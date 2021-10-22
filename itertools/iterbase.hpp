@@ -29,7 +29,7 @@ namespace itertools {
         return before;
       }
       constexpr ValueType operator !=(const Derived& rhs) const noexcept {
-        return !*this == rhs;
+        return !(*this == rhs);
       }
     };
 
