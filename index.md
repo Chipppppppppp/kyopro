@@ -3,24 +3,24 @@ data:
   libraryCategories:
   - name: base
     pages:
-    - icon: ':heavy_check_mark:'
-      path: base/base_int.hpp
-      title: base/base_int.hpp
+    - icon: ':warning:'
+      path: base/types.hpp
+      title: base/types.hpp
   - name: structure
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: structure/FenwickTree.hpp
       title: structure/FenwickTree.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: structure/UnionFind.hpp
       title: structure/UnionFind.hpp
   verificationCategories:
   - name: yosupo
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: yosupo/FenwickTree.test.cpp
       title: yosupo/FenwickTree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: yosupo/UnionFind.test.cpp
       title: yosupo/UnionFind.test.cpp
 layout: toppage
