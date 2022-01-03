@@ -3,12 +3,12 @@ data:
   libraryCategories:
   - name: base
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: base/types.hpp
       title: base/types.hpp
   - name: structure
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: structure/FenwickTree.hpp
       title: structure/FenwickTree.hpp
     - icon: ':warning:'
@@ -17,7 +17,7 @@ data:
   verificationCategories:
   - name: yosupo
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: yosupo/FenwickTree.test.cpp
       title: yosupo/FenwickTree.test.cpp
     - icon: ':x:'
