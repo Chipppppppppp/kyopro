@@ -17,6 +17,9 @@ data:
   verificationCategories:
   - name: yosupo
     pages:
+    - icon: ':x:'
+      path: yosupo/FenwickTree.test.hpp
+      title: yosupo/FenwickTree.test.hpp
     - icon: ':heavy_check_mark:'
       path: yosupo/UnionFind.test.cpp
       title: yosupo/UnionFind.test.cpp
