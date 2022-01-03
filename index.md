@@ -18,8 +18,8 @@ data:
   - name: yosupo
     pages:
     - icon: ':x:'
-      path: yosupo/FenwickTree.test.hpp
-      title: yosupo/FenwickTree.test.hpp
+      path: yosupo/FenwickTree.test.cpp
+      title: yosupo/FenwickTree.test.cpp
     - icon: ':heavy_check_mark:'
       path: yosupo/UnionFind.test.cpp
       title: yosupo/UnionFind.test.cpp
