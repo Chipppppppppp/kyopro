@@ -14,7 +14,7 @@ int main() {
     }
     int q; cin >> q;
     int cnt = 0;
-    while (q --) {
+    while (q--) {
         int t_i; cin >> t_i;
         cnt += binary_search(ALL(s), t_i);
     }
