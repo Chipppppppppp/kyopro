@@ -11,7 +11,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: structure/FenwickTree.hpp
       title: structure/FenwickTree.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: structure/UnionFind.hpp
       title: structure/UnionFind.hpp
   verificationCategories:
@@ -20,7 +20,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: yosupo/FenwickTree.test.cpp
       title: yosupo/FenwickTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: yosupo/UnionFind.test.cpp
       title: yosupo/UnionFind.test.cpp
 layout: toppage
