@@ -20,16 +20,16 @@ data:
   bundledCode: "#line 1 \"yosupo/UnionFind.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\
     \n#include <iostream>\n#line 1 \"structure/UnionFind.hpp\"\n\n\n/* UnionFind */\n\
     #include <vector>\n#include <unordered_map>\n#include <algorithm>\n#include <initializer_list>\n\
-    #include <cstdint>\n#line 2 \"base/types.hpp\"\n#ifndef KYOPRO_BASE_INT\n#define\
+    #line 1 \"base/types.hpp\"\n#include <cstdint>\n#ifndef KYOPRO_BASE_INT\n#define\
     \ KYOPRO_BASE_INT std::int64_t\n#endif\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT\
     \ std::size_t\n#endif\n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n\
-    #endif\n#line 10 \"structure/UnionFind.hpp\"\n\nnamespace kyopro {\n  template<class\
+    #endif\n#line 9 \"structure/UnionFind.hpp\"\n\nnamespace kyopro {\n  template<class\
     \ KyoproContainer = std::vector<int>>\n  struct UnionFind {\n  private:\n    KyoproContainer\
-    \ kyopro_par;\n  public:\n    UnionFind() noexcept = default;\n    UnionFind(std::size_t\
-    \ kyopro_n) noexcept: kyopro_par(kyopro_n, -1) {}\n    void resize(std::size_t\
-    \ kyopro_x) { kyopro_par.resize(kyopro_x, -1); }\n    void assign(std::size_t\
+    \ kyopro_par;\n  public:\n    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT\
+    \ kyopro_n) noexcept: kyopro_par(kyopro_n, -1) {}\n    void resize(KYOPRO_BASE_UINT\
+    \ kyopro_x) { kyopro_par.resize(kyopro_x, -1); }\n    void assign(KYOPRO_BASE_UINT\
     \ kyopro_x) { kyopro_par.assign(kyopro_x, -1); }\n    void reset() { std::fill(std::begin(kyopro_par),\
-    \ std::end(kyopro_par), -1); }\n    std::size_t size() const noexcept { return\
+    \ std::end(kyopro_par), -1); }\n    KYOPRO_BASE_UINT size() const noexcept { return\
     \ kyopro_par.size(); }\n    KYOPRO_BASE_INT find(int kyopro_x) {\n      int kyopro_p\
     \ = kyopro_x;\n      while (kyopro_par[kyopro_p] >= 0) kyopro_p = kyopro_par[kyopro_p];\n\
     \      while (kyopro_x != kyopro_p) {\n        int kyopro_tmp = kyopro_x;\n  \
@@ -71,7 +71,7 @@ data:
   isVerificationFile: true
   path: yosupo/UnionFind.test.cpp
   requiredBy: []
-  timestamp: '2022-01-03 23:26:42+09:00'
+  timestamp: '2022-01-03 23:31:36+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/UnionFind.test.cpp
