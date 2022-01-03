@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <vector>
 #include <utility>
-#include "../base/base_int.hpp"
+#include "../base/types.hpp"
 
 namespace kyopro {
   template<class KyoproT, class KyoproContainer = std::vector<KyoproT>>
