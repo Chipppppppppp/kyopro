@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <initializer_list>
 #include <cstdint>
-#include "../base/base_int.hpp"
+#include "../base/types.hpp"
 
 namespace kyopro {
   template<class KyoproContainer = std::vector<int>>
@@ -45,26 +45,27 @@ namespace kyopro {
     bool same(int kyopro_x, int kyopro_y) { return find(kyopro_x) == find(kyopro_y); }
     KYOPRO_BASE_INT group_size(int kyopro_x) { return -kyopro_par[find(kyopro_x)]; }
     KyoproContainer group_members(int kyopro_x) {
-      int root = find(kyopro_x);
+      kyopro_x = find(kyopro_x);
       KyoproContainer kyopro_a;
-      for (int kyopro_i = 0; kyopro_i < (int)(size()); ++kyopro_i) if (find(kyopro_i) == root) kyopro_a.emplace_back(kyopro_i);
+      for (int kyopro_i = 0; kyopro_i < (int)(size()); ++kyopro_i) if (find(kyopro_i) == kyopro_x) kyopro_a.emplace_back(kyopro_i);
       return kyopro_a;
     }
-    std::vector<KYOPRO_BASE_INT> roots() const {
-      std::vector<KYOPRO_BASE_INT> kyopro_a;
+    template<class KyoproVector = std::vector<KYOPRO_BASE_INT>>
+    KyoproVector roots() const {
+      KyoproVector kyopro_a;
       for (int kyopro_i = 0; kyopro_i < (int)(size()); ++kyopro_i) if (kyopro_par[kyopro_i] < 0) kyopro_a.emplace_back(kyopro_i);
       return kyopro_a;
     }
     KYOPRO_BASE_INT group_count() const {
-      KYOPRO_BASE_INT cnt = 0;
-      for (int kyopro_i = 0; kyopro_i < (int)(size()); ++kyopro_i) if (kyopro_par[kyopro_i] < 0) ++cnt;
-      return cnt;
+      KYOPRO_BASE_INT kyopro_cnt = 0;
+      for (int kyopro_i = 0; kyopro_i < (int)(size()); ++kyopro_i) if (kyopro_par[kyopro_i] < 0) ++kyopro_cnt;
+      return kyopro_cnt;
     }
-    template<class Container = std::unordered_map<KYOPRO_BASE_INT, std::vector<KYOPRO_BASE_INT>>>
-    Container all_group_members() {
-      Container group_members;
-      for (int member = 0; member < (int)(size()); ++member) group_members[find(member)].emplace_back(member);
-      return group_members;
+    template<class KyoproMap = std::unordered_map<KYOPRO_BASE_INT, std::vector<KYOPRO_BASE_INT>>>
+    KyoproMap all_group_members() {
+      KyoproMap kyopro_group_members;
+      for (int kyopro_member = 0; kyopro_member < (int)(size()); ++kyopro_member) kyopro_group_members[find(kyopro_member)].emplace_back(kyopro_member);
+      return kyopro_group_members;
     }
   };
 }
