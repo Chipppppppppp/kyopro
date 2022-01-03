@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <initializer_list>
 #include <cstdint>
-#include "../base_int.hpp"
+#include "../base/base_int.hpp"
 
 namespace kyopro {
   template<class KyoproContainer = std::vector<int>>
