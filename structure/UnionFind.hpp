@@ -5,7 +5,6 @@
 #include <unordered_map>
 #include <algorithm>
 #include <initializer_list>
-#include <cstdint>
 #include "../base/types.hpp"
 
 namespace kyopro {
