@@ -20,10 +20,10 @@ namespace kyopro {
     FenwickTree(std::size_t kyopro_n) noexcept: kyopro_tree(kyopro_n) {}
     template<class... KyoproArgs>
     FenwickTree(KyoproArgs&&... kyopro_args) noexcept {
-      KyoproContainer kyopro_a(forward<KyoproArgs>(kyopro_args)...);
+      KyoproContainer kyopro_a(std::forward<KyoproArgs>(kyopro_args)...);
       FenwickTree(kyopro_a.size());
       int kyopro_cnt = 0;
-      for (KyoproT&& kyopro_i: kyopro_a) {
+      for (KyoproT& kyopro_i: kyopro_a) {
         add(kyopro_cnt, kyopro_i);
         ++kyopro_cnt;
       }
