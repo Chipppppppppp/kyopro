@@ -8,6 +8,9 @@ data:
       title: base/base_int.hpp
   - name: structure
     pages:
+    - icon: ':warning:'
+      path: structure/FenwickTree.hpp
+      title: structure/FenwickTree.hpp
     - icon: ':heavy_check_mark:'
       path: structure/UnionFind.hpp
       title: structure/UnionFind.hpp
