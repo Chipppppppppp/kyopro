@@ -28,8 +28,8 @@ data:
     \ const_reference = const KyoproT&;\n    FenwickTree() noexcept = default;\n \
     \   FenwickTree(std::size_t kyopro_n) noexcept: kyopro_tree(kyopro_n) {}\n   \
     \ template<class... KyoproArgs>\n    FenwickTree(KyoproArgs&&... kyopro_args)\
-    \ noexcept {\n      KyoproContainer kyopro_a(forward<KyoproArgs>(kyopro_args)...);\n\
-    \      FenwickTree(kyopro_a.size());\n      int kyopro_cnt = 0;\n      for (KyoproT&&\
+    \ noexcept {\n      KyoproContainer kyopro_a(std::forward<KyoproArgs>(kyopro_args)...);\n\
+    \      FenwickTree(kyopro_a.size());\n      int kyopro_cnt = 0;\n      for (KyoproT&\
     \ kyopro_i: kyopro_a) {\n        add(kyopro_cnt, kyopro_i);\n        ++kyopro_cnt;\n\
     \      }\n    }\n    std::size_t size() noexcept { return kyopro_tree.size();\
     \ }\n    void add(int kyopro_p, const KyoproT& kyopro_x) {\n      ++kyopro_p;\n\
@@ -61,7 +61,7 @@ data:
   isVerificationFile: true
   path: yosupo/FenwickTree.test.cpp
   requiredBy: []
-  timestamp: '2022-01-03 21:49:28+09:00'
+  timestamp: '2022-01-03 21:52:54+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: yosupo/FenwickTree.test.cpp
