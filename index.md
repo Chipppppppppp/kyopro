@@ -1,11 +1,11 @@
 ---
 data:
   libraryCategories:
-  - name: .
+  - name: structure
     pages:
     - icon: ':warning:'
-      path: UnionFind.hpp
-      title: UnionFind.hpp
+      path: structure/UnionFind.hpp
+      title: structure/UnionFind.hpp
   verificationCategories:
   - name: .
     pages:

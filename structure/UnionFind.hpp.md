@@ -14,7 +14,7 @@ data:
     , line 187, in bundle\n    bundler.update(path)\n  File \"/opt/hostedtoolcache/Python/3.10.1/x64/lib/python3.10/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 312, in update\n    raise BundleErrorAt(path, i + 1, \"#pragma once found\
     \ in a non-first line\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
-    \ UnionFind.hpp: line 2: #pragma once found in a non-first line\n"
+    \ structure/UnionFind.hpp: line 2: #pragma once found in a non-first line\n"
   code: "/* UnionFind */\n#pragma once\n#include <vector>\n#include <unordered_map>\n\
     #include <algorithm>\n#include <initializer_list>\n#include <cstdint>\n#include\
     \ \"../base_int.hpp\"\n\nnamespace kyopro {\n  template<class KyoproContainer\
@@ -48,18 +48,18 @@ data:
     \ Container = std::unordered_map<KYOPRO_BASE_INT, std::vector<KYOPRO_BASE_INT>>>\n\
     \    Container all_group_members() {\n      Container group_members;\n      for\
     \ (int member = 0; member < (int)(size()); ++member) group_members[find(member)].emplace_back(member);\n\
-    \      return group_members;\n    }\n  };\n}"
+    \      return group_members;\n    }\n  };\n}\n"
   dependsOn: []
   isVerificationFile: false
-  path: UnionFind.hpp
+  path: structure/UnionFind.hpp
   requiredBy: []
   timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: UnionFind.hpp
+documentation_of: structure/UnionFind.hpp
 layout: document
 redirect_from:
-- /library/UnionFind.hpp
-- /library/UnionFind.hpp.html
-title: UnionFind.hpp
+- /library/structure/UnionFind.hpp
+- /library/structure/UnionFind.hpp.html
+title: structure/UnionFind.hpp
 ---
