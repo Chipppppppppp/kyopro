@@ -18,16 +18,6 @@ namespace kyopro {
     using const_reference = const KyoproT&;
     FenwickTree() noexcept = default;
     FenwickTree(std::size_t kyopro_n) noexcept: kyopro_tree(kyopro_n) {}
-    template<class... KyoproArgs>
-    FenwickTree(KyoproArgs&&... kyopro_args) noexcept {
-      KyoproContainer kyopro_a(std::forward<KyoproArgs>(kyopro_args)...);
-      FenwickTree(kyopro_a.size());
-      int kyopro_cnt = 0;
-      for (KyoproT& kyopro_i: kyopro_a) {
-        add(kyopro_cnt, kyopro_i);
-        ++kyopro_cnt;
-      }
-    }
     std::size_t size() noexcept { return kyopro_tree.size(); }
     void add(int kyopro_p, const KyoproT& kyopro_x) {
       ++kyopro_p;
