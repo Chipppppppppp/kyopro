@@ -25,7 +25,7 @@ data:
     \   FenwickTree(std::size_t kyopro_n) noexcept: kyopro_tree(kyopro_n) {}\n   \
     \ template<class... KyoproArgs>\n    FenwickTree(KyoproArgs&&... kyopro_args)\
     \ noexcept {\n      KyoproContainer kyopro_a(forward<KyoproArgs>(kyopro_args)...);\n\
-    \      kyopro_tree(kyopro_a.size());\n      int kyopro_cnt = 0;\n      for (KyoproT&&\
+    \      FenwickTree(kyopro_a.size());\n      int kyopro_cnt = 0;\n      for (KyoproT&&\
     \ kyopro_i: kyopro_a) {\n        add(kyopro_cnt, kyopro_i);\n        ++kyopro_cnt;\n\
     \      }\n    }\n    std::size_t size() noexcept { return kyopro_tree.size();\
     \ }\n    void add(int kyopro_p, const KyoproT& kyopro_x) {\n      ++kyopro_p;\n\
@@ -47,7 +47,7 @@ data:
     \ noexcept = default;\n    FenwickTree(std::size_t kyopro_n) noexcept: kyopro_tree(kyopro_n)\
     \ {}\n    template<class... KyoproArgs>\n    FenwickTree(KyoproArgs&&... kyopro_args)\
     \ noexcept {\n      KyoproContainer kyopro_a(forward<KyoproArgs>(kyopro_args)...);\n\
-    \      kyopro_tree(kyopro_a.size());\n      int kyopro_cnt = 0;\n      for (KyoproT&&\
+    \      FenwickTree(kyopro_a.size());\n      int kyopro_cnt = 0;\n      for (KyoproT&&\
     \ kyopro_i: kyopro_a) {\n        add(kyopro_cnt, kyopro_i);\n        ++kyopro_cnt;\n\
     \      }\n    }\n    std::size_t size() noexcept { return kyopro_tree.size();\
     \ }\n    void add(int kyopro_p, const KyoproT& kyopro_x) {\n      ++kyopro_p;\n\
@@ -66,7 +66,7 @@ data:
   isVerificationFile: false
   path: structure/FenwickTree.hpp
   requiredBy: []
-  timestamp: '2022-01-03 21:46:17+09:00'
+  timestamp: '2022-01-03 21:49:28+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - yosupo/FenwickTree.test.cpp
