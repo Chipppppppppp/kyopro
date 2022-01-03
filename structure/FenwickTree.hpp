@@ -1,5 +1,6 @@
+#ifndef KYOPRO_FENWICK_TREE
+#define KYOPRO_FENWICK_TREE
 /* FenwickTree */
-#pragma once
 #include <cstdint>
 #include <vector>
 #include "..base/base_int.hpp"
@@ -36,3 +37,4 @@ namespace kyopro {
     T all_query() { return query(kyopro_tree.size()); }
   };
 }
+#endif
