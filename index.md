@@ -1,6 +1,11 @@
 ---
 data:
   libraryCategories:
+  - name: base
+    pages:
+    - icon: ':warning:'
+      path: base/base_int.hpp
+      title: base/base_int.hpp
   - name: structure
     pages:
     - icon: ':warning:'
