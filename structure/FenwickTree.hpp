@@ -13,12 +13,12 @@ namespace kyopro {
     KyoproContainer kyopro_tree;
   public:
     using value_type = KyoproT;
-    using size_type = std::size_t;
+    using size_type = KYOPRO_BASE_UINT;
     using reference = KyoproT&;
     using const_reference = const KyoproT&;
     FenwickTree() noexcept = default;
-    FenwickTree(std::size_t kyopro_n) noexcept: kyopro_tree(kyopro_n) {}
-    std::size_t size() noexcept { return kyopro_tree.size(); }
+    FenwickTree(KYOPRO_BASE_UINT kyopro_n) noexcept: kyopro_tree(kyopro_n) {}
+    KYOPRO_BASE_UINT size() noexcept { return kyopro_tree.size(); }
     void add(int kyopro_p, const KyoproT& kyopro_x) {
       ++kyopro_p;
       while (kyopro_p <= (int)size()) {
