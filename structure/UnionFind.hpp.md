@@ -1,11 +1,17 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: base/base_int.hpp
+    title: base/base_int.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: yosupo/UnionFind.test.cpp
+    title: yosupo/UnionFind.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.10.1/x64/lib/python3.10/site-packages/onlinejudge_verify/documentation/build.py\"\
@@ -17,7 +23,7 @@ data:
     \ structure/UnionFind.hpp: line 2: #pragma once found in a non-first line\n"
   code: "/* UnionFind */\n#pragma once\n#include <vector>\n#include <unordered_map>\n\
     #include <algorithm>\n#include <initializer_list>\n#include <cstdint>\n#include\
-    \ \"../base_int.hpp\"\n\nnamespace kyopro {\n  template<class KyoproContainer\
+    \ \"../base/base_int.hpp\"\n\nnamespace kyopro {\n  template<class KyoproContainer\
     \ = std::vector<int>>\n  struct UnionFind {\n  private:\n    KyoproContainer kyopro_par;\n\
     \  public:\n    UnionFind() noexcept = default;\n    UnionFind(std::size_t kyopro_n)\
     \ noexcept: kyopro_par(kyopro_n, -1) {}\n    void resize(std::size_t kyopro_x)\
@@ -49,13 +55,15 @@ data:
     \    Container all_group_members() {\n      Container group_members;\n      for\
     \ (int member = 0; member < (int)(size()); ++member) group_members[find(member)].emplace_back(member);\n\
     \      return group_members;\n    }\n  };\n}\n"
-  dependsOn: []
+  dependsOn:
+  - base/base_int.hpp
   isVerificationFile: false
   path: structure/UnionFind.hpp
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2022-01-03 19:08:53+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - yosupo/UnionFind.test.cpp
 documentation_of: structure/UnionFind.hpp
 layout: document
 redirect_from:
