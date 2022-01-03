@@ -1,6 +1,5 @@
-#define problem "https://judge.yosupo.jp/problem/point_add_range_sum"
+#define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
 #include <iostream>
-#include <vector>
 #include "../structure/FenwickTree.hpp"
 using ll = long long;
 
