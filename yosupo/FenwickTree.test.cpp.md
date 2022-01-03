@@ -34,7 +34,7 @@ data:
     \    }\n    T query(int kyopro_l, int kyopro_r) { return query(kyopro_r) - query(kyopro_l);\
     \ }\n    T all_query() { return query(kyopro_tree.size()); }\n  };\n}\n\n#line\
     \ 5 \"yosupo/FenwickTree.test.cpp\"\nusing ll = long long;\n\nint main() {\n \
-    \ int n, q;\n  std::cin >> n >> q;\n  kyopro::FenwickTree<ll> ft;\n  for (int\
+    \ int n, q;\n  std::cin >> n >> q;\n  kyopro::FenwickTree<ll> ft(n);\n  for (int\
     \ i = 0; i < n; ++i) {\n    int a;\n    std::cin >> a;\n    ft.add(i, a);\n  }\n\
     \  for (int i = 0; i < q; ++i) {\n    int t, x, y;\n    std::cin >> t >> x >>\
     \ y;\n    if (t == 0) ft.add(x, y);\n    else std::cout << ft.query(x, y) << '\\\
@@ -42,7 +42,7 @@ data:
   code: "#define problem \"https://judge.yosupo.jp/problem/point_add_range_sum\"\n\
     #include <iostream>\n#include <vector>\n#include \"../structure/FenwickTree.hpp\"\
     \nusing ll = long long;\n\nint main() {\n  int n, q;\n  std::cin >> n >> q;\n\
-    \  kyopro::FenwickTree<ll> ft;\n  for (int i = 0; i < n; ++i) {\n    int a;\n\
+    \  kyopro::FenwickTree<ll> ft(n);\n  for (int i = 0; i < n; ++i) {\n    int a;\n\
     \    std::cin >> a;\n    ft.add(i, a);\n  }\n  for (int i = 0; i < q; ++i) {\n\
     \    int t, x, y;\n    std::cin >> t >> x >> y;\n    if (t == 0) ft.add(x, y);\n\
     \    else std::cout << ft.query(x, y) << '\\n';\n  }\n}\n"
@@ -52,7 +52,7 @@ data:
   isVerificationFile: true
   path: yosupo/FenwickTree.test.cpp
   requiredBy: []
-  timestamp: '2022-01-03 20:00:34+09:00'
+  timestamp: '2022-01-03 20:13:09+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: yosupo/FenwickTree.test.cpp
