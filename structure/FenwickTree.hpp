@@ -1,7 +1,6 @@
 #ifndef KYOPRO_FENWICK_TREE
 #define KYOPRO_FENWICK_TREE
 /* FenwickTree */
-#include <cstdint>
 #include <vector>
 #include <utility>
 #include "../base/types.hpp"
