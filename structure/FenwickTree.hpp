@@ -3,7 +3,7 @@
 /* FenwickTree */
 #include <cstdint>
 #include <vector>
-#include "..base/base_int.hpp"
+#include "../base/base_int.hpp"
 
 namespace kyopro {
   template<class T, class Container = std::vector<T>>
