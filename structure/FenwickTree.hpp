@@ -21,7 +21,7 @@ namespace kyopro {
     template<class... KyoproArgs>
     FenwickTree(KyoproArgs&&... kyopro_args) noexcept {
       KyoproContainer kyopro_a(forward<KyoproArgs>(kyopro_args)...);
-      kyopro_tree(kyopro_a.size());
+      FenwickTree(kyopro_a.size());
       int kyopro_cnt = 0;
       for (KyoproT&& kyopro_i: kyopro_a) {
         add(kyopro_cnt, kyopro_i);
