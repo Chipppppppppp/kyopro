@@ -15,11 +15,11 @@ namespace kyopro {
     KyoproContainer kyopro_par;
   public:
     UnionFind() noexcept = default;
-    UnionFind(std::size_t kyopro_n) noexcept: kyopro_par(kyopro_n, -1) {}
-    void resize(std::size_t kyopro_x) { kyopro_par.resize(kyopro_x, -1); }
-    void assign(std::size_t kyopro_x) { kyopro_par.assign(kyopro_x, -1); }
+    UnionFind(KYOPRO_BASE_UINT kyopro_n) noexcept: kyopro_par(kyopro_n, -1) {}
+    void resize(KYOPRO_BASE_UINT kyopro_x) { kyopro_par.resize(kyopro_x, -1); }
+    void assign(KYOPRO_BASE_UINT kyopro_x) { kyopro_par.assign(kyopro_x, -1); }
     void reset() { std::fill(std::begin(kyopro_par), std::end(kyopro_par), -1); }
-    std::size_t size() const noexcept { return kyopro_par.size(); }
+    KYOPRO_BASE_UINT size() const noexcept { return kyopro_par.size(); }
     KYOPRO_BASE_INT find(int kyopro_x) {
       int kyopro_p = kyopro_x;
       while (kyopro_par[kyopro_p] >= 0) kyopro_p = kyopro_par[kyopro_p];
