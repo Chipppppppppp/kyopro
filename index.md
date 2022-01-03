@@ -3,12 +3,12 @@ data:
   libraryCategories:
   - name: base
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: base/base_int.hpp
       title: base/base_int.hpp
   - name: structure
     pages:
-    - icon: ':warning:'
+    - icon: ':x:'
       path: structure/FenwickTree.hpp
       title: structure/FenwickTree.hpp
     - icon: ':heavy_check_mark:'
