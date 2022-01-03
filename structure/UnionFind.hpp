@@ -1,5 +1,5 @@
-#ifndef KYOPRO_UNIONFIND
-#define KYOPRO_UNIONFIND
+#ifndef KYOPRO_UNION_FIND
+#define KYOPRO_UNION_FIND
 /* UnionFind */
 #include <vector>
 #include <unordered_map>
