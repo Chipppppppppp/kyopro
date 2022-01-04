@@ -18,12 +18,12 @@ data:
     links:
     - https://judge.yosupo.jp/problem/unionfind
   bundledCode: "#line 1 \"yosupo/UnionFind.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\
-    \n#include <iostream>\n#line 1 \"structure/UnionFind.hpp\"\n\n\n/* UnionFind */\n\
+    \n#include <iostream>\n#line 2 \"structure/UnionFind.hpp\"\n/* UnionFind */\n\
     #include <vector>\n#include <unordered_map>\n#include <algorithm>\n#include <initializer_list>\n\
     #line 1 \"base/types.hpp\"\n#include <cstdint>\n#ifndef KYOPRO_BASE_INT\n#define\
     \ KYOPRO_BASE_INT std::int64_t\n#endif\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT\
     \ std::size_t\n#endif\n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n\
-    #endif\n#line 9 \"structure/UnionFind.hpp\"\n\nnamespace kyopro {\n  template<class\
+    #endif\n#line 8 \"structure/UnionFind.hpp\"\n\nnamespace kyopro {\n  template<class\
     \ KyoproContainer = std::vector<int>>\n  struct UnionFind {\n  private:\n    KyoproContainer\
     \ kyopro_par;\n  public:\n    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT\
     \ kyopro_n) noexcept: kyopro_par(kyopro_n, -1) {}\n    void resize(KYOPRO_BASE_UINT\
@@ -55,7 +55,7 @@ data:
     \ = std::unordered_map<KYOPRO_BASE_INT, std::vector<KYOPRO_BASE_INT>>>\n    KyoproMap\
     \ all_group_members() {\n      KyoproMap kyopro_group_members;\n      for (int\
     \ kyopro_member = 0; kyopro_member < (int)(size()); ++kyopro_member) kyopro_group_members[find(kyopro_member)].emplace_back(kyopro_member);\n\
-    \      return kyopro_group_members;\n    }\n  };\n}\n\n#line 4 \"yosupo/UnionFind.test.cpp\"\
+    \      return kyopro_group_members;\n    }\n  };\n}\n#line 4 \"yosupo/UnionFind.test.cpp\"\
     \n\nint main() {\n  int n, q;\n  std::cin >> n >> q;\n  kyopro::UnionFind uf(n);\n\
     \  for (int i = 0; i < q; ++i) {\n    int t, u, v;\n    std::cin >> t >> u >>\
     \ v;\n    if (t == 0) uf.unite(u, v);\n    else std::cout << uf.same(u, v) <<\
@@ -71,7 +71,7 @@ data:
   isVerificationFile: true
   path: yosupo/UnionFind.test.cpp
   requiredBy: []
-  timestamp: '2022-01-03 23:31:36+09:00'
+  timestamp: '2022-01-04 14:55:34+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/UnionFind.test.cpp
