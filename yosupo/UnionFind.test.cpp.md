@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: base/types.hpp
-    title: base/types.hpp
+    path: base/settings.hpp
+    title: base/settings.hpp
   - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
@@ -20,15 +20,18 @@ data:
   bundledCode: "#line 1 \"yosupo/UnionFind.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\
     \n#include <iostream>\n#line 2 \"structure/UnionFind.hpp\"\n/* UnionFind */\n\
     #include <vector>\n#include <unordered_map>\n#include <algorithm>\n#include <initializer_list>\n\
-    #line 1 \"base/types.hpp\"\n#include <cstdint>\n#ifndef KYOPRO_BASE_INT\n#define\
+    #line 1 \"base/settings.hpp\"\n#include <cstdint>\n#ifndef KYOPRO_BASE_INT\n#define\
     \ KYOPRO_BASE_INT std::int64_t\n#endif\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT\
     \ std::size_t\n#endif\n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n\
-    #endif\n#line 8 \"structure/UnionFind.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ KyoproContainer = std::vector<int>>\n  struct UnionFind {\n  private:\n    KyoproContainer\
-    \ kyopro_par;\n  public:\n    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT\
-    \ kyopro_n) noexcept: kyopro_par(kyopro_n, -1) {}\n    void resize(KYOPRO_BASE_UINT\
-    \ kyopro_x) { kyopro_par.resize(kyopro_x, -1); }\n    void assign(KYOPRO_BASE_UINT\
-    \ kyopro_x) { kyopro_par.assign(kyopro_x, -1); }\n    void reset() { std::fill(std::begin(kyopro_par),\
+    #endif\n#ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD 1000000007\n#endif\n\
+    #ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION 12\n#endif\n\
+    #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV 3\n#endif\n#line 8 \"structure/UnionFind.hpp\"\
+    \n\nnamespace kyopro {\n  template<class KyoproContainer = std::vector<int>>\n\
+    \  struct UnionFind {\n  private:\n    KyoproContainer kyopro_par;\n  public:\n\
+    \    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT kyopro_n)\
+    \ noexcept: kyopro_par(kyopro_n, -1) {}\n    void resize(KYOPRO_BASE_UINT kyopro_x)\
+    \ { kyopro_par.resize(kyopro_x, -1); }\n    void assign(KYOPRO_BASE_UINT kyopro_x)\
+    \ { kyopro_par.assign(kyopro_x, -1); }\n    void reset() { std::fill(std::begin(kyopro_par),\
     \ std::end(kyopro_par), -1); }\n    KYOPRO_BASE_UINT size() const noexcept { return\
     \ kyopro_par.size(); }\n    KYOPRO_BASE_INT find(int kyopro_x) {\n      int kyopro_p\
     \ = kyopro_x;\n      while (kyopro_par[kyopro_p] >= 0) kyopro_p = kyopro_par[kyopro_p];\n\
@@ -67,11 +70,11 @@ data:
     \    else std::cout << uf.same(u, v) << '\\n';\n  }\n}\n"
   dependsOn:
   - structure/UnionFind.hpp
-  - base/types.hpp
+  - base/settings.hpp
   isVerificationFile: true
   path: yosupo/UnionFind.test.cpp
   requiredBy: []
-  timestamp: '2022-01-04 14:55:34+09:00'
+  timestamp: '2022-01-04 18:22:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/UnionFind.test.cpp

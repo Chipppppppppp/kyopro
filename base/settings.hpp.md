@@ -26,7 +26,7 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: '#line 1 "base/types.hpp"
+  bundledCode: '#line 1 "base/settings.hpp"
 
     #include <cstdint>
 
@@ -45,6 +45,24 @@ data:
     #ifndef KYOPRO_BASE_FLOAT
 
     #define KYOPRO_BASE_FLOAT double
+
+    #endif
+
+    #ifndef KYOPRO_DEFAULT_MOD
+
+    #define KYOPRO_DEFAULT_MOD 1000000007
+
+    #endif
+
+    #ifndef KYOPRO_DECIMAL_PRECISION
+
+    #define KYOPRO_DECIMAL_PRECISION 12
+
+    #endif
+
+    #ifndef KYOPRO_INF_DIV
+
+    #define KYOPRO_INF_DIV 3
 
     #endif
 
@@ -69,24 +87,40 @@ data:
 
     #endif
 
-    '
+    #ifndef KYOPRO_DEFAULT_MOD
+
+    #define KYOPRO_DEFAULT_MOD 1000000007
+
+    #endif
+
+    #ifndef KYOPRO_DECIMAL_PRECISION
+
+    #define KYOPRO_DECIMAL_PRECISION 12
+
+    #endif
+
+    #ifndef KYOPRO_INF_DIV
+
+    #define KYOPRO_INF_DIV 3
+
+    #endif'
   dependsOn: []
   isVerificationFile: false
-  path: base/types.hpp
+  path: base/settings.hpp
   requiredBy:
   - structure/FenwickTree.hpp
   - structure/UnionFind.hpp
   - all.hpp
   - all.hpp
-  timestamp: '2022-01-03 23:22:10+09:00'
+  timestamp: '2022-01-04 18:22:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - yosupo/UnionFind.test.cpp
   - yosupo/FenwickTree.test.cpp
-documentation_of: base/types.hpp
+documentation_of: base/settings.hpp
 layout: document
 redirect_from:
-- /library/base/types.hpp
-- /library/base/types.hpp.html
-title: base/types.hpp
+- /library/base/settings.hpp
+- /library/base/settings.hpp.html
+title: base/settings.hpp
 ---

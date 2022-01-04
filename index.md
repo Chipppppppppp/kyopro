@@ -9,8 +9,8 @@ data:
   - name: base
     pages:
     - icon: ':heavy_check_mark:'
-      path: base/types.hpp
-      title: base/types.hpp
+      path: base/settings.hpp
+      title: base/settings.hpp
   - name: structure
     pages:
     - icon: ':heavy_check_mark:'

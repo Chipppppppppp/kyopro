@@ -2,11 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: base/types.hpp
-    title: base/types.hpp
+    path: base/settings.hpp
+    title: base/settings.hpp
   - icon: ':heavy_check_mark:'
-    path: base/types.hpp
-    title: base/types.hpp
+    path: base/settings.hpp
+    title: base/settings.hpp
   - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
@@ -20,22 +20,27 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"base/types.hpp\"\n#include <cstdint>\n#ifndef KYOPRO_BASE_INT\n\
+  bundledCode: "#line 1 \"base/settings.hpp\"\n#include <cstdint>\n#ifndef KYOPRO_BASE_INT\n\
     #define KYOPRO_BASE_INT std::int64_t\n#endif\n#ifndef KYOPRO_BASE_UINT\n#define\
     \ KYOPRO_BASE_UINT std::size_t\n#endif\n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT\
-    \ double\n#endif\n#line 2 \"structure/FenwickTree.hpp\"\n/* FenwickTree */\n#include\
-    \ <vector>\n#include <utility>\n#line 2 \"base/types.hpp\"\n#ifndef KYOPRO_BASE_INT\n\
-    #define KYOPRO_BASE_INT std::int64_t\n#endif\n#ifndef KYOPRO_BASE_UINT\n#define\
-    \ KYOPRO_BASE_UINT std::size_t\n#endif\n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT\
-    \ double\n#endif\n#line 6 \"structure/FenwickTree.hpp\"\n\nnamespace kyopro {\n\
-    \  template<class KyoproT, class KyoproContainer = std::vector<KyoproT>>\n  struct\
-    \ FenwickTree {\n  private:\n    KyoproContainer kyopro_tree;\n  public:\n   \
-    \ using value_type = KyoproT;\n    using size_type = KYOPRO_BASE_UINT;\n    using\
-    \ reference = KyoproT&;\n    using const_reference = const KyoproT&;\n    FenwickTree()\
-    \ noexcept = default;\n    FenwickTree(KYOPRO_BASE_UINT kyopro_n) noexcept: kyopro_tree(kyopro_n)\
-    \ {}\n    KYOPRO_BASE_UINT size() noexcept { return kyopro_tree.size(); }\n  \
-    \  void add(int kyopro_p, const KyoproT& kyopro_x) {\n      ++kyopro_p;\n    \
-    \  while (kyopro_p <= (int)size()) {\n        kyopro_tree[kyopro_p - 1] += kyopro_x;\n\
+    \ double\n#endif\n#ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD 1000000007\n\
+    #endif\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION 12\n\
+    #endif\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV 3\n#endif\n#line 2 \"structure/FenwickTree.hpp\"\
+    \n/* FenwickTree */\n#include <vector>\n#include <utility>\n#line 2 \"base/settings.hpp\"\
+    \n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n#ifndef\
+    \ KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::size_t\n#endif\n#ifndef KYOPRO_BASE_FLOAT\n\
+    #define KYOPRO_BASE_FLOAT double\n#endif\n#ifndef KYOPRO_DEFAULT_MOD\n#define\
+    \ KYOPRO_DEFAULT_MOD 1000000007\n#endif\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define\
+    \ KYOPRO_DECIMAL_PRECISION 12\n#endif\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV\
+    \ 3\n#endif\n#line 6 \"structure/FenwickTree.hpp\"\n\nnamespace kyopro {\n  template<class\
+    \ KyoproT, class KyoproContainer = std::vector<KyoproT>>\n  struct FenwickTree\
+    \ {\n  private:\n    KyoproContainer kyopro_tree;\n  public:\n    using value_type\
+    \ = KyoproT;\n    using size_type = KYOPRO_BASE_UINT;\n    using reference = KyoproT&;\n\
+    \    using const_reference = const KyoproT&;\n    FenwickTree() noexcept = default;\n\
+    \    FenwickTree(KYOPRO_BASE_UINT kyopro_n) noexcept: kyopro_tree(kyopro_n) {}\n\
+    \    KYOPRO_BASE_UINT size() noexcept { return kyopro_tree.size(); }\n    void\
+    \ add(int kyopro_p, const KyoproT& kyopro_x) {\n      ++kyopro_p;\n      while\
+    \ (kyopro_p <= (int)size()) {\n        kyopro_tree[kyopro_p - 1] += kyopro_x;\n\
     \        kyopro_p += kyopro_p & -kyopro_p;\n      }\n    }\n    void set(int kyopro_p,\
     \ const KyoproT& kyopro_x) { add(kyopro_p, kyopro_x - get(kyopro_p)); }\n    KyoproT\
     \ query(int kyopro_r) {\n      KyoproT kyopro_s = 0;\n      while (kyopro_r >\
@@ -45,16 +50,18 @@ data:
     \ get(int kyopro_p) { return query(kyopro_p + 1) - query(kyopro_p); }\n    KyoproT\
     \ all_query() { return query(kyopro_tree.size()); }\n  };\n}\n#line 2 \"structure/UnionFind.hpp\"\
     \n/* UnionFind */\n#line 4 \"structure/UnionFind.hpp\"\n#include <unordered_map>\n\
-    #include <algorithm>\n#include <initializer_list>\n#line 2 \"base/types.hpp\"\n\
-    #ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n#ifndef\
+    #include <algorithm>\n#include <initializer_list>\n#line 2 \"base/settings.hpp\"\
+    \n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n#ifndef\
     \ KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::size_t\n#endif\n#ifndef KYOPRO_BASE_FLOAT\n\
-    #define KYOPRO_BASE_FLOAT double\n#endif\n#line 8 \"structure/UnionFind.hpp\"\n\
-    \nnamespace kyopro {\n  template<class KyoproContainer = std::vector<int>>\n \
-    \ struct UnionFind {\n  private:\n    KyoproContainer kyopro_par;\n  public:\n\
-    \    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT kyopro_n)\
-    \ noexcept: kyopro_par(kyopro_n, -1) {}\n    void resize(KYOPRO_BASE_UINT kyopro_x)\
-    \ { kyopro_par.resize(kyopro_x, -1); }\n    void assign(KYOPRO_BASE_UINT kyopro_x)\
-    \ { kyopro_par.assign(kyopro_x, -1); }\n    void reset() { std::fill(std::begin(kyopro_par),\
+    #define KYOPRO_BASE_FLOAT double\n#endif\n#ifndef KYOPRO_DEFAULT_MOD\n#define\
+    \ KYOPRO_DEFAULT_MOD 1000000007\n#endif\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define\
+    \ KYOPRO_DECIMAL_PRECISION 12\n#endif\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV\
+    \ 3\n#endif\n#line 8 \"structure/UnionFind.hpp\"\n\nnamespace kyopro {\n  template<class\
+    \ KyoproContainer = std::vector<int>>\n  struct UnionFind {\n  private:\n    KyoproContainer\
+    \ kyopro_par;\n  public:\n    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT\
+    \ kyopro_n) noexcept: kyopro_par(kyopro_n, -1) {}\n    void resize(KYOPRO_BASE_UINT\
+    \ kyopro_x) { kyopro_par.resize(kyopro_x, -1); }\n    void assign(KYOPRO_BASE_UINT\
+    \ kyopro_x) { kyopro_par.assign(kyopro_x, -1); }\n    void reset() { std::fill(std::begin(kyopro_par),\
     \ std::end(kyopro_par), -1); }\n    KYOPRO_BASE_UINT size() const noexcept { return\
     \ kyopro_par.size(); }\n    KYOPRO_BASE_INT find(int kyopro_x) {\n      int kyopro_p\
     \ = kyopro_x;\n      while (kyopro_par[kyopro_p] >= 0) kyopro_p = kyopro_par[kyopro_p];\n\
@@ -84,20 +91,20 @@ data:
     \      return kyopro_group_members;\n    }\n  };\n}\n#line 5 \"all.hpp\"\n"
   code: '#pragma once
 
-    #include "base/types.hpp"
+    #include "base/settings.hpp"
 
     #include "structure/FenwickTree.hpp"
 
     #include "structure/UnionFind.hpp"'
   dependsOn:
-  - base/types.hpp
+  - base/settings.hpp
   - structure/FenwickTree.hpp
-  - base/types.hpp
+  - base/settings.hpp
   - structure/UnionFind.hpp
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2022-01-04 15:09:42+09:00'
+  timestamp: '2022-01-04 18:22:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp
