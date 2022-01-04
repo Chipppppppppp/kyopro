@@ -18,11 +18,11 @@ data:
     links:
     - https://judge.yosupo.jp/problem/point_add_range_sum
   bundledCode: "#line 1 \"yosupo/FenwickTree.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_range_sum\"\
-    \n#include <iostream>\n#line 1 \"structure/FenwickTree.hpp\"\n\n\n/* FenwickTree\
-    \ */\n#include <vector>\n#include <utility>\n#line 1 \"base/types.hpp\"\n#include\
-    \ <cstdint>\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\
-    #ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::size_t\n#endif\n#ifndef\
-    \ KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n#line 7 \"structure/FenwickTree.hpp\"\
+    \n#include <iostream>\n#line 2 \"structure/FenwickTree.hpp\"\n/* FenwickTree */\n\
+    #include <vector>\n#include <utility>\n#line 1 \"base/types.hpp\"\n#include <cstdint>\n\
+    #ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n#ifndef\
+    \ KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::size_t\n#endif\n#ifndef KYOPRO_BASE_FLOAT\n\
+    #define KYOPRO_BASE_FLOAT double\n#endif\n#line 6 \"structure/FenwickTree.hpp\"\
     \n\nnamespace kyopro {\n  template<class KyoproT, class KyoproContainer = std::vector<KyoproT>>\n\
     \  struct FenwickTree {\n  private:\n    KyoproContainer kyopro_tree;\n  public:\n\
     \    using value_type = KyoproT;\n    using size_type = KYOPRO_BASE_UINT;\n  \
@@ -39,7 +39,7 @@ data:
     \    }\n    KyoproT query(int kyopro_l, int kyopro_r) { return query(kyopro_r)\
     \ - query(kyopro_l); }\n    KyoproT get(int kyopro_p) { return query(kyopro_p\
     \ + 1) - query(kyopro_p); }\n    KyoproT all_query() { return query(kyopro_tree.size());\
-    \ }\n  };\n}\n\n#line 4 \"yosupo/FenwickTree.test.cpp\"\nusing ll = long long;\n\
+    \ }\n  };\n}\n#line 4 \"yosupo/FenwickTree.test.cpp\"\nusing ll = long long;\n\
     \nint main() {\n  int n, q;\n  std::cin >> n >> q;\n  kyopro::FenwickTree<ll>\
     \ ft(n);\n  for (int i = 0; i < n; ++i) {\n    int a;\n    std::cin >> a;\n  \
     \  ft.add(i, a);\n  }\n  for (int i = 0; i < q; ++i) {\n    int t, x, y;\n   \
@@ -58,7 +58,7 @@ data:
   isVerificationFile: true
   path: yosupo/FenwickTree.test.cpp
   requiredBy: []
-  timestamp: '2022-01-03 23:31:52+09:00'
+  timestamp: '2022-01-04 14:29:07+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/FenwickTree.test.cpp
