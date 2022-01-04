@@ -1,5 +1,4 @@
-#ifndef KYOPRO_UNION_FIND
-#define KYOPRO_UNION_FIND
+#pragma once
 /* UnionFind */
 #include <vector>
 #include <unordered_map>
@@ -68,4 +67,3 @@ namespace kyopro {
     }
   };
 }
-#endif
