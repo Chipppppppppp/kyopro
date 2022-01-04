@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <algorithm>
 #include <initializer_list>
-#include "../base/types.hpp"
+#include "../base/settings.hpp"
 
 namespace kyopro {
   template<class KyoproContainer = std::vector<int>>

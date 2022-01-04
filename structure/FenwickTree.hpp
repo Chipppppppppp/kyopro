@@ -2,7 +2,7 @@
 /* FenwickTree */
 #include <vector>
 #include <utility>
-#include "../base/types.hpp"
+#include "../base/settings.hpp"
 
 namespace kyopro {
   template<class KyoproT, class KyoproContainer = std::vector<KyoproT>>
