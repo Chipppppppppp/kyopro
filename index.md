@@ -1,6 +1,11 @@
 ---
 data:
   libraryCategories:
+  - name: .
+    pages:
+    - icon: ':warning:'
+      path: all.hpp
+      title: all.hpp
   - name: base
     pages:
     - icon: ':heavy_check_mark:'

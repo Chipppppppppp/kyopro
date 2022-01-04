@@ -2,6 +2,12 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
   - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
@@ -70,6 +76,8 @@ data:
   requiredBy:
   - structure/FenwickTree.hpp
   - structure/UnionFind.hpp
+  - all.hpp
+  - all.hpp
   timestamp: '2022-01-03 23:22:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

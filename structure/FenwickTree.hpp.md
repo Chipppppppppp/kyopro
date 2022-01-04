@@ -4,7 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: base/types.hpp
     title: base/types.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: yosupo/FenwickTree.test.cpp
@@ -58,7 +61,8 @@ data:
   - base/types.hpp
   isVerificationFile: false
   path: structure/FenwickTree.hpp
-  requiredBy: []
+  requiredBy:
+  - all.hpp
   timestamp: '2022-01-04 14:29:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
