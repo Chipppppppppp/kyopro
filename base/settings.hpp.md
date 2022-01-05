@@ -2,49 +2,52 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: all.hpp
     title: all.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: all.hpp
     title: all.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: base/all.hpp
     title: base/all.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/monoid.hpp
     title: base/monoid.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: structure/all.hpp
     title: structure/all.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: structure/all.hpp
     title: structure/all.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: yosupo/FenwickTree.test.cpp
     title: yosupo/FenwickTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: yosupo/FenwickTree.test.cpp
     title: yosupo/FenwickTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  _isVerificationFailed: true
+  - icon: ':heavy_check_mark:'
+    path: yosupo/UnionFind.test.cpp
+    title: yosupo/UnionFind.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: '#line 1 "base/settings.hpp"
@@ -140,8 +143,9 @@ data:
   - base/all.hpp
   - base/monoid.hpp
   timestamp: '2022-01-04 18:22:10+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - yosupo/UnionFind.test.cpp
   - yosupo/UnionFind.test.cpp
   - yosupo/FenwickTree.test.cpp
   - yosupo/FenwickTree.test.cpp

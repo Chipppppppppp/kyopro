@@ -3,38 +3,38 @@ data:
   libraryCategories:
   - name: .
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: all.hpp
       title: all.hpp
   - name: base
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: base/all.hpp
       title: base/all.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: base/constant.hpp
       title: base/constant.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: base/monoid.hpp
       title: base/monoid.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: base/settings.hpp
       title: base/settings.hpp
   - name: structure
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: structure/FenwickTree.hpp
       title: structure/FenwickTree.hpp
     - icon: ':heavy_check_mark:'
       path: structure/UnionFind.hpp
       title: structure/UnionFind.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: structure/all.hpp
       title: structure/all.hpp
   verificationCategories:
   - name: yosupo
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: yosupo/FenwickTree.test.cpp
       title: yosupo/FenwickTree.test.cpp
     - icon: ':heavy_check_mark:'

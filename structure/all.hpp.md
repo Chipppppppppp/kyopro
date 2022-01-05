@@ -1,32 +1,38 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/monoid.hpp
     title: base/monoid.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: all.hpp
     title: all.hpp
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: yosupo/FenwickTree.test.cpp
+    title: yosupo/FenwickTree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: yosupo/UnionFind.test.cpp
+    title: yosupo/UnionFind.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"structure/UnionFind.hpp\"\n/* UnionFind */\n#include <vector>\n\
@@ -145,8 +151,10 @@ data:
   requiredBy:
   - all.hpp
   timestamp: '2022-01-05 11:31:07+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - yosupo/UnionFind.test.cpp
+  - yosupo/FenwickTree.test.cpp
 documentation_of: structure/all.hpp
 layout: document
 redirect_from:
