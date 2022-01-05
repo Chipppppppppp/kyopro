@@ -8,22 +8,37 @@ data:
   - icon: ':warning:'
     path: all.hpp
     title: all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':x:'
+    path: base/constant.hpp
+    title: base/constant.hpp
+  - icon: ':x:'
+    path: base/monoid.hpp
+    title: base/monoid.hpp
+  - icon: ':x:'
+    path: structure/FenwickTree.hpp
+    title: structure/FenwickTree.hpp
+  - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: yosupo/FenwickTree.test.cpp
+    title: yosupo/FenwickTree.test.cpp
+  - icon: ':x:'
     path: yosupo/FenwickTree.test.cpp
     title: yosupo/FenwickTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: '#line 1 "base/settings.hpp"
@@ -109,13 +124,18 @@ data:
   path: base/settings.hpp
   requiredBy:
   - structure/FenwickTree.hpp
+  - structure/FenwickTree.hpp
   - structure/UnionFind.hpp
   - all.hpp
   - all.hpp
+  - all.hpp
+  - base/constant.hpp
+  - base/monoid.hpp
   timestamp: '2022-01-04 18:22:10+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - yosupo/UnionFind.test.cpp
+  - yosupo/FenwickTree.test.cpp
   - yosupo/FenwickTree.test.cpp
 documentation_of: base/settings.hpp
 layout: document

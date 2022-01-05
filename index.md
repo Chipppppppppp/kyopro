@@ -8,12 +8,18 @@ data:
       title: all.hpp
   - name: base
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
+      path: base/constant.hpp
+      title: base/constant.hpp
+    - icon: ':x:'
+      path: base/monoid.hpp
+      title: base/monoid.hpp
+    - icon: ':question:'
       path: base/settings.hpp
       title: base/settings.hpp
   - name: structure
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: structure/FenwickTree.hpp
       title: structure/FenwickTree.hpp
     - icon: ':heavy_check_mark:'
@@ -22,7 +28,7 @@ data:
   verificationCategories:
   - name: yosupo
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: yosupo/FenwickTree.test.cpp
       title: yosupo/FenwickTree.test.cpp
     - icon: ':heavy_check_mark:'
