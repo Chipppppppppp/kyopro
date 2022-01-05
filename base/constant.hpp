@@ -14,7 +14,6 @@ namespace kyopro {
   template<class KyoproT>
   inline constexpr KyoproT PI = 3.14159265358979323846;
   inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;
-  using KyoproPair = std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>;
-  inline constexpr std::array<KyoproPair, 4> beside{KyoproPair{1, 0}, KyoproPair{0, 1}, KyoproPair{-1, 0}, KyoproPair{0, -1}};
-  inline constexpr std::array<KyoproPair, 8> around{KyoproPair{1, 0}, KyoproPair{1, 1}, KyoproPair{0, 1}, KyoproPair{-1, 1}, KyoproPair{-1, 0}, KyoproPair{-1, -1}, KyoproPair{0, -1}, KyoproPair{1, -1}};
+  inline constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 4> beside{{{1, 0}, {0, 1}, {-1, 0}, {0, -1}}};
+  inline constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}}};
 }
