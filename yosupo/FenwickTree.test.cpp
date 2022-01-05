@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
 #include <iostream>
-#include "../structure/FenwickTree.hpp"
+#include "../all.hpp"
 using ll = long long;
 
 int main() {
@@ -10,12 +10,12 @@ int main() {
   for (int i = 0; i < n; ++i) {
     int a;
     std::cin >> a;
-    ft.add(i, a);
+    ft.apply(i, a);
   }
   for (int i = 0; i < q; ++i) {
     int t, x, y;
     std::cin >> t >> x >> y;
-    if (t == 0) ft.add(x, y);
-    else std::cout << ft.query(x, y) << '\n';
+    if (t == 0) ft.apply(x, y);
+    else std::cout << ft.prod(x, y) << '\n';
   }
 }
