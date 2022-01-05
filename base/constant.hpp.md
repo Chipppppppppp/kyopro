@@ -8,12 +8,18 @@ data:
   - icon: ':warning:'
     path: all.hpp
     title: all.hpp
+  - icon: ':warning:'
+    path: base/all.hpp
+    title: base/all.hpp
   - icon: ':x:'
     path: base/monoid.hpp
     title: base/monoid.hpp
   - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
+  - icon: ':warning:'
+    path: structure/all.hpp
+    title: structure/all.hpp
   _extendedVerifiedWith:
   - icon: ':x:'
     path: yosupo/FenwickTree.test.cpp
@@ -36,11 +42,12 @@ data:
     \ INF = std::numeric_limits<KyoproT>::max() / KYOPRO_INF_DIV;\n  inline constexpr\
     \ KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n  template<class KyoproT>\n  inline\
     \ constexpr KyoproT PI = 3.14159265358979323846;\n  inline constexpr KYOPRO_BASE_FLOAT\
-    \ pi = PI<KYOPRO_BASE_FLOAT>;\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 4> beside{{{1, 0}}, {{0, 1}}, {{-1, 0}}, {{0, -1}}};\n  inline\
-    \ constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{1,\
-    \ 0}}, {{1, 1}}, {{0, 1}}, {{-1, 1}}, {{-1, 0}}, {{-1, -1}}, {{0, -1}}, {{1, -1}}};\n\
-    }\n"
+    \ pi = PI<KYOPRO_BASE_FLOAT>;\n  using KyoproPair = std::pair<KYOPRO_BASE_INT,\
+    \ KYOPRO_BASE_INT>;\n  inline constexpr std::array<KyoproPair, 4> beside{KyoproPair{1,\
+    \ 0}, KyoproPair{0, 1}, KyoproPair{-1, 0}, KyoproPair{0, -1}};\n  inline constexpr\
+    \ std::array<KyoproPair, 8> around{KyoproPair{1, 0}, KyoproPair{1, 1}, KyoproPair{0,\
+    \ 1}, KyoproPair{-1, 1}, KyoproPair{-1, 0}, KyoproPair{-1, -1}, KyoproPair{0,\
+    \ -1}, KyoproPair{1, -1}};\n}\n"
   code: "#pragma once\n#include <limits>\n#include <array>\n#include <utility>\n#include\
     \ \"settings.hpp\"\n\nnamespace kyopro {\n  template<class KyoproT>\n  inline\
     \ constexpr KyoproT MOD = KYOPRO_DEFAULT_MOD;\n  inline constexpr KYOPRO_BASE_INT\
@@ -48,20 +55,23 @@ data:
     \ INF = std::numeric_limits<KyoproT>::max() / KYOPRO_INF_DIV;\n  inline constexpr\
     \ KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n  template<class KyoproT>\n  inline\
     \ constexpr KyoproT PI = 3.14159265358979323846;\n  inline constexpr KYOPRO_BASE_FLOAT\
-    \ pi = PI<KYOPRO_BASE_FLOAT>;\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 4> beside{{{1, 0}}, {{0, 1}}, {{-1, 0}}, {{0, -1}}};\n  inline\
-    \ constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{1,\
-    \ 0}}, {{1, 1}}, {{0, 1}}, {{-1, 1}}, {{-1, 0}}, {{-1, -1}}, {{0, -1}}, {{1, -1}}};\n\
-    }"
+    \ pi = PI<KYOPRO_BASE_FLOAT>;\n  using KyoproPair = std::pair<KYOPRO_BASE_INT,\
+    \ KYOPRO_BASE_INT>;\n  inline constexpr std::array<KyoproPair, 4> beside{KyoproPair{1,\
+    \ 0}, KyoproPair{0, 1}, KyoproPair{-1, 0}, KyoproPair{0, -1}};\n  inline constexpr\
+    \ std::array<KyoproPair, 8> around{KyoproPair{1, 0}, KyoproPair{1, 1}, KyoproPair{0,\
+    \ 1}, KyoproPair{-1, 1}, KyoproPair{-1, 0}, KyoproPair{-1, -1}, KyoproPair{0,\
+    \ -1}, KyoproPair{1, -1}};\n}"
   dependsOn:
   - base/settings.hpp
   isVerificationFile: false
   path: base/constant.hpp
   requiredBy:
   - structure/FenwickTree.hpp
+  - structure/all.hpp
   - all.hpp
+  - base/all.hpp
   - base/monoid.hpp
-  timestamp: '2022-01-05 11:14:02+09:00'
+  timestamp: '2022-01-05 11:31:07+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - yosupo/FenwickTree.test.cpp

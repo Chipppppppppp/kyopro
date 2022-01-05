@@ -17,6 +17,9 @@ data:
   - icon: ':warning:'
     path: all.hpp
     title: all.hpp
+  - icon: ':warning:'
+    path: structure/all.hpp
+    title: structure/all.hpp
   _extendedVerifiedWith:
   - icon: ':x:'
     path: yosupo/FenwickTree.test.cpp
@@ -46,31 +49,33 @@ data:
     \ INF = std::numeric_limits<KyoproT>::max() / KYOPRO_INF_DIV;\n  inline constexpr\
     \ KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n  template<class KyoproT>\n  inline\
     \ constexpr KyoproT PI = 3.14159265358979323846;\n  inline constexpr KYOPRO_BASE_FLOAT\
-    \ pi = PI<KYOPRO_BASE_FLOAT>;\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 4> beside{{{1, 0}}, {{0, 1}}, {{-1, 0}}, {{0, -1}}};\n  inline\
-    \ constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{1,\
-    \ 0}}, {{1, 1}}, {{0, 1}}, {{-1, 1}}, {{-1, 0}}, {{-1, -1}}, {{0, -1}}, {{1, -1}}};\n\
-    }\n#line 4 \"base/monoid.hpp\"\n\nnamespace kyopro {\n  template<class KyoproT,\
-    \ KyoproT kyopro_id = 0>\n  struct Plus {\n    static constexpr KyoproT id = kyopro_id;\n\
-    \    static constexpr op(KyoproT kyopro_a, KyoproT kyopro_b) noexcept { return\
-    \ kyopro_a + kyopro_b; }\n    static constexpr inv(KyoproT a) noexcept { return\
-    \ -kyopro_a; }\n  };\n  template<class KyoproT, KyoproT kyopro_id = 1>\n  struct\
-    \ Mul {\n    static constexpr KyoproT id = kyopro_id;\n    static constexpr op(KyoproT\
-    \ kyopro_a, KyoproT kyopro_b) noexcept { return kyopro_a * kyopro_b; }\n    static\
-    \ constexpr inv(KyoproT a) noexcept {\n      static_assert(!std::is_integral_v<KyoproT>);\n\
-    \      return 1 / kyopro_a;\n    }\n  };\n  template<class KyoproT, KyoproT kyopro_id\
+    \ pi = PI<KYOPRO_BASE_FLOAT>;\n  using KyoproPair = std::pair<KYOPRO_BASE_INT,\
+    \ KYOPRO_BASE_INT>;\n  inline constexpr std::array<KyoproPair, 4> beside{KyoproPair{1,\
+    \ 0}, KyoproPair{0, 1}, KyoproPair{-1, 0}, KyoproPair{0, -1}};\n  inline constexpr\
+    \ std::array<KyoproPair, 8> around{KyoproPair{1, 0}, KyoproPair{1, 1}, KyoproPair{0,\
+    \ 1}, KyoproPair{-1, 1}, KyoproPair{-1, 0}, KyoproPair{-1, -1}, KyoproPair{0,\
+    \ -1}, KyoproPair{1, -1}};\n}\n#line 4 \"base/monoid.hpp\"\n\nnamespace kyopro\
+    \ {\n  template<class KyoproT, KyoproT kyopro_id = 0>\n  struct Plus {\n    static\
+    \ constexpr KyoproT id = kyopro_id;\n    static constexpr KyoproT op(KyoproT kyopro_a,\
+    \ KyoproT kyopro_b) noexcept { return kyopro_a + kyopro_b; }\n    static constexpr\
+    \ KyoproT inv(KyoproT kyopro_a) noexcept { return -kyopro_a; }\n  };\n  template<class\
+    \ KyoproT, KyoproT kyopro_id = 1>\n  struct Mul {\n    static constexpr KyoproT\
+    \ id = kyopro_id;\n    static constexpr KyoproT op(KyoproT kyopro_a, KyoproT kyopro_b)\
+    \ noexcept { return kyopro_a * kyopro_b; }\n    static constexpr KyoproT inv(KyoproT\
+    \ kyopro_a) noexcept {\n      static_assert(!std::is_integral_v<KyoproT>);\n \
+    \     return 1 / kyopro_a;\n    }\n  };\n  template<class KyoproT, KyoproT kyopro_id\
     \ = -inf>\n  struct Max {\n    static constexpr KyoproT id = kyopro_id;\n    static\
-    \ constexpr op(KyoproT kyopro_a, KyoproT kyopro_b) noexcept { return kyopro_a\
+    \ constexpr KyoproT op(KyoproT kyopro_a, KyoproT kyopro_b) noexcept { return kyopro_a\
     \ > kyopro_b ? kyopro_a : kyopro_b; }\n  };\n  template<class KyoproT, KyoproT\
     \ kyopro_id = inf>\n  struct Min {\n    static constexpr KyoproT id = kyopro_id;\n\
-    \    static constexpr op(KyoproT kyopro_a, KyoproT kyopro_b) noexcept { return\
-    \ kyopro_a < kyopro_b ? kyopro_a : kyopro_b; }\n  };\n}\n#line 7 \"structure/FenwickTree.hpp\"\
+    \    static constexpr KyoproT op(KyoproT kyopro_a, KyoproT kyopro_b) noexcept\
+    \ { return kyopro_a < kyopro_b ? kyopro_a : kyopro_b; }\n  };\n}\n#line 7 \"structure/FenwickTree.hpp\"\
     \n\nnamespace kyopro {\n  template<class KyoproT, class KyoproOp = Plus<KyoproT>,\
     \ class KyoproContainer = std::vector<KyoproT>>\n  struct FenwickTree {\n  private:\n\
     \    KyoproContainer kyopro_tree;\n  public:\n    using value_type = KyoproT;\n\
     \    using size_type = KYOPRO_BASE_UINT;\n    using reference = KyoproT&;\n  \
     \  using const_reference = const KyoproT&;\n    FenwickTree() noexcept = default;\n\
-    \    FenwickTree(KYOPRO_BASE_UINT kyopro_n) noexcept: kyopro_tree(kyopro_n, kyopro_id)\
+    \    FenwickTree(KYOPRO_BASE_UINT kyopro_n) noexcept: kyopro_tree(kyopro_n, KyoproOp::id)\
     \ {}\n    KYOPRO_BASE_UINT size() noexcept { return kyopro_tree.size(); }\n  \
     \  void apply(int kyopro_p, const KyoproT& kyopro_x) {\n      ++kyopro_p;\n  \
     \    while (kyopro_p <= (int)size()) {\n        kyopro_tree[kyopro_p - 1] = KyoproOp::op(kyopro_tree[kyopro_p\
@@ -90,7 +95,7 @@ data:
     \ kyopro_tree;\n  public:\n    using value_type = KyoproT;\n    using size_type\
     \ = KYOPRO_BASE_UINT;\n    using reference = KyoproT&;\n    using const_reference\
     \ = const KyoproT&;\n    FenwickTree() noexcept = default;\n    FenwickTree(KYOPRO_BASE_UINT\
-    \ kyopro_n) noexcept: kyopro_tree(kyopro_n, kyopro_id) {}\n    KYOPRO_BASE_UINT\
+    \ kyopro_n) noexcept: kyopro_tree(kyopro_n, KyoproOp::id) {}\n    KYOPRO_BASE_UINT\
     \ size() noexcept { return kyopro_tree.size(); }\n    void apply(int kyopro_p,\
     \ const KyoproT& kyopro_x) {\n      ++kyopro_p;\n      while (kyopro_p <= (int)size())\
     \ {\n        kyopro_tree[kyopro_p - 1] = KyoproOp::op(kyopro_tree[kyopro_p - 1],\
@@ -111,8 +116,9 @@ data:
   isVerificationFile: false
   path: structure/FenwickTree.hpp
   requiredBy:
+  - structure/all.hpp
   - all.hpp
-  timestamp: '2022-01-05 11:14:02+09:00'
+  timestamp: '2022-01-05 11:31:07+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - yosupo/FenwickTree.test.cpp

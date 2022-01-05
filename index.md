@@ -8,6 +8,9 @@ data:
       title: all.hpp
   - name: base
     pages:
+    - icon: ':warning:'
+      path: base/all.hpp
+      title: base/all.hpp
     - icon: ':x:'
       path: base/constant.hpp
       title: base/constant.hpp
@@ -25,6 +28,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: structure/UnionFind.hpp
       title: structure/UnionFind.hpp
+    - icon: ':warning:'
+      path: structure/all.hpp
+      title: structure/all.hpp
   verificationCategories:
   - name: yosupo
     pages:

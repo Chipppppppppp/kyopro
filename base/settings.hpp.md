@@ -9,8 +9,8 @@ data:
     path: all.hpp
     title: all.hpp
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
+    path: base/all.hpp
+    title: base/all.hpp
   - icon: ':x:'
     path: base/constant.hpp
     title: base/constant.hpp
@@ -26,6 +26,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
+  - icon: ':warning:'
+    path: structure/all.hpp
+    title: structure/all.hpp
+  - icon: ':warning:'
+    path: structure/all.hpp
+    title: structure/all.hpp
   _extendedVerifiedWith:
   - icon: ':x:'
     path: yosupo/FenwickTree.test.cpp
@@ -126,10 +132,12 @@ data:
   - structure/FenwickTree.hpp
   - structure/FenwickTree.hpp
   - structure/UnionFind.hpp
-  - all.hpp
+  - structure/all.hpp
+  - structure/all.hpp
   - all.hpp
   - all.hpp
   - base/constant.hpp
+  - base/all.hpp
   - base/monoid.hpp
   timestamp: '2022-01-04 18:22:10+09:00'
   verificationStatus: LIBRARY_SOME_WA

@@ -8,6 +8,9 @@ data:
   - icon: ':warning:'
     path: all.hpp
     title: all.hpp
+  - icon: ':warning:'
+    path: structure/all.hpp
+    title: structure/all.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: yosupo/UnionFind.test.cpp
@@ -98,6 +101,7 @@ data:
   isVerificationFile: false
   path: structure/UnionFind.hpp
   requiredBy:
+  - structure/all.hpp
   - all.hpp
   timestamp: '2022-01-04 18:22:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
