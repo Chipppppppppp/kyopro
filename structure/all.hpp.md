@@ -20,19 +20,13 @@ data:
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: all.hpp
     title: all.hpp
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: yosupo/FenwickTree.test.cpp
-    title: yosupo/FenwickTree.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: yosupo/UnionFind.test.cpp
-    title: yosupo/UnionFind.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"structure/UnionFind.hpp\"\n/* UnionFind */\n#include <vector>\n\
@@ -151,10 +145,8 @@ data:
   requiredBy:
   - all.hpp
   timestamp: '2022-01-05 11:31:07+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - yosupo/UnionFind.test.cpp
-  - yosupo/FenwickTree.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: structure/all.hpp
 layout: document
 redirect_from:

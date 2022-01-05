@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
   - icon: ':heavy_check_mark:'
@@ -22,20 +22,14 @@ data:
   - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: yosupo/FenwickTree.test.cpp
-    title: yosupo/FenwickTree.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: yosupo/UnionFind.test.cpp
-    title: yosupo/UnionFind.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 1 \"base/settings.hpp\"\n#include <cstdint>\n#ifndef KYOPRO_BASE_INT\n\
@@ -160,10 +154,8 @@ data:
   path: all.hpp
   requiredBy: []
   timestamp: '2022-01-05 11:31:07+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - yosupo/UnionFind.test.cpp
-  - yosupo/FenwickTree.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: all.hpp
 layout: document
 redirect_from:

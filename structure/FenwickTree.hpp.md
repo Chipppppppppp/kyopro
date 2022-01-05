@@ -14,19 +14,16 @@ data:
     path: base/settings.hpp
     title: base/settings.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: all.hpp
     title: all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: yosupo/FenwickTree.test.cpp
     title: yosupo/FenwickTree.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: yosupo/UnionFind.test.cpp
-    title: yosupo/UnionFind.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -124,7 +121,6 @@ data:
   timestamp: '2022-01-05 11:31:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - yosupo/UnionFind.test.cpp
   - yosupo/FenwickTree.test.cpp
 documentation_of: structure/FenwickTree.hpp
 layout: document

@@ -2,13 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: all.hpp
     title: all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: all.hpp
     title: all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
   - icon: ':heavy_check_mark:'
@@ -26,10 +26,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
   _extendedVerifiedWith:
@@ -39,9 +39,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: yosupo/FenwickTree.test.cpp
     title: yosupo/FenwickTree.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: yosupo/UnionFind.test.cpp
-    title: yosupo/UnionFind.test.cpp
   - icon: ':heavy_check_mark:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
@@ -145,7 +142,6 @@ data:
   timestamp: '2022-01-04 18:22:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - yosupo/UnionFind.test.cpp
   - yosupo/UnionFind.test.cpp
   - yosupo/FenwickTree.test.cpp
   - yosupo/FenwickTree.test.cpp

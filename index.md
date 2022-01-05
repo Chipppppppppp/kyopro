@@ -3,12 +3,12 @@ data:
   libraryCategories:
   - name: .
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: all.hpp
       title: all.hpp
   - name: base
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: base/all.hpp
       title: base/all.hpp
     - icon: ':heavy_check_mark:'
@@ -28,7 +28,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: structure/UnionFind.hpp
       title: structure/UnionFind.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: structure/all.hpp
       title: structure/all.hpp
   verificationCategories:
