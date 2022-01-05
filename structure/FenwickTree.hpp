@@ -16,7 +16,7 @@ namespace kyopro {
     using reference = KyoproT&;
     using const_reference = const KyoproT&;
     FenwickTree() noexcept = default;
-    FenwickTree(KYOPRO_BASE_UINT kyopro_n) noexcept: kyopro_tree(kyopro_n, kyopro_id) {}
+    FenwickTree(KYOPRO_BASE_UINT kyopro_n) noexcept: kyopro_tree(kyopro_n, KyoproOp::id) {}
     KYOPRO_BASE_UINT size() noexcept { return kyopro_tree.size(); }
     void apply(int kyopro_p, const KyoproT& kyopro_x) {
       ++kyopro_p;
