@@ -42,12 +42,10 @@ data:
     \ INF = std::numeric_limits<KyoproT>::max() / KYOPRO_INF_DIV;\n  inline constexpr\
     \ KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n  template<class KyoproT>\n  inline\
     \ constexpr KyoproT PI = 3.14159265358979323846;\n  inline constexpr KYOPRO_BASE_FLOAT\
-    \ pi = PI<KYOPRO_BASE_FLOAT>;\n  using KyoproPair = std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>;\n  inline constexpr std::array<KyoproPair, 4> beside{KyoproPair{1,\
-    \ 0}, KyoproPair{0, 1}, KyoproPair{-1, 0}, KyoproPair{0, -1}};\n  inline constexpr\
-    \ std::array<KyoproPair, 8> around{KyoproPair{1, 0}, KyoproPair{1, 1}, KyoproPair{0,\
-    \ 1}, KyoproPair{-1, 1}, KyoproPair{-1, 0}, KyoproPair{-1, -1}, KyoproPair{0,\
-    \ -1}, KyoproPair{1, -1}};\n}\n"
+    \ pi = PI<KYOPRO_BASE_FLOAT>;\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
+    \ KYOPRO_BASE_INT>, 4> beside{{{1, 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr\
+    \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1,\
+    \ 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}}};\n}\n"
   code: "#pragma once\n#include <limits>\n#include <array>\n#include <utility>\n#include\
     \ \"settings.hpp\"\n\nnamespace kyopro {\n  template<class KyoproT>\n  inline\
     \ constexpr KyoproT MOD = KYOPRO_DEFAULT_MOD;\n  inline constexpr KYOPRO_BASE_INT\
@@ -55,12 +53,10 @@ data:
     \ INF = std::numeric_limits<KyoproT>::max() / KYOPRO_INF_DIV;\n  inline constexpr\
     \ KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n  template<class KyoproT>\n  inline\
     \ constexpr KyoproT PI = 3.14159265358979323846;\n  inline constexpr KYOPRO_BASE_FLOAT\
-    \ pi = PI<KYOPRO_BASE_FLOAT>;\n  using KyoproPair = std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>;\n  inline constexpr std::array<KyoproPair, 4> beside{KyoproPair{1,\
-    \ 0}, KyoproPair{0, 1}, KyoproPair{-1, 0}, KyoproPair{0, -1}};\n  inline constexpr\
-    \ std::array<KyoproPair, 8> around{KyoproPair{1, 0}, KyoproPair{1, 1}, KyoproPair{0,\
-    \ 1}, KyoproPair{-1, 1}, KyoproPair{-1, 0}, KyoproPair{-1, -1}, KyoproPair{0,\
-    \ -1}, KyoproPair{1, -1}};\n}"
+    \ pi = PI<KYOPRO_BASE_FLOAT>;\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
+    \ KYOPRO_BASE_INT>, 4> beside{{{1, 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr\
+    \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1,\
+    \ 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}}};\n}"
   dependsOn:
   - base/settings.hpp
   isVerificationFile: false
@@ -71,7 +67,7 @@ data:
   - all.hpp
   - base/all.hpp
   - base/monoid.hpp
-  timestamp: '2022-01-05 11:31:07+09:00'
+  timestamp: '2022-01-05 12:00:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - yosupo/FenwickTree.test.cpp

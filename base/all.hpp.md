@@ -38,25 +38,24 @@ data:
     \ constexpr KyoproT INF = std::numeric_limits<KyoproT>::max() / KYOPRO_INF_DIV;\n\
     \  inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n  template<class\
     \ KyoproT>\n  inline constexpr KyoproT PI = 3.14159265358979323846;\n  inline\
-    \ constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n  using KyoproPair\
-    \ = std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>;\n  inline constexpr std::array<KyoproPair,\
-    \ 4> beside{KyoproPair{1, 0}, KyoproPair{0, 1}, KyoproPair{-1, 0}, KyoproPair{0,\
-    \ -1}};\n  inline constexpr std::array<KyoproPair, 8> around{KyoproPair{1, 0},\
-    \ KyoproPair{1, 1}, KyoproPair{0, 1}, KyoproPair{-1, 1}, KyoproPair{-1, 0}, KyoproPair{-1,\
-    \ -1}, KyoproPair{0, -1}, KyoproPair{1, -1}};\n}\n#line 2 \"base/monoid.hpp\"\n\
-    #include <type_traits>\n#line 4 \"base/monoid.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ KyoproT, KyoproT kyopro_id = 0>\n  struct Plus {\n    static constexpr KyoproT\
-    \ id = kyopro_id;\n    static constexpr KyoproT op(KyoproT kyopro_a, KyoproT kyopro_b)\
-    \ noexcept { return kyopro_a + kyopro_b; }\n    static constexpr KyoproT inv(KyoproT\
-    \ kyopro_a) noexcept { return -kyopro_a; }\n  };\n  template<class KyoproT, KyoproT\
-    \ kyopro_id = 1>\n  struct Mul {\n    static constexpr KyoproT id = kyopro_id;\n\
+    \ constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n  inline constexpr\
+    \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 4> beside{{{1, 0}, {0,\
+    \ 1}, {-1, 0}, {0, -1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
+    \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
+    \ -1}, {0, -1}, {1, -1}}};\n}\n#line 2 \"base/monoid.hpp\"\n#include <type_traits>\n\
+    #line 4 \"base/monoid.hpp\"\n\nnamespace kyopro {\n  template<class KyoproT, KyoproT\
+    \ kyopro_id = 0>\n  struct Plus {\n    static constexpr KyoproT id = kyopro_id;\n\
     \    static constexpr KyoproT op(KyoproT kyopro_a, KyoproT kyopro_b) noexcept\
-    \ { return kyopro_a * kyopro_b; }\n    static constexpr KyoproT inv(KyoproT kyopro_a)\
-    \ noexcept {\n      static_assert(!std::is_integral_v<KyoproT>);\n      return\
-    \ 1 / kyopro_a;\n    }\n  };\n  template<class KyoproT, KyoproT kyopro_id = -inf>\n\
-    \  struct Max {\n    static constexpr KyoproT id = kyopro_id;\n    static constexpr\
-    \ KyoproT op(KyoproT kyopro_a, KyoproT kyopro_b) noexcept { return kyopro_a >\
-    \ kyopro_b ? kyopro_a : kyopro_b; }\n  };\n  template<class KyoproT, KyoproT kyopro_id\
+    \ { return kyopro_a + kyopro_b; }\n    static constexpr KyoproT inv(KyoproT kyopro_a)\
+    \ noexcept { return -kyopro_a; }\n  };\n  template<class KyoproT, KyoproT kyopro_id\
+    \ = 1>\n  struct Mul {\n    static constexpr KyoproT id = kyopro_id;\n    static\
+    \ constexpr KyoproT op(KyoproT kyopro_a, KyoproT kyopro_b) noexcept { return kyopro_a\
+    \ * kyopro_b; }\n    static constexpr KyoproT inv(KyoproT kyopro_a) noexcept {\n\
+    \      static_assert(!std::is_integral_v<KyoproT>);\n      return 1 / kyopro_a;\n\
+    \    }\n  };\n  template<class KyoproT, KyoproT kyopro_id = -inf>\n  struct Max\
+    \ {\n    static constexpr KyoproT id = kyopro_id;\n    static constexpr KyoproT\
+    \ op(KyoproT kyopro_a, KyoproT kyopro_b) noexcept { return kyopro_a > kyopro_b\
+    \ ? kyopro_a : kyopro_b; }\n  };\n  template<class KyoproT, KyoproT kyopro_id\
     \ = inf>\n  struct Min {\n    static constexpr KyoproT id = kyopro_id;\n    static\
     \ constexpr KyoproT op(KyoproT kyopro_a, KyoproT kyopro_b) noexcept { return kyopro_a\
     \ < kyopro_b ? kyopro_a : kyopro_b; }\n  };\n}\n#line 5 \"base/all.hpp\"\n"
@@ -75,7 +74,7 @@ data:
   path: base/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-01-05 11:31:07+09:00'
+  timestamp: '2022-01-05 12:00:31+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: base/all.hpp
