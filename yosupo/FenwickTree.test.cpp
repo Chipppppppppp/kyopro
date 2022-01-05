@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
 #include <iostream>
-#include "../all.hpp"
+#include "../structure/FenwickTree.hpp"
 using ll = long long;
 
 int main() {
