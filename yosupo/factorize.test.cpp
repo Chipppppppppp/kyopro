@@ -9,7 +9,8 @@ int main() {
     long long a;
     std::cin >> a;
     auto primes = kyopro::factorize(a);
-    std::cout << primes.size() << ' ';
-    for (auto& i: primes) std::cout << i << " \n"[&i == &primes.back()];
+    std::cout << primes.size();
+    for (auto i: primes) std::cout << ' ' << i;
+    std::cout << '\n';
   }
 }
