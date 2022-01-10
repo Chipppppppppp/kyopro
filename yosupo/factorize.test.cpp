@@ -1,0 +1,15 @@
+#define PROBLEM https://judge.yosupo.jp/problem/factorize
+#include <iostream>
+#include "../math/factorize.hpp"
+
+int main() {
+  int q;
+  std::cin >> q;
+  for (int i = 0; i < q; ++i) {
+    long long a;
+    std::cin >> a;
+    auto primes = factorize(a);
+    std::cout << primes.size() << std::endl;
+    for (auto& i: primes) std::cout << i << " \n"[&i == &primes.back()];
+  }
+}

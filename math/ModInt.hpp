@@ -4,7 +4,7 @@
 #include <cassert>
 #include "../base/settings.hpp"
 #include "../base/constant.hpp"
-#include "../base/hash.hpp"
+#include "../base/Hash.hpp"
 #include "mod.hpp"
 
 namespace kyopro {
