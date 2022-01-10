@@ -15,8 +15,12 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"base/trait.hpp\"\n#include <utility>\n#include <type_traits>\n\
-    #include <iterator>\n#include <stack>\n#include <queue>\n\nnamespace kyopro {\n\
-    \  template<class KyoproT, class = void>\n  struct is_iterator: std::false_type\
+    #include <iterator>\n#include <stack>\n#include <queue>\n\n#ifdef __SIZEOF_INT128__\n\
+    struct std::is_integral<__int128_t>: std::true_type {};\nstruct std::is_signed<__int128_t>:\
+    \ std::true_type {};\nstruct std::is_integral<__uint128_t>: std::true_type {};\n\
+    struct std::is_unsigned<__uint128_t>: std::true_type {};\n#endif\n#ifdef __SIZEOF_FLOAT128__\n\
+    struct std::is_floating_point<__float128>: std::true_type {};\n#endif\n\nnamespace\
+    \ kyopro {\n  template<class KyoproT, class = void>\n  struct is_iterator: std::false_type\
     \ {};\n  template<class KyoproT>\n  struct is_iterator<KyoproT, std::enable_if_t<!std::is_same_v<typename\
     \ std::iterator_traits<KyoproT>::value_type, void>>>: std::true_type {};\n  template<class\
     \ KyoproT>\n  constexpr bool is_iterator_v = is_iterator<KyoproT>::value;\n\n\
@@ -36,7 +40,11 @@ data:
     \ Container, Compare>>: std::false_type {};\n  template<class KyoproT>\n  constexpr\
     \ bool is_iterable_v = is_iterable<KyoproT>::value;\n}\n"
   code: "#pragma once\n#include <utility>\n#include <type_traits>\n#include <iterator>\n\
-    #include <stack>\n#include <queue>\n\nnamespace kyopro {\n  template<class KyoproT,\
+    #include <stack>\n#include <queue>\n\n#ifdef __SIZEOF_INT128__\nstruct std::is_integral<__int128_t>:\
+    \ std::true_type {};\nstruct std::is_signed<__int128_t>: std::true_type {};\n\
+    struct std::is_integral<__uint128_t>: std::true_type {};\nstruct std::is_unsigned<__uint128_t>:\
+    \ std::true_type {};\n#endif\n#ifdef __SIZEOF_FLOAT128__\nstruct std::is_floating_point<__float128>:\
+    \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<class KyoproT,\
     \ class = void>\n  struct is_iterator: std::false_type {};\n  template<class KyoproT>\n\
     \  struct is_iterator<KyoproT, std::enable_if_t<!std::is_same_v<typename std::iterator_traits<KyoproT>::value_type,\
     \ void>>>: std::true_type {};\n  template<class KyoproT>\n  constexpr bool is_iterator_v\
@@ -62,7 +70,7 @@ data:
   requiredBy:
   - base/Hash.hpp
   - base/all.hpp
-  timestamp: '2022-01-10 19:46:56+09:00'
+  timestamp: '2022-01-10 20:19:03+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: base/trait.hpp
