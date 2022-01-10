@@ -14,11 +14,11 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: 'https:'
+    PROBLEM: https://judge.yosupo.jp/problem/factorize
     links:
     - https://judge.yosupo.jp/problem/factorize
-  bundledCode: "#line 1 \"yosupo/factorize.test.cpp\"\n#define PROBLEM https://judge.yosupo.jp/problem/factorize\n\
-    #include <iostream>\n#line 2 \"math/factorize.hpp\"\n#include <cstdint>\n#include\
+  bundledCode: "#line 1 \"yosupo/factorize.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\
+    \n#include <iostream>\n#line 2 \"math/factorize.hpp\"\n#include <cstdint>\n#include\
     \ <vector>\n#include <utility>\n#line 3 \"base/settings.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n\
     #define KYOPRO_BASE_INT std::int64_t\n#endif\n#ifndef KYOPRO_BASE_UINT\n#define\
     \ KYOPRO_BASE_UINT std::size_t\n#endif\n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT\
@@ -36,7 +36,7 @@ data:
     \ long a;\n    std::cin >> a;\n    auto primes = kyopro::factorize(a);\n    std::cout\
     \ << primes.size() << std::endl;\n    for (auto& i: primes) std::cout << i <<\
     \ \" \\n\"[&i == &primes.back()];\n  }\n}\n"
-  code: "#define PROBLEM https://judge.yosupo.jp/problem/factorize\n#include <iostream>\n\
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\n#include <iostream>\n\
     #include \"../math/factorize.hpp\"\n\nint main() {\n  int q;\n  std::cin >> q;\n\
     \  for (int i = 0; i < q; ++i) {\n    long long a;\n    std::cin >> a;\n    auto\
     \ primes = kyopro::factorize(a);\n    std::cout << primes.size() << std::endl;\n\
@@ -48,7 +48,7 @@ data:
   isVerificationFile: true
   path: yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2022-01-10 23:00:13+09:00'
+  timestamp: '2022-01-10 23:09:52+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: yosupo/factorize.test.cpp
