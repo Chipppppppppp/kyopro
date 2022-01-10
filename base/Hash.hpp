@@ -3,7 +3,6 @@
 #include <tuple>
 #include "settings.hpp"
 #include "trait.hpp"
-#include "../math/ModInt.hpp"
 
 namespace kyopro {
   template<class, class = void>
@@ -14,9 +13,6 @@ namespace kyopro {
 
   template<class KyoproT>
   struct Hash<KyoproT, std::enable_if_t<std::is_floating_point_v<KyoproT>>> { constexpr KYOPRO_BASE_UINT operator ()(KyoproT kyopro_a) const noexcept { return (KYOPRO_BASE_UINT)kyopro_a & 0xfffff000; } };
-
-  template<KYOPRO_BASE_UINT m>
-  struct Hash<ModInt<m>> { constexpr KYOPRO_BASE_UINT operator ()(ModInt<m> kyopro_a) const noexcept { return kyopro_a; } };
 
   template<class KyoproT>
   struct Hash<KyoproT, std::enable_if_t<is_tuple_v<KyoproT>>> {

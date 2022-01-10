@@ -4,6 +4,7 @@
 #include <cassert>
 #include "../base/settings.hpp"
 #include "../base/constant.hpp"
+#include "../base/hash.hpp"
 #include "mod.hpp"
 
 namespace kyopro {
@@ -87,5 +88,9 @@ namespace kyopro {
     friend constexpr bool operator ==(ModInt lhs, ModInt rhs) noexcept { return lhs.value == rhs.value; }
     friend constexpr bool operator !=(ModInt lhs, ModInt rhs) noexcept { return lhs.value != rhs.value; }
   };
+
+  template<KYOPRO_BASE_UINT m>
+  struct Hash<ModInt<m>> { constexpr KYOPRO_BASE_UINT operator ()(ModInt<m> kyopro_a) const noexcept { return kyopro_a; } };
+
   constexpr ModInt<mod> operator "" _m(unsigned long long a) noexcept { return a; }
 }
