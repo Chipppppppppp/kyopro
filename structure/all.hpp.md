@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/monoid.hpp
     title: math/monoid.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':heavy_check_mark:'
@@ -76,27 +76,28 @@ data:
     \ n, KyoproT init = 1) noexcept {\n    while (n > 0) {\n      if (n & 1) init\
     \ *= a;\n      a *= a;\n      n >>= 1;\n    }\n    return init;\n  }\n}\n#line\
     \ 8 \"base/constant.hpp\"\n\nnamespace kyopro {\n  inline constexpr std::uint64_t\
-    \ kyopro_decimal_max = power(10, KYOPRO_DECIMAL_PRECISION);\n  template<class\
-    \ KyoproT>\n  inline constexpr KyoproT MOD = KYOPRO_DEFAULT_MOD;\n  inline constexpr\
-    \ KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n  template<class KyoproT>\n  inline\
-    \ constexpr KyoproT INF = std::numeric_limits<KyoproT>::max() / KYOPRO_INF_DIV;\n\
-    \  inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n  template<class\
-    \ KyoproT>\n  inline constexpr KYOPRO_BASE_FLOAT EPS = (KyoproT)1 / decimal_precision_max;\n\
-    \  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<lf>;\n  template<class KyoproT>\n\
-    \  inline constexpr KyoproT PI = 3.14159265358979323846;\n  inline constexpr KYOPRO_BASE_FLOAT\
-    \ pi = PI<KYOPRO_BASE_FLOAT>;\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 4> beside{{{1, 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr\
-    \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1,\
-    \ 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}}};\n}\n#line 4 \"math/monoid.hpp\"\
-    \n\nnamespace kyopro {\n  template<class KyoproT, KyoproT kyopro_id = 0>\n  struct\
-    \ Plus {\n    static constexpr KyoproT id = kyopro_id;\n    static constexpr KyoproT\
-    \ op(KyoproT kyopro_a, KyoproT kyopro_b) noexcept { return kyopro_a + kyopro_b;\
-    \ }\n    static constexpr KyoproT inv(KyoproT kyopro_a) noexcept { return -kyopro_a;\
-    \ }\n  };\n  template<class KyoproT, KyoproT kyopro_id = 1>\n  struct Mul {\n\
-    \    static constexpr KyoproT id = kyopro_id;\n    static constexpr KyoproT op(KyoproT\
-    \ kyopro_a, KyoproT kyopro_b) noexcept { return kyopro_a * kyopro_b; }\n    static\
-    \ constexpr KyoproT inv(KyoproT kyopro_a) noexcept {\n      static_assert(!std::is_integral_v<KyoproT>);\n\
-    \      return 1 / kyopro_a;\n    }\n  };\n  template<class KyoproT, KyoproT kyopro_id\
+    \ kyopro_decimal_max = power(static_cast<std::uint64_t>(10), KYOPRO_DECIMAL_PRECISION);\n\
+    \  template<class KyoproT>\n  inline constexpr KyoproT MOD = KYOPRO_DEFAULT_MOD;\n\
+    \  inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n  template<class\
+    \ KyoproT>\n  inline constexpr KyoproT INF = std::numeric_limits<KyoproT>::max()\
+    \ / KYOPRO_INF_DIV;\n  inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\
+    \  template<class KyoproT>\n  inline constexpr KYOPRO_BASE_FLOAT EPS = static_cast<KyoproT>(1)\
+    \ / kyopro_decimal_max;\n  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\
+    \  template<class KyoproT>\n  inline constexpr KyoproT PI = 3.14159265358979323846;\n\
+    \  inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n  inline constexpr\
+    \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 4> beside{{{1, 0}, {0,\
+    \ 1}, {-1, 0}, {0, -1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
+    \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
+    \ -1}, {0, -1}, {1, -1}}};\n}\n#line 4 \"math/monoid.hpp\"\n\nnamespace kyopro\
+    \ {\n  template<class KyoproT, KyoproT kyopro_id = 0>\n  struct Plus {\n    static\
+    \ constexpr KyoproT id = kyopro_id;\n    static constexpr KyoproT op(KyoproT kyopro_a,\
+    \ KyoproT kyopro_b) noexcept { return kyopro_a + kyopro_b; }\n    static constexpr\
+    \ KyoproT inv(KyoproT kyopro_a) noexcept { return -kyopro_a; }\n  };\n  template<class\
+    \ KyoproT, KyoproT kyopro_id = 1>\n  struct Mul {\n    static constexpr KyoproT\
+    \ id = kyopro_id;\n    static constexpr KyoproT op(KyoproT kyopro_a, KyoproT kyopro_b)\
+    \ noexcept { return kyopro_a * kyopro_b; }\n    static constexpr KyoproT inv(KyoproT\
+    \ kyopro_a) noexcept {\n      static_assert(!std::is_integral_v<KyoproT>);\n \
+    \     return 1 / kyopro_a;\n    }\n  };\n  template<class KyoproT, KyoproT kyopro_id\
     \ = -inf>\n  struct Max {\n    static constexpr KyoproT id = kyopro_id;\n    static\
     \ constexpr KyoproT op(KyoproT kyopro_a, KyoproT kyopro_b) noexcept { return kyopro_a\
     \ > kyopro_b ? kyopro_a : kyopro_b; }\n  };\n  template<class KyoproT, KyoproT\
@@ -137,7 +138,7 @@ data:
   path: structure/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-01-10 19:46:56+09:00'
+  timestamp: '2022-01-10 20:01:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: structure/all.hpp

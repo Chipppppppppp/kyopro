@@ -11,7 +11,7 @@ data:
   - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/constant.hpp
     title: base/constant.hpp
   - icon: ':warning:'
@@ -26,13 +26,13 @@ data:
   - icon: ':warning:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/monoid.hpp
     title: math/monoid.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':heavy_check_mark:'
@@ -48,15 +48,15 @@ data:
     path: template/all.hpp
     title: template/all.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: yosupo/FenwickTree.test.cpp
     title: yosupo/FenwickTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: '#line 2 "base/settings.hpp"
@@ -159,7 +159,7 @@ data:
   - base/constant.hpp
   - base/all.hpp
   timestamp: '2022-01-10 19:46:56+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - yosupo/UnionFind.test.cpp
   - yosupo/FenwickTree.test.cpp

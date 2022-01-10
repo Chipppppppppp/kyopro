@@ -4,10 +4,10 @@ data:
   - icon: ':warning:'
     path: base/Hash.hpp
     title: base/Hash.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/settings.hpp
     title: base/settings.hpp
   - icon: ':warning:'
@@ -19,7 +19,7 @@ data:
   - icon: ':warning:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
   _extendedRequiredBy:
@@ -43,26 +43,26 @@ data:
     \ a, std::uint64_t n, KyoproT init = 1) noexcept {\n    while (n > 0) {\n    \
     \  if (n & 1) init *= a;\n      a *= a;\n      n >>= 1;\n    }\n    return init;\n\
     \  }\n}\n#line 8 \"base/constant.hpp\"\n\nnamespace kyopro {\n  inline constexpr\
-    \ std::uint64_t kyopro_decimal_max = power(10, KYOPRO_DECIMAL_PRECISION);\n  template<class\
-    \ KyoproT>\n  inline constexpr KyoproT MOD = KYOPRO_DEFAULT_MOD;\n  inline constexpr\
-    \ KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n  template<class KyoproT>\n  inline\
-    \ constexpr KyoproT INF = std::numeric_limits<KyoproT>::max() / KYOPRO_INF_DIV;\n\
-    \  inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n  template<class\
-    \ KyoproT>\n  inline constexpr KYOPRO_BASE_FLOAT EPS = (KyoproT)1 / decimal_precision_max;\n\
-    \  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<lf>;\n  template<class KyoproT>\n\
-    \  inline constexpr KyoproT PI = 3.14159265358979323846;\n  inline constexpr KYOPRO_BASE_FLOAT\
-    \ pi = PI<KYOPRO_BASE_FLOAT>;\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 4> beside{{{1, 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr\
-    \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1,\
-    \ 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}}};\n}\n#line 3 \"base/trait.hpp\"\
-    \n#include <type_traits>\n#include <iterator>\n#include <stack>\n#include <queue>\n\
-    \nnamespace kyopro {\n  template<class KyoproT, class = void>\n  struct is_iterator:\
-    \ std::false_type {};\n  template<class KyoproT>\n  struct is_iterator<KyoproT,\
-    \ std::enable_if_t<!std::is_same_v<typename std::iterator_traits<KyoproT>::value_type,\
-    \ void>>>: std::true_type {};\n  template<class KyoproT>\n  constexpr bool is_iterator_v\
-    \ = is_iterator<KyoproT>::value;\n\n  template<class KyoproT, class = void>\n\
-    \  struct is_container: std::false_type {};\n  template<class KyoproT>\n  struct\
-    \ is_container<KyoproT, std::void_t<decltype(std::begin(std::declval<KyoproT>()),\
+    \ std::uint64_t kyopro_decimal_max = power(static_cast<std::uint64_t>(10), KYOPRO_DECIMAL_PRECISION);\n\
+    \  template<class KyoproT>\n  inline constexpr KyoproT MOD = KYOPRO_DEFAULT_MOD;\n\
+    \  inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n  template<class\
+    \ KyoproT>\n  inline constexpr KyoproT INF = std::numeric_limits<KyoproT>::max()\
+    \ / KYOPRO_INF_DIV;\n  inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\
+    \  template<class KyoproT>\n  inline constexpr KYOPRO_BASE_FLOAT EPS = static_cast<KyoproT>(1)\
+    \ / kyopro_decimal_max;\n  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\
+    \  template<class KyoproT>\n  inline constexpr KyoproT PI = 3.14159265358979323846;\n\
+    \  inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n  inline constexpr\
+    \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 4> beside{{{1, 0}, {0,\
+    \ 1}, {-1, 0}, {0, -1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
+    \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
+    \ -1}, {0, -1}, {1, -1}}};\n}\n#line 3 \"base/trait.hpp\"\n#include <type_traits>\n\
+    #include <iterator>\n#include <stack>\n#include <queue>\n\nnamespace kyopro {\n\
+    \  template<class KyoproT, class = void>\n  struct is_iterator: std::false_type\
+    \ {};\n  template<class KyoproT>\n  struct is_iterator<KyoproT, std::enable_if_t<!std::is_same_v<typename\
+    \ std::iterator_traits<KyoproT>::value_type, void>>>: std::true_type {};\n  template<class\
+    \ KyoproT>\n  constexpr bool is_iterator_v = is_iterator<KyoproT>::value;\n\n\
+    \  template<class KyoproT, class = void>\n  struct is_container: std::false_type\
+    \ {};\n  template<class KyoproT>\n  struct is_container<KyoproT, std::void_t<decltype(std::begin(std::declval<KyoproT>()),\
     \ std::end(std::declval<KyoproT>()), std::empty(std::declval<KyoproT>()))>>: std::true_type\
     \ {};\n  template<class KyoproT>\n  constexpr bool is_container_v = is_container<KyoproT>::value;\n\
     \n  template<class KyoproT>\n  struct is_tuple: std::false_type {};\n  template<class\
@@ -95,16 +95,16 @@ data:
     \ noexcept {\n      std::uint64_t res = 1, a = value;\n      while (n > 0) {\n\
     \        if (n & 1) res = res * a % m;\n        a = a * a % m;\n        n >>=\
     \ 1;\n      }\n      return res;\n    }\n    constexpr ModInt inv() const noexcept\
-    \ {\n      std::uint64_t a = value, b = m;\n      base_int_t u = 1, v = 0;\n \
-    \     while (b > 0) {\n        std::uint64_t t = a / b;\n        a -= t * b;\n\
-    \        swap(a, b);\n        u -= t * v;\n        swap(u, v);\n      }\n    \
-    \  return floor_mod(u, m);\n    }\n    constexpr ModInt operator +() const noexcept\
-    \ { return *this; }\n    constexpr ModInt operator -() const noexcept { return\
-    \ m - value; }\n    constexpr ModInt& operator ++() noexcept {\n      if (++value\
-    \ >= m) value -= m;\n      return *this;\n    }\n    constexpr ModInt operator\
-    \ ++(int) noexcept {\n      ModInt before = *this;\n      operator ++();\n   \
-    \   return before;\n    }\n    constexpr ModInt& operator --() noexcept {\n  \
-    \    if (value == 0) value = m;\n      --value;\n      return *this;\n    }\n\
+    \ {\n      std::uint64_t a = value, b = m;\n      std::int64_t u = 1, v = 0;\n\
+    \      while (b > 0) {\n        std::uint64_t t = a / b;\n        a -= t * b;\n\
+    \        std::swap(a, b);\n        u -= t * v;\n        std::swap(u, v);\n   \
+    \   }\n      return floor_mod(u, m);\n    }\n    constexpr ModInt operator +()\
+    \ const noexcept { return *this; }\n    constexpr ModInt operator -() const noexcept\
+    \ { return m - value; }\n    constexpr ModInt& operator ++() noexcept {\n    \
+    \  if (++value >= m) value -= m;\n      return *this;\n    }\n    constexpr ModInt\
+    \ operator ++(int) noexcept {\n      ModInt before = *this;\n      operator ++();\n\
+    \      return before;\n    }\n    constexpr ModInt& operator --() noexcept {\n\
+    \      if (value == 0) value = m;\n      --value;\n      return *this;\n    }\n\
     \    constexpr ModInt operator --(int) noexcept {\n      ModInt before = *this;\n\
     \      operator --();\n      return before;\n    }\n    constexpr ModInt& operator\
     \ +=(ModInt rhs) noexcept {\n      if ((value += rhs.value) >= m) value -= m;\n\
@@ -121,7 +121,7 @@ data:
     \ { return lhs /= rhs; }\n    friend constexpr bool operator ==(ModInt lhs, ModInt\
     \ rhs) noexcept { return lhs.value == rhs.value; }\n    friend constexpr bool\
     \ operator !=(ModInt lhs, ModInt rhs) noexcept { return lhs.value != rhs.value;\
-    \ }\n  };\n  constexpr ModInt<mod> operator \"\" _m(std::uint64_t a) noexcept\
+    \ }\n  };\n  constexpr ModInt<mod> operator \"\" _m(unsigned long long a) noexcept\
     \ { return a; }\n}\n#line 7 \"base/Hash.hpp\"\n\nnamespace kyopro {\n  template<class,\
     \ class = void>\n  struct Hash;\n\n  template<class KyoproT>\n  struct Hash<KyoproT,\
     \ std::enable_if_t<std::is_integral_v<KyoproT>>> { constexpr KYOPRO_BASE_UINT\
@@ -166,7 +166,7 @@ data:
   path: base/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-01-10 19:46:56+09:00'
+  timestamp: '2022-01-10 20:01:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: base/all.hpp
