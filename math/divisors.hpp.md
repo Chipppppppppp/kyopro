@@ -4,13 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: base/settings.hpp
     title: base/settings.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
-    path: math/all.hpp
-    title: math/all.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -18,7 +12,7 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"math/divisors.hpp\"\n#include <cstdint>\n#include <vector>\n\
-    #line 3 \"base/settings.hpp\"\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT\
+    #line 3 \"base/settings.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT\
     \ std::int64_t\n#endif\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::size_t\n\
     #endif\n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\
     #ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD 1000000007\n#endif\n#ifndef\
@@ -43,10 +37,8 @@ data:
   - base/settings.hpp
   isVerificationFile: false
   path: math/divisors.hpp
-  requiredBy:
-  - math/all.hpp
-  - all.hpp
-  timestamp: '2022-01-10 19:46:56+09:00'
+  requiredBy: []
+  timestamp: '2022-01-10 20:12:50+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/divisors.hpp

@@ -13,26 +13,17 @@ data:
   - icon: ':warning:'
     path: base/trait.hpp
     title: base/trait.hpp
-  - icon: ':warning:'
-    path: math/ModInt.hpp
-    title: math/ModInt.hpp
-  - icon: ':warning:'
-    path: math/mod.hpp
-    title: math/mod.hpp
   - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"base/settings.hpp\"\n#include <cstdint>\n#ifndef KYOPRO_BASE_INT\n\
+  bundledCode: "#line 2 \"base/settings.hpp\"\n#include <cstdint>\n\n#ifndef KYOPRO_BASE_INT\n\
     #define KYOPRO_BASE_INT std::int64_t\n#endif\n#ifndef KYOPRO_BASE_UINT\n#define\
     \ KYOPRO_BASE_UINT std::size_t\n#endif\n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT\
     \ double\n#endif\n#ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD 1000000007\n\
@@ -76,61 +67,13 @@ data:
     \ template<class KyoproT, class Container, class Compare>\n  struct is_iterable<std::priority_queue<KyoproT,\
     \ Container, Compare>>: std::false_type {};\n  template<class KyoproT>\n  constexpr\
     \ bool is_iterable_v = is_iterable<KyoproT>::value;\n}\n#line 3 \"base/Hash.hpp\"\
-    \n#include <tuple>\n#line 4 \"math/ModInt.hpp\"\n#include <cassert>\n#line 4 \"\
-    math/mod.hpp\"\n\nnamespace kyopro {\n  template<class KyoproT, class KyoproU>\n\
-    \  constexpr KyoproT floor_mod(KyoproT kyopro_x, KyoproU kyopro_m) noexcept {\n\
-    \    static_assert(std::is_integral_v<KyoproT> && std::is_integral_v<KyoproU>);\n\
-    \    if constexpr (std::is_unsigned_v<KyoproT>) return kyopro_x % kyopro_m;\n\
-    \    return (kyopro_x %= kyopro_m) < 0 ? kyopro_x + kyopro_m : kyopro_x;\n  }\n\
-    \n  template<class KyoproT, class KyoproU>\n  constexpr KyoproT ceil_mod(KyoproT\
-    \ kyopro_x, KyoproU kyopro_m) noexcept { return kyopro_m - floor_mod(kyopro_x\
-    \ - 1, kyopro_m) - 1; }\n}\n#line 8 \"math/ModInt.hpp\"\n\nnamespace kyopro {\n\
-    \  template<std::uint64_t m>\n  struct ModInt {\n    static constexpr std::uint64_t\
-    \ mod = m;\n    std::uint64_t value;\n    constexpr ModInt() noexcept = default;\n\
-    \    template<class T>\n    constexpr ModInt(T value) noexcept: value(floor_mod(value,\
-    \ m)) { static_assert(std::is_integral_v<T>); }\n    template<class T>\n    explicit\
-    \ constexpr operator T() const noexcept { return value; }\n    static constexpr\
-    \ ModInt raw(std::uint64_t n) noexcept {\n      ModInt res;\n      res.value =\
-    \ n;\n      return res;\n    }\n    constexpr ModInt power(std::uint64_t n) const\
-    \ noexcept {\n      std::uint64_t res = 1, a = value;\n      while (n > 0) {\n\
-    \        if (n & 1) res = res * a % m;\n        a = a * a % m;\n        n >>=\
-    \ 1;\n      }\n      return res;\n    }\n    constexpr ModInt inv() const noexcept\
-    \ {\n      std::uint64_t a = value, b = m;\n      std::int64_t u = 1, v = 0;\n\
-    \      while (b > 0) {\n        std::uint64_t t = a / b;\n        a -= t * b;\n\
-    \        std::swap(a, b);\n        u -= t * v;\n        std::swap(u, v);\n   \
-    \   }\n      return floor_mod(u, m);\n    }\n    constexpr ModInt operator +()\
-    \ const noexcept { return *this; }\n    constexpr ModInt operator -() const noexcept\
-    \ { return m - value; }\n    constexpr ModInt& operator ++() noexcept {\n    \
-    \  if (++value >= m) value -= m;\n      return *this;\n    }\n    constexpr ModInt\
-    \ operator ++(int) noexcept {\n      ModInt before = *this;\n      operator ++();\n\
-    \      return before;\n    }\n    constexpr ModInt& operator --() noexcept {\n\
-    \      if (value == 0) value = m;\n      --value;\n      return *this;\n    }\n\
-    \    constexpr ModInt operator --(int) noexcept {\n      ModInt before = *this;\n\
-    \      operator --();\n      return before;\n    }\n    constexpr ModInt& operator\
-    \ +=(ModInt rhs) noexcept {\n      if ((value += rhs.value) >= m) value -= m;\n\
-    \      return *this;\n    }\n    constexpr ModInt& operator -=(ModInt rhs) noexcept\
-    \ {\n      if (value < rhs.value) value += m;\n      value -= rhs.value;\n   \
-    \   return *this;\n    }\n    constexpr ModInt& operator *=(ModInt rhs) noexcept\
-    \ {\n      value = value * rhs.value % m;\n      return *this;\n    }\n    constexpr\
-    \ ModInt& operator /=(ModInt rhs) noexcept {\n      value = value * rhs.inv().value\
-    \ % m;\n      return *this;\n    }\n    friend constexpr ModInt operator +(ModInt\
-    \ lhs, ModInt rhs) noexcept { return lhs += rhs; }\n    friend constexpr ModInt\
-    \ operator -(ModInt lhs, ModInt rhs) noexcept { return lhs -= rhs; }\n    friend\
-    \ constexpr ModInt operator *(ModInt lhs, ModInt rhs) noexcept { return lhs *=\
-    \ rhs; }\n    friend constexpr ModInt operator /(ModInt lhs, ModInt rhs) noexcept\
-    \ { return lhs /= rhs; }\n    friend constexpr bool operator ==(ModInt lhs, ModInt\
-    \ rhs) noexcept { return lhs.value == rhs.value; }\n    friend constexpr bool\
-    \ operator !=(ModInt lhs, ModInt rhs) noexcept { return lhs.value != rhs.value;\
-    \ }\n  };\n  constexpr ModInt<mod> operator \"\" _m(unsigned long long a) noexcept\
-    \ { return a; }\n}\n#line 7 \"base/Hash.hpp\"\n\nnamespace kyopro {\n  template<class,\
+    \n#include <tuple>\n#line 6 \"base/Hash.hpp\"\n\nnamespace kyopro {\n  template<class,\
     \ class = void>\n  struct Hash;\n\n  template<class KyoproT>\n  struct Hash<KyoproT,\
     \ std::enable_if_t<std::is_integral_v<KyoproT>>> { constexpr KYOPRO_BASE_UINT\
     \ operator ()(KyoproT kyopro_a) const noexcept { return kyopro_a; } };\n\n  template<class\
     \ KyoproT>\n  struct Hash<KyoproT, std::enable_if_t<std::is_floating_point_v<KyoproT>>>\
     \ { constexpr KYOPRO_BASE_UINT operator ()(KyoproT kyopro_a) const noexcept {\
-    \ return (KYOPRO_BASE_UINT)kyopro_a & 0xfffff000; } };\n\n  template<KYOPRO_BASE_UINT\
-    \ m>\n  struct Hash<ModInt<m>> { constexpr KYOPRO_BASE_UINT operator ()(ModInt<m>\
-    \ kyopro_a) const noexcept { return kyopro_a; } };\n\n  template<class KyoproT>\n\
+    \ return (KYOPRO_BASE_UINT)kyopro_a & 0xfffff000; } };\n\n  template<class KyoproT>\n\
     \  struct Hash<KyoproT, std::enable_if_t<is_tuple_v<KyoproT>>> {\n    template<KYOPRO_BASE_UINT\
     \ kyopro_i = 0>\n    constexpr KYOPRO_BASE_UINT operator ()(const KyoproT& kyopro_a)\
     \ const noexcept {\n      if constexpr (kyopro_i == std::tuple_size_v<KyoproT>)\
@@ -160,13 +103,10 @@ data:
   - math/power.hpp
   - base/trait.hpp
   - base/Hash.hpp
-  - math/ModInt.hpp
-  - math/mod.hpp
   isVerificationFile: false
   path: base/all.hpp
-  requiredBy:
-  - all.hpp
-  timestamp: '2022-01-10 20:01:28+09:00'
+  requiredBy: []
+  timestamp: '2022-01-10 20:12:50+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: base/all.hpp

@@ -11,12 +11,6 @@ data:
     path: math/power.hpp
     title: math/power.hpp
   _extendedRequiredBy:
-  - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
-    path: math/all.hpp
-    title: math/all.hpp
   - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
@@ -34,7 +28,7 @@ data:
     links: []
   bundledCode: "#line 2 \"math/monoid.hpp\"\n#include <type_traits>\n#line 2 \"base/constant.hpp\"\
     \n#include <cstdint>\n#include <limits>\n#include <array>\n#include <utility>\n\
-    #line 3 \"base/settings.hpp\"\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT\
+    #line 3 \"base/settings.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT\
     \ std::int64_t\n#endif\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::size_t\n\
     #endif\n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\
     #ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD 1000000007\n#endif\n#ifndef\
@@ -97,9 +91,7 @@ data:
   requiredBy:
   - structure/FenwickTree.hpp
   - structure/all.hpp
-  - math/all.hpp
-  - all.hpp
-  timestamp: '2022-01-10 20:01:28+09:00'
+  timestamp: '2022-01-10 20:12:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - yosupo/FenwickTree.test.cpp

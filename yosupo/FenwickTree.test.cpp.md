@@ -29,9 +29,9 @@ data:
   bundledCode: "#line 1 \"yosupo/FenwickTree.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_range_sum\"\
     \n#include <iostream>\n#line 2 \"structure/FenwickTree.hpp\"\n/* FenwickTree */\n\
     #include <vector>\n#include <utility>\n#line 2 \"base/settings.hpp\"\n#include\
-    \ <cstdint>\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\
-    #ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::size_t\n#endif\n#ifndef\
-    \ KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n#ifndef KYOPRO_DEFAULT_MOD\n\
+    \ <cstdint>\n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n\
+    #endif\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::size_t\n#endif\n\
+    #ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n#ifndef KYOPRO_DEFAULT_MOD\n\
     #define KYOPRO_DEFAULT_MOD 1000000007\n#endif\n#ifndef KYOPRO_DECIMAL_PRECISION\n\
     #define KYOPRO_DECIMAL_PRECISION 12\n#endif\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV\
     \ 3\n#endif\n#line 2 \"math/monoid.hpp\"\n#include <type_traits>\n#line 3 \"base/constant.hpp\"\
@@ -107,7 +107,7 @@ data:
   isVerificationFile: true
   path: yosupo/FenwickTree.test.cpp
   requiredBy: []
-  timestamp: '2022-01-10 20:01:28+09:00'
+  timestamp: '2022-01-10 20:12:50+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/FenwickTree.test.cpp

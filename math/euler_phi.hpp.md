@@ -1,13 +1,7 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
-    path: math/all.hpp
-    title: math/all.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -36,9 +30,7 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: math/euler_phi.hpp
-  requiredBy:
-  - math/all.hpp
-  - all.hpp
+  requiredBy: []
   timestamp: '2022-01-10 19:46:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

@@ -3,9 +3,6 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
     path: base/Hash.hpp
     title: base/Hash.hpp
   - icon: ':warning:'
@@ -14,12 +11,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':warning:'
-    path: math/ModInt.hpp
-    title: math/ModInt.hpp
-  - icon: ':warning:'
-    path: math/all.hpp
-    title: math/all.hpp
   - icon: ':warning:'
     path: math/divisors.hpp
     title: math/divisors.hpp
@@ -41,12 +32,6 @@ data:
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
-  - icon: ':warning:'
-    path: template/alias.hpp
-    title: template/alias.hpp
-  - icon: ':warning:'
-    path: template/all.hpp
-    title: template/all.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: yosupo/FenwickTree.test.cpp
@@ -62,6 +47,7 @@ data:
   bundledCode: '#line 2 "base/settings.hpp"
 
     #include <cstdint>
+
 
     #ifndef KYOPRO_BASE_INT
 
@@ -103,6 +89,7 @@ data:
   code: '#pragma once
 
     #include <cstdint>
+
 
     #ifndef KYOPRO_BASE_INT
 
@@ -148,17 +135,12 @@ data:
   - structure/all.hpp
   - math/power.hpp
   - math/factorize.hpp
-  - math/ModInt.hpp
   - math/divisors.hpp
-  - math/all.hpp
   - math/monoid.hpp
-  - template/alias.hpp
-  - template/all.hpp
-  - all.hpp
   - base/Hash.hpp
   - base/constant.hpp
   - base/all.hpp
-  timestamp: '2022-01-10 19:46:56+09:00'
+  timestamp: '2022-01-10 20:12:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - yosupo/UnionFind.test.cpp

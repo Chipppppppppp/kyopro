@@ -19,10 +19,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -31,7 +28,7 @@ data:
     links: []
   bundledCode: "#line 2 \"structure/UnionFind.hpp\"\n/* UnionFind */\n#include <vector>\n\
     #include <unordered_map>\n#include <algorithm>\n#line 2 \"base/settings.hpp\"\n\
-    #include <cstdint>\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n\
+    #include <cstdint>\n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n\
     #endif\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::size_t\n#endif\n\
     #ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n#ifndef KYOPRO_DEFAULT_MOD\n\
     #define KYOPRO_DEFAULT_MOD 1000000007\n#endif\n#ifndef KYOPRO_DECIMAL_PRECISION\n\
@@ -136,9 +133,8 @@ data:
   - math/power.hpp
   isVerificationFile: false
   path: structure/all.hpp
-  requiredBy:
-  - all.hpp
-  timestamp: '2022-01-10 20:01:28+09:00'
+  requiredBy: []
+  timestamp: '2022-01-10 20:12:50+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: structure/all.hpp
