@@ -8,7 +8,7 @@ int main() {
   for (int i = 0; i < q; ++i) {
     long long a;
     std::cin >> a;
-    auto primes = factorize(a);
+    auto primes = kyopro::factorize(a);
     std::cout << primes.size() << std::endl;
     for (auto& i: primes) std::cout << i << " \n"[&i == &primes.back()];
   }
