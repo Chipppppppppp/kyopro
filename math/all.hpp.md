@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/settings.hpp
     title: base/settings.hpp
   - icon: ':warning:'
@@ -25,7 +25,7 @@ data:
   - icon: ':warning:'
     path: math/euler_phi.hpp
     title: math/euler_phi.hpp
-  - icon: ':x:'
+  - icon: ':warning:'
     path: math/factorize.hpp
     title: math/factorize.hpp
   - icon: ':warning:'

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/settings.hpp
     title: base/settings.hpp
   _extendedRequiredBy:
@@ -11,13 +11,10 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  _extendedVerifiedWith:
-  - icon: ':x:'
-    path: yosupo/factorize.test.cpp
-    title: yosupo/factorize.test.cpp
-  _isVerificationFailed: true
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"math/factorize.hpp\"\n#include <cstdint>\n#include <vector>\n\
@@ -51,9 +48,8 @@ data:
   - math/all.hpp
   - all.hpp
   timestamp: '2022-01-10 22:56:47+09:00'
-  verificationStatus: LIBRARY_ALL_WA
-  verifiedWith:
-  - yosupo/factorize.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: math/factorize.hpp
 layout: document
 redirect_from:
