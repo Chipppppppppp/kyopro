@@ -6,21 +6,33 @@ data:
     path: all.hpp
     title: all.hpp
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
+    path: base/Hash.hpp
+    title: base/Hash.hpp
   - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':heavy_check_mark:'
-    path: base/monoid.hpp
-    title: base/monoid.hpp
-  - icon: ':heavy_check_mark:'
-    path: structure/FenwickTree.hpp
-    title: structure/FenwickTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
+    path: math/ModInt.hpp
+    title: math/ModInt.hpp
+  - icon: ':warning:'
+    path: math/all.hpp
+    title: math/all.hpp
+  - icon: ':warning:'
+    path: math/divisors.hpp
+    title: math/divisors.hpp
+  - icon: ':warning:'
+    path: math/factorize.hpp
+    title: math/factorize.hpp
+  - icon: ':x:'
+    path: math/monoid.hpp
+    title: math/monoid.hpp
+  - icon: ':x:'
+    path: math/power.hpp
+    title: math/power.hpp
+  - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':heavy_check_mark:'
@@ -30,24 +42,24 @@ data:
     path: structure/all.hpp
     title: structure/all.hpp
   - icon: ':warning:'
-    path: structure/all.hpp
-    title: structure/all.hpp
+    path: template/alias.hpp
+    title: template/alias.hpp
+  - icon: ':warning:'
+    path: template/all.hpp
+    title: template/all.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: yosupo/FenwickTree.test.cpp
-    title: yosupo/FenwickTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/FenwickTree.test.cpp
     title: yosupo/FenwickTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: '#line 1 "base/settings.hpp"
+  bundledCode: '#line 2 "base/settings.hpp"
 
     #include <cstdint>
 
@@ -88,7 +100,9 @@ data:
     #endif
 
     '
-  code: '#include <cstdint>
+  code: '#pragma once
+
+    #include <cstdint>
 
     #ifndef KYOPRO_BASE_INT
 
@@ -130,20 +144,24 @@ data:
   path: base/settings.hpp
   requiredBy:
   - structure/FenwickTree.hpp
-  - structure/FenwickTree.hpp
   - structure/UnionFind.hpp
   - structure/all.hpp
-  - structure/all.hpp
+  - math/power.hpp
+  - math/factorize.hpp
+  - math/ModInt.hpp
+  - math/divisors.hpp
+  - math/all.hpp
+  - math/monoid.hpp
+  - template/alias.hpp
+  - template/all.hpp
   - all.hpp
-  - all.hpp
+  - base/Hash.hpp
   - base/constant.hpp
   - base/all.hpp
-  - base/monoid.hpp
-  timestamp: '2022-01-04 18:22:10+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-10 19:46:56+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - yosupo/UnionFind.test.cpp
-  - yosupo/FenwickTree.test.cpp
   - yosupo/FenwickTree.test.cpp
 documentation_of: base/settings.hpp
 layout: document

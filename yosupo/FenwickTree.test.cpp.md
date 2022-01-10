@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':heavy_check_mark:'
-    path: base/monoid.hpp
-    title: base/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':heavy_check_mark:'
-    path: base/settings.hpp
-    title: base/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: math/monoid.hpp
+    title: math/monoid.hpp
+  - icon: ':x:'
+    path: math/power.hpp
+    title: math/power.hpp
+  - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_add_range_sum
@@ -28,29 +28,30 @@ data:
     - https://judge.yosupo.jp/problem/point_add_range_sum
   bundledCode: "#line 1 \"yosupo/FenwickTree.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_range_sum\"\
     \n#include <iostream>\n#line 2 \"structure/FenwickTree.hpp\"\n/* FenwickTree */\n\
-    #include <vector>\n#include <utility>\n#line 1 \"base/settings.hpp\"\n#include\
+    #include <vector>\n#include <utility>\n#line 2 \"base/settings.hpp\"\n#include\
     \ <cstdint>\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\
     #ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::size_t\n#endif\n#ifndef\
     \ KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n#ifndef KYOPRO_DEFAULT_MOD\n\
     #define KYOPRO_DEFAULT_MOD 1000000007\n#endif\n#ifndef KYOPRO_DECIMAL_PRECISION\n\
     #define KYOPRO_DECIMAL_PRECISION 12\n#endif\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV\
-    \ 3\n#endif\n#line 2 \"base/monoid.hpp\"\n#include <type_traits>\n#line 2 \"base/constant.hpp\"\
-    \n#include <limits>\n#include <array>\n#line 2 \"base/settings.hpp\"\n#ifndef\
-    \ KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n#ifndef KYOPRO_BASE_UINT\n\
-    #define KYOPRO_BASE_UINT std::size_t\n#endif\n#ifndef KYOPRO_BASE_FLOAT\n#define\
-    \ KYOPRO_BASE_FLOAT double\n#endif\n#ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD\
-    \ 1000000007\n#endif\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION\
-    \ 12\n#endif\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV 3\n#endif\n#line\
-    \ 6 \"base/constant.hpp\"\n\nnamespace kyopro {\n  template<class KyoproT>\n \
-    \ inline constexpr KyoproT MOD = KYOPRO_DEFAULT_MOD;\n  inline constexpr KYOPRO_BASE_INT\
-    \ mod = MOD<KYOPRO_BASE_INT>;\n  template<class KyoproT>\n  inline constexpr KyoproT\
-    \ INF = std::numeric_limits<KyoproT>::max() / KYOPRO_INF_DIV;\n  inline constexpr\
-    \ KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n  template<class KyoproT>\n  inline\
-    \ constexpr KyoproT PI = 3.14159265358979323846;\n  inline constexpr KYOPRO_BASE_FLOAT\
+    \ 3\n#endif\n#line 2 \"math/monoid.hpp\"\n#include <type_traits>\n#line 3 \"base/constant.hpp\"\
+    \n#include <limits>\n#include <array>\n#line 4 \"math/power.hpp\"\nnamespace kyopro\
+    \ {\n  template<class KyoproT>\n  constexpr KyoproT power(KyoproT a, std::uint64_t\
+    \ n, KyoproT init = 1) noexcept {\n    while (n > 0) {\n      if (n & 1) init\
+    \ *= a;\n      a *= a;\n      n >>= 1;\n    }\n    return init;\n  }\n}\n#line\
+    \ 8 \"base/constant.hpp\"\n\nnamespace kyopro {\n  inline constexpr std::uint64_t\
+    \ kyopro_decimal_max = power(10, KYOPRO_DECIMAL_PRECISION);\n  template<class\
+    \ KyoproT>\n  inline constexpr KyoproT MOD = KYOPRO_DEFAULT_MOD;\n  inline constexpr\
+    \ KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n  template<class KyoproT>\n  inline\
+    \ constexpr KyoproT INF = std::numeric_limits<KyoproT>::max() / KYOPRO_INF_DIV;\n\
+    \  inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n  template<class\
+    \ KyoproT>\n  inline constexpr KYOPRO_BASE_FLOAT EPS = (KyoproT)1 / decimal_precision_max;\n\
+    \  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<lf>;\n  template<class KyoproT>\n\
+    \  inline constexpr KyoproT PI = 3.14159265358979323846;\n  inline constexpr KYOPRO_BASE_FLOAT\
     \ pi = PI<KYOPRO_BASE_FLOAT>;\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
     \ KYOPRO_BASE_INT>, 4> beside{{{1, 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr\
     \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1,\
-    \ 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}}};\n}\n#line 4 \"base/monoid.hpp\"\
+    \ 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}}};\n}\n#line 4 \"math/monoid.hpp\"\
     \n\nnamespace kyopro {\n  template<class KyoproT, KyoproT kyopro_id = 0>\n  struct\
     \ Plus {\n    static constexpr KyoproT id = kyopro_id;\n    static constexpr KyoproT\
     \ op(KyoproT kyopro_a, KyoproT kyopro_b) noexcept { return kyopro_a + kyopro_b;\
@@ -99,14 +100,14 @@ data:
   dependsOn:
   - structure/FenwickTree.hpp
   - base/settings.hpp
-  - base/monoid.hpp
+  - math/monoid.hpp
   - base/constant.hpp
-  - base/settings.hpp
+  - math/power.hpp
   isVerificationFile: true
   path: yosupo/FenwickTree.test.cpp
   requiredBy: []
-  timestamp: '2022-01-05 12:00:31+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-10 19:46:56+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: yosupo/FenwickTree.test.cpp
 layout: document
