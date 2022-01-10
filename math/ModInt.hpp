@@ -32,13 +32,13 @@ namespace kyopro {
     }
     constexpr ModInt inv() const noexcept {
       std::uint64_t a = value, b = m;
-      base_int_t u = 1, v = 0;
+      std::int64_t u = 1, v = 0;
       while (b > 0) {
         std::uint64_t t = a / b;
         a -= t * b;
-        swap(a, b);
+        std::swap(a, b);
         u -= t * v;
-        swap(u, v);
+        std::swap(u, v);
       }
       return floor_mod(u, m);
     }
@@ -87,5 +87,5 @@ namespace kyopro {
     friend constexpr bool operator ==(ModInt lhs, ModInt rhs) noexcept { return lhs.value == rhs.value; }
     friend constexpr bool operator !=(ModInt lhs, ModInt rhs) noexcept { return lhs.value != rhs.value; }
   };
-  constexpr ModInt<mod> operator "" _m(std::uint64_t a) noexcept { return a; }
+  constexpr ModInt<mod> operator "" _m(unsigned long long a) noexcept { return a; }
 }
