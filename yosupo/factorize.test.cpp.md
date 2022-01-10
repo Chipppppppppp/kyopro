@@ -33,21 +33,22 @@ data:
     \      kyopro_n /= kyopro_i;\n    }\n    if (kyopro_n != 1) kyopro_res.emplace_back(kyopro_n);\n\
     \    return kyopro_res;\n  }\n}\n#line 4 \"yosupo/factorize.test.cpp\"\n\nint\
     \ main() {\n  int q;\n  std::cin >> q;\n  for (int i = 0; i < q; ++i) {\n    long\
-    \ long a;\n    std::cin >> a;\n    auto primes = factorize(a);\n    std::cout\
+    \ long a;\n    std::cin >> a;\n    auto primes = kyopro::factorize(a);\n    std::cout\
     \ << primes.size() << std::endl;\n    for (auto& i: primes) std::cout << i <<\
     \ \" \\n\"[&i == &primes.back()];\n  }\n}\n"
   code: "#define PROBLEM https://judge.yosupo.jp/problem/factorize\n#include <iostream>\n\
     #include \"../math/factorize.hpp\"\n\nint main() {\n  int q;\n  std::cin >> q;\n\
     \  for (int i = 0; i < q; ++i) {\n    long long a;\n    std::cin >> a;\n    auto\
-    \ primes = factorize(a);\n    std::cout << primes.size() << std::endl;\n    for\
-    \ (auto& i: primes) std::cout << i << \" \\n\"[&i == &primes.back()];\n  }\n}"
+    \ primes = kyopro::factorize(a);\n    std::cout << primes.size() << std::endl;\n\
+    \    for (auto& i: primes) std::cout << i << \" \\n\"[&i == &primes.back()];\n\
+    \  }\n}"
   dependsOn:
   - math/factorize.hpp
   - base/settings.hpp
   isVerificationFile: true
   path: yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2022-01-10 22:56:47+09:00'
+  timestamp: '2022-01-10 23:00:13+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: yosupo/factorize.test.cpp
