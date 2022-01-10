@@ -1,6 +1,6 @@
 #pragma once
 #include <type_traits>
-#include "constant.hpp"
+#include "../base/constant.hpp"
 
 namespace kyopro {
   template<class KyoproT, KyoproT kyopro_id = 0>

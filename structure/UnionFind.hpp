@@ -3,7 +3,6 @@
 #include <vector>
 #include <unordered_map>
 #include <algorithm>
-#include <initializer_list>
 #include "../base/settings.hpp"
 
 namespace kyopro {

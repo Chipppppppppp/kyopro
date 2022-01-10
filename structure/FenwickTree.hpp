@@ -3,7 +3,7 @@
 #include <vector>
 #include <utility>
 #include "../base/settings.hpp"
-#include "../base/monoid.hpp"
+#include "../math/monoid.hpp"
 
 namespace kyopro {
   template<class KyoproT, class KyoproOp = Plus<KyoproT>, class KyoproContainer = std::vector<KyoproT>>
