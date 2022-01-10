@@ -1,10 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/settings.hpp
     title: base/settings.hpp
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
@@ -98,6 +101,7 @@ data:
   path: structure/UnionFind.hpp
   requiredBy:
   - structure/all.hpp
+  - all.hpp
   timestamp: '2022-01-10 20:12:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

@@ -3,11 +3,26 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
     path: base/Hash.hpp
     title: base/Hash.hpp
   - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
+  - icon: ':warning:'
+    path: math/ModInt.hpp
+    title: math/ModInt.hpp
+  - icon: ':warning:'
+    path: math/all.hpp
+    title: math/all.hpp
+  - icon: ':warning:'
+    path: template/alias.hpp
+    title: template/alias.hpp
+  - icon: ':warning:'
+    path: template/all.hpp
+    title: template/all.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -68,6 +83,11 @@ data:
   isVerificationFile: false
   path: base/trait.hpp
   requiredBy:
+  - math/ModInt.hpp
+  - math/all.hpp
+  - template/alias.hpp
+  - template/all.hpp
+  - all.hpp
   - base/Hash.hpp
   - base/all.hpp
   timestamp: '2022-01-10 20:19:03+09:00'

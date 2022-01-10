@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/settings.hpp
     title: base/settings.hpp
   - icon: ':warning:'
@@ -16,7 +16,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -109,7 +112,8 @@ data:
   - base/Hash.hpp
   isVerificationFile: false
   path: base/all.hpp
-  requiredBy: []
+  requiredBy:
+  - all.hpp
   timestamp: '2022-01-10 20:19:03+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

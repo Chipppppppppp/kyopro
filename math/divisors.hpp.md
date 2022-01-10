@@ -1,10 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/settings.hpp
     title: base/settings.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: math/all.hpp
+    title: math/all.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -37,7 +43,9 @@ data:
   - base/settings.hpp
   isVerificationFile: false
   path: math/divisors.hpp
-  requiredBy: []
+  requiredBy:
+  - math/all.hpp
+  - all.hpp
   timestamp: '2022-01-10 20:12:50+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
     path: base/Hash.hpp
     title: base/Hash.hpp
   - icon: ':warning:'
@@ -12,9 +15,15 @@ data:
     path: base/constant.hpp
     title: base/constant.hpp
   - icon: ':warning:'
+    path: math/ModInt.hpp
+    title: math/ModInt.hpp
+  - icon: ':warning:'
+    path: math/all.hpp
+    title: math/all.hpp
+  - icon: ':warning:'
     path: math/divisors.hpp
     title: math/divisors.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
   - icon: ':heavy_check_mark:'
@@ -32,6 +41,12 @@ data:
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
+  - icon: ':warning:'
+    path: template/alias.hpp
+    title: template/alias.hpp
+  - icon: ':warning:'
+    path: template/all.hpp
+    title: template/all.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: yosupo/FenwickTree.test.cpp
@@ -39,9 +54,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: yosupo/factorize.test.cpp
+    title: yosupo/factorize.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: '#line 2 "base/settings.hpp"
@@ -135,16 +153,22 @@ data:
   - structure/all.hpp
   - math/power.hpp
   - math/factorize.hpp
+  - math/ModInt.hpp
   - math/divisors.hpp
+  - math/all.hpp
   - math/monoid.hpp
+  - template/alias.hpp
+  - template/all.hpp
+  - all.hpp
   - base/Hash.hpp
   - base/constant.hpp
   - base/all.hpp
   timestamp: '2022-01-10 20:12:50+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - yosupo/UnionFind.test.cpp
   - yosupo/FenwickTree.test.cpp
+  - yosupo/factorize.test.cpp
 documentation_of: base/settings.hpp
 layout: document
 redirect_from:

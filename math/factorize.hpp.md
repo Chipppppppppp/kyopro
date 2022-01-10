@@ -1,14 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/settings.hpp
     title: base/settings.hpp
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: math/all.hpp
+    title: math/all.hpp
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: yosupo/factorize.test.cpp
+    title: yosupo/factorize.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"math/factorize.hpp\"\n#include <cstdint>\n#include <vector>\n\
@@ -18,36 +27,33 @@ data:
     \ double\n#endif\n#ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD 1000000007\n\
     #endif\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION 12\n\
     #endif\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV 3\n#endif\n#line 6 \"math/factorize.hpp\"\
-    \n\nnamespace kyopro {\n  template<class KyoproContainer = std::vector<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>>>\n  KyoproContainer factorize(size_t kyopro_n) {\n    KyoproContainer\
-    \ kyopro_res;\n    if ((kyopro_n & 1) == 0) {\n      kyopro_res.emplace_back(2,\
-    \ 1);\n      kyopro_n >>= 1;\n      while ((kyopro_n & 1) == 0) {\n        ++kyopro_res.back().second;\n\
-    \        kyopro_n >>= 1;\n      }\n    }\n    for (size_t kyopro_i = 3; kyopro_i\
-    \ * kyopro_i <= kyopro_n; kyopro_i += 2) if (kyopro_n % kyopro_i == 0) {\n   \
-    \   kyopro_res.emplace_back(2, 1);\n      kyopro_n /= kyopro_i;\n      while (kyopro_n\
-    \ % kyopro_i == 0) {\n        ++kyopro_res.back().second;\n        kyopro_n /=\
-    \ kyopro_i;\n      }\n    }\n    if (kyopro_n != 1) kyopro_res.emplace_back(kyopro_n,\
-    \ 1);\n    return kyopro_res;\n  }\n}\n"
+    \n\nnamespace kyopro {\n  template<class KyoproContainer = std::vector<KYOPRO_BASE_INT>>\n\
+    \  KyoproContainer factorize(std::uint64_t kyopro_n) {\n    KyoproContainer kyopro_res;\n\
+    \    while ((kyopro_n & 1) == 0) {\n      kyopro_res.emplace_back(2);\n      kyopro_n\
+    \ >>= 1;\n    }\n    for (std::uint64_t kyopro_i = 3; kyopro_i * kyopro_i <= kyopro_n;\
+    \ kyopro_i += 2) while (kyopro_n % kyopro_i == 0) {\n      kyopro_res.emplace_back(2);\n\
+    \      kyopro_n /= kyopro_i;\n    }\n    if (kyopro_n != 1) kyopro_res.emplace_back(kyopro_n);\n\
+    \    return kyopro_res;\n  }\n}\n"
   code: "#pragma once\n#include <cstdint>\n#include <vector>\n#include <utility>\n\
     #include \"../base/settings.hpp\"\n\nnamespace kyopro {\n  template<class KyoproContainer\
-    \ = std::vector<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>>>\n  KyoproContainer\
-    \ factorize(size_t kyopro_n) {\n    KyoproContainer kyopro_res;\n    if ((kyopro_n\
-    \ & 1) == 0) {\n      kyopro_res.emplace_back(2, 1);\n      kyopro_n >>= 1;\n\
-    \      while ((kyopro_n & 1) == 0) {\n        ++kyopro_res.back().second;\n  \
-    \      kyopro_n >>= 1;\n      }\n    }\n    for (size_t kyopro_i = 3; kyopro_i\
-    \ * kyopro_i <= kyopro_n; kyopro_i += 2) if (kyopro_n % kyopro_i == 0) {\n   \
-    \   kyopro_res.emplace_back(2, 1);\n      kyopro_n /= kyopro_i;\n      while (kyopro_n\
-    \ % kyopro_i == 0) {\n        ++kyopro_res.back().second;\n        kyopro_n /=\
-    \ kyopro_i;\n      }\n    }\n    if (kyopro_n != 1) kyopro_res.emplace_back(kyopro_n,\
-    \ 1);\n    return kyopro_res;\n  }\n}"
+    \ = std::vector<KYOPRO_BASE_INT>>\n  KyoproContainer factorize(std::uint64_t kyopro_n)\
+    \ {\n    KyoproContainer kyopro_res;\n    while ((kyopro_n & 1) == 0) {\n    \
+    \  kyopro_res.emplace_back(2);\n      kyopro_n >>= 1;\n    }\n    for (std::uint64_t\
+    \ kyopro_i = 3; kyopro_i * kyopro_i <= kyopro_n; kyopro_i += 2) while (kyopro_n\
+    \ % kyopro_i == 0) {\n      kyopro_res.emplace_back(2);\n      kyopro_n /= kyopro_i;\n\
+    \    }\n    if (kyopro_n != 1) kyopro_res.emplace_back(kyopro_n);\n    return\
+    \ kyopro_res;\n  }\n}"
   dependsOn:
   - base/settings.hpp
   isVerificationFile: false
   path: math/factorize.hpp
-  requiredBy: []
-  timestamp: '2022-01-10 20:12:50+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  requiredBy:
+  - math/all.hpp
+  - all.hpp
+  timestamp: '2022-01-10 22:56:47+09:00'
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - yosupo/factorize.test.cpp
 documentation_of: math/factorize.hpp
 layout: document
 redirect_from:

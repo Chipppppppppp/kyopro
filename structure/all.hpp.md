@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/settings.hpp
     title: base/settings.hpp
   - icon: ':heavy_check_mark:'
@@ -19,7 +19,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -133,7 +136,8 @@ data:
   - math/power.hpp
   isVerificationFile: false
   path: structure/all.hpp
-  requiredBy: []
+  requiredBy:
+  - all.hpp
   timestamp: '2022-01-10 20:12:50+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

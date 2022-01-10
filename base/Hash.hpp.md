@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/settings.hpp
     title: base/settings.hpp
   - icon: ':warning:'
@@ -9,8 +9,23 @@ data:
     title: base/trait.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
+  - icon: ':warning:'
+    path: math/ModInt.hpp
+    title: math/ModInt.hpp
+  - icon: ':warning:'
+    path: math/all.hpp
+    title: math/all.hpp
+  - icon: ':warning:'
+    path: template/alias.hpp
+    title: template/alias.hpp
+  - icon: ':warning:'
+    path: template/all.hpp
+    title: template/all.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -94,6 +109,11 @@ data:
   isVerificationFile: false
   path: base/Hash.hpp
   requiredBy:
+  - math/ModInt.hpp
+  - math/all.hpp
+  - template/alias.hpp
+  - template/all.hpp
+  - all.hpp
   - base/all.hpp
   timestamp: '2022-01-10 20:19:03+09:00'
   verificationStatus: LIBRARY_NO_TESTS

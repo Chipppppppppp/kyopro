@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/settings.hpp
     title: base/settings.hpp
   - icon: ':heavy_check_mark:'
@@ -14,6 +14,9 @@ data:
     path: math/power.hpp
     title: math/power.hpp
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
@@ -114,6 +117,7 @@ data:
   path: structure/FenwickTree.hpp
   requiredBy:
   - structure/all.hpp
+  - all.hpp
   timestamp: '2022-01-10 20:12:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

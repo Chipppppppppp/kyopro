@@ -17,7 +17,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: base/constant.hpp
       title: base/constant.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: base/settings.hpp
       title: base/settings.hpp
     - icon: ':warning:'
@@ -40,7 +40,7 @@ data:
     - icon: ':warning:'
       path: math/euler_phi.hpp
       title: math/euler_phi.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: math/factorize.hpp
       title: math/factorize.hpp
     - icon: ':warning:'
@@ -83,5 +83,8 @@ data:
     - icon: ':heavy_check_mark:'
       path: yosupo/UnionFind.test.cpp
       title: yosupo/UnionFind.test.cpp
+    - icon: ':x:'
+      path: yosupo/factorize.test.cpp
+      title: yosupo/factorize.test.cpp
 layout: toppage
 ---

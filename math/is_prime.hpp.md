@@ -1,7 +1,13 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: math/all.hpp
+    title: math/all.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -25,7 +31,9 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: math/is_prime.hpp
-  requiredBy: []
+  requiredBy:
+  - math/all.hpp
+  - all.hpp
   timestamp: '2022-01-10 19:46:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

@@ -1,16 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/settings.hpp
     title: base/settings.hpp
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
   - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
   - icon: ':heavy_check_mark:'
     path: base/constant.hpp
     title: base/constant.hpp
+  - icon: ':warning:'
+    path: math/ModInt.hpp
+    title: math/ModInt.hpp
+  - icon: ':warning:'
+    path: math/all.hpp
+    title: math/all.hpp
   - icon: ':heavy_check_mark:'
     path: math/monoid.hpp
     title: math/monoid.hpp
@@ -20,6 +29,12 @@ data:
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
+  - icon: ':warning:'
+    path: template/alias.hpp
+    title: template/alias.hpp
+  - icon: ':warning:'
+    path: template/all.hpp
+    title: template/all.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: yosupo/FenwickTree.test.cpp
@@ -50,7 +65,12 @@ data:
   requiredBy:
   - structure/FenwickTree.hpp
   - structure/all.hpp
+  - math/ModInt.hpp
+  - math/all.hpp
   - math/monoid.hpp
+  - template/alias.hpp
+  - template/all.hpp
+  - all.hpp
   - base/constant.hpp
   - base/all.hpp
   timestamp: '2022-01-10 20:12:50+09:00'
