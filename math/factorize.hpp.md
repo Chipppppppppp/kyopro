@@ -24,22 +24,19 @@ data:
     \ double\n#endif\n#ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD 1000000007\n\
     #endif\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION 12\n\
     #endif\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV 3\n#endif\n#line 6 \"math/factorize.hpp\"\
-    \n\nnamespace kyopro {\n  template<class KyoproContainer = std::vector<KYOPRO_BASE_INT>>\n\
-    \  KyoproContainer factorize(std::uint64_t kyopro_n) {\n    KyoproContainer kyopro_res;\n\
-    \    while ((kyopro_n & 1) == 0) {\n      kyopro_res.emplace_back(2);\n      kyopro_n\
-    \ >>= 1;\n    }\n    for (std::uint64_t kyopro_i = 3; kyopro_i * kyopro_i <= kyopro_n;\
-    \ kyopro_i += 2) while (kyopro_n % kyopro_i == 0) {\n      kyopro_res.emplace_back(2);\n\
-    \      kyopro_n /= kyopro_i;\n    }\n    if (kyopro_n != 1) kyopro_res.emplace_back(kyopro_n);\n\
-    \    return kyopro_res;\n  }\n}\n"
+    \n\nnamespace kyopro {\n  template<class _typeContainer = std::vector<KYOPRO_BASE_INT>>\n\
+    \  _typeContainer factorize(std::uint64_t _n) {\n    _typeContainer _res;\n  \
+    \  while ((_n & 1) == 0) {\n      _res.emplace_back(2);\n      _n >>= 1;\n   \
+    \ }\n    for (std::uint64_t _i = 3; _i * _i <= _n; _i += 2) while (_n % _i ==\
+    \ 0) {\n      _res.emplace_back(2);\n      _n /= _i;\n    }\n    if (_n != 1)\
+    \ _res.emplace_back(_n);\n    return _res;\n  }\n}\n"
   code: "#pragma once\n#include <cstdint>\n#include <vector>\n#include <utility>\n\
-    #include \"../base/settings.hpp\"\n\nnamespace kyopro {\n  template<class KyoproContainer\
-    \ = std::vector<KYOPRO_BASE_INT>>\n  KyoproContainer factorize(std::uint64_t kyopro_n)\
-    \ {\n    KyoproContainer kyopro_res;\n    while ((kyopro_n & 1) == 0) {\n    \
-    \  kyopro_res.emplace_back(2);\n      kyopro_n >>= 1;\n    }\n    for (std::uint64_t\
-    \ kyopro_i = 3; kyopro_i * kyopro_i <= kyopro_n; kyopro_i += 2) while (kyopro_n\
-    \ % kyopro_i == 0) {\n      kyopro_res.emplace_back(2);\n      kyopro_n /= kyopro_i;\n\
-    \    }\n    if (kyopro_n != 1) kyopro_res.emplace_back(kyopro_n);\n    return\
-    \ kyopro_res;\n  }\n}"
+    #include \"../base/settings.hpp\"\n\nnamespace kyopro {\n  template<class _typeContainer\
+    \ = std::vector<KYOPRO_BASE_INT>>\n  _typeContainer factorize(std::uint64_t _n)\
+    \ {\n    _typeContainer _res;\n    while ((_n & 1) == 0) {\n      _res.emplace_back(2);\n\
+    \      _n >>= 1;\n    }\n    for (std::uint64_t _i = 3; _i * _i <= _n; _i += 2)\
+    \ while (_n % _i == 0) {\n      _res.emplace_back(2);\n      _n /= _i;\n    }\n\
+    \    if (_n != 1) _res.emplace_back(_n);\n    return _res;\n  }\n}"
   dependsOn:
   - base/settings.hpp
   isVerificationFile: false
@@ -47,7 +44,7 @@ data:
   requiredBy:
   - math/all.hpp
   - all.hpp
-  timestamp: '2022-01-10 22:56:47+09:00'
+  timestamp: '2022-01-11 23:13:11+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/factorize.hpp

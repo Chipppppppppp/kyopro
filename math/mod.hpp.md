@@ -24,21 +24,19 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"math/mod.hpp\"\n#include <type_traits>\n#include <cassert>\n\
-    \nnamespace kyopro {\n  template<class KyoproT, class KyoproU>\n  constexpr KyoproT\
-    \ floor_mod(KyoproT kyopro_x, KyoproU kyopro_m) noexcept {\n    static_assert(std::is_integral_v<KyoproT>\
-    \ && std::is_integral_v<KyoproU>);\n    if constexpr (std::is_unsigned_v<KyoproT>)\
-    \ return kyopro_x % kyopro_m;\n    return (kyopro_x %= kyopro_m) < 0 ? kyopro_x\
-    \ + kyopro_m : kyopro_x;\n  }\n\n  template<class KyoproT, class KyoproU>\n  constexpr\
-    \ KyoproT ceil_mod(KyoproT kyopro_x, KyoproU kyopro_m) noexcept { return kyopro_m\
-    \ - floor_mod(kyopro_x - 1, kyopro_m) - 1; }\n}\n"
+    \nnamespace kyopro {\n  template<class _typeT, class _typeU>\n  constexpr _typeT\
+    \ floor_mod(_typeT _x, _typeU _m) noexcept {\n    static_assert(std::is_integral_v<_typeT>\
+    \ && std::is_integral_v<_typeU>);\n    if constexpr (std::is_unsigned_v<_typeT>)\
+    \ return _x % _m;\n    return (_x %= _m) < 0 ? _x + _m : _x;\n  }\n\n  template<class\
+    \ _typeT, class _typeU>\n  constexpr _typeT ceil_mod(_typeT _x, _typeU _m) noexcept\
+    \ { return _m - floor_mod(_x - 1, _m) - 1; }\n}\n"
   code: "#pragma once\n#include <type_traits>\n#include <cassert>\n\nnamespace kyopro\
-    \ {\n  template<class KyoproT, class KyoproU>\n  constexpr KyoproT floor_mod(KyoproT\
-    \ kyopro_x, KyoproU kyopro_m) noexcept {\n    static_assert(std::is_integral_v<KyoproT>\
-    \ && std::is_integral_v<KyoproU>);\n    if constexpr (std::is_unsigned_v<KyoproT>)\
-    \ return kyopro_x % kyopro_m;\n    return (kyopro_x %= kyopro_m) < 0 ? kyopro_x\
-    \ + kyopro_m : kyopro_x;\n  }\n\n  template<class KyoproT, class KyoproU>\n  constexpr\
-    \ KyoproT ceil_mod(KyoproT kyopro_x, KyoproU kyopro_m) noexcept { return kyopro_m\
-    \ - floor_mod(kyopro_x - 1, kyopro_m) - 1; }\n}"
+    \ {\n  template<class _typeT, class _typeU>\n  constexpr _typeT floor_mod(_typeT\
+    \ _x, _typeU _m) noexcept {\n    static_assert(std::is_integral_v<_typeT> && std::is_integral_v<_typeU>);\n\
+    \    if constexpr (std::is_unsigned_v<_typeT>) return _x % _m;\n    return (_x\
+    \ %= _m) < 0 ? _x + _m : _x;\n  }\n\n  template<class _typeT, class _typeU>\n\
+    \  constexpr _typeT ceil_mod(_typeT _x, _typeU _m) noexcept { return _m - floor_mod(_x\
+    \ - 1, _m) - 1; }\n}"
   dependsOn: []
   isVerificationFile: false
   path: math/mod.hpp
@@ -48,7 +46,7 @@ data:
   - template/alias.hpp
   - template/all.hpp
   - all.hpp
-  timestamp: '2022-01-10 19:46:56+09:00'
+  timestamp: '2022-01-11 23:13:11+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/mod.hpp

@@ -15,30 +15,26 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"math/div.hpp\"\n#include <type_traits>\n\nnamespace kyopro\
-    \ {\n  template<class KyoproT, class KyoproU>\n  constexpr KyoproT floor_div(KyoproT\
-    \ kyopro_x, KyoproU kyopro_m) noexcept {\n    static_assert(std::is_integral_v<KyoproT>\
-    \ && std::is_integral_v<KyoproU>);\n    if constexpr (std::is_unsigned_v<KyoproT>)\
-    \ return kyopro_x / kyopro_m;\n    if (kyopro_m < 0) return -kyopro_x / -kyopro_m;\n\
-    \    if (kyopro_x < 0) return (kyopro_x + 1) / kyopro_m - 1;\n    return kyopro_x\
-    \ / kyopro_m;\n  }\n\n  template<class KyoproT, class KyoproU>\n  constexpr KyoproT\
-    \ ceil_div(KyoproT kyopro_x, KyoproU kyopro_m) noexcept { return floor_div(kyopro_x\
-    \ + kyopro_m - 1, kyopro_m); }\n}\n"
+    \ {\n  template<class _typeT, class _typeU>\n  constexpr _typeT floor_div(_typeT\
+    \ _x, _typeU _m) noexcept {\n    static_assert(std::is_integral_v<_typeT> && std::is_integral_v<_typeU>);\n\
+    \    if constexpr (std::is_unsigned_v<_typeT>) return _x / _m;\n    if (_m < 0)\
+    \ return -_x / -_m;\n    if (_x < 0) return (_x + 1) / _m - 1;\n    return _x\
+    \ / _m;\n  }\n\n  template<class _typeT, class _typeU>\n  constexpr _typeT ceil_div(_typeT\
+    \ _x, _typeU _m) noexcept { return floor_div(_x + _m - 1, _m); }\n}\n"
   code: "#pragma once\n#include <type_traits>\n\nnamespace kyopro {\n  template<class\
-    \ KyoproT, class KyoproU>\n  constexpr KyoproT floor_div(KyoproT kyopro_x, KyoproU\
-    \ kyopro_m) noexcept {\n    static_assert(std::is_integral_v<KyoproT> && std::is_integral_v<KyoproU>);\n\
-    \    if constexpr (std::is_unsigned_v<KyoproT>) return kyopro_x / kyopro_m;\n\
-    \    if (kyopro_m < 0) return -kyopro_x / -kyopro_m;\n    if (kyopro_x < 0) return\
-    \ (kyopro_x + 1) / kyopro_m - 1;\n    return kyopro_x / kyopro_m;\n  }\n\n  template<class\
-    \ KyoproT, class KyoproU>\n  constexpr KyoproT ceil_div(KyoproT kyopro_x, KyoproU\
-    \ kyopro_m) noexcept { return floor_div(kyopro_x + kyopro_m - 1, kyopro_m); }\n\
-    }"
+    \ _typeT, class _typeU>\n  constexpr _typeT floor_div(_typeT _x, _typeU _m) noexcept\
+    \ {\n    static_assert(std::is_integral_v<_typeT> && std::is_integral_v<_typeU>);\n\
+    \    if constexpr (std::is_unsigned_v<_typeT>) return _x / _m;\n    if (_m < 0)\
+    \ return -_x / -_m;\n    if (_x < 0) return (_x + 1) / _m - 1;\n    return _x\
+    \ / _m;\n  }\n\n  template<class _typeT, class _typeU>\n  constexpr _typeT ceil_div(_typeT\
+    \ _x, _typeU _m) noexcept { return floor_div(_x + _m - 1, _m); }\n}"
   dependsOn: []
   isVerificationFile: false
   path: math/div.hpp
   requiredBy:
   - math/all.hpp
   - all.hpp
-  timestamp: '2022-01-10 19:46:56+09:00'
+  timestamp: '2022-01-11 23:13:11+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/div.hpp

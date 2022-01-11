@@ -51,13 +51,13 @@ data:
     \ KYOPRO_DEFAULT_MOD 1000000007\n#endif\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define\
     \ KYOPRO_DECIMAL_PRECISION 12\n#endif\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV\
     \ 3\n#endif\n#line 4 \"math/power.hpp\"\nnamespace kyopro {\n  template<class\
-    \ KyoproT>\n  constexpr KyoproT power(KyoproT a, std::uint64_t n, KyoproT init\
-    \ = 1) noexcept {\n    while (n > 0) {\n      if (n & 1) init *= a;\n      a *=\
-    \ a;\n      n >>= 1;\n    }\n    return init;\n  }\n}\n"
+    \ _typeT>\n  constexpr _typeT power(_typeT a, std::uint64_t n, _typeT init = 1)\
+    \ noexcept {\n    while (n > 0) {\n      if (n & 1) init *= a;\n      a *= a;\n\
+    \      n >>= 1;\n    }\n    return init;\n  }\n}\n"
   code: "#pragma once\n#include <cstdint>\n#include \"../base/settings.hpp\"\nnamespace\
-    \ kyopro {\n  template<class KyoproT>\n  constexpr KyoproT power(KyoproT a, std::uint64_t\
-    \ n, KyoproT init = 1) noexcept {\n    while (n > 0) {\n      if (n & 1) init\
-    \ *= a;\n      a *= a;\n      n >>= 1;\n    }\n    return init;\n  }\n}"
+    \ kyopro {\n  template<class _typeT>\n  constexpr _typeT power(_typeT a, std::uint64_t\
+    \ n, _typeT init = 1) noexcept {\n    while (n > 0) {\n      if (n & 1) init *=\
+    \ a;\n      a *= a;\n      n >>= 1;\n    }\n    return init;\n  }\n}"
   dependsOn:
   - base/settings.hpp
   isVerificationFile: false
@@ -73,7 +73,7 @@ data:
   - all.hpp
   - base/constant.hpp
   - base/all.hpp
-  timestamp: '2022-01-10 20:12:50+09:00'
+  timestamp: '2022-01-11 23:13:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - yosupo/FenwickTree.test.cpp

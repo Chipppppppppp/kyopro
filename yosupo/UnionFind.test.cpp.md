@@ -26,43 +26,36 @@ data:
     #ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD 1000000007\n#endif\n#ifndef\
     \ KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION 12\n#endif\n#ifndef\
     \ KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV 3\n#endif\n#line 7 \"structure/UnionFind.hpp\"\
-    \n\nnamespace kyopro {\n  template<class KyoproContainer = std::vector<int>>\n\
-    \  struct UnionFind {\n  private:\n    KyoproContainer kyopro_par;\n  public:\n\
-    \    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT kyopro_n)\
-    \ noexcept: kyopro_par(kyopro_n, -1) {}\n    void resize(KYOPRO_BASE_UINT kyopro_x)\
-    \ { kyopro_par.resize(kyopro_x, -1); }\n    void assign(KYOPRO_BASE_UINT kyopro_x)\
-    \ { kyopro_par.assign(kyopro_x, -1); }\n    void reset() { std::fill(std::begin(kyopro_par),\
-    \ std::end(kyopro_par), -1); }\n    KYOPRO_BASE_UINT size() const noexcept { return\
-    \ kyopro_par.size(); }\n    KYOPRO_BASE_INT find(int kyopro_x) {\n      int kyopro_p\
-    \ = kyopro_x;\n      while (kyopro_par[kyopro_p] >= 0) kyopro_p = kyopro_par[kyopro_p];\n\
-    \      while (kyopro_x != kyopro_p) {\n        int kyopro_tmp = kyopro_x;\n  \
-    \      kyopro_x = kyopro_par[kyopro_x];\n        kyopro_par[kyopro_tmp] = kyopro_p;\n\
-    \      }\n      return kyopro_p;\n    }\n    bool unite(int kyopro_x, int kyopro_y)\
-    \ {\n      kyopro_x = find(kyopro_x), kyopro_y = find(kyopro_y);\n      if (kyopro_x\
-    \ == kyopro_y) return false;\n      if (kyopro_par[kyopro_x] > kyopro_par[kyopro_y])\
-    \ {\n        int kyopro_tmp = kyopro_x;\n        kyopro_x = kyopro_y;\n      \
-    \  kyopro_y = kyopro_tmp;\n      }\n      kyopro_par[kyopro_x] += kyopro_par[kyopro_y];\n\
-    \      kyopro_par[kyopro_y] = kyopro_x;\n      return true;\n    }\n    bool same(int\
-    \ kyopro_x, int kyopro_y) { return find(kyopro_x) == find(kyopro_y); }\n    KYOPRO_BASE_INT\
-    \ group_size(int kyopro_x) { return -kyopro_par[find(kyopro_x)]; }\n    KyoproContainer\
-    \ group_members(int kyopro_x) {\n      kyopro_x = find(kyopro_x);\n      KyoproContainer\
-    \ kyopro_a;\n      for (int kyopro_i = 0; kyopro_i < (int)(size()); ++kyopro_i)\
-    \ if (find(kyopro_i) == kyopro_x) kyopro_a.emplace_back(kyopro_i);\n      return\
-    \ kyopro_a;\n    }\n    template<class KyoproVector = std::vector<KYOPRO_BASE_INT>>\n\
-    \    KyoproVector roots() const {\n      KyoproVector kyopro_a;\n      for (int\
-    \ kyopro_i = 0; kyopro_i < (int)(size()); ++kyopro_i) if (kyopro_par[kyopro_i]\
-    \ < 0) kyopro_a.emplace_back(kyopro_i);\n      return kyopro_a;\n    }\n    KYOPRO_BASE_INT\
-    \ group_count() const {\n      KYOPRO_BASE_INT kyopro_cnt = 0;\n      for (int\
-    \ kyopro_i = 0; kyopro_i < (int)(size()); ++kyopro_i) if (kyopro_par[kyopro_i]\
-    \ < 0) ++kyopro_cnt;\n      return kyopro_cnt;\n    }\n    template<class KyoproMap\
-    \ = std::unordered_map<KYOPRO_BASE_INT, std::vector<KYOPRO_BASE_INT>>>\n    KyoproMap\
-    \ all_group_members() {\n      KyoproMap kyopro_group_members;\n      for (int\
-    \ kyopro_member = 0; kyopro_member < (int)(size()); ++kyopro_member) kyopro_group_members[find(kyopro_member)].emplace_back(kyopro_member);\n\
-    \      return kyopro_group_members;\n    }\n  };\n}\n#line 4 \"yosupo/UnionFind.test.cpp\"\
-    \n\nint main() {\n  int n, q;\n  std::cin >> n >> q;\n  kyopro::UnionFind uf(n);\n\
-    \  for (int i = 0; i < q; ++i) {\n    int t, u, v;\n    std::cin >> t >> u >>\
-    \ v;\n    if (t == 0) uf.unite(u, v);\n    else std::cout << uf.same(u, v) <<\
-    \ '\\n';\n  }\n}\n"
+    \n\nnamespace kyopro {\n  template<class _typeContainer = std::vector<int>>\n\
+    \  struct UnionFind {\n  private:\n    _typeContainer _par;\n  public:\n    UnionFind()\
+    \ noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT _n) noexcept: _par(_n, -1)\
+    \ {}\n    void resize(KYOPRO_BASE_UINT _x) { _par.resize(_x, -1); }\n    void\
+    \ assign(KYOPRO_BASE_UINT _x) { _par.assign(_x, -1); }\n    void reset() { std::fill(std::begin(_par),\
+    \ std::end(_par), -1); }\n    KYOPRO_BASE_UINT size() const noexcept { return\
+    \ _par.size(); }\n    KYOPRO_BASE_INT find(int _x) {\n      int _p = _x;\n   \
+    \   while (_par[_p] >= 0) _p = _par[_p];\n      while (_x != _p) {\n        int\
+    \ _tmp = _x;\n        _x = _par[_x];\n        _par[_tmp] = _p;\n      }\n    \
+    \  return _p;\n    }\n    bool unite(int _x, int _y) {\n      _x = find(_x), _y\
+    \ = find(_y);\n      if (_x == _y) return false;\n      if (_par[_x] > _par[_y])\
+    \ {\n        int _tmp = _x;\n        _x = _y;\n        _y = _tmp;\n      }\n \
+    \     _par[_x] += _par[_y];\n      _par[_y] = _x;\n      return true;\n    }\n\
+    \    bool same(int _x, int _y) { return find(_x) == find(_y); }\n    KYOPRO_BASE_INT\
+    \ group_size(int _x) { return -_par[find(_x)]; }\n    _typeContainer group_members(int\
+    \ _x) {\n      _x = find(_x);\n      _typeContainer _a;\n      for (int _i = 0;\
+    \ _i < (int)(size()); ++_i) if (find(_i) == _x) _a.emplace_back(_i);\n      return\
+    \ _a;\n    }\n    template<class _typeVector = std::vector<KYOPRO_BASE_INT>>\n\
+    \    _typeVector roots() const {\n      _typeVector _a;\n      for (int _i = 0;\
+    \ _i < (int)(size()); ++_i) if (_par[_i] < 0) _a.emplace_back(_i);\n      return\
+    \ _a;\n    }\n    KYOPRO_BASE_INT group_count() const {\n      KYOPRO_BASE_INT\
+    \ _cnt = 0;\n      for (int _i = 0; _i < (int)(size()); ++_i) if (_par[_i] < 0)\
+    \ ++_cnt;\n      return _cnt;\n    }\n    template<class _typeMap = std::unordered_map<KYOPRO_BASE_INT,\
+    \ std::vector<KYOPRO_BASE_INT>>>\n    _typeMap all_group_members() {\n      _typeMap\
+    \ _group_members;\n      for (int _member = 0; _member < (int)(size()); ++_member)\
+    \ _group_members[find(_member)].emplace_back(_member);\n      return _group_members;\n\
+    \    }\n  };\n}\n#line 4 \"yosupo/UnionFind.test.cpp\"\n\nint main() {\n  int\
+    \ n, q;\n  std::cin >> n >> q;\n  kyopro::UnionFind uf(n);\n  for (int i = 0;\
+    \ i < q; ++i) {\n    int t, u, v;\n    std::cin >> t >> u >> v;\n    if (t ==\
+    \ 0) uf.unite(u, v);\n    else std::cout << uf.same(u, v) << '\\n';\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\n#include <iostream>\n\
     #include \"../structure/UnionFind.hpp\"\n\nint main() {\n  int n, q;\n  std::cin\
     \ >> n >> q;\n  kyopro::UnionFind uf(n);\n  for (int i = 0; i < q; ++i) {\n  \
@@ -74,7 +67,7 @@ data:
   isVerificationFile: true
   path: yosupo/UnionFind.test.cpp
   requiredBy: []
-  timestamp: '2022-01-10 20:12:50+09:00'
+  timestamp: '2022-01-11 23:13:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/UnionFind.test.cpp

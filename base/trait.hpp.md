@@ -35,50 +35,50 @@ data:
     \ std::true_type {};\nstruct std::is_integral<__uint128_t>: std::true_type {};\n\
     struct std::is_unsigned<__uint128_t>: std::true_type {};\n#endif\n#ifdef __SIZEOF_FLOAT128__\n\
     struct std::is_floating_point<__float128>: std::true_type {};\n#endif\n\nnamespace\
-    \ kyopro {\n  template<class KyoproT, class = void>\n  struct is_iterator: std::false_type\
-    \ {};\n  template<class KyoproT>\n  struct is_iterator<KyoproT, std::enable_if_t<!std::is_same_v<typename\
-    \ std::iterator_traits<KyoproT>::value_type, void>>>: std::true_type {};\n  template<class\
-    \ KyoproT>\n  constexpr bool is_iterator_v = is_iterator<KyoproT>::value;\n\n\
-    \  template<class KyoproT, class = void>\n  struct is_container: std::false_type\
-    \ {};\n  template<class KyoproT>\n  struct is_container<KyoproT, std::void_t<decltype(std::begin(std::declval<KyoproT>()),\
-    \ std::end(std::declval<KyoproT>()), std::empty(std::declval<KyoproT>()))>>: std::true_type\
-    \ {};\n  template<class KyoproT>\n  constexpr bool is_container_v = is_container<KyoproT>::value;\n\
-    \n  template<class KyoproT>\n  struct is_tuple: std::false_type {};\n  template<class\
-    \ KyoproT, class U>\n  struct is_tuple<std::pair<KyoproT, U>>: std::true_type\
-    \ {};\n  template<class... Args>\n  struct is_tuple<std::tuple<Args...>>: std::true_type\
-    \ {};\n  template<class KyoproT>\n  constexpr bool is_tuple_v = is_tuple<KyoproT>::value;\n\
-    \n  template<class KyoproT>\n  struct is_iterable: is_container<KyoproT> {};\n\
-    \  template<class KyoproT, class Container>\n  struct is_iterable<std::stack<KyoproT,\
-    \ Container>>: std::false_type {};\n  template<class KyoproT, class Container>\n\
-    \  struct is_iterable<std::queue<KyoproT, Container>>: std::false_type {};\n \
-    \ template<class KyoproT, class Container, class Compare>\n  struct is_iterable<std::priority_queue<KyoproT,\
-    \ Container, Compare>>: std::false_type {};\n  template<class KyoproT>\n  constexpr\
-    \ bool is_iterable_v = is_iterable<KyoproT>::value;\n}\n"
+    \ kyopro {\n  template<class _typeT, class = void>\n  struct is_iterator: std::false_type\
+    \ {};\n  template<class _typeT>\n  struct is_iterator<_typeT, std::enable_if_t<!std::is_same_v<typename\
+    \ std::iterator_traits<_typeT>::value_type, void>>>: std::true_type {};\n  template<class\
+    \ _typeT>\n  constexpr bool is_iterator_v = is_iterator<_typeT>::value;\n\n  template<class\
+    \ _typeT, class = void>\n  struct is_container: std::false_type {};\n  template<class\
+    \ _typeT>\n  struct is_container<_typeT, std::void_t<decltype(std::begin(std::declval<_typeT>()),\
+    \ std::end(std::declval<_typeT>()), std::empty(std::declval<_typeT>()))>>: std::true_type\
+    \ {};\n  template<class _typeT>\n  constexpr bool is_container_v = is_container<_typeT>::value;\n\
+    \n  template<class _typeT>\n  struct is_tuple: std::false_type {};\n  template<class\
+    \ _typeT, class U>\n  struct is_tuple<std::pair<_typeT, U>>: std::true_type {};\n\
+    \  template<class... Args>\n  struct is_tuple<std::tuple<Args...>>: std::true_type\
+    \ {};\n  template<class _typeT>\n  constexpr bool is_tuple_v = is_tuple<_typeT>::value;\n\
+    \n  template<class _typeT>\n  struct is_iterable: is_container<_typeT> {};\n \
+    \ template<class _typeT, class Container>\n  struct is_iterable<std::stack<_typeT,\
+    \ Container>>: std::false_type {};\n  template<class _typeT, class Container>\n\
+    \  struct is_iterable<std::queue<_typeT, Container>>: std::false_type {};\n  template<class\
+    \ _typeT, class Container, class Compare>\n  struct is_iterable<std::priority_queue<_typeT,\
+    \ Container, Compare>>: std::false_type {};\n  template<class _typeT>\n  constexpr\
+    \ bool is_iterable_v = is_iterable<_typeT>::value;\n}\n"
   code: "#pragma once\n#include <utility>\n#include <type_traits>\n#include <iterator>\n\
     #include <stack>\n#include <queue>\n\n#ifdef __SIZEOF_INT128__\nstruct std::is_integral<__int128_t>:\
     \ std::true_type {};\nstruct std::is_signed<__int128_t>: std::true_type {};\n\
     struct std::is_integral<__uint128_t>: std::true_type {};\nstruct std::is_unsigned<__uint128_t>:\
     \ std::true_type {};\n#endif\n#ifdef __SIZEOF_FLOAT128__\nstruct std::is_floating_point<__float128>:\
-    \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<class KyoproT,\
-    \ class = void>\n  struct is_iterator: std::false_type {};\n  template<class KyoproT>\n\
-    \  struct is_iterator<KyoproT, std::enable_if_t<!std::is_same_v<typename std::iterator_traits<KyoproT>::value_type,\
-    \ void>>>: std::true_type {};\n  template<class KyoproT>\n  constexpr bool is_iterator_v\
-    \ = is_iterator<KyoproT>::value;\n\n  template<class KyoproT, class = void>\n\
-    \  struct is_container: std::false_type {};\n  template<class KyoproT>\n  struct\
-    \ is_container<KyoproT, std::void_t<decltype(std::begin(std::declval<KyoproT>()),\
-    \ std::end(std::declval<KyoproT>()), std::empty(std::declval<KyoproT>()))>>: std::true_type\
-    \ {};\n  template<class KyoproT>\n  constexpr bool is_container_v = is_container<KyoproT>::value;\n\
-    \n  template<class KyoproT>\n  struct is_tuple: std::false_type {};\n  template<class\
-    \ KyoproT, class U>\n  struct is_tuple<std::pair<KyoproT, U>>: std::true_type\
-    \ {};\n  template<class... Args>\n  struct is_tuple<std::tuple<Args...>>: std::true_type\
-    \ {};\n  template<class KyoproT>\n  constexpr bool is_tuple_v = is_tuple<KyoproT>::value;\n\
-    \n  template<class KyoproT>\n  struct is_iterable: is_container<KyoproT> {};\n\
-    \  template<class KyoproT, class Container>\n  struct is_iterable<std::stack<KyoproT,\
-    \ Container>>: std::false_type {};\n  template<class KyoproT, class Container>\n\
-    \  struct is_iterable<std::queue<KyoproT, Container>>: std::false_type {};\n \
-    \ template<class KyoproT, class Container, class Compare>\n  struct is_iterable<std::priority_queue<KyoproT,\
-    \ Container, Compare>>: std::false_type {};\n  template<class KyoproT>\n  constexpr\
-    \ bool is_iterable_v = is_iterable<KyoproT>::value;\n}"
+    \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<class _typeT, class\
+    \ = void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
+    \  struct is_iterator<_typeT, std::enable_if_t<!std::is_same_v<typename std::iterator_traits<_typeT>::value_type,\
+    \ void>>>: std::true_type {};\n  template<class _typeT>\n  constexpr bool is_iterator_v\
+    \ = is_iterator<_typeT>::value;\n\n  template<class _typeT, class = void>\n  struct\
+    \ is_container: std::false_type {};\n  template<class _typeT>\n  struct is_container<_typeT,\
+    \ std::void_t<decltype(std::begin(std::declval<_typeT>()), std::end(std::declval<_typeT>()),\
+    \ std::empty(std::declval<_typeT>()))>>: std::true_type {};\n  template<class\
+    \ _typeT>\n  constexpr bool is_container_v = is_container<_typeT>::value;\n\n\
+    \  template<class _typeT>\n  struct is_tuple: std::false_type {};\n  template<class\
+    \ _typeT, class U>\n  struct is_tuple<std::pair<_typeT, U>>: std::true_type {};\n\
+    \  template<class... Args>\n  struct is_tuple<std::tuple<Args...>>: std::true_type\
+    \ {};\n  template<class _typeT>\n  constexpr bool is_tuple_v = is_tuple<_typeT>::value;\n\
+    \n  template<class _typeT>\n  struct is_iterable: is_container<_typeT> {};\n \
+    \ template<class _typeT, class Container>\n  struct is_iterable<std::stack<_typeT,\
+    \ Container>>: std::false_type {};\n  template<class _typeT, class Container>\n\
+    \  struct is_iterable<std::queue<_typeT, Container>>: std::false_type {};\n  template<class\
+    \ _typeT, class Container, class Compare>\n  struct is_iterable<std::priority_queue<_typeT,\
+    \ Container, Compare>>: std::false_type {};\n  template<class _typeT>\n  constexpr\
+    \ bool is_iterable_v = is_iterable<_typeT>::value;\n}"
   dependsOn: []
   isVerificationFile: false
   path: base/trait.hpp
@@ -90,7 +90,7 @@ data:
   - all.hpp
   - base/Hash.hpp
   - base/all.hpp
-  timestamp: '2022-01-10 20:19:03+09:00'
+  timestamp: '2022-01-11 23:13:11+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: base/trait.hpp

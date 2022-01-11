@@ -24,21 +24,19 @@ data:
     #ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD 1000000007\n#endif\n#ifndef\
     \ KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION 12\n#endif\n#ifndef\
     \ KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV 3\n#endif\n#line 5 \"math/divisors.hpp\"\
-    \n\nnamespace kyopro {\n  template<class KyoproContainer = std::vector<KYOPRO_BASE_INT>>\n\
-    \  KyoproContainer divisors(std::uint64_t kyopro_n) {\n    KyoproContainer kyopro_lower,\
-    \ kyopro_upper;\n    std::uint64_t kyopro_i;\n    for (kyopro_i = 1; kyopro_i\
-    \ * kyopro_i < kyopro_n; ++kyopro_i) if (kyopro_n % kyopro_i == 0) {\n      kyopro_lower.emplace_back(kyopro_i);\n\
-    \      kyopro_upper.emplace_back(kyopro_n / kyopro_i);\n    }\n    if (kyopro_i\
-    \ * kyopro_i == kyopro_n) kyopro_lower.emplace_back(kyopro_i);\n    kyopro_lower.insert(end(kyopro_lower),\
-    \ rall(kyopro_upper));\n    return kyopro_lower;\n  }\n}\n"
+    \n\nnamespace kyopro {\n  template<class _typeContainer = std::vector<KYOPRO_BASE_INT>>\n\
+    \  _typeContainer divisors(std::uint64_t _n) {\n    _typeContainer _lower, _upper;\n\
+    \    std::uint64_t _i;\n    for (_i = 1; _i * _i < _n; ++_i) if (_n % _i == 0)\
+    \ {\n      _lower.emplace_back(_i);\n      _upper.emplace_back(_n / _i);\n   \
+    \ }\n    if (_i * _i == _n) _lower.emplace_back(_i);\n    _lower.insert(end(_lower),\
+    \ rall(_upper));\n    return _lower;\n  }\n}\n"
   code: "#pragma once\n#include <cstdint>\n#include <vector>\n#include \"../base/settings.hpp\"\
-    \n\nnamespace kyopro {\n  template<class KyoproContainer = std::vector<KYOPRO_BASE_INT>>\n\
-    \  KyoproContainer divisors(std::uint64_t kyopro_n) {\n    KyoproContainer kyopro_lower,\
-    \ kyopro_upper;\n    std::uint64_t kyopro_i;\n    for (kyopro_i = 1; kyopro_i\
-    \ * kyopro_i < kyopro_n; ++kyopro_i) if (kyopro_n % kyopro_i == 0) {\n      kyopro_lower.emplace_back(kyopro_i);\n\
-    \      kyopro_upper.emplace_back(kyopro_n / kyopro_i);\n    }\n    if (kyopro_i\
-    \ * kyopro_i == kyopro_n) kyopro_lower.emplace_back(kyopro_i);\n    kyopro_lower.insert(end(kyopro_lower),\
-    \ rall(kyopro_upper));\n    return kyopro_lower;\n  }\n}"
+    \n\nnamespace kyopro {\n  template<class _typeContainer = std::vector<KYOPRO_BASE_INT>>\n\
+    \  _typeContainer divisors(std::uint64_t _n) {\n    _typeContainer _lower, _upper;\n\
+    \    std::uint64_t _i;\n    for (_i = 1; _i * _i < _n; ++_i) if (_n % _i == 0)\
+    \ {\n      _lower.emplace_back(_i);\n      _upper.emplace_back(_n / _i);\n   \
+    \ }\n    if (_i * _i == _n) _lower.emplace_back(_i);\n    _lower.insert(end(_lower),\
+    \ rall(_upper));\n    return _lower;\n  }\n}"
   dependsOn:
   - base/settings.hpp
   isVerificationFile: false
@@ -46,7 +44,7 @@ data:
   requiredBy:
   - math/all.hpp
   - all.hpp
-  timestamp: '2022-01-10 20:12:50+09:00'
+  timestamp: '2022-01-11 23:13:11+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/divisors.hpp
