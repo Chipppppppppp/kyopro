@@ -8,33 +8,33 @@ namespace kyopro {
   template<class, class = void>
   struct Hash;
 
-  template<class KyoproT>
-  struct Hash<KyoproT, std::enable_if_t<std::is_integral_v<KyoproT>>> { constexpr KYOPRO_BASE_UINT operator ()(KyoproT kyopro_a) const noexcept { return kyopro_a; } };
+  template<class _typeT>
+  struct Hash<_typeT, std::enable_if_t<std::is_integral_v<_typeT>>> { constexpr KYOPRO_BASE_UINT operator ()(_typeT _a) const noexcept { return _a; } };
 
-  template<class KyoproT>
-  struct Hash<KyoproT, std::enable_if_t<std::is_floating_point_v<KyoproT>>> { constexpr KYOPRO_BASE_UINT operator ()(KyoproT kyopro_a) const noexcept { return (KYOPRO_BASE_UINT)kyopro_a & 0xfffff000; } };
+  template<class _typeT>
+  struct Hash<_typeT, std::enable_if_t<std::is_floating_point_v<_typeT>>> { constexpr KYOPRO_BASE_UINT operator ()(_typeT _a) const noexcept { return (KYOPRO_BASE_UINT)_a & 0xfffff000; } };
 
-  template<class KyoproT>
-  struct Hash<KyoproT, std::enable_if_t<is_tuple_v<KyoproT>>> {
-    template<KYOPRO_BASE_UINT kyopro_i = 0>
-    constexpr KYOPRO_BASE_UINT operator ()(const KyoproT& kyopro_a) const noexcept {
-      if constexpr (kyopro_i == std::tuple_size_v<KyoproT>) return std::tuple_size_v<KyoproT>;
+  template<class _typeT>
+  struct Hash<_typeT, std::enable_if_t<is_tuple_v<_typeT>>> {
+    template<KYOPRO_BASE_UINT _i = 0>
+    constexpr KYOPRO_BASE_UINT operator ()(const _typeT& _a) const noexcept {
+      if constexpr (_i == std::tuple_size_v<_typeT>) return std::tuple_size_v<_typeT>;
       else {
-        KYOPRO_BASE_UINT kyopro_seed = operator()<kyopro_i + 1>(kyopro_a);
-        return kyopro_seed ^ (Hash<std::tuple_element_t<kyopro_i, KyoproT>>()(get<kyopro_i>(kyopro_a)) + 0x9e3779b97f4a7c15LU + (kyopro_seed << 12) + (kyopro_seed >> 4));
+        KYOPRO_BASE_UINT _seed = operator()<_i + 1>(_a);
+        return _seed ^ (Hash<std::tuple_element_t<_i, _typeT>>()(get<_i>(_a)) + 0x9e3779b97f4a7c15LU + (_seed << 12) + (_seed >> 4));
       }
     }
   };
 
-  template<class KyoproT>
-  struct Hash<KyoproT, std::enable_if_t<is_container_v<KyoproT>>> {
+  template<class _typeT>
+  struct Hash<_typeT, std::enable_if_t<is_container_v<_typeT>>> {
   private:
-    [[no_unique_address]] Hash<typename KyoproT::value_type> make_hash;
+    [[no_unique_address]] Hash<typename _typeT::value_type> make_hash;
   public:
-    constexpr KYOPRO_BASE_UINT operator ()(const KyoproT& kyopro_a) const noexcept {
-      KYOPRO_BASE_UINT kyopro_seed = kyopro_a.size();
-      for (auto& kyopro_i: kyopro_a) kyopro_seed ^= make_hash(kyopro_i) + 0x9e3779b97f4a7c15LU + (kyopro_seed << 12) + (kyopro_seed >> 4);
-      return kyopro_seed;
+    constexpr KYOPRO_BASE_UINT operator ()(const _typeT& _a) const noexcept {
+      KYOPRO_BASE_UINT _seed = _a.size();
+      for (auto& _i: _a) _seed ^= make_hash(_i) + 0x9e3779b97f4a7c15LU + (_seed << 12) + (_seed >> 4);
+      return _seed;
     }
   };
 }

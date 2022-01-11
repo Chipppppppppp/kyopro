@@ -3,13 +3,13 @@
 #include <cassert>
 
 namespace kyopro {
-  template<class KyoproT, class KyoproU>
-  constexpr KyoproT floor_mod(KyoproT kyopro_x, KyoproU kyopro_m) noexcept {
-    static_assert(std::is_integral_v<KyoproT> && std::is_integral_v<KyoproU>);
-    if constexpr (std::is_unsigned_v<KyoproT>) return kyopro_x % kyopro_m;
-    return (kyopro_x %= kyopro_m) < 0 ? kyopro_x + kyopro_m : kyopro_x;
+  template<class _typeT, class _typeU>
+  constexpr _typeT floor_mod(_typeT _x, _typeU _m) noexcept {
+    static_assert(std::is_integral_v<_typeT> && std::is_integral_v<_typeU>);
+    if constexpr (std::is_unsigned_v<_typeT>) return _x % _m;
+    return (_x %= _m) < 0 ? _x + _m : _x;
   }
 
-  template<class KyoproT, class KyoproU>
-  constexpr KyoproT ceil_mod(KyoproT kyopro_x, KyoproU kyopro_m) noexcept { return kyopro_m - floor_mod(kyopro_x - 1, kyopro_m) - 1; }
+  template<class _typeT, class _typeU>
+  constexpr _typeT ceil_mod(_typeT _x, _typeU _m) noexcept { return _m - floor_mod(_x - 1, _m) - 1; }
 }

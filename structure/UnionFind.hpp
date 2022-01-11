@@ -6,63 +6,63 @@
 #include "../base/settings.hpp"
 
 namespace kyopro {
-  template<class KyoproContainer = std::vector<int>>
+  template<class _typeContainer = std::vector<int>>
   struct UnionFind {
   private:
-    KyoproContainer kyopro_par;
+    _typeContainer _par;
   public:
     UnionFind() noexcept = default;
-    UnionFind(KYOPRO_BASE_UINT kyopro_n) noexcept: kyopro_par(kyopro_n, -1) {}
-    void resize(KYOPRO_BASE_UINT kyopro_x) { kyopro_par.resize(kyopro_x, -1); }
-    void assign(KYOPRO_BASE_UINT kyopro_x) { kyopro_par.assign(kyopro_x, -1); }
-    void reset() { std::fill(std::begin(kyopro_par), std::end(kyopro_par), -1); }
-    KYOPRO_BASE_UINT size() const noexcept { return kyopro_par.size(); }
-    KYOPRO_BASE_INT find(int kyopro_x) {
-      int kyopro_p = kyopro_x;
-      while (kyopro_par[kyopro_p] >= 0) kyopro_p = kyopro_par[kyopro_p];
-      while (kyopro_x != kyopro_p) {
-        int kyopro_tmp = kyopro_x;
-        kyopro_x = kyopro_par[kyopro_x];
-        kyopro_par[kyopro_tmp] = kyopro_p;
+    UnionFind(KYOPRO_BASE_UINT _n) noexcept: _par(_n, -1) {}
+    void resize(KYOPRO_BASE_UINT _x) { _par.resize(_x, -1); }
+    void assign(KYOPRO_BASE_UINT _x) { _par.assign(_x, -1); }
+    void reset() { std::fill(std::begin(_par), std::end(_par), -1); }
+    KYOPRO_BASE_UINT size() const noexcept { return _par.size(); }
+    KYOPRO_BASE_INT find(int _x) {
+      int _p = _x;
+      while (_par[_p] >= 0) _p = _par[_p];
+      while (_x != _p) {
+        int _tmp = _x;
+        _x = _par[_x];
+        _par[_tmp] = _p;
       }
-      return kyopro_p;
+      return _p;
     }
-    bool unite(int kyopro_x, int kyopro_y) {
-      kyopro_x = find(kyopro_x), kyopro_y = find(kyopro_y);
-      if (kyopro_x == kyopro_y) return false;
-      if (kyopro_par[kyopro_x] > kyopro_par[kyopro_y]) {
-        int kyopro_tmp = kyopro_x;
-        kyopro_x = kyopro_y;
-        kyopro_y = kyopro_tmp;
+    bool unite(int _x, int _y) {
+      _x = find(_x), _y = find(_y);
+      if (_x == _y) return false;
+      if (_par[_x] > _par[_y]) {
+        int _tmp = _x;
+        _x = _y;
+        _y = _tmp;
       }
-      kyopro_par[kyopro_x] += kyopro_par[kyopro_y];
-      kyopro_par[kyopro_y] = kyopro_x;
+      _par[_x] += _par[_y];
+      _par[_y] = _x;
       return true;
     }
-    bool same(int kyopro_x, int kyopro_y) { return find(kyopro_x) == find(kyopro_y); }
-    KYOPRO_BASE_INT group_size(int kyopro_x) { return -kyopro_par[find(kyopro_x)]; }
-    KyoproContainer group_members(int kyopro_x) {
-      kyopro_x = find(kyopro_x);
-      KyoproContainer kyopro_a;
-      for (int kyopro_i = 0; kyopro_i < (int)(size()); ++kyopro_i) if (find(kyopro_i) == kyopro_x) kyopro_a.emplace_back(kyopro_i);
-      return kyopro_a;
+    bool same(int _x, int _y) { return find(_x) == find(_y); }
+    KYOPRO_BASE_INT group_size(int _x) { return -_par[find(_x)]; }
+    _typeContainer group_members(int _x) {
+      _x = find(_x);
+      _typeContainer _a;
+      for (int _i = 0; _i < (int)(size()); ++_i) if (find(_i) == _x) _a.emplace_back(_i);
+      return _a;
     }
-    template<class KyoproVector = std::vector<KYOPRO_BASE_INT>>
-    KyoproVector roots() const {
-      KyoproVector kyopro_a;
-      for (int kyopro_i = 0; kyopro_i < (int)(size()); ++kyopro_i) if (kyopro_par[kyopro_i] < 0) kyopro_a.emplace_back(kyopro_i);
-      return kyopro_a;
+    template<class _typeVector = std::vector<KYOPRO_BASE_INT>>
+    _typeVector roots() const {
+      _typeVector _a;
+      for (int _i = 0; _i < (int)(size()); ++_i) if (_par[_i] < 0) _a.emplace_back(_i);
+      return _a;
     }
     KYOPRO_BASE_INT group_count() const {
-      KYOPRO_BASE_INT kyopro_cnt = 0;
-      for (int kyopro_i = 0; kyopro_i < (int)(size()); ++kyopro_i) if (kyopro_par[kyopro_i] < 0) ++kyopro_cnt;
-      return kyopro_cnt;
+      KYOPRO_BASE_INT _cnt = 0;
+      for (int _i = 0; _i < (int)(size()); ++_i) if (_par[_i] < 0) ++_cnt;
+      return _cnt;
     }
-    template<class KyoproMap = std::unordered_map<KYOPRO_BASE_INT, std::vector<KYOPRO_BASE_INT>>>
-    KyoproMap all_group_members() {
-      KyoproMap kyopro_group_members;
-      for (int kyopro_member = 0; kyopro_member < (int)(size()); ++kyopro_member) kyopro_group_members[find(kyopro_member)].emplace_back(kyopro_member);
-      return kyopro_group_members;
+    template<class _typeMap = std::unordered_map<KYOPRO_BASE_INT, std::vector<KYOPRO_BASE_INT>>>
+    _typeMap all_group_members() {
+      _typeMap _group_members;
+      for (int _member = 0; _member < (int)(size()); ++_member) _group_members[find(_member)].emplace_back(_member);
+      return _group_members;
     }
   };
 }

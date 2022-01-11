@@ -6,36 +6,36 @@
 #include "../math/monoid.hpp"
 
 namespace kyopro {
-  template<class KyoproT, class KyoproOp = Plus<KyoproT>, class KyoproContainer = std::vector<KyoproT>>
+  template<class _typeT, class _typeOp = Plus<_typeT>, class _typeContainer = std::vector<_typeT>>
   struct FenwickTree {
   private:
-    KyoproContainer kyopro_tree;
+    _typeContainer _tree;
   public:
-    using value_type = KyoproT;
+    using value_type = _typeT;
     using size_type = KYOPRO_BASE_UINT;
-    using reference = KyoproT&;
-    using const_reference = const KyoproT&;
+    using reference = _typeT&;
+    using const_reference = const _typeT&;
     FenwickTree() noexcept = default;
-    FenwickTree(KYOPRO_BASE_UINT kyopro_n) noexcept: kyopro_tree(kyopro_n, KyoproOp::id) {}
-    KYOPRO_BASE_UINT size() noexcept { return kyopro_tree.size(); }
-    void apply(int kyopro_p, const KyoproT& kyopro_x) {
-      ++kyopro_p;
-      while (kyopro_p <= (int)size()) {
-        kyopro_tree[kyopro_p - 1] = KyoproOp::op(kyopro_tree[kyopro_p - 1], kyopro_x);
-        kyopro_p += kyopro_p & -kyopro_p;
+    FenwickTree(KYOPRO_BASE_UINT _n) noexcept: _tree(_n, _typeOp::id) {}
+    KYOPRO_BASE_UINT size() noexcept { return _tree.size(); }
+    void apply(int _p, const _typeT& _x) {
+      ++_p;
+      while (_p <= (int)size()) {
+        _tree[_p - 1] = _typeOp::op(_tree[_p - 1], _x);
+        _p += _p & -_p;
       }
     }
-    KyoproT prod(int kyopro_r) const {
-      KyoproT kyopro_s = KyoproOp::id;
-      while (kyopro_r > 0) {
-        kyopro_s = KyoproOp::op(kyopro_s, kyopro_tree[kyopro_r - 1]);
-        kyopro_r -= kyopro_r & -kyopro_r;
+    _typeT prod(int _r) const {
+      _typeT _s = _typeOp::id;
+      while (_r > 0) {
+        _s = _typeOp::op(_s, _tree[_r - 1]);
+        _r -= _r & -_r;
       }
-      return kyopro_s;
+      return _s;
     }
-    KyoproT prod(int kyopro_l, int kyopro_r) const { return KyoproOp::op(prod(kyopro_r), KyoproOp::inv(prod(kyopro_l))); }
-    KyoproT get(int kyopro_p) { return KyoproOp::op(prod(kyopro_p + 1), KyoproOp::inv(prod(kyopro_p))); }
-    KyoproT all_query() { return prod(kyopro_tree.size()); }
-    void set(int kyopro_p, const KyoproT& kyopro_x) { apply(kyopro_p, KyoproOp::op(kyopro_x, KyoproOp::inv(get(kyopro_p)))); }
+    _typeT prod(int _l, int _r) const { return _typeOp::op(prod(_r), _typeOp::inv(prod(_l))); }
+    _typeT get(int _p) { return _typeOp::op(prod(_p + 1), _typeOp::inv(prod(_p))); }
+    _typeT all_query() { return prod(_tree.size()); }
+    void set(int _p, const _typeT& _x) { apply(_p, _typeOp::op(_x, _typeOp::inv(get(_p)))); }
   };
 }

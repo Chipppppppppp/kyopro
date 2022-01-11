@@ -2,21 +2,21 @@
 #include <cstdint>
 
 namespace kyopro {
-  constexpr std::uint64_t euler_phi(std::uint64_t kyopro_n) noexcept {
-    std::uint64_t kyopro_res = kyopro_n;
-    if ((kyopro_n & 1) == 0) {
-      kyopro_res -= kyopro_res >> 1;
-      kyopro_n >>= 1;
-      while ((kyopro_n & 1) == 0) kyopro_n >>= 1;
+  constexpr std::uint64_t euler_phi(std::uint64_t _n) noexcept {
+    std::uint64_t _res = _n;
+    if ((_n & 1) == 0) {
+      _res -= _res >> 1;
+      _n >>= 1;
+      while ((_n & 1) == 0) _n >>= 1;
     }
-    for (std::uint64_t kyopro_i = 3; kyopro_i * kyopro_i <= kyopro_n; kyopro_i += 2) {
-      if (kyopro_n % kyopro_i == 0) {
-        kyopro_res -= kyopro_res / kyopro_i;
-        kyopro_n /= kyopro_i;
-        while (kyopro_n % kyopro_i == 0) kyopro_n /= kyopro_i;
+    for (std::uint64_t _i = 3; _i * _i <= _n; _i += 2) {
+      if (_n % _i == 0) {
+        _res -= _res / _i;
+        _n /= _i;
+        while (_n % _i == 0) _n /= _i;
       }
     }
-    if (kyopro_n != 1) kyopro_res -= kyopro_res / kyopro_n;
-    return kyopro_res;
+    if (_n != 1) _res -= _res / _n;
+    return _res;
   }
 }

@@ -5,18 +5,18 @@
 #include "../base/settings.hpp"
 
 namespace kyopro {
-  template<class KyoproContainer = std::vector<KYOPRO_BASE_INT>>
-  KyoproContainer factorize(std::uint64_t kyopro_n) {
-    KyoproContainer kyopro_res;
-    while ((kyopro_n & 1) == 0) {
-      kyopro_res.emplace_back(2);
-      kyopro_n >>= 1;
+  template<class _typeContainer = std::vector<KYOPRO_BASE_INT>>
+  _typeContainer factorize(std::uint64_t _n) {
+    _typeContainer _res;
+    while ((_n & 1) == 0) {
+      _res.emplace_back(2);
+      _n >>= 1;
     }
-    for (std::uint64_t kyopro_i = 3; kyopro_i * kyopro_i <= kyopro_n; kyopro_i += 2) while (kyopro_n % kyopro_i == 0) {
-      kyopro_res.emplace_back(2);
-      kyopro_n /= kyopro_i;
+    for (std::uint64_t _i = 3; _i * _i <= _n; _i += 2) while (_n % _i == 0) {
+      _res.emplace_back(2);
+      _n /= _i;
     }
-    if (kyopro_n != 1) kyopro_res.emplace_back(kyopro_n);
-    return kyopro_res;
+    if (_n != 1) _res.emplace_back(_n);
+    return _res;
   }
 }

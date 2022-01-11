@@ -3,29 +3,29 @@
 #include "../base/constant.hpp"
 
 namespace kyopro {
-  template<class KyoproT, KyoproT kyopro_id = 0>
+  template<class _typeT, _typeT _id = 0>
   struct Plus {
-    static constexpr KyoproT id = kyopro_id;
-    static constexpr KyoproT op(KyoproT kyopro_a, KyoproT kyopro_b) noexcept { return kyopro_a + kyopro_b; }
-    static constexpr KyoproT inv(KyoproT kyopro_a) noexcept { return -kyopro_a; }
+    static constexpr _typeT id = _id;
+    static constexpr _typeT op(_typeT _a, _typeT _b) noexcept { return _a + _b; }
+    static constexpr _typeT inv(_typeT _a) noexcept { return -_a; }
   };
-  template<class KyoproT, KyoproT kyopro_id = 1>
+  template<class _typeT, _typeT _id = 1>
   struct Mul {
-    static constexpr KyoproT id = kyopro_id;
-    static constexpr KyoproT op(KyoproT kyopro_a, KyoproT kyopro_b) noexcept { return kyopro_a * kyopro_b; }
-    static constexpr KyoproT inv(KyoproT kyopro_a) noexcept {
-      static_assert(!std::is_integral_v<KyoproT>);
-      return 1 / kyopro_a;
+    static constexpr _typeT id = _id;
+    static constexpr _typeT op(_typeT _a, _typeT _b) noexcept { return _a * _b; }
+    static constexpr _typeT inv(_typeT _a) noexcept {
+      static_assert(!std::is_integral_v<_typeT>);
+      return 1 / _a;
     }
   };
-  template<class KyoproT, KyoproT kyopro_id = -inf>
+  template<class _typeT, _typeT _id = -inf>
   struct Max {
-    static constexpr KyoproT id = kyopro_id;
-    static constexpr KyoproT op(KyoproT kyopro_a, KyoproT kyopro_b) noexcept { return kyopro_a > kyopro_b ? kyopro_a : kyopro_b; }
+    static constexpr _typeT id = _id;
+    static constexpr _typeT op(_typeT _a, _typeT _b) noexcept { return _a > _b ? _a : _b; }
   };
-  template<class KyoproT, KyoproT kyopro_id = inf>
+  template<class _typeT, _typeT _id = inf>
   struct Min {
-    static constexpr KyoproT id = kyopro_id;
-    static constexpr KyoproT op(KyoproT kyopro_a, KyoproT kyopro_b) noexcept { return kyopro_a < kyopro_b ? kyopro_a : kyopro_b; }
+    static constexpr _typeT id = _id;
+    static constexpr _typeT op(_typeT _a, _typeT _b) noexcept { return _a < _b ? _a : _b; }
   };
 }

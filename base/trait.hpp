@@ -16,37 +16,37 @@ struct std::is_floating_point<__float128>: std::true_type {};
 #endif
 
 namespace kyopro {
-  template<class KyoproT, class = void>
+  template<class _typeT, class = void>
   struct is_iterator: std::false_type {};
-  template<class KyoproT>
-  struct is_iterator<KyoproT, std::enable_if_t<!std::is_same_v<typename std::iterator_traits<KyoproT>::value_type, void>>>: std::true_type {};
-  template<class KyoproT>
-  constexpr bool is_iterator_v = is_iterator<KyoproT>::value;
+  template<class _typeT>
+  struct is_iterator<_typeT, std::enable_if_t<!std::is_same_v<typename std::iterator_traits<_typeT>::value_type, void>>>: std::true_type {};
+  template<class _typeT>
+  constexpr bool is_iterator_v = is_iterator<_typeT>::value;
 
-  template<class KyoproT, class = void>
+  template<class _typeT, class = void>
   struct is_container: std::false_type {};
-  template<class KyoproT>
-  struct is_container<KyoproT, std::void_t<decltype(std::begin(std::declval<KyoproT>()), std::end(std::declval<KyoproT>()), std::empty(std::declval<KyoproT>()))>>: std::true_type {};
-  template<class KyoproT>
-  constexpr bool is_container_v = is_container<KyoproT>::value;
+  template<class _typeT>
+  struct is_container<_typeT, std::void_t<decltype(std::begin(std::declval<_typeT>()), std::end(std::declval<_typeT>()), std::empty(std::declval<_typeT>()))>>: std::true_type {};
+  template<class _typeT>
+  constexpr bool is_container_v = is_container<_typeT>::value;
 
-  template<class KyoproT>
+  template<class _typeT>
   struct is_tuple: std::false_type {};
-  template<class KyoproT, class U>
-  struct is_tuple<std::pair<KyoproT, U>>: std::true_type {};
+  template<class _typeT, class U>
+  struct is_tuple<std::pair<_typeT, U>>: std::true_type {};
   template<class... Args>
   struct is_tuple<std::tuple<Args...>>: std::true_type {};
-  template<class KyoproT>
-  constexpr bool is_tuple_v = is_tuple<KyoproT>::value;
+  template<class _typeT>
+  constexpr bool is_tuple_v = is_tuple<_typeT>::value;
 
-  template<class KyoproT>
-  struct is_iterable: is_container<KyoproT> {};
-  template<class KyoproT, class Container>
-  struct is_iterable<std::stack<KyoproT, Container>>: std::false_type {};
-  template<class KyoproT, class Container>
-  struct is_iterable<std::queue<KyoproT, Container>>: std::false_type {};
-  template<class KyoproT, class Container, class Compare>
-  struct is_iterable<std::priority_queue<KyoproT, Container, Compare>>: std::false_type {};
-  template<class KyoproT>
-  constexpr bool is_iterable_v = is_iterable<KyoproT>::value;
+  template<class _typeT>
+  struct is_iterable: is_container<_typeT> {};
+  template<class _typeT, class Container>
+  struct is_iterable<std::stack<_typeT, Container>>: std::false_type {};
+  template<class _typeT, class Container>
+  struct is_iterable<std::queue<_typeT, Container>>: std::false_type {};
+  template<class _typeT, class Container, class Compare>
+  struct is_iterable<std::priority_queue<_typeT, Container, Compare>>: std::false_type {};
+  template<class _typeT>
+  constexpr bool is_iterable_v = is_iterable<_typeT>::value;
 }

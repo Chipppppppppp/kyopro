@@ -4,16 +4,16 @@
 #include "../base/settings.hpp"
 
 namespace kyopro {
-  template<class KyoproContainer = std::vector<KYOPRO_BASE_INT>>
-  KyoproContainer divisors(std::uint64_t kyopro_n) {
-    KyoproContainer kyopro_lower, kyopro_upper;
-    std::uint64_t kyopro_i;
-    for (kyopro_i = 1; kyopro_i * kyopro_i < kyopro_n; ++kyopro_i) if (kyopro_n % kyopro_i == 0) {
-      kyopro_lower.emplace_back(kyopro_i);
-      kyopro_upper.emplace_back(kyopro_n / kyopro_i);
+  template<class _typeContainer = std::vector<KYOPRO_BASE_INT>>
+  _typeContainer divisors(std::uint64_t _n) {
+    _typeContainer _lower, _upper;
+    std::uint64_t _i;
+    for (_i = 1; _i * _i < _n; ++_i) if (_n % _i == 0) {
+      _lower.emplace_back(_i);
+      _upper.emplace_back(_n / _i);
     }
-    if (kyopro_i * kyopro_i == kyopro_n) kyopro_lower.emplace_back(kyopro_i);
-    kyopro_lower.insert(end(kyopro_lower), rall(kyopro_upper));
-    return kyopro_lower;
+    if (_i * _i == _n) _lower.emplace_back(_i);
+    _lower.insert(end(_lower), rall(_upper));
+    return _lower;
   }
 }

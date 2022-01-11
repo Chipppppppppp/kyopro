@@ -90,7 +90,7 @@ namespace kyopro {
   };
 
   template<KYOPRO_BASE_UINT m>
-  struct Hash<ModInt<m>> { constexpr KYOPRO_BASE_UINT operator ()(ModInt<m> kyopro_a) const noexcept { return kyopro_a; } };
+  struct Hash<ModInt<m>> { constexpr KYOPRO_BASE_UINT operator ()(ModInt<m> _a) const noexcept { return _a; } };
 
   constexpr ModInt<mod> operator "" _m(unsigned long long a) noexcept { return a; }
 }
