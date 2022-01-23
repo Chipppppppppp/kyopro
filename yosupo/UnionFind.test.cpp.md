@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/unionfind
@@ -56,11 +56,11 @@ data:
     \    }\n  };\n}\n#line 4 \"yosupo/UnionFind.test.cpp\"\n\nint main() {\n  int\
     \ n, q;\n  std::cin >> n >> q;\n  kyopro::UnionFind uf(n);\n  for (int i = 0;\
     \ i < q; ++i) {\n    int t, u, v;\n    std::cin >> t >> u >> v;\n    if (t ==\
-    \ 0) uf.unite(u, v);\n    else std::cout << uf.same(u, v) << '\\n';\n  }\n}\n"
+    \ 0) uf.merge(u, v);\n    else std::cout << uf.same(u, v) << '\\n';\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\n#include <iostream>\n\
     #include \"../structure/UnionFind.hpp\"\n\nint main() {\n  int n, q;\n  std::cin\
     \ >> n >> q;\n  kyopro::UnionFind uf(n);\n  for (int i = 0; i < q; ++i) {\n  \
-    \  int t, u, v;\n    std::cin >> t >> u >> v;\n    if (t == 0) uf.unite(u, v);\n\
+    \  int t, u, v;\n    std::cin >> t >> u >> v;\n    if (t == 0) uf.merge(u, v);\n\
     \    else std::cout << uf.same(u, v) << '\\n';\n  }\n}\n"
   dependsOn:
   - structure/UnionFind.hpp
@@ -68,8 +68,8 @@ data:
   isVerificationFile: true
   path: yosupo/UnionFind.test.cpp
   requiredBy: []
-  timestamp: '2022-01-23 17:00:03+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-01-23 17:08:04+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/UnionFind.test.cpp
 layout: document

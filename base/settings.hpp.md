@@ -38,7 +38,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   - icon: ':warning:'
@@ -54,12 +54,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: yosupo/FenwickTree.test.cpp
     title: yosupo/FenwickTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: '#line 2 "base/settings.hpp"
@@ -189,7 +189,7 @@ data:
   - base/io.hpp
   - base/constant.hpp
   timestamp: '2022-01-23 17:00:03+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - yosupo/UnionFind.test.cpp
   - yosupo/FenwickTree.test.cpp
