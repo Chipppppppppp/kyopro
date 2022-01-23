@@ -16,7 +16,7 @@
 
 namespace kyopro {
   using ll = int64_t;
-  using ull = uint64_t;
+  using ull = uint_fast64_t;
   using lf = double;
   #ifdef __SIZEOF_INT128__
   using i128 = __int128_t;
@@ -26,21 +26,21 @@ namespace kyopro {
   using f128 = __float128;
   #endif
 
-  template<class T>
-  using vec = std::vector<T>;
+  template<class _typeT>
+  using vec = std::vector<_typeT>;
   using str = std::string;
   template<class Key>
   using hash_set = std::unordered_set<Key, Hash<Key>>;
-  template<class Key, class T>
-  using hash_map = std::unordered_map<Key, T, Hash<Key>>;
+  template<class Key, class _typeT>
+  using hash_map = std::unordered_map<Key, _typeT, Hash<Key>>;
   template<class Key>
   using hash_multiset = std::unordered_multiset<Key, Hash<Key>>;
-  template<class Key, class T>
-  using hash_multimap = std::unordered_multimap<Key, T, Hash<Key>>;
-  template<class T, class Compare = std::less<T>, class Container = vec<T>>
-  using priq = std::priority_queue<T, Container, Compare>;
-  template<class T, class Compare = std::greater<T>, class Container = vec<T>>
-  using heapq = priq<T, Container, Compare>;
+  template<class Key, class _typeT>
+  using hash_multimap = std::unordered_multimap<Key, _typeT, Hash<Key>>;
+  template<class _typeT, class Compare = std::less<_typeT>, class Container = vec<_typeT>>
+  using priq = std::priority_queue<_typeT, Container, Compare>;
+  template<class _typeT, class Compare = std::greater<_typeT>, class Container = vec<_typeT>>
+  using heapq = priq<_typeT, Container, Compare>;
 
   using pll = std::pair<ll, ll>;
   using l3 = std::tuple<ll, ll, ll>;

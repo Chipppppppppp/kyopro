@@ -5,9 +5,9 @@
 
 namespace kyopro {
   template<class _typeContainer = std::vector<KYOPRO_BASE_INT>>
-  _typeContainer divisors(std::uint64_t _n) {
+  _typeContainer divisors(std::uint_fast64_t _n) {
     _typeContainer _lower, _upper;
-    std::uint64_t _i;
+    std::uint_fast64_t _i;
     for (_i = 1; _i * _i < _n; ++_i) if (_n % _i == 0) {
       _lower.emplace_back(_i);
       _upper.emplace_back(_n / _i);

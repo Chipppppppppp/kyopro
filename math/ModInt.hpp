@@ -8,89 +8,98 @@
 #include "mod.hpp"
 
 namespace kyopro {
-  template<std::uint64_t m>
+  template<std::uint_fast64_t _m>
   struct ModInt {
-    static constexpr std::uint64_t mod = m;
-    std::uint64_t value;
+    static constexpr KYOPRO_BASE_INT mod = _m;
+    std::uint_fast64_t _value;
+
     constexpr ModInt() noexcept = default;
     template<class T>
-    constexpr ModInt(T value) noexcept: value(floor_mod(value, m)) { static_assert(std::is_integral_v<T>); }
+    constexpr ModInt(T _value) noexcept: _value(floor_mod(_value, _m)) { static_assert(std::is_integral_v<T>); }
+
     template<class T>
-    explicit constexpr operator T() const noexcept { return value; }
-    static constexpr ModInt raw(std::uint64_t n) noexcept {
-      ModInt res;
-      res.value = n;
-      return res;
+    explicit constexpr operator T() const noexcept { return _value; }
+
+    static constexpr ModInt raw(std::uint_fast64_t _n) noexcept {
+      ModInt _res;
+      _res._value = _n;
+      return _res;
     }
-    constexpr ModInt power(std::uint64_t n) const noexcept {
-      std::uint64_t res = 1, a = value;
-      while (n > 0) {
-        if (n & 1) res = res * a % m;
-        a = a * a % m;
-        n >>= 1;
+
+    constexpr ModInt power(std::uint_fast64_t _n) const noexcept {
+      std::uint_fast64_t _res = 1, _a = _value;
+      while (_n > 0) {
+        if (_n & 1) _res = _res * _a % _m;
+        _a = _a * _a % _m;
+        _n >>= 1;
       }
-      return res;
+      return _res;
     }
+
     constexpr ModInt inv() const noexcept {
-      std::uint64_t a = value, b = m;
-      std::int64_t u = 1, v = 0;
-      while (b > 0) {
-        std::uint64_t t = a / b;
-        a -= t * b;
-        std::swap(a, b);
-        u -= t * v;
-        std::swap(u, v);
+      std::uint_fast64_t _a = _value, _b = _m;
+      std::int64_t _u = 1, _v = 0;
+      while (_b > 0) {
+        std::uint_fast64_t _t = _a / _b;
+        _a -= _t * _b;
+        std::swap(_a, _b);
+        _u -= _t * _v;
+        std::swap(_u, _v);
       }
-      return floor_mod(u, m);
+      return floor_mod(_u, _m);
     }
+
     constexpr ModInt operator +() const noexcept { return *this; }
-    constexpr ModInt operator -() const noexcept { return m - value; }
+    constexpr ModInt operator -() const noexcept { return _m - _value; }
+
     constexpr ModInt& operator ++() noexcept {
-      if (++value >= m) value -= m;
+      if (++_value >= _m) _value -= _m;
       return *this;
     }
     constexpr ModInt operator ++(int) noexcept {
-      ModInt before = *this;
+      ModInt _before = *this;
       operator ++();
-      return before;
+      return _before;
     }
     constexpr ModInt& operator --() noexcept {
-      if (value == 0) value = m;
-      --value;
+      if (_value == 0) _value = _m;
+      --_value;
       return *this;
     }
     constexpr ModInt operator --(int) noexcept {
-      ModInt before = *this;
+      ModInt _before = *this;
       operator --();
-      return before;
+      return _before;
     }
-    constexpr ModInt& operator +=(ModInt rhs) noexcept {
-      if ((value += rhs.value) >= m) value -= m;
+
+    constexpr ModInt& operator +=(ModInt _rhs) noexcept {
+      if ((_value += _rhs._value) >= _m) _value -= _m;
       return *this;
     }
-    constexpr ModInt& operator -=(ModInt rhs) noexcept {
-      if (value < rhs.value) value += m;
-      value -= rhs.value;
+    constexpr ModInt& operator -=(ModInt _rhs) noexcept {
+      if (_value < _rhs._value) _value += _m;
+      _value -= _rhs._value;
       return *this;
     }
-    constexpr ModInt& operator *=(ModInt rhs) noexcept {
-      value = value * rhs.value % m;
+    constexpr ModInt& operator *=(ModInt _rhs) noexcept {
+      _value = _value * _rhs._value % _m;
       return *this;
     }
-    constexpr ModInt& operator /=(ModInt rhs) noexcept {
-      value = value * rhs.inv().value % m;
+    constexpr ModInt& operator /=(ModInt _rhs) noexcept {
+      _value = _value * _rhs.inv()._value % _m;
       return *this;
     }
-    friend constexpr ModInt operator +(ModInt lhs, ModInt rhs) noexcept { return lhs += rhs; }
-    friend constexpr ModInt operator -(ModInt lhs, ModInt rhs) noexcept { return lhs -= rhs; }
-    friend constexpr ModInt operator *(ModInt lhs, ModInt rhs) noexcept { return lhs *= rhs; }
-    friend constexpr ModInt operator /(ModInt lhs, ModInt rhs) noexcept { return lhs /= rhs; }
-    friend constexpr bool operator ==(ModInt lhs, ModInt rhs) noexcept { return lhs.value == rhs.value; }
-    friend constexpr bool operator !=(ModInt lhs, ModInt rhs) noexcept { return lhs.value != rhs.value; }
+
+    friend constexpr ModInt operator +(ModInt _lhs, ModInt _rhs) noexcept { return _lhs += _rhs; }
+    friend constexpr ModInt operator -(ModInt _lhs, ModInt _rhs) noexcept { return _lhs -= _rhs; }
+    friend constexpr ModInt operator *(ModInt _lhs, ModInt _rhs) noexcept { return _lhs *= _rhs; }
+    friend constexpr ModInt operator /(ModInt _lhs, ModInt _rhs) noexcept { return _lhs /= _rhs; }
+    friend constexpr bool operator ==(ModInt _lhs, ModInt _rhs) noexcept { return _lhs._value == _rhs._value; }
+    friend constexpr bool operator !=(ModInt _lhs, ModInt _rhs) noexcept { return _lhs._value != _rhs._value; }
   };
 
-  template<KYOPRO_BASE_UINT m>
-  struct Hash<ModInt<m>> { constexpr KYOPRO_BASE_UINT operator ()(ModInt<m> _a) const noexcept { return _a; } };
+  template<KYOPRO_BASE_UINT _m>
+  struct Hash<ModInt<_m>> { constexpr KYOPRO_BASE_UINT operator ()(ModInt<_m> _a) const noexcept { return _a; } };
 
-  constexpr ModInt<mod> operator "" _m(unsigned long long a) noexcept { return a; }
+  constexpr ModInt<mod> operator "" _m(unsigned long long _a) noexcept { return _a; }
 }

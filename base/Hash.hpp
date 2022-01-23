@@ -1,4 +1,5 @@
 #pragma once
+#include <cstddef>
 #include <type_traits>
 #include <tuple>
 #include "settings.hpp"
@@ -12,7 +13,13 @@ namespace kyopro {
   struct Hash<_typeT, std::enable_if_t<std::is_integral_v<_typeT>>> { constexpr KYOPRO_BASE_UINT operator ()(_typeT _a) const noexcept { return _a; } };
 
   template<class _typeT>
-  struct Hash<_typeT, std::enable_if_t<std::is_floating_point_v<_typeT>>> { constexpr KYOPRO_BASE_UINT operator ()(_typeT _a) const noexcept { return (KYOPRO_BASE_UINT)_a & 0xfffff000; } };
+  struct Hash<_typeT, std::enable_if_t<std::is_floating_point_v<_typeT>>> { constexpr KYOPRO_BASE_UINT operator ()(_typeT _a) const noexcept { return static_cast<KYOPRO_BASE_UINT>(_a) & 0xfffff000; } };
+
+  template<class _typeT>
+  struct Hash<_typeT*, void> { constexpr KYOPRO_BASE_UINT operator ()(_typeT* _a) const noexcept { return reinterpret_cast<KYOPRO_BASE_UINT>(_a); } };
+
+  template<>
+  struct Hash<std::nullptr_t, void> { constexpr KYOPRO_BASE_UINT operator ()(std::nullptr_t) const noexcept { return 0; } };
 
   template<class _typeT>
   struct Hash<_typeT, std::enable_if_t<is_tuple_v<_typeT>>> {
@@ -27,7 +34,7 @@ namespace kyopro {
   };
 
   template<class _typeT>
-  struct Hash<_typeT, std::enable_if_t<is_container_v<_typeT>>> {
+  struct Hash<_typeT, std::enable_if_t<is_iterable_v<_typeT>>> {
   private:
     [[no_unique_address]] Hash<typename _typeT::value_type> make_hash;
   public:

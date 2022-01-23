@@ -16,21 +16,21 @@ struct std::is_floating_point<__float128>: std::true_type {};
 #endif
 
 namespace kyopro {
-  template<class _typeT, class = void>
+  template<class, class = void>
   struct is_iterator: std::false_type {};
   template<class _typeT>
-  struct is_iterator<_typeT, std::enable_if_t<!std::is_same_v<typename std::iterator_traits<_typeT>::value_type, void>>>: std::true_type {};
+  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>: std::true_type {};
   template<class _typeT>
   constexpr bool is_iterator_v = is_iterator<_typeT>::value;
 
-  template<class _typeT, class = void>
-  struct is_container: std::false_type {};
+  template<class, class = void>
+  struct is_iterable: std::false_type {};
   template<class _typeT>
-  struct is_container<_typeT, std::void_t<decltype(std::begin(std::declval<_typeT>()), std::end(std::declval<_typeT>()), std::empty(std::declval<_typeT>()))>>: std::true_type {};
+  struct is_iterable<_typeT, std::void_t<typename _typeT::iterator>>: std::true_type {};
   template<class _typeT>
-  constexpr bool is_container_v = is_container<_typeT>::value;
+  constexpr bool is_iterable_v = is_iterable<_typeT>::value;
 
-  template<class _typeT>
+  template<class>
   struct is_tuple: std::false_type {};
   template<class _typeT, class U>
   struct is_tuple<std::pair<_typeT, U>>: std::true_type {};
@@ -39,14 +39,10 @@ namespace kyopro {
   template<class _typeT>
   constexpr bool is_tuple_v = is_tuple<_typeT>::value;
 
+  template<class, class = void>
+  struct is_container_adapter: std::false_type {};
   template<class _typeT>
-  struct is_iterable: is_container<_typeT> {};
-  template<class _typeT, class Container>
-  struct is_iterable<std::stack<_typeT, Container>>: std::false_type {};
-  template<class _typeT, class Container>
-  struct is_iterable<std::queue<_typeT, Container>>: std::false_type {};
-  template<class _typeT, class Container, class Compare>
-  struct is_iterable<std::priority_queue<_typeT, Container, Compare>>: std::false_type {};
+  struct is_container_adapter<_typeT, std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_iterable<_typeT>> {};
   template<class _typeT>
-  constexpr bool is_iterable_v = is_iterable<_typeT>::value;
+  constexpr bool is_container_adapter_v = is_container_adapter<_typeT>::value;
 }
