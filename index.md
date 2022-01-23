@@ -18,8 +18,8 @@ data:
       path: base/constant.hpp
       title: base/constant.hpp
     - icon: ':warning:'
-      path: base/io.hpp
-      title: base/io.hpp
+      path: base/printer.hpp
+      title: base/printer.hpp
     - icon: ':heavy_check_mark:'
       path: base/settings.hpp
       title: base/settings.hpp

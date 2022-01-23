@@ -32,17 +32,17 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"base/Hash.hpp\"\n#include <cstddef>\n#include <type_traits>\n\
-    #include <tuple>\n#line 2 \"base/settings.hpp\"\n#include <cstdint>\n\n#ifndef\
-    \ KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n\
-    #define KYOPRO_BASE_UINT std::size_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n#define\
-    \ KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD\
-    \ static_cast<KYOPRO_BASE_UINT>(1000000007)\n#endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n\
-    #define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n#endif\n\n\
-    #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
+  bundledCode: "#line 2 \"base/Hash.hpp\"\n#include <cstddef>\n#include <tuple>\n\
+    #include <type_traits>\n#line 2 \"base/settings.hpp\"\n#include <cstdint>\n\n\
+    #ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef\
+    \ KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::size_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n\
+    #define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define\
+    \ KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(1000000007)\n#endif\n\n#ifndef\
+    \ KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
+    #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 2 \"base/trait.hpp\"\n#include <utility>\n#line 4 \"base/trait.hpp\"\
-    \n#include <iterator>\n#include <stack>\n#include <queue>\n\n#ifdef __SIZEOF_INT128__\n\
+    #endif\n#line 2 \"base/trait.hpp\"\n#include <iterator>\n#include <queue>\n#include\
+    \ <stack>\n#line 6 \"base/trait.hpp\"\n#include <utility>\n\n#ifdef __SIZEOF_INT128__\n\
     template<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
     struct std::is_signed<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
     \ std::true_type {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>: std::true_type\
@@ -85,7 +85,7 @@ data:
     \ noexcept {\n      KYOPRO_BASE_UINT _seed = _a.size();\n      for (auto& _i:\
     \ _a) _seed ^= make_hash(_i) + 0x9e3779b97f4a7c15LU + (_seed << 12) + (_seed >>\
     \ 4);\n      return _seed;\n    }\n  };\n}\n"
-  code: "#pragma once\n#include <cstddef>\n#include <type_traits>\n#include <tuple>\n\
+  code: "#pragma once\n#include <cstddef>\n#include <tuple>\n#include <type_traits>\n\
     #include \"settings.hpp\"\n#include \"trait.hpp\"\n\nnamespace kyopro {\n  template<class,\
     \ class = void>\n  struct Hash;\n\n  template<class _typeT>\n  struct Hash<_typeT,\
     \ std::enable_if_t<std::is_integral_v<_typeT>>> { constexpr KYOPRO_BASE_UINT operator\
@@ -120,7 +120,7 @@ data:
   - math/ModInt.hpp
   - math/all.hpp
   - base/all.hpp
-  timestamp: '2022-01-23 17:04:39+09:00'
+  timestamp: '2022-01-23 18:51:32+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: base/Hash.hpp

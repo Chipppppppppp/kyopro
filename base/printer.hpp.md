@@ -7,28 +7,35 @@ data:
   - icon: ':warning:'
     path: base/trait.hpp
     title: base/trait.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: base/all.hpp
+    title: base/all.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"base/io.hpp\"\n#include <unistd.h>\n#include <cstdint>\n\
-    #include <type_traits>\n#include <iterator>\n#include <utility>\n#include <tuple>\n\
-    #include <array>\n#include <string>\n#line 3 \"base/settings.hpp\"\n\n#ifndef\
-    \ KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n\
-    #define KYOPRO_BASE_UINT std::size_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n#define\
-    \ KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD\
-    \ static_cast<KYOPRO_BASE_UINT>(1000000007)\n#endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n\
-    #define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n#endif\n\n\
-    #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
+  bundledCode: "#line 2 \"base/printer.hpp\"\n#include <unistd.h>\n#include <array>\n\
+    #include <cstdint>\n#include <iterator>\n#include <string>\n#include <tuple>\n\
+    #include <type_traits>\n#include <utility>\n#line 3 \"base/settings.hpp\"\n\n\
+    #ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef\
+    \ KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::size_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n\
+    #define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define\
+    \ KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(1000000007)\n#endif\n\n#ifndef\
+    \ KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
+    #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 5 \"base/trait.hpp\"\n#include <stack>\n#include <queue>\n\n#ifdef\
-    \ __SIZEOF_INT128__\ntemplate<>\nstruct std::is_integral<__int128_t>: std::true_type\
-    \ {};\ntemplate<>\nstruct std::is_signed<__int128_t>: std::true_type {};\ntemplate<>\n\
-    struct std::is_integral<__uint128_t>: std::true_type {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>:\
-    \ std::true_type {};\n#endif\n#ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
+    #endif\n#line 3 \"base/trait.hpp\"\n#include <queue>\n#include <stack>\n#line\
+    \ 7 \"base/trait.hpp\"\n\n#ifdef __SIZEOF_INT128__\ntemplate<>\nstruct std::is_integral<__int128_t>:\
+    \ std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>: std::true_type\
+    \ {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type {};\n\
+    template<>\nstruct std::is_unsigned<__uint128_t>: std::true_type {};\n#endif\n\
+    #ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
     \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<class, class =\
     \ void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
     \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
@@ -45,10 +52,10 @@ data:
     \ _typeT>\n  struct is_container_adapter<_typeT, std::void_t<decltype(std::empty(std::declval<_typeT>()))>>:\
     \ std::negation<is_iterable<_typeT>> {};\n  template<class _typeT>\n  constexpr\
     \ bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n}\n#line\
-    \ 12 \"base/io.hpp\"\n\nnamespace kyopro {\n  template<bool space = false, bool\
-    \ flush = false, size_t buf_size = KYOPRO_BUFFER_SIZE>\n  struct Printer {\n \
-    \ private:\n    int fd;\n    std::array<char, buf_size> buffer;\n    int idx;\n\
-    \  public:\n    Printer(int fd): fd(fd), idx() {}\n    ~Printer() { write(fd,\
+    \ 12 \"base/printer.hpp\"\n\nnamespace kyopro {\n  template<bool space = false,\
+    \ bool flush = false, size_t buf_size = KYOPRO_BUFFER_SIZE>\n  struct Printer\
+    \ {\n  private:\n    int fd;\n    std::array<char, buf_size> buffer;\n    int\
+    \ idx;\n  public:\n    Printer(int fd): fd(fd), idx() {}\n    ~Printer() { write(fd,\
     \ buffer.begin(), idx); }\n\n    template<class, class = void>\n    struct impl;\n\
     \n    template<>\n    struct impl<char, void> {\n      static void print(char\
     \ a) {\n        buffer[idx] = c;\n        ++idx;\n        if (idx == buf_size)\
@@ -85,9 +92,9 @@ data:
     \      if constexpr (space) impl<char>::print(' ');\n      operator ()(std::forward<Args>(args)...);\n\
     \    }\n  };\n\n  Printer print(1), eprint(2);\n  Printer<true> println(1), eprintln(2);\n\
     }\n"
-  code: "#pragma once\n#include <unistd.h>\n#include <cstdint>\n#include <type_traits>\n\
-    #include <iterator>\n#include <utility>\n#include <tuple>\n#include <array>\n\
-    #include <string>\n#include \"settings.hpp\"\n#include \"trait.hpp\"\n\nnamespace\
+  code: "#pragma once\n#include <unistd.h>\n#include <array>\n#include <cstdint>\n\
+    #include <iterator>\n#include <string>\n#include <tuple>\n#include <type_traits>\n\
+    #include <utility>\n#include \"settings.hpp\"\n#include \"trait.hpp\"\n\nnamespace\
     \ kyopro {\n  template<bool space = false, bool flush = false, size_t buf_size\
     \ = KYOPRO_BUFFER_SIZE>\n  struct Printer {\n  private:\n    int fd;\n    std::array<char,\
     \ buf_size> buffer;\n    int idx;\n  public:\n    Printer(int fd): fd(fd), idx()\
@@ -131,15 +138,17 @@ data:
   - base/settings.hpp
   - base/trait.hpp
   isVerificationFile: false
-  path: base/io.hpp
-  requiredBy: []
-  timestamp: '2022-01-23 17:04:39+09:00'
+  path: base/printer.hpp
+  requiredBy:
+  - all.hpp
+  - base/all.hpp
+  timestamp: '2022-01-23 18:51:32+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: base/io.hpp
+documentation_of: base/printer.hpp
 layout: document
 redirect_from:
-- /library/base/io.hpp
-- /library/base/io.hpp.html
-title: base/io.hpp
+- /library/base/printer.hpp
+- /library/base/printer.hpp.html
+title: base/printer.hpp
 ---

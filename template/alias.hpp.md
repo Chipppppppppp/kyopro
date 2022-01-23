@@ -39,7 +39,7 @@ data:
     #include <functional>\n#include <utility>\n#include <vector>\n#include <string>\n\
     #include <set>\n#include <map>\n#include <unordered_set>\n#include <unordered_map>\n\
     #include <queue>\n#include <stack>\n#line 2 \"base/Hash.hpp\"\n#include <cstddef>\n\
-    #include <type_traits>\n#include <tuple>\n#line 3 \"base/settings.hpp\"\n\n#ifndef\
+    #include <tuple>\n#include <type_traits>\n#line 3 \"base/settings.hpp\"\n\n#ifndef\
     \ KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n\
     #define KYOPRO_BASE_UINT std::size_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n#define\
     \ KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD\
@@ -47,7 +47,7 @@ data:
     #define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n#endif\n\n\
     #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 4 \"base/trait.hpp\"\n#include <iterator>\n#line 7 \"base/trait.hpp\"\
+    #endif\n#line 2 \"base/trait.hpp\"\n#include <iterator>\n#line 7 \"base/trait.hpp\"\
     \n\n#ifdef __SIZEOF_INT128__\ntemplate<>\nstruct std::is_integral<__int128_t>:\
     \ std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>: std::true_type\
     \ {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type {};\n\
@@ -90,8 +90,8 @@ data:
     \  public:\n    constexpr KYOPRO_BASE_UINT operator ()(const _typeT& _a) const\
     \ noexcept {\n      KYOPRO_BASE_UINT _seed = _a.size();\n      for (auto& _i:\
     \ _a) _seed ^= make_hash(_i) + 0x9e3779b97f4a7c15LU + (_seed << 12) + (_seed >>\
-    \ 4);\n      return _seed;\n    }\n  };\n}\n#line 4 \"math/ModInt.hpp\"\n#include\
-    \ <cassert>\n#line 4 \"base/constant.hpp\"\n#include <array>\n#line 4 \"math/power.hpp\"\
+    \ 4);\n      return _seed;\n    }\n  };\n}\n#line 2 \"math/ModInt.hpp\"\n#include\
+    \ <cassert>\n#line 2 \"base/constant.hpp\"\n#include <array>\n#line 4 \"math/power.hpp\"\
     \nnamespace kyopro {\n  template<class _typeT>\n  constexpr _typeT power(_typeT\
     \ _a, std::uint_fast64_t _n, _typeT _init = 1) noexcept {\n    while (_n > 0)\
     \ {\n      if (_n & 1) _init *= _a;\n      _a *= _a;\n      _n >>= 1;\n    }\n\
@@ -240,7 +240,7 @@ data:
   requiredBy:
   - all.hpp
   - template/all.hpp
-  timestamp: '2022-01-23 17:04:39+09:00'
+  timestamp: '2022-01-23 18:51:32+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/alias.hpp

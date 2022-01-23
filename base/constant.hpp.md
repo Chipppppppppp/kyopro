@@ -44,8 +44,8 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"base/constant.hpp\"\n#include <cstdint>\n#include <limits>\n\
-    #include <array>\n#include <utility>\n#line 3 \"base/settings.hpp\"\n\n#ifndef\
+  bundledCode: "#line 2 \"base/constant.hpp\"\n#include <array>\n#include <cstdint>\n\
+    #include <limits>\n#include <utility>\n#line 3 \"base/settings.hpp\"\n\n#ifndef\
     \ KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n\
     #define KYOPRO_BASE_UINT std::size_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n#define\
     \ KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD\
@@ -70,8 +70,8 @@ data:
     \ 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
     \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
     \ -1}, {0, -1}, {1, -1}}};\n}\n"
-  code: "#pragma once\n#include <cstdint>\n#include <limits>\n#include <array>\n#include\
-    \ <utility>\n#include \"settings.hpp\"\n#include \"../math/power.hpp\"\n\nnamespace\
+  code: "#pragma once\n#include <array>\n#include <cstdint>\n#include <limits>\n#include\
+    \ <utility>\n#include \"../math/power.hpp\"\n#include \"settings.hpp\"\n\nnamespace\
     \ kyopro {\n  inline constexpr std::uint_fast64_t _decimal_max = power(static_cast<std::uint_fast64_t>(10),\
     \ KYOPRO_DECIMAL_PRECISION);\n\n  template<class _typeT>\n  inline constexpr _typeT\
     \ MOD = KYOPRO_DEFAULT_MOD;\n  inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\
@@ -86,8 +86,8 @@ data:
     \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
     \ -1}, {0, -1}, {1, -1}}};\n}"
   dependsOn:
-  - base/settings.hpp
   - math/power.hpp
+  - base/settings.hpp
   isVerificationFile: false
   path: base/constant.hpp
   requiredBy:
@@ -100,7 +100,7 @@ data:
   - math/all.hpp
   - math/monoid.hpp
   - base/all.hpp
-  timestamp: '2022-01-23 17:00:03+09:00'
+  timestamp: '2022-01-23 18:51:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - yosupo/FenwickTree.test.cpp

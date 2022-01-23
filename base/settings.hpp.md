@@ -15,8 +15,8 @@ data:
     path: base/constant.hpp
     title: base/constant.hpp
   - icon: ':warning:'
-    path: base/io.hpp
-    title: base/io.hpp
+    path: base/printer.hpp
+    title: base/printer.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
@@ -185,8 +185,8 @@ data:
   - math/power.hpp
   - math/monoid.hpp
   - base/all.hpp
+  - base/printer.hpp
   - base/Hash.hpp
-  - base/io.hpp
   - base/constant.hpp
   timestamp: '2022-01-23 17:00:03+09:00'
   verificationStatus: LIBRARY_ALL_AC

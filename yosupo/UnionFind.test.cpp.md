@@ -19,7 +19,7 @@ data:
     - https://judge.yosupo.jp/problem/unionfind
   bundledCode: "#line 1 \"yosupo/UnionFind.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\
     \n#include <iostream>\n#line 2 \"structure/UnionFind.hpp\"\n/* UnionFind */\n\
-    #include <vector>\n#include <unordered_map>\n#include <algorithm>\n#line 2 \"\
+    #include <algorithm>\n#include <unordered_map>\n#include <vector>\n#line 2 \"\
     base/settings.hpp\"\n#include <cstdint>\n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT\
     \ std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::size_t\n\
     #endif\n\n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\
@@ -68,7 +68,7 @@ data:
   isVerificationFile: true
   path: yosupo/UnionFind.test.cpp
   requiredBy: []
-  timestamp: '2022-01-23 17:08:04+09:00'
+  timestamp: '2022-01-23 18:51:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/UnionFind.test.cpp

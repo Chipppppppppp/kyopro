@@ -33,7 +33,7 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"math/monoid.hpp\"\n#include <type_traits>\n#line 2 \"base/constant.hpp\"\
-    \n#include <cstdint>\n#include <limits>\n#include <array>\n#include <utility>\n\
+    \n#include <array>\n#include <cstdint>\n#include <limits>\n#include <utility>\n\
     #line 3 \"base/settings.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT\
     \ std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::size_t\n\
     #endif\n\n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\
@@ -87,8 +87,8 @@ data:
     \ _a < _b ? _a : _b; }\n  };\n}"
   dependsOn:
   - base/constant.hpp
-  - base/settings.hpp
   - math/power.hpp
+  - base/settings.hpp
   isVerificationFile: false
   path: math/monoid.hpp
   requiredBy:
@@ -96,7 +96,7 @@ data:
   - structure/FenwickTree.hpp
   - structure/all.hpp
   - math/all.hpp
-  timestamp: '2022-01-23 17:00:03+09:00'
+  timestamp: '2022-01-23 18:51:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - yosupo/FenwickTree.test.cpp

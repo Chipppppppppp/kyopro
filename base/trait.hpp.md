@@ -12,8 +12,8 @@ data:
     path: base/all.hpp
     title: base/all.hpp
   - icon: ':warning:'
-    path: base/io.hpp
-    title: base/io.hpp
+    path: base/printer.hpp
+    title: base/printer.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
@@ -32,8 +32,8 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"base/trait.hpp\"\n#include <utility>\n#include <type_traits>\n\
-    #include <iterator>\n#include <stack>\n#include <queue>\n\n#ifdef __SIZEOF_INT128__\n\
+  bundledCode: "#line 2 \"base/trait.hpp\"\n#include <iterator>\n#include <queue>\n\
+    #include <stack>\n#include <type_traits>\n#include <utility>\n\n#ifdef __SIZEOF_INT128__\n\
     template<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
     struct std::is_signed<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
     \ std::true_type {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>: std::true_type\
@@ -54,9 +54,9 @@ data:
     \ _typeT>\n  struct is_container_adapter<_typeT, std::void_t<decltype(std::empty(std::declval<_typeT>()))>>:\
     \ std::negation<is_iterable<_typeT>> {};\n  template<class _typeT>\n  constexpr\
     \ bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n}\n"
-  code: "#pragma once\n#include <utility>\n#include <type_traits>\n#include <iterator>\n\
-    #include <stack>\n#include <queue>\n\n#ifdef __SIZEOF_INT128__\ntemplate<>\nstruct\
-    \ std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>:\
+  code: "#pragma once\n#include <iterator>\n#include <queue>\n#include <stack>\n#include\
+    \ <type_traits>\n#include <utility>\n\n#ifdef __SIZEOF_INT128__\ntemplate<>\n\
+    struct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>:\
     \ std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type\
     \ {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>: std::true_type {};\n\
     #endif\n#ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
@@ -86,9 +86,9 @@ data:
   - math/ModInt.hpp
   - math/all.hpp
   - base/all.hpp
+  - base/printer.hpp
   - base/Hash.hpp
-  - base/io.hpp
-  timestamp: '2022-01-23 17:04:39+09:00'
+  timestamp: '2022-01-23 18:51:32+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: base/trait.hpp
