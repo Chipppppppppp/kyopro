@@ -6,12 +6,17 @@
 #include <queue>
 
 #ifdef __SIZEOF_INT128__
+template<>
 struct std::is_integral<__int128_t>: std::true_type {};
+template<>
 struct std::is_signed<__int128_t>: std::true_type {};
+template<>
 struct std::is_integral<__uint128_t>: std::true_type {};
+template<>
 struct std::is_unsigned<__uint128_t>: std::true_type {};
 #endif
 #ifdef __SIZEOF_FLOAT128__
+template<>
 struct std::is_floating_point<__float128>: std::true_type {};
 #endif
 
