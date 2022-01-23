@@ -48,10 +48,11 @@ data:
     #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 4 \"base/trait.hpp\"\n#include <iterator>\n#line 7 \"base/trait.hpp\"\
-    \n\n#ifdef __SIZEOF_INT128__\nstruct std::is_integral<__int128_t>: std::true_type\
-    \ {};\nstruct std::is_signed<__int128_t>: std::true_type {};\nstruct std::is_integral<__uint128_t>:\
-    \ std::true_type {};\nstruct std::is_unsigned<__uint128_t>: std::true_type {};\n\
-    #endif\n#ifdef __SIZEOF_FLOAT128__\nstruct std::is_floating_point<__float128>:\
+    \n\n#ifdef __SIZEOF_INT128__\ntemplate<>\nstruct std::is_integral<__int128_t>:\
+    \ std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>: std::true_type\
+    \ {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type {};\n\
+    template<>\nstruct std::is_unsigned<__uint128_t>: std::true_type {};\n#endif\n\
+    #ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
     \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<class, class =\
     \ void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
     \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
@@ -205,7 +206,7 @@ data:
   path: template/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-01-23 17:00:03+09:00'
+  timestamp: '2022-01-23 17:04:39+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/all.hpp

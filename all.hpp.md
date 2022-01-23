@@ -94,23 +94,24 @@ data:
     \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
     \ -1}, {0, -1}, {1, -1}}};\n}\n#line 3 \"base/trait.hpp\"\n#include <type_traits>\n\
     #include <iterator>\n#include <stack>\n#include <queue>\n\n#ifdef __SIZEOF_INT128__\n\
-    struct std::is_integral<__int128_t>: std::true_type {};\nstruct std::is_signed<__int128_t>:\
-    \ std::true_type {};\nstruct std::is_integral<__uint128_t>: std::true_type {};\n\
-    struct std::is_unsigned<__uint128_t>: std::true_type {};\n#endif\n#ifdef __SIZEOF_FLOAT128__\n\
-    struct std::is_floating_point<__float128>: std::true_type {};\n#endif\n\nnamespace\
-    \ kyopro {\n  template<class, class = void>\n  struct is_iterator: std::false_type\
-    \ {};\n  template<class _typeT>\n  struct is_iterator<_typeT, std::void_t<typename\
-    \ std::iterator_traits<_typeT>::iterator_category>>: std::true_type {};\n  template<class\
-    \ _typeT>\n  constexpr bool is_iterator_v = is_iterator<_typeT>::value;\n\n  template<class,\
-    \ class = void>\n  struct is_iterable: std::false_type {};\n  template<class _typeT>\n\
-    \  struct is_iterable<_typeT, std::void_t<typename _typeT::iterator>>: std::true_type\
-    \ {};\n  template<class _typeT>\n  constexpr bool is_iterable_v = is_iterable<_typeT>::value;\n\
-    \n  template<class>\n  struct is_tuple: std::false_type {};\n  template<class\
-    \ _typeT, class U>\n  struct is_tuple<std::pair<_typeT, U>>: std::true_type {};\n\
-    \  template<class... Args>\n  struct is_tuple<std::tuple<Args...>>: std::true_type\
-    \ {};\n  template<class _typeT>\n  constexpr bool is_tuple_v = is_tuple<_typeT>::value;\n\
-    \n  template<class, class = void>\n  struct is_container_adapter: std::false_type\
-    \ {};\n  template<class _typeT>\n  struct is_container_adapter<_typeT, std::void_t<decltype(std::empty(std::declval<_typeT>()))>>:\
+    template<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
+    struct std::is_signed<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
+    \ std::true_type {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>: std::true_type\
+    \ {};\n#endif\n#ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
+    \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<class, class =\
+    \ void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
+    \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
+    \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_iterator_v\
+    \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
+    \ std::false_type {};\n  template<class _typeT>\n  struct is_iterable<_typeT,\
+    \ std::void_t<typename _typeT::iterator>>: std::true_type {};\n  template<class\
+    \ _typeT>\n  constexpr bool is_iterable_v = is_iterable<_typeT>::value;\n\n  template<class>\n\
+    \  struct is_tuple: std::false_type {};\n  template<class _typeT, class U>\n \
+    \ struct is_tuple<std::pair<_typeT, U>>: std::true_type {};\n  template<class...\
+    \ Args>\n  struct is_tuple<std::tuple<Args...>>: std::true_type {};\n  template<class\
+    \ _typeT>\n  constexpr bool is_tuple_v = is_tuple<_typeT>::value;\n\n  template<class,\
+    \ class = void>\n  struct is_container_adapter: std::false_type {};\n  template<class\
+    \ _typeT>\n  struct is_container_adapter<_typeT, std::void_t<decltype(std::empty(std::declval<_typeT>()))>>:\
     \ std::negation<is_iterable<_typeT>> {};\n  template<class _typeT>\n  constexpr\
     \ bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n}\n#line\
     \ 2 \"base/Hash.hpp\"\n#include <cstddef>\n#line 4 \"base/Hash.hpp\"\n#include\
@@ -341,7 +342,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2022-01-23 17:00:03+09:00'
+  timestamp: '2022-01-23 17:04:39+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp
