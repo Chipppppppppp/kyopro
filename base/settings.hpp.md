@@ -15,6 +15,9 @@ data:
     path: base/constant.hpp
     title: base/constant.hpp
   - icon: ':warning:'
+    path: base/io.hpp
+    title: base/io.hpp
+  - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
   - icon: ':warning:'
@@ -35,7 +38,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   - icon: ':warning:'
@@ -51,12 +54,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: yosupo/FenwickTree.test.cpp
     title: yosupo/FenwickTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: '#line 2 "base/settings.hpp"
@@ -70,11 +73,13 @@ data:
 
     #endif
 
+
     #ifndef KYOPRO_BASE_UINT
 
     #define KYOPRO_BASE_UINT std::size_t
 
     #endif
+
 
     #ifndef KYOPRO_BASE_FLOAT
 
@@ -82,21 +87,31 @@ data:
 
     #endif
 
+
     #ifndef KYOPRO_DEFAULT_MOD
 
-    #define KYOPRO_DEFAULT_MOD 1000000007
+    #define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(1000000007)
 
     #endif
+
 
     #ifndef KYOPRO_DECIMAL_PRECISION
 
-    #define KYOPRO_DECIMAL_PRECISION 12
+    #define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)
 
     #endif
 
+
     #ifndef KYOPRO_INF_DIV
 
-    #define KYOPRO_INF_DIV 3
+    #define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)
+
+    #endif
+
+
+    #ifndef KYOPRO_BUFFER_SIZE
+
+    #define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)
 
     #endif
 
@@ -112,11 +127,13 @@ data:
 
     #endif
 
+
     #ifndef KYOPRO_BASE_UINT
 
     #define KYOPRO_BASE_UINT std::size_t
 
     #endif
+
 
     #ifndef KYOPRO_BASE_FLOAT
 
@@ -124,44 +141,55 @@ data:
 
     #endif
 
+
     #ifndef KYOPRO_DEFAULT_MOD
 
-    #define KYOPRO_DEFAULT_MOD 1000000007
+    #define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(1000000007)
 
     #endif
+
 
     #ifndef KYOPRO_DECIMAL_PRECISION
 
-    #define KYOPRO_DECIMAL_PRECISION 12
+    #define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)
 
     #endif
 
+
     #ifndef KYOPRO_INF_DIV
 
-    #define KYOPRO_INF_DIV 3
+    #define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)
+
+    #endif
+
+
+    #ifndef KYOPRO_BUFFER_SIZE
+
+    #define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)
 
     #endif'
   dependsOn: []
   isVerificationFile: false
   path: base/settings.hpp
   requiredBy:
-  - structure/FenwickTree.hpp
-  - structure/UnionFind.hpp
-  - structure/all.hpp
-  - math/power.hpp
-  - math/factorize.hpp
-  - math/ModInt.hpp
-  - math/divisors.hpp
-  - math/all.hpp
-  - math/monoid.hpp
+  - all.hpp
   - template/alias.hpp
   - template/all.hpp
-  - all.hpp
-  - base/Hash.hpp
-  - base/constant.hpp
+  - structure/FenwickTree.hpp
+  - structure/all.hpp
+  - structure/UnionFind.hpp
+  - math/ModInt.hpp
+  - math/all.hpp
+  - math/divisors.hpp
+  - math/factorize.hpp
+  - math/power.hpp
+  - math/monoid.hpp
   - base/all.hpp
-  timestamp: '2022-01-10 20:12:50+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  - base/Hash.hpp
+  - base/io.hpp
+  - base/constant.hpp
+  timestamp: '2022-01-23 17:00:03+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - yosupo/UnionFind.test.cpp
   - yosupo/FenwickTree.test.cpp

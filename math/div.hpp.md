@@ -32,8 +32,8 @@ data:
   isVerificationFile: false
   path: math/div.hpp
   requiredBy:
-  - math/all.hpp
   - all.hpp
+  - math/all.hpp
   timestamp: '2022-01-11 23:13:11+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

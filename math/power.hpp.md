@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/settings.hpp
     title: base/settings.hpp
   _extendedRequiredBy:
@@ -45,35 +45,37 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"math/power.hpp\"\n#include <cstdint>\n#line 3 \"base/settings.hpp\"\
-    \n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n#ifndef\
-    \ KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::size_t\n#endif\n#ifndef KYOPRO_BASE_FLOAT\n\
-    #define KYOPRO_BASE_FLOAT double\n#endif\n#ifndef KYOPRO_DEFAULT_MOD\n#define\
-    \ KYOPRO_DEFAULT_MOD 1000000007\n#endif\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define\
-    \ KYOPRO_DECIMAL_PRECISION 12\n#endif\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV\
-    \ 3\n#endif\n#line 4 \"math/power.hpp\"\nnamespace kyopro {\n  template<class\
-    \ _typeT>\n  constexpr _typeT power(_typeT a, std::uint64_t n, _typeT init = 1)\
-    \ noexcept {\n    while (n > 0) {\n      if (n & 1) init *= a;\n      a *= a;\n\
-    \      n >>= 1;\n    }\n    return init;\n  }\n}\n"
+    \n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n\
+    #ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::size_t\n#endif\n\n#ifndef\
+    \ KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n\
+    #define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(1000000007)\n#endif\n\
+    \n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
+    #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
+    #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
+    #endif\n#line 4 \"math/power.hpp\"\nnamespace kyopro {\n  template<class _typeT>\n\
+    \  constexpr _typeT power(_typeT _a, std::uint_fast64_t _n, _typeT _init = 1)\
+    \ noexcept {\n    while (_n > 0) {\n      if (_n & 1) _init *= _a;\n      _a *=\
+    \ _a;\n      _n >>= 1;\n    }\n    return _init;\n  }\n}\n"
   code: "#pragma once\n#include <cstdint>\n#include \"../base/settings.hpp\"\nnamespace\
-    \ kyopro {\n  template<class _typeT>\n  constexpr _typeT power(_typeT a, std::uint64_t\
-    \ n, _typeT init = 1) noexcept {\n    while (n > 0) {\n      if (n & 1) init *=\
-    \ a;\n      a *= a;\n      n >>= 1;\n    }\n    return init;\n  }\n}"
+    \ kyopro {\n  template<class _typeT>\n  constexpr _typeT power(_typeT _a, std::uint_fast64_t\
+    \ _n, _typeT _init = 1) noexcept {\n    while (_n > 0) {\n      if (_n & 1) _init\
+    \ *= _a;\n      _a *= _a;\n      _n >>= 1;\n    }\n    return _init;\n  }\n}"
   dependsOn:
   - base/settings.hpp
   isVerificationFile: false
   path: math/power.hpp
   requiredBy:
+  - all.hpp
+  - template/alias.hpp
+  - template/all.hpp
   - structure/FenwickTree.hpp
   - structure/all.hpp
   - math/ModInt.hpp
   - math/all.hpp
   - math/monoid.hpp
-  - template/alias.hpp
-  - template/all.hpp
-  - all.hpp
-  - base/constant.hpp
   - base/all.hpp
-  timestamp: '2022-01-11 23:13:11+09:00'
+  - base/constant.hpp
+  timestamp: '2022-01-23 17:00:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - yosupo/FenwickTree.test.cpp
