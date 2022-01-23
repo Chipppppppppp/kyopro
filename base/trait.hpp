@@ -1,9 +1,9 @@
 #pragma once
-#include <utility>
-#include <type_traits>
 #include <iterator>
-#include <stack>
 #include <queue>
+#include <stack>
+#include <type_traits>
+#include <utility>
 
 #ifdef __SIZEOF_INT128__
 template<>

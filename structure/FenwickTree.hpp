@@ -1,7 +1,7 @@
 #pragma once
 /* FenwickTree */
-#include <vector>
 #include <utility>
+#include <vector>
 #include "../base/settings.hpp"
 #include "../math/monoid.hpp"
 

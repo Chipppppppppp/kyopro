@@ -1,7 +1,7 @@
 #pragma once
 #include <cstddef>
-#include <type_traits>
 #include <tuple>
+#include <type_traits>
 #include "settings.hpp"
 #include "trait.hpp"
 

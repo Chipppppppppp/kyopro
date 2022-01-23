@@ -1,12 +1,12 @@
 #pragma once
 #include <unistd.h>
-#include <cstdint>
-#include <type_traits>
-#include <iterator>
-#include <utility>
-#include <tuple>
 #include <array>
+#include <cstdint>
+#include <iterator>
 #include <string>
+#include <tuple>
+#include <type_traits>
+#include <utility>
 #include "settings.hpp"
 #include "trait.hpp"
 

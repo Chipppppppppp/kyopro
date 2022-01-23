@@ -1,10 +1,10 @@
 #pragma once
+#include <array>
 #include <cstdint>
 #include <limits>
-#include <array>
 #include <utility>
-#include "settings.hpp"
 #include "../math/power.hpp"
+#include "settings.hpp"
 
 namespace kyopro {
   inline constexpr std::uint_fast64_t _decimal_max = power(static_cast<std::uint_fast64_t>(10), KYOPRO_DECIMAL_PRECISION);

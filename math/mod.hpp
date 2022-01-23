@@ -1,6 +1,6 @@
 #pragma once
-#include <type_traits>
 #include <cassert>
+#include <type_traits>
 
 namespace kyopro {
   template<class _typeT, class _typeU>

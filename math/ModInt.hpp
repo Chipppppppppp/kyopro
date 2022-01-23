@@ -1,10 +1,10 @@
 #pragma once
+#include <cassert>
 #include <cstdint>
 #include <type_traits>
-#include <cassert>
-#include "../base/settings.hpp"
 #include "../base/constant.hpp"
 #include "../base/Hash.hpp"
+#include "../base/settings.hpp"
 #include "mod.hpp"
 
 namespace kyopro {
