@@ -12,33 +12,33 @@
 #include "trait.hpp"
 
 namespace kyopro {
-  template<KYOPRO_BASE_UINT buf_size = KYOPRO_BUFFER_SIZE>
+  template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>
   struct Writer {
   private:
-    int fd, idx;
-    std::array<char, buf_size> buffer;
+    int _fd, _idx;
+    std::array<char, _buf_size> _buffer;
 
   public:
     Writer() noexcept = default;
-    Writer(int fd) noexcept: fd(fd), idx(0), buffer() {}
-    Writer(FILE* fp) noexcept: fd(fileno_unlocked(fp)), idx(0), buffer() {}
+    Writer(int _fd) noexcept: _fd(_fd), _idx(0), _buffer() {}
+    Writer(FILE* _fp) noexcept: _fd(fileno_unlocked(_fp)), _idx(0), _buffer() {}
 
     ~Writer() {
-      write(fd, buffer.begin(), idx);
+      write(_fd, _buffer.begin(), _idx);
     }
 
-    Writer& operator =(int fd) noexcept {
-      this->fd = fd;
+    Writer& operator =(int _fd) noexcept {
+      this->_fd = _fd;
       return *this;
     }
-    Writer& operator =(FILE* fp) noexcept {
-      this->fd = fileno_unlocked(fp);
+    Writer& operator =(FILE* _fp) noexcept {
+      this->_fd = fileno_unlocked(_fp);
       return *this;
     }
 
     struct iterator {
     private:
-      Writer& writer;
+      Writer& _writer;
 
     public:
       using difference_type = void;
@@ -48,29 +48,29 @@ namespace kyopro {
       using iterator_category = std::output_iterator_tag;
 
       iterator() noexcept = default;
-      iterator(Writer& writer) noexcept: writer(writer) {}
+      iterator(Writer& _writer) noexcept: _writer(_writer) {}
 
       iterator& operator ++() {
-        ++writer.idx;
-        if (writer.idx == buf_size) {
-          write(writer.fd, writer.buffer.begin(), buf_size);
-          writer.idx = 0;
+        ++_writer._idx;
+        if (_writer._idx == _buf_size) {
+          write(_writer._fd, _writer._buffer.begin(), _buf_size);
+          _writer._idx = 0;
         }
         return *this;
       }
 
       iterator operator ++(int) {
-        iterator before = *this;
+        iterator _before = *this;
         operator ++();
-        return before;
+        return _before;
       }
 
       char& operator *() const {
-        return writer.buffer[writer.idx];
+        return _writer._buffer[_writer._idx];
       }
 
-      void flush() const {
-        write(writer.fd, writer.buffer.begin(), writer.idx);
+      void _flush() const {
+        write(_writer._fd, _writer._buffer.begin(), _writer._idx);
       }
     };
 
@@ -81,107 +81,107 @@ namespace kyopro {
 
   Writer output(1), error(2);
 
-  template<class Writer, bool sep = true, bool end = true, bool debug = true, bool flush = false, KYOPRO_BASE_UINT decimal_precision = KYOPRO_DECIMAL_PRECISION>
+  template<class _typeWriter, bool _sep = true, bool _end = true, bool _debug = true, bool _flush = false, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>
   struct Printer {
   private:
     template<class, class = void>
-    struct has_print: std::false_type {};
-    template<class T>
-    struct has_print<T, std::void_t<decltype(T::print)>>: std::true_type {};
+    struct _has_print: std::false_type {};
+    template<class _typeT>
+    struct _has_print<_typeT, std::void_t<decltype(_typeT::print)>>: std::true_type {};
 
-    typename Writer::iterator itr;
+    typename _typeWriter::iterator _itr;
 
-    void print_sep() {
-      if constexpr (debug) {
-        print(',');
+    void _print_sep() {
+      if constexpr (_debug) {
+        _print(',');
       }
-      print(' ');
+      _print(' ');
     }
 
-    void print(char a) {
-      *itr = a;
-      ++itr;
+    void _print(char _a) {
+      *_itr = _a;
+      ++_itr;
     }
-    void print(const char* a) {
-      for (; *a; ++a) print(*a);
+    void _print(const char* _a) {
+      for (; *_a; ++_a) _print(*_a);
     }
-    void print(const std::string& a) {
-      for (auto i: a) print(i);
+    void _print(const std::string& _a) {
+      for (auto _i: _a) _print(_i);
     }
-    void print(bool a) {
-      print(static_cast<char>('0' + a));
+    void _print(bool _a) {
+      _print(static_cast<char>('0' + _a));
     }
-    template<class T, std::enable_if_t<std::is_arithmetic_v<T> && !has_print<T>::value>* = nullptr>
-    void print(T a) {
-      if constexpr (std::is_signed_v<T>) if (a < 0) {
-        print('-');
-        a = -a;
+    template<class _typeT, std::enable_if_t<std::is_arithmetic_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>
+    void _print(_typeT _a) {
+      if constexpr (std::is_signed_v<_typeT>) if (_a < 0) {
+        _print('-');
+        _a = -_a;
       }
-      std::uint_fast64_t p = a;
-      a -= p;
-      std::string s;
+      std::uint_fast64_t _p = _a;
+      _a -= _p;
+      std::string _s;
       do {
-        s += '0' + p % 10;
-        p /= 10;
-      } while (p > 0);
-      for (auto i = s.rbegin(); i != s.rend(); ++i) print(*i);
-      if constexpr (std::is_integral_v<T>) return;
-      print('.');
-      for (int i = 0; i < static_cast<int>(decimal_precision); ++i) {
-        a *= 10;
-        print('0' + static_cast<std::uint_fast64_t>(a) % 10);
+        _s += '0' + _p % 10;
+        _p /= 10;
+      } while (_p > 0);
+      for (auto _i = _s.rbegin(); _i != _s.rend(); ++_i) _print(*_i);
+      if constexpr (std::is_integral_v<_typeT>) return;
+      _print('.');
+      for (int _i = 0; _i < static_cast<int>(_decimal_precision); ++_i) {
+        _a *= 10;
+        _print('0' + static_cast<std::uint_fast64_t>(_a) % 10);
       }
     }
-    template<size_t i = 0, class T, std::enable_if_t<is_tuple_v<T> && !has_print<T>::value>* = nullptr>
-    void print(const T& a) {
-      if constexpr (debug && i == 0) print('{');
-      if constexpr (std::tuple_size_v<T> != 0) print(std::get<i>(a));
-      if constexpr (i + 1 < std::tuple_size_v<T>) {
-        if constexpr (sep) print_sep();
-        print<i + 1>(a);
-      } else if constexpr (debug) print('}');
+    template<size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>
+    void _print(const _typeT& _a) {
+      if constexpr (_debug && _i == 0) _print('{');
+      if constexpr (std::tuple_size_v<_typeT> != 0) _print(std::get<_i>(_a));
+      if constexpr (_i + 1 < std::tuple_size_v<_typeT>) {
+        if constexpr (_sep) _print_sep();
+        _print<_i + 1>(_a);
+      } else if constexpr (_debug) _print('}');
     }
-    template<class T, std::enable_if_t<is_iterable_v<T> && !has_print<T>::value>* = nullptr>
-    void print(const T& a) {
-      if constexpr (debug) print('{');
-      if (std::empty(a)) return;
-      for (auto i = std::begin(a); ; ) {
-        print(*i);
-        if (++i != std::end(a)) {
-          if constexpr (sep) {
-            if constexpr (debug) {
-              print(',');
-              print(' ');
-            } else if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<T>()[0])>>) print(' ');
-            else print('\n');
+    template<class _typeT, std::enable_if_t<is_iterable_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>
+    void _print(const _typeT& _a) {
+      if constexpr (_debug) _print('{');
+      if (std::empty(_a)) return;
+      for (auto _i = std::begin(_a); ; ) {
+        _print(*_i);
+        if (++_i != std::end(_a)) {
+          if constexpr (_sep) {
+            if constexpr (_debug) {
+              _print(',');
+              _print(' ');
+            } else if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<_typeT>()[0])>>) _print(' ');
+            else _print('\n');
           }
         } else break;
       }
-      if constexpr (debug) print('}');
+      if constexpr (_debug) _print('}');
     }
-    template<class T, std::enable_if_t<has_print<T>::value>* = nullptr>
-    void print(const T& a) {
-      a.print();
+    template<class _typeT, std::enable_if_t<_has_print<_typeT>::value>* = nullptr>
+    void _print(const _typeT& _a) {
+      _a._print();
     }
 
   public:
     Printer() noexcept = default;
-    Printer(Writer& writer) noexcept: itr(writer.begin()) {}
+    Printer(_typeWriter& _writer) noexcept: _itr(_writer.begin()) {}
 
     template<bool = true>
     void operator ()() {
-      if constexpr (end) print('\n');
-      if constexpr (flush) itr.flush();
+      if constexpr (_end) _print('\n');
+      if constexpr (_flush) _itr._flush();
     }
-    template<bool first = true, class Head, class... Args>
-    void operator ()(Head&& head, Args&&... args) {
-      if constexpr (debug && first) {
-        print('#');
-        print(' ');
+    template<bool _first = true, class _typeHead, class... _typeArgs>
+    void operator ()(_typeHead&& _head, _typeArgs&&... _args) {
+      if constexpr (_debug && _first) {
+        _print('#');
+        _print(' ');
       }
-      if constexpr (sep && !first) print_sep();
-      print(head);
-      operator ()<false>(std::forward<Args>(args)...);
+      if constexpr (_sep && !_first) _print_sep();
+      _print(_head);
+      operator ()<false>(std::forward<_typeArgs>(_args)...);
     }
   };
 
