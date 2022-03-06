@@ -16,6 +16,7 @@ namespace kyopro {
   struct Hash<_typeT, std::enable_if_t<std::is_scalar_v<_typeT>>> {
   private:
     [[no_unique_address]] std::hash<_typeT> _hashser;
+
   public:
     constexpr KYOPRO_BASE_UINT operator ()(_typeT a) const noexcept {
       return _hasher(a);
@@ -38,6 +39,7 @@ namespace kyopro {
   struct Hash<_typeT, std::enable_if_t<is_iterable_v<_typeT>>> {
   private:
     [[no_unique_address]] Hash<decltype(*std::begin(std::declval<_typeT>()))> _hasher;
+
   public:
     constexpr KYOPRO_BASE_UINT operator ()(const _typeT& _a) const noexcept {
       KYOPRO_BASE_UINT _seed = _a.size();
