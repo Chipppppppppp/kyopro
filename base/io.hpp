@@ -168,19 +168,19 @@ namespace kyopro {
     Printer() noexcept = default;
     Printer(Writer& writer) noexcept: itr(writer.begin()) {}
 
+    template<bool first = true>
     void operator ()() {
-      if constexpr (end) operator ()('\n');
+      if constexpr (end) print('\n');
       if constexpr (flush) itr.flush();
     }
-    template<class Head>
-    void operator ()(Head&& head) {
-      print(head);
-      operator ()();
-    }
-    template<class Head, class... Args>
+    template<bool first = true, class Head, class... Args>
     void operator ()(Head&& head, Args&&... args) {
+      if constexpr (debug && first) {
+        print('#');
+        print(' ');
+      }
+      if constexpr (sep && !first) print_sep();
       print(head);
-      if constexpr (sep) print_sep();
       operator ()(std::forward<Args>(args)...);
     }
   };
