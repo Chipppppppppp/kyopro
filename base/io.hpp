@@ -12,7 +12,7 @@
 #include "trait.hpp"
 
 namespace kyopro {
-  template<KYOPRO_BASE_UINT buf_size = KYOPRO_BUFFER_SIZE, KYOPRO_BASE_UINT decimal_precision = KYOPRO_DECIMAL_PRECISION>
+  template<KYOPRO_BASE_UINT buf_size = KYOPRO_BUFFER_SIZE>
   struct Writer {
   private:
     int fd, idx;
@@ -22,9 +22,11 @@ namespace kyopro {
     Writer() noexcept = default;
     Writer(int fd) noexcept: fd(fd), idx(0), buffer() {}
     Writer(FILE* fp) noexcept: fd(fileno_unlocked(fp)), idx(0), buffer() {}
+
     ~Writer() {
       write(fd, buffer.begin(), idx);
     }
+
     Writer& operator =(int fd) noexcept {
       this->fd = fd;
       return *this;
@@ -36,59 +38,64 @@ namespace kyopro {
 
     struct iterator {
     private:
-      int fd;
-      int& idx;
-      std::array<char, buf_size>& buffer;
+      Writer& writer;
+
     public:
-      iterator() noexcept = default;
-      iterator(int fd, int& idx, std::array<char, buf_size>& buffer) noexcept: fd(fd), idx(idx), buffer(buffer) {}
       using difference_type = void;
       using value_type = void;
       using pointer = void;
       using reference = void;
       using iterator_category = std::output_iterator_tag;
+
+      iterator() noexcept = default;
+      iterator(Writer& writer) noexcept: writer(writer) {}
+
       iterator& operator ++() {
-        ++idx;
-        if (idx == buf_size) {
-          write(fd, buffer.begin(), buf_size);
-          idx = 0;
+        ++writer.idx;
+        if (writer.idx == buf_size) {
+          write(writer.fd, writer.buffer.begin(), buf_size);
+          writer.idx = 0;
         }
         return *this;
       }
-      iterator operator ++(int) noexcept {
+
+      iterator operator ++(int) {
         iterator before = *this;
         operator ++();
         return before;
       }
+
       char& operator *() const {
-        return buffer[idx];
+        return writer.buffer[writer.idx];
       }
-      void flush() {
-        write(fd, buffer.begin(), idx);
+
+      void flush() const {
+        write(writer.fd, writer.buffer.begin(), writer.idx);
       }
     };
 
-    iterator begin() const noexcept {
-      return iterator(fd, idx, buffer);
+    iterator begin() noexcept {
+      return iterator(*this);
     }
   };
 
   Writer output(1), error(2);
 
-  template<class Writer, bool sep = true, bool end = true, bool debug = true, bool flush = false>
+  template<class Writer, bool sep = true, bool end = true, bool debug = true, bool flush = false, KYOPRO_BASE_UINT decimal_precision = KYOPRO_DECIMAL_PRECISION>
   struct Printer {
   private:
     template<class, class = void>
     struct has_print: std::false_type {};
     template<class T>
     struct has_print<T, std::void_t<decltype(T::print)>>: std::true_type {};
+
     typename Writer::iterator itr;
 
     void print_sep() {
       if constexpr (debug) {
-        operator ()(',');
+        print(',');
       }
-      operator ()(' ');
+      print(' ');
     }
 
     void print(char a) {
@@ -96,18 +103,18 @@ namespace kyopro {
       ++itr;
     }
     void print(const char* a) {
-      for (; *a; ++a) operator ()(*a);
+      for (; *a; ++a) print(*a);
     }
-    void print(const str& a) {
-      for (auto i: a) operator ()(i);
+    void print(const std::string& a) {
+      for (auto i: a) print(i);
     }
     void print(bool a) {
-      operator ()('0' + a);
+      print('0' + a);
     }
     template<class T, std::enable_if_t<std::is_arithmetic_v<T> && !has_print<T>::value>* = nullptr>
     void print(T a) {
       if constexpr (std::is_signed_v<T>) if (a < 0) {
-        operator ()('-');
+        print('-');
         a = -a;
       }
       std::uint_fast64_t p = a;
@@ -117,42 +124,40 @@ namespace kyopro {
         s += '0' + p % 10;
         p /= 10;
       } while (p > 0);
-      for (auto i = s.rbegin(); i != s.rend(); ++i) operator ()(*i);
+      for (auto i = s.rbegin(); i != s.rend(); ++i) print(*i);
       if constexpr (std::is_integral_v<T>) return;
-      operator ()('.');
+      print('.');
       for (int i = 0; i < static_cast<int>(decimal_precision); ++i) {
         a *= 10;
-        operator ()('0' + static_cast<std::uint_fast64_t>(a) % 10);
+        print('0' + static_cast<std::uint_fast64_t>(a) % 10);
       }
     }
-    static void print(tuple<>) noexcept {}
     template<size_t i = 0, class T, std::enable_if_t<is_tuple_v<T> && !has_print<T>::value>* = nullptr>
     void print(const T& a) {
-      if constexpr (debug) operator ()('{');
-      operator ()(std::get<i>(a));
+      if constexpr (debug && i == 0) print('{');
+      if constexpr (std::tuple_size_v<T> != 0) print(std::get<i>(a));
       if constexpr (i + 1 < std::tuple_size_v<T>) {
         if constexpr (sep) print_sep();
-        operator ()<i + 1>(a);
-      }
-      if constexpr (debug) operator ()('}');
+        print<i + 1>(a);
+      } else if constexpr (debug) print('}');
     }
     template<class T, std::enable_if_t<is_iterable_v<T> && !has_print<T>::value>* = nullptr>
     void print(const T& a) {
-      if constexpr (debug) operator ()('{');
+      if constexpr (debug) print('{');
       if (std::empty(a)) return;
       for (auto i = std::begin(a); ; ) {
-        operator ()(*i);
+        print(*i);
         if (++i != std::end(a)) {
           if constexpr (sep) {
             if constexpr (debug) {
-              operator ()(',');
-              operator ()(' ');
-            } else if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<T>()[0])>>) operator ()(' ');
-            else operator ()('\n');
+              print(',');
+              print(' ');
+            } else if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<T>()[0])>>) print(' ');
+            else print('\n');
           }
         } else break;
       }
-      if constexpr (debug) operator ()('}');
+      if constexpr (debug) print('}');
     }
     template<class T, std::enable_if_t<has_print<T>::value>* = nullptr>
     void print(const T& a) {
@@ -161,7 +166,7 @@ namespace kyopro {
 
   public:
     Printer() noexcept = default;
-    Printer(const Writer& writer) noexcept: itr(writer.begin()) {}
+    Printer(Writer& writer) noexcept: itr(writer.begin()) {}
 
     void operator ()() {
       if constexpr (end) operator ()('\n');
