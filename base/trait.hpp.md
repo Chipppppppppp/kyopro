@@ -5,7 +5,7 @@ data:
   - icon: ':warning:'
     path: base/Hash.hpp
     title: base/Hash.hpp
-  - icon: ':warning:'
+  - icon: ':question:'
     path: base/out.hpp
     title: base/out.hpp
   - icon: ':warning:'
@@ -20,10 +20,16 @@ data:
   - icon: ':warning:'
     path: template/all.hpp
     title: template/all.hpp
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: yosupo/FenwickTree.test.cpp
+    title: yosupo/FenwickTree.test.cpp
+  - icon: ':x:'
+    path: yosupo/UnionFind.test.cpp
+    title: yosupo/UnionFind.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"base/trait.hpp\"\n#include <iterator>\n#include <queue>\n\
@@ -81,8 +87,10 @@ data:
   - base/out.hpp
   - base/Hash.hpp
   timestamp: '2022-01-23 18:51:32+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_SOME_WA
+  verifiedWith:
+  - yosupo/FenwickTree.test.cpp
+  - yosupo/UnionFind.test.cpp
 documentation_of: base/trait.hpp
 layout: document
 redirect_from:

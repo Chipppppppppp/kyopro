@@ -7,10 +7,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':warning:'
+  - icon: ':question:'
     path: base/trait.hpp
     title: base/trait.hpp
   - icon: ':warning:'

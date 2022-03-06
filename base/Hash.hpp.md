@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':warning:'
+  - icon: ':question:'
     path: base/trait.hpp
     title: base/trait.hpp
   _extendedRequiredBy:

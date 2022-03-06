@@ -1,17 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':warning:'
+  - icon: ':question:'
     path: base/trait.hpp
     title: base/trait.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: yosupo/FenwickTree.test.cpp
+    title: yosupo/FenwickTree.test.cpp
+  - icon: ':x:'
+    path: yosupo/UnionFind.test.cpp
+    title: yosupo/UnionFind.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"base/out.hpp\"\n#include <unistd.h>\n#include <array>\n\
@@ -184,8 +190,10 @@ data:
   path: base/out.hpp
   requiredBy: []
   timestamp: '2022-03-06 23:13:48+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_SOME_WA
+  verifiedWith:
+  - yosupo/FenwickTree.test.cpp
+  - yosupo/UnionFind.test.cpp
 documentation_of: base/out.hpp
 layout: document
 redirect_from:

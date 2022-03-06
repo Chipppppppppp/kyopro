@@ -17,13 +17,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: base/constant.hpp
       title: base/constant.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: base/out.hpp
       title: base/out.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: base/settings.hpp
       title: base/settings.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: base/trait.hpp
       title: base/trait.hpp
   - name: math
@@ -63,7 +63,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: structure/FenwickTree.hpp
       title: structure/FenwickTree.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: structure/UnionFind.hpp
       title: structure/UnionFind.hpp
     - icon: ':warning:'
@@ -83,7 +83,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: yosupo/FenwickTree.test.cpp
       title: yosupo/FenwickTree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: yosupo/UnionFind.test.cpp
       title: yosupo/UnionFind.test.cpp
 layout: toppage
