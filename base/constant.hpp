@@ -7,8 +7,6 @@
 #include "settings.hpp"
 
 namespace kyopro {
-  inline constexpr std::uint_fast64_t _decimal_max = power(static_cast<std::uint_fast64_t>(10), KYOPRO_DECIMAL_PRECISION);
-
   template<class _typeT>
   inline constexpr _typeT MOD = KYOPRO_DEFAULT_MOD;
   inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;
@@ -17,8 +15,8 @@ namespace kyopro {
   inline constexpr _typeT INF = std::numeric_limits<_typeT>::max() / KYOPRO_INF_DIV;
   inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;
 
-  template<class _typeT>
-  inline constexpr KYOPRO_BASE_FLOAT EPS = static_cast<_typeT>(1) / _decimal_max;
+  template<class _typeT, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>
+  inline constexpr KYOPRO_BASE_FLOAT EPS = static_cast<_typeT>(1) / power(static_cast<std::uint_fast64_t>(10), _decimal_precision);
   inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;
 
   template<class _typeT>
