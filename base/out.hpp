@@ -168,9 +168,8 @@ namespace kyopro {
     Printer() noexcept = default;
     Printer(Writer& writer) noexcept: itr(writer.begin()) {}
 
-    template<bool first = true>
+    template<bool = true>
     void operator ()() {
-      if constexpr (sep && !first) print_sep();
       if constexpr (end) print('\n');
       if constexpr (flush) itr.flush();
     }
