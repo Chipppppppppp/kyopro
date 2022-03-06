@@ -90,7 +90,7 @@ data:
     \ bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n}\n#line\
     \ 10 \"base/Hash.hpp\"\n\nnamespace kyopro {\n  template<class, class = void>\n\
     \  struct Hash;\n\n  template<class _typeT>\n  struct Hash<_typeT, std::enable_if_t<std::is_scalar_v<_typeT>>>\
-    \ {\n  private:\n    [[no_unique_address]] std::hash<_typeT> _hashser;\n  public:\n\
+    \ {\n  private:\n    [[no_unique_address]] std::hash<_typeT> _hashser;\n\n  public:\n\
     \    constexpr KYOPRO_BASE_UINT operator ()(_typeT a) const noexcept {\n     \
     \ return _hasher(a);\n    }\n  };\n\n  template<class _typeT>\n  struct Hash<_typeT,\
     \ std::enable_if_t<is_tuple_v<_typeT>>> {\n    template<KYOPRO_BASE_UINT _i =\
@@ -101,7 +101,7 @@ data:
     \ + (_seed << 12) + (_seed >> 4));\n      }\n    }\n  };\n\n  template<class _typeT>\n\
     \  struct Hash<_typeT, std::enable_if_t<is_iterable_v<_typeT>>> {\n  private:\n\
     \    [[no_unique_address]] Hash<decltype(*std::begin(std::declval<_typeT>()))>\
-    \ _hasher;\n  public:\n    constexpr KYOPRO_BASE_UINT operator ()(const _typeT&\
+    \ _hasher;\n\n  public:\n    constexpr KYOPRO_BASE_UINT operator ()(const _typeT&\
     \ _a) const noexcept {\n      KYOPRO_BASE_UINT _seed = _a.size();\n      for (auto&\
     \ _i: _a) _seed ^= _hasher(_i) + 0x9e3779b97f4a7c15LU + (_seed << 12) + (_seed\
     \ >> 4);\n      return _seed;\n    }\n  };\n}\n#line 4 \"math/mod.hpp\"\n\nnamespace\
@@ -213,7 +213,7 @@ data:
   - template/all.hpp
   - template/alias.hpp
   - all.hpp
-  timestamp: '2022-03-06 15:44:21+09:00'
+  timestamp: '2022-03-06 23:07:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/ModInt.hpp
