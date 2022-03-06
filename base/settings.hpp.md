@@ -3,20 +3,14 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
     path: base/Hash.hpp
     title: base/Hash.hpp
-  - icon: ':warning:'
-    path: base/all.hpp
-    title: base/all.hpp
   - icon: ':heavy_check_mark:'
     path: base/constant.hpp
     title: base/constant.hpp
   - icon: ':warning:'
-    path: base/io.hpp
-    title: base/io.hpp
+    path: base/out.hpp
+    title: base/out.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
@@ -184,10 +178,8 @@ data:
   - template/all.hpp
   - template/alias.hpp
   - base/constant.hpp
-  - base/io.hpp
-  - base/all.hpp
+  - base/out.hpp
   - base/Hash.hpp
-  - all.hpp
   timestamp: '2022-01-23 17:00:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

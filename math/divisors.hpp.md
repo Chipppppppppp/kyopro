@@ -6,9 +6,6 @@ data:
     title: base/settings.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
   _extendedVerifiedWith: []
@@ -44,7 +41,6 @@ data:
   path: math/divisors.hpp
   requiredBy:
   - math/all.hpp
-  - all.hpp
   timestamp: '2022-01-23 17:00:03+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

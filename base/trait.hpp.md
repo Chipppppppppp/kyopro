@@ -3,17 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
     path: base/Hash.hpp
     title: base/Hash.hpp
   - icon: ':warning:'
-    path: base/all.hpp
-    title: base/all.hpp
-  - icon: ':warning:'
-    path: base/io.hpp
-    title: base/io.hpp
+    path: base/out.hpp
+    title: base/out.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
@@ -84,10 +78,8 @@ data:
   - math/all.hpp
   - template/all.hpp
   - template/alias.hpp
-  - base/io.hpp
-  - base/all.hpp
+  - base/out.hpp
   - base/Hash.hpp
-  - all.hpp
   timestamp: '2022-01-23 18:51:32+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

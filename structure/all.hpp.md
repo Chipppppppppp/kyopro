@@ -19,10 +19,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -127,8 +124,7 @@ data:
   - structure/UnionFind.hpp
   isVerificationFile: false
   path: structure/all.hpp
-  requiredBy:
-  - all.hpp
+  requiredBy: []
   timestamp: '2022-03-06 15:44:21+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

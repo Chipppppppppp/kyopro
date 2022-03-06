@@ -40,10 +40,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -246,8 +243,7 @@ data:
   - math/monoid.hpp
   isVerificationFile: false
   path: math/all.hpp
-  requiredBy:
-  - all.hpp
+  requiredBy: []
   timestamp: '2022-03-06 23:07:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

@@ -7,22 +7,16 @@ data:
   - icon: ':warning:'
     path: base/trait.hpp
     title: base/trait.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
-    path: base/all.hpp
-    title: base/all.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"base/io.hpp\"\n#include <unistd.h>\n#include <array>\n#include\
-    \ <cstdint>\n#include <cstdio>\n#include <iterator>\n#include <string>\n#include\
-    \ <tuple>\n#include <type_traits>\n#include <utility>\n#line 3 \"base/settings.hpp\"\
+  bundledCode: "#line 2 \"base/out.hpp\"\n#include <unistd.h>\n#include <array>\n\
+    #include <cstdint>\n#include <cstdio>\n#include <iterator>\n#include <string>\n\
+    #include <tuple>\n#include <type_traits>\n#include <utility>\n#line 3 \"base/settings.hpp\"\
     \n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n\
     #ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::size_t\n#endif\n\n#ifndef\
     \ KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n\
@@ -52,7 +46,7 @@ data:
     \ _typeT>\n  struct is_container_adapter<_typeT, std::void_t<decltype(std::empty(std::declval<_typeT>()))>>:\
     \ std::negation<is_iterable<_typeT>> {};\n  template<class _typeT>\n  constexpr\
     \ bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n}\n#line\
-    \ 13 \"base/io.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT buf_size\
+    \ 13 \"base/out.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT buf_size\
     \ = KYOPRO_BUFFER_SIZE>\n  struct Writer {\n  private:\n    int fd, idx;\n   \
     \ std::array<char, buf_size> buffer;\n\n  public:\n    Writer() noexcept = default;\n\
     \    Writer(int fd) noexcept: fd(fd), idx(0), buffer() {}\n    Writer(FILE* fp)\
@@ -108,14 +102,15 @@ data:
     \ = nullptr>\n    void print(const T& a) {\n      a.print();\n    }\n\n  public:\n\
     \    Printer() noexcept = default;\n    Printer(Writer& writer) noexcept: itr(writer.begin())\
     \ {}\n\n    template<bool first = true>\n    void operator ()() {\n      if constexpr\
-    \ (end) print('\\n');\n      if constexpr (flush) itr.flush();\n    }\n    template<bool\
-    \ first = true, class Head, class... Args>\n    void operator ()(Head&& head,\
-    \ Args&&... args) {\n      if constexpr (debug && first) {\n        print('#');\n\
-    \        print(' ');\n      }\n      if constexpr (sep && !first) print_sep();\n\
-    \      print(head);\n      operator ()(std::forward<Args>(args)...);\n    }\n\
-    \  };\n\n  Printer<Writer<>, false, false, false> print(output), eprint(error);\n\
-    \  Printer<Writer<>, true, true, false> println(output), eprintln(error);\n  Printer<Writer<>>\
-    \ debug(output), edebug(error);\n}\n"
+    \ (sep && !first) print_sep();\n      if constexpr (end) print('\\n');\n     \
+    \ if constexpr (flush) itr.flush();\n    }\n    template<bool first = true, class\
+    \ Head, class... Args>\n    void operator ()(Head&& head, Args&&... args) {\n\
+    \      if constexpr (debug && first) {\n        print('#');\n        print(' ');\n\
+    \      }\n      if constexpr (sep && !first) print_sep();\n      print(head);\n\
+    \      operator ()<false>(std::forward<Args>(args)...);\n    }\n  };\n\n  Printer<Writer<>,\
+    \ false, false, false> print(output), eprint(error);\n  Printer<Writer<>, true,\
+    \ true, false> println(output), eprintln(error);\n  Printer<Writer<>> debug(output),\
+    \ edebug(error);\n}\n"
   code: "#pragma once\n#include <unistd.h>\n#include <array>\n#include <cstdint>\n\
     #include <cstdio>\n#include <iterator>\n#include <string>\n#include <tuple>\n\
     #include <type_traits>\n#include <utility>\n#include \"settings.hpp\"\n#include\
@@ -175,29 +170,28 @@ data:
     \ = nullptr>\n    void print(const T& a) {\n      a.print();\n    }\n\n  public:\n\
     \    Printer() noexcept = default;\n    Printer(Writer& writer) noexcept: itr(writer.begin())\
     \ {}\n\n    template<bool first = true>\n    void operator ()() {\n      if constexpr\
-    \ (end) print('\\n');\n      if constexpr (flush) itr.flush();\n    }\n    template<bool\
-    \ first = true, class Head, class... Args>\n    void operator ()(Head&& head,\
-    \ Args&&... args) {\n      if constexpr (debug && first) {\n        print('#');\n\
-    \        print(' ');\n      }\n      if constexpr (sep && !first) print_sep();\n\
-    \      print(head);\n      operator ()(std::forward<Args>(args)...);\n    }\n\
-    \  };\n\n  Printer<Writer<>, false, false, false> print(output), eprint(error);\n\
-    \  Printer<Writer<>, true, true, false> println(output), eprintln(error);\n  Printer<Writer<>>\
-    \ debug(output), edebug(error);\n}"
+    \ (sep && !first) print_sep();\n      if constexpr (end) print('\\n');\n     \
+    \ if constexpr (flush) itr.flush();\n    }\n    template<bool first = true, class\
+    \ Head, class... Args>\n    void operator ()(Head&& head, Args&&... args) {\n\
+    \      if constexpr (debug && first) {\n        print('#');\n        print(' ');\n\
+    \      }\n      if constexpr (sep && !first) print_sep();\n      print(head);\n\
+    \      operator ()<false>(std::forward<Args>(args)...);\n    }\n  };\n\n  Printer<Writer<>,\
+    \ false, false, false> print(output), eprint(error);\n  Printer<Writer<>, true,\
+    \ true, false> println(output), eprintln(error);\n  Printer<Writer<>> debug(output),\
+    \ edebug(error);\n}"
   dependsOn:
   - base/settings.hpp
   - base/trait.hpp
   isVerificationFile: false
-  path: base/io.hpp
-  requiredBy:
-  - base/all.hpp
-  - all.hpp
-  timestamp: '2022-03-06 23:05:41+09:00'
+  path: base/out.hpp
+  requiredBy: []
+  timestamp: '2022-03-06 23:10:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: base/io.hpp
+documentation_of: base/out.hpp
 layout: document
 redirect_from:
-- /library/base/io.hpp
-- /library/base/io.hpp.html
-title: base/io.hpp
+- /library/base/out.hpp
+- /library/base/out.hpp.html
+title: base/out.hpp
 ---
