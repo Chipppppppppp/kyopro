@@ -6,6 +6,9 @@ data:
     title: base/settings.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
   _extendedVerifiedWith:
@@ -87,6 +90,7 @@ data:
   path: structure/UnionFind.hpp
   requiredBy:
   - structure/all.hpp
+  - all.hpp
   timestamp: '2022-01-23 18:51:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

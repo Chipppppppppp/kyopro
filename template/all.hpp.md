@@ -25,7 +25,10 @@ data:
   - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -198,7 +201,8 @@ data:
   - math/mod.hpp
   isVerificationFile: false
   path: template/all.hpp
-  requiredBy: []
+  requiredBy:
+  - all.hpp
   timestamp: '2022-03-06 23:07:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

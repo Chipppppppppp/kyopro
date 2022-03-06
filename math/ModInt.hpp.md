@@ -21,6 +21,9 @@ data:
     title: math/power.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
   - icon: ':warning:'
@@ -209,6 +212,7 @@ data:
   - math/all.hpp
   - template/all.hpp
   - template/alias.hpp
+  - all.hpp
   timestamp: '2022-03-06 23:07:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
