@@ -43,8 +43,8 @@ data:
   isVerificationFile: false
   path: math/factorize.hpp
   requiredBy:
-  - all.hpp
   - math/all.hpp
+  - all.hpp
   timestamp: '2022-01-23 18:51:32+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

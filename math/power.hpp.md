@@ -65,16 +65,16 @@ data:
   isVerificationFile: false
   path: math/power.hpp
   requiredBy:
-  - all.hpp
-  - template/alias.hpp
-  - template/all.hpp
+  - math/ModInt.hpp
+  - math/monoid.hpp
+  - math/all.hpp
   - structure/FenwickTree.hpp
   - structure/all.hpp
-  - math/ModInt.hpp
-  - math/all.hpp
-  - math/monoid.hpp
-  - base/all.hpp
+  - template/all.hpp
+  - template/alias.hpp
   - base/constant.hpp
+  - base/all.hpp
+  - all.hpp
   timestamp: '2022-01-23 17:00:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

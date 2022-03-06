@@ -33,8 +33,8 @@ data:
   isVerificationFile: false
   path: math/euler_phi.hpp
   requiredBy:
-  - all.hpp
   - math/all.hpp
+  - all.hpp
   timestamp: '2022-01-23 17:00:03+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

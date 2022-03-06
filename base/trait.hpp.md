@@ -12,8 +12,8 @@ data:
     path: base/all.hpp
     title: base/all.hpp
   - icon: ':warning:'
-    path: base/printer.hpp
-    title: base/printer.hpp
+    path: base/io.hpp
+    title: base/io.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
@@ -80,14 +80,14 @@ data:
   isVerificationFile: false
   path: base/trait.hpp
   requiredBy:
-  - all.hpp
-  - template/alias.hpp
-  - template/all.hpp
   - math/ModInt.hpp
   - math/all.hpp
+  - template/all.hpp
+  - template/alias.hpp
+  - base/io.hpp
   - base/all.hpp
-  - base/printer.hpp
   - base/Hash.hpp
+  - all.hpp
   timestamp: '2022-01-23 18:51:32+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

@@ -15,8 +15,8 @@ data:
     path: base/constant.hpp
     title: base/constant.hpp
   - icon: ':warning:'
-    path: base/printer.hpp
-    title: base/printer.hpp
+    path: base/io.hpp
+    title: base/io.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
@@ -172,27 +172,27 @@ data:
   isVerificationFile: false
   path: base/settings.hpp
   requiredBy:
-  - all.hpp
-  - template/alias.hpp
-  - template/all.hpp
+  - math/factorize.hpp
+  - math/ModInt.hpp
+  - math/divisors.hpp
+  - math/monoid.hpp
+  - math/all.hpp
+  - math/power.hpp
+  - structure/UnionFind.hpp
   - structure/FenwickTree.hpp
   - structure/all.hpp
-  - structure/UnionFind.hpp
-  - math/ModInt.hpp
-  - math/all.hpp
-  - math/divisors.hpp
-  - math/factorize.hpp
-  - math/power.hpp
-  - math/monoid.hpp
-  - base/all.hpp
-  - base/printer.hpp
-  - base/Hash.hpp
+  - template/all.hpp
+  - template/alias.hpp
   - base/constant.hpp
+  - base/io.hpp
+  - base/all.hpp
+  - base/Hash.hpp
+  - all.hpp
   timestamp: '2022-01-23 17:00:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - yosupo/UnionFind.test.cpp
   - yosupo/FenwickTree.test.cpp
+  - yosupo/UnionFind.test.cpp
 documentation_of: base/settings.hpp
 layout: document
 redirect_from:

@@ -89,8 +89,8 @@ data:
   isVerificationFile: false
   path: structure/UnionFind.hpp
   requiredBy:
-  - all.hpp
   - structure/all.hpp
+  - all.hpp
   timestamp: '2022-01-23 18:51:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
