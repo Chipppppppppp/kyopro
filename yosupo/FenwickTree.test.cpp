@@ -1,6 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
 #include <iostream>
 #include "../structure/FenwickTree.hpp"
+#include "../base/out.hpp"
 
 int main() {
   int n, q;
@@ -15,6 +16,6 @@ int main() {
     int t, x, y;
     std::cin >> t >> x >> y;
     if (t == 0) ft.apply(x, y);
-    else std::cout << ft.prod(x, y) << '\n';
+    else kyopro::println(ft.prod(x, y));
   }
 }
