@@ -75,7 +75,7 @@ namespace kyopro {
 
   Writer output(1), error(2);
 
-  template<class Writer, bool sep = false, bool end = false, bool flush = false, bool debug = false>
+  template<class Writer, bool sep = true, bool end = true, bool debug = true, bool flush = false>
   struct Printer {
   private:
     template<class, class = void>
@@ -180,6 +180,7 @@ namespace kyopro {
     }
   };
 
-  Printer<Writer> print(output), eprint(error);
-  Printer<Writer, true> println(output), eprintln(error);
+  Printer<Writer, false, false, false> print(output), eprint(error);
+  Printer<Writer, true, true, false> println(output), eprintln(error);
+  Printer<Writer> debug(output), edebug(error);
 }
