@@ -16,7 +16,7 @@ namespace kyopro {
   struct Writer {
   private:
     int fd, idx;
-    std::array<Char, buf_size> buffer;
+    std::array<char, buf_size> buffer;
 
   public:
     Writer() noexcept = default;
