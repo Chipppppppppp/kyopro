@@ -109,7 +109,7 @@ namespace kyopro {
       for (auto i: a) print(i);
     }
     void print(bool a) {
-      print('0' + a);
+      print(static_cast<char>('0' + a));
     }
     template<class T, std::enable_if_t<std::is_arithmetic_v<T> && !has_print<T>::value>* = nullptr>
     void print(T a) {
