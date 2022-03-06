@@ -170,6 +170,7 @@ namespace kyopro {
 
     template<bool first = true>
     void operator ()() {
+      if constexpr (sep && !first) print_sep();
       if constexpr (end) print('\n');
       if constexpr (flush) itr.flush();
     }
@@ -181,7 +182,7 @@ namespace kyopro {
       }
       if constexpr (sep && !first) print_sep();
       print(head);
-      operator ()(std::forward<Args>(args)...);
+      operator ()<false>(std::forward<Args>(args)...);
     }
   };
 
