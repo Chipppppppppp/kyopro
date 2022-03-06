@@ -180,7 +180,7 @@ namespace kyopro {
     }
   };
 
-  Printer<Writer, false, false, false> print(output), eprint(error);
-  Printer<Writer, true, true, false> println(output), eprintln(error);
-  Printer<Writer> debug(output), edebug(error);
+  Printer<Writer<>, false, false, false> print(output), eprint(error);
+  Printer<Writer<>, true, true, false> println(output), eprintln(error);
+  Printer<Writer<>> debug(output), edebug(error);
 }
