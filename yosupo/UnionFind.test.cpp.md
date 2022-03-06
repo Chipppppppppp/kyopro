@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/out.hpp
     title: base/out.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/trait.hpp
     title: base/trait.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/unionfind
@@ -113,13 +113,13 @@ data:
     \ ');\n    }\n\n    void print(char a) {\n      *itr = a;\n      ++itr;\n    }\n\
     \    void print(const char* a) {\n      for (; *a; ++a) print(*a);\n    }\n  \
     \  void print(const std::string& a) {\n      for (auto i: a) print(i);\n    }\n\
-    \    void print(bool a) {\n      print('0' + a);\n    }\n    template<class T,\
-    \ std::enable_if_t<std::is_arithmetic_v<T> && !has_print<T>::value>* = nullptr>\n\
-    \    void print(T a) {\n      if constexpr (std::is_signed_v<T>) if (a < 0) {\n\
-    \        print('-');\n        a = -a;\n      }\n      std::uint_fast64_t p = a;\n\
-    \      a -= p;\n      std::string s;\n      do {\n        s += '0' + p % 10;\n\
-    \        p /= 10;\n      } while (p > 0);\n      for (auto i = s.rbegin(); i !=\
-    \ s.rend(); ++i) print(*i);\n      if constexpr (std::is_integral_v<T>) return;\n\
+    \    void print(bool a) {\n      print(static_cast<char>('0' + a));\n    }\n \
+    \   template<class T, std::enable_if_t<std::is_arithmetic_v<T> && !has_print<T>::value>*\
+    \ = nullptr>\n    void print(T a) {\n      if constexpr (std::is_signed_v<T>)\
+    \ if (a < 0) {\n        print('-');\n        a = -a;\n      }\n      std::uint_fast64_t\
+    \ p = a;\n      a -= p;\n      std::string s;\n      do {\n        s += '0' +\
+    \ p % 10;\n        p /= 10;\n      } while (p > 0);\n      for (auto i = s.rbegin();\
+    \ i != s.rend(); ++i) print(*i);\n      if constexpr (std::is_integral_v<T>) return;\n\
     \      print('.');\n      for (int i = 0; i < static_cast<int>(decimal_precision);\
     \ ++i) {\n        a *= 10;\n        print('0' + static_cast<std::uint_fast64_t>(a)\
     \ % 10);\n      }\n    }\n    template<size_t i = 0, class T, std::enable_if_t<is_tuple_v<T>\
@@ -164,8 +164,8 @@ data:
   isVerificationFile: true
   path: yosupo/UnionFind.test.cpp
   requiredBy: []
-  timestamp: '2022-03-06 23:17:35+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-03-06 23:28:46+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/UnionFind.test.cpp
 layout: document
