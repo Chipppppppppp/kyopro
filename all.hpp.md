@@ -194,36 +194,37 @@ data:
     \    }\n      if constexpr (debug) print('}');\n    }\n    template<class T, std::enable_if_t<has_print<T>::value>*\
     \ = nullptr>\n    void print(const T& a) {\n      a.print();\n    }\n\n  public:\n\
     \    Printer() noexcept = default;\n    Printer(Writer& writer) noexcept: itr(writer.begin())\
-    \ {}\n\n    void operator ()() {\n      if constexpr (end) operator ()('\\n');\n\
-    \      if constexpr (flush) itr.flush();\n    }\n    template<class Head>\n  \
-    \  void operator ()(Head&& head) {\n      print(head);\n      operator ()();\n\
-    \    }\n    template<class Head, class... Args>\n    void operator ()(Head&& head,\
-    \ Args&&... args) {\n      print(head);\n      if constexpr (sep) print_sep();\n\
-    \      operator ()(std::forward<Args>(args)...);\n    }\n  };\n\n  Printer<Writer<>,\
-    \ false, false, false> print(output), eprint(error);\n  Printer<Writer<>, true,\
-    \ true, false> println(output), eprintln(error);\n  Printer<Writer<>> debug(output),\
-    \ edebug(error);\n}\n#line 3 \"math/div.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT, _typeU> floor_div(_typeT\
-    \ _x, _typeU _m) noexcept {\n    static_assert(std::is_integral_v<_typeT> && std::is_integral_v<_typeU>);\n\
-    \    if constexpr (std::is_unsigned_v<_typeT> || std::is_unsigned_v<_typeU>) return\
-    \ _x / _m;\n    auto _d = _x / _m;\n    return _d * _m == _x ? _d : _d - ((_x\
-    \ < 0) ^ (_m < 0));\n  }\n\n  template<class _typeT, class _typeU>\n  constexpr\
-    \ std::common_type_t<_typeT, _typeU> ceil_div(_typeT _x, _typeU _m) noexcept {\
-    \ return floor_div(_x + _m - static_cast<_typeT>(1), _m); }\n}\n#line 3 \"math/divisors.hpp\"\
-    \n#include <vector>\n#line 5 \"math/divisors.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ _typeContainer = std::vector<KYOPRO_BASE_INT>>\n  _typeContainer divisors(std::uint_fast64_t\
-    \ _n) {\n    _typeContainer _lower, _upper;\n    std::uint_fast64_t _i;\n    for\
-    \ (_i = 1; _i * _i < _n; ++_i) if (_n % _i == 0) {\n      _lower.emplace_back(_i);\n\
-    \      _upper.emplace_back(_n / _i);\n    }\n    if (_i * _i == _n) _lower.emplace_back(_i);\n\
-    \    _lower.insert(end(_lower), rall(_upper));\n    return _lower;\n  }\n}\n#line\
-    \ 3 \"math/euler_phi.hpp\"\n\nnamespace kyopro {\n  constexpr std::uint_fast64_t\
-    \ euler_phi(std::uint_fast64_t _n) noexcept {\n    std::uint_fast64_t _res = _n;\n\
-    \    if ((_n & 1) == 0) {\n      _res -= _res >> 1;\n      _n >>= 1;\n      while\
-    \ ((_n & 1) == 0) _n >>= 1;\n    }\n    for (std::uint_fast64_t _i = 3; _i * _i\
-    \ <= _n; _i += 2) {\n      if (_n % _i == 0) {\n        _res -= _res / _i;\n \
-    \       _n /= _i;\n        while (_n % _i == 0) _n /= _i;\n      }\n    }\n  \
-    \  if (_n != 1) _res -= _res / _n;\n    return _res;\n  }\n}\n#line 6 \"math/factorize.hpp\"\
+    \ {}\n\n    template<bool first = true>\n    void operator ()() {\n      if constexpr\
+    \ (end) print('\\n');\n      if constexpr (flush) itr.flush();\n    }\n    template<bool\
+    \ first = true, class Head, class... Args>\n    void operator ()(Head&& head,\
+    \ Args&&... args) {\n      if constexpr (debug && first) {\n        print('#');\n\
+    \        print(' ');\n      }\n      if constexpr (sep && !first) print_sep();\n\
+    \      print(head);\n      operator ()(std::forward<Args>(args)...);\n    }\n\
+    \  };\n\n  Printer<Writer<>, false, false, false> print(output), eprint(error);\n\
+    \  Printer<Writer<>, true, true, false> println(output), eprintln(error);\n  Printer<Writer<>>\
+    \ debug(output), edebug(error);\n}\n#line 3 \"math/div.hpp\"\n\nnamespace kyopro\
+    \ {\n  template<class _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT,\
+    \ _typeU> floor_div(_typeT _x, _typeU _m) noexcept {\n    static_assert(std::is_integral_v<_typeT>\
+    \ && std::is_integral_v<_typeU>);\n    if constexpr (std::is_unsigned_v<_typeT>\
+    \ || std::is_unsigned_v<_typeU>) return _x / _m;\n    auto _d = _x / _m;\n   \
+    \ return _d * _m == _x ? _d : _d - ((_x < 0) ^ (_m < 0));\n  }\n\n  template<class\
+    \ _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT, _typeU> ceil_div(_typeT\
+    \ _x, _typeU _m) noexcept { return floor_div(_x + _m - static_cast<_typeT>(1),\
+    \ _m); }\n}\n#line 3 \"math/divisors.hpp\"\n#include <vector>\n#line 5 \"math/divisors.hpp\"\
     \n\nnamespace kyopro {\n  template<class _typeContainer = std::vector<KYOPRO_BASE_INT>>\n\
+    \  _typeContainer divisors(std::uint_fast64_t _n) {\n    _typeContainer _lower,\
+    \ _upper;\n    std::uint_fast64_t _i;\n    for (_i = 1; _i * _i < _n; ++_i) if\
+    \ (_n % _i == 0) {\n      _lower.emplace_back(_i);\n      _upper.emplace_back(_n\
+    \ / _i);\n    }\n    if (_i * _i == _n) _lower.emplace_back(_i);\n    _lower.insert(end(_lower),\
+    \ rall(_upper));\n    return _lower;\n  }\n}\n#line 3 \"math/euler_phi.hpp\"\n\
+    \nnamespace kyopro {\n  constexpr std::uint_fast64_t euler_phi(std::uint_fast64_t\
+    \ _n) noexcept {\n    std::uint_fast64_t _res = _n;\n    if ((_n & 1) == 0) {\n\
+    \      _res -= _res >> 1;\n      _n >>= 1;\n      while ((_n & 1) == 0) _n >>=\
+    \ 1;\n    }\n    for (std::uint_fast64_t _i = 3; _i * _i <= _n; _i += 2) {\n \
+    \     if (_n % _i == 0) {\n        _res -= _res / _i;\n        _n /= _i;\n   \
+    \     while (_n % _i == 0) _n /= _i;\n      }\n    }\n    if (_n != 1) _res -=\
+    \ _res / _n;\n    return _res;\n  }\n}\n#line 6 \"math/factorize.hpp\"\n\nnamespace\
+    \ kyopro {\n  template<class _typeContainer = std::vector<KYOPRO_BASE_INT>>\n\
     \  _typeContainer factorize(std::uint_fast64_t _n) {\n    _typeContainer _res;\n\
     \    while ((_n & 1) == 0) {\n      _res.emplace_back(2);\n      _n >>= 1;\n \
     \   }\n    for (std::uint_fast64_t _i = 3; _i * _i <= _n; _i += 2) while (_n %\
@@ -409,7 +410,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2022-03-06 19:23:33+09:00'
+  timestamp: '2022-03-06 23:05:41+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp

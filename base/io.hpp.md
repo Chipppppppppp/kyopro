@@ -107,15 +107,15 @@ data:
     \    }\n      if constexpr (debug) print('}');\n    }\n    template<class T, std::enable_if_t<has_print<T>::value>*\
     \ = nullptr>\n    void print(const T& a) {\n      a.print();\n    }\n\n  public:\n\
     \    Printer() noexcept = default;\n    Printer(Writer& writer) noexcept: itr(writer.begin())\
-    \ {}\n\n    void operator ()() {\n      if constexpr (end) operator ()('\\n');\n\
-    \      if constexpr (flush) itr.flush();\n    }\n    template<class Head>\n  \
-    \  void operator ()(Head&& head) {\n      print(head);\n      operator ()();\n\
-    \    }\n    template<class Head, class... Args>\n    void operator ()(Head&& head,\
-    \ Args&&... args) {\n      print(head);\n      if constexpr (sep) print_sep();\n\
-    \      operator ()(std::forward<Args>(args)...);\n    }\n  };\n\n  Printer<Writer<>,\
-    \ false, false, false> print(output), eprint(error);\n  Printer<Writer<>, true,\
-    \ true, false> println(output), eprintln(error);\n  Printer<Writer<>> debug(output),\
-    \ edebug(error);\n}\n"
+    \ {}\n\n    template<bool first = true>\n    void operator ()() {\n      if constexpr\
+    \ (end) print('\\n');\n      if constexpr (flush) itr.flush();\n    }\n    template<bool\
+    \ first = true, class Head, class... Args>\n    void operator ()(Head&& head,\
+    \ Args&&... args) {\n      if constexpr (debug && first) {\n        print('#');\n\
+    \        print(' ');\n      }\n      if constexpr (sep && !first) print_sep();\n\
+    \      print(head);\n      operator ()(std::forward<Args>(args)...);\n    }\n\
+    \  };\n\n  Printer<Writer<>, false, false, false> print(output), eprint(error);\n\
+    \  Printer<Writer<>, true, true, false> println(output), eprintln(error);\n  Printer<Writer<>>\
+    \ debug(output), edebug(error);\n}\n"
   code: "#pragma once\n#include <unistd.h>\n#include <array>\n#include <cstdint>\n\
     #include <cstdio>\n#include <iterator>\n#include <string>\n#include <tuple>\n\
     #include <type_traits>\n#include <utility>\n#include \"settings.hpp\"\n#include\
@@ -174,15 +174,15 @@ data:
     \    }\n      if constexpr (debug) print('}');\n    }\n    template<class T, std::enable_if_t<has_print<T>::value>*\
     \ = nullptr>\n    void print(const T& a) {\n      a.print();\n    }\n\n  public:\n\
     \    Printer() noexcept = default;\n    Printer(Writer& writer) noexcept: itr(writer.begin())\
-    \ {}\n\n    void operator ()() {\n      if constexpr (end) operator ()('\\n');\n\
-    \      if constexpr (flush) itr.flush();\n    }\n    template<class Head>\n  \
-    \  void operator ()(Head&& head) {\n      print(head);\n      operator ()();\n\
-    \    }\n    template<class Head, class... Args>\n    void operator ()(Head&& head,\
-    \ Args&&... args) {\n      print(head);\n      if constexpr (sep) print_sep();\n\
-    \      operator ()(std::forward<Args>(args)...);\n    }\n  };\n\n  Printer<Writer<>,\
-    \ false, false, false> print(output), eprint(error);\n  Printer<Writer<>, true,\
-    \ true, false> println(output), eprintln(error);\n  Printer<Writer<>> debug(output),\
-    \ edebug(error);\n}"
+    \ {}\n\n    template<bool first = true>\n    void operator ()() {\n      if constexpr\
+    \ (end) print('\\n');\n      if constexpr (flush) itr.flush();\n    }\n    template<bool\
+    \ first = true, class Head, class... Args>\n    void operator ()(Head&& head,\
+    \ Args&&... args) {\n      if constexpr (debug && first) {\n        print('#');\n\
+    \        print(' ');\n      }\n      if constexpr (sep && !first) print_sep();\n\
+    \      print(head);\n      operator ()(std::forward<Args>(args)...);\n    }\n\
+    \  };\n\n  Printer<Writer<>, false, false, false> print(output), eprint(error);\n\
+    \  Printer<Writer<>, true, true, false> println(output), eprintln(error);\n  Printer<Writer<>>\
+    \ debug(output), edebug(error);\n}"
   dependsOn:
   - base/settings.hpp
   - base/trait.hpp
@@ -191,7 +191,7 @@ data:
   requiredBy:
   - base/all.hpp
   - all.hpp
-  timestamp: '2022-03-06 19:23:33+09:00'
+  timestamp: '2022-03-06 23:05:41+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: base/io.hpp
