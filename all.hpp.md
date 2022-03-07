@@ -163,7 +163,7 @@ data:
     \ bool _sep = true, bool _end = true, bool _debug = true, bool _flush = false,\
     \ KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  struct Printer\
     \ {\n  private:\n    template<class, class = void>\n    struct _has_print: std::false_type\
-    \ {};\n    template<class _typeT>\n    struct _has_print<_typeT, std::void_t<decltype(_typeT::print(std::declval<Printer>()))>>:\
+    \ {};\n    template<class _typeT>\n    struct _has_print<_typeT, std::void_t<decltype(std::declval<_typeT>().print(std::declval<Printer&>()))>>:\
     \ std::true_type {};\n\n    typename _typeWriter::iterator _itr;\n\n  public:\n\
     \    Printer() noexcept = default;\n    Printer(_typeWriter& _writer) noexcept:\
     \ _itr(_writer.begin()) {}\n\n    void _print_sep() {\n      if constexpr (_debug)\
@@ -412,7 +412,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2022-03-07 13:17:00+09:00'
+  timestamp: '2022-03-07 16:31:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp
