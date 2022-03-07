@@ -87,7 +87,7 @@ namespace kyopro {
     template<class, class = void>
     struct _has_print: std::false_type {};
     template<class _typeT>
-    struct _has_print<_typeT, std::void_t<decltype(_typeT::print(*this))>>: std::true_type {};
+    struct _has_print<_typeT, std::void_t<decltype(_typeT::print(std::declval<Printer>()))>>: std::true_type {};
 
     typename _typeWriter::iterator _itr;
 
