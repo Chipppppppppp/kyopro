@@ -150,7 +150,7 @@ data:
     \   friend constexpr bool operator ==(ModInt _lhs, ModInt _rhs) noexcept { return\
     \ _lhs.value == _rhs.value; }\n\n    friend constexpr bool operator !=(ModInt\
     \ _lhs, ModInt _rhs) noexcept { return _lhs.value != _rhs.value; }\n\n    template<class\
-    \ _typePrinter>\n    void print(_typePrinter& _printer) {\n      _printer.print(value);\n\
+    \ _typePrinter>\n    void print(_typePrinter& _printer) const {\n      _printer.print(value);\n\
     \    }\n  };\n\n  template<KYOPRO_BASE_UINT _m>\n  struct Hash<ModInt<_m>> { constexpr\
     \ KYOPRO_BASE_UINT operator ()(ModInt<_m> _a) const noexcept { return _a; } };\n\
     }\n#line 16 \"template/alias.hpp\"\n\nnamespace kyopro {\n  using ll = int64_t;\n\
@@ -237,7 +237,7 @@ data:
   requiredBy:
   - template/all.hpp
   - all.hpp
-  timestamp: '2022-03-07 13:04:54+09:00'
+  timestamp: '2022-03-07 16:37:03+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/alias.hpp
