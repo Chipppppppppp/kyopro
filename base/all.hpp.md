@@ -4,19 +4,19 @@ data:
   - icon: ':warning:'
     path: base/Hash.hpp
     title: base/Hash.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/out.hpp
     title: base/out.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/trait.hpp
     title: base/trait.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
   _extendedRequiredBy:
@@ -121,7 +121,7 @@ data:
     \ bool _sep = true, bool _end = true, bool _debug = true, bool _flush = false,\
     \ KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  struct Printer\
     \ {\n  private:\n    template<class, class = void>\n    struct _has_print: std::false_type\
-    \ {};\n    template<class _typeT>\n    struct _has_print<_typeT, std::void_t<decltype(_typeT::print(*this))>>:\
+    \ {};\n    template<class _typeT>\n    struct _has_print<_typeT, std::void_t<decltype(_typeT::print(std::declval<Printer>()))>>:\
     \ std::true_type {};\n\n    typename _typeWriter::iterator _itr;\n\n  public:\n\
     \    Printer() noexcept = default;\n    Printer(_typeWriter& _writer) noexcept:\
     \ _itr(_writer.begin()) {}\n\n    void _print_sep() {\n      if constexpr (_debug)\
@@ -185,7 +185,7 @@ data:
   path: base/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-03-07 13:04:54+09:00'
+  timestamp: '2022-03-07 13:17:00+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: base/all.hpp

@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/trait.hpp
     title: base/trait.hpp
   _extendedRequiredBy:
@@ -15,15 +15,15 @@ data:
     path: base/all.hpp
     title: base/all.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: yosupo/FenwickTree.test.cpp
     title: yosupo/FenwickTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"base/out.hpp\"\n#include <unistd.h>\n#include <array>\n\
@@ -83,7 +83,7 @@ data:
     \ bool _sep = true, bool _end = true, bool _debug = true, bool _flush = false,\
     \ KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  struct Printer\
     \ {\n  private:\n    template<class, class = void>\n    struct _has_print: std::false_type\
-    \ {};\n    template<class _typeT>\n    struct _has_print<_typeT, std::void_t<decltype(_typeT::print(*this))>>:\
+    \ {};\n    template<class _typeT>\n    struct _has_print<_typeT, std::void_t<decltype(_typeT::print(std::declval<Printer>()))>>:\
     \ std::true_type {};\n\n    typename _typeWriter::iterator _itr;\n\n  public:\n\
     \    Printer() noexcept = default;\n    Printer(_typeWriter& _writer) noexcept:\
     \ _itr(_writer.begin()) {}\n\n    void _print_sep() {\n      if constexpr (_debug)\
@@ -153,7 +153,7 @@ data:
     \ bool _sep = true, bool _end = true, bool _debug = true, bool _flush = false,\
     \ KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  struct Printer\
     \ {\n  private:\n    template<class, class = void>\n    struct _has_print: std::false_type\
-    \ {};\n    template<class _typeT>\n    struct _has_print<_typeT, std::void_t<decltype(_typeT::print(*this))>>:\
+    \ {};\n    template<class _typeT>\n    struct _has_print<_typeT, std::void_t<decltype(_typeT::print(std::declval<Printer>()))>>:\
     \ std::true_type {};\n\n    typename _typeWriter::iterator _itr;\n\n  public:\n\
     \    Printer() noexcept = default;\n    Printer(_typeWriter& _writer) noexcept:\
     \ _itr(_writer.begin()) {}\n\n    void _print_sep() {\n      if constexpr (_debug)\
@@ -203,8 +203,8 @@ data:
   requiredBy:
   - base/all.hpp
   - all.hpp
-  timestamp: '2022-03-07 13:04:54+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-03-07 13:17:00+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - yosupo/FenwickTree.test.cpp
   - yosupo/UnionFind.test.cpp

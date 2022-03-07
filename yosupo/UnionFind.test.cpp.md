@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/out.hpp
     title: base/out.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/trait.hpp
     title: base/trait.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/unionfind
@@ -108,7 +108,7 @@ data:
     \ bool _sep = true, bool _end = true, bool _debug = true, bool _flush = false,\
     \ KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  struct Printer\
     \ {\n  private:\n    template<class, class = void>\n    struct _has_print: std::false_type\
-    \ {};\n    template<class _typeT>\n    struct _has_print<_typeT, std::void_t<decltype(_typeT::print(*this))>>:\
+    \ {};\n    template<class _typeT>\n    struct _has_print<_typeT, std::void_t<decltype(_typeT::print(std::declval<Printer>()))>>:\
     \ std::true_type {};\n\n    typename _typeWriter::iterator _itr;\n\n  public:\n\
     \    Printer() noexcept = default;\n    Printer(_typeWriter& _writer) noexcept:\
     \ _itr(_writer.begin()) {}\n\n    void _print_sep() {\n      if constexpr (_debug)\
@@ -167,8 +167,8 @@ data:
   isVerificationFile: true
   path: yosupo/UnionFind.test.cpp
   requiredBy: []
-  timestamp: '2022-03-07 13:04:54+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-03-07 13:17:00+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/UnionFind.test.cpp
 layout: document
