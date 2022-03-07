@@ -69,7 +69,7 @@ namespace kyopro {
         return _writer._buffer[_writer._idx];
       }
 
-      void _flush() const {
+      void flush() const {
         write(_writer._fd, _writer._buffer.begin(), _writer._idx);
       }
     };
@@ -87,34 +87,38 @@ namespace kyopro {
     template<class, class = void>
     struct _has_print: std::false_type {};
     template<class _typeT>
-    struct _has_print<_typeT, std::void_t<decltype(_typeT::print)>>: std::true_type {};
+    struct _has_print<_typeT, std::void_t<decltype(_typeT::print(*this))>>: std::true_type {};
 
     typename _typeWriter::iterator _itr;
 
+  public:
+    Printer() noexcept = default;
+    Printer(_typeWriter& _writer) noexcept: _itr(_writer.begin()) {}
+
     void _print_sep() {
       if constexpr (_debug) {
-        _print(',');
+        print(',');
       }
-      _print(' ');
+      print(' ');
     }
 
-    void _print(char _a) {
+    void print(char _a) {
       *_itr = _a;
       ++_itr;
     }
-    void _print(const char* _a) {
-      for (; *_a; ++_a) _print(*_a);
+    void print(const char* _a) {
+      for (; *_a; ++_a) print(*_a);
     }
-    void _print(const std::string& _a) {
-      for (auto _i: _a) _print(_i);
+    void print(const std::string& _a) {
+      for (auto _i: _a) print(_i);
     }
-    void _print(bool _a) {
-      _print(static_cast<char>('0' + _a));
+    void print(bool _a) {
+      print(static_cast<char>('0' + _a));
     }
     template<class _typeT, std::enable_if_t<std::is_arithmetic_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>
-    void _print(_typeT _a) {
+    void print(_typeT _a) {
       if constexpr (std::is_signed_v<_typeT>) if (_a < 0) {
-        _print('-');
+        print('-');
         _a = -_a;
       }
       std::uint_fast64_t _p = _a;
@@ -124,63 +128,59 @@ namespace kyopro {
         _s += '0' + _p % 10;
         _p /= 10;
       } while (_p > 0);
-      for (auto _i = _s.rbegin(); _i != _s.rend(); ++_i) _print(*_i);
+      for (auto _i = _s.rbegin(); _i != _s.rend(); ++_i) print(*_i);
       if constexpr (std::is_integral_v<_typeT>) return;
-      _print('.');
+      print('.');
       for (int _i = 0; _i < static_cast<int>(_decimal_precision); ++_i) {
         _a *= 10;
-        _print('0' + static_cast<std::uint_fast64_t>(_a) % 10);
+        print('0' + static_cast<std::uint_fast64_t>(_a) % 10);
       }
     }
     template<size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>
-    void _print(const _typeT& _a) {
-      if constexpr (_debug && _i == 0) _print('{');
-      if constexpr (std::tuple_size_v<_typeT> != 0) _print(std::get<_i>(_a));
+    void print(const _typeT& _a) {
+      if constexpr (_debug && _i == 0) print('{');
+      if constexpr (std::tuple_size_v<_typeT> != 0) print(std::get<_i>(_a));
       if constexpr (_i + 1 < std::tuple_size_v<_typeT>) {
         if constexpr (_sep) _print_sep();
-        _print<_i + 1>(_a);
-      } else if constexpr (_debug) _print('}');
+        print<_i + 1>(_a);
+      } else if constexpr (_debug) print('}');
     }
     template<class _typeT, std::enable_if_t<is_iterable_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>
-    void _print(const _typeT& _a) {
-      if constexpr (_debug) _print('{');
+    void print(const _typeT& _a) {
+      if constexpr (_debug) print('{');
       if (std::empty(_a)) return;
       for (auto _i = std::begin(_a); ; ) {
-        _print(*_i);
+        print(*_i);
         if (++_i != std::end(_a)) {
           if constexpr (_sep) {
             if constexpr (_debug) {
-              _print(',');
-              _print(' ');
-            } else if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<_typeT>()[0])>>) _print(' ');
-            else _print('\n');
+              print(',');
+              print(' ');
+            } else if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<_typeT>()[0])>>) print(' ');
+            else print('\n');
           }
         } else break;
       }
-      if constexpr (_debug) _print('}');
+      if constexpr (_debug) print('}');
     }
     template<class _typeT, std::enable_if_t<_has_print<_typeT>::value>* = nullptr>
-    void _print(const _typeT& _a) {
-      _a._print();
+    void print(const _typeT& _a) {
+      _a.print(*this);
     }
-
-  public:
-    Printer() noexcept = default;
-    Printer(_typeWriter& _writer) noexcept: _itr(_writer.begin()) {}
 
     template<bool = true>
     void operator ()() {
-      if constexpr (_end) _print('\n');
+      if constexpr (_end) print('\n');
       if constexpr (_flush) _itr._flush();
     }
     template<bool _first = true, class _typeHead, class... _typeArgs>
     void operator ()(_typeHead&& _head, _typeArgs&&... _args) {
       if constexpr (_debug && _first) {
-        _print('#');
-        _print(' ');
+        print('#');
+        print(' ');
       }
       if constexpr (_sep && !_first) _print_sep();
-      _print(_head);
+      print(_head);
       operator ()<false>(std::forward<_typeArgs>(_args)...);
     }
   };
