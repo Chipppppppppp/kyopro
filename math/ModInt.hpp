@@ -110,7 +110,7 @@ namespace kyopro {
     friend constexpr bool operator !=(ModInt _lhs, ModInt _rhs) noexcept { return _lhs.value != _rhs.value; }
 
     template<class _typePrinter>
-    void print(_typePrinter& _printer) {
+    void print(_typePrinter& _printer) const {
       _printer.print(value);
     }
   };
