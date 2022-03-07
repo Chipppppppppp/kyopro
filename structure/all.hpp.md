@@ -57,35 +57,38 @@ data:
     \ 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
     \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
     \ -1}, {0, -1}, {1, -1}}};\n}\n#line 4 \"math/monoid.hpp\"\n\nnamespace kyopro\
-    \ {\n  template<class _typeT, _typeT _id = 0>\n  struct Plus {\n    static constexpr\
-    \ _typeT id = _id;\n    static constexpr _typeT op(_typeT _a, _typeT _b) noexcept\
-    \ { return _a + _b; }\n    static constexpr _typeT inv(_typeT _a) noexcept { return\
-    \ -_a; }\n  };\n  template<class _typeT, _typeT _id = 1>\n  struct Mul {\n   \
-    \ static constexpr _typeT id = _id;\n    static constexpr _typeT op(_typeT _a,\
-    \ _typeT _b) noexcept { return _a * _b; }\n    static constexpr _typeT inv(_typeT\
-    \ _a) noexcept {\n      static_assert(!std::is_integral_v<_typeT>);\n      return\
-    \ 1 / _a;\n    }\n  };\n  template<class _typeT, _typeT _id = -inf>\n  struct\
-    \ Max {\n    static constexpr _typeT id = _id;\n    static constexpr _typeT op(_typeT\
-    \ _a, _typeT _b) noexcept { return _a > _b ? _a : _b; }\n  };\n  template<class\
-    \ _typeT, _typeT _id = inf>\n  struct Min {\n    static constexpr _typeT id =\
-    \ _id;\n    static constexpr _typeT op(_typeT _a, _typeT _b) noexcept { return\
-    \ _a < _b ? _a : _b; }\n  };\n}\n#line 7 \"structure/FenwickTree.hpp\"\n\nnamespace\
-    \ kyopro {\n  template<class _typeT, class _typeOp = Plus<_typeT>>\n  struct FenwickTree\
-    \ {\n  private:\n    std::vector<_typeT> _tree;\n\n  public:\n    using value_type\
-    \ = _typeT;\n    using size_type = KYOPRO_BASE_UINT;\n    using reference = _typeT&;\n\
-    \    using const_reference = const _typeT&;\n\n    FenwickTree() noexcept = default;\n\
-    \    FenwickTree(KYOPRO_BASE_UINT _n) noexcept: _tree(_n, _typeOp::id) {}\n\n\
+    \ {\n  template<class _typeT, _typeT _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
+    \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
+    \ _a, _typeT _b) const noexcept { return _a + _b; }\n    constexpr _typeT inv(_typeT\
+    \ _a) const noexcept { return -_a; }\n  };\n  template<class _typeT, _typeT _id\
+    \ = 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<_typeT>);\n   \
+    \ static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a,\
+    \ _typeT _b) const noexcept { return _a * _b; }\n    constexpr _typeT inv(_typeT\
+    \ _a) const noexcept {\n      static_assert(!std::is_integral_v<_typeT>);\n  \
+    \    return 1 / _a;\n    }\n  };\n  template<class _typeT, _typeT _id = std::is_integral_v<_typeT>\
+    \ ? -INF<_typeT> : -inf>\n  struct Max {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
+    \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
+    \ _a, _typeT _b) const noexcept { return _a > _b ? _a : _b; }\n  };\n  template<class\
+    \ _typeT, _typeT _id = std::is_integral_v<_typeT> ? INF<_typeT> : inf>\n  struct\
+    \ Min {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static constexpr\
+    \ _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT _b) const\
+    \ noexcept { return _a < _b ? _a : _b; }\n  };\n}\n#line 7 \"structure/FenwickTree.hpp\"\
+    \n\nnamespace kyopro {\n  template<class _typeT, class _typeOp = Plus<_typeT>>\n\
+    \  struct FenwickTree {\n  private:\n    [[no_unique_address]] _typeOp _op;\n\
+    \    std::vector<_typeT> _tree;\n\n  public:\n    using value_type = _typeT;\n\
+    \    using size_type = KYOPRO_BASE_UINT;\n    using reference = _typeT&;\n   \
+    \ using const_reference = const _typeT&;\n\n    FenwickTree() noexcept = default;\n\
+    \    FenwickTree(KYOPRO_BASE_UINT _n) noexcept: _op(), _tree(_n, _op.id) {}\n\n\
     \    KYOPRO_BASE_UINT size() noexcept { return _tree.size(); }\n\n    void apply(int\
     \ _p, const _typeT& _x) {\n      ++_p;\n      while (_p <= (int)size()) {\n  \
-    \      _tree[_p - 1] = _typeOp::op(_tree[_p - 1], _x);\n        _p += _p & -_p;\n\
-    \      }\n    }\n\n    _typeT prod(int _r) const {\n      _typeT _s = _typeOp::id;\n\
-    \      while (_r > 0) {\n        _s = _typeOp::op(_s, _tree[_r - 1]);\n      \
-    \  _r -= _r & -_r;\n      }\n      return _s;\n    }\n    _typeT prod(int _l,\
-    \ int _r) const { return _typeOp::op(prod(_r), _typeOp::inv(prod(_l))); }\n\n\
-    \    _typeT all_prod() { return prod(_tree.size()); }\n\n    _typeT get(int _p)\
-    \ { return _typeOp::op(prod(_p + 1), _typeOp::inv(prod(_p))); }\n\n    void set(int\
-    \ _p, const _typeT& _x) { apply(_p, _typeOp::op(_x, _typeOp::inv(get(_p)))); }\n\
-    \  };\n}\n#line 2 \"structure/UnionFind.hpp\"\n/* UnionFind */\n#include <algorithm>\n\
+    \      _tree[_p - 1] = _op(_tree[_p - 1], _x);\n        _p += _p & -_p;\n    \
+    \  }\n    }\n\n    _typeT prod(int _r) const {\n      _typeT _s = _op.id;\n  \
+    \    while (_r > 0) {\n        _s = _op(_s, _tree[_r - 1]);\n        _r -= _r\
+    \ & -_r;\n      }\n      return _s;\n    }\n    _typeT prod(int _l, int _r) const\
+    \ { return _op(prod(_r), _op.inv(prod(_l))); }\n\n    _typeT all_prod() { return\
+    \ prod(_tree.size()); }\n\n    _typeT get(int _p) { return _op(prod(_p + 1), _op.inv(prod(_p)));\
+    \ }\n\n    void set(int _p, const _typeT& _x) { apply(_p, _op(_x, _op.inv(get(_p))));\
+    \ }\n  };\n}\n#line 2 \"structure/UnionFind.hpp\"\n/* UnionFind */\n#include <algorithm>\n\
     #include <unordered_map>\n#line 7 \"structure/UnionFind.hpp\"\n\nnamespace kyopro\
     \ {\n  struct UnionFind {\n  private:\n    std::vector<int> _par;\n\n  public:\n\
     \    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT _n) noexcept:\
@@ -129,7 +132,7 @@ data:
   path: structure/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-03-06 15:44:21+09:00'
+  timestamp: '2022-03-07 19:01:57+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: structure/all.hpp

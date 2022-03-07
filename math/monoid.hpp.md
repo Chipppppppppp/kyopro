@@ -58,33 +58,40 @@ data:
     \ 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
     \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
     \ -1}, {0, -1}, {1, -1}}};\n}\n#line 4 \"math/monoid.hpp\"\n\nnamespace kyopro\
-    \ {\n  template<class _typeT, _typeT _id = 0>\n  struct Plus {\n    static constexpr\
-    \ _typeT id = _id;\n    static constexpr _typeT op(_typeT _a, _typeT _b) noexcept\
-    \ { return _a + _b; }\n    static constexpr _typeT inv(_typeT _a) noexcept { return\
-    \ -_a; }\n  };\n  template<class _typeT, _typeT _id = 1>\n  struct Mul {\n   \
-    \ static constexpr _typeT id = _id;\n    static constexpr _typeT op(_typeT _a,\
-    \ _typeT _b) noexcept { return _a * _b; }\n    static constexpr _typeT inv(_typeT\
-    \ _a) noexcept {\n      static_assert(!std::is_integral_v<_typeT>);\n      return\
-    \ 1 / _a;\n    }\n  };\n  template<class _typeT, _typeT _id = -inf>\n  struct\
-    \ Max {\n    static constexpr _typeT id = _id;\n    static constexpr _typeT op(_typeT\
-    \ _a, _typeT _b) noexcept { return _a > _b ? _a : _b; }\n  };\n  template<class\
-    \ _typeT, _typeT _id = inf>\n  struct Min {\n    static constexpr _typeT id =\
-    \ _id;\n    static constexpr _typeT op(_typeT _a, _typeT _b) noexcept { return\
-    \ _a < _b ? _a : _b; }\n  };\n}\n"
+    \ {\n  template<class _typeT, _typeT _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
+    \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
+    \ _a, _typeT _b) const noexcept { return _a + _b; }\n    constexpr _typeT inv(_typeT\
+    \ _a) const noexcept { return -_a; }\n  };\n  template<class _typeT, _typeT _id\
+    \ = 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<_typeT>);\n   \
+    \ static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a,\
+    \ _typeT _b) const noexcept { return _a * _b; }\n    constexpr _typeT inv(_typeT\
+    \ _a) const noexcept {\n      static_assert(!std::is_integral_v<_typeT>);\n  \
+    \    return 1 / _a;\n    }\n  };\n  template<class _typeT, _typeT _id = std::is_integral_v<_typeT>\
+    \ ? -INF<_typeT> : -inf>\n  struct Max {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
+    \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
+    \ _a, _typeT _b) const noexcept { return _a > _b ? _a : _b; }\n  };\n  template<class\
+    \ _typeT, _typeT _id = std::is_integral_v<_typeT> ? INF<_typeT> : inf>\n  struct\
+    \ Min {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static constexpr\
+    \ _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT _b) const\
+    \ noexcept { return _a < _b ? _a : _b; }\n  };\n}\n"
   code: "#pragma once\n#include <type_traits>\n#include \"../base/constant.hpp\"\n\
     \nnamespace kyopro {\n  template<class _typeT, _typeT _id = 0>\n  struct Plus\
-    \ {\n    static constexpr _typeT id = _id;\n    static constexpr _typeT op(_typeT\
-    \ _a, _typeT _b) noexcept { return _a + _b; }\n    static constexpr _typeT inv(_typeT\
-    \ _a) noexcept { return -_a; }\n  };\n  template<class _typeT, _typeT _id = 1>\n\
-    \  struct Mul {\n    static constexpr _typeT id = _id;\n    static constexpr _typeT\
-    \ op(_typeT _a, _typeT _b) noexcept { return _a * _b; }\n    static constexpr\
-    \ _typeT inv(_typeT _a) noexcept {\n      static_assert(!std::is_integral_v<_typeT>);\n\
-    \      return 1 / _a;\n    }\n  };\n  template<class _typeT, _typeT _id = -inf>\n\
-    \  struct Max {\n    static constexpr _typeT id = _id;\n    static constexpr _typeT\
-    \ op(_typeT _a, _typeT _b) noexcept { return _a > _b ? _a : _b; }\n  };\n  template<class\
-    \ _typeT, _typeT _id = inf>\n  struct Min {\n    static constexpr _typeT id =\
-    \ _id;\n    static constexpr _typeT op(_typeT _a, _typeT _b) noexcept { return\
-    \ _a < _b ? _a : _b; }\n  };\n}"
+    \ {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static constexpr _typeT\
+    \ id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT _b) const noexcept\
+    \ { return _a + _b; }\n    constexpr _typeT inv(_typeT _a) const noexcept { return\
+    \ -_a; }\n  };\n  template<class _typeT, _typeT _id = 1>\n  struct Mul {\n   \
+    \ static_assert(std::is_arithmetic_v<_typeT>);\n    static constexpr _typeT id\
+    \ = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT _b) const noexcept\
+    \ { return _a * _b; }\n    constexpr _typeT inv(_typeT _a) const noexcept {\n\
+    \      static_assert(!std::is_integral_v<_typeT>);\n      return 1 / _a;\n   \
+    \ }\n  };\n  template<class _typeT, _typeT _id = std::is_integral_v<_typeT> ?\
+    \ -INF<_typeT> : -inf>\n  struct Max {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
+    \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
+    \ _a, _typeT _b) const noexcept { return _a > _b ? _a : _b; }\n  };\n  template<class\
+    \ _typeT, _typeT _id = std::is_integral_v<_typeT> ? INF<_typeT> : inf>\n  struct\
+    \ Min {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static constexpr\
+    \ _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT _b) const\
+    \ noexcept { return _a < _b ? _a : _b; }\n  };\n}"
   dependsOn:
   - base/constant.hpp
   - math/power.hpp
@@ -96,7 +103,7 @@ data:
   - structure/FenwickTree.hpp
   - structure/all.hpp
   - all.hpp
-  timestamp: '2022-03-06 15:44:21+09:00'
+  timestamp: '2022-03-07 19:01:57+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - yosupo/FenwickTree.test.cpp
