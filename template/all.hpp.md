@@ -4,13 +4,13 @@ data:
   - icon: ':warning:'
     path: base/Hash.hpp
     title: base/Hash.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/trait.hpp
     title: base/trait.hpp
   - icon: ':warning:'
@@ -19,7 +19,7 @@ data:
   - icon: ':warning:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
   - icon: ':warning:'
@@ -112,50 +112,50 @@ data:
     \ _typeU> ceil_mod(_typeT _x, _typeU _m) noexcept {\n    return _m - floor_mod(_x\
     \ - 1, _m) - static_cast<_typeT>(1);\n  }\n}\n#line 9 \"math/ModInt.hpp\"\n\n\
     namespace kyopro {\n  template<std::uint_fast64_t _m>\n  struct ModInt {\n   \
-    \ static constexpr KYOPRO_BASE_INT mod = _m;\n    std::uint_fast64_t _value;\n\
-    \n    constexpr ModInt() noexcept = default;\n    template<class T>\n    constexpr\
-    \ ModInt(T _value) noexcept: _value(floor_mod(_value, _m)) { static_assert(std::is_integral_v<T>);\
+    \ static constexpr KYOPRO_BASE_INT mod = _m;\n    std::uint_fast64_t value;\n\n\
+    \    constexpr ModInt() noexcept = default;\n    template<class T>\n    constexpr\
+    \ ModInt(T value) noexcept: value(floor_mod(value, _m)) { static_assert(std::is_integral_v<T>);\
     \ }\n\n    template<class T>\n    explicit constexpr operator T() const noexcept\
-    \ { return _value; }\n\n    static constexpr ModInt raw(std::uint_fast64_t _n)\
-    \ noexcept {\n      ModInt _res;\n      _res._value = _n;\n      return _res;\n\
+    \ { return value; }\n\n    static constexpr ModInt raw(std::uint_fast64_t _n)\
+    \ noexcept {\n      ModInt _res;\n      _res.value = _n;\n      return _res;\n\
     \    }\n\n    constexpr ModInt power(std::uint_fast64_t _n) const noexcept {\n\
-    \      std::uint_fast64_t _res = 1, _a = _value;\n      while (_n > 0) {\n   \
-    \     if (_n & 1) _res = _res * _a % _m;\n        _a = _a * _a % _m;\n       \
-    \ _n >>= 1;\n      }\n      return _res;\n    }\n\n    constexpr ModInt inv()\
-    \ const noexcept {\n      std::uint_fast64_t _a = _value, _b = _m;\n      std::int64_t\
+    \      std::uint_fast64_t _res = 1, _a = value;\n      while (_n > 0) {\n    \
+    \    if (_n & 1) _res = _res * _a % _m;\n        _a = _a * _a % _m;\n        _n\
+    \ >>= 1;\n      }\n      return _res;\n    }\n\n    constexpr ModInt inv() const\
+    \ noexcept {\n      std::uint_fast64_t _a = value, _b = _m;\n      std::int64_t\
     \ _u = 1, _v = 0;\n      while (_b > 0) {\n        std::uint_fast64_t _t = _a\
     \ / _b;\n        _a -= _t * _b;\n        std::swap(_a, _b);\n        _u -= _t\
     \ * _v;\n        std::swap(_u, _v);\n      }\n      return floor_mod(_u, _m);\n\
     \    }\n\n    constexpr ModInt operator +() const noexcept { return *this; }\n\
-    \    constexpr ModInt operator -() const noexcept { return _m - _value; }\n\n\
-    \    constexpr ModInt& operator ++() noexcept {\n      if (++_value >= _m) _value\
-    \ -= _m;\n      return *this;\n    }\n    constexpr ModInt operator ++(int) noexcept\
-    \ {\n      ModInt _before = *this;\n      operator ++();\n      return _before;\n\
-    \    }\n    constexpr ModInt& operator --() noexcept {\n      if (_value == 0)\
-    \ _value = _m;\n      --_value;\n      return *this;\n    }\n    constexpr ModInt\
-    \ operator --(int) noexcept {\n      ModInt _before = *this;\n      operator --();\n\
-    \      return _before;\n    }\n\n    constexpr ModInt& operator +=(ModInt _rhs)\
-    \ noexcept {\n      if ((_value += _rhs._value) >= _m) _value -= _m;\n      return\
-    \ *this;\n    }\n    constexpr ModInt& operator -=(ModInt _rhs) noexcept {\n \
-    \     if (_value < _rhs._value) _value += _m;\n      _value -= _rhs._value;\n\
-    \      return *this;\n    }\n    constexpr ModInt& operator *=(ModInt _rhs) noexcept\
-    \ {\n      _value = _value * _rhs._value % _m;\n      return *this;\n    }\n \
-    \   constexpr ModInt& operator /=(ModInt _rhs) noexcept {\n      _value = _value\
-    \ * _rhs.inv()._value % _m;\n      return *this;\n    }\n\n    friend constexpr\
+    \n    constexpr ModInt operator -() const noexcept { return _m - value; }\n\n\
+    \    constexpr ModInt& operator ++() noexcept {\n      if (++value >= _m) value\
+    \ -= _m;\n      return *this;\n    }\n\n    constexpr ModInt operator ++(int)\
+    \ noexcept {\n      ModInt _before = *this;\n      operator ++();\n      return\
+    \ _before;\n    }\n\n    constexpr ModInt& operator --() noexcept {\n      if\
+    \ (value == 0) value = _m;\n      --value;\n      return *this;\n    }\n\n   \
+    \ constexpr ModInt operator --(int) noexcept {\n      ModInt _before = *this;\n\
+    \      operator --();\n      return _before;\n    }\n\n    constexpr ModInt& operator\
+    \ +=(ModInt _rhs) noexcept {\n      if ((value += _rhs.value) >= _m) value -=\
+    \ _m;\n      return *this;\n    }\n\n    constexpr ModInt& operator -=(ModInt\
+    \ _rhs) noexcept {\n      if (value < _rhs.value) value += _m;\n      value -=\
+    \ _rhs.value;\n      return *this;\n    }\n\n    constexpr ModInt& operator *=(ModInt\
+    \ _rhs) noexcept {\n      value = value * _rhs.value % _m;\n      return *this;\n\
+    \    }\n\n    constexpr ModInt& operator /=(ModInt _rhs) noexcept {\n      value\
+    \ = value * _rhs.inv().value % _m;\n      return *this;\n    }\n\n    friend constexpr\
     \ ModInt operator +(ModInt _lhs, ModInt _rhs) noexcept { return _lhs += _rhs;\
-    \ }\n    friend constexpr ModInt operator -(ModInt _lhs, ModInt _rhs) noexcept\
-    \ { return _lhs -= _rhs; }\n    friend constexpr ModInt operator *(ModInt _lhs,\
-    \ ModInt _rhs) noexcept { return _lhs *= _rhs; }\n    friend constexpr ModInt\
-    \ operator /(ModInt _lhs, ModInt _rhs) noexcept { return _lhs /= _rhs; }\n   \
-    \ friend constexpr bool operator ==(ModInt _lhs, ModInt _rhs) noexcept { return\
-    \ _lhs._value == _rhs._value; }\n    friend constexpr bool operator !=(ModInt\
-    \ _lhs, ModInt _rhs) noexcept { return _lhs._value != _rhs._value; }\n  };\n\n\
-    \  template<KYOPRO_BASE_UINT _m>\n  struct Hash<ModInt<_m>> { constexpr KYOPRO_BASE_UINT\
-    \ operator ()(ModInt<_m> _a) const noexcept { return _a; } };\n\n  constexpr ModInt<mod>\
-    \ operator \"\" _m(unsigned long long _a) noexcept { return _a; }\n}\n#line 16\
-    \ \"template/alias.hpp\"\n\nnamespace kyopro {\n  using ll = int64_t;\n  using\
-    \ ull = uint_fast64_t;\n  using lf = double;\n  #ifdef __SIZEOF_INT128__\n  using\
-    \ i128 = __int128_t;\n  using u128 = __uint128_t;\n  #endif\n  #ifdef __SIZEOF_FLOAT128__\n\
+    \ }\n\n    friend constexpr ModInt operator -(ModInt _lhs, ModInt _rhs) noexcept\
+    \ { return _lhs -= _rhs; }\n\n    friend constexpr ModInt operator *(ModInt _lhs,\
+    \ ModInt _rhs) noexcept { return _lhs *= _rhs; }\n\n    friend constexpr ModInt\
+    \ operator /(ModInt _lhs, ModInt _rhs) noexcept { return _lhs /= _rhs; }\n\n \
+    \   friend constexpr bool operator ==(ModInt _lhs, ModInt _rhs) noexcept { return\
+    \ _lhs.value == _rhs.value; }\n\n    friend constexpr bool operator !=(ModInt\
+    \ _lhs, ModInt _rhs) noexcept { return _lhs.value != _rhs.value; }\n\n    template<class\
+    \ _typePrinter>\n    void print(_typePrinter& _printer) {\n      _printer.print(value);\n\
+    \    }\n  };\n\n  template<KYOPRO_BASE_UINT _m>\n  struct Hash<ModInt<_m>> { constexpr\
+    \ KYOPRO_BASE_UINT operator ()(ModInt<_m> _a) const noexcept { return _a; } };\n\
+    }\n#line 16 \"template/alias.hpp\"\n\nnamespace kyopro {\n  using ll = int64_t;\n\
+    \  using ull = uint_fast64_t;\n  using lf = double;\n  #ifdef __SIZEOF_INT128__\n\
+    \  using i128 = __int128_t;\n  using u128 = __uint128_t;\n  #endif\n  #ifdef __SIZEOF_FLOAT128__\n\
     \  using f128 = __float128;\n  #endif\n\n  template<class _typeT>\n  using vec\
     \ = std::vector<_typeT>;\n  using str = std::string;\n  template<class Key>\n\
     \  using hash_set = std::unordered_set<Key, Hash<Key>>;\n  template<class Key,\
@@ -203,7 +203,7 @@ data:
   path: template/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-03-06 23:07:28+09:00'
+  timestamp: '2022-03-07 13:04:54+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/all.hpp

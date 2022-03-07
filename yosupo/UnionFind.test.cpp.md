@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/out.hpp
     title: base/out.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/trait.hpp
     title: base/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/unionfind
@@ -101,59 +101,59 @@ data:
     \          _writer._idx = 0;\n        }\n        return *this;\n      }\n\n  \
     \    iterator operator ++(int) {\n        iterator _before = *this;\n        operator\
     \ ++();\n        return _before;\n      }\n\n      char& operator *() const {\n\
-    \        return _writer._buffer[_writer._idx];\n      }\n\n      void _flush()\
+    \        return _writer._buffer[_writer._idx];\n      }\n\n      void flush()\
     \ const {\n        write(_writer._fd, _writer._buffer.begin(), _writer._idx);\n\
     \      }\n    };\n\n    iterator begin() noexcept {\n      return iterator(*this);\n\
     \    }\n  };\n\n  Writer output(1), error(2);\n\n  template<class _typeWriter,\
     \ bool _sep = true, bool _end = true, bool _debug = true, bool _flush = false,\
     \ KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  struct Printer\
     \ {\n  private:\n    template<class, class = void>\n    struct _has_print: std::false_type\
-    \ {};\n    template<class _typeT>\n    struct _has_print<_typeT, std::void_t<decltype(_typeT::print)>>:\
-    \ std::true_type {};\n\n    typename _typeWriter::iterator _itr;\n\n    void _print_sep()\
-    \ {\n      if constexpr (_debug) {\n        _print(',');\n      }\n      _print('\
-    \ ');\n    }\n\n    void _print(char _a) {\n      *_itr = _a;\n      ++_itr;\n\
-    \    }\n    void _print(const char* _a) {\n      for (; *_a; ++_a) _print(*_a);\n\
-    \    }\n    void _print(const std::string& _a) {\n      for (auto _i: _a) _print(_i);\n\
-    \    }\n    void _print(bool _a) {\n      _print(static_cast<char>('0' + _a));\n\
-    \    }\n    template<class _typeT, std::enable_if_t<std::is_arithmetic_v<_typeT>\
-    \ && !_has_print<_typeT>::value>* = nullptr>\n    void _print(_typeT _a) {\n \
-    \     if constexpr (std::is_signed_v<_typeT>) if (_a < 0) {\n        _print('-');\n\
-    \        _a = -_a;\n      }\n      std::uint_fast64_t _p = _a;\n      _a -= _p;\n\
-    \      std::string _s;\n      do {\n        _s += '0' + _p % 10;\n        _p /=\
-    \ 10;\n      } while (_p > 0);\n      for (auto _i = _s.rbegin(); _i != _s.rend();\
-    \ ++_i) _print(*_i);\n      if constexpr (std::is_integral_v<_typeT>) return;\n\
-    \      _print('.');\n      for (int _i = 0; _i < static_cast<int>(_decimal_precision);\
-    \ ++_i) {\n        _a *= 10;\n        _print('0' + static_cast<std::uint_fast64_t>(_a)\
+    \ {};\n    template<class _typeT>\n    struct _has_print<_typeT, std::void_t<decltype(_typeT::print(*this))>>:\
+    \ std::true_type {};\n\n    typename _typeWriter::iterator _itr;\n\n  public:\n\
+    \    Printer() noexcept = default;\n    Printer(_typeWriter& _writer) noexcept:\
+    \ _itr(_writer.begin()) {}\n\n    void _print_sep() {\n      if constexpr (_debug)\
+    \ {\n        print(',');\n      }\n      print(' ');\n    }\n\n    void print(char\
+    \ _a) {\n      *_itr = _a;\n      ++_itr;\n    }\n    void print(const char* _a)\
+    \ {\n      for (; *_a; ++_a) print(*_a);\n    }\n    void print(const std::string&\
+    \ _a) {\n      for (auto _i: _a) print(_i);\n    }\n    void print(bool _a) {\n\
+    \      print(static_cast<char>('0' + _a));\n    }\n    template<class _typeT,\
+    \ std::enable_if_t<std::is_arithmetic_v<_typeT> && !_has_print<_typeT>::value>*\
+    \ = nullptr>\n    void print(_typeT _a) {\n      if constexpr (std::is_signed_v<_typeT>)\
+    \ if (_a < 0) {\n        print('-');\n        _a = -_a;\n      }\n      std::uint_fast64_t\
+    \ _p = _a;\n      _a -= _p;\n      std::string _s;\n      do {\n        _s +=\
+    \ '0' + _p % 10;\n        _p /= 10;\n      } while (_p > 0);\n      for (auto\
+    \ _i = _s.rbegin(); _i != _s.rend(); ++_i) print(*_i);\n      if constexpr (std::is_integral_v<_typeT>)\
+    \ return;\n      print('.');\n      for (int _i = 0; _i < static_cast<int>(_decimal_precision);\
+    \ ++_i) {\n        _a *= 10;\n        print('0' + static_cast<std::uint_fast64_t>(_a)\
     \ % 10);\n      }\n    }\n    template<size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT>\
-    \ && !_has_print<_typeT>::value>* = nullptr>\n    void _print(const _typeT& _a)\
-    \ {\n      if constexpr (_debug && _i == 0) _print('{');\n      if constexpr (std::tuple_size_v<_typeT>\
-    \ != 0) _print(std::get<_i>(_a));\n      if constexpr (_i + 1 < std::tuple_size_v<_typeT>)\
-    \ {\n        if constexpr (_sep) _print_sep();\n        _print<_i + 1>(_a);\n\
-    \      } else if constexpr (_debug) _print('}');\n    }\n    template<class _typeT,\
+    \ && !_has_print<_typeT>::value>* = nullptr>\n    void print(const _typeT& _a)\
+    \ {\n      if constexpr (_debug && _i == 0) print('{');\n      if constexpr (std::tuple_size_v<_typeT>\
+    \ != 0) print(std::get<_i>(_a));\n      if constexpr (_i + 1 < std::tuple_size_v<_typeT>)\
+    \ {\n        if constexpr (_sep) _print_sep();\n        print<_i + 1>(_a);\n \
+    \     } else if constexpr (_debug) print('}');\n    }\n    template<class _typeT,\
     \ std::enable_if_t<is_iterable_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>\n\
-    \    void _print(const _typeT& _a) {\n      if constexpr (_debug) _print('{');\n\
+    \    void print(const _typeT& _a) {\n      if constexpr (_debug) print('{');\n\
     \      if (std::empty(_a)) return;\n      for (auto _i = std::begin(_a); ; ) {\n\
-    \        _print(*_i);\n        if (++_i != std::end(_a)) {\n          if constexpr\
-    \ (_sep) {\n            if constexpr (_debug) {\n              _print(',');\n\
-    \              _print(' ');\n            } else if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<_typeT>()[0])>>)\
-    \ _print(' ');\n            else _print('\\n');\n          }\n        } else break;\n\
-    \      }\n      if constexpr (_debug) _print('}');\n    }\n    template<class\
-    \ _typeT, std::enable_if_t<_has_print<_typeT>::value>* = nullptr>\n    void _print(const\
-    \ _typeT& _a) {\n      _a._print();\n    }\n\n  public:\n    Printer() noexcept\
-    \ = default;\n    Printer(_typeWriter& _writer) noexcept: _itr(_writer.begin())\
-    \ {}\n\n    template<bool = true>\n    void operator ()() {\n      if constexpr\
-    \ (_end) _print('\\n');\n      if constexpr (_flush) _itr._flush();\n    }\n \
-    \   template<bool _first = true, class _typeHead, class... _typeArgs>\n    void\
-    \ operator ()(_typeHead&& _head, _typeArgs&&... _args) {\n      if constexpr (_debug\
-    \ && _first) {\n        _print('#');\n        _print(' ');\n      }\n      if\
-    \ constexpr (_sep && !_first) _print_sep();\n      _print(_head);\n      operator\
-    \ ()<false>(std::forward<_typeArgs>(_args)...);\n    }\n  };\n\n  Printer<Writer<>,\
-    \ false, false, false> print(output), eprint(error);\n  Printer<Writer<>, true,\
-    \ true, false> println(output), eprintln(error);\n  Printer<Writer<>> debug(output),\
-    \ edebug(error);\n}\n#line 5 \"yosupo/UnionFind.test.cpp\"\n\nint main() {\n \
-    \ int n, q;\n  std::cin >> n >> q;\n  kyopro::UnionFind uf(n);\n  for (int i =\
-    \ 0; i < q; ++i) {\n    int t, u, v;\n    std::cin >> t >> u >> v;\n    if (t\
-    \ == 0) uf.merge(u, v);\n    else kyopro::println(uf.same(u, v));\n  }\n}\n"
+    \        print(*_i);\n        if (++_i != std::end(_a)) {\n          if constexpr\
+    \ (_sep) {\n            if constexpr (_debug) {\n              print(',');\n \
+    \             print(' ');\n            } else if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<_typeT>()[0])>>)\
+    \ print(' ');\n            else print('\\n');\n          }\n        } else break;\n\
+    \      }\n      if constexpr (_debug) print('}');\n    }\n    template<class _typeT,\
+    \ std::enable_if_t<_has_print<_typeT>::value>* = nullptr>\n    void print(const\
+    \ _typeT& _a) {\n      _a.print(*this);\n    }\n\n    template<bool = true>\n\
+    \    void operator ()() {\n      if constexpr (_end) print('\\n');\n      if constexpr\
+    \ (_flush) _itr._flush();\n    }\n    template<bool _first = true, class _typeHead,\
+    \ class... _typeArgs>\n    void operator ()(_typeHead&& _head, _typeArgs&&...\
+    \ _args) {\n      if constexpr (_debug && _first) {\n        print('#');\n   \
+    \     print(' ');\n      }\n      if constexpr (_sep && !_first) _print_sep();\n\
+    \      print(_head);\n      operator ()<false>(std::forward<_typeArgs>(_args)...);\n\
+    \    }\n  };\n\n  Printer<Writer<>, false, false, false> print(output), eprint(error);\n\
+    \  Printer<Writer<>, true, true, false> println(output), eprintln(error);\n  Printer<Writer<>>\
+    \ debug(output), edebug(error);\n}\n#line 5 \"yosupo/UnionFind.test.cpp\"\n\n\
+    int main() {\n  int n, q;\n  std::cin >> n >> q;\n  kyopro::UnionFind uf(n);\n\
+    \  for (int i = 0; i < q; ++i) {\n    int t, u, v;\n    std::cin >> t >> u >>\
+    \ v;\n    if (t == 0) uf.merge(u, v);\n    else kyopro::println(uf.same(u, v));\n\
+    \  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\n#include <iostream>\n\
     #include \"../structure/UnionFind.hpp\"\n#include \"../base/out.hpp\"\n\nint main()\
     \ {\n  int n, q;\n  std::cin >> n >> q;\n  kyopro::UnionFind uf(n);\n  for (int\
@@ -167,8 +167,8 @@ data:
   isVerificationFile: true
   path: yosupo/UnionFind.test.cpp
   requiredBy: []
-  timestamp: '2022-03-06 23:43:14+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-03-07 13:04:54+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: yosupo/UnionFind.test.cpp
 layout: document

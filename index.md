@@ -14,16 +14,16 @@ data:
     - icon: ':warning:'
       path: base/all.hpp
       title: base/all.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: base/constant.hpp
       title: base/constant.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: base/out.hpp
       title: base/out.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: base/settings.hpp
       title: base/settings.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: base/trait.hpp
       title: base/trait.hpp
   - name: math
@@ -52,18 +52,18 @@ data:
     - icon: ':warning:'
       path: math/mod.hpp
       title: math/mod.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: math/monoid.hpp
       title: math/monoid.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: math/power.hpp
       title: math/power.hpp
   - name: structure
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: structure/FenwickTree.hpp
       title: structure/FenwickTree.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: structure/UnionFind.hpp
       title: structure/UnionFind.hpp
     - icon: ':warning:'
@@ -80,10 +80,10 @@ data:
   verificationCategories:
   - name: yosupo
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: yosupo/FenwickTree.test.cpp
       title: yosupo/FenwickTree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: yosupo/UnionFind.test.cpp
       title: yosupo/UnionFind.test.cpp
 layout: toppage

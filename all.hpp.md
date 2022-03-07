@@ -7,16 +7,16 @@ data:
   - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/out.hpp
     title: base/out.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/trait.hpp
     title: base/trait.hpp
   - icon: ':warning:'
@@ -43,16 +43,16 @@ data:
   - icon: ':warning:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/monoid.hpp
     title: math/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   - icon: ':warning:'
@@ -157,76 +157,76 @@ data:
     \      }\n\n      iterator operator ++(int) {\n        iterator _before = *this;\n\
     \        operator ++();\n        return _before;\n      }\n\n      char& operator\
     \ *() const {\n        return _writer._buffer[_writer._idx];\n      }\n\n    \
-    \  void _flush() const {\n        write(_writer._fd, _writer._buffer.begin(),\
-    \ _writer._idx);\n      }\n    };\n\n    iterator begin() noexcept {\n      return\
-    \ iterator(*this);\n    }\n  };\n\n  Writer output(1), error(2);\n\n  template<class\
-    \ _typeWriter, bool _sep = true, bool _end = true, bool _debug = true, bool _flush\
-    \ = false, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n \
-    \ struct Printer {\n  private:\n    template<class, class = void>\n    struct\
-    \ _has_print: std::false_type {};\n    template<class _typeT>\n    struct _has_print<_typeT,\
-    \ std::void_t<decltype(_typeT::print)>>: std::true_type {};\n\n    typename _typeWriter::iterator\
-    \ _itr;\n\n    void _print_sep() {\n      if constexpr (_debug) {\n        _print(',');\n\
-    \      }\n      _print(' ');\n    }\n\n    void _print(char _a) {\n      *_itr\
-    \ = _a;\n      ++_itr;\n    }\n    void _print(const char* _a) {\n      for (;\
-    \ *_a; ++_a) _print(*_a);\n    }\n    void _print(const std::string& _a) {\n \
-    \     for (auto _i: _a) _print(_i);\n    }\n    void _print(bool _a) {\n     \
-    \ _print(static_cast<char>('0' + _a));\n    }\n    template<class _typeT, std::enable_if_t<std::is_arithmetic_v<_typeT>\
-    \ && !_has_print<_typeT>::value>* = nullptr>\n    void _print(_typeT _a) {\n \
-    \     if constexpr (std::is_signed_v<_typeT>) if (_a < 0) {\n        _print('-');\n\
-    \        _a = -_a;\n      }\n      std::uint_fast64_t _p = _a;\n      _a -= _p;\n\
-    \      std::string _s;\n      do {\n        _s += '0' + _p % 10;\n        _p /=\
-    \ 10;\n      } while (_p > 0);\n      for (auto _i = _s.rbegin(); _i != _s.rend();\
-    \ ++_i) _print(*_i);\n      if constexpr (std::is_integral_v<_typeT>) return;\n\
-    \      _print('.');\n      for (int _i = 0; _i < static_cast<int>(_decimal_precision);\
-    \ ++_i) {\n        _a *= 10;\n        _print('0' + static_cast<std::uint_fast64_t>(_a)\
+    \  void flush() const {\n        write(_writer._fd, _writer._buffer.begin(), _writer._idx);\n\
+    \      }\n    };\n\n    iterator begin() noexcept {\n      return iterator(*this);\n\
+    \    }\n  };\n\n  Writer output(1), error(2);\n\n  template<class _typeWriter,\
+    \ bool _sep = true, bool _end = true, bool _debug = true, bool _flush = false,\
+    \ KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  struct Printer\
+    \ {\n  private:\n    template<class, class = void>\n    struct _has_print: std::false_type\
+    \ {};\n    template<class _typeT>\n    struct _has_print<_typeT, std::void_t<decltype(_typeT::print(*this))>>:\
+    \ std::true_type {};\n\n    typename _typeWriter::iterator _itr;\n\n  public:\n\
+    \    Printer() noexcept = default;\n    Printer(_typeWriter& _writer) noexcept:\
+    \ _itr(_writer.begin()) {}\n\n    void _print_sep() {\n      if constexpr (_debug)\
+    \ {\n        print(',');\n      }\n      print(' ');\n    }\n\n    void print(char\
+    \ _a) {\n      *_itr = _a;\n      ++_itr;\n    }\n    void print(const char* _a)\
+    \ {\n      for (; *_a; ++_a) print(*_a);\n    }\n    void print(const std::string&\
+    \ _a) {\n      for (auto _i: _a) print(_i);\n    }\n    void print(bool _a) {\n\
+    \      print(static_cast<char>('0' + _a));\n    }\n    template<class _typeT,\
+    \ std::enable_if_t<std::is_arithmetic_v<_typeT> && !_has_print<_typeT>::value>*\
+    \ = nullptr>\n    void print(_typeT _a) {\n      if constexpr (std::is_signed_v<_typeT>)\
+    \ if (_a < 0) {\n        print('-');\n        _a = -_a;\n      }\n      std::uint_fast64_t\
+    \ _p = _a;\n      _a -= _p;\n      std::string _s;\n      do {\n        _s +=\
+    \ '0' + _p % 10;\n        _p /= 10;\n      } while (_p > 0);\n      for (auto\
+    \ _i = _s.rbegin(); _i != _s.rend(); ++_i) print(*_i);\n      if constexpr (std::is_integral_v<_typeT>)\
+    \ return;\n      print('.');\n      for (int _i = 0; _i < static_cast<int>(_decimal_precision);\
+    \ ++_i) {\n        _a *= 10;\n        print('0' + static_cast<std::uint_fast64_t>(_a)\
     \ % 10);\n      }\n    }\n    template<size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT>\
-    \ && !_has_print<_typeT>::value>* = nullptr>\n    void _print(const _typeT& _a)\
-    \ {\n      if constexpr (_debug && _i == 0) _print('{');\n      if constexpr (std::tuple_size_v<_typeT>\
-    \ != 0) _print(std::get<_i>(_a));\n      if constexpr (_i + 1 < std::tuple_size_v<_typeT>)\
-    \ {\n        if constexpr (_sep) _print_sep();\n        _print<_i + 1>(_a);\n\
-    \      } else if constexpr (_debug) _print('}');\n    }\n    template<class _typeT,\
+    \ && !_has_print<_typeT>::value>* = nullptr>\n    void print(const _typeT& _a)\
+    \ {\n      if constexpr (_debug && _i == 0) print('{');\n      if constexpr (std::tuple_size_v<_typeT>\
+    \ != 0) print(std::get<_i>(_a));\n      if constexpr (_i + 1 < std::tuple_size_v<_typeT>)\
+    \ {\n        if constexpr (_sep) _print_sep();\n        print<_i + 1>(_a);\n \
+    \     } else if constexpr (_debug) print('}');\n    }\n    template<class _typeT,\
     \ std::enable_if_t<is_iterable_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>\n\
-    \    void _print(const _typeT& _a) {\n      if constexpr (_debug) _print('{');\n\
+    \    void print(const _typeT& _a) {\n      if constexpr (_debug) print('{');\n\
     \      if (std::empty(_a)) return;\n      for (auto _i = std::begin(_a); ; ) {\n\
-    \        _print(*_i);\n        if (++_i != std::end(_a)) {\n          if constexpr\
-    \ (_sep) {\n            if constexpr (_debug) {\n              _print(',');\n\
-    \              _print(' ');\n            } else if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<_typeT>()[0])>>)\
-    \ _print(' ');\n            else _print('\\n');\n          }\n        } else break;\n\
-    \      }\n      if constexpr (_debug) _print('}');\n    }\n    template<class\
-    \ _typeT, std::enable_if_t<_has_print<_typeT>::value>* = nullptr>\n    void _print(const\
-    \ _typeT& _a) {\n      _a._print();\n    }\n\n  public:\n    Printer() noexcept\
-    \ = default;\n    Printer(_typeWriter& _writer) noexcept: _itr(_writer.begin())\
-    \ {}\n\n    template<bool = true>\n    void operator ()() {\n      if constexpr\
-    \ (_end) _print('\\n');\n      if constexpr (_flush) _itr._flush();\n    }\n \
-    \   template<bool _first = true, class _typeHead, class... _typeArgs>\n    void\
-    \ operator ()(_typeHead&& _head, _typeArgs&&... _args) {\n      if constexpr (_debug\
-    \ && _first) {\n        _print('#');\n        _print(' ');\n      }\n      if\
-    \ constexpr (_sep && !_first) _print_sep();\n      _print(_head);\n      operator\
-    \ ()<false>(std::forward<_typeArgs>(_args)...);\n    }\n  };\n\n  Printer<Writer<>,\
-    \ false, false, false> print(output), eprint(error);\n  Printer<Writer<>, true,\
-    \ true, false> println(output), eprintln(error);\n  Printer<Writer<>> debug(output),\
-    \ edebug(error);\n}\n#line 3 \"math/div.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT, _typeU> floor_div(_typeT\
-    \ _x, _typeU _m) noexcept {\n    static_assert(std::is_integral_v<_typeT> && std::is_integral_v<_typeU>);\n\
-    \    if constexpr (std::is_unsigned_v<_typeT> || std::is_unsigned_v<_typeU>) return\
-    \ _x / _m;\n    auto _d = _x / _m;\n    return _d * _m == _x ? _d : _d - ((_x\
-    \ < 0) ^ (_m < 0));\n  }\n\n  template<class _typeT, class _typeU>\n  constexpr\
-    \ std::common_type_t<_typeT, _typeU> ceil_div(_typeT _x, _typeU _m) noexcept {\
-    \ return floor_div(_x + _m - static_cast<_typeT>(1), _m); }\n}\n#line 3 \"math/divisors.hpp\"\
-    \n#include <vector>\n#line 5 \"math/divisors.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ _typeContainer = std::vector<KYOPRO_BASE_INT>>\n  _typeContainer divisors(std::uint_fast64_t\
-    \ _n) {\n    _typeContainer _lower, _upper;\n    std::uint_fast64_t _i;\n    for\
-    \ (_i = 1; _i * _i < _n; ++_i) if (_n % _i == 0) {\n      _lower.emplace_back(_i);\n\
-    \      _upper.emplace_back(_n / _i);\n    }\n    if (_i * _i == _n) _lower.emplace_back(_i);\n\
-    \    _lower.insert(end(_lower), rall(_upper));\n    return _lower;\n  }\n}\n#line\
-    \ 3 \"math/euler_phi.hpp\"\n\nnamespace kyopro {\n  constexpr std::uint_fast64_t\
-    \ euler_phi(std::uint_fast64_t _n) noexcept {\n    std::uint_fast64_t _res = _n;\n\
-    \    if ((_n & 1) == 0) {\n      _res -= _res >> 1;\n      _n >>= 1;\n      while\
-    \ ((_n & 1) == 0) _n >>= 1;\n    }\n    for (std::uint_fast64_t _i = 3; _i * _i\
-    \ <= _n; _i += 2) {\n      if (_n % _i == 0) {\n        _res -= _res / _i;\n \
-    \       _n /= _i;\n        while (_n % _i == 0) _n /= _i;\n      }\n    }\n  \
-    \  if (_n != 1) _res -= _res / _n;\n    return _res;\n  }\n}\n#line 6 \"math/factorize.hpp\"\
+    \        print(*_i);\n        if (++_i != std::end(_a)) {\n          if constexpr\
+    \ (_sep) {\n            if constexpr (_debug) {\n              print(',');\n \
+    \             print(' ');\n            } else if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<_typeT>()[0])>>)\
+    \ print(' ');\n            else print('\\n');\n          }\n        } else break;\n\
+    \      }\n      if constexpr (_debug) print('}');\n    }\n    template<class _typeT,\
+    \ std::enable_if_t<_has_print<_typeT>::value>* = nullptr>\n    void print(const\
+    \ _typeT& _a) {\n      _a.print(*this);\n    }\n\n    template<bool = true>\n\
+    \    void operator ()() {\n      if constexpr (_end) print('\\n');\n      if constexpr\
+    \ (_flush) _itr._flush();\n    }\n    template<bool _first = true, class _typeHead,\
+    \ class... _typeArgs>\n    void operator ()(_typeHead&& _head, _typeArgs&&...\
+    \ _args) {\n      if constexpr (_debug && _first) {\n        print('#');\n   \
+    \     print(' ');\n      }\n      if constexpr (_sep && !_first) _print_sep();\n\
+    \      print(_head);\n      operator ()<false>(std::forward<_typeArgs>(_args)...);\n\
+    \    }\n  };\n\n  Printer<Writer<>, false, false, false> print(output), eprint(error);\n\
+    \  Printer<Writer<>, true, true, false> println(output), eprintln(error);\n  Printer<Writer<>>\
+    \ debug(output), edebug(error);\n}\n#line 3 \"math/div.hpp\"\n\nnamespace kyopro\
+    \ {\n  template<class _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT,\
+    \ _typeU> floor_div(_typeT _x, _typeU _m) noexcept {\n    static_assert(std::is_integral_v<_typeT>\
+    \ && std::is_integral_v<_typeU>);\n    if constexpr (std::is_unsigned_v<_typeT>\
+    \ || std::is_unsigned_v<_typeU>) return _x / _m;\n    auto _d = _x / _m;\n   \
+    \ return _d * _m == _x ? _d : _d - ((_x < 0) ^ (_m < 0));\n  }\n\n  template<class\
+    \ _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT, _typeU> ceil_div(_typeT\
+    \ _x, _typeU _m) noexcept { return floor_div(_x + _m - static_cast<_typeT>(1),\
+    \ _m); }\n}\n#line 3 \"math/divisors.hpp\"\n#include <vector>\n#line 5 \"math/divisors.hpp\"\
     \n\nnamespace kyopro {\n  template<class _typeContainer = std::vector<KYOPRO_BASE_INT>>\n\
+    \  _typeContainer divisors(std::uint_fast64_t _n) {\n    _typeContainer _lower,\
+    \ _upper;\n    std::uint_fast64_t _i;\n    for (_i = 1; _i * _i < _n; ++_i) if\
+    \ (_n % _i == 0) {\n      _lower.emplace_back(_i);\n      _upper.emplace_back(_n\
+    \ / _i);\n    }\n    if (_i * _i == _n) _lower.emplace_back(_i);\n    _lower.insert(end(_lower),\
+    \ rall(_upper));\n    return _lower;\n  }\n}\n#line 3 \"math/euler_phi.hpp\"\n\
+    \nnamespace kyopro {\n  constexpr std::uint_fast64_t euler_phi(std::uint_fast64_t\
+    \ _n) noexcept {\n    std::uint_fast64_t _res = _n;\n    if ((_n & 1) == 0) {\n\
+    \      _res -= _res >> 1;\n      _n >>= 1;\n      while ((_n & 1) == 0) _n >>=\
+    \ 1;\n    }\n    for (std::uint_fast64_t _i = 3; _i * _i <= _n; _i += 2) {\n \
+    \     if (_n % _i == 0) {\n        _res -= _res / _i;\n        _n /= _i;\n   \
+    \     while (_n % _i == 0) _n /= _i;\n      }\n    }\n    if (_n != 1) _res -=\
+    \ _res / _n;\n    return _res;\n  }\n}\n#line 6 \"math/factorize.hpp\"\n\nnamespace\
+    \ kyopro {\n  template<class _typeContainer = std::vector<KYOPRO_BASE_INT>>\n\
     \  _typeContainer factorize(std::uint_fast64_t _n) {\n    _typeContainer _res;\n\
     \    while ((_n & 1) == 0) {\n      _res.emplace_back(2);\n      _n >>= 1;\n \
     \   }\n    for (std::uint_fast64_t _i = 3; _i * _i <= _n; _i += 2) while (_n %\
@@ -246,77 +246,77 @@ data:
     \ _typeU> ceil_mod(_typeT _x, _typeU _m) noexcept {\n    return _m - floor_mod(_x\
     \ - 1, _m) - static_cast<_typeT>(1);\n  }\n}\n#line 9 \"math/ModInt.hpp\"\n\n\
     namespace kyopro {\n  template<std::uint_fast64_t _m>\n  struct ModInt {\n   \
-    \ static constexpr KYOPRO_BASE_INT mod = _m;\n    std::uint_fast64_t _value;\n\
-    \n    constexpr ModInt() noexcept = default;\n    template<class T>\n    constexpr\
-    \ ModInt(T _value) noexcept: _value(floor_mod(_value, _m)) { static_assert(std::is_integral_v<T>);\
+    \ static constexpr KYOPRO_BASE_INT mod = _m;\n    std::uint_fast64_t value;\n\n\
+    \    constexpr ModInt() noexcept = default;\n    template<class T>\n    constexpr\
+    \ ModInt(T value) noexcept: value(floor_mod(value, _m)) { static_assert(std::is_integral_v<T>);\
     \ }\n\n    template<class T>\n    explicit constexpr operator T() const noexcept\
-    \ { return _value; }\n\n    static constexpr ModInt raw(std::uint_fast64_t _n)\
-    \ noexcept {\n      ModInt _res;\n      _res._value = _n;\n      return _res;\n\
+    \ { return value; }\n\n    static constexpr ModInt raw(std::uint_fast64_t _n)\
+    \ noexcept {\n      ModInt _res;\n      _res.value = _n;\n      return _res;\n\
     \    }\n\n    constexpr ModInt power(std::uint_fast64_t _n) const noexcept {\n\
-    \      std::uint_fast64_t _res = 1, _a = _value;\n      while (_n > 0) {\n   \
-    \     if (_n & 1) _res = _res * _a % _m;\n        _a = _a * _a % _m;\n       \
-    \ _n >>= 1;\n      }\n      return _res;\n    }\n\n    constexpr ModInt inv()\
-    \ const noexcept {\n      std::uint_fast64_t _a = _value, _b = _m;\n      std::int64_t\
+    \      std::uint_fast64_t _res = 1, _a = value;\n      while (_n > 0) {\n    \
+    \    if (_n & 1) _res = _res * _a % _m;\n        _a = _a * _a % _m;\n        _n\
+    \ >>= 1;\n      }\n      return _res;\n    }\n\n    constexpr ModInt inv() const\
+    \ noexcept {\n      std::uint_fast64_t _a = value, _b = _m;\n      std::int64_t\
     \ _u = 1, _v = 0;\n      while (_b > 0) {\n        std::uint_fast64_t _t = _a\
     \ / _b;\n        _a -= _t * _b;\n        std::swap(_a, _b);\n        _u -= _t\
     \ * _v;\n        std::swap(_u, _v);\n      }\n      return floor_mod(_u, _m);\n\
     \    }\n\n    constexpr ModInt operator +() const noexcept { return *this; }\n\
-    \    constexpr ModInt operator -() const noexcept { return _m - _value; }\n\n\
-    \    constexpr ModInt& operator ++() noexcept {\n      if (++_value >= _m) _value\
-    \ -= _m;\n      return *this;\n    }\n    constexpr ModInt operator ++(int) noexcept\
-    \ {\n      ModInt _before = *this;\n      operator ++();\n      return _before;\n\
-    \    }\n    constexpr ModInt& operator --() noexcept {\n      if (_value == 0)\
-    \ _value = _m;\n      --_value;\n      return *this;\n    }\n    constexpr ModInt\
-    \ operator --(int) noexcept {\n      ModInt _before = *this;\n      operator --();\n\
-    \      return _before;\n    }\n\n    constexpr ModInt& operator +=(ModInt _rhs)\
-    \ noexcept {\n      if ((_value += _rhs._value) >= _m) _value -= _m;\n      return\
-    \ *this;\n    }\n    constexpr ModInt& operator -=(ModInt _rhs) noexcept {\n \
-    \     if (_value < _rhs._value) _value += _m;\n      _value -= _rhs._value;\n\
-    \      return *this;\n    }\n    constexpr ModInt& operator *=(ModInt _rhs) noexcept\
-    \ {\n      _value = _value * _rhs._value % _m;\n      return *this;\n    }\n \
-    \   constexpr ModInt& operator /=(ModInt _rhs) noexcept {\n      _value = _value\
-    \ * _rhs.inv()._value % _m;\n      return *this;\n    }\n\n    friend constexpr\
+    \n    constexpr ModInt operator -() const noexcept { return _m - value; }\n\n\
+    \    constexpr ModInt& operator ++() noexcept {\n      if (++value >= _m) value\
+    \ -= _m;\n      return *this;\n    }\n\n    constexpr ModInt operator ++(int)\
+    \ noexcept {\n      ModInt _before = *this;\n      operator ++();\n      return\
+    \ _before;\n    }\n\n    constexpr ModInt& operator --() noexcept {\n      if\
+    \ (value == 0) value = _m;\n      --value;\n      return *this;\n    }\n\n   \
+    \ constexpr ModInt operator --(int) noexcept {\n      ModInt _before = *this;\n\
+    \      operator --();\n      return _before;\n    }\n\n    constexpr ModInt& operator\
+    \ +=(ModInt _rhs) noexcept {\n      if ((value += _rhs.value) >= _m) value -=\
+    \ _m;\n      return *this;\n    }\n\n    constexpr ModInt& operator -=(ModInt\
+    \ _rhs) noexcept {\n      if (value < _rhs.value) value += _m;\n      value -=\
+    \ _rhs.value;\n      return *this;\n    }\n\n    constexpr ModInt& operator *=(ModInt\
+    \ _rhs) noexcept {\n      value = value * _rhs.value % _m;\n      return *this;\n\
+    \    }\n\n    constexpr ModInt& operator /=(ModInt _rhs) noexcept {\n      value\
+    \ = value * _rhs.inv().value % _m;\n      return *this;\n    }\n\n    friend constexpr\
     \ ModInt operator +(ModInt _lhs, ModInt _rhs) noexcept { return _lhs += _rhs;\
-    \ }\n    friend constexpr ModInt operator -(ModInt _lhs, ModInt _rhs) noexcept\
-    \ { return _lhs -= _rhs; }\n    friend constexpr ModInt operator *(ModInt _lhs,\
-    \ ModInt _rhs) noexcept { return _lhs *= _rhs; }\n    friend constexpr ModInt\
-    \ operator /(ModInt _lhs, ModInt _rhs) noexcept { return _lhs /= _rhs; }\n   \
-    \ friend constexpr bool operator ==(ModInt _lhs, ModInt _rhs) noexcept { return\
-    \ _lhs._value == _rhs._value; }\n    friend constexpr bool operator !=(ModInt\
-    \ _lhs, ModInt _rhs) noexcept { return _lhs._value != _rhs._value; }\n  };\n\n\
-    \  template<KYOPRO_BASE_UINT _m>\n  struct Hash<ModInt<_m>> { constexpr KYOPRO_BASE_UINT\
-    \ operator ()(ModInt<_m> _a) const noexcept { return _a; } };\n\n  constexpr ModInt<mod>\
-    \ operator \"\" _m(unsigned long long _a) noexcept { return _a; }\n}\n#line 4\
-    \ \"math/monoid.hpp\"\n\nnamespace kyopro {\n  template<class _typeT, _typeT _id\
-    \ = 0>\n  struct Plus {\n    static constexpr _typeT id = _id;\n    static constexpr\
-    \ _typeT op(_typeT _a, _typeT _b) noexcept { return _a + _b; }\n    static constexpr\
-    \ _typeT inv(_typeT _a) noexcept { return -_a; }\n  };\n  template<class _typeT,\
-    \ _typeT _id = 1>\n  struct Mul {\n    static constexpr _typeT id = _id;\n   \
-    \ static constexpr _typeT op(_typeT _a, _typeT _b) noexcept { return _a * _b;\
-    \ }\n    static constexpr _typeT inv(_typeT _a) noexcept {\n      static_assert(!std::is_integral_v<_typeT>);\n\
-    \      return 1 / _a;\n    }\n  };\n  template<class _typeT, _typeT _id = -inf>\n\
-    \  struct Max {\n    static constexpr _typeT id = _id;\n    static constexpr _typeT\
-    \ op(_typeT _a, _typeT _b) noexcept { return _a > _b ? _a : _b; }\n  };\n  template<class\
-    \ _typeT, _typeT _id = inf>\n  struct Min {\n    static constexpr _typeT id =\
-    \ _id;\n    static constexpr _typeT op(_typeT _a, _typeT _b) noexcept { return\
-    \ _a < _b ? _a : _b; }\n  };\n}\n#line 2 \"structure/FenwickTree.hpp\"\n/* FenwickTree\
-    \ */\n#line 7 \"structure/FenwickTree.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ _typeT, class _typeOp = Plus<_typeT>>\n  struct FenwickTree {\n  private:\n\
-    \    std::vector<_typeT> _tree;\n\n  public:\n    using value_type = _typeT;\n\
-    \    using size_type = KYOPRO_BASE_UINT;\n    using reference = _typeT&;\n   \
-    \ using const_reference = const _typeT&;\n\n    FenwickTree() noexcept = default;\n\
-    \    FenwickTree(KYOPRO_BASE_UINT _n) noexcept: _tree(_n, _typeOp::id) {}\n\n\
-    \    KYOPRO_BASE_UINT size() noexcept { return _tree.size(); }\n\n    void apply(int\
-    \ _p, const _typeT& _x) {\n      ++_p;\n      while (_p <= (int)size()) {\n  \
-    \      _tree[_p - 1] = _typeOp::op(_tree[_p - 1], _x);\n        _p += _p & -_p;\n\
-    \      }\n    }\n\n    _typeT prod(int _r) const {\n      _typeT _s = _typeOp::id;\n\
-    \      while (_r > 0) {\n        _s = _typeOp::op(_s, _tree[_r - 1]);\n      \
-    \  _r -= _r & -_r;\n      }\n      return _s;\n    }\n    _typeT prod(int _l,\
-    \ int _r) const { return _typeOp::op(prod(_r), _typeOp::inv(prod(_l))); }\n\n\
-    \    _typeT all_prod() { return prod(_tree.size()); }\n\n    _typeT get(int _p)\
-    \ { return _typeOp::op(prod(_p + 1), _typeOp::inv(prod(_p))); }\n\n    void set(int\
-    \ _p, const _typeT& _x) { apply(_p, _typeOp::op(_x, _typeOp::inv(get(_p)))); }\n\
-    \  };\n}\n#line 2 \"structure/UnionFind.hpp\"\n/* UnionFind */\n#include <algorithm>\n\
+    \ }\n\n    friend constexpr ModInt operator -(ModInt _lhs, ModInt _rhs) noexcept\
+    \ { return _lhs -= _rhs; }\n\n    friend constexpr ModInt operator *(ModInt _lhs,\
+    \ ModInt _rhs) noexcept { return _lhs *= _rhs; }\n\n    friend constexpr ModInt\
+    \ operator /(ModInt _lhs, ModInt _rhs) noexcept { return _lhs /= _rhs; }\n\n \
+    \   friend constexpr bool operator ==(ModInt _lhs, ModInt _rhs) noexcept { return\
+    \ _lhs.value == _rhs.value; }\n\n    friend constexpr bool operator !=(ModInt\
+    \ _lhs, ModInt _rhs) noexcept { return _lhs.value != _rhs.value; }\n\n    template<class\
+    \ _typePrinter>\n    void print(_typePrinter& _printer) {\n      _printer.print(value);\n\
+    \    }\n  };\n\n  template<KYOPRO_BASE_UINT _m>\n  struct Hash<ModInt<_m>> { constexpr\
+    \ KYOPRO_BASE_UINT operator ()(ModInt<_m> _a) const noexcept { return _a; } };\n\
+    }\n#line 4 \"math/monoid.hpp\"\n\nnamespace kyopro {\n  template<class _typeT,\
+    \ _typeT _id = 0>\n  struct Plus {\n    static constexpr _typeT id = _id;\n  \
+    \  static constexpr _typeT op(_typeT _a, _typeT _b) noexcept { return _a + _b;\
+    \ }\n    static constexpr _typeT inv(_typeT _a) noexcept { return -_a; }\n  };\n\
+    \  template<class _typeT, _typeT _id = 1>\n  struct Mul {\n    static constexpr\
+    \ _typeT id = _id;\n    static constexpr _typeT op(_typeT _a, _typeT _b) noexcept\
+    \ { return _a * _b; }\n    static constexpr _typeT inv(_typeT _a) noexcept {\n\
+    \      static_assert(!std::is_integral_v<_typeT>);\n      return 1 / _a;\n   \
+    \ }\n  };\n  template<class _typeT, _typeT _id = -inf>\n  struct Max {\n    static\
+    \ constexpr _typeT id = _id;\n    static constexpr _typeT op(_typeT _a, _typeT\
+    \ _b) noexcept { return _a > _b ? _a : _b; }\n  };\n  template<class _typeT, _typeT\
+    \ _id = inf>\n  struct Min {\n    static constexpr _typeT id = _id;\n    static\
+    \ constexpr _typeT op(_typeT _a, _typeT _b) noexcept { return _a < _b ? _a : _b;\
+    \ }\n  };\n}\n#line 2 \"structure/FenwickTree.hpp\"\n/* FenwickTree */\n#line\
+    \ 7 \"structure/FenwickTree.hpp\"\n\nnamespace kyopro {\n  template<class _typeT,\
+    \ class _typeOp = Plus<_typeT>>\n  struct FenwickTree {\n  private:\n    std::vector<_typeT>\
+    \ _tree;\n\n  public:\n    using value_type = _typeT;\n    using size_type = KYOPRO_BASE_UINT;\n\
+    \    using reference = _typeT&;\n    using const_reference = const _typeT&;\n\n\
+    \    FenwickTree() noexcept = default;\n    FenwickTree(KYOPRO_BASE_UINT _n) noexcept:\
+    \ _tree(_n, _typeOp::id) {}\n\n    KYOPRO_BASE_UINT size() noexcept { return _tree.size();\
+    \ }\n\n    void apply(int _p, const _typeT& _x) {\n      ++_p;\n      while (_p\
+    \ <= (int)size()) {\n        _tree[_p - 1] = _typeOp::op(_tree[_p - 1], _x);\n\
+    \        _p += _p & -_p;\n      }\n    }\n\n    _typeT prod(int _r) const {\n\
+    \      _typeT _s = _typeOp::id;\n      while (_r > 0) {\n        _s = _typeOp::op(_s,\
+    \ _tree[_r - 1]);\n        _r -= _r & -_r;\n      }\n      return _s;\n    }\n\
+    \    _typeT prod(int _l, int _r) const { return _typeOp::op(prod(_r), _typeOp::inv(prod(_l)));\
+    \ }\n\n    _typeT all_prod() { return prod(_tree.size()); }\n\n    _typeT get(int\
+    \ _p) { return _typeOp::op(prod(_p + 1), _typeOp::inv(prod(_p))); }\n\n    void\
+    \ set(int _p, const _typeT& _x) { apply(_p, _typeOp::op(_x, _typeOp::inv(get(_p))));\
+    \ }\n  };\n}\n#line 2 \"structure/UnionFind.hpp\"\n/* UnionFind */\n#include <algorithm>\n\
     #include <unordered_map>\n#line 7 \"structure/UnionFind.hpp\"\n\nnamespace kyopro\
     \ {\n  struct UnionFind {\n  private:\n    std::vector<int> _par;\n\n  public:\n\
     \    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT _n) noexcept:\
@@ -412,7 +412,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2022-03-06 23:43:14+09:00'
+  timestamp: '2022-03-07 13:04:54+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp
