@@ -30,7 +30,7 @@ namespace kyopro {
       if constexpr (_i == std::tuple_size_v<_typeT>) return std::tuple_size_v<_typeT>;
       else {
         KYOPRO_BASE_UINT _seed = operator()<_i + 1>(_a);
-        return _seed ^ (Hash<std::tuple_element_t<_i, _typeT>>()(get<_i>(_a)) + 0x9e3779b97f4a7c15LU + (_seed << 12) + (_seed >> 4));
+        return _seed ^ (Hash<std::tuple_element_t<_i, _typeT>>()(std::get<_i>(_a)) + 0x9e3779b97f4a7c15LU + (_seed << 12) + (_seed >> 4));
       }
     }
   };
