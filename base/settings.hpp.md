@@ -17,6 +17,9 @@ data:
   - icon: ':warning:'
     path: base/in.hpp
     title: base/in.hpp
+  - icon: ':warning:'
+    path: base/io.hpp
+    title: base/io.hpp
   - icon: ':heavy_check_mark:'
     path: base/out.hpp
     title: base/out.hpp
@@ -189,6 +192,7 @@ data:
   - base/in.hpp
   - base/constant.hpp
   - base/out.hpp
+  - base/io.hpp
   - base/all.hpp
   - base/Hash.hpp
   - all.hpp

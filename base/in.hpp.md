@@ -17,6 +17,9 @@ data:
   - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
+  - icon: ':warning:'
+    path: base/io.hpp
+    title: base/io.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -186,6 +189,7 @@ data:
   isVerificationFile: false
   path: base/in.hpp
   requiredBy:
+  - base/io.hpp
   - base/all.hpp
   - all.hpp
   timestamp: '2022-03-09 23:05:47+09:00'

@@ -14,6 +14,9 @@ data:
   - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
+  - icon: ':warning:'
+    path: base/io.hpp
+    title: base/io.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: yosupo/FenwickTree.test.cpp
@@ -205,6 +208,7 @@ data:
   isVerificationFile: false
   path: base/out.hpp
   requiredBy:
+  - base/io.hpp
   - base/all.hpp
   - all.hpp
   timestamp: '2022-03-09 23:05:47+09:00'

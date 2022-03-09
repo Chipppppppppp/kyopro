@@ -18,6 +18,9 @@ data:
     path: base/in.hpp
     title: base/in.hpp
   - icon: ':warning:'
+    path: base/io.hpp
+    title: base/io.hpp
+  - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
   - icon: ':warning:'
@@ -77,6 +80,7 @@ data:
   - template/alias.hpp
   - base/in.hpp
   - base/constant.hpp
+  - base/io.hpp
   - base/all.hpp
   - all.hpp
   timestamp: '2022-01-23 17:00:03+09:00'

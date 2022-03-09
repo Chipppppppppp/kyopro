@@ -13,6 +13,9 @@ data:
   - icon: ':warning:'
     path: base/in.hpp
     title: base/in.hpp
+  - icon: ':warning:'
+    path: base/io.hpp
+    title: base/io.hpp
   - icon: ':heavy_check_mark:'
     path: base/out.hpp
     title: base/out.hpp
@@ -464,6 +467,7 @@ data:
   - base/settings.hpp
   - base/Hash.hpp
   - base/trait.hpp
+  - base/io.hpp
   - base/in.hpp
   - base/out.hpp
   - math/all.hpp
@@ -483,7 +487,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2022-03-09 23:05:47+09:00'
+  timestamp: '2022-03-09 23:07:43+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp
