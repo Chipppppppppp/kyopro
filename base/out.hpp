@@ -81,7 +81,7 @@ namespace kyopro {
 
   Writer output(1), error(2);
 
-  template<class _typeWriter, bool _sep = true, bool _end = true, bool _debug = true, bool _flush = false, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>
+  template<class _typeIterator, bool _sep = true, bool _end = true, bool _debug = true, bool _comment = false, bool _flush = false, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>
   struct Printer {
   private:
     template<class, class = void>
@@ -100,10 +100,10 @@ namespace kyopro {
     static constexpr bool sep = _sep, end = _end, debug = _debug, flush = _flush;
     static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;
 
-    typename _typeWriter::iterator itr;
+    _typeIterator itr;
 
     Printer() noexcept = default;
-    Printer(_typeWriter& _writer) noexcept: itr(_writer.begin()) {}
+    Printer(_typeIterator _itr) noexcept: itr(_itr) {}
 
     void print(char _a) {
       *itr = _a;
@@ -178,7 +178,7 @@ namespace kyopro {
     }
     template<bool _first = true, class _typeHead, class... _typeArgs>
     void operator ()(_typeHead&& _head, _typeArgs&&... _args) {
-      if constexpr (_debug && _first) {
+      if constexpr (_comment && _first) {
         print('#');
         print(' ');
       }
@@ -188,7 +188,7 @@ namespace kyopro {
     }
   };
 
-  Printer<Writer<>, false, false, false> print(output), eprint(error);
-  Printer<Writer<>, true, true, false> println(output), eprintln(error);
-  Printer<Writer<>> debug(output), edebug(error);
+  Printer<Writer<>::iterator, false, false, false> print(output.begin()), eprint(error.begin());
+  Printer<Writer<>::iterator, true, true, false> println(output.begin()), eprintln(error.begin());
+  Printer<Writer<>::iterator, true, true, true, true> debug(output.begin()), edebug(error.begin());
 }

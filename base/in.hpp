@@ -79,7 +79,7 @@ namespace kyopro {
 
   Reader input(0);
 
-  template<class _typeReader, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>
+  template<class _typeIterator, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>
   struct Scanner {
   private:
     template<class, class = void>
@@ -89,10 +89,10 @@ namespace kyopro {
 
   public:
     static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;
-    typename _typeReader::iterator itr;
+    _typeIterator itr;
 
     Scanner() noexcept = default;
-    Scanner(_typeReader& _reader) noexcept: itr(_reader.begin()) {}
+    Scanner(_typeIterator _itr) noexcept: itr(_itr) {}
 
     void scan(char& _a) {
       while (('\t' <= *itr && *itr <= '\r') || *itr == ' ') ++itr;
@@ -163,5 +163,5 @@ namespace kyopro {
     }
   };
 
-  Scanner<Reader<>> scan(input);
+  Scanner<Reader<>::iterator> scan(input.begin());
 }
