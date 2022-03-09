@@ -109,15 +109,17 @@ data:
     \ KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  struct Printer\
     \ {\n  private:\n    template<class, class = void>\n    struct _has_print: std::false_type\
     \ {};\n    template<class _typeT>\n    struct _has_print<_typeT, std::void_t<decltype(std::declval<_typeT>().print(std::declval<Printer&>()))>>:\
-    \ std::true_type {};\n\n    typename _typeWriter::iterator _itr;\n\n  public:\n\
-    \    Printer() noexcept = default;\n    Printer(_typeWriter& _writer) noexcept:\
-    \ _itr(_writer.begin()) {}\n\n    void _print_sep() {\n      if constexpr (_debug)\
-    \ {\n        print(',');\n      }\n      print(' ');\n    }\n\n    void print(char\
-    \ _a) {\n      *_itr = _a;\n      ++_itr;\n    }\n    void print(const char* _a)\
-    \ {\n      for (; *_a; ++_a) print(*_a);\n    }\n    void print(const std::string&\
-    \ _a) {\n      for (auto _i: _a) print(_i);\n    }\n    void print(bool _a) {\n\
-    \      print(static_cast<char>('0' + _a));\n    }\n    template<class _typeT,\
-    \ std::enable_if_t<std::is_arithmetic_v<_typeT> && !_has_print<_typeT>::value>*\
+    \ std::true_type {};\n\n    void _print_sep() {\n      if constexpr (_debug) {\n\
+    \        print(',');\n      }\n      print(' ');\n    }\n\n  public:\n    static\
+    \ constexpr bool sep = _sep, end = _end, debug = _debug, flush = _flush;\n   \
+    \ static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;\n\n\
+    \    typename _typeWriter::iterator itr;\n\n    Printer() noexcept = default;\n\
+    \    Printer(_typeWriter& _writer) noexcept: itr(_writer.begin()) {}\n\n    void\
+    \ print(char _a) {\n      *itr = _a;\n      ++itr;\n    }\n    void print(const\
+    \ char* _a) {\n      for (; *_a; ++_a) print(*_a);\n    }\n    void print(const\
+    \ std::string& _a) {\n      for (auto _i: _a) print(_i);\n    }\n    void print(bool\
+    \ _a) {\n      print(static_cast<char>('0' + _a));\n    }\n    template<class\
+    \ _typeT, std::enable_if_t<std::is_arithmetic_v<_typeT> && !_has_print<_typeT>::value>*\
     \ = nullptr>\n    void print(_typeT _a) {\n      if constexpr (std::is_signed_v<_typeT>)\
     \ if (_a < 0) {\n        print('-');\n        _a = -_a;\n      }\n      std::uint_fast64_t\
     \ _p = _a;\n      _a -= _p;\n      std::string _s;\n      do {\n        _s +=\
@@ -142,7 +144,7 @@ data:
     \ std::enable_if_t<_has_print<_typeT>::value>* = nullptr>\n    void print(const\
     \ _typeT& _a) {\n      _a.print(*this);\n    }\n\n    template<bool = true>\n\
     \    void operator ()() {\n      if constexpr (_end) print('\\n');\n      if constexpr\
-    \ (_flush) _itr._flush();\n    }\n    template<bool _first = true, class _typeHead,\
+    \ (_flush) itr._flush();\n    }\n    template<bool _first = true, class _typeHead,\
     \ class... _typeArgs>\n    void operator ()(_typeHead&& _head, _typeArgs&&...\
     \ _args) {\n      if constexpr (_debug && _first) {\n        print('#');\n   \
     \     print(' ');\n      }\n      if constexpr (_sep && !_first) _print_sep();\n\
@@ -167,7 +169,7 @@ data:
   isVerificationFile: true
   path: yosupo/UnionFind.test.cpp
   requiredBy: []
-  timestamp: '2022-03-07 16:31:47+09:00'
+  timestamp: '2022-03-09 23:05:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/UnionFind.test.cpp

@@ -15,6 +15,9 @@ data:
     path: base/constant.hpp
     title: base/constant.hpp
   - icon: ':warning:'
+    path: base/in.hpp
+    title: base/in.hpp
+  - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
   - icon: ':warning:'
@@ -72,6 +75,7 @@ data:
   - structure/all.hpp
   - template/all.hpp
   - template/alias.hpp
+  - base/in.hpp
   - base/constant.hpp
   - base/all.hpp
   - all.hpp

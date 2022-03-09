@@ -14,6 +14,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: base/constant.hpp
     title: base/constant.hpp
+  - icon: ':warning:'
+    path: base/in.hpp
+    title: base/in.hpp
   - icon: ':heavy_check_mark:'
     path: base/out.hpp
     title: base/out.hpp
@@ -183,6 +186,7 @@ data:
   - structure/all.hpp
   - template/all.hpp
   - template/alias.hpp
+  - base/in.hpp
   - base/constant.hpp
   - base/out.hpp
   - base/all.hpp

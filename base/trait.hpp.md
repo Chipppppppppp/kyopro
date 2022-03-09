@@ -11,6 +11,9 @@ data:
   - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
+  - icon: ':warning:'
+    path: base/in.hpp
+    title: base/in.hpp
   - icon: ':heavy_check_mark:'
     path: base/out.hpp
     title: base/out.hpp
@@ -90,6 +93,7 @@ data:
   - math/all.hpp
   - template/all.hpp
   - template/alias.hpp
+  - base/in.hpp
   - base/out.hpp
   - base/all.hpp
   - base/Hash.hpp
