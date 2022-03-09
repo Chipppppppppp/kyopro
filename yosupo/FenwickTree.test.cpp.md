@@ -99,8 +99,8 @@ data:
     \ prod(_tree.size()); }\n\n    _typeT get(int _p) { return _op(prod(_p + 1), _op.inv(prod(_p)));\
     \ }\n\n    void set(int _p, const _typeT& _x) { apply(_p, _op(_x, _op.inv(get(_p))));\
     \ }\n  };\n}\n#line 2 \"base/in.hpp\"\n#include <unistd.h>\n#line 5 \"base/in.hpp\"\
-    \n#include <cstdio>\n#include <iterator>\n#include <string>\n#include <tuple>\n\
-    #line 3 \"base/trait.hpp\"\n#include <queue>\n#include <stack>\n#line 7 \"base/trait.hpp\"\
+    \n#include <cstdio>\n#include <string>\n#include <tuple>\n#line 2 \"base/trait.hpp\"\
+    \n#include <iterator>\n#include <queue>\n#include <stack>\n#line 7 \"base/trait.hpp\"\
     \n\n#ifdef __SIZEOF_INT128__\ntemplate<>\nstruct std::is_integral<__int128_t>:\
     \ std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>: std::true_type\
     \ {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type {};\n\
@@ -122,7 +122,7 @@ data:
     \ _typeT>\n  struct is_container_adapter<_typeT, std::void_t<decltype(std::empty(std::declval<_typeT>()))>>:\
     \ std::negation<is_iterable<_typeT>> {};\n  template<class _typeT>\n  constexpr\
     \ bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n}\n#line\
-    \ 14 \"base/in.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _buf_size\
+    \ 13 \"base/in.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _buf_size\
     \ = KYOPRO_BUFFER_SIZE>\n  struct Reader {\n  private:\n    int _fd, _idx;\n \
     \   std::array<char, _buf_size> _buffer;\n\n  public:\n    Reader() {\n      read(_fd,\
     \ _buffer.begin(), _buf_size);\n    }\n    Reader(int _fd) noexcept: _fd(_fd),\
@@ -274,7 +274,7 @@ data:
   isVerificationFile: true
   path: yosupo/FenwickTree.test.cpp
   requiredBy: []
-  timestamp: '2022-03-09 23:16:51+09:00'
+  timestamp: '2022-03-09 23:18:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/FenwickTree.test.cpp

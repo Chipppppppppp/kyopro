@@ -69,17 +69,17 @@ data:
     \ _group_members;\n      for (int _member = 0; _member < (int)(size()); ++_member)\
     \ _group_members[find(_member)].emplace_back(_member);\n      return _group_members;\n\
     \    }\n  };\n}\n#line 2 \"base/in.hpp\"\n#include <unistd.h>\n#include <array>\n\
-    #line 5 \"base/in.hpp\"\n#include <cstdio>\n#include <iterator>\n#include <string>\n\
-    #include <tuple>\n#include <type_traits>\n#include <utility>\n#line 4 \"math/power.hpp\"\
-    \nnamespace kyopro {\n  template<class _typeT>\n  constexpr _typeT power(_typeT\
-    \ _a, std::uint_fast64_t _n, _typeT _init = 1) noexcept {\n    while (_n > 0)\
-    \ {\n      if (_n & 1) _init *= _a;\n      _a *= _a;\n      _n >>= 1;\n    }\n\
-    \    return _init;\n  }\n}\n#line 3 \"base/trait.hpp\"\n#include <queue>\n#include\
-    \ <stack>\n#line 7 \"base/trait.hpp\"\n\n#ifdef __SIZEOF_INT128__\ntemplate<>\n\
-    struct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>:\
-    \ std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type\
-    \ {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>: std::true_type {};\n\
-    #endif\n#ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
+    #line 5 \"base/in.hpp\"\n#include <cstdio>\n#include <string>\n#include <tuple>\n\
+    #include <type_traits>\n#include <utility>\n#line 4 \"math/power.hpp\"\nnamespace\
+    \ kyopro {\n  template<class _typeT>\n  constexpr _typeT power(_typeT _a, std::uint_fast64_t\
+    \ _n, _typeT _init = 1) noexcept {\n    while (_n > 0) {\n      if (_n & 1) _init\
+    \ *= _a;\n      _a *= _a;\n      _n >>= 1;\n    }\n    return _init;\n  }\n}\n\
+    #line 2 \"base/trait.hpp\"\n#include <iterator>\n#include <queue>\n#include <stack>\n\
+    #line 7 \"base/trait.hpp\"\n\n#ifdef __SIZEOF_INT128__\ntemplate<>\nstruct std::is_integral<__int128_t>:\
+    \ std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>: std::true_type\
+    \ {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type {};\n\
+    template<>\nstruct std::is_unsigned<__uint128_t>: std::true_type {};\n#endif\n\
+    #ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
     \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<class, class =\
     \ void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
     \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
@@ -96,7 +96,7 @@ data:
     \ _typeT>\n  struct is_container_adapter<_typeT, std::void_t<decltype(std::empty(std::declval<_typeT>()))>>:\
     \ std::negation<is_iterable<_typeT>> {};\n  template<class _typeT>\n  constexpr\
     \ bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n}\n#line\
-    \ 14 \"base/in.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _buf_size\
+    \ 13 \"base/in.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _buf_size\
     \ = KYOPRO_BUFFER_SIZE>\n  struct Reader {\n  private:\n    int _fd, _idx;\n \
     \   std::array<char, _buf_size> _buffer;\n\n  public:\n    Reader() {\n      read(_fd,\
     \ _buffer.begin(), _buf_size);\n    }\n    Reader(int _fd) noexcept: _fd(_fd),\
@@ -243,7 +243,7 @@ data:
   isVerificationFile: true
   path: yosupo/UnionFind.test.cpp
   requiredBy: []
-  timestamp: '2022-03-09 23:16:51+09:00'
+  timestamp: '2022-03-09 23:18:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/UnionFind.test.cpp

@@ -101,13 +101,13 @@ data:
     \ _a) const noexcept {\n      KYOPRO_BASE_UINT _seed = _a.size();\n      for (auto&\
     \ _i: _a) _seed ^= _hasher(_i) + 0x9e3779b97f4a7c15LU + (_seed << 12) + (_seed\
     \ >> 4);\n      return _seed;\n    }\n  };\n}\n#line 2 \"base/in.hpp\"\n#include\
-    \ <unistd.h>\n#line 5 \"base/in.hpp\"\n#include <cstdio>\n#line 7 \"base/in.hpp\"\
-    \n#include <string>\n#line 14 \"base/in.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
-    \ _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Reader {\n  private:\n    int _fd,\
-    \ _idx;\n    std::array<char, _buf_size> _buffer;\n\n  public:\n    Reader() {\n\
-    \      read(_fd, _buffer.begin(), _buf_size);\n    }\n    Reader(int _fd) noexcept:\
-    \ _fd(_fd), _idx(0), _buffer() {\n      read(_fd, _buffer.begin(), _buf_size);\n\
-    \    }\n    Reader(FILE* _fp) noexcept: _fd(fileno_unlocked(_fp)), _idx(0), _buffer()\
+    \ <unistd.h>\n#line 5 \"base/in.hpp\"\n#include <cstdio>\n#include <string>\n\
+    #line 13 \"base/in.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _buf_size\
+    \ = KYOPRO_BUFFER_SIZE>\n  struct Reader {\n  private:\n    int _fd, _idx;\n \
+    \   std::array<char, _buf_size> _buffer;\n\n  public:\n    Reader() {\n      read(_fd,\
+    \ _buffer.begin(), _buf_size);\n    }\n    Reader(int _fd) noexcept: _fd(_fd),\
+    \ _idx(0), _buffer() {\n      read(_fd, _buffer.begin(), _buf_size);\n    }\n\
+    \    Reader(FILE* _fp) noexcept: _fd(fileno_unlocked(_fp)), _idx(0), _buffer()\
     \ {\n      read(_fd, _buffer.begin(), _buf_size);\n    }\n\n    Reader& operator\
     \ =(int _fd) noexcept {\n      this->_fd = _fd;\n      return *this;\n    }\n\
     \    Reader& operator =(FILE* _fp) noexcept {\n      this->_fd = fileno_unlocked(_fp);\n\
@@ -253,7 +253,7 @@ data:
   path: base/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-03-09 23:16:51+09:00'
+  timestamp: '2022-03-09 23:18:22+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: base/all.hpp
