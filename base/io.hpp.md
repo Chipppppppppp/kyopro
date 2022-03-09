@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: base/in.hpp
     title: base/in.hpp
   - icon: ':heavy_check_mark:'
@@ -23,10 +23,16 @@ data:
   - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: yosupo/FenwickTree.test.cpp
+    title: yosupo/FenwickTree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: yosupo/UnionFind.test.cpp
+    title: yosupo/UnionFind.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"base/in.hpp\"\n#include <unistd.h>\n#include <array>\n#include\
@@ -208,8 +214,10 @@ data:
   - base/all.hpp
   - all.hpp
   timestamp: '2022-03-09 23:07:43+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - yosupo/FenwickTree.test.cpp
+  - yosupo/UnionFind.test.cpp
 documentation_of: base/io.hpp
 layout: document
 redirect_from:

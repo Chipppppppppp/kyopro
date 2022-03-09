@@ -14,7 +14,7 @@ data:
   - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: base/io.hpp
     title: base/io.hpp
   _extendedVerifiedWith:

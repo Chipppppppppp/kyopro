@@ -14,10 +14,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: base/in.hpp
     title: base/in.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: base/io.hpp
     title: base/io.hpp
   - icon: ':heavy_check_mark:'
