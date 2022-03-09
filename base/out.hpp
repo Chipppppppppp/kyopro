@@ -89,12 +89,6 @@ namespace kyopro {
     template<class _typeT>
     struct _has_print<_typeT, std::void_t<decltype(std::declval<_typeT>().print(std::declval<Printer&>()))>>: std::true_type {};
 
-    typename _typeWriter::iterator _itr;
-
-  public:
-    Printer() noexcept = default;
-    Printer(_typeWriter& _writer) noexcept: _itr(_writer.begin()) {}
-
     void _print_sep() {
       if constexpr (_debug) {
         print(',');
@@ -102,9 +96,18 @@ namespace kyopro {
       print(' ');
     }
 
+  public:
+    static constexpr bool sep = _sep, end = _end, debug = _debug, flush = _flush;
+    static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;
+
+    typename _typeWriter::iterator itr;
+
+    Printer() noexcept = default;
+    Printer(_typeWriter& _writer) noexcept: itr(_writer.begin()) {}
+
     void print(char _a) {
-      *_itr = _a;
-      ++_itr;
+      *itr = _a;
+      ++itr;
     }
     void print(const char* _a) {
       for (; *_a; ++_a) print(*_a);
@@ -171,7 +174,7 @@ namespace kyopro {
     template<bool = true>
     void operator ()() {
       if constexpr (_end) print('\n');
-      if constexpr (_flush) _itr._flush();
+      if constexpr (_flush) itr._flush();
     }
     template<bool _first = true, class _typeHead, class... _typeArgs>
     void operator ()(_typeHead&& _head, _typeArgs&&... _args) {
