@@ -83,7 +83,7 @@ data:
     \ const {\n        write(_writer._fd, _writer._buffer.begin(), _writer._idx);\n\
     \      }\n    };\n\n    iterator begin() noexcept {\n      return iterator(*this);\n\
     \    }\n  };\n\n  Writer output(1), error(2);\n\n  template<class _typeIterator,\
-    \ bool _sep = true, bool _end = true, bool _debug = true, bool _comment = false,\
+    \ bool _sep = true, bool _end = true, bool _debug = false, bool _comment = false,\
     \ bool _flush = false, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
     \  struct Printer {\n  private:\n    template<class, class = void>\n    struct\
     \ _has_print: std::false_type {};\n    template<class _typeT>\n    struct _has_print<_typeT,\
@@ -128,8 +128,8 @@ data:
     \ _args) {\n      if constexpr (_comment && _first) {\n        print('#');\n \
     \       print(' ');\n      }\n      if constexpr (_sep && !_first) _print_sep();\n\
     \      print(_head);\n      operator ()<false>(std::forward<_typeArgs>(_args)...);\n\
-    \    }\n  };\n\n  Printer<Writer<>::iterator, false, false, false> print(output.begin()),\
-    \ eprint(error.begin());\n  Printer<Writer<>::iterator, true, true, false> println(output.begin()),\
+    \    }\n  };\n\n  Printer<Writer<>::iterator, false, false> print(output.begin()),\
+    \ eprint(error.begin());\n  Printer<Writer<>::iterator> println(output.begin()),\
     \ eprintln(error.begin());\n  Printer<Writer<>::iterator, true, true, true, true>\
     \ debug(output.begin()), edebug(error.begin());\n}\n"
   code: "#pragma once\n#include <unistd.h>\n#include <array>\n#include <cstdint>\n\
@@ -157,7 +157,7 @@ data:
     \ const {\n        write(_writer._fd, _writer._buffer.begin(), _writer._idx);\n\
     \      }\n    };\n\n    iterator begin() noexcept {\n      return iterator(*this);\n\
     \    }\n  };\n\n  Writer output(1), error(2);\n\n  template<class _typeIterator,\
-    \ bool _sep = true, bool _end = true, bool _debug = true, bool _comment = false,\
+    \ bool _sep = true, bool _end = true, bool _debug = false, bool _comment = false,\
     \ bool _flush = false, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
     \  struct Printer {\n  private:\n    template<class, class = void>\n    struct\
     \ _has_print: std::false_type {};\n    template<class _typeT>\n    struct _has_print<_typeT,\
@@ -202,8 +202,8 @@ data:
     \ _args) {\n      if constexpr (_comment && _first) {\n        print('#');\n \
     \       print(' ');\n      }\n      if constexpr (_sep && !_first) _print_sep();\n\
     \      print(_head);\n      operator ()<false>(std::forward<_typeArgs>(_args)...);\n\
-    \    }\n  };\n\n  Printer<Writer<>::iterator, false, false, false> print(output.begin()),\
-    \ eprint(error.begin());\n  Printer<Writer<>::iterator, true, true, false> println(output.begin()),\
+    \    }\n  };\n\n  Printer<Writer<>::iterator, false, false> print(output.begin()),\
+    \ eprint(error.begin());\n  Printer<Writer<>::iterator> println(output.begin()),\
     \ eprintln(error.begin());\n  Printer<Writer<>::iterator, true, true, true, true>\
     \ debug(output.begin()), edebug(error.begin());\n}"
   dependsOn:
@@ -215,7 +215,7 @@ data:
   - base/io.hpp
   - base/all.hpp
   - all.hpp
-  timestamp: '2022-03-10 00:12:51+09:00'
+  timestamp: '2022-03-10 00:20:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - yosupo/FenwickTree.test.cpp
