@@ -82,28 +82,29 @@ data:
     \        return _writer._buffer[_writer._idx];\n      }\n\n      void flush()\
     \ const {\n        write(_writer._fd, _writer._buffer.begin(), _writer._idx);\n\
     \      }\n    };\n\n    iterator begin() noexcept {\n      return iterator(*this);\n\
-    \    }\n  };\n\n  Writer output(1), error(2);\n\n  template<class _typeWriter,\
-    \ bool _sep = true, bool _end = true, bool _debug = true, bool _flush = false,\
-    \ KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  struct Printer\
-    \ {\n  private:\n    template<class, class = void>\n    struct _has_print: std::false_type\
-    \ {};\n    template<class _typeT>\n    struct _has_print<_typeT, std::void_t<decltype(std::declval<_typeT>().print(std::declval<Printer&>()))>>:\
+    \    }\n  };\n\n  Writer output(1), error(2);\n\n  template<class _typeIterator,\
+    \ bool _sep = true, bool _end = true, bool _debug = true, bool _comment = false,\
+    \ bool _flush = false, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
+    \  struct Printer {\n  private:\n    template<class, class = void>\n    struct\
+    \ _has_print: std::false_type {};\n    template<class _typeT>\n    struct _has_print<_typeT,\
+    \ std::void_t<decltype(std::declval<_typeT>().print(std::declval<Printer&>()))>>:\
     \ std::true_type {};\n\n    void _print_sep() {\n      if constexpr (_debug) {\n\
     \        print(',');\n      }\n      print(' ');\n    }\n\n  public:\n    static\
     \ constexpr bool sep = _sep, end = _end, debug = _debug, flush = _flush;\n   \
     \ static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;\n\n\
-    \    typename _typeWriter::iterator itr;\n\n    Printer() noexcept = default;\n\
-    \    Printer(_typeWriter& _writer) noexcept: itr(_writer.begin()) {}\n\n    void\
-    \ print(char _a) {\n      *itr = _a;\n      ++itr;\n    }\n    void print(const\
-    \ char* _a) {\n      for (; *_a; ++_a) print(*_a);\n    }\n    void print(const\
-    \ std::string& _a) {\n      for (auto _i: _a) print(_i);\n    }\n    void print(bool\
-    \ _a) {\n      print(static_cast<char>('0' + _a));\n    }\n    template<class\
-    \ _typeT, std::enable_if_t<std::is_arithmetic_v<_typeT> && !_has_print<_typeT>::value>*\
-    \ = nullptr>\n    void print(_typeT _a) {\n      if constexpr (std::is_signed_v<_typeT>)\
-    \ if (_a < 0) {\n        print('-');\n        _a = -_a;\n      }\n      std::uint_fast64_t\
-    \ _p = _a;\n      _a -= _p;\n      std::string _s;\n      do {\n        _s +=\
-    \ '0' + _p % 10;\n        _p /= 10;\n      } while (_p > 0);\n      for (auto\
-    \ _i = _s.rbegin(); _i != _s.rend(); ++_i) print(*_i);\n      if constexpr (std::is_integral_v<_typeT>)\
-    \ return;\n      print('.');\n      for (int _i = 0; _i < static_cast<int>(_decimal_precision);\
+    \    _typeIterator itr;\n\n    Printer() noexcept = default;\n    Printer(_typeIterator\
+    \ _itr) noexcept: itr(_itr) {}\n\n    void print(char _a) {\n      *itr = _a;\n\
+    \      ++itr;\n    }\n    void print(const char* _a) {\n      for (; *_a; ++_a)\
+    \ print(*_a);\n    }\n    void print(const std::string& _a) {\n      for (auto\
+    \ _i: _a) print(_i);\n    }\n    void print(bool _a) {\n      print(static_cast<char>('0'\
+    \ + _a));\n    }\n    template<class _typeT, std::enable_if_t<std::is_arithmetic_v<_typeT>\
+    \ && !_has_print<_typeT>::value>* = nullptr>\n    void print(_typeT _a) {\n  \
+    \    if constexpr (std::is_signed_v<_typeT>) if (_a < 0) {\n        print('-');\n\
+    \        _a = -_a;\n      }\n      std::uint_fast64_t _p = _a;\n      _a -= _p;\n\
+    \      std::string _s;\n      do {\n        _s += '0' + _p % 10;\n        _p /=\
+    \ 10;\n      } while (_p > 0);\n      for (auto _i = _s.rbegin(); _i != _s.rend();\
+    \ ++_i) print(*_i);\n      if constexpr (std::is_integral_v<_typeT>) return;\n\
+    \      print('.');\n      for (int _i = 0; _i < static_cast<int>(_decimal_precision);\
     \ ++_i) {\n        _a *= 10;\n        print('0' + static_cast<std::uint_fast64_t>(_a)\
     \ % 10);\n      }\n    }\n    template<size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT>\
     \ && !_has_print<_typeT>::value>* = nullptr>\n    void print(const _typeT& _a)\
@@ -124,12 +125,13 @@ data:
     \    void operator ()() {\n      if constexpr (_end) print('\\n');\n      if constexpr\
     \ (_flush) itr._flush();\n    }\n    template<bool _first = true, class _typeHead,\
     \ class... _typeArgs>\n    void operator ()(_typeHead&& _head, _typeArgs&&...\
-    \ _args) {\n      if constexpr (_debug && _first) {\n        print('#');\n   \
-    \     print(' ');\n      }\n      if constexpr (_sep && !_first) _print_sep();\n\
+    \ _args) {\n      if constexpr (_comment && _first) {\n        print('#');\n \
+    \       print(' ');\n      }\n      if constexpr (_sep && !_first) _print_sep();\n\
     \      print(_head);\n      operator ()<false>(std::forward<_typeArgs>(_args)...);\n\
-    \    }\n  };\n\n  Printer<Writer<>, false, false, false> print(output), eprint(error);\n\
-    \  Printer<Writer<>, true, true, false> println(output), eprintln(error);\n  Printer<Writer<>>\
-    \ debug(output), edebug(error);\n}\n"
+    \    }\n  };\n\n  Printer<Writer<>::iterator, false, false, false> print(output.begin()),\
+    \ eprint(error.begin());\n  Printer<Writer<>::iterator, true, true, false> println(output.begin()),\
+    \ eprintln(error.begin());\n  Printer<Writer<>::iterator, true, true, true, true>\
+    \ debug(output.begin()), edebug(error.begin());\n}\n"
   code: "#pragma once\n#include <unistd.h>\n#include <array>\n#include <cstdint>\n\
     #include <cstdio>\n#include <iterator>\n#include <string>\n#include <tuple>\n\
     #include <type_traits>\n#include <utility>\n#include \"settings.hpp\"\n#include\
@@ -154,28 +156,29 @@ data:
     \        return _writer._buffer[_writer._idx];\n      }\n\n      void flush()\
     \ const {\n        write(_writer._fd, _writer._buffer.begin(), _writer._idx);\n\
     \      }\n    };\n\n    iterator begin() noexcept {\n      return iterator(*this);\n\
-    \    }\n  };\n\n  Writer output(1), error(2);\n\n  template<class _typeWriter,\
-    \ bool _sep = true, bool _end = true, bool _debug = true, bool _flush = false,\
-    \ KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  struct Printer\
-    \ {\n  private:\n    template<class, class = void>\n    struct _has_print: std::false_type\
-    \ {};\n    template<class _typeT>\n    struct _has_print<_typeT, std::void_t<decltype(std::declval<_typeT>().print(std::declval<Printer&>()))>>:\
+    \    }\n  };\n\n  Writer output(1), error(2);\n\n  template<class _typeIterator,\
+    \ bool _sep = true, bool _end = true, bool _debug = true, bool _comment = false,\
+    \ bool _flush = false, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
+    \  struct Printer {\n  private:\n    template<class, class = void>\n    struct\
+    \ _has_print: std::false_type {};\n    template<class _typeT>\n    struct _has_print<_typeT,\
+    \ std::void_t<decltype(std::declval<_typeT>().print(std::declval<Printer&>()))>>:\
     \ std::true_type {};\n\n    void _print_sep() {\n      if constexpr (_debug) {\n\
     \        print(',');\n      }\n      print(' ');\n    }\n\n  public:\n    static\
     \ constexpr bool sep = _sep, end = _end, debug = _debug, flush = _flush;\n   \
     \ static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;\n\n\
-    \    typename _typeWriter::iterator itr;\n\n    Printer() noexcept = default;\n\
-    \    Printer(_typeWriter& _writer) noexcept: itr(_writer.begin()) {}\n\n    void\
-    \ print(char _a) {\n      *itr = _a;\n      ++itr;\n    }\n    void print(const\
-    \ char* _a) {\n      for (; *_a; ++_a) print(*_a);\n    }\n    void print(const\
-    \ std::string& _a) {\n      for (auto _i: _a) print(_i);\n    }\n    void print(bool\
-    \ _a) {\n      print(static_cast<char>('0' + _a));\n    }\n    template<class\
-    \ _typeT, std::enable_if_t<std::is_arithmetic_v<_typeT> && !_has_print<_typeT>::value>*\
-    \ = nullptr>\n    void print(_typeT _a) {\n      if constexpr (std::is_signed_v<_typeT>)\
-    \ if (_a < 0) {\n        print('-');\n        _a = -_a;\n      }\n      std::uint_fast64_t\
-    \ _p = _a;\n      _a -= _p;\n      std::string _s;\n      do {\n        _s +=\
-    \ '0' + _p % 10;\n        _p /= 10;\n      } while (_p > 0);\n      for (auto\
-    \ _i = _s.rbegin(); _i != _s.rend(); ++_i) print(*_i);\n      if constexpr (std::is_integral_v<_typeT>)\
-    \ return;\n      print('.');\n      for (int _i = 0; _i < static_cast<int>(_decimal_precision);\
+    \    _typeIterator itr;\n\n    Printer() noexcept = default;\n    Printer(_typeIterator\
+    \ _itr) noexcept: itr(_itr) {}\n\n    void print(char _a) {\n      *itr = _a;\n\
+    \      ++itr;\n    }\n    void print(const char* _a) {\n      for (; *_a; ++_a)\
+    \ print(*_a);\n    }\n    void print(const std::string& _a) {\n      for (auto\
+    \ _i: _a) print(_i);\n    }\n    void print(bool _a) {\n      print(static_cast<char>('0'\
+    \ + _a));\n    }\n    template<class _typeT, std::enable_if_t<std::is_arithmetic_v<_typeT>\
+    \ && !_has_print<_typeT>::value>* = nullptr>\n    void print(_typeT _a) {\n  \
+    \    if constexpr (std::is_signed_v<_typeT>) if (_a < 0) {\n        print('-');\n\
+    \        _a = -_a;\n      }\n      std::uint_fast64_t _p = _a;\n      _a -= _p;\n\
+    \      std::string _s;\n      do {\n        _s += '0' + _p % 10;\n        _p /=\
+    \ 10;\n      } while (_p > 0);\n      for (auto _i = _s.rbegin(); _i != _s.rend();\
+    \ ++_i) print(*_i);\n      if constexpr (std::is_integral_v<_typeT>) return;\n\
+    \      print('.');\n      for (int _i = 0; _i < static_cast<int>(_decimal_precision);\
     \ ++_i) {\n        _a *= 10;\n        print('0' + static_cast<std::uint_fast64_t>(_a)\
     \ % 10);\n      }\n    }\n    template<size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT>\
     \ && !_has_print<_typeT>::value>* = nullptr>\n    void print(const _typeT& _a)\
@@ -196,12 +199,13 @@ data:
     \    void operator ()() {\n      if constexpr (_end) print('\\n');\n      if constexpr\
     \ (_flush) itr._flush();\n    }\n    template<bool _first = true, class _typeHead,\
     \ class... _typeArgs>\n    void operator ()(_typeHead&& _head, _typeArgs&&...\
-    \ _args) {\n      if constexpr (_debug && _first) {\n        print('#');\n   \
-    \     print(' ');\n      }\n      if constexpr (_sep && !_first) _print_sep();\n\
+    \ _args) {\n      if constexpr (_comment && _first) {\n        print('#');\n \
+    \       print(' ');\n      }\n      if constexpr (_sep && !_first) _print_sep();\n\
     \      print(_head);\n      operator ()<false>(std::forward<_typeArgs>(_args)...);\n\
-    \    }\n  };\n\n  Printer<Writer<>, false, false, false> print(output), eprint(error);\n\
-    \  Printer<Writer<>, true, true, false> println(output), eprintln(error);\n  Printer<Writer<>>\
-    \ debug(output), edebug(error);\n}"
+    \    }\n  };\n\n  Printer<Writer<>::iterator, false, false, false> print(output.begin()),\
+    \ eprint(error.begin());\n  Printer<Writer<>::iterator, true, true, false> println(output.begin()),\
+    \ eprintln(error.begin());\n  Printer<Writer<>::iterator, true, true, true, true>\
+    \ debug(output.begin()), edebug(error.begin());\n}"
   dependsOn:
   - base/settings.hpp
   - base/trait.hpp
@@ -211,7 +215,7 @@ data:
   - base/io.hpp
   - base/all.hpp
   - all.hpp
-  timestamp: '2022-03-09 23:05:47+09:00'
+  timestamp: '2022-03-10 00:12:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - yosupo/FenwickTree.test.cpp
