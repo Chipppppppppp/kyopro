@@ -117,9 +117,9 @@ namespace kyopro {
     template<class _typeT, std::enable_if_t<std::is_arithmetic_v<_typeT> && !_has_scan<_typeT>::value>* = nullptr>
     void scan(_typeT& _a) {
       while (('\t' <= *itr && *itr <= '\r') || *itr == ' ') ++itr;
-      bool sgn = false;
+      bool _sgn = false;
       if constexpr (!std::is_unsigned_v<_typeT>) if (*itr == '-') {
-        sgn = true;
+        _sgn = true;
         ++itr;
       }
       _a = 0;
@@ -138,7 +138,7 @@ namespace kyopro {
         }
         while ('0' <= *itr && *itr <= '9') ++itr;
       }
-      if constexpr (!std::is_unsigned_v<_typeT>) if (sgn) _a = -_a;
+      if constexpr (!std::is_unsigned_v<_typeT>) if (_sgn) _a = -_a;
     }
     template<std::size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT> && !_has_scan<_typeT>::value>* = nullptr>
     void scan(_typeT& _a) {
