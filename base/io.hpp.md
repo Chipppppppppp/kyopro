@@ -107,9 +107,9 @@ data:
     \ if (*itr != '0') _a = true;\n        ++itr;\n      }\n    }\n    template<class\
     \ _typeT, std::enable_if_t<std::is_arithmetic_v<_typeT> && !_has_scan<_typeT>::value>*\
     \ = nullptr>\n    void scan(_typeT& _a) {\n      while (('\\t' <= *itr && *itr\
-    \ <= '\\r') || *itr == ' ') ++itr;\n      bool sgn = false;\n      if constexpr\
-    \ (!std::is_unsigned_v<_typeT>) if (*itr == '-') {\n        sgn = true;\n    \
-    \    ++itr;\n      }\n      _a = 0;\n      for (; '0' <= *itr && *itr <= '9';\
+    \ <= '\\r') || *itr == ' ') ++itr;\n      bool _sgn = false;\n      if constexpr\
+    \ (!std::is_unsigned_v<_typeT>) if (*itr == '-') {\n        _sgn = true;\n   \
+    \     ++itr;\n      }\n      _a = 0;\n      for (; '0' <= *itr && *itr <= '9';\
     \ ++itr) _a = _a * 10 + *itr - '0';\n      if (*itr == '.') {\n        ++itr;\n\
     \        if constexpr (std::is_floating_point_v<_typeT>) {\n          constexpr\
     \ std::uint_fast64_t _power_decimal_precision = power(10ULL, _decimal_precision);\n\
@@ -117,8 +117,8 @@ data:
     \ (; '0' <= *itr && *itr <= '9' && _i < _power_decimal_precision; _i *= 10) {\n\
     \            _d = _d * 10 + *itr - '0';\n            ++itr;\n          }\n   \
     \       _a += _d / _i;\n        }\n        while ('0' <= *itr && *itr <= '9')\
-    \ ++itr;\n      }\n      if constexpr (!std::is_unsigned_v<_typeT>) if (sgn) _a\
-    \ = -_a;\n    }\n    template<std::size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT>\
+    \ ++itr;\n      }\n      if constexpr (!std::is_unsigned_v<_typeT>) if (_sgn)\
+    \ _a = -_a;\n    }\n    template<std::size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT>\
     \ && !_has_scan<_typeT>::value>* = nullptr>\n    void scan(_typeT& _a) {\n   \
     \   if constexpr (_i < std::tuple_size_v<_typeT>) {\n        scan(std::get<_i>(_a));\n\
     \        scan<_i + 1>(_a);\n      }\n    }\n    template<class _typeT, std::enable_if_t<is_iterable_v<_typeT>\
@@ -213,7 +213,7 @@ data:
   requiredBy:
   - base/all.hpp
   - all.hpp
-  timestamp: '2022-03-09 23:07:43+09:00'
+  timestamp: '2022-03-09 23:16:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - yosupo/FenwickTree.test.cpp
