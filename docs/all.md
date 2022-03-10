@@ -1,2 +1,0 @@
-# Summary
-全てのファイルをincludeする．

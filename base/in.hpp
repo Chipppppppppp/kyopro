@@ -22,10 +22,10 @@ namespace kyopro {
     Reader() {
       read(_fd, _buffer.begin(), _buf_size);
     }
-    Reader(int _fd) noexcept: _fd(_fd), _idx(0), _buffer() {
+    Reader(int _fd): _fd(_fd), _idx(0), _buffer() {
       read(_fd, _buffer.begin(), _buf_size);
     }
-    Reader(FILE* _fp) noexcept: _fd(fileno_unlocked(_fp)), _idx(0), _buffer() {
+    Reader(FILE* _fp): _fd(std::fileno(_fp)), _idx(0), _buffer() {
       read(_fd, _buffer.begin(), _buf_size);
     }
 
@@ -34,7 +34,7 @@ namespace kyopro {
       return *this;
     }
     Reader& operator =(FILE* _fp) noexcept {
-      this->_fd = fileno_unlocked(_fp);
+      this->_fd = std::fileno(_fp);
       return *this;
     }
 
