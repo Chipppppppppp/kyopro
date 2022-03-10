@@ -7,22 +7,22 @@ data:
   - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/in.hpp
     title: base/in.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/io.hpp
     title: base/io.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/out.hpp
     title: base/out.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/trait.hpp
     title: base/trait.hpp
   - icon: ':warning:'
@@ -49,16 +49,16 @@ data:
   - icon: ':warning:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/monoid.hpp
     title: math/monoid.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   - icon: ':warning:'
@@ -116,18 +116,18 @@ data:
     \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_iterator_v\
     \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_iterable<_typeT,\
-    \ std::void_t<typename _typeT::iterator>>: std::true_type {};\n  template<class\
-    \ _typeT>\n  constexpr bool is_iterable_v = is_iterable<_typeT>::value;\n\n  template<class>\n\
-    \  struct is_tuple: std::false_type {};\n  template<class _typeT, class U>\n \
-    \ struct is_tuple<std::pair<_typeT, U>>: std::true_type {};\n  template<class...\
-    \ Args>\n  struct is_tuple<std::tuple<Args...>>: std::true_type {};\n  template<class\
-    \ _typeT>\n  constexpr bool is_tuple_v = is_tuple<_typeT>::value;\n\n  template<class,\
-    \ class = void>\n  struct is_container_adapter: std::false_type {};\n  template<class\
-    \ _typeT>\n  struct is_container_adapter<_typeT, std::void_t<decltype(std::empty(std::declval<_typeT>()))>>:\
-    \ std::negation<is_iterable<_typeT>> {};\n  template<class _typeT>\n  constexpr\
-    \ bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n}\n#line\
-    \ 10 \"base/Hash.hpp\"\n\nnamespace kyopro {\n  template<class, class = void>\n\
-    \  struct Hash;\n\n  template<class _typeT>\n  struct Hash<_typeT, std::enable_if_t<std::is_scalar_v<_typeT>>>\
+    \ std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
+    \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_iterable_v\
+    \ = is_iterable<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
+    \ {};\n  template<class _typeT, class U>\n  struct is_tuple<std::pair<_typeT,\
+    \ U>>: std::true_type {};\n  template<class... Args>\n  struct is_tuple<std::tuple<Args...>>:\
+    \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_tuple_v =\
+    \ is_tuple<_typeT>::value;\n\n  template<class, class = void>\n  struct is_container_adapter:\
+    \ std::false_type {};\n  template<class _typeT>\n  struct is_container_adapter<_typeT,\
+    \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_iterable<_typeT>>\
+    \ {};\n  template<class _typeT>\n  constexpr bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n\
+    }\n#line 10 \"base/Hash.hpp\"\n\nnamespace kyopro {\n  template<class, class =\
+    \ void>\n  struct Hash;\n\n  template<class _typeT>\n  struct Hash<_typeT, std::enable_if_t<std::is_scalar_v<_typeT>>>\
     \ {\n  private:\n    [[no_unique_address]] std::hash<_typeT> _hashser;\n\n  public:\n\
     \    constexpr KYOPRO_BASE_UINT operator ()(_typeT a) const noexcept {\n     \
     \ return _hasher(a);\n    }\n  };\n\n  template<class _typeT>\n  struct Hash<_typeT,\
@@ -149,10 +149,10 @@ data:
     \   std::array<char, _buf_size> _buffer;\n\n  public:\n    Reader() {\n      read(_fd,\
     \ _buffer.begin(), _buf_size);\n    }\n    Reader(int _fd): _fd(_fd), _idx(0),\
     \ _buffer() {\n      read(_fd, _buffer.begin(), _buf_size);\n    }\n    Reader(FILE*\
-    \ _fp): _fd(std::fileno(_fp)), _idx(0), _buffer() {\n      read(_fd, _buffer.begin(),\
+    \ _fp): _fd(fileno(_fp)), _idx(0), _buffer() {\n      read(_fd, _buffer.begin(),\
     \ _buf_size);\n    }\n\n    Reader& operator =(int _fd) noexcept {\n      this->_fd\
     \ = _fd;\n      return *this;\n    }\n    Reader& operator =(FILE* _fp) noexcept\
-    \ {\n      this->_fd = std::fileno(_fp);\n      return *this;\n    }\n\n    struct\
+    \ {\n      this->_fd = fileno(_fp);\n      return *this;\n    }\n\n    struct\
     \ iterator {\n    private:\n      Reader& _reader;\n\n    public:\n      using\
     \ difference_type = void;\n      using value_type = void;\n      using pointer\
     \ = void;\n      using reference = void;\n      using iterator_category = std::input_iterator_tag;\n\
@@ -204,10 +204,10 @@ data:
     \ _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Writer {\n  private:\n    int _fd,\
     \ _idx;\n    std::array<char, _buf_size> _buffer;\n\n  public:\n    Writer() noexcept\
     \ = default;\n    Writer(int _fd) noexcept: _fd(_fd), _idx(0), _buffer() {}\n\
-    \    Writer(FILE* _fp) noexcept: _fd(std::fileno(_fp)), _idx(0), _buffer() {}\n\
-    \n    ~Writer() {\n      write(_fd, _buffer.begin(), _idx);\n    }\n\n    Writer&\
+    \    Writer(FILE* _fp) noexcept: _fd(fileno(_fp)), _idx(0), _buffer() {}\n\n \
+    \   ~Writer() {\n      write(_fd, _buffer.begin(), _idx);\n    }\n\n    Writer&\
     \ operator =(int _fd) noexcept {\n      this->_fd = _fd;\n      return *this;\n\
-    \    }\n    Writer& operator =(FILE* _fp) noexcept {\n      this->_fd = std::fileno(_fp);\n\
+    \    }\n    Writer& operator =(FILE* _fp) noexcept {\n      this->_fd = fileno(_fp);\n\
     \      return *this;\n    }\n\n    struct iterator {\n    private:\n      Writer&\
     \ _writer;\n\n    public:\n      using difference_type = void;\n      using value_type\
     \ = void;\n      using pointer = void;\n      using reference = void;\n      using\
@@ -487,7 +487,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2022-03-10 13:15:22+09:00'
+  timestamp: '2022-03-10 17:01:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp

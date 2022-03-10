@@ -1,38 +1,38 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/in.hpp
     title: base/in.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/io.hpp
     title: base/io.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/out.hpp
     title: base/out.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/trait.hpp
     title: base/trait.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/monoid.hpp
     title: math/monoid.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_add_range_sum
@@ -112,40 +112,40 @@ data:
     \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_iterator_v\
     \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_iterable<_typeT,\
-    \ std::void_t<typename _typeT::iterator>>: std::true_type {};\n  template<class\
-    \ _typeT>\n  constexpr bool is_iterable_v = is_iterable<_typeT>::value;\n\n  template<class>\n\
-    \  struct is_tuple: std::false_type {};\n  template<class _typeT, class U>\n \
-    \ struct is_tuple<std::pair<_typeT, U>>: std::true_type {};\n  template<class...\
-    \ Args>\n  struct is_tuple<std::tuple<Args...>>: std::true_type {};\n  template<class\
-    \ _typeT>\n  constexpr bool is_tuple_v = is_tuple<_typeT>::value;\n\n  template<class,\
-    \ class = void>\n  struct is_container_adapter: std::false_type {};\n  template<class\
-    \ _typeT>\n  struct is_container_adapter<_typeT, std::void_t<decltype(std::empty(std::declval<_typeT>()))>>:\
-    \ std::negation<is_iterable<_typeT>> {};\n  template<class _typeT>\n  constexpr\
-    \ bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n}\n#line\
-    \ 13 \"base/in.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _buf_size\
-    \ = KYOPRO_BUFFER_SIZE>\n  struct Reader {\n  private:\n    int _fd, _idx;\n \
-    \   std::array<char, _buf_size> _buffer;\n\n  public:\n    Reader() {\n      read(_fd,\
-    \ _buffer.begin(), _buf_size);\n    }\n    Reader(int _fd): _fd(_fd), _idx(0),\
-    \ _buffer() {\n      read(_fd, _buffer.begin(), _buf_size);\n    }\n    Reader(FILE*\
-    \ _fp): _fd(std::fileno(_fp)), _idx(0), _buffer() {\n      read(_fd, _buffer.begin(),\
-    \ _buf_size);\n    }\n\n    Reader& operator =(int _fd) noexcept {\n      this->_fd\
-    \ = _fd;\n      return *this;\n    }\n    Reader& operator =(FILE* _fp) noexcept\
-    \ {\n      this->_fd = std::fileno(_fp);\n      return *this;\n    }\n\n    struct\
-    \ iterator {\n    private:\n      Reader& _reader;\n\n    public:\n      using\
-    \ difference_type = void;\n      using value_type = void;\n      using pointer\
-    \ = void;\n      using reference = void;\n      using iterator_category = std::input_iterator_tag;\n\
-    \n      iterator() noexcept = default;\n      iterator(Reader& _reader) noexcept:\
-    \ _reader(_reader) {}\n\n      iterator& operator ++() {\n        ++_reader._idx;\n\
-    \        if (_reader._idx == _buf_size) {\n          read(_reader._fd, _reader._buffer.begin(),\
-    \ _buf_size);\n          _reader._idx = 0;\n        }\n        return *this;\n\
-    \      }\n\n      iterator operator ++(int) {\n        iterator _before = *this;\n\
-    \        operator ++();\n        return _before;\n      }\n\n      char& operator\
-    \ *() const {\n        return _reader._buffer[_reader._idx];\n      }\n    };\n\
-    \n    iterator begin() noexcept {\n      return iterator(*this);\n    }\n  };\n\
-    \n  Reader input(0);\n\n  template<class _typeIterator, KYOPRO_BASE_UINT _decimal_precision\
-    \ = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n  private:\n    template<class,\
-    \ class = void>\n    struct _has_scan: std::false_type {};\n    template<class\
-    \ _typeT>\n    struct _has_scan<_typeT, std::void_t<decltype(std::declval<_typeT>().scan(std::declval<Scanner&>()))>>:\
+    \ std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
+    \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_iterable_v\
+    \ = is_iterable<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
+    \ {};\n  template<class _typeT, class U>\n  struct is_tuple<std::pair<_typeT,\
+    \ U>>: std::true_type {};\n  template<class... Args>\n  struct is_tuple<std::tuple<Args...>>:\
+    \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_tuple_v =\
+    \ is_tuple<_typeT>::value;\n\n  template<class, class = void>\n  struct is_container_adapter:\
+    \ std::false_type {};\n  template<class _typeT>\n  struct is_container_adapter<_typeT,\
+    \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_iterable<_typeT>>\
+    \ {};\n  template<class _typeT>\n  constexpr bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n\
+    }\n#line 13 \"base/in.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    \ _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Reader {\n  private:\n    int _fd,\
+    \ _idx;\n    std::array<char, _buf_size> _buffer;\n\n  public:\n    Reader() {\n\
+    \      read(_fd, _buffer.begin(), _buf_size);\n    }\n    Reader(int _fd): _fd(_fd),\
+    \ _idx(0), _buffer() {\n      read(_fd, _buffer.begin(), _buf_size);\n    }\n\
+    \    Reader(FILE* _fp): _fd(fileno(_fp)), _idx(0), _buffer() {\n      read(_fd,\
+    \ _buffer.begin(), _buf_size);\n    }\n\n    Reader& operator =(int _fd) noexcept\
+    \ {\n      this->_fd = _fd;\n      return *this;\n    }\n    Reader& operator\
+    \ =(FILE* _fp) noexcept {\n      this->_fd = fileno(_fp);\n      return *this;\n\
+    \    }\n\n    struct iterator {\n    private:\n      Reader& _reader;\n\n    public:\n\
+    \      using difference_type = void;\n      using value_type = void;\n      using\
+    \ pointer = void;\n      using reference = void;\n      using iterator_category\
+    \ = std::input_iterator_tag;\n\n      iterator() noexcept = default;\n      iterator(Reader&\
+    \ _reader) noexcept: _reader(_reader) {}\n\n      iterator& operator ++() {\n\
+    \        ++_reader._idx;\n        if (_reader._idx == _buf_size) {\n         \
+    \ read(_reader._fd, _reader._buffer.begin(), _buf_size);\n          _reader._idx\
+    \ = 0;\n        }\n        return *this;\n      }\n\n      iterator operator ++(int)\
+    \ {\n        iterator _before = *this;\n        operator ++();\n        return\
+    \ _before;\n      }\n\n      char& operator *() const {\n        return _reader._buffer[_reader._idx];\n\
+    \      }\n    };\n\n    iterator begin() noexcept {\n      return iterator(*this);\n\
+    \    }\n  };\n\n  Reader input(0);\n\n  template<class _typeIterator, KYOPRO_BASE_UINT\
+    \ _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n  private:\n\
+    \    template<class, class = void>\n    struct _has_scan: std::false_type {};\n\
+    \    template<class _typeT>\n    struct _has_scan<_typeT, std::void_t<decltype(std::declval<_typeT>().scan(std::declval<Scanner&>()))>>:\
     \ std::true_type {};\n\n  public:\n    static constexpr KYOPRO_BASE_UINT decimal_precision\
     \ = _decimal_precision;\n    _typeIterator itr;\n\n    Scanner() noexcept = default;\n\
     \    Scanner(_typeIterator _itr) noexcept: itr(_itr) {}\n\n    void scan(char&\
@@ -182,10 +182,10 @@ data:
     \ _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Writer {\n  private:\n    int _fd,\
     \ _idx;\n    std::array<char, _buf_size> _buffer;\n\n  public:\n    Writer() noexcept\
     \ = default;\n    Writer(int _fd) noexcept: _fd(_fd), _idx(0), _buffer() {}\n\
-    \    Writer(FILE* _fp) noexcept: _fd(std::fileno(_fp)), _idx(0), _buffer() {}\n\
-    \n    ~Writer() {\n      write(_fd, _buffer.begin(), _idx);\n    }\n\n    Writer&\
+    \    Writer(FILE* _fp) noexcept: _fd(fileno(_fp)), _idx(0), _buffer() {}\n\n \
+    \   ~Writer() {\n      write(_fd, _buffer.begin(), _idx);\n    }\n\n    Writer&\
     \ operator =(int _fd) noexcept {\n      this->_fd = _fd;\n      return *this;\n\
-    \    }\n    Writer& operator =(FILE* _fp) noexcept {\n      this->_fd = std::fileno(_fp);\n\
+    \    }\n    Writer& operator =(FILE* _fp) noexcept {\n      this->_fd = fileno(_fp);\n\
     \      return *this;\n    }\n\n    struct iterator {\n    private:\n      Writer&\
     \ _writer;\n\n    public:\n      using difference_type = void;\n      using value_type\
     \ = void;\n      using pointer = void;\n      using reference = void;\n      using\
@@ -274,8 +274,8 @@ data:
   isVerificationFile: true
   path: yosupo/FenwickTree.test.cpp
   requiredBy: []
-  timestamp: '2022-03-10 13:15:22+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-03-10 17:01:45+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/FenwickTree.test.cpp
 layout: document

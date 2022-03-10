@@ -4,13 +4,13 @@ data:
   - icon: ':warning:'
     path: base/Hash.hpp
     title: base/Hash.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/trait.hpp
     title: base/trait.hpp
   - icon: ':warning:'
@@ -19,7 +19,7 @@ data:
   - icon: ':warning:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
   _extendedRequiredBy:
@@ -59,18 +59,18 @@ data:
     \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_iterator_v\
     \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_iterable<_typeT,\
-    \ std::void_t<typename _typeT::iterator>>: std::true_type {};\n  template<class\
-    \ _typeT>\n  constexpr bool is_iterable_v = is_iterable<_typeT>::value;\n\n  template<class>\n\
-    \  struct is_tuple: std::false_type {};\n  template<class _typeT, class U>\n \
-    \ struct is_tuple<std::pair<_typeT, U>>: std::true_type {};\n  template<class...\
-    \ Args>\n  struct is_tuple<std::tuple<Args...>>: std::true_type {};\n  template<class\
-    \ _typeT>\n  constexpr bool is_tuple_v = is_tuple<_typeT>::value;\n\n  template<class,\
-    \ class = void>\n  struct is_container_adapter: std::false_type {};\n  template<class\
-    \ _typeT>\n  struct is_container_adapter<_typeT, std::void_t<decltype(std::empty(std::declval<_typeT>()))>>:\
-    \ std::negation<is_iterable<_typeT>> {};\n  template<class _typeT>\n  constexpr\
-    \ bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n}\n#line\
-    \ 10 \"base/Hash.hpp\"\n\nnamespace kyopro {\n  template<class, class = void>\n\
-    \  struct Hash;\n\n  template<class _typeT>\n  struct Hash<_typeT, std::enable_if_t<std::is_scalar_v<_typeT>>>\
+    \ std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
+    \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_iterable_v\
+    \ = is_iterable<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
+    \ {};\n  template<class _typeT, class U>\n  struct is_tuple<std::pair<_typeT,\
+    \ U>>: std::true_type {};\n  template<class... Args>\n  struct is_tuple<std::tuple<Args...>>:\
+    \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_tuple_v =\
+    \ is_tuple<_typeT>::value;\n\n  template<class, class = void>\n  struct is_container_adapter:\
+    \ std::false_type {};\n  template<class _typeT>\n  struct is_container_adapter<_typeT,\
+    \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_iterable<_typeT>>\
+    \ {};\n  template<class _typeT>\n  constexpr bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n\
+    }\n#line 10 \"base/Hash.hpp\"\n\nnamespace kyopro {\n  template<class, class =\
+    \ void>\n  struct Hash;\n\n  template<class _typeT>\n  struct Hash<_typeT, std::enable_if_t<std::is_scalar_v<_typeT>>>\
     \ {\n  private:\n    [[no_unique_address]] std::hash<_typeT> _hashser;\n\n  public:\n\
     \    constexpr KYOPRO_BASE_UINT operator ()(_typeT a) const noexcept {\n     \
     \ return _hasher(a);\n    }\n  };\n\n  template<class _typeT>\n  struct Hash<_typeT,\
@@ -242,7 +242,7 @@ data:
   requiredBy:
   - template/all.hpp
   - all.hpp
-  timestamp: '2022-03-09 23:24:52+09:00'
+  timestamp: '2022-03-10 17:01:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/alias.hpp

@@ -11,13 +11,13 @@ data:
   - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/in.hpp
     title: base/in.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/io.hpp
     title: base/io.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/out.hpp
     title: base/out.hpp
   - icon: ':warning:'
@@ -33,15 +33,15 @@ data:
     path: template/all.hpp
     title: template/all.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: yosupo/FenwickTree.test.cpp
     title: yosupo/FenwickTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"base/trait.hpp\"\n#include <iterator>\n#include <queue>\n\
@@ -56,16 +56,17 @@ data:
     \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_iterator_v\
     \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_iterable<_typeT,\
-    \ std::void_t<typename _typeT::iterator>>: std::true_type {};\n  template<class\
-    \ _typeT>\n  constexpr bool is_iterable_v = is_iterable<_typeT>::value;\n\n  template<class>\n\
-    \  struct is_tuple: std::false_type {};\n  template<class _typeT, class U>\n \
-    \ struct is_tuple<std::pair<_typeT, U>>: std::true_type {};\n  template<class...\
-    \ Args>\n  struct is_tuple<std::tuple<Args...>>: std::true_type {};\n  template<class\
-    \ _typeT>\n  constexpr bool is_tuple_v = is_tuple<_typeT>::value;\n\n  template<class,\
-    \ class = void>\n  struct is_container_adapter: std::false_type {};\n  template<class\
-    \ _typeT>\n  struct is_container_adapter<_typeT, std::void_t<decltype(std::empty(std::declval<_typeT>()))>>:\
-    \ std::negation<is_iterable<_typeT>> {};\n  template<class _typeT>\n  constexpr\
-    \ bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n}\n"
+    \ std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
+    \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_iterable_v\
+    \ = is_iterable<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
+    \ {};\n  template<class _typeT, class U>\n  struct is_tuple<std::pair<_typeT,\
+    \ U>>: std::true_type {};\n  template<class... Args>\n  struct is_tuple<std::tuple<Args...>>:\
+    \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_tuple_v =\
+    \ is_tuple<_typeT>::value;\n\n  template<class, class = void>\n  struct is_container_adapter:\
+    \ std::false_type {};\n  template<class _typeT>\n  struct is_container_adapter<_typeT,\
+    \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_iterable<_typeT>>\
+    \ {};\n  template<class _typeT>\n  constexpr bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n\
+    }\n"
   code: "#pragma once\n#include <iterator>\n#include <queue>\n#include <stack>\n#include\
     \ <type_traits>\n#include <utility>\n\n#ifdef __SIZEOF_INT128__\ntemplate<>\n\
     struct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>:\
@@ -78,16 +79,17 @@ data:
     \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_iterator_v\
     \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_iterable<_typeT,\
-    \ std::void_t<typename _typeT::iterator>>: std::true_type {};\n  template<class\
-    \ _typeT>\n  constexpr bool is_iterable_v = is_iterable<_typeT>::value;\n\n  template<class>\n\
-    \  struct is_tuple: std::false_type {};\n  template<class _typeT, class U>\n \
-    \ struct is_tuple<std::pair<_typeT, U>>: std::true_type {};\n  template<class...\
-    \ Args>\n  struct is_tuple<std::tuple<Args...>>: std::true_type {};\n  template<class\
-    \ _typeT>\n  constexpr bool is_tuple_v = is_tuple<_typeT>::value;\n\n  template<class,\
-    \ class = void>\n  struct is_container_adapter: std::false_type {};\n  template<class\
-    \ _typeT>\n  struct is_container_adapter<_typeT, std::void_t<decltype(std::empty(std::declval<_typeT>()))>>:\
-    \ std::negation<is_iterable<_typeT>> {};\n  template<class _typeT>\n  constexpr\
-    \ bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n}"
+    \ std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
+    \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_iterable_v\
+    \ = is_iterable<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
+    \ {};\n  template<class _typeT, class U>\n  struct is_tuple<std::pair<_typeT,\
+    \ U>>: std::true_type {};\n  template<class... Args>\n  struct is_tuple<std::tuple<Args...>>:\
+    \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_tuple_v =\
+    \ is_tuple<_typeT>::value;\n\n  template<class, class = void>\n  struct is_container_adapter:\
+    \ std::false_type {};\n  template<class _typeT>\n  struct is_container_adapter<_typeT,\
+    \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_iterable<_typeT>>\
+    \ {};\n  template<class _typeT>\n  constexpr bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n\
+    }"
   dependsOn: []
   isVerificationFile: false
   path: base/trait.hpp
@@ -102,8 +104,8 @@ data:
   - base/all.hpp
   - base/Hash.hpp
   - all.hpp
-  timestamp: '2022-01-23 18:51:32+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-03-10 17:01:45+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - yosupo/FenwickTree.test.cpp
   - yosupo/UnionFind.test.cpp
