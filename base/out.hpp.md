@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/trait.hpp
     title: base/trait.hpp
   _extendedRequiredBy:
@@ -14,19 +14,19 @@ data:
   - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/io.hpp
     title: base/io.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/FenwickTree.test.cpp
     title: yosupo/FenwickTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"base/out.hpp\"\n#include <unistd.h>\n#include <array>\n\
@@ -65,10 +65,10 @@ data:
     \ = KYOPRO_BUFFER_SIZE>\n  struct Writer {\n  private:\n    int _fd, _idx;\n \
     \   std::array<char, _buf_size> _buffer;\n\n  public:\n    Writer() noexcept =\
     \ default;\n    Writer(int _fd) noexcept: _fd(_fd), _idx(0), _buffer() {}\n  \
-    \  Writer(FILE* _fp) noexcept: _fd(fileno_unlocked(_fp)), _idx(0), _buffer() {}\n\
-    \n    ~Writer() {\n      write(_fd, _buffer.begin(), _idx);\n    }\n\n    Writer&\
+    \  Writer(FILE* _fp) noexcept: _fd(std::fileno(_fp)), _idx(0), _buffer() {}\n\n\
+    \    ~Writer() {\n      write(_fd, _buffer.begin(), _idx);\n    }\n\n    Writer&\
     \ operator =(int _fd) noexcept {\n      this->_fd = _fd;\n      return *this;\n\
-    \    }\n    Writer& operator =(FILE* _fp) noexcept {\n      this->_fd = fileno_unlocked(_fp);\n\
+    \    }\n    Writer& operator =(FILE* _fp) noexcept {\n      this->_fd = std::fileno(_fp);\n\
     \      return *this;\n    }\n\n    struct iterator {\n    private:\n      Writer&\
     \ _writer;\n\n    public:\n      using difference_type = void;\n      using value_type\
     \ = void;\n      using pointer = void;\n      using reference = void;\n      using\
@@ -139,11 +139,11 @@ data:
     \ KYOPRO_BUFFER_SIZE>\n  struct Writer {\n  private:\n    int _fd, _idx;\n   \
     \ std::array<char, _buf_size> _buffer;\n\n  public:\n    Writer() noexcept = default;\n\
     \    Writer(int _fd) noexcept: _fd(_fd), _idx(0), _buffer() {}\n    Writer(FILE*\
-    \ _fp) noexcept: _fd(fileno_unlocked(_fp)), _idx(0), _buffer() {}\n\n    ~Writer()\
+    \ _fp) noexcept: _fd(std::fileno(_fp)), _idx(0), _buffer() {}\n\n    ~Writer()\
     \ {\n      write(_fd, _buffer.begin(), _idx);\n    }\n\n    Writer& operator =(int\
     \ _fd) noexcept {\n      this->_fd = _fd;\n      return *this;\n    }\n    Writer&\
-    \ operator =(FILE* _fp) noexcept {\n      this->_fd = fileno_unlocked(_fp);\n\
-    \      return *this;\n    }\n\n    struct iterator {\n    private:\n      Writer&\
+    \ operator =(FILE* _fp) noexcept {\n      this->_fd = std::fileno(_fp);\n    \
+    \  return *this;\n    }\n\n    struct iterator {\n    private:\n      Writer&\
     \ _writer;\n\n    public:\n      using difference_type = void;\n      using value_type\
     \ = void;\n      using pointer = void;\n      using reference = void;\n      using\
     \ iterator_category = std::output_iterator_tag;\n\n      iterator() noexcept =\
@@ -215,8 +215,8 @@ data:
   - base/io.hpp
   - base/all.hpp
   - all.hpp
-  timestamp: '2022-03-10 00:20:07+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-03-10 13:15:22+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - yosupo/FenwickTree.test.cpp
   - yosupo/UnionFind.test.cpp
