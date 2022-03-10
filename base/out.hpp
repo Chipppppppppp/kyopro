@@ -21,7 +21,7 @@ namespace kyopro {
   public:
     Writer() noexcept = default;
     Writer(int _fd) noexcept: _fd(_fd), _idx(0), _buffer() {}
-    Writer(FILE* _fp) noexcept: _fd(std::fileno(_fp)), _idx(0), _buffer() {}
+    Writer(FILE* _fp) noexcept: _fd(fileno(_fp)), _idx(0), _buffer() {}
 
     ~Writer() {
       write(_fd, _buffer.begin(), _idx);
@@ -32,7 +32,7 @@ namespace kyopro {
       return *this;
     }
     Writer& operator =(FILE* _fp) noexcept {
-      this->_fd = std::fileno(_fp);
+      this->_fd = fileno(_fp);
       return *this;
     }
 

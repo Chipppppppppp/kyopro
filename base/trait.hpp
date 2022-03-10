@@ -31,7 +31,7 @@ namespace kyopro {
   template<class, class = void>
   struct is_iterable: std::false_type {};
   template<class _typeT>
-  struct is_iterable<_typeT, std::void_t<typename _typeT::iterator>>: std::true_type {};
+  struct is_iterable<_typeT, std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>: std::true_type {};
   template<class _typeT>
   constexpr bool is_iterable_v = is_iterable<_typeT>::value;
 
