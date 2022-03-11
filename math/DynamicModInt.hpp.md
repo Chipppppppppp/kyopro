@@ -101,106 +101,101 @@ data:
     \ _typeU> ceil_mod(_typeT _x, _typeU _m) noexcept {\n    return _m - floor_mod(_x\
     \ - 1, _m) - static_cast<_typeT>(1);\n  }\n}\n#line 9 \"math/DynamicModInt.hpp\"\
     \n\nnamespace kyopro {\n  struct DynamicModInt {\n    inline static KYOPRO_BASE_UINT\
-    \ mod;\n    KYOPRO_BASE_UINT value;\n\n    static constexpr void set_mod(KYOPRO_BASE_UINT\
-    \ _mod) noexcept {\n      mod = _mod;\n    }\n\n    constexpr DynamicModInt()\
-    \ noexcept = default;\n    template<class _typeT>\n    constexpr DynamicModInt(_typeT\
-    \ _value) noexcept: value(floor_mod(_value, mod)) { static_assert(std::is_integral_v<_typeT>);\
-    \ }\n\n    template<class _typeT>\n    explicit constexpr operator _typeT() const\
-    \ noexcept { return value; }\n\n    static constexpr DynamicModInt raw(std::uint_fast64_t\
-    \ _n) noexcept {\n      DynamicModInt _res;\n      _res.value = _n;\n      return\
-    \ _res;\n    }\n\n    constexpr DynamicModInt power(std::uint_fast64_t _n) const\
-    \ noexcept {\n      std::uint_fast64_t _res = 1, _a = value;\n      while (_n\
-    \ > 0) {\n        if (_n & 1) _res = _res * _a % mod;\n        _a = _a * _a %\
-    \ mod;\n        _n >>= 1;\n      }\n      return _res;\n    }\n\n    constexpr\
-    \ DynamicModInt inv() const noexcept {\n      std::uint_fast64_t _a = value, _b\
-    \ = mod;\n      std::int_fast64_t _u = 1, _v = 0;\n      while (_b > 0) {\n  \
-    \      std::uint_fast64_t _t = _a / _b;\n        _a -= _t * _b;\n        std::swap(_a,\
-    \ _b);\n        _u -= _t * _v;\n        std::swap(_u, _v);\n      }\n      return\
-    \ floor_mod(_u, mod);\n    }\n\n    constexpr DynamicModInt operator +() const\
-    \ noexcept { return *this; }\n\n    constexpr DynamicModInt operator -() const\
-    \ noexcept { return mod - value; }\n\n    constexpr DynamicModInt& operator ++()\
-    \ noexcept {\n      if (++value >= mod) value -= mod;\n      return *this;\n \
-    \   }\n\n    constexpr DynamicModInt operator ++(int) noexcept {\n      DynamicModInt\
-    \ _before = *this;\n      operator ++();\n      return _before;\n    }\n\n   \
-    \ constexpr DynamicModInt& operator --() noexcept {\n      if (value == 0) value\
-    \ = mod;\n      --value;\n      return *this;\n    }\n\n    constexpr DynamicModInt\
+    \ mod;\n    KYOPRO_BASE_UINT value;\n\n    static void set_mod(KYOPRO_BASE_UINT\
+    \ _mod) noexcept {\n      mod = _mod;\n    }\n\n    DynamicModInt() noexcept =\
+    \ default;\n    template<class _typeT>\n    DynamicModInt(_typeT _value) noexcept:\
+    \ value(floor_mod(_value, mod)) { static_assert(std::is_integral_v<_typeT>); }\n\
+    \n    template<class _typeT>\n    explicit operator _typeT() const noexcept {\
+    \ return value; }\n\n    static DynamicModInt raw(std::uint_fast64_t _n) noexcept\
+    \ {\n      DynamicModInt _res;\n      _res.value = _n;\n      return _res;\n \
+    \   }\n\n    DynamicModInt power(std::uint_fast64_t _n) const noexcept {\n   \
+    \   std::uint_fast64_t _res = 1, _a = value;\n      while (_n > 0) {\n       \
+    \ if (_n & 1) _res = _res * _a % mod;\n        _a = _a * _a % mod;\n        _n\
+    \ >>= 1;\n      }\n      return _res;\n    }\n\n    DynamicModInt inv() const\
+    \ noexcept {\n      std::uint_fast64_t _a = value, _b = mod;\n      std::int_fast64_t\
+    \ _u = 1, _v = 0;\n      while (_b > 0) {\n        std::uint_fast64_t _t = _a\
+    \ / _b;\n        _a -= _t * _b;\n        std::swap(_a, _b);\n        _u -= _t\
+    \ * _v;\n        std::swap(_u, _v);\n      }\n      return floor_mod(_u, mod);\n\
+    \    }\n\n    DynamicModInt operator +() const noexcept { return *this; }\n\n\
+    \    DynamicModInt operator -() const noexcept { return mod - value; }\n\n   \
+    \ DynamicModInt& operator ++() noexcept {\n      if (++value >= mod) value -=\
+    \ mod;\n      return *this;\n    }\n\n    DynamicModInt operator ++(int) noexcept\
+    \ {\n      DynamicModInt _before = *this;\n      operator ++();\n      return\
+    \ _before;\n    }\n\n    DynamicModInt& operator --() noexcept {\n      if (value\
+    \ == 0) value = mod;\n      --value;\n      return *this;\n    }\n\n    DynamicModInt\
     \ operator --(int) noexcept {\n      DynamicModInt _before = *this;\n      operator\
-    \ --();\n      return _before;\n    }\n\n    constexpr DynamicModInt& operator\
-    \ +=(DynamicModInt _rhs) noexcept {\n      if ((value += _rhs.value) >= mod) value\
-    \ -= mod;\n      return *this;\n    }\n\n    constexpr DynamicModInt& operator\
-    \ -=(DynamicModInt _rhs) noexcept {\n      if (value < _rhs.value) value += mod;\n\
-    \      value -= _rhs.value;\n      return *this;\n    }\n\n    constexpr DynamicModInt&\
-    \ operator *=(DynamicModInt _rhs) noexcept {\n      value = value * _rhs.value\
-    \ % mod;\n      return *this;\n    }\n\n    constexpr DynamicModInt& operator\
-    \ /=(DynamicModInt _rhs) noexcept {\n      value = value * _rhs.inv().value %\
-    \ mod;\n      return *this;\n    }\n\n    friend constexpr DynamicModInt operator\
-    \ +(DynamicModInt _lhs, DynamicModInt _rhs) noexcept { return _lhs += _rhs; }\n\
-    \n    friend constexpr DynamicModInt operator -(DynamicModInt _lhs, DynamicModInt\
-    \ _rhs) noexcept { return _lhs -= _rhs; }\n\n    friend constexpr DynamicModInt\
+    \ --();\n      return _before;\n    }\n\n    DynamicModInt& operator +=(DynamicModInt\
+    \ _rhs) noexcept {\n      if ((value += _rhs.value) >= mod) value -= mod;\n  \
+    \    return *this;\n    }\n\n    DynamicModInt& operator -=(DynamicModInt _rhs)\
+    \ noexcept {\n      if (value < _rhs.value) value += mod;\n      value -= _rhs.value;\n\
+    \      return *this;\n    }\n\n    DynamicModInt& operator *=(DynamicModInt _rhs)\
+    \ noexcept {\n      value = value * _rhs.value % mod;\n      return *this;\n \
+    \   }\n\n    DynamicModInt& operator /=(DynamicModInt _rhs) noexcept {\n     \
+    \ value = value * _rhs.inv().value % mod;\n      return *this;\n    }\n\n    friend\
+    \ DynamicModInt operator +(DynamicModInt _lhs, DynamicModInt _rhs) noexcept {\
+    \ return _lhs += _rhs; }\n\n    friend DynamicModInt operator -(DynamicModInt\
+    \ _lhs, DynamicModInt _rhs) noexcept { return _lhs -= _rhs; }\n\n    friend DynamicModInt\
     \ operator *(DynamicModInt _lhs, DynamicModInt _rhs) noexcept { return _lhs *=\
-    \ _rhs; }\n\n    friend constexpr DynamicModInt operator /(DynamicModInt _lhs,\
-    \ DynamicModInt _rhs) noexcept { return _lhs /= _rhs; }\n\n    friend constexpr\
-    \ bool operator ==(DynamicModInt _lhs, DynamicModInt _rhs) noexcept { return _lhs.value\
-    \ == _rhs.value; }\n\n    friend constexpr bool operator !=(DynamicModInt _lhs,\
-    \ DynamicModInt _rhs) noexcept { return _lhs.value != _rhs.value; }\n\n    template<class\
-    \ _typeScanner>\n    void scan(_typeScanner& _scanner) {\n      std::int_fast64_t\
-    \ _value;\n      _scanner.scan(_value);\n      value = floor_mod(_value, mod);\n\
-    \    }\n\n    template<class _typePrinter>\n    void print(_typePrinter& _printer)\
-    \ const {\n      _printer.print(value);\n    }\n  };\n\n  struct Hash<DynamicModInt>\
-    \ { constexpr std::size_t operator ()(DynamicModInt _a) const noexcept { return\
-    \ _a; } };\n}\n"
+    \ _rhs; }\n\n    friend DynamicModInt operator /(DynamicModInt _lhs, DynamicModInt\
+    \ _rhs) noexcept { return _lhs /= _rhs; }\n\n    friend bool operator ==(DynamicModInt\
+    \ _lhs, DynamicModInt _rhs) noexcept { return _lhs.value == _rhs.value; }\n\n\
+    \    friend bool operator !=(DynamicModInt _lhs, DynamicModInt _rhs) noexcept\
+    \ { return _lhs.value != _rhs.value; }\n\n    template<class _typeScanner>\n \
+    \   void scan(_typeScanner& _scanner) {\n      std::int_fast64_t _value;\n   \
+    \   _scanner.scan(_value);\n      value = floor_mod(_value, mod);\n    }\n\n \
+    \   template<class _typePrinter>\n    void print(_typePrinter& _printer) const\
+    \ {\n      _printer.print(value);\n    }\n  };\n\n  struct Hash<DynamicModInt>\
+    \ { std::size_t operator ()(DynamicModInt _a) const noexcept { return _a; } };\n\
+    }\n"
   code: "#pragma once\n#include <cassert>\n#include <cstdint>\n#include <type_traits>\n\
     #include \"../base/constant.hpp\"\n#include \"../base/Hash.hpp\"\n#include \"\
     ../base/settings.hpp\"\n#include \"mod.hpp\"\n\nnamespace kyopro {\n  struct DynamicModInt\
     \ {\n    inline static KYOPRO_BASE_UINT mod;\n    KYOPRO_BASE_UINT value;\n\n\
-    \    static constexpr void set_mod(KYOPRO_BASE_UINT _mod) noexcept {\n      mod\
-    \ = _mod;\n    }\n\n    constexpr DynamicModInt() noexcept = default;\n    template<class\
-    \ _typeT>\n    constexpr DynamicModInt(_typeT _value) noexcept: value(floor_mod(_value,\
-    \ mod)) { static_assert(std::is_integral_v<_typeT>); }\n\n    template<class _typeT>\n\
-    \    explicit constexpr operator _typeT() const noexcept { return value; }\n\n\
-    \    static constexpr DynamicModInt raw(std::uint_fast64_t _n) noexcept {\n  \
-    \    DynamicModInt _res;\n      _res.value = _n;\n      return _res;\n    }\n\n\
-    \    constexpr DynamicModInt power(std::uint_fast64_t _n) const noexcept {\n \
-    \     std::uint_fast64_t _res = 1, _a = value;\n      while (_n > 0) {\n     \
-    \   if (_n & 1) _res = _res * _a % mod;\n        _a = _a * _a % mod;\n       \
-    \ _n >>= 1;\n      }\n      return _res;\n    }\n\n    constexpr DynamicModInt\
-    \ inv() const noexcept {\n      std::uint_fast64_t _a = value, _b = mod;\n   \
-    \   std::int_fast64_t _u = 1, _v = 0;\n      while (_b > 0) {\n        std::uint_fast64_t\
-    \ _t = _a / _b;\n        _a -= _t * _b;\n        std::swap(_a, _b);\n        _u\
-    \ -= _t * _v;\n        std::swap(_u, _v);\n      }\n      return floor_mod(_u,\
-    \ mod);\n    }\n\n    constexpr DynamicModInt operator +() const noexcept { return\
-    \ *this; }\n\n    constexpr DynamicModInt operator -() const noexcept { return\
-    \ mod - value; }\n\n    constexpr DynamicModInt& operator ++() noexcept {\n  \
-    \    if (++value >= mod) value -= mod;\n      return *this;\n    }\n\n    constexpr\
-    \ DynamicModInt operator ++(int) noexcept {\n      DynamicModInt _before = *this;\n\
-    \      operator ++();\n      return _before;\n    }\n\n    constexpr DynamicModInt&\
-    \ operator --() noexcept {\n      if (value == 0) value = mod;\n      --value;\n\
-    \      return *this;\n    }\n\n    constexpr DynamicModInt operator --(int) noexcept\
-    \ {\n      DynamicModInt _before = *this;\n      operator --();\n      return\
-    \ _before;\n    }\n\n    constexpr DynamicModInt& operator +=(DynamicModInt _rhs)\
-    \ noexcept {\n      if ((value += _rhs.value) >= mod) value -= mod;\n      return\
-    \ *this;\n    }\n\n    constexpr DynamicModInt& operator -=(DynamicModInt _rhs)\
+    \    static void set_mod(KYOPRO_BASE_UINT _mod) noexcept {\n      mod = _mod;\n\
+    \    }\n\n    DynamicModInt() noexcept = default;\n    template<class _typeT>\n\
+    \    DynamicModInt(_typeT _value) noexcept: value(floor_mod(_value, mod)) { static_assert(std::is_integral_v<_typeT>);\
+    \ }\n\n    template<class _typeT>\n    explicit operator _typeT() const noexcept\
+    \ { return value; }\n\n    static DynamicModInt raw(std::uint_fast64_t _n) noexcept\
+    \ {\n      DynamicModInt _res;\n      _res.value = _n;\n      return _res;\n \
+    \   }\n\n    DynamicModInt power(std::uint_fast64_t _n) const noexcept {\n   \
+    \   std::uint_fast64_t _res = 1, _a = value;\n      while (_n > 0) {\n       \
+    \ if (_n & 1) _res = _res * _a % mod;\n        _a = _a * _a % mod;\n        _n\
+    \ >>= 1;\n      }\n      return _res;\n    }\n\n    DynamicModInt inv() const\
+    \ noexcept {\n      std::uint_fast64_t _a = value, _b = mod;\n      std::int_fast64_t\
+    \ _u = 1, _v = 0;\n      while (_b > 0) {\n        std::uint_fast64_t _t = _a\
+    \ / _b;\n        _a -= _t * _b;\n        std::swap(_a, _b);\n        _u -= _t\
+    \ * _v;\n        std::swap(_u, _v);\n      }\n      return floor_mod(_u, mod);\n\
+    \    }\n\n    DynamicModInt operator +() const noexcept { return *this; }\n\n\
+    \    DynamicModInt operator -() const noexcept { return mod - value; }\n\n   \
+    \ DynamicModInt& operator ++() noexcept {\n      if (++value >= mod) value -=\
+    \ mod;\n      return *this;\n    }\n\n    DynamicModInt operator ++(int) noexcept\
+    \ {\n      DynamicModInt _before = *this;\n      operator ++();\n      return\
+    \ _before;\n    }\n\n    DynamicModInt& operator --() noexcept {\n      if (value\
+    \ == 0) value = mod;\n      --value;\n      return *this;\n    }\n\n    DynamicModInt\
+    \ operator --(int) noexcept {\n      DynamicModInt _before = *this;\n      operator\
+    \ --();\n      return _before;\n    }\n\n    DynamicModInt& operator +=(DynamicModInt\
+    \ _rhs) noexcept {\n      if ((value += _rhs.value) >= mod) value -= mod;\n  \
+    \    return *this;\n    }\n\n    DynamicModInt& operator -=(DynamicModInt _rhs)\
     \ noexcept {\n      if (value < _rhs.value) value += mod;\n      value -= _rhs.value;\n\
-    \      return *this;\n    }\n\n    constexpr DynamicModInt& operator *=(DynamicModInt\
-    \ _rhs) noexcept {\n      value = value * _rhs.value % mod;\n      return *this;\n\
-    \    }\n\n    constexpr DynamicModInt& operator /=(DynamicModInt _rhs) noexcept\
-    \ {\n      value = value * _rhs.inv().value % mod;\n      return *this;\n    }\n\
-    \n    friend constexpr DynamicModInt operator +(DynamicModInt _lhs, DynamicModInt\
-    \ _rhs) noexcept { return _lhs += _rhs; }\n\n    friend constexpr DynamicModInt\
-    \ operator -(DynamicModInt _lhs, DynamicModInt _rhs) noexcept { return _lhs -=\
-    \ _rhs; }\n\n    friend constexpr DynamicModInt operator *(DynamicModInt _lhs,\
-    \ DynamicModInt _rhs) noexcept { return _lhs *= _rhs; }\n\n    friend constexpr\
-    \ DynamicModInt operator /(DynamicModInt _lhs, DynamicModInt _rhs) noexcept {\
-    \ return _lhs /= _rhs; }\n\n    friend constexpr bool operator ==(DynamicModInt\
+    \      return *this;\n    }\n\n    DynamicModInt& operator *=(DynamicModInt _rhs)\
+    \ noexcept {\n      value = value * _rhs.value % mod;\n      return *this;\n \
+    \   }\n\n    DynamicModInt& operator /=(DynamicModInt _rhs) noexcept {\n     \
+    \ value = value * _rhs.inv().value % mod;\n      return *this;\n    }\n\n    friend\
+    \ DynamicModInt operator +(DynamicModInt _lhs, DynamicModInt _rhs) noexcept {\
+    \ return _lhs += _rhs; }\n\n    friend DynamicModInt operator -(DynamicModInt\
+    \ _lhs, DynamicModInt _rhs) noexcept { return _lhs -= _rhs; }\n\n    friend DynamicModInt\
+    \ operator *(DynamicModInt _lhs, DynamicModInt _rhs) noexcept { return _lhs *=\
+    \ _rhs; }\n\n    friend DynamicModInt operator /(DynamicModInt _lhs, DynamicModInt\
+    \ _rhs) noexcept { return _lhs /= _rhs; }\n\n    friend bool operator ==(DynamicModInt\
     \ _lhs, DynamicModInt _rhs) noexcept { return _lhs.value == _rhs.value; }\n\n\
-    \    friend constexpr bool operator !=(DynamicModInt _lhs, DynamicModInt _rhs)\
-    \ noexcept { return _lhs.value != _rhs.value; }\n\n    template<class _typeScanner>\n\
-    \    void scan(_typeScanner& _scanner) {\n      std::int_fast64_t _value;\n  \
-    \    _scanner.scan(_value);\n      value = floor_mod(_value, mod);\n    }\n\n\
-    \    template<class _typePrinter>\n    void print(_typePrinter& _printer) const\
+    \    friend bool operator !=(DynamicModInt _lhs, DynamicModInt _rhs) noexcept\
+    \ { return _lhs.value != _rhs.value; }\n\n    template<class _typeScanner>\n \
+    \   void scan(_typeScanner& _scanner) {\n      std::int_fast64_t _value;\n   \
+    \   _scanner.scan(_value);\n      value = floor_mod(_value, mod);\n    }\n\n \
+    \   template<class _typePrinter>\n    void print(_typePrinter& _printer) const\
     \ {\n      _printer.print(value);\n    }\n  };\n\n  struct Hash<DynamicModInt>\
-    \ { constexpr std::size_t operator ()(DynamicModInt _a) const noexcept { return\
-    \ _a; } };\n}"
+    \ { std::size_t operator ()(DynamicModInt _a) const noexcept { return _a; } };\n\
+    }"
   dependsOn:
   - base/constant.hpp
   - math/power.hpp
@@ -211,7 +206,7 @@ data:
   isVerificationFile: false
   path: math/DynamicModInt.hpp
   requiredBy: []
-  timestamp: '2022-03-11 23:56:05+09:00'
+  timestamp: '2022-03-12 00:02:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/DynamicModInt.hpp
