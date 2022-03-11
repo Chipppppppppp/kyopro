@@ -144,7 +144,7 @@ data:
     \   void scan(_typeScanner& _scanner) {\n      std::int_fast64_t _value;\n   \
     \   _scanner.scan(_value);\n      value = floor_mod(_value, mod);\n    }\n\n \
     \   template<class _typePrinter>\n    void print(_typePrinter& _printer) const\
-    \ {\n      _printer.print(value);\n    }\n  };\n\n  struct Hash<DynamicModInt>\
+    \ {\n      _printer.print(value);\n    }\n  };\n\n  template<>\n  struct Hash<DynamicModInt>\
     \ { std::size_t operator ()(DynamicModInt _a) const noexcept { return _a; } };\n\
     }\n"
   code: "#pragma once\n#include <cassert>\n#include <cstdint>\n#include <type_traits>\n\
@@ -193,7 +193,7 @@ data:
     \   void scan(_typeScanner& _scanner) {\n      std::int_fast64_t _value;\n   \
     \   _scanner.scan(_value);\n      value = floor_mod(_value, mod);\n    }\n\n \
     \   template<class _typePrinter>\n    void print(_typePrinter& _printer) const\
-    \ {\n      _printer.print(value);\n    }\n  };\n\n  struct Hash<DynamicModInt>\
+    \ {\n      _printer.print(value);\n    }\n  };\n\n  template<>\n  struct Hash<DynamicModInt>\
     \ { std::size_t operator ()(DynamicModInt _a) const noexcept { return _a; } };\n\
     }"
   dependsOn:
@@ -206,7 +206,7 @@ data:
   isVerificationFile: false
   path: math/DynamicModInt.hpp
   requiredBy: []
-  timestamp: '2022-03-12 00:02:47+09:00'
+  timestamp: '2022-03-12 00:07:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/DynamicModInt.hpp
