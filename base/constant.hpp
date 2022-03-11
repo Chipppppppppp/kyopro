@@ -15,7 +15,7 @@ namespace kyopro {
   inline constexpr _typeT INF = std::numeric_limits<_typeT>::max() / KYOPRO_INF_DIV;
   inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;
 
-  template<class _typeT, fileno _decimal_precision = KYOPRO_DECIMAL_PRECISION>
+  template<class _typeT, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>
   inline constexpr KYOPRO_BASE_FLOAT EPS = static_cast<_typeT>(1) / power(static_cast<std::uint_fast64_t>(10), _decimal_precision);
   inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;
 
