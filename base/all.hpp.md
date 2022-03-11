@@ -4,25 +4,25 @@ data:
   - icon: ':warning:'
     path: base/Hash.hpp
     title: base/Hash.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/in.hpp
     title: base/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/io.hpp
     title: base/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/out.hpp
     title: base/out.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/trait.hpp
     title: base/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
   _extendedRequiredBy:
@@ -38,13 +38,13 @@ data:
   bundledCode: "#line 2 \"base/constant.hpp\"\n#include <array>\n#include <cstdint>\n\
     #include <limits>\n#include <utility>\n#line 3 \"base/settings.hpp\"\n\n#ifndef\
     \ KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n\
-    #define KYOPRO_BASE_UINT std::size_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n#define\
-    \ KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD\
-    \ static_cast<KYOPRO_BASE_UINT>(1000000007)\n#endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n\
-    #define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n#endif\n\n\
-    #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
+    #define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n\
+    #define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define\
+    \ KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(1000000007)\n#endif\n\n#ifndef\
+    \ KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
+    #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 4 \"math/power.hpp\"\nnamespace kyopro {\n  template<class _typeT>\n\
+    #endif\n#line 4 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n\
     \  constexpr _typeT power(_typeT _a, std::uint_fast64_t _n, _typeT _init = 1)\
     \ noexcept {\n    while (_n > 0) {\n      if (_n & 1) _init *= _a;\n      _a *=\
     \ _a;\n      _n >>= 1;\n    }\n    return _init;\n  }\n}\n#line 8 \"base/constant.hpp\"\
@@ -52,7 +52,7 @@ data:
     \ = KYOPRO_DEFAULT_MOD;\n  inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\
     \n  template<class _typeT>\n  inline constexpr _typeT INF = std::numeric_limits<_typeT>::max()\
     \ / KYOPRO_INF_DIV;\n  inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\
-    \n  template<class _typeT, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
+    \n  template<class _typeT, fileno _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
     \  inline constexpr KYOPRO_BASE_FLOAT EPS = static_cast<_typeT>(1) / power(static_cast<std::uint_fast64_t>(10),\
     \ _decimal_precision);\n  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\
     \n  template<class _typeT>\n  inline constexpr _typeT PI = 3.14159265358979323846;\n\
@@ -61,13 +61,13 @@ data:
     \ 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
     \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
     \ -1}, {0, -1}, {1, -1}}};\n}\n#line 2 \"base/Hash.hpp\"\n#include <cstddef>\n\
-    #include <functional>\n#include <initializer_list>\n#include <tuple>\n#include\
-    \ <type_traits>\n#line 2 \"base/trait.hpp\"\n#include <iterator>\n#include <queue>\n\
-    #include <stack>\n#line 7 \"base/trait.hpp\"\n\n#ifdef __SIZEOF_INT128__\ntemplate<>\n\
-    struct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>:\
-    \ std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type\
-    \ {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>: std::true_type {};\n\
-    #endif\n#ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
+    #line 4 \"base/Hash.hpp\"\n#include <functional>\n#include <initializer_list>\n\
+    #include <tuple>\n#include <type_traits>\n#line 2 \"base/trait.hpp\"\n#include\
+    \ <iterator>\n#include <queue>\n#include <stack>\n#line 7 \"base/trait.hpp\"\n\
+    \n#ifdef __SIZEOF_INT128__\ntemplate<>\nstruct std::is_integral<__int128_t>: std::true_type\
+    \ {};\ntemplate<>\nstruct std::is_signed<__int128_t>: std::true_type {};\ntemplate<>\n\
+    struct std::is_integral<__uint128_t>: std::true_type {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>:\
+    \ std::true_type {};\n#endif\n#ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
     \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<class, class =\
     \ void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
     \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
@@ -77,32 +77,32 @@ data:
     \ std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
     \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_iterable_v\
     \ = is_iterable<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
-    \ {};\n  template<class _typeT, class U>\n  struct is_tuple<std::pair<_typeT,\
-    \ U>>: std::true_type {};\n  template<class... Args>\n  struct is_tuple<std::tuple<Args...>>:\
+    \ {};\n  template<class _typeT, class _typeU>\n  struct is_tuple<std::pair<_typeT,\
+    \ _typeU>>: std::true_type {};\n  template<class... _typeArgs>\n  struct is_tuple<std::tuple<_typeArgs...>>:\
     \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_tuple_v =\
     \ is_tuple<_typeT>::value;\n\n  template<class, class = void>\n  struct is_container_adapter:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_container_adapter<_typeT,\
     \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_iterable<_typeT>>\
     \ {};\n  template<class _typeT>\n  constexpr bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n\
-    }\n#line 10 \"base/Hash.hpp\"\n\nnamespace kyopro {\n  template<class, class =\
+    }\n#line 11 \"base/Hash.hpp\"\n\nnamespace kyopro {\n  template<class, class =\
     \ void>\n  struct Hash;\n\n  template<class _typeT>\n  struct Hash<_typeT, std::enable_if_t<std::is_scalar_v<_typeT>>>\
     \ {\n  private:\n    [[no_unique_address]] std::hash<_typeT> _hashser;\n\n  public:\n\
-    \    constexpr KYOPRO_BASE_UINT operator ()(_typeT a) const noexcept {\n     \
-    \ return _hasher(a);\n    }\n  };\n\n  template<class _typeT>\n  struct Hash<_typeT,\
-    \ std::enable_if_t<is_tuple_v<_typeT>>> {\n    template<KYOPRO_BASE_UINT _i =\
-    \ 0>\n    constexpr KYOPRO_BASE_UINT operator ()(const _typeT& _a) const noexcept\
-    \ {\n      if constexpr (_i == std::tuple_size_v<_typeT>) return std::tuple_size_v<_typeT>;\n\
-    \      else {\n        KYOPRO_BASE_UINT _seed = operator()<_i + 1>(_a);\n    \
-    \    return _seed ^ (Hash<std::tuple_element_t<_i, _typeT>>()(std::get<_i>(_a))\
+    \    constexpr std::size_t operator ()(_typeT a) const noexcept {\n      return\
+    \ _hasher(a);\n    }\n  };\n\n  template<class _typeT>\n  struct Hash<_typeT,\
+    \ std::enable_if_t<is_tuple_v<_typeT>>> {\n    template<std::size_t _i = 0>\n\
+    \    constexpr std::size_t operator ()(const _typeT& _a) const noexcept {\n  \
+    \    if constexpr (_i == std::tuple_size_v<_typeT>) return std::tuple_size_v<_typeT>;\n\
+    \      else {\n        std::uint_fast64_t _seed = operator()<_i + 1>(_a);\n  \
+    \      return _seed ^ (Hash<std::tuple_element_t<_i, _typeT>>()(std::get<_i>(_a))\
     \ + 0x9e3779b97f4a7c15LU + (_seed << 12) + (_seed >> 4));\n      }\n    }\n  };\n\
     \n  template<class _typeT>\n  struct Hash<_typeT, std::enable_if_t<is_iterable_v<_typeT>>>\
     \ {\n  private:\n    [[no_unique_address]] Hash<decltype(*std::begin(std::declval<_typeT>()))>\
-    \ _hasher;\n\n  public:\n    constexpr KYOPRO_BASE_UINT operator ()(const _typeT&\
-    \ _a) const noexcept {\n      KYOPRO_BASE_UINT _seed = _a.size();\n      for (auto&\
+    \ _hasher;\n\n  public:\n    constexpr std::size_t operator ()(const _typeT& _a)\
+    \ const noexcept {\n      std::uint_fast64_t _seed = _a.size();\n      for (auto&\
     \ _i: _a) _seed ^= _hasher(_i) + 0x9e3779b97f4a7c15LU + (_seed << 12) + (_seed\
     \ >> 4);\n      return _seed;\n    }\n  };\n}\n#line 2 \"base/in.hpp\"\n#include\
-    \ <unistd.h>\n#line 5 \"base/in.hpp\"\n#include <cstdio>\n#include <string>\n\
-    #line 13 \"base/in.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _buf_size\
+    \ <unistd.h>\n#line 6 \"base/in.hpp\"\n#include <cstdio>\n#include <string>\n\
+    #line 14 \"base/in.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _buf_size\
     \ = KYOPRO_BUFFER_SIZE>\n  struct Reader {\n  private:\n    int _fd, _idx;\n \
     \   std::array<char, _buf_size> _buffer;\n\n  public:\n    Reader() {\n      read(_fd,\
     \ _buffer.begin(), _buf_size);\n    }\n    Reader(int _fd): _fd(_fd), _idx(0),\
@@ -128,20 +128,19 @@ data:
     \ _typeT>\n    struct _has_scan<_typeT, std::void_t<decltype(std::declval<_typeT>().scan(std::declval<Scanner&>()))>>:\
     \ std::true_type {};\n\n  public:\n    static constexpr KYOPRO_BASE_UINT decimal_precision\
     \ = _decimal_precision;\n    _typeIterator itr;\n\n    Scanner() noexcept = default;\n\
-    \    Scanner(_typeIterator _itr) noexcept: itr(_itr) {}\n\n    void scan(char&\
-    \ _a) {\n      while (('\\t' <= *itr && *itr <= '\\r') || *itr == ' ') ++itr;\n\
-    \      _a = *itr;\n      ++itr;\n    }\n    void scan(std::string& _a) {\n   \
-    \   while (('\\t' <= *itr && *itr <= '\\r') || *itr == ' ') ++itr;\n      for\
-    \ (auto& _i: _a) {\n        _i = *itr;\n        ++itr;\n      }\n    }\n    void\
-    \ scan(bool& _a) {\n      while (('\\t' <= *itr && *itr <= '\\r') || *itr == '\
-    \ ') ++itr;\n      while ('0' <= *itr && *itr <= '9') {\n        if (*itr != '0')\
-    \ _a = true;\n        ++itr;\n      }\n    }\n    template<class _typeT, std::enable_if_t<std::is_arithmetic_v<_typeT>\
+    \    Scanner(_typeIterator _itr) noexcept: itr(_itr) {}\n\n    void discard_space()\
+    \ {\n      while (('\\t' <= *itr && *itr <= '\\r') || *itr == ' ') ++itr;\n  \
+    \  }\n\n    void scan(char& _a) {\n      discard_space();\n      _a = *itr;\n\
+    \      ++itr;\n    }\n    void scan(std::string& _a) {\n      discard_space();\n\
+    \      for (auto& _i: _a) {\n        _i = *itr;\n        ++itr;\n      }\n   \
+    \ }\n    void scan(bool& _a) {\n      discard_space();\n      while ('0' <= *itr\
+    \ && *itr <= '9') {\n        if (*itr != '0') _a = true;\n        ++itr;\n   \
+    \   }\n    }\n    template<class _typeT, std::enable_if_t<std::is_arithmetic_v<_typeT>\
     \ && !_has_scan<_typeT>::value>* = nullptr>\n    void scan(_typeT& _a) {\n   \
-    \   while (('\\t' <= *itr && *itr <= '\\r') || *itr == ' ') ++itr;\n      bool\
-    \ _sgn = false;\n      if constexpr (!std::is_unsigned_v<_typeT>) if (*itr ==\
-    \ '-') {\n        _sgn = true;\n        ++itr;\n      }\n      _a = 0;\n     \
-    \ for (; '0' <= *itr && *itr <= '9'; ++itr) _a = _a * 10 + *itr - '0';\n     \
-    \ if (*itr == '.') {\n        ++itr;\n        if constexpr (std::is_floating_point_v<_typeT>)\
+    \   discard_space();\n      bool _sgn = false;\n      if constexpr (!std::is_unsigned_v<_typeT>)\
+    \ if (*itr == '-') {\n        _sgn = true;\n        ++itr;\n      }\n      _a\
+    \ = 0;\n      for (; '0' <= *itr && *itr <= '9'; ++itr) _a = _a * 10 + *itr -\
+    \ '0';\n      if (*itr == '.') {\n        ++itr;\n        if constexpr (std::is_floating_point_v<_typeT>)\
     \ {\n          constexpr std::uint_fast64_t _power_decimal_precision = power(10ULL,\
     \ _decimal_precision);\n          _typeT _d = 0;\n          std::uint_fast64_t\
     \ _i = 1;\n          for (; '0' <= *itr && *itr <= '9' && _i < _power_decimal_precision;\
@@ -203,7 +202,7 @@ data:
     \ ++_i) print(*_i);\n      if constexpr (std::is_integral_v<_typeT>) return;\n\
     \      print('.');\n      for (int _i = 0; _i < static_cast<int>(_decimal_precision);\
     \ ++_i) {\n        _a *= 10;\n        print('0' + static_cast<std::uint_fast64_t>(_a)\
-    \ % 10);\n      }\n    }\n    template<size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT>\
+    \ % 10);\n      }\n    }\n    template<std::size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT>\
     \ && !_has_print<_typeT>::value>* = nullptr>\n    void print(const _typeT& _a)\
     \ {\n      if constexpr (_debug && _i == 0) print('{');\n      if constexpr (std::tuple_size_v<_typeT>\
     \ != 0) print(std::get<_i>(_a));\n      if constexpr (_i + 1 < std::tuple_size_v<_typeT>)\
@@ -253,7 +252,7 @@ data:
   path: base/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-03-10 17:01:45+09:00'
+  timestamp: '2022-03-11 22:32:55+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: base/all.hpp

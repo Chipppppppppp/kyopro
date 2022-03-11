@@ -11,13 +11,13 @@ data:
   - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/in.hpp
     title: base/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/io.hpp
     title: base/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/out.hpp
     title: base/out.hpp
   - icon: ':warning:'
@@ -33,15 +33,15 @@ data:
     path: template/all.hpp
     title: template/all.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/FenwickTree.test.cpp
     title: yosupo/FenwickTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"base/trait.hpp\"\n#include <iterator>\n#include <queue>\n\
@@ -59,8 +59,8 @@ data:
     \ std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
     \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_iterable_v\
     \ = is_iterable<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
-    \ {};\n  template<class _typeT, class U>\n  struct is_tuple<std::pair<_typeT,\
-    \ U>>: std::true_type {};\n  template<class... Args>\n  struct is_tuple<std::tuple<Args...>>:\
+    \ {};\n  template<class _typeT, class _typeU>\n  struct is_tuple<std::pair<_typeT,\
+    \ _typeU>>: std::true_type {};\n  template<class... _typeArgs>\n  struct is_tuple<std::tuple<_typeArgs...>>:\
     \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_tuple_v =\
     \ is_tuple<_typeT>::value;\n\n  template<class, class = void>\n  struct is_container_adapter:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_container_adapter<_typeT,\
@@ -82,8 +82,8 @@ data:
     \ std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
     \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_iterable_v\
     \ = is_iterable<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
-    \ {};\n  template<class _typeT, class U>\n  struct is_tuple<std::pair<_typeT,\
-    \ U>>: std::true_type {};\n  template<class... Args>\n  struct is_tuple<std::tuple<Args...>>:\
+    \ {};\n  template<class _typeT, class _typeU>\n  struct is_tuple<std::pair<_typeT,\
+    \ _typeU>>: std::true_type {};\n  template<class... _typeArgs>\n  struct is_tuple<std::tuple<_typeArgs...>>:\
     \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_tuple_v =\
     \ is_tuple<_typeT>::value;\n\n  template<class, class = void>\n  struct is_container_adapter:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_container_adapter<_typeT,\
@@ -104,8 +104,8 @@ data:
   - base/all.hpp
   - base/Hash.hpp
   - all.hpp
-  timestamp: '2022-03-10 17:01:45+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-03-11 22:32:55+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - yosupo/FenwickTree.test.cpp
   - yosupo/UnionFind.test.cpp

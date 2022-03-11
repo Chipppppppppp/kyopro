@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/settings.hpp
     title: base/settings.hpp
   _extendedRequiredBy:
@@ -23,7 +23,7 @@ data:
   bundledCode: "#line 2 \"structure/UnionFind.hpp\"\n/* UnionFind */\n#include <algorithm>\n\
     #include <unordered_map>\n#include <vector>\n#line 2 \"base/settings.hpp\"\n#include\
     \ <cstdint>\n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n\
-    #endif\n\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::size_t\n#endif\n\
+    #endif\n\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\
     \n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef\
     \ KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(1000000007)\n\
     #endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
@@ -91,7 +91,7 @@ data:
   requiredBy:
   - structure/all.hpp
   - all.hpp
-  timestamp: '2022-01-23 18:51:32+09:00'
+  timestamp: '2022-03-11 22:32:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - yosupo/UnionFind.test.cpp

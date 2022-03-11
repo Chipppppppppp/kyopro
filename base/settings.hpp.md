@@ -11,16 +11,16 @@ data:
   - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/in.hpp
     title: base/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/io.hpp
     title: base/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/out.hpp
     title: base/out.hpp
   - icon: ':warning:'
@@ -35,13 +35,13 @@ data:
   - icon: ':warning:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/monoid.hpp
     title: math/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':heavy_check_mark:'
@@ -57,15 +57,15 @@ data:
     path: template/all.hpp
     title: template/all.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/FenwickTree.test.cpp
     title: yosupo/FenwickTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: '#line 2 "base/settings.hpp"
@@ -82,7 +82,7 @@ data:
 
     #ifndef KYOPRO_BASE_UINT
 
-    #define KYOPRO_BASE_UINT std::size_t
+    #define KYOPRO_BASE_UINT std::uint64_t
 
     #endif
 
@@ -136,7 +136,7 @@ data:
 
     #ifndef KYOPRO_BASE_UINT
 
-    #define KYOPRO_BASE_UINT std::size_t
+    #define KYOPRO_BASE_UINT std::uint64_t
 
     #endif
 
@@ -196,8 +196,8 @@ data:
   - base/all.hpp
   - base/Hash.hpp
   - all.hpp
-  timestamp: '2022-01-23 17:00:03+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-03-11 22:32:55+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - yosupo/FenwickTree.test.cpp
   - yosupo/UnionFind.test.cpp

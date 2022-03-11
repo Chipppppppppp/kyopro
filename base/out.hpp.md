@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/trait.hpp
     title: base/trait.hpp
   _extendedRequiredBy:
@@ -14,26 +14,26 @@ data:
   - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: base/io.hpp
     title: base/io.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/FenwickTree.test.cpp
     title: yosupo/FenwickTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"base/out.hpp\"\n#include <unistd.h>\n#include <array>\n\
     #include <cstdint>\n#include <cstdio>\n#include <iterator>\n#include <string>\n\
     #include <tuple>\n#include <type_traits>\n#include <utility>\n#line 3 \"base/settings.hpp\"\
     \n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n\
-    #ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::size_t\n#endif\n\n#ifndef\
+    #ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef\
     \ KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n\
     #define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(1000000007)\n#endif\n\
     \n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
@@ -54,8 +54,8 @@ data:
     \ std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
     \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_iterable_v\
     \ = is_iterable<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
-    \ {};\n  template<class _typeT, class U>\n  struct is_tuple<std::pair<_typeT,\
-    \ U>>: std::true_type {};\n  template<class... Args>\n  struct is_tuple<std::tuple<Args...>>:\
+    \ {};\n  template<class _typeT, class _typeU>\n  struct is_tuple<std::pair<_typeT,\
+    \ _typeU>>: std::true_type {};\n  template<class... _typeArgs>\n  struct is_tuple<std::tuple<_typeArgs...>>:\
     \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_tuple_v =\
     \ is_tuple<_typeT>::value;\n\n  template<class, class = void>\n  struct is_container_adapter:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_container_adapter<_typeT,\
@@ -106,7 +106,7 @@ data:
     \ ++_i) print(*_i);\n      if constexpr (std::is_integral_v<_typeT>) return;\n\
     \      print('.');\n      for (int _i = 0; _i < static_cast<int>(_decimal_precision);\
     \ ++_i) {\n        _a *= 10;\n        print('0' + static_cast<std::uint_fast64_t>(_a)\
-    \ % 10);\n      }\n    }\n    template<size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT>\
+    \ % 10);\n      }\n    }\n    template<std::size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT>\
     \ && !_has_print<_typeT>::value>* = nullptr>\n    void print(const _typeT& _a)\
     \ {\n      if constexpr (_debug && _i == 0) print('{');\n      if constexpr (std::tuple_size_v<_typeT>\
     \ != 0) print(std::get<_i>(_a));\n      if constexpr (_i + 1 < std::tuple_size_v<_typeT>)\
@@ -179,7 +179,7 @@ data:
     \ ++_i) print(*_i);\n      if constexpr (std::is_integral_v<_typeT>) return;\n\
     \      print('.');\n      for (int _i = 0; _i < static_cast<int>(_decimal_precision);\
     \ ++_i) {\n        _a *= 10;\n        print('0' + static_cast<std::uint_fast64_t>(_a)\
-    \ % 10);\n      }\n    }\n    template<size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT>\
+    \ % 10);\n      }\n    }\n    template<std::size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT>\
     \ && !_has_print<_typeT>::value>* = nullptr>\n    void print(const _typeT& _a)\
     \ {\n      if constexpr (_debug && _i == 0) print('{');\n      if constexpr (std::tuple_size_v<_typeT>\
     \ != 0) print(std::get<_i>(_a));\n      if constexpr (_i + 1 < std::tuple_size_v<_typeT>)\
@@ -214,8 +214,8 @@ data:
   - base/io.hpp
   - base/all.hpp
   - all.hpp
-  timestamp: '2022-03-10 17:01:45+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-03-11 22:32:55+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - yosupo/FenwickTree.test.cpp
   - yosupo/UnionFind.test.cpp
