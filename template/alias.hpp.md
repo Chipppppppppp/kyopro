@@ -116,19 +116,19 @@ data:
     \ ModInt() noexcept = default;\n    template<class _typeT>\n    constexpr ModInt(_typeT\
     \ _value) noexcept: value(floor_mod(_value, _m)) { static_assert(std::is_integral_v<_typeT>);\
     \ }\n\n    template<class _typeT>\n    explicit constexpr operator _typeT() const\
-    \ noexcept { return value; }\n\n    static constexpr ModInt raw(std::uint_fast64_t\
-    \ _n) noexcept {\n      ModInt _res;\n      _res.value = _n;\n      return _res;\n\
-    \    }\n\n    constexpr ModInt power(std::uint_fast64_t _n) const noexcept {\n\
-    \      std::uint_fast64_t _res = 1, _a = value;\n      while (_n > 0) {\n    \
-    \    if (_n & 1) _res = _res * _a % _m;\n        _a = _a * _a % _m;\n        _n\
-    \ >>= 1;\n      }\n      return _res;\n    }\n\n    constexpr ModInt inv() const\
-    \ noexcept {\n      std::uint_fast64_t _a = value, _b = _m;\n      std::int_fast64_t\
-    \ _u = 1, _v = 0;\n      while (_b > 0) {\n        std::uint_fast64_t _t = _a\
-    \ / _b;\n        _a -= _t * _b;\n        std::swap(_a, _b);\n        _u -= _t\
-    \ * _v;\n        std::swap(_u, _v);\n      }\n      return floor_mod(_u, _m);\n\
-    \    }\n\n    constexpr ModInt operator +() const noexcept { return *this; }\n\
-    \n    constexpr ModInt operator -() const noexcept { return _m - value; }\n\n\
-    \    constexpr ModInt& operator ++() noexcept {\n      if (++value >= _m) value\
+    \ noexcept { return static_cast<_typeT>(value); }\n\n    static constexpr ModInt\
+    \ raw(std::uint_fast64_t _n) noexcept {\n      ModInt _res;\n      _res.value\
+    \ = _n;\n      return _res;\n    }\n\n    constexpr ModInt power(std::uint_fast64_t\
+    \ _n) const noexcept {\n      std::uint_fast64_t _res = 1, _a = value;\n     \
+    \ while (_n > 0) {\n        if (_n & 1) _res = _res * _a % _m;\n        _a = _a\
+    \ * _a % _m;\n        _n >>= 1;\n      }\n      return _res;\n    }\n\n    constexpr\
+    \ ModInt inv() const noexcept {\n      std::uint_fast64_t _a = value, _b = _m;\n\
+    \      std::int_fast64_t _u = 1, _v = 0;\n      while (_b > 0) {\n        std::uint_fast64_t\
+    \ _t = _a / _b;\n        _a -= _t * _b;\n        std::swap(_a, _b);\n        _u\
+    \ -= _t * _v;\n        std::swap(_u, _v);\n      }\n      return floor_mod(_u,\
+    \ _m);\n    }\n\n    constexpr ModInt operator +() const noexcept { return *this;\
+    \ }\n\n    constexpr ModInt operator -() const noexcept { return _m - value; }\n\
+    \n    constexpr ModInt& operator ++() noexcept {\n      if (++value >= _m) value\
     \ -= _m;\n      return *this;\n    }\n\n    constexpr ModInt operator ++(int)\
     \ noexcept {\n      ModInt _before = *this;\n      operator ++();\n      return\
     \ _before;\n    }\n\n    constexpr ModInt& operator --() noexcept {\n      if\
@@ -155,15 +155,15 @@ data:
     \    }\n\n    template<class _typePrinter>\n    void print(_typePrinter& _printer)\
     \ const {\n      _printer.print(value);\n    }\n  };\n\n  template<KYOPRO_BASE_UINT\
     \ _m>\n  struct Hash<ModInt<_m>> { constexpr std::size_t operator ()(ModInt<_m>\
-    \ _a) const noexcept { return _a; } };\n}\n#line 16 \"template/alias.hpp\"\n\n\
-    namespace kyopro {\n  using ll = long long;\n  using ull = unsigned long long;\n\
-    \  using lf = double;\n\n  using i8 = std::int8_t;\n  using u8 = std::uint8_t;\n\
-    \  using i16 = std::int16_t;\n  using u16 = std::uint16_t;\n  using i32 = std::int32_t;\n\
-    \  using u32 = std::uint32_t;\n  using i64 = std::int64_t;\n  using u64 = std::uint64_t;\n\
-    \  #ifdef __SIZEOF_INT128__\n  using i128 = __int128_t;\n  using u128 = __uint128_t;\n\
-    \  #endif\n  #ifdef __SIZEOF_FLOAT128__\n  using f128 = __float128;\n  #endif\n\
-    \n  template<class _typeT>\n  using vec = std::vector<_typeT>;\n  using str =\
-    \ std::string;\n  template<class Key>\n  using hash_set = std::unordered_set<Key,\
+    \ _a) const noexcept { return static_cast<std::size_t>(_a); } };\n}\n#line 16\
+    \ \"template/alias.hpp\"\n\nnamespace kyopro {\n  using ll = long long;\n  using\
+    \ ull = unsigned long long;\n  using lf = double;\n\n  using i8 = std::int8_t;\n\
+    \  using u8 = std::uint8_t;\n  using i16 = std::int16_t;\n  using u16 = std::uint16_t;\n\
+    \  using i32 = std::int32_t;\n  using u32 = std::uint32_t;\n  using i64 = std::int64_t;\n\
+    \  using u64 = std::uint64_t;\n  #ifdef __SIZEOF_INT128__\n  using i128 = __int128_t;\n\
+    \  using u128 = __uint128_t;\n  #endif\n  #ifdef __SIZEOF_FLOAT128__\n  using\
+    \ f128 = __float128;\n  #endif\n\n  template<class _typeT>\n  using vec = std::vector<_typeT>;\n\
+    \  using str = std::string;\n  template<class Key>\n  using hash_set = std::unordered_set<Key,\
     \ Hash<Key>>;\n  template<class Key, class _typeT>\n  using hash_map = std::unordered_map<Key,\
     \ _typeT, Hash<Key>>;\n  template<class Key>\n  using hash_multiset = std::unordered_multiset<Key,\
     \ Hash<Key>>;\n  template<class Key, class _typeT>\n  using hash_multimap = std::unordered_multimap<Key,\
@@ -245,7 +245,7 @@ data:
   requiredBy:
   - template/all.hpp
   - all.hpp
-  timestamp: '2022-03-11 23:56:05+09:00'
+  timestamp: '2022-03-12 00:16:39+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/alias.hpp
