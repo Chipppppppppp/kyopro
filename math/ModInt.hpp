@@ -18,7 +18,7 @@ namespace kyopro {
     constexpr ModInt(_typeT _value) noexcept: value(floor_mod(_value, _m)) { static_assert(std::is_integral_v<_typeT>); }
 
     template<class _typeT>
-    explicit constexpr operator _typeT() const noexcept { return value; }
+    explicit constexpr operator _typeT() const noexcept { return static_cast<_typeT>(value); }
 
     static constexpr ModInt raw(std::uint_fast64_t _n) noexcept {
       ModInt _res;
@@ -123,5 +123,5 @@ namespace kyopro {
   };
 
   template<KYOPRO_BASE_UINT _m>
-  struct Hash<ModInt<_m>> { constexpr std::size_t operator ()(ModInt<_m> _a) const noexcept { return _a; } };
+  struct Hash<ModInt<_m>> { constexpr std::size_t operator ()(ModInt<_m> _a) const noexcept { return static_cast<std::size_t>(_a); } };
 }

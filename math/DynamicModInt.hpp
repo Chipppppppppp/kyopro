@@ -21,7 +21,7 @@ namespace kyopro {
     DynamicModInt(_typeT _value) noexcept: value(floor_mod(_value, mod)) { static_assert(std::is_integral_v<_typeT>); }
 
     template<class _typeT>
-    explicit operator _typeT() const noexcept { return value; }
+    explicit operator _typeT() const noexcept { return static_cast<_typeT>(value); }
 
     static DynamicModInt raw(std::uint_fast64_t _n) noexcept {
       DynamicModInt _res;
@@ -126,5 +126,5 @@ namespace kyopro {
   };
 
   template<>
-  struct Hash<DynamicModInt> { std::size_t operator ()(DynamicModInt _a) const noexcept { return _a; } };
+  struct Hash<DynamicModInt> { std::size_t operator ()(DynamicModInt _a) const noexcept { return static_cast<std::size_t>(_a); } };
 }
