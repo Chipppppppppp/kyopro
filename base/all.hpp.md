@@ -108,24 +108,21 @@ data:
     \ _buffer.begin(), _buf_size);\n    }\n    Reader(int _fd): _fd(_fd), _idx(0),\
     \ _buffer() {\n      read(_fd, _buffer.begin(), _buf_size);\n    }\n    Reader(FILE*\
     \ _fp): _fd(fileno(_fp)), _idx(0), _buffer() {\n      read(_fd, _buffer.begin(),\
-    \ _buf_size);\n    }\n\n    Reader& operator =(int _fd) noexcept {\n      this->_fd\
-    \ = _fd;\n      return *this;\n    }\n    Reader& operator =(FILE* _fp) noexcept\
-    \ {\n      this->_fd = fileno(_fp);\n      return *this;\n    }\n\n    struct\
-    \ iterator {\n    private:\n      Reader& _reader;\n\n    public:\n      using\
-    \ difference_type = void;\n      using value_type = void;\n      using pointer\
-    \ = void;\n      using reference = void;\n      using iterator_category = std::input_iterator_tag;\n\
-    \n      iterator() noexcept = default;\n      iterator(Reader& _reader) noexcept:\
-    \ _reader(_reader) {}\n\n      iterator& operator ++() {\n        ++_reader._idx;\n\
-    \        if (_reader._idx == _buf_size) {\n          read(_reader._fd, _reader._buffer.begin(),\
-    \ _buf_size);\n          _reader._idx = 0;\n        }\n        return *this;\n\
-    \      }\n\n      iterator operator ++(int) {\n        iterator _before = *this;\n\
-    \        operator ++();\n        return _before;\n      }\n\n      char& operator\
-    \ *() const {\n        return _reader._buffer[_reader._idx];\n      }\n    };\n\
-    \n    iterator begin() noexcept {\n      return iterator(*this);\n    }\n  };\n\
-    \n  Reader input(0);\n\n  template<class _typeIterator, KYOPRO_BASE_UINT _decimal_precision\
-    \ = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n  private:\n    template<class,\
-    \ class = void>\n    struct _has_scan: std::false_type {};\n    template<class\
-    \ _typeT>\n    struct _has_scan<_typeT, std::void_t<decltype(std::declval<_typeT>().scan(std::declval<Scanner&>()))>>:\
+    \ _buf_size);\n    }\n\n    struct iterator {\n    private:\n      Reader& _reader;\n\
+    \n    public:\n      using difference_type = void;\n      using value_type = void;\n\
+    \      using pointer = void;\n      using reference = void;\n      using iterator_category\
+    \ = std::input_iterator_tag;\n\n      iterator() noexcept = default;\n      iterator(Reader&\
+    \ _reader) noexcept: _reader(_reader) {}\n\n      iterator& operator ++() {\n\
+    \        ++_reader._idx;\n        if (_reader._idx == _buf_size) {\n         \
+    \ read(_reader._fd, _reader._buffer.begin(), _buf_size);\n          _reader._idx\
+    \ = 0;\n        }\n        return *this;\n      }\n\n      iterator operator ++(int)\
+    \ {\n        iterator _before = *this;\n        operator ++();\n        return\
+    \ _before;\n      }\n\n      char& operator *() const {\n        return _reader._buffer[_reader._idx];\n\
+    \      }\n    };\n\n    iterator begin() noexcept {\n      return iterator(*this);\n\
+    \    }\n  };\n\n  Reader input(0);\n\n  template<class _typeIterator, KYOPRO_BASE_UINT\
+    \ _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n  private:\n\
+    \    template<class, class = void>\n    struct _has_scan: std::false_type {};\n\
+    \    template<class _typeT>\n    struct _has_scan<_typeT, std::void_t<decltype(std::declval<_typeT>().scan(std::declval<Scanner&>()))>>:\
     \ std::true_type {};\n\n  public:\n    static constexpr KYOPRO_BASE_UINT decimal_precision\
     \ = _decimal_precision;\n    _typeIterator itr;\n\n    Scanner() noexcept = default;\n\
     \    Scanner(_typeIterator _itr) noexcept: itr(_itr) {}\n\n    void discard_space()\
@@ -162,21 +159,18 @@ data:
     \ _idx;\n    std::array<char, _buf_size> _buffer;\n\n  public:\n    Writer() noexcept\
     \ = default;\n    Writer(int _fd) noexcept: _fd(_fd), _idx(0), _buffer() {}\n\
     \    Writer(FILE* _fp) noexcept: _fd(fileno(_fp)), _idx(0), _buffer() {}\n\n \
-    \   ~Writer() {\n      write(_fd, _buffer.begin(), _idx);\n    }\n\n    Writer&\
-    \ operator =(int _fd) noexcept {\n      this->_fd = _fd;\n      return *this;\n\
-    \    }\n    Writer& operator =(FILE* _fp) noexcept {\n      this->_fd = fileno(_fp);\n\
-    \      return *this;\n    }\n\n    struct iterator {\n    private:\n      Writer&\
-    \ _writer;\n\n    public:\n      using difference_type = void;\n      using value_type\
-    \ = void;\n      using pointer = void;\n      using reference = void;\n      using\
-    \ iterator_category = std::output_iterator_tag;\n\n      iterator() noexcept =\
-    \ default;\n      iterator(Writer& _writer) noexcept: _writer(_writer) {}\n\n\
-    \      iterator& operator ++() {\n        ++_writer._idx;\n        if (_writer._idx\
-    \ == _buf_size) {\n          write(_writer._fd, _writer._buffer.begin(), _buf_size);\n\
-    \          _writer._idx = 0;\n        }\n        return *this;\n      }\n\n  \
-    \    iterator operator ++(int) {\n        iterator _before = *this;\n        operator\
-    \ ++();\n        return _before;\n      }\n\n      char& operator *() const {\n\
-    \        return _writer._buffer[_writer._idx];\n      }\n\n      void flush()\
-    \ const {\n        write(_writer._fd, _writer._buffer.begin(), _writer._idx);\n\
+    \   ~Writer() {\n      write(_fd, _buffer.begin(), _idx);\n    }\n\n    struct\
+    \ iterator {\n    private:\n      Writer& _writer;\n\n    public:\n      using\
+    \ difference_type = void;\n      using value_type = void;\n      using pointer\
+    \ = void;\n      using reference = void;\n      using iterator_category = std::output_iterator_tag;\n\
+    \n      iterator() noexcept = default;\n      iterator(Writer& _writer) noexcept:\
+    \ _writer(_writer) {}\n\n      iterator& operator ++() {\n        ++_writer._idx;\n\
+    \        if (_writer._idx == _buf_size) {\n          write(_writer._fd, _writer._buffer.begin(),\
+    \ _buf_size);\n          _writer._idx = 0;\n        }\n        return *this;\n\
+    \      }\n\n      iterator operator ++(int) {\n        iterator _before = *this;\n\
+    \        operator ++();\n        return _before;\n      }\n\n      char& operator\
+    \ *() const {\n        return _writer._buffer[_writer._idx];\n      }\n\n    \
+    \  void flush() const {\n        write(_writer._fd, _writer._buffer.begin(), _writer._idx);\n\
     \      }\n    };\n\n    iterator begin() noexcept {\n      return iterator(*this);\n\
     \    }\n  };\n\n  Writer output(1), error(2);\n\n  template<class _typeIterator,\
     \ bool _sep = true, bool _end = true, bool _debug = false, bool _comment = false,\
@@ -252,7 +246,7 @@ data:
   path: base/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-03-11 23:22:12+09:00'
+  timestamp: '2022-03-11 23:28:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: base/all.hpp
