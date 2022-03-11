@@ -156,7 +156,7 @@ namespace kyopro {
       for (auto& _i: _a) scan(_i);
     }
     template<class _typeT, std::enable_if_t<_has_scan<_typeT>::value>* = nullptr>
-    void scan(const _typeT& _a) {
+    void scan(_typeT& _a) {
       _a.scan(*this);
     }
 

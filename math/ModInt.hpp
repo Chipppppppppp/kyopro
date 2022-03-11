@@ -110,11 +110,12 @@ namespace kyopro {
     friend constexpr bool operator !=(ModInt _lhs, ModInt _rhs) noexcept { return _lhs.value != _rhs.value; }
 
     template<class _typeScanner>
-    void scan(_typeScanner& _scanner) const {
+    void scan(_typeScanner& _scanner) {
       std::int_fast64_t _value;
       _scanner.scan(_value);
-      operator =(_value);
+      value = floor_mod(_value, _m);
     }
+
     template<class _typePrinter>
     void print(_typePrinter& _printer) const {
       _printer.print(value);
