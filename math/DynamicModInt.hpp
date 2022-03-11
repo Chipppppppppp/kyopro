@@ -125,5 +125,6 @@ namespace kyopro {
     }
   };
 
+  template<>
   struct Hash<DynamicModInt> { std::size_t operator ()(DynamicModInt _a) const noexcept { return _a; } };
 }
