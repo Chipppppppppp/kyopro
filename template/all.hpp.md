@@ -150,10 +150,10 @@ data:
     \   friend constexpr bool operator ==(ModInt _lhs, ModInt _rhs) noexcept { return\
     \ _lhs.value == _rhs.value; }\n\n    friend constexpr bool operator !=(ModInt\
     \ _lhs, ModInt _rhs) noexcept { return _lhs.value != _rhs.value; }\n\n    template<class\
-    \ _typeScanner>\n    void scan(_typeScanner& _scanner) const {\n      std::int_fast64_t\
-    \ _value;\n      _scanner.scan(_value);\n      operator =(_value);\n    }\n  \
-    \  template<class _typePrinter>\n    void print(_typePrinter& _printer) const\
-    \ {\n      _printer.print(value);\n    }\n  };\n\n  template<KYOPRO_BASE_UINT\
+    \ _typeScanner>\n    void scan(_typeScanner& _scanner) {\n      std::int_fast64_t\
+    \ _value;\n      _scanner.scan(_value);\n      value = floor_mod(_value, _m);\n\
+    \    }\n\n    template<class _typePrinter>\n    void print(_typePrinter& _printer)\
+    \ const {\n      _printer.print(value);\n    }\n  };\n\n  template<KYOPRO_BASE_UINT\
     \ _m>\n  struct Hash<ModInt<_m>> { constexpr std::size_t operator ()(ModInt<_m>\
     \ _a) const noexcept { return _a; } };\n}\n#line 16 \"template/alias.hpp\"\n\n\
     namespace kyopro {\n  using ll = long long;\n  using ull = unsigned long long;\n\
@@ -208,7 +208,7 @@ data:
   path: template/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-03-11 23:13:04+09:00'
+  timestamp: '2022-03-11 23:22:12+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/all.hpp

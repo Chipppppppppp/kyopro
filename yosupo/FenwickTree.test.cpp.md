@@ -173,8 +173,8 @@ data:
     \        scan<_i + 1>(_a);\n      }\n    }\n    template<class _typeT, std::enable_if_t<is_iterable_v<_typeT>\
     \ && !_has_scan<_typeT>::value>* = nullptr>\n    void scan(_typeT& _a) {\n   \
     \   for (auto& _i: _a) scan(_i);\n    }\n    template<class _typeT, std::enable_if_t<_has_scan<_typeT>::value>*\
-    \ = nullptr>\n    void scan(const _typeT& _a) {\n      _a.scan(*this);\n    }\n\
-    \n    void operator ()() {}\n    template<class _typeHead, class... _typeArgs>\n\
+    \ = nullptr>\n    void scan(_typeT& _a) {\n      _a.scan(*this);\n    }\n\n  \
+    \  void operator ()() {}\n    template<class _typeHead, class... _typeArgs>\n\
     \    void operator ()(_typeHead& _head, _typeArgs&... _args) {\n      scan(_head);\n\
     \      operator ()(_args...);\n    }\n  };\n\n  Scanner<Reader<>::iterator> scan(input.begin());\n\
     }\n#line 13 \"base/out.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
@@ -273,7 +273,7 @@ data:
   isVerificationFile: true
   path: yosupo/FenwickTree.test.cpp
   requiredBy: []
-  timestamp: '2022-03-11 23:13:04+09:00'
+  timestamp: '2022-03-11 23:22:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/FenwickTree.test.cpp

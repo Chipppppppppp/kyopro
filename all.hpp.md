@@ -195,8 +195,8 @@ data:
     \        scan<_i + 1>(_a);\n      }\n    }\n    template<class _typeT, std::enable_if_t<is_iterable_v<_typeT>\
     \ && !_has_scan<_typeT>::value>* = nullptr>\n    void scan(_typeT& _a) {\n   \
     \   for (auto& _i: _a) scan(_i);\n    }\n    template<class _typeT, std::enable_if_t<_has_scan<_typeT>::value>*\
-    \ = nullptr>\n    void scan(const _typeT& _a) {\n      _a.scan(*this);\n    }\n\
-    \n    void operator ()() {}\n    template<class _typeHead, class... _typeArgs>\n\
+    \ = nullptr>\n    void scan(_typeT& _a) {\n      _a.scan(*this);\n    }\n\n  \
+    \  void operator ()() {}\n    template<class _typeHead, class... _typeArgs>\n\
     \    void operator ()(_typeHead& _head, _typeArgs&... _args) {\n      scan(_head);\n\
     \      operator ()(_args...);\n    }\n  };\n\n  Scanner<Reader<>::iterator> scan(input.begin());\n\
     }\n#line 13 \"base/out.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
@@ -349,10 +349,10 @@ data:
     \   friend constexpr bool operator ==(ModInt _lhs, ModInt _rhs) noexcept { return\
     \ _lhs.value == _rhs.value; }\n\n    friend constexpr bool operator !=(ModInt\
     \ _lhs, ModInt _rhs) noexcept { return _lhs.value != _rhs.value; }\n\n    template<class\
-    \ _typeScanner>\n    void scan(_typeScanner& _scanner) const {\n      std::int_fast64_t\
-    \ _value;\n      _scanner.scan(_value);\n      operator =(_value);\n    }\n  \
-    \  template<class _typePrinter>\n    void print(_typePrinter& _printer) const\
-    \ {\n      _printer.print(value);\n    }\n  };\n\n  template<KYOPRO_BASE_UINT\
+    \ _typeScanner>\n    void scan(_typeScanner& _scanner) {\n      std::int_fast64_t\
+    \ _value;\n      _scanner.scan(_value);\n      value = floor_mod(_value, _m);\n\
+    \    }\n\n    template<class _typePrinter>\n    void print(_typePrinter& _printer)\
+    \ const {\n      _printer.print(value);\n    }\n  };\n\n  template<KYOPRO_BASE_UINT\
     \ _m>\n  struct Hash<ModInt<_m>> { constexpr std::size_t operator ()(ModInt<_m>\
     \ _a) const noexcept { return _a; } };\n}\n#line 4 \"math/monoid.hpp\"\n\nnamespace\
     \ kyopro {\n  template<class _typeT, _typeT _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
@@ -488,7 +488,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2022-03-11 23:13:04+09:00'
+  timestamp: '2022-03-11 23:22:12+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp
