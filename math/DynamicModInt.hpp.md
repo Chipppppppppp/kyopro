@@ -19,7 +19,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: math/all.hpp
+    title: math/all.hpp
+  - icon: ':warning:'
+    path: template/alias.hpp
+    title: template/alias.hpp
+  - icon: ':warning:'
+    path: template/all.hpp
+    title: template/all.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -205,7 +217,11 @@ data:
   - math/mod.hpp
   isVerificationFile: false
   path: math/DynamicModInt.hpp
-  requiredBy: []
+  requiredBy:
+  - math/all.hpp
+  - template/all.hpp
+  - template/alias.hpp
+  - all.hpp
   timestamp: '2022-03-12 00:16:39+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
