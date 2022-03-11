@@ -15,7 +15,7 @@ namespace kyopro {
 
     constexpr ModInt() noexcept = default;
     template<class _typeT>
-    constexpr ModInt(_typeT value) noexcept: value(floor_mod(value, _m)) { static_assert(std::is_integral_v<_typeT>); }
+    constexpr ModInt(_typeT _value) noexcept: value(floor_mod(_value, _m)) { static_assert(std::is_integral_v<_typeT>); }
 
     template<class _typeT>
     explicit constexpr operator _typeT() const noexcept { return value; }
