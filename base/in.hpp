@@ -30,15 +30,6 @@ namespace kyopro {
       read(_fd, _buffer.begin(), _buf_size);
     }
 
-    Reader& operator =(int _fd) noexcept {
-      this->_fd = _fd;
-      return *this;
-    }
-    Reader& operator =(FILE* _fp) noexcept {
-      this->_fd = fileno(_fp);
-      return *this;
-    }
-
     struct iterator {
     private:
       Reader& _reader;

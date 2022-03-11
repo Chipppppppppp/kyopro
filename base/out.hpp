@@ -27,15 +27,6 @@ namespace kyopro {
       write(_fd, _buffer.begin(), _idx);
     }
 
-    Writer& operator =(int _fd) noexcept {
-      this->_fd = _fd;
-      return *this;
-    }
-    Writer& operator =(FILE* _fp) noexcept {
-      this->_fd = fileno(_fp);
-      return *this;
-    }
-
     struct iterator {
     private:
       Writer& _writer;
