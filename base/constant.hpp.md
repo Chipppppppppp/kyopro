@@ -15,6 +15,9 @@ data:
     path: base/all.hpp
     title: base/all.hpp
   - icon: ':warning:'
+    path: math/DynamicModInt.hpp
+    title: math/DynamicModInt.hpp
+  - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
   - icon: ':warning:'
@@ -91,15 +94,16 @@ data:
   isVerificationFile: false
   path: base/constant.hpp
   requiredBy:
-  - structure/all.hpp
+  - math/ModInt.hpp
+  - math/DynamicModInt.hpp
+  - math/monoid.hpp
+  - math/all.hpp
   - structure/FenwickTree.hpp
-  - base/all.hpp
-  - all.hpp
+  - structure/all.hpp
   - template/all.hpp
   - template/alias.hpp
-  - math/ModInt.hpp
-  - math/all.hpp
-  - math/monoid.hpp
+  - base/all.hpp
+  - all.hpp
   timestamp: '2022-03-11 23:13:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

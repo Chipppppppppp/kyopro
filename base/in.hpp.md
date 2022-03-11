@@ -192,8 +192,8 @@ data:
   timestamp: '2022-03-11 23:28:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - yosupo/UnionFind.test.cpp
   - yosupo/FenwickTree.test.cpp
+  - yosupo/UnionFind.test.cpp
 documentation_of: base/in.hpp
 layout: document
 redirect_from:

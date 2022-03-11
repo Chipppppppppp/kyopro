@@ -15,6 +15,9 @@ data:
     path: base/all.hpp
     title: base/all.hpp
   - icon: ':warning:'
+    path: math/DynamicModInt.hpp
+    title: math/DynamicModInt.hpp
+  - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
   - icon: ':warning:'
@@ -107,12 +110,13 @@ data:
   isVerificationFile: false
   path: base/Hash.hpp
   requiredBy:
-  - base/all.hpp
-  - all.hpp
+  - math/ModInt.hpp
+  - math/DynamicModInt.hpp
+  - math/all.hpp
   - template/all.hpp
   - template/alias.hpp
-  - math/ModInt.hpp
-  - math/all.hpp
+  - base/all.hpp
+  - all.hpp
   timestamp: '2022-03-11 22:32:55+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

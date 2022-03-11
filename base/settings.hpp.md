@@ -24,6 +24,9 @@ data:
     path: base/out.hpp
     title: base/out.hpp
   - icon: ':warning:'
+    path: math/DynamicModInt.hpp
+    title: math/DynamicModInt.hpp
+  - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
   - icon: ':warning:'
@@ -178,29 +181,30 @@ data:
   isVerificationFile: false
   path: base/settings.hpp
   requiredBy:
+  - math/factorize.hpp
+  - math/ModInt.hpp
+  - math/divisors.hpp
+  - math/DynamicModInt.hpp
+  - math/monoid.hpp
+  - math/all.hpp
+  - math/power.hpp
   - structure/UnionFind.hpp
-  - structure/all.hpp
   - structure/FenwickTree.hpp
-  - base/io.hpp
-  - base/out.hpp
-  - base/in.hpp
-  - base/all.hpp
-  - base/Hash.hpp
-  - base/constant.hpp
-  - all.hpp
+  - structure/all.hpp
   - template/all.hpp
   - template/alias.hpp
-  - math/ModInt.hpp
-  - math/all.hpp
-  - math/factorize.hpp
-  - math/monoid.hpp
-  - math/power.hpp
-  - math/divisors.hpp
+  - base/in.hpp
+  - base/constant.hpp
+  - base/out.hpp
+  - base/io.hpp
+  - base/all.hpp
+  - base/Hash.hpp
+  - all.hpp
   timestamp: '2022-03-11 22:32:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - yosupo/UnionFind.test.cpp
   - yosupo/FenwickTree.test.cpp
+  - yosupo/UnionFind.test.cpp
 documentation_of: base/settings.hpp
 layout: document
 redirect_from:

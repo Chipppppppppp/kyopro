@@ -35,6 +35,9 @@ data:
   - name: math
     pages:
     - icon: ':warning:'
+      path: math/DynamicModInt.hpp
+      title: math/DynamicModInt.hpp
+    - icon: ':warning:'
       path: math/ModInt.hpp
       title: math/ModInt.hpp
     - icon: ':warning:'

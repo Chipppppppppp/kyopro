@@ -6,6 +6,9 @@ data:
     path: all.hpp
     title: all.hpp
   - icon: ':warning:'
+    path: math/DynamicModInt.hpp
+    title: math/DynamicModInt.hpp
+  - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
   - icon: ':warning:'
@@ -43,11 +46,12 @@ data:
   isVerificationFile: false
   path: math/mod.hpp
   requiredBy:
-  - all.hpp
+  - math/ModInt.hpp
+  - math/DynamicModInt.hpp
+  - math/all.hpp
   - template/all.hpp
   - template/alias.hpp
-  - math/ModInt.hpp
-  - math/all.hpp
+  - all.hpp
   timestamp: '2022-03-06 15:44:21+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

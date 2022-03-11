@@ -307,7 +307,7 @@ data:
     namespace kyopro {\n  template<KYOPRO_BASE_UINT _m>\n  struct ModInt {\n    static\
     \ constexpr KYOPRO_BASE_UINT mod = _m;\n    KYOPRO_BASE_UINT value;\n\n    constexpr\
     \ ModInt() noexcept = default;\n    template<class _typeT>\n    constexpr ModInt(_typeT\
-    \ value) noexcept: value(floor_mod(value, _m)) { static_assert(std::is_integral_v<_typeT>);\
+    \ _value) noexcept: value(floor_mod(_value, _m)) { static_assert(std::is_integral_v<_typeT>);\
     \ }\n\n    template<class _typeT>\n    explicit constexpr operator _typeT() const\
     \ noexcept { return value; }\n\n    static constexpr ModInt raw(std::uint_fast64_t\
     \ _n) noexcept {\n      ModInt _res;\n      _res.value = _n;\n      return _res;\n\
@@ -482,7 +482,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2022-03-11 23:28:44+09:00'
+  timestamp: '2022-03-11 23:56:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp

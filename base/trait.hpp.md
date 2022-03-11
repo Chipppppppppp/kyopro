@@ -21,6 +21,9 @@ data:
     path: base/out.hpp
     title: base/out.hpp
   - icon: ':warning:'
+    path: math/DynamicModInt.hpp
+    title: math/DynamicModInt.hpp
+  - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
   - icon: ':warning:'
@@ -94,21 +97,22 @@ data:
   isVerificationFile: false
   path: base/trait.hpp
   requiredBy:
-  - base/io.hpp
-  - base/out.hpp
+  - math/ModInt.hpp
+  - math/DynamicModInt.hpp
+  - math/all.hpp
+  - template/all.hpp
+  - template/alias.hpp
   - base/in.hpp
+  - base/out.hpp
+  - base/io.hpp
   - base/all.hpp
   - base/Hash.hpp
   - all.hpp
-  - template/all.hpp
-  - template/alias.hpp
-  - math/ModInt.hpp
-  - math/all.hpp
   timestamp: '2022-03-11 22:32:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - yosupo/UnionFind.test.cpp
   - yosupo/FenwickTree.test.cpp
+  - yosupo/UnionFind.test.cpp
 documentation_of: base/trait.hpp
 layout: document
 redirect_from:

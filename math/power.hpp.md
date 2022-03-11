@@ -21,6 +21,9 @@ data:
     path: base/io.hpp
     title: base/io.hpp
   - icon: ':warning:'
+    path: math/DynamicModInt.hpp
+    title: math/DynamicModInt.hpp
+  - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
   - icon: ':warning:'
@@ -74,23 +77,24 @@ data:
   isVerificationFile: false
   path: math/power.hpp
   requiredBy:
-  - structure/all.hpp
+  - math/ModInt.hpp
+  - math/DynamicModInt.hpp
+  - math/monoid.hpp
+  - math/all.hpp
   - structure/FenwickTree.hpp
-  - base/io.hpp
-  - base/in.hpp
-  - base/all.hpp
-  - base/constant.hpp
-  - all.hpp
+  - structure/all.hpp
   - template/all.hpp
   - template/alias.hpp
-  - math/ModInt.hpp
-  - math/all.hpp
-  - math/monoid.hpp
+  - base/in.hpp
+  - base/constant.hpp
+  - base/io.hpp
+  - base/all.hpp
+  - all.hpp
   timestamp: '2022-03-11 22:32:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - yosupo/UnionFind.test.cpp
   - yosupo/FenwickTree.test.cpp
+  - yosupo/UnionFind.test.cpp
 documentation_of: math/power.hpp
 layout: document
 redirect_from:

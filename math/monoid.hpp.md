@@ -99,10 +99,10 @@ data:
   isVerificationFile: false
   path: math/monoid.hpp
   requiredBy:
-  - structure/all.hpp
-  - structure/FenwickTree.hpp
-  - all.hpp
   - math/all.hpp
+  - structure/FenwickTree.hpp
+  - structure/all.hpp
+  - all.hpp
   timestamp: '2022-03-11 23:13:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
