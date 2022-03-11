@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/trait.hpp
     title: base/trait.hpp
   _extendedRequiredBy:
@@ -107,12 +107,12 @@ data:
   isVerificationFile: false
   path: base/Hash.hpp
   requiredBy:
-  - math/ModInt.hpp
-  - math/all.hpp
-  - template/all.hpp
-  - template/alias.hpp
   - base/all.hpp
   - all.hpp
+  - template/all.hpp
+  - template/alias.hpp
+  - math/ModInt.hpp
+  - math/all.hpp
   timestamp: '2022-03-11 22:32:55+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

@@ -11,13 +11,13 @@ data:
   - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/in.hpp
     title: base/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/io.hpp
     title: base/io.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/out.hpp
     title: base/out.hpp
   - icon: ':warning:'
@@ -33,15 +33,15 @@ data:
     path: template/all.hpp
     title: template/all.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: yosupo/FenwickTree.test.cpp
     title: yosupo/FenwickTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"base/trait.hpp\"\n#include <iterator>\n#include <queue>\n\
@@ -94,21 +94,21 @@ data:
   isVerificationFile: false
   path: base/trait.hpp
   requiredBy:
-  - math/ModInt.hpp
-  - math/all.hpp
-  - template/all.hpp
-  - template/alias.hpp
-  - base/in.hpp
-  - base/out.hpp
   - base/io.hpp
+  - base/out.hpp
+  - base/in.hpp
   - base/all.hpp
   - base/Hash.hpp
   - all.hpp
+  - template/all.hpp
+  - template/alias.hpp
+  - math/ModInt.hpp
+  - math/all.hpp
   timestamp: '2022-03-11 22:32:55+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - yosupo/FenwickTree.test.cpp
   - yosupo/UnionFind.test.cpp
+  - yosupo/FenwickTree.test.cpp
 documentation_of: base/trait.hpp
 layout: document
 redirect_from:

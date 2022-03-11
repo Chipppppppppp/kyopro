@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/settings.hpp
     title: base/settings.hpp
   _extendedRequiredBy:
@@ -43,8 +43,8 @@ data:
   isVerificationFile: false
   path: math/divisors.hpp
   requiredBy:
-  - math/all.hpp
   - all.hpp
+  - math/all.hpp
   timestamp: '2022-03-11 22:32:55+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/in.hpp
     title: base/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/io.hpp
     title: base/io.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/out.hpp
     title: base/out.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/trait.hpp
     title: base/trait.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
   - icon: ':heavy_check_mark:'

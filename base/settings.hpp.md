@@ -11,16 +11,16 @@ data:
   - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/in.hpp
     title: base/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/io.hpp
     title: base/io.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/out.hpp
     title: base/out.hpp
   - icon: ':warning:'
@@ -35,13 +35,13 @@ data:
   - icon: ':warning:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/monoid.hpp
     title: math/monoid.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':heavy_check_mark:'
@@ -57,15 +57,15 @@ data:
     path: template/all.hpp
     title: template/all.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: yosupo/FenwickTree.test.cpp
     title: yosupo/FenwickTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: '#line 2 "base/settings.hpp"
@@ -178,29 +178,29 @@ data:
   isVerificationFile: false
   path: base/settings.hpp
   requiredBy:
-  - math/factorize.hpp
-  - math/ModInt.hpp
-  - math/divisors.hpp
-  - math/monoid.hpp
-  - math/all.hpp
-  - math/power.hpp
   - structure/UnionFind.hpp
-  - structure/FenwickTree.hpp
   - structure/all.hpp
-  - template/all.hpp
-  - template/alias.hpp
-  - base/in.hpp
-  - base/constant.hpp
-  - base/out.hpp
+  - structure/FenwickTree.hpp
   - base/io.hpp
+  - base/out.hpp
+  - base/in.hpp
   - base/all.hpp
   - base/Hash.hpp
+  - base/constant.hpp
   - all.hpp
+  - template/all.hpp
+  - template/alias.hpp
+  - math/ModInt.hpp
+  - math/all.hpp
+  - math/factorize.hpp
+  - math/monoid.hpp
+  - math/power.hpp
+  - math/divisors.hpp
   timestamp: '2022-03-11 22:32:55+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - yosupo/FenwickTree.test.cpp
   - yosupo/UnionFind.test.cpp
+  - yosupo/FenwickTree.test.cpp
 documentation_of: base/settings.hpp
 layout: document
 redirect_from:

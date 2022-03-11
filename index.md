@@ -14,22 +14,22 @@ data:
     - icon: ':warning:'
       path: base/all.hpp
       title: base/all.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: base/constant.hpp
       title: base/constant.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: base/in.hpp
       title: base/in.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: base/io.hpp
       title: base/io.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: base/out.hpp
       title: base/out.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: base/settings.hpp
       title: base/settings.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: base/trait.hpp
       title: base/trait.hpp
   - name: math
@@ -58,15 +58,15 @@ data:
     - icon: ':warning:'
       path: math/mod.hpp
       title: math/mod.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: math/monoid.hpp
       title: math/monoid.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: math/power.hpp
       title: math/power.hpp
   - name: structure
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: structure/FenwickTree.hpp
       title: structure/FenwickTree.hpp
     - icon: ':heavy_check_mark:'
@@ -86,7 +86,7 @@ data:
   verificationCategories:
   - name: yosupo
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: yosupo/FenwickTree.test.cpp
       title: yosupo/FenwickTree.test.cpp
     - icon: ':heavy_check_mark:'

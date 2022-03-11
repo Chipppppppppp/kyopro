@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/settings.hpp
     title: base/settings.hpp
   _extendedRequiredBy:
@@ -11,13 +11,13 @@ data:
   - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/in.hpp
     title: base/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: base/io.hpp
     title: base/io.hpp
   - icon: ':warning:'
@@ -26,10 +26,10 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/monoid.hpp
     title: math/monoid.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':warning:'
@@ -42,15 +42,15 @@ data:
     path: template/all.hpp
     title: template/all.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: yosupo/FenwickTree.test.cpp
     title: yosupo/FenwickTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"math/power.hpp\"\n#include <cstdint>\n#line 3 \"base/settings.hpp\"\
@@ -74,23 +74,23 @@ data:
   isVerificationFile: false
   path: math/power.hpp
   requiredBy:
-  - math/ModInt.hpp
-  - math/monoid.hpp
-  - math/all.hpp
-  - structure/FenwickTree.hpp
   - structure/all.hpp
+  - structure/FenwickTree.hpp
+  - base/io.hpp
+  - base/in.hpp
+  - base/all.hpp
+  - base/constant.hpp
+  - all.hpp
   - template/all.hpp
   - template/alias.hpp
-  - base/in.hpp
-  - base/constant.hpp
-  - base/io.hpp
-  - base/all.hpp
-  - all.hpp
+  - math/ModInt.hpp
+  - math/all.hpp
+  - math/monoid.hpp
   timestamp: '2022-03-11 22:32:55+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - yosupo/FenwickTree.test.cpp
   - yosupo/UnionFind.test.cpp
+  - yosupo/FenwickTree.test.cpp
 documentation_of: math/power.hpp
 layout: document
 redirect_from:
