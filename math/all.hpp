@@ -1,6 +1,7 @@
 #pragma once
 #include "div.hpp"
 #include "divisors.hpp"
+#include "DynamicModInt.hpp"
 #include "euler_phi.hpp"
 #include "factorize.hpp"
 #include "is_prime.hpp"
