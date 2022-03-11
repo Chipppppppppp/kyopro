@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdint>
 #include "../base/settings.hpp"
+
 namespace kyopro {
   template<class _typeT>
   constexpr _typeT power(_typeT _a, std::uint_fast64_t _n, _typeT _init = 1) noexcept {

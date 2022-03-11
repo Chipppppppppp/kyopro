@@ -6,7 +6,7 @@
 #endif
 
 #ifndef KYOPRO_BASE_UINT
-#define KYOPRO_BASE_UINT std::size_t
+#define KYOPRO_BASE_UINT std::uint64_t
 #endif
 
 #ifndef KYOPRO_BASE_FLOAT

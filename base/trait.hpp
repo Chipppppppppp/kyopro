@@ -37,10 +37,10 @@ namespace kyopro {
 
   template<class>
   struct is_tuple: std::false_type {};
-  template<class _typeT, class U>
-  struct is_tuple<std::pair<_typeT, U>>: std::true_type {};
-  template<class... Args>
-  struct is_tuple<std::tuple<Args...>>: std::true_type {};
+  template<class _typeT, class _typeU>
+  struct is_tuple<std::pair<_typeT, _typeU>>: std::true_type {};
+  template<class... _typeArgs>
+  struct is_tuple<std::tuple<_typeArgs...>>: std::true_type {};
   template<class _typeT>
   constexpr bool is_tuple_v = is_tuple<_typeT>::value;
 

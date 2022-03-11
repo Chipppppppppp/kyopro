@@ -1,6 +1,7 @@
 #pragma once
 #include <unistd.h>
 #include <array>
+#include <cstddef>
 #include <cstdint>
 #include <cstdio>
 #include <string>
@@ -94,20 +95,24 @@ namespace kyopro {
     Scanner() noexcept = default;
     Scanner(_typeIterator _itr) noexcept: itr(_itr) {}
 
-    void scan(char& _a) {
+    void discard_space() {
       while (('\t' <= *itr && *itr <= '\r') || *itr == ' ') ++itr;
+    }
+
+    void scan(char& _a) {
+      discard_space();
       _a = *itr;
       ++itr;
     }
     void scan(std::string& _a) {
-      while (('\t' <= *itr && *itr <= '\r') || *itr == ' ') ++itr;
+      discard_space();
       for (auto& _i: _a) {
         _i = *itr;
         ++itr;
       }
     }
     void scan(bool& _a) {
-      while (('\t' <= *itr && *itr <= '\r') || *itr == ' ') ++itr;
+      discard_space();
       while ('0' <= *itr && *itr <= '9') {
         if (*itr != '0') _a = true;
         ++itr;
@@ -115,7 +120,7 @@ namespace kyopro {
     }
     template<class _typeT, std::enable_if_t<std::is_arithmetic_v<_typeT> && !_has_scan<_typeT>::value>* = nullptr>
     void scan(_typeT& _a) {
-      while (('\t' <= *itr && *itr <= '\r') || *itr == ' ') ++itr;
+      discard_space();
       bool _sgn = false;
       if constexpr (!std::is_unsigned_v<_typeT>) if (*itr == '-') {
         _sgn = true;
