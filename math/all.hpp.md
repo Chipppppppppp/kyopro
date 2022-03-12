@@ -233,7 +233,7 @@ data:
     \ p < 100 && p * p <= n; ++p) {\n      while (n % p == 0) {\n        n /= p;\n\
     \        res.eb(p);\n      }\n    }\n    while (n > 1) {\n      std::uint_fast64_t\
     \ p = find_prime_factor(n);\n      while (n % p == 0) {\n        n /= p;\n   \
-    \     res.eb(p);\n      }\n    }\n    if constexpr (sorted) std::sort(res.begin(),\
+    \     res.emplace_back(p);\n      }\n    }\n    if constexpr (sorted) std::sort(res.begin(),\
     \ res.end());\n    return res;\n  }\n}\n#line 9 \"math/ModInt.hpp\"\n\nnamespace\
     \ kyopro {\n  template<KYOPRO_BASE_UINT _m>\n  struct ModInt {\n    static constexpr\
     \ KYOPRO_BASE_UINT mod = _m;\n    KYOPRO_BASE_UINT value;\n\n    static KYOPRO_BASE_INT\
@@ -347,7 +347,7 @@ data:
   path: math/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-03-12 19:49:03+09:00'
+  timestamp: '2022-03-12 19:52:58+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/all.hpp

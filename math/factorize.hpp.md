@@ -65,7 +65,7 @@ data:
     \ p < 100 && p * p <= n; ++p) {\n      while (n % p == 0) {\n        n /= p;\n\
     \        res.eb(p);\n      }\n    }\n    while (n > 1) {\n      std::uint_fast64_t\
     \ p = find_prime_factor(n);\n      while (n % p == 0) {\n        n /= p;\n   \
-    \     res.eb(p);\n      }\n    }\n    if constexpr (sorted) std::sort(res.begin(),\
+    \     res.emplace_back(p);\n      }\n    }\n    if constexpr (sorted) std::sort(res.begin(),\
     \ res.end());\n    return res;\n  }\n}\n"
   code: "#pragma once\n#include <algorithm>\n#include <cstdint>\n#include <numeric>\n\
     #include <random>\n#include \"../base/settings.hpp\"\n#include \"is_prime.hpp\"\
@@ -89,7 +89,7 @@ data:
     \ p < 100 && p * p <= n; ++p) {\n      while (n % p == 0) {\n        n /= p;\n\
     \        res.eb(p);\n      }\n    }\n    while (n > 1) {\n      std::uint_fast64_t\
     \ p = find_prime_factor(n);\n      while (n % p == 0) {\n        n /= p;\n   \
-    \     res.eb(p);\n      }\n    }\n    if constexpr (sorted) std::sort(res.begin(),\
+    \     res.emplace_back(p);\n      }\n    }\n    if constexpr (sorted) std::sort(res.begin(),\
     \ res.end());\n    return res;\n  }\n}"
   dependsOn:
   - base/settings.hpp
@@ -99,7 +99,7 @@ data:
   requiredBy:
   - math/all.hpp
   - all.hpp
-  timestamp: '2022-03-12 19:49:03+09:00'
+  timestamp: '2022-03-12 19:52:58+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/factorize.hpp
