@@ -47,23 +47,23 @@ data:
     \ noexcept {\n    static_assert(std::is_integral_v<_typeT>);\n    std::uint_fast64_t\
     \ _b = floor_mod(_a, static_cast<_typeT>(_mod));\n    std::uint_fast64_t _res\
     \ = 1;\n    while (_n > 0) {\n      if (_n & 1) _res = _res * _b % _mod;\n   \
-    \   _b *= _b;\n      _n >>= 1;\n    }\n    return static_cast<_typeT>(_res);\n\
+    \   _b = _b * _b % _mod;\n      _n >>= 1;\n    }\n    return static_cast<_typeT>(_res);\n\
     \  }\n}\n#line 6 \"math/is_prime.hpp\"\n\nnamespace kyopro {\n  constexpr bool\
-    \ is_prime(KYOPRO_BASE_UINT _n) {\n    if (_n <= 1) return false;\n    if (~_n\
-    \ & 1) return _n == 2;\n    std::uint_fast64_t _d = _n - 1;\n    while (~_d &\
-    \ 1) _d >>= 1;\n    std::uint_fast64_t _e = 1, _rev = _n - 1;\n    for (auto _a:\
-    \ std::array<std::uint_fast64_t, 7>{2, 325, 9375, 28178, 450775, 9780504, 1795265022})\
-    \ {\n      if (_n <= _a) break;\n      std::uint_fast64_t _t = _d, _y = modpow(_a,\
-    \ _t, _n);\n      while (_t != _n - 1 && _y != _e && _y != _rev) {\n        _y\
-    \ = _y * _y % _n;\n        _t <<= 1;\n      }\n      if (_y != _rev && !(_t &\
-    \ 1)) return false;\n    }\n    return true;\n  }\n}\n"
+    \ is_prime(KYOPRO_BASE_UINT _n) {\n    if (_n <= 1) return false;\n    if (!(_n\
+    \ & 1)) return _n == 2;\n    std::uint_fast64_t _d = _n - 1;\n    while (!(_d\
+    \ & 1)) _d >>= 1;\n    std::uint_fast64_t _e = 1, _rev = _n - 1;\n    for (auto\
+    \ _a: std::array<std::uint_fast64_t, 7>{2, 325, 9375, 28178, 450775, 9780504,\
+    \ 1795265022}) {\n      if (_n <= _a) break;\n      std::uint_fast64_t _t = _d,\
+    \ _y = modpow(_a, _d, _n);\n      while (_t != _n - 1 && _y != _e && _y != _rev)\
+    \ {\n        _y = _y * _y % _n;\n        _t <<= 1;\n      }\n      if (_y != _rev\
+    \ && !(_t & 1)) return false;\n    }\n    return true;\n  }\n}\n"
   code: "#pragma once\n#include <array>\n#include <cstdint>\n#include \"../base/settings.hpp\"\
     \n#include \"modpow.hpp\"\n\nnamespace kyopro {\n  constexpr bool is_prime(KYOPRO_BASE_UINT\
-    \ _n) {\n    if (_n <= 1) return false;\n    if (~_n & 1) return _n == 2;\n  \
-    \  std::uint_fast64_t _d = _n - 1;\n    while (~_d & 1) _d >>= 1;\n    std::uint_fast64_t\
+    \ _n) {\n    if (_n <= 1) return false;\n    if (!(_n & 1)) return _n == 2;\n\
+    \    std::uint_fast64_t _d = _n - 1;\n    while (!(_d & 1)) _d >>= 1;\n    std::uint_fast64_t\
     \ _e = 1, _rev = _n - 1;\n    for (auto _a: std::array<std::uint_fast64_t, 7>{2,\
     \ 325, 9375, 28178, 450775, 9780504, 1795265022}) {\n      if (_n <= _a) break;\n\
-    \      std::uint_fast64_t _t = _d, _y = modpow(_a, _t, _n);\n      while (_t !=\
+    \      std::uint_fast64_t _t = _d, _y = modpow(_a, _d, _n);\n      while (_t !=\
     \ _n - 1 && _y != _e && _y != _rev) {\n        _y = _y * _y % _n;\n        _t\
     \ <<= 1;\n      }\n      if (_y != _rev && !(_t & 1)) return false;\n    }\n \
     \   return true;\n  }\n}"
@@ -77,7 +77,7 @@ data:
   - math/factorize.hpp
   - math/all.hpp
   - all.hpp
-  timestamp: '2022-03-12 18:34:43+09:00'
+  timestamp: '2022-03-12 19:07:51+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/is_prime.hpp

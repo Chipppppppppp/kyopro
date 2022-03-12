@@ -46,15 +46,16 @@ data:
     \ _a, KYOPRO_BASE_UINT _n, KYOPRO_BASE_UINT _mod) noexcept {\n    static_assert(std::is_integral_v<_typeT>);\n\
     \    std::uint_fast64_t _b = floor_mod(_a, static_cast<_typeT>(_mod));\n    std::uint_fast64_t\
     \ _res = 1;\n    while (_n > 0) {\n      if (_n & 1) _res = _res * _b % _mod;\n\
-    \      _b *= _b;\n      _n >>= 1;\n    }\n    return static_cast<_typeT>(_res);\n\
+    \      _b = _b * _b % _mod;\n      _n >>= 1;\n    }\n    return static_cast<_typeT>(_res);\n\
     \  }\n}\n"
   code: "#pragma once\n#include <cstdint>\n#include <type_traits>\n#include \"../base/settings.hpp\"\
     \n#include \"mod.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n  constexpr\
     \ _typeT modpow(_typeT _a, KYOPRO_BASE_UINT _n, KYOPRO_BASE_UINT _mod) noexcept\
     \ {\n    static_assert(std::is_integral_v<_typeT>);\n    std::uint_fast64_t _b\
     \ = floor_mod(_a, static_cast<_typeT>(_mod));\n    std::uint_fast64_t _res = 1;\n\
-    \    while (_n > 0) {\n      if (_n & 1) _res = _res * _b % _mod;\n      _b *=\
-    \ _b;\n      _n >>= 1;\n    }\n    return static_cast<_typeT>(_res);\n  }\n}"
+    \    while (_n > 0) {\n      if (_n & 1) _res = _res * _b % _mod;\n      _b =\
+    \ _b * _b % _mod;\n      _n >>= 1;\n    }\n    return static_cast<_typeT>(_res);\n\
+    \  }\n}"
   dependsOn:
   - base/settings.hpp
   - math/mod.hpp
@@ -65,7 +66,7 @@ data:
   - math/is_prime.hpp
   - math/all.hpp
   - all.hpp
-  timestamp: '2022-03-12 10:43:12+09:00'
+  timestamp: '2022-03-12 19:07:51+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/modpow.hpp
