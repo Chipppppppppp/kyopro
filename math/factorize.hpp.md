@@ -42,20 +42,21 @@ data:
     \ 7, 61} : std::initializer_list<std::uint_fast64_t>{2, 325, 9375, 28178, 450775,\
     \ 9780504, 1795265022})) {\n      if (_n <= _a) break;\n      std::uint_fast64_t\
     \ _t = _d, _y = modpow(_a, _d, _n);\n      while (_t != _n - 1 && _y != _e &&\
-    \ _y != _rev) {\n        _y = _y * _y % _n;\n        _t <<= 1;\n      }\n    \
-    \  if (_y != _rev && !(_t & 1)) return false;\n    }\n    return true;\n  }\n\
-    }\n#line 8 \"math/factorize.hpp\"\n\nnamespace kyopro {\n  template<class T>\n\
-    \  constexpr T pollard_rho(T n, KYOPRO_BASE_UINT c) {\n    std::uint_fast64_t\
-    \ cc = c % n;\n    auto f = [=](std::uint_fast64_t x) noexcept { return (x * x\
-    \ + cc) % n; };\n    std::uint_fast64_t x = 1, y = 2, z = 1, q = 1;\n    T g =\
-    \ 1;\n    for (int r = 1; g == 1; r <<= 1) {\n      x = y;\n      for (int i =\
-    \ 0; i < r; ++i) y = f(y);\n      for (int k = 0; k < r and g == 1; k += 128)\
-    \ {\n        z = y;\n        int min = std::min(128, r - k);\n        for (int\
-    \ i = 0; i < min; ++i) {\n          y = f(y);\n          q = q * abs(x - y) %\
-    \ n;\n        }\n        g = std::gcd(q, n);\n      }\n    }\n    if (g == n)\
-    \ {\n      do {\n        z = f(z);\n        g = std::gcd(abs(x - z), n);\n   \
-    \   } while (g == 1);\n    }\n    return g;\n  }\n\n  KYOPRO_BASE_UINT find_prime_factor(KYOPRO_BASE_UINT\
-    \ n) noexcept {\n    static std::mt19937_64 mt(std::random_device{}());\n    std::uniform_int_distribution<std::uint_fast64_t>\
+    \ _y != _rev) {\n        _y = static_cast<__uint128_t>(_y) * _y % _n;\n      \
+    \  _t <<= 1;\n      }\n      if (_y != _rev && !(_t & 1)) return false;\n    }\n\
+    \    return true;\n  }\n}\n#line 8 \"math/factorize.hpp\"\n\nnamespace kyopro\
+    \ {\n  template<class T>\n  constexpr T pollard_rho(T n, KYOPRO_BASE_UINT c) {\n\
+    \    std::uint_fast64_t cc = c % n;\n    auto f = [=](std::uint_fast64_t x) noexcept\
+    \ { return (x * x + cc) % n; };\n    std::uint_fast64_t x = 1, y = 2, z = 1, q\
+    \ = 1;\n    T g = 1;\n    for (int r = 1; g == 1; r <<= 1) {\n      x = y;\n \
+    \     for (int i = 0; i < r; ++i) y = f(y);\n      for (int k = 0; k < r and g\
+    \ == 1; k += 128) {\n        z = y;\n        int min = std::min(128, r - k);\n\
+    \        for (int i = 0; i < min; ++i) {\n          y = f(y);\n          q = q\
+    \ * abs(x - y) % n;\n        }\n        g = std::gcd(q, n);\n      }\n    }\n\
+    \    if (g == n) {\n      do {\n        z = f(z);\n        g = std::gcd(abs(x\
+    \ - z), n);\n      } while (g == 1);\n    }\n    return g;\n  }\n\n  KYOPRO_BASE_UINT\
+    \ find_prime_factor(KYOPRO_BASE_UINT n) noexcept {\n    static std::mt19937_64\
+    \ mt(std::random_device{}());\n    std::uniform_int_distribution<std::uint_fast64_t>\
     \ rnd(0, n - 1);\n    if (is_prime(n)) return n;\n    for (int i = 0; i < 100;\
     \ ++i) {\n      std::uint_fast64_t m = pollard_rho(n, rnd(mt));\n      if (is_prime(m))\
     \ return m;\n      n = m;\n    }\n    return 1;\n  }\n\n  template<bool sorted\
@@ -98,7 +99,7 @@ data:
   requiredBy:
   - math/all.hpp
   - all.hpp
-  timestamp: '2022-03-12 19:39:56+09:00'
+  timestamp: '2022-03-12 19:49:03+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/factorize.hpp

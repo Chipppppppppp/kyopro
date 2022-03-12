@@ -41,8 +41,9 @@ data:
     \ : std::initializer_list<std::uint_fast64_t>{2, 325, 9375, 28178, 450775, 9780504,\
     \ 1795265022})) {\n      if (_n <= _a) break;\n      std::uint_fast64_t _t = _d,\
     \ _y = modpow(_a, _d, _n);\n      while (_t != _n - 1 && _y != _e && _y != _rev)\
-    \ {\n        _y = _y * _y % _n;\n        _t <<= 1;\n      }\n      if (_y != _rev\
-    \ && !(_t & 1)) return false;\n    }\n    return true;\n  }\n}\n"
+    \ {\n        _y = static_cast<__uint128_t>(_y) * _y % _n;\n        _t <<= 1;\n\
+    \      }\n      if (_y != _rev && !(_t & 1)) return false;\n    }\n    return\
+    \ true;\n  }\n}\n"
   code: "#pragma once\n#include <cstdint>\n#include <initializer_list>\n#include \"\
     ../base/settings.hpp\"\n\nnamespace kyopro {\n  constexpr bool is_prime(KYOPRO_BASE_UINT\
     \ _n) {\n    auto modpow = [](std::uint_fast64_t _a, std::uint_fast64_t _n, std::uint_fast64_t\
@@ -56,8 +57,9 @@ data:
     \ 7, 61} : std::initializer_list<std::uint_fast64_t>{2, 325, 9375, 28178, 450775,\
     \ 9780504, 1795265022})) {\n      if (_n <= _a) break;\n      std::uint_fast64_t\
     \ _t = _d, _y = modpow(_a, _d, _n);\n      while (_t != _n - 1 && _y != _e &&\
-    \ _y != _rev) {\n        _y = _y * _y % _n;\n        _t <<= 1;\n      }\n    \
-    \  if (_y != _rev && !(_t & 1)) return false;\n    }\n    return true;\n  }\n}"
+    \ _y != _rev) {\n        _y = static_cast<__uint128_t>(_y) * _y % _n;\n      \
+    \  _t <<= 1;\n      }\n      if (_y != _rev && !(_t & 1)) return false;\n    }\n\
+    \    return true;\n  }\n}"
   dependsOn:
   - base/settings.hpp
   isVerificationFile: false
@@ -66,7 +68,7 @@ data:
   - math/factorize.hpp
   - math/all.hpp
   - all.hpp
-  timestamp: '2022-03-12 19:39:56+09:00'
+  timestamp: '2022-03-12 19:49:03+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/is_prime.hpp
