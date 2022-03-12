@@ -36,7 +36,7 @@ data:
     links:
     - https://judge.yosupo.jp/problem/factorize
   bundledCode: "#line 1 \"yosupo/Factorize.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\
-    \n#line 2 \"base/in.hpp\"\n#include <unistd.h>\n#include <array>\n#include <cstddef>\n\
+    \n\n#line 2 \"base/in.hpp\"\n#include <unistd.h>\n#include <array>\n#include <cstddef>\n\
     #include <cstdint>\n#include <cstdio>\n#include <string>\n#include <tuple>\n#include\
     \ <type_traits>\n#include <utility>\n#line 3 \"base/settings.hpp\"\n\n#ifndef\
     \ KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n\
@@ -230,15 +230,15 @@ data:
     \        res.emplace_back(p);\n      }\n    }\n    while (n > 1) {\n      std::uint_fast64_t\
     \ p = find_prime_factor(n);\n      while (n % p == 0) {\n        n /= p;\n   \
     \     res.emplace_back(p);\n      }\n    }\n    if constexpr (sorted) std::sort(res.begin(),\
-    \ res.end());\n    return res;\n  }\n}\n#line 4 \"yosupo/Factorize.test.cpp\"\n\
+    \ res.end());\n    return res;\n  }\n}\n#line 5 \"yosupo/Factorize.test.cpp\"\n\
     \nint main() {\n  int q;\n  kyopro::scan(q);\n  for (int i = 0; i < q; ++i) {\n\
     \    long long a;\n    kyopro::scan(a);\n    auto ans = kyopro::factorize(a);\n\
     \    kyopro::println(ans.size(), ans);\n  }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\n#include \"\
-    ../base/io.hpp\"\n#include \"../math/factorize.hpp\"\n\nint main() {\n  int q;\n\
-    \  kyopro::scan(q);\n  for (int i = 0; i < q; ++i) {\n    long long a;\n    kyopro::scan(a);\n\
-    \    auto ans = kyopro::factorize(a);\n    kyopro::println(ans.size(), ans);\n\
-    \  }\n}"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\n\n#include\
+    \ \"../base/io.hpp\"\n#include \"../math/factorize.hpp\"\n\nint main() {\n  int\
+    \ q;\n  kyopro::scan(q);\n  for (int i = 0; i < q; ++i) {\n    long long a;\n\
+    \    kyopro::scan(a);\n    auto ans = kyopro::factorize(a);\n    kyopro::println(ans.size(),\
+    \ ans);\n  }\n}"
   dependsOn:
   - base/io.hpp
   - base/in.hpp
@@ -251,7 +251,7 @@ data:
   isVerificationFile: true
   path: yosupo/Factorize.test.cpp
   requiredBy: []
-  timestamp: '2022-03-12 20:07:35+09:00'
+  timestamp: '2022-03-12 20:37:58+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: yosupo/Factorize.test.cpp

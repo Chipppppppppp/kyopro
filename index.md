@@ -96,10 +96,13 @@ data:
       path: yosupo/Factorize.test.cpp
       title: yosupo/Factorize.test.cpp
     - icon: ':x:'
-      path: yosupo/FenwickTree.test.cpp
-      title: yosupo/FenwickTree.test.cpp
-    - icon: ':x:'
       path: yosupo/UnionFind.test.cpp
       title: yosupo/UnionFind.test.cpp
+    - icon: ':x:'
+      path: yosupo/many_aplusb.test.cpp
+      title: yosupo/many_aplusb.test.cpp
+    - icon: ':x:'
+      path: yosupo/point_add_range_sum.test.cpp
+      title: yosupo/point_add_range_sum.test.cpp
 layout: toppage
 ---

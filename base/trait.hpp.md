@@ -40,11 +40,14 @@ data:
     path: yosupo/Factorize.test.cpp
     title: yosupo/Factorize.test.cpp
   - icon: ':x:'
-    path: yosupo/FenwickTree.test.cpp
-    title: yosupo/FenwickTree.test.cpp
-  - icon: ':x:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
+  - icon: ':x:'
+    path: yosupo/many_aplusb.test.cpp
+    title: yosupo/many_aplusb.test.cpp
+  - icon: ':x:'
+    path: yosupo/point_add_range_sum.test.cpp
+    title: yosupo/point_add_range_sum.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
@@ -113,9 +116,10 @@ data:
   timestamp: '2022-03-12 19:39:56+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - yosupo/FenwickTree.test.cpp
   - yosupo/Factorize.test.cpp
   - yosupo/UnionFind.test.cpp
+  - yosupo/point_add_range_sum.test.cpp
+  - yosupo/many_aplusb.test.cpp
 documentation_of: base/trait.hpp
 layout: document
 redirect_from:

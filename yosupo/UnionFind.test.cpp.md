@@ -33,7 +33,7 @@ data:
     links:
     - https://judge.yosupo.jp/problem/unionfind
   bundledCode: "#line 1 \"yosupo/UnionFind.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\
-    \n#line 2 \"base/in.hpp\"\n#include <unistd.h>\n#include <array>\n#include <cstddef>\n\
+    \n\n#line 2 \"base/in.hpp\"\n#include <unistd.h>\n#include <array>\n#include <cstddef>\n\
     #include <cstdint>\n#include <cstdio>\n#include <string>\n#include <tuple>\n#include\
     \ <type_traits>\n#include <utility>\n#line 3 \"base/settings.hpp\"\n\n#ifndef\
     \ KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n\
@@ -216,16 +216,16 @@ data:
     \ _typeMap = std::unordered_map<KYOPRO_BASE_INT, std::vector<KYOPRO_BASE_INT>>>\n\
     \    _typeMap all_group_members() {\n      _typeMap _group_members;\n      for\
     \ (int _member = 0; _member < (int)(size()); ++_member) _group_members[find(_member)].emplace_back(_member);\n\
-    \      return _group_members;\n    }\n  };\n}\n#line 4 \"yosupo/UnionFind.test.cpp\"\
+    \      return _group_members;\n    }\n  };\n}\n#line 5 \"yosupo/UnionFind.test.cpp\"\
     \n\nint main() {\n  int n, q;\n  kyopro::scan(n, q);\n  kyopro::UnionFind uf(n);\n\
     \  for (int i = 0; i < q; ++i) {\n    int t, u, v;\n    kyopro::scan(t, u, v);\n\
     \    if (t == 0) uf.merge(u, v);\n    else kyopro::println(uf.same(u, v));\n \
     \ }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\n#include \"\
-    ../base/io.hpp\"\n#include \"../structure/UnionFind.hpp\"\n\nint main() {\n  int\
-    \ n, q;\n  kyopro::scan(n, q);\n  kyopro::UnionFind uf(n);\n  for (int i = 0;\
-    \ i < q; ++i) {\n    int t, u, v;\n    kyopro::scan(t, u, v);\n    if (t == 0)\
-    \ uf.merge(u, v);\n    else kyopro::println(uf.same(u, v));\n  }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\n\n#include\
+    \ \"../base/io.hpp\"\n#include \"../structure/UnionFind.hpp\"\n\nint main() {\n\
+    \  int n, q;\n  kyopro::scan(n, q);\n  kyopro::UnionFind uf(n);\n  for (int i\
+    \ = 0; i < q; ++i) {\n    int t, u, v;\n    kyopro::scan(t, u, v);\n    if (t\
+    \ == 0) uf.merge(u, v);\n    else kyopro::println(uf.same(u, v));\n  }\n}\n"
   dependsOn:
   - base/io.hpp
   - base/in.hpp
@@ -237,7 +237,7 @@ data:
   isVerificationFile: true
   path: yosupo/UnionFind.test.cpp
   requiredBy: []
-  timestamp: '2022-03-12 20:07:35+09:00'
+  timestamp: '2022-03-12 20:37:58+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: yosupo/UnionFind.test.cpp

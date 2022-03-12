@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':x:'
-    path: base/constant.hpp
-    title: base/constant.hpp
-  - icon: ':x:'
     path: base/in.hpp
     title: base/in.hpp
   - icon: ':x:'
@@ -20,14 +17,8 @@ data:
     path: base/trait.hpp
     title: base/trait.hpp
   - icon: ':x:'
-    path: math/monoid.hpp
-    title: math/monoid.hpp
-  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':x:'
-    path: structure/FenwickTree.hpp
-    title: structure/FenwickTree.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -35,11 +26,11 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/point_add_range_sum
+    PROBLEM: https://judge.yosupo.jp/problem/many_aplusb
     links:
-    - https://judge.yosupo.jp/problem/point_add_range_sum
-  bundledCode: "#line 1 \"yosupo/FenwickTree.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_range_sum\"\
-    \n#line 2 \"base/in.hpp\"\n#include <unistd.h>\n#include <array>\n#include <cstddef>\n\
+    - https://judge.yosupo.jp/problem/many_aplusb
+  bundledCode: "#line 1 \"yosupo/many_aplusb.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/many_aplusb\"\
+    \n\n#line 2 \"base/in.hpp\"\n#include <unistd.h>\n#include <array>\n#include <cstddef>\n\
     #include <cstdint>\n#include <cstdio>\n#include <string>\n#include <tuple>\n#include\
     \ <type_traits>\n#include <utility>\n#line 3 \"base/settings.hpp\"\n\n#ifndef\
     \ KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n\
@@ -194,66 +185,14 @@ data:
     \    }\n  };\n\n  Printer<Writer<>::iterator, false, false> print(output.begin()),\
     \ eprint(error.begin());\n  Printer<Writer<>::iterator> println(output.begin()),\
     \ eprintln(error.begin());\n  Printer<Writer<>::iterator, true, true, true, true>\
-    \ debug(output.begin()), edebug(error.begin());\n}\n#line 2 \"structure/FenwickTree.hpp\"\
-    \n/* FenwickTree */\n#line 4 \"structure/FenwickTree.hpp\"\n#include <vector>\n\
-    #line 3 \"base/constant.hpp\"\n#include <limits>\n#line 7 \"base/constant.hpp\"\
-    \n\nnamespace kyopro {\n  template<class _typeT>\n  inline constexpr _typeT MOD\
-    \ = KYOPRO_DEFAULT_MOD;\n  inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\
-    \n  template<class _typeT>\n  inline constexpr _typeT INF = std::numeric_limits<_typeT>::max()\
-    \ / KYOPRO_INF_DIV;\n  inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\
-    \n  template<class _typeT, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
-    \  inline constexpr KYOPRO_BASE_FLOAT EPS = static_cast<_typeT>(1) / power(10ULL,\
-    \ _decimal_precision);\n  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\
-    \n  template<class _typeT>\n  inline constexpr _typeT PI = 3.14159265358979323846;\n\
-    \  inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n\n  inline\
-    \ constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 4> beside{{{1,\
-    \ 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
-    \ -1}, {0, -1}, {1, -1}}};\n}\n#line 4 \"math/monoid.hpp\"\n\nnamespace kyopro\
-    \ {\n  template<class _typeT, _typeT _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
-    \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
-    \ _a, _typeT _b) const noexcept { return _a + _b; }\n    constexpr _typeT inv(_typeT\
-    \ _a) const noexcept { return -_a; }\n  };\n  template<class _typeT, _typeT _id\
-    \ = 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<_typeT>);\n   \
-    \ static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a,\
-    \ _typeT _b) const noexcept { return _a * _b; }\n    constexpr _typeT inv(_typeT\
-    \ _a) const noexcept {\n      static_assert(!std::is_integral_v<_typeT>);\n  \
-    \    return 1 / _a;\n    }\n  };\n  template<class _typeT, _typeT _id = std::is_integral_v<_typeT>\
-    \ ? -INF<_typeT> : -inf>\n  struct Max {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
-    \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
-    \ _a, _typeT _b) const noexcept { return _a > _b ? _a : _b; }\n  };\n  template<class\
-    \ _typeT, _typeT _id = std::is_integral_v<_typeT> ? INF<_typeT> : inf>\n  struct\
-    \ Min {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static constexpr\
-    \ _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT _b) const\
-    \ noexcept { return _a < _b ? _a : _b; }\n  };\n}\n#line 7 \"structure/FenwickTree.hpp\"\
-    \n\nnamespace kyopro {\n  template<class _typeT, class _typeOp = Plus<_typeT>>\n\
-    \  struct FenwickTree {\n  private:\n    [[no_unique_address]] _typeOp _op;\n\
-    \    std::vector<_typeT> _tree;\n\n  public:\n    using value_type = _typeT;\n\
-    \    using size_type = KYOPRO_BASE_UINT;\n    using reference = _typeT&;\n   \
-    \ using const_reference = const _typeT&;\n\n    FenwickTree() noexcept = default;\n\
-    \    FenwickTree(KYOPRO_BASE_UINT _n) noexcept: _op(), _tree(_n, _op.id) {}\n\n\
-    \    KYOPRO_BASE_UINT size() noexcept { return static_cast<KYOPRO_BASE_UINT>(_tree.size());\
-    \ }\n\n    void apply(int _p, const _typeT& _x) {\n      ++_p;\n      while (_p\
-    \ <= (int)size()) {\n        _tree[_p - 1] = _op(_tree[_p - 1], _x);\n       \
-    \ _p += _p & -_p;\n      }\n    }\n\n    _typeT prod(int _r) const {\n      _typeT\
-    \ _s = _op.id;\n      while (_r > 0) {\n        _s = _op(_s, _tree[_r - 1]);\n\
-    \        _r -= _r & -_r;\n      }\n      return _s;\n    }\n    _typeT prod(int\
-    \ _l, int _r) const { return _op(prod(_r), _op.inv(prod(_l))); }\n\n    _typeT\
-    \ all_prod() { return prod(_tree.size()); }\n\n    _typeT get(int _p) { return\
-    \ _op(prod(_p + 1), _op.inv(prod(_p))); }\n\n    void set(int _p, const _typeT&\
-    \ _x) { apply(_p, _op(_x, _op.inv(get(_p)))); }\n  };\n}\n#line 4 \"yosupo/FenwickTree.test.cpp\"\
-    \n\nint main() {\n  int n, q;\n  kyopro::scan(n, q);\n  kyopro::FenwickTree<long\
-    \ long> ft(n);\n  for (int i = 0; i < n; ++i) {\n    int a;\n    kyopro::scan(a);\n\
-    \    ft.apply(i, a);\n  }\n  for (int i = 0; i < q; ++i) {\n    int t, x, y;\n\
-    \    kyopro::scan(t, x, y);\n    if (t == 0) ft.apply(x, y);\n    else kyopro::println(ft.prod(x,\
-    \ y));\n  }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_range_sum\"\n\
-    #include \"../base/io.hpp\"\n#include \"../structure/FenwickTree.hpp\"\n\nint\
-    \ main() {\n  int n, q;\n  kyopro::scan(n, q);\n  kyopro::FenwickTree<long long>\
-    \ ft(n);\n  for (int i = 0; i < n; ++i) {\n    int a;\n    kyopro::scan(a);\n\
-    \    ft.apply(i, a);\n  }\n  for (int i = 0; i < q; ++i) {\n    int t, x, y;\n\
-    \    kyopro::scan(t, x, y);\n    if (t == 0) ft.apply(x, y);\n    else kyopro::println(ft.prod(x,\
-    \ y));\n  }\n}\n"
+    \ debug(output.begin()), edebug(error.begin());\n}\n#line 4 \"yosupo/many_aplusb.test.cpp\"\
+    \n\nint main() {\n  int t;\n  kyopro::scan(t);\n  for (int i = 0; i < t; ++i)\
+    \ {\n    long long a, b;\n    kyopro::scan(a, b);\n    kyopro::println(a + b);\n\
+    \  }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/many_aplusb\"\n\n#include\
+    \ \"../base/io.hpp\"\n\nint main() {\n  int t;\n  kyopro::scan(t);\n  for (int\
+    \ i = 0; i < t; ++i) {\n    long long a, b;\n    kyopro::scan(a, b);\n    kyopro::println(a\
+    \ + b);\n  }\n}"
   dependsOn:
   - base/io.hpp
   - base/in.hpp
@@ -261,19 +200,16 @@ data:
   - base/settings.hpp
   - base/trait.hpp
   - base/out.hpp
-  - structure/FenwickTree.hpp
-  - math/monoid.hpp
-  - base/constant.hpp
   isVerificationFile: true
-  path: yosupo/FenwickTree.test.cpp
+  path: yosupo/many_aplusb.test.cpp
   requiredBy: []
-  timestamp: '2022-03-12 20:07:35+09:00'
+  timestamp: '2022-03-12 20:37:58+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: yosupo/FenwickTree.test.cpp
+documentation_of: yosupo/many_aplusb.test.cpp
 layout: document
 redirect_from:
-- /verify/yosupo/FenwickTree.test.cpp
-- /verify/yosupo/FenwickTree.test.cpp.html
-title: yosupo/FenwickTree.test.cpp
+- /verify/yosupo/many_aplusb.test.cpp
+- /verify/yosupo/many_aplusb.test.cpp.html
+title: yosupo/many_aplusb.test.cpp
 ---
