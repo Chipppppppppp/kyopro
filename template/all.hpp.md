@@ -51,11 +51,10 @@ data:
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 2 \"base/trait.hpp\"\n#include <iterator>\n#line 7 \"base/trait.hpp\"\
-    \n\n#ifdef __SIZEOF_INT128__\ntemplate<>\nstruct std::is_integral<__int128_t>:\
-    \ std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>: std::true_type\
-    \ {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type {};\n\
-    template<>\nstruct std::is_unsigned<__uint128_t>: std::true_type {};\n#endif\n\
-    #ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
+    \n\ntemplate<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
+    struct std::is_signed<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
+    \ std::true_type {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>: std::true_type\
+    \ {};\n#ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
     \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<class, class =\
     \ void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
     \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
@@ -212,12 +211,12 @@ data:
     \ ull = unsigned long long;\n  using lf = double;\n\n  using i8 = std::int8_t;\n\
     \  using u8 = std::uint8_t;\n  using i16 = std::int16_t;\n  using u16 = std::uint16_t;\n\
     \  using i32 = std::int32_t;\n  using u32 = std::uint32_t;\n  using i64 = std::int64_t;\n\
-    \  using u64 = std::uint64_t;\n  #ifdef __SIZEOF_INT128__\n  using i128 = __int128_t;\n\
-    \  using u128 = __uint128_t;\n  #endif\n  #ifdef __SIZEOF_FLOAT128__\n  using\
-    \ f128 = __float128;\n  #endif\n\n  using mint = ModInt<mod>;\n  using dmint =\
-    \ DynamicModInt;\n\n  template<class _typeKey>\n  using hset = std::unordered_set<_typeKey,\
-    \ Hash<_typeKey>>;\n  template<class _typeKey, class _typeT>\n  using hmap = std::unordered_map<_typeKey,\
-    \ _typeT, Hash<_typeKey>>;\n  template<class _typeKey>\n  using hmultiset = std::unordered_multiset<_typeKey,\
+    \  using u64 = std::uint64_t;\n  using i128 = __int128_t;\n  using u128 = __uint128_t;\n\
+    \  #ifdef __SIZEOF_FLOAT128__\n  using f128 = __float128;\n  #endif\n\n  using\
+    \ mint = ModInt<mod>;\n  using dmint = DynamicModInt;\n\n  template<class _typeKey>\n\
+    \  using hset = std::unordered_set<_typeKey, Hash<_typeKey>>;\n  template<class\
+    \ _typeKey, class _typeT>\n  using hmap = std::unordered_map<_typeKey, _typeT,\
+    \ Hash<_typeKey>>;\n  template<class _typeKey>\n  using hmultiset = std::unordered_multiset<_typeKey,\
     \ Hash<_typeKey>>;\n  template<class _typeKey, class _typeT>\n  using hmultimap\
     \ = std::unordered_multimap<_typeKey, _typeT, Hash<_typeKey>>;\n  template<class\
     \ _typeT, class _typeCompare = std::less<_typeT>, class _typeContainer = std::vector<_typeT>>\n\
@@ -243,7 +242,7 @@ data:
   path: template/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-03-12 18:14:52+09:00'
+  timestamp: '2022-03-12 19:39:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/all.hpp

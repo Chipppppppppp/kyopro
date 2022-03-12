@@ -112,10 +112,10 @@ data:
     #line 4 \"base/Hash.hpp\"\n#include <functional>\n#include <initializer_list>\n\
     #include <tuple>\n#include <type_traits>\n#line 2 \"base/trait.hpp\"\n#include\
     \ <iterator>\n#include <queue>\n#include <stack>\n#line 7 \"base/trait.hpp\"\n\
-    \n#ifdef __SIZEOF_INT128__\ntemplate<>\nstruct std::is_integral<__int128_t>: std::true_type\
-    \ {};\ntemplate<>\nstruct std::is_signed<__int128_t>: std::true_type {};\ntemplate<>\n\
-    struct std::is_integral<__uint128_t>: std::true_type {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>:\
-    \ std::true_type {};\n#endif\n#ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
+    \ntemplate<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
+    struct std::is_signed<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
+    \ std::true_type {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>: std::true_type\
+    \ {};\n#ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
     \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<class, class =\
     \ void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
     \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
@@ -346,14 +346,13 @@ data:
     \       _n /= _i;\n        while (_n % _i == 0) _n /= _i;\n      }\n    }\n  \
     \  if (_n != 1) _res -= _res / _n;\n    return _res;\n  }\n}\n#line 2 \"math/factorize.hpp\"\
     \n#include <algorithm>\n#line 4 \"math/factorize.hpp\"\n#include <numeric>\n#include\
-    \ <random>\n#line 6 \"math/modpow.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ _typeT>\n  constexpr _typeT modpow(_typeT _a, KYOPRO_BASE_UINT _n, KYOPRO_BASE_UINT\
-    \ _mod) noexcept {\n    static_assert(std::is_integral_v<_typeT>);\n    std::uint_fast64_t\
-    \ _b = floor_mod(_a, static_cast<_typeT>(_mod));\n    std::uint_fast64_t _res\
-    \ = 1;\n    while (_n > 0) {\n      if (_n & 1) _res = _res * _b % _mod;\n   \
-    \   _b = _b * _b % _mod;\n      _n >>= 1;\n    }\n    return static_cast<_typeT>(_res);\n\
-    \  }\n}\n#line 6 \"math/is_prime.hpp\"\n\nnamespace kyopro {\n  constexpr bool\
-    \ is_prime(KYOPRO_BASE_UINT _n) {\n    if (_n <= 1) return false;\n    if (!(_n\
+    \ <random>\n#line 5 \"math/is_prime.hpp\"\n\nnamespace kyopro {\n  constexpr bool\
+    \ is_prime(KYOPRO_BASE_UINT _n) {\n    auto modpow = [](std::uint_fast64_t _a,\
+    \ std::uint_fast64_t _n, std::uint_fast64_t _mod) noexcept {\n      std::uint_fast64_t\
+    \ _b = _a % _mod;\n      std::uint_fast64_t _res = 1;\n      while (_n > 0) {\n\
+    \        if (_n & 1) _res = static_cast<__uint128_t>(_res) * _b % _mod;\n    \
+    \    _b = static_cast<__uint128_t>(_b) * _b % _mod;\n        _n >>= 1;\n     \
+    \ }\n      return _res;\n    };\n    if (_n <= 1) return false;\n    if (!(_n\
     \ & 1)) return _n == 2;\n    std::uint_fast64_t _d = _n - 1;\n    while (!(_d\
     \ & 1)) _d >>= 1;\n    std::uint_fast64_t _e = 1, _rev = _n - 1;\n    for (auto\
     \ _a: (_n < (1ULL << 32) ? std::initializer_list<std::uint_fast64_t>{2, 7, 61}\
@@ -429,17 +428,23 @@ data:
     \    }\n\n    template<class _typePrinter>\n    void print(_typePrinter& _printer)\
     \ const {\n      _printer.print(value);\n    }\n  };\n\n  template<KYOPRO_BASE_UINT\
     \ _m>\n  struct Hash<ModInt<_m>> { constexpr std::size_t operator ()(ModInt<_m>\
-    \ _a) const noexcept { return static_cast<std::size_t>(_a); } };\n}\n#line 4 \"\
-    math/monoid.hpp\"\n\nnamespace kyopro {\n  template<class _typeT, _typeT _id =\
-    \ 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static\
-    \ constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT\
-    \ _b) const noexcept { return _a + _b; }\n    constexpr _typeT inv(_typeT _a)\
-    \ const noexcept { return -_a; }\n  };\n  template<class _typeT, _typeT _id =\
-    \ 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static\
-    \ constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT\
-    \ _b) const noexcept { return _a * _b; }\n    constexpr _typeT inv(_typeT _a)\
-    \ const noexcept {\n      static_assert(!std::is_integral_v<_typeT>);\n      return\
-    \ 1 / _a;\n    }\n  };\n  template<class _typeT, _typeT _id = std::is_integral_v<_typeT>\
+    \ _a) const noexcept { return static_cast<std::size_t>(_a); } };\n}\n#line 6 \"\
+    math/modpow.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n  constexpr\
+    \ _typeT modpow(_typeT _a, KYOPRO_BASE_UINT _n, KYOPRO_BASE_UINT _mod) noexcept\
+    \ {\n    static_assert(std::is_integral_v<_typeT>);\n    std::uint_fast64_t _b\
+    \ = floor_mod(_a, static_cast<_typeT>(_mod));\n    std::uint_fast64_t _res = 1;\n\
+    \    while (_n > 0) {\n      if (_n & 1) _res = _res * _b % _mod;\n      _b =\
+    \ _b * _b % _mod;\n      _n >>= 1;\n    }\n    return static_cast<_typeT>(_res);\n\
+    \  }\n}\n#line 4 \"math/monoid.hpp\"\n\nnamespace kyopro {\n  template<class _typeT,\
+    \ _typeT _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
+    \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
+    \ _a, _typeT _b) const noexcept { return _a + _b; }\n    constexpr _typeT inv(_typeT\
+    \ _a) const noexcept { return -_a; }\n  };\n  template<class _typeT, _typeT _id\
+    \ = 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<_typeT>);\n   \
+    \ static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a,\
+    \ _typeT _b) const noexcept { return _a * _b; }\n    constexpr _typeT inv(_typeT\
+    \ _a) const noexcept {\n      static_assert(!std::is_integral_v<_typeT>);\n  \
+    \    return 1 / _a;\n    }\n  };\n  template<class _typeT, _typeT _id = std::is_integral_v<_typeT>\
     \ ? -INF<_typeT> : -inf>\n  struct Max {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
     \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
     \ _a, _typeT _b) const noexcept { return _a > _b ? _a : _b; }\n  };\n  template<class\
@@ -497,12 +502,11 @@ data:
     \ double;\n\n  using i8 = std::int8_t;\n  using u8 = std::uint8_t;\n  using i16\
     \ = std::int16_t;\n  using u16 = std::uint16_t;\n  using i32 = std::int32_t;\n\
     \  using u32 = std::uint32_t;\n  using i64 = std::int64_t;\n  using u64 = std::uint64_t;\n\
-    \  #ifdef __SIZEOF_INT128__\n  using i128 = __int128_t;\n  using u128 = __uint128_t;\n\
-    \  #endif\n  #ifdef __SIZEOF_FLOAT128__\n  using f128 = __float128;\n  #endif\n\
-    \n  using mint = ModInt<mod>;\n  using dmint = DynamicModInt;\n\n  template<class\
-    \ _typeKey>\n  using hset = std::unordered_set<_typeKey, Hash<_typeKey>>;\n  template<class\
-    \ _typeKey, class _typeT>\n  using hmap = std::unordered_map<_typeKey, _typeT,\
-    \ Hash<_typeKey>>;\n  template<class _typeKey>\n  using hmultiset = std::unordered_multiset<_typeKey,\
+    \  using i128 = __int128_t;\n  using u128 = __uint128_t;\n  #ifdef __SIZEOF_FLOAT128__\n\
+    \  using f128 = __float128;\n  #endif\n\n  using mint = ModInt<mod>;\n  using\
+    \ dmint = DynamicModInt;\n\n  template<class _typeKey>\n  using hset = std::unordered_set<_typeKey,\
+    \ Hash<_typeKey>>;\n  template<class _typeKey, class _typeT>\n  using hmap = std::unordered_map<_typeKey,\
+    \ _typeT, Hash<_typeKey>>;\n  template<class _typeKey>\n  using hmultiset = std::unordered_multiset<_typeKey,\
     \ Hash<_typeKey>>;\n  template<class _typeKey, class _typeT>\n  using hmultimap\
     \ = std::unordered_multimap<_typeKey, _typeT, Hash<_typeKey>>;\n  template<class\
     \ _typeT, class _typeCompare = std::less<_typeT>, class _typeContainer = std::vector<_typeT>>\n\
@@ -537,8 +541,8 @@ data:
   - math/euler_phi.hpp
   - math/factorize.hpp
   - math/is_prime.hpp
-  - math/modpow.hpp
   - math/ModInt.hpp
+  - math/modpow.hpp
   - math/monoid.hpp
   - structure/all.hpp
   - structure/FenwickTree.hpp
@@ -548,7 +552,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2022-03-12 19:21:33+09:00'
+  timestamp: '2022-03-12 19:39:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp

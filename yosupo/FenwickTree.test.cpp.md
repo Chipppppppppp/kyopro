@@ -102,18 +102,17 @@ data:
     \n#include <unistd.h>\n#line 4 \"base/in.hpp\"\n#include <cstddef>\n#line 6 \"\
     base/in.hpp\"\n#include <cstdio>\n#include <string>\n#include <tuple>\n#line 2\
     \ \"base/trait.hpp\"\n#include <iterator>\n#include <queue>\n#include <stack>\n\
-    #line 7 \"base/trait.hpp\"\n\n#ifdef __SIZEOF_INT128__\ntemplate<>\nstruct std::is_integral<__int128_t>:\
+    #line 7 \"base/trait.hpp\"\n\ntemplate<>\nstruct std::is_integral<__int128_t>:\
     \ std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>: std::true_type\
     \ {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type {};\n\
-    template<>\nstruct std::is_unsigned<__uint128_t>: std::true_type {};\n#endif\n\
-    #ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
-    \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<class, class =\
-    \ void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
-    \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
-    \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_iterator_v\
-    \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
-    \ std::false_type {};\n  template<class _typeT>\n  struct is_iterable<_typeT,\
-    \ std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
+    template<>\nstruct std::is_unsigned<__uint128_t>: std::true_type {};\n#ifdef __SIZEOF_FLOAT128__\n\
+    template<>\nstruct std::is_floating_point<__float128>: std::true_type {};\n#endif\n\
+    \nnamespace kyopro {\n  template<class, class = void>\n  struct is_iterator: std::false_type\
+    \ {};\n  template<class _typeT>\n  struct is_iterator<_typeT, std::void_t<typename\
+    \ std::iterator_traits<_typeT>::iterator_category>>: std::true_type {};\n  template<class\
+    \ _typeT>\n  constexpr bool is_iterator_v = is_iterator<_typeT>::value;\n\n  template<class,\
+    \ class = void>\n  struct is_iterable: std::false_type {};\n  template<class _typeT>\n\
+    \  struct is_iterable<_typeT, std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
     \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_iterable_v\
     \ = is_iterable<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
     \ {};\n  template<class _typeT, class _typeU>\n  struct is_tuple<std::pair<_typeT,\
@@ -269,7 +268,7 @@ data:
   isVerificationFile: true
   path: yosupo/FenwickTree.test.cpp
   requiredBy: []
-  timestamp: '2022-03-12 18:14:52+09:00'
+  timestamp: '2022-03-12 19:39:56+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/FenwickTree.test.cpp
