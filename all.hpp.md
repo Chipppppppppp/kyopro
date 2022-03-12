@@ -346,16 +346,22 @@ data:
     \       _n /= _i;\n        while (_n % _i == 0) _n /= _i;\n      }\n    }\n  \
     \  if (_n != 1) _res -= _res / _n;\n    return _res;\n  }\n}\n#line 2 \"math/factorize.hpp\"\
     \n#include <algorithm>\n#line 4 \"math/factorize.hpp\"\n#include <numeric>\n#include\
-    \ <random>\n#line 5 \"math/is_prime.hpp\"\n\nnamespace kyopro {\n  constexpr bool\
+    \ <random>\n#line 6 \"math/modpow.hpp\"\n\nnamespace kyopro {\n  template<class\
+    \ _typeT>\n  constexpr _typeT modpow(_typeT _a, KYOPRO_BASE_UINT _n, KYOPRO_BASE_UINT\
+    \ _mod) noexcept {\n    static_assert(std::is_integral_v<_typeT>);\n    std::uint_fast64_t\
+    \ _b = floor_mod(_a, static_cast<_typeT>(_mod));\n    std::uint_fast64_t _res\
+    \ = 1;\n    while (_n > 0) {\n      if (_n & 1) _res = _res * _b % _mod;\n   \
+    \   _b *= _b;\n      _n >>= 1;\n    }\n    return static_cast<_typeT>(_res);\n\
+    \  }\n}\n#line 6 \"math/is_prime.hpp\"\n\nnamespace kyopro {\n  constexpr bool\
     \ is_prime(KYOPRO_BASE_UINT _n) {\n    if (_n <= 1) return false;\n    if (~_n\
     \ & 1) return _n == 2;\n    std::uint_fast64_t _d = _n - 1;\n    while (~_d &\
     \ 1) _d >>= 1;\n    std::uint_fast64_t _e = 1, _rev = _n - 1;\n    for (auto _a:\
     \ std::array<std::uint_fast64_t, 7>{2, 325, 9375, 28178, 450775, 9780504, 1795265022})\
     \ {\n      if (_n <= _a) break;\n      std::uint_fast64_t _t = _d, _y = modpow(_a,\
     \ _t, _n);\n      while (_t != _n - 1 && _y != _e && _y != _rev) {\n        _y\
-    \ *= _y;\n        _t <<= 1;\n      }\n      if (_y != _rev && !(_t & 1)) return\
-    \ false;\n    }\n    return true;\n  }\n}\n#line 8 \"math/factorize.hpp\"\n\n\
-    namespace kyopro {\n  template<class T>\n  constexpr T pollard_rho(T n, KYOPRO_BASE_UINT\
+    \ = _y * _y % _n;\n        _t <<= 1;\n      }\n      if (_y != _rev && !(_t &\
+    \ 1)) return false;\n    }\n    return true;\n  }\n}\n#line 8 \"math/factorize.hpp\"\
+    \n\nnamespace kyopro {\n  template<class T>\n  constexpr T pollard_rho(T n, KYOPRO_BASE_UINT\
     \ c) {\n    std::uint_fast64_t cc = c % n;\n    auto f = [=](std::uint_fast64_t\
     \ x) noexcept { return (x * x + cc) % n; };\n    std::uint_fast64_t x = 1, y =\
     \ 2, z = 1, q = 1;\n    T g = 1;\n    for (std::uint_fast64_t r = 1; g == 1; r\
@@ -422,23 +428,17 @@ data:
     \    }\n\n    template<class _typePrinter>\n    void print(_typePrinter& _printer)\
     \ const {\n      _printer.print(value);\n    }\n  };\n\n  template<KYOPRO_BASE_UINT\
     \ _m>\n  struct Hash<ModInt<_m>> { constexpr std::size_t operator ()(ModInt<_m>\
-    \ _a) const noexcept { return static_cast<std::size_t>(_a); } };\n}\n#line 6 \"\
-    math/modpow.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n  constexpr\
-    \ _typeT modpow(_typeT _a, KYOPRO_BASE_UINT _n, KYOPRO_BASE_UINT _mod) noexcept\
-    \ {\n    static_assert(std::is_integral_v<_typeT>);\n    std::uint_fast64_t _b\
-    \ = floor_mod(_a, static_cast<_typeT>(_mod));\n    std::uint_fast64_t _res = 1;\n\
-    \    while (_n > 0) {\n      if (_n & 1) _res = _res * _b % _mod;\n      _b *=\
-    \ _b;\n      _n >>= 1;\n    }\n    return static_cast<_typeT>(_res);\n  }\n}\n\
-    #line 4 \"math/monoid.hpp\"\n\nnamespace kyopro {\n  template<class _typeT, _typeT\
-    \ _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
-    \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
-    \ _a, _typeT _b) const noexcept { return _a + _b; }\n    constexpr _typeT inv(_typeT\
-    \ _a) const noexcept { return -_a; }\n  };\n  template<class _typeT, _typeT _id\
-    \ = 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<_typeT>);\n   \
-    \ static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a,\
-    \ _typeT _b) const noexcept { return _a * _b; }\n    constexpr _typeT inv(_typeT\
-    \ _a) const noexcept {\n      static_assert(!std::is_integral_v<_typeT>);\n  \
-    \    return 1 / _a;\n    }\n  };\n  template<class _typeT, _typeT _id = std::is_integral_v<_typeT>\
+    \ _a) const noexcept { return static_cast<std::size_t>(_a); } };\n}\n#line 4 \"\
+    math/monoid.hpp\"\n\nnamespace kyopro {\n  template<class _typeT, _typeT _id =\
+    \ 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static\
+    \ constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT\
+    \ _b) const noexcept { return _a + _b; }\n    constexpr _typeT inv(_typeT _a)\
+    \ const noexcept { return -_a; }\n  };\n  template<class _typeT, _typeT _id =\
+    \ 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static\
+    \ constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT\
+    \ _b) const noexcept { return _a * _b; }\n    constexpr _typeT inv(_typeT _a)\
+    \ const noexcept {\n      static_assert(!std::is_integral_v<_typeT>);\n      return\
+    \ 1 / _a;\n    }\n  };\n  template<class _typeT, _typeT _id = std::is_integral_v<_typeT>\
     \ ? -INF<_typeT> : -inf>\n  struct Max {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
     \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
     \ _a, _typeT _b) const noexcept { return _a > _b ? _a : _b; }\n  };\n  template<class\
@@ -536,8 +536,8 @@ data:
   - math/euler_phi.hpp
   - math/factorize.hpp
   - math/is_prime.hpp
-  - math/ModInt.hpp
   - math/modpow.hpp
+  - math/ModInt.hpp
   - math/monoid.hpp
   - structure/all.hpp
   - structure/FenwickTree.hpp
@@ -547,7 +547,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2022-03-12 18:14:52+09:00'
+  timestamp: '2022-03-12 18:34:43+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp
