@@ -162,17 +162,15 @@ namespace kyopro {
       _a.print(*this);
     }
 
-    template<bool = true>
+    template<bool _first = true>
     void operator ()() {
+      if constexpr (_comment && _first) print('#');
       if constexpr (_end) print('\n');
       if constexpr (_flush) itr._flush();
     }
     template<bool _first = true, class _typeHead, class... _typeArgs>
     void operator ()(_typeHead&& _head, _typeArgs&&... _args) {
-      if constexpr (_comment && _first) {
-        print('#');
-        print(' ');
-      }
+      if constexpr (_comment && _first) print('#');
       if constexpr (_sep && !_first) _print_sep();
       print(_head);
       operator ()<false>(std::forward<_typeArgs>(_args)...);
