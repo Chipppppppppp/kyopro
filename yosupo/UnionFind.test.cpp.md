@@ -1,81 +1,53 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/in.hpp
     title: base/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/io.hpp
     title: base/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/out.hpp
     title: base/out.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/trait.hpp
     title: base/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/unionfind
     links:
     - https://judge.yosupo.jp/problem/unionfind
   bundledCode: "#line 1 \"yosupo/UnionFind.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\
-    \n#include <iostream>\n#line 2 \"structure/UnionFind.hpp\"\n/* UnionFind */\n\
-    #include <algorithm>\n#include <unordered_map>\n#include <vector>\n#line 2 \"\
-    base/settings.hpp\"\n#include <cstdint>\n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT\
-    \ std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n\
-    #endif\n\n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\
-    \n#ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(1000000007)\n\
-    #endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
+    \n#line 2 \"base/in.hpp\"\n#include <unistd.h>\n#include <array>\n#include <cstddef>\n\
+    #include <cstdint>\n#include <cstdio>\n#include <string>\n#include <tuple>\n#include\
+    \ <type_traits>\n#include <utility>\n#line 3 \"base/settings.hpp\"\n\n#ifndef\
+    \ KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n\
+    #define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n\
+    #define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define\
+    \ KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(1000000007)\n#endif\n\n#ifndef\
+    \ KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 7 \"structure/UnionFind.hpp\"\n\nnamespace kyopro {\n  struct UnionFind\
-    \ {\n  private:\n    std::vector<int> _par;\n\n  public:\n    UnionFind() noexcept\
-    \ = default;\n    UnionFind(KYOPRO_BASE_UINT _n) noexcept: _par(_n, -1) {}\n\n\
-    \    void resize(KYOPRO_BASE_UINT _x) { _par.resize(_x, -1); }\n    void assign(KYOPRO_BASE_UINT\
-    \ _x) { _par.assign(_x, -1); }\n    void reset() { std::fill(std::begin(_par),\
-    \ std::end(_par), -1); }\n\n    KYOPRO_BASE_UINT size() const noexcept { return\
-    \ static_cast<KYOPRO_BASE_UINT>(_par.size()); }\n\n    KYOPRO_BASE_INT find(int\
-    \ _x) {\n      int _p = _x;\n      while (_par[_p] >= 0) _p = _par[_p];\n    \
-    \  while (_x != _p) {\n        int _tmp = _x;\n        _x = _par[_x];\n      \
-    \  _par[_tmp] = _p;\n      }\n      return _p;\n    }\n\n    bool merge(int _x,\
-    \ int _y) {\n      _x = find(_x), _y = find(_y);\n      if (_x == _y) return false;\n\
-    \      if (_par[_x] > _par[_y]) {\n        int _tmp = _x;\n        _x = _y;\n\
-    \        _y = _tmp;\n      }\n      _par[_x] += _par[_y];\n      _par[_y] = _x;\n\
-    \      return true;\n    }\n\n    bool same(int _x, int _y) { return find(_x)\
-    \ == find(_y); }\n\n    KYOPRO_BASE_INT group_size(int _x) { return -_par[find(_x)];\
-    \ }\n\n    std::vector<int> group_members(int _x) {\n      _x = find(_x);\n  \
-    \    std::vector<int> _a;\n      for (int _i = 0; _i < (int)(size()); ++_i) if\
-    \ (find(_i) == _x) _a.emplace_back(_i);\n      return _a;\n    }\n\n    template<class\
-    \ _typeVector = std::vector<KYOPRO_BASE_INT>>\n    _typeVector roots() const {\n\
-    \      _typeVector _a;\n      for (int _i = 0; _i < (int)(size()); ++_i) if (_par[_i]\
-    \ < 0) _a.emplace_back(_i);\n      return _a;\n    }\n\n    KYOPRO_BASE_INT group_count()\
-    \ const {\n      KYOPRO_BASE_INT _cnt = 0;\n      for (int _i = 0; _i < (int)(size());\
-    \ ++_i) if (_par[_i] < 0) ++_cnt;\n      return _cnt;\n    }\n\n    template<class\
-    \ _typeMap = std::unordered_map<KYOPRO_BASE_INT, std::vector<KYOPRO_BASE_INT>>>\n\
-    \    _typeMap all_group_members() {\n      _typeMap _group_members;\n      for\
-    \ (int _member = 0; _member < (int)(size()); ++_member) _group_members[find(_member)].emplace_back(_member);\n\
-    \      return _group_members;\n    }\n  };\n}\n#line 2 \"base/in.hpp\"\n#include\
-    \ <unistd.h>\n#include <array>\n#include <cstddef>\n#line 6 \"base/in.hpp\"\n\
-    #include <cstdio>\n#include <string>\n#include <tuple>\n#include <type_traits>\n\
-    #include <utility>\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ _typeT>\n  constexpr _typeT power(_typeT _a, KYOPRO_BASE_UINT _n, _typeT _init\
-    \ = 1) noexcept {\n    while (_n > 0) {\n      if (_n & 1) _init *= _a;\n    \
-    \  _a *= _a;\n      _n >>= 1;\n    }\n    return _init;\n  }\n}\n#line 2 \"base/trait.hpp\"\
-    \n#include <iterator>\n#include <queue>\n#include <stack>\n#line 7 \"base/trait.hpp\"\
+    #endif\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n\
+    \  constexpr _typeT power(_typeT _a, KYOPRO_BASE_UINT _n, _typeT _init = 1) noexcept\
+    \ {\n    while (_n > 0) {\n      if (_n & 1) _init *= _a;\n      _a *= _a;\n \
+    \     _n >>= 1;\n    }\n    return _init;\n  }\n}\n#line 2 \"base/trait.hpp\"\n\
+    #include <iterator>\n#include <queue>\n#include <stack>\n#line 7 \"base/trait.hpp\"\
     \n\ntemplate<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
     struct std::is_signed<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
     \ std::true_type {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>: std::true_type\
@@ -206,39 +178,67 @@ data:
     \ print(' ');\n            else print('\\n');\n          }\n        } else break;\n\
     \      }\n      if constexpr (_debug) print('}');\n    }\n    template<class _typeT,\
     \ std::enable_if_t<_has_print<_typeT>::value>* = nullptr>\n    void print(const\
-    \ _typeT& _a) {\n      _a.print(*this);\n    }\n\n    template<bool = true>\n\
-    \    void operator ()() {\n      if constexpr (_end) print('\\n');\n      if constexpr\
-    \ (_flush) itr._flush();\n    }\n    template<bool _first = true, class _typeHead,\
-    \ class... _typeArgs>\n    void operator ()(_typeHead&& _head, _typeArgs&&...\
-    \ _args) {\n      if constexpr (_comment && _first) {\n        print('#');\n \
-    \       print(' ');\n      }\n      if constexpr (_sep && !_first) _print_sep();\n\
+    \ _typeT& _a) {\n      _a.print(*this);\n    }\n\n    template<bool _first = true>\n\
+    \    void operator ()() {\n      if constexpr (_comment && _first) print('#');\n\
+    \      if constexpr (_end) print('\\n');\n      if constexpr (_flush) itr._flush();\n\
+    \    }\n    template<bool _first = true, class _typeHead, class... _typeArgs>\n\
+    \    void operator ()(_typeHead&& _head, _typeArgs&&... _args) {\n      if constexpr\
+    \ (_comment && _first) print('#');\n      if constexpr (_sep && !_first) _print_sep();\n\
     \      print(_head);\n      operator ()<false>(std::forward<_typeArgs>(_args)...);\n\
     \    }\n  };\n\n  Printer<Writer<>::iterator, false, false> print(output.begin()),\
     \ eprint(error.begin());\n  Printer<Writer<>::iterator> println(output.begin()),\
     \ eprintln(error.begin());\n  Printer<Writer<>::iterator, true, true, true, true>\
-    \ debug(output.begin()), edebug(error.begin());\n}\n#line 5 \"yosupo/UnionFind.test.cpp\"\
+    \ debug(output.begin()), edebug(error.begin());\n}\n#line 2 \"structure/UnionFind.hpp\"\
+    \n/* UnionFind */\n#include <algorithm>\n#include <unordered_map>\n#include <vector>\n\
+    #line 7 \"structure/UnionFind.hpp\"\n\nnamespace kyopro {\n  struct UnionFind\
+    \ {\n  private:\n    std::vector<int> _par;\n\n  public:\n    UnionFind() noexcept\
+    \ = default;\n    UnionFind(KYOPRO_BASE_UINT _n) noexcept: _par(_n, -1) {}\n\n\
+    \    void resize(KYOPRO_BASE_UINT _x) { _par.resize(_x, -1); }\n    void assign(KYOPRO_BASE_UINT\
+    \ _x) { _par.assign(_x, -1); }\n    void reset() { std::fill(std::begin(_par),\
+    \ std::end(_par), -1); }\n\n    KYOPRO_BASE_UINT size() const noexcept { return\
+    \ static_cast<KYOPRO_BASE_UINT>(_par.size()); }\n\n    KYOPRO_BASE_INT find(int\
+    \ _x) {\n      int _p = _x;\n      while (_par[_p] >= 0) _p = _par[_p];\n    \
+    \  while (_x != _p) {\n        int _tmp = _x;\n        _x = _par[_x];\n      \
+    \  _par[_tmp] = _p;\n      }\n      return _p;\n    }\n\n    bool merge(int _x,\
+    \ int _y) {\n      _x = find(_x), _y = find(_y);\n      if (_x == _y) return false;\n\
+    \      if (_par[_x] > _par[_y]) {\n        int _tmp = _x;\n        _x = _y;\n\
+    \        _y = _tmp;\n      }\n      _par[_x] += _par[_y];\n      _par[_y] = _x;\n\
+    \      return true;\n    }\n\n    bool same(int _x, int _y) { return find(_x)\
+    \ == find(_y); }\n\n    KYOPRO_BASE_INT group_size(int _x) { return -_par[find(_x)];\
+    \ }\n\n    std::vector<int> group_members(int _x) {\n      _x = find(_x);\n  \
+    \    std::vector<int> _a;\n      for (int _i = 0; _i < (int)(size()); ++_i) if\
+    \ (find(_i) == _x) _a.emplace_back(_i);\n      return _a;\n    }\n\n    template<class\
+    \ _typeVector = std::vector<KYOPRO_BASE_INT>>\n    _typeVector roots() const {\n\
+    \      _typeVector _a;\n      for (int _i = 0; _i < (int)(size()); ++_i) if (_par[_i]\
+    \ < 0) _a.emplace_back(_i);\n      return _a;\n    }\n\n    KYOPRO_BASE_INT group_count()\
+    \ const {\n      KYOPRO_BASE_INT _cnt = 0;\n      for (int _i = 0; _i < (int)(size());\
+    \ ++_i) if (_par[_i] < 0) ++_cnt;\n      return _cnt;\n    }\n\n    template<class\
+    \ _typeMap = std::unordered_map<KYOPRO_BASE_INT, std::vector<KYOPRO_BASE_INT>>>\n\
+    \    _typeMap all_group_members() {\n      _typeMap _group_members;\n      for\
+    \ (int _member = 0; _member < (int)(size()); ++_member) _group_members[find(_member)].emplace_back(_member);\n\
+    \      return _group_members;\n    }\n  };\n}\n#line 4 \"yosupo/UnionFind.test.cpp\"\
     \n\nint main() {\n  int n, q;\n  kyopro::scan(n, q);\n  kyopro::UnionFind uf(n);\n\
     \  for (int i = 0; i < q; ++i) {\n    int t, u, v;\n    kyopro::scan(t, u, v);\n\
     \    if (t == 0) uf.merge(u, v);\n    else kyopro::println(uf.same(u, v));\n \
     \ }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\n#include <iostream>\n\
-    #include \"../structure/UnionFind.hpp\"\n#include \"../base/io.hpp\"\n\nint main()\
-    \ {\n  int n, q;\n  kyopro::scan(n, q);\n  kyopro::UnionFind uf(n);\n  for (int\
-    \ i = 0; i < q; ++i) {\n    int t, u, v;\n    kyopro::scan(t, u, v);\n    if (t\
-    \ == 0) uf.merge(u, v);\n    else kyopro::println(uf.same(u, v));\n  }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\n#include \"\
+    ../base/io.hpp\"\n#include \"../structure/UnionFind.hpp\"\n\nint main() {\n  int\
+    \ n, q;\n  kyopro::scan(n, q);\n  kyopro::UnionFind uf(n);\n  for (int i = 0;\
+    \ i < q; ++i) {\n    int t, u, v;\n    kyopro::scan(t, u, v);\n    if (t == 0)\
+    \ uf.merge(u, v);\n    else kyopro::println(uf.same(u, v));\n  }\n}\n"
   dependsOn:
-  - structure/UnionFind.hpp
-  - base/settings.hpp
   - base/io.hpp
   - base/in.hpp
   - math/power.hpp
+  - base/settings.hpp
   - base/trait.hpp
   - base/out.hpp
+  - structure/UnionFind.hpp
   isVerificationFile: true
   path: yosupo/UnionFind.test.cpp
   requiredBy: []
-  timestamp: '2022-03-12 19:39:56+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-03-12 20:07:35+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: yosupo/UnionFind.test.cpp
 layout: document

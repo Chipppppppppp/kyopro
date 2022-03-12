@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/trait.hpp
     title: base/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
   _extendedRequiredBy:
@@ -17,19 +17,22 @@ data:
   - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/io.hpp
     title: base/io.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: yosupo/Factorize.test.cpp
+    title: yosupo/Factorize.test.cpp
+  - icon: ':x:'
     path: yosupo/FenwickTree.test.cpp
     title: yosupo/FenwickTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"base/in.hpp\"\n#include <unistd.h>\n#include <array>\n#include\
@@ -189,9 +192,10 @@ data:
   - base/all.hpp
   - all.hpp
   timestamp: '2022-03-12 19:39:56+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - yosupo/FenwickTree.test.cpp
+  - yosupo/Factorize.test.cpp
   - yosupo/UnionFind.test.cpp
 documentation_of: base/in.hpp
 layout: document

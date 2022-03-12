@@ -4,25 +4,25 @@ data:
   - icon: ':warning:'
     path: base/Hash.hpp
     title: base/Hash.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/in.hpp
     title: base/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/io.hpp
     title: base/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/out.hpp
     title: base/out.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/trait.hpp
     title: base/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
   _extendedRequiredBy:
@@ -211,12 +211,12 @@ data:
     \ print(' ');\n            else print('\\n');\n          }\n        } else break;\n\
     \      }\n      if constexpr (_debug) print('}');\n    }\n    template<class _typeT,\
     \ std::enable_if_t<_has_print<_typeT>::value>* = nullptr>\n    void print(const\
-    \ _typeT& _a) {\n      _a.print(*this);\n    }\n\n    template<bool = true>\n\
-    \    void operator ()() {\n      if constexpr (_end) print('\\n');\n      if constexpr\
-    \ (_flush) itr._flush();\n    }\n    template<bool _first = true, class _typeHead,\
-    \ class... _typeArgs>\n    void operator ()(_typeHead&& _head, _typeArgs&&...\
-    \ _args) {\n      if constexpr (_comment && _first) {\n        print('#');\n \
-    \       print(' ');\n      }\n      if constexpr (_sep && !_first) _print_sep();\n\
+    \ _typeT& _a) {\n      _a.print(*this);\n    }\n\n    template<bool _first = true>\n\
+    \    void operator ()() {\n      if constexpr (_comment && _first) print('#');\n\
+    \      if constexpr (_end) print('\\n');\n      if constexpr (_flush) itr._flush();\n\
+    \    }\n    template<bool _first = true, class _typeHead, class... _typeArgs>\n\
+    \    void operator ()(_typeHead&& _head, _typeArgs&&... _args) {\n      if constexpr\
+    \ (_comment && _first) print('#');\n      if constexpr (_sep && !_first) _print_sep();\n\
     \      print(_head);\n      operator ()<false>(std::forward<_typeArgs>(_args)...);\n\
     \    }\n  };\n\n  Printer<Writer<>::iterator, false, false> print(output.begin()),\
     \ eprint(error.begin());\n  Printer<Writer<>::iterator> println(output.begin()),\
@@ -246,7 +246,7 @@ data:
   path: base/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-03-12 19:39:56+09:00'
+  timestamp: '2022-03-12 20:07:35+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: base/all.hpp

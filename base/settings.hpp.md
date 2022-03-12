@@ -11,16 +11,16 @@ data:
   - icon: ':warning:'
     path: base/all.hpp
     title: base/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/constant.hpp
     title: base/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/in.hpp
     title: base/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/io.hpp
     title: base/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: base/out.hpp
     title: base/out.hpp
   - icon: ':warning:'
@@ -38,25 +38,25 @@ data:
   - icon: ':warning:'
     path: math/euler_phi.hpp
     title: math/euler_phi.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
     path: math/modpow.hpp
     title: math/modpow.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/monoid.hpp
     title: math/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   - icon: ':warning:'
@@ -69,15 +69,18 @@ data:
     path: template/all.hpp
     title: template/all.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: yosupo/Factorize.test.cpp
+    title: yosupo/Factorize.test.cpp
+  - icon: ':x:'
     path: yosupo/FenwickTree.test.cpp
     title: yosupo/FenwickTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: '#line 2 "base/settings.hpp"
@@ -213,9 +216,10 @@ data:
   - base/Hash.hpp
   - all.hpp
   timestamp: '2022-03-11 22:32:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - yosupo/FenwickTree.test.cpp
+  - yosupo/Factorize.test.cpp
   - yosupo/UnionFind.test.cpp
 documentation_of: base/settings.hpp
 layout: document
