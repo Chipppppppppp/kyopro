@@ -1,4 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/unionfind"
+
 #include "../base/io.hpp"
 #include "../structure/UnionFind.hpp"
 
