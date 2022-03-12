@@ -60,7 +60,7 @@ namespace kyopro {
       std::uint_fast64_t p = find_prime_factor(n);
       while (n % p == 0) {
         n /= p;
-        res.eb(p);
+        res.emplace_back(p);
       }
     }
     if constexpr (sorted) std::sort(res.begin(), res.end());
