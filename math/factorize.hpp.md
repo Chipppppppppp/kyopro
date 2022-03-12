@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/settings.hpp
     title: base/settings.hpp
-  - icon: ':x:'
+  - icon: ':warning:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   _extendedRequiredBy:
@@ -14,13 +14,10 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  _extendedVerifiedWith:
-  - icon: ':x:'
-    path: yosupo/Factorize.test.cpp
-    title: yosupo/Factorize.test.cpp
-  _isVerificationFailed: true
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"math/factorize.hpp\"\n#include <algorithm>\n#include <cstdint>\n\
@@ -103,9 +100,8 @@ data:
   - math/all.hpp
   - all.hpp
   timestamp: '2022-03-12 19:55:46+09:00'
-  verificationStatus: LIBRARY_ALL_WA
-  verifiedWith:
-  - yosupo/Factorize.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: math/factorize.hpp
 layout: document
 redirect_from:

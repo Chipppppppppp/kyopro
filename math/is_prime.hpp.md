@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: base/settings.hpp
     title: base/settings.hpp
   _extendedRequiredBy:
@@ -11,16 +11,13 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  - icon: ':x:'
+  - icon: ':warning:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  _extendedVerifiedWith:
-  - icon: ':x:'
-    path: yosupo/Factorize.test.cpp
-    title: yosupo/Factorize.test.cpp
-  _isVerificationFailed: true
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"math/is_prime.hpp\"\n#include <cstdint>\n#include <initializer_list>\n\
@@ -72,9 +69,8 @@ data:
   - math/all.hpp
   - all.hpp
   timestamp: '2022-03-12 19:49:03+09:00'
-  verificationStatus: LIBRARY_ALL_WA
-  verifiedWith:
-  - yosupo/Factorize.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: math/is_prime.hpp
 layout: document
 redirect_from:
