@@ -2,10 +2,19 @@
 #include <cstdint>
 #include <initializer_list>
 #include "../base/settings.hpp"
-#include "modpow.hpp"
 
 namespace kyopro {
   constexpr bool is_prime(KYOPRO_BASE_UINT _n) {
+    auto modpow = [](std::uint_fast64_t _a, std::uint_fast64_t _n, std::uint_fast64_t _mod) noexcept {
+      std::uint_fast64_t _b = _a % _mod;
+      std::uint_fast64_t _res = 1;
+      while (_n > 0) {
+        if (_n & 1) _res = static_cast<__uint128_t>(_res) * _b % _mod;
+        _b = static_cast<__uint128_t>(_b) * _b % _mod;
+        _n >>= 1;
+      }
+      return _res;
+    };
     if (_n <= 1) return false;
     if (!(_n & 1)) return _n == 2;
     std::uint_fast64_t _d = _n - 1;
