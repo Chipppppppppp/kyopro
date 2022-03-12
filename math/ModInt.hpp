@@ -13,6 +13,10 @@ namespace kyopro {
     static constexpr KYOPRO_BASE_UINT mod = _m;
     KYOPRO_BASE_UINT value;
 
+    static KYOPRO_BASE_INT get_mod() noexcept {
+      return static_cast<KYOPRO_BASE_INT>(_m);
+    }
+
     constexpr ModInt() noexcept = default;
     template<class _typeT>
     constexpr ModInt(_typeT _value) noexcept: value(floor_mod(_value, _m)) { static_assert(std::is_integral_v<_typeT>); }

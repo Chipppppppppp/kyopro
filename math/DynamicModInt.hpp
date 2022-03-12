@@ -16,6 +16,10 @@ namespace kyopro {
       mod = _mod;
     }
 
+    static KYOPRO_BASE_INT get_mod() noexcept {
+      return static_cast<KYOPRO_BASE_UINT>(mod);
+    }
+
     DynamicModInt() noexcept = default;
     template<class _typeT>
     DynamicModInt(_typeT _value) noexcept: value(floor_mod(_value, mod)) { static_assert(std::is_integral_v<_typeT>); }

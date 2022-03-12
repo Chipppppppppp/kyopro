@@ -5,7 +5,6 @@
 #include "euler_phi.hpp"
 #include "factorize.hpp"
 #include "is_prime.hpp"
-#include "miller_rabin.hpp"
 #include "mod.hpp"
 #include "ModInt.hpp"
 #include "modpow.hpp"
