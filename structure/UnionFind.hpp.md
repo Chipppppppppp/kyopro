@@ -35,35 +35,7 @@ data:
     \    void resize(KYOPRO_BASE_UINT _x) { _par.resize(_x, -1); }\n    void assign(KYOPRO_BASE_UINT\
     \ _x) { _par.assign(_x, -1); }\n    void reset() { std::fill(std::begin(_par),\
     \ std::end(_par), -1); }\n\n    KYOPRO_BASE_UINT size() const noexcept { return\
-    \ _par.size(); }\n\n    KYOPRO_BASE_INT find(int _x) {\n      int _p = _x;\n \
-    \     while (_par[_p] >= 0) _p = _par[_p];\n      while (_x != _p) {\n       \
-    \ int _tmp = _x;\n        _x = _par[_x];\n        _par[_tmp] = _p;\n      }\n\
-    \      return _p;\n    }\n\n    bool merge(int _x, int _y) {\n      _x = find(_x),\
-    \ _y = find(_y);\n      if (_x == _y) return false;\n      if (_par[_x] > _par[_y])\
-    \ {\n        int _tmp = _x;\n        _x = _y;\n        _y = _tmp;\n      }\n \
-    \     _par[_x] += _par[_y];\n      _par[_y] = _x;\n      return true;\n    }\n\
-    \n    bool same(int _x, int _y) { return find(_x) == find(_y); }\n\n    KYOPRO_BASE_INT\
-    \ group_size(int _x) { return -_par[find(_x)]; }\n\n    std::vector<int> group_members(int\
-    \ _x) {\n      _x = find(_x);\n      std::vector<int> _a;\n      for (int _i =\
-    \ 0; _i < (int)(size()); ++_i) if (find(_i) == _x) _a.emplace_back(_i);\n    \
-    \  return _a;\n    }\n\n    template<class _typeVector = std::vector<KYOPRO_BASE_INT>>\n\
-    \    _typeVector roots() const {\n      _typeVector _a;\n      for (int _i = 0;\
-    \ _i < (int)(size()); ++_i) if (_par[_i] < 0) _a.emplace_back(_i);\n      return\
-    \ _a;\n    }\n\n    KYOPRO_BASE_INT group_count() const {\n      KYOPRO_BASE_INT\
-    \ _cnt = 0;\n      for (int _i = 0; _i < (int)(size()); ++_i) if (_par[_i] < 0)\
-    \ ++_cnt;\n      return _cnt;\n    }\n\n    template<class _typeMap = std::unordered_map<KYOPRO_BASE_INT,\
-    \ std::vector<KYOPRO_BASE_INT>>>\n    _typeMap all_group_members() {\n      _typeMap\
-    \ _group_members;\n      for (int _member = 0; _member < (int)(size()); ++_member)\
-    \ _group_members[find(_member)].emplace_back(_member);\n      return _group_members;\n\
-    \    }\n  };\n}\n"
-  code: "#pragma once\n/* UnionFind */\n#include <algorithm>\n#include <unordered_map>\n\
-    #include <vector>\n#include \"../base/settings.hpp\"\n\nnamespace kyopro {\n \
-    \ struct UnionFind {\n  private:\n    std::vector<int> _par;\n\n  public:\n  \
-    \  UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT _n) noexcept:\
-    \ _par(_n, -1) {}\n\n    void resize(KYOPRO_BASE_UINT _x) { _par.resize(_x, -1);\
-    \ }\n    void assign(KYOPRO_BASE_UINT _x) { _par.assign(_x, -1); }\n    void reset()\
-    \ { std::fill(std::begin(_par), std::end(_par), -1); }\n\n    KYOPRO_BASE_UINT\
-    \ size() const noexcept { return _par.size(); }\n\n    KYOPRO_BASE_INT find(int\
+    \ static_cast<KYOPRO_BASE_UINT>(_par.size()); }\n\n    KYOPRO_BASE_INT find(int\
     \ _x) {\n      int _p = _x;\n      while (_par[_p] >= 0) _p = _par[_p];\n    \
     \  while (_x != _p) {\n        int _tmp = _x;\n        _x = _par[_x];\n      \
     \  _par[_tmp] = _p;\n      }\n      return _p;\n    }\n\n    bool merge(int _x,\
@@ -84,6 +56,35 @@ data:
     \    _typeMap all_group_members() {\n      _typeMap _group_members;\n      for\
     \ (int _member = 0; _member < (int)(size()); ++_member) _group_members[find(_member)].emplace_back(_member);\n\
     \      return _group_members;\n    }\n  };\n}\n"
+  code: "#pragma once\n/* UnionFind */\n#include <algorithm>\n#include <unordered_map>\n\
+    #include <vector>\n#include \"../base/settings.hpp\"\n\nnamespace kyopro {\n \
+    \ struct UnionFind {\n  private:\n    std::vector<int> _par;\n\n  public:\n  \
+    \  UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT _n) noexcept:\
+    \ _par(_n, -1) {}\n\n    void resize(KYOPRO_BASE_UINT _x) { _par.resize(_x, -1);\
+    \ }\n    void assign(KYOPRO_BASE_UINT _x) { _par.assign(_x, -1); }\n    void reset()\
+    \ { std::fill(std::begin(_par), std::end(_par), -1); }\n\n    KYOPRO_BASE_UINT\
+    \ size() const noexcept { return static_cast<KYOPRO_BASE_UINT>(_par.size()); }\n\
+    \n    KYOPRO_BASE_INT find(int _x) {\n      int _p = _x;\n      while (_par[_p]\
+    \ >= 0) _p = _par[_p];\n      while (_x != _p) {\n        int _tmp = _x;\n   \
+    \     _x = _par[_x];\n        _par[_tmp] = _p;\n      }\n      return _p;\n  \
+    \  }\n\n    bool merge(int _x, int _y) {\n      _x = find(_x), _y = find(_y);\n\
+    \      if (_x == _y) return false;\n      if (_par[_x] > _par[_y]) {\n       \
+    \ int _tmp = _x;\n        _x = _y;\n        _y = _tmp;\n      }\n      _par[_x]\
+    \ += _par[_y];\n      _par[_y] = _x;\n      return true;\n    }\n\n    bool same(int\
+    \ _x, int _y) { return find(_x) == find(_y); }\n\n    KYOPRO_BASE_INT group_size(int\
+    \ _x) { return -_par[find(_x)]; }\n\n    std::vector<int> group_members(int _x)\
+    \ {\n      _x = find(_x);\n      std::vector<int> _a;\n      for (int _i = 0;\
+    \ _i < (int)(size()); ++_i) if (find(_i) == _x) _a.emplace_back(_i);\n      return\
+    \ _a;\n    }\n\n    template<class _typeVector = std::vector<KYOPRO_BASE_INT>>\n\
+    \    _typeVector roots() const {\n      _typeVector _a;\n      for (int _i = 0;\
+    \ _i < (int)(size()); ++_i) if (_par[_i] < 0) _a.emplace_back(_i);\n      return\
+    \ _a;\n    }\n\n    KYOPRO_BASE_INT group_count() const {\n      KYOPRO_BASE_INT\
+    \ _cnt = 0;\n      for (int _i = 0; _i < (int)(size()); ++_i) if (_par[_i] < 0)\
+    \ ++_cnt;\n      return _cnt;\n    }\n\n    template<class _typeMap = std::unordered_map<KYOPRO_BASE_INT,\
+    \ std::vector<KYOPRO_BASE_INT>>>\n    _typeMap all_group_members() {\n      _typeMap\
+    \ _group_members;\n      for (int _member = 0; _member < (int)(size()); ++_member)\
+    \ _group_members[find(_member)].emplace_back(_member);\n      return _group_members;\n\
+    \    }\n  };\n}\n"
   dependsOn:
   - base/settings.hpp
   isVerificationFile: false
@@ -91,7 +92,7 @@ data:
   requiredBy:
   - structure/all.hpp
   - all.hpp
-  timestamp: '2022-03-11 22:32:55+09:00'
+  timestamp: '2022-03-12 10:43:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - yosupo/UnionFind.test.cpp

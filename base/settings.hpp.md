@@ -36,8 +36,20 @@ data:
     path: math/divisors.hpp
     title: math/divisors.hpp
   - icon: ':warning:'
+    path: math/euler_phi.hpp
+    title: math/euler_phi.hpp
+  - icon: ':warning:'
     path: math/factorize.hpp
     title: math/factorize.hpp
+  - icon: ':warning:'
+    path: math/is_prime.hpp
+    title: math/is_prime.hpp
+  - icon: ':warning:'
+    path: math/miller_rabin.hpp
+    title: math/miller_rabin.hpp
+  - icon: ':warning:'
+    path: math/modpow.hpp
+    title: math/modpow.hpp
   - icon: ':heavy_check_mark:'
     path: math/monoid.hpp
     title: math/monoid.hpp
@@ -181,13 +193,17 @@ data:
   isVerificationFile: false
   path: base/settings.hpp
   requiredBy:
+  - math/miller_rabin.hpp
   - math/factorize.hpp
   - math/ModInt.hpp
   - math/divisors.hpp
   - math/DynamicModInt.hpp
+  - math/is_prime.hpp
   - math/monoid.hpp
+  - math/euler_phi.hpp
   - math/all.hpp
   - math/power.hpp
+  - math/modpow.hpp
   - structure/UnionFind.hpp
   - structure/FenwickTree.hpp
   - structure/all.hpp

@@ -42,11 +42,11 @@ data:
     \n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 4 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n\
-    \  constexpr _typeT power(_typeT _a, std::uint_fast64_t _n, _typeT _init = 1)\
-    \ noexcept {\n    while (_n > 0) {\n      if (_n & 1) _init *= _a;\n      _a *=\
-    \ _a;\n      _n >>= 1;\n    }\n    return _init;\n  }\n}\n#line 2 \"base/trait.hpp\"\
-    \n#include <iterator>\n#include <queue>\n#include <stack>\n#line 7 \"base/trait.hpp\"\
+    #endif\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n\
+    \  constexpr _typeT power(_typeT _a, KYOPRO_BASE_UINT _n, _typeT _init = 1) noexcept\
+    \ {\n    while (_n > 0) {\n      if (_n & 1) _init *= _a;\n      _a *= _a;\n \
+    \     _n >>= 1;\n    }\n    return _init;\n  }\n}\n#line 2 \"base/trait.hpp\"\n\
+    #include <iterator>\n#include <queue>\n#include <stack>\n#line 7 \"base/trait.hpp\"\
     \n\n#ifdef __SIZEOF_INT128__\ntemplate<>\nstruct std::is_integral<__int128_t>:\
     \ std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>: std::true_type\
     \ {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type {};\n\
@@ -189,7 +189,7 @@ data:
   - base/io.hpp
   - base/all.hpp
   - all.hpp
-  timestamp: '2022-03-11 23:28:44+09:00'
+  timestamp: '2022-03-12 10:43:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - yosupo/FenwickTree.test.cpp

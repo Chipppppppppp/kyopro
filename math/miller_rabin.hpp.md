@@ -5,9 +5,6 @@ data:
     path: base/settings.hpp
     title: base/settings.hpp
   - icon: ':warning:'
-    path: math/miller_rabin.hpp
-    title: math/miller_rabin.hpp
-  - icon: ':warning:'
     path: math/mod.hpp
     title: math/mod.hpp
   - icon: ':warning:'
@@ -20,13 +17,16 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
+  - icon: ':warning:'
+    path: math/is_prime.hpp
+    title: math/is_prime.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"math/is_prime.hpp\"\n#include <array>\n#include <cstdint>\n\
+  bundledCode: "#line 1 \"math/miller_rabin.hpp\"\n#include <array>\n#include <cstdint>\n\
     #line 3 \"base/settings.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT\
     \ std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n\
     #endif\n\n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\
@@ -55,33 +55,33 @@ data:
     \ {\n      if (_n <= _a) break;\n      std::uint_fast64_t _t = _d, _y = modpow(_a,\
     \ _t, _n);\n      while (_t != _n - 1 && _y != _e && _y != _rev) {\n        _y\
     \ *= _y;\n        _t *= 2;\n      }\n      if (_y != _rev && _t % 2 == 0) return\
-    \ false;\n    }\n    return true;\n  }\n}\n#line 6 \"math/is_prime.hpp\"\n\nnamespace\
-    \ kyopro {\n  constexpr bool is_prime(KYOPRO_BASE_UINT _n) noexcept {\n    if\
-    \ (_n <= 1) return false;\n    if (~_n & 1) return _n == 2;\n    return miller_rabin(_n,\
-    \ std::array<KYOPRO_BASE_UINT, 7>{2, 325, 9375, 28178, 450775, 9780504, 1795265022});\n\
-    \  }\n}\n"
-  code: "#pragma once\n#include <array>\n#include <cstdint>\n#include \"../base/settings.hpp\"\
-    \n#include \"miller_rabin.hpp\"\n\nnamespace kyopro {\n  constexpr bool is_prime(KYOPRO_BASE_UINT\
-    \ _n) noexcept {\n    if (_n <= 1) return false;\n    if (~_n & 1) return _n ==\
-    \ 2;\n    return miller_rabin(_n, std::array<KYOPRO_BASE_UINT, 7>{2, 325, 9375,\
-    \ 28178, 450775, 9780504, 1795265022});\n  }\n}"
+    \ false;\n    }\n    return true;\n  }\n}\n"
+  code: "#include <array>\n#include <cstdint>\n#include \"../base/settings.hpp\"\n\
+    #include \"../math/modpow.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    \ _size>\n  bool miller_rabin(KYOPRO_BASE_UINT _n, const std::array<KYOPRO_BASE_UINT,\
+    \ _size>& _as) {\n    std::uint_fast64_t _d = _n - 1;\n    while (~_d & 1) _d\
+    \ >>= 1;\n    std::uint_fast64_t _e = 1, _rev = _n - 1;\n    for (auto _a: _as)\
+    \ {\n      if (_n <= _a) break;\n      std::uint_fast64_t _t = _d, _y = modpow(_a,\
+    \ _t, _n);\n      while (_t != _n - 1 && _y != _e && _y != _rev) {\n        _y\
+    \ *= _y;\n        _t *= 2;\n      }\n      if (_y != _rev && _t % 2 == 0) return\
+    \ false;\n    }\n    return true;\n  }\n}\n"
   dependsOn:
   - base/settings.hpp
-  - math/miller_rabin.hpp
   - math/modpow.hpp
   - math/mod.hpp
   isVerificationFile: false
-  path: math/is_prime.hpp
+  path: math/miller_rabin.hpp
   requiredBy:
+  - math/is_prime.hpp
   - math/all.hpp
   - all.hpp
   timestamp: '2022-03-12 10:43:12+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: math/is_prime.hpp
+documentation_of: math/miller_rabin.hpp
 layout: document
 redirect_from:
-- /library/math/is_prime.hpp
-- /library/math/is_prime.hpp.html
-title: math/is_prime.hpp
+- /library/math/miller_rabin.hpp
+- /library/math/miller_rabin.hpp.html
+title: math/miller_rabin.hpp
 ---

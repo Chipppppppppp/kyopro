@@ -27,14 +27,14 @@ data:
     #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 6 \"math/factorize.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ _typeContainer = std::vector<KYOPRO_BASE_INT>>\n  _typeContainer factorize(std::uint_fast64_t\
+    \ _typeContainer = std::vector<KYOPRO_BASE_INT>>\n  _typeContainer factorize(KYOPRO_BASE_UINT\
     \ _n) {\n    _typeContainer _res;\n    while ((_n & 1) == 0) {\n      _res.emplace_back(2);\n\
     \      _n >>= 1;\n    }\n    for (std::uint_fast64_t _i = 3; _i * _i <= _n; _i\
     \ += 2) while (_n % _i == 0) {\n      _res.emplace_back(2);\n      _n /= _i;\n\
     \    }\n    if (_n != 1) _res.emplace_back(_n);\n    return _res;\n  }\n}\n"
   code: "#pragma once\n#include <cstdint>\n#include <utility>\n#include <vector>\n\
     #include \"../base/settings.hpp\"\n\nnamespace kyopro {\n  template<class _typeContainer\
-    \ = std::vector<KYOPRO_BASE_INT>>\n  _typeContainer factorize(std::uint_fast64_t\
+    \ = std::vector<KYOPRO_BASE_INT>>\n  _typeContainer factorize(KYOPRO_BASE_UINT\
     \ _n) {\n    _typeContainer _res;\n    while ((_n & 1) == 0) {\n      _res.emplace_back(2);\n\
     \      _n >>= 1;\n    }\n    for (std::uint_fast64_t _i = 3; _i * _i <= _n; _i\
     \ += 2) while (_n % _i == 0) {\n      _res.emplace_back(2);\n      _n /= _i;\n\
@@ -46,7 +46,7 @@ data:
   requiredBy:
   - math/all.hpp
   - all.hpp
-  timestamp: '2022-03-11 22:32:55+09:00'
+  timestamp: '2022-03-12 10:43:12+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/factorize.hpp

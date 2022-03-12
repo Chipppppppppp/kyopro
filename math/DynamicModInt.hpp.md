@@ -48,10 +48,10 @@ data:
     \n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 4 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n\
-    \  constexpr _typeT power(_typeT _a, std::uint_fast64_t _n, _typeT _init = 1)\
-    \ noexcept {\n    while (_n > 0) {\n      if (_n & 1) _init *= _a;\n      _a *=\
-    \ _a;\n      _n >>= 1;\n    }\n    return _init;\n  }\n}\n#line 8 \"base/constant.hpp\"\
+    #endif\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n\
+    \  constexpr _typeT power(_typeT _a, KYOPRO_BASE_UINT _n, _typeT _init = 1) noexcept\
+    \ {\n    while (_n > 0) {\n      if (_n & 1) _init *= _a;\n      _a *= _a;\n \
+    \     _n >>= 1;\n    }\n    return _init;\n  }\n}\n#line 8 \"base/constant.hpp\"\
     \n\nnamespace kyopro {\n  template<class _typeT>\n  inline constexpr _typeT MOD\
     \ = KYOPRO_DEFAULT_MOD;\n  inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\
     \n  template<class _typeT>\n  inline constexpr _typeT INF = std::numeric_limits<_typeT>::max()\
@@ -118,9 +118,9 @@ data:
     \ default;\n    template<class _typeT>\n    DynamicModInt(_typeT _value) noexcept:\
     \ value(floor_mod(_value, mod)) { static_assert(std::is_integral_v<_typeT>); }\n\
     \n    template<class _typeT>\n    explicit operator _typeT() const noexcept {\
-    \ return static_cast<_typeT>(value); }\n\n    static DynamicModInt raw(std::uint_fast64_t\
+    \ return static_cast<_typeT>(value); }\n\n    static DynamicModInt raw(KYOPRO_BASE_UINT\
     \ _n) noexcept {\n      DynamicModInt _res;\n      _res.value = _n;\n      return\
-    \ _res;\n    }\n\n    DynamicModInt power(std::uint_fast64_t _n) const noexcept\
+    \ _res;\n    }\n\n    DynamicModInt power(KYOPRO_BASE_UINT _n) const noexcept\
     \ {\n      std::uint_fast64_t _res = 1, _a = value;\n      while (_n > 0) {\n\
     \        if (_n & 1) _res = _res * _a % mod;\n        _a = _a * _a % mod;\n  \
     \      _n >>= 1;\n      }\n      return _res;\n    }\n\n    DynamicModInt inv()\
@@ -167,9 +167,9 @@ data:
     \    }\n\n    DynamicModInt() noexcept = default;\n    template<class _typeT>\n\
     \    DynamicModInt(_typeT _value) noexcept: value(floor_mod(_value, mod)) { static_assert(std::is_integral_v<_typeT>);\
     \ }\n\n    template<class _typeT>\n    explicit operator _typeT() const noexcept\
-    \ { return static_cast<_typeT>(value); }\n\n    static DynamicModInt raw(std::uint_fast64_t\
+    \ { return static_cast<_typeT>(value); }\n\n    static DynamicModInt raw(KYOPRO_BASE_UINT\
     \ _n) noexcept {\n      DynamicModInt _res;\n      _res.value = _n;\n      return\
-    \ _res;\n    }\n\n    DynamicModInt power(std::uint_fast64_t _n) const noexcept\
+    \ _res;\n    }\n\n    DynamicModInt power(KYOPRO_BASE_UINT _n) const noexcept\
     \ {\n      std::uint_fast64_t _res = 1, _a = value;\n      while (_n > 0) {\n\
     \        if (_n & 1) _res = _res * _a % mod;\n        _a = _a * _a % mod;\n  \
     \      _n >>= 1;\n      }\n      return _res;\n    }\n\n    DynamicModInt inv()\
@@ -222,7 +222,7 @@ data:
   - template/all.hpp
   - template/alias.hpp
   - all.hpp
-  timestamp: '2022-03-12 00:16:39+09:00'
+  timestamp: '2022-03-12 10:43:12+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/DynamicModInt.hpp

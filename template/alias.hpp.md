@@ -89,9 +89,9 @@ data:
     \ const noexcept {\n      std::uint_fast64_t _seed = _a.size();\n      for (auto&\
     \ _i: _a) _seed ^= _hasher(_i) + 0x9e3779b97f4a7c15LU + (_seed << 12) + (_seed\
     \ >> 4);\n      return _seed;\n    }\n  };\n}\n#line 2 \"math/DynamicModInt.hpp\"\
-    \n#include <cassert>\n#line 2 \"base/constant.hpp\"\n#include <array>\n#line 4\
+    \n#include <cassert>\n#line 2 \"base/constant.hpp\"\n#include <array>\n#line 3\
     \ \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n  constexpr\
-    \ _typeT power(_typeT _a, std::uint_fast64_t _n, _typeT _init = 1) noexcept {\n\
+    \ _typeT power(_typeT _a, KYOPRO_BASE_UINT _n, _typeT _init = 1) noexcept {\n\
     \    while (_n > 0) {\n      if (_n & 1) _init *= _a;\n      _a *= _a;\n     \
     \ _n >>= 1;\n    }\n    return _init;\n  }\n}\n#line 8 \"base/constant.hpp\"\n\
     \nnamespace kyopro {\n  template<class _typeT>\n  inline constexpr _typeT MOD\
@@ -120,9 +120,9 @@ data:
     \ default;\n    template<class _typeT>\n    DynamicModInt(_typeT _value) noexcept:\
     \ value(floor_mod(_value, mod)) { static_assert(std::is_integral_v<_typeT>); }\n\
     \n    template<class _typeT>\n    explicit operator _typeT() const noexcept {\
-    \ return static_cast<_typeT>(value); }\n\n    static DynamicModInt raw(std::uint_fast64_t\
+    \ return static_cast<_typeT>(value); }\n\n    static DynamicModInt raw(KYOPRO_BASE_UINT\
     \ _n) noexcept {\n      DynamicModInt _res;\n      _res.value = _n;\n      return\
-    \ _res;\n    }\n\n    DynamicModInt power(std::uint_fast64_t _n) const noexcept\
+    \ _res;\n    }\n\n    DynamicModInt power(KYOPRO_BASE_UINT _n) const noexcept\
     \ {\n      std::uint_fast64_t _res = 1, _a = value;\n      while (_n > 0) {\n\
     \        if (_n & 1) _res = _res * _a % mod;\n        _a = _a * _a % mod;\n  \
     \      _n >>= 1;\n      }\n      return _res;\n    }\n\n    DynamicModInt inv()\
@@ -166,9 +166,9 @@ data:
     \ template<class _typeT>\n    constexpr ModInt(_typeT _value) noexcept: value(floor_mod(_value,\
     \ _m)) { static_assert(std::is_integral_v<_typeT>); }\n\n    template<class _typeT>\n\
     \    explicit constexpr operator _typeT() const noexcept { return static_cast<_typeT>(value);\
-    \ }\n\n    static constexpr ModInt raw(std::uint_fast64_t _n) noexcept {\n   \
-    \   ModInt _res;\n      _res.value = _n;\n      return _res;\n    }\n\n    constexpr\
-    \ ModInt power(std::uint_fast64_t _n) const noexcept {\n      std::uint_fast64_t\
+    \ }\n\n    static constexpr ModInt raw(KYOPRO_BASE_UINT _n) noexcept {\n     \
+    \ ModInt _res;\n      _res.value = _n;\n      return _res;\n    }\n\n    constexpr\
+    \ ModInt power(KYOPRO_BASE_UINT _n) const noexcept {\n      std::uint_fast64_t\
     \ _res = 1, _a = value;\n      while (_n > 0) {\n        if (_n & 1) _res = _res\
     \ * _a % _m;\n        _a = _a * _a % _m;\n        _n >>= 1;\n      }\n      return\
     \ _res;\n    }\n\n    constexpr ModInt inv() const noexcept {\n      std::uint_fast64_t\
@@ -257,7 +257,7 @@ data:
   requiredBy:
   - template/all.hpp
   - all.hpp
-  timestamp: '2022-03-12 01:06:10+09:00'
+  timestamp: '2022-03-12 10:43:12+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/alias.hpp

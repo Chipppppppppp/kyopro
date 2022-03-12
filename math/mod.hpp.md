@@ -15,6 +15,15 @@ data:
     path: math/all.hpp
     title: math/all.hpp
   - icon: ':warning:'
+    path: math/is_prime.hpp
+    title: math/is_prime.hpp
+  - icon: ':warning:'
+    path: math/miller_rabin.hpp
+    title: math/miller_rabin.hpp
+  - icon: ':warning:'
+    path: math/modpow.hpp
+    title: math/modpow.hpp
+  - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
   - icon: ':warning:'
@@ -46,9 +55,12 @@ data:
   isVerificationFile: false
   path: math/mod.hpp
   requiredBy:
+  - math/miller_rabin.hpp
   - math/ModInt.hpp
   - math/DynamicModInt.hpp
+  - math/is_prime.hpp
   - math/all.hpp
+  - math/modpow.hpp
   - template/all.hpp
   - template/alias.hpp
   - all.hpp

@@ -48,38 +48,39 @@ data:
     \    void resize(KYOPRO_BASE_UINT _x) { _par.resize(_x, -1); }\n    void assign(KYOPRO_BASE_UINT\
     \ _x) { _par.assign(_x, -1); }\n    void reset() { std::fill(std::begin(_par),\
     \ std::end(_par), -1); }\n\n    KYOPRO_BASE_UINT size() const noexcept { return\
-    \ _par.size(); }\n\n    KYOPRO_BASE_INT find(int _x) {\n      int _p = _x;\n \
-    \     while (_par[_p] >= 0) _p = _par[_p];\n      while (_x != _p) {\n       \
-    \ int _tmp = _x;\n        _x = _par[_x];\n        _par[_tmp] = _p;\n      }\n\
-    \      return _p;\n    }\n\n    bool merge(int _x, int _y) {\n      _x = find(_x),\
-    \ _y = find(_y);\n      if (_x == _y) return false;\n      if (_par[_x] > _par[_y])\
-    \ {\n        int _tmp = _x;\n        _x = _y;\n        _y = _tmp;\n      }\n \
-    \     _par[_x] += _par[_y];\n      _par[_y] = _x;\n      return true;\n    }\n\
-    \n    bool same(int _x, int _y) { return find(_x) == find(_y); }\n\n    KYOPRO_BASE_INT\
-    \ group_size(int _x) { return -_par[find(_x)]; }\n\n    std::vector<int> group_members(int\
-    \ _x) {\n      _x = find(_x);\n      std::vector<int> _a;\n      for (int _i =\
-    \ 0; _i < (int)(size()); ++_i) if (find(_i) == _x) _a.emplace_back(_i);\n    \
-    \  return _a;\n    }\n\n    template<class _typeVector = std::vector<KYOPRO_BASE_INT>>\n\
-    \    _typeVector roots() const {\n      _typeVector _a;\n      for (int _i = 0;\
-    \ _i < (int)(size()); ++_i) if (_par[_i] < 0) _a.emplace_back(_i);\n      return\
-    \ _a;\n    }\n\n    KYOPRO_BASE_INT group_count() const {\n      KYOPRO_BASE_INT\
-    \ _cnt = 0;\n      for (int _i = 0; _i < (int)(size()); ++_i) if (_par[_i] < 0)\
-    \ ++_cnt;\n      return _cnt;\n    }\n\n    template<class _typeMap = std::unordered_map<KYOPRO_BASE_INT,\
-    \ std::vector<KYOPRO_BASE_INT>>>\n    _typeMap all_group_members() {\n      _typeMap\
-    \ _group_members;\n      for (int _member = 0; _member < (int)(size()); ++_member)\
-    \ _group_members[find(_member)].emplace_back(_member);\n      return _group_members;\n\
-    \    }\n  };\n}\n#line 2 \"base/in.hpp\"\n#include <unistd.h>\n#include <array>\n\
-    #include <cstddef>\n#line 6 \"base/in.hpp\"\n#include <cstdio>\n#include <string>\n\
-    #include <tuple>\n#include <type_traits>\n#include <utility>\n#line 4 \"math/power.hpp\"\
-    \n\nnamespace kyopro {\n  template<class _typeT>\n  constexpr _typeT power(_typeT\
-    \ _a, std::uint_fast64_t _n, _typeT _init = 1) noexcept {\n    while (_n > 0)\
-    \ {\n      if (_n & 1) _init *= _a;\n      _a *= _a;\n      _n >>= 1;\n    }\n\
-    \    return _init;\n  }\n}\n#line 2 \"base/trait.hpp\"\n#include <iterator>\n\
-    #include <queue>\n#include <stack>\n#line 7 \"base/trait.hpp\"\n\n#ifdef __SIZEOF_INT128__\n\
-    template<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
-    struct std::is_signed<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
-    \ std::true_type {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>: std::true_type\
-    \ {};\n#endif\n#ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
+    \ static_cast<KYOPRO_BASE_UINT>(_par.size()); }\n\n    KYOPRO_BASE_INT find(int\
+    \ _x) {\n      int _p = _x;\n      while (_par[_p] >= 0) _p = _par[_p];\n    \
+    \  while (_x != _p) {\n        int _tmp = _x;\n        _x = _par[_x];\n      \
+    \  _par[_tmp] = _p;\n      }\n      return _p;\n    }\n\n    bool merge(int _x,\
+    \ int _y) {\n      _x = find(_x), _y = find(_y);\n      if (_x == _y) return false;\n\
+    \      if (_par[_x] > _par[_y]) {\n        int _tmp = _x;\n        _x = _y;\n\
+    \        _y = _tmp;\n      }\n      _par[_x] += _par[_y];\n      _par[_y] = _x;\n\
+    \      return true;\n    }\n\n    bool same(int _x, int _y) { return find(_x)\
+    \ == find(_y); }\n\n    KYOPRO_BASE_INT group_size(int _x) { return -_par[find(_x)];\
+    \ }\n\n    std::vector<int> group_members(int _x) {\n      _x = find(_x);\n  \
+    \    std::vector<int> _a;\n      for (int _i = 0; _i < (int)(size()); ++_i) if\
+    \ (find(_i) == _x) _a.emplace_back(_i);\n      return _a;\n    }\n\n    template<class\
+    \ _typeVector = std::vector<KYOPRO_BASE_INT>>\n    _typeVector roots() const {\n\
+    \      _typeVector _a;\n      for (int _i = 0; _i < (int)(size()); ++_i) if (_par[_i]\
+    \ < 0) _a.emplace_back(_i);\n      return _a;\n    }\n\n    KYOPRO_BASE_INT group_count()\
+    \ const {\n      KYOPRO_BASE_INT _cnt = 0;\n      for (int _i = 0; _i < (int)(size());\
+    \ ++_i) if (_par[_i] < 0) ++_cnt;\n      return _cnt;\n    }\n\n    template<class\
+    \ _typeMap = std::unordered_map<KYOPRO_BASE_INT, std::vector<KYOPRO_BASE_INT>>>\n\
+    \    _typeMap all_group_members() {\n      _typeMap _group_members;\n      for\
+    \ (int _member = 0; _member < (int)(size()); ++_member) _group_members[find(_member)].emplace_back(_member);\n\
+    \      return _group_members;\n    }\n  };\n}\n#line 2 \"base/in.hpp\"\n#include\
+    \ <unistd.h>\n#include <array>\n#include <cstddef>\n#line 6 \"base/in.hpp\"\n\
+    #include <cstdio>\n#include <string>\n#include <tuple>\n#include <type_traits>\n\
+    #include <utility>\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class\
+    \ _typeT>\n  constexpr _typeT power(_typeT _a, KYOPRO_BASE_UINT _n, _typeT _init\
+    \ = 1) noexcept {\n    while (_n > 0) {\n      if (_n & 1) _init *= _a;\n    \
+    \  _a *= _a;\n      _n >>= 1;\n    }\n    return _init;\n  }\n}\n#line 2 \"base/trait.hpp\"\
+    \n#include <iterator>\n#include <queue>\n#include <stack>\n#line 7 \"base/trait.hpp\"\
+    \n\n#ifdef __SIZEOF_INT128__\ntemplate<>\nstruct std::is_integral<__int128_t>:\
+    \ std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>: std::true_type\
+    \ {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type {};\n\
+    template<>\nstruct std::is_unsigned<__uint128_t>: std::true_type {};\n#endif\n\
+    #ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
     \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<class, class =\
     \ void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
     \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
@@ -237,7 +238,7 @@ data:
   isVerificationFile: true
   path: yosupo/UnionFind.test.cpp
   requiredBy: []
-  timestamp: '2022-03-11 23:28:44+09:00'
+  timestamp: '2022-03-12 10:43:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/UnionFind.test.cpp
