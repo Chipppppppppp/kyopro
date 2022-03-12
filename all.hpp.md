@@ -368,10 +368,10 @@ data:
     \ 1;\n    for (int r = 1; g == 1; r <<= 1) {\n      x = y;\n      for (int i =\
     \ 0; i < r; ++i) y = f(y);\n      for (int k = 0; k < r and g == 1; k += 128)\
     \ {\n        z = y;\n        int min = std::min(128, r - k);\n        for (int\
-    \ i = 0; i < min; ++i) {\n          y = f(y);\n          q = q * abs(x - y) %\
+    \ i = 0; i < min; ++i) {\n          y = f(y);\n          q = q * (x + n - y) %\
     \ n;\n        }\n        g = std::gcd(q, n);\n      }\n    }\n    if (g == n)\
-    \ {\n      do {\n        z = f(z);\n        g = std::gcd(abs(x - z), n);\n   \
-    \   } while (g == 1);\n    }\n    return g;\n  }\n\n  KYOPRO_BASE_UINT find_prime_factor(KYOPRO_BASE_UINT\
+    \ {\n      do {\n        z = f(z);\n        g = std::gcd((x + n - z) % n, n);\n\
+    \      } while (g == 1);\n    }\n    return g;\n  }\n\n  KYOPRO_BASE_UINT find_prime_factor(KYOPRO_BASE_UINT\
     \ n) noexcept {\n    static std::mt19937_64 mt(std::random_device{}());\n    std::uniform_int_distribution<std::uint_fast64_t>\
     \ rnd(0, n - 1);\n    if (is_prime(n)) return n;\n    for (int i = 0; i < 100;\
     \ ++i) {\n      std::uint_fast64_t m = pollard_rho(n, rnd(mt));\n      if (is_prime(m))\
@@ -379,7 +379,7 @@ data:
     \ = true, class _typeContainer = std::vector<KYOPRO_BASE_INT>>\n  _typeContainer\
     \ factorize(KYOPRO_BASE_UINT n) {\n    _typeContainer res;\n    for (int p = 2;\
     \ p < 100 && p * p <= n; ++p) {\n      while (n % p == 0) {\n        n /= p;\n\
-    \        res.eb(p);\n      }\n    }\n    while (n > 1) {\n      std::uint_fast64_t\
+    \        res.emplace_back(p);\n      }\n    }\n    while (n > 1) {\n      std::uint_fast64_t\
     \ p = find_prime_factor(n);\n      while (n % p == 0) {\n        n /= p;\n   \
     \     res.emplace_back(p);\n      }\n    }\n    if constexpr (sorted) std::sort(res.begin(),\
     \ res.end());\n    return res;\n  }\n}\n#line 9 \"math/ModInt.hpp\"\n\nnamespace\
@@ -552,7 +552,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2022-03-12 19:52:58+09:00'
+  timestamp: '2022-03-12 19:55:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp
