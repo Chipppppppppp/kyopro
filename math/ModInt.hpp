@@ -20,13 +20,13 @@ namespace kyopro {
     template<class _typeT>
     explicit constexpr operator _typeT() const noexcept { return static_cast<_typeT>(value); }
 
-    static constexpr ModInt raw(std::uint_fast64_t _n) noexcept {
+    static constexpr ModInt raw(KYOPRO_BASE_UINT _n) noexcept {
       ModInt _res;
       _res.value = _n;
       return _res;
     }
 
-    constexpr ModInt power(std::uint_fast64_t _n) const noexcept {
+    constexpr ModInt power(KYOPRO_BASE_UINT _n) const noexcept {
       std::uint_fast64_t _res = 1, _a = value;
       while (_n > 0) {
         if (_n & 1) _res = _res * _a % _m;

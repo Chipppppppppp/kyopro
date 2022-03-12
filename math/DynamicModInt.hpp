@@ -23,13 +23,13 @@ namespace kyopro {
     template<class _typeT>
     explicit operator _typeT() const noexcept { return static_cast<_typeT>(value); }
 
-    static DynamicModInt raw(std::uint_fast64_t _n) noexcept {
+    static DynamicModInt raw(KYOPRO_BASE_UINT _n) noexcept {
       DynamicModInt _res;
       _res.value = _n;
       return _res;
     }
 
-    DynamicModInt power(std::uint_fast64_t _n) const noexcept {
+    DynamicModInt power(KYOPRO_BASE_UINT _n) const noexcept {
       std::uint_fast64_t _res = 1, _a = value;
       while (_n > 0) {
         if (_n & 1) _res = _res * _a % mod;

@@ -6,7 +6,7 @@
 
 namespace kyopro {
   template<class _typeContainer = std::vector<KYOPRO_BASE_INT>>
-  _typeContainer factorize(std::uint_fast64_t _n) {
+  _typeContainer factorize(KYOPRO_BASE_UINT _n) {
     _typeContainer _res;
     while ((_n & 1) == 0) {
       _res.emplace_back(2);

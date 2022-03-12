@@ -5,7 +5,7 @@
 
 namespace kyopro {
   template<class _typeContainer = std::vector<KYOPRO_BASE_INT>>
-  _typeContainer divisors(std::uint_fast64_t _n) {
+  _typeContainer divisors(KYOPRO_BASE_UINT _n) {
     _typeContainer _lower, _upper;
     std::uint_fast64_t _i;
     for (_i = 1; _i * _i < _n; ++_i) if (_n % _i == 0) {

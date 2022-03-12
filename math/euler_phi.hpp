@@ -1,8 +1,9 @@
 #pragma once
 #include <cstdint>
+#include "../base/settings.hpp"
 
 namespace kyopro {
-  constexpr std::uint_fast64_t euler_phi(std::uint_fast64_t _n) noexcept {
+  constexpr KYOPRO_BASE_UINT euler_phi(KYOPRO_BASE_UINT _n) noexcept {
     std::uint_fast64_t _res = _n;
     if ((_n & 1) == 0) {
       _res -= _res >> 1;
