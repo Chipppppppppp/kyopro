@@ -12,7 +12,7 @@ namespace kyopro {
     std::uint_fast64_t _res = 1;
     while (_n > 0) {
       if (_n & 1) _res = _res * _b % _mod;
-      _b *= _b;
+      _b = _b * _b % _mod;
       _n >>= 1;
     }
     return static_cast<_typeT>(_res);
