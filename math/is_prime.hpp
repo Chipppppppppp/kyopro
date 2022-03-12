@@ -2,6 +2,7 @@
 #include <array>
 #include <cstdint>
 #include "../base/settings.hpp"
+#include "modpow.hpp"
 
 namespace kyopro {
   constexpr bool is_prime(KYOPRO_BASE_UINT _n) {
@@ -14,7 +15,7 @@ namespace kyopro {
       if (_n <= _a) break;
       std::uint_fast64_t _t = _d, _y = modpow(_a, _t, _n);
       while (_t != _n - 1 && _y != _e && _y != _rev) {
-        _y *= _y;
+        _y = _y * _y % _n;
         _t <<= 1;
       }
       if (_y != _rev && !(_t & 1)) return false;
