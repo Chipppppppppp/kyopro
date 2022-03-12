@@ -49,34 +49,34 @@ data:
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 2 \"math/monoid.hpp\"\n#include <type_traits>\n#line 2 \"base/constant.hpp\"\
-    \n#include <array>\n#line 4 \"base/constant.hpp\"\n#include <limits>\n#line 3\
-    \ \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n  constexpr\
-    \ _typeT power(_typeT _a, KYOPRO_BASE_UINT _n, _typeT _init = 1) noexcept {\n\
-    \    while (_n > 0) {\n      if (_n & 1) _init *= _a;\n      _a *= _a;\n     \
-    \ _n >>= 1;\n    }\n    return _init;\n  }\n}\n#line 8 \"base/constant.hpp\"\n\
-    \nnamespace kyopro {\n  template<class _typeT>\n  inline constexpr _typeT MOD\
-    \ = KYOPRO_DEFAULT_MOD;\n  inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\
-    \n  template<class _typeT>\n  inline constexpr _typeT INF = std::numeric_limits<_typeT>::max()\
-    \ / KYOPRO_INF_DIV;\n  inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\
-    \n  template<class _typeT, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
-    \  inline constexpr KYOPRO_BASE_FLOAT EPS = static_cast<_typeT>(1) / power(static_cast<std::uint_fast64_t>(10),\
-    \ _decimal_precision);\n  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\
-    \n  template<class _typeT>\n  inline constexpr _typeT PI = 3.14159265358979323846;\n\
-    \  inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n\n  inline\
-    \ constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 4> beside{{{1,\
-    \ 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
-    \ -1}, {0, -1}, {1, -1}}};\n}\n#line 4 \"math/monoid.hpp\"\n\nnamespace kyopro\
-    \ {\n  template<class _typeT, _typeT _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
-    \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
-    \ _a, _typeT _b) const noexcept { return _a + _b; }\n    constexpr _typeT inv(_typeT\
-    \ _a) const noexcept { return -_a; }\n  };\n  template<class _typeT, _typeT _id\
-    \ = 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<_typeT>);\n   \
-    \ static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a,\
-    \ _typeT _b) const noexcept { return _a * _b; }\n    constexpr _typeT inv(_typeT\
-    \ _a) const noexcept {\n      static_assert(!std::is_integral_v<_typeT>);\n  \
-    \    return 1 / _a;\n    }\n  };\n  template<class _typeT, _typeT _id = std::is_integral_v<_typeT>\
-    \ ? -INF<_typeT> : -inf>\n  struct Max {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
+    \n#include <array>\n#include <limits>\n#line 3 \"math/power.hpp\"\n\nnamespace\
+    \ kyopro {\n  template<class _typeT>\n  constexpr _typeT power(_typeT _a, KYOPRO_BASE_UINT\
+    \ _n, _typeT _init = 1) noexcept {\n    while (_n > 0) {\n      if (_n & 1) _init\
+    \ *= _a;\n      _a *= _a;\n      _n >>= 1;\n    }\n    return _init;\n  }\n}\n\
+    #line 7 \"base/constant.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n\
+    \  inline constexpr _typeT MOD = KYOPRO_DEFAULT_MOD;\n  inline constexpr KYOPRO_BASE_INT\
+    \ mod = MOD<KYOPRO_BASE_INT>;\n\n  template<class _typeT>\n  inline constexpr\
+    \ _typeT INF = std::numeric_limits<_typeT>::max() / KYOPRO_INF_DIV;\n  inline\
+    \ constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\n  template<class _typeT,\
+    \ KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  inline constexpr\
+    \ KYOPRO_BASE_FLOAT EPS = static_cast<_typeT>(1) / power(10ULL, _decimal_precision);\n\
+    \  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\n  template<class\
+    \ _typeT>\n  inline constexpr _typeT PI = 3.14159265358979323846;\n  inline constexpr\
+    \ KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
+    \ KYOPRO_BASE_INT>, 4> beside{{{1, 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr\
+    \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1,\
+    \ 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}}};\n}\n#line 4 \"math/monoid.hpp\"\
+    \n\nnamespace kyopro {\n  template<class _typeT, _typeT _id = 0>\n  struct Plus\
+    \ {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static constexpr _typeT\
+    \ id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT _b) const noexcept\
+    \ { return _a + _b; }\n    constexpr _typeT inv(_typeT _a) const noexcept { return\
+    \ -_a; }\n  };\n  template<class _typeT, _typeT _id = 1>\n  struct Mul {\n   \
+    \ static_assert(std::is_arithmetic_v<_typeT>);\n    static constexpr _typeT id\
+    \ = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT _b) const noexcept\
+    \ { return _a * _b; }\n    constexpr _typeT inv(_typeT _a) const noexcept {\n\
+    \      static_assert(!std::is_integral_v<_typeT>);\n      return 1 / _a;\n   \
+    \ }\n  };\n  template<class _typeT, _typeT _id = std::is_integral_v<_typeT> ?\
+    \ -INF<_typeT> : -inf>\n  struct Max {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
     \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
     \ _a, _typeT _b) const noexcept { return _a > _b ? _a : _b; }\n  };\n  template<class\
     \ _typeT, _typeT _id = std::is_integral_v<_typeT> ? INF<_typeT> : inf>\n  struct\
@@ -269,7 +269,7 @@ data:
   isVerificationFile: true
   path: yosupo/FenwickTree.test.cpp
   requiredBy: []
-  timestamp: '2022-03-12 10:43:12+09:00'
+  timestamp: '2022-03-12 18:14:52+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/FenwickTree.test.cpp

@@ -59,9 +59,6 @@ data:
       path: math/is_prime.hpp
       title: math/is_prime.hpp
     - icon: ':warning:'
-      path: math/miller_rabin.hpp
-      title: math/miller_rabin.hpp
-    - icon: ':warning:'
       path: math/mod.hpp
       title: math/mod.hpp
     - icon: ':warning:'

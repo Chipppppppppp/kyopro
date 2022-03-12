@@ -14,12 +14,6 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  - icon: ':warning:'
-    path: math/is_prime.hpp
-    title: math/is_prime.hpp
-  - icon: ':warning:'
-    path: math/miller_rabin.hpp
-    title: math/miller_rabin.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -61,8 +55,6 @@ data:
   isVerificationFile: false
   path: math/modpow.hpp
   requiredBy:
-  - math/miller_rabin.hpp
-  - math/is_prime.hpp
   - math/all.hpp
   - all.hpp
   timestamp: '2022-03-12 10:43:12+09:00'

@@ -45,9 +45,6 @@ data:
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
-    path: math/miller_rabin.hpp
-    title: math/miller_rabin.hpp
-  - icon: ':warning:'
     path: math/modpow.hpp
     title: math/modpow.hpp
   - icon: ':heavy_check_mark:'
@@ -193,7 +190,6 @@ data:
   isVerificationFile: false
   path: base/settings.hpp
   requiredBy:
-  - math/miller_rabin.hpp
   - math/factorize.hpp
   - math/ModInt.hpp
   - math/divisors.hpp
