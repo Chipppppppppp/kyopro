@@ -13,7 +13,7 @@ namespace kyopro {
     auto f = [=](std::uint_fast64_t x) noexcept { return (x * x + cc) % n; };
     std::uint_fast64_t x = 1, y = 2, z = 1, q = 1;
     T g = 1;
-    for (std::uint_fast64_t r = 1; g == 1; r <<= 1) {
+    for (int r = 1; g == 1; r <<= 1) {
       x = y;
       for (int i = 0; i < r; ++i) y = f(y);
       for (int k = 0; k < r and g == 1; k += 128) {
