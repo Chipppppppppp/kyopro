@@ -26,7 +26,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"math/miller_rabin.hpp\"\n#include <array>\n#include <cstdint>\n\
+  bundledCode: "#line 2 \"math/miller_rabin.hpp\"\n#include <array>\n#include <cstdint>\n\
     #line 3 \"base/settings.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT\
     \ std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n\
     #endif\n\n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\
@@ -48,7 +48,7 @@ data:
     \ _b = floor_mod(_a, static_cast<_typeT>(_mod));\n    std::uint_fast64_t _res\
     \ = 1;\n    while (_n > 0) {\n      if (_n & 1) _res = _res * _b % _mod;\n   \
     \   _b *= _b;\n      _n >>= 1;\n    }\n    return static_cast<_typeT>(_res);\n\
-    \  }\n}\n#line 5 \"math/miller_rabin.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    \  }\n}\n#line 6 \"math/miller_rabin.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
     \ _size>\n  bool miller_rabin(KYOPRO_BASE_UINT _n, const std::array<KYOPRO_BASE_UINT,\
     \ _size>& _as) {\n    std::uint_fast64_t _d = _n - 1;\n    while (~_d & 1) _d\
     \ >>= 1;\n    std::uint_fast64_t _e = 1, _rev = _n - 1;\n    for (auto _a: _as)\
@@ -56,8 +56,8 @@ data:
     \ _t, _n);\n      while (_t != _n - 1 && _y != _e && _y != _rev) {\n        _y\
     \ *= _y;\n        _t *= 2;\n      }\n      if (_y != _rev && _t % 2 == 0) return\
     \ false;\n    }\n    return true;\n  }\n}\n"
-  code: "#include <array>\n#include <cstdint>\n#include \"../base/settings.hpp\"\n\
-    #include \"../math/modpow.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+  code: "#pragma once\n#include <array>\n#include <cstdint>\n#include \"../base/settings.hpp\"\
+    \n#include \"../math/modpow.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
     \ _size>\n  bool miller_rabin(KYOPRO_BASE_UINT _n, const std::array<KYOPRO_BASE_UINT,\
     \ _size>& _as) {\n    std::uint_fast64_t _d = _n - 1;\n    while (~_d & 1) _d\
     \ >>= 1;\n    std::uint_fast64_t _e = 1, _rev = _n - 1;\n    for (auto _a: _as)\
@@ -75,7 +75,7 @@ data:
   - math/is_prime.hpp
   - math/all.hpp
   - all.hpp
-  timestamp: '2022-03-12 10:43:12+09:00'
+  timestamp: '2022-03-12 10:46:43+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/miller_rabin.hpp

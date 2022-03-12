@@ -48,7 +48,7 @@ data:
     \ _b = floor_mod(_a, static_cast<_typeT>(_mod));\n    std::uint_fast64_t _res\
     \ = 1;\n    while (_n > 0) {\n      if (_n & 1) _res = _res * _b % _mod;\n   \
     \   _b *= _b;\n      _n >>= 1;\n    }\n    return static_cast<_typeT>(_res);\n\
-    \  }\n}\n#line 5 \"math/miller_rabin.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    \  }\n}\n#line 6 \"math/miller_rabin.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
     \ _size>\n  bool miller_rabin(KYOPRO_BASE_UINT _n, const std::array<KYOPRO_BASE_UINT,\
     \ _size>& _as) {\n    std::uint_fast64_t _d = _n - 1;\n    while (~_d & 1) _d\
     \ >>= 1;\n    std::uint_fast64_t _e = 1, _rev = _n - 1;\n    for (auto _a: _as)\
@@ -75,7 +75,7 @@ data:
   requiredBy:
   - math/all.hpp
   - all.hpp
-  timestamp: '2022-03-12 10:43:12+09:00'
+  timestamp: '2022-03-12 10:46:43+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/is_prime.hpp
