@@ -35,11 +35,11 @@ data:
     \ KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 2 \"math/is_prime.hpp\"\n#include <array>\n#line 3 \"math/modpow.hpp\"\
-    \n#include <type_traits>\n#line 2 \"math/mod.hpp\"\n#include <cassert>\n#line\
-    \ 4 \"math/mod.hpp\"\n\nnamespace kyopro {\n  template<class _typeT, class _typeU>\n\
-    \  constexpr std::common_type_t<_typeT, _typeU> floor_mod(_typeT _x, _typeU _m)\
-    \ noexcept {\n    static_assert(std::is_integral_v<_typeT> && std::is_integral_v<_typeU>);\n\
+    #endif\n#line 3 \"math/is_prime.hpp\"\n#include <initializer_list>\n#line 3 \"\
+    math/modpow.hpp\"\n#include <type_traits>\n#line 2 \"math/mod.hpp\"\n#include\
+    \ <cassert>\n#line 4 \"math/mod.hpp\"\n\nnamespace kyopro {\n  template<class\
+    \ _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT, _typeU> floor_mod(_typeT\
+    \ _x, _typeU _m) noexcept {\n    static_assert(std::is_integral_v<_typeT> && std::is_integral_v<_typeU>);\n\
     \    if constexpr (std::is_unsigned_v<_typeT> || std::is_unsigned_v<_typeU>) return\
     \ _x % _m;\n    return (_x %= _m) < 0 ? _x + _m : _x;\n  }\n\n  template<class\
     \ _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT, _typeU> ceil_mod(_typeT\
@@ -54,8 +54,9 @@ data:
     \ is_prime(KYOPRO_BASE_UINT _n) {\n    if (_n <= 1) return false;\n    if (!(_n\
     \ & 1)) return _n == 2;\n    std::uint_fast64_t _d = _n - 1;\n    while (!(_d\
     \ & 1)) _d >>= 1;\n    std::uint_fast64_t _e = 1, _rev = _n - 1;\n    for (auto\
-    \ _a: std::array<std::uint_fast64_t, 7>{2, 325, 9375, 28178, 450775, 9780504,\
-    \ 1795265022}) {\n      if (_n <= _a) break;\n      std::uint_fast64_t _t = _d,\
+    \ _a: (_n < (1ULL << 32) ? std::initializer_list<std::uint_fast64_t>{2, 7, 61}\
+    \ : std::initializer_list<std::uint_fast64_t>{2, 325, 9375, 28178, 450775, 9780504,\
+    \ 1795265022})) {\n      if (_n <= _a) break;\n      std::uint_fast64_t _t = _d,\
     \ _y = modpow(_a, _d, _n);\n      while (_t != _n - 1 && _y != _e && _y != _rev)\
     \ {\n        _y = _y * _y % _n;\n        _t <<= 1;\n      }\n      if (_y != _rev\
     \ && !(_t & 1)) return false;\n    }\n    return true;\n  }\n}\n#line 8 \"math/factorize.hpp\"\
@@ -115,7 +116,7 @@ data:
   requiredBy:
   - math/all.hpp
   - all.hpp
-  timestamp: '2022-03-12 19:07:51+09:00'
+  timestamp: '2022-03-12 19:21:33+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/factorize.hpp

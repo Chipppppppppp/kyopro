@@ -209,8 +209,9 @@ data:
     \ is_prime(KYOPRO_BASE_UINT _n) {\n    if (_n <= 1) return false;\n    if (!(_n\
     \ & 1)) return _n == 2;\n    std::uint_fast64_t _d = _n - 1;\n    while (!(_d\
     \ & 1)) _d >>= 1;\n    std::uint_fast64_t _e = 1, _rev = _n - 1;\n    for (auto\
-    \ _a: std::array<std::uint_fast64_t, 7>{2, 325, 9375, 28178, 450775, 9780504,\
-    \ 1795265022}) {\n      if (_n <= _a) break;\n      std::uint_fast64_t _t = _d,\
+    \ _a: (_n < (1ULL << 32) ? std::initializer_list<std::uint_fast64_t>{2, 7, 61}\
+    \ : std::initializer_list<std::uint_fast64_t>{2, 325, 9375, 28178, 450775, 9780504,\
+    \ 1795265022})) {\n      if (_n <= _a) break;\n      std::uint_fast64_t _t = _d,\
     \ _y = modpow(_a, _d, _n);\n      while (_t != _n - 1 && _y != _e && _y != _rev)\
     \ {\n        _y = _y * _y % _n;\n        _t <<= 1;\n      }\n      if (_y != _rev\
     \ && !(_t & 1)) return false;\n    }\n    return true;\n  }\n}\n#line 8 \"math/factorize.hpp\"\
@@ -342,7 +343,7 @@ data:
   path: math/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-03-12 19:07:51+09:00'
+  timestamp: '2022-03-12 19:21:33+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/all.hpp
