@@ -21,7 +21,7 @@ namespace kyopro {
         int min = std::min(128, r - k);
         for (int i = 0; i < min; ++i) {
           y = f(y);
-          q = q * abs(x - y) % n;
+          q = q * (x + n - y) % n;
         }
         g = std::gcd(q, n);
       }
@@ -29,7 +29,7 @@ namespace kyopro {
     if (g == n) {
       do {
         z = f(z);
-        g = std::gcd(abs(x - z), n);
+        g = std::gcd((x + n - z) % n, n);
       } while (g == 1);
     }
     return g;
@@ -53,7 +53,7 @@ namespace kyopro {
     for (int p = 2; p < 100 && p * p <= n; ++p) {
       while (n % p == 0) {
         n /= p;
-        res.eb(p);
+        res.emplace_back(p);
       }
     }
     while (n > 1) {
