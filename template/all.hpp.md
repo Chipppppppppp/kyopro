@@ -131,37 +131,36 @@ data:
     \ {\n      _mod = _m;\n      _barrett.set_mod(_m);\n    }\n\n    static KYOPRO_BASE_INT\
     \ get_mod() noexcept {\n      return static_cast<KYOPRO_BASE_INT>(_mod);\n   \
     \ }\n\n    DynamicModInt() noexcept = default;\n    template<class _typeT>\n \
-    \   DynamicModInt(_typeT _value) noexcept: value(floor_mod(_value, _mod)), _barrett()\
-    \ { static_assert(std::is_integral_v<_typeT>); }\n\n    template<class _typeT>\n\
-    \    explicit operator _typeT() const noexcept { return static_cast<_typeT>(value);\
-    \ }\n\n    static DynamicModInt raw(KYOPRO_BASE_UINT _n) noexcept {\n      DynamicModInt\
-    \ _res;\n      _res.value = _n;\n      return _res;\n    }\n\n    DynamicModInt\
-    \ power(KYOPRO_BASE_UINT _n) const noexcept {\n      std::uint_fast64_t _res =\
-    \ 1, _a = value;\n      while (_n > 0) {\n        if (_n & 1) _res = _res * _a\
-    \ % _mod;\n        _a = _a * _a % _mod;\n        _n >>= 1;\n      }\n      return\
-    \ _res;\n    }\n\n    DynamicModInt inv() const noexcept {\n      std::uint_fast64_t\
-    \ _a = value, _b = _mod;\n      std::int_fast64_t _u = 1, _v = 0;\n      while\
-    \ (_b > 0) {\n        std::uint_fast64_t _t = _a / _b;\n        _a -= _t * _b;\n\
-    \        std::swap(_a, _b);\n        _u -= _t * _v;\n        std::swap(_u, _v);\n\
-    \      }\n      return floor_mod(_u, _mod);\n    }\n\n    DynamicModInt operator\
-    \ +() const noexcept { return *this; }\n\n    DynamicModInt operator -() const\
-    \ noexcept { return _mod - value; }\n\n    DynamicModInt& operator ++() noexcept\
-    \ {\n      if (++value >= _mod) value -= _mod;\n      return *this;\n    }\n\n\
-    \    DynamicModInt operator ++(int) noexcept {\n      DynamicModInt _before =\
-    \ *this;\n      operator ++();\n      return _before;\n    }\n\n    DynamicModInt&\
-    \ operator --() noexcept {\n      if (value == 0) value = _mod;\n      --value;\n\
-    \      return *this;\n    }\n\n    DynamicModInt operator --(int) noexcept {\n\
-    \      DynamicModInt _before = *this;\n      operator --();\n      return _before;\n\
-    \    }\n\n    DynamicModInt& operator +=(DynamicModInt _rhs) noexcept {\n    \
-    \  if ((value += _rhs.value) >= _mod) value -= _mod;\n      return *this;\n  \
-    \  }\n\n    DynamicModInt& operator -=(DynamicModInt _rhs) noexcept {\n      if\
-    \ (value < _rhs.value) value += _mod;\n      value -= _rhs.value;\n      return\
-    \ *this;\n    }\n\n    DynamicModInt& operator *=(DynamicModInt _rhs) noexcept\
-    \ {\n      value = _barrett(value * _rhs.value);\n      return *this;\n    }\n\
-    \n    DynamicModInt& operator /=(DynamicModInt _rhs) noexcept {\n      value =\
-    \ _barrett(value * _rhs.inv().value);\n      return *this;\n    }\n\n    friend\
-    \ DynamicModInt operator +(DynamicModInt _lhs, DynamicModInt _rhs) noexcept {\
-    \ return _lhs += _rhs; }\n\n    friend DynamicModInt operator -(DynamicModInt\
+    \   DynamicModInt(_typeT _value) noexcept: value(floor_mod(_value, _mod)) { static_assert(std::is_integral_v<_typeT>);\
+    \ }\n\n    template<class _typeT>\n    explicit operator _typeT() const noexcept\
+    \ { return static_cast<_typeT>(value); }\n\n    static DynamicModInt raw(KYOPRO_BASE_UINT\
+    \ _n) noexcept {\n      DynamicModInt _res;\n      _res.value = _n;\n      return\
+    \ _res;\n    }\n\n    DynamicModInt power(KYOPRO_BASE_UINT _n) const noexcept\
+    \ {\n      std::uint_fast64_t _res = 1, _a = value;\n      while (_n > 0) {\n\
+    \        if (_n & 1) _res = _res * _a % _mod;\n        _a = _a * _a % _mod;\n\
+    \        _n >>= 1;\n      }\n      return _res;\n    }\n\n    DynamicModInt inv()\
+    \ const noexcept {\n      std::uint_fast64_t _a = value, _b = _mod;\n      std::int_fast64_t\
+    \ _u = 1, _v = 0;\n      while (_b > 0) {\n        std::uint_fast64_t _t = _a\
+    \ / _b;\n        _a -= _t * _b;\n        std::swap(_a, _b);\n        _u -= _t\
+    \ * _v;\n        std::swap(_u, _v);\n      }\n      return floor_mod(_u, _mod);\n\
+    \    }\n\n    DynamicModInt operator +() const noexcept { return *this; }\n\n\
+    \    DynamicModInt operator -() const noexcept { return _mod - value; }\n\n  \
+    \  DynamicModInt& operator ++() noexcept {\n      if (++value >= _mod) value -=\
+    \ _mod;\n      return *this;\n    }\n\n    DynamicModInt operator ++(int) noexcept\
+    \ {\n      DynamicModInt _before = *this;\n      operator ++();\n      return\
+    \ _before;\n    }\n\n    DynamicModInt& operator --() noexcept {\n      if (value\
+    \ == 0) value = _mod;\n      --value;\n      return *this;\n    }\n\n    DynamicModInt\
+    \ operator --(int) noexcept {\n      DynamicModInt _before = *this;\n      operator\
+    \ --();\n      return _before;\n    }\n\n    DynamicModInt& operator +=(DynamicModInt\
+    \ _rhs) noexcept {\n      if ((value += _rhs.value) >= _mod) value -= _mod;\n\
+    \      return *this;\n    }\n\n    DynamicModInt& operator -=(DynamicModInt _rhs)\
+    \ noexcept {\n      if (value < _rhs.value) value += _mod;\n      value -= _rhs.value;\n\
+    \      return *this;\n    }\n\n    DynamicModInt& operator *=(DynamicModInt _rhs)\
+    \ noexcept {\n      value = _barrett(value * _rhs.value);\n      return *this;\n\
+    \    }\n\n    DynamicModInt& operator /=(DynamicModInt _rhs) noexcept {\n    \
+    \  value = _barrett(value * _rhs.inv().value);\n      return *this;\n    }\n\n\
+    \    friend DynamicModInt operator +(DynamicModInt _lhs, DynamicModInt _rhs) noexcept\
+    \ { return _lhs += _rhs; }\n\n    friend DynamicModInt operator -(DynamicModInt\
     \ _lhs, DynamicModInt _rhs) noexcept { return _lhs -= _rhs; }\n\n    friend DynamicModInt\
     \ operator *(DynamicModInt _lhs, DynamicModInt _rhs) noexcept { return _lhs *=\
     \ _rhs; }\n\n    friend DynamicModInt operator /(DynamicModInt _lhs, DynamicModInt\
@@ -256,7 +255,7 @@ data:
   path: template/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-03-13 23:42:12+09:00'
+  timestamp: '2022-03-13 23:58:25+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/all.hpp
