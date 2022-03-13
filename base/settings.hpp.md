@@ -24,6 +24,9 @@ data:
     path: base/out.hpp
     title: base/out.hpp
   - icon: ':warning:'
+    path: math/Barrett.hpp
+    title: math/Barrett.hpp
+  - icon: ':warning:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
@@ -193,6 +196,7 @@ data:
   isVerificationFile: false
   path: base/settings.hpp
   requiredBy:
+  - math/Barrett.hpp
   - math/factorize.hpp
   - math/ModInt.hpp
   - math/divisors.hpp

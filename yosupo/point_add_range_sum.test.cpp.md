@@ -254,7 +254,7 @@ data:
     \ ft(n);\n  for (int i = 0; i < n; ++i) {\n    int a;\n    kyopro::scan(a);\n\
     \    ft.apply(i, a);\n  }\n  for (int i = 0; i < q; ++i) {\n    int t, x, y;\n\
     \    kyopro::scan(t, x, y);\n    if (t == 0) ft.apply(x, y);\n    else kyopro::println(ft.prod(x,\
-    \ y));\n  }\n}\n"
+    \ y));\n  }\n}"
   dependsOn:
   - base/io.hpp
   - base/in.hpp
@@ -268,7 +268,7 @@ data:
   isVerificationFile: true
   path: yosupo/point_add_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-03-12 20:37:58+09:00'
+  timestamp: '2022-03-13 23:42:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/point_add_range_sum.test.cpp
