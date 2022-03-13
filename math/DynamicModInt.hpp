@@ -5,24 +5,30 @@
 #include "../base/constant.hpp"
 #include "../base/Hash.hpp"
 #include "../base/settings.hpp"
+#include "Barrett.hpp"
 #include "mod.hpp"
 
 namespace kyopro {
   struct DynamicModInt {
-    inline static KYOPRO_BASE_UINT mod;
+  private:
+    inline static std::uint_fast64_t _mod;
+    inline static Barrett _barrett;
+
+  public:
     KYOPRO_BASE_UINT value;
 
-    static void set_mod(KYOPRO_BASE_UINT _mod) noexcept {
-      mod = _mod;
+    static void set_mod(KYOPRO_BASE_UINT _m) noexcept {
+      _mod = _m;
+      _barrett.set_mod(_m);
     }
 
     static KYOPRO_BASE_INT get_mod() noexcept {
-      return static_cast<KYOPRO_BASE_UINT>(mod);
+      return static_cast<KYOPRO_BASE_INT>(_mod);
     }
 
     DynamicModInt() noexcept = default;
     template<class _typeT>
-    DynamicModInt(_typeT _value) noexcept: value(floor_mod(_value, mod)) { static_assert(std::is_integral_v<_typeT>); }
+    DynamicModInt(_typeT _value) noexcept: value(floor_mod(_value, _mod)), _barrett() { static_assert(std::is_integral_v<_typeT>); }
 
     template<class _typeT>
     explicit operator _typeT() const noexcept { return static_cast<_typeT>(value); }
@@ -36,15 +42,15 @@ namespace kyopro {
     DynamicModInt power(KYOPRO_BASE_UINT _n) const noexcept {
       std::uint_fast64_t _res = 1, _a = value;
       while (_n > 0) {
-        if (_n & 1) _res = _res * _a % mod;
-        _a = _a * _a % mod;
+        if (_n & 1) _res = _res * _a % _mod;
+        _a = _a * _a % _mod;
         _n >>= 1;
       }
       return _res;
     }
 
     DynamicModInt inv() const noexcept {
-      std::uint_fast64_t _a = value, _b = mod;
+      std::uint_fast64_t _a = value, _b = _mod;
       std::int_fast64_t _u = 1, _v = 0;
       while (_b > 0) {
         std::uint_fast64_t _t = _a / _b;
@@ -53,15 +59,15 @@ namespace kyopro {
         _u -= _t * _v;
         std::swap(_u, _v);
       }
-      return floor_mod(_u, mod);
+      return floor_mod(_u, _mod);
     }
 
     DynamicModInt operator +() const noexcept { return *this; }
 
-    DynamicModInt operator -() const noexcept { return mod - value; }
+    DynamicModInt operator -() const noexcept { return _mod - value; }
 
     DynamicModInt& operator ++() noexcept {
-      if (++value >= mod) value -= mod;
+      if (++value >= _mod) value -= _mod;
       return *this;
     }
 
@@ -72,7 +78,7 @@ namespace kyopro {
     }
 
     DynamicModInt& operator --() noexcept {
-      if (value == 0) value = mod;
+      if (value == 0) value = _mod;
       --value;
       return *this;
     }
@@ -84,23 +90,23 @@ namespace kyopro {
     }
 
     DynamicModInt& operator +=(DynamicModInt _rhs) noexcept {
-      if ((value += _rhs.value) >= mod) value -= mod;
+      if ((value += _rhs.value) >= _mod) value -= _mod;
       return *this;
     }
 
     DynamicModInt& operator -=(DynamicModInt _rhs) noexcept {
-      if (value < _rhs.value) value += mod;
+      if (value < _rhs.value) value += _mod;
       value -= _rhs.value;
       return *this;
     }
 
     DynamicModInt& operator *=(DynamicModInt _rhs) noexcept {
-      value = value * _rhs.value % mod;
+      value = _barrett(value * _rhs.value);
       return *this;
     }
 
     DynamicModInt& operator /=(DynamicModInt _rhs) noexcept {
-      value = value * _rhs.inv().value % mod;
+      value = _barrett(value * _rhs.inv().value);
       return *this;
     }
 
@@ -120,7 +126,7 @@ namespace kyopro {
     void scan(_typeScanner& _scanner) {
       std::int_fast64_t _value;
       _scanner.scan(_value);
-      value = floor_mod(_value, mod);
+      value = floor_mod(_value, _mod);
     }
 
     template<class _typePrinter>

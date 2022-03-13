@@ -10,10 +10,9 @@
 namespace kyopro {
   template<KYOPRO_BASE_UINT _m>
   struct ModInt {
-    static constexpr KYOPRO_BASE_UINT mod = _m;
     KYOPRO_BASE_UINT value;
 
-    static KYOPRO_BASE_INT get_mod() noexcept {
+    static constexpr KYOPRO_BASE_INT get_mod() noexcept {
       return static_cast<KYOPRO_BASE_INT>(_m);
     }
 

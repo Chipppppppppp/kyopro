@@ -8,62 +8,62 @@
 
 namespace kyopro {
   template<class T>
-  constexpr T pollard_rho(T n, KYOPRO_BASE_UINT c) {
-    std::uint_fast64_t cc = c % n;
-    auto f = [=](std::uint_fast64_t x) noexcept { return (x * x + cc) % n; };
-    std::uint_fast64_t x = 1, y = 2, z = 1, q = 1;
-    T g = 1;
-    for (int r = 1; g == 1; r <<= 1) {
-      x = y;
-      for (int i = 0; i < r; ++i) y = f(y);
-      for (int k = 0; k < r and g == 1; k += 128) {
-        z = y;
-        int min = std::min(128, r - k);
-        for (int i = 0; i < min; ++i) {
-          y = f(y);
-          q = q * (x + n - y) % n;
+  constexpr T pollard_rho(T _n, KYOPRO_BASE_UINT _c) {
+    std::uint_fast64_t _cc = _c % _n;
+    auto _f = [=](std::uint_fast64_t _x) noexcept { return (_x * _x + _cc) % _n; };
+    std::uint_fast64_t _x = 1, _y = 2, _z = 1, _q = 1;
+    T _g = 1;
+    for (int _r = 1; _g == 1; _r <<= 1) {
+      _x = _y;
+      for (int _i = 0; _i < _r; ++_i) _y = _f(_y);
+      for (int _k = 0; _k < _r && _g == 1; _k += 128) {
+        _z = _y;
+        int _min = std::min(128, _r - _k);
+        for (int _i = 0; _i < _min; ++_i) {
+          _y = _f(_y);
+          _q = _q * (_x + _n - _y) % _n;
         }
-        g = std::gcd(q, n);
+        _g = std::gcd(_q, _n);
       }
     }
-    if (g == n) {
+    if (_g == _n) {
       do {
-        z = f(z);
-        g = std::gcd((x + n - z) % n, n);
-      } while (g == 1);
+        _z = _f(_z);
+        _g = std::gcd((_x + _n - _z) % _n, _n);
+      } while (_g == 1);
     }
-    return g;
+    return _g;
   }
 
-  KYOPRO_BASE_UINT find_prime_factor(KYOPRO_BASE_UINT n) noexcept {
-    static std::mt19937_64 mt(std::random_device{}());
-    std::uniform_int_distribution<std::uint_fast64_t> rnd(0, n - 1);
-    if (is_prime(n)) return n;
-    for (int i = 0; i < 100; ++i) {
-      std::uint_fast64_t m = pollard_rho(n, rnd(mt));
-      if (is_prime(m)) return m;
-      n = m;
+  KYOPRO_BASE_UINT find_prime_factor(KYOPRO_BASE_UINT _n) noexcept {
+    static std::mt19937_64 _mt(std::random_device{}());
+    std::uniform_int_distribution<std::uint_fast64_t> _rnd(0, _n - 1);
+    if (is_prime(_n)) return _n;
+    for (int _i = 0; _i < 100; ++_i) {
+      std::uint_fast64_t _m = pollard_rho(_n, _rnd(_mt));
+      if (is_prime(_m)) return _m;
+      _n = _m;
     }
     return 1;
   }
 
-  template<bool sorted = true, class _typeContainer = std::vector<KYOPRO_BASE_INT>>
-  _typeContainer factorize(KYOPRO_BASE_UINT n) {
-    _typeContainer res;
-    for (int p = 2; p < 100 && p * p <= n; ++p) {
-      while (n % p == 0) {
-        n /= p;
-        res.emplace_back(p);
+  template<bool _sorted = true, class _typeContainer = std::vector<KYOPRO_BASE_INT>>
+  _typeContainer factorize(KYOPRO_BASE_UINT _n) {
+    _typeContainer _res;
+    for (int _p = 2; _p < 100 && _p * _p <= _n; ++_p) {
+      while (_n % _p == 0) {
+        _n /= _p;
+        _res.emplace_back(_p);
       }
     }
-    while (n > 1) {
-      std::uint_fast64_t p = find_prime_factor(n);
-      while (n % p == 0) {
-        n /= p;
-        res.emplace_back(p);
+    while (_n > 1) {
+      std::uint_fast64_t _p = find_prime_factor(_n);
+      while (_n % _p == 0) {
+        _n /= _p;
+        _res.emplace_back(_p);
       }
     }
-    if constexpr (sorted) std::sort(res.begin(), res.end());
-    return res;
+    if constexpr (_sorted) std::sort(_res.begin(), _res.end());
+    return _res;
   }
 }
