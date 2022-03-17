@@ -49,10 +49,10 @@ data:
     - icon: ':warning:'
       path: math/modpow.hpp
       title: math/modpow.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: math/monoid.hpp
       title: math/monoid.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: math/power.hpp
       title: math/power.hpp
   - name: meta
@@ -60,21 +60,21 @@ data:
     - icon: ':warning:'
       path: meta/all.hpp
       title: meta/all.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: meta/constant.hpp
       title: meta/constant.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: meta/settings.hpp
       title: meta/settings.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: meta/trait.hpp
       title: meta/trait.hpp
   - name: structure
     pages:
-    - icon: ':warning:'
+    - icon: ':x:'
       path: structure/FenwickTree.hpp
       title: structure/FenwickTree.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: structure/UnionFind.hpp
       title: structure/UnionFind.hpp
     - icon: ':warning:'
@@ -82,13 +82,13 @@ data:
       title: structure/all.hpp
   - name: system
     pages:
-    - icon: ':warning:'
+    - icon: ':x:'
       path: system/all.hpp
       title: system/all.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: system/in.hpp
       title: system/in.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: system/out.hpp
       title: system/out.hpp
   - name: template

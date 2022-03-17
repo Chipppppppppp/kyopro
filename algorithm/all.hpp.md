@@ -4,10 +4,10 @@ data:
   - icon: ':warning:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:

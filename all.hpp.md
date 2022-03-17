@@ -40,31 +40,40 @@ data:
   - icon: ':warning:'
     path: math/modpow.hpp
     title: math/modpow.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: math/monoid.hpp
     title: math/monoid.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
   - icon: ':warning:'
     path: meta/all.hpp
     title: meta/all.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
+  - icon: ':x:'
+    path: structure/FenwickTree.hpp
+    title: structure/FenwickTree.hpp
+  - icon: ':x:'
+    path: structure/UnionFind.hpp
+    title: structure/UnionFind.hpp
   - icon: ':warning:'
+    path: structure/all.hpp
+    title: structure/all.hpp
+  - icon: ':x:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: system/out.hpp
     title: system/out.hpp
   - icon: ':warning:'
@@ -359,30 +368,73 @@ data:
     \ _typeT, _typeT _id = std::is_integral_v<_typeT> ? INF<_typeT> : inf>\n  struct\
     \ Min {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static constexpr\
     \ _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT _b) const\
-    \ noexcept { return _a < _b ? _a : _b; }\n  };\n}\n#line 2 \"system/in.hpp\"\n\
-    #include <unistd.h>\n#line 6 \"system/in.hpp\"\n#include <cstdio>\n#include <string>\n\
-    #line 14 \"system/in.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
-    \ _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Reader {\n  private:\n    int _fd,\
-    \ _idx;\n    std::array<char, _buf_size> _buffer;\n\n  public:\n    Reader() {\n\
-    \      read(_fd, _buffer.begin(), _buf_size);\n    }\n    Reader(int _fd): _fd(_fd),\
-    \ _idx(0), _buffer() {\n      read(_fd, _buffer.begin(), _buf_size);\n    }\n\
-    \    Reader(FILE* _fp): _fd(fileno(_fp)), _idx(0), _buffer() {\n      read(_fd,\
-    \ _buffer.begin(), _buf_size);\n    }\n\n    struct iterator {\n    private:\n\
-    \      Reader& _reader;\n\n    public:\n      using difference_type = void;\n\
-    \      using value_type = void;\n      using pointer = void;\n      using reference\
-    \ = void;\n      using iterator_category = std::input_iterator_tag;\n\n      iterator()\
-    \ noexcept = default;\n      iterator(Reader& _reader) noexcept: _reader(_reader)\
-    \ {}\n\n      iterator& operator ++() {\n        ++_reader._idx;\n        if (_reader._idx\
-    \ == _buf_size) {\n          read(_reader._fd, _reader._buffer.begin(), _buf_size);\n\
-    \          _reader._idx = 0;\n        }\n        return *this;\n      }\n\n  \
-    \    iterator operator ++(int) {\n        iterator _before = *this;\n        operator\
-    \ ++();\n        return _before;\n      }\n\n      char& operator *() const {\n\
-    \        return _reader._buffer[_reader._idx];\n      }\n    };\n\n    iterator\
-    \ begin() noexcept {\n      return iterator(*this);\n    }\n  };\n\n  Reader input(0);\n\
-    \n  template<class _typeIterator, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
-    \  struct Scanner {\n  private:\n    template<class, class = void>\n    struct\
-    \ _has_scan: std::false_type {};\n    template<class _typeT>\n    struct _has_scan<_typeT,\
-    \ std::void_t<decltype(std::declval<_typeT>().scan(std::declval<Scanner&>()))>>:\
+    \ noexcept { return _a < _b ? _a : _b; }\n  };\n}\n#line 6 \"structure/FenwickTree.hpp\"\
+    \n\nnamespace kyopro {\n  template<class _typeT, class _typeOp = Plus<_typeT>>\n\
+    \  struct FenwickTree {\n  private:\n    [[no_unique_address]] _typeOp _op;\n\
+    \    std::vector<_typeT> _tree;\n\n  public:\n    using value_type = _typeT;\n\
+    \    using size_type = KYOPRO_BASE_UINT;\n    using reference = _typeT&;\n   \
+    \ using const_reference = const _typeT&;\n\n    FenwickTree() noexcept = default;\n\
+    \    FenwickTree(KYOPRO_BASE_UINT _n) noexcept: _op(), _tree(_n, _op.id) {}\n\n\
+    \    KYOPRO_BASE_UINT size() noexcept { return static_cast<KYOPRO_BASE_UINT>(_tree.size());\
+    \ }\n\n    void apply(int _p, const _typeT& _x) {\n      ++_p;\n      while (_p\
+    \ <= (int)size()) {\n        _tree[_p - 1] = _op(_tree[_p - 1], _x);\n       \
+    \ _p += _p & -_p;\n      }\n    }\n\n    _typeT prod(int _r) const {\n      _typeT\
+    \ _s = _op.id;\n      while (_r > 0) {\n        _s = _op(_s, _tree[_r - 1]);\n\
+    \        _r -= _r & -_r;\n      }\n      return _s;\n    }\n    _typeT prod(int\
+    \ _l, int _r) const { return _op(prod(_r), _op.inv(prod(_l))); }\n\n    _typeT\
+    \ all_prod() { return prod(_tree.size()); }\n\n    _typeT get(int _p) { return\
+    \ _op(prod(_p + 1), _op.inv(prod(_p))); }\n\n    void set(int _p, const _typeT&\
+    \ _x) { apply(_p, _op(_x, _op.inv(get(_p)))); }\n  };\n}\n#line 3 \"structure/UnionFind.hpp\"\
+    \n#include <unordered_map>\n#line 6 \"structure/UnionFind.hpp\"\n\nnamespace kyopro\
+    \ {\n  struct UnionFind {\n  private:\n    std::vector<int> _par;\n\n  public:\n\
+    \    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT _n) noexcept:\
+    \ _par(_n, -1) {}\n\n    void resize(KYOPRO_BASE_UINT _x) { _par.resize(_x, -1);\
+    \ }\n    void assign(KYOPRO_BASE_UINT _x) { _par.assign(_x, -1); }\n    void reset()\
+    \ { std::fill(std::begin(_par), std::end(_par), -1); }\n\n    KYOPRO_BASE_UINT\
+    \ size() const noexcept { return static_cast<KYOPRO_BASE_UINT>(_par.size()); }\n\
+    \n    KYOPRO_BASE_INT find(int _x) {\n      int _p = _x;\n      while (_par[_p]\
+    \ >= 0) _p = _par[_p];\n      while (_x != _p) {\n        int _tmp = _x;\n   \
+    \     _x = _par[_x];\n        _par[_tmp] = _p;\n      }\n      return _p;\n  \
+    \  }\n\n    bool merge(int _x, int _y) {\n      _x = find(_x), _y = find(_y);\n\
+    \      if (_x == _y) return false;\n      if (_par[_x] > _par[_y]) {\n       \
+    \ int _tmp = _x;\n        _x = _y;\n        _y = _tmp;\n      }\n      _par[_x]\
+    \ += _par[_y];\n      _par[_y] = _x;\n      return true;\n    }\n\n    bool same(int\
+    \ _x, int _y) { return find(_x) == find(_y); }\n\n    KYOPRO_BASE_INT group_size(int\
+    \ _x) { return -_par[find(_x)]; }\n\n    std::vector<int> group_members(int _x)\
+    \ {\n      _x = find(_x);\n      std::vector<int> _a;\n      for (int _i = 0;\
+    \ _i < (int)(size()); ++_i) if (find(_i) == _x) _a.emplace_back(_i);\n      return\
+    \ _a;\n    }\n\n    template<class _typeVector = std::vector<KYOPRO_BASE_INT>>\n\
+    \    _typeVector roots() const {\n      _typeVector _a;\n      for (int _i = 0;\
+    \ _i < (int)(size()); ++_i) if (_par[_i] < 0) _a.emplace_back(_i);\n      return\
+    \ _a;\n    }\n\n    KYOPRO_BASE_INT group_count() const {\n      KYOPRO_BASE_INT\
+    \ _cnt = 0;\n      for (int _i = 0; _i < (int)(size()); ++_i) if (_par[_i] < 0)\
+    \ ++_cnt;\n      return _cnt;\n    }\n\n    template<class _typeMap = std::unordered_map<KYOPRO_BASE_INT,\
+    \ std::vector<KYOPRO_BASE_INT>>>\n    _typeMap all_group_members() {\n      _typeMap\
+    \ _group_members;\n      for (int _member = 0; _member < (int)(size()); ++_member)\
+    \ _group_members[find(_member)].emplace_back(_member);\n      return _group_members;\n\
+    \    }\n  };\n}\n#line 2 \"system/in.hpp\"\n#include <unistd.h>\n#line 6 \"system/in.hpp\"\
+    \n#include <cstdio>\n#include <string>\n#line 14 \"system/in.hpp\"\n\nnamespace\
+    \ kyopro {\n  template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>\n  struct\
+    \ Reader {\n  private:\n    int _fd, _idx;\n    std::array<char, _buf_size> _buffer;\n\
+    \n  public:\n    Reader() {\n      read(_fd, _buffer.begin(), _buf_size);\n  \
+    \  }\n    Reader(int _fd): _fd(_fd), _idx(0), _buffer() {\n      read(_fd, _buffer.begin(),\
+    \ _buf_size);\n    }\n    Reader(FILE* _fp): _fd(fileno(_fp)), _idx(0), _buffer()\
+    \ {\n      read(_fd, _buffer.begin(), _buf_size);\n    }\n\n    struct iterator\
+    \ {\n    private:\n      Reader& _reader;\n\n    public:\n      using difference_type\
+    \ = void;\n      using value_type = void;\n      using pointer = void;\n     \
+    \ using reference = void;\n      using iterator_category = std::input_iterator_tag;\n\
+    \n      iterator() noexcept = default;\n      iterator(Reader& _reader) noexcept:\
+    \ _reader(_reader) {}\n\n      iterator& operator ++() {\n        ++_reader._idx;\n\
+    \        if (_reader._idx == _buf_size) {\n          read(_reader._fd, _reader._buffer.begin(),\
+    \ _buf_size);\n          _reader._idx = 0;\n        }\n        return *this;\n\
+    \      }\n\n      iterator operator ++(int) {\n        iterator _before = *this;\n\
+    \        operator ++();\n        return _before;\n      }\n\n      char& operator\
+    \ *() const {\n        return _reader._buffer[_reader._idx];\n      }\n    };\n\
+    \n    iterator begin() noexcept {\n      return iterator(*this);\n    }\n  };\n\
+    \n  Reader input(0);\n\n  template<class _typeIterator, KYOPRO_BASE_UINT _decimal_precision\
+    \ = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n  private:\n    template<class,\
+    \ class = void>\n    struct _has_scan: std::false_type {};\n    template<class\
+    \ _typeT>\n    struct _has_scan<_typeT, std::void_t<decltype(std::declval<_typeT>().scan(std::declval<Scanner&>()))>>:\
     \ std::true_type {};\n\n  public:\n    static constexpr KYOPRO_BASE_UINT decimal_precision\
     \ = _decimal_precision;\n    _typeIterator itr;\n\n    Scanner() noexcept = default;\n\
     \    Scanner(_typeIterator _itr) noexcept: itr(_itr) {}\n\n    void discard_space()\
@@ -482,24 +534,23 @@ data:
     \ eprint(error.begin());\n  Printer<Writer<>::iterator> println(output.begin()),\
     \ eprintln(error.begin());\n  Printer<Writer<>::iterator, true, true, true, true>\
     \ debug(output.begin()), edebug(error.begin());\n}\n#line 8 \"template/alias.hpp\"\
-    \n#include <set>\n#include <map>\n#include <unordered_set>\n#include <unordered_map>\n\
-    #line 17 \"template/alias.hpp\"\n\nnamespace kyopro {\n  using ll = long long;\n\
-    \  using ull = unsigned long long;\n  using lf = double;\n\n  using i8 = std::int8_t;\n\
-    \  using u8 = std::uint8_t;\n  using i16 = std::int16_t;\n  using u16 = std::uint16_t;\n\
-    \  using i32 = std::int32_t;\n  using u32 = std::uint32_t;\n  using i64 = std::int64_t;\n\
-    \  using u64 = std::uint64_t;\n  using i128 = __int128_t;\n  using u128 = __uint128_t;\n\
-    \  #ifdef __SIZEOF_FLOAT128__\n  using f128 = __float128;\n  #endif\n\n  using\
-    \ mint = ModInt<mod>;\n  using dmint = DynamicModInt;\n\n  template<class _typeKey>\n\
-    \  using hset = std::unordered_set<_typeKey, Hash<_typeKey>>;\n  template<class\
-    \ _typeKey, class _typeT>\n  using hmap = std::unordered_map<_typeKey, _typeT,\
-    \ Hash<_typeKey>>;\n  template<class _typeKey>\n  using hmultiset = std::unordered_multiset<_typeKey,\
+    \n#include <set>\n#include <map>\n#include <unordered_set>\n#line 17 \"template/alias.hpp\"\
+    \n\nnamespace kyopro {\n  using ll = long long;\n  using ull = unsigned long long;\n\
+    \  using lf = double;\n\n  using i8 = std::int8_t;\n  using u8 = std::uint8_t;\n\
+    \  using i16 = std::int16_t;\n  using u16 = std::uint16_t;\n  using i32 = std::int32_t;\n\
+    \  using u32 = std::uint32_t;\n  using i64 = std::int64_t;\n  using u64 = std::uint64_t;\n\
+    \  using i128 = __int128_t;\n  using u128 = __uint128_t;\n  #ifdef __SIZEOF_FLOAT128__\n\
+    \  using f128 = __float128;\n  #endif\n\n  using mint = ModInt<mod>;\n  using\
+    \ dmint = DynamicModInt;\n\n  template<class _typeKey>\n  using hset = std::unordered_set<_typeKey,\
+    \ Hash<_typeKey>>;\n  template<class _typeKey, class _typeT>\n  using hmap = std::unordered_map<_typeKey,\
+    \ _typeT, Hash<_typeKey>>;\n  template<class _typeKey>\n  using hmultiset = std::unordered_multiset<_typeKey,\
     \ Hash<_typeKey>>;\n  template<class _typeKey, class _typeT>\n  using hmultimap\
     \ = std::unordered_multimap<_typeKey, _typeT, Hash<_typeKey>>;\n  template<class\
     \ _typeT, class _typeCompare = std::less<_typeT>, class _typeContainer = std::vector<_typeT>>\n\
     \  using priq = std::priority_queue<_typeT, _typeContainer, _typeCompare>;\n \
     \ template<class _typeT, class _typeCompare = std::greater<_typeT>, class _typeContainer\
     \ = std::vector<_typeT>>\n  using heapq = priq<_typeT, _typeContainer, _typeCompare>;\n\
-    }\n\nusing namespace std;\nusing namespace kyopro;\n#line 7 \"all.hpp\"\n"
+    }\n\nusing namespace std;\nusing namespace kyopro;\n#line 8 \"all.hpp\"\n"
   code: '#pragma once
 
     #include "algorithm/all.hpp"
@@ -507,6 +558,8 @@ data:
     #include "math/all.hpp"
 
     #include "meta/all.hpp"
+
+    #include "structure/all.hpp"
 
     #include "system/all.hpp"
 
@@ -531,6 +584,9 @@ data:
   - math/modpow.hpp
   - math/monoid.hpp
   - meta/all.hpp
+  - structure/all.hpp
+  - structure/FenwickTree.hpp
+  - structure/UnionFind.hpp
   - system/all.hpp
   - system/in.hpp
   - system/out.hpp
@@ -539,7 +595,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2022-03-17 14:38:24+09:00'
+  timestamp: '2022-03-17 14:43:06+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp
