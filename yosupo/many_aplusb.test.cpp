@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/many_aplusb"
 
-#include "../base/io.hpp"
+#include "../meta/io.hpp"
 
 int main() {
   int t;
