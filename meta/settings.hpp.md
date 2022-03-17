@@ -9,6 +9,9 @@ data:
     path: algorithm/all.hpp
     title: algorithm/all.hpp
   - icon: ':warning:'
+    path: algorithm/bit.hpp
+    title: algorithm/bit.hpp
+  - icon: ':warning:'
     path: all.hpp
     title: all.hpp
   - icon: ':warning:'
@@ -218,6 +221,7 @@ data:
   - structure/all.hpp
   - template/all.hpp
   - template/alias.hpp
+  - algorithm/bit.hpp
   - algorithm/all.hpp
   - algorithm/Hash.hpp
   - all.hpp

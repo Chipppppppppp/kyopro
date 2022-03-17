@@ -8,6 +8,9 @@ data:
     path: algorithm/all.hpp
     title: algorithm/all.hpp
   - icon: ':warning:'
+    path: algorithm/bit.hpp
+    title: algorithm/bit.hpp
+  - icon: ':warning:'
     path: math/Barrett.hpp
     title: math/Barrett.hpp
   - icon: ':warning:'
@@ -89,22 +92,27 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"algorithm/Hash.hpp\"\n#include <cstddef>\n#include <cstdint>\n\
-    #include <functional>\n#include <initializer_list>\n#include <tuple>\n#include\
-    \ <type_traits>\n#include <utility>\n#line 3 \"meta/settings.hpp\"\n\n#ifndef\
-    \ KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n\
-    #define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n\
-    #define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define\
-    \ KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(1000000007)\n#endif\n\n#ifndef\
-    \ KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
-    #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
+  bundledCode: "#line 2 \"meta/settings.hpp\"\n#include <cstdint>\n\n#ifndef KYOPRO_BASE_INT\n\
+    #define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n#define\
+    \ KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n#define\
+    \ KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD\
+    \ static_cast<KYOPRO_BASE_UINT>(1000000007)\n#endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n\
+    #define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n#endif\n\n\
+    #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#include <queue>\n#include\
-    \ <limits>\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct\
-    \ std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>:\
-    \ std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type\
-    \ {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>: std::true_type {};\n\
-    #ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
+    #endif\n#line 3 \"algorithm/bit.hpp\"\n\nnamespace kyopro {\n  constexpr KYOPRO_BASE_INT\
+    \ popcount(KYOPRO_BASE_INT _x) noexcept {\n    _x = _x - ((_x >> 1) & 0x5555555555555555);\n\
+    \    _x = (_x & 0x3333333333333333) + ((_x >> 2) & 0x3333333333333333);\n    _x\
+    \ = (_x + (_x >> 4)) & 0x0f0f0f0f0f0f0f0f;\n    _x = _x + (_x >> 8);\n    _x =\
+    \ _x + (_x >> 16);\n    _x = _x + (_x >> 32);\n    return _x & 0x0000007f;\n \
+    \ }\n}\n#line 2 \"algorithm/Hash.hpp\"\n#include <cstddef>\n#line 4 \"algorithm/Hash.hpp\"\
+    \n#include <functional>\n#include <initializer_list>\n#include <tuple>\n#include\
+    \ <type_traits>\n#include <utility>\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n\
+    #include <queue>\n#include <limits>\n#include <stack>\n#line 9 \"meta/trait.hpp\"\
+    \n\ntemplate<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
+    struct std::is_signed<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
+    \ std::true_type {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>: std::true_type\
+    \ {};\n#ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
     \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
     \ _size>\n  struct int_least {\n  private:\n    auto _get_type() const noexcept\
     \ {\n      if constexpr (_size <= 8) return std::declval<std::int_least8_t>();\n\
@@ -566,8 +574,9 @@ data:
     #include "template/all.hpp"'
   dependsOn:
   - algorithm/all.hpp
-  - algorithm/Hash.hpp
+  - algorithm/bit.hpp
   - meta/settings.hpp
+  - algorithm/Hash.hpp
   - meta/trait.hpp
   - math/all.hpp
   - math/Barrett.hpp
@@ -595,7 +604,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2022-03-17 14:43:06+09:00'
+  timestamp: '2022-03-17 14:48:06+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp

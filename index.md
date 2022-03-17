@@ -9,6 +9,9 @@ data:
     - icon: ':warning:'
       path: algorithm/all.hpp
       title: algorithm/all.hpp
+    - icon: ':warning:'
+      path: algorithm/bit.hpp
+      title: algorithm/bit.hpp
   - name: .
     pages:
     - icon: ':warning:'
