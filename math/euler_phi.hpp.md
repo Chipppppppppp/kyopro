@@ -1,9 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: base/settings.hpp
-    title: base/settings.hpp
+  - icon: ':warning:'
+    path: meta/settings.hpp
+    title: meta/settings.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
     path: all.hpp
@@ -17,7 +17,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"math/euler_phi.hpp\"\n#include <cstdint>\n#line 3 \"base/settings.hpp\"\
+  bundledCode: "#line 2 \"math/euler_phi.hpp\"\n#include <cstdint>\n#line 3 \"meta/settings.hpp\"\
     \n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n\
     #ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef\
     \ KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n\
@@ -32,7 +32,7 @@ data:
     \ <= _n; _i += 2) {\n      if (_n % _i == 0) {\n        _res -= _res / _i;\n \
     \       _n /= _i;\n        while (_n % _i == 0) _n /= _i;\n      }\n    }\n  \
     \  if (_n != 1) _res -= _res / _n;\n    return _res;\n  }\n}\n"
-  code: "#pragma once\n#include <cstdint>\n#include \"../base/settings.hpp\"\n\nnamespace\
+  code: "#pragma once\n#include <cstdint>\n#include \"../meta/settings.hpp\"\n\nnamespace\
     \ kyopro {\n  constexpr KYOPRO_BASE_UINT euler_phi(KYOPRO_BASE_UINT _n) noexcept\
     \ {\n    std::uint_fast64_t _res = _n;\n    if ((_n & 1) == 0) {\n      _res -=\
     \ _res >> 1;\n      _n >>= 1;\n      while ((_n & 1) == 0) _n >>= 1;\n    }\n\
@@ -41,13 +41,13 @@ data:
     \ % _i == 0) _n /= _i;\n      }\n    }\n    if (_n != 1) _res -= _res / _n;\n\
     \    return _res;\n  }\n}"
   dependsOn:
-  - base/settings.hpp
+  - meta/settings.hpp
   isVerificationFile: false
   path: math/euler_phi.hpp
   requiredBy:
   - math/all.hpp
   - all.hpp
-  timestamp: '2022-03-12 10:43:12+09:00'
+  timestamp: '2022-03-17 14:38:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/euler_phi.hpp

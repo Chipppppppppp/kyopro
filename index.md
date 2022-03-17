@@ -1,37 +1,19 @@
 ---
 data:
   libraryCategories:
+  - name: algorithm
+    pages:
+    - icon: ':warning:'
+      path: algorithm/Hash.hpp
+      title: algorithm/Hash.hpp
+    - icon: ':warning:'
+      path: algorithm/all.hpp
+      title: algorithm/all.hpp
   - name: .
     pages:
     - icon: ':warning:'
       path: all.hpp
       title: all.hpp
-  - name: base
-    pages:
-    - icon: ':warning:'
-      path: base/Hash.hpp
-      title: base/Hash.hpp
-    - icon: ':warning:'
-      path: base/all.hpp
-      title: base/all.hpp
-    - icon: ':heavy_check_mark:'
-      path: base/constant.hpp
-      title: base/constant.hpp
-    - icon: ':heavy_check_mark:'
-      path: base/in.hpp
-      title: base/in.hpp
-    - icon: ':heavy_check_mark:'
-      path: base/io.hpp
-      title: base/io.hpp
-    - icon: ':heavy_check_mark:'
-      path: base/out.hpp
-      title: base/out.hpp
-    - icon: ':heavy_check_mark:'
-      path: base/settings.hpp
-      title: base/settings.hpp
-    - icon: ':heavy_check_mark:'
-      path: base/trait.hpp
-      title: base/trait.hpp
   - name: math
     pages:
     - icon: ':warning:'
@@ -67,23 +49,48 @@ data:
     - icon: ':warning:'
       path: math/modpow.hpp
       title: math/modpow.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: math/monoid.hpp
       title: math/monoid.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: math/power.hpp
       title: math/power.hpp
+  - name: meta
+    pages:
+    - icon: ':warning:'
+      path: meta/all.hpp
+      title: meta/all.hpp
+    - icon: ':warning:'
+      path: meta/constant.hpp
+      title: meta/constant.hpp
+    - icon: ':warning:'
+      path: meta/settings.hpp
+      title: meta/settings.hpp
+    - icon: ':warning:'
+      path: meta/trait.hpp
+      title: meta/trait.hpp
   - name: structure
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: structure/FenwickTree.hpp
       title: structure/FenwickTree.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: structure/UnionFind.hpp
       title: structure/UnionFind.hpp
     - icon: ':warning:'
       path: structure/all.hpp
       title: structure/all.hpp
+  - name: system
+    pages:
+    - icon: ':warning:'
+      path: system/all.hpp
+      title: system/all.hpp
+    - icon: ':warning:'
+      path: system/in.hpp
+      title: system/in.hpp
+    - icon: ':warning:'
+      path: system/out.hpp
+      title: system/out.hpp
   - name: template
     pages:
     - icon: ':warning:'
@@ -95,13 +102,13 @@ data:
   verificationCategories:
   - name: yosupo
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: yosupo/UnionFind.test.cpp
       title: yosupo/UnionFind.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: yosupo/many_aplusb.test.cpp
       title: yosupo/many_aplusb.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: yosupo/point_add_range_sum.test.cpp
       title: yosupo/point_add_range_sum.test.cpp
 layout: toppage

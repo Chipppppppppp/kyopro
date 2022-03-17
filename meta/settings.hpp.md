@@ -3,26 +3,14 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: algorithm/Hash.hpp
+    title: algorithm/Hash.hpp
+  - icon: ':warning:'
+    path: algorithm/all.hpp
+    title: algorithm/all.hpp
+  - icon: ':warning:'
     path: all.hpp
     title: all.hpp
-  - icon: ':warning:'
-    path: base/Hash.hpp
-    title: base/Hash.hpp
-  - icon: ':warning:'
-    path: base/all.hpp
-    title: base/all.hpp
-  - icon: ':heavy_check_mark:'
-    path: base/constant.hpp
-    title: base/constant.hpp
-  - icon: ':heavy_check_mark:'
-    path: base/in.hpp
-    title: base/in.hpp
-  - icon: ':heavy_check_mark:'
-    path: base/io.hpp
-    title: base/io.hpp
-  - icon: ':heavy_check_mark:'
-    path: base/out.hpp
-    title: base/out.hpp
   - icon: ':warning:'
     path: math/Barrett.hpp
     title: math/Barrett.hpp
@@ -50,43 +38,52 @@ data:
   - icon: ':warning:'
     path: math/modpow.hpp
     title: math/modpow.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: math/monoid.hpp
     title: math/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
+    path: meta/all.hpp
+    title: meta/all.hpp
+  - icon: ':warning:'
+    path: meta/constant.hpp
+    title: meta/constant.hpp
+  - icon: ':warning:'
+    path: meta/trait.hpp
+    title: meta/trait.hpp
+  - icon: ':warning:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
   - icon: ':warning:'
+    path: system/all.hpp
+    title: system/all.hpp
+  - icon: ':warning:'
+    path: system/in.hpp
+    title: system/in.hpp
+  - icon: ':warning:'
+    path: system/out.hpp
+    title: system/out.hpp
+  - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
   - icon: ':warning:'
     path: template/all.hpp
     title: template/all.hpp
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: yosupo/UnionFind.test.cpp
-    title: yosupo/UnionFind.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: yosupo/many_aplusb.test.cpp
-    title: yosupo/many_aplusb.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: yosupo/point_add_range_sum.test.cpp
-    title: yosupo/point_add_range_sum.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: '#line 2 "base/settings.hpp"
+  bundledCode: '#line 2 "meta/settings.hpp"
 
     #include <cstdint>
 
@@ -194,7 +191,7 @@ data:
     #endif'
   dependsOn: []
   isVerificationFile: false
-  path: base/settings.hpp
+  path: meta/settings.hpp
   requiredBy:
   - math/Barrett.hpp
   - math/factorize.hpp
@@ -212,23 +209,22 @@ data:
   - structure/all.hpp
   - template/all.hpp
   - template/alias.hpp
-  - base/in.hpp
-  - base/constant.hpp
-  - base/out.hpp
-  - base/io.hpp
-  - base/all.hpp
-  - base/Hash.hpp
+  - algorithm/all.hpp
+  - algorithm/Hash.hpp
   - all.hpp
-  timestamp: '2022-03-11 22:32:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - yosupo/UnionFind.test.cpp
-  - yosupo/point_add_range_sum.test.cpp
-  - yosupo/many_aplusb.test.cpp
-documentation_of: base/settings.hpp
+  - meta/trait.hpp
+  - meta/constant.hpp
+  - meta/all.hpp
+  - system/in.hpp
+  - system/out.hpp
+  - system/all.hpp
+  timestamp: '2022-03-17 14:38:24+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: meta/settings.hpp
 layout: document
 redirect_from:
-- /library/base/settings.hpp
-- /library/base/settings.hpp.html
-title: base/settings.hpp
+- /library/meta/settings.hpp
+- /library/meta/settings.hpp.html
+title: meta/settings.hpp
 ---

@@ -1,78 +1,74 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: base/constant.hpp
-    title: base/constant.hpp
-  - icon: ':heavy_check_mark:'
-    path: base/settings.hpp
-    title: base/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: math/monoid.hpp
     title: math/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
+    path: meta/constant.hpp
+    title: meta/constant.hpp
+  - icon: ':warning:'
+    path: meta/settings.hpp
+    title: meta/settings.hpp
+  - icon: ':warning:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"structure/FenwickTree.hpp\"\n/* FenwickTree */\n#include\
-    \ <utility>\n#include <vector>\n#line 2 \"base/settings.hpp\"\n#include <cstdint>\n\
-    \n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef\
-    \ KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef\
-    \ KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n\
-    #define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(1000000007)\n#endif\n\
-    \n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
+  bundledCode: "#line 2 \"structure/FenwickTree.hpp\"\n#include <utility>\n#include\
+    \ <vector>\n#line 2 \"math/monoid.hpp\"\n#include <type_traits>\n#line 2 \"meta/constant.hpp\"\
+    \n#include <array>\n#include <limits>\n#line 2 \"meta/settings.hpp\"\n#include\
+    \ <cstdint>\n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n\
+    #endif\n\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\
+    \n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef\
+    \ KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(1000000007)\n\
+    #endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 2 \"math/monoid.hpp\"\n#include <type_traits>\n#line 2 \"base/constant.hpp\"\
-    \n#include <array>\n#include <limits>\n#line 3 \"math/power.hpp\"\n\nnamespace\
-    \ kyopro {\n  template<class _typeT>\n  constexpr _typeT power(_typeT _a, KYOPRO_BASE_UINT\
-    \ _n, _typeT _init = 1) noexcept {\n    while (_n > 0) {\n      if (_n & 1) _init\
-    \ *= _a;\n      _a *= _a;\n      _n >>= 1;\n    }\n    return _init;\n  }\n}\n\
-    #line 7 \"base/constant.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n\
-    \  inline constexpr _typeT MOD = KYOPRO_DEFAULT_MOD;\n  inline constexpr KYOPRO_BASE_INT\
-    \ mod = MOD<KYOPRO_BASE_INT>;\n\n  template<class _typeT>\n  inline constexpr\
-    \ _typeT INF = std::numeric_limits<_typeT>::max() / KYOPRO_INF_DIV;\n  inline\
-    \ constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\n  template<class _typeT,\
-    \ KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  inline constexpr\
-    \ KYOPRO_BASE_FLOAT EPS = static_cast<_typeT>(1) / power(10ULL, _decimal_precision);\n\
-    \  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\n  template<class\
-    \ _typeT>\n  inline constexpr _typeT PI = 3.14159265358979323846;\n  inline constexpr\
-    \ KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 4> beside{{{1, 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr\
-    \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1,\
-    \ 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}}};\n}\n#line 4 \"math/monoid.hpp\"\
-    \n\nnamespace kyopro {\n  template<class _typeT, _typeT _id = 0>\n  struct Plus\
-    \ {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static constexpr _typeT\
-    \ id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT _b) const noexcept\
-    \ { return _a + _b; }\n    constexpr _typeT inv(_typeT _a) const noexcept { return\
-    \ -_a; }\n  };\n  template<class _typeT, _typeT _id = 1>\n  struct Mul {\n   \
-    \ static_assert(std::is_arithmetic_v<_typeT>);\n    static constexpr _typeT id\
-    \ = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT _b) const noexcept\
-    \ { return _a * _b; }\n    constexpr _typeT inv(_typeT _a) const noexcept {\n\
-    \      static_assert(!std::is_integral_v<_typeT>);\n      return 1 / _a;\n   \
-    \ }\n  };\n  template<class _typeT, _typeT _id = std::is_integral_v<_typeT> ?\
-    \ -INF<_typeT> : -inf>\n  struct Max {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
+    #endif\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n\
+    \  constexpr _typeT power(_typeT _a, KYOPRO_BASE_UINT _n, _typeT _init = 1) noexcept\
+    \ {\n    while (_n > 0) {\n      if (_n & 1) _init *= _a;\n      _a *= _a;\n \
+    \     _n >>= 1;\n    }\n    return _init;\n  }\n}\n#line 7 \"meta/constant.hpp\"\
+    \n\nnamespace kyopro {\n  template<class _typeT>\n  inline constexpr _typeT MOD\
+    \ = KYOPRO_DEFAULT_MOD;\n  inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\
+    \n  template<class _typeT>\n  inline constexpr _typeT INF = std::numeric_limits<_typeT>::max()\
+    \ / KYOPRO_INF_DIV;\n  inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\
+    \n  template<class _typeT, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
+    \  inline constexpr KYOPRO_BASE_FLOAT EPS = static_cast<_typeT>(1) / power(10ULL,\
+    \ _decimal_precision);\n  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\
+    \n  template<class _typeT>\n  inline constexpr _typeT PI = 3.14159265358979323846;\n\
+    \  inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n\n  inline\
+    \ constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 4> beside{{{1,\
+    \ 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
+    \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
+    \ -1}, {0, -1}, {1, -1}}};\n}\n#line 4 \"math/monoid.hpp\"\n\nnamespace kyopro\
+    \ {\n  template<class _typeT, _typeT _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
+    \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
+    \ _a, _typeT _b) const noexcept { return _a + _b; }\n    constexpr _typeT inv(_typeT\
+    \ _a) const noexcept { return -_a; }\n  };\n  template<class _typeT, _typeT _id\
+    \ = 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<_typeT>);\n   \
+    \ static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a,\
+    \ _typeT _b) const noexcept { return _a * _b; }\n    constexpr _typeT inv(_typeT\
+    \ _a) const noexcept {\n      static_assert(!std::is_integral_v<_typeT>);\n  \
+    \    return 1 / _a;\n    }\n  };\n  template<class _typeT, _typeT _id = std::is_integral_v<_typeT>\
+    \ ? -INF<_typeT> : -inf>\n  struct Max {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
     \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
     \ _a, _typeT _b) const noexcept { return _a > _b ? _a : _b; }\n  };\n  template<class\
     \ _typeT, _typeT _id = std::is_integral_v<_typeT> ? INF<_typeT> : inf>\n  struct\
     \ Min {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static constexpr\
     \ _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT _b) const\
-    \ noexcept { return _a < _b ? _a : _b; }\n  };\n}\n#line 7 \"structure/FenwickTree.hpp\"\
+    \ noexcept { return _a < _b ? _a : _b; }\n  };\n}\n#line 6 \"structure/FenwickTree.hpp\"\
     \n\nnamespace kyopro {\n  template<class _typeT, class _typeOp = Plus<_typeT>>\n\
     \  struct FenwickTree {\n  private:\n    [[no_unique_address]] _typeOp _op;\n\
     \    std::vector<_typeT> _tree;\n\n  public:\n    using value_type = _typeT;\n\
@@ -89,14 +85,14 @@ data:
     \ all_prod() { return prod(_tree.size()); }\n\n    _typeT get(int _p) { return\
     \ _op(prod(_p + 1), _op.inv(prod(_p))); }\n\n    void set(int _p, const _typeT&\
     \ _x) { apply(_p, _op(_x, _op.inv(get(_p)))); }\n  };\n}\n#line 2 \"structure/UnionFind.hpp\"\
-    \n/* UnionFind */\n#include <algorithm>\n#include <unordered_map>\n#line 7 \"\
-    structure/UnionFind.hpp\"\n\nnamespace kyopro {\n  struct UnionFind {\n  private:\n\
-    \    std::vector<int> _par;\n\n  public:\n    UnionFind() noexcept = default;\n\
-    \    UnionFind(KYOPRO_BASE_UINT _n) noexcept: _par(_n, -1) {}\n\n    void resize(KYOPRO_BASE_UINT\
-    \ _x) { _par.resize(_x, -1); }\n    void assign(KYOPRO_BASE_UINT _x) { _par.assign(_x,\
-    \ -1); }\n    void reset() { std::fill(std::begin(_par), std::end(_par), -1);\
-    \ }\n\n    KYOPRO_BASE_UINT size() const noexcept { return static_cast<KYOPRO_BASE_UINT>(_par.size());\
-    \ }\n\n    KYOPRO_BASE_INT find(int _x) {\n      int _p = _x;\n      while (_par[_p]\
+    \n#include <algorithm>\n#include <unordered_map>\n#line 6 \"structure/UnionFind.hpp\"\
+    \n\nnamespace kyopro {\n  struct UnionFind {\n  private:\n    std::vector<int>\
+    \ _par;\n\n  public:\n    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT\
+    \ _n) noexcept: _par(_n, -1) {}\n\n    void resize(KYOPRO_BASE_UINT _x) { _par.resize(_x,\
+    \ -1); }\n    void assign(KYOPRO_BASE_UINT _x) { _par.assign(_x, -1); }\n    void\
+    \ reset() { std::fill(std::begin(_par), std::end(_par), -1); }\n\n    KYOPRO_BASE_UINT\
+    \ size() const noexcept { return static_cast<KYOPRO_BASE_UINT>(_par.size()); }\n\
+    \n    KYOPRO_BASE_INT find(int _x) {\n      int _p = _x;\n      while (_par[_p]\
     \ >= 0) _p = _par[_p];\n      while (_x != _p) {\n        int _tmp = _x;\n   \
     \     _x = _par[_x];\n        _par[_tmp] = _p;\n      }\n      return _p;\n  \
     \  }\n\n    bool merge(int _x, int _y) {\n      _x = find(_x), _y = find(_y);\n\
@@ -124,16 +120,15 @@ data:
     #include "UnionFind.hpp"'
   dependsOn:
   - structure/FenwickTree.hpp
-  - base/settings.hpp
   - math/monoid.hpp
-  - base/constant.hpp
+  - meta/constant.hpp
   - math/power.hpp
+  - meta/settings.hpp
   - structure/UnionFind.hpp
   isVerificationFile: false
   path: structure/all.hpp
-  requiredBy:
-  - all.hpp
-  timestamp: '2022-03-12 18:14:52+09:00'
+  requiredBy: []
+  timestamp: '2022-03-17 14:38:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: structure/all.hpp

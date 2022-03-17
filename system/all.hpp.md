@@ -2,29 +2,20 @@
 data:
   _extendedDependsOn:
   - icon: ':warning:'
-    path: base/Hash.hpp
-    title: base/Hash.hpp
-  - icon: ':heavy_check_mark:'
-    path: base/constant.hpp
-    title: base/constant.hpp
-  - icon: ':heavy_check_mark:'
-    path: base/in.hpp
-    title: base/in.hpp
-  - icon: ':heavy_check_mark:'
-    path: base/io.hpp
-    title: base/io.hpp
-  - icon: ':heavy_check_mark:'
-    path: base/out.hpp
-    title: base/out.hpp
-  - icon: ':heavy_check_mark:'
-    path: base/settings.hpp
-    title: base/settings.hpp
-  - icon: ':heavy_check_mark:'
-    path: base/trait.hpp
-    title: base/trait.hpp
-  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
+  - icon: ':warning:'
+    path: meta/settings.hpp
+    title: meta/settings.hpp
+  - icon: ':warning:'
+    path: meta/trait.hpp
+    title: meta/trait.hpp
+  - icon: ':warning:'
+    path: system/in.hpp
+    title: system/in.hpp
+  - icon: ':warning:'
+    path: system/out.hpp
+    title: system/out.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
     path: all.hpp
@@ -35,94 +26,79 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"base/constant.hpp\"\n#include <array>\n#include <limits>\n\
-    #include <utility>\n#line 2 \"base/settings.hpp\"\n#include <cstdint>\n\n#ifndef\
-    \ KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n\
-    #define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n\
-    #define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define\
-    \ KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(1000000007)\n#endif\n\n#ifndef\
-    \ KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
+  bundledCode: "#line 2 \"system/in.hpp\"\n#include <unistd.h>\n#include <array>\n\
+    #include <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <string>\n\
+    #include <tuple>\n#include <type_traits>\n#include <utility>\n#line 3 \"meta/settings.hpp\"\
+    \n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n\
+    #ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef\
+    \ KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n\
+    #define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(1000000007)\n#endif\n\
+    \n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n\
     \  constexpr _typeT power(_typeT _a, KYOPRO_BASE_UINT _n, _typeT _init = 1) noexcept\
     \ {\n    while (_n > 0) {\n      if (_n & 1) _init *= _a;\n      _a *= _a;\n \
-    \     _n >>= 1;\n    }\n    return _init;\n  }\n}\n#line 7 \"base/constant.hpp\"\
-    \n\nnamespace kyopro {\n  template<class _typeT>\n  inline constexpr _typeT MOD\
-    \ = KYOPRO_DEFAULT_MOD;\n  inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\
-    \n  template<class _typeT>\n  inline constexpr _typeT INF = std::numeric_limits<_typeT>::max()\
-    \ / KYOPRO_INF_DIV;\n  inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\
-    \n  template<class _typeT, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
-    \  inline constexpr KYOPRO_BASE_FLOAT EPS = static_cast<_typeT>(1) / power(10ULL,\
-    \ _decimal_precision);\n  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\
-    \n  template<class _typeT>\n  inline constexpr _typeT PI = 3.14159265358979323846;\n\
-    \  inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n\n  inline\
-    \ constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 4> beside{{{1,\
-    \ 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
-    \ -1}, {0, -1}, {1, -1}}};\n}\n#line 2 \"base/Hash.hpp\"\n#include <cstddef>\n\
-    #line 4 \"base/Hash.hpp\"\n#include <functional>\n#include <initializer_list>\n\
-    #include <tuple>\n#include <type_traits>\n#line 2 \"base/trait.hpp\"\n#include\
-    \ <iterator>\n#include <queue>\n#include <stack>\n#line 7 \"base/trait.hpp\"\n\
-    \ntemplate<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
-    struct std::is_signed<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
-    \ std::true_type {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>: std::true_type\
-    \ {};\n#ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
-    \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<class, class =\
-    \ void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
-    \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
-    \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_iterator_v\
+    \     _n >>= 1;\n    }\n    return _init;\n  }\n}\n#line 2 \"meta/trait.hpp\"\n\
+    #include <iterator>\n#include <queue>\n#include <limits>\n#include <stack>\n#line\
+    \ 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct std::is_integral<__int128_t>: std::true_type\
+    \ {};\ntemplate<>\nstruct std::is_signed<__int128_t>: std::true_type {};\ntemplate<>\n\
+    struct std::is_integral<__uint128_t>: std::true_type {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>:\
+    \ std::true_type {};\n#ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
+    \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    \ _size>\n  struct int_least {\n  private:\n    auto _get_type() const noexcept\
+    \ {\n      if constexpr (_size <= 8) return std::declval<std::int_least8_t>();\n\
+    \      if constexpr (_size <= 16) return std::declval<std::int_least16_t>();\n\
+    \      if constexpr (_size <= 32) return std::declval<std::int_least32_t>();\n\
+    \      if constexpr (_size <= 64) return std::declval<std::int_least64_t>();\n\
+    \      static_assert(_size <= 128, \"Integer size is too long\");\n      return\
+    \ std::declval<__int128_t>();\n    }\n\n  public:\n    using type = decltype(_get_type());\n\
+    \  };\n\n  template<KYOPRO_BASE_UINT _size>\n  using int_least_t = int_least<_size>::type;\n\
+    \n  template<KYOPRO_BASE_UINT _size>\n  struct uint_least {\n  private:\n    auto\
+    \ _get_type() const noexcept {\n      if constexpr (_size <= 8) return std::declval<std::uint_least8_t>();\n\
+    \      if constexpr (_size <= 16) return std::declval<std::uint_least16_t>();\n\
+    \      if constexpr (_size <= 32) return std::declval<std::uint_least32_t>();\n\
+    \      if constexpr (_size <= 64) return std::declval<std::uint_least64_t>();\n\
+    \      static_assert(_size <= 128, \"Integer size is too long\");\n      return\
+    \ std::declval<__uint128_t>();\n    }\n\n  public:\n    using type = decltype(_get_type());\n\
+    \  };\n\n  template<KYOPRO_BASE_UINT _size>\n  using uint_least_t = uint_least<_size>::type;\n\
+    \n  template<class, class = void>\n  struct is_iterator: std::false_type {};\n\
+    \  template<class _typeT>\n  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
+    \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterator_v\
     \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_iterable<_typeT,\
     \ std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
-    \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_iterable_v\
+    \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterable_v\
     \ = is_iterable<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
     \ {};\n  template<class _typeT, class _typeU>\n  struct is_tuple<std::pair<_typeT,\
     \ _typeU>>: std::true_type {};\n  template<class... _typeArgs>\n  struct is_tuple<std::tuple<_typeArgs...>>:\
-    \ std::true_type {};\n  template<class _typeT>\n  constexpr bool is_tuple_v =\
-    \ is_tuple<_typeT>::value;\n\n  template<class, class = void>\n  struct is_container_adapter:\
+    \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_tuple_v\
+    \ = is_tuple<_typeT>::value;\n\n  template<class, class = void>\n  struct is_container_adapter:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_container_adapter<_typeT,\
     \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_iterable<_typeT>>\
-    \ {};\n  template<class _typeT>\n  constexpr bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n\
-    }\n#line 11 \"base/Hash.hpp\"\n\nnamespace kyopro {\n  template<class, class =\
-    \ void>\n  struct Hash;\n\n  template<class _typeT>\n  struct Hash<_typeT, std::enable_if_t<std::is_scalar_v<_typeT>>>\
-    \ {\n  private:\n    [[no_unique_address]] std::hash<_typeT> _hashser;\n\n  public:\n\
-    \    constexpr std::size_t operator ()(_typeT a) const noexcept {\n      return\
-    \ _hasher(a);\n    }\n  };\n\n  template<class _typeT>\n  struct Hash<_typeT,\
-    \ std::enable_if_t<is_tuple_v<_typeT>>> {\n    template<std::size_t _i = 0>\n\
-    \    constexpr std::size_t operator ()(const _typeT& _a) const noexcept {\n  \
-    \    if constexpr (_i == std::tuple_size_v<_typeT>) return std::tuple_size_v<_typeT>;\n\
-    \      else {\n        std::uint_fast64_t _seed = operator()<_i + 1>(_a);\n  \
-    \      return _seed ^ (Hash<std::tuple_element_t<_i, _typeT>>()(std::get<_i>(_a))\
-    \ + 0x9e3779b97f4a7c15LU + (_seed << 12) + (_seed >> 4));\n      }\n    }\n  };\n\
-    \n  template<class _typeT>\n  struct Hash<_typeT, std::enable_if_t<is_iterable_v<_typeT>>>\
-    \ {\n  private:\n    [[no_unique_address]] Hash<decltype(*std::begin(std::declval<_typeT>()))>\
-    \ _hasher;\n\n  public:\n    constexpr std::size_t operator ()(const _typeT& _a)\
-    \ const noexcept {\n      std::uint_fast64_t _seed = _a.size();\n      for (auto&\
-    \ _i: _a) _seed ^= _hasher(_i) + 0x9e3779b97f4a7c15LU + (_seed << 12) + (_seed\
-    \ >> 4);\n      return _seed;\n    }\n  };\n}\n#line 2 \"base/in.hpp\"\n#include\
-    \ <unistd.h>\n#line 6 \"base/in.hpp\"\n#include <cstdio>\n#include <string>\n\
-    #line 14 \"base/in.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _buf_size\
-    \ = KYOPRO_BUFFER_SIZE>\n  struct Reader {\n  private:\n    int _fd, _idx;\n \
-    \   std::array<char, _buf_size> _buffer;\n\n  public:\n    Reader() {\n      read(_fd,\
-    \ _buffer.begin(), _buf_size);\n    }\n    Reader(int _fd): _fd(_fd), _idx(0),\
-    \ _buffer() {\n      read(_fd, _buffer.begin(), _buf_size);\n    }\n    Reader(FILE*\
-    \ _fp): _fd(fileno(_fp)), _idx(0), _buffer() {\n      read(_fd, _buffer.begin(),\
-    \ _buf_size);\n    }\n\n    struct iterator {\n    private:\n      Reader& _reader;\n\
-    \n    public:\n      using difference_type = void;\n      using value_type = void;\n\
-    \      using pointer = void;\n      using reference = void;\n      using iterator_category\
-    \ = std::input_iterator_tag;\n\n      iterator() noexcept = default;\n      iterator(Reader&\
-    \ _reader) noexcept: _reader(_reader) {}\n\n      iterator& operator ++() {\n\
-    \        ++_reader._idx;\n        if (_reader._idx == _buf_size) {\n         \
-    \ read(_reader._fd, _reader._buffer.begin(), _buf_size);\n          _reader._idx\
-    \ = 0;\n        }\n        return *this;\n      }\n\n      iterator operator ++(int)\
-    \ {\n        iterator _before = *this;\n        operator ++();\n        return\
-    \ _before;\n      }\n\n      char& operator *() const {\n        return _reader._buffer[_reader._idx];\n\
-    \      }\n    };\n\n    iterator begin() noexcept {\n      return iterator(*this);\n\
-    \    }\n  };\n\n  Reader input(0);\n\n  template<class _typeIterator, KYOPRO_BASE_UINT\
-    \ _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n  private:\n\
-    \    template<class, class = void>\n    struct _has_scan: std::false_type {};\n\
-    \    template<class _typeT>\n    struct _has_scan<_typeT, std::void_t<decltype(std::declval<_typeT>().scan(std::declval<Scanner&>()))>>:\
+    \ {};\n\n  template<class _typeT>\n  constexpr bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n\
+    }\n#line 14 \"system/in.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    \ _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Reader {\n  private:\n    int _fd,\
+    \ _idx;\n    std::array<char, _buf_size> _buffer;\n\n  public:\n    Reader() {\n\
+    \      read(_fd, _buffer.begin(), _buf_size);\n    }\n    Reader(int _fd): _fd(_fd),\
+    \ _idx(0), _buffer() {\n      read(_fd, _buffer.begin(), _buf_size);\n    }\n\
+    \    Reader(FILE* _fp): _fd(fileno(_fp)), _idx(0), _buffer() {\n      read(_fd,\
+    \ _buffer.begin(), _buf_size);\n    }\n\n    struct iterator {\n    private:\n\
+    \      Reader& _reader;\n\n    public:\n      using difference_type = void;\n\
+    \      using value_type = void;\n      using pointer = void;\n      using reference\
+    \ = void;\n      using iterator_category = std::input_iterator_tag;\n\n      iterator()\
+    \ noexcept = default;\n      iterator(Reader& _reader) noexcept: _reader(_reader)\
+    \ {}\n\n      iterator& operator ++() {\n        ++_reader._idx;\n        if (_reader._idx\
+    \ == _buf_size) {\n          read(_reader._fd, _reader._buffer.begin(), _buf_size);\n\
+    \          _reader._idx = 0;\n        }\n        return *this;\n      }\n\n  \
+    \    iterator operator ++(int) {\n        iterator _before = *this;\n        operator\
+    \ ++();\n        return _before;\n      }\n\n      char& operator *() const {\n\
+    \        return _reader._buffer[_reader._idx];\n      }\n    };\n\n    iterator\
+    \ begin() noexcept {\n      return iterator(*this);\n    }\n  };\n\n  Reader input(0);\n\
+    \n  template<class _typeIterator, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
+    \  struct Scanner {\n  private:\n    template<class, class = void>\n    struct\
+    \ _has_scan: std::false_type {};\n    template<class _typeT>\n    struct _has_scan<_typeT,\
+    \ std::void_t<decltype(std::declval<_typeT>().scan(std::declval<Scanner&>()))>>:\
     \ std::true_type {};\n\n  public:\n    static constexpr KYOPRO_BASE_UINT decimal_precision\
     \ = _decimal_precision;\n    _typeIterator itr;\n\n    Scanner() noexcept = default;\n\
     \    Scanner(_typeIterator _itr) noexcept: itr(_itr) {}\n\n    void discard_space()\
@@ -154,7 +130,7 @@ data:
     \  void operator ()() {}\n    template<class _typeHead, class... _typeArgs>\n\
     \    void operator ()(_typeHead& _head, _typeArgs&... _args) {\n      scan(_head);\n\
     \      operator ()(_args...);\n    }\n  };\n\n  Scanner<Reader<>::iterator> scan(input.begin());\n\
-    }\n#line 13 \"base/out.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    }\n#line 13 \"system/out.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
     \ _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Writer {\n  private:\n    int _fd,\
     \ _idx;\n    std::array<char, _buf_size> _buffer;\n\n  public:\n    Writer() noexcept\
     \ = default;\n    Writer(int _fd) noexcept: _fd(_fd), _idx(0), _buffer() {}\n\
@@ -221,38 +197,30 @@ data:
     \    }\n  };\n\n  Printer<Writer<>::iterator, false, false> print(output.begin()),\
     \ eprint(error.begin());\n  Printer<Writer<>::iterator> println(output.begin()),\
     \ eprintln(error.begin());\n  Printer<Writer<>::iterator, true, true, true, true>\
-    \ debug(output.begin()), edebug(error.begin());\n}\n#line 7 \"base/all.hpp\"\n"
+    \ debug(output.begin()), edebug(error.begin());\n}\n#line 4 \"system/all.hpp\"\
+    \n"
   code: '#pragma once
 
-    #include "constant.hpp"
+    #include "in.hpp"
 
-    #include "Hash.hpp"
-
-    #include "io.hpp"
-
-    #include "settings.hpp"
-
-    #include "trait.hpp"'
+    #include "out.hpp"'
   dependsOn:
-  - base/constant.hpp
+  - system/in.hpp
   - math/power.hpp
-  - base/settings.hpp
-  - base/Hash.hpp
-  - base/trait.hpp
-  - base/io.hpp
-  - base/in.hpp
-  - base/out.hpp
+  - meta/settings.hpp
+  - meta/trait.hpp
+  - system/out.hpp
   isVerificationFile: false
-  path: base/all.hpp
+  path: system/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-03-12 20:07:35+09:00'
+  timestamp: '2022-03-17 14:38:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: base/all.hpp
+documentation_of: system/all.hpp
 layout: document
 redirect_from:
-- /library/base/all.hpp
-- /library/base/all.hpp.html
-title: base/all.hpp
+- /library/system/all.hpp
+- /library/system/all.hpp.html
+title: system/all.hpp
 ---

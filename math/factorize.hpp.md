@@ -1,12 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: base/settings.hpp
-    title: base/settings.hpp
   - icon: ':warning:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
+  - icon: ':warning:'
+    path: meta/settings.hpp
+    title: meta/settings.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
     path: all.hpp
@@ -21,7 +21,7 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"math/factorize.hpp\"\n#include <algorithm>\n#include <cstdint>\n\
-    #include <numeric>\n#include <random>\n#line 3 \"base/settings.hpp\"\n\n#ifndef\
+    #include <numeric>\n#include <random>\n#line 3 \"meta/settings.hpp\"\n\n#ifndef\
     \ KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n\
     #define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n\
     #define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define\
@@ -70,7 +70,7 @@ data:
     \      }\n    }\n    if constexpr (_sorted) std::sort(_res.begin(), _res.end());\n\
     \    return _res;\n  }\n}\n"
   code: "#pragma once\n#include <algorithm>\n#include <cstdint>\n#include <numeric>\n\
-    #include <random>\n#include \"../base/settings.hpp\"\n#include \"is_prime.hpp\"\
+    #include <random>\n#include \"../meta/settings.hpp\"\n#include \"is_prime.hpp\"\
     \n\nnamespace kyopro {\n  template<class T>\n  constexpr T pollard_rho(T _n, KYOPRO_BASE_UINT\
     \ _c) {\n    std::uint_fast64_t _cc = _c % _n;\n    auto _f = [=](std::uint_fast64_t\
     \ _x) noexcept { return (_x * _x + _cc) % _n; };\n    std::uint_fast64_t _x =\
@@ -96,14 +96,14 @@ data:
     \      }\n    }\n    if constexpr (_sorted) std::sort(_res.begin(), _res.end());\n\
     \    return _res;\n  }\n}"
   dependsOn:
-  - base/settings.hpp
+  - meta/settings.hpp
   - math/is_prime.hpp
   isVerificationFile: false
   path: math/factorize.hpp
   requiredBy:
   - math/all.hpp
   - all.hpp
-  timestamp: '2022-03-13 23:42:12+09:00'
+  timestamp: '2022-03-17 14:38:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/factorize.hpp
