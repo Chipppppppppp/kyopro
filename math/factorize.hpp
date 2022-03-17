@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <numeric>
 #include <random>
-#include "../base/settings.hpp"
+#include "../meta/settings.hpp"
 #include "is_prime.hpp"
 
 namespace kyopro {

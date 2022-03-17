@@ -1,5 +1,5 @@
 #pragma once
-#include "../base/settings.hpp"
+#include "../meta/settings.hpp"
 
 namespace kyopro {
   template<class _typeT>

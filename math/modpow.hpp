@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <type_traits>
-#include "../base/settings.hpp"
+#include "../meta/settings.hpp"
 #include "mod.hpp"
 
 namespace kyopro {

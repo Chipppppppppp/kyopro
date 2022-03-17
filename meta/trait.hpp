@@ -1,9 +1,11 @@
 #pragma once
 #include <iterator>
 #include <queue>
+#include <limits>
 #include <stack>
 #include <type_traits>
 #include <utility>
+#include "settings.hpp"
 
 template<>
 struct std::is_integral<__int128_t>: std::true_type {};
@@ -19,10 +21,49 @@ struct std::is_floating_point<__float128>: std::true_type {};
 #endif
 
 namespace kyopro {
+  template<KYOPRO_BASE_UINT _size>
+  struct int_least {
+  private:
+    auto _get_type() const noexcept {
+      if constexpr (_size <= 8) return std::declval<std::int_least8_t>();
+      if constexpr (_size <= 16) return std::declval<std::int_least16_t>();
+      if constexpr (_size <= 32) return std::declval<std::int_least32_t>();
+      if constexpr (_size <= 64) return std::declval<std::int_least64_t>();
+      static_assert(_size <= 128, "Integer size is too long");
+      return std::declval<__int128_t>();
+    }
+
+  public:
+    using type = decltype(_get_type());
+  };
+
+  template<KYOPRO_BASE_UINT _size>
+  using int_least_t = int_least<_size>::type;
+
+  template<KYOPRO_BASE_UINT _size>
+  struct uint_least {
+  private:
+    auto _get_type() const noexcept {
+      if constexpr (_size <= 8) return std::declval<std::uint_least8_t>();
+      if constexpr (_size <= 16) return std::declval<std::uint_least16_t>();
+      if constexpr (_size <= 32) return std::declval<std::uint_least32_t>();
+      if constexpr (_size <= 64) return std::declval<std::uint_least64_t>();
+      static_assert(_size <= 128, "Integer size is too long");
+      return std::declval<__uint128_t>();
+    }
+
+  public:
+    using type = decltype(_get_type());
+  };
+
+  template<KYOPRO_BASE_UINT _size>
+  using uint_least_t = uint_least<_size>::type;
+
   template<class, class = void>
   struct is_iterator: std::false_type {};
   template<class _typeT>
   struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>: std::true_type {};
+
   template<class _typeT>
   constexpr bool is_iterator_v = is_iterator<_typeT>::value;
 
@@ -30,6 +71,7 @@ namespace kyopro {
   struct is_iterable: std::false_type {};
   template<class _typeT>
   struct is_iterable<_typeT, std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>: std::true_type {};
+
   template<class _typeT>
   constexpr bool is_iterable_v = is_iterable<_typeT>::value;
 
@@ -39,6 +81,7 @@ namespace kyopro {
   struct is_tuple<std::pair<_typeT, _typeU>>: std::true_type {};
   template<class... _typeArgs>
   struct is_tuple<std::tuple<_typeArgs...>>: std::true_type {};
+
   template<class _typeT>
   constexpr bool is_tuple_v = is_tuple<_typeT>::value;
 
@@ -46,6 +89,7 @@ namespace kyopro {
   struct is_container_adapter: std::false_type {};
   template<class _typeT>
   struct is_container_adapter<_typeT, std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_iterable<_typeT>> {};
+
   template<class _typeT>
   constexpr bool is_container_adapter_v = is_container_adapter<_typeT>::value;
 }

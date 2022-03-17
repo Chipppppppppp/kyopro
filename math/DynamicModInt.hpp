@@ -2,9 +2,9 @@
 #include <cassert>
 #include <cstdint>
 #include <type_traits>
-#include "../base/constant.hpp"
-#include "../base/Hash.hpp"
-#include "../base/settings.hpp"
+#include "../algorithm/Hash.hpp"
+#include "../meta/constant.hpp"
+#include "../meta/settings.hpp"
 #include "Barrett.hpp"
 #include "mod.hpp"
 

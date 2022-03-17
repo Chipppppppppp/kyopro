@@ -1,9 +1,8 @@
 #pragma once
-/* FenwickTree */
 #include <utility>
 #include <vector>
-#include "../base/settings.hpp"
 #include "../math/monoid.hpp"
+#include "../meta/settings.hpp"
 
 namespace kyopro {
   template<class _typeT, class _typeOp = Plus<_typeT>>

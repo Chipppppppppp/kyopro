@@ -9,8 +9,8 @@
 #include <type_traits>
 #include <utility>
 #include "../math/power.hpp"
-#include "settings.hpp"
-#include "trait.hpp"
+#include "../meta/settings.hpp"
+#include "../meta/trait.hpp"
 
 namespace kyopro {
   template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>

@@ -1,24 +1,32 @@
 #pragma once
 #include <cassert>
 #include <cstdint>
+#include <limits>
 #include <type_traits>
-#include "../base/constant.hpp"
-#include "../base/Hash.hpp"
-#include "../base/settings.hpp"
+#include "../algorithm/Hash.hpp"
+#include "../meta/constant.hpp"
+#include "../meta/settings.hpp"
+#include "../meta/trait.hpp"
 #include "mod.hpp"
 
 namespace kyopro {
-  template<KYOPRO_BASE_UINT _m>
+  template<KYOPRO_BASE_UINT _mod>
   struct ModInt {
-    KYOPRO_BASE_UINT value;
+  private:
+    static constexpr value_type _mod = static_cast<value_type>(_mod);
+
+  public:
+    using value_type = uint_least_t<>;
+
+    value_type value;
 
     static constexpr KYOPRO_BASE_INT get_mod() noexcept {
-      return static_cast<KYOPRO_BASE_INT>(_m);
+      return static_cast<KYOPRO_BASE_INT>(_mod);
     }
 
     constexpr ModInt() noexcept = default;
     template<class _typeT>
-    constexpr ModInt(_typeT _value) noexcept: value(floor_mod(_value, _m)) { static_assert(std::is_integral_v<_typeT>); }
+    constexpr ModInt(_typeT _value) noexcept: value(floor_mod(_value, _mod)) { static_assert(std::is_integral_v<_typeT>); }
 
     template<class _typeT>
     explicit constexpr operator _typeT() const noexcept { return static_cast<_typeT>(value); }
@@ -32,15 +40,15 @@ namespace kyopro {
     constexpr ModInt power(KYOPRO_BASE_UINT _n) const noexcept {
       std::uint_fast64_t _res = 1, _a = value;
       while (_n > 0) {
-        if (_n & 1) _res = _res * _a % _m;
-        _a = _a * _a % _m;
+        if (_n & 1) _res = _res * _a % _mod;
+        _a = _a * _a % _mod;
         _n >>= 1;
       }
       return _res;
     }
 
     constexpr ModInt inv() const noexcept {
-      std::uint_fast64_t _a = value, _b = _m;
+      std::uint_fast64_t _a = value, _b = _mod;
       std::int_fast64_t _u = 1, _v = 0;
       while (_b > 0) {
         std::uint_fast64_t _t = _a / _b;
@@ -49,15 +57,15 @@ namespace kyopro {
         _u -= _t * _v;
         std::swap(_u, _v);
       }
-      return floor_mod(_u, _m);
+      return floor_mod(_u, _mod);
     }
 
     constexpr ModInt operator +() const noexcept { return *this; }
 
-    constexpr ModInt operator -() const noexcept { return _m - value; }
+    constexpr ModInt operator -() const noexcept { return _mod - value; }
 
     constexpr ModInt& operator ++() noexcept {
-      if (++value >= _m) value -= _m;
+      if (++value >= _mod) value -= _mod;
       return *this;
     }
 
@@ -68,7 +76,7 @@ namespace kyopro {
     }
 
     constexpr ModInt& operator --() noexcept {
-      if (value == 0) value = _m;
+      if (value == 0) value = _mod;
       --value;
       return *this;
     }
@@ -80,23 +88,23 @@ namespace kyopro {
     }
 
     constexpr ModInt& operator +=(ModInt _rhs) noexcept {
-      if ((value += _rhs.value) >= _m) value -= _m;
+      if ((value += _rhs.value) >= _mod) value -= _mod;
       return *this;
     }
 
     constexpr ModInt& operator -=(ModInt _rhs) noexcept {
-      if (value < _rhs.value) value += _m;
+      if (value < _rhs.value) value += _mod;
       value -= _rhs.value;
       return *this;
     }
 
     constexpr ModInt& operator *=(ModInt _rhs) noexcept {
-      value = value * _rhs.value % _m;
+      value = static_cast<decltype(_get_value_type().second)>(value) * _rhs.value % _mod;
       return *this;
     }
 
     constexpr ModInt& operator /=(ModInt _rhs) noexcept {
-      value = value * _rhs.inv().value % _m;
+      value = static_cast<decltype(_get_value_type().second)>(value) * _rhs.inv().value % _mod;
       return *this;
     }
 
@@ -116,7 +124,7 @@ namespace kyopro {
     void scan(_typeScanner& _scanner) {
       std::int_fast64_t _value;
       _scanner.scan(_value);
-      value = floor_mod(_value, _m);
+      value = floor_mod(_value, _mod);
     }
 
     template<class _typePrinter>
@@ -125,6 +133,6 @@ namespace kyopro {
     }
   };
 
-  template<KYOPRO_BASE_UINT _m>
-  struct Hash<ModInt<_m>> { constexpr std::size_t operator ()(ModInt<_m> _a) const noexcept { return static_cast<std::size_t>(_a); } };
+  template<KYOPRO_BASE_UINT _mod>
+  struct Hash<ModInt<_mod>> { constexpr std::size_t operator ()(ModInt<_mod> _a) const noexcept { return static_cast<std::size_t>(_a); } };
 }

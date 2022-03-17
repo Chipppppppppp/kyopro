@@ -6,8 +6,8 @@
 #include <tuple>
 #include <type_traits>
 #include <utility>
-#include "settings.hpp"
-#include "trait.hpp"
+#include "../meta/settings.hpp"
+#include "../meta/trait.hpp"
 
 namespace kyopro {
   template<class, class = void>

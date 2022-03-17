@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "../base/settings.hpp"
+#include "../meta/settings.hpp"
 
 namespace kyopro {
   constexpr KYOPRO_BASE_UINT euler_phi(KYOPRO_BASE_UINT _n) noexcept {

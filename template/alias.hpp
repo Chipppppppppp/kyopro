@@ -11,7 +11,7 @@
 #include <unordered_map>
 #include <queue>
 #include <stack>
-#include "../base/Hash.hpp"
+#include "../algorithm/Hash.hpp"
 #include "../math/DynamicModInt.hpp"
 #include "../math/ModInt.hpp"
 

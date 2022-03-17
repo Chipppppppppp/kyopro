@@ -1,6 +1,7 @@
 #pragma once
+
 #include <cstdint>
-#include "../base/settings.hpp"
+#include "../meta/settings.hpp"
 
 struct Barrett {
 private:

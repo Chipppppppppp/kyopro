@@ -1,9 +1,8 @@
 #pragma once
-/* UnionFind */
 #include <algorithm>
 #include <unordered_map>
 #include <vector>
-#include "../base/settings.hpp"
+#include "../meta/settings.hpp"
 
 namespace kyopro {
   struct UnionFind {

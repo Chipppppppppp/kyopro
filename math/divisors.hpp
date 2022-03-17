@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <vector>
-#include "../base/settings.hpp"
+#include "../meta/settings.hpp"
 
 namespace kyopro {
   template<class _typeContainer = std::vector<KYOPRO_BASE_INT>>

@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <initializer_list>
-#include "../base/settings.hpp"
+#include "../meta/settings.hpp"
 
 namespace kyopro {
   constexpr bool is_prime(KYOPRO_BASE_UINT _n) {
