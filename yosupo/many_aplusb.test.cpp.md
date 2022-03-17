@@ -14,10 +14,10 @@ data:
     , line 401, in update\n    self.update(self._resolve(pathlib.Path(included), included_from=path))\n\
     \  File \"/opt/hostedtoolcache/Python/3.10.2/x64/lib/python3.10/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 260, in _resolve\n    raise BundleErrorAt(path, -1, \"no such header\"\
-    )\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: ../base/io.hpp:\
+    )\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: ../meta/io.hpp:\
     \ line -1: no such header\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/many_aplusb\"\n\n#include\
-    \ \"../base/io.hpp\"\n\nint main() {\n  int t;\n  kyopro::scan(t);\n  for (int\
+    \ \"../meta/io.hpp\"\n\nint main() {\n  int t;\n  kyopro::scan(t);\n  for (int\
     \ i = 0; i < t; ++i) {\n    long long a, b;\n    kyopro::scan(a, b);\n    kyopro::println(a\
     \ + b);\n  }\n}"
   dependsOn: []

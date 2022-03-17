@@ -14,10 +14,10 @@ data:
     , line 401, in update\n    self.update(self._resolve(pathlib.Path(included), included_from=path))\n\
     \  File \"/opt/hostedtoolcache/Python/3.10.2/x64/lib/python3.10/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 260, in _resolve\n    raise BundleErrorAt(path, -1, \"no such header\"\
-    )\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: ../base/io.hpp:\
+    )\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: ../meta/io.hpp:\
     \ line -1: no such header\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_range_sum\"\n\
-    \n#include \"../base/io.hpp\"\n#include \"../structure/FenwickTree.hpp\"\n\nint\
+    \n#include \"../meta/io.hpp\"\n#include \"../structure/FenwickTree.hpp\"\n\nint\
     \ main() {\n  int n, q;\n  kyopro::scan(n, q);\n  kyopro::FenwickTree<long long>\
     \ ft(n);\n  for (int i = 0; i < n; ++i) {\n    int a;\n    kyopro::scan(a);\n\
     \    ft.apply(i, a);\n  }\n  for (int i = 0; i < q; ++i) {\n    int t, x, y;\n\
