@@ -12,6 +12,12 @@ data:
     path: all/all.hpp
     title: all/all.hpp
   - icon: ':warning:'
+    path: math/Barrett.hpp
+    title: math/Barrett.hpp
+  - icon: ':warning:'
+    path: math/DynamicModInt.hpp
+    title: math/DynamicModInt.hpp
+  - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
   - icon: ':warning:'
@@ -115,7 +121,9 @@ data:
   isVerificationFile: false
   path: algorithm/bit.hpp
   requiredBy:
+  - math/Barrett.hpp
   - math/ModInt.hpp
+  - math/DynamicModInt.hpp
   - math/all.hpp
   - template/all.hpp
   - template/alias.hpp
