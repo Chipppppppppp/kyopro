@@ -194,36 +194,38 @@ data:
     \ const noexcept {\n      std::uint_fast64_t _seed = _a.size();\n      for (auto&\
     \ _i: _a) _seed ^= _hasher(_i) + 0x9e3779b97f4a7c15LU + (_seed << 12) + (_seed\
     \ >> 4);\n      return _seed;\n    }\n  };\n}\n#line 2 \"math/Barrett.hpp\"\n\n\
-    #line 9 \"math/Barrett.hpp\"\n\ntemplate<class _typeT>\nstruct Barrett {\n  static_assert(std::is_unsigned_v<_typeT>,\
-    \ \"Unsigned integer is required\");\n\nprivate:\n  using _mul_value_type = uint_least_t<std::numeric_limits<std::make_unsigned_t<_typeT>>::digits\
-    \ * 2>;\n  _typeT _mod;\n  _mul_value_type _m;\n\npublic:\n  using value_type\
-    \ = _typeT;\n\n  constexpr void set_mod(_typeT _mod) noexcept {\n    this->_mod\
-    \ = _mod;\n    _m = (static_cast<_mul_value_type>(1) << 64) / _mod;\n  }\n\n \
-    \ constexpr KYOPRO_BASE_INT get_mod() const noexcept {\n    return _mod;\n  }\n\
-    \n  Barrett() noexcept = default;\n  Barrett(KYOPRO_BASE_UINT _mod) noexcept:\
-    \ _mod(_mod), _m((static_cast<_mul_value_type>(1) << 64) / _mod) {}\n\n  constexpr\
-    \ KYOPRO_BASE_UINT operator ()(KYOPRO_BASE_UINT _x) const noexcept {\n\t  _x -=\
-    \ static_cast<_typeT>((_x * _m) >> 64) * _mod;\n    return _x < _mod ? _x : _x\
-    \ - _mod;\n  }\n};\n#line 3 \"math/div.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT, _typeU> floor_div(_typeT\
-    \ _x, _typeU _m) noexcept {\n    static_assert(std::is_integral_v<_typeT> && std::is_integral_v<_typeU>);\n\
-    \    if constexpr (std::is_unsigned_v<_typeT> || std::is_unsigned_v<_typeU>) return\
-    \ _x / _m;\n    auto _d = _x / _m;\n    return _d * _m == _x ? _d : _d - ((_x\
-    \ < 0) ^ (_m < 0));\n  }\n\n  template<class _typeT, class _typeU>\n  constexpr\
-    \ std::common_type_t<_typeT, _typeU> ceil_div(_typeT _x, _typeU _m) noexcept {\
-    \ return floor_div(_x + _m - static_cast<_typeT>(1), _m); }\n}\n#line 3 \"math/divisors.hpp\"\
-    \n#include <vector>\n#line 5 \"math/divisors.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ _typeContainer = std::vector<KYOPRO_BASE_INT>>\n  _typeContainer divisors(KYOPRO_BASE_UINT\
-    \ _n) {\n    _typeContainer _lower, _upper;\n    std::uint_fast64_t _i;\n    for\
-    \ (_i = 1; _i * _i < _n; ++_i) if (_n % _i == 0) {\n      _lower.emplace_back(_i);\n\
-    \      _upper.emplace_back(_n / _i);\n    }\n    if (_i * _i == _n) _lower.emplace_back(_i);\n\
-    \    _lower.insert(end(_lower), rall(_upper));\n    return _lower;\n  }\n}\n#line\
-    \ 2 \"math/DynamicModInt.hpp\"\n#include <cassert>\n#line 2 \"meta/constant.hpp\"\
-    \n#include <array>\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ _typeT>\n  constexpr _typeT power(_typeT _a, KYOPRO_BASE_UINT _n, _typeT _init\
-    \ = 1) noexcept {\n    while (_n > 0) {\n      if (_n & 1) _init *= _a;\n    \
-    \  _a *= _a;\n      _n >>= 1;\n    }\n    return _init;\n  }\n}\n#line 7 \"meta/constant.hpp\"\
-    \n\nnamespace kyopro {\n  template<class _typeT>\n  inline constexpr _typeT MOD\
+    #line 9 \"math/Barrett.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n\
+    \  struct Barrett {\n    static_assert(std::is_unsigned_v<_typeT>, \"Unsigned\
+    \ integer is required\");\n\n  private:\n    using _mul_value_type = uint_least_t<std::numeric_limits<std::make_unsigned_t<_typeT>>::digits\
+    \ * 2>;\n    _typeT _mod;\n    _mul_value_type _m;\n\n  public:\n    using value_type\
+    \ = _typeT;\n\n    constexpr void set_mod(_typeT _mod) noexcept {\n      this->_mod\
+    \ = _mod;\n      _m = (static_cast<_mul_value_type>(1) << 64) / _mod;\n    }\n\
+    \n    constexpr KYOPRO_BASE_INT get_mod() const noexcept {\n      return _mod;\n\
+    \    }\n\n    Barrett() noexcept = default;\n    Barrett(KYOPRO_BASE_UINT _mod)\
+    \ noexcept: _mod(_mod), _m((static_cast<_mul_value_type>(1) << 64) / _mod) {}\n\
+    \n    constexpr KYOPRO_BASE_UINT operator ()(KYOPRO_BASE_UINT _x) const noexcept\
+    \ {\n      _x -= static_cast<_typeT>((_x * _m) >> 64) * _mod;\n      return _x\
+    \ < _mod ? _x : _x - _mod;\n    }\n  };\n}\n#line 3 \"math/div.hpp\"\n\nnamespace\
+    \ kyopro {\n  template<class _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT,\
+    \ _typeU> floor_div(_typeT _x, _typeU _m) noexcept {\n    static_assert(std::is_integral_v<_typeT>\
+    \ && std::is_integral_v<_typeU>);\n    if constexpr (std::is_unsigned_v<_typeT>\
+    \ || std::is_unsigned_v<_typeU>) return _x / _m;\n    auto _d = _x / _m;\n   \
+    \ return _d * _m == _x ? _d : _d - ((_x < 0) ^ (_m < 0));\n  }\n\n  template<class\
+    \ _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT, _typeU> ceil_div(_typeT\
+    \ _x, _typeU _m) noexcept { return floor_div(_x + _m - static_cast<_typeT>(1),\
+    \ _m); }\n}\n#line 3 \"math/divisors.hpp\"\n#include <vector>\n#line 5 \"math/divisors.hpp\"\
+    \n\nnamespace kyopro {\n  template<class _typeContainer = std::vector<KYOPRO_BASE_INT>>\n\
+    \  _typeContainer divisors(KYOPRO_BASE_UINT _n) {\n    _typeContainer _lower,\
+    \ _upper;\n    std::uint_fast64_t _i;\n    for (_i = 1; _i * _i < _n; ++_i) if\
+    \ (_n % _i == 0) {\n      _lower.emplace_back(_i);\n      _upper.emplace_back(_n\
+    \ / _i);\n    }\n    if (_i * _i == _n) _lower.emplace_back(_i);\n    _lower.insert(end(_lower),\
+    \ rall(_upper));\n    return _lower;\n  }\n}\n#line 2 \"math/DynamicModInt.hpp\"\
+    \n#include <cassert>\n#line 2 \"meta/constant.hpp\"\n#include <array>\n#line 3\
+    \ \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n  constexpr\
+    \ _typeT power(_typeT _a, KYOPRO_BASE_UINT _n, _typeT _init = 1) noexcept {\n\
+    \    while (_n > 0) {\n      if (_n & 1) _init *= _a;\n      _a *= _a;\n     \
+    \ _n >>= 1;\n    }\n    return _init;\n  }\n}\n#line 7 \"meta/constant.hpp\"\n\
+    \nnamespace kyopro {\n  template<class _typeT>\n  inline constexpr _typeT MOD\
     \ = KYOPRO_DEFAULT_MOD;\n  inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\
     \n  template<class _typeT>\n  inline constexpr _typeT INF = std::numeric_limits<_typeT>::max()\
     \ / KYOPRO_INF_DIV;\n  inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\
@@ -574,16 +576,17 @@ data:
     \ eprint(error.begin());\n  Printer<Writer<>::iterator> println(output.begin()),\
     \ eprintln(error.begin());\n  Printer<Writer<>::iterator, true, true, true, true>\
     \ debug(output.begin()), edebug(error.begin());\n}\n#line 8 \"template/alias.hpp\"\
-    \n#include <set>\n#include <map>\n#include <unordered_set>\n#line 17 \"template/alias.hpp\"\
+    \n#include <set>\n#include <map>\n#include <unordered_set>\n#line 18 \"template/alias.hpp\"\
     \n\nnamespace kyopro {\n  using ll = long long;\n  using ull = unsigned long long;\n\
     \  using lf = double;\n\n  using i8 = std::int8_t;\n  using u8 = std::uint8_t;\n\
     \  using i16 = std::int16_t;\n  using u16 = std::uint16_t;\n  using i32 = std::int32_t;\n\
     \  using u32 = std::uint32_t;\n  using i64 = std::int64_t;\n  using u64 = std::uint64_t;\n\
     \  using i128 = __int128_t;\n  using u128 = __uint128_t;\n  #ifdef __SIZEOF_FLOAT128__\n\
     \  using f128 = __float128;\n  #endif\n\n  using mint = ModInt<mod>;\n  using\
-    \ dmint = DynamicModInt;\n\n  template<class _typeKey>\n  using hset = std::unordered_set<_typeKey,\
-    \ Hash<_typeKey>>;\n  template<class _typeKey, class _typeT>\n  using hmap = std::unordered_map<_typeKey,\
-    \ _typeT, Hash<_typeKey>>;\n  template<class _typeKey>\n  using hmultiset = std::unordered_multiset<_typeKey,\
+    \ dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\n  template<class _typeKey>\n  using\
+    \ hset = std::unordered_set<_typeKey, Hash<_typeKey>>;\n  template<class _typeKey,\
+    \ class _typeT>\n  using hmap = std::unordered_map<_typeKey, _typeT, Hash<_typeKey>>;\n\
+    \  template<class _typeKey>\n  using hmultiset = std::unordered_multiset<_typeKey,\
     \ Hash<_typeKey>>;\n  template<class _typeKey, class _typeT>\n  using hmultimap\
     \ = std::unordered_multimap<_typeKey, _typeT, Hash<_typeKey>>;\n  template<class\
     \ _typeT, class _typeCompare = std::less<_typeT>, class _typeContainer = std::vector<_typeT>>\n\
@@ -636,7 +639,7 @@ data:
   isVerificationFile: false
   path: all/all.hpp
   requiredBy: []
-  timestamp: '2022-03-19 01:10:40+09:00'
+  timestamp: '2022-03-19 01:16:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp

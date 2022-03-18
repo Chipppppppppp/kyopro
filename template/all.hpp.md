@@ -164,43 +164,44 @@ data:
     \ _x) noexcept {\n    return bit_len(_x >> static_cast<_typeT>(1));\n  }\n\n \
     \ template<class _typeT>\n  constexpr KYOPRO_BASE_INT ceil_bit(_typeT _x) noexcept\
     \ {\n    if (_x == 0) return 0;\n    return bit_len(_x - static_cast<_typeT>(1));\n\
-    \  }\n}\n#line 9 \"math/Barrett.hpp\"\n\ntemplate<class _typeT>\nstruct Barrett\
-    \ {\n  static_assert(std::is_unsigned_v<_typeT>, \"Unsigned integer is required\"\
-    );\n\nprivate:\n  using _mul_value_type = uint_least_t<std::numeric_limits<std::make_unsigned_t<_typeT>>::digits\
-    \ * 2>;\n  _typeT _mod;\n  _mul_value_type _m;\n\npublic:\n  using value_type\
-    \ = _typeT;\n\n  constexpr void set_mod(_typeT _mod) noexcept {\n    this->_mod\
-    \ = _mod;\n    _m = (static_cast<_mul_value_type>(1) << 64) / _mod;\n  }\n\n \
-    \ constexpr KYOPRO_BASE_INT get_mod() const noexcept {\n    return _mod;\n  }\n\
-    \n  Barrett() noexcept = default;\n  Barrett(KYOPRO_BASE_UINT _mod) noexcept:\
-    \ _mod(_mod), _m((static_cast<_mul_value_type>(1) << 64) / _mod) {}\n\n  constexpr\
-    \ KYOPRO_BASE_UINT operator ()(KYOPRO_BASE_UINT _x) const noexcept {\n\t  _x -=\
-    \ static_cast<_typeT>((_x * _m) >> 64) * _mod;\n    return _x < _mod ? _x : _x\
-    \ - _mod;\n  }\n};\n#line 4 \"math/mod.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT, _typeU> floor_mod(_typeT\
-    \ _x, _typeU _m) noexcept {\n    static_assert(std::is_integral_v<_typeT> && std::is_integral_v<_typeU>);\n\
-    \    if constexpr (std::is_unsigned_v<_typeT> || std::is_unsigned_v<_typeU>) return\
-    \ _x % _m;\n    return (_x %= _m) < 0 ? _x + _m : _x;\n  }\n\n  template<class\
-    \ _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT, _typeU> ceil_mod(_typeT\
-    \ _x, _typeU _m) noexcept {\n    return _m - floor_mod(_x - 1, _m) - static_cast<_typeT>(1);\n\
-    \  }\n}\n#line 10 \"math/DynamicModInt.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ _typeT>\n  struct DynamicModInt {\n    static_assert(std::is_unsigned_v<_typeT>,\
-    \ \"Unsigned integer is required\");\n\n  private:\n    inline static _typeT _mod;\n\
-    \    inline static Barrett<_typeT> _barrett;\n\n  public:\n    _typeT value;\n\
-    \n    static void set_mod(_typeT _m) noexcept {\n      _mod = _m;\n      _barrett.set_mod(_m);\n\
-    \    }\n\n    static KYOPRO_BASE_INT get_mod() noexcept {\n      return _mod;\n\
-    \    }\n\n    DynamicModInt() noexcept = default;\n    DynamicModInt(_typeT _value)\
-    \ noexcept: value(floor_mod(_value, _mod)) {}\n\n    template<class _typeU>\n\
-    \    explicit operator _typeU() const noexcept { return value; }\n\n    static\
-    \ DynamicModInt raw(_typeT _n) noexcept {\n      DynamicModInt _res;\n      _res.value\
-    \ = _n;\n      return _res;\n    }\n\n    DynamicModInt power(_typeT _n) const\
-    \ noexcept {\n      _typeT _res = 1, _a = value;\n      while (_n > 0) {\n   \
-    \     if (_n & 1) _res = _res * _a % _mod;\n        _a = _a * _a % _mod;\n   \
-    \     _n >>= 1;\n      }\n      return _res;\n    }\n\n    DynamicModInt inv()\
-    \ const noexcept {\n      _typeT _a = value, _b = _mod;\n      std::make_signed_t<_typeT>\
-    \ _u = 1, _v = 0;\n      while (_b > 0) {\n        _typeT _t = _a / _b;\n    \
-    \    _a -= _t * _b;\n        std::swap(_a, _b);\n        _u -= _t * _v;\n    \
-    \    std::swap(_u, _v);\n      }\n      return floor_mod(_u, _mod);\n    }\n\n\
-    \    DynamicModInt operator +() const noexcept { return *this; }\n\n    DynamicModInt\
+    \  }\n}\n#line 9 \"math/Barrett.hpp\"\n\nnamespace kyopro {\n  template<class\
+    \ _typeT>\n  struct Barrett {\n    static_assert(std::is_unsigned_v<_typeT>, \"\
+    Unsigned integer is required\");\n\n  private:\n    using _mul_value_type = uint_least_t<std::numeric_limits<std::make_unsigned_t<_typeT>>::digits\
+    \ * 2>;\n    _typeT _mod;\n    _mul_value_type _m;\n\n  public:\n    using value_type\
+    \ = _typeT;\n\n    constexpr void set_mod(_typeT _mod) noexcept {\n      this->_mod\
+    \ = _mod;\n      _m = (static_cast<_mul_value_type>(1) << 64) / _mod;\n    }\n\
+    \n    constexpr KYOPRO_BASE_INT get_mod() const noexcept {\n      return _mod;\n\
+    \    }\n\n    Barrett() noexcept = default;\n    Barrett(KYOPRO_BASE_UINT _mod)\
+    \ noexcept: _mod(_mod), _m((static_cast<_mul_value_type>(1) << 64) / _mod) {}\n\
+    \n    constexpr KYOPRO_BASE_UINT operator ()(KYOPRO_BASE_UINT _x) const noexcept\
+    \ {\n      _x -= static_cast<_typeT>((_x * _m) >> 64) * _mod;\n      return _x\
+    \ < _mod ? _x : _x - _mod;\n    }\n  };\n}\n#line 4 \"math/mod.hpp\"\n\nnamespace\
+    \ kyopro {\n  template<class _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT,\
+    \ _typeU> floor_mod(_typeT _x, _typeU _m) noexcept {\n    static_assert(std::is_integral_v<_typeT>\
+    \ && std::is_integral_v<_typeU>);\n    if constexpr (std::is_unsigned_v<_typeT>\
+    \ || std::is_unsigned_v<_typeU>) return _x % _m;\n    return (_x %= _m) < 0 ?\
+    \ _x + _m : _x;\n  }\n\n  template<class _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT,\
+    \ _typeU> ceil_mod(_typeT _x, _typeU _m) noexcept {\n    return _m - floor_mod(_x\
+    \ - 1, _m) - static_cast<_typeT>(1);\n  }\n}\n#line 10 \"math/DynamicModInt.hpp\"\
+    \n\nnamespace kyopro {\n  template<class _typeT>\n  struct DynamicModInt {\n \
+    \   static_assert(std::is_unsigned_v<_typeT>, \"Unsigned integer is required\"\
+    );\n\n  private:\n    inline static _typeT _mod;\n    inline static Barrett<_typeT>\
+    \ _barrett;\n\n  public:\n    _typeT value;\n\n    static void set_mod(_typeT\
+    \ _m) noexcept {\n      _mod = _m;\n      _barrett.set_mod(_m);\n    }\n\n   \
+    \ static KYOPRO_BASE_INT get_mod() noexcept {\n      return _mod;\n    }\n\n \
+    \   DynamicModInt() noexcept = default;\n    DynamicModInt(_typeT _value) noexcept:\
+    \ value(floor_mod(_value, _mod)) {}\n\n    template<class _typeU>\n    explicit\
+    \ operator _typeU() const noexcept { return value; }\n\n    static DynamicModInt\
+    \ raw(_typeT _n) noexcept {\n      DynamicModInt _res;\n      _res.value = _n;\n\
+    \      return _res;\n    }\n\n    DynamicModInt power(_typeT _n) const noexcept\
+    \ {\n      _typeT _res = 1, _a = value;\n      while (_n > 0) {\n        if (_n\
+    \ & 1) _res = _res * _a % _mod;\n        _a = _a * _a % _mod;\n        _n >>=\
+    \ 1;\n      }\n      return _res;\n    }\n\n    DynamicModInt inv() const noexcept\
+    \ {\n      _typeT _a = value, _b = _mod;\n      std::make_signed_t<_typeT> _u\
+    \ = 1, _v = 0;\n      while (_b > 0) {\n        _typeT _t = _a / _b;\n       \
+    \ _a -= _t * _b;\n        std::swap(_a, _b);\n        _u -= _t * _v;\n       \
+    \ std::swap(_u, _v);\n      }\n      return floor_mod(_u, _mod);\n    }\n\n  \
+    \  DynamicModInt operator +() const noexcept { return *this; }\n\n    DynamicModInt\
     \ operator -() const noexcept { return _mod - value; }\n\n    DynamicModInt& operator\
     \ ++() noexcept {\n      if (++value >= _mod) value -= _mod;\n      return *this;\n\
     \    }\n\n    DynamicModInt operator ++(int) noexcept {\n      DynamicModInt _before\
@@ -278,15 +279,15 @@ data:
     \    }\n\n    template<class _typePrinter>\n    void print(_typePrinter& _printer)\
     \ const {\n      _printer.print(value);\n    }\n  };\n\n  template<KYOPRO_BASE_UINT\
     \ _mod>\n  struct Hash<ModInt<_mod>> { constexpr std::size_t operator ()(ModInt<_mod>\
-    \ _a) const noexcept { return static_cast<std::size_t>(_a); } };\n}\n#line 17\
+    \ _a) const noexcept { return static_cast<std::size_t>(_a); } };\n}\n#line 18\
     \ \"template/alias.hpp\"\n\nnamespace kyopro {\n  using ll = long long;\n  using\
     \ ull = unsigned long long;\n  using lf = double;\n\n  using i8 = std::int8_t;\n\
     \  using u8 = std::uint8_t;\n  using i16 = std::int16_t;\n  using u16 = std::uint16_t;\n\
     \  using i32 = std::int32_t;\n  using u32 = std::uint32_t;\n  using i64 = std::int64_t;\n\
     \  using u64 = std::uint64_t;\n  using i128 = __int128_t;\n  using u128 = __uint128_t;\n\
     \  #ifdef __SIZEOF_FLOAT128__\n  using f128 = __float128;\n  #endif\n\n  using\
-    \ mint = ModInt<mod>;\n  using dmint = DynamicModInt;\n\n  template<class _typeKey>\n\
-    \  using hset = std::unordered_set<_typeKey, Hash<_typeKey>>;\n  template<class\
+    \ mint = ModInt<mod>;\n  using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\n  template<class\
+    \ _typeKey>\n  using hset = std::unordered_set<_typeKey, Hash<_typeKey>>;\n  template<class\
     \ _typeKey, class _typeT>\n  using hmap = std::unordered_map<_typeKey, _typeT,\
     \ Hash<_typeKey>>;\n  template<class _typeKey>\n  using hmultiset = std::unordered_multiset<_typeKey,\
     \ Hash<_typeKey>>;\n  template<class _typeKey, class _typeT>\n  using hmultimap\
@@ -316,7 +317,7 @@ data:
   path: template/all.hpp
   requiredBy:
   - all/all.hpp
-  timestamp: '2022-03-19 01:10:40+09:00'
+  timestamp: '2022-03-19 01:16:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/all.hpp

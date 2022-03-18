@@ -115,31 +115,32 @@ data:
     \ std::false_type {};\n  template<class _typeT>\n  struct is_container_adapter<_typeT,\
     \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_iterable<_typeT>>\
     \ {};\n\n  template<class _typeT>\n  constexpr bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n\
-    }\n#line 9 \"math/Barrett.hpp\"\n\ntemplate<class _typeT>\nstruct Barrett {\n\
-    \  static_assert(std::is_unsigned_v<_typeT>, \"Unsigned integer is required\"\
-    );\n\nprivate:\n  using _mul_value_type = uint_least_t<std::numeric_limits<std::make_unsigned_t<_typeT>>::digits\
-    \ * 2>;\n  _typeT _mod;\n  _mul_value_type _m;\n\npublic:\n  using value_type\
-    \ = _typeT;\n\n  constexpr void set_mod(_typeT _mod) noexcept {\n    this->_mod\
-    \ = _mod;\n    _m = (static_cast<_mul_value_type>(1) << 64) / _mod;\n  }\n\n \
-    \ constexpr KYOPRO_BASE_INT get_mod() const noexcept {\n    return _mod;\n  }\n\
-    \n  Barrett() noexcept = default;\n  Barrett(KYOPRO_BASE_UINT _mod) noexcept:\
-    \ _mod(_mod), _m((static_cast<_mul_value_type>(1) << 64) / _mod) {}\n\n  constexpr\
-    \ KYOPRO_BASE_UINT operator ()(KYOPRO_BASE_UINT _x) const noexcept {\n\t  _x -=\
-    \ static_cast<_typeT>((_x * _m) >> 64) * _mod;\n    return _x < _mod ? _x : _x\
-    \ - _mod;\n  }\n};\n"
+    }\n#line 9 \"math/Barrett.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n\
+    \  struct Barrett {\n    static_assert(std::is_unsigned_v<_typeT>, \"Unsigned\
+    \ integer is required\");\n\n  private:\n    using _mul_value_type = uint_least_t<std::numeric_limits<std::make_unsigned_t<_typeT>>::digits\
+    \ * 2>;\n    _typeT _mod;\n    _mul_value_type _m;\n\n  public:\n    using value_type\
+    \ = _typeT;\n\n    constexpr void set_mod(_typeT _mod) noexcept {\n      this->_mod\
+    \ = _mod;\n      _m = (static_cast<_mul_value_type>(1) << 64) / _mod;\n    }\n\
+    \n    constexpr KYOPRO_BASE_INT get_mod() const noexcept {\n      return _mod;\n\
+    \    }\n\n    Barrett() noexcept = default;\n    Barrett(KYOPRO_BASE_UINT _mod)\
+    \ noexcept: _mod(_mod), _m((static_cast<_mul_value_type>(1) << 64) / _mod) {}\n\
+    \n    constexpr KYOPRO_BASE_UINT operator ()(KYOPRO_BASE_UINT _x) const noexcept\
+    \ {\n      _x -= static_cast<_typeT>((_x * _m) >> 64) * _mod;\n      return _x\
+    \ < _mod ? _x : _x - _mod;\n    }\n  };\n}\n"
   code: "#pragma once\n\n#include <cstdint>\n#include <limits>\n#include <type_traits>\n\
     #include \"../algorithm/bit.hpp\"\n#include \"../meta/settings.hpp\"\n#include\
-    \ \"../meta/trait.hpp\"\n\ntemplate<class _typeT>\nstruct Barrett {\n  static_assert(std::is_unsigned_v<_typeT>,\
-    \ \"Unsigned integer is required\");\n\nprivate:\n  using _mul_value_type = uint_least_t<std::numeric_limits<std::make_unsigned_t<_typeT>>::digits\
-    \ * 2>;\n  _typeT _mod;\n  _mul_value_type _m;\n\npublic:\n  using value_type\
-    \ = _typeT;\n\n  constexpr void set_mod(_typeT _mod) noexcept {\n    this->_mod\
-    \ = _mod;\n    _m = (static_cast<_mul_value_type>(1) << 64) / _mod;\n  }\n\n \
-    \ constexpr KYOPRO_BASE_INT get_mod() const noexcept {\n    return _mod;\n  }\n\
-    \n  Barrett() noexcept = default;\n  Barrett(KYOPRO_BASE_UINT _mod) noexcept:\
-    \ _mod(_mod), _m((static_cast<_mul_value_type>(1) << 64) / _mod) {}\n\n  constexpr\
-    \ KYOPRO_BASE_UINT operator ()(KYOPRO_BASE_UINT _x) const noexcept {\n\t  _x -=\
-    \ static_cast<_typeT>((_x * _m) >> 64) * _mod;\n    return _x < _mod ? _x : _x\
-    \ - _mod;\n  }\n};"
+    \ \"../meta/trait.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n  struct\
+    \ Barrett {\n    static_assert(std::is_unsigned_v<_typeT>, \"Unsigned integer\
+    \ is required\");\n\n  private:\n    using _mul_value_type = uint_least_t<std::numeric_limits<std::make_unsigned_t<_typeT>>::digits\
+    \ * 2>;\n    _typeT _mod;\n    _mul_value_type _m;\n\n  public:\n    using value_type\
+    \ = _typeT;\n\n    constexpr void set_mod(_typeT _mod) noexcept {\n      this->_mod\
+    \ = _mod;\n      _m = (static_cast<_mul_value_type>(1) << 64) / _mod;\n    }\n\
+    \n    constexpr KYOPRO_BASE_INT get_mod() const noexcept {\n      return _mod;\n\
+    \    }\n\n    Barrett() noexcept = default;\n    Barrett(KYOPRO_BASE_UINT _mod)\
+    \ noexcept: _mod(_mod), _m((static_cast<_mul_value_type>(1) << 64) / _mod) {}\n\
+    \n    constexpr KYOPRO_BASE_UINT operator ()(KYOPRO_BASE_UINT _x) const noexcept\
+    \ {\n      _x -= static_cast<_typeT>((_x * _m) >> 64) * _mod;\n      return _x\
+    \ < _mod ? _x : _x - _mod;\n    }\n  };\n}"
   dependsOn:
   - algorithm/bit.hpp
   - meta/settings.hpp
@@ -152,7 +153,7 @@ data:
   - template/all.hpp
   - template/alias.hpp
   - all/all.hpp
-  timestamp: '2022-03-19 01:10:40+09:00'
+  timestamp: '2022-03-19 01:16:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/Barrett.hpp
