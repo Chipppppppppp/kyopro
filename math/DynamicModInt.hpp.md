@@ -10,16 +10,16 @@ data:
   - icon: ':warning:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -59,24 +59,25 @@ data:
     \ {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>: std::true_type {};\n\
     #ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
     \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
-    \ _size>\n  struct int_least {\n  private:\n    auto _get_type() const noexcept\
-    \ {\n      if constexpr (_size <= 8) return std::declval<std::int_least8_t>();\n\
+    \ _size>\n  struct int_least {\n  private:\n    static constexpr auto _get_type()\
+    \ noexcept {\n      if constexpr (_size <= 8) return std::declval<std::int_least8_t>();\n\
     \      if constexpr (_size <= 16) return std::declval<std::int_least16_t>();\n\
     \      if constexpr (_size <= 32) return std::declval<std::int_least32_t>();\n\
     \      if constexpr (_size <= 64) return std::declval<std::int_least64_t>();\n\
     \      static_assert(_size <= 128, \"Integer size is too long\");\n      return\
     \ std::declval<__int128_t>();\n    }\n\n  public:\n    using type = decltype(_get_type());\n\
-    \  };\n\n  template<KYOPRO_BASE_UINT _size>\n  using int_least_t = int_least<_size>::type;\n\
-    \n  template<KYOPRO_BASE_UINT _size>\n  struct uint_least {\n  private:\n    auto\
-    \ _get_type() const noexcept {\n      if constexpr (_size <= 8) return std::declval<std::uint_least8_t>();\n\
-    \      if constexpr (_size <= 16) return std::declval<std::uint_least16_t>();\n\
-    \      if constexpr (_size <= 32) return std::declval<std::uint_least32_t>();\n\
-    \      if constexpr (_size <= 64) return std::declval<std::uint_least64_t>();\n\
-    \      static_assert(_size <= 128, \"Integer size is too long\");\n      return\
-    \ std::declval<__uint128_t>();\n    }\n\n  public:\n    using type = decltype(_get_type());\n\
-    \  };\n\n  template<KYOPRO_BASE_UINT _size>\n  using uint_least_t = uint_least<_size>::type;\n\
-    \n  template<class, class = void>\n  struct is_iterator: std::false_type {};\n\
-    \  template<class _typeT>\n  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
+    \  };\n\n  template<KYOPRO_BASE_UINT _size>\n  using int_least_t = typename int_least<_size>::type;\n\
+    \n  template<KYOPRO_BASE_UINT _size>\n  struct uint_least {\n  private:\n    static\
+    \ constexpr auto _get_type() noexcept {\n      if constexpr (_size <= 8) return\
+    \ std::declval<std::uint_least8_t>();\n      if constexpr (_size <= 16) return\
+    \ std::declval<std::uint_least16_t>();\n      if constexpr (_size <= 32) return\
+    \ std::declval<std::uint_least32_t>();\n      if constexpr (_size <= 64) return\
+    \ std::declval<std::uint_least64_t>();\n      static_assert(_size <= 128, \"Integer\
+    \ size is too long\");\n      return std::declval<__uint128_t>();\n    }\n\n \
+    \ public:\n    using type = decltype(_get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
+    \ _size>\n  using uint_least_t = typename uint_least<_size>::type;\n\n  template<class,\
+    \ class = void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
+    \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterator_v\
     \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_iterable<_typeT,\
@@ -256,7 +257,7 @@ data:
   - template/all.hpp
   - template/alias.hpp
   - all.hpp
-  timestamp: '2022-03-17 14:38:24+09:00'
+  timestamp: '2022-03-19 00:38:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/DynamicModInt.hpp

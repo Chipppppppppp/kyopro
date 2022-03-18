@@ -5,6 +5,9 @@ data:
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
   - icon: ':warning:'
+    path: algorithm/bit.hpp
+    title: algorithm/bit.hpp
+  - icon: ':warning:'
     path: math/Barrett.hpp
     title: math/Barrett.hpp
   - icon: ':warning:'
@@ -34,19 +37,19 @@ data:
   - icon: ':warning:'
     path: math/modpow.hpp
     title: math/modpow.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/monoid.hpp
     title: math/monoid.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -100,24 +103,25 @@ data:
     \ std::true_type {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>: std::true_type\
     \ {};\n#ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
     \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
-    \ _size>\n  struct int_least {\n  private:\n    auto _get_type() const noexcept\
-    \ {\n      if constexpr (_size <= 8) return std::declval<std::int_least8_t>();\n\
+    \ _size>\n  struct int_least {\n  private:\n    static constexpr auto _get_type()\
+    \ noexcept {\n      if constexpr (_size <= 8) return std::declval<std::int_least8_t>();\n\
     \      if constexpr (_size <= 16) return std::declval<std::int_least16_t>();\n\
     \      if constexpr (_size <= 32) return std::declval<std::int_least32_t>();\n\
     \      if constexpr (_size <= 64) return std::declval<std::int_least64_t>();\n\
     \      static_assert(_size <= 128, \"Integer size is too long\");\n      return\
     \ std::declval<__int128_t>();\n    }\n\n  public:\n    using type = decltype(_get_type());\n\
-    \  };\n\n  template<KYOPRO_BASE_UINT _size>\n  using int_least_t = int_least<_size>::type;\n\
-    \n  template<KYOPRO_BASE_UINT _size>\n  struct uint_least {\n  private:\n    auto\
-    \ _get_type() const noexcept {\n      if constexpr (_size <= 8) return std::declval<std::uint_least8_t>();\n\
-    \      if constexpr (_size <= 16) return std::declval<std::uint_least16_t>();\n\
-    \      if constexpr (_size <= 32) return std::declval<std::uint_least32_t>();\n\
-    \      if constexpr (_size <= 64) return std::declval<std::uint_least64_t>();\n\
-    \      static_assert(_size <= 128, \"Integer size is too long\");\n      return\
-    \ std::declval<__uint128_t>();\n    }\n\n  public:\n    using type = decltype(_get_type());\n\
-    \  };\n\n  template<KYOPRO_BASE_UINT _size>\n  using uint_least_t = uint_least<_size>::type;\n\
-    \n  template<class, class = void>\n  struct is_iterator: std::false_type {};\n\
-    \  template<class _typeT>\n  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
+    \  };\n\n  template<KYOPRO_BASE_UINT _size>\n  using int_least_t = typename int_least<_size>::type;\n\
+    \n  template<KYOPRO_BASE_UINT _size>\n  struct uint_least {\n  private:\n    static\
+    \ constexpr auto _get_type() noexcept {\n      if constexpr (_size <= 8) return\
+    \ std::declval<std::uint_least8_t>();\n      if constexpr (_size <= 16) return\
+    \ std::declval<std::uint_least16_t>();\n      if constexpr (_size <= 32) return\
+    \ std::declval<std::uint_least32_t>();\n      if constexpr (_size <= 64) return\
+    \ std::declval<std::uint_least64_t>();\n      static_assert(_size <= 128, \"Integer\
+    \ size is too long\");\n      return std::declval<__uint128_t>();\n    }\n\n \
+    \ public:\n    using type = decltype(_get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
+    \ _size>\n  using uint_least_t = typename uint_least<_size>::type;\n\n  template<class,\
+    \ class = void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
+    \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterator_v\
     \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_iterable<_typeT,\
@@ -266,49 +270,85 @@ data:
     \      }\n    }\n    while (_n > 1) {\n      std::uint_fast64_t _p = find_prime_factor(_n);\n\
     \      while (_n % _p == 0) {\n        _n /= _p;\n        _res.emplace_back(_p);\n\
     \      }\n    }\n    if constexpr (_sorted) std::sort(_res.begin(), _res.end());\n\
-    \    return _res;\n  }\n}\n#line 11 \"math/ModInt.hpp\"\n\nnamespace kyopro {\n\
-    \  template<KYOPRO_BASE_UINT _mod>\n  struct ModInt {\n  private:\n    static\
-    \ constexpr value_type _mod = static_cast<value_type>(_mod);\n\n  public:\n  \
-    \  using value_type = uint_least_t<>;\n\n    value_type value;\n\n    static constexpr\
-    \ KYOPRO_BASE_INT get_mod() noexcept {\n      return static_cast<KYOPRO_BASE_INT>(_mod);\n\
-    \    }\n\n    constexpr ModInt() noexcept = default;\n    template<class _typeT>\n\
-    \    constexpr ModInt(_typeT _value) noexcept: value(floor_mod(_value, _mod))\
-    \ { static_assert(std::is_integral_v<_typeT>); }\n\n    template<class _typeT>\n\
-    \    explicit constexpr operator _typeT() const noexcept { return static_cast<_typeT>(value);\
-    \ }\n\n    static constexpr ModInt raw(KYOPRO_BASE_UINT _n) noexcept {\n     \
-    \ ModInt _res;\n      _res.value = _n;\n      return _res;\n    }\n\n    constexpr\
-    \ ModInt power(KYOPRO_BASE_UINT _n) const noexcept {\n      std::uint_fast64_t\
-    \ _res = 1, _a = value;\n      while (_n > 0) {\n        if (_n & 1) _res = _res\
-    \ * _a % _mod;\n        _a = _a * _a % _mod;\n        _n >>= 1;\n      }\n   \
-    \   return _res;\n    }\n\n    constexpr ModInt inv() const noexcept {\n     \
-    \ std::uint_fast64_t _a = value, _b = _mod;\n      std::int_fast64_t _u = 1, _v\
-    \ = 0;\n      while (_b > 0) {\n        std::uint_fast64_t _t = _a / _b;\n   \
-    \     _a -= _t * _b;\n        std::swap(_a, _b);\n        _u -= _t * _v;\n   \
-    \     std::swap(_u, _v);\n      }\n      return floor_mod(_u, _mod);\n    }\n\n\
-    \    constexpr ModInt operator +() const noexcept { return *this; }\n\n    constexpr\
-    \ ModInt operator -() const noexcept { return _mod - value; }\n\n    constexpr\
-    \ ModInt& operator ++() noexcept {\n      if (++value >= _mod) value -= _mod;\n\
-    \      return *this;\n    }\n\n    constexpr ModInt operator ++(int) noexcept\
-    \ {\n      ModInt _before = *this;\n      operator ++();\n      return _before;\n\
-    \    }\n\n    constexpr ModInt& operator --() noexcept {\n      if (value == 0)\
-    \ value = _mod;\n      --value;\n      return *this;\n    }\n\n    constexpr ModInt\
-    \ operator --(int) noexcept {\n      ModInt _before = *this;\n      operator --();\n\
-    \      return _before;\n    }\n\n    constexpr ModInt& operator +=(ModInt _rhs)\
-    \ noexcept {\n      if ((value += _rhs.value) >= _mod) value -= _mod;\n      return\
-    \ *this;\n    }\n\n    constexpr ModInt& operator -=(ModInt _rhs) noexcept {\n\
-    \      if (value < _rhs.value) value += _mod;\n      value -= _rhs.value;\n  \
-    \    return *this;\n    }\n\n    constexpr ModInt& operator *=(ModInt _rhs) noexcept\
-    \ {\n      value = static_cast<decltype(_get_value_type().second)>(value) * _rhs.value\
-    \ % _mod;\n      return *this;\n    }\n\n    constexpr ModInt& operator /=(ModInt\
-    \ _rhs) noexcept {\n      value = static_cast<decltype(_get_value_type().second)>(value)\
-    \ * _rhs.inv().value % _mod;\n      return *this;\n    }\n\n    friend constexpr\
-    \ ModInt operator +(ModInt _lhs, ModInt _rhs) noexcept { return _lhs += _rhs;\
-    \ }\n\n    friend constexpr ModInt operator -(ModInt _lhs, ModInt _rhs) noexcept\
-    \ { return _lhs -= _rhs; }\n\n    friend constexpr ModInt operator *(ModInt _lhs,\
-    \ ModInt _rhs) noexcept { return _lhs *= _rhs; }\n\n    friend constexpr ModInt\
-    \ operator /(ModInt _lhs, ModInt _rhs) noexcept { return _lhs /= _rhs; }\n\n \
-    \   friend constexpr bool operator ==(ModInt _lhs, ModInt _rhs) noexcept { return\
-    \ _lhs.value == _rhs.value; }\n\n    friend constexpr bool operator !=(ModInt\
+    \    return _res;\n  }\n}\n#line 5 \"algorithm/bit.hpp\"\n\nnamespace kyopro {\n\
+    \  template<class _typeT>\n  constexpr KYOPRO_BASE_INT pop_count(_typeT _x) noexcept\
+    \ {\n    constexpr auto _digits = std::numeric_limits<std::make_unsigned_t<_typeT>>::digits;\n\
+    \    static_assert(_digits <= std::numeric_limits<unsigned long long>::digits,\
+    \ \"Integer size is too long\");\n    if constexpr (_digits <= std::numeric_limits<unsigned\
+    \ int>::digits) return static_cast<KYOPRO_BASE_INT>(__builtin_popcount(_x));\n\
+    \    else if constexpr (_digits <= std::numeric_limits<unsigned long>::digits)\
+    \ return static_cast<KYOPRO_BASE_INT>(__builtin_popcountl(_x));\n    else return\
+    \ static_cast<KYOPRO_BASE_INT>(__builtin_popcountll(_x));\n  }\n\n  template<class\
+    \ _typeT>\n  constexpr KYOPRO_BASE_INT leading_zero(_typeT _x) noexcept {\n  \
+    \  constexpr auto _digits = std::numeric_limits<std::make_unsigned_t<_typeT>>::digits;\n\
+    \    static_assert(_digits <= std::numeric_limits<unsigned long long>::digits,\
+    \ \"Integer size is too long\");\n    if (_x == 0) return 0;\n    if constexpr\
+    \ (_digits <= std::numeric_limits<unsigned int>::digits) return static_cast<KYOPRO_BASE_INT>(__builtin_clz(_x)\
+    \ + _digits - std::numeric_limits<unsigned int>::digits);\n    else if constexpr\
+    \ (_digits <= std::numeric_limits<unsigned long>::digits) return static_cast<KYOPRO_BASE_INT>(__builtin_clzl(_x)\
+    \ + _digits - std::numeric_limits<unsigned long>::digits);\n    else return static_cast<KYOPRO_BASE_INT>(__builtin_clzll(_x)\
+    \ + _digits - std::numeric_limits<unsigned long long>::digits);\n  }\n\n  template<class\
+    \ _typeT>\n  constexpr KYOPRO_BASE_INT trailing_zero(_typeT _x) noexcept {\n \
+    \   constexpr auto _digits = std::numeric_limits<std::make_unsigned_t<_typeT>>::digits;\n\
+    \    static_assert(_digits <= std::numeric_limits<unsigned long long>::digits,\
+    \ \"Integer size is too long\");\n    if constexpr (_digits <= std::numeric_limits<unsigned\
+    \ int>::digits) return static_cast<KYOPRO_BASE_INT>(__builtin_ctz(_x));\n    else\
+    \ if constexpr (_digits <= std::numeric_limits<unsigned long>::digits) return\
+    \ static_cast<KYOPRO_BASE_INT>(__builtin_ctzl(_x));\n    else return static_cast<KYOPRO_BASE_INT>(__builtin_ctzll(_x));\n\
+    \  }\n\n  template<class _typeT>\n  constexpr KYOPRO_BASE_INT bit_len(_typeT _x)\
+    \ noexcept {\n    constexpr auto _digits = std::numeric_limits<std::make_unsigned_t<_typeT>>::digits;\n\
+    \    static_assert(_digits <= std::numeric_limits<unsigned long long>::digits,\
+    \ \"Integer size is too long\");\n    if (_x == 0) return 0;\n    if constexpr\
+    \ (_digits <= std::numeric_limits<unsigned int>::digits) return static_cast<KYOPRO_BASE_INT>(std::numeric_limits<unsigned\
+    \ int>::digits - __builtin_clz(_x));\n    else if constexpr (_digits <= std::numeric_limits<unsigned\
+    \ long>::digits) return static_cast<KYOPRO_BASE_INT>(std::numeric_limits<unsigned\
+    \ long>::digits - __builtin_clzl(_x));\n    else return static_cast<KYOPRO_BASE_INT>(std::numeric_limits<unsigned\
+    \ long long>::digits - __builtin_clzll(_x));\n  }\n\n  template<class _typeT>\n\
+    \  constexpr KYOPRO_BASE_INT floor_bit(_typeT _x) noexcept {\n    return bit_len(_x\
+    \ >> 1);\n  }\n\n  template<class _typeT>\n  constexpr KYOPRO_BASE_INT ceil_bit(_typeT\
+    \ _x) noexcept {\n    if (_x == 0) return 0;\n    return bit_len(_x - 1);\n  }\n\
+    }\n#line 12 \"math/ModInt.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    \ _mod>\n  struct ModInt {\n  private:\n    static constexpr value_type _mod =\
+    \ static_cast<value_type>(_mod);\n\n  public:\n    using value_type = uint_least_t<bit_len(_mod)>;\n\
+    \n    value_type value;\n\n    static constexpr KYOPRO_BASE_INT get_mod() noexcept\
+    \ {\n      return static_cast<KYOPRO_BASE_INT>(_mod);\n    }\n\n    constexpr\
+    \ ModInt() noexcept = default;\n    template<class _typeT>\n    constexpr ModInt(_typeT\
+    \ _value) noexcept: value(floor_mod(_value, _mod)) { static_assert(std::is_integral_v<_typeT>);\
+    \ }\n\n    template<class _typeT>\n    explicit constexpr operator _typeT() const\
+    \ noexcept { return static_cast<_typeT>(value); }\n\n    static constexpr ModInt\
+    \ raw(KYOPRO_BASE_UINT _n) noexcept {\n      ModInt _res;\n      _res.value =\
+    \ _n;\n      return _res;\n    }\n\n    constexpr ModInt power(KYOPRO_BASE_UINT\
+    \ _n) const noexcept {\n      std::uint_fast64_t _res = 1, _a = value;\n     \
+    \ while (_n > 0) {\n        if (_n & 1) _res = _res * _a % _mod;\n        _a =\
+    \ _a * _a % _mod;\n        _n >>= 1;\n      }\n      return _res;\n    }\n\n \
+    \   constexpr ModInt inv() const noexcept {\n      std::uint_fast64_t _a = value,\
+    \ _b = _mod;\n      std::int_fast64_t _u = 1, _v = 0;\n      while (_b > 0) {\n\
+    \        std::uint_fast64_t _t = _a / _b;\n        _a -= _t * _b;\n        std::swap(_a,\
+    \ _b);\n        _u -= _t * _v;\n        std::swap(_u, _v);\n      }\n      return\
+    \ floor_mod(_u, _mod);\n    }\n\n    constexpr ModInt operator +() const noexcept\
+    \ { return *this; }\n\n    constexpr ModInt operator -() const noexcept { return\
+    \ _mod - value; }\n\n    constexpr ModInt& operator ++() noexcept {\n      if\
+    \ (++value >= _mod) value -= _mod;\n      return *this;\n    }\n\n    constexpr\
+    \ ModInt operator ++(int) noexcept {\n      ModInt _before = *this;\n      operator\
+    \ ++();\n      return _before;\n    }\n\n    constexpr ModInt& operator --() noexcept\
+    \ {\n      if (value == 0) value = _mod;\n      --value;\n      return *this;\n\
+    \    }\n\n    constexpr ModInt operator --(int) noexcept {\n      ModInt _before\
+    \ = *this;\n      operator --();\n      return _before;\n    }\n\n    constexpr\
+    \ ModInt& operator +=(ModInt _rhs) noexcept {\n      if ((value += _rhs.value)\
+    \ >= _mod) value -= _mod;\n      return *this;\n    }\n\n    constexpr ModInt&\
+    \ operator -=(ModInt _rhs) noexcept {\n      if (value < _rhs.value) value +=\
+    \ _mod;\n      value -= _rhs.value;\n      return *this;\n    }\n\n    constexpr\
+    \ ModInt& operator *=(ModInt _rhs) noexcept {\n      value = static_cast<uint_least_t<bit_len(_mod)\
+    \ * 2>>(value) * _rhs.value % _mod;\n      return *this;\n    }\n\n    constexpr\
+    \ ModInt& operator /=(ModInt _rhs) noexcept {\n      value = static_cast<uint_least_t<bit_len(_mod)\
+    \ * 2>>(value) * _rhs.inv().value % _mod;\n      return *this;\n    }\n\n    friend\
+    \ constexpr ModInt operator +(ModInt _lhs, ModInt _rhs) noexcept { return _lhs\
+    \ += _rhs; }\n\n    friend constexpr ModInt operator -(ModInt _lhs, ModInt _rhs)\
+    \ noexcept { return _lhs -= _rhs; }\n\n    friend constexpr ModInt operator *(ModInt\
+    \ _lhs, ModInt _rhs) noexcept { return _lhs *= _rhs; }\n\n    friend constexpr\
+    \ ModInt operator /(ModInt _lhs, ModInt _rhs) noexcept { return _lhs /= _rhs;\
+    \ }\n\n    friend constexpr bool operator ==(ModInt _lhs, ModInt _rhs) noexcept\
+    \ { return _lhs.value == _rhs.value; }\n\n    friend constexpr bool operator !=(ModInt\
     \ _lhs, ModInt _rhs) noexcept { return _lhs.value != _rhs.value; }\n\n    template<class\
     \ _typeScanner>\n    void scan(_typeScanner& _scanner) {\n      std::int_fast64_t\
     \ _value;\n      _scanner.scan(_value);\n      value = floor_mod(_value, _mod);\n\
@@ -379,13 +419,14 @@ data:
   - math/factorize.hpp
   - math/is_prime.hpp
   - math/ModInt.hpp
+  - algorithm/bit.hpp
   - math/modpow.hpp
   - math/monoid.hpp
   isVerificationFile: false
   path: math/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-03-17 14:38:24+09:00'
+  timestamp: '2022-03-19 00:38:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/all.hpp
