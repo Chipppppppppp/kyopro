@@ -16,13 +16,13 @@ namespace kyopro {
     using value_type = uint_least_t<bit_len(_m)>;
 
   private:
-    static constexpr value_type _mod = static_cast<value_type>(_m);
+    static constexpr value_type _mod = _m;
 
   public:
     value_type value;
 
     static constexpr KYOPRO_BASE_INT get_mod() noexcept {
-      return static_cast<KYOPRO_BASE_INT>(_mod);
+      return _mod;
     }
 
     constexpr ModInt() noexcept = default;
@@ -30,7 +30,7 @@ namespace kyopro {
     constexpr ModInt(_typeT _value) noexcept: value(floor_mod(_value, _mod)) { static_assert(std::is_integral_v<_typeT>); }
 
     template<class _typeT>
-    explicit constexpr operator _typeT() const noexcept { return static_cast<_typeT>(value); }
+    explicit constexpr operator _typeT() const noexcept { return value; }
 
     static constexpr ModInt raw(KYOPRO_BASE_UINT _n) noexcept {
       ModInt _res;

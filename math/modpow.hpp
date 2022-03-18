@@ -15,6 +15,6 @@ namespace kyopro {
       _b = _b * _b % _mod;
       _n >>= 1;
     }
-    return static_cast<_typeT>(_res);
+    return _res;
   }
 }

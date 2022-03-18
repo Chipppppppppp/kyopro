@@ -15,7 +15,7 @@ public:
   }
 
   constexpr KYOPRO_BASE_INT get_mod() const noexcept {
-    return static_cast<KYOPRO_BASE_INT>(_mod);
+    return _mod;
   }
 
   Barrett() noexcept = default;

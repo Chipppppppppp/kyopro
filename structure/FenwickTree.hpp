@@ -20,7 +20,7 @@ namespace kyopro {
     FenwickTree() noexcept = default;
     FenwickTree(KYOPRO_BASE_UINT _n) noexcept: _op(), _tree(_n, _op.id) {}
 
-    KYOPRO_BASE_UINT size() noexcept { return static_cast<KYOPRO_BASE_UINT>(_tree.size()); }
+    KYOPRO_BASE_UINT size() noexcept { return _tree.size(); }
 
     void apply(int _p, const _typeT& _x) {
       ++_p;

@@ -17,7 +17,7 @@ namespace kyopro {
     void assign(KYOPRO_BASE_UINT _x) { _par.assign(_x, -1); }
     void reset() { std::fill(std::begin(_par), std::end(_par), -1); }
 
-    KYOPRO_BASE_UINT size() const noexcept { return static_cast<KYOPRO_BASE_UINT>(_par.size()); }
+    KYOPRO_BASE_UINT size() const noexcept { return _par.size(); }
 
     KYOPRO_BASE_INT find(int _x) {
       int _p = _x;
