@@ -30,29 +30,28 @@ data:
     \n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n\
     #ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef\
     \ KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n\
-    #define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(1000000007)\n#endif\n\
-    \n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
+    #define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(998244353)\n#endif\n\n\
+    #ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 5 \"math/Barrett.hpp\"\n\nstruct Barrett {\nprivate:\n  std::uint_fast64_t\
     \ _mod;\n  __uint128_t _m;\n\npublic:\n  constexpr void set_mod(KYOPRO_BASE_UINT\
     \ _mod) noexcept {\n    this->_mod = _mod;\n    _m = (static_cast<__uint128_t>(1)\
     \ << 64) / _mod;\n  }\n\n  constexpr KYOPRO_BASE_INT get_mod() const noexcept\
-    \ {\n    return static_cast<KYOPRO_BASE_INT>(_mod);\n  }\n\n  Barrett() noexcept\
-    \ = default;\n  Barrett(KYOPRO_BASE_UINT _mod) noexcept: _mod(_mod), _m((static_cast<__uint128_t>(1)\
-    \ << 64) / _mod) {}\n\n  constexpr KYOPRO_BASE_UINT operator ()(KYOPRO_BASE_UINT\
-    \ _x) const noexcept {\n\t  _x -= static_cast<std::uint_fast64_t>((_x * _m) >>\
-    \ 64) * _mod;\n    return _x < _mod ? _x : _x - _mod;\n  }\n};\n"
+    \ {\n    return _mod;\n  }\n\n  Barrett() noexcept = default;\n  Barrett(KYOPRO_BASE_UINT\
+    \ _mod) noexcept: _mod(_mod), _m((static_cast<__uint128_t>(1) << 64) / _mod) {}\n\
+    \n  constexpr KYOPRO_BASE_UINT operator ()(KYOPRO_BASE_UINT _x) const noexcept\
+    \ {\n\t  _x -= static_cast<std::uint_fast64_t>((_x * _m) >> 64) * _mod;\n    return\
+    \ _x < _mod ? _x : _x - _mod;\n  }\n};\n"
   code: "#pragma once\n\n#include <cstdint>\n#include \"../meta/settings.hpp\"\n\n\
     struct Barrett {\nprivate:\n  std::uint_fast64_t _mod;\n  __uint128_t _m;\n\n\
     public:\n  constexpr void set_mod(KYOPRO_BASE_UINT _mod) noexcept {\n    this->_mod\
     \ = _mod;\n    _m = (static_cast<__uint128_t>(1) << 64) / _mod;\n  }\n\n  constexpr\
-    \ KYOPRO_BASE_INT get_mod() const noexcept {\n    return static_cast<KYOPRO_BASE_INT>(_mod);\n\
-    \  }\n\n  Barrett() noexcept = default;\n  Barrett(KYOPRO_BASE_UINT _mod) noexcept:\
-    \ _mod(_mod), _m((static_cast<__uint128_t>(1) << 64) / _mod) {}\n\n  constexpr\
-    \ KYOPRO_BASE_UINT operator ()(KYOPRO_BASE_UINT _x) const noexcept {\n\t  _x -=\
-    \ static_cast<std::uint_fast64_t>((_x * _m) >> 64) * _mod;\n    return _x < _mod\
-    \ ? _x : _x - _mod;\n  }\n};"
+    \ KYOPRO_BASE_INT get_mod() const noexcept {\n    return _mod;\n  }\n\n  Barrett()\
+    \ noexcept = default;\n  Barrett(KYOPRO_BASE_UINT _mod) noexcept: _mod(_mod),\
+    \ _m((static_cast<__uint128_t>(1) << 64) / _mod) {}\n\n  constexpr KYOPRO_BASE_UINT\
+    \ operator ()(KYOPRO_BASE_UINT _x) const noexcept {\n\t  _x -= static_cast<std::uint_fast64_t>((_x\
+    \ * _m) >> 64) * _mod;\n    return _x < _mod ? _x : _x - _mod;\n  }\n};"
   dependsOn:
   - meta/settings.hpp
   isVerificationFile: false
@@ -63,7 +62,7 @@ data:
   - template/all.hpp
   - template/alias.hpp
   - all.hpp
-  timestamp: '2022-03-17 14:38:24+09:00'
+  timestamp: '2022-03-19 00:51:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/Barrett.hpp

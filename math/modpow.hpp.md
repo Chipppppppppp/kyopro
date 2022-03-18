@@ -24,7 +24,7 @@ data:
     #line 3 \"meta/settings.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT\
     \ std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n\
     #endif\n\n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\
-    \n#ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(1000000007)\n\
+    \n#ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(998244353)\n\
     #endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
@@ -40,16 +40,14 @@ data:
     \ _a, KYOPRO_BASE_UINT _n, KYOPRO_BASE_UINT _mod) noexcept {\n    static_assert(std::is_integral_v<_typeT>);\n\
     \    std::uint_fast64_t _b = floor_mod(_a, static_cast<_typeT>(_mod));\n    std::uint_fast64_t\
     \ _res = 1;\n    while (_n > 0) {\n      if (_n & 1) _res = _res * _b % _mod;\n\
-    \      _b = _b * _b % _mod;\n      _n >>= 1;\n    }\n    return static_cast<_typeT>(_res);\n\
-    \  }\n}\n"
+    \      _b = _b * _b % _mod;\n      _n >>= 1;\n    }\n    return _res;\n  }\n}\n"
   code: "#pragma once\n#include <cstdint>\n#include <type_traits>\n#include \"../meta/settings.hpp\"\
     \n#include \"mod.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n  constexpr\
     \ _typeT modpow(_typeT _a, KYOPRO_BASE_UINT _n, KYOPRO_BASE_UINT _mod) noexcept\
     \ {\n    static_assert(std::is_integral_v<_typeT>);\n    std::uint_fast64_t _b\
     \ = floor_mod(_a, static_cast<_typeT>(_mod));\n    std::uint_fast64_t _res = 1;\n\
     \    while (_n > 0) {\n      if (_n & 1) _res = _res * _b % _mod;\n      _b =\
-    \ _b * _b % _mod;\n      _n >>= 1;\n    }\n    return static_cast<_typeT>(_res);\n\
-    \  }\n}"
+    \ _b * _b % _mod;\n      _n >>= 1;\n    }\n    return _res;\n  }\n}"
   dependsOn:
   - meta/settings.hpp
   - math/mod.hpp
@@ -58,7 +56,7 @@ data:
   requiredBy:
   - math/all.hpp
   - all.hpp
-  timestamp: '2022-03-17 14:38:24+09:00'
+  timestamp: '2022-03-19 00:51:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/modpow.hpp
