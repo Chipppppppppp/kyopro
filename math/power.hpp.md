@@ -6,8 +6,8 @@ data:
     title: meta/settings.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
+    path: all/all.hpp
+    title: all/all.hpp
   - icon: ':warning:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
@@ -88,7 +88,7 @@ data:
   - structure/all.hpp
   - template/all.hpp
   - template/alias.hpp
-  - all.hpp
+  - all/all.hpp
   - meta/constant.hpp
   - meta/all.hpp
   - system/in.hpp

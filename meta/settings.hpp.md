@@ -12,8 +12,8 @@ data:
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
+    path: all/all.hpp
+    title: all/all.hpp
   - icon: ':warning:'
     path: math/Barrett.hpp
     title: math/Barrett.hpp
@@ -224,7 +224,7 @@ data:
   - algorithm/bit.hpp
   - algorithm/all.hpp
   - algorithm/Hash.hpp
-  - all.hpp
+  - all/all.hpp
   - meta/trait.hpp
   - meta/constant.hpp
   - meta/all.hpp

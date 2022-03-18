@@ -588,7 +588,7 @@ data:
     \  using priq = std::priority_queue<_typeT, _typeContainer, _typeCompare>;\n \
     \ template<class _typeT, class _typeCompare = std::greater<_typeT>, class _typeContainer\
     \ = std::vector<_typeT>>\n  using heapq = priq<_typeT, _typeContainer, _typeCompare>;\n\
-    }\n\nusing namespace std;\nusing namespace kyopro;\n#line 8 \"all.hpp\"\n"
+    }\n\nusing namespace std;\nusing namespace kyopro;\n#line 8 \"all/all.hpp\"\n"
   code: '#pragma once
 
     #include "algorithm/all.hpp"
@@ -632,15 +632,15 @@ data:
   - template/all.hpp
   - template/alias.hpp
   isVerificationFile: false
-  path: all.hpp
+  path: all/all.hpp
   requiredBy: []
-  timestamp: '2022-03-19 00:51:47+09:00'
+  timestamp: '2022-03-19 00:55:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: all.hpp
+documentation_of: all/all.hpp
 layout: document
 redirect_from:
-- /library/all.hpp
-- /library/all.hpp.html
-title: all.hpp
+- /library/all/all.hpp
+- /library/all/all.hpp.html
+title: all/all.hpp
 ---

@@ -12,8 +12,8 @@ data:
     title: meta/settings.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
+    path: all/all.hpp
+    title: all/all.hpp
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
@@ -102,7 +102,7 @@ data:
   - math/all.hpp
   - structure/FenwickTree.hpp
   - structure/all.hpp
-  - all.hpp
+  - all/all.hpp
   timestamp: '2022-03-19 00:51:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

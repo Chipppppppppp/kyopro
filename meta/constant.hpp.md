@@ -9,8 +9,8 @@ data:
     title: meta/settings.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
+    path: all/all.hpp
+    title: all/all.hpp
   - icon: ':warning:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
@@ -101,7 +101,7 @@ data:
   - structure/all.hpp
   - template/all.hpp
   - template/alias.hpp
-  - all.hpp
+  - all/all.hpp
   - meta/all.hpp
   timestamp: '2022-03-19 00:51:47+09:00'
   verificationStatus: LIBRARY_ALL_AC

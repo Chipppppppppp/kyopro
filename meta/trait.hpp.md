@@ -12,8 +12,8 @@ data:
     path: algorithm/all.hpp
     title: algorithm/all.hpp
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
+    path: all/all.hpp
+    title: all/all.hpp
   - icon: ':warning:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
@@ -156,7 +156,7 @@ data:
   - template/alias.hpp
   - algorithm/all.hpp
   - algorithm/Hash.hpp
-  - all.hpp
+  - all/all.hpp
   - meta/all.hpp
   - system/in.hpp
   - system/out.hpp

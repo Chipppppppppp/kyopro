@@ -12,11 +12,11 @@ data:
     - icon: ':warning:'
       path: algorithm/bit.hpp
       title: algorithm/bit.hpp
-  - name: .
+  - name: all
     pages:
     - icon: ':warning:'
-      path: all.hpp
-      title: all.hpp
+      path: all/all.hpp
+      title: all/all.hpp
   - name: math
     pages:
     - icon: ':warning:'

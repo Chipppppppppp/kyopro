@@ -3,8 +3,8 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
+    path: all/all.hpp
+    title: all/all.hpp
   - icon: ':warning:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
@@ -55,7 +55,7 @@ data:
   - math/modpow.hpp
   - template/all.hpp
   - template/alias.hpp
-  - all.hpp
+  - all/all.hpp
   timestamp: '2022-03-06 15:44:21+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
