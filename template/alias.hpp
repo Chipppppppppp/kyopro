@@ -14,6 +14,7 @@
 #include "../algorithm/Hash.hpp"
 #include "../math/DynamicModInt.hpp"
 #include "../math/ModInt.hpp"
+#include "../meta/settings.hpp"
 
 namespace kyopro {
   using ll = long long;
@@ -35,7 +36,7 @@ namespace kyopro {
   #endif
 
   using mint = ModInt<mod>;
-  using dmint = DynamicModInt;
+  using dmint = DynamicModInt<KYOPRO_BASE_UINT>;
 
   template<class _typeKey>
   using hset = std::unordered_set<_typeKey, Hash<_typeKey>>;
