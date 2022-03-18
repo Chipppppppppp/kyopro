@@ -308,10 +308,10 @@ data:
     \ >> 1);\n  }\n\n  template<class _typeT>\n  constexpr KYOPRO_BASE_INT ceil_bit(_typeT\
     \ _x) noexcept {\n    if (_x == 0) return 0;\n    return bit_len(_x - 1);\n  }\n\
     }\n#line 12 \"math/ModInt.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
-    \ _mod>\n  struct ModInt {\n  private:\n    static constexpr value_type _mod =\
-    \ static_cast<value_type>(_mod);\n\n  public:\n    using value_type = uint_least_t<bit_len(_mod)>;\n\
-    \n    value_type value;\n\n    static constexpr KYOPRO_BASE_INT get_mod() noexcept\
-    \ {\n      return static_cast<KYOPRO_BASE_INT>(_mod);\n    }\n\n    constexpr\
+    \ _m>\n  struct ModInt {\n    using value_type = uint_least_t<bit_len(_m)>;\n\n\
+    \  private:\n    static constexpr value_type _mod = static_cast<value_type>(_m);\n\
+    \n  public:\n    value_type value;\n\n    static constexpr KYOPRO_BASE_INT get_mod()\
+    \ noexcept {\n      return static_cast<KYOPRO_BASE_INT>(_mod);\n    }\n\n    constexpr\
     \ ModInt() noexcept = default;\n    template<class _typeT>\n    constexpr ModInt(_typeT\
     \ _value) noexcept: value(floor_mod(_value, _mod)) { static_assert(std::is_integral_v<_typeT>);\
     \ }\n\n    template<class _typeT>\n    explicit constexpr operator _typeT() const\
@@ -426,7 +426,7 @@ data:
   path: math/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-03-19 00:38:34+09:00'
+  timestamp: '2022-03-19 00:43:31+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/all.hpp
