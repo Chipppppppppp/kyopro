@@ -9,15 +9,18 @@
 #include "mod.hpp"
 
 namespace kyopro {
+  template<class _typeT>
   struct DynamicModInt {
+    static_assert(std::is_unsigned_v<_typeT>, "Unsigned integer is required");
+
   private:
-    inline static std::uint_fast64_t _mod;
-    inline static Barrett _barrett;
+    inline static _typeT _mod;
+    inline static Barrett<_typeT> _barrett;
 
   public:
-    KYOPRO_BASE_UINT value;
+    _typeT value;
 
-    static void set_mod(KYOPRO_BASE_UINT _m) noexcept {
+    static void set_mod(_typeT _m) noexcept {
       _mod = _m;
       _barrett.set_mod(_m);
     }
@@ -27,20 +30,19 @@ namespace kyopro {
     }
 
     DynamicModInt() noexcept = default;
-    template<class _typeT>
-    DynamicModInt(_typeT _value) noexcept: value(floor_mod(_value, _mod)) { static_assert(std::is_integral_v<_typeT>); }
+    DynamicModInt(_typeT _value) noexcept: value(floor_mod(_value, _mod)) {}
 
-    template<class _typeT>
-    explicit operator _typeT() const noexcept { return value; }
+    template<class _typeU>
+    explicit operator _typeU() const noexcept { return value; }
 
-    static DynamicModInt raw(KYOPRO_BASE_UINT _n) noexcept {
+    static DynamicModInt raw(_typeT _n) noexcept {
       DynamicModInt _res;
       _res.value = _n;
       return _res;
     }
 
-    DynamicModInt power(KYOPRO_BASE_UINT _n) const noexcept {
-      std::uint_fast64_t _res = 1, _a = value;
+    DynamicModInt power(_typeT _n) const noexcept {
+      _typeT _res = 1, _a = value;
       while (_n > 0) {
         if (_n & 1) _res = _res * _a % _mod;
         _a = _a * _a % _mod;
@@ -50,10 +52,10 @@ namespace kyopro {
     }
 
     DynamicModInt inv() const noexcept {
-      std::uint_fast64_t _a = value, _b = _mod;
-      std::int_fast64_t _u = 1, _v = 0;
+      _typeT _a = value, _b = _mod;
+      std::make_signed_t<_typeT> _u = 1, _v = 0;
       while (_b > 0) {
-        std::uint_fast64_t _t = _a / _b;
+        _typeT _t = _a / _b;
         _a -= _t * _b;
         std::swap(_a, _b);
         _u -= _t * _v;
@@ -124,7 +126,7 @@ namespace kyopro {
 
     template<class _typeScanner>
     void scan(_typeScanner& _scanner) {
-      std::int_fast64_t _value;
+      std::make_signed_t<_typeT> _value;
       _scanner.scan(_value);
       value = floor_mod(_value, _mod);
     }
@@ -135,6 +137,6 @@ namespace kyopro {
     }
   };
 
-  template<>
-  struct Hash<DynamicModInt> { std::size_t operator ()(DynamicModInt _a) const noexcept { return static_cast<std::size_t>(_a); } };
+  template<class _typeT>
+  struct Hash<DynamicModInt<_typeT>> { std::size_t operator ()(DynamicModInt<_typeT> _a) const noexcept { return static_cast<std::size_t>(_a); } };
 }
