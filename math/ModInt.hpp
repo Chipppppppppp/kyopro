@@ -11,14 +11,14 @@
 #include "mod.hpp"
 
 namespace kyopro {
-  template<KYOPRO_BASE_UINT _mod>
+  template<KYOPRO_BASE_UINT _m>
   struct ModInt {
+    using value_type = uint_least_t<bit_len(_m)>;
+
   private:
-    static constexpr value_type _mod = static_cast<value_type>(_mod);
+    static constexpr value_type _mod = static_cast<value_type>(_m);
 
   public:
-    using value_type = uint_least_t<bit_len(_mod)>;
-
     value_type value;
 
     static constexpr KYOPRO_BASE_INT get_mod() noexcept {
