@@ -24,7 +24,7 @@ namespace kyopro {
   template<KYOPRO_BASE_UINT _size>
   struct int_least {
   private:
-    auto _get_type() const noexcept {
+    static constexpr auto _get_type() noexcept {
       if constexpr (_size <= 8) return std::declval<std::int_least8_t>();
       if constexpr (_size <= 16) return std::declval<std::int_least16_t>();
       if constexpr (_size <= 32) return std::declval<std::int_least32_t>();
@@ -38,12 +38,12 @@ namespace kyopro {
   };
 
   template<KYOPRO_BASE_UINT _size>
-  using int_least_t = int_least<_size>::type;
+  using int_least_t = typename int_least<_size>::type;
 
   template<KYOPRO_BASE_UINT _size>
   struct uint_least {
   private:
-    auto _get_type() const noexcept {
+    static constexpr auto _get_type() noexcept {
       if constexpr (_size <= 8) return std::declval<std::uint_least8_t>();
       if constexpr (_size <= 16) return std::declval<std::uint_least16_t>();
       if constexpr (_size <= 32) return std::declval<std::uint_least32_t>();
@@ -57,7 +57,7 @@ namespace kyopro {
   };
 
   template<KYOPRO_BASE_UINT _size>
-  using uint_least_t = uint_least<_size>::type;
+  using uint_least_t = typename uint_least<_size>::type;
 
   template<class, class = void>
   struct is_iterator: std::false_type {};

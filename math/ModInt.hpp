@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <limits>
 #include <type_traits>
+#include "../algorithm/bit.hpp"
 #include "../algorithm/Hash.hpp"
 #include "../meta/constant.hpp"
 #include "../meta/settings.hpp"
@@ -16,7 +17,7 @@ namespace kyopro {
     static constexpr value_type _mod = static_cast<value_type>(_mod);
 
   public:
-    using value_type = uint_least_t<>;
+    using value_type = uint_least_t<bit_len(_mod)>;
 
     value_type value;
 
@@ -99,12 +100,12 @@ namespace kyopro {
     }
 
     constexpr ModInt& operator *=(ModInt _rhs) noexcept {
-      value = static_cast<decltype(_get_value_type().second)>(value) * _rhs.value % _mod;
+      value = static_cast<uint_least_t<bit_len(_mod) * 2>>(value) * _rhs.value % _mod;
       return *this;
     }
 
     constexpr ModInt& operator /=(ModInt _rhs) noexcept {
-      value = static_cast<decltype(_get_value_type().second)>(value) * _rhs.inv().value % _mod;
+      value = static_cast<uint_least_t<bit_len(_mod) * 2>>(value) * _rhs.inv().value % _mod;
       return *this;
     }
 

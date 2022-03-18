@@ -79,6 +79,18 @@
     "vector": "cpp",
     "*.tcc": "cpp",
     "memory_resource": "cpp",
-    "stop_token": "cpp"
+    "stop_token": "cpp",
+    "any": "cpp",
+    "codecvt": "cpp",
+    "csignal": "cpp",
+    "fstream": "cpp",
+    "future": "cpp",
+    "iomanip": "cpp",
+    "list": "cpp",
+    "strstream": "cpp",
+    "typeindex": "cpp",
+    "variant": "cpp",
+    "cfenv": "cpp",
+    "cinttypes": "cpp"
   }
 }
