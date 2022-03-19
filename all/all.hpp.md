@@ -359,29 +359,29 @@ data:
     \     _a -= _t * _b;\n        std::swap(_a, _b);\n        _u -= _t * _v;\n   \
     \     std::swap(_u, _v);\n      }\n      return floor_mod(_u, _mod);\n    }\n\n\
     \    constexpr ModInt operator +() const noexcept { return *this; }\n\n    constexpr\
-    \ ModInt operator -() const noexcept { return _mod - value; }\n\n    constexpr\
-    \ ModInt& operator ++() noexcept {\n      if (++value >= _mod) value -= _mod;\n\
-    \      return *this;\n    }\n\n    constexpr ModInt operator ++(int) noexcept\
-    \ {\n      ModInt _before = *this;\n      operator ++();\n      return _before;\n\
-    \    }\n\n    constexpr ModInt& operator --() noexcept {\n      if (value == 0)\
-    \ value = _mod;\n      --value;\n      return *this;\n    }\n\n    constexpr ModInt\
-    \ operator --(int) noexcept {\n      ModInt _before = *this;\n      operator --();\n\
-    \      return _before;\n    }\n\n    constexpr ModInt& operator +=(ModInt _rhs)\
-    \ noexcept {\n      if ((value += _rhs.value) >= _mod) value -= _mod;\n      return\
-    \ *this;\n    }\n\n    constexpr ModInt& operator -=(ModInt _rhs) noexcept {\n\
-    \      if (value < _rhs.value) value += _mod;\n      value -= _rhs.value;\n  \
-    \    return *this;\n    }\n\n    constexpr ModInt& operator *=(ModInt _rhs) noexcept\
-    \ {\n      value = static_cast<uint_least_t<bit_len(_mod) * 2>>(value) * _rhs.value\
-    \ % _mod;\n      return *this;\n    }\n\n    constexpr ModInt& operator /=(ModInt\
-    \ _rhs) noexcept {\n      value = static_cast<uint_least_t<bit_len(_mod) * 2>>(value)\
-    \ * _rhs.inv().value % _mod;\n      return *this;\n    }\n\n    friend constexpr\
-    \ ModInt operator +(ModInt _lhs, ModInt _rhs) noexcept { return _lhs += _rhs;\
-    \ }\n\n    friend constexpr ModInt operator -(ModInt _lhs, ModInt _rhs) noexcept\
-    \ { return _lhs -= _rhs; }\n\n    friend constexpr ModInt operator *(ModInt _lhs,\
-    \ ModInt _rhs) noexcept { return _lhs *= _rhs; }\n\n    friend constexpr ModInt\
-    \ operator /(ModInt _lhs, ModInt _rhs) noexcept { return _lhs /= _rhs; }\n\n \
-    \   friend constexpr bool operator ==(ModInt _lhs, ModInt _rhs) noexcept { return\
-    \ _lhs.value == _rhs.value; }\n\n    friend constexpr bool operator !=(ModInt\
+    \ ModInt operator -() const noexcept { return value == 0 ? 0 : _mod - value; }\n\
+    \n    constexpr ModInt& operator ++() noexcept {\n      if (++value >= _mod) value\
+    \ -= _mod;\n      return *this;\n    }\n\n    constexpr ModInt operator ++(int)\
+    \ noexcept {\n      ModInt _before = *this;\n      operator ++();\n      return\
+    \ _before;\n    }\n\n    constexpr ModInt& operator --() noexcept {\n      if\
+    \ (value == 0) value = _mod;\n      --value;\n      return *this;\n    }\n\n \
+    \   constexpr ModInt operator --(int) noexcept {\n      ModInt _before = *this;\n\
+    \      operator --();\n      return _before;\n    }\n\n    constexpr ModInt& operator\
+    \ +=(ModInt _rhs) noexcept {\n      if ((value += _rhs.value) >= _mod) value -=\
+    \ _mod;\n      return *this;\n    }\n\n    constexpr ModInt& operator -=(ModInt\
+    \ _rhs) noexcept {\n      if (value < _rhs.value) value += _mod;\n      value\
+    \ -= _rhs.value;\n      return *this;\n    }\n\n    constexpr ModInt& operator\
+    \ *=(ModInt _rhs) noexcept {\n      value = static_cast<uint_least_t<bit_len(_mod)\
+    \ * 2>>(value) * _rhs.value % _mod;\n      return *this;\n    }\n\n    constexpr\
+    \ ModInt& operator /=(ModInt _rhs) noexcept {\n      value = static_cast<uint_least_t<bit_len(_mod)\
+    \ * 2>>(value) * _rhs.inv().value % _mod;\n      return *this;\n    }\n\n    friend\
+    \ constexpr ModInt operator +(ModInt _lhs, ModInt _rhs) noexcept { return _lhs\
+    \ += _rhs; }\n\n    friend constexpr ModInt operator -(ModInt _lhs, ModInt _rhs)\
+    \ noexcept { return _lhs -= _rhs; }\n\n    friend constexpr ModInt operator *(ModInt\
+    \ _lhs, ModInt _rhs) noexcept { return _lhs *= _rhs; }\n\n    friend constexpr\
+    \ ModInt operator /(ModInt _lhs, ModInt _rhs) noexcept { return _lhs /= _rhs;\
+    \ }\n\n    friend constexpr bool operator ==(ModInt _lhs, ModInt _rhs) noexcept\
+    \ { return _lhs.value == _rhs.value; }\n\n    friend constexpr bool operator !=(ModInt\
     \ _lhs, ModInt _rhs) noexcept { return _lhs.value != _rhs.value; }\n\n    template<class\
     \ _typeScanner>\n    void scan(_typeScanner& _scanner) {\n      std::int_fast64_t\
     \ _value;\n      _scanner.scan(_value);\n      value = floor_mod(_value, _mod);\n\
@@ -639,7 +639,7 @@ data:
   isVerificationFile: false
   path: all/all.hpp
   requiredBy: []
-  timestamp: '2022-03-19 12:06:00+09:00'
+  timestamp: '2022-03-19 12:07:31+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp
