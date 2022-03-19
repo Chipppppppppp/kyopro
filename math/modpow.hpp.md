@@ -31,7 +31,7 @@ data:
     #endif\n#line 2 \"math/mod.hpp\"\n#include <cassert>\n#line 4 \"math/mod.hpp\"\
     \n\nnamespace kyopro {\n  template<class _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT,\
     \ _typeU> floor_mod(_typeT _x, _typeU _m) noexcept {\n    static_assert(std::is_integral_v<_typeT>\
-    \ && std::is_integral_v<_typeU>);\n    if constexpr (std::is_unsigned_v<_typeT>\
+    \ && std::is_integral_v<_typeU>, \"Integer is required\");\n    if constexpr (std::is_unsigned_v<_typeT>\
     \ || std::is_unsigned_v<_typeU>) return _x % _m;\n    return (_x %= _m) < 0 ?\
     \ _x + _m : _x;\n  }\n\n  template<class _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT,\
     \ _typeU> ceil_mod(_typeT _x, _typeU _m) noexcept {\n    return _m - floor_mod(_x\
@@ -56,7 +56,7 @@ data:
   requiredBy:
   - math/all.hpp
   - all/all.hpp
-  timestamp: '2022-03-19 00:51:47+09:00'
+  timestamp: '2022-03-19 12:10:09+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/modpow.hpp
