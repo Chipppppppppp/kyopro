@@ -4,13 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: all/all.hpp
-    title: all/all.hpp
-  - icon: ':warning:'
-    path: math/all.hpp
-    title: math/all.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -44,9 +38,7 @@ data:
   - meta/settings.hpp
   isVerificationFile: false
   path: math/euler_phi.hpp
-  requiredBy:
-  - math/all.hpp
-  - all/all.hpp
+  requiredBy: []
   timestamp: '2022-03-19 00:51:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

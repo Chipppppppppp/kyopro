@@ -1,13 +1,7 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: all/all.hpp
-    title: all/all.hpp
-  - icon: ':warning:'
-    path: math/all.hpp
-    title: math/all.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -34,9 +28,7 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: math/div.hpp
-  requiredBy:
-  - math/all.hpp
-  - all/all.hpp
+  requiredBy: []
   timestamp: '2022-03-19 12:10:55+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

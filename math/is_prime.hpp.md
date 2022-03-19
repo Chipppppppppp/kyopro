@@ -6,12 +6,6 @@ data:
     title: meta/settings.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: all/all.hpp
-    title: all/all.hpp
-  - icon: ':warning:'
-    path: math/all.hpp
-    title: math/all.hpp
-  - icon: ':warning:'
     path: math/factorize.hpp
     title: math/factorize.hpp
   _extendedVerifiedWith: []
@@ -66,8 +60,6 @@ data:
   path: math/is_prime.hpp
   requiredBy:
   - math/factorize.hpp
-  - math/all.hpp
-  - all/all.hpp
   timestamp: '2022-03-19 00:51:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

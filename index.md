@@ -20,14 +20,14 @@ data:
   - name: math
     pages:
     - icon: ':warning:'
-      path: math/Barrett.hpp
-      title: math/Barrett.hpp
-    - icon: ':warning:'
       path: math/DynamicModInt.hpp
       title: math/DynamicModInt.hpp
     - icon: ':warning:'
       path: math/ModInt.hpp
       title: math/ModInt.hpp
+    - icon: ':warning:'
+      path: math/Montgomery.hpp
+      title: math/Montgomery.hpp
     - icon: ':warning:'
       path: math/all.hpp
       title: math/all.hpp

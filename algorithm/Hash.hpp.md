@@ -12,17 +12,11 @@ data:
     path: algorithm/all.hpp
     title: algorithm/all.hpp
   - icon: ':warning:'
-    path: all/all.hpp
-    title: all/all.hpp
-  - icon: ':warning:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
-  - icon: ':warning:'
-    path: math/all.hpp
-    title: math/all.hpp
   - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
@@ -129,11 +123,9 @@ data:
   requiredBy:
   - math/ModInt.hpp
   - math/DynamicModInt.hpp
-  - math/all.hpp
   - template/all.hpp
   - template/alias.hpp
   - algorithm/all.hpp
-  - all/all.hpp
   timestamp: '2022-03-19 00:51:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
