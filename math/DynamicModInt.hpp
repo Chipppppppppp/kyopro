@@ -5,8 +5,8 @@
 #include "../algorithm/Hash.hpp"
 #include "../meta/constant.hpp"
 #include "../meta/settings.hpp"
-#include "Montgomery.hpp"
 #include "mod.hpp"
+#include "Montgomery.hpp"
 
 namespace kyopro {
   template<class _typeT>

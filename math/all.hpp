@@ -1,5 +1,4 @@
 #pragma once
-#include "Barrett.hpp"
 #include "div.hpp"
 #include "divisors.hpp"
 #include "DynamicModInt.hpp"
@@ -10,4 +9,5 @@
 #include "ModInt.hpp"
 #include "modpow.hpp"
 #include "monoid.hpp"
+#include "Montgomery.hpp"
 #include "power.hpp"
