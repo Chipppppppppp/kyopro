@@ -5,7 +5,7 @@
 #include "../algorithm/Hash.hpp"
 #include "../meta/constant.hpp"
 #include "../meta/settings.hpp"
-#include "Barrett.hpp"
+#include "Montgomery.hpp"
 #include "mod.hpp"
 
 namespace kyopro {
@@ -15,14 +15,14 @@ namespace kyopro {
 
   private:
     inline static _typeT _mod;
-    inline static Barrett<_typeT> _barrett;
+    inline static Montgomery _montgomery;
 
   public:
     _typeT value;
 
     static void set_mod(_typeT _m) noexcept {
       _mod = _m;
-      _barrett.set_mod(_m);
+      _montgomery.set_mod(_m);
     }
 
     static KYOPRO_BASE_INT get_mod() noexcept {
@@ -103,12 +103,12 @@ namespace kyopro {
     }
 
     DynamicModInt& operator *=(DynamicModInt _rhs) noexcept {
-      value = _barrett(value * _rhs.value);
+      value = _montgomery(value * _rhs.value);
       return *this;
     }
 
     DynamicModInt& operator /=(DynamicModInt _rhs) noexcept {
-      value = _barrett(value * _rhs.inv().value);
+      value = _montgomery(value * _rhs.inv().value);
       return *this;
     }
 
