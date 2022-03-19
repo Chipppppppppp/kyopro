@@ -159,7 +159,7 @@ data:
     \ < _mod ? _x : _x - _mod;\n    }\n  };\n}\n#line 3 \"math/div.hpp\"\n\nnamespace\
     \ kyopro {\n  template<class _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT,\
     \ _typeU> floor_div(_typeT _x, _typeU _m) noexcept {\n    static_assert(std::is_integral_v<_typeT>\
-    \ && std::is_integral_v<_typeU>);\n    if constexpr (std::is_unsigned_v<_typeT>\
+    \ && std::is_integral_v<_typeU>, \"Integer is required\");\n    if constexpr (std::is_unsigned_v<_typeT>\
     \ || std::is_unsigned_v<_typeU>) return _x / _m;\n    auto _d = _x / _m;\n   \
     \ return _d * _m == _x ? _d : _d - ((_x < 0) ^ (_m < 0));\n  }\n\n  template<class\
     \ _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT, _typeU> ceil_div(_typeT\
@@ -429,7 +429,7 @@ data:
   path: math/all.hpp
   requiredBy:
   - all/all.hpp
-  timestamp: '2022-03-19 12:10:09+09:00'
+  timestamp: '2022-03-19 12:10:55+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/all.hpp
