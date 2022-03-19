@@ -63,7 +63,7 @@ namespace kyopro {
 
     constexpr ModInt operator +() const noexcept { return *this; }
 
-    constexpr ModInt operator -() const noexcept { return _mod - value; }
+    constexpr ModInt operator -() const noexcept { return value == 0 ? 0 : _mod - value; }
 
     constexpr ModInt& operator ++() noexcept {
       if (++value >= _mod) value -= _mod;
