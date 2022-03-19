@@ -66,7 +66,7 @@ namespace kyopro {
 
     DynamicModInt operator +() const noexcept { return *this; }
 
-    DynamicModInt operator -() const noexcept { return _mod - value; }
+    DynamicModInt operator -() const noexcept { return raw(0) - value; }
 
     DynamicModInt& operator ++() noexcept {
       if (++value >= _mod) value -= _mod;
