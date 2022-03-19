@@ -24,6 +24,12 @@ data:
     title: meta/trait.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':warning:'
+    path: math/all.hpp
+    title: math/all.hpp
+  - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
   - icon: ':warning:'
@@ -118,43 +124,42 @@ data:
     \ constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 4> beside{{{1,\
     \ 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
     \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
-    \ -1}, {0, -1}, {1, -1}}};\n}\n#line 4 \"math/Montgomery.hpp\"\n\nnamespace kyopro\
-    \ {\n  struct Montgomery {\n  private:\n    std::uint_fast64_t _m, _r, _n2;\n\n\
-    \  public:\n    constexpr void set_mod(KYOPRO_BASE_UINT _mod) noexcept {\n   \
-    \   _m = _mod;\n      _n2 = -static_cast<__uint128_t>(_m) % _m;\n      _r = _m;\n\
-    \      _r *= 2 - _m * _r;\n      _r *= 2 - _m * _r;\n      _r *= 2 - _m * _r;\n\
-    \      _r *= 2 - _m * _r;\n      _r *= 2 - _m * _r;\n      _r = -_r;\n    }\n\n\
-    \    constexpr KYOPRO_BASE_INT get_mod() const noexcept {\n      return _m;\n\
-    \    }\n\n    Montgomery() noexcept = default;\n    Montgomery(KYOPRO_BASE_UINT\
-    \ _mod) noexcept {\n      set_mod(_mod);\n    }\n\n    constexpr KYOPRO_BASE_UINT\
-    \ operator ()(__uint128_t _x) const noexcept {\n      return (_x + static_cast<__uint128_t>(static_cast<std::uint_fast64_t>(_x)\
-    \ * _r) * _m) >> 64;\n    }\n  };\n}\n#line 4 \"math/mod.hpp\"\n\nnamespace kyopro\
-    \ {\n  template<class _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT,\
+    \ -1}, {0, -1}, {1, -1}}};\n}\n#line 4 \"math/mod.hpp\"\n\nnamespace kyopro {\n\
+    \  template<class _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT,\
     \ _typeU> floor_mod(_typeT _x, _typeU _m) noexcept {\n    static_assert(std::is_integral_v<_typeT>\
     \ && std::is_integral_v<_typeU>, \"Integer is required\");\n    if constexpr (std::is_unsigned_v<_typeT>\
     \ || std::is_unsigned_v<_typeU>) return _x % _m;\n    return (_x %= _m) < 0 ?\
     \ _x + _m : _x;\n  }\n\n  template<class _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT,\
     \ _typeU> ceil_mod(_typeT _x, _typeU _m) noexcept {\n    return _m - floor_mod(_x\
-    \ - 1, _m) - static_cast<_typeT>(1);\n  }\n}\n#line 10 \"math/DynamicModInt.hpp\"\
-    \n\nnamespace kyopro {\n  template<class _typeT>\n  struct DynamicModInt {\n \
-    \   static_assert(std::is_unsigned_v<_typeT>, \"Unsigned integer is required\"\
-    );\n\n  private:\n    inline static _typeT _mod;\n    inline static Montgomery\
-    \ _montgomery;\n\n  public:\n    _typeT value;\n\n    static void set_mod(_typeT\
-    \ _m) noexcept {\n      _mod = _m;\n      _montgomery.set_mod(_m);\n    }\n\n\
-    \    static KYOPRO_BASE_INT get_mod() noexcept {\n      return _mod;\n    }\n\n\
-    \    DynamicModInt() noexcept = default;\n    DynamicModInt(_typeT _value) noexcept:\
-    \ value(floor_mod(_value, _mod)) {}\n\n    template<class _typeU>\n    explicit\
-    \ operator _typeU() const noexcept { return value; }\n\n    static DynamicModInt\
-    \ raw(_typeT _n) noexcept {\n      DynamicModInt _res;\n      _res.value = _n;\n\
-    \      return _res;\n    }\n\n    DynamicModInt power(_typeT _n) const noexcept\
-    \ {\n      _typeT _res = 1, _a = value;\n      while (_n > 0) {\n        if (_n\
-    \ & 1) _res = _res * _a % _mod;\n        _a = _a * _a % _mod;\n        _n >>=\
-    \ 1;\n      }\n      return _res;\n    }\n\n    DynamicModInt inv() const noexcept\
-    \ {\n      _typeT _a = value, _b = _mod;\n      std::make_signed_t<_typeT> _u\
-    \ = 1, _v = 0;\n      while (_b > 0) {\n        _typeT _t = _a / _b;\n       \
-    \ _a -= _t * _b;\n        std::swap(_a, _b);\n        _u -= _t * _v;\n       \
-    \ std::swap(_u, _v);\n      }\n      return floor_mod(_u, _mod);\n    }\n\n  \
-    \  DynamicModInt operator +() const noexcept { return *this; }\n\n    DynamicModInt\
+    \ - 1, _m) - static_cast<_typeT>(1);\n  }\n}\n#line 4 \"math/Montgomery.hpp\"\n\
+    \nnamespace kyopro {\n  struct Montgomery {\n  private:\n    std::uint_fast64_t\
+    \ _m, _r, _n2;\n\n  public:\n    constexpr void set_mod(KYOPRO_BASE_UINT _mod)\
+    \ noexcept {\n      _m = _mod;\n      _n2 = -static_cast<__uint128_t>(_m) % _m;\n\
+    \      _r = _m;\n      _r *= 2 - _m * _r;\n      _r *= 2 - _m * _r;\n      _r\
+    \ *= 2 - _m * _r;\n      _r *= 2 - _m * _r;\n      _r *= 2 - _m * _r;\n      _r\
+    \ = -_r;\n    }\n\n    constexpr KYOPRO_BASE_INT get_mod() const noexcept {\n\
+    \      return _m;\n    }\n\n    Montgomery() noexcept = default;\n    Montgomery(KYOPRO_BASE_UINT\
+    \ _mod) noexcept {\n      set_mod(_mod);\n    }\n\n    constexpr KYOPRO_BASE_UINT\
+    \ operator ()(__uint128_t _x) const noexcept {\n      return (_x + static_cast<__uint128_t>(static_cast<std::uint_fast64_t>(_x)\
+    \ * _r) * _m) >> 64;\n    }\n  };\n}\n#line 10 \"math/DynamicModInt.hpp\"\n\n\
+    namespace kyopro {\n  template<class _typeT>\n  struct DynamicModInt {\n    static_assert(std::is_unsigned_v<_typeT>,\
+    \ \"Unsigned integer is required\");\n\n  private:\n    inline static _typeT _mod;\n\
+    \    inline static Montgomery _montgomery;\n\n  public:\n    _typeT value;\n\n\
+    \    static void set_mod(_typeT _m) noexcept {\n      _mod = _m;\n      _montgomery.set_mod(_m);\n\
+    \    }\n\n    static KYOPRO_BASE_INT get_mod() noexcept {\n      return _mod;\n\
+    \    }\n\n    DynamicModInt() noexcept = default;\n    DynamicModInt(_typeT _value)\
+    \ noexcept: value(floor_mod(_value, _mod)) {}\n\n    template<class _typeU>\n\
+    \    explicit operator _typeU() const noexcept { return value; }\n\n    static\
+    \ DynamicModInt raw(_typeT _n) noexcept {\n      DynamicModInt _res;\n      _res.value\
+    \ = _n;\n      return _res;\n    }\n\n    DynamicModInt power(_typeT _n) const\
+    \ noexcept {\n      _typeT _res = 1, _a = value;\n      while (_n > 0) {\n   \
+    \     if (_n & 1) _res = _res * _a % _mod;\n        _a = _a * _a % _mod;\n   \
+    \     _n >>= 1;\n      }\n      return _res;\n    }\n\n    DynamicModInt inv()\
+    \ const noexcept {\n      _typeT _a = value, _b = _mod;\n      std::make_signed_t<_typeT>\
+    \ _u = 1, _v = 0;\n      while (_b > 0) {\n        _typeT _t = _a / _b;\n    \
+    \    _a -= _t * _b;\n        std::swap(_a, _b);\n        _u -= _t * _v;\n    \
+    \    std::swap(_u, _v);\n      }\n      return floor_mod(_u, _mod);\n    }\n\n\
+    \    DynamicModInt operator +() const noexcept { return *this; }\n\n    DynamicModInt\
     \ operator -() const noexcept { return value == 0 ? 0 : _mod - value; }\n\n  \
     \  DynamicModInt& operator ++() noexcept {\n      if (++value >= _mod) value -=\
     \ _mod;\n      return *this;\n    }\n\n    DynamicModInt operator ++(int) noexcept\
@@ -187,7 +192,7 @@ data:
     \ _a) const noexcept { return static_cast<std::size_t>(_a); } };\n}\n"
   code: "#pragma once\n#include <cassert>\n#include <cstdint>\n#include <type_traits>\n\
     #include \"../algorithm/Hash.hpp\"\n#include \"../meta/constant.hpp\"\n#include\
-    \ \"../meta/settings.hpp\"\n#include \"Montgomery.hpp\"\n#include \"mod.hpp\"\n\
+    \ \"../meta/settings.hpp\"\n#include \"mod.hpp\"\n#include \"Montgomery.hpp\"\n\
     \nnamespace kyopro {\n  template<class _typeT>\n  struct DynamicModInt {\n   \
     \ static_assert(std::is_unsigned_v<_typeT>, \"Unsigned integer is required\");\n\
     \n  private:\n    inline static _typeT _mod;\n    inline static Montgomery _montgomery;\n\
@@ -243,14 +248,16 @@ data:
   - meta/trait.hpp
   - meta/constant.hpp
   - math/power.hpp
-  - math/Montgomery.hpp
   - math/mod.hpp
+  - math/Montgomery.hpp
   isVerificationFile: false
   path: math/DynamicModInt.hpp
   requiredBy:
+  - math/all.hpp
   - template/all.hpp
   - template/alias.hpp
-  timestamp: '2022-03-19 20:47:54+09:00'
+  - all/all.hpp
+  timestamp: '2022-03-20 00:20:19+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/DynamicModInt.hpp

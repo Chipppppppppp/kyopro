@@ -12,6 +12,9 @@ data:
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':warning:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
@@ -20,6 +23,9 @@ data:
   - icon: ':warning:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
+  - icon: ':warning:'
+    path: math/all.hpp
+    title: math/all.hpp
   - icon: ':warning:'
     path: math/divisors.hpp
     title: math/divisors.hpp
@@ -207,6 +213,7 @@ data:
   - math/is_prime.hpp
   - math/monoid.hpp
   - math/euler_phi.hpp
+  - math/all.hpp
   - math/power.hpp
   - math/modpow.hpp
   - structure/UnionFind.hpp
@@ -217,6 +224,7 @@ data:
   - algorithm/bit.hpp
   - algorithm/all.hpp
   - algorithm/Hash.hpp
+  - all/all.hpp
   - meta/trait.hpp
   - meta/constant.hpp
   - meta/all.hpp

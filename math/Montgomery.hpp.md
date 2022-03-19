@@ -6,8 +6,14 @@ data:
     title: meta/settings.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':warning:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
+  - icon: ':warning:'
+    path: math/all.hpp
+    title: math/all.hpp
   - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
@@ -56,8 +62,10 @@ data:
   path: math/Montgomery.hpp
   requiredBy:
   - math/DynamicModInt.hpp
+  - math/all.hpp
   - template/all.hpp
   - template/alias.hpp
+  - all/all.hpp
   timestamp: '2022-03-19 20:47:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
