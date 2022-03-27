@@ -9,7 +9,7 @@
 #include "Montgomery.hpp"
 
 namespace kyopro {
-  template<class _typeT>
+  template<class _typeT, KYOPRO_BASE_UINT = 0>
   struct DynamicModInt {
     static_assert(std::is_unsigned_v<_typeT>, "Unsigned integer is required");
 
@@ -141,6 +141,6 @@ namespace kyopro {
     }
   };
 
-  template<class _typeT>
-  struct Hash<DynamicModInt<_typeT>> { std::size_t operator ()(DynamicModInt<_typeT> _a) const noexcept { return static_cast<std::size_t>(_a); } };
+  template<class _typeT, KYOPRO_BASE_UINT _kind>
+  struct Hash<DynamicModInt<_typeT, _kind>> { std::size_t operator ()(DynamicModInt<_typeT, _kind> _a) const noexcept { return static_cast<std::size_t>(_a); } };
 }

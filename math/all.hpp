@@ -7,7 +7,6 @@
 #include "is_prime.hpp"
 #include "mod.hpp"
 #include "ModInt.hpp"
-#include "modpow.hpp"
 #include "monoid.hpp"
 #include "Montgomery.hpp"
 #include "power.hpp"
