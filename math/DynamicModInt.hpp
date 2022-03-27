@@ -137,7 +137,7 @@ namespace kyopro {
 
     template<class _typePrinter>
     void print(_typePrinter& _printer) const {
-      _printer.print(value);
+      _printer.print(_montgomery.inverse_transform(value));
     }
   };
 
