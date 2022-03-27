@@ -3,13 +3,13 @@ data:
   libraryCategories:
   - name: algorithm
     pages:
-    - icon: ':warning:'
+    - icon: ':x:'
       path: algorithm/Hash.hpp
       title: algorithm/Hash.hpp
     - icon: ':warning:'
       path: algorithm/all.hpp
       title: algorithm/all.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: algorithm/bit.hpp
       title: algorithm/bit.hpp
   - name: all
@@ -19,13 +19,13 @@ data:
       title: all/all.hpp
   - name: math
     pages:
-    - icon: ':warning:'
+    - icon: ':x:'
       path: math/DynamicModInt.hpp
       title: math/DynamicModInt.hpp
     - icon: ':warning:'
       path: math/ModInt.hpp
       title: math/ModInt.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: math/Montgomery.hpp
       title: math/Montgomery.hpp
     - icon: ':warning:'
@@ -43,16 +43,16 @@ data:
     - icon: ':warning:'
       path: math/factorize.hpp
       title: math/factorize.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: math/is_prime.hpp
       title: math/is_prime.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: math/mod.hpp
       title: math/mod.hpp
     - icon: ':heavy_check_mark:'
       path: math/monoid.hpp
       title: math/monoid.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: math/power.hpp
       title: math/power.hpp
   - name: meta
@@ -60,13 +60,13 @@ data:
     - icon: ':warning:'
       path: meta/all.hpp
       title: meta/all.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: meta/constant.hpp
       title: meta/constant.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: meta/settings.hpp
       title: meta/settings.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: meta/trait.hpp
       title: meta/trait.hpp
   - name: structure
@@ -82,13 +82,13 @@ data:
       title: structure/all.hpp
   - name: system
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: system/all.hpp
       title: system/all.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: system/in.hpp
       title: system/in.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: system/out.hpp
       title: system/out.hpp
   - name: template
@@ -100,6 +100,11 @@ data:
       path: template/all.hpp
       title: template/all.hpp
   verificationCategories:
+  - name: aoj
+    pages:
+    - icon: ':x:'
+      path: aoj/PrimeNumber.test.cpp
+      title: aoj/PrimeNumber.test.cpp
   - name: yosupo
     pages:
     - icon: ':heavy_check_mark:'

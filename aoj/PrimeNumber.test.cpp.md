@@ -14,6 +14,9 @@ data:
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
   - icon: ':x:'
+    path: math/is_prime.hpp
+    title: math/is_prime.hpp
+  - icon: ':x:'
     path: math/mod.hpp
     title: math/mod.hpp
   - icon: ':question:'
@@ -28,26 +31,27 @@ data:
   - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: all/all.hpp
-    title: all/all.hpp
-  - icon: ':warning:'
-    path: math/all.hpp
-    title: math/all.hpp
-  - icon: ':warning:'
-    path: math/factorize.hpp
-    title: math/factorize.hpp
-  _extendedVerifiedWith:
-  - icon: ':x:'
-    path: aoj/PrimeNumber.test.cpp
-    title: aoj/PrimeNumber.test.cpp
+  - icon: ':question:'
+    path: system/all.hpp
+    title: system/all.hpp
+  - icon: ':question:'
+    path: system/in.hpp
+    title: system/in.hpp
+  - icon: ':question:'
+    path: system/out.hpp
+    title: system/out.hpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: true
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':x:'
   attributes:
-    links: []
-  bundledCode: "#line 2 \"math/is_prime.hpp\"\n#include <cstdint>\n#include <type_traits>\n\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_1_C&lang=ja
+    links:
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_1_C&lang=ja
+  bundledCode: "#line 1 \"aoj/PrimeNumber.test.cpp\"\n#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_1_C&lang=ja\"\
+    \n#line 2 \"math/is_prime.hpp\"\n#include <cstdint>\n#include <type_traits>\n\
     #line 2 \"algorithm/bit.hpp\"\n#include <limits>\n#line 3 \"meta/settings.hpp\"\
     \n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n\
     #ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef\
@@ -256,25 +260,138 @@ data:
     \ if (_n <= _i) return true;\n        if (!ok(_i)) return false;\n      }\n  \
     \  } else {\n      for (auto _i: (std::uint_fast64_t[]){2, 325, 9375, 28178, 450775,\
     \ 9780504, 1795265022}) {\n        if (_n <= _i) return true;\n        if (!ok(_i))\
-    \ return false;\n      }\n    }\n    return true;\n  }\n}\n"
-  code: "#pragma once\n#include <cstdint>\n#include <type_traits>\n#include \"../algorithm/bit.hpp\"\
-    \n#include \"../meta/settings.hpp\"\n#include \"DynamicModInt.hpp\"\n\nnamespace\
-    \ kyopro {\n  template<class _typeT>\n  constexpr bool is_prime(_typeT _x) {\n\
-    \    using _typeU = std::make_unsigned_t<_typeT>;\n    using _typeModInt = DynamicModInt<_typeU,\
-    \ KYOPRO_BASE_UINT(-1)>;\n    _typeU _n = _x;\n    if (_n <= 1) return false;\n\
-    \    if (!(_n & 1)) return _n == 2;\n    _typeModInt::set_mod(_n);\n    std::uint_fast64_t\
-    \ _d = (_n - 1) >> trailing_zero(_n - 1);\n    _typeModInt _one = 1, _minus_one\
-    \ = _n - 1;\n    auto ok = [&](std::uint_fast64_t _a) noexcept {\n      auto _y\
-    \ = _typeModInt(_a).power(_d);\n      std::uint_fast64_t _t = _d;\n      while\
-    \ (_y != _one and _y != _minus_one and _t != _x - 1) _y *= _y, _t <<= 1;\n   \
-    \   if (_y != _minus_one and !(_t & 1)) return false;\n      return true;\n  \
-    \  };\n    if (std::numeric_limits<_typeU>::digits <= 32 || _n < (static_cast<_typeU>(1)\
-    \ << 32)) {\n      for (auto _i: (std::uint_fast64_t[]){2, 7, 61}) {\n       \
-    \ if (_n <= _i) return true;\n        if (!ok(_i)) return false;\n      }\n  \
-    \  } else {\n      for (auto _i: (std::uint_fast64_t[]){2, 325, 9375, 28178, 450775,\
-    \ 9780504, 1795265022}) {\n        if (_n <= _i) return true;\n        if (!ok(_i))\
-    \ return false;\n      }\n    }\n    return true;\n  }\n}"
+    \ return false;\n      }\n    }\n    return true;\n  }\n}\n#line 2 \"system/in.hpp\"\
+    \n#include <unistd.h>\n#line 6 \"system/in.hpp\"\n#include <cstdio>\n#include\
+    \ <string>\n#line 14 \"system/in.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    \ _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Reader {\n  private:\n    int _fd,\
+    \ _idx;\n    std::array<char, _buf_size> _buffer;\n\n  public:\n    Reader() {\n\
+    \      read(_fd, _buffer.begin(), _buf_size);\n    }\n    Reader(int _fd): _fd(_fd),\
+    \ _idx(0), _buffer() {\n      read(_fd, _buffer.begin(), _buf_size);\n    }\n\
+    \    Reader(FILE* _fp): _fd(fileno(_fp)), _idx(0), _buffer() {\n      read(_fd,\
+    \ _buffer.begin(), _buf_size);\n    }\n\n    struct iterator {\n    private:\n\
+    \      Reader& _reader;\n\n    public:\n      using difference_type = void;\n\
+    \      using value_type = void;\n      using pointer = void;\n      using reference\
+    \ = void;\n      using iterator_category = std::input_iterator_tag;\n\n      iterator()\
+    \ noexcept = default;\n      iterator(Reader& _reader) noexcept: _reader(_reader)\
+    \ {}\n\n      iterator& operator ++() {\n        ++_reader._idx;\n        if (_reader._idx\
+    \ == _buf_size) {\n          read(_reader._fd, _reader._buffer.begin(), _buf_size);\n\
+    \          _reader._idx = 0;\n        }\n        return *this;\n      }\n\n  \
+    \    iterator operator ++(int) {\n        iterator _before = *this;\n        operator\
+    \ ++();\n        return _before;\n      }\n\n      char& operator *() const {\n\
+    \        return _reader._buffer[_reader._idx];\n      }\n    };\n\n    iterator\
+    \ begin() noexcept {\n      return iterator(*this);\n    }\n  };\n\n  Reader input(0);\n\
+    \n  template<class _typeIterator, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
+    \  struct Scanner {\n  private:\n    template<class, class = void>\n    struct\
+    \ _has_scan: std::false_type {};\n    template<class _typeT>\n    struct _has_scan<_typeT,\
+    \ std::void_t<decltype(std::declval<_typeT>().scan(std::declval<Scanner&>()))>>:\
+    \ std::true_type {};\n\n  public:\n    static constexpr KYOPRO_BASE_UINT decimal_precision\
+    \ = _decimal_precision;\n    _typeIterator itr;\n\n    Scanner() noexcept = default;\n\
+    \    Scanner(_typeIterator _itr) noexcept: itr(_itr) {}\n\n    void discard_space()\
+    \ {\n      while (('\\t' <= *itr && *itr <= '\\r') || *itr == ' ') ++itr;\n  \
+    \  }\n\n    void scan(char& _a) {\n      discard_space();\n      _a = *itr;\n\
+    \      ++itr;\n    }\n    void scan(std::string& _a) {\n      discard_space();\n\
+    \      for (auto& _i: _a) {\n        _i = *itr;\n        ++itr;\n      }\n   \
+    \ }\n    void scan(bool& _a) {\n      discard_space();\n      while ('0' <= *itr\
+    \ && *itr <= '9') {\n        if (*itr != '0') _a = true;\n        ++itr;\n   \
+    \   }\n    }\n    template<class _typeT, std::enable_if_t<std::is_arithmetic_v<_typeT>\
+    \ && !_has_scan<_typeT>::value>* = nullptr>\n    void scan(_typeT& _a) {\n   \
+    \   discard_space();\n      bool _sgn = false;\n      if constexpr (!std::is_unsigned_v<_typeT>)\
+    \ if (*itr == '-') {\n        _sgn = true;\n        ++itr;\n      }\n      _a\
+    \ = 0;\n      for (; '0' <= *itr && *itr <= '9'; ++itr) _a = _a * 10 + *itr -\
+    \ '0';\n      if (*itr == '.') {\n        ++itr;\n        if constexpr (std::is_floating_point_v<_typeT>)\
+    \ {\n          constexpr std::uint_fast64_t _power_decimal_precision = power(10ULL,\
+    \ _decimal_precision);\n          _typeT _d = 0;\n          std::uint_fast64_t\
+    \ _i = 1;\n          for (; '0' <= *itr && *itr <= '9' && _i < _power_decimal_precision;\
+    \ _i *= 10) {\n            _d = _d * 10 + *itr - '0';\n            ++itr;\n  \
+    \        }\n          _a += _d / _i;\n        }\n        while ('0' <= *itr &&\
+    \ *itr <= '9') ++itr;\n      }\n      if constexpr (!std::is_unsigned_v<_typeT>)\
+    \ if (_sgn) _a = -_a;\n    }\n    template<std::size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT>\
+    \ && !_has_scan<_typeT>::value>* = nullptr>\n    void scan(_typeT& _a) {\n   \
+    \   if constexpr (_i < std::tuple_size_v<_typeT>) {\n        scan(std::get<_i>(_a));\n\
+    \        scan<_i + 1>(_a);\n      }\n    }\n    template<class _typeT, std::enable_if_t<is_iterable_v<_typeT>\
+    \ && !_has_scan<_typeT>::value>* = nullptr>\n    void scan(_typeT& _a) {\n   \
+    \   for (auto& _i: _a) scan(_i);\n    }\n    template<class _typeT, std::enable_if_t<_has_scan<_typeT>::value>*\
+    \ = nullptr>\n    void scan(_typeT& _a) {\n      _a.scan(*this);\n    }\n\n  \
+    \  void operator ()() {}\n    template<class _typeHead, class... _typeArgs>\n\
+    \    void operator ()(_typeHead& _head, _typeArgs&... _args) {\n      scan(_head);\n\
+    \      operator ()(_args...);\n    }\n  };\n\n  Scanner<Reader<>::iterator> scan(input.begin());\n\
+    }\n#line 13 \"system/out.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    \ _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Writer {\n  private:\n    int _fd,\
+    \ _idx;\n    std::array<char, _buf_size> _buffer;\n\n  public:\n    Writer() noexcept\
+    \ = default;\n    Writer(int _fd) noexcept: _fd(_fd), _idx(0), _buffer() {}\n\
+    \    Writer(FILE* _fp) noexcept: _fd(fileno(_fp)), _idx(0), _buffer() {}\n\n \
+    \   ~Writer() {\n      write(_fd, _buffer.begin(), _idx);\n    }\n\n    struct\
+    \ iterator {\n    private:\n      Writer& _writer;\n\n    public:\n      using\
+    \ difference_type = void;\n      using value_type = void;\n      using pointer\
+    \ = void;\n      using reference = void;\n      using iterator_category = std::output_iterator_tag;\n\
+    \n      iterator() noexcept = default;\n      iterator(Writer& _writer) noexcept:\
+    \ _writer(_writer) {}\n\n      iterator& operator ++() {\n        ++_writer._idx;\n\
+    \        if (_writer._idx == _buf_size) {\n          write(_writer._fd, _writer._buffer.begin(),\
+    \ _buf_size);\n          _writer._idx = 0;\n        }\n        return *this;\n\
+    \      }\n\n      iterator operator ++(int) {\n        iterator _before = *this;\n\
+    \        operator ++();\n        return _before;\n      }\n\n      char& operator\
+    \ *() const {\n        return _writer._buffer[_writer._idx];\n      }\n\n    \
+    \  void flush() const {\n        write(_writer._fd, _writer._buffer.begin(), _writer._idx);\n\
+    \      }\n    };\n\n    iterator begin() noexcept {\n      return iterator(*this);\n\
+    \    }\n  };\n\n  Writer output(1), error(2);\n\n  template<class _typeIterator,\
+    \ bool _sep = true, bool _end = true, bool _debug = false, bool _comment = false,\
+    \ bool _flush = false, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
+    \  struct Printer {\n  private:\n    template<class, class = void>\n    struct\
+    \ _has_print: std::false_type {};\n    template<class _typeT>\n    struct _has_print<_typeT,\
+    \ std::void_t<decltype(std::declval<_typeT>().print(std::declval<Printer&>()))>>:\
+    \ std::true_type {};\n\n    void _print_sep() {\n      if constexpr (_debug) {\n\
+    \        print(',');\n      }\n      print(' ');\n    }\n\n  public:\n    static\
+    \ constexpr bool sep = _sep, end = _end, debug = _debug, flush = _flush;\n   \
+    \ static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;\n\n\
+    \    _typeIterator itr;\n\n    Printer() noexcept = default;\n    Printer(_typeIterator\
+    \ _itr) noexcept: itr(_itr) {}\n\n    void print(char _a) {\n      *itr = _a;\n\
+    \      ++itr;\n    }\n    void print(const char* _a) {\n      for (; *_a; ++_a)\
+    \ print(*_a);\n    }\n    void print(const std::string& _a) {\n      for (auto\
+    \ _i: _a) print(_i);\n    }\n    void print(bool _a) {\n      print(static_cast<char>('0'\
+    \ + _a));\n    }\n    template<class _typeT, std::enable_if_t<std::is_arithmetic_v<_typeT>\
+    \ && !_has_print<_typeT>::value>* = nullptr>\n    void print(_typeT _a) {\n  \
+    \    if constexpr (std::is_signed_v<_typeT>) if (_a < 0) {\n        print('-');\n\
+    \        _a = -_a;\n      }\n      std::uint_fast64_t _p = _a;\n      _a -= _p;\n\
+    \      std::string _s;\n      do {\n        _s += '0' + _p % 10;\n        _p /=\
+    \ 10;\n      } while (_p > 0);\n      for (auto _i = _s.rbegin(); _i != _s.rend();\
+    \ ++_i) print(*_i);\n      if constexpr (std::is_integral_v<_typeT>) return;\n\
+    \      print('.');\n      for (int _i = 0; _i < static_cast<int>(_decimal_precision);\
+    \ ++_i) {\n        _a *= 10;\n        print('0' + static_cast<std::uint_fast64_t>(_a)\
+    \ % 10);\n      }\n    }\n    template<std::size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT>\
+    \ && !_has_print<_typeT>::value>* = nullptr>\n    void print(const _typeT& _a)\
+    \ {\n      if constexpr (_debug && _i == 0) print('{');\n      if constexpr (std::tuple_size_v<_typeT>\
+    \ != 0) print(std::get<_i>(_a));\n      if constexpr (_i + 1 < std::tuple_size_v<_typeT>)\
+    \ {\n        if constexpr (_sep) _print_sep();\n        print<_i + 1>(_a);\n \
+    \     } else if constexpr (_debug) print('}');\n    }\n    template<class _typeT,\
+    \ std::enable_if_t<is_iterable_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>\n\
+    \    void print(const _typeT& _a) {\n      if constexpr (_debug) print('{');\n\
+    \      if (std::empty(_a)) return;\n      for (auto _i = std::begin(_a); ; ) {\n\
+    \        print(*_i);\n        if (++_i != std::end(_a)) {\n          if constexpr\
+    \ (_sep) {\n            if constexpr (_debug) {\n              print(',');\n \
+    \             print(' ');\n            } else if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<_typeT>()[0])>>)\
+    \ print(' ');\n            else print('\\n');\n          }\n        } else break;\n\
+    \      }\n      if constexpr (_debug) print('}');\n    }\n    template<class _typeT,\
+    \ std::enable_if_t<_has_print<_typeT>::value>* = nullptr>\n    void print(const\
+    \ _typeT& _a) {\n      _a.print(*this);\n    }\n\n    template<bool _first = true>\n\
+    \    void operator ()() {\n      if constexpr (_comment && _first) print('#');\n\
+    \      if constexpr (_end) print('\\n');\n      if constexpr (_flush) itr._flush();\n\
+    \    }\n    template<bool _first = true, class _typeHead, class... _typeArgs>\n\
+    \    void operator ()(_typeHead&& _head, _typeArgs&&... _args) {\n      if constexpr\
+    \ (_comment && _first) print('#');\n      if constexpr (_sep && !_first) _print_sep();\n\
+    \      print(_head);\n      operator ()<false>(std::forward<_typeArgs>(_args)...);\n\
+    \    }\n  };\n\n  Printer<Writer<>::iterator, false, false> print(output.begin()),\
+    \ eprint(error.begin());\n  Printer<Writer<>::iterator> println(output.begin()),\
+    \ eprintln(error.begin());\n  Printer<Writer<>::iterator, true, true, true, true>\
+    \ debug(output.begin()), edebug(error.begin());\n}\n#line 4 \"aoj/PrimeNumber.test.cpp\"\
+    \n\nint main() {\n  int t;\n  kyopro::scan(t);\n  for (int i = 0; i < t; ++i)\
+    \ {\n    long long x;\n    kyopro::scan(x);\n    kyopro::println(kyopro::is_prime(x));\n\
+    \  }\n}\n"
+  code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_1_C&lang=ja\"\
+    \n#include \"../math/is_prime.hpp\"\n#include \"../system/all.hpp\"\n\nint main()\
+    \ {\n  int t;\n  kyopro::scan(t);\n  for (int i = 0; i < t; ++i) {\n    long long\
+    \ x;\n    kyopro::scan(x);\n    kyopro::println(kyopro::is_prime(x));\n  }\n}"
   dependsOn:
+  - math/is_prime.hpp
   - algorithm/bit.hpp
   - meta/settings.hpp
   - math/DynamicModInt.hpp
@@ -284,20 +401,19 @@ data:
   - math/power.hpp
   - math/mod.hpp
   - math/Montgomery.hpp
-  isVerificationFile: false
-  path: math/is_prime.hpp
-  requiredBy:
-  - math/factorize.hpp
-  - math/all.hpp
-  - all/all.hpp
-  timestamp: '2022-03-28 08:19:08+09:00'
-  verificationStatus: LIBRARY_ALL_WA
-  verifiedWith:
-  - aoj/PrimeNumber.test.cpp
-documentation_of: math/is_prime.hpp
+  - system/all.hpp
+  - system/in.hpp
+  - system/out.hpp
+  isVerificationFile: true
+  path: aoj/PrimeNumber.test.cpp
+  requiredBy: []
+  timestamp: '2022-03-28 08:25:54+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
+  verifiedWith: []
+documentation_of: aoj/PrimeNumber.test.cpp
 layout: document
 redirect_from:
-- /library/math/is_prime.hpp
-- /library/math/is_prime.hpp.html
-title: math/is_prime.hpp
+- /verify/aoj/PrimeNumber.test.cpp
+- /verify/aoj/PrimeNumber.test.cpp.html
+title: aoj/PrimeNumber.test.cpp
 ---
