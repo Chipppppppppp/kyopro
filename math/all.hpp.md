@@ -287,8 +287,8 @@ data:
     \ true;\n    };\n    if (std::numeric_limits<_typeU>::digits <= 32 || _n < (static_cast<_typeU>(1)\
     \ << 32)) {\n      for (auto _i: (std::uint_fast64_t[]){2, 7, 61}) if (!ok(_i))\
     \ return false;\n    } else {\n      for (auto _i: (std::uint_fast64_t[]){2, 325,\
-    \ 9375, 28178, 450775, 9780504, 1795265022}) {\n        if (x <= a) return true;\n\
-    \        if (!ok(a)) return false;\n      }\n    }\n    return true;\n  }\n}\n\
+    \ 9375, 28178, 450775, 9780504, 1795265022}) {\n        if (_n <= _i) return true;\n\
+    \        if (!ok(_i)) return false;\n      }\n    }\n    return true;\n  }\n}\n\
     #line 8 \"math/factorize.hpp\"\n\nnamespace kyopro {\n  template<class T>\n  constexpr\
     \ T pollard_rho(T _n, KYOPRO_BASE_UINT _c) {\n    std::uint_fast64_t _cc = _c\
     \ % _n;\n    auto _f = [=](std::uint_fast64_t _x) noexcept { return (_x * _x +\
@@ -421,7 +421,7 @@ data:
   path: math/all.hpp
   requiredBy:
   - all/all.hpp
-  timestamp: '2022-03-28 07:27:00+09:00'
+  timestamp: '2022-03-28 07:32:19+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/all.hpp

@@ -252,8 +252,8 @@ data:
     \  };\n    if (std::numeric_limits<_typeU>::digits <= 32 || _n < (static_cast<_typeU>(1)\
     \ << 32)) {\n      for (auto _i: (std::uint_fast64_t[]){2, 7, 61}) if (!ok(_i))\
     \ return false;\n    } else {\n      for (auto _i: (std::uint_fast64_t[]){2, 325,\
-    \ 9375, 28178, 450775, 9780504, 1795265022}) {\n        if (x <= a) return true;\n\
-    \        if (!ok(a)) return false;\n      }\n    }\n    return true;\n  }\n}\n"
+    \ 9375, 28178, 450775, 9780504, 1795265022}) {\n        if (_n <= _i) return true;\n\
+    \        if (!ok(_i)) return false;\n      }\n    }\n    return true;\n  }\n}\n"
   code: "#pragma once\n#include <cstdint>\n#include <type_traits>\n#include \"../algorithm/bit.hpp\"\
     \n#include \"../meta/settings.hpp\"\n#include \"DynamicModInt.hpp\"\n\nnamespace\
     \ kyopro {\n  template<class _typeT>\n  constexpr bool is_prime(_typeT _x) {\n\
@@ -267,8 +267,8 @@ data:
     \ 1)) return false;\n      return true;\n    };\n    if (std::numeric_limits<_typeU>::digits\
     \ <= 32 || _n < (static_cast<_typeU>(1) << 32)) {\n      for (auto _i: (std::uint_fast64_t[]){2,\
     \ 7, 61}) if (!ok(_i)) return false;\n    } else {\n      for (auto _i: (std::uint_fast64_t[]){2,\
-    \ 325, 9375, 28178, 450775, 9780504, 1795265022}) {\n        if (x <= a) return\
-    \ true;\n        if (!ok(a)) return false;\n      }\n    }\n    return true;\n\
+    \ 325, 9375, 28178, 450775, 9780504, 1795265022}) {\n        if (_n <= _i) return\
+    \ true;\n        if (!ok(_i)) return false;\n      }\n    }\n    return true;\n\
     \  }\n}"
   dependsOn:
   - algorithm/bit.hpp
@@ -286,7 +286,7 @@ data:
   - math/factorize.hpp
   - math/all.hpp
   - all/all.hpp
-  timestamp: '2022-03-28 07:27:00+09:00'
+  timestamp: '2022-03-28 07:32:19+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/is_prime.hpp
