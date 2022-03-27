@@ -171,7 +171,7 @@ data:
     \ value_type _mod = _m;\n\n  public:\n    value_type value;\n\n    static constexpr\
     \ KYOPRO_BASE_INT get_mod() noexcept {\n      return _mod;\n    }\n\n    constexpr\
     \ ModInt() noexcept = default;\n    template<class _typeT>\n    constexpr ModInt(_typeT\
-    \ _value) noexcept: floor_mod(_value, _mod) {}\n\n    template<class _typeT>\n\
+    \ _value) noexcept: value(floor_mod(_value, _mod)) {}\n\n    template<class _typeT>\n\
     \    explicit constexpr operator _typeT() const noexcept { return value; }\n\n\
     \    static constexpr ModInt raw(KYOPRO_BASE_UINT _n) noexcept {\n      ModInt\
     \ _res;\n      _res.value = _n;\n      return _res;\n    }\n\n    constexpr ModInt\
@@ -223,7 +223,7 @@ data:
     \ constexpr value_type _mod = _m;\n\n  public:\n    value_type value;\n\n    static\
     \ constexpr KYOPRO_BASE_INT get_mod() noexcept {\n      return _mod;\n    }\n\n\
     \    constexpr ModInt() noexcept = default;\n    template<class _typeT>\n    constexpr\
-    \ ModInt(_typeT _value) noexcept: floor_mod(_value, _mod) {}\n\n    template<class\
+    \ ModInt(_typeT _value) noexcept: value(floor_mod(_value, _mod)) {}\n\n    template<class\
     \ _typeT>\n    explicit constexpr operator _typeT() const noexcept { return value;\
     \ }\n\n    static constexpr ModInt raw(KYOPRO_BASE_UINT _n) noexcept {\n     \
     \ ModInt _res;\n      _res.value = _n;\n      return _res;\n    }\n\n    constexpr\
@@ -281,7 +281,7 @@ data:
   - template/all.hpp
   - template/alias.hpp
   - all/all.hpp
-  timestamp: '2022-03-27 23:05:30+09:00'
+  timestamp: '2022-03-27 23:24:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/ModInt.hpp

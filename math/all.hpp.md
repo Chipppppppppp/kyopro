@@ -187,11 +187,10 @@ data:
     \ kyopro {\n  template<class _typeT>\n  struct DynamicModInt {\n    static_assert(std::is_unsigned_v<_typeT>,\
     \ \"Unsigned integer is required\");\n\n  private:\n    using _larger_type = uint_least_t<std::numeric_limits<_typeT>::digits\
     \ * 2>;\n\n    inline static Montgomery<_typeT> _montgomery;\n\n  public:\n  \
-    \  _typeT value;\n\n    static void set_mod(_typeT _montgomery.mod) noexcept {\n\
-    \      _montgomery.set_mod(_montgomery.mod);\n    }\n\n    static KYOPRO_BASE_INT\
-    \ get_mod() noexcept {\n      return _montgomery.mod;\n    }\n\n    KYOPRO_BASE_INT\
-    \ get_val() noexcept {\n      return _montgomery.inverse_transform(value);\n \
-    \   }\n\n    DynamicModInt() noexcept = default;\n    DynamicModInt(_typeT _value)\
+    \  _typeT value;\n\n    static void set_mod(_typeT _mod) noexcept {\n      _montgomery.set_mod(_mod);\n\
+    \    }\n\n    static KYOPRO_BASE_INT get_mod() noexcept {\n      return _montgomery.mod;\n\
+    \    }\n\n    KYOPRO_BASE_INT get_val() noexcept {\n      return _montgomery.inverse_transform(value);\n\
+    \    }\n\n    DynamicModInt() noexcept = default;\n    DynamicModInt(_typeT _value)\
     \ noexcept: value(_montgomery.transform(floor_mod(_value, _montgomery.mod))) {}\n\
     \n    template<class _typeU>\n    explicit operator _typeU() const noexcept {\
     \ return _montgomery.inverse_transform(value); }\n\n    static DynamicModInt raw(_typeT\
@@ -322,8 +321,8 @@ data:
     \ 2)>;\n\n  private:\n    static constexpr value_type _mod = _m;\n\n  public:\n\
     \    value_type value;\n\n    static constexpr KYOPRO_BASE_INT get_mod() noexcept\
     \ {\n      return _mod;\n    }\n\n    constexpr ModInt() noexcept = default;\n\
-    \    template<class _typeT>\n    constexpr ModInt(_typeT _value) noexcept: floor_mod(_value,\
-    \ _mod) {}\n\n    template<class _typeT>\n    explicit constexpr operator _typeT()\
+    \    template<class _typeT>\n    constexpr ModInt(_typeT _value) noexcept: value(floor_mod(_value,\
+    \ _mod)) {}\n\n    template<class _typeT>\n    explicit constexpr operator _typeT()\
     \ const noexcept { return value; }\n\n    static constexpr ModInt raw(KYOPRO_BASE_UINT\
     \ _n) noexcept {\n      ModInt _res;\n      _res.value = _n;\n      return _res;\n\
     \    }\n\n    constexpr ModInt power(KYOPRO_BASE_UINT _n) const noexcept {\n \
@@ -435,7 +434,7 @@ data:
   path: math/all.hpp
   requiredBy:
   - all/all.hpp
-  timestamp: '2022-03-27 23:20:52+09:00'
+  timestamp: '2022-03-27 23:24:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/all.hpp
