@@ -25,12 +25,12 @@ namespace kyopro {
   struct int_least {
   private:
     static constexpr auto _get_type() noexcept {
-      if constexpr (_size <= 8) return std::declval<std::int_least8_t>();
-      if constexpr (_size <= 16) return std::declval<std::int_least16_t>();
-      if constexpr (_size <= 32) return std::declval<std::int_least32_t>();
-      if constexpr (_size <= 64) return std::declval<std::int_least64_t>();
+      if constexpr (_size <= 8) return std::int_least8_t();
+      if constexpr (_size <= 16) return std::int_least16_t();
+      if constexpr (_size <= 32) return std::int_least32_t();
+      if constexpr (_size <= 64) return std::int_least64_t();
       static_assert(_size <= 128, "Integer size is too long");
-      return std::declval<__int128_t>();
+      return __int128_t();
     }
 
   public:
@@ -44,12 +44,12 @@ namespace kyopro {
   struct uint_least {
   private:
     static constexpr auto _get_type() noexcept {
-      if constexpr (_size <= 8) return std::declval<std::uint_least8_t>();
-      if constexpr (_size <= 16) return std::declval<std::uint_least16_t>();
-      if constexpr (_size <= 32) return std::declval<std::uint_least32_t>();
-      if constexpr (_size <= 64) return std::declval<std::uint_least64_t>();
+      if constexpr (_size <= 8) return std::uint_least8_t();
+      if constexpr (_size <= 16) return std::uint_least16_t();
+      if constexpr (_size <= 32) return std::uint_least32_t();
+      if constexpr (_size <= 64) return std::uint_least64_t();
       static_assert(_size <= 128, "Integer size is too long");
-      return std::declval<__uint128_t>();
+      return __uint128_t();
     }
 
   public:

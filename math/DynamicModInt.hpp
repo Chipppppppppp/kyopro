@@ -107,12 +107,12 @@ namespace kyopro {
     }
 
     DynamicModInt& operator *=(DynamicModInt _rhs) noexcept {
-      value = _montgomery(static_cast<_larger_type>(value) * _rhs.value);
+      value = _montgomery.reduce(static_cast<_larger_type>(value) * _rhs.value);
       return *this;
     }
 
     DynamicModInt& operator /=(DynamicModInt _rhs) noexcept {
-      value = _montgomery(static_cast<_larger_type>(value) * _rhs.inv().value);
+      value = _montgomery.reduce(static_cast<_larger_type>(value) * _rhs.inv().value);
       return *this;
     }
 
