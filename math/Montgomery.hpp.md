@@ -43,7 +43,7 @@ data:
     \ {\n      mod = _mod;\n      _n2 = -static_cast<_larger_type>(mod) % mod;\n \
     \     _typeT _t = 0;\n      for (int _i = 0; _i < std::numeric_limits<_typeT>::digits;\
     \ ++_i) {\n        if (!(_t & 1)) {\n          _t += mod;\n          _r += static_cast<_typeT>(1)\
-    \ << static_cast<_typeT>(i);\n        }\n        _t >>= 1;\n      }\n    }\n\n\
+    \ << static_cast<_typeT>(_i);\n        }\n        _t >>= 1;\n      }\n    }\n\n\
     \    constexpr KYOPRO_BASE_INT get_mod() const noexcept {\n      return mod;\n\
     \    }\n\n    Montgomery() noexcept = default;\n    Montgomery(_typeT _mod) noexcept\
     \ {\n      set_mod(_mod);\n    }\n\n    constexpr _typeT transform(_typeT _x)\
@@ -62,7 +62,7 @@ data:
     \      _n2 = -static_cast<_larger_type>(mod) % mod;\n      _typeT _t = 0;\n  \
     \    for (int _i = 0; _i < std::numeric_limits<_typeT>::digits; ++_i) {\n    \
     \    if (!(_t & 1)) {\n          _t += mod;\n          _r += static_cast<_typeT>(1)\
-    \ << static_cast<_typeT>(i);\n        }\n        _t >>= 1;\n      }\n    }\n\n\
+    \ << static_cast<_typeT>(_i);\n        }\n        _t >>= 1;\n      }\n    }\n\n\
     \    constexpr KYOPRO_BASE_INT get_mod() const noexcept {\n      return mod;\n\
     \    }\n\n    Montgomery() noexcept = default;\n    Montgomery(_typeT _mod) noexcept\
     \ {\n      set_mod(_mod);\n    }\n\n    constexpr _typeT transform(_typeT _x)\
@@ -82,7 +82,7 @@ data:
   - template/all.hpp
   - template/alias.hpp
   - all/all.hpp
-  timestamp: '2022-03-27 23:05:30+09:00'
+  timestamp: '2022-03-27 23:20:52+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/Montgomery.hpp
