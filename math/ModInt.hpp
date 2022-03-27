@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <limits>
 #include <type_traits>
+#include <utility>
 #include "../algorithm/bit.hpp"
 #include "../algorithm/Hash.hpp"
 #include "../meta/constant.hpp"
@@ -13,7 +14,7 @@
 namespace kyopro {
   template<KYOPRO_BASE_UINT _m>
   struct ModInt {
-    using value_type = uint_least_t<bit_len(_m)>;
+    using value_type = uint_least_t<bit_len(_m * 2 - 2)>;
 
   private:
     static constexpr value_type _mod = _m;
@@ -27,7 +28,7 @@ namespace kyopro {
 
     constexpr ModInt() noexcept = default;
     template<class _typeT>
-    constexpr ModInt(_typeT _value) noexcept: value(floor_mod(_value, _mod)) { static_assert(std::is_integral_v<_typeT>); }
+    constexpr ModInt(_typeT _value) noexcept: floor_mod(_value, _mod) {}
 
     template<class _typeT>
     explicit constexpr operator _typeT() const noexcept { return value; }

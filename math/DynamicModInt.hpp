@@ -14,26 +14,30 @@ namespace kyopro {
     static_assert(std::is_unsigned_v<_typeT>, "Unsigned integer is required");
 
   private:
-    inline static _typeT _mod;
-    inline static Montgomery _montgomery;
+    using _larger_type = uint_least_t<std::numeric_limits<_typeT>::digits * 2>;
+
+    inline static Montgomery<_typeT> _montgomery;
 
   public:
     _typeT value;
 
-    static void set_mod(_typeT _m) noexcept {
-      _mod = _m;
-      _montgomery.set_mod(_m);
+    static void set_mod(_typeT _mod) noexcept {
+      _montgomery.set_mod(_mod);
     }
 
     static KYOPRO_BASE_INT get_mod() noexcept {
-      return _mod;
+      return _montgomery.mod;
+    }
+
+    static KYOPRO_BASE_INT get_val() noexcept {
+      return _montgomery.inverse_transform(value);
     }
 
     DynamicModInt() noexcept = default;
-    DynamicModInt(_typeT _value) noexcept: value(floor_mod(_value, _mod)) {}
+    DynamicModInt(_typeT _value) noexcept: value(_montgomery.transform(floor_mod(_value, _montgomery.mod))) {}
 
     template<class _typeU>
-    explicit operator _typeU() const noexcept { return value; }
+    explicit operator _typeU() const noexcept { return _montgomery.inverse_transform(value); }
 
     static DynamicModInt raw(_typeT _n) noexcept {
       DynamicModInt _res;
@@ -42,10 +46,10 @@ namespace kyopro {
     }
 
     DynamicModInt power(_typeT _n) const noexcept {
-      _typeT _res = 1, _a = value;
+      DynamicModInt _res = 1, _a = value;
       while (_n > 0) {
-        if (_n & 1) _res = _res * _a % _mod;
-        _a = _a * _a % _mod;
+        if (_n & 1) _res = _res * _a;
+        _a = _a * _a;
         _n >>= 1;
       }
       return _res;
@@ -61,7 +65,7 @@ namespace kyopro {
         _u -= _t * _v;
         std::swap(_u, _v);
       }
-      return floor_mod(_u, _mod);
+      return static_cast<DynamicModInt>(_u);
     }
 
     DynamicModInt operator +() const noexcept { return *this; }
@@ -92,23 +96,23 @@ namespace kyopro {
     }
 
     DynamicModInt& operator +=(DynamicModInt _rhs) noexcept {
-      if ((value += _rhs.value) >= _mod) value -= _mod;
+      if ((value += _rhs.value) >= mod) value -= mod;
       return *this;
     }
 
     DynamicModInt& operator -=(DynamicModInt _rhs) noexcept {
-      if (value < _rhs.value) value += _mod;
+      if (value < _rhs.value) value += mod;
       value -= _rhs.value;
       return *this;
     }
 
     DynamicModInt& operator *=(DynamicModInt _rhs) noexcept {
-      value = _montgomery(value * _rhs.value);
+      value = _montgomery(static_cast<_larger_type>(value) * _rhs.value);
       return *this;
     }
 
     DynamicModInt& operator /=(DynamicModInt _rhs) noexcept {
-      value = _montgomery(value * _rhs.inv().value);
+      value = _montgomery(static_cast<_larger_type>(value) * _rhs.inv().value);
       return *this;
     }
 
@@ -126,9 +130,9 @@ namespace kyopro {
 
     template<class _typeScanner>
     void scan(_typeScanner& _scanner) {
-      std::make_signed_t<_typeT> _value;
+      std::int_fast64_t _value;
       _scanner.scan(_value);
-      value = floor_mod(_value, _mod);
+      value = _montgomery.transform(floor_mod(_value, _montgomery.mod));
     }
 
     template<class _typePrinter>
