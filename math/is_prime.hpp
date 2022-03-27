@@ -27,8 +27,8 @@ namespace kyopro {
       for (auto _i: (std::uint_fast64_t[]){2, 7, 61}) if (!ok(_i)) return false;
     } else {
       for (auto _i: (std::uint_fast64_t[]){2, 325, 9375, 28178, 450775, 9780504, 1795265022}) {
-        if (x <= a) return true;
-        if (!ok(a)) return false;
+        if (_n <= _i) return true;
+        if (!ok(_i)) return false;
       }
     }
     return true;
