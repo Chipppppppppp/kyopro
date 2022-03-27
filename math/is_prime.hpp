@@ -9,7 +9,7 @@ namespace kyopro {
   template<class _typeT>
   constexpr bool is_prime(_typeT _x) {
     using _typeU = std::make_unsigned_t<_typeT>;
-    using _typeModInt = DynamicModInt<_typeU, -1>;
+    using _typeModInt = DynamicModInt<_typeU, KYOPRO_BASE_UINT(-1)>;
     _typeU _n = _x;
     if (_n <= 1) return false;
     if (!(_n & 1)) return _n == 2;
