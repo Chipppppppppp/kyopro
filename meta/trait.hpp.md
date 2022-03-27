@@ -24,6 +24,12 @@ data:
     path: math/all.hpp
     title: math/all.hpp
   - icon: ':warning:'
+    path: math/factorize.hpp
+    title: math/factorize.hpp
+  - icon: ':warning:'
+    path: math/is_prime.hpp
+    title: math/is_prime.hpp
+  - icon: ':warning:'
     path: meta/all.hpp
     title: meta/all.hpp
   - icon: ':heavy_check_mark:'
@@ -147,8 +153,10 @@ data:
   isVerificationFile: false
   path: meta/trait.hpp
   requiredBy:
+  - math/factorize.hpp
   - math/ModInt.hpp
   - math/DynamicModInt.hpp
+  - math/is_prime.hpp
   - math/all.hpp
   - template/all.hpp
   - template/alias.hpp

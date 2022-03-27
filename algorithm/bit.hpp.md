@@ -18,6 +18,12 @@ data:
     path: math/all.hpp
     title: math/all.hpp
   - icon: ':warning:'
+    path: math/factorize.hpp
+    title: math/factorize.hpp
+  - icon: ':warning:'
+    path: math/is_prime.hpp
+    title: math/is_prime.hpp
+  - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
   - icon: ':warning:'
@@ -115,7 +121,9 @@ data:
   isVerificationFile: false
   path: algorithm/bit.hpp
   requiredBy:
+  - math/factorize.hpp
   - math/ModInt.hpp
+  - math/is_prime.hpp
   - math/all.hpp
   - template/all.hpp
   - template/alias.hpp

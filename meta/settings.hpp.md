@@ -38,9 +38,6 @@ data:
   - icon: ':warning:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':warning:'
-    path: math/modpow.hpp
-    title: math/modpow.hpp
   - icon: ':heavy_check_mark:'
     path: math/monoid.hpp
     title: math/monoid.hpp
@@ -215,7 +212,6 @@ data:
   - math/euler_phi.hpp
   - math/all.hpp
   - math/power.hpp
-  - math/modpow.hpp
   - structure/UnionFind.hpp
   - structure/FenwickTree.hpp
   - structure/all.hpp

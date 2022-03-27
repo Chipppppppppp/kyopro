@@ -20,6 +20,12 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
+  - icon: ':warning:'
+    path: math/factorize.hpp
+    title: math/factorize.hpp
+  - icon: ':warning:'
+    path: math/is_prime.hpp
+    title: math/is_prime.hpp
   - icon: ':heavy_check_mark:'
     path: math/monoid.hpp
     title: math/monoid.hpp
@@ -93,8 +99,10 @@ data:
   isVerificationFile: false
   path: meta/constant.hpp
   requiredBy:
+  - math/factorize.hpp
   - math/ModInt.hpp
   - math/DynamicModInt.hpp
+  - math/is_prime.hpp
   - math/monoid.hpp
   - math/all.hpp
   - structure/FenwickTree.hpp

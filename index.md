@@ -49,9 +49,6 @@ data:
     - icon: ':warning:'
       path: math/mod.hpp
       title: math/mod.hpp
-    - icon: ':warning:'
-      path: math/modpow.hpp
-      title: math/modpow.hpp
     - icon: ':heavy_check_mark:'
       path: math/monoid.hpp
       title: math/monoid.hpp

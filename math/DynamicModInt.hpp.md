@@ -30,6 +30,12 @@ data:
     path: math/all.hpp
     title: math/all.hpp
   - icon: ':warning:'
+    path: math/factorize.hpp
+    title: math/factorize.hpp
+  - icon: ':warning:'
+    path: math/is_prime.hpp
+    title: math/is_prime.hpp
+  - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
   - icon: ':warning:'
@@ -148,8 +154,9 @@ data:
     \ const noexcept {\n      _typeT _y = (_x + static_cast<_larger_type>(static_cast<_typeT>(_x)\
     \ * _r) * mod) >> std::numeric_limits<_typeT>::digits;\n      return _y >= mod\
     \ ? _y - mod : _y;\n    }\n  };\n}\n#line 10 \"math/DynamicModInt.hpp\"\n\nnamespace\
-    \ kyopro {\n  template<class _typeT>\n  struct DynamicModInt {\n    static_assert(std::is_unsigned_v<_typeT>,\
-    \ \"Unsigned integer is required\");\n\n  private:\n    using _larger_type = uint_least_t<std::numeric_limits<_typeT>::digits\
+    \ kyopro {\n  template<class _typeT, KYOPRO_BASE_UINT = 0>\n  struct DynamicModInt\
+    \ {\n    static_assert(std::is_unsigned_v<_typeT>, \"Unsigned integer is required\"\
+    );\n\n  private:\n    using _larger_type = uint_least_t<std::numeric_limits<_typeT>::digits\
     \ * 2>;\n\n    inline static Montgomery<_typeT> _montgomery;\n\n  public:\n  \
     \  _typeT value;\n\n    static void set_mod(_typeT _mod) noexcept {\n      _montgomery.set_mod(_mod);\n\
     \    }\n\n    static KYOPRO_BASE_INT get_mod() noexcept {\n      return _montgomery.mod;\n\
@@ -197,15 +204,15 @@ data:
     \   _scanner.scan(_value);\n      value = _montgomery.transform(floor_mod(_value,\
     \ _montgomery.mod));\n    }\n\n    template<class _typePrinter>\n    void print(_typePrinter&\
     \ _printer) const {\n      _printer.print(_montgomery.inverse_transform(value));\n\
-    \    }\n  };\n\n  template<class _typeT>\n  struct Hash<DynamicModInt<_typeT>>\
-    \ { std::size_t operator ()(DynamicModInt<_typeT> _a) const noexcept { return\
-    \ static_cast<std::size_t>(_a); } };\n}\n"
+    \    }\n  };\n\n  template<class _typeT, KYOPRO_BASE_UINT _kind>\n  struct Hash<DynamicModInt<_typeT,\
+    \ _kind>> { std::size_t operator ()(DynamicModInt<_typeT, _kind> _a) const noexcept\
+    \ { return static_cast<std::size_t>(_a); } };\n}\n"
   code: "#pragma once\n#include <cassert>\n#include <cstdint>\n#include <type_traits>\n\
     #include \"../algorithm/Hash.hpp\"\n#include \"../meta/constant.hpp\"\n#include\
     \ \"../meta/settings.hpp\"\n#include \"mod.hpp\"\n#include \"Montgomery.hpp\"\n\
-    \nnamespace kyopro {\n  template<class _typeT>\n  struct DynamicModInt {\n   \
-    \ static_assert(std::is_unsigned_v<_typeT>, \"Unsigned integer is required\");\n\
-    \n  private:\n    using _larger_type = uint_least_t<std::numeric_limits<_typeT>::digits\
+    \nnamespace kyopro {\n  template<class _typeT, KYOPRO_BASE_UINT = 0>\n  struct\
+    \ DynamicModInt {\n    static_assert(std::is_unsigned_v<_typeT>, \"Unsigned integer\
+    \ is required\");\n\n  private:\n    using _larger_type = uint_least_t<std::numeric_limits<_typeT>::digits\
     \ * 2>;\n\n    inline static Montgomery<_typeT> _montgomery;\n\n  public:\n  \
     \  _typeT value;\n\n    static void set_mod(_typeT _mod) noexcept {\n      _montgomery.set_mod(_mod);\n\
     \    }\n\n    static KYOPRO_BASE_INT get_mod() noexcept {\n      return _montgomery.mod;\n\
@@ -253,9 +260,9 @@ data:
     \   _scanner.scan(_value);\n      value = _montgomery.transform(floor_mod(_value,\
     \ _montgomery.mod));\n    }\n\n    template<class _typePrinter>\n    void print(_typePrinter&\
     \ _printer) const {\n      _printer.print(_montgomery.inverse_transform(value));\n\
-    \    }\n  };\n\n  template<class _typeT>\n  struct Hash<DynamicModInt<_typeT>>\
-    \ { std::size_t operator ()(DynamicModInt<_typeT> _a) const noexcept { return\
-    \ static_cast<std::size_t>(_a); } };\n}\n"
+    \    }\n  };\n\n  template<class _typeT, KYOPRO_BASE_UINT _kind>\n  struct Hash<DynamicModInt<_typeT,\
+    \ _kind>> { std::size_t operator ()(DynamicModInt<_typeT, _kind> _a) const noexcept\
+    \ { return static_cast<std::size_t>(_a); } };\n}\n"
   dependsOn:
   - algorithm/Hash.hpp
   - meta/settings.hpp
@@ -267,11 +274,13 @@ data:
   isVerificationFile: false
   path: math/DynamicModInt.hpp
   requiredBy:
+  - math/factorize.hpp
+  - math/is_prime.hpp
   - math/all.hpp
   - template/all.hpp
   - template/alias.hpp
   - all/all.hpp
-  timestamp: '2022-03-28 07:05:20+09:00'
+  timestamp: '2022-03-28 07:27:00+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/DynamicModInt.hpp
