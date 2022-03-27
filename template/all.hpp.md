@@ -201,18 +201,19 @@ data:
     \   void scan(_typeScanner& _scanner) {\n      std::int_fast64_t _value;\n   \
     \   _scanner.scan(_value);\n      value = _montgomery.transform(floor_mod(_value,\
     \ _montgomery.mod));\n    }\n\n    template<class _typePrinter>\n    void print(_typePrinter&\
-    \ _printer) const {\n      _printer.print(value);\n    }\n  };\n\n  template<class\
-    \ _typeT>\n  struct Hash<DynamicModInt<_typeT>> { std::size_t operator ()(DynamicModInt<_typeT>\
-    \ _a) const noexcept { return static_cast<std::size_t>(_a); } };\n}\n#line 5 \"\
-    algorithm/bit.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n  constexpr\
-    \ KYOPRO_BASE_INT pop_count(_typeT _x) noexcept {\n    constexpr auto _digits\
-    \ = std::numeric_limits<std::make_unsigned_t<_typeT>>::digits;\n    static_assert(_digits\
-    \ <= std::numeric_limits<unsigned long long>::digits, \"Integer size is too long\"\
-    );\n    if constexpr (_digits <= std::numeric_limits<unsigned int>::digits) return\
-    \ __builtin_popcount(_x);\n    else if constexpr (_digits <= std::numeric_limits<unsigned\
-    \ long>::digits) return __builtin_popcountl(_x);\n    else return __builtin_popcountll(_x);\n\
-    \  }\n\n  template<class _typeT>\n  constexpr KYOPRO_BASE_INT leading_zero(_typeT\
+    \ _printer) const {\n      _printer.print(_montgomery.inverse_transform(value));\n\
+    \    }\n  };\n\n  template<class _typeT>\n  struct Hash<DynamicModInt<_typeT>>\
+    \ { std::size_t operator ()(DynamicModInt<_typeT> _a) const noexcept { return\
+    \ static_cast<std::size_t>(_a); } };\n}\n#line 5 \"algorithm/bit.hpp\"\n\nnamespace\
+    \ kyopro {\n  template<class _typeT>\n  constexpr KYOPRO_BASE_INT pop_count(_typeT\
     \ _x) noexcept {\n    constexpr auto _digits = std::numeric_limits<std::make_unsigned_t<_typeT>>::digits;\n\
+    \    static_assert(_digits <= std::numeric_limits<unsigned long long>::digits,\
+    \ \"Integer size is too long\");\n    if constexpr (_digits <= std::numeric_limits<unsigned\
+    \ int>::digits) return __builtin_popcount(_x);\n    else if constexpr (_digits\
+    \ <= std::numeric_limits<unsigned long>::digits) return __builtin_popcountl(_x);\n\
+    \    else return __builtin_popcountll(_x);\n  }\n\n  template<class _typeT>\n\
+    \  constexpr KYOPRO_BASE_INT leading_zero(_typeT _x) noexcept {\n    constexpr\
+    \ auto _digits = std::numeric_limits<std::make_unsigned_t<_typeT>>::digits;\n\
     \    static_assert(_digits <= std::numeric_limits<unsigned long long>::digits,\
     \ \"Integer size is too long\");\n    if (_x == 0) return 0;\n    if constexpr\
     \ (_digits <= std::numeric_limits<unsigned int>::digits) return __builtin_clz(_x)\
@@ -323,7 +324,7 @@ data:
   path: template/all.hpp
   requiredBy:
   - all/all.hpp
-  timestamp: '2022-03-28 07:02:12+09:00'
+  timestamp: '2022-03-28 07:05:20+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/all.hpp

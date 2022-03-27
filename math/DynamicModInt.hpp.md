@@ -196,9 +196,10 @@ data:
     \   void scan(_typeScanner& _scanner) {\n      std::int_fast64_t _value;\n   \
     \   _scanner.scan(_value);\n      value = _montgomery.transform(floor_mod(_value,\
     \ _montgomery.mod));\n    }\n\n    template<class _typePrinter>\n    void print(_typePrinter&\
-    \ _printer) const {\n      _printer.print(value);\n    }\n  };\n\n  template<class\
-    \ _typeT>\n  struct Hash<DynamicModInt<_typeT>> { std::size_t operator ()(DynamicModInt<_typeT>\
-    \ _a) const noexcept { return static_cast<std::size_t>(_a); } };\n}\n"
+    \ _printer) const {\n      _printer.print(_montgomery.inverse_transform(value));\n\
+    \    }\n  };\n\n  template<class _typeT>\n  struct Hash<DynamicModInt<_typeT>>\
+    \ { std::size_t operator ()(DynamicModInt<_typeT> _a) const noexcept { return\
+    \ static_cast<std::size_t>(_a); } };\n}\n"
   code: "#pragma once\n#include <cassert>\n#include <cstdint>\n#include <type_traits>\n\
     #include \"../algorithm/Hash.hpp\"\n#include \"../meta/constant.hpp\"\n#include\
     \ \"../meta/settings.hpp\"\n#include \"mod.hpp\"\n#include \"Montgomery.hpp\"\n\
@@ -251,9 +252,10 @@ data:
     \   void scan(_typeScanner& _scanner) {\n      std::int_fast64_t _value;\n   \
     \   _scanner.scan(_value);\n      value = _montgomery.transform(floor_mod(_value,\
     \ _montgomery.mod));\n    }\n\n    template<class _typePrinter>\n    void print(_typePrinter&\
-    \ _printer) const {\n      _printer.print(value);\n    }\n  };\n\n  template<class\
-    \ _typeT>\n  struct Hash<DynamicModInt<_typeT>> { std::size_t operator ()(DynamicModInt<_typeT>\
-    \ _a) const noexcept { return static_cast<std::size_t>(_a); } };\n}\n"
+    \ _printer) const {\n      _printer.print(_montgomery.inverse_transform(value));\n\
+    \    }\n  };\n\n  template<class _typeT>\n  struct Hash<DynamicModInt<_typeT>>\
+    \ { std::size_t operator ()(DynamicModInt<_typeT> _a) const noexcept { return\
+    \ static_cast<std::size_t>(_a); } };\n}\n"
   dependsOn:
   - algorithm/Hash.hpp
   - meta/settings.hpp
@@ -269,7 +271,7 @@ data:
   - template/all.hpp
   - template/alias.hpp
   - all/all.hpp
-  timestamp: '2022-03-28 07:02:12+09:00'
+  timestamp: '2022-03-28 07:05:20+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/DynamicModInt.hpp

@@ -297,18 +297,19 @@ data:
     \   void scan(_typeScanner& _scanner) {\n      std::int_fast64_t _value;\n   \
     \   _scanner.scan(_value);\n      value = _montgomery.transform(floor_mod(_value,\
     \ _montgomery.mod));\n    }\n\n    template<class _typePrinter>\n    void print(_typePrinter&\
-    \ _printer) const {\n      _printer.print(value);\n    }\n  };\n\n  template<class\
-    \ _typeT>\n  struct Hash<DynamicModInt<_typeT>> { std::size_t operator ()(DynamicModInt<_typeT>\
-    \ _a) const noexcept { return static_cast<std::size_t>(_a); } };\n}\n#line 4 \"\
-    math/euler_phi.hpp\"\n\nnamespace kyopro {\n  constexpr KYOPRO_BASE_UINT euler_phi(KYOPRO_BASE_UINT\
-    \ _n) noexcept {\n    std::uint_fast64_t _res = _n;\n    if ((_n & 1) == 0) {\n\
-    \      _res -= _res >> 1;\n      _n >>= 1;\n      while ((_n & 1) == 0) _n >>=\
-    \ 1;\n    }\n    for (std::uint_fast64_t _i = 3; _i * _i <= _n; _i += 2) {\n \
-    \     if (_n % _i == 0) {\n        _res -= _res / _i;\n        _n /= _i;\n   \
-    \     while (_n % _i == 0) _n /= _i;\n      }\n    }\n    if (_n != 1) _res -=\
-    \ _res / _n;\n    return _res;\n  }\n}\n#line 2 \"math/factorize.hpp\"\n#include\
-    \ <algorithm>\n#line 4 \"math/factorize.hpp\"\n#include <numeric>\n#include <random>\n\
-    #line 5 \"math/is_prime.hpp\"\n\nnamespace kyopro {\n  constexpr bool is_prime(KYOPRO_BASE_UINT\
+    \ _printer) const {\n      _printer.print(_montgomery.inverse_transform(value));\n\
+    \    }\n  };\n\n  template<class _typeT>\n  struct Hash<DynamicModInt<_typeT>>\
+    \ { std::size_t operator ()(DynamicModInt<_typeT> _a) const noexcept { return\
+    \ static_cast<std::size_t>(_a); } };\n}\n#line 4 \"math/euler_phi.hpp\"\n\nnamespace\
+    \ kyopro {\n  constexpr KYOPRO_BASE_UINT euler_phi(KYOPRO_BASE_UINT _n) noexcept\
+    \ {\n    std::uint_fast64_t _res = _n;\n    if ((_n & 1) == 0) {\n      _res -=\
+    \ _res >> 1;\n      _n >>= 1;\n      while ((_n & 1) == 0) _n >>= 1;\n    }\n\
+    \    for (std::uint_fast64_t _i = 3; _i * _i <= _n; _i += 2) {\n      if (_n %\
+    \ _i == 0) {\n        _res -= _res / _i;\n        _n /= _i;\n        while (_n\
+    \ % _i == 0) _n /= _i;\n      }\n    }\n    if (_n != 1) _res -= _res / _n;\n\
+    \    return _res;\n  }\n}\n#line 2 \"math/factorize.hpp\"\n#include <algorithm>\n\
+    #line 4 \"math/factorize.hpp\"\n#include <numeric>\n#include <random>\n#line 5\
+    \ \"math/is_prime.hpp\"\n\nnamespace kyopro {\n  constexpr bool is_prime(KYOPRO_BASE_UINT\
     \ _n) {\n    auto modpow = [](std::uint_fast64_t _a, std::uint_fast64_t _n, std::uint_fast64_t\
     \ _mod) noexcept {\n      std::uint_fast64_t _b = _a % _mod;\n      std::uint_fast64_t\
     \ _res = 1;\n      while (_n > 0) {\n        if (_n & 1) _res = static_cast<__uint128_t>(_res)\
@@ -644,7 +645,7 @@ data:
   isVerificationFile: false
   path: all/all.hpp
   requiredBy: []
-  timestamp: '2022-03-28 07:02:12+09:00'
+  timestamp: '2022-03-28 07:05:20+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp
