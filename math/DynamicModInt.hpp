@@ -21,8 +21,8 @@ namespace kyopro {
   public:
     _typeT value;
 
-    static void set_mod(_typeT _montgomery.mod) noexcept {
-      _montgomery.set_mod(_montgomery.mod);
+    static void set_mod(_typeT _mod) noexcept {
+      _montgomery.set_mod(_mod);
     }
 
     static KYOPRO_BASE_INT get_mod() noexcept {

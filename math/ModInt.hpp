@@ -28,7 +28,7 @@ namespace kyopro {
 
     constexpr ModInt() noexcept = default;
     template<class _typeT>
-    constexpr ModInt(_typeT _value) noexcept: floor_mod(_value, _mod) {}
+    constexpr ModInt(_typeT _value) noexcept: value(floor_mod(_value, _mod)) {}
 
     template<class _typeT>
     explicit constexpr operator _typeT() const noexcept { return value; }
