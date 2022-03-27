@@ -21,15 +21,15 @@ namespace kyopro {
   public:
     _typeT value;
 
-    static void set_mod(_typeT _mod) noexcept {
-      _montgomery.set_mod(_mod);
+    static void set_mod(_typeT _montgomery.mod) noexcept {
+      _montgomery.set_mod(_montgomery.mod);
     }
 
     static KYOPRO_BASE_INT get_mod() noexcept {
       return _montgomery.mod;
     }
 
-    static KYOPRO_BASE_INT get_val() noexcept {
+    KYOPRO_BASE_INT get_val() noexcept {
       return _montgomery.inverse_transform(value);
     }
 
@@ -56,7 +56,7 @@ namespace kyopro {
     }
 
     DynamicModInt inv() const noexcept {
-      _typeT _a = value, _b = _mod;
+      _typeT _a = value, _b = _montgomery.mod;
       std::make_signed_t<_typeT> _u = 1, _v = 0;
       while (_b > 0) {
         _typeT _t = _a / _b;
@@ -70,10 +70,10 @@ namespace kyopro {
 
     DynamicModInt operator +() const noexcept { return *this; }
 
-    DynamicModInt operator -() const noexcept { return value == 0 ? 0 : _mod - value; }
+    DynamicModInt operator -() const noexcept { return value == 0 ? 0 : _montgomery.mod - value; }
 
     DynamicModInt& operator ++() noexcept {
-      if (++value >= _mod) value -= _mod;
+      if (++value >= _montgomery.mod) value -= _montgomery.mod;
       return *this;
     }
 
@@ -84,7 +84,7 @@ namespace kyopro {
     }
 
     DynamicModInt& operator --() noexcept {
-      if (value == 0) value = _mod;
+      if (value == 0) value = _montgomery.mod;
       --value;
       return *this;
     }

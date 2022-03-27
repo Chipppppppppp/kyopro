@@ -24,7 +24,7 @@ namespace kyopro {
       for (int _i = 0; _i < std::numeric_limits<_typeT>::digits; ++_i) {
         if (!(_t & 1)) {
           _t += mod;
-          _r += static_cast<_typeT>(1) << static_cast<_typeT>(i);
+          _r += static_cast<_typeT>(1) << static_cast<_typeT>(_i);
         }
         _t >>= 1;
       }
