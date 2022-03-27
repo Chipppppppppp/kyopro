@@ -24,7 +24,10 @@ namespace kyopro {
       return true;
     };
     if (std::numeric_limits<_typeU>::digits <= 32 || _n < (static_cast<_typeU>(1) << 32)) {
-      for (auto _i: (std::uint_fast64_t[]){2, 7, 61}) if (!ok(_i)) return false;
+      for (auto _i: (std::uint_fast64_t[]){2, 7, 61}) {
+        if (_n <= _i) return true;
+        if (!ok(_i)) return false;
+      }
     } else {
       for (auto _i: (std::uint_fast64_t[]){2, 325, 9375, 28178, 450775, 9780504, 1795265022}) {
         if (_n <= _i) return true;
