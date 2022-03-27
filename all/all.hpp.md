@@ -309,26 +309,26 @@ data:
     \ <algorithm>\n#line 4 \"math/factorize.hpp\"\n#include <numeric>\n#include <random>\n\
     #line 7 \"math/is_prime.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n\
     \  constexpr bool is_prime(_typeT _x) {\n    using _typeU = std::make_unsigned_t<_typeT>;\n\
-    \    using _typeModInt = DynamicModInt<_typeU, -1>;\n    _typeU _n = _x;\n   \
-    \ if (_n <= 1) return false;\n    if (!(_n & 1)) return _n == 2;\n    _typeModInt::set_mod(_n);\n\
-    \    std::uint_fast64_t _d = (_n - 1) >> trailing_zero(_n - 1);\n    _typeModInt\
-    \ _one = 1, _minus_one = _n - 1;\n    auto ok = [&](std::uint_fast64_t _a) noexcept\
-    \ {\n      auto _y = _typeModInt(_a).power(_d);\n      std::uint_fast64_t _t =\
-    \ _d;\n      while (_y != _one and _y != _minus_one and _t != _x - 1) _y *= _y,\
-    \ _t <<= 1;\n      if (_y != _minus_one and !(_t & 1)) return false;\n      return\
-    \ true;\n    };\n    if (std::numeric_limits<_typeU>::digits <= 32 || _n < (static_cast<_typeU>(1)\
-    \ << 32)) {\n      for (auto _i: (std::uint_fast64_t[]){2, 7, 61}) if (!ok(_i))\
-    \ return false;\n    } else {\n      for (auto _i: (std::uint_fast64_t[]){2, 325,\
-    \ 9375, 28178, 450775, 9780504, 1795265022}) {\n        if (_n <= _i) return true;\n\
-    \        if (!ok(_i)) return false;\n      }\n    }\n    return true;\n  }\n}\n\
-    #line 8 \"math/factorize.hpp\"\n\nnamespace kyopro {\n  template<class T>\n  constexpr\
-    \ T pollard_rho(T _n, KYOPRO_BASE_UINT _c) {\n    std::uint_fast64_t _cc = _c\
-    \ % _n;\n    auto _f = [=](std::uint_fast64_t _x) noexcept { return (_x * _x +\
-    \ _cc) % _n; };\n    std::uint_fast64_t _x = 1, _y = 2, _z = 1, _q = 1;\n    T\
-    \ _g = 1;\n    for (int _r = 1; _g == 1; _r <<= 1) {\n      _x = _y;\n      for\
-    \ (int _i = 0; _i < _r; ++_i) _y = _f(_y);\n      for (int _k = 0; _k < _r &&\
-    \ _g == 1; _k += 128) {\n        _z = _y;\n        int _min = std::min(128, _r\
-    \ - _k);\n        for (int _i = 0; _i < _min; ++_i) {\n          _y = _f(_y);\n\
+    \    using _typeModInt = DynamicModInt<_typeU, KYOPRO_BASE_UINT(-1)>;\n    _typeU\
+    \ _n = _x;\n    if (_n <= 1) return false;\n    if (!(_n & 1)) return _n == 2;\n\
+    \    _typeModInt::set_mod(_n);\n    std::uint_fast64_t _d = (_n - 1) >> trailing_zero(_n\
+    \ - 1);\n    _typeModInt _one = 1, _minus_one = _n - 1;\n    auto ok = [&](std::uint_fast64_t\
+    \ _a) noexcept {\n      auto _y = _typeModInt(_a).power(_d);\n      std::uint_fast64_t\
+    \ _t = _d;\n      while (_y != _one and _y != _minus_one and _t != _x - 1) _y\
+    \ *= _y, _t <<= 1;\n      if (_y != _minus_one and !(_t & 1)) return false;\n\
+    \      return true;\n    };\n    if (std::numeric_limits<_typeU>::digits <= 32\
+    \ || _n < (static_cast<_typeU>(1) << 32)) {\n      for (auto _i: (std::uint_fast64_t[]){2,\
+    \ 7, 61}) if (!ok(_i)) return false;\n    } else {\n      for (auto _i: (std::uint_fast64_t[]){2,\
+    \ 325, 9375, 28178, 450775, 9780504, 1795265022}) {\n        if (_n <= _i) return\
+    \ true;\n        if (!ok(_i)) return false;\n      }\n    }\n    return true;\n\
+    \  }\n}\n#line 8 \"math/factorize.hpp\"\n\nnamespace kyopro {\n  template<class\
+    \ T>\n  constexpr T pollard_rho(T _n, KYOPRO_BASE_UINT _c) {\n    std::uint_fast64_t\
+    \ _cc = _c % _n;\n    auto _f = [=](std::uint_fast64_t _x) noexcept { return (_x\
+    \ * _x + _cc) % _n; };\n    std::uint_fast64_t _x = 1, _y = 2, _z = 1, _q = 1;\n\
+    \    T _g = 1;\n    for (int _r = 1; _g == 1; _r <<= 1) {\n      _x = _y;\n  \
+    \    for (int _i = 0; _i < _r; ++_i) _y = _f(_y);\n      for (int _k = 0; _k <\
+    \ _r && _g == 1; _k += 128) {\n        _z = _y;\n        int _min = std::min(128,\
+    \ _r - _k);\n        for (int _i = 0; _i < _min; ++_i) {\n          _y = _f(_y);\n\
     \          _q = _q * (_x + _n - _y) % _n;\n        }\n        _g = std::gcd(_q,\
     \ _n);\n      }\n    }\n    if (_g == _n) {\n      do {\n        _z = _f(_z);\n\
     \        _g = std::gcd((_x + _n - _z) % _n, _n);\n      } while (_g == 1);\n \
@@ -635,7 +635,7 @@ data:
   isVerificationFile: false
   path: all/all.hpp
   requiredBy: []
-  timestamp: '2022-03-28 07:32:19+09:00'
+  timestamp: '2022-03-28 07:35:06+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp

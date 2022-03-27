@@ -243,14 +243,14 @@ data:
     \ { return static_cast<std::size_t>(_a); } };\n}\n#line 7 \"math/is_prime.hpp\"\
     \n\nnamespace kyopro {\n  template<class _typeT>\n  constexpr bool is_prime(_typeT\
     \ _x) {\n    using _typeU = std::make_unsigned_t<_typeT>;\n    using _typeModInt\
-    \ = DynamicModInt<_typeU, -1>;\n    _typeU _n = _x;\n    if (_n <= 1) return false;\n\
-    \    if (!(_n & 1)) return _n == 2;\n    _typeModInt::set_mod(_n);\n    std::uint_fast64_t\
-    \ _d = (_n - 1) >> trailing_zero(_n - 1);\n    _typeModInt _one = 1, _minus_one\
-    \ = _n - 1;\n    auto ok = [&](std::uint_fast64_t _a) noexcept {\n      auto _y\
-    \ = _typeModInt(_a).power(_d);\n      std::uint_fast64_t _t = _d;\n      while\
-    \ (_y != _one and _y != _minus_one and _t != _x - 1) _y *= _y, _t <<= 1;\n   \
-    \   if (_y != _minus_one and !(_t & 1)) return false;\n      return true;\n  \
-    \  };\n    if (std::numeric_limits<_typeU>::digits <= 32 || _n < (static_cast<_typeU>(1)\
+    \ = DynamicModInt<_typeU, KYOPRO_BASE_UINT(-1)>;\n    _typeU _n = _x;\n    if\
+    \ (_n <= 1) return false;\n    if (!(_n & 1)) return _n == 2;\n    _typeModInt::set_mod(_n);\n\
+    \    std::uint_fast64_t _d = (_n - 1) >> trailing_zero(_n - 1);\n    _typeModInt\
+    \ _one = 1, _minus_one = _n - 1;\n    auto ok = [&](std::uint_fast64_t _a) noexcept\
+    \ {\n      auto _y = _typeModInt(_a).power(_d);\n      std::uint_fast64_t _t =\
+    \ _d;\n      while (_y != _one and _y != _minus_one and _t != _x - 1) _y *= _y,\
+    \ _t <<= 1;\n      if (_y != _minus_one and !(_t & 1)) return false;\n      return\
+    \ true;\n    };\n    if (std::numeric_limits<_typeU>::digits <= 32 || _n < (static_cast<_typeU>(1)\
     \ << 32)) {\n      for (auto _i: (std::uint_fast64_t[]){2, 7, 61}) if (!ok(_i))\
     \ return false;\n    } else {\n      for (auto _i: (std::uint_fast64_t[]){2, 325,\
     \ 9375, 28178, 450775, 9780504, 1795265022}) {\n        if (_n <= _i) return true;\n\
@@ -321,7 +321,7 @@ data:
   requiredBy:
   - math/all.hpp
   - all/all.hpp
-  timestamp: '2022-03-28 07:32:19+09:00'
+  timestamp: '2022-03-28 07:35:06+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/factorize.hpp
