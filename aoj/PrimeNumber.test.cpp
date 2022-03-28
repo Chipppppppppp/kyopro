@@ -5,9 +5,11 @@
 int main() {
   int t;
   kyopro::scan(t);
+  int cnt = 0;
   for (int i = 0; i < t; ++i) {
     long long x;
     kyopro::scan(x);
-    kyopro::println(kyopro::is_prime(x));
+    if (kyopro::is_prime(x)) ++cnt;
   }
+  kyopro::println(cnt);
 }
