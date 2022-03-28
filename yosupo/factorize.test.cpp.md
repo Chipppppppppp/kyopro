@@ -1,53 +1,53 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/out.hpp
     title: system/out.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/factorize
@@ -274,22 +274,21 @@ data:
     \ = _y;\n      for (int _i = 0; _i < _r; ++_i) _y = _f(_y);\n      for (int _k\
     \ = 0; _k < _r && _g == 1; _k += 128) {\n        _z = _y;\n        int _min =\
     \ std::min(128, _r - _k);\n        for (int _i = 0; _i < _min; ++_i) {\n     \
-    \     _y = _f(_y);\n          _q = _q * (_x + _n - _y);\n        }\n        _g\
-    \ = std::gcd(static_cast<_typeU>(_q), _n);\n      }\n    }\n    if (_g == _n)\
-    \ {\n      do {\n        _z = _f(_z);\n        _g = std::gcd(static_cast<_typeU>(_x\
-    \ + _n - _z), _n);\n      } while (_g == 1);\n    }\n    return _g;\n  }\n\n \
-    \ KYOPRO_BASE_UINT find_prime_factor(KYOPRO_BASE_UINT _n) noexcept {\n    static\
-    \ std::mt19937_64 _mt(std::random_device{}());\n    std::uniform_int_distribution<std::uint_fast64_t>\
-    \ _rnd(0, _n - 1);\n    if (is_prime(_n)) return _n;\n    for (int _i = 0; _i\
-    \ < 100; ++_i) {\n      std::uint_fast64_t _m = pollard_rho(_n, _rnd(_mt));\n\
-    \      if (is_prime(_m)) return _m;\n      _n = _m;\n    }\n    return 1;\n  }\n\
-    \n  template<bool _sorted = true, class _typeContainer = std::vector<KYOPRO_BASE_INT>>\n\
-    \  _typeContainer factorize(KYOPRO_BASE_UINT _n) {\n    _typeContainer _res;\n\
-    \    for (int _p = 2; _p < 100 && _p * _p <= _n; ++_p) {\n      while (_n % _p\
-    \ == 0) {\n        _n /= _p;\n        _res.emplace_back(_p);\n      }\n    }\n\
-    \    while (_n > 1) {\n      std::uint_fast64_t _p = find_prime_factor(_n);\n\
-    \      while (_n % _p == 0) {\n        _n /= _p;\n        _res.emplace_back(_p);\n\
-    \      }\n    }\n    if constexpr (_sorted) std::sort(_res.begin(), _res.end());\n\
+    \     _y = _f(_y);\n          _q *= _x - _y;\n        }\n        _g = std::gcd(static_cast<_typeU>(_q),\
+    \ _n);\n      }\n    }\n    if (_g == _n) {\n      do {\n        _z = _f(_z);\n\
+    \        _g = std::gcd(static_cast<_typeU>(_x - _z), _n);\n      } while (_g ==\
+    \ 1);\n    }\n    return _g;\n  }\n\n  KYOPRO_BASE_UINT find_factor(KYOPRO_BASE_UINT\
+    \ _n) noexcept {\n    static std::mt19937_64 _mt(std::random_device{}());\n  \
+    \  std::uniform_int_distribution<std::uint_fast64_t> _rnd(0, _n - 1);\n    if\
+    \ (is_prime(_n)) return _n;\n    for (int _i = 0; _i < 100; ++_i) {\n      std::uint_fast64_t\
+    \ _m = pollard_rho(_n, _rnd(_mt));\n      if (is_prime(_m)) return _m;\n     \
+    \ _n = _m;\n    }\n    return 1;\n  }\n\n  template<bool _sorted = true, class\
+    \ _typeContainer = std::vector<KYOPRO_BASE_INT>>\n  _typeContainer factorize(KYOPRO_BASE_UINT\
+    \ _n) {\n    _typeContainer _res;\n    for (int _p = 2; _p < 100 && _p * _p <=\
+    \ _n; ++_p) {\n      while (_n % _p == 0) {\n        _n /= _p;\n        _res.emplace_back(_p);\n\
+    \      }\n    }\n    while (_n > 1) {\n      std::uint_fast64_t _p = find_factor(_n);\n\
+    \      do {\n        _n /= _p;\n        _res.emplace_back(_p);\n      } while\
+    \ (_n % _p == 0);\n    }\n    if constexpr (_sorted) std::sort(_res.begin(), _res.end());\n\
     \    return _res;\n  }\n}\n#line 2 \"system/in.hpp\"\n#include <unistd.h>\n#line\
     \ 6 \"system/in.hpp\"\n#include <cstdio>\n#include <string>\n#line 14 \"system/in.hpp\"\
     \n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>\n\
@@ -438,8 +437,8 @@ data:
   isVerificationFile: true
   path: yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2022-03-28 19:53:51+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-03-29 07:19:39+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/factorize.test.cpp
 layout: document
