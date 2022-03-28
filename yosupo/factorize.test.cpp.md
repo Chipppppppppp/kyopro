@@ -1,53 +1,53 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/out.hpp
     title: system/out.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/factorize
@@ -271,13 +271,13 @@ data:
     \    _typeU _n = _p;\n    _typeDynamicModInt::set_mod(_n);\n    _typeDynamicModInt\
     \ _cc = _c;\n    auto _f = [=](_typeDynamicModInt _x) noexcept { return _x * _x\
     \ + _cc; };\n    _typeDynamicModInt _x = 1, _y = 2, _z = 1, _q = 1;\n    _typeU\
-    \ _g = 1;\n    const int m = 1 << (__lg(_n) / 5);\n    for (int _r = 1; _g ==\
-    \ 1; _r <<= 1) {\n      _x = _y;\n      for (int _i = 0; _i < _r; ++_i) _y = _f(_y);\n\
-    \      for (int _k = 0; _k < _r && _g == 1; _k += m) {\n        _z = _y;\n   \
-    \     int _min = std::min(m, _r - _k);\n        for (int _i = 0; _i < _min; ++_i)\
-    \ {\n          _y = _f(_y);\n          _q *= _x - _y;\n        }\n        _g =\
-    \ std::gcd(static_cast<_typeU>(_q), _n);\n      }\n    }\n    if (_g == _n) {\n\
-    \      do {\n        _z = _f(_z);\n        _g = std::gcd(static_cast<_typeU>(_x\
+    \ _g = 1;\n    const int _m = 1 << (std::__lg(_n) / 5);\n    for (int _r = 1;\
+    \ _g == 1; _r <<= 1) {\n      _x = _y;\n      for (int _i = 0; _i < _r; ++_i)\
+    \ _y = _f(_y);\n      for (int _k = 0; _k < _r && _g == 1; _k += _m) {\n     \
+    \   _z = _y;\n        int _min = std::min(_m, _r - _k);\n        for (int _i =\
+    \ 0; _i < _min; ++_i) {\n          _y = _f(_y);\n          _q *= _x - _y;\n  \
+    \      }\n        _g = std::gcd(static_cast<_typeU>(_q), _n);\n      }\n    }\n\
+    \    if (_g == _n) {\n      do {\n        _z = _f(_z);\n        _g = std::gcd(static_cast<_typeU>(_x\
     \ - _z), _n);\n      } while (_g == 1);\n    }\n    return _g;\n  }\n\n  KYOPRO_BASE_UINT\
     \ find_factor(KYOPRO_BASE_UINT _n) noexcept {\n    static std::mt19937_64 _mt(std::random_device{}());\n\
     \    std::uniform_int_distribution<std::uint_fast64_t> _rnd(0, _n - 1);\n    if\
@@ -438,8 +438,8 @@ data:
   isVerificationFile: true
   path: yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2022-03-29 08:38:22+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-03-29 08:47:03+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/factorize.test.cpp
 layout: document
