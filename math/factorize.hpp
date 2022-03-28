@@ -19,13 +19,13 @@ namespace kyopro {
     auto _f = [=](_typeDynamicModInt _x) noexcept { return _x * _x + _cc; };
     _typeDynamicModInt _x = 1, _y = 2, _z = 1, _q = 1;
     _typeU _g = 1;
-    const int m = 1 << (__lg(_n) / 5);
+    const int _m = 1 << (std::__lg(_n) / 5);
     for (int _r = 1; _g == 1; _r <<= 1) {
       _x = _y;
       for (int _i = 0; _i < _r; ++_i) _y = _f(_y);
-      for (int _k = 0; _k < _r && _g == 1; _k += m) {
+      for (int _k = 0; _k < _r && _g == 1; _k += _m) {
         _z = _y;
-        int _min = std::min(m, _r - _k);
+        int _min = std::min(_m, _r - _k);
         for (int _i = 0; _i < _min; ++_i) {
           _y = _f(_y);
           _q *= _x - _y;
