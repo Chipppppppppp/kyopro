@@ -3,16 +3,22 @@
 #include <cstdint>
 #include <numeric>
 #include <random>
+#include <type_traits>
 #include "../meta/settings.hpp"
+#include "DynamicModInt.hpp"
 #include "is_prime.hpp"
 
 namespace kyopro {
-  template<class T>
-  constexpr T pollard_rho(T _n, KYOPRO_BASE_UINT _c) {
-    std::uint_fast64_t _cc = _c % _n;
-    auto _f = [=](std::uint_fast64_t _x) noexcept { return (_x * _x + _cc) % _n; };
-    std::uint_fast64_t _x = 1, _y = 2, _z = 1, _q = 1;
-    T _g = 1;
+  template<class _typeT>
+  constexpr _typeT pollard_rho(_typeT _p, KYOPRO_BASE_UINT _c) {
+    using _typeU = std::make_unsigned_t<_typeT>;
+    using _typeDynamicModInt = DynamicModInt<_typeU, KYOPRO_BASE_UINT(-1)>;
+    _typeU _x = _p;
+    _typeDynamicModInt::set_mod(_n);
+    _typeDynamicModInt _cc = _c;
+    auto _f = [=](_typeDynamicModInt _x) noexcept { return _x * _x + _cc; };
+    _typeDynamicModInt _x = 1, _y = 2, _z = 1, _q = 1;
+    _typeU _g = 1;
     for (int _r = 1; _g == 1; _r <<= 1) {
       _x = _y;
       for (int _i = 0; _i < _r; ++_i) _y = _f(_y);
@@ -23,13 +29,13 @@ namespace kyopro {
           _y = _f(_y);
           _q = _q * (_x + _n - _y) % _n;
         }
-        _g = std::gcd(_q, _n);
+        _g = std::gcd(static_cast<_typeU>(_q), _n);
       }
     }
     if (_g == _n) {
       do {
         _z = _f(_z);
-        _g = std::gcd((_x + _n - _z) % _n, _n);
+        _g = std::gcd(static_cast<_typeU>(_x + _n - _z), _n);
       } while (_g == 1);
     }
     return _g;
