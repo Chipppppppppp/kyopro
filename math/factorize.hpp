@@ -27,7 +27,7 @@ namespace kyopro {
         int _min = std::min(128, _r - _k);
         for (int _i = 0; _i < _min; ++_i) {
           _y = _f(_y);
-          _q = _q * (_x + _n - _y);
+          _q *= _x - _y;
         }
         _g = std::gcd(static_cast<_typeU>(_q), _n);
       }
@@ -35,13 +35,13 @@ namespace kyopro {
     if (_g == _n) {
       do {
         _z = _f(_z);
-        _g = std::gcd(static_cast<_typeU>(_x + _n - _z), _n);
+        _g = std::gcd(static_cast<_typeU>(_x - _z), _n);
       } while (_g == 1);
     }
     return _g;
   }
 
-  KYOPRO_BASE_UINT find_prime_factor(KYOPRO_BASE_UINT _n) noexcept {
+  KYOPRO_BASE_UINT find_factor(KYOPRO_BASE_UINT _n) noexcept {
     static std::mt19937_64 _mt(std::random_device{}());
     std::uniform_int_distribution<std::uint_fast64_t> _rnd(0, _n - 1);
     if (is_prime(_n)) return _n;
@@ -63,11 +63,11 @@ namespace kyopro {
       }
     }
     while (_n > 1) {
-      std::uint_fast64_t _p = find_prime_factor(_n);
-      while (_n % _p == 0) {
+      std::uint_fast64_t _p = find_factor(_n);
+      do {
         _n /= _p;
         _res.emplace_back(_p);
-      }
+      } while (_n % _p == 0);
     }
     if constexpr (_sorted) std::sort(_res.begin(), _res.end());
     return _res;
