@@ -412,13 +412,14 @@ data:
     \ eprint(error.begin());\n  Printer<Writer<>::iterator> println(output.begin()),\
     \ eprintln(error.begin());\n  Printer<Writer<>::iterator, true, true, true, true>\
     \ debug(output.begin()), edebug(error.begin());\n}\n#line 4 \"yosupo/factorize.test.cpp\"\
-    \n\nint main() {\n  ll q;\n  kyopro::scan(q);\n  for (int i = 0; i < q; ++i) {\n\
-    \    ll a;\n    kyopro::scan(a);\n    auto res = kyopro::factorize(a);\n    println(len(res),\
-    \ res);\n  }\n}\n"
+    \n\nint main() {\n  long long q;\n  kyopro::scan(q);\n  for (int i = 0; i < q;\
+    \ ++i) {\n    long long a;\n    kyopro::scan(a);\n    auto res = kyopro::factorize(a);\n\
+    \    kyopro::println(res.size(), res);\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\n#include \"\
-    ../math/factorize.hpp\"\n#include \"../system/all.hpp\"\n\nint main() {\n  ll\
-    \ q;\n  kyopro::scan(q);\n  for (int i = 0; i < q; ++i) {\n    ll a;\n    kyopro::scan(a);\n\
-    \    auto res = kyopro::factorize(a);\n    println(len(res), res);\n  }\n}"
+    ../math/factorize.hpp\"\n#include \"../system/all.hpp\"\n\nint main() {\n  long\
+    \ long q;\n  kyopro::scan(q);\n  for (int i = 0; i < q; ++i) {\n    long long\
+    \ a;\n    kyopro::scan(a);\n    auto res = kyopro::factorize(a);\n    kyopro::println(res.size(),\
+    \ res);\n  }\n}"
   dependsOn:
   - math/factorize.hpp
   - meta/settings.hpp
@@ -437,7 +438,7 @@ data:
   isVerificationFile: true
   path: yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2022-03-28 19:48:15+09:00'
+  timestamp: '2022-03-28 19:53:51+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: yosupo/factorize.test.cpp
