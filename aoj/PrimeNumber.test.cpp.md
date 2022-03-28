@@ -181,7 +181,7 @@ data:
     \ _larger_type = uint_least_t<std::numeric_limits<_typeT>::digits * 2>;\n\n  \
     \  _typeT _r, _n2;\n\n  public:\n    constexpr void set_mod(_typeT _mod) noexcept\
     \ {\n      mod = _mod;\n      _n2 = -static_cast<_larger_type>(mod) % mod;\n \
-    \     _typeT _t = 0;\n      for (int _i = 0; _i < std::numeric_limits<_typeT>::digits;\
+    \     _typeT _t = 0;\n      _r = 0;\n      for (int _i = 0; _i < std::numeric_limits<_typeT>::digits;\
     \ ++_i) {\n        if (!(_t & 1)) {\n          _t += mod;\n          _r += static_cast<_typeT>(1)\
     \ << static_cast<_typeT>(_i);\n        }\n        _t >>= 1;\n      }\n    }\n\n\
     \    constexpr KYOPRO_BASE_INT get_mod() const noexcept {\n      return mod;\n\
@@ -206,7 +206,7 @@ data:
     \ return _montgomery.inverse_transform(value); }\n\n    static DynamicModInt raw(_typeT\
     \ _n) noexcept {\n      DynamicModInt _res;\n      _res.value = _n;\n      return\
     \ _res;\n    }\n\n    DynamicModInt power(_typeT _n) const noexcept {\n      DynamicModInt\
-    \ _res = 1, _a = value;\n      while (_n > 0) {\n        if (_n & 1) _res = _res\
+    \ _res = 1, _a = *this;\n      while (_n > 0) {\n        if (_n & 1) _res = _res\
     \ * _a;\n        _a = _a * _a;\n        _n >>= 1;\n      }\n      return _res;\n\
     \    }\n\n    DynamicModInt inv() const noexcept {\n      _typeT _a = value, _b\
     \ = _montgomery.mod;\n      std::make_signed_t<_typeT> _u = 1, _v = 0;\n     \
@@ -249,9 +249,7 @@ data:
     \n\nnamespace kyopro {\n  template<class _typeT>\n  constexpr bool is_prime(_typeT\
     \ _x) {\n    using _typeU = std::make_unsigned_t<_typeT>;\n    using _typeDynamicModInt\
     \ = DynamicModInt<_typeU, KYOPRO_BASE_UINT(-1)>;\n    _typeU _n = _x;\n    if\
-    \ (_n <= 1) return false;\n    if (_n == 2 or _n == 3 or _n == 5 or _n == 7) return\
-    \ true;\n    if (_n % 2 == 0 or _n % 3 == 0 or _n % 5 == 0 or _n % 7 == 0) return\
-    \ false;\n    if (_n < 121) return _n > 1;\n    _typeDynamicModInt::set_mod(_n);\n\
+    \ (_n <= 1) return false;\n    if (!(_n & 1)) return _n == 2;\n    _typeDynamicModInt::set_mod(_n);\n\
     \    std::uint_fast64_t _d = (_n - 1) >> trailing_zero(_n - 1);\n    _typeDynamicModInt\
     \ _one = 1, _minus_one = _n - 1;\n    auto ng = [&](std::uint_fast64_t _a) noexcept\
     \ {\n      auto _y = _typeDynamicModInt(_a).power(_d);\n      std::uint_fast64_t\
@@ -259,33 +257,33 @@ data:
     \ *= _y, _t <<= 1;\n      if (_y != _minus_one and !(_t & 1)) return true;\n \
     \     return false;\n    };\n    if (std::numeric_limits<_typeU>::digits <= 32\
     \ || _n < (static_cast<_typeU>(1) << 32)) {\n      for (auto _i: (std::uint_fast64_t[]){2,\
-    \ 7, 61}) {\n        if (ng(_i)) return false;\n      }\n    } else {\n      for\
-    \ (auto _i: (std::uint_fast64_t[]){2, 325, 9375, 28178, 450775, 9780504, 1795265022})\
-    \ {\n        if (_n <= _i) return true;\n        if (ng(_i)) return false;\n \
-    \     }\n    }\n    return true;\n  }\n}\n#line 2 \"system/in.hpp\"\n#include\
-    \ <unistd.h>\n#line 6 \"system/in.hpp\"\n#include <cstdio>\n#include <string>\n\
-    #line 14 \"system/in.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
-    \ _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Reader {\n  private:\n    int _fd,\
-    \ _idx;\n    std::array<char, _buf_size> _buffer;\n\n  public:\n    Reader() {\n\
-    \      read(_fd, _buffer.begin(), _buf_size);\n    }\n    Reader(int _fd): _fd(_fd),\
-    \ _idx(0), _buffer() {\n      read(_fd, _buffer.begin(), _buf_size);\n    }\n\
-    \    Reader(FILE* _fp): _fd(fileno(_fp)), _idx(0), _buffer() {\n      read(_fd,\
-    \ _buffer.begin(), _buf_size);\n    }\n\n    struct iterator {\n    private:\n\
-    \      Reader& _reader;\n\n    public:\n      using difference_type = void;\n\
-    \      using value_type = void;\n      using pointer = void;\n      using reference\
-    \ = void;\n      using iterator_category = std::input_iterator_tag;\n\n      iterator()\
-    \ noexcept = default;\n      iterator(Reader& _reader) noexcept: _reader(_reader)\
-    \ {}\n\n      iterator& operator ++() {\n        ++_reader._idx;\n        if (_reader._idx\
-    \ == _buf_size) {\n          read(_reader._fd, _reader._buffer.begin(), _buf_size);\n\
-    \          _reader._idx = 0;\n        }\n        return *this;\n      }\n\n  \
-    \    iterator operator ++(int) {\n        iterator _before = *this;\n        operator\
-    \ ++();\n        return _before;\n      }\n\n      char& operator *() const {\n\
-    \        return _reader._buffer[_reader._idx];\n      }\n    };\n\n    iterator\
-    \ begin() noexcept {\n      return iterator(*this);\n    }\n  };\n\n  Reader input(0);\n\
-    \n  template<class _typeIterator, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
-    \  struct Scanner {\n  private:\n    template<class, class = void>\n    struct\
-    \ _has_scan: std::false_type {};\n    template<class _typeT>\n    struct _has_scan<_typeT,\
-    \ std::void_t<decltype(std::declval<_typeT>().scan(std::declval<Scanner&>()))>>:\
+    \ 7, 61}) {\n        if (_n <= _i) return true;\n        if (ng(_i)) return false;\n\
+    \      }\n    } else {\n      for (auto _i: (std::uint_fast64_t[]){2, 325, 9375,\
+    \ 28178, 450775, 9780504, 1795265022}) {\n        if (_n <= _i) return true;\n\
+    \        if (ng(_i)) return false;\n      }\n    }\n    return true;\n  }\n}\n\
+    #line 2 \"system/in.hpp\"\n#include <unistd.h>\n#line 6 \"system/in.hpp\"\n#include\
+    \ <cstdio>\n#include <string>\n#line 14 \"system/in.hpp\"\n\nnamespace kyopro\
+    \ {\n  template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Reader\
+    \ {\n  private:\n    int _fd, _idx;\n    std::array<char, _buf_size> _buffer;\n\
+    \n  public:\n    Reader() {\n      read(_fd, _buffer.begin(), _buf_size);\n  \
+    \  }\n    Reader(int _fd): _fd(_fd), _idx(0), _buffer() {\n      read(_fd, _buffer.begin(),\
+    \ _buf_size);\n    }\n    Reader(FILE* _fp): _fd(fileno(_fp)), _idx(0), _buffer()\
+    \ {\n      read(_fd, _buffer.begin(), _buf_size);\n    }\n\n    struct iterator\
+    \ {\n    private:\n      Reader& _reader;\n\n    public:\n      using difference_type\
+    \ = void;\n      using value_type = void;\n      using pointer = void;\n     \
+    \ using reference = void;\n      using iterator_category = std::input_iterator_tag;\n\
+    \n      iterator() noexcept = default;\n      iterator(Reader& _reader) noexcept:\
+    \ _reader(_reader) {}\n\n      iterator& operator ++() {\n        ++_reader._idx;\n\
+    \        if (_reader._idx == _buf_size) {\n          read(_reader._fd, _reader._buffer.begin(),\
+    \ _buf_size);\n          _reader._idx = 0;\n        }\n        return *this;\n\
+    \      }\n\n      iterator operator ++(int) {\n        iterator _before = *this;\n\
+    \        operator ++();\n        return _before;\n      }\n\n      char& operator\
+    \ *() const {\n        return _reader._buffer[_reader._idx];\n      }\n    };\n\
+    \n    iterator begin() noexcept {\n      return iterator(*this);\n    }\n  };\n\
+    \n  Reader input(0);\n\n  template<class _typeIterator, KYOPRO_BASE_UINT _decimal_precision\
+    \ = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n  private:\n    template<class,\
+    \ class = void>\n    struct _has_scan: std::false_type {};\n    template<class\
+    \ _typeT>\n    struct _has_scan<_typeT, std::void_t<decltype(std::declval<_typeT>().scan(std::declval<Scanner&>()))>>:\
     \ std::true_type {};\n\n  public:\n    static constexpr KYOPRO_BASE_UINT decimal_precision\
     \ = _decimal_precision;\n    _typeIterator itr;\n\n    Scanner() noexcept = default;\n\
     \    Scanner(_typeIterator _itr) noexcept: itr(_itr) {}\n\n    void discard_space()\
@@ -409,7 +407,7 @@ data:
   isVerificationFile: true
   path: aoj/PrimeNumber.test.cpp
   requiredBy: []
-  timestamp: '2022-03-28 12:54:51+09:00'
+  timestamp: '2022-03-28 14:30:09+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: aoj/PrimeNumber.test.cpp

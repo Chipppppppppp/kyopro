@@ -175,7 +175,7 @@ data:
     \ _larger_type = uint_least_t<std::numeric_limits<_typeT>::digits * 2>;\n\n  \
     \  _typeT _r, _n2;\n\n  public:\n    constexpr void set_mod(_typeT _mod) noexcept\
     \ {\n      mod = _mod;\n      _n2 = -static_cast<_larger_type>(mod) % mod;\n \
-    \     _typeT _t = 0;\n      for (int _i = 0; _i < std::numeric_limits<_typeT>::digits;\
+    \     _typeT _t = 0;\n      _r = 0;\n      for (int _i = 0; _i < std::numeric_limits<_typeT>::digits;\
     \ ++_i) {\n        if (!(_t & 1)) {\n          _t += mod;\n          _r += static_cast<_typeT>(1)\
     \ << static_cast<_typeT>(_i);\n        }\n        _t >>= 1;\n      }\n    }\n\n\
     \    constexpr KYOPRO_BASE_INT get_mod() const noexcept {\n      return mod;\n\
@@ -200,7 +200,7 @@ data:
     \ return _montgomery.inverse_transform(value); }\n\n    static DynamicModInt raw(_typeT\
     \ _n) noexcept {\n      DynamicModInt _res;\n      _res.value = _n;\n      return\
     \ _res;\n    }\n\n    DynamicModInt power(_typeT _n) const noexcept {\n      DynamicModInt\
-    \ _res = 1, _a = value;\n      while (_n > 0) {\n        if (_n & 1) _res = _res\
+    \ _res = 1, _a = *this;\n      while (_n > 0) {\n        if (_n & 1) _res = _res\
     \ * _a;\n        _a = _a * _a;\n        _n >>= 1;\n      }\n      return _res;\n\
     \    }\n\n    DynamicModInt inv() const noexcept {\n      _typeT _a = value, _b\
     \ = _montgomery.mod;\n      std::make_signed_t<_typeT> _u = 1, _v = 0;\n     \
@@ -243,9 +243,7 @@ data:
     \n\nnamespace kyopro {\n  template<class _typeT>\n  constexpr bool is_prime(_typeT\
     \ _x) {\n    using _typeU = std::make_unsigned_t<_typeT>;\n    using _typeDynamicModInt\
     \ = DynamicModInt<_typeU, KYOPRO_BASE_UINT(-1)>;\n    _typeU _n = _x;\n    if\
-    \ (_n <= 1) return false;\n    if (_n == 2 or _n == 3 or _n == 5 or _n == 7) return\
-    \ true;\n    if (_n % 2 == 0 or _n % 3 == 0 or _n % 5 == 0 or _n % 7 == 0) return\
-    \ false;\n    if (_n < 121) return _n > 1;\n    _typeDynamicModInt::set_mod(_n);\n\
+    \ (_n <= 1) return false;\n    if (!(_n & 1)) return _n == 2;\n    _typeDynamicModInt::set_mod(_n);\n\
     \    std::uint_fast64_t _d = (_n - 1) >> trailing_zero(_n - 1);\n    _typeDynamicModInt\
     \ _one = 1, _minus_one = _n - 1;\n    auto ng = [&](std::uint_fast64_t _a) noexcept\
     \ {\n      auto _y = _typeDynamicModInt(_a).power(_d);\n      std::uint_fast64_t\
@@ -253,31 +251,31 @@ data:
     \ *= _y, _t <<= 1;\n      if (_y != _minus_one and !(_t & 1)) return true;\n \
     \     return false;\n    };\n    if (std::numeric_limits<_typeU>::digits <= 32\
     \ || _n < (static_cast<_typeU>(1) << 32)) {\n      for (auto _i: (std::uint_fast64_t[]){2,\
-    \ 7, 61}) {\n        if (ng(_i)) return false;\n      }\n    } else {\n      for\
-    \ (auto _i: (std::uint_fast64_t[]){2, 325, 9375, 28178, 450775, 9780504, 1795265022})\
-    \ {\n        if (_n <= _i) return true;\n        if (ng(_i)) return false;\n \
-    \     }\n    }\n    return true;\n  }\n}\n#line 8 \"math/factorize.hpp\"\n\nnamespace\
-    \ kyopro {\n  template<class T>\n  constexpr T pollard_rho(T _n, KYOPRO_BASE_UINT\
-    \ _c) {\n    std::uint_fast64_t _cc = _c % _n;\n    auto _f = [=](std::uint_fast64_t\
-    \ _x) noexcept { return (_x * _x + _cc) % _n; };\n    std::uint_fast64_t _x =\
-    \ 1, _y = 2, _z = 1, _q = 1;\n    T _g = 1;\n    for (int _r = 1; _g == 1; _r\
-    \ <<= 1) {\n      _x = _y;\n      for (int _i = 0; _i < _r; ++_i) _y = _f(_y);\n\
-    \      for (int _k = 0; _k < _r && _g == 1; _k += 128) {\n        _z = _y;\n \
-    \       int _min = std::min(128, _r - _k);\n        for (int _i = 0; _i < _min;\
-    \ ++_i) {\n          _y = _f(_y);\n          _q = _q * (_x + _n - _y) % _n;\n\
-    \        }\n        _g = std::gcd(_q, _n);\n      }\n    }\n    if (_g == _n)\
-    \ {\n      do {\n        _z = _f(_z);\n        _g = std::gcd((_x + _n - _z) %\
-    \ _n, _n);\n      } while (_g == 1);\n    }\n    return _g;\n  }\n\n  KYOPRO_BASE_UINT\
-    \ find_prime_factor(KYOPRO_BASE_UINT _n) noexcept {\n    static std::mt19937_64\
-    \ _mt(std::random_device{}());\n    std::uniform_int_distribution<std::uint_fast64_t>\
-    \ _rnd(0, _n - 1);\n    if (is_prime(_n)) return _n;\n    for (int _i = 0; _i\
-    \ < 100; ++_i) {\n      std::uint_fast64_t _m = pollard_rho(_n, _rnd(_mt));\n\
-    \      if (is_prime(_m)) return _m;\n      _n = _m;\n    }\n    return 1;\n  }\n\
-    \n  template<bool _sorted = true, class _typeContainer = std::vector<KYOPRO_BASE_INT>>\n\
-    \  _typeContainer factorize(KYOPRO_BASE_UINT _n) {\n    _typeContainer _res;\n\
-    \    for (int _p = 2; _p < 100 && _p * _p <= _n; ++_p) {\n      while (_n % _p\
-    \ == 0) {\n        _n /= _p;\n        _res.emplace_back(_p);\n      }\n    }\n\
-    \    while (_n > 1) {\n      std::uint_fast64_t _p = find_prime_factor(_n);\n\
+    \ 7, 61}) {\n        if (_n <= _i) return true;\n        if (ng(_i)) return false;\n\
+    \      }\n    } else {\n      for (auto _i: (std::uint_fast64_t[]){2, 325, 9375,\
+    \ 28178, 450775, 9780504, 1795265022}) {\n        if (_n <= _i) return true;\n\
+    \        if (ng(_i)) return false;\n      }\n    }\n    return true;\n  }\n}\n\
+    #line 8 \"math/factorize.hpp\"\n\nnamespace kyopro {\n  template<class T>\n  constexpr\
+    \ T pollard_rho(T _n, KYOPRO_BASE_UINT _c) {\n    std::uint_fast64_t _cc = _c\
+    \ % _n;\n    auto _f = [=](std::uint_fast64_t _x) noexcept { return (_x * _x +\
+    \ _cc) % _n; };\n    std::uint_fast64_t _x = 1, _y = 2, _z = 1, _q = 1;\n    T\
+    \ _g = 1;\n    for (int _r = 1; _g == 1; _r <<= 1) {\n      _x = _y;\n      for\
+    \ (int _i = 0; _i < _r; ++_i) _y = _f(_y);\n      for (int _k = 0; _k < _r &&\
+    \ _g == 1; _k += 128) {\n        _z = _y;\n        int _min = std::min(128, _r\
+    \ - _k);\n        for (int _i = 0; _i < _min; ++_i) {\n          _y = _f(_y);\n\
+    \          _q = _q * (_x + _n - _y) % _n;\n        }\n        _g = std::gcd(_q,\
+    \ _n);\n      }\n    }\n    if (_g == _n) {\n      do {\n        _z = _f(_z);\n\
+    \        _g = std::gcd((_x + _n - _z) % _n, _n);\n      } while (_g == 1);\n \
+    \   }\n    return _g;\n  }\n\n  KYOPRO_BASE_UINT find_prime_factor(KYOPRO_BASE_UINT\
+    \ _n) noexcept {\n    static std::mt19937_64 _mt(std::random_device{}());\n  \
+    \  std::uniform_int_distribution<std::uint_fast64_t> _rnd(0, _n - 1);\n    if\
+    \ (is_prime(_n)) return _n;\n    for (int _i = 0; _i < 100; ++_i) {\n      std::uint_fast64_t\
+    \ _m = pollard_rho(_n, _rnd(_mt));\n      if (is_prime(_m)) return _m;\n     \
+    \ _n = _m;\n    }\n    return 1;\n  }\n\n  template<bool _sorted = true, class\
+    \ _typeContainer = std::vector<KYOPRO_BASE_INT>>\n  _typeContainer factorize(KYOPRO_BASE_UINT\
+    \ _n) {\n    _typeContainer _res;\n    for (int _p = 2; _p < 100 && _p * _p <=\
+    \ _n; ++_p) {\n      while (_n % _p == 0) {\n        _n /= _p;\n        _res.emplace_back(_p);\n\
+    \      }\n    }\n    while (_n > 1) {\n      std::uint_fast64_t _p = find_prime_factor(_n);\n\
     \      while (_n % _p == 0) {\n        _n /= _p;\n        _res.emplace_back(_p);\n\
     \      }\n    }\n    if constexpr (_sorted) std::sort(_res.begin(), _res.end());\n\
     \    return _res;\n  }\n}\n"
@@ -323,7 +321,7 @@ data:
   requiredBy:
   - math/all.hpp
   - all/all.hpp
-  timestamp: '2022-03-28 12:54:51+09:00'
+  timestamp: '2022-03-28 14:30:09+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/factorize.hpp

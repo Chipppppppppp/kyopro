@@ -140,7 +140,7 @@ data:
     \ _larger_type = uint_least_t<std::numeric_limits<_typeT>::digits * 2>;\n\n  \
     \  _typeT _r, _n2;\n\n  public:\n    constexpr void set_mod(_typeT _mod) noexcept\
     \ {\n      mod = _mod;\n      _n2 = -static_cast<_larger_type>(mod) % mod;\n \
-    \     _typeT _t = 0;\n      for (int _i = 0; _i < std::numeric_limits<_typeT>::digits;\
+    \     _typeT _t = 0;\n      _r = 0;\n      for (int _i = 0; _i < std::numeric_limits<_typeT>::digits;\
     \ ++_i) {\n        if (!(_t & 1)) {\n          _t += mod;\n          _r += static_cast<_typeT>(1)\
     \ << static_cast<_typeT>(_i);\n        }\n        _t >>= 1;\n      }\n    }\n\n\
     \    constexpr KYOPRO_BASE_INT get_mod() const noexcept {\n      return mod;\n\
@@ -165,7 +165,7 @@ data:
     \ return _montgomery.inverse_transform(value); }\n\n    static DynamicModInt raw(_typeT\
     \ _n) noexcept {\n      DynamicModInt _res;\n      _res.value = _n;\n      return\
     \ _res;\n    }\n\n    DynamicModInt power(_typeT _n) const noexcept {\n      DynamicModInt\
-    \ _res = 1, _a = value;\n      while (_n > 0) {\n        if (_n & 1) _res = _res\
+    \ _res = 1, _a = *this;\n      while (_n > 0) {\n        if (_n & 1) _res = _res\
     \ * _a;\n        _a = _a * _a;\n        _n >>= 1;\n      }\n      return _res;\n\
     \    }\n\n    DynamicModInt inv() const noexcept {\n      _typeT _a = value, _b\
     \ = _montgomery.mod;\n      std::make_signed_t<_typeT> _u = 1, _v = 0;\n     \
@@ -324,7 +324,7 @@ data:
   path: template/all.hpp
   requiredBy:
   - all/all.hpp
-  timestamp: '2022-03-28 08:19:08+09:00'
+  timestamp: '2022-03-28 14:30:09+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/all.hpp
