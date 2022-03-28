@@ -12,9 +12,7 @@ namespace kyopro {
     using _typeDynamicModInt = DynamicModInt<_typeU, KYOPRO_BASE_UINT(-1)>;
     _typeU _n = _x;
     if (_n <= 1) return false;
-    if (_n == 2 or _n == 3 or _n == 5 or _n == 7) return true;
-    if (_n % 2 == 0 or _n % 3 == 0 or _n % 5 == 0 or _n % 7 == 0) return false;
-    if (_n < 121) return _n > 1;
+    if (!(_n & 1)) return _n == 2;
     _typeDynamicModInt::set_mod(_n);
     std::uint_fast64_t _d = (_n - 1) >> trailing_zero(_n - 1);
     _typeDynamicModInt _one = 1, _minus_one = _n - 1;
@@ -27,6 +25,7 @@ namespace kyopro {
     };
     if (std::numeric_limits<_typeU>::digits <= 32 || _n < (static_cast<_typeU>(1) << 32)) {
       for (auto _i: (std::uint_fast64_t[]){2, 7, 61}) {
+        if (_n <= _i) return true;
         if (ng(_i)) return false;
       }
     } else {

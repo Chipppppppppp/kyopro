@@ -46,7 +46,7 @@ namespace kyopro {
     }
 
     DynamicModInt power(_typeT _n) const noexcept {
-      DynamicModInt _res = 1, _a = value;
+      DynamicModInt _res = 1, _a = *this;
       while (_n > 0) {
         if (_n & 1) _res = _res * _a;
         _a = _a * _a;

@@ -21,6 +21,7 @@ namespace kyopro {
       mod = _mod;
       _n2 = -static_cast<_larger_type>(mod) % mod;
       _typeT _t = 0;
+      _r = 0;
       for (int _i = 0; _i < std::numeric_limits<_typeT>::digits; ++_i) {
         if (!(_t & 1)) {
           _t += mod;
