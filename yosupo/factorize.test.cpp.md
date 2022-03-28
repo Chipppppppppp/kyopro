@@ -271,8 +271,8 @@ data:
     \    _typeU _n = _p;\n    _typeDynamicModInt::set_mod(_n);\n    _typeDynamicModInt\
     \ _cc = _c;\n    auto _f = [=](_typeDynamicModInt _x) noexcept { return _x * _x\
     \ + _cc; };\n    _typeDynamicModInt _x = 1, _y = 2, _z = 1, _q = 1;\n    _typeU\
-    \ _g = 1;\n    const int m = 1 << (__lg(n) / 5);\n    for (int _r = 1; _g == 1;\
-    \ _r <<= 1) {\n      _x = _y;\n      for (int _i = 0; _i < _r; ++_i) _y = _f(_y);\n\
+    \ _g = 1;\n    const int m = 1 << (__lg(_n) / 5);\n    for (int _r = 1; _g ==\
+    \ 1; _r <<= 1) {\n      _x = _y;\n      for (int _i = 0; _i < _r; ++_i) _y = _f(_y);\n\
     \      for (int _k = 0; _k < _r && _g == 1; _k += m) {\n        _z = _y;\n   \
     \     int _min = std::min(m, _r - _k);\n        for (int _i = 0; _i < _min; ++_i)\
     \ {\n          _y = _f(_y);\n          _q *= _x - _y;\n        }\n        _g =\
@@ -438,7 +438,7 @@ data:
   isVerificationFile: true
   path: yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2022-03-29 08:34:25+09:00'
+  timestamp: '2022-03-29 08:38:22+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: yosupo/factorize.test.cpp
