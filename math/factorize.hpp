@@ -27,7 +27,7 @@ namespace kyopro {
         int _min = std::min(128, _r - _k);
         for (int _i = 0; _i < _min; ++_i) {
           _y = _f(_y);
-          _q = _q * (_x + _n - _y) % _n;
+          _q = _q * (_x + _n - _y);
         }
         _g = std::gcd(static_cast<_typeU>(_q), _n);
       }
