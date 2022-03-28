@@ -1,53 +1,53 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/out.hpp
     title: system/out.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/factorize
@@ -271,16 +271,16 @@ data:
     \    _typeU _n = _p;\n    _typeDynamicModInt::set_mod(_n);\n    _typeDynamicModInt\
     \ _cc = _c;\n    auto _f = [=](_typeDynamicModInt _x) noexcept { return _x * _x\
     \ + _cc; };\n    _typeDynamicModInt _x = 1, _y = 2, _z = 1, _q = 1;\n    _typeU\
-    \ _g = 1;\n    for (int _r = 1; _g == 1; _r <<= 1) {\n      _x = _y;\n      for\
-    \ (int _i = 0; _i < _r; ++_i) _y = _f(_y);\n      for (int _k = 0; _k < _r &&\
-    \ _g == 1; _k += 128) {\n        _z = _y;\n        int _min = std::min(128, _r\
-    \ - _k);\n        for (int _i = 0; _i < _min; ++_i) {\n          _y = _f(_y);\n\
-    \          _q *= _x - _y;\n        }\n        _g = std::gcd(static_cast<_typeU>(_q),\
-    \ _n);\n      }\n    }\n    if (_g == _n) {\n      do {\n        _z = _f(_z);\n\
-    \        _g = std::gcd(static_cast<_typeU>(_x - _z), _n);\n      } while (_g ==\
-    \ 1);\n    }\n    return _g;\n  }\n\n  KYOPRO_BASE_UINT find_factor(KYOPRO_BASE_UINT\
-    \ _n) noexcept {\n    static std::mt19937_64 _mt(std::random_device{}());\n  \
-    \  std::uniform_int_distribution<std::uint_fast64_t> _rnd(0, _n - 1);\n    if\
+    \ _g = 1;\n    const int m = 1 << (__lg(n) / 5);\n    for (int _r = 1; _g == 1;\
+    \ _r <<= 1) {\n      _x = _y;\n      for (int _i = 0; _i < _r; ++_i) _y = _f(_y);\n\
+    \      for (int _k = 0; _k < _r && _g == 1; _k += m) {\n        _z = _y;\n   \
+    \     int _min = std::min(m, _r - _k);\n        for (int _i = 0; _i < _min; ++_i)\
+    \ {\n          _y = _f(_y);\n          _q *= _x - _y;\n        }\n        _g =\
+    \ std::gcd(static_cast<_typeU>(_q), _n);\n      }\n    }\n    if (_g == _n) {\n\
+    \      do {\n        _z = _f(_z);\n        _g = std::gcd(static_cast<_typeU>(_x\
+    \ - _z), _n);\n      } while (_g == 1);\n    }\n    return _g;\n  }\n\n  KYOPRO_BASE_UINT\
+    \ find_factor(KYOPRO_BASE_UINT _n) noexcept {\n    static std::mt19937_64 _mt(std::random_device{}());\n\
+    \    std::uniform_int_distribution<std::uint_fast64_t> _rnd(0, _n - 1);\n    if\
     \ (is_prime(_n)) return _n;\n    for (int _i = 0; _i < 100; ++_i) {\n      std::uint_fast64_t\
     \ _m = pollard_rho(_n, _rnd(_mt));\n      if (is_prime(_m)) return _m;\n     \
     \ _n = _m;\n    }\n    return 1;\n  }\n\n  template<bool _sorted = true, class\
@@ -438,8 +438,8 @@ data:
   isVerificationFile: true
   path: yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2022-03-29 08:12:27+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-03-29 08:34:25+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: yosupo/factorize.test.cpp
 layout: document
