@@ -383,13 +383,14 @@ data:
     \ eprint(error.begin());\n  Printer<Writer<>::iterator> println(output.begin()),\
     \ eprintln(error.begin());\n  Printer<Writer<>::iterator, true, true, true, true>\
     \ debug(output.begin()), edebug(error.begin());\n}\n#line 4 \"aoj/PrimeNumber.test.cpp\"\
-    \n\nint main() {\n  int t;\n  kyopro::scan(t);\n  for (int i = 0; i < t; ++i)\
-    \ {\n    long long x;\n    kyopro::scan(x);\n    kyopro::println(kyopro::is_prime(x));\n\
-    \  }\n}\n"
+    \n\nint main() {\n  int t;\n  kyopro::scan(t);\n  int cnt = 0;\n  for (int i =\
+    \ 0; i < t; ++i) {\n    long long x;\n    kyopro::scan(x);\n    if (kyopro::is_prime(x))\
+    \ ++cnt;\n  }\n  kyopro::println(cnt);\n}\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_1_C&lang=ja\"\
     \n#include \"../math/is_prime.hpp\"\n#include \"../system/all.hpp\"\n\nint main()\
-    \ {\n  int t;\n  kyopro::scan(t);\n  for (int i = 0; i < t; ++i) {\n    long long\
-    \ x;\n    kyopro::scan(x);\n    kyopro::println(kyopro::is_prime(x));\n  }\n}"
+    \ {\n  int t;\n  kyopro::scan(t);\n  int cnt = 0;\n  for (int i = 0; i < t; ++i)\
+    \ {\n    long long x;\n    kyopro::scan(x);\n    if (kyopro::is_prime(x)) ++cnt;\n\
+    \  }\n  kyopro::println(cnt);\n}"
   dependsOn:
   - math/is_prime.hpp
   - algorithm/bit.hpp
@@ -407,7 +408,7 @@ data:
   isVerificationFile: true
   path: aoj/PrimeNumber.test.cpp
   requiredBy: []
-  timestamp: '2022-03-28 14:30:09+09:00'
+  timestamp: '2022-03-28 14:34:10+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: aoj/PrimeNumber.test.cpp
