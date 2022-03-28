@@ -325,7 +325,7 @@ data:
     \ 10 \"math/factorize.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n\
     \  constexpr _typeT pollard_rho(_typeT _p, KYOPRO_BASE_UINT _c) {\n    using _typeU\
     \ = std::make_unsigned_t<_typeT>;\n    using _typeDynamicModInt = DynamicModInt<_typeU,\
-    \ KYOPRO_BASE_UINT(-1)>;\n    _typeU _x = _p;\n    _typeDynamicModInt::set_mod(_n);\n\
+    \ KYOPRO_BASE_UINT(-1)>;\n    _typeU _n = _p;\n    _typeDynamicModInt::set_mod(_n);\n\
     \    _typeDynamicModInt _cc = _c;\n    auto _f = [=](_typeDynamicModInt _x) noexcept\
     \ { return _x * _x + _cc; };\n    _typeDynamicModInt _x = 1, _y = 2, _z = 1, _q\
     \ = 1;\n    _typeU _g = 1;\n    for (int _r = 1; _g == 1; _r <<= 1) {\n      _x\
@@ -639,7 +639,7 @@ data:
   isVerificationFile: false
   path: all/all.hpp
   requiredBy: []
-  timestamp: '2022-03-28 19:26:09+09:00'
+  timestamp: '2022-03-28 19:32:03+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp
