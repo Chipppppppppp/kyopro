@@ -249,22 +249,23 @@ data:
     \n\nnamespace kyopro {\n  template<class _typeT>\n  constexpr bool is_prime(_typeT\
     \ _x) {\n    using _typeU = std::make_unsigned_t<_typeT>;\n    using _typeDynamicModInt\
     \ = DynamicModInt<_typeU, KYOPRO_BASE_UINT(-1)>;\n    _typeU _n = _x;\n    if\
-    \ (_n <= 1) return false;\n    if (!(_n & 1)) return _n == 2;\n    _typeDynamicModInt::set_mod(_n);\n\
-    \    std::uint_fast64_t _d = (_n - 1) >> trailing_zero(_n - 1);\n    _typeDynamicModInt\
-    \ _one = 1, _minus_one = _n - 1;\n    auto ng = [&](std::uint_fast64_t _a) noexcept\
-    \ {\n      auto _y = _typeDynamicModInt(_a).power(_d);\n      std::uint_fast64_t\
-    \ _t = _d;\n      while (_y != _one and _y != _minus_one and _t != _n - 1) _y\
-    \ *= _y, _t <<= 1;\n      if (_y != _minus_one and !(_t & 1)) return true;\n \
-    \     return false;\n    };\n    if (std::numeric_limits<_typeU>::digits <= 32\
-    \ || _n < (static_cast<_typeU>(1) << 32)) {\n      for (auto _i: (std::uint_fast64_t[3]){2,\
-    \ 7, 61}) {\n        if (_n <= _i) return true;\n        if (ng(_i)) return false;\n\
-    \      }\n    } else {\n      for (auto _i: (std::uint_fast64_t[7]){2, 325, 9375,\
-    \ 28178, 450775, 9780504, 1795265022}) {\n        if (_n <= _i) return true;\n\
-    \        if (ng(_i)) return false;\n      }\n    }\n    return true;\n  }\n}\n\
-    #line 2 \"system/in.hpp\"\n#include <unistd.h>\n#line 6 \"system/in.hpp\"\n#include\
-    \ <cstdio>\n#include <string>\n#line 14 \"system/in.hpp\"\n\nnamespace kyopro\
-    \ {\n  template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Reader\
-    \ {\n  private:\n    int _fd, _idx;\n    std::array<char, _buf_size> _buffer;\n\
+    \ (_n == 2 or _n == 3 or _n == 5 or _n == 7) return true;\n    if (_n % 2 == 0\
+    \ or _n % 3 == 0 or _n % 5 == 0 or _n % 7 == 0) return false;\n    if (_n < 121)\
+    \ return _n > 1;\n    _typeDynamicModInt::set_mod(_n);\n    std::uint_fast64_t\
+    \ _d = (_n - 1) >> trailing_zero(_n - 1);\n    _typeDynamicModInt _one = 1, _minus_one\
+    \ = _n - 1;\n    auto ng = [&](std::uint_fast64_t _a) noexcept {\n      auto _y\
+    \ = _typeDynamicModInt(_a).power(_d);\n      std::uint_fast64_t _t = _d;\n   \
+    \   while (_y != _one and _y != _minus_one and _t != _n - 1) _y *= _y, _t <<=\
+    \ 1;\n      if (_y != _minus_one and !(_t & 1)) return true;\n      return false;\n\
+    \    };\n    if (std::numeric_limits<_typeU>::digits <= 32 || _n < (static_cast<_typeU>(1)\
+    \ << 32)) {\n      for (auto _i: (std::uint_fast64_t[3]){2, 7, 61}) {\n      \
+    \  if (ng(_i)) return false;\n      }\n    } else {\n      for (auto _i: (std::uint_fast64_t[7]){2,\
+    \ 325, 9375, 28178, 450775, 9780504, 1795265022}) {\n        if (_n <= _i) return\
+    \ true;\n        if (ng(_i)) return false;\n      }\n    }\n    return true;\n\
+    \  }\n}\n#line 2 \"system/in.hpp\"\n#include <unistd.h>\n#line 6 \"system/in.hpp\"\
+    \n#include <cstdio>\n#include <string>\n#line 14 \"system/in.hpp\"\n\nnamespace\
+    \ kyopro {\n  template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>\n  struct\
+    \ Reader {\n  private:\n    int _fd, _idx;\n    std::array<char, _buf_size> _buffer;\n\
     \n  public:\n    Reader() {\n      read(_fd, _buffer.begin(), _buf_size);\n  \
     \  }\n    Reader(int _fd): _fd(_fd), _idx(0), _buffer() {\n      read(_fd, _buffer.begin(),\
     \ _buf_size);\n    }\n    Reader(FILE* _fp): _fd(fileno(_fp)), _idx(0), _buffer()\
@@ -408,7 +409,7 @@ data:
   isVerificationFile: true
   path: aoj/PrimeNumber.test.cpp
   requiredBy: []
-  timestamp: '2022-03-28 19:09:19+09:00'
+  timestamp: '2022-03-29 08:12:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: aoj/PrimeNumber.test.cpp
