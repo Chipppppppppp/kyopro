@@ -19,7 +19,7 @@ namespace kyopro {
     auto _f = [=](_typeDynamicModInt _x) noexcept { return _x * _x + _cc; };
     _typeDynamicModInt _x = 1, _y = 2, _z = 1, _q = 1;
     _typeU _g = 1;
-    const int m = 1 << (__lg(n) / 5);
+    const int m = 1 << (__lg(_n) / 5);
     for (int _r = 1; _g == 1; _r <<= 1) {
       _x = _y;
       for (int _i = 0; _i < _r; ++_i) _y = _f(_y);
