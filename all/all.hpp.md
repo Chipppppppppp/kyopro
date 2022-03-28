@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
   - icon: ':warning:'
     path: algorithm/all.hpp
     title: algorithm/all.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
   - icon: ':warning:'
@@ -34,28 +34,28 @@ data:
   - icon: ':warning:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/mod.hpp
     title: math/mod.hpp
   - icon: ':heavy_check_mark:'
     path: math/monoid.hpp
     title: math/monoid.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
   - icon: ':warning:'
     path: meta/all.hpp
     title: meta/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   - icon: ':heavy_check_mark:'
@@ -67,13 +67,13 @@ data:
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/out.hpp
     title: system/out.hpp
   - icon: ':warning:'
@@ -317,32 +317,32 @@ data:
     \   while (_y != _one and _y != _minus_one and _t != _n - 1) _y *= _y, _t <<=\
     \ 1;\n      if (_y != _minus_one and !(_t & 1)) return true;\n      return false;\n\
     \    };\n    if (std::numeric_limits<_typeU>::digits <= 32 || _n < (static_cast<_typeU>(1)\
-    \ << 32)) {\n      for (auto _i: (std::uint_fast64_t[]){2, 7, 61}) {\n       \
-    \ if (_n <= _i) return true;\n        if (ng(_i)) return false;\n      }\n   \
-    \ } else {\n      for (auto _i: (std::uint_fast64_t[]){2, 325, 9375, 28178, 450775,\
-    \ 9780504, 1795265022}) {\n        if (_n <= _i) return true;\n        if (ng(_i))\
-    \ return false;\n      }\n    }\n    return true;\n  }\n}\n#line 8 \"math/factorize.hpp\"\
-    \n\nnamespace kyopro {\n  template<class T>\n  constexpr T pollard_rho(T _n, KYOPRO_BASE_UINT\
-    \ _c) {\n    std::uint_fast64_t _cc = _c % _n;\n    auto _f = [=](std::uint_fast64_t\
-    \ _x) noexcept { return (_x * _x + _cc) % _n; };\n    std::uint_fast64_t _x =\
-    \ 1, _y = 2, _z = 1, _q = 1;\n    T _g = 1;\n    for (int _r = 1; _g == 1; _r\
-    \ <<= 1) {\n      _x = _y;\n      for (int _i = 0; _i < _r; ++_i) _y = _f(_y);\n\
-    \      for (int _k = 0; _k < _r && _g == 1; _k += 128) {\n        _z = _y;\n \
-    \       int _min = std::min(128, _r - _k);\n        for (int _i = 0; _i < _min;\
-    \ ++_i) {\n          _y = _f(_y);\n          _q = _q * (_x + _n - _y) % _n;\n\
-    \        }\n        _g = std::gcd(_q, _n);\n      }\n    }\n    if (_g == _n)\
-    \ {\n      do {\n        _z = _f(_z);\n        _g = std::gcd((_x + _n - _z) %\
-    \ _n, _n);\n      } while (_g == 1);\n    }\n    return _g;\n  }\n\n  KYOPRO_BASE_UINT\
-    \ find_prime_factor(KYOPRO_BASE_UINT _n) noexcept {\n    static std::mt19937_64\
-    \ _mt(std::random_device{}());\n    std::uniform_int_distribution<std::uint_fast64_t>\
-    \ _rnd(0, _n - 1);\n    if (is_prime(_n)) return _n;\n    for (int _i = 0; _i\
-    \ < 100; ++_i) {\n      std::uint_fast64_t _m = pollard_rho(_n, _rnd(_mt));\n\
-    \      if (is_prime(_m)) return _m;\n      _n = _m;\n    }\n    return 1;\n  }\n\
-    \n  template<bool _sorted = true, class _typeContainer = std::vector<KYOPRO_BASE_INT>>\n\
-    \  _typeContainer factorize(KYOPRO_BASE_UINT _n) {\n    _typeContainer _res;\n\
-    \    for (int _p = 2; _p < 100 && _p * _p <= _n; ++_p) {\n      while (_n % _p\
-    \ == 0) {\n        _n /= _p;\n        _res.emplace_back(_p);\n      }\n    }\n\
-    \    while (_n > 1) {\n      std::uint_fast64_t _p = find_prime_factor(_n);\n\
+    \ << 32)) {\n      for (auto _i: (std::uint_fast64_t[3]){2, 7, 61}) {\n      \
+    \  if (_n <= _i) return true;\n        if (ng(_i)) return false;\n      }\n  \
+    \  } else {\n      for (auto _i: (std::uint_fast64_t[7]){2, 325, 9375, 28178,\
+    \ 450775, 9780504, 1795265022}) {\n        if (_n <= _i) return true;\n      \
+    \  if (ng(_i)) return false;\n      }\n    }\n    return true;\n  }\n}\n#line\
+    \ 8 \"math/factorize.hpp\"\n\nnamespace kyopro {\n  template<class T>\n  constexpr\
+    \ T pollard_rho(T _n, KYOPRO_BASE_UINT _c) {\n    std::uint_fast64_t _cc = _c\
+    \ % _n;\n    auto _f = [=](std::uint_fast64_t _x) noexcept { return (_x * _x +\
+    \ _cc) % _n; };\n    std::uint_fast64_t _x = 1, _y = 2, _z = 1, _q = 1;\n    T\
+    \ _g = 1;\n    for (int _r = 1; _g == 1; _r <<= 1) {\n      _x = _y;\n      for\
+    \ (int _i = 0; _i < _r; ++_i) _y = _f(_y);\n      for (int _k = 0; _k < _r &&\
+    \ _g == 1; _k += 128) {\n        _z = _y;\n        int _min = std::min(128, _r\
+    \ - _k);\n        for (int _i = 0; _i < _min; ++_i) {\n          _y = _f(_y);\n\
+    \          _q = _q * (_x + _n - _y) % _n;\n        }\n        _g = std::gcd(_q,\
+    \ _n);\n      }\n    }\n    if (_g == _n) {\n      do {\n        _z = _f(_z);\n\
+    \        _g = std::gcd((_x + _n - _z) % _n, _n);\n      } while (_g == 1);\n \
+    \   }\n    return _g;\n  }\n\n  KYOPRO_BASE_UINT find_prime_factor(KYOPRO_BASE_UINT\
+    \ _n) noexcept {\n    static std::mt19937_64 _mt(std::random_device{}());\n  \
+    \  std::uniform_int_distribution<std::uint_fast64_t> _rnd(0, _n - 1);\n    if\
+    \ (is_prime(_n)) return _n;\n    for (int _i = 0; _i < 100; ++_i) {\n      std::uint_fast64_t\
+    \ _m = pollard_rho(_n, _rnd(_mt));\n      if (is_prime(_m)) return _m;\n     \
+    \ _n = _m;\n    }\n    return 1;\n  }\n\n  template<bool _sorted = true, class\
+    \ _typeContainer = std::vector<KYOPRO_BASE_INT>>\n  _typeContainer factorize(KYOPRO_BASE_UINT\
+    \ _n) {\n    _typeContainer _res;\n    for (int _p = 2; _p < 100 && _p * _p <=\
+    \ _n; ++_p) {\n      while (_n % _p == 0) {\n        _n /= _p;\n        _res.emplace_back(_p);\n\
+    \      }\n    }\n    while (_n > 1) {\n      std::uint_fast64_t _p = find_prime_factor(_n);\n\
     \      while (_n % _p == 0) {\n        _n /= _p;\n        _res.emplace_back(_p);\n\
     \      }\n    }\n    if constexpr (_sorted) std::sort(_res.begin(), _res.end());\n\
     \    return _res;\n  }\n}\n#line 13 \"math/ModInt.hpp\"\n\nnamespace kyopro {\n\
@@ -636,7 +636,7 @@ data:
   isVerificationFile: false
   path: all/all.hpp
   requiredBy: []
-  timestamp: '2022-03-28 14:30:09+09:00'
+  timestamp: '2022-03-28 19:09:19+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp
