@@ -13,7 +13,7 @@ namespace kyopro {
   constexpr _typeT pollard_rho(_typeT _p, KYOPRO_BASE_UINT _c) {
     using _typeU = std::make_unsigned_t<_typeT>;
     using _typeDynamicModInt = DynamicModInt<_typeU, KYOPRO_BASE_UINT(-1)>;
-    _typeU _x = _p;
+    _typeU _n = _p;
     _typeDynamicModInt::set_mod(_n);
     _typeDynamicModInt _cc = _c;
     auto _f = [=](_typeDynamicModInt _x) noexcept { return _x * _x + _cc; };
