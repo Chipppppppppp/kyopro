@@ -264,9 +264,9 @@ data:
     \ = _y;\n      for (int _i = 0; _i < _r; ++_i) _y = _f(_y);\n      for (int _k\
     \ = 0; _k < _r && _g == 1; _k += 128) {\n        _z = _y;\n        int _min =\
     \ std::min(128, _r - _k);\n        for (int _i = 0; _i < _min; ++_i) {\n     \
-    \     _y = _f(_y);\n          _q = _q * (_x + _n - _y) % _n;\n        }\n    \
-    \    _g = std::gcd(static_cast<_typeU>(_q), _n);\n      }\n    }\n    if (_g ==\
-    \ _n) {\n      do {\n        _z = _f(_z);\n        _g = std::gcd(static_cast<_typeU>(_x\
+    \     _y = _f(_y);\n          _q = _q * (_x + _n - _y);\n        }\n        _g\
+    \ = std::gcd(static_cast<_typeU>(_q), _n);\n      }\n    }\n    if (_g == _n)\
+    \ {\n      do {\n        _z = _f(_z);\n        _g = std::gcd(static_cast<_typeU>(_x\
     \ + _n - _z), _n);\n      } while (_g == 1);\n    }\n    return _g;\n  }\n\n \
     \ KYOPRO_BASE_UINT find_prime_factor(KYOPRO_BASE_UINT _n) noexcept {\n    static\
     \ std::mt19937_64 _mt(std::random_device{}());\n    std::uniform_int_distribution<std::uint_fast64_t>\
@@ -293,9 +293,9 @@ data:
     \ = _y;\n      for (int _i = 0; _i < _r; ++_i) _y = _f(_y);\n      for (int _k\
     \ = 0; _k < _r && _g == 1; _k += 128) {\n        _z = _y;\n        int _min =\
     \ std::min(128, _r - _k);\n        for (int _i = 0; _i < _min; ++_i) {\n     \
-    \     _y = _f(_y);\n          _q = _q * (_x + _n - _y) % _n;\n        }\n    \
-    \    _g = std::gcd(static_cast<_typeU>(_q), _n);\n      }\n    }\n    if (_g ==\
-    \ _n) {\n      do {\n        _z = _f(_z);\n        _g = std::gcd(static_cast<_typeU>(_x\
+    \     _y = _f(_y);\n          _q = _q * (_x + _n - _y);\n        }\n        _g\
+    \ = std::gcd(static_cast<_typeU>(_q), _n);\n      }\n    }\n    if (_g == _n)\
+    \ {\n      do {\n        _z = _f(_z);\n        _g = std::gcd(static_cast<_typeU>(_x\
     \ + _n - _z), _n);\n      } while (_g == 1);\n    }\n    return _g;\n  }\n\n \
     \ KYOPRO_BASE_UINT find_prime_factor(KYOPRO_BASE_UINT _n) noexcept {\n    static\
     \ std::mt19937_64 _mt(std::random_device{}());\n    std::uniform_int_distribution<std::uint_fast64_t>\
@@ -326,7 +326,7 @@ data:
   requiredBy:
   - math/all.hpp
   - all/all.hpp
-  timestamp: '2022-03-28 19:32:03+09:00'
+  timestamp: '2022-03-28 19:35:04+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/factorize.hpp
