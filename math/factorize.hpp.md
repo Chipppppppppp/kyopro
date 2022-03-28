@@ -45,56 +45,20 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"math/factorize.hpp\"\n#include <algorithm>\n#include <cstdint>\n\
-    #include <numeric>\n#include <random>\n#line 3 \"meta/settings.hpp\"\n\n#ifndef\
-    \ KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n\
-    #define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n\
-    #define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define\
-    \ KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(998244353)\n#endif\n\n#ifndef\
-    \ KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
+    #include <numeric>\n#include <random>\n#include <type_traits>\n#line 3 \"meta/settings.hpp\"\
+    \n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n\
+    #ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef\
+    \ KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n\
+    #define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(998244353)\n#endif\n\n\
+    #ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 3 \"math/is_prime.hpp\"\n#include <type_traits>\n#line 2 \"algorithm/bit.hpp\"\
-    \n#include <limits>\n#line 5 \"algorithm/bit.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ _typeT>\n  constexpr KYOPRO_BASE_INT pop_count(_typeT _x) noexcept {\n    constexpr\
-    \ auto _digits = std::numeric_limits<std::make_unsigned_t<_typeT>>::digits;\n\
-    \    static_assert(_digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"Integer size is too long\");\n    if constexpr (_digits <= std::numeric_limits<unsigned\
-    \ int>::digits) return __builtin_popcount(_x);\n    else if constexpr (_digits\
-    \ <= std::numeric_limits<unsigned long>::digits) return __builtin_popcountl(_x);\n\
-    \    else return __builtin_popcountll(_x);\n  }\n\n  template<class _typeT>\n\
-    \  constexpr KYOPRO_BASE_INT leading_zero(_typeT _x) noexcept {\n    constexpr\
-    \ auto _digits = std::numeric_limits<std::make_unsigned_t<_typeT>>::digits;\n\
-    \    static_assert(_digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"Integer size is too long\");\n    if (_x == 0) return 0;\n    if constexpr\
-    \ (_digits <= std::numeric_limits<unsigned int>::digits) return __builtin_clz(_x)\
-    \ + _digits - std::numeric_limits<unsigned int>::digits;\n    else if constexpr\
-    \ (_digits <= std::numeric_limits<unsigned long>::digits) return __builtin_clzl(_x)\
-    \ + _digits - std::numeric_limits<unsigned long>::digits;\n    else return __builtin_clzll(_x)\
-    \ + _digits - std::numeric_limits<unsigned long long>::digits;\n  }\n\n  template<class\
-    \ _typeT>\n  constexpr KYOPRO_BASE_INT trailing_zero(_typeT _x) noexcept {\n \
-    \   constexpr auto _digits = std::numeric_limits<std::make_unsigned_t<_typeT>>::digits;\n\
-    \    static_assert(_digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"Integer size is too long\");\n    if constexpr (_digits <= std::numeric_limits<unsigned\
-    \ int>::digits) return __builtin_ctz(_x);\n    else if constexpr (_digits <= std::numeric_limits<unsigned\
-    \ long>::digits) return __builtin_ctzl(_x);\n    else return __builtin_ctzll(_x);\n\
-    \  }\n\n  template<class _typeT>\n  constexpr KYOPRO_BASE_INT bit_len(_typeT _x)\
-    \ noexcept {\n    constexpr auto _digits = std::numeric_limits<std::make_unsigned_t<_typeT>>::digits;\n\
-    \    static_assert(_digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"Integer size is too long\");\n    if (_x == 0) return 0;\n    if constexpr\
-    \ (_digits <= std::numeric_limits<unsigned int>::digits) return std::numeric_limits<unsigned\
-    \ int>::digits - __builtin_clz(_x);\n    else if constexpr (_digits <= std::numeric_limits<unsigned\
-    \ long>::digits) return std::numeric_limits<unsigned long>::digits - __builtin_clzl(_x);\n\
-    \    else return std::numeric_limits<unsigned long long>::digits - __builtin_clzll(_x);\n\
-    \  }\n\n  template<class _typeT>\n  constexpr KYOPRO_BASE_INT floor_bit(_typeT\
-    \ _x) noexcept {\n    return bit_len(_x >> static_cast<_typeT>(1));\n  }\n\n \
-    \ template<class _typeT>\n  constexpr KYOPRO_BASE_INT ceil_bit(_typeT _x) noexcept\
-    \ {\n    if (_x == 0) return 0;\n    return bit_len(_x - static_cast<_typeT>(1));\n\
-    \  }\n}\n#line 2 \"math/DynamicModInt.hpp\"\n#include <cassert>\n#line 2 \"algorithm/Hash.hpp\"\
+    #endif\n#line 2 \"math/DynamicModInt.hpp\"\n#include <cassert>\n#line 2 \"algorithm/Hash.hpp\"\
     \n#include <cstddef>\n#line 4 \"algorithm/Hash.hpp\"\n#include <functional>\n\
     #include <initializer_list>\n#include <tuple>\n#line 8 \"algorithm/Hash.hpp\"\n\
     #include <utility>\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#include\
-    \ <queue>\n#line 5 \"meta/trait.hpp\"\n#include <stack>\n#line 9 \"meta/trait.hpp\"\
-    \n\ntemplate<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
+    \ <queue>\n#include <limits>\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\n\
+    template<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
     struct std::is_signed<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
     \ std::true_type {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>: std::true_type\
     \ {};\n#ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
@@ -239,61 +203,102 @@ data:
     \ _printer) const {\n      _printer.print(_montgomery.inverse_transform(value));\n\
     \    }\n  };\n\n  template<class _typeT, KYOPRO_BASE_UINT _kind>\n  struct Hash<DynamicModInt<_typeT,\
     \ _kind>> { std::size_t operator ()(DynamicModInt<_typeT, _kind> _a) const noexcept\
-    \ { return static_cast<std::size_t>(_a); } };\n}\n#line 7 \"math/is_prime.hpp\"\
-    \n\nnamespace kyopro {\n  template<class _typeT>\n  constexpr bool is_prime(_typeT\
-    \ _x) {\n    using _typeU = std::make_unsigned_t<_typeT>;\n    using _typeDynamicModInt\
-    \ = DynamicModInt<_typeU, KYOPRO_BASE_UINT(-1)>;\n    _typeU _n = _x;\n    if\
-    \ (_n <= 1) return false;\n    if (!(_n & 1)) return _n == 2;\n    _typeDynamicModInt::set_mod(_n);\n\
-    \    std::uint_fast64_t _d = (_n - 1) >> trailing_zero(_n - 1);\n    _typeDynamicModInt\
-    \ _one = 1, _minus_one = _n - 1;\n    auto ng = [&](std::uint_fast64_t _a) noexcept\
-    \ {\n      auto _y = _typeDynamicModInt(_a).power(_d);\n      std::uint_fast64_t\
-    \ _t = _d;\n      while (_y != _one and _y != _minus_one and _t != _n - 1) _y\
-    \ *= _y, _t <<= 1;\n      if (_y != _minus_one and !(_t & 1)) return true;\n \
-    \     return false;\n    };\n    if (std::numeric_limits<_typeU>::digits <= 32\
-    \ || _n < (static_cast<_typeU>(1) << 32)) {\n      for (auto _i: (std::uint_fast64_t[3]){2,\
-    \ 7, 61}) {\n        if (_n <= _i) return true;\n        if (ng(_i)) return false;\n\
-    \      }\n    } else {\n      for (auto _i: (std::uint_fast64_t[7]){2, 325, 9375,\
-    \ 28178, 450775, 9780504, 1795265022}) {\n        if (_n <= _i) return true;\n\
-    \        if (ng(_i)) return false;\n      }\n    }\n    return true;\n  }\n}\n\
-    #line 8 \"math/factorize.hpp\"\n\nnamespace kyopro {\n  template<class T>\n  constexpr\
-    \ T pollard_rho(T _n, KYOPRO_BASE_UINT _c) {\n    std::uint_fast64_t _cc = _c\
-    \ % _n;\n    auto _f = [=](std::uint_fast64_t _x) noexcept { return (_x * _x +\
-    \ _cc) % _n; };\n    std::uint_fast64_t _x = 1, _y = 2, _z = 1, _q = 1;\n    T\
-    \ _g = 1;\n    for (int _r = 1; _g == 1; _r <<= 1) {\n      _x = _y;\n      for\
-    \ (int _i = 0; _i < _r; ++_i) _y = _f(_y);\n      for (int _k = 0; _k < _r &&\
-    \ _g == 1; _k += 128) {\n        _z = _y;\n        int _min = std::min(128, _r\
-    \ - _k);\n        for (int _i = 0; _i < _min; ++_i) {\n          _y = _f(_y);\n\
-    \          _q = _q * (_x + _n - _y) % _n;\n        }\n        _g = std::gcd(_q,\
-    \ _n);\n      }\n    }\n    if (_g == _n) {\n      do {\n        _z = _f(_z);\n\
-    \        _g = std::gcd((_x + _n - _z) % _n, _n);\n      } while (_g == 1);\n \
-    \   }\n    return _g;\n  }\n\n  KYOPRO_BASE_UINT find_prime_factor(KYOPRO_BASE_UINT\
-    \ _n) noexcept {\n    static std::mt19937_64 _mt(std::random_device{}());\n  \
-    \  std::uniform_int_distribution<std::uint_fast64_t> _rnd(0, _n - 1);\n    if\
-    \ (is_prime(_n)) return _n;\n    for (int _i = 0; _i < 100; ++_i) {\n      std::uint_fast64_t\
-    \ _m = pollard_rho(_n, _rnd(_mt));\n      if (is_prime(_m)) return _m;\n     \
-    \ _n = _m;\n    }\n    return 1;\n  }\n\n  template<bool _sorted = true, class\
-    \ _typeContainer = std::vector<KYOPRO_BASE_INT>>\n  _typeContainer factorize(KYOPRO_BASE_UINT\
-    \ _n) {\n    _typeContainer _res;\n    for (int _p = 2; _p < 100 && _p * _p <=\
-    \ _n; ++_p) {\n      while (_n % _p == 0) {\n        _n /= _p;\n        _res.emplace_back(_p);\n\
-    \      }\n    }\n    while (_n > 1) {\n      std::uint_fast64_t _p = find_prime_factor(_n);\n\
+    \ { return static_cast<std::size_t>(_a); } };\n}\n#line 5 \"algorithm/bit.hpp\"\
+    \n\nnamespace kyopro {\n  template<class _typeT>\n  constexpr KYOPRO_BASE_INT\
+    \ pop_count(_typeT _x) noexcept {\n    constexpr auto _digits = std::numeric_limits<std::make_unsigned_t<_typeT>>::digits;\n\
+    \    static_assert(_digits <= std::numeric_limits<unsigned long long>::digits,\
+    \ \"Integer size is too long\");\n    if constexpr (_digits <= std::numeric_limits<unsigned\
+    \ int>::digits) return __builtin_popcount(_x);\n    else if constexpr (_digits\
+    \ <= std::numeric_limits<unsigned long>::digits) return __builtin_popcountl(_x);\n\
+    \    else return __builtin_popcountll(_x);\n  }\n\n  template<class _typeT>\n\
+    \  constexpr KYOPRO_BASE_INT leading_zero(_typeT _x) noexcept {\n    constexpr\
+    \ auto _digits = std::numeric_limits<std::make_unsigned_t<_typeT>>::digits;\n\
+    \    static_assert(_digits <= std::numeric_limits<unsigned long long>::digits,\
+    \ \"Integer size is too long\");\n    if (_x == 0) return 0;\n    if constexpr\
+    \ (_digits <= std::numeric_limits<unsigned int>::digits) return __builtin_clz(_x)\
+    \ + _digits - std::numeric_limits<unsigned int>::digits;\n    else if constexpr\
+    \ (_digits <= std::numeric_limits<unsigned long>::digits) return __builtin_clzl(_x)\
+    \ + _digits - std::numeric_limits<unsigned long>::digits;\n    else return __builtin_clzll(_x)\
+    \ + _digits - std::numeric_limits<unsigned long long>::digits;\n  }\n\n  template<class\
+    \ _typeT>\n  constexpr KYOPRO_BASE_INT trailing_zero(_typeT _x) noexcept {\n \
+    \   constexpr auto _digits = std::numeric_limits<std::make_unsigned_t<_typeT>>::digits;\n\
+    \    static_assert(_digits <= std::numeric_limits<unsigned long long>::digits,\
+    \ \"Integer size is too long\");\n    if constexpr (_digits <= std::numeric_limits<unsigned\
+    \ int>::digits) return __builtin_ctz(_x);\n    else if constexpr (_digits <= std::numeric_limits<unsigned\
+    \ long>::digits) return __builtin_ctzl(_x);\n    else return __builtin_ctzll(_x);\n\
+    \  }\n\n  template<class _typeT>\n  constexpr KYOPRO_BASE_INT bit_len(_typeT _x)\
+    \ noexcept {\n    constexpr auto _digits = std::numeric_limits<std::make_unsigned_t<_typeT>>::digits;\n\
+    \    static_assert(_digits <= std::numeric_limits<unsigned long long>::digits,\
+    \ \"Integer size is too long\");\n    if (_x == 0) return 0;\n    if constexpr\
+    \ (_digits <= std::numeric_limits<unsigned int>::digits) return std::numeric_limits<unsigned\
+    \ int>::digits - __builtin_clz(_x);\n    else if constexpr (_digits <= std::numeric_limits<unsigned\
+    \ long>::digits) return std::numeric_limits<unsigned long>::digits - __builtin_clzl(_x);\n\
+    \    else return std::numeric_limits<unsigned long long>::digits - __builtin_clzll(_x);\n\
+    \  }\n\n  template<class _typeT>\n  constexpr KYOPRO_BASE_INT floor_bit(_typeT\
+    \ _x) noexcept {\n    return bit_len(_x >> static_cast<_typeT>(1));\n  }\n\n \
+    \ template<class _typeT>\n  constexpr KYOPRO_BASE_INT ceil_bit(_typeT _x) noexcept\
+    \ {\n    if (_x == 0) return 0;\n    return bit_len(_x - static_cast<_typeT>(1));\n\
+    \  }\n}\n#line 7 \"math/is_prime.hpp\"\n\nnamespace kyopro {\n  template<class\
+    \ _typeT>\n  constexpr bool is_prime(_typeT _x) {\n    using _typeU = std::make_unsigned_t<_typeT>;\n\
+    \    using _typeDynamicModInt = DynamicModInt<_typeU, KYOPRO_BASE_UINT(-1)>;\n\
+    \    _typeU _n = _x;\n    if (_n <= 1) return false;\n    if (!(_n & 1)) return\
+    \ _n == 2;\n    _typeDynamicModInt::set_mod(_n);\n    std::uint_fast64_t _d =\
+    \ (_n - 1) >> trailing_zero(_n - 1);\n    _typeDynamicModInt _one = 1, _minus_one\
+    \ = _n - 1;\n    auto ng = [&](std::uint_fast64_t _a) noexcept {\n      auto _y\
+    \ = _typeDynamicModInt(_a).power(_d);\n      std::uint_fast64_t _t = _d;\n   \
+    \   while (_y != _one and _y != _minus_one and _t != _n - 1) _y *= _y, _t <<=\
+    \ 1;\n      if (_y != _minus_one and !(_t & 1)) return true;\n      return false;\n\
+    \    };\n    if (std::numeric_limits<_typeU>::digits <= 32 || _n < (static_cast<_typeU>(1)\
+    \ << 32)) {\n      for (auto _i: (std::uint_fast64_t[3]){2, 7, 61}) {\n      \
+    \  if (_n <= _i) return true;\n        if (ng(_i)) return false;\n      }\n  \
+    \  } else {\n      for (auto _i: (std::uint_fast64_t[7]){2, 325, 9375, 28178,\
+    \ 450775, 9780504, 1795265022}) {\n        if (_n <= _i) return true;\n      \
+    \  if (ng(_i)) return false;\n      }\n    }\n    return true;\n  }\n}\n#line\
+    \ 10 \"math/factorize.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n\
+    \  constexpr _typeT pollard_rho(_typeT _p, KYOPRO_BASE_UINT _c) {\n    using _typeU\
+    \ = std::make_unsigned_t<_typeT>;\n    using _typeDynamicModInt = DynamicModInt<_typeU,\
+    \ KYOPRO_BASE_UINT(-1)>;\n    _typeU _x = _p;\n    _typeDynamicModInt::set_mod(_n);\n\
+    \    _typeDynamicModInt _cc = _c;\n    auto _f = [=](_typeDynamicModInt _x) noexcept\
+    \ { return _x * _x + _cc; };\n    _typeDynamicModInt _x = 1, _y = 2, _z = 1, _q\
+    \ = 1;\n    _typeU _g = 1;\n    for (int _r = 1; _g == 1; _r <<= 1) {\n      _x\
+    \ = _y;\n      for (int _i = 0; _i < _r; ++_i) _y = _f(_y);\n      for (int _k\
+    \ = 0; _k < _r && _g == 1; _k += 128) {\n        _z = _y;\n        int _min =\
+    \ std::min(128, _r - _k);\n        for (int _i = 0; _i < _min; ++_i) {\n     \
+    \     _y = _f(_y);\n          _q = _q * (_x + _n - _y) % _n;\n        }\n    \
+    \    _g = std::gcd(static_cast<_typeU>(_q), _n);\n      }\n    }\n    if (_g ==\
+    \ _n) {\n      do {\n        _z = _f(_z);\n        _g = std::gcd(static_cast<_typeU>(_x\
+    \ + _n - _z), _n);\n      } while (_g == 1);\n    }\n    return _g;\n  }\n\n \
+    \ KYOPRO_BASE_UINT find_prime_factor(KYOPRO_BASE_UINT _n) noexcept {\n    static\
+    \ std::mt19937_64 _mt(std::random_device{}());\n    std::uniform_int_distribution<std::uint_fast64_t>\
+    \ _rnd(0, _n - 1);\n    if (is_prime(_n)) return _n;\n    for (int _i = 0; _i\
+    \ < 100; ++_i) {\n      std::uint_fast64_t _m = pollard_rho(_n, _rnd(_mt));\n\
+    \      if (is_prime(_m)) return _m;\n      _n = _m;\n    }\n    return 1;\n  }\n\
+    \n  template<bool _sorted = true, class _typeContainer = std::vector<KYOPRO_BASE_INT>>\n\
+    \  _typeContainer factorize(KYOPRO_BASE_UINT _n) {\n    _typeContainer _res;\n\
+    \    for (int _p = 2; _p < 100 && _p * _p <= _n; ++_p) {\n      while (_n % _p\
+    \ == 0) {\n        _n /= _p;\n        _res.emplace_back(_p);\n      }\n    }\n\
+    \    while (_n > 1) {\n      std::uint_fast64_t _p = find_prime_factor(_n);\n\
     \      while (_n % _p == 0) {\n        _n /= _p;\n        _res.emplace_back(_p);\n\
     \      }\n    }\n    if constexpr (_sorted) std::sort(_res.begin(), _res.end());\n\
     \    return _res;\n  }\n}\n"
   code: "#pragma once\n#include <algorithm>\n#include <cstdint>\n#include <numeric>\n\
-    #include <random>\n#include \"../meta/settings.hpp\"\n#include \"is_prime.hpp\"\
-    \n\nnamespace kyopro {\n  template<class T>\n  constexpr T pollard_rho(T _n, KYOPRO_BASE_UINT\
-    \ _c) {\n    std::uint_fast64_t _cc = _c % _n;\n    auto _f = [=](std::uint_fast64_t\
-    \ _x) noexcept { return (_x * _x + _cc) % _n; };\n    std::uint_fast64_t _x =\
-    \ 1, _y = 2, _z = 1, _q = 1;\n    T _g = 1;\n    for (int _r = 1; _g == 1; _r\
-    \ <<= 1) {\n      _x = _y;\n      for (int _i = 0; _i < _r; ++_i) _y = _f(_y);\n\
-    \      for (int _k = 0; _k < _r && _g == 1; _k += 128) {\n        _z = _y;\n \
-    \       int _min = std::min(128, _r - _k);\n        for (int _i = 0; _i < _min;\
-    \ ++_i) {\n          _y = _f(_y);\n          _q = _q * (_x + _n - _y) % _n;\n\
-    \        }\n        _g = std::gcd(_q, _n);\n      }\n    }\n    if (_g == _n)\
-    \ {\n      do {\n        _z = _f(_z);\n        _g = std::gcd((_x + _n - _z) %\
-    \ _n, _n);\n      } while (_g == 1);\n    }\n    return _g;\n  }\n\n  KYOPRO_BASE_UINT\
-    \ find_prime_factor(KYOPRO_BASE_UINT _n) noexcept {\n    static std::mt19937_64\
-    \ _mt(std::random_device{}());\n    std::uniform_int_distribution<std::uint_fast64_t>\
+    #include <random>\n#include <type_traits>\n#include \"../meta/settings.hpp\"\n\
+    #include \"DynamicModInt.hpp\"\n#include \"is_prime.hpp\"\n\nnamespace kyopro\
+    \ {\n  template<class _typeT>\n  constexpr _typeT pollard_rho(_typeT _p, KYOPRO_BASE_UINT\
+    \ _c) {\n    using _typeU = std::make_unsigned_t<_typeT>;\n    using _typeDynamicModInt\
+    \ = DynamicModInt<_typeU, KYOPRO_BASE_UINT(-1)>;\n    _typeU _x = _p;\n    _typeDynamicModInt::set_mod(_n);\n\
+    \    _typeDynamicModInt _cc = _c;\n    auto _f = [=](_typeDynamicModInt _x) noexcept\
+    \ { return _x * _x + _cc; };\n    _typeDynamicModInt _x = 1, _y = 2, _z = 1, _q\
+    \ = 1;\n    _typeU _g = 1;\n    for (int _r = 1; _g == 1; _r <<= 1) {\n      _x\
+    \ = _y;\n      for (int _i = 0; _i < _r; ++_i) _y = _f(_y);\n      for (int _k\
+    \ = 0; _k < _r && _g == 1; _k += 128) {\n        _z = _y;\n        int _min =\
+    \ std::min(128, _r - _k);\n        for (int _i = 0; _i < _min; ++_i) {\n     \
+    \     _y = _f(_y);\n          _q = _q * (_x + _n - _y) % _n;\n        }\n    \
+    \    _g = std::gcd(static_cast<_typeU>(_q), _n);\n      }\n    }\n    if (_g ==\
+    \ _n) {\n      do {\n        _z = _f(_z);\n        _g = std::gcd(static_cast<_typeU>(_x\
+    \ + _n - _z), _n);\n      } while (_g == 1);\n    }\n    return _g;\n  }\n\n \
+    \ KYOPRO_BASE_UINT find_prime_factor(KYOPRO_BASE_UINT _n) noexcept {\n    static\
+    \ std::mt19937_64 _mt(std::random_device{}());\n    std::uniform_int_distribution<std::uint_fast64_t>\
     \ _rnd(0, _n - 1);\n    if (is_prime(_n)) return _n;\n    for (int _i = 0; _i\
     \ < 100; ++_i) {\n      std::uint_fast64_t _m = pollard_rho(_n, _rnd(_mt));\n\
     \      if (is_prime(_m)) return _m;\n      _n = _m;\n    }\n    return 1;\n  }\n\
@@ -307,8 +312,6 @@ data:
     \    return _res;\n  }\n}"
   dependsOn:
   - meta/settings.hpp
-  - math/is_prime.hpp
-  - algorithm/bit.hpp
   - math/DynamicModInt.hpp
   - algorithm/Hash.hpp
   - meta/trait.hpp
@@ -316,12 +319,14 @@ data:
   - math/power.hpp
   - math/mod.hpp
   - math/Montgomery.hpp
+  - math/is_prime.hpp
+  - algorithm/bit.hpp
   isVerificationFile: false
   path: math/factorize.hpp
   requiredBy:
   - math/all.hpp
   - all/all.hpp
-  timestamp: '2022-03-28 19:09:19+09:00'
+  timestamp: '2022-03-28 19:26:09+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/factorize.hpp
