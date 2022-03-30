@@ -49,7 +49,7 @@ namespace kyopro {
   template<class _typeT, class _typeCompare = std::less<_typeT>, class _typeContainer = std::vector<_typeT>>
   using priq = std::priority_queue<_typeT, _typeContainer, _typeCompare>;
   template<class _typeT, class _typeCompare = std::greater<_typeT>, class _typeContainer = std::vector<_typeT>>
-  using heapq = priq<_typeT, _typeContainer, _typeCompare>;
+  using heapq = priq<_typeT, _typeCompare, _typeContainer>;
 }
 
 using namespace std;
