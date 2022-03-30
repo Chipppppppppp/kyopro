@@ -9,7 +9,7 @@
 #define KYOPRO_REP2(i, last) for (KYOPRO_BASE_INT i = 0, KYOPRO_LAST_ ## i = (last); (i) < (KYOPRO_LAST_ ## i); ++(i))
 #define KYOPRO_REP3(i, first, last) for (KYOPRO_BASE_INT i = (first), KYOPRO_LAST_ ## i = last; (i) < (KYOPRO_LAST_ ## i); ++(i))
 #define KYOPRO_REP4(i, first, last, step) for (KYOPRO_BASE_INT i = (first), KYOPRO_LAST_ ## i = (last), KYOPRO_STEP_ ## i = (step); (KYOPRO_STEP_ ## i) > 0 ? (i) < (KYOPRO_LAST_ ## i) : (i) > (KYOPRO_LAST_ ## i); (i) += (KYOPRO_BASE_INT)(step))
-#define rep(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__ __VA_OPT__(,) KYOPRO_REP3, KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)
+#define rep(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__ __VA_OPT__(,) KYOPRO_REP4, KYOPRO_REP3, KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)
 #define KYOPRO_ITER2(i, last) for (auto i = std::decay_t<decltype(last)>(), KYOPRO_LAST_ ## i = (last); (i) != (KYOPRO_LAST_ ## i); ++(i))
 #define KYOPRO_ITER3(i, first, last) for (auto i = (first), KYOPRO_LAST_ ## i = (last); (i) != (KYOPRO_LAST_ ## i); ++(i))
 #define KYOPRO_ITER4(i, first, last, step) for (auto i = (first), KYOPRO_LAST_ ## i = (last); (step) > 0 ? (i) < (KYOPRO_LAST_ ## i) : (i) > (KYOPRO_LAST_ ## i); (i) += (step))
