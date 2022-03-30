@@ -77,6 +77,9 @@ data:
   - icon: ':warning:'
     path: template/all.hpp
     title: template/all.hpp
+  - icon: ':warning:'
+    path: template/macro.hpp
+    title: template/macro.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: aoj/PrimeNumber.test.cpp
@@ -221,6 +224,7 @@ data:
   - structure/UnionFind.hpp
   - structure/FenwickTree.hpp
   - structure/all.hpp
+  - template/macro.hpp
   - template/all.hpp
   - template/alias.hpp
   - algorithm/bit.hpp

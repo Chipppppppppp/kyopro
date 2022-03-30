@@ -302,7 +302,7 @@ data:
     \ _typeT, class _typeCompare = std::less<_typeT>, class _typeContainer = std::vector<_typeT>>\n\
     \  using priq = std::priority_queue<_typeT, _typeContainer, _typeCompare>;\n \
     \ template<class _typeT, class _typeCompare = std::greater<_typeT>, class _typeContainer\
-    \ = std::vector<_typeT>>\n  using heapq = priq<_typeT, _typeContainer, _typeCompare>;\n\
+    \ = std::vector<_typeT>>\n  using heapq = priq<_typeT, _typeCompare, _typeContainer>;\n\
     }\n\nusing namespace std;\nusing namespace kyopro;\n#line 3 \"template/all.hpp\"\
     \n"
   code: '#pragma once
@@ -324,7 +324,7 @@ data:
   path: template/all.hpp
   requiredBy:
   - all/all.hpp
-  timestamp: '2022-03-28 14:30:09+09:00'
+  timestamp: '2022-03-30 12:01:07+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/all.hpp

@@ -99,6 +99,9 @@ data:
     - icon: ':warning:'
       path: template/all.hpp
       title: template/all.hpp
+    - icon: ':warning:'
+      path: template/macro.hpp
+      title: template/macro.hpp
   verificationCategories:
   - name: aoj
     pages:

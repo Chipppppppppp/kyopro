@@ -312,16 +312,16 @@ data:
     \    _typeU _n = _x;\n    if (_n <= 1) return false;\n    if (!(_n & 1)) return\
     \ _n == 2;\n    _typeDynamicModInt::set_mod(_n);\n    std::uint_fast64_t _d =\
     \ (_n - 1) >> trailing_zero(_n - 1);\n    _typeDynamicModInt _one = 1, _minus_one\
-    \ = _n - 1;\n    auto ng = [&](std::uint_fast64_t _a) noexcept {\n      auto _y\
-    \ = _typeDynamicModInt(_a).power(_d);\n      std::uint_fast64_t _t = _d;\n   \
-    \   while (_y != _one and _y != _minus_one and _t != _n - 1) _y *= _y, _t <<=\
+    \ = _n - 1;\n    auto _ng = [&](std::uint_fast64_t _a) noexcept {\n      auto\
+    \ _y = _typeDynamicModInt(_a).power(_d);\n      std::uint_fast64_t _t = _d;\n\
+    \      while (_y != _one and _y != _minus_one and _t != _n - 1) _y *= _y, _t <<=\
     \ 1;\n      if (_y != _minus_one and !(_t & 1)) return true;\n      return false;\n\
     \    };\n    if (std::numeric_limits<_typeU>::digits <= 32 || _n < (static_cast<_typeU>(1)\
     \ << 32)) {\n      for (auto _i: (std::uint_fast64_t[3]){2, 7, 61}) {\n      \
-    \  if (_n <= _i) return true;\n        if (ng(_i)) return false;\n      }\n  \
-    \  } else {\n      for (auto _i: (std::uint_fast64_t[7]){2, 325, 9375, 28178,\
+    \  if (_n <= _i) return true;\n        if (_ng(_i)) return false;\n      }\n \
+    \   } else {\n      for (auto _i: (std::uint_fast64_t[7]){2, 325, 9375, 28178,\
     \ 450775, 9780504, 1795265022}) {\n        if (_n <= _i) return true;\n      \
-    \  if (ng(_i)) return false;\n      }\n    }\n    return true;\n  }\n}\n#line\
+    \  if (_ng(_i)) return false;\n      }\n    }\n    return true;\n  }\n}\n#line\
     \ 10 \"math/factorize.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n\
     \  constexpr _typeT pollard_rho(_typeT _p, KYOPRO_BASE_UINT _c) {\n    using _typeU\
     \ = std::make_unsigned_t<_typeT>;\n    using _typeDynamicModInt = DynamicModInt<_typeU,\
@@ -593,7 +593,7 @@ data:
     \ _typeT, class _typeCompare = std::less<_typeT>, class _typeContainer = std::vector<_typeT>>\n\
     \  using priq = std::priority_queue<_typeT, _typeContainer, _typeCompare>;\n \
     \ template<class _typeT, class _typeCompare = std::greater<_typeT>, class _typeContainer\
-    \ = std::vector<_typeT>>\n  using heapq = priq<_typeT, _typeContainer, _typeCompare>;\n\
+    \ = std::vector<_typeT>>\n  using heapq = priq<_typeT, _typeCompare, _typeContainer>;\n\
     }\n\nusing namespace std;\nusing namespace kyopro;\n#line 8 \"all/all.hpp\"\n"
   code: '#pragma once
 
@@ -639,7 +639,7 @@ data:
   isVerificationFile: false
   path: all/all.hpp
   requiredBy: []
-  timestamp: '2022-03-29 08:56:52+09:00'
+  timestamp: '2022-03-30 12:01:07+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp
