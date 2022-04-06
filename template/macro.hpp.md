@@ -191,8 +191,8 @@ data:
   isVerificationFile: false
   path: template/macro.hpp
   requiredBy:
-  - template/all.hpp
   - all/all.hpp
+  - template/all.hpp
   timestamp: '2022-03-30 17:18:07+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

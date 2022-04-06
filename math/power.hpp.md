@@ -92,29 +92,29 @@ data:
   isVerificationFile: false
   path: math/power.hpp
   requiredBy:
-  - math/factorize.hpp
+  - all/all.hpp
+  - system/all.hpp
+  - system/in.hpp
+  - meta/all.hpp
+  - meta/constant.hpp
+  - structure/all.hpp
+  - structure/FenwickTree.hpp
+  - template/alias.hpp
+  - template/all.hpp
   - math/ModInt.hpp
+  - math/all.hpp
   - math/DynamicModInt.hpp
   - math/is_prime.hpp
+  - math/factorize.hpp
   - math/monoid.hpp
-  - math/all.hpp
-  - structure/FenwickTree.hpp
-  - structure/all.hpp
-  - template/all.hpp
-  - template/alias.hpp
-  - all/all.hpp
-  - meta/constant.hpp
-  - meta/all.hpp
-  - system/in.hpp
-  - system/all.hpp
   timestamp: '2022-03-19 00:51:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - yosupo/factorize.test.cpp
+  - aoj/PrimeNumber.test.cpp
   - yosupo/UnionFind.test.cpp
   - yosupo/point_add_range_sum.test.cpp
+  - yosupo/factorize.test.cpp
   - yosupo/many_aplusb.test.cpp
-  - aoj/PrimeNumber.test.cpp
 documentation_of: math/power.hpp
 layout: document
 redirect_from:

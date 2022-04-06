@@ -35,6 +35,9 @@ data:
     path: template/alias.hpp
     title: template/alias.hpp
   - icon: ':warning:'
+    path: template/amin_amax.hpp
+    title: template/amin_amax.hpp
+  - icon: ':warning:'
     path: template/macro.hpp
     title: template/macro.hpp
   _extendedRequiredBy:
@@ -49,16 +52,15 @@ data:
     links: []
   bundledCode: "#line 2 \"template/alias.hpp\"\n#include <cstdint>\n#include <limits>\n\
     #include <functional>\n#include <utility>\n#include <vector>\n#include <string>\n\
-    #include <set>\n#include <map>\n#include <unordered_set>\n#include <unordered_map>\n\
-    #include <queue>\n#include <stack>\n#line 2 \"algorithm/Hash.hpp\"\n#include <cstddef>\n\
-    #line 5 \"algorithm/Hash.hpp\"\n#include <initializer_list>\n#include <tuple>\n\
-    #include <type_traits>\n#line 3 \"meta/settings.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n\
-    #define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n#define\
-    \ KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n#define\
-    \ KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD\
-    \ static_cast<KYOPRO_BASE_UINT>(998244353)\n#endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n\
-    #define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n#endif\n\n\
-    #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
+    #include <set>\n#include <type_traits>\n#include <map>\n#include <unordered_set>\n\
+    #include <unordered_map>\n#include <queue>\n#include <stack>\n#line 2 \"algorithm/Hash.hpp\"\
+    \n#include <cstddef>\n#line 5 \"algorithm/Hash.hpp\"\n#include <initializer_list>\n\
+    #include <tuple>\n#line 3 \"meta/settings.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n#define\
+    \ KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT\
+    \ std::uint64_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT\
+    \ double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(998244353)\n\
+    #endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
+    #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#line 9 \"meta/trait.hpp\"\
     \n\ntemplate<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
@@ -154,7 +156,7 @@ data:
     \      return reduce(_x);\n    }\n\n    constexpr _typeT reduce(_larger_type _x)\
     \ const noexcept {\n      _typeT _y = (_x + static_cast<_larger_type>(static_cast<_typeT>(_x)\
     \ * _r) * mod) >> std::numeric_limits<_typeT>::digits;\n      return _y >= mod\
-    \ ? _y - mod : _y;\n    }\n  };\n}\n#line 10 \"math/DynamicModInt.hpp\"\n\nnamespace\
+    \ ? _y - mod : _y;\n    }\n  };\n}\n#line 11 \"math/DynamicModInt.hpp\"\n\nnamespace\
     \ kyopro {\n  template<class _typeT, KYOPRO_BASE_UINT = 0>\n  struct DynamicModInt\
     \ {\n    static_assert(std::is_unsigned_v<_typeT>, \"Unsigned integer is required\"\
     );\n\n  private:\n    using _larger_type = uint_least_t<std::numeric_limits<_typeT>::digits\
@@ -289,7 +291,7 @@ data:
     \    }\n\n    template<class _typePrinter>\n    void print(_typePrinter& _printer)\
     \ const {\n      _printer.print(value);\n    }\n  };\n\n  template<KYOPRO_BASE_UINT\
     \ _mod>\n  struct Hash<ModInt<_mod>> { constexpr std::size_t operator ()(ModInt<_mod>\
-    \ _a) const noexcept { return static_cast<std::size_t>(_a); } };\n}\n#line 18\
+    \ _a) const noexcept { return static_cast<std::size_t>(_a); } };\n}\n#line 19\
     \ \"template/alias.hpp\"\n\nnamespace kyopro {\n  using ll = long long;\n  using\
     \ ull = unsigned long long;\n  using lf = double;\n\n  using i8 = std::int8_t;\n\
     \  using u8 = std::uint8_t;\n  using i16 = std::int16_t;\n  using u16 = std::uint16_t;\n\
@@ -306,22 +308,32 @@ data:
     \  using priq = std::priority_queue<_typeT, _typeContainer, _typeCompare>;\n \
     \ template<class _typeT, class _typeCompare = std::greater<_typeT>, class _typeContainer\
     \ = std::vector<_typeT>>\n  using heapq = priq<_typeT, _typeCompare, _typeContainer>;\n\
-    }\n\nusing namespace std;\nusing namespace kyopro;\n#line 5 \"template/macro.hpp\"\
-    \n\n#define KYOPRO_OVERLOAD_MACRO(_1, _2, _3, _4, name, ...) name\n#define KYOPRO_REP0()\
-    \ for (; ; )\n#define KYOPRO_REP1(i) for (KYOPRO_BASE_INT i = 0; ; ++(i))\n#define\
-    \ KYOPRO_REP2(i, last) for (KYOPRO_BASE_INT i = 0, KYOPRO_LAST_ ## i = (last);\
-    \ (i) < (KYOPRO_LAST_ ## i); ++(i))\n#define KYOPRO_REP3(i, first, last) for (KYOPRO_BASE_INT\
-    \ i = (first), KYOPRO_LAST_ ## i = last; (i) < (KYOPRO_LAST_ ## i); ++(i))\n#define\
-    \ KYOPRO_REP4(i, first, last, step) for (KYOPRO_BASE_INT i = (first), KYOPRO_LAST_\
-    \ ## i = (last), KYOPRO_STEP_ ## i = (step); (KYOPRO_STEP_ ## i) > 0 ? (i) < (KYOPRO_LAST_\
-    \ ## i) : (i) > (KYOPRO_LAST_ ## i); (i) += (KYOPRO_BASE_INT)(step))\n#define\
-    \ rep(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__ __VA_OPT__(,) KYOPRO_REP4, KYOPRO_REP3,\
-    \ KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\n#define KYOPRO_ITER2(i,\
-    \ last) for (auto i = std::decay_t<decltype(last)>(), KYOPRO_LAST_ ## i = (last);\
-    \ (i) != (KYOPRO_LAST_ ## i); ++(i))\n#define KYOPRO_ITER3(i, first, last) for\
-    \ (auto i = (first), KYOPRO_LAST_ ## i = (last); (i) != (KYOPRO_LAST_ ## i); ++(i))\n\
-    #define KYOPRO_ITER4(i, first, last, step) for (auto i = (first), KYOPRO_LAST_\
-    \ ## i = (last); (step) > 0 ? (i) < (KYOPRO_LAST_ ## i) : (i) > (KYOPRO_LAST_\
+    }\n\nusing namespace std;\nusing namespace kyopro;\n\ntemplate<class _typeT, class\
+    \ _typeU, std::enable_if_t<!std::is_same_v<_typeT, _typeU>>* = nullptr>\nconstexpr\
+    \ std::common_type_t<_typeT, _typeU> min(const _typeT& a, const _typeU& b) noexcept\
+    \ {\n  return a < b ? a : b;\n}\n\ntemplate<class _typeT, class _typeU, std::enable_if_t<!std::is_same_v<_typeT,\
+    \ _typeU>>* = nullptr>\nconstexpr std::common_type_t<_typeT, _typeU> max(const\
+    \ _typeT& a, const _typeU& b) noexcept {\n  return a > b ? a : b;\n}\n#line 2\
+    \ \"template/amin_amax.hpp\"\n\nnamespace kyopro {\n  template<class _typeT, class\
+    \ _typeU>\n  constexpr bool amin(_typeT& a, _typeU&& b) noexcept {\n    if (b\
+    \ < a) {\n      a = b;\n      return true;\n    }\n    return false;\n  }\n\n\
+    \  template<class _typeT, class _typeU>\n  constexpr bool amax(_typeT& a, _typeU&&\
+    \ b) noexcept {\n    if (a < b) {\n      a = b;\n      return true;\n    }\n \
+    \   return false;\n  }\n}\n#line 5 \"template/macro.hpp\"\n\n#define KYOPRO_OVERLOAD_MACRO(_1,\
+    \ _2, _3, _4, name, ...) name\n#define KYOPRO_REP0() for (; ; )\n#define KYOPRO_REP1(i)\
+    \ for (KYOPRO_BASE_INT i = 0; ; ++(i))\n#define KYOPRO_REP2(i, last) for (KYOPRO_BASE_INT\
+    \ i = 0, KYOPRO_LAST_ ## i = (last); (i) < (KYOPRO_LAST_ ## i); ++(i))\n#define\
+    \ KYOPRO_REP3(i, first, last) for (KYOPRO_BASE_INT i = (first), KYOPRO_LAST_ ##\
+    \ i = last; (i) < (KYOPRO_LAST_ ## i); ++(i))\n#define KYOPRO_REP4(i, first, last,\
+    \ step) for (KYOPRO_BASE_INT i = (first), KYOPRO_LAST_ ## i = (last), KYOPRO_STEP_\
+    \ ## i = (step); (KYOPRO_STEP_ ## i) > 0 ? (i) < (KYOPRO_LAST_ ## i) : (i) > (KYOPRO_LAST_\
+    \ ## i); (i) += (KYOPRO_BASE_INT)(step))\n#define rep(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__\
+    \ __VA_OPT__(,) KYOPRO_REP4, KYOPRO_REP3, KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\n\
+    #define KYOPRO_ITER2(i, last) for (auto i = std::decay_t<decltype(last)>(), KYOPRO_LAST_\
+    \ ## i = (last); (i) != (KYOPRO_LAST_ ## i); ++(i))\n#define KYOPRO_ITER3(i, first,\
+    \ last) for (auto i = (first), KYOPRO_LAST_ ## i = (last); (i) != (KYOPRO_LAST_\
+    \ ## i); ++(i))\n#define KYOPRO_ITER4(i, first, last, step) for (auto i = (first),\
+    \ KYOPRO_LAST_ ## i = (last); (step) > 0 ? (i) < (KYOPRO_LAST_ ## i) : (i) > (KYOPRO_LAST_\
     \ ## i); (i) += (step))\n#define iter(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__,\
     \ KYOPRO_ITER4, KYOPRO_ITER3, KYOPRO_ITER2)(__VA_ARGS__)\n#define KYOPRO_LAMBDA1(value)\
     \ ([&]() noexcept { return (value);})\n#define KYOPRO_LAMBDA2(_1, value) ([&](auto&&\
@@ -331,10 +343,12 @@ data:
     \ })\n#define lambda(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__, KYOPRO_LAMBDA4, KYOPRO_LAMBDA3,\
     \ KYOPRO_LAMBDA2, KYOPRO_LAMBDA1)(__VA_ARGS__)\n#define all(...) std::begin(__VA_ARGS__),\
     \ std::end(__VA_ARGS__)\n#define rall(...) std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\n\
-    #line 4 \"template/all.hpp\"\n"
+    #line 5 \"template/all.hpp\"\n"
   code: '#pragma once
 
     #include "alias.hpp"
+
+    #include "amin_amax.hpp"
 
     #include "macro.hpp"'
   dependsOn:
@@ -349,12 +363,13 @@ data:
   - math/Montgomery.hpp
   - math/ModInt.hpp
   - algorithm/bit.hpp
+  - template/amin_amax.hpp
   - template/macro.hpp
   isVerificationFile: false
   path: template/all.hpp
   requiredBy:
   - all/all.hpp
-  timestamp: '2022-03-30 17:18:07+09:00'
+  timestamp: '2022-04-07 00:44:43+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/all.hpp

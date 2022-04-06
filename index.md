@@ -100,6 +100,12 @@ data:
       path: template/all.hpp
       title: template/all.hpp
     - icon: ':warning:'
+      path: template/amin_amax.hpp
+      title: template/amin_amax.hpp
+    - icon: ':warning:'
+      path: template/len.hpp
+      title: template/len.hpp
+    - icon: ':warning:'
       path: template/macro.hpp
       title: template/macro.hpp
   verificationCategories:

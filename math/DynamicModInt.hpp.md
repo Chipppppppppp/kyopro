@@ -54,8 +54,8 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"math/DynamicModInt.hpp\"\n#include <cassert>\n#include <cstdint>\n\
-    #include <type_traits>\n#line 2 \"algorithm/Hash.hpp\"\n#include <cstddef>\n#line\
-    \ 4 \"algorithm/Hash.hpp\"\n#include <functional>\n#include <initializer_list>\n\
+    #include <limits>\n#include <type_traits>\n#line 2 \"algorithm/Hash.hpp\"\n#include\
+    \ <cstddef>\n#line 4 \"algorithm/Hash.hpp\"\n#include <functional>\n#include <initializer_list>\n\
     #include <tuple>\n#line 8 \"algorithm/Hash.hpp\"\n#include <utility>\n#line 3\
     \ \"meta/settings.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n\
     #endif\n\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\
@@ -64,9 +64,9 @@ data:
     #endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#include <queue>\n#include\
-    \ <limits>\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct\
-    \ std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>:\
+    #endif\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#include <queue>\n#line\
+    \ 5 \"meta/trait.hpp\"\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\n\
+    struct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>:\
     \ std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type\
     \ {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>: std::true_type {};\n\
     #ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
@@ -158,7 +158,7 @@ data:
     \      return reduce(_x);\n    }\n\n    constexpr _typeT reduce(_larger_type _x)\
     \ const noexcept {\n      _typeT _y = (_x + static_cast<_larger_type>(static_cast<_typeT>(_x)\
     \ * _r) * mod) >> std::numeric_limits<_typeT>::digits;\n      return _y >= mod\
-    \ ? _y - mod : _y;\n    }\n  };\n}\n#line 10 \"math/DynamicModInt.hpp\"\n\nnamespace\
+    \ ? _y - mod : _y;\n    }\n  };\n}\n#line 11 \"math/DynamicModInt.hpp\"\n\nnamespace\
     \ kyopro {\n  template<class _typeT, KYOPRO_BASE_UINT = 0>\n  struct DynamicModInt\
     \ {\n    static_assert(std::is_unsigned_v<_typeT>, \"Unsigned integer is required\"\
     );\n\n  private:\n    using _larger_type = uint_least_t<std::numeric_limits<_typeT>::digits\
@@ -212,10 +212,10 @@ data:
     \    }\n  };\n\n  template<class _typeT, KYOPRO_BASE_UINT _kind>\n  struct Hash<DynamicModInt<_typeT,\
     \ _kind>> { std::size_t operator ()(DynamicModInt<_typeT, _kind> _a) const noexcept\
     \ { return static_cast<std::size_t>(_a); } };\n}\n"
-  code: "#pragma once\n#include <cassert>\n#include <cstdint>\n#include <type_traits>\n\
-    #include \"../algorithm/Hash.hpp\"\n#include \"../meta/constant.hpp\"\n#include\
-    \ \"../meta/settings.hpp\"\n#include \"mod.hpp\"\n#include \"Montgomery.hpp\"\n\
-    \nnamespace kyopro {\n  template<class _typeT, KYOPRO_BASE_UINT = 0>\n  struct\
+  code: "#pragma once\n#include <cassert>\n#include <cstdint>\n#include <limits>\n\
+    #include <type_traits>\n#include \"../algorithm/Hash.hpp\"\n#include \"../meta/constant.hpp\"\
+    \n#include \"../meta/settings.hpp\"\n#include \"mod.hpp\"\n#include \"Montgomery.hpp\"\
+    \n\nnamespace kyopro {\n  template<class _typeT, KYOPRO_BASE_UINT = 0>\n  struct\
     \ DynamicModInt {\n    static_assert(std::is_unsigned_v<_typeT>, \"Unsigned integer\
     \ is required\");\n\n  private:\n    using _larger_type = uint_least_t<std::numeric_limits<_typeT>::digits\
     \ * 2>;\n\n    inline static Montgomery<_typeT> _montgomery;\n\n  public:\n  \
@@ -279,17 +279,17 @@ data:
   isVerificationFile: false
   path: math/DynamicModInt.hpp
   requiredBy:
-  - math/factorize.hpp
-  - math/is_prime.hpp
-  - math/all.hpp
-  - template/all.hpp
-  - template/alias.hpp
   - all/all.hpp
-  timestamp: '2022-03-28 14:30:09+09:00'
+  - template/alias.hpp
+  - template/all.hpp
+  - math/all.hpp
+  - math/is_prime.hpp
+  - math/factorize.hpp
+  timestamp: '2022-04-07 00:44:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - yosupo/factorize.test.cpp
   - aoj/PrimeNumber.test.cpp
+  - yosupo/factorize.test.cpp
 documentation_of: math/DynamicModInt.hpp
 layout: document
 redirect_from:

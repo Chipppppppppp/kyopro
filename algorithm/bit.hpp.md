@@ -127,19 +127,19 @@ data:
   isVerificationFile: false
   path: algorithm/bit.hpp
   requiredBy:
-  - math/factorize.hpp
-  - math/ModInt.hpp
-  - math/is_prime.hpp
-  - math/all.hpp
-  - template/all.hpp
-  - template/alias.hpp
-  - algorithm/all.hpp
   - all/all.hpp
+  - algorithm/all.hpp
+  - template/alias.hpp
+  - template/all.hpp
+  - math/ModInt.hpp
+  - math/all.hpp
+  - math/is_prime.hpp
+  - math/factorize.hpp
   timestamp: '2022-03-19 00:51:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - yosupo/factorize.test.cpp
   - aoj/PrimeNumber.test.cpp
+  - yosupo/factorize.test.cpp
 documentation_of: algorithm/bit.hpp
 layout: document
 redirect_from:

@@ -240,7 +240,7 @@ data:
     ../structure/UnionFind.hpp\"\n#include \"../system/all.hpp\"\n\nint main() {\n\
     \  int n, q;\n  kyopro::scan(n, q);\n  kyopro::UnionFind uf(n);\n  for (int i\
     \ = 0; i < q; ++i) {\n    int t, u, v;\n    kyopro::scan(t, u, v);\n    if (t\
-    \ == 0) uf.merge(u, v);\n    else kyopro::println(uf.same(u, v));\n  }\n}\n"
+    \ == 0) uf.merge(u, v);\n    else kyopro::println(uf.same(u, v));\n  }\n}"
   dependsOn:
   - structure/UnionFind.hpp
   - meta/settings.hpp
@@ -252,7 +252,7 @@ data:
   isVerificationFile: true
   path: yosupo/UnionFind.test.cpp
   requiredBy: []
-  timestamp: '2022-03-28 08:19:08+09:00'
+  timestamp: '2022-04-07 00:44:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/UnionFind.test.cpp

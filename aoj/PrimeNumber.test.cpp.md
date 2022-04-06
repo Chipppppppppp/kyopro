@@ -192,7 +192,7 @@ data:
     \      return reduce(_x);\n    }\n\n    constexpr _typeT reduce(_larger_type _x)\
     \ const noexcept {\n      _typeT _y = (_x + static_cast<_larger_type>(static_cast<_typeT>(_x)\
     \ * _r) * mod) >> std::numeric_limits<_typeT>::digits;\n      return _y >= mod\
-    \ ? _y - mod : _y;\n    }\n  };\n}\n#line 10 \"math/DynamicModInt.hpp\"\n\nnamespace\
+    \ ? _y - mod : _y;\n    }\n  };\n}\n#line 11 \"math/DynamicModInt.hpp\"\n\nnamespace\
     \ kyopro {\n  template<class _typeT, KYOPRO_BASE_UINT = 0>\n  struct DynamicModInt\
     \ {\n    static_assert(std::is_unsigned_v<_typeT>, \"Unsigned integer is required\"\
     );\n\n  private:\n    using _larger_type = uint_least_t<std::numeric_limits<_typeT>::digits\
@@ -408,7 +408,7 @@ data:
   isVerificationFile: true
   path: aoj/PrimeNumber.test.cpp
   requiredBy: []
-  timestamp: '2022-03-30 12:01:07+09:00'
+  timestamp: '2022-04-07 00:44:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: aoj/PrimeNumber.test.cpp

@@ -63,33 +63,33 @@ data:
     #ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 2 \"math/DynamicModInt.hpp\"\n#include <cassert>\n#line 2 \"algorithm/Hash.hpp\"\
-    \n#include <cstddef>\n#line 4 \"algorithm/Hash.hpp\"\n#include <functional>\n\
-    #include <initializer_list>\n#include <tuple>\n#line 8 \"algorithm/Hash.hpp\"\n\
-    #include <utility>\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#include\
-    \ <queue>\n#include <limits>\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\n\
-    template<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
-    struct std::is_signed<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
-    \ std::true_type {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>: std::true_type\
-    \ {};\n#ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
-    \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
-    \ _size>\n  struct int_least {\n  private:\n    static constexpr auto _get_type()\
+    #endif\n#line 2 \"math/DynamicModInt.hpp\"\n#include <cassert>\n#line 4 \"math/DynamicModInt.hpp\"\
+    \n#include <limits>\n#line 2 \"algorithm/Hash.hpp\"\n#include <cstddef>\n#line\
+    \ 4 \"algorithm/Hash.hpp\"\n#include <functional>\n#include <initializer_list>\n\
+    #include <tuple>\n#line 8 \"algorithm/Hash.hpp\"\n#include <utility>\n#line 2\
+    \ \"meta/trait.hpp\"\n#include <iterator>\n#include <queue>\n#line 5 \"meta/trait.hpp\"\
+    \n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct std::is_integral<__int128_t>:\
+    \ std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>: std::true_type\
+    \ {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type {};\n\
+    template<>\nstruct std::is_unsigned<__uint128_t>: std::true_type {};\n#ifdef __SIZEOF_FLOAT128__\n\
+    template<>\nstruct std::is_floating_point<__float128>: std::true_type {};\n#endif\n\
+    \nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _size>\n  struct int_least {\n\
+    \  private:\n    static constexpr auto _get_type() noexcept {\n      static_assert(_size\
+    \ <= 128, \"Integer size is too long\");\n      if constexpr (_size <= 8) return\
+    \ std::int_least8_t();\n      if constexpr (_size <= 16) return std::int_least16_t();\n\
+    \      if constexpr (_size <= 32) return std::int_least32_t();\n      if constexpr\
+    \ (_size <= 64) return std::int_least64_t();\n      else return __int128_t();\n\
+    \    }\n\n  public:\n    using type = decltype(_get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
+    \ _size>\n  using int_least_t = typename int_least<_size>::type;\n\n  template<KYOPRO_BASE_UINT\
+    \ _size>\n  struct uint_least {\n  private:\n    static constexpr auto _get_type()\
     \ noexcept {\n      static_assert(_size <= 128, \"Integer size is too long\");\n\
-    \      if constexpr (_size <= 8) return std::int_least8_t();\n      if constexpr\
-    \ (_size <= 16) return std::int_least16_t();\n      if constexpr (_size <= 32)\
-    \ return std::int_least32_t();\n      if constexpr (_size <= 64) return std::int_least64_t();\n\
-    \      else return __int128_t();\n    }\n\n  public:\n    using type = decltype(_get_type());\n\
-    \  };\n\n  template<KYOPRO_BASE_UINT _size>\n  using int_least_t = typename int_least<_size>::type;\n\
-    \n  template<KYOPRO_BASE_UINT _size>\n  struct uint_least {\n  private:\n    static\
-    \ constexpr auto _get_type() noexcept {\n      static_assert(_size <= 128, \"\
-    Integer size is too long\");\n      if constexpr (_size <= 8) return std::uint_least8_t();\n\
-    \      if constexpr (_size <= 16) return std::uint_least16_t();\n      if constexpr\
-    \ (_size <= 32) return std::uint_least32_t();\n      if constexpr (_size <= 64)\
-    \ return std::uint_least64_t();\n      else return __uint128_t();\n    }\n\n \
-    \ public:\n    using type = decltype(_get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
-    \ _size>\n  using uint_least_t = typename uint_least<_size>::type;\n\n  template<class,\
-    \ class = void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
-    \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
+    \      if constexpr (_size <= 8) return std::uint_least8_t();\n      if constexpr\
+    \ (_size <= 16) return std::uint_least16_t();\n      if constexpr (_size <= 32)\
+    \ return std::uint_least32_t();\n      if constexpr (_size <= 64) return std::uint_least64_t();\n\
+    \      else return __uint128_t();\n    }\n\n  public:\n    using type = decltype(_get_type());\n\
+    \  };\n\n  template<KYOPRO_BASE_UINT _size>\n  using uint_least_t = typename uint_least<_size>::type;\n\
+    \n  template<class, class = void>\n  struct is_iterator: std::false_type {};\n\
+    \  template<class _typeT>\n  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterator_v\
     \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_iterable<_typeT,\
@@ -160,7 +160,7 @@ data:
     \      return reduce(_x);\n    }\n\n    constexpr _typeT reduce(_larger_type _x)\
     \ const noexcept {\n      _typeT _y = (_x + static_cast<_larger_type>(static_cast<_typeT>(_x)\
     \ * _r) * mod) >> std::numeric_limits<_typeT>::digits;\n      return _y >= mod\
-    \ ? _y - mod : _y;\n    }\n  };\n}\n#line 10 \"math/DynamicModInt.hpp\"\n\nnamespace\
+    \ ? _y - mod : _y;\n    }\n  };\n}\n#line 11 \"math/DynamicModInt.hpp\"\n\nnamespace\
     \ kyopro {\n  template<class _typeT, KYOPRO_BASE_UINT = 0>\n  struct DynamicModInt\
     \ {\n    static_assert(std::is_unsigned_v<_typeT>, \"Unsigned integer is required\"\
     );\n\n  private:\n    using _larger_type = uint_least_t<std::numeric_limits<_typeT>::digits\
@@ -438,7 +438,7 @@ data:
   isVerificationFile: true
   path: yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2022-03-30 12:01:07+09:00'
+  timestamp: '2022-04-07 00:44:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/factorize.test.cpp
