@@ -27,9 +27,9 @@ namespace kyopro {
     static constexpr auto _get_type() noexcept {
       static_assert(_size <= 128, "Integer size is too long");
       if constexpr (_size <= 8) return std::int_least8_t();
-      if constexpr (_size <= 16) return std::int_least16_t();
-      if constexpr (_size <= 32) return std::int_least32_t();
-      if constexpr (_size <= 64) return std::int_least64_t();
+      else if constexpr (_size <= 16) return std::int_least16_t();
+      else if constexpr (_size <= 32) return std::int_least32_t();
+      else if constexpr (_size <= 64) return std::int_least64_t();
       else return __int128_t();
     }
 
@@ -46,9 +46,9 @@ namespace kyopro {
     static constexpr auto _get_type() noexcept {
       static_assert(_size <= 128, "Integer size is too long");
       if constexpr (_size <= 8) return std::uint_least8_t();
-      if constexpr (_size <= 16) return std::uint_least16_t();
-      if constexpr (_size <= 32) return std::uint_least32_t();
-      if constexpr (_size <= 64) return std::uint_least64_t();
+      else if constexpr (_size <= 16) return std::uint_least16_t();
+      else if constexpr (_size <= 32) return std::uint_least32_t();
+      else if constexpr (_size <= 64) return std::uint_least64_t();
       else return __uint128_t();
     }
 
@@ -57,7 +57,7 @@ namespace kyopro {
   };
 
   template<KYOPRO_BASE_UINT _size>
-  using uint_least_t = typename uint_least<_size>::type;
+  using  = typename uint_least<_size>::type;
 
   template<class, class = void>
   struct is_iterator: std::false_type {};
