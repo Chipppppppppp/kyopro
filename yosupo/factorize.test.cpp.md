@@ -1,53 +1,53 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: system/out.hpp
     title: system/out.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/factorize
@@ -88,8 +88,8 @@ data:
     \ <= 32) return std::uint_least32_t();\n      else if constexpr (_size <= 64)\
     \ return std::uint_least64_t();\n      else return __uint128_t();\n    }\n\n \
     \ public:\n    using type = decltype(_get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
-    \ _size>\n  using  = typename uint_least<_size>::type;\n\n  template<class, class\
-    \ = void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
+    \ _size>\n  using uint_least_t = typename uint_least<_size>::type;\n\n  template<class,\
+    \ class = void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
     \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterator_v\
     \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
@@ -436,8 +436,8 @@ data:
   isVerificationFile: true
   path: yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2022-04-07 18:08:18+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-04-07 18:14:29+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/factorize.test.cpp
 layout: document

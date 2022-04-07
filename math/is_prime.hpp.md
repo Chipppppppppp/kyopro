@@ -1,31 +1,31 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -35,19 +35,19 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/factorize.hpp
     title: math/factorize.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: aoj/PrimeNumber.test.cpp
     title: aoj/PrimeNumber.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: yosupo/factorize.test.cpp
     title: yosupo/factorize.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"math/is_prime.hpp\"\n#include <cstdint>\n#include <type_traits>\n\
@@ -119,8 +119,8 @@ data:
     \ <= 32) return std::uint_least32_t();\n      else if constexpr (_size <= 64)\
     \ return std::uint_least64_t();\n      else return __uint128_t();\n    }\n\n \
     \ public:\n    using type = decltype(_get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
-    \ _size>\n  using  = typename uint_least<_size>::type;\n\n  template<class, class\
-    \ = void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
+    \ _size>\n  using uint_least_t = typename uint_least<_size>::type;\n\n  template<class,\
+    \ class = void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
     \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterator_v\
     \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
@@ -291,8 +291,8 @@ data:
   - all/all.hpp
   - math/all.hpp
   - math/factorize.hpp
-  timestamp: '2022-04-07 18:08:18+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-04-07 18:14:29+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - aoj/PrimeNumber.test.cpp
   - yosupo/factorize.test.cpp
