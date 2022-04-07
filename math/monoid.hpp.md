@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
@@ -17,19 +17,19 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/point_add_range_sum.test.cpp
     title: yosupo/point_add_range_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"math/monoid.hpp\"\n#include <type_traits>\n#line 2 \"meta/constant.hpp\"\
@@ -53,13 +53,10 @@ data:
     \  inline constexpr KYOPRO_BASE_FLOAT EPS = static_cast<_typeT>(1) / power(10ULL,\
     \ _decimal_precision);\n  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\
     \n  template<class _typeT>\n  inline constexpr _typeT PI = 3.14159265358979323846;\n\
-    \  inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n\n  inline\
-    \ constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 4> beside{{{1,\
-    \ 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
-    \ -1}, {0, -1}, {1, -1}}};\n}\n#line 4 \"math/monoid.hpp\"\n\nnamespace kyopro\
-    \ {\n  template<class _typeT, _typeT _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
-    \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
+    \  inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n}\n#line 4\
+    \ \"math/monoid.hpp\"\n\nnamespace kyopro {\n  template<class _typeT, _typeT _id\
+    \ = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<_typeT>);\n  \
+    \  static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
     \ _a, _typeT _b) const noexcept { return _a + _b; }\n    constexpr _typeT inv(_typeT\
     \ _a) const noexcept { return -_a; }\n  };\n  template<class _typeT, _typeT _id\
     \ = 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<_typeT>);\n   \
@@ -103,8 +100,8 @@ data:
   - structure/all.hpp
   - structure/FenwickTree.hpp
   - math/all.hpp
-  timestamp: '2022-03-19 00:51:47+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-04-07 18:08:18+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - yosupo/point_add_range_sum.test.cpp
 documentation_of: math/monoid.hpp

@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
@@ -20,19 +20,19 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/monoid.hpp
     title: math/monoid.hpp
   - icon: ':warning:'
     path: meta/all.hpp
     title: meta/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':warning:'
@@ -45,18 +45,18 @@ data:
     path: template/all.hpp
     title: template/all.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: aoj/PrimeNumber.test.cpp
     title: aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/factorize.test.cpp
     title: yosupo/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/point_add_range_sum.test.cpp
     title: yosupo/point_add_range_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"meta/constant.hpp\"\n#include <array>\n#include <limits>\n\
@@ -80,11 +80,7 @@ data:
     \  inline constexpr KYOPRO_BASE_FLOAT EPS = static_cast<_typeT>(1) / power(10ULL,\
     \ _decimal_precision);\n  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\
     \n  template<class _typeT>\n  inline constexpr _typeT PI = 3.14159265358979323846;\n\
-    \  inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n\n  inline\
-    \ constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 4> beside{{{1,\
-    \ 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
-    \ -1}, {0, -1}, {1, -1}}};\n}\n"
+    \  inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n}\n"
   code: "#pragma once\n#include <array>\n#include <limits>\n#include <utility>\n#include\
     \ \"../math/power.hpp\"\n#include \"settings.hpp\"\n\nnamespace kyopro {\n  template<class\
     \ _typeT>\n  inline constexpr _typeT MOD = KYOPRO_DEFAULT_MOD;\n  inline constexpr\
@@ -95,10 +91,7 @@ data:
     \ constexpr KYOPRO_BASE_FLOAT EPS = static_cast<_typeT>(1) / power(10ULL, _decimal_precision);\n\
     \  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\n  template<class\
     \ _typeT>\n  inline constexpr _typeT PI = 3.14159265358979323846;\n  inline constexpr\
-    \ KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 4> beside{{{1, 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr\
-    \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1,\
-    \ 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}}};\n}"
+    \ KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n}"
   dependsOn:
   - math/power.hpp
   - meta/settings.hpp
@@ -117,8 +110,8 @@ data:
   - math/is_prime.hpp
   - math/factorize.hpp
   - math/monoid.hpp
-  timestamp: '2022-03-19 00:51:47+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-04-07 18:08:18+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - aoj/PrimeNumber.test.cpp
   - yosupo/point_add_range_sum.test.cpp

@@ -2,25 +2,28 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
   - icon: ':warning:'
     path: algorithm/all.hpp
     title: algorithm/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
+    path: algorithm/compress.hpp
+    title: algorithm/compress.hpp
+  - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
   - icon: ':warning:'
@@ -32,43 +35,43 @@ data:
   - icon: ':warning:'
     path: math/euler_phi.hpp
     title: math/euler_phi.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/monoid.hpp
     title: math/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
   - icon: ':warning:'
     path: meta/all.hpp
     title: meta/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: system/out.hpp
     title: system/out.hpp
   - icon: ':warning:'
@@ -78,30 +81,33 @@ data:
     path: template/all.hpp
     title: template/all.hpp
   - icon: ':warning:'
+    path: template/constant.hpp
+    title: template/constant.hpp
+  - icon: ':warning:'
     path: template/len.hpp
     title: template/len.hpp
   - icon: ':warning:'
     path: template/macro.hpp
     title: template/macro.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: aoj/PrimeNumber.test.cpp
     title: aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/factorize.test.cpp
     title: yosupo/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/many_aplusb.test.cpp
     title: yosupo/many_aplusb.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/point_add_range_sum.test.cpp
     title: yosupo/point_add_range_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: '#line 2 "meta/settings.hpp"
@@ -222,6 +228,7 @@ data:
   - meta/all.hpp
   - meta/constant.hpp
   - algorithm/Hash.hpp
+  - algorithm/compress.hpp
   - algorithm/all.hpp
   - algorithm/bit.hpp
   - structure/UnionFind.hpp
@@ -230,6 +237,7 @@ data:
   - template/macro.hpp
   - template/alias.hpp
   - template/all.hpp
+  - template/constant.hpp
   - template/len.hpp
   - math/euler_phi.hpp
   - math/ModInt.hpp
@@ -242,7 +250,7 @@ data:
   - math/power.hpp
   - math/monoid.hpp
   timestamp: '2022-03-19 00:51:47+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - aoj/PrimeNumber.test.cpp
   - yosupo/UnionFind.test.cpp

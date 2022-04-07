@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -44,34 +44,32 @@ data:
     \  inline constexpr KYOPRO_BASE_FLOAT EPS = static_cast<_typeT>(1) / power(10ULL,\
     \ _decimal_precision);\n  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\
     \n  template<class _typeT>\n  inline constexpr _typeT PI = 3.14159265358979323846;\n\
-    \  inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n\n  inline\
-    \ constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 4> beside{{{1,\
-    \ 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
-    \ -1}, {0, -1}, {1, -1}}};\n}\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n\
-    #include <queue>\n#line 5 \"meta/trait.hpp\"\n#include <stack>\n#include <type_traits>\n\
-    #line 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct std::is_integral<__int128_t>:\
-    \ std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>: std::true_type\
-    \ {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type {};\n\
-    template<>\nstruct std::is_unsigned<__uint128_t>: std::true_type {};\n#ifdef __SIZEOF_FLOAT128__\n\
-    template<>\nstruct std::is_floating_point<__float128>: std::true_type {};\n#endif\n\
-    \nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _size>\n  struct int_least {\n\
-    \  private:\n    static constexpr auto _get_type() noexcept {\n      static_assert(_size\
-    \ <= 128, \"Integer size is too long\");\n      if constexpr (_size <= 8) return\
-    \ std::int_least8_t();\n      if constexpr (_size <= 16) return std::int_least16_t();\n\
-    \      if constexpr (_size <= 32) return std::int_least32_t();\n      if constexpr\
-    \ (_size <= 64) return std::int_least64_t();\n      else return __int128_t();\n\
-    \    }\n\n  public:\n    using type = decltype(_get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
+    \  inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n}\n#line 2\
+    \ \"meta/trait.hpp\"\n#include <iterator>\n#include <queue>\n#line 5 \"meta/trait.hpp\"\
+    \n#include <stack>\n#include <type_traits>\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\n\
+    struct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>:\
+    \ std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type\
+    \ {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>: std::true_type {};\n\
+    #ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
+    \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    \ _size>\n  struct int_least {\n  private:\n    static constexpr auto _get_type()\
+    \ noexcept {\n      static_assert(_size <= 128, \"Integer size is too long\");\n\
+    \      if constexpr (_size <= 8) return std::int_least8_t();\n      else if constexpr\
+    \ (_size <= 16) return std::int_least16_t();\n      else if constexpr (_size <=\
+    \ 32) return std::int_least32_t();\n      else if constexpr (_size <= 64) return\
+    \ std::int_least64_t();\n      else return __int128_t();\n    }\n\n  public:\n\
+    \    using type = decltype(_get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
     \ _size>\n  using int_least_t = typename int_least<_size>::type;\n\n  template<KYOPRO_BASE_UINT\
     \ _size>\n  struct uint_least {\n  private:\n    static constexpr auto _get_type()\
     \ noexcept {\n      static_assert(_size <= 128, \"Integer size is too long\");\n\
-    \      if constexpr (_size <= 8) return std::uint_least8_t();\n      if constexpr\
-    \ (_size <= 16) return std::uint_least16_t();\n      if constexpr (_size <= 32)\
-    \ return std::uint_least32_t();\n      if constexpr (_size <= 64) return std::uint_least64_t();\n\
-    \      else return __uint128_t();\n    }\n\n  public:\n    using type = decltype(_get_type());\n\
-    \  };\n\n  template<KYOPRO_BASE_UINT _size>\n  using uint_least_t = typename uint_least<_size>::type;\n\
-    \n  template<class, class = void>\n  struct is_iterator: std::false_type {};\n\
-    \  template<class _typeT>\n  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
+    \      if constexpr (_size <= 8) return std::uint_least8_t();\n      else if constexpr\
+    \ (_size <= 16) return std::uint_least16_t();\n      else if constexpr (_size\
+    \ <= 32) return std::uint_least32_t();\n      else if constexpr (_size <= 64)\
+    \ return std::uint_least64_t();\n      else return __uint128_t();\n    }\n\n \
+    \ public:\n    using type = decltype(_get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
+    \ _size>\n  using  = typename uint_least<_size>::type;\n\n  template<class, class\
+    \ = void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
+    \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterator_v\
     \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_iterable<_typeT,\
@@ -102,7 +100,7 @@ data:
   path: meta/all.hpp
   requiredBy:
   - all/all.hpp
-  timestamp: '2022-03-28 08:19:08+09:00'
+  timestamp: '2022-04-07 18:08:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: meta/all.hpp

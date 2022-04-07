@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
   - icon: ':warning:'
     path: algorithm/all.hpp
     title: algorithm/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
   - icon: ':warning:'
@@ -31,49 +31,49 @@ data:
   - icon: ':warning:'
     path: math/euler_phi.hpp
     title: math/euler_phi.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/monoid.hpp
     title: math/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
   - icon: ':warning:'
     path: meta/all.hpp
     title: meta/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: system/out.hpp
     title: system/out.hpp
   - icon: ':warning:'
@@ -151,20 +151,21 @@ data:
     \nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _size>\n  struct int_least {\n\
     \  private:\n    static constexpr auto _get_type() noexcept {\n      static_assert(_size\
     \ <= 128, \"Integer size is too long\");\n      if constexpr (_size <= 8) return\
-    \ std::int_least8_t();\n      if constexpr (_size <= 16) return std::int_least16_t();\n\
-    \      if constexpr (_size <= 32) return std::int_least32_t();\n      if constexpr\
-    \ (_size <= 64) return std::int_least64_t();\n      else return __int128_t();\n\
+    \ std::int_least8_t();\n      else if constexpr (_size <= 16) return std::int_least16_t();\n\
+    \      else if constexpr (_size <= 32) return std::int_least32_t();\n      else\
+    \ if constexpr (_size <= 64) return std::int_least64_t();\n      else return __int128_t();\n\
     \    }\n\n  public:\n    using type = decltype(_get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
     \ _size>\n  using int_least_t = typename int_least<_size>::type;\n\n  template<KYOPRO_BASE_UINT\
     \ _size>\n  struct uint_least {\n  private:\n    static constexpr auto _get_type()\
     \ noexcept {\n      static_assert(_size <= 128, \"Integer size is too long\");\n\
-    \      if constexpr (_size <= 8) return std::uint_least8_t();\n      if constexpr\
-    \ (_size <= 16) return std::uint_least16_t();\n      if constexpr (_size <= 32)\
-    \ return std::uint_least32_t();\n      if constexpr (_size <= 64) return std::uint_least64_t();\n\
-    \      else return __uint128_t();\n    }\n\n  public:\n    using type = decltype(_get_type());\n\
-    \  };\n\n  template<KYOPRO_BASE_UINT _size>\n  using uint_least_t = typename uint_least<_size>::type;\n\
-    \n  template<class, class = void>\n  struct is_iterator: std::false_type {};\n\
-    \  template<class _typeT>\n  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
+    \      if constexpr (_size <= 8) return std::uint_least8_t();\n      else if constexpr\
+    \ (_size <= 16) return std::uint_least16_t();\n      else if constexpr (_size\
+    \ <= 32) return std::uint_least32_t();\n      else if constexpr (_size <= 64)\
+    \ return std::uint_least64_t();\n      else return __uint128_t();\n    }\n\n \
+    \ public:\n    using type = decltype(_get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
+    \ _size>\n  using  = typename uint_least<_size>::type;\n\n  template<class, class\
+    \ = void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
+    \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterator_v\
     \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_iterable<_typeT,\
@@ -222,19 +223,16 @@ data:
     \  inline constexpr KYOPRO_BASE_FLOAT EPS = static_cast<_typeT>(1) / power(10ULL,\
     \ _decimal_precision);\n  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\
     \n  template<class _typeT>\n  inline constexpr _typeT PI = 3.14159265358979323846;\n\
-    \  inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n\n  inline\
-    \ constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 4> beside{{{1,\
-    \ 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
-    \ -1}, {0, -1}, {1, -1}}};\n}\n#line 4 \"math/mod.hpp\"\n\nnamespace kyopro {\n\
-    \  template<class _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT,\
-    \ _typeU> floor_mod(_typeT _x, _typeU _m) noexcept {\n    static_assert(std::is_integral_v<_typeT>\
-    \ && std::is_integral_v<_typeU>, \"Integer is required\");\n    if constexpr (std::is_unsigned_v<_typeT>\
-    \ || std::is_unsigned_v<_typeU>) return _x % _m;\n    return (_x %= _m) < 0 ?\
-    \ _x + _m : _x;\n  }\n\n  template<class _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT,\
-    \ _typeU> ceil_mod(_typeT _x, _typeU _m) noexcept {\n    return _m - floor_mod(_x\
-    \ - 1, _m) - static_cast<_typeT>(1);\n  }\n}\n#line 6 \"math/Montgomery.hpp\"\n\
-    \nnamespace kyopro {\n  template<class _typeT>\n  struct Montgomery {\n    static_assert(std::is_unsigned_v<_typeT>,\
+    \  inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n}\n#line 4\
+    \ \"math/mod.hpp\"\n\nnamespace kyopro {\n  template<class _typeT, class _typeU>\n\
+    \  constexpr std::common_type_t<_typeT, _typeU> floor_mod(_typeT _x, _typeU _m)\
+    \ noexcept {\n    static_assert(std::is_integral_v<_typeT> && std::is_integral_v<_typeU>,\
+    \ \"Integer is required\");\n    if constexpr (std::is_unsigned_v<_typeT> || std::is_unsigned_v<_typeU>)\
+    \ return _x % _m;\n    return (_x %= _m) < 0 ? _x + _m : _x;\n  }\n\n  template<class\
+    \ _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT, _typeU> ceil_mod(_typeT\
+    \ _x, _typeU _m) noexcept {\n    return _m - floor_mod(_x - 1, _m) - static_cast<_typeT>(1);\n\
+    \  }\n}\n#line 6 \"math/Montgomery.hpp\"\n\nnamespace kyopro {\n  template<class\
+    \ _typeT>\n  struct Montgomery {\n    static_assert(std::is_unsigned_v<_typeT>,\
     \ \"Unsigned integer is required\");\n\n    _typeT mod;\n\n  private:\n    using\
     \ _larger_type = uint_least_t<std::numeric_limits<_typeT>::digits * 2>;\n\n  \
     \  _typeT _r, _n2;\n\n  public:\n    constexpr void set_mod(_typeT _mod) noexcept\
@@ -682,7 +680,7 @@ data:
   isVerificationFile: false
   path: all/all.hpp
   requiredBy: []
-  timestamp: '2022-04-07 00:44:43+09:00'
+  timestamp: '2022-04-07 18:08:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp

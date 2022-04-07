@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: system/out.hpp
     title: system/out.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/many_aplusb
@@ -52,20 +52,21 @@ data:
     \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
     \ _size>\n  struct int_least {\n  private:\n    static constexpr auto _get_type()\
     \ noexcept {\n      static_assert(_size <= 128, \"Integer size is too long\");\n\
-    \      if constexpr (_size <= 8) return std::int_least8_t();\n      if constexpr\
-    \ (_size <= 16) return std::int_least16_t();\n      if constexpr (_size <= 32)\
-    \ return std::int_least32_t();\n      if constexpr (_size <= 64) return std::int_least64_t();\n\
-    \      else return __int128_t();\n    }\n\n  public:\n    using type = decltype(_get_type());\n\
-    \  };\n\n  template<KYOPRO_BASE_UINT _size>\n  using int_least_t = typename int_least<_size>::type;\n\
-    \n  template<KYOPRO_BASE_UINT _size>\n  struct uint_least {\n  private:\n    static\
-    \ constexpr auto _get_type() noexcept {\n      static_assert(_size <= 128, \"\
-    Integer size is too long\");\n      if constexpr (_size <= 8) return std::uint_least8_t();\n\
-    \      if constexpr (_size <= 16) return std::uint_least16_t();\n      if constexpr\
-    \ (_size <= 32) return std::uint_least32_t();\n      if constexpr (_size <= 64)\
+    \      if constexpr (_size <= 8) return std::int_least8_t();\n      else if constexpr\
+    \ (_size <= 16) return std::int_least16_t();\n      else if constexpr (_size <=\
+    \ 32) return std::int_least32_t();\n      else if constexpr (_size <= 64) return\
+    \ std::int_least64_t();\n      else return __int128_t();\n    }\n\n  public:\n\
+    \    using type = decltype(_get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
+    \ _size>\n  using int_least_t = typename int_least<_size>::type;\n\n  template<KYOPRO_BASE_UINT\
+    \ _size>\n  struct uint_least {\n  private:\n    static constexpr auto _get_type()\
+    \ noexcept {\n      static_assert(_size <= 128, \"Integer size is too long\");\n\
+    \      if constexpr (_size <= 8) return std::uint_least8_t();\n      else if constexpr\
+    \ (_size <= 16) return std::uint_least16_t();\n      else if constexpr (_size\
+    \ <= 32) return std::uint_least32_t();\n      else if constexpr (_size <= 64)\
     \ return std::uint_least64_t();\n      else return __uint128_t();\n    }\n\n \
     \ public:\n    using type = decltype(_get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
-    \ _size>\n  using uint_least_t = typename uint_least<_size>::type;\n\n  template<class,\
-    \ class = void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
+    \ _size>\n  using  = typename uint_least<_size>::type;\n\n  template<class, class\
+    \ = void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
     \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterator_v\
     \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
@@ -218,8 +219,8 @@ data:
   isVerificationFile: true
   path: yosupo/many_aplusb.test.cpp
   requiredBy: []
-  timestamp: '2022-03-28 08:19:08+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-04-07 18:08:18+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: yosupo/many_aplusb.test.cpp
 layout: document
