@@ -57,7 +57,7 @@ namespace kyopro {
   };
 
   template<KYOPRO_BASE_UINT _size>
-  using  = typename uint_least<_size>::type;
+  using uint_least_t = typename uint_least<_size>::type;
 
   template<class, class = void>
   struct is_iterator: std::false_type {};
