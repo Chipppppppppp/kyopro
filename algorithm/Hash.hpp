@@ -37,7 +37,7 @@ namespace kyopro {
   };
 
   template<class _typeT>
-  struct Hash<_typeT, std::enable_if_t<is_iterable_v<_typeT>>> {
+  struct Hash<_typeT, std::enable_if_t<is_range_v<_typeT>>> {
   private:
     [[no_unique_address]] Hash<decltype(*std::begin(std::declval<_typeT>()))> _hasher;
 

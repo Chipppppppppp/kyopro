@@ -142,7 +142,7 @@ namespace kyopro {
         scan<_i + 1>(_a);
       }
     }
-    template<class _typeT, std::enable_if_t<is_iterable_v<_typeT> && !_has_scan<_typeT>::value>* = nullptr>
+    template<class _typeT, std::enable_if_t<is_range_v<_typeT> && !_has_scan<_typeT>::value>* = nullptr>
     void scan(_typeT& _a) {
       for (auto& _i: _a) scan(_i);
     }

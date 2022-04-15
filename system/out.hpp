@@ -139,7 +139,7 @@ namespace kyopro {
         print<_i + 1>(_a);
       } else if constexpr (_debug) print('}');
     }
-    template<class _typeT, std::enable_if_t<is_iterable_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>
+    template<class _typeT, std::enable_if_t<is_range_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>
     void print(const _typeT& _a) {
       if constexpr (_debug) print('{');
       if (std::empty(_a)) return;

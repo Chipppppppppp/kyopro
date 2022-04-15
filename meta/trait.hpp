@@ -68,12 +68,12 @@ namespace kyopro {
   constexpr bool is_iterator_v = is_iterator<_typeT>::value;
 
   template<class, class = void>
-  struct is_iterable: std::false_type {};
+  struct is_range: std::false_type {};
   template<class _typeT>
-  struct is_iterable<_typeT, std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>: std::true_type {};
+  struct is_range<_typeT, std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>: std::true_type {};
 
   template<class _typeT>
-  constexpr bool is_iterable_v = is_iterable<_typeT>::value;
+  constexpr bool is_range_v = is_range<_typeT>::value;
 
   template<class>
   struct is_tuple: std::false_type {};
@@ -88,7 +88,7 @@ namespace kyopro {
   template<class, class = void>
   struct is_container_adapter: std::false_type {};
   template<class _typeT>
-  struct is_container_adapter<_typeT, std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_iterable<_typeT>> {};
+  struct is_container_adapter<_typeT, std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_range<_typeT>> {};
 
   template<class _typeT>
   constexpr bool is_container_adapter_v = is_container_adapter<_typeT>::value;
