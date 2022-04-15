@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
@@ -20,19 +20,19 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/monoid.hpp
     title: math/monoid.hpp
   - icon: ':warning:'
     path: meta/all.hpp
     title: meta/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':warning:'
@@ -48,15 +48,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: aoj/PrimeNumber.test.cpp
     title: aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/factorize.test.cpp
     title: yosupo/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/point_add_range_sum.test.cpp
     title: yosupo/point_add_range_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"meta/constant.hpp\"\n#include <array>\n#include <limits>\n\
@@ -98,24 +98,24 @@ data:
   isVerificationFile: false
   path: meta/constant.hpp
   requiredBy:
-  - all/all.hpp
-  - meta/all.hpp
-  - structure/all.hpp
-  - structure/FenwickTree.hpp
-  - template/alias.hpp
-  - template/all.hpp
-  - math/ModInt.hpp
-  - math/all.hpp
-  - math/DynamicModInt.hpp
-  - math/is_prime.hpp
-  - math/factorize.hpp
   - math/monoid.hpp
+  - math/DynamicModInt.hpp
+  - math/factorize.hpp
+  - math/is_prime.hpp
+  - math/all.hpp
+  - math/ModInt.hpp
+  - meta/all.hpp
+  - structure/FenwickTree.hpp
+  - structure/all.hpp
+  - template/all.hpp
+  - template/alias.hpp
+  - all/all.hpp
   timestamp: '2022-04-07 18:08:18+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - aoj/PrimeNumber.test.cpp
-  - yosupo/point_add_range_sum.test.cpp
   - yosupo/factorize.test.cpp
+  - yosupo/point_add_range_sum.test.cpp
 documentation_of: meta/constant.hpp
 layout: document
 redirect_from:

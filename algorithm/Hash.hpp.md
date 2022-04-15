@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -14,7 +14,7 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
@@ -23,10 +23,10 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
@@ -39,12 +39,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: aoj/PrimeNumber.test.cpp
     title: aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/factorize.test.cpp
     title: yosupo/factorize.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"algorithm/Hash.hpp\"\n#include <cstddef>\n#include <cstdint>\n\
@@ -83,17 +83,16 @@ data:
     \ class = void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
     \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterator_v\
-    \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
-    \ std::false_type {};\n  template<class _typeT>\n  struct is_iterable<_typeT,\
-    \ std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
-    \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterable_v\
-    \ = is_iterable<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
+    \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_range:\
+    \ std::false_type {};\n  template<class _typeT>\n  struct is_range<_typeT, std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
+    \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_range_v\
+    \ = is_range<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
     \ {};\n  template<class _typeT, class _typeU>\n  struct is_tuple<std::pair<_typeT,\
     \ _typeU>>: std::true_type {};\n  template<class... _typeArgs>\n  struct is_tuple<std::tuple<_typeArgs...>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_tuple_v\
     \ = is_tuple<_typeT>::value;\n\n  template<class, class = void>\n  struct is_container_adapter:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_container_adapter<_typeT,\
-    \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_iterable<_typeT>>\
+    \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_range<_typeT>>\
     \ {};\n\n  template<class _typeT>\n  constexpr bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n\
     }\n#line 11 \"algorithm/Hash.hpp\"\n\nnamespace kyopro {\n  template<class, class\
     \ = void>\n  struct Hash;\n\n  template<class _typeT>\n  struct Hash<_typeT, std::enable_if_t<std::is_scalar_v<_typeT>>>\
@@ -106,7 +105,7 @@ data:
     \      else {\n        std::uint_fast64_t _seed = operator()<_i + 1>(_a);\n  \
     \      return _seed ^ (Hash<std::tuple_element_t<_i, _typeT>>()(std::get<_i>(_a))\
     \ + 0x9e3779b97f4a7c15LU + (_seed << 12) + (_seed >> 4));\n      }\n    }\n  };\n\
-    \n  template<class _typeT>\n  struct Hash<_typeT, std::enable_if_t<is_iterable_v<_typeT>>>\
+    \n  template<class _typeT>\n  struct Hash<_typeT, std::enable_if_t<is_range_v<_typeT>>>\
     \ {\n  private:\n    [[no_unique_address]] Hash<decltype(*std::begin(std::declval<_typeT>()))>\
     \ _hasher;\n\n  public:\n    constexpr std::size_t operator ()(const _typeT& _a)\
     \ const noexcept {\n      std::uint_fast64_t _seed = _a.size();\n      for (auto&\
@@ -126,7 +125,7 @@ data:
     \      else {\n        std::uint_fast64_t _seed = operator()<_i + 1>(_a);\n  \
     \      return _seed ^ (Hash<std::tuple_element_t<_i, _typeT>>()(std::get<_i>(_a))\
     \ + 0x9e3779b97f4a7c15LU + (_seed << 12) + (_seed >> 4));\n      }\n    }\n  };\n\
-    \n  template<class _typeT>\n  struct Hash<_typeT, std::enable_if_t<is_iterable_v<_typeT>>>\
+    \n  template<class _typeT>\n  struct Hash<_typeT, std::enable_if_t<is_range_v<_typeT>>>\
     \ {\n  private:\n    [[no_unique_address]] Hash<decltype(*std::begin(std::declval<_typeT>()))>\
     \ _hasher;\n\n  public:\n    constexpr std::size_t operator ()(const _typeT& _a)\
     \ const noexcept {\n      std::uint_fast64_t _seed = _a.size();\n      for (auto&\
@@ -138,17 +137,17 @@ data:
   isVerificationFile: false
   path: algorithm/Hash.hpp
   requiredBy:
-  - all/all.hpp
-  - algorithm/all.hpp
-  - template/alias.hpp
-  - template/all.hpp
-  - math/ModInt.hpp
-  - math/all.hpp
   - math/DynamicModInt.hpp
-  - math/is_prime.hpp
   - math/factorize.hpp
-  timestamp: '2022-04-07 18:14:29+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  - math/is_prime.hpp
+  - math/all.hpp
+  - math/ModInt.hpp
+  - algorithm/all.hpp
+  - template/all.hpp
+  - template/alias.hpp
+  - all/all.hpp
+  timestamp: '2022-04-15 22:05:16+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - aoj/PrimeNumber.test.cpp
   - yosupo/factorize.test.cpp

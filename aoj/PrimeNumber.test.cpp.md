@@ -1,43 +1,43 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/out.hpp
     title: system/out.hpp
   _extendedRequiredBy: []
@@ -124,17 +124,16 @@ data:
     \ class = void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
     \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterator_v\
-    \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
-    \ std::false_type {};\n  template<class _typeT>\n  struct is_iterable<_typeT,\
-    \ std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
-    \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterable_v\
-    \ = is_iterable<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
+    \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_range:\
+    \ std::false_type {};\n  template<class _typeT>\n  struct is_range<_typeT, std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
+    \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_range_v\
+    \ = is_range<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
     \ {};\n  template<class _typeT, class _typeU>\n  struct is_tuple<std::pair<_typeT,\
     \ _typeU>>: std::true_type {};\n  template<class... _typeArgs>\n  struct is_tuple<std::tuple<_typeArgs...>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_tuple_v\
     \ = is_tuple<_typeT>::value;\n\n  template<class, class = void>\n  struct is_container_adapter:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_container_adapter<_typeT,\
-    \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_iterable<_typeT>>\
+    \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_range<_typeT>>\
     \ {};\n\n  template<class _typeT>\n  constexpr bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n\
     }\n#line 11 \"algorithm/Hash.hpp\"\n\nnamespace kyopro {\n  template<class, class\
     \ = void>\n  struct Hash;\n\n  template<class _typeT>\n  struct Hash<_typeT, std::enable_if_t<std::is_scalar_v<_typeT>>>\
@@ -147,7 +146,7 @@ data:
     \      else {\n        std::uint_fast64_t _seed = operator()<_i + 1>(_a);\n  \
     \      return _seed ^ (Hash<std::tuple_element_t<_i, _typeT>>()(std::get<_i>(_a))\
     \ + 0x9e3779b97f4a7c15LU + (_seed << 12) + (_seed >> 4));\n      }\n    }\n  };\n\
-    \n  template<class _typeT>\n  struct Hash<_typeT, std::enable_if_t<is_iterable_v<_typeT>>>\
+    \n  template<class _typeT>\n  struct Hash<_typeT, std::enable_if_t<is_range_v<_typeT>>>\
     \ {\n  private:\n    [[no_unique_address]] Hash<decltype(*std::begin(std::declval<_typeT>()))>\
     \ _hasher;\n\n  public:\n    constexpr std::size_t operator ()(const _typeT& _a)\
     \ const noexcept {\n      std::uint_fast64_t _seed = _a.size();\n      for (auto&\
@@ -306,7 +305,7 @@ data:
     \ if (_sgn) _a = -_a;\n    }\n    template<std::size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT>\
     \ && !_has_scan<_typeT>::value>* = nullptr>\n    void scan(_typeT& _a) {\n   \
     \   if constexpr (_i < std::tuple_size_v<_typeT>) {\n        scan(std::get<_i>(_a));\n\
-    \        scan<_i + 1>(_a);\n      }\n    }\n    template<class _typeT, std::enable_if_t<is_iterable_v<_typeT>\
+    \        scan<_i + 1>(_a);\n      }\n    }\n    template<class _typeT, std::enable_if_t<is_range_v<_typeT>\
     \ && !_has_scan<_typeT>::value>* = nullptr>\n    void scan(_typeT& _a) {\n   \
     \   for (auto& _i: _a) scan(_i);\n    }\n    template<class _typeT, std::enable_if_t<_has_scan<_typeT>::value>*\
     \ = nullptr>\n    void scan(_typeT& _a) {\n      _a.scan(*this);\n    }\n\n  \
@@ -361,7 +360,7 @@ data:
     \ != 0) print(std::get<_i>(_a));\n      if constexpr (_i + 1 < std::tuple_size_v<_typeT>)\
     \ {\n        if constexpr (_sep) _print_sep();\n        print<_i + 1>(_a);\n \
     \     } else if constexpr (_debug) print('}');\n    }\n    template<class _typeT,\
-    \ std::enable_if_t<is_iterable_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>\n\
+    \ std::enable_if_t<is_range_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>\n\
     \    void print(const _typeT& _a) {\n      if constexpr (_debug) print('{');\n\
     \      if (std::empty(_a)) return;\n      for (auto _i = std::begin(_a); ; ) {\n\
     \        print(*_i);\n        if (++_i != std::end(_a)) {\n          if constexpr\
@@ -406,7 +405,7 @@ data:
   isVerificationFile: true
   path: aoj/PrimeNumber.test.cpp
   requiredBy: []
-  timestamp: '2022-04-07 18:14:29+09:00'
+  timestamp: '2022-04-15 22:05:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: aoj/PrimeNumber.test.cpp

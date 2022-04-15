@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
@@ -17,19 +17,19 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/point_add_range_sum.test.cpp
     title: yosupo/point_add_range_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"math/monoid.hpp\"\n#include <type_traits>\n#line 2 \"meta/constant.hpp\"\
@@ -96,12 +96,12 @@ data:
   isVerificationFile: false
   path: math/monoid.hpp
   requiredBy:
-  - all/all.hpp
-  - structure/all.hpp
-  - structure/FenwickTree.hpp
   - math/all.hpp
+  - structure/FenwickTree.hpp
+  - structure/all.hpp
+  - all/all.hpp
   timestamp: '2022-04-07 18:08:18+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - yosupo/point_add_range_sum.test.cpp
 documentation_of: math/monoid.hpp

@@ -1,11 +1,11 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
   - icon: ':warning:'
@@ -14,7 +14,7 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
@@ -23,22 +23,22 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
     path: meta/all.hpp
     title: meta/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/out.hpp
     title: system/out.hpp
   - icon: ':warning:'
@@ -51,21 +51,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: aoj/PrimeNumber.test.cpp
     title: aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/factorize.test.cpp
     title: yosupo/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/many_aplusb.test.cpp
     title: yosupo/many_aplusb.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/point_add_range_sum.test.cpp
     title: yosupo/point_add_range_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#include <queue>\n\
@@ -102,17 +102,16 @@ data:
     \ class = void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
     \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterator_v\
-    \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
-    \ std::false_type {};\n  template<class _typeT>\n  struct is_iterable<_typeT,\
-    \ std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
-    \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterable_v\
-    \ = is_iterable<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
+    \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_range:\
+    \ std::false_type {};\n  template<class _typeT>\n  struct is_range<_typeT, std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
+    \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_range_v\
+    \ = is_range<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
     \ {};\n  template<class _typeT, class _typeU>\n  struct is_tuple<std::pair<_typeT,\
     \ _typeU>>: std::true_type {};\n  template<class... _typeArgs>\n  struct is_tuple<std::tuple<_typeArgs...>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_tuple_v\
     \ = is_tuple<_typeT>::value;\n\n  template<class, class = void>\n  struct is_container_adapter:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_container_adapter<_typeT,\
-    \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_iterable<_typeT>>\
+    \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_range<_typeT>>\
     \ {};\n\n  template<class _typeT>\n  constexpr bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n\
     }\n"
   code: "#pragma once\n#include <iterator>\n#include <queue>\n#include <limits>\n\
@@ -141,17 +140,16 @@ data:
     \ class = void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
     \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterator_v\
-    \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
-    \ std::false_type {};\n  template<class _typeT>\n  struct is_iterable<_typeT,\
-    \ std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
-    \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterable_v\
-    \ = is_iterable<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
+    \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_range:\
+    \ std::false_type {};\n  template<class _typeT>\n  struct is_range<_typeT, std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
+    \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_range_v\
+    \ = is_range<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
     \ {};\n  template<class _typeT, class _typeU>\n  struct is_tuple<std::pair<_typeT,\
     \ _typeU>>: std::true_type {};\n  template<class... _typeArgs>\n  struct is_tuple<std::tuple<_typeArgs...>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_tuple_v\
     \ = is_tuple<_typeT>::value;\n\n  template<class, class = void>\n  struct is_container_adapter:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_container_adapter<_typeT,\
-    \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_iterable<_typeT>>\
+    \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_range<_typeT>>\
     \ {};\n\n  template<class _typeT>\n  constexpr bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n\
     }"
   dependsOn:
@@ -159,28 +157,28 @@ data:
   isVerificationFile: false
   path: meta/trait.hpp
   requiredBy:
-  - all/all.hpp
-  - system/out.hpp
+  - math/DynamicModInt.hpp
+  - math/factorize.hpp
+  - math/is_prime.hpp
+  - math/all.hpp
+  - math/ModInt.hpp
   - system/all.hpp
+  - system/out.hpp
   - system/in.hpp
   - meta/all.hpp
   - algorithm/Hash.hpp
   - algorithm/all.hpp
-  - template/alias.hpp
   - template/all.hpp
-  - math/ModInt.hpp
-  - math/all.hpp
-  - math/DynamicModInt.hpp
-  - math/is_prime.hpp
-  - math/factorize.hpp
-  timestamp: '2022-04-07 18:14:29+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  - template/alias.hpp
+  - all/all.hpp
+  timestamp: '2022-04-15 22:05:16+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - aoj/PrimeNumber.test.cpp
-  - yosupo/UnionFind.test.cpp
-  - yosupo/point_add_range_sum.test.cpp
-  - yosupo/factorize.test.cpp
   - yosupo/many_aplusb.test.cpp
+  - yosupo/UnionFind.test.cpp
+  - yosupo/factorize.test.cpp
+  - yosupo/point_add_range_sum.test.cpp
 documentation_of: meta/trait.hpp
 layout: document
 redirect_from:

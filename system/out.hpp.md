@@ -1,38 +1,38 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/all.hpp
     title: system/all.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: aoj/PrimeNumber.test.cpp
     title: aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/factorize.test.cpp
     title: yosupo/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/many_aplusb.test.cpp
     title: yosupo/many_aplusb.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/point_add_range_sum.test.cpp
     title: yosupo/point_add_range_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"system/out.hpp\"\n#include <unistd.h>\n#include <array>\n\
@@ -70,17 +70,16 @@ data:
     \ class = void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
     \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterator_v\
-    \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
-    \ std::false_type {};\n  template<class _typeT>\n  struct is_iterable<_typeT,\
-    \ std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
-    \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterable_v\
-    \ = is_iterable<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
+    \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_range:\
+    \ std::false_type {};\n  template<class _typeT>\n  struct is_range<_typeT, std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
+    \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_range_v\
+    \ = is_range<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
     \ {};\n  template<class _typeT, class _typeU>\n  struct is_tuple<std::pair<_typeT,\
     \ _typeU>>: std::true_type {};\n  template<class... _typeArgs>\n  struct is_tuple<std::tuple<_typeArgs...>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_tuple_v\
     \ = is_tuple<_typeT>::value;\n\n  template<class, class = void>\n  struct is_container_adapter:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_container_adapter<_typeT,\
-    \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_iterable<_typeT>>\
+    \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_range<_typeT>>\
     \ {};\n\n  template<class _typeT>\n  constexpr bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n\
     }\n#line 13 \"system/out.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
     \ _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Writer {\n  private:\n    int _fd,\
@@ -130,7 +129,7 @@ data:
     \ != 0) print(std::get<_i>(_a));\n      if constexpr (_i + 1 < std::tuple_size_v<_typeT>)\
     \ {\n        if constexpr (_sep) _print_sep();\n        print<_i + 1>(_a);\n \
     \     } else if constexpr (_debug) print('}');\n    }\n    template<class _typeT,\
-    \ std::enable_if_t<is_iterable_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>\n\
+    \ std::enable_if_t<is_range_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>\n\
     \    void print(const _typeT& _a) {\n      if constexpr (_debug) print('{');\n\
     \      if (std::empty(_a)) return;\n      for (auto _i = std::begin(_a); ; ) {\n\
     \        print(*_i);\n        if (++_i != std::end(_a)) {\n          if constexpr\
@@ -201,7 +200,7 @@ data:
     \ != 0) print(std::get<_i>(_a));\n      if constexpr (_i + 1 < std::tuple_size_v<_typeT>)\
     \ {\n        if constexpr (_sep) _print_sep();\n        print<_i + 1>(_a);\n \
     \     } else if constexpr (_debug) print('}');\n    }\n    template<class _typeT,\
-    \ std::enable_if_t<is_iterable_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>\n\
+    \ std::enable_if_t<is_range_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>\n\
     \    void print(const _typeT& _a) {\n      if constexpr (_debug) print('{');\n\
     \      if (std::empty(_a)) return;\n      for (auto _i = std::begin(_a); ; ) {\n\
     \        print(*_i);\n        if (++_i != std::end(_a)) {\n          if constexpr\
@@ -227,16 +226,16 @@ data:
   isVerificationFile: false
   path: system/out.hpp
   requiredBy:
-  - all/all.hpp
   - system/all.hpp
-  timestamp: '2022-04-07 18:14:29+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  - all/all.hpp
+  timestamp: '2022-04-15 22:05:16+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - aoj/PrimeNumber.test.cpp
-  - yosupo/UnionFind.test.cpp
-  - yosupo/point_add_range_sum.test.cpp
-  - yosupo/factorize.test.cpp
   - yosupo/many_aplusb.test.cpp
+  - yosupo/UnionFind.test.cpp
+  - yosupo/factorize.test.cpp
+  - yosupo/point_add_range_sum.test.cpp
 documentation_of: system/out.hpp
 layout: document
 redirect_from:

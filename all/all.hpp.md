@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
   - icon: ':warning:'
     path: algorithm/all.hpp
     title: algorithm/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
   - icon: ':warning:'
@@ -31,49 +31,49 @@ data:
   - icon: ':warning:'
     path: math/euler_phi.hpp
     title: math/euler_phi.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/monoid.hpp
     title: math/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
   - icon: ':warning:'
     path: meta/all.hpp
     title: meta/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/out.hpp
     title: system/out.hpp
   - icon: ':warning:'
@@ -167,17 +167,16 @@ data:
     \ class = void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
     \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterator_v\
-    \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
-    \ std::false_type {};\n  template<class _typeT>\n  struct is_iterable<_typeT,\
-    \ std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
-    \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterable_v\
-    \ = is_iterable<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
+    \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_range:\
+    \ std::false_type {};\n  template<class _typeT>\n  struct is_range<_typeT, std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
+    \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_range_v\
+    \ = is_range<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
     \ {};\n  template<class _typeT, class _typeU>\n  struct is_tuple<std::pair<_typeT,\
     \ _typeU>>: std::true_type {};\n  template<class... _typeArgs>\n  struct is_tuple<std::tuple<_typeArgs...>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_tuple_v\
     \ = is_tuple<_typeT>::value;\n\n  template<class, class = void>\n  struct is_container_adapter:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_container_adapter<_typeT,\
-    \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_iterable<_typeT>>\
+    \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_range<_typeT>>\
     \ {};\n\n  template<class _typeT>\n  constexpr bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n\
     }\n#line 11 \"algorithm/Hash.hpp\"\n\nnamespace kyopro {\n  template<class, class\
     \ = void>\n  struct Hash;\n\n  template<class _typeT>\n  struct Hash<_typeT, std::enable_if_t<std::is_scalar_v<_typeT>>>\
@@ -190,7 +189,7 @@ data:
     \      else {\n        std::uint_fast64_t _seed = operator()<_i + 1>(_a);\n  \
     \      return _seed ^ (Hash<std::tuple_element_t<_i, _typeT>>()(std::get<_i>(_a))\
     \ + 0x9e3779b97f4a7c15LU + (_seed << 12) + (_seed >> 4));\n      }\n    }\n  };\n\
-    \n  template<class _typeT>\n  struct Hash<_typeT, std::enable_if_t<is_iterable_v<_typeT>>>\
+    \n  template<class _typeT>\n  struct Hash<_typeT, std::enable_if_t<is_range_v<_typeT>>>\
     \ {\n  private:\n    [[no_unique_address]] Hash<decltype(*std::begin(std::declval<_typeT>()))>\
     \ _hasher;\n\n  public:\n    constexpr std::size_t operator ()(const _typeT& _a)\
     \ const noexcept {\n      std::uint_fast64_t _seed = _a.size();\n      for (auto&\
@@ -417,40 +416,42 @@ data:
     \ Min {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static constexpr\
     \ _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT _b) const\
     \ noexcept { return _a < _b ? _a : _b; }\n  };\n}\n#line 6 \"structure/FenwickTree.hpp\"\
-    \n\nnamespace kyopro {\n  template<class _typeT, class _typeOp = Plus<_typeT>>\n\
-    \  struct FenwickTree {\n  private:\n    [[no_unique_address]] _typeOp _op;\n\
-    \    std::vector<_typeT> _tree;\n\n  public:\n    using value_type = _typeT;\n\
-    \    using size_type = KYOPRO_BASE_UINT;\n    using reference = _typeT&;\n   \
-    \ using const_reference = const _typeT&;\n\n    FenwickTree() noexcept = default;\n\
-    \    FenwickTree(KYOPRO_BASE_UINT _n) noexcept: _op(), _tree(_n, _op.id) {}\n\n\
-    \    KYOPRO_BASE_UINT size() noexcept { return _tree.size(); }\n\n    void apply(int\
-    \ _p, const _typeT& _x) {\n      ++_p;\n      while (_p <= (int)size()) {\n  \
-    \      _tree[_p - 1] = _op(_tree[_p - 1], _x);\n        _p += _p & -_p;\n    \
-    \  }\n    }\n\n    _typeT prod(int _r) const {\n      _typeT _s = _op.id;\n  \
-    \    while (_r > 0) {\n        _s = _op(_s, _tree[_r - 1]);\n        _r -= _r\
-    \ & -_r;\n      }\n      return _s;\n    }\n    _typeT prod(int _l, int _r) const\
-    \ { return _op(prod(_r), _op.inv(prod(_l))); }\n\n    _typeT all_prod() { return\
-    \ prod(_tree.size()); }\n\n    _typeT get(int _p) { return _op(prod(_p + 1), _op.inv(prod(_p)));\
-    \ }\n\n    void set(int _p, const _typeT& _x) { apply(_p, _op(_x, _op.inv(get(_p))));\
-    \ }\n  };\n}\n#line 3 \"structure/UnionFind.hpp\"\n#include <unordered_map>\n\
-    #line 6 \"structure/UnionFind.hpp\"\n\nnamespace kyopro {\n  struct UnionFind\
-    \ {\n  private:\n    std::vector<int> _par;\n\n  public:\n    UnionFind() noexcept\
-    \ = default;\n    UnionFind(KYOPRO_BASE_UINT _n) noexcept: _par(_n, -1) {}\n\n\
-    \    void resize(KYOPRO_BASE_UINT _x) { _par.resize(_x, -1); }\n    void assign(KYOPRO_BASE_UINT\
-    \ _x) { _par.assign(_x, -1); }\n    void reset() { std::fill(std::begin(_par),\
-    \ std::end(_par), -1); }\n\n    KYOPRO_BASE_UINT size() const noexcept { return\
-    \ _par.size(); }\n\n    KYOPRO_BASE_INT find(int _x) {\n      int _p = _x;\n \
-    \     while (_par[_p] >= 0) _p = _par[_p];\n      while (_x != _p) {\n       \
-    \ int _tmp = _x;\n        _x = _par[_x];\n        _par[_tmp] = _p;\n      }\n\
-    \      return _p;\n    }\n\n    bool merge(int _x, int _y) {\n      _x = find(_x),\
-    \ _y = find(_y);\n      if (_x == _y) return false;\n      if (_par[_x] > _par[_y])\
-    \ {\n        int _tmp = _x;\n        _x = _y;\n        _y = _tmp;\n      }\n \
-    \     _par[_x] += _par[_y];\n      _par[_y] = _x;\n      return true;\n    }\n\
-    \n    bool same(int _x, int _y) { return find(_x) == find(_y); }\n\n    KYOPRO_BASE_INT\
-    \ group_size(int _x) { return -_par[find(_x)]; }\n\n    std::vector<int> group_members(int\
-    \ _x) {\n      _x = find(_x);\n      std::vector<int> _a;\n      for (int _i =\
-    \ 0; _i < (int)(size()); ++_i) if (find(_i) == _x) _a.emplace_back(_i);\n    \
-    \  return _a;\n    }\n\n    template<class _typeVector = std::vector<KYOPRO_BASE_INT>>\n\
+    \n\nnamespace kyopro {\n  template<class _typeT, class _typeOp = Plus<_typeT>,\
+    \ class _typeContainer = std::vector<_typeT>>\n  struct FenwickTree {\n  private:\n\
+    \    [[no_unique_address]] _typeOp _op;\n    _typeContainer _tree;\n\n  public:\n\
+    \    using value_type = _typeT;\n    using size_type = KYOPRO_BASE_UINT;\n   \
+    \ using reference = _typeT&;\n    using const_reference = const _typeT&;\n\n \
+    \   template<class... _typeArgs>\n    FenwickTree(_typeArgs&&... _args) noexcept:\
+    \ _tree(std::forward<_typeArgs>(_args)...) {}\n\n    KYOPRO_BASE_UINT size() noexcept\
+    \ { return _tree.size(); }\n\n    void apply(int _p, const _typeT& _x) {\n   \
+    \   ++_p;\n      while (_p <= (int)size()) {\n        _tree[_p - 1] = _op(_tree[_p\
+    \ - 1], _x);\n        _p += _p & -_p;\n      }\n    }\n\n    _typeT prod(int _r)\
+    \ const {\n      _typeT _s = _op.id;\n      while (_r > 0) {\n        _s = _op(_s,\
+    \ _tree[_r - 1]);\n        _r -= _r & -_r;\n      }\n      return _s;\n    }\n\
+    \    _typeT prod(int _l, int _r) const { return _op(prod(_r), _op.inv(prod(_l)));\
+    \ }\n\n    _typeT all_prod() { return prod(_tree.size()); }\n\n    _typeT get(int\
+    \ _p) { return _op(prod(_p + 1), _op.inv(prod(_p))); }\n\n    void set(int _p,\
+    \ const _typeT& _x) { apply(_p, _op(_x, _op.inv(get(_p)))); }\n  };\n}\n#line\
+    \ 3 \"structure/UnionFind.hpp\"\n#include <unordered_map>\n#line 7 \"structure/UnionFind.hpp\"\
+    \n\nnamespace kyopro {\n  template<class _typeContainer = std::vector<int>>\n\
+    \  struct UnionFind {\n  private:\n    _typeContainer _par;\n\n  public:\n   \
+    \ template<class... _typeArgs>\n    UnionFind(_typeArgs&&... _args) noexcept:\
+    \ _par(std::forward<_typeArgs>(_args)...) {}\n\n    void resize(KYOPRO_BASE_UINT\
+    \ _x) { _par.resize(_x, -1); }\n    void assign(KYOPRO_BASE_UINT _x) { _par.assign(_x,\
+    \ -1); }\n    void reset() { std::fill(std::begin(_par), std::end(_par), -1);\
+    \ }\n\n    KYOPRO_BASE_UINT size() const noexcept { return _par.size(); }\n\n\
+    \    KYOPRO_BASE_INT find(int _x) {\n      int _p = _x;\n      while (_par[_p]\
+    \ >= 0) _p = _par[_p];\n      while (_x != _p) {\n        int _tmp = _x;\n   \
+    \     _x = _par[_x];\n        _par[_tmp] = _p;\n      }\n      return _p;\n  \
+    \  }\n\n    bool merge(int _x, int _y) {\n      _x = find(_x), _y = find(_y);\n\
+    \      if (_x == _y) return false;\n      if (_par[_x] > _par[_y]) {\n       \
+    \ int _tmp = _x;\n        _x = _y;\n        _y = _tmp;\n      }\n      _par[_x]\
+    \ += _par[_y];\n      _par[_y] = _x;\n      return true;\n    }\n\n    bool same(int\
+    \ _x, int _y) { return find(_x) == find(_y); }\n\n    KYOPRO_BASE_INT group_size(int\
+    \ _x) { return -_par[find(_x)]; }\n\n    std::vector<int> group_members(int _x)\
+    \ {\n      _x = find(_x);\n      std::vector<int> _a;\n      for (int _i = 0;\
+    \ _i < (int)(size()); ++_i) if (find(_i) == _x) _a.emplace_back(_i);\n      return\
+    \ _a;\n    }\n\n    template<class _typeVector = std::vector<KYOPRO_BASE_INT>>\n\
     \    _typeVector roots() const {\n      _typeVector _a;\n      for (int _i = 0;\
     \ _i < (int)(size()); ++_i) if (_par[_i] < 0) _a.emplace_back(_i);\n      return\
     \ _a;\n    }\n\n    KYOPRO_BASE_INT group_count() const {\n      KYOPRO_BASE_INT\
@@ -506,7 +507,7 @@ data:
     \ if (_sgn) _a = -_a;\n    }\n    template<std::size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT>\
     \ && !_has_scan<_typeT>::value>* = nullptr>\n    void scan(_typeT& _a) {\n   \
     \   if constexpr (_i < std::tuple_size_v<_typeT>) {\n        scan(std::get<_i>(_a));\n\
-    \        scan<_i + 1>(_a);\n      }\n    }\n    template<class _typeT, std::enable_if_t<is_iterable_v<_typeT>\
+    \        scan<_i + 1>(_a);\n      }\n    }\n    template<class _typeT, std::enable_if_t<is_range_v<_typeT>\
     \ && !_has_scan<_typeT>::value>* = nullptr>\n    void scan(_typeT& _a) {\n   \
     \   for (auto& _i: _a) scan(_i);\n    }\n    template<class _typeT, std::enable_if_t<_has_scan<_typeT>::value>*\
     \ = nullptr>\n    void scan(_typeT& _a) {\n      _a.scan(*this);\n    }\n\n  \
@@ -561,7 +562,7 @@ data:
     \ != 0) print(std::get<_i>(_a));\n      if constexpr (_i + 1 < std::tuple_size_v<_typeT>)\
     \ {\n        if constexpr (_sep) _print_sep();\n        print<_i + 1>(_a);\n \
     \     } else if constexpr (_debug) print('}');\n    }\n    template<class _typeT,\
-    \ std::enable_if_t<is_iterable_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>\n\
+    \ std::enable_if_t<is_range_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>\n\
     \    void print(const _typeT& _a) {\n      if constexpr (_debug) print('{');\n\
     \      if (std::empty(_a)) return;\n      for (auto _i = std::begin(_a); ; ) {\n\
     \        print(*_i);\n        if (++_i != std::end(_a)) {\n          if constexpr\
@@ -680,7 +681,7 @@ data:
   isVerificationFile: false
   path: all/all.hpp
   requiredBy: []
-  timestamp: '2022-04-07 18:14:29+09:00'
+  timestamp: '2022-04-15 22:05:16+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp

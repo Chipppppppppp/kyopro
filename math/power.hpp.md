@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
@@ -17,31 +17,31 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/monoid.hpp
     title: math/monoid.hpp
   - icon: ':warning:'
     path: meta/all.hpp
     title: meta/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/in.hpp
     title: system/in.hpp
   - icon: ':warning:'
@@ -54,21 +54,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: aoj/PrimeNumber.test.cpp
     title: aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/factorize.test.cpp
     title: yosupo/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/many_aplusb.test.cpp
     title: yosupo/many_aplusb.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/point_add_range_sum.test.cpp
     title: yosupo/point_add_range_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"meta/settings.hpp\"\n#include <cstdint>\n\n#ifndef KYOPRO_BASE_INT\n\
@@ -92,29 +92,29 @@ data:
   isVerificationFile: false
   path: math/power.hpp
   requiredBy:
-  - all/all.hpp
+  - math/monoid.hpp
+  - math/DynamicModInt.hpp
+  - math/factorize.hpp
+  - math/is_prime.hpp
+  - math/all.hpp
+  - math/ModInt.hpp
   - system/all.hpp
   - system/in.hpp
-  - meta/all.hpp
   - meta/constant.hpp
-  - structure/all.hpp
+  - meta/all.hpp
   - structure/FenwickTree.hpp
-  - template/alias.hpp
+  - structure/all.hpp
   - template/all.hpp
-  - math/ModInt.hpp
-  - math/all.hpp
-  - math/DynamicModInt.hpp
-  - math/is_prime.hpp
-  - math/factorize.hpp
-  - math/monoid.hpp
+  - template/alias.hpp
+  - all/all.hpp
   timestamp: '2022-03-19 00:51:47+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - aoj/PrimeNumber.test.cpp
-  - yosupo/UnionFind.test.cpp
-  - yosupo/point_add_range_sum.test.cpp
-  - yosupo/factorize.test.cpp
   - yosupo/many_aplusb.test.cpp
+  - yosupo/UnionFind.test.cpp
+  - yosupo/factorize.test.cpp
+  - yosupo/point_add_range_sum.test.cpp
 documentation_of: math/power.hpp
 layout: document
 redirect_from:

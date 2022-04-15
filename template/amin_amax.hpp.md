@@ -30,8 +30,8 @@ data:
   isVerificationFile: false
   path: template/amin_amax.hpp
   requiredBy:
-  - all/all.hpp
   - template/all.hpp
+  - all/all.hpp
   timestamp: '2022-04-07 00:44:43+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

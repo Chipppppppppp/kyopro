@@ -1,38 +1,38 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/monoid.hpp
     title: math/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/out.hpp
     title: system/out.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_add_range_sum
@@ -80,23 +80,24 @@ data:
     \ Min {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static constexpr\
     \ _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT _b) const\
     \ noexcept { return _a < _b ? _a : _b; }\n  };\n}\n#line 6 \"structure/FenwickTree.hpp\"\
-    \n\nnamespace kyopro {\n  template<class _typeT, class _typeOp = Plus<_typeT>>\n\
-    \  struct FenwickTree {\n  private:\n    [[no_unique_address]] _typeOp _op;\n\
-    \    std::vector<_typeT> _tree;\n\n  public:\n    using value_type = _typeT;\n\
-    \    using size_type = KYOPRO_BASE_UINT;\n    using reference = _typeT&;\n   \
-    \ using const_reference = const _typeT&;\n\n    FenwickTree() noexcept = default;\n\
-    \    FenwickTree(KYOPRO_BASE_UINT _n) noexcept: _op(), _tree(_n, _op.id) {}\n\n\
-    \    KYOPRO_BASE_UINT size() noexcept { return _tree.size(); }\n\n    void apply(int\
-    \ _p, const _typeT& _x) {\n      ++_p;\n      while (_p <= (int)size()) {\n  \
-    \      _tree[_p - 1] = _op(_tree[_p - 1], _x);\n        _p += _p & -_p;\n    \
-    \  }\n    }\n\n    _typeT prod(int _r) const {\n      _typeT _s = _op.id;\n  \
-    \    while (_r > 0) {\n        _s = _op(_s, _tree[_r - 1]);\n        _r -= _r\
-    \ & -_r;\n      }\n      return _s;\n    }\n    _typeT prod(int _l, int _r) const\
-    \ { return _op(prod(_r), _op.inv(prod(_l))); }\n\n    _typeT all_prod() { return\
-    \ prod(_tree.size()); }\n\n    _typeT get(int _p) { return _op(prod(_p + 1), _op.inv(prod(_p)));\
-    \ }\n\n    void set(int _p, const _typeT& _x) { apply(_p, _op(_x, _op.inv(get(_p))));\
-    \ }\n  };\n}\n#line 2 \"system/in.hpp\"\n#include <unistd.h>\n#line 4 \"system/in.hpp\"\
-    \n#include <cstddef>\n#line 6 \"system/in.hpp\"\n#include <cstdio>\n#include <string>\n\
+    \n\nnamespace kyopro {\n  template<class _typeT, class _typeOp = Plus<_typeT>,\
+    \ class _typeContainer = std::vector<_typeT>>\n  struct FenwickTree {\n  private:\n\
+    \    [[no_unique_address]] _typeOp _op;\n    _typeContainer _tree;\n\n  public:\n\
+    \    using value_type = _typeT;\n    using size_type = KYOPRO_BASE_UINT;\n   \
+    \ using reference = _typeT&;\n    using const_reference = const _typeT&;\n\n \
+    \   template<class... _typeArgs>\n    FenwickTree(_typeArgs&&... _args) noexcept:\
+    \ _tree(std::forward<_typeArgs>(_args)...) {}\n\n    KYOPRO_BASE_UINT size() noexcept\
+    \ { return _tree.size(); }\n\n    void apply(int _p, const _typeT& _x) {\n   \
+    \   ++_p;\n      while (_p <= (int)size()) {\n        _tree[_p - 1] = _op(_tree[_p\
+    \ - 1], _x);\n        _p += _p & -_p;\n      }\n    }\n\n    _typeT prod(int _r)\
+    \ const {\n      _typeT _s = _op.id;\n      while (_r > 0) {\n        _s = _op(_s,\
+    \ _tree[_r - 1]);\n        _r -= _r & -_r;\n      }\n      return _s;\n    }\n\
+    \    _typeT prod(int _l, int _r) const { return _op(prod(_r), _op.inv(prod(_l)));\
+    \ }\n\n    _typeT all_prod() { return prod(_tree.size()); }\n\n    _typeT get(int\
+    \ _p) { return _op(prod(_p + 1), _op.inv(prod(_p))); }\n\n    void set(int _p,\
+    \ const _typeT& _x) { apply(_p, _op(_x, _op.inv(get(_p)))); }\n  };\n}\n#line\
+    \ 2 \"system/in.hpp\"\n#include <unistd.h>\n#line 4 \"system/in.hpp\"\n#include\
+    \ <cstddef>\n#line 6 \"system/in.hpp\"\n#include <cstdio>\n#include <string>\n\
     #include <tuple>\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#include <queue>\n\
     #line 5 \"meta/trait.hpp\"\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\n\
     struct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>:\
@@ -123,17 +124,16 @@ data:
     \ class = void>\n  struct is_iterator: std::false_type {};\n  template<class _typeT>\n\
     \  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterator_v\
-    \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
-    \ std::false_type {};\n  template<class _typeT>\n  struct is_iterable<_typeT,\
-    \ std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
-    \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_iterable_v\
-    \ = is_iterable<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
+    \ = is_iterator<_typeT>::value;\n\n  template<class, class = void>\n  struct is_range:\
+    \ std::false_type {};\n  template<class _typeT>\n  struct is_range<_typeT, std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>:\
+    \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_range_v\
+    \ = is_range<_typeT>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
     \ {};\n  template<class _typeT, class _typeU>\n  struct is_tuple<std::pair<_typeT,\
     \ _typeU>>: std::true_type {};\n  template<class... _typeArgs>\n  struct is_tuple<std::tuple<_typeArgs...>>:\
     \ std::true_type {};\n\n  template<class _typeT>\n  constexpr bool is_tuple_v\
     \ = is_tuple<_typeT>::value;\n\n  template<class, class = void>\n  struct is_container_adapter:\
     \ std::false_type {};\n  template<class _typeT>\n  struct is_container_adapter<_typeT,\
-    \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_iterable<_typeT>>\
+    \ std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_range<_typeT>>\
     \ {};\n\n  template<class _typeT>\n  constexpr bool is_container_adapter_v = is_container_adapter<_typeT>::value;\n\
     }\n#line 14 \"system/in.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
     \ _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Reader {\n  private:\n    int _fd,\
@@ -181,7 +181,7 @@ data:
     \ if (_sgn) _a = -_a;\n    }\n    template<std::size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT>\
     \ && !_has_scan<_typeT>::value>* = nullptr>\n    void scan(_typeT& _a) {\n   \
     \   if constexpr (_i < std::tuple_size_v<_typeT>) {\n        scan(std::get<_i>(_a));\n\
-    \        scan<_i + 1>(_a);\n      }\n    }\n    template<class _typeT, std::enable_if_t<is_iterable_v<_typeT>\
+    \        scan<_i + 1>(_a);\n      }\n    }\n    template<class _typeT, std::enable_if_t<is_range_v<_typeT>\
     \ && !_has_scan<_typeT>::value>* = nullptr>\n    void scan(_typeT& _a) {\n   \
     \   for (auto& _i: _a) scan(_i);\n    }\n    template<class _typeT, std::enable_if_t<_has_scan<_typeT>::value>*\
     \ = nullptr>\n    void scan(_typeT& _a) {\n      _a.scan(*this);\n    }\n\n  \
@@ -236,7 +236,7 @@ data:
     \ != 0) print(std::get<_i>(_a));\n      if constexpr (_i + 1 < std::tuple_size_v<_typeT>)\
     \ {\n        if constexpr (_sep) _print_sep();\n        print<_i + 1>(_a);\n \
     \     } else if constexpr (_debug) print('}');\n    }\n    template<class _typeT,\
-    \ std::enable_if_t<is_iterable_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>\n\
+    \ std::enable_if_t<is_range_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>\n\
     \    void print(const _typeT& _a) {\n      if constexpr (_debug) print('{');\n\
     \      if (std::empty(_a)) return;\n      for (auto _i = std::begin(_a); ; ) {\n\
     \        print(*_i);\n        if (++_i != std::end(_a)) {\n          if constexpr\
@@ -281,8 +281,8 @@ data:
   isVerificationFile: true
   path: yosupo/point_add_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-04-07 18:14:29+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-04-15 22:05:16+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: yosupo/point_add_range_sum.test.cpp
 layout: document
