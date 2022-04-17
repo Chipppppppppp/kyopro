@@ -131,12 +131,13 @@ data:
     \ _i *= 10) {\n            _d = _d * 10 + *itr - '0';\n            ++itr;\n  \
     \        }\n          _a += _d / _i;\n        }\n        while ('0' <= *itr &&\
     \ *itr <= '9') ++itr;\n      }\n      if constexpr (!std::is_unsigned_v<_typeT>)\
-    \ if (_sgn) _a = -_a;\n    }\n    template<std::size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT>\
-    \ && !_has_scan<_typeT>::value>* = nullptr>\n    void scan(_typeT& _a) {\n   \
-    \   if constexpr (_i < std::tuple_size_v<_typeT>) {\n        scan(std::get<_i>(_a));\n\
-    \        scan<_i + 1>(_a);\n      }\n    }\n    template<class _typeT, std::enable_if_t<is_range_v<_typeT>\
-    \ && !_has_scan<_typeT>::value>* = nullptr>\n    void scan(_typeT& _a) {\n   \
-    \   for (auto& _i: _a) scan(_i);\n    }\n    template<class _typeT, std::enable_if_t<_has_scan<_typeT>::value>*\
+    \ if (_sgn) _a = -_a;\n    }\n    template<KYOPRO_BASE_UINT _i = 0, class _typeT,\
+    \ std::enable_if_t<is_tuple_v<_typeT> && !_has_scan<_typeT>::value>* = nullptr>\n\
+    \    void scan(_typeT& _a) {\n      if constexpr (_i < std::tuple_size_v<_typeT>)\
+    \ {\n        scan(std::get<_i>(_a));\n        scan<_i + 1>(_a);\n      }\n   \
+    \ }\n    template<class _typeT, std::enable_if_t<is_range_v<_typeT> && !_has_scan<_typeT>::value>*\
+    \ = nullptr>\n    void scan(_typeT& _a) {\n      for (auto& _i: _a) scan(_i);\n\
+    \    }\n    template<class _typeT, std::enable_if_t<_has_scan<_typeT>::value>*\
     \ = nullptr>\n    void scan(_typeT& _a) {\n      _a.scan(*this);\n    }\n\n  \
     \  void operator ()() {}\n    template<class _typeHead, class... _typeArgs>\n\
     \    void operator ()(_typeHead& _head, _typeArgs&... _args) {\n      scan(_head);\n\
@@ -188,12 +189,13 @@ data:
     \ _i *= 10) {\n            _d = _d * 10 + *itr - '0';\n            ++itr;\n  \
     \        }\n          _a += _d / _i;\n        }\n        while ('0' <= *itr &&\
     \ *itr <= '9') ++itr;\n      }\n      if constexpr (!std::is_unsigned_v<_typeT>)\
-    \ if (_sgn) _a = -_a;\n    }\n    template<std::size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT>\
-    \ && !_has_scan<_typeT>::value>* = nullptr>\n    void scan(_typeT& _a) {\n   \
-    \   if constexpr (_i < std::tuple_size_v<_typeT>) {\n        scan(std::get<_i>(_a));\n\
-    \        scan<_i + 1>(_a);\n      }\n    }\n    template<class _typeT, std::enable_if_t<is_range_v<_typeT>\
-    \ && !_has_scan<_typeT>::value>* = nullptr>\n    void scan(_typeT& _a) {\n   \
-    \   for (auto& _i: _a) scan(_i);\n    }\n    template<class _typeT, std::enable_if_t<_has_scan<_typeT>::value>*\
+    \ if (_sgn) _a = -_a;\n    }\n    template<KYOPRO_BASE_UINT _i = 0, class _typeT,\
+    \ std::enable_if_t<is_tuple_v<_typeT> && !_has_scan<_typeT>::value>* = nullptr>\n\
+    \    void scan(_typeT& _a) {\n      if constexpr (_i < std::tuple_size_v<_typeT>)\
+    \ {\n        scan(std::get<_i>(_a));\n        scan<_i + 1>(_a);\n      }\n   \
+    \ }\n    template<class _typeT, std::enable_if_t<is_range_v<_typeT> && !_has_scan<_typeT>::value>*\
+    \ = nullptr>\n    void scan(_typeT& _a) {\n      for (auto& _i: _a) scan(_i);\n\
+    \    }\n    template<class _typeT, std::enable_if_t<_has_scan<_typeT>::value>*\
     \ = nullptr>\n    void scan(_typeT& _a) {\n      _a.scan(*this);\n    }\n\n  \
     \  void operator ()() {}\n    template<class _typeHead, class... _typeArgs>\n\
     \    void operator ()(_typeHead& _head, _typeArgs&... _args) {\n      scan(_head);\n\
@@ -208,7 +210,7 @@ data:
   requiredBy:
   - system/all.hpp
   - all/all.hpp
-  timestamp: '2022-04-15 22:05:16+09:00'
+  timestamp: '2022-04-17 23:28:33+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - aoj/PrimeNumber.test.cpp

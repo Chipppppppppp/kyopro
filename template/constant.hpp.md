@@ -4,7 +4,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':warning:'
+    path: template/all.hpp
+    title: template/all.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -33,7 +39,9 @@ data:
   - meta/settings.hpp
   isVerificationFile: false
   path: template/constant.hpp
-  requiredBy: []
+  requiredBy:
+  - template/all.hpp
+  - all/all.hpp
   timestamp: '2022-04-07 18:08:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

@@ -38,8 +38,20 @@ data:
     path: template/amin_amax.hpp
     title: template/amin_amax.hpp
   - icon: ':warning:'
+    path: template/constant.hpp
+    title: template/constant.hpp
+  - icon: ':warning:'
+    path: template/len.hpp
+    title: template/len.hpp
+  - icon: ':warning:'
     path: template/macro.hpp
     title: template/macro.hpp
+  - icon: ':warning:'
+    path: template/make_array.hpp
+    title: template/make_array.hpp
+  - icon: ':warning:'
+    path: template/make_vector.hpp
+    title: template/make_vector.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
     path: all/all.hpp
@@ -316,21 +328,28 @@ data:
     \ < a) {\n      a = b;\n      return true;\n    }\n    return false;\n  }\n\n\
     \  template<class _typeT, class _typeU>\n  constexpr bool amax(_typeT& a, _typeU&&\
     \ b) noexcept {\n    if (a < b) {\n      a = b;\n      return true;\n    }\n \
-    \   return false;\n  }\n}\n#line 5 \"template/macro.hpp\"\n\n#define KYOPRO_OVERLOAD_MACRO(_1,\
-    \ _2, _3, _4, name, ...) name\n#define KYOPRO_REP0() for (; ; )\n#define KYOPRO_REP1(i)\
-    \ for (KYOPRO_BASE_INT i = 0; ; ++(i))\n#define KYOPRO_REP2(i, last) for (KYOPRO_BASE_INT\
-    \ i = 0, KYOPRO_LAST_ ## i = (last); (i) < (KYOPRO_LAST_ ## i); ++(i))\n#define\
-    \ KYOPRO_REP3(i, first, last) for (KYOPRO_BASE_INT i = (first), KYOPRO_LAST_ ##\
-    \ i = last; (i) < (KYOPRO_LAST_ ## i); ++(i))\n#define KYOPRO_REP4(i, first, last,\
-    \ step) for (KYOPRO_BASE_INT i = (first), KYOPRO_LAST_ ## i = (last), KYOPRO_STEP_\
-    \ ## i = (step); (KYOPRO_STEP_ ## i) > 0 ? (i) < (KYOPRO_LAST_ ## i) : (i) > (KYOPRO_LAST_\
-    \ ## i); (i) += (KYOPRO_BASE_INT)(step))\n#define rep(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__\
-    \ __VA_OPT__(,) KYOPRO_REP4, KYOPRO_REP3, KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\n\
-    #define KYOPRO_ITER2(i, last) for (auto i = std::decay_t<decltype(last)>(), KYOPRO_LAST_\
-    \ ## i = (last); (i) != (KYOPRO_LAST_ ## i); ++(i))\n#define KYOPRO_ITER3(i, first,\
-    \ last) for (auto i = (first), KYOPRO_LAST_ ## i = (last); (i) != (KYOPRO_LAST_\
-    \ ## i); ++(i))\n#define KYOPRO_ITER4(i, first, last, step) for (auto i = (first),\
-    \ KYOPRO_LAST_ ## i = (last); (step) > 0 ? (i) < (KYOPRO_LAST_ ## i) : (i) > (KYOPRO_LAST_\
+    \   return false;\n  }\n}\n#line 4 \"template/constant.hpp\"\n\nnamespace kyopro\
+    \ {\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>,\
+    \ 4> beside{{{1, 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
+    \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
+    \ -1}, {0, -1}, {1, -1}}};\n}\n#line 4 \"template/len.hpp\"\n\nnamespace kyopro\
+    \ {\n  template<class _typeT>\n  constexpr KYOPRO_BASE_INT len(_typeT&& _a) noexcept\
+    \ {\n    return std::size(_a);\n  }\n}\n#line 5 \"template/macro.hpp\"\n\n#define\
+    \ KYOPRO_OVERLOAD_MACRO(_1, _2, _3, _4, name, ...) name\n#define KYOPRO_REP0()\
+    \ for (; ; )\n#define KYOPRO_REP1(i) for (KYOPRO_BASE_INT i = 0; ; ++(i))\n#define\
+    \ KYOPRO_REP2(i, last) for (KYOPRO_BASE_INT i = 0, KYOPRO_LAST_ ## i = (last);\
+    \ (i) < (KYOPRO_LAST_ ## i); ++(i))\n#define KYOPRO_REP3(i, first, last) for (KYOPRO_BASE_INT\
+    \ i = (first), KYOPRO_LAST_ ## i = last; (i) < (KYOPRO_LAST_ ## i); ++(i))\n#define\
+    \ KYOPRO_REP4(i, first, last, step) for (KYOPRO_BASE_INT i = (first), KYOPRO_LAST_\
+    \ ## i = (last), KYOPRO_STEP_ ## i = (step); (KYOPRO_STEP_ ## i) > 0 ? (i) < (KYOPRO_LAST_\
+    \ ## i) : (i) > (KYOPRO_LAST_ ## i); (i) += (KYOPRO_BASE_INT)(step))\n#define\
+    \ rep(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__ __VA_OPT__(,) KYOPRO_REP4, KYOPRO_REP3,\
+    \ KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\n#define KYOPRO_ITER2(i,\
+    \ last) for (auto i = std::decay_t<decltype(last)>(), KYOPRO_LAST_ ## i = (last);\
+    \ (i) != (KYOPRO_LAST_ ## i); ++(i))\n#define KYOPRO_ITER3(i, first, last) for\
+    \ (auto i = (first), KYOPRO_LAST_ ## i = (last); (i) != (KYOPRO_LAST_ ## i); ++(i))\n\
+    #define KYOPRO_ITER4(i, first, last, step) for (auto i = (first), KYOPRO_LAST_\
+    \ ## i = (last); (step) > 0 ? (i) < (KYOPRO_LAST_ ## i) : (i) > (KYOPRO_LAST_\
     \ ## i); (i) += (step))\n#define iter(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__,\
     \ KYOPRO_ITER4, KYOPRO_ITER3, KYOPRO_ITER2)(__VA_ARGS__)\n#define KYOPRO_LAMBDA1(value)\
     \ ([&]() noexcept { return (value);})\n#define KYOPRO_LAMBDA2(_1, value) ([&](auto&&\
@@ -340,14 +359,36 @@ data:
     \ })\n#define lambda(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__, KYOPRO_LAMBDA4, KYOPRO_LAMBDA3,\
     \ KYOPRO_LAMBDA2, KYOPRO_LAMBDA1)(__VA_ARGS__)\n#define all(...) std::begin(__VA_ARGS__),\
     \ std::end(__VA_ARGS__)\n#define rall(...) std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\n\
-    #line 5 \"template/all.hpp\"\n"
+    #line 5 \"template/make_array.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n\
+    \  constexpr auto make_array(const _typeT& _init = _typeT()) noexcept { return\
+    \ _init; }\n\n  template<class _typeT, KYOPRO_BASE_UINT _length, KYOPRO_BASE_UINT...\
+    \ _lengths>\n  constexpr auto make_array(const _typeT& _init = _typeT()) noexcept\
+    \ {\n    auto _elm = make_array<_typeT, _lengths...>(_init);\n    std::array<decltype(_elm),\
+    \ _length> _res;\n    for (auto& _i: _res) _i = _elm;\n    return std::move(_res);\n\
+    \  }\n}\n#line 6 \"template/make_vector.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    \ _idx = 0, KYOPRO_BASE_UINT _n, class _typeT>\n  auto make_vector(const KYOPRO_BASE_UINT\
+    \ (&_d)[_n], _typeT&& _init) noexcept {\n    if constexpr (_idx < _n) return std::vector(_d[_idx],\
+    \ make_vector<_idx + 1>(_d, std::forward<_typeT>(_init)));\n    else return _init;\n\
+    \  }\n\n  template<class _typeT, KYOPRO_BASE_UINT _idx = 0, KYOPRO_BASE_UINT _n>\n\
+    \  auto make_vector(const KYOPRO_BASE_UINT (&_d)[_n], const _typeT& _init = _typeT())\
+    \ noexcept {\n    if constexpr (_idx < _n) return std::vector(_d[_idx], make_vector<_idx\
+    \ + 1>(_d, _init));\n    else return _init;\n  }\n}\n#line 9 \"template/all.hpp\"\
+    \n"
   code: '#pragma once
 
     #include "alias.hpp"
 
     #include "amin_amax.hpp"
 
-    #include "macro.hpp"'
+    #include "constant.hpp"
+
+    #include "len.hpp"
+
+    #include "macro.hpp"
+
+    #include "make_array.hpp"
+
+    #include "make_vector.hpp"'
   dependsOn:
   - template/alias.hpp
   - algorithm/Hash.hpp
@@ -361,12 +402,16 @@ data:
   - math/ModInt.hpp
   - algorithm/bit.hpp
   - template/amin_amax.hpp
+  - template/constant.hpp
+  - template/len.hpp
   - template/macro.hpp
+  - template/make_array.hpp
+  - template/make_vector.hpp
   isVerificationFile: false
   path: template/all.hpp
   requiredBy:
   - all/all.hpp
-  timestamp: '2022-04-15 22:05:16+09:00'
+  timestamp: '2022-04-17 23:28:33+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/all.hpp

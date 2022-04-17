@@ -92,6 +92,12 @@ data:
   - icon: ':warning:'
     path: template/macro.hpp
     title: template/macro.hpp
+  - icon: ':warning:'
+    path: template/make_array.hpp
+    title: template/make_array.hpp
+  - icon: ':warning:'
+    path: template/make_vector.hpp
+    title: template/make_vector.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: aoj/PrimeNumber.test.cpp
@@ -247,11 +253,13 @@ data:
   - structure/UnionFind.hpp
   - function/monoid.hpp
   - function/all.hpp
+  - template/make_vector.hpp
   - template/constant.hpp
   - template/all.hpp
   - template/alias.hpp
   - template/len.hpp
   - template/macro.hpp
+  - template/make_array.hpp
   - all/all.hpp
   timestamp: '2022-03-19 00:51:47+09:00'
   verificationStatus: LIBRARY_ALL_AC

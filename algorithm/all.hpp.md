@@ -7,6 +7,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
+  - icon: ':warning:'
+    path: algorithm/compress.hpp
+    title: algorithm/compress.hpp
   - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
@@ -67,22 +70,31 @@ data:
     \ _x) noexcept {\n    return bit_len(_x >> static_cast<_typeT>(1));\n  }\n\n \
     \ template<class _typeT>\n  constexpr KYOPRO_BASE_INT ceil_bit(_typeT _x) noexcept\
     \ {\n    if (_x == 0) return 0;\n    return bit_len(_x - static_cast<_typeT>(1));\n\
-    \  }\n}\n#line 2 \"algorithm/Hash.hpp\"\n#include <cstddef>\n#line 4 \"algorithm/Hash.hpp\"\
-    \n#include <functional>\n#include <initializer_list>\n#include <tuple>\n#line\
-    \ 8 \"algorithm/Hash.hpp\"\n#include <utility>\n#line 2 \"meta/trait.hpp\"\n#include\
-    \ <iterator>\n#include <queue>\n#line 5 \"meta/trait.hpp\"\n#include <stack>\n\
-    #line 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct std::is_integral<__int128_t>:\
-    \ std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>: std::true_type\
-    \ {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type {};\n\
-    template<>\nstruct std::is_unsigned<__uint128_t>: std::true_type {};\n#ifdef __SIZEOF_FLOAT128__\n\
-    template<>\nstruct std::is_floating_point<__float128>: std::true_type {};\n#endif\n\
-    \nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _size>\n  struct int_least {\n\
-    \  private:\n    static constexpr auto _get_type() noexcept {\n      static_assert(_size\
-    \ <= 128, \"Integer size is too long\");\n      if constexpr (_size <= 8) return\
-    \ std::int_least8_t();\n      else if constexpr (_size <= 16) return std::int_least16_t();\n\
-    \      else if constexpr (_size <= 32) return std::int_least32_t();\n      else\
-    \ if constexpr (_size <= 64) return std::int_least64_t();\n      else return __int128_t();\n\
-    \    }\n\n  public:\n    using type = decltype(_get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
+    \  }\n}\n#line 2 \"algorithm/compress.hpp\"\n#include <algorithm>\n#include <functional>\n\
+    #include <iterator>\n#include <unordered_map>\n#include <vector>\n#line 8 \"algorithm/compress.hpp\"\
+    \n\nnamespace kyopro {\n  template<class _typeT, class _typeContainer = std::unordered_map<typename\
+    \ std::iterator_traits<_typeT>::value_type, KYOPRO_BASE_INT>, class _typeCompare>\n\
+    \  auto compress(_typeT _first, _typeT _last, _typeCompare _comp = std::less<typename\
+    \ std::iterator_traits<_typeT>::value_type>()) {\n    std::vector<typename iterator_traits<T>::value_type>\
+    \ _vec(_first, _last);\n    std::sort(_vec.begin(), _vec.end(), _comp);\n    auto\
+    \ _end = std::unique(_vec.begin(), _vec.end());\n    _typeContainer _mem;\n  \
+    \  int _cnt = -1;\n    for (auto _i = _vec.begin(); _i != _end; ++_i) _mem[*_i]\
+    \ = ++_cnt;\n    return _mem;\n  }\n}\n#line 2 \"algorithm/Hash.hpp\"\n#include\
+    \ <cstddef>\n#line 5 \"algorithm/Hash.hpp\"\n#include <initializer_list>\n#include\
+    \ <tuple>\n#line 8 \"algorithm/Hash.hpp\"\n#include <utility>\n#line 3 \"meta/trait.hpp\"\
+    \n#include <queue>\n#line 5 \"meta/trait.hpp\"\n#include <stack>\n#line 9 \"meta/trait.hpp\"\
+    \n\ntemplate<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
+    struct std::is_signed<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
+    \ std::true_type {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>: std::true_type\
+    \ {};\n#ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
+    \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    \ _size>\n  struct int_least {\n  private:\n    static constexpr auto _get_type()\
+    \ noexcept {\n      static_assert(_size <= 128, \"Integer size is too long\");\n\
+    \      if constexpr (_size <= 8) return std::int_least8_t();\n      else if constexpr\
+    \ (_size <= 16) return std::int_least16_t();\n      else if constexpr (_size <=\
+    \ 32) return std::int_least32_t();\n      else if constexpr (_size <= 64) return\
+    \ std::int_least64_t();\n      else return __int128_t();\n    }\n\n  public:\n\
+    \    using type = decltype(_get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
     \ _size>\n  using int_least_t = typename int_least<_size>::type;\n\n  template<KYOPRO_BASE_UINT\
     \ _size>\n  struct uint_least {\n  private:\n    static constexpr auto _get_type()\
     \ noexcept {\n      static_assert(_size <= 128, \"Integer size is too long\");\n\
@@ -122,22 +134,25 @@ data:
     \ _hasher;\n\n  public:\n    constexpr std::size_t operator ()(const _typeT& _a)\
     \ const noexcept {\n      std::uint_fast64_t _seed = _a.size();\n      for (auto&\
     \ _i: _a) _seed ^= _hasher(_i) + 0x9e3779b97f4a7c15LU + (_seed << 12) + (_seed\
-    \ >> 4);\n      return _seed;\n    }\n  };\n}\n#line 4 \"algorithm/all.hpp\"\n"
+    \ >> 4);\n      return _seed;\n    }\n  };\n}\n#line 5 \"algorithm/all.hpp\"\n"
   code: '#pragma once
 
     #include "bit.hpp"
+
+    #include "compress.hpp"
 
     #include "Hash.hpp"'
   dependsOn:
   - algorithm/bit.hpp
   - meta/settings.hpp
+  - algorithm/compress.hpp
   - algorithm/Hash.hpp
   - meta/trait.hpp
   isVerificationFile: false
   path: algorithm/all.hpp
   requiredBy:
   - all/all.hpp
-  timestamp: '2022-04-15 22:05:16+09:00'
+  timestamp: '2022-04-17 23:28:33+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm/all.hpp

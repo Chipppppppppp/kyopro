@@ -122,6 +122,12 @@ data:
     - icon: ':warning:'
       path: template/macro.hpp
       title: template/macro.hpp
+    - icon: ':warning:'
+      path: template/make_array.hpp
+      title: template/make_array.hpp
+    - icon: ':warning:'
+      path: template/make_vector.hpp
+      title: template/make_vector.hpp
   verificationCategories:
   - name: aoj
     pages:

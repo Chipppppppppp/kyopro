@@ -123,18 +123,19 @@ data:
     \ ++_i) print(*_i);\n      if constexpr (std::is_integral_v<_typeT>) return;\n\
     \      print('.');\n      for (int _i = 0; _i < static_cast<int>(_decimal_precision);\
     \ ++_i) {\n        _a *= 10;\n        print('0' + static_cast<std::uint_fast64_t>(_a)\
-    \ % 10);\n      }\n    }\n    template<std::size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT>\
+    \ % 10);\n      }\n    }\n    template<KYOPRO_BASE_UINT _i = 0, class _typeT,\
+    \ std::enable_if_t<is_tuple_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>\n\
+    \    void print(const _typeT& _a) {\n      if constexpr (_debug && _i == 0) print('{');\n\
+    \      if constexpr (std::tuple_size_v<_typeT> != 0) print(std::get<_i>(_a));\n\
+    \      if constexpr (_i + 1 < std::tuple_size_v<_typeT>) {\n        if constexpr\
+    \ (_sep) _print_sep();\n        print<_i + 1>(_a);\n      } else if constexpr\
+    \ (_debug) print('}');\n    }\n    template<class _typeT, std::enable_if_t<is_range_v<_typeT>\
     \ && !_has_print<_typeT>::value>* = nullptr>\n    void print(const _typeT& _a)\
-    \ {\n      if constexpr (_debug && _i == 0) print('{');\n      if constexpr (std::tuple_size_v<_typeT>\
-    \ != 0) print(std::get<_i>(_a));\n      if constexpr (_i + 1 < std::tuple_size_v<_typeT>)\
-    \ {\n        if constexpr (_sep) _print_sep();\n        print<_i + 1>(_a);\n \
-    \     } else if constexpr (_debug) print('}');\n    }\n    template<class _typeT,\
-    \ std::enable_if_t<is_range_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>\n\
-    \    void print(const _typeT& _a) {\n      if constexpr (_debug) print('{');\n\
-    \      if (std::empty(_a)) return;\n      for (auto _i = std::begin(_a); ; ) {\n\
-    \        print(*_i);\n        if (++_i != std::end(_a)) {\n          if constexpr\
-    \ (_sep) {\n            if constexpr (_debug) {\n              print(',');\n \
-    \             print(' ');\n            } else if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<_typeT>()[0])>>)\
+    \ {\n      if constexpr (_debug) print('{');\n      if (std::empty(_a)) return;\n\
+    \      for (auto _i = std::begin(_a); ; ) {\n        print(*_i);\n        if (++_i\
+    \ != std::end(_a)) {\n          if constexpr (_sep) {\n            if constexpr\
+    \ (_debug) {\n              print(',');\n              print(' ');\n         \
+    \   } else if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<_typeT>()[0])>>)\
     \ print(' ');\n            else print('\\n');\n          }\n        } else break;\n\
     \      }\n      if constexpr (_debug) print('}');\n    }\n    template<class _typeT,\
     \ std::enable_if_t<_has_print<_typeT>::value>* = nullptr>\n    void print(const\
@@ -194,18 +195,19 @@ data:
     \ ++_i) print(*_i);\n      if constexpr (std::is_integral_v<_typeT>) return;\n\
     \      print('.');\n      for (int _i = 0; _i < static_cast<int>(_decimal_precision);\
     \ ++_i) {\n        _a *= 10;\n        print('0' + static_cast<std::uint_fast64_t>(_a)\
-    \ % 10);\n      }\n    }\n    template<std::size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT>\
+    \ % 10);\n      }\n    }\n    template<KYOPRO_BASE_UINT _i = 0, class _typeT,\
+    \ std::enable_if_t<is_tuple_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>\n\
+    \    void print(const _typeT& _a) {\n      if constexpr (_debug && _i == 0) print('{');\n\
+    \      if constexpr (std::tuple_size_v<_typeT> != 0) print(std::get<_i>(_a));\n\
+    \      if constexpr (_i + 1 < std::tuple_size_v<_typeT>) {\n        if constexpr\
+    \ (_sep) _print_sep();\n        print<_i + 1>(_a);\n      } else if constexpr\
+    \ (_debug) print('}');\n    }\n    template<class _typeT, std::enable_if_t<is_range_v<_typeT>\
     \ && !_has_print<_typeT>::value>* = nullptr>\n    void print(const _typeT& _a)\
-    \ {\n      if constexpr (_debug && _i == 0) print('{');\n      if constexpr (std::tuple_size_v<_typeT>\
-    \ != 0) print(std::get<_i>(_a));\n      if constexpr (_i + 1 < std::tuple_size_v<_typeT>)\
-    \ {\n        if constexpr (_sep) _print_sep();\n        print<_i + 1>(_a);\n \
-    \     } else if constexpr (_debug) print('}');\n    }\n    template<class _typeT,\
-    \ std::enable_if_t<is_range_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>\n\
-    \    void print(const _typeT& _a) {\n      if constexpr (_debug) print('{');\n\
-    \      if (std::empty(_a)) return;\n      for (auto _i = std::begin(_a); ; ) {\n\
-    \        print(*_i);\n        if (++_i != std::end(_a)) {\n          if constexpr\
-    \ (_sep) {\n            if constexpr (_debug) {\n              print(',');\n \
-    \             print(' ');\n            } else if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<_typeT>()[0])>>)\
+    \ {\n      if constexpr (_debug) print('{');\n      if (std::empty(_a)) return;\n\
+    \      for (auto _i = std::begin(_a); ; ) {\n        print(*_i);\n        if (++_i\
+    \ != std::end(_a)) {\n          if constexpr (_sep) {\n            if constexpr\
+    \ (_debug) {\n              print(',');\n              print(' ');\n         \
+    \   } else if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<_typeT>()[0])>>)\
     \ print(' ');\n            else print('\\n');\n          }\n        } else break;\n\
     \      }\n      if constexpr (_debug) print('}');\n    }\n    template<class _typeT,\
     \ std::enable_if_t<_has_print<_typeT>::value>* = nullptr>\n    void print(const\
@@ -228,7 +230,7 @@ data:
   requiredBy:
   - system/all.hpp
   - all/all.hpp
-  timestamp: '2022-04-15 22:05:16+09:00'
+  timestamp: '2022-04-17 23:28:33+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - aoj/PrimeNumber.test.cpp
