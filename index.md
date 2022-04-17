@@ -28,7 +28,7 @@ data:
     - icon: ':warning:'
       path: function/all.hpp
       title: function/all.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: function/monoid.hpp
       title: function/monoid.hpp
   - name: math
@@ -63,7 +63,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: math/mod.hpp
       title: math/mod.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: math/power.hpp
       title: math/power.hpp
   - name: meta
@@ -71,21 +71,21 @@ data:
     - icon: ':warning:'
       path: meta/all.hpp
       title: meta/all.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: meta/constant.hpp
       title: meta/constant.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: meta/settings.hpp
       title: meta/settings.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: meta/trait.hpp
       title: meta/trait.hpp
   - name: structure
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: structure/FenwickTree.hpp
       title: structure/FenwickTree.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: structure/UnionFind.hpp
       title: structure/UnionFind.hpp
     - icon: ':warning:'
@@ -93,13 +93,13 @@ data:
       title: structure/all.hpp
   - name: system
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: system/all.hpp
       title: system/all.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: system/in.hpp
       title: system/in.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: system/out.hpp
       title: system/out.hpp
   - name: template
@@ -130,7 +130,7 @@ data:
       title: aoj/PrimeNumber.test.cpp
   - name: yosupo
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: yosupo/UnionFind.test.cpp
       title: yosupo/UnionFind.test.cpp
     - icon: ':heavy_check_mark:'
@@ -139,7 +139,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: yosupo/many_aplusb.test.cpp
       title: yosupo/many_aplusb.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: yosupo/point_add_range_sum.test.cpp
       title: yosupo/point_add_range_sum.test.cpp
 layout: toppage

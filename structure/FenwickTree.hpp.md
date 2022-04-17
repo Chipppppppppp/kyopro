@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
@@ -21,12 +21,12 @@ data:
     path: structure/all.hpp
     title: structure/all.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/point_add_range_sum.test.cpp
     title: yosupo/point_add_range_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"structure/FenwickTree.hpp\"\n#include <utility>\n#include\
@@ -70,38 +70,40 @@ data:
     \ _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT _b) const\
     \ noexcept { return _a < _b ? _a : _b; }\n  };\n}\n#line 6 \"structure/FenwickTree.hpp\"\
     \n\nnamespace kyopro {\n  template<class _typeT, class _typeOp = Plus<_typeT>,\
-    \ class _typeContainer = std::vector<_typeT>>\n  struct FenwickTree {\n  private:\n\
-    \    [[no_unique_address]] _typeOp _op;\n    _typeContainer _tree;\n\n  public:\n\
-    \    using value_type = _typeT;\n    using size_type = KYOPRO_BASE_UINT;\n   \
-    \ using reference = _typeT&;\n    using const_reference = const _typeT&;\n\n \
-    \   template<class... _typeArgs>\n    FenwickTree(_typeArgs&&... _args) noexcept:\
-    \ _tree(std::forward<_typeArgs>(_args)...) {}\n\n    KYOPRO_BASE_UINT size() noexcept\
-    \ { return _tree.size(); }\n\n    void apply(int _p, const _typeT& _x) {\n   \
-    \   ++_p;\n      while (_p <= (int)size()) {\n        _tree[_p - 1] = _op(_tree[_p\
-    \ - 1], _x);\n        _p += _p & -_p;\n      }\n    }\n\n    _typeT prod(int _r)\
-    \ const {\n      _typeT _s = _op.id;\n      while (_r > 0) {\n        _s = _op(_s,\
-    \ _tree[_r - 1]);\n        _r -= _r & -_r;\n      }\n      return _s;\n    }\n\
-    \    _typeT prod(int _l, int _r) const { return _op(prod(_r), _op.inv(prod(_l)));\
-    \ }\n\n    _typeT all_prod() { return prod(_tree.size()); }\n\n    _typeT get(int\
-    \ _p) { return _op(prod(_p + 1), _op.inv(prod(_p))); }\n\n    void set(int _p,\
-    \ const _typeT& _x) { apply(_p, _op(_x, _op.inv(get(_p)))); }\n  };\n}\n"
+    \ class Container = std::vector<_typeT>>\n  struct FenwickTree {\n  private:\n\
+    \    [[no_unique_address]] _typeOp _op;\n    Container _tree;\n\n  public:\n \
+    \   using value_type = _typeT;\n    using size_type = KYOPRO_BASE_UINT;\n    using\
+    \ reference = _typeT&;\n    using const_reference = const _typeT&;\n\n    FenwickTree()\
+    \ noexcept = default;\n    FenwickTree(KYOPRO_BASE_UINT _n) noexcept: _tree(_n,\
+    \ _op.id) {}\n    FenwickTree(_typeT&& _tree): _tree(std:forward<_typeT>(_tree))\
+    \ {}\n\n    KYOPRO_BASE_UINT size() noexcept { return _tree.size(); }\n\n    void\
+    \ apply(int _p, const _typeT& _x) {\n      ++_p;\n      while (_p <= (int)size())\
+    \ {\n        _tree[_p - 1] = _op(_tree[_p - 1], _x);\n        _p += _p & -_p;\n\
+    \      }\n    }\n\n    _typeT prod(int _r) const {\n      _typeT _s = _op.id;\n\
+    \      while (_r > 0) {\n        _s = _op(_s, _tree[_r - 1]);\n        _r -= _r\
+    \ & -_r;\n      }\n      return _s;\n    }\n    _typeT prod(int _l, int _r) const\
+    \ { return _op(prod(_r), _op.inv(prod(_l))); }\n\n    _typeT all_prod() { return\
+    \ prod(_tree.size()); }\n\n    _typeT get(int _p) { return _op(prod(_p + 1), _op.inv(prod(_p)));\
+    \ }\n\n    void set(int _p, const _typeT& _x) { apply(_p, _op(_x, _op.inv(get(_p))));\
+    \ }\n  };\n}\n"
   code: "#pragma once\n#include <utility>\n#include <vector>\n#include \"../function/monoid.hpp\"\
     \n#include \"../meta/settings.hpp\"\n\nnamespace kyopro {\n  template<class _typeT,\
-    \ class _typeOp = Plus<_typeT>, class _typeContainer = std::vector<_typeT>>\n\
-    \  struct FenwickTree {\n  private:\n    [[no_unique_address]] _typeOp _op;\n\
-    \    _typeContainer _tree;\n\n  public:\n    using value_type = _typeT;\n    using\
-    \ size_type = KYOPRO_BASE_UINT;\n    using reference = _typeT&;\n    using const_reference\
-    \ = const _typeT&;\n\n    template<class... _typeArgs>\n    FenwickTree(_typeArgs&&...\
-    \ _args) noexcept: _tree(std::forward<_typeArgs>(_args)...) {}\n\n    KYOPRO_BASE_UINT\
-    \ size() noexcept { return _tree.size(); }\n\n    void apply(int _p, const _typeT&\
-    \ _x) {\n      ++_p;\n      while (_p <= (int)size()) {\n        _tree[_p - 1]\
-    \ = _op(_tree[_p - 1], _x);\n        _p += _p & -_p;\n      }\n    }\n\n    _typeT\
-    \ prod(int _r) const {\n      _typeT _s = _op.id;\n      while (_r > 0) {\n  \
-    \      _s = _op(_s, _tree[_r - 1]);\n        _r -= _r & -_r;\n      }\n      return\
-    \ _s;\n    }\n    _typeT prod(int _l, int _r) const { return _op(prod(_r), _op.inv(prod(_l)));\
-    \ }\n\n    _typeT all_prod() { return prod(_tree.size()); }\n\n    _typeT get(int\
-    \ _p) { return _op(prod(_p + 1), _op.inv(prod(_p))); }\n\n    void set(int _p,\
-    \ const _typeT& _x) { apply(_p, _op(_x, _op.inv(get(_p)))); }\n  };\n}\n"
+    \ class _typeOp = Plus<_typeT>, class Container = std::vector<_typeT>>\n  struct\
+    \ FenwickTree {\n  private:\n    [[no_unique_address]] _typeOp _op;\n    Container\
+    \ _tree;\n\n  public:\n    using value_type = _typeT;\n    using size_type = KYOPRO_BASE_UINT;\n\
+    \    using reference = _typeT&;\n    using const_reference = const _typeT&;\n\n\
+    \    FenwickTree() noexcept = default;\n    FenwickTree(KYOPRO_BASE_UINT _n) noexcept:\
+    \ _tree(_n, _op.id) {}\n    FenwickTree(_typeT&& _tree): _tree(std:forward<_typeT>(_tree))\
+    \ {}\n\n    KYOPRO_BASE_UINT size() noexcept { return _tree.size(); }\n\n    void\
+    \ apply(int _p, const _typeT& _x) {\n      ++_p;\n      while (_p <= (int)size())\
+    \ {\n        _tree[_p - 1] = _op(_tree[_p - 1], _x);\n        _p += _p & -_p;\n\
+    \      }\n    }\n\n    _typeT prod(int _r) const {\n      _typeT _s = _op.id;\n\
+    \      while (_r > 0) {\n        _s = _op(_s, _tree[_r - 1]);\n        _r -= _r\
+    \ & -_r;\n      }\n      return _s;\n    }\n    _typeT prod(int _l, int _r) const\
+    \ { return _op(prod(_r), _op.inv(prod(_l))); }\n\n    _typeT all_prod() { return\
+    \ prod(_tree.size()); }\n\n    _typeT get(int _p) { return _op(prod(_p + 1), _op.inv(prod(_p)));\
+    \ }\n\n    void set(int _p, const _typeT& _x) { apply(_p, _op(_x, _op.inv(get(_p))));\
+    \ }\n  };\n}\n"
   dependsOn:
   - function/monoid.hpp
   - meta/constant.hpp
@@ -112,8 +114,8 @@ data:
   requiredBy:
   - structure/all.hpp
   - all/all.hpp
-  timestamp: '2022-04-17 11:59:19+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-04-17 14:24:18+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - yosupo/point_add_range_sum.test.cpp
 documentation_of: structure/FenwickTree.hpp

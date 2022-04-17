@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   _extendedRequiredBy:
@@ -70,27 +70,29 @@ data:
     \ _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT _b) const\
     \ noexcept { return _a < _b ? _a : _b; }\n  };\n}\n#line 6 \"structure/FenwickTree.hpp\"\
     \n\nnamespace kyopro {\n  template<class _typeT, class _typeOp = Plus<_typeT>,\
-    \ class _typeContainer = std::vector<_typeT>>\n  struct FenwickTree {\n  private:\n\
-    \    [[no_unique_address]] _typeOp _op;\n    _typeContainer _tree;\n\n  public:\n\
-    \    using value_type = _typeT;\n    using size_type = KYOPRO_BASE_UINT;\n   \
-    \ using reference = _typeT&;\n    using const_reference = const _typeT&;\n\n \
-    \   template<class... _typeArgs>\n    FenwickTree(_typeArgs&&... _args) noexcept:\
-    \ _tree(std::forward<_typeArgs>(_args)...) {}\n\n    KYOPRO_BASE_UINT size() noexcept\
-    \ { return _tree.size(); }\n\n    void apply(int _p, const _typeT& _x) {\n   \
-    \   ++_p;\n      while (_p <= (int)size()) {\n        _tree[_p - 1] = _op(_tree[_p\
-    \ - 1], _x);\n        _p += _p & -_p;\n      }\n    }\n\n    _typeT prod(int _r)\
-    \ const {\n      _typeT _s = _op.id;\n      while (_r > 0) {\n        _s = _op(_s,\
-    \ _tree[_r - 1]);\n        _r -= _r & -_r;\n      }\n      return _s;\n    }\n\
-    \    _typeT prod(int _l, int _r) const { return _op(prod(_r), _op.inv(prod(_l)));\
-    \ }\n\n    _typeT all_prod() { return prod(_tree.size()); }\n\n    _typeT get(int\
-    \ _p) { return _op(prod(_p + 1), _op.inv(prod(_p))); }\n\n    void set(int _p,\
-    \ const _typeT& _x) { apply(_p, _op(_x, _op.inv(get(_p)))); }\n  };\n}\n#line\
-    \ 2 \"structure/UnionFind.hpp\"\n#include <algorithm>\n#include <unordered_map>\n\
-    #line 6 \"structure/UnionFind.hpp\"\n\nnamespace kyopro {\n  struct UnionFind\
-    \ {\n  private:\n    std::vector<int> _par;\n\n  public:\n    UnionFind() noexcept\
-    \ = default;\n    UnionFind(KYOPRO_BASE_UINT _n) noexcept: _par(_n, -1) {}\n\n\
-    \    void resize(KYOPRO_BASE_UINT _x) { _par.resize(_x, -1); }\n    void assign(KYOPRO_BASE_UINT\
-    \ _x) { _par.assign(_x, -1); }\n    void reset() { std::fill(std::begin(_par),\
+    \ class Container = std::vector<_typeT>>\n  struct FenwickTree {\n  private:\n\
+    \    [[no_unique_address]] _typeOp _op;\n    Container _tree;\n\n  public:\n \
+    \   using value_type = _typeT;\n    using size_type = KYOPRO_BASE_UINT;\n    using\
+    \ reference = _typeT&;\n    using const_reference = const _typeT&;\n\n    FenwickTree()\
+    \ noexcept = default;\n    FenwickTree(KYOPRO_BASE_UINT _n) noexcept: _tree(_n,\
+    \ _op.id) {}\n    FenwickTree(_typeT&& _tree): _tree(std:forward<_typeT>(_tree))\
+    \ {}\n\n    KYOPRO_BASE_UINT size() noexcept { return _tree.size(); }\n\n    void\
+    \ apply(int _p, const _typeT& _x) {\n      ++_p;\n      while (_p <= (int)size())\
+    \ {\n        _tree[_p - 1] = _op(_tree[_p - 1], _x);\n        _p += _p & -_p;\n\
+    \      }\n    }\n\n    _typeT prod(int _r) const {\n      _typeT _s = _op.id;\n\
+    \      while (_r > 0) {\n        _s = _op(_s, _tree[_r - 1]);\n        _r -= _r\
+    \ & -_r;\n      }\n      return _s;\n    }\n    _typeT prod(int _l, int _r) const\
+    \ { return _op(prod(_r), _op.inv(prod(_l))); }\n\n    _typeT all_prod() { return\
+    \ prod(_tree.size()); }\n\n    _typeT get(int _p) { return _op(prod(_p + 1), _op.inv(prod(_p)));\
+    \ }\n\n    void set(int _p, const _typeT& _x) { apply(_p, _op(_x, _op.inv(get(_p))));\
+    \ }\n  };\n}\n#line 2 \"structure/UnionFind.hpp\"\n#include <algorithm>\n#line\
+    \ 4 \"structure/UnionFind.hpp\"\n#include <unordered_map>\n#line 8 \"structure/UnionFind.hpp\"\
+    \n\nnamespace kyopro {\n  template<class Container = std::vector<int>>\n  struct\
+    \ UnionFind {\n  private:\n    Container _par;\n\n  public:\n    UnionFind() noexcept\
+    \ = default;\n    UnionFind(KYOPRO_BASE_UINT _n) noexcept: _par(_n, -1) {}\n \
+    \   template<class _typeT>\n    UnionFind(_typeT&& _par): _par(std::forward<_typeT>(_par))\
+    \ {}\n\n    void resize(KYOPRO_BASE_UINT _x) { _par.resize(_x, -1); }\n    void\
+    \ assign(KYOPRO_BASE_UINT _x) { _par.assign(_x, -1); }\n    void reset() { std::fill(std::begin(_par),\
     \ std::end(_par), -1); }\n\n    KYOPRO_BASE_UINT size() const noexcept { return\
     \ _par.size(); }\n\n    KYOPRO_BASE_INT find(int _x) {\n      int _p = _x;\n \
     \     while (_par[_p] >= 0) _p = _par[_p];\n      while (_x != _p) {\n       \
@@ -112,7 +114,8 @@ data:
     \ std::vector<KYOPRO_BASE_INT>>>\n    _typeMap all_group_members() {\n      _typeMap\
     \ _group_members;\n      for (int _member = 0; _member < (int)(size()); ++_member)\
     \ _group_members[find(_member)].emplace_back(_member);\n      return _group_members;\n\
-    \    }\n  };\n}\n#line 4 \"structure/all.hpp\"\n"
+    \    }\n  };\n\n  template<class _typeT>\n  UnionFind(_typeT&&) -> UnionFind<std::decay_t<_typeT>>;\n\
+    }\n#line 4 \"structure/all.hpp\"\n"
   code: '#pragma once
 
     #include "FenwickTree.hpp"
@@ -129,7 +132,7 @@ data:
   path: structure/all.hpp
   requiredBy:
   - all/all.hpp
-  timestamp: '2022-04-17 13:27:43+09:00'
+  timestamp: '2022-04-17 14:24:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: structure/all.hpp
