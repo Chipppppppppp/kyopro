@@ -1,19 +1,17 @@
 #pragma once
 #include <algorithm>
 #include <unordered_map>
-#include <utility>
 #include <vector>
 #include "../meta/settings.hpp"
 
 namespace kyopro {
-  template<class _typeContainer = std::vector<int>>
   struct UnionFind {
   private:
-    _typeContainer _par;
+    std::vector<int> _par;
 
   public:
-    template<class... _typeArgs>
-    UnionFind(_typeArgs&&... _args) noexcept: _par(std::forward<_typeArgs>(_args)...) {}
+    UnionFind() noexcept = default;
+    UnionFind(KYOPRO_BASE_UINT _n) noexcept: _par(_n, -1) {}
 
     void resize(KYOPRO_BASE_UINT _x) { _par.resize(_x, -1); }
     void assign(KYOPRO_BASE_UINT _x) { _par.assign(_x, -1); }
