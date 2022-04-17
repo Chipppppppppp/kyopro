@@ -1,32 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/out.hpp
     title: system/out.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/unionfind
@@ -43,25 +43,25 @@ data:
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 8 \"structure/UnionFind.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ Container = std::vector<int>>\n  struct UnionFind {\n  private:\n    Container\
+    \ _typeContainer = std::vector<int>>\n  struct UnionFind {\n  private:\n    _typeContainer\
     \ _par;\n\n  public:\n    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT\
-    \ _n) noexcept: _par(_n, -1) {}\n    template<class _typeT>\n    UnionFind(_typeT&&\
-    \ _par): _par(std::forward<_typeT>(_par)) {}\n\n    void resize(KYOPRO_BASE_UINT\
-    \ _x) { _par.resize(_x, -1); }\n    void assign(KYOPRO_BASE_UINT _x) { _par.assign(_x,\
-    \ -1); }\n    void reset() { std::fill(std::begin(_par), std::end(_par), -1);\
-    \ }\n\n    KYOPRO_BASE_UINT size() const noexcept { return _par.size(); }\n\n\
-    \    KYOPRO_BASE_INT find(int _x) {\n      int _p = _x;\n      while (_par[_p]\
-    \ >= 0) _p = _par[_p];\n      while (_x != _p) {\n        int _tmp = _x;\n   \
-    \     _x = _par[_x];\n        _par[_tmp] = _p;\n      }\n      return _p;\n  \
-    \  }\n\n    bool merge(int _x, int _y) {\n      _x = find(_x), _y = find(_y);\n\
-    \      if (_x == _y) return false;\n      if (_par[_x] > _par[_y]) {\n       \
-    \ int _tmp = _x;\n        _x = _y;\n        _y = _tmp;\n      }\n      _par[_x]\
-    \ += _par[_y];\n      _par[_y] = _x;\n      return true;\n    }\n\n    bool same(int\
-    \ _x, int _y) { return find(_x) == find(_y); }\n\n    KYOPRO_BASE_INT group_size(int\
-    \ _x) { return -_par[find(_x)]; }\n\n    std::vector<int> group_members(int _x)\
-    \ {\n      _x = find(_x);\n      std::vector<int> _a;\n      for (int _i = 0;\
-    \ _i < (int)(size()); ++_i) if (find(_i) == _x) _a.emplace_back(_i);\n      return\
-    \ _a;\n    }\n\n    template<class _typeVector = std::vector<KYOPRO_BASE_INT>>\n\
+    \ _n) noexcept: _par(_n, -1) {}\n    template<class _typeC, std::enable_if_t<std::is_same_v<_typeContainer,\
+    \ std::decay_t<_typeC>>>>\n    UnionFind(_typeC&& _par): _par(std::forward<_typeC>(_par))\
+    \ {}\n\n    void resize(KYOPRO_BASE_UINT _x) { _par.resize(_x, -1); }\n    void\
+    \ assign(KYOPRO_BASE_UINT _x) { _par.assign(_x, -1); }\n    void reset() { std::fill(std::begin(_par),\
+    \ std::end(_par), -1); }\n\n    KYOPRO_BASE_UINT size() const noexcept { return\
+    \ _par.size(); }\n\n    KYOPRO_BASE_INT find(int _x) {\n      int _p = _x;\n \
+    \     while (_par[_p] >= 0) _p = _par[_p];\n      while (_x != _p) {\n       \
+    \ int _tmp = _x;\n        _x = _par[_x];\n        _par[_tmp] = _p;\n      }\n\
+    \      return _p;\n    }\n\n    bool merge(int _x, int _y) {\n      _x = find(_x),\
+    \ _y = find(_y);\n      if (_x == _y) return false;\n      if (_par[_x] > _par[_y])\
+    \ {\n        int _tmp = _x;\n        _x = _y;\n        _y = _tmp;\n      }\n \
+    \     _par[_x] += _par[_y];\n      _par[_y] = _x;\n      return true;\n    }\n\
+    \n    bool same(int _x, int _y) { return find(_x) == find(_y); }\n\n    KYOPRO_BASE_INT\
+    \ group_size(int _x) { return -_par[find(_x)]; }\n\n    std::vector<int> group_members(int\
+    \ _x) {\n      _x = find(_x);\n      std::vector<int> _a;\n      for (int _i =\
+    \ 0; _i < (int)(size()); ++_i) if (find(_i) == _x) _a.emplace_back(_i);\n    \
+    \  return _a;\n    }\n\n    template<class _typeVector = std::vector<KYOPRO_BASE_INT>>\n\
     \    _typeVector roots() const {\n      _typeVector _a;\n      for (int _i = 0;\
     \ _i < (int)(size()); ++_i) if (_par[_i] < 0) _a.emplace_back(_i);\n      return\
     \ _a;\n    }\n\n    KYOPRO_BASE_INT group_count() const {\n      KYOPRO_BASE_INT\
@@ -70,9 +70,8 @@ data:
     \ std::vector<KYOPRO_BASE_INT>>>\n    _typeMap all_group_members() {\n      _typeMap\
     \ _group_members;\n      for (int _member = 0; _member < (int)(size()); ++_member)\
     \ _group_members[find(_member)].emplace_back(_member);\n      return _group_members;\n\
-    \    }\n  };\n\n  template<class _typeT>\n  UnionFind(_typeT&&) -> UnionFind<std::decay_t<_typeT>>;\n\
-    }\n#line 2 \"system/in.hpp\"\n#include <unistd.h>\n#include <array>\n#include\
-    \ <cstddef>\n#line 6 \"system/in.hpp\"\n#include <cstdio>\n#include <string>\n\
+    \    }\n  };\n}\n#line 2 \"system/in.hpp\"\n#include <unistd.h>\n#include <array>\n\
+    #include <cstddef>\n#line 6 \"system/in.hpp\"\n#include <cstdio>\n#include <string>\n\
     #include <tuple>\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class\
     \ _typeT>\n  constexpr _typeT power(_typeT _a, KYOPRO_BASE_UINT _n, _typeT _init\
     \ = 1) noexcept {\n    while (_n > 0) {\n      if (_n & 1) _init *= _a;\n    \
@@ -254,8 +253,8 @@ data:
   isVerificationFile: true
   path: yosupo/UnionFind.test.cpp
   requiredBy: []
-  timestamp: '2022-04-17 14:24:18+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-04-17 15:18:46+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/UnionFind.test.cpp
 layout: document
