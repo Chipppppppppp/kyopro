@@ -5,11 +5,11 @@
 #include "../meta/settings.hpp"
 
 namespace kyopro {
-  template<class _typeT, class _typeOp = Plus<_typeT>, class _typeContainer = std::vector<_typeT>>
+  template<class _typeT, class _typeOp = Plus<_typeT>, class Container = std::vector<_typeT>>
   struct FenwickTree {
   private:
     [[no_unique_address]] _typeOp _op;
-    _typeContainer _tree;
+    Container _tree;
 
   public:
     using value_type = _typeT;
@@ -17,8 +17,9 @@ namespace kyopro {
     using reference = _typeT&;
     using const_reference = const _typeT&;
 
-    template<class... _typeArgs>
-    FenwickTree(_typeArgs&&... _args) noexcept: _tree(std::forward<_typeArgs>(_args)...) {}
+    FenwickTree() noexcept = default;
+    FenwickTree(KYOPRO_BASE_UINT _n) noexcept: _tree(_n, _op.id) {}
+    FenwickTree(_typeT&& _tree): _tree(std:forward<_typeT>(_tree)) {}
 
     KYOPRO_BASE_UINT size() noexcept { return _tree.size(); }
 
