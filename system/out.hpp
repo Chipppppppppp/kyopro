@@ -130,7 +130,7 @@ namespace kyopro {
         print('0' + static_cast<std::uint_fast64_t>(_a) % 10);
       }
     }
-    template<std::size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>
+    template<KYOPRO_BASE_UINT _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT> && !_has_print<_typeT>::value>* = nullptr>
     void print(const _typeT& _a) {
       if constexpr (_debug && _i == 0) print('{');
       if constexpr (std::tuple_size_v<_typeT> != 0) print(std::get<_i>(_a));

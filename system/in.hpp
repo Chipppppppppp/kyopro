@@ -135,7 +135,7 @@ namespace kyopro {
       }
       if constexpr (!std::is_unsigned_v<_typeT>) if (_sgn) _a = -_a;
     }
-    template<std::size_t _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT> && !_has_scan<_typeT>::value>* = nullptr>
+    template<KYOPRO_BASE_UINT _i = 0, class _typeT, std::enable_if_t<is_tuple_v<_typeT> && !_has_scan<_typeT>::value>* = nullptr>
     void scan(_typeT& _a) {
       if constexpr (_i < std::tuple_size_v<_typeT>) {
         scan(std::get<_i>(_a));
