@@ -1,7 +1,7 @@
 #pragma once
 #include <utility>
 #include <vector>
-#include "../math/monoid.hpp"
+#include "../function/monoid.hpp"
 #include "../meta/settings.hpp"
 
 namespace kyopro {
