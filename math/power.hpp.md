@@ -8,6 +8,12 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
+  - icon: ':warning:'
+    path: function/all.hpp
+    title: function/all.hpp
+  - icon: ':x:'
+    path: function/monoid.hpp
+    title: function/monoid.hpp
   - icon: ':question:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
@@ -23,9 +29,6 @@ data:
   - icon: ':question:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':x:'
-    path: math/monoid.hpp
-    title: math/monoid.hpp
   - icon: ':warning:'
     path: meta/all.hpp
     title: meta/all.hpp
@@ -92,7 +95,6 @@ data:
   isVerificationFile: false
   path: math/power.hpp
   requiredBy:
-  - math/monoid.hpp
   - math/DynamicModInt.hpp
   - math/factorize.hpp
   - math/is_prime.hpp
@@ -104,6 +106,8 @@ data:
   - meta/all.hpp
   - structure/FenwickTree.hpp
   - structure/all.hpp
+  - function/monoid.hpp
+  - function/all.hpp
   - template/all.hpp
   - template/alias.hpp
   - all/all.hpp

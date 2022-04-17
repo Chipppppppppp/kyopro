@@ -34,9 +34,6 @@ data:
   - icon: ':question:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':x:'
-    path: math/monoid.hpp
-    title: math/monoid.hpp
   - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
@@ -360,24 +357,8 @@ data:
     \    }\n\n    template<class _typePrinter>\n    void print(_typePrinter& _printer)\
     \ const {\n      _printer.print(value);\n    }\n  };\n\n  template<KYOPRO_BASE_UINT\
     \ _mod>\n  struct Hash<ModInt<_mod>> { constexpr std::size_t operator ()(ModInt<_mod>\
-    \ _a) const noexcept { return static_cast<std::size_t>(_a); } };\n}\n#line 4 \"\
-    math/monoid.hpp\"\n\nnamespace kyopro {\n  template<class _typeT, _typeT _id =\
-    \ 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static\
-    \ constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT\
-    \ _b) const noexcept { return _a + _b; }\n    constexpr _typeT inv(_typeT _a)\
-    \ const noexcept { return -_a; }\n  };\n  template<class _typeT, _typeT _id =\
-    \ 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static\
-    \ constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT\
-    \ _b) const noexcept { return _a * _b; }\n    constexpr _typeT inv(_typeT _a)\
-    \ const noexcept {\n      static_assert(!std::is_integral_v<_typeT>);\n      return\
-    \ 1 / _a;\n    }\n  };\n  template<class _typeT, _typeT _id = std::is_integral_v<_typeT>\
-    \ ? -INF<_typeT> : -inf>\n  struct Max {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
-    \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
-    \ _a, _typeT _b) const noexcept { return _a > _b ? _a : _b; }\n  };\n  template<class\
-    \ _typeT, _typeT _id = std::is_integral_v<_typeT> ? INF<_typeT> : inf>\n  struct\
-    \ Min {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static constexpr\
-    \ _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT _b) const\
-    \ noexcept { return _a < _b ? _a : _b; }\n  };\n}\n#line 13 \"math/all.hpp\"\n"
+    \ _a) const noexcept { return static_cast<std::size_t>(_a); } };\n}\n#line 12\
+    \ \"math/all.hpp\"\n"
   code: '#pragma once
 
     #include "div.hpp"
@@ -395,8 +376,6 @@ data:
     #include "mod.hpp"
 
     #include "ModInt.hpp"
-
-    #include "monoid.hpp"
 
     #include "Montgomery.hpp"
 
@@ -417,12 +396,11 @@ data:
   - math/is_prime.hpp
   - algorithm/bit.hpp
   - math/ModInt.hpp
-  - math/monoid.hpp
   isVerificationFile: false
   path: math/all.hpp
   requiredBy:
   - all/all.hpp
-  timestamp: '2022-04-15 22:05:16+09:00'
+  timestamp: '2022-04-17 11:59:19+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/all.hpp

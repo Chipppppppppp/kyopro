@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':x:'
-    path: math/monoid.hpp
-    title: math/monoid.hpp
+    path: function/monoid.hpp
+    title: function/monoid.hpp
   - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
@@ -30,9 +30,9 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"structure/FenwickTree.hpp\"\n#include <utility>\n#include\
-    \ <vector>\n#line 2 \"math/monoid.hpp\"\n#include <type_traits>\n#line 2 \"meta/constant.hpp\"\
-    \n#include <array>\n#include <limits>\n#line 2 \"meta/settings.hpp\"\n#include\
-    \ <cstdint>\n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n\
+    \ <vector>\n#line 2 \"function/monoid.hpp\"\n#include <type_traits>\n#line 2 \"\
+    meta/constant.hpp\"\n#include <array>\n#include <limits>\n#line 2 \"meta/settings.hpp\"\
+    \n#include <cstdint>\n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n\
     #endif\n\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\
     \n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef\
     \ KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(998244353)\n\
@@ -52,9 +52,9 @@ data:
     \ _decimal_precision);\n  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\
     \n  template<class _typeT>\n  inline constexpr _typeT PI = 3.14159265358979323846;\n\
     \  inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n}\n#line 4\
-    \ \"math/monoid.hpp\"\n\nnamespace kyopro {\n  template<class _typeT, _typeT _id\
-    \ = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<_typeT>);\n  \
-    \  static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
+    \ \"function/monoid.hpp\"\n\nnamespace kyopro {\n  template<class _typeT, _typeT\
+    \ _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
+    \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
     \ _a, _typeT _b) const noexcept { return _a + _b; }\n    constexpr _typeT inv(_typeT\
     \ _a) const noexcept { return -_a; }\n  };\n  template<class _typeT, _typeT _id\
     \ = 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<_typeT>);\n   \
@@ -85,7 +85,7 @@ data:
     \ }\n\n    _typeT all_prod() { return prod(_tree.size()); }\n\n    _typeT get(int\
     \ _p) { return _op(prod(_p + 1), _op.inv(prod(_p))); }\n\n    void set(int _p,\
     \ const _typeT& _x) { apply(_p, _op(_x, _op.inv(get(_p)))); }\n  };\n}\n"
-  code: "#pragma once\n#include <utility>\n#include <vector>\n#include \"../math/monoid.hpp\"\
+  code: "#pragma once\n#include <utility>\n#include <vector>\n#include \"../function/monoid.hpp\"\
     \n#include \"../meta/settings.hpp\"\n\nnamespace kyopro {\n  template<class _typeT,\
     \ class _typeOp = Plus<_typeT>, class _typeContainer = std::vector<_typeT>>\n\
     \  struct FenwickTree {\n  private:\n    [[no_unique_address]] _typeOp _op;\n\
@@ -103,7 +103,7 @@ data:
     \ _p) { return _op(prod(_p + 1), _op.inv(prod(_p))); }\n\n    void set(int _p,\
     \ const _typeT& _x) { apply(_p, _op(_x, _op.inv(get(_p)))); }\n  };\n}\n"
   dependsOn:
-  - math/monoid.hpp
+  - function/monoid.hpp
   - meta/constant.hpp
   - math/power.hpp
   - meta/settings.hpp
@@ -112,7 +112,7 @@ data:
   requiredBy:
   - structure/all.hpp
   - all/all.hpp
-  timestamp: '2022-04-15 22:05:16+09:00'
+  timestamp: '2022-04-17 11:59:19+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - yosupo/point_add_range_sum.test.cpp

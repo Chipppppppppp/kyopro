@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':x:'
-    path: math/monoid.hpp
-    title: math/monoid.hpp
+    path: function/monoid.hpp
+    title: function/monoid.hpp
   - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
@@ -40,7 +40,7 @@ data:
     - https://judge.yosupo.jp/problem/point_add_range_sum
   bundledCode: "#line 1 \"yosupo/point_add_range_sum.test.cpp\"\n#define PROBLEM \"\
     https://judge.yosupo.jp/problem/point_add_range_sum\"\n#line 2 \"structure/FenwickTree.hpp\"\
-    \n#include <utility>\n#include <vector>\n#line 2 \"math/monoid.hpp\"\n#include\
+    \n#include <utility>\n#include <vector>\n#line 2 \"function/monoid.hpp\"\n#include\
     \ <type_traits>\n#line 2 \"meta/constant.hpp\"\n#include <array>\n#include <limits>\n\
     #line 2 \"meta/settings.hpp\"\n#include <cstdint>\n\n#ifndef KYOPRO_BASE_INT\n\
     #define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n#define\
@@ -63,9 +63,9 @@ data:
     \ _decimal_precision);\n  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\
     \n  template<class _typeT>\n  inline constexpr _typeT PI = 3.14159265358979323846;\n\
     \  inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n}\n#line 4\
-    \ \"math/monoid.hpp\"\n\nnamespace kyopro {\n  template<class _typeT, _typeT _id\
-    \ = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<_typeT>);\n  \
-    \  static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
+    \ \"function/monoid.hpp\"\n\nnamespace kyopro {\n  template<class _typeT, _typeT\
+    \ _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
+    \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
     \ _a, _typeT _b) const noexcept { return _a + _b; }\n    constexpr _typeT inv(_typeT\
     \ _a) const noexcept { return -_a; }\n  };\n  template<class _typeT, _typeT _id\
     \ = 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<_typeT>);\n   \
@@ -270,7 +270,7 @@ data:
     \ y));\n  }\n}"
   dependsOn:
   - structure/FenwickTree.hpp
-  - math/monoid.hpp
+  - function/monoid.hpp
   - meta/constant.hpp
   - math/power.hpp
   - meta/settings.hpp
@@ -281,7 +281,7 @@ data:
   isVerificationFile: true
   path: yosupo/point_add_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-04-15 22:05:16+09:00'
+  timestamp: '2022-04-17 11:59:19+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: yosupo/point_add_range_sum.test.cpp

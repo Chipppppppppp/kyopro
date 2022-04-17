@@ -20,6 +20,17 @@ data:
     - icon: ':warning:'
       path: all/all.hpp
       title: all/all.hpp
+  - name: function
+    pages:
+    - icon: ':warning:'
+      path: function/RecursiveLambda.hpp
+      title: function/RecursiveLambda.hpp
+    - icon: ':warning:'
+      path: function/all.hpp
+      title: function/all.hpp
+    - icon: ':x:'
+      path: function/monoid.hpp
+      title: function/monoid.hpp
   - name: math
     pages:
     - icon: ':question:'
@@ -52,9 +63,6 @@ data:
     - icon: ':question:'
       path: math/mod.hpp
       title: math/mod.hpp
-    - icon: ':x:'
-      path: math/monoid.hpp
-      title: math/monoid.hpp
     - icon: ':question:'
       path: math/power.hpp
       title: math/power.hpp

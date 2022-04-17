@@ -10,6 +10,9 @@ data:
   - icon: ':question:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
+  - icon: ':x:'
+    path: function/monoid.hpp
+    title: function/monoid.hpp
   - icon: ':question:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
@@ -40,9 +43,6 @@ data:
   - icon: ':question:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':x:'
-    path: math/monoid.hpp
-    title: math/monoid.hpp
   - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
@@ -399,16 +399,16 @@ data:
     \ const {\n      _printer.print(value);\n    }\n  };\n\n  template<KYOPRO_BASE_UINT\
     \ _mod>\n  struct Hash<ModInt<_mod>> { constexpr std::size_t operator ()(ModInt<_mod>\
     \ _a) const noexcept { return static_cast<std::size_t>(_a); } };\n}\n#line 4 \"\
-    math/monoid.hpp\"\n\nnamespace kyopro {\n  template<class _typeT, _typeT _id =\
-    \ 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static\
-    \ constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT\
-    \ _b) const noexcept { return _a + _b; }\n    constexpr _typeT inv(_typeT _a)\
-    \ const noexcept { return -_a; }\n  };\n  template<class _typeT, _typeT _id =\
-    \ 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static\
-    \ constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT\
-    \ _b) const noexcept { return _a * _b; }\n    constexpr _typeT inv(_typeT _a)\
-    \ const noexcept {\n      static_assert(!std::is_integral_v<_typeT>);\n      return\
-    \ 1 / _a;\n    }\n  };\n  template<class _typeT, _typeT _id = std::is_integral_v<_typeT>\
+    function/monoid.hpp\"\n\nnamespace kyopro {\n  template<class _typeT, _typeT _id\
+    \ = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<_typeT>);\n  \
+    \  static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
+    \ _a, _typeT _b) const noexcept { return _a + _b; }\n    constexpr _typeT inv(_typeT\
+    \ _a) const noexcept { return -_a; }\n  };\n  template<class _typeT, _typeT _id\
+    \ = 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<_typeT>);\n   \
+    \ static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a,\
+    \ _typeT _b) const noexcept { return _a * _b; }\n    constexpr _typeT inv(_typeT\
+    \ _a) const noexcept {\n      static_assert(!std::is_integral_v<_typeT>);\n  \
+    \    return 1 / _a;\n    }\n  };\n  template<class _typeT, _typeT _id = std::is_integral_v<_typeT>\
     \ ? -INF<_typeT> : -inf>\n  struct Max {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
     \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
     \ _a, _typeT _b) const noexcept { return _a > _b ? _a : _b; }\n  };\n  template<class\
@@ -666,10 +666,10 @@ data:
   - math/factorize.hpp
   - math/is_prime.hpp
   - math/ModInt.hpp
-  - math/monoid.hpp
   - meta/all.hpp
   - structure/all.hpp
   - structure/FenwickTree.hpp
+  - function/monoid.hpp
   - structure/UnionFind.hpp
   - system/all.hpp
   - system/in.hpp
@@ -681,7 +681,7 @@ data:
   isVerificationFile: false
   path: all/all.hpp
   requiredBy: []
-  timestamp: '2022-04-15 22:05:16+09:00'
+  timestamp: '2022-04-17 11:59:19+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp
