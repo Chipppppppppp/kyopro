@@ -1,15 +1,16 @@
 #pragma once
+#include <type_traits>
 #include <utility>
 #include <vector>
 #include "../function/monoid.hpp"
 #include "../meta/settings.hpp"
 
 namespace kyopro {
-  template<class _typeT, class _typeOp = Plus<_typeT>, class Container = std::vector<_typeT>>
+  template<class _typeT, class _typeOp = Plus<_typeT>, class _typeContainer = std::vector<_typeT>>
   struct FenwickTree {
   private:
     [[no_unique_address]] _typeOp _op;
-    Container _tree;
+    _typeContainer _tree;
 
   public:
     using value_type = _typeT;
@@ -19,7 +20,8 @@ namespace kyopro {
 
     FenwickTree() noexcept = default;
     FenwickTree(KYOPRO_BASE_UINT _n) noexcept: _tree(_n, _op.id) {}
-    FenwickTree(_typeT&& _tree): _tree(std:forward<_typeT>(_tree)) {}
+    template<class _typeC, std::enable_if_t<std::is_same_v<_typeContainer, std::decay_t<_typeC>>>>
+    FenwickTree(_typeC&& _tree): _tree(std::forward<_typeC>(_tree)) {}
 
     KYOPRO_BASE_UINT size() noexcept { return _tree.size(); }
 

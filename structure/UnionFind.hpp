@@ -7,16 +7,16 @@
 #include "../meta/settings.hpp"
 
 namespace kyopro {
-  template<class Container = std::vector<int>>
+  template<class _typeContainer = std::vector<int>>
   struct UnionFind {
   private:
-    Container _par;
+    _typeContainer _par;
 
   public:
     UnionFind() noexcept = default;
     UnionFind(KYOPRO_BASE_UINT _n) noexcept: _par(_n, -1) {}
-    template<class _typeT>
-    UnionFind(_typeT&& _par): _par(std::forward<_typeT>(_par)) {}
+    template<class _typeC, std::enable_if_t<std::is_same_v<_typeContainer, std::decay_t<_typeC>>>>
+    UnionFind(_typeC&& _par): _par(std::forward<_typeC>(_par)) {}
 
     void resize(KYOPRO_BASE_UINT _x) { _par.resize(_x, -1); }
     void assign(KYOPRO_BASE_UINT _x) { _par.assign(_x, -1); }
@@ -79,7 +79,4 @@ namespace kyopro {
       return _group_members;
     }
   };
-
-  template<class _typeT>
-  UnionFind(_typeT&&) -> UnionFind<std::decay_t<_typeT>>;
 }
