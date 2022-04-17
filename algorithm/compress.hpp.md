@@ -31,8 +31,8 @@ data:
     \ _typeT, class _typeContainer = std::unordered_map<typename std::iterator_traits<_typeT>::value_type,\
     \ KYOPRO_BASE_INT>, class _typeCompare>\n  auto compress(_typeT _first, _typeT\
     \ _last, _typeCompare _comp = std::less<typename std::iterator_traits<_typeT>::value_type>())\
-    \ {\n    std::vector<typename iterator_traits<T>::value_type> _vec(_first, _last);\n\
-    \    std::sort(_vec.begin(), _vec.end(), _comp);\n    auto _end = std::unique(_vec.begin(),\
+    \ {\n    std::vector<typename iterator_traits<_typeT>::value_type> _vec(_first,\
+    \ _last);\n    std::sort(_vec.begin(), _vec.end(), _comp);\n    auto _end = std::unique(_vec.begin(),\
     \ _vec.end());\n    _typeContainer _mem;\n    int _cnt = -1;\n    for (auto _i\
     \ = _vec.begin(); _i != _end; ++_i) _mem[*_i] = ++_cnt;\n    return _mem;\n  }\n\
     }\n"
@@ -41,7 +41,7 @@ data:
     \n\nnamespace kyopro {\n  template<class _typeT, class _typeContainer = std::unordered_map<typename\
     \ std::iterator_traits<_typeT>::value_type, KYOPRO_BASE_INT>, class _typeCompare>\n\
     \  auto compress(_typeT _first, _typeT _last, _typeCompare _comp = std::less<typename\
-    \ std::iterator_traits<_typeT>::value_type>()) {\n    std::vector<typename iterator_traits<T>::value_type>\
+    \ std::iterator_traits<_typeT>::value_type>()) {\n    std::vector<typename iterator_traits<_typeT>::value_type>\
     \ _vec(_first, _last);\n    std::sort(_vec.begin(), _vec.end(), _comp);\n    auto\
     \ _end = std::unique(_vec.begin(), _vec.end());\n    _typeContainer _mem;\n  \
     \  int _cnt = -1;\n    for (auto _i = _vec.begin(); _i != _end; ++_i) _mem[*_i]\
@@ -53,7 +53,7 @@ data:
   requiredBy:
   - algorithm/all.hpp
   - all/all.hpp
-  timestamp: '2022-04-07 18:08:18+09:00'
+  timestamp: '2022-04-17 23:39:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm/compress.hpp
