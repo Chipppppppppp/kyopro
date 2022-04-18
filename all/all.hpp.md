@@ -109,6 +109,9 @@ data:
   - icon: ':warning:'
     path: template/make_vector.hpp
     title: template/make_vector.hpp
+  - icon: ':warning:'
+    path: template/min_max_different_types.hpp
+    title: template/min_max_different_types.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -618,43 +621,49 @@ data:
     \    }\n  };\n\n  Printer<Writer<>::iterator, false, false> print(output.begin()),\
     \ eprint(error.begin());\n  Printer<Writer<>::iterator> println(output.begin()),\
     \ eprintln(error.begin());\n  Printer<Writer<>::iterator, true, true, true, true>\
-    \ debug(output.begin()), edebug(error.begin());\n}\n#line 8 \"template/alias.hpp\"\
-    \n#include <set>\n#line 10 \"template/alias.hpp\"\n#include <map>\n#include <unordered_set>\n\
-    #line 19 \"template/alias.hpp\"\n\nnamespace kyopro {\n  using ll = long long;\n\
-    \  using ull = unsigned long long;\n  using lf = double;\n\n  using i8 = std::int8_t;\n\
-    \  using u8 = std::uint8_t;\n  using i16 = std::int16_t;\n  using u16 = std::uint16_t;\n\
-    \  using i32 = std::int32_t;\n  using u32 = std::uint32_t;\n  using i64 = std::int64_t;\n\
-    \  using u64 = std::uint64_t;\n  using i128 = __int128_t;\n  using u128 = __uint128_t;\n\
-    \  #ifdef __SIZEOF_FLOAT128__\n  using f128 = __float128;\n  #endif\n\n  using\
-    \ mint = ModInt<mod>;\n  using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\n  template<class\
+    \ debug(output.begin()), edebug(error.begin());\n}\n#line 9 \"template/alias.hpp\"\
+    \n#include <set>\n#include <map>\n#include <unordered_set>\n#line 19 \"template/alias.hpp\"\
+    \n\nnamespace kyopro {\n  using ll = long long;\n  using ull = unsigned long long;\n\
+    \  using lf = double;\n\n  using i8 = std::int8_t;\n  using u8 = std::uint8_t;\n\
+    \  using i16 = std::int16_t;\n  using u16 = std::uint16_t;\n  using i32 = std::int32_t;\n\
+    \  using u32 = std::uint32_t;\n  using i64 = std::int64_t;\n  using u64 = std::uint64_t;\n\
+    \  using i128 = __int128_t;\n  using u128 = __uint128_t;\n  #ifdef __SIZEOF_FLOAT128__\n\
+    \  using f128 = __float128;\n  #endif\n\n  using mint = ModInt<mod>;\n  using\
+    \ dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\n  template<class _typeT, KYOPRO_BASE_UINT\
+    \ _idx, class... _typeArgs>\n  struct _agg_type {\n    using type = _agg_type<_typeT,\
+    \ _idx - 1, _typeT, _typeArgs...>;\n  };\n  template<class _typeT, class... _typeArgs>\n\
+    \  struct _agg_type<_typeT, 0, _typeArgs...> {\n    using type = std::tuple<_typeArgs...>;\n\
+    \  };\n\n  template<class _typeT, KYOPRO_BASE_UINT _idx>\n  using agg = _agg_type<_typeT,\
+    \ _idx>;\n\n  template<class _typeT>\n  using vec = std::vector<_typeT>;\n  template<class\
+    \ _typeT>\n  using vvec = std::vector<vec<_typeT>>;\n  template<class _typeT>\n\
+    \  using vvvec = std::vector<vvec<_typeT>>;\n  template<class _typeT>\n  using\
+    \ vvvvec = std::vector<vvvec<_typeT>>;\n  template<class _typeT>\n  using vvvvvec\
+    \ = std::vector<vvvvec<_typeT>>;\n\n  template<class _typeKey, class _typeCompare\
+    \ = std::less<_typeKey>>\n  using mset = std::unordered_set<_typeKey, _typeCompare>;\n\
+    \  template<class _typeKey, class _typeT, class _typeCompare = std::less<_typeKey>>\n\
+    \  using mmap = std::unordered_map<_typeKey, _typeT, _typeCompare>;\n  template<class\
     \ _typeKey>\n  using hset = std::unordered_set<_typeKey, Hash<_typeKey>>;\n  template<class\
     \ _typeKey, class _typeT>\n  using hmap = std::unordered_map<_typeKey, _typeT,\
-    \ Hash<_typeKey>>;\n  template<class _typeKey>\n  using hmultiset = std::unordered_multiset<_typeKey,\
-    \ Hash<_typeKey>>;\n  template<class _typeKey, class _typeT>\n  using hmultimap\
-    \ = std::unordered_multimap<_typeKey, _typeT, Hash<_typeKey>>;\n  template<class\
+    \ Hash<_typeKey>>;\n  template<class _typeKey>\n  using hmiset = std::unordered_multiset<_typeKey,\
+    \ Hash<_typeKey>>;\n  template<class _typeKey, class _typeT>\n  using hmmap =\
+    \ std::unordered_multimap<_typeKey, _typeT, Hash<_typeKey>>;\n  template<class\
     \ _typeT, class _typeCompare = std::less<_typeT>, class _typeContainer = std::vector<_typeT>>\n\
     \  using priq = std::priority_queue<_typeT, _typeContainer, _typeCompare>;\n \
     \ template<class _typeT, class _typeCompare = std::greater<_typeT>, class _typeContainer\
     \ = std::vector<_typeT>>\n  using heapq = priq<_typeT, _typeCompare, _typeContainer>;\n\
-    }\n\nusing namespace std;\nusing namespace kyopro;\n\ntemplate<class _typeT, class\
-    \ _typeU, std::enable_if_t<!std::is_same_v<_typeT, _typeU>>* = nullptr>\nconstexpr\
-    \ std::common_type_t<_typeT, _typeU> min(const _typeT& a, const _typeU& b) noexcept\
-    \ {\n  return a < b ? a : b;\n}\n\ntemplate<class _typeT, class _typeU, std::enable_if_t<!std::is_same_v<_typeT,\
-    \ _typeU>>* = nullptr>\nconstexpr std::common_type_t<_typeT, _typeU> max(const\
-    \ _typeT& a, const _typeU& b) noexcept {\n  return a > b ? a : b;\n}\n#line 2\
-    \ \"template/amin_amax.hpp\"\n\nnamespace kyopro {\n  template<class _typeT, class\
-    \ _typeU>\n  constexpr bool amin(_typeT& a, _typeU&& b) noexcept {\n    if (b\
-    \ < a) {\n      a = b;\n      return true;\n    }\n    return false;\n  }\n\n\
-    \  template<class _typeT, class _typeU>\n  constexpr bool amax(_typeT& a, _typeU&&\
-    \ b) noexcept {\n    if (a < b) {\n      a = b;\n      return true;\n    }\n \
-    \   return false;\n  }\n}\n#line 4 \"template/constant.hpp\"\n\nnamespace kyopro\
-    \ {\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>,\
-    \ 4> beside{{{1, 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
-    \ -1}, {0, -1}, {1, -1}}};\n}\n#line 4 \"template/len.hpp\"\n\nnamespace kyopro\
-    \ {\n  template<class _typeT>\n  constexpr KYOPRO_BASE_INT len(_typeT&& _a) noexcept\
-    \ {\n    return std::size(_a);\n  }\n}\n#line 5 \"template/macro.hpp\"\n\n#define\
-    \ KYOPRO_OVERLOAD_MACRO(_1, _2, _3, _4, name, ...) name\n#define KYOPRO_REP0()\
+    }\n\nusing namespace std;\nusing namespace kyopro;\n#line 2 \"template/amin_amax.hpp\"\
+    \n\nnamespace kyopro {\n  template<class _typeT, class _typeU>\n  constexpr bool\
+    \ amin(_typeT& a, _typeU&& b) noexcept {\n    if (b < a) {\n      a = b;\n   \
+    \   return true;\n    }\n    return false;\n  }\n\n  template<class _typeT, class\
+    \ _typeU>\n  constexpr bool amax(_typeT& a, _typeU&& b) noexcept {\n    if (a\
+    \ < b) {\n      a = b;\n      return true;\n    }\n    return false;\n  }\n}\n\
+    #line 4 \"template/constant.hpp\"\n\nnamespace kyopro {\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
+    \ KYOPRO_BASE_INT>, 4> beside{{{1, 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr\
+    \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1,\
+    \ 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}}};\n}\n#line 4 \"template/len.hpp\"\
+    \n\nnamespace kyopro {\n  template<class _typeT>\n  constexpr KYOPRO_BASE_INT\
+    \ len(_typeT&& _a) noexcept {\n    return std::size(_a);\n  }\n}\n#line 5 \"template/macro.hpp\"\
+    \n\n#define KYOPRO_OVERLOAD_MACRO(_1, _2, _3, _4, name, ...) name\n#define KYOPRO_REP0()\
     \ for (; ; )\n#define KYOPRO_REP1(i) for (KYOPRO_BASE_INT i = 0; ; ++(i))\n#define\
     \ KYOPRO_REP2(i, last) for (KYOPRO_BASE_INT i = 0, KYOPRO_LAST_ ## i = (last);\
     \ (i) < (KYOPRO_LAST_ ## i); ++(i))\n#define KYOPRO_REP3(i, first, last) for (KYOPRO_BASE_INT\
@@ -691,7 +700,13 @@ data:
     \  }\n\n  template<class _typeT, KYOPRO_BASE_UINT _idx = 0, KYOPRO_BASE_UINT _n>\n\
     \  auto make_vector(const KYOPRO_BASE_UINT (&_d)[_n], const _typeT& _init = _typeT())\
     \ noexcept {\n    if constexpr (_idx < _n) return std::vector(_d[_idx], make_vector<_idx\
-    \ + 1>(_d, _init));\n    else return _init;\n  }\n}\n#line 9 \"all/all.hpp\"\n"
+    \ + 1>(_d, _init));\n    else return _init;\n  }\n}\n#line 4 \"template/min_max_different_types.hpp\"\
+    \n\nusing std::min, std::max;\n\ntemplate<class _typeT, class _typeU, std::enable_if_t<!std::is_same_v<_typeT,\
+    \ _typeU>>* = nullptr>\nconstexpr std::common_type_t<_typeT, _typeU> min(const\
+    \ _typeT& a, const _typeU& b) noexcept {\n  return a < b ? a : b;\n}\n\ntemplate<class\
+    \ _typeT, class _typeU, std::enable_if_t<!std::is_same_v<_typeT, _typeU>>* = nullptr>\n\
+    constexpr std::common_type_t<_typeT, _typeU> max(const _typeT& a, const _typeU&\
+    \ b) noexcept {\n  return a > b ? a : b;\n}\n#line 9 \"all/all.hpp\"\n"
   code: '#pragma once
 
     #include "../algorithm/all.hpp"
@@ -744,10 +759,11 @@ data:
   - template/macro.hpp
   - template/make_array.hpp
   - template/make_vector.hpp
+  - template/min_max_different_types.hpp
   isVerificationFile: false
   path: all/all.hpp
   requiredBy: []
-  timestamp: '2022-04-17 23:42:01+09:00'
+  timestamp: '2022-04-18 12:13:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp

@@ -45,15 +45,16 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"template/alias.hpp\"\n#include <cstdint>\n#include <limits>\n\
-    #include <functional>\n#include <utility>\n#include <vector>\n#include <string>\n\
-    #include <set>\n#include <type_traits>\n#include <map>\n#include <unordered_set>\n\
+    #include <functional>\n#include <tuple>\n#include <utility>\n#include <vector>\n\
+    #include <string>\n#include <set>\n#include <map>\n#include <unordered_set>\n\
     #include <unordered_map>\n#include <queue>\n#include <stack>\n#line 2 \"algorithm/Hash.hpp\"\
     \n#include <cstddef>\n#line 5 \"algorithm/Hash.hpp\"\n#include <initializer_list>\n\
-    #include <tuple>\n#line 3 \"meta/settings.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n#define\
-    \ KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT\
-    \ std::uint64_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT\
-    \ double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(998244353)\n\
-    #endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
+    #line 7 \"algorithm/Hash.hpp\"\n#include <type_traits>\n#line 3 \"meta/settings.hpp\"\
+    \n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n\
+    #ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef\
+    \ KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n\
+    #define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(998244353)\n#endif\n\n\
+    #ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#line 9 \"meta/trait.hpp\"\
@@ -290,24 +291,31 @@ data:
     \  using u64 = std::uint64_t;\n  using i128 = __int128_t;\n  using u128 = __uint128_t;\n\
     \  #ifdef __SIZEOF_FLOAT128__\n  using f128 = __float128;\n  #endif\n\n  using\
     \ mint = ModInt<mod>;\n  using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\n  template<class\
-    \ _typeKey>\n  using hset = std::unordered_set<_typeKey, Hash<_typeKey>>;\n  template<class\
-    \ _typeKey, class _typeT>\n  using hmap = std::unordered_map<_typeKey, _typeT,\
-    \ Hash<_typeKey>>;\n  template<class _typeKey>\n  using hmultiset = std::unordered_multiset<_typeKey,\
-    \ Hash<_typeKey>>;\n  template<class _typeKey, class _typeT>\n  using hmultimap\
-    \ = std::unordered_multimap<_typeKey, _typeT, Hash<_typeKey>>;\n  template<class\
+    \ _typeT, KYOPRO_BASE_UINT _idx, class... _typeArgs>\n  struct _agg_type {\n \
+    \   using type = _agg_type<_typeT, _idx - 1, _typeT, _typeArgs...>;\n  };\n  template<class\
+    \ _typeT, class... _typeArgs>\n  struct _agg_type<_typeT, 0, _typeArgs...> {\n\
+    \    using type = std::tuple<_typeArgs...>;\n  };\n\n  template<class _typeT,\
+    \ KYOPRO_BASE_UINT _idx>\n  using agg = _agg_type<_typeT, _idx>;\n\n  template<class\
+    \ _typeT>\n  using vec = std::vector<_typeT>;\n  template<class _typeT>\n  using\
+    \ vvec = std::vector<vec<_typeT>>;\n  template<class _typeT>\n  using vvvec =\
+    \ std::vector<vvec<_typeT>>;\n  template<class _typeT>\n  using vvvvec = std::vector<vvvec<_typeT>>;\n\
+    \  template<class _typeT>\n  using vvvvvec = std::vector<vvvvec<_typeT>>;\n\n\
+    \  template<class _typeKey, class _typeCompare = std::less<_typeKey>>\n  using\
+    \ mset = std::unordered_set<_typeKey, _typeCompare>;\n  template<class _typeKey,\
+    \ class _typeT, class _typeCompare = std::less<_typeKey>>\n  using mmap = std::unordered_map<_typeKey,\
+    \ _typeT, _typeCompare>;\n  template<class _typeKey>\n  using hset = std::unordered_set<_typeKey,\
+    \ Hash<_typeKey>>;\n  template<class _typeKey, class _typeT>\n  using hmap = std::unordered_map<_typeKey,\
+    \ _typeT, Hash<_typeKey>>;\n  template<class _typeKey>\n  using hmiset = std::unordered_multiset<_typeKey,\
+    \ Hash<_typeKey>>;\n  template<class _typeKey, class _typeT>\n  using hmmap =\
+    \ std::unordered_multimap<_typeKey, _typeT, Hash<_typeKey>>;\n  template<class\
     \ _typeT, class _typeCompare = std::less<_typeT>, class _typeContainer = std::vector<_typeT>>\n\
     \  using priq = std::priority_queue<_typeT, _typeContainer, _typeCompare>;\n \
     \ template<class _typeT, class _typeCompare = std::greater<_typeT>, class _typeContainer\
     \ = std::vector<_typeT>>\n  using heapq = priq<_typeT, _typeCompare, _typeContainer>;\n\
-    }\n\nusing namespace std;\nusing namespace kyopro;\n\ntemplate<class _typeT, class\
-    \ _typeU, std::enable_if_t<!std::is_same_v<_typeT, _typeU>>* = nullptr>\nconstexpr\
-    \ std::common_type_t<_typeT, _typeU> min(const _typeT& a, const _typeU& b) noexcept\
-    \ {\n  return a < b ? a : b;\n}\n\ntemplate<class _typeT, class _typeU, std::enable_if_t<!std::is_same_v<_typeT,\
-    \ _typeU>>* = nullptr>\nconstexpr std::common_type_t<_typeT, _typeU> max(const\
-    \ _typeT& a, const _typeU& b) noexcept {\n  return a > b ? a : b;\n}\n"
+    }\n\nusing namespace std;\nusing namespace kyopro;\n"
   code: "#pragma once\n#include <cstdint>\n#include <limits>\n#include <functional>\n\
-    #include <utility>\n#include <vector>\n#include <string>\n#include <set>\n#include\
-    \ <type_traits>\n#include <map>\n#include <unordered_set>\n#include <unordered_map>\n\
+    #include <tuple>\n#include <utility>\n#include <vector>\n#include <string>\n#include\
+    \ <set>\n#include <map>\n#include <unordered_set>\n#include <unordered_map>\n\
     #include <queue>\n#include <stack>\n#include \"../algorithm/Hash.hpp\"\n#include\
     \ \"../math/DynamicModInt.hpp\"\n#include \"../math/ModInt.hpp\"\n#include \"\
     ../meta/settings.hpp\"\n\nnamespace kyopro {\n  using ll = long long;\n  using\
@@ -317,21 +325,28 @@ data:
     \  using u64 = std::uint64_t;\n  using i128 = __int128_t;\n  using u128 = __uint128_t;\n\
     \  #ifdef __SIZEOF_FLOAT128__\n  using f128 = __float128;\n  #endif\n\n  using\
     \ mint = ModInt<mod>;\n  using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\n  template<class\
-    \ _typeKey>\n  using hset = std::unordered_set<_typeKey, Hash<_typeKey>>;\n  template<class\
-    \ _typeKey, class _typeT>\n  using hmap = std::unordered_map<_typeKey, _typeT,\
-    \ Hash<_typeKey>>;\n  template<class _typeKey>\n  using hmultiset = std::unordered_multiset<_typeKey,\
-    \ Hash<_typeKey>>;\n  template<class _typeKey, class _typeT>\n  using hmultimap\
-    \ = std::unordered_multimap<_typeKey, _typeT, Hash<_typeKey>>;\n  template<class\
+    \ _typeT, KYOPRO_BASE_UINT _idx, class... _typeArgs>\n  struct _agg_type {\n \
+    \   using type = _agg_type<_typeT, _idx - 1, _typeT, _typeArgs...>;\n  };\n  template<class\
+    \ _typeT, class... _typeArgs>\n  struct _agg_type<_typeT, 0, _typeArgs...> {\n\
+    \    using type = std::tuple<_typeArgs...>;\n  };\n\n  template<class _typeT,\
+    \ KYOPRO_BASE_UINT _idx>\n  using agg = _agg_type<_typeT, _idx>;\n\n  template<class\
+    \ _typeT>\n  using vec = std::vector<_typeT>;\n  template<class _typeT>\n  using\
+    \ vvec = std::vector<vec<_typeT>>;\n  template<class _typeT>\n  using vvvec =\
+    \ std::vector<vvec<_typeT>>;\n  template<class _typeT>\n  using vvvvec = std::vector<vvvec<_typeT>>;\n\
+    \  template<class _typeT>\n  using vvvvvec = std::vector<vvvvec<_typeT>>;\n\n\
+    \  template<class _typeKey, class _typeCompare = std::less<_typeKey>>\n  using\
+    \ mset = std::unordered_set<_typeKey, _typeCompare>;\n  template<class _typeKey,\
+    \ class _typeT, class _typeCompare = std::less<_typeKey>>\n  using mmap = std::unordered_map<_typeKey,\
+    \ _typeT, _typeCompare>;\n  template<class _typeKey>\n  using hset = std::unordered_set<_typeKey,\
+    \ Hash<_typeKey>>;\n  template<class _typeKey, class _typeT>\n  using hmap = std::unordered_map<_typeKey,\
+    \ _typeT, Hash<_typeKey>>;\n  template<class _typeKey>\n  using hmiset = std::unordered_multiset<_typeKey,\
+    \ Hash<_typeKey>>;\n  template<class _typeKey, class _typeT>\n  using hmmap =\
+    \ std::unordered_multimap<_typeKey, _typeT, Hash<_typeKey>>;\n  template<class\
     \ _typeT, class _typeCompare = std::less<_typeT>, class _typeContainer = std::vector<_typeT>>\n\
     \  using priq = std::priority_queue<_typeT, _typeContainer, _typeCompare>;\n \
     \ template<class _typeT, class _typeCompare = std::greater<_typeT>, class _typeContainer\
     \ = std::vector<_typeT>>\n  using heapq = priq<_typeT, _typeCompare, _typeContainer>;\n\
-    }\n\nusing namespace std;\nusing namespace kyopro;\n\ntemplate<class _typeT, class\
-    \ _typeU, std::enable_if_t<!std::is_same_v<_typeT, _typeU>>* = nullptr>\nconstexpr\
-    \ std::common_type_t<_typeT, _typeU> min(const _typeT& a, const _typeU& b) noexcept\
-    \ {\n  return a < b ? a : b;\n}\n\ntemplate<class _typeT, class _typeU, std::enable_if_t<!std::is_same_v<_typeT,\
-    \ _typeU>>* = nullptr>\nconstexpr std::common_type_t<_typeT, _typeU> max(const\
-    \ _typeT& a, const _typeU& b) noexcept {\n  return a > b ? a : b;\n}"
+    }\n\nusing namespace std;\nusing namespace kyopro;"
   dependsOn:
   - algorithm/Hash.hpp
   - meta/settings.hpp
@@ -348,7 +363,7 @@ data:
   requiredBy:
   - template/all.hpp
   - all/all.hpp
-  timestamp: '2022-04-15 22:05:16+09:00'
+  timestamp: '2022-04-18 12:13:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/alias.hpp

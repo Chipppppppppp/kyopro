@@ -128,6 +128,9 @@ data:
     - icon: ':warning:'
       path: template/make_vector.hpp
       title: template/make_vector.hpp
+    - icon: ':warning:'
+      path: template/min_max_different_types.hpp
+      title: template/min_max_different_types.hpp
   verificationCategories:
   - name: aoj
     pages:
