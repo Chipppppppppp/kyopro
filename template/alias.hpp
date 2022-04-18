@@ -41,7 +41,7 @@ namespace kyopro {
 
   template<class _typeT, KYOPRO_BASE_UINT _idx, class... _typeArgs>
   struct _agg_type {
-    using type = _agg_type<_typeT, _idx - 1, _typeT, _typeArgs...>;
+    using type = _agg_type<_typeT, _idx - 1, _typeT, _typeArgs...>::type;
   };
   template<class _typeT, class... _typeArgs>
   struct _agg_type<_typeT, 0, _typeArgs...> {
@@ -49,7 +49,7 @@ namespace kyopro {
   };
 
   template<class _typeT, KYOPRO_BASE_UINT _idx>
-  using agg = _agg_type<_typeT, _idx>;
+  using agg = _agg_type<_typeT, _idx>::type;
 
   template<class _typeT>
   using vec = std::vector<_typeT>;
