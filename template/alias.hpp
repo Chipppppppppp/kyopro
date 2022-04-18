@@ -2,11 +2,11 @@
 #include <cstdint>
 #include <limits>
 #include <functional>
+#include <tuple>
 #include <utility>
 #include <vector>
 #include <string>
 #include <set>
-#include <type_traits>
 #include <map>
 #include <unordered_set>
 #include <unordered_map>
@@ -39,14 +39,41 @@ namespace kyopro {
   using mint = ModInt<mod>;
   using dmint = DynamicModInt<KYOPRO_BASE_UINT>;
 
+  template<class _typeT, KYOPRO_BASE_UINT _idx, class... _typeArgs>
+  struct _agg_type {
+    using type = _agg_type<_typeT, _idx - 1, _typeT, _typeArgs...>;
+  };
+  template<class _typeT, class... _typeArgs>
+  struct _agg_type<_typeT, 0, _typeArgs...> {
+    using type = std::tuple<_typeArgs...>;
+  };
+
+  template<class _typeT, KYOPRO_BASE_UINT _idx>
+  using agg = _agg_type<_typeT, _idx>;
+
+  template<class _typeT>
+  using vec = std::vector<_typeT>;
+  template<class _typeT>
+  using vvec = std::vector<vec<_typeT>>;
+  template<class _typeT>
+  using vvvec = std::vector<vvec<_typeT>>;
+  template<class _typeT>
+  using vvvvec = std::vector<vvvec<_typeT>>;
+  template<class _typeT>
+  using vvvvvec = std::vector<vvvvec<_typeT>>;
+
+  template<class _typeKey, class _typeCompare = std::less<_typeKey>>
+  using mset = std::unordered_set<_typeKey, _typeCompare>;
+  template<class _typeKey, class _typeT, class _typeCompare = std::less<_typeKey>>
+  using mmap = std::unordered_map<_typeKey, _typeT, _typeCompare>;
   template<class _typeKey>
   using hset = std::unordered_set<_typeKey, Hash<_typeKey>>;
   template<class _typeKey, class _typeT>
   using hmap = std::unordered_map<_typeKey, _typeT, Hash<_typeKey>>;
   template<class _typeKey>
-  using hmultiset = std::unordered_multiset<_typeKey, Hash<_typeKey>>;
+  using hmiset = std::unordered_multiset<_typeKey, Hash<_typeKey>>;
   template<class _typeKey, class _typeT>
-  using hmultimap = std::unordered_multimap<_typeKey, _typeT, Hash<_typeKey>>;
+  using hmmap = std::unordered_multimap<_typeKey, _typeT, Hash<_typeKey>>;
   template<class _typeT, class _typeCompare = std::less<_typeT>, class _typeContainer = std::vector<_typeT>>
   using priq = std::priority_queue<_typeT, _typeContainer, _typeCompare>;
   template<class _typeT, class _typeCompare = std::greater<_typeT>, class _typeContainer = std::vector<_typeT>>
@@ -55,13 +82,3 @@ namespace kyopro {
 
 using namespace std;
 using namespace kyopro;
-
-template<class _typeT, class _typeU, std::enable_if_t<!std::is_same_v<_typeT, _typeU>>* = nullptr>
-constexpr std::common_type_t<_typeT, _typeU> min(const _typeT& a, const _typeU& b) noexcept {
-  return a < b ? a : b;
-}
-
-template<class _typeT, class _typeU, std::enable_if_t<!std::is_same_v<_typeT, _typeU>>* = nullptr>
-constexpr std::common_type_t<_typeT, _typeU> max(const _typeT& a, const _typeU& b) noexcept {
-  return a > b ? a : b;
-}
