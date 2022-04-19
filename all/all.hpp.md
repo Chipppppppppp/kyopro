@@ -630,7 +630,7 @@ data:
     \  using i128 = __int128_t;\n  using u128 = __uint128_t;\n  #ifdef __SIZEOF_FLOAT128__\n\
     \  using f128 = __float128;\n  #endif\n\n  using mint = ModInt<mod>;\n  using\
     \ dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\n  template<class _typeT, KYOPRO_BASE_UINT\
-    \ _idx, class... _typeArgs>\n  struct _agg_type {\n    using type = _agg_type<_typeT,\
+    \ _idx, class... _typeArgs>\n  struct _agg_type {\n    using type = typename _agg_type<_typeT,\
     \ _idx - 1, _typeT, _typeArgs...>::type;\n  };\n  template<class _typeT, class...\
     \ _typeArgs>\n  struct _agg_type<_typeT, 0, _typeArgs...> {\n    using type =\
     \ std::tuple<_typeArgs...>;\n  };\n  template<class _typeT>\n  struct _agg_type<_typeT,\
@@ -765,7 +765,7 @@ data:
   isVerificationFile: false
   path: all/all.hpp
   requiredBy: []
-  timestamp: '2022-04-19 15:32:14+09:00'
+  timestamp: '2022-04-19 15:37:20+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp
