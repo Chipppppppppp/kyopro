@@ -47,9 +47,13 @@ namespace kyopro {
   struct _agg_type<_typeT, 0, _typeArgs...> {
     using type = std::tuple<_typeArgs...>;
   };
+  template<class _typeT>
+  struct _agg_type<_typeT, 0, _typeT, _typeT> {
+    using type = std::pair<_typeT, _typeT>;
+  };
 
   template<class _typeT, KYOPRO_BASE_UINT _idx>
-  using agg = _agg_type<_typeT, _idx>::type;
+  using agg = typename _agg_type<_typeT, _idx>::type;
 
   template<class _typeT>
   using vec = std::vector<_typeT>;
