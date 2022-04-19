@@ -294,16 +294,18 @@ data:
     \ _typeT, KYOPRO_BASE_UINT _idx, class... _typeArgs>\n  struct _agg_type {\n \
     \   using type = _agg_type<_typeT, _idx - 1, _typeT, _typeArgs...>::type;\n  };\n\
     \  template<class _typeT, class... _typeArgs>\n  struct _agg_type<_typeT, 0, _typeArgs...>\
-    \ {\n    using type = std::tuple<_typeArgs...>;\n  };\n\n  template<class _typeT,\
-    \ KYOPRO_BASE_UINT _idx>\n  using agg = _agg_type<_typeT, _idx>::type;\n\n  template<class\
-    \ _typeT>\n  using vec = std::vector<_typeT>;\n  template<class _typeT>\n  using\
-    \ vvec = std::vector<vec<_typeT>>;\n  template<class _typeT>\n  using vvvec =\
-    \ std::vector<vvec<_typeT>>;\n  template<class _typeT>\n  using vvvvec = std::vector<vvvec<_typeT>>;\n\
-    \  template<class _typeT>\n  using vvvvvec = std::vector<vvvvec<_typeT>>;\n\n\
-    \  template<class _typeKey, class _typeCompare = std::less<_typeKey>>\n  using\
-    \ mset = std::unordered_set<_typeKey, _typeCompare>;\n  template<class _typeKey,\
-    \ class _typeT, class _typeCompare = std::less<_typeKey>>\n  using mmap = std::unordered_map<_typeKey,\
-    \ _typeT, _typeCompare>;\n  template<class _typeKey>\n  using hset = std::unordered_set<_typeKey,\
+    \ {\n    using type = std::tuple<_typeArgs...>;\n  };\n  template<class _typeT>\n\
+    \  struct _agg_type<_typeT, 0, _typeT, _typeT> {\n    using type = std::pair<_typeT,\
+    \ _typeT>;\n  };\n\n  template<class _typeT, KYOPRO_BASE_UINT _idx>\n  using agg\
+    \ = typename _agg_type<_typeT, _idx>::type;\n\n  template<class _typeT>\n  using\
+    \ vec = std::vector<_typeT>;\n  template<class _typeT>\n  using vvec = std::vector<vec<_typeT>>;\n\
+    \  template<class _typeT>\n  using vvvec = std::vector<vvec<_typeT>>;\n  template<class\
+    \ _typeT>\n  using vvvvec = std::vector<vvvec<_typeT>>;\n  template<class _typeT>\n\
+    \  using vvvvvec = std::vector<vvvvec<_typeT>>;\n\n  template<class _typeKey,\
+    \ class _typeCompare = std::less<_typeKey>>\n  using mset = std::unordered_set<_typeKey,\
+    \ _typeCompare>;\n  template<class _typeKey, class _typeT, class _typeCompare\
+    \ = std::less<_typeKey>>\n  using mmap = std::unordered_map<_typeKey, _typeT,\
+    \ _typeCompare>;\n  template<class _typeKey>\n  using hset = std::unordered_set<_typeKey,\
     \ Hash<_typeKey>>;\n  template<class _typeKey, class _typeT>\n  using hmap = std::unordered_map<_typeKey,\
     \ _typeT, Hash<_typeKey>>;\n  template<class _typeKey>\n  using hmiset = std::unordered_multiset<_typeKey,\
     \ Hash<_typeKey>>;\n  template<class _typeKey, class _typeT>\n  using hmmap =\
@@ -328,16 +330,18 @@ data:
     \ _typeT, KYOPRO_BASE_UINT _idx, class... _typeArgs>\n  struct _agg_type {\n \
     \   using type = _agg_type<_typeT, _idx - 1, _typeT, _typeArgs...>::type;\n  };\n\
     \  template<class _typeT, class... _typeArgs>\n  struct _agg_type<_typeT, 0, _typeArgs...>\
-    \ {\n    using type = std::tuple<_typeArgs...>;\n  };\n\n  template<class _typeT,\
-    \ KYOPRO_BASE_UINT _idx>\n  using agg = _agg_type<_typeT, _idx>::type;\n\n  template<class\
-    \ _typeT>\n  using vec = std::vector<_typeT>;\n  template<class _typeT>\n  using\
-    \ vvec = std::vector<vec<_typeT>>;\n  template<class _typeT>\n  using vvvec =\
-    \ std::vector<vvec<_typeT>>;\n  template<class _typeT>\n  using vvvvec = std::vector<vvvec<_typeT>>;\n\
-    \  template<class _typeT>\n  using vvvvvec = std::vector<vvvvec<_typeT>>;\n\n\
-    \  template<class _typeKey, class _typeCompare = std::less<_typeKey>>\n  using\
-    \ mset = std::unordered_set<_typeKey, _typeCompare>;\n  template<class _typeKey,\
-    \ class _typeT, class _typeCompare = std::less<_typeKey>>\n  using mmap = std::unordered_map<_typeKey,\
-    \ _typeT, _typeCompare>;\n  template<class _typeKey>\n  using hset = std::unordered_set<_typeKey,\
+    \ {\n    using type = std::tuple<_typeArgs...>;\n  };\n  template<class _typeT>\n\
+    \  struct _agg_type<_typeT, 0, _typeT, _typeT> {\n    using type = std::pair<_typeT,\
+    \ _typeT>;\n  };\n\n  template<class _typeT, KYOPRO_BASE_UINT _idx>\n  using agg\
+    \ = typename _agg_type<_typeT, _idx>::type;\n\n  template<class _typeT>\n  using\
+    \ vec = std::vector<_typeT>;\n  template<class _typeT>\n  using vvec = std::vector<vec<_typeT>>;\n\
+    \  template<class _typeT>\n  using vvvec = std::vector<vvec<_typeT>>;\n  template<class\
+    \ _typeT>\n  using vvvvec = std::vector<vvvec<_typeT>>;\n  template<class _typeT>\n\
+    \  using vvvvvec = std::vector<vvvvec<_typeT>>;\n\n  template<class _typeKey,\
+    \ class _typeCompare = std::less<_typeKey>>\n  using mset = std::unordered_set<_typeKey,\
+    \ _typeCompare>;\n  template<class _typeKey, class _typeT, class _typeCompare\
+    \ = std::less<_typeKey>>\n  using mmap = std::unordered_map<_typeKey, _typeT,\
+    \ _typeCompare>;\n  template<class _typeKey>\n  using hset = std::unordered_set<_typeKey,\
     \ Hash<_typeKey>>;\n  template<class _typeKey, class _typeT>\n  using hmap = std::unordered_map<_typeKey,\
     \ _typeT, Hash<_typeKey>>;\n  template<class _typeKey>\n  using hmiset = std::unordered_multiset<_typeKey,\
     \ Hash<_typeKey>>;\n  template<class _typeKey, class _typeT>\n  using hmmap =\
@@ -363,7 +367,7 @@ data:
   requiredBy:
   - template/all.hpp
   - all/all.hpp
-  timestamp: '2022-04-18 13:54:44+09:00'
+  timestamp: '2022-04-19 15:32:14+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/alias.hpp
