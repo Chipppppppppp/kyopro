@@ -20,11 +20,6 @@ data:
     - icon: ':warning:'
       path: all/all.hpp
       title: all/all.hpp
-  - name: .
-    pages:
-    - icon: ':warning:'
-      path: formatter.py
-      title: formatter.py
   - name: function
     pages:
     - icon: ':warning:'
