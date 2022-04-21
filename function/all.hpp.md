@@ -4,16 +4,16 @@ data:
   - icon: ':warning:'
     path: function/RecursiveLambda.hpp
     title: function/RecursiveLambda.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
@@ -36,43 +36,40 @@ data:
     #define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n#endif\n\n\
     #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n\
-    \  constexpr _typeT power(_typeT _a, KYOPRO_BASE_UINT _n, _typeT _init = 1) noexcept\
-    \ {\n    while (_n > 0) {\n      if (_n & 1) _init *= _a;\n      _a *= _a;\n \
-    \     _n >>= 1;\n    }\n    return _init;\n  }\n}\n#line 7 \"meta/constant.hpp\"\
-    \n\nnamespace kyopro {\n  template<class _typeT>\n  inline constexpr _typeT MOD\
-    \ = KYOPRO_DEFAULT_MOD;\n  inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\
-    \n  template<class _typeT>\n  inline constexpr _typeT INF = std::numeric_limits<_typeT>::max()\
-    \ / KYOPRO_INF_DIV;\n  inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\
-    \n  template<class _typeT, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
-    \  inline constexpr KYOPRO_BASE_FLOAT EPS = static_cast<_typeT>(1) / power(10ULL,\
-    \ _decimal_precision);\n  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\
-    \n  template<class _typeT>\n  inline constexpr _typeT PI = 3.14159265358979323846;\n\
-    \  inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n}\n#line 4\
-    \ \"function/monoid.hpp\"\n\nnamespace kyopro {\n  template<class _typeT, _typeT\
-    \ _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
-    \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
-    \ _a, _typeT _b) const noexcept { return _a + _b; }\n    constexpr _typeT inv(_typeT\
-    \ _a) const noexcept { return -_a; }\n  };\n  template<class _typeT, _typeT _id\
-    \ = 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<_typeT>);\n   \
-    \ static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a,\
-    \ _typeT _b) const noexcept { return _a * _b; }\n    constexpr _typeT inv(_typeT\
-    \ _a) const noexcept {\n      static_assert(!std::is_integral_v<_typeT>);\n  \
-    \    return 1 / _a;\n    }\n  };\n  template<class _typeT, _typeT _id = std::is_integral_v<_typeT>\
-    \ ? -INF<_typeT> : -inf>\n  struct Max {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
-    \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
-    \ _a, _typeT _b) const noexcept { return _a > _b ? _a : _b; }\n  };\n  template<class\
-    \ _typeT, _typeT _id = std::is_integral_v<_typeT> ? INF<_typeT> : inf>\n  struct\
-    \ Min {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static constexpr\
-    \ _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT _b) const\
-    \ noexcept { return _a < _b ? _a : _b; }\n  };\n}\n#line 4 \"function/RecursiveLambda.hpp\"\
-    \n\nnamespace kyopro {\n  template<class _typeF>\n  struct RecursiveLambda {\n\
-    \  private:\n    _typeF _func;\n\n  public:\n    template<class _typeG>\n    constexpr\
-    \ RecursiveLambda(_typeG&& _func) noexcept: _func(std::forward<_typeG>(_func))\
-    \ {}\n    template<class... _typeArgs>\n    constexpr decltype(auto) operator\
-    \ ()(_typeArgs&&... _args) const noexcept { return _func(*this, std::forward<_typeArgs>(_args)...);\
-    \ }\n  };\n\n  template<class _typeF>\n  RecursiveLambda(_typeF&&) -> RecursiveLambda<std::decay_t<_typeF>>;\n\
-    }\n#line 4 \"function/all.hpp\"\n"
+    #endif\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class T>\n\
+    \  constexpr T power(T a, KYOPRO_BASE_UINT n, T init = 1) noexcept {\n    while\
+    \ (n > 0) {\n      if (n & 1) init *= a;\n      a *= a;\n      n >>= 1;\n    }\n\
+    \    return init;\n  }\n}\n#line 7 \"meta/constant.hpp\"\n\nnamespace kyopro {\n\
+    \  template<class T>\n  inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\n  inline\
+    \ constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\n  template<class T>\n\
+    \  inline constexpr T INF = std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\n\
+    \  inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\n  template<class\
+    \ T, KYOPRO_BASE_UINT decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  inline\
+    \ constexpr KYOPRO_BASE_FLOAT EPS = static_cast<T>(1) / power(10ULL, decimal_precision);\n\
+    \  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\n  template<class\
+    \ T>\n  inline constexpr T PI = 3.14159265358979323846;\n  inline constexpr KYOPRO_BASE_FLOAT\
+    \ pi = PI<KYOPRO_BASE_FLOAT>;\n}\n#line 4 \"function/monoid.hpp\"\n\nnamespace\
+    \ kyopro {\n  template<class T, T _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<T>);\n\
+    \    static constexpr T id = _id;\n    constexpr T operator ()(T a, T b) const\
+    \ noexcept { return a + b; }\n    constexpr T inv(T a) const noexcept { return\
+    \ -a; }\n  };\n\n  template<class T, T _id = 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<T>);\n\
+    \    static constexpr T id = _id;\n    constexpr T operator ()(T a, T b) const\
+    \ noexcept { return a * b; }\n    constexpr T inv(T a) const noexcept {\n    \
+    \  static_assert(!std::is_integral_v<T>);\n      return 1 / a;\n    }\n  };\n\n\
+    \  template<class T, T _id = std::is_integral_v<T> ? -INF<T> : -inf>\n  struct\
+    \ Max {\n    static_assert(std::is_arithmetic_v<T>);\n    static constexpr T id\
+    \ = _id;\n    constexpr T operator ()(T a, T b) const noexcept { return a > b\
+    \ ? a : b; }\n  };\n\n  template<class T, T _id = std::is_integral_v<T> ? INF<T>\
+    \ : inf>\n  struct Min {\n    static_assert(std::is_arithmetic_v<T>);\n    static\
+    \ constexpr T id = _id;\n    constexpr T operator ()(T a, T b) const noexcept\
+    \ { return a < b ? a : b; }\n  };\n}\n#line 4 \"function/RecursiveLambda.hpp\"\
+    \n\nnamespace kyopro {\n  template<class F>\n  struct RecursiveLambda {\n  private:\n\
+    \    F func;\n\n  public:\n    template<class G>\n    constexpr RecursiveLambda(G&&\
+    \ func) noexcept: func(std::forward<G>(func)) {}\n    template<class... Args>\n\
+    \    constexpr decltype(auto) operator ()(Args&&... args) const noexcept { return\
+    \ func(*this, std::forward<Args>(args)...); }\n  };\n\n  template<class F>\n \
+    \ RecursiveLambda(F&&) -> RecursiveLambda<std::decay_t<F>>;\n}\n#line 4 \"function/all.hpp\"\
+    \n"
   code: '#pragma once
 
     #include "monoid.hpp"
@@ -88,7 +85,7 @@ data:
   path: function/all.hpp
   requiredBy:
   - all/all.hpp
-  timestamp: '2022-04-17 11:59:19+09:00'
+  timestamp: '2022-04-21 22:07:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: function/all.hpp

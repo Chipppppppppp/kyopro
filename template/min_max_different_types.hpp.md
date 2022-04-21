@@ -15,19 +15,16 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"template/min_max_different_types.hpp\"\n#include <algorithm>\n\
-    #include <type_traits>\n\nusing std::min, std::max;\n\ntemplate<class _typeT,\
-    \ class _typeU, std::enable_if_t<!std::is_same_v<_typeT, _typeU>>* = nullptr>\n\
-    constexpr std::common_type_t<_typeT, _typeU> min(const _typeT& a, const _typeU&\
-    \ b) noexcept {\n  return a < b ? a : b;\n}\n\ntemplate<class _typeT, class _typeU,\
-    \ std::enable_if_t<!std::is_same_v<_typeT, _typeU>>* = nullptr>\nconstexpr std::common_type_t<_typeT,\
-    \ _typeU> max(const _typeT& a, const _typeU& b) noexcept {\n  return a > b ? a\
-    \ : b;\n}\n"
+    #include <type_traits>\n\nusing std::min, std::max;\n\ntemplate<class T, class\
+    \ U, std::enable_if_t<!std::is_same_v<T, U>>* = nullptr>\nconstexpr std::common_type_t<T,\
+    \ U> min(const T& a, const U& b) noexcept {\n  return a < b ? a : b;\n}\n\ntemplate<class\
+    \ T, class U, std::enable_if_t<!std::is_same_v<T, U>>* = nullptr>\nconstexpr std::common_type_t<T,\
+    \ U> max(const T& a, const U& b) noexcept {\n  return a > b ? a : b;\n}\n"
   code: "#pragma once\n#include <algorithm>\n#include <type_traits>\n\nusing std::min,\
-    \ std::max;\n\ntemplate<class _typeT, class _typeU, std::enable_if_t<!std::is_same_v<_typeT,\
-    \ _typeU>>* = nullptr>\nconstexpr std::common_type_t<_typeT, _typeU> min(const\
-    \ _typeT& a, const _typeU& b) noexcept {\n  return a < b ? a : b;\n}\n\ntemplate<class\
-    \ _typeT, class _typeU, std::enable_if_t<!std::is_same_v<_typeT, _typeU>>* = nullptr>\n\
-    constexpr std::common_type_t<_typeT, _typeU> max(const _typeT& a, const _typeU&\
+    \ std::max;\n\ntemplate<class T, class U, std::enable_if_t<!std::is_same_v<T,\
+    \ U>>* = nullptr>\nconstexpr std::common_type_t<T, U> min(const T& a, const U&\
+    \ b) noexcept {\n  return a < b ? a : b;\n}\n\ntemplate<class T, class U, std::enable_if_t<!std::is_same_v<T,\
+    \ U>>* = nullptr>\nconstexpr std::common_type_t<T, U> max(const T& a, const U&\
     \ b) noexcept {\n  return a > b ? a : b;\n}"
   dependsOn: []
   isVerificationFile: false
@@ -35,7 +32,7 @@ data:
   requiredBy:
   - template/all.hpp
   - all/all.hpp
-  timestamp: '2022-04-18 12:13:24+09:00'
+  timestamp: '2022-04-21 22:07:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/min_max_different_types.hpp

@@ -15,29 +15,28 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"math/div.hpp\"\n#include <type_traits>\n\nnamespace kyopro\
-    \ {\n  template<class _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT,\
-    \ _typeU> floor_div(_typeT _x, _typeU _m) noexcept {\n    static_assert(std::is_integral_v<_typeT>\
-    \ && std::is_integral_v<_typeU>, \"Integer is required\");\n    if constexpr (std::is_unsigned_v<_typeT>\
-    \ || std::is_unsigned_v<_typeU>) return _x / _m;\n    auto _d = _x / _m;\n   \
-    \ return _d * _m == _x ? _d : _d - ((_x < 0) ^ (_m < 0));\n  }\n\n  template<class\
-    \ _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT, _typeU> ceil_div(_typeT\
-    \ _x, _typeU _m) noexcept { return floor_div(_x + _m - static_cast<_typeT>(1),\
-    \ _m); }\n}\n"
+    \ {\n  template<class T, class U>\n  constexpr std::common_type_t<T, U> floor_div(T\
+    \ x, U m) noexcept {\n    static_assert(std::is_integral_v<T> && std::is_integral_v<U>,\
+    \ \"Integer is required\");\n    if constexpr (std::is_unsigned_v<T> || std::is_unsigned_v<U>)\
+    \ return x / m;\n    auto d = x / m;\n    return d * m == x ? d : d - ((x < 0)\
+    \ ^ (m < 0));\n  }\n\n  template<class T, class U>\n  constexpr std::common_type_t<T,\
+    \ U> ceil_div(T x, U m) noexcept { return floor_div(x + m - static_cast<T>(1),\
+    \ m); }\n}\n"
   code: "#pragma once\n#include <type_traits>\n\nnamespace kyopro {\n  template<class\
-    \ _typeT, class _typeU>\n  constexpr std::common_type_t<_typeT, _typeU> floor_div(_typeT\
-    \ _x, _typeU _m) noexcept {\n    static_assert(std::is_integral_v<_typeT> && std::is_integral_v<_typeU>,\
-    \ \"Integer is required\");\n    if constexpr (std::is_unsigned_v<_typeT> || std::is_unsigned_v<_typeU>)\
-    \ return _x / _m;\n    auto _d = _x / _m;\n    return _d * _m == _x ? _d : _d\
-    \ - ((_x < 0) ^ (_m < 0));\n  }\n\n  template<class _typeT, class _typeU>\n  constexpr\
-    \ std::common_type_t<_typeT, _typeU> ceil_div(_typeT _x, _typeU _m) noexcept {\
-    \ return floor_div(_x + _m - static_cast<_typeT>(1), _m); }\n}\n"
+    \ T, class U>\n  constexpr std::common_type_t<T, U> floor_div(T x, U m) noexcept\
+    \ {\n    static_assert(std::is_integral_v<T> && std::is_integral_v<U>, \"Integer\
+    \ is required\");\n    if constexpr (std::is_unsigned_v<T> || std::is_unsigned_v<U>)\
+    \ return x / m;\n    auto d = x / m;\n    return d * m == x ? d : d - ((x < 0)\
+    \ ^ (m < 0));\n  }\n\n  template<class T, class U>\n  constexpr std::common_type_t<T,\
+    \ U> ceil_div(T x, U m) noexcept { return floor_div(x + m - static_cast<T>(1),\
+    \ m); }\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: math/div.hpp
   requiredBy:
   - math/all.hpp
   - all/all.hpp
-  timestamp: '2022-03-19 12:10:55+09:00'
+  timestamp: '2022-04-21 22:07:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/div.hpp

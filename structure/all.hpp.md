@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   _extendedRequiredBy:
@@ -39,84 +39,77 @@ data:
     \ KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class _typeT>\n\
-    \  constexpr _typeT power(_typeT _a, KYOPRO_BASE_UINT _n, _typeT _init = 1) noexcept\
-    \ {\n    while (_n > 0) {\n      if (_n & 1) _init *= _a;\n      _a *= _a;\n \
-    \     _n >>= 1;\n    }\n    return _init;\n  }\n}\n#line 7 \"meta/constant.hpp\"\
-    \n\nnamespace kyopro {\n  template<class _typeT>\n  inline constexpr _typeT MOD\
-    \ = KYOPRO_DEFAULT_MOD;\n  inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\
-    \n  template<class _typeT>\n  inline constexpr _typeT INF = std::numeric_limits<_typeT>::max()\
-    \ / KYOPRO_INF_DIV;\n  inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\
-    \n  template<class _typeT, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
-    \  inline constexpr KYOPRO_BASE_FLOAT EPS = static_cast<_typeT>(1) / power(10ULL,\
-    \ _decimal_precision);\n  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\
-    \n  template<class _typeT>\n  inline constexpr _typeT PI = 3.14159265358979323846;\n\
-    \  inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n}\n#line 4\
-    \ \"function/monoid.hpp\"\n\nnamespace kyopro {\n  template<class _typeT, _typeT\
-    \ _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
-    \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
-    \ _a, _typeT _b) const noexcept { return _a + _b; }\n    constexpr _typeT inv(_typeT\
-    \ _a) const noexcept { return -_a; }\n  };\n  template<class _typeT, _typeT _id\
-    \ = 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<_typeT>);\n   \
-    \ static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a,\
-    \ _typeT _b) const noexcept { return _a * _b; }\n    constexpr _typeT inv(_typeT\
-    \ _a) const noexcept {\n      static_assert(!std::is_integral_v<_typeT>);\n  \
-    \    return 1 / _a;\n    }\n  };\n  template<class _typeT, _typeT _id = std::is_integral_v<_typeT>\
-    \ ? -INF<_typeT> : -inf>\n  struct Max {\n    static_assert(std::is_arithmetic_v<_typeT>);\n\
-    \    static constexpr _typeT id = _id;\n    constexpr _typeT operator ()(_typeT\
-    \ _a, _typeT _b) const noexcept { return _a > _b ? _a : _b; }\n  };\n  template<class\
-    \ _typeT, _typeT _id = std::is_integral_v<_typeT> ? INF<_typeT> : inf>\n  struct\
-    \ Min {\n    static_assert(std::is_arithmetic_v<_typeT>);\n    static constexpr\
-    \ _typeT id = _id;\n    constexpr _typeT operator ()(_typeT _a, _typeT _b) const\
-    \ noexcept { return _a < _b ? _a : _b; }\n  };\n}\n#line 7 \"structure/FenwickTree.hpp\"\
-    \n\nnamespace kyopro {\n  template<class _typeT, class _typeOp = Plus<_typeT>,\
-    \ class _typeContainer = std::vector<_typeT>>\n  struct FenwickTree {\n  private:\n\
-    \    [[no_unique_address]] _typeOp _op;\n    _typeContainer _tree;\n\n  public:\n\
-    \    using value_type = _typeT;\n    using size_type = KYOPRO_BASE_UINT;\n   \
-    \ using reference = _typeT&;\n    using const_reference = const _typeT&;\n\n \
-    \   FenwickTree() noexcept = default;\n    FenwickTree(KYOPRO_BASE_UINT _n) noexcept:\
-    \ _tree(_n, _op.id) {}\n    template<class _typeC, std::enable_if_t<std::is_same_v<_typeContainer,\
-    \ std::decay_t<_typeC>>>>\n    FenwickTree(_typeC&& _tree): _tree(std::forward<_typeC>(_tree))\
-    \ {}\n\n    KYOPRO_BASE_UINT size() noexcept { return _tree.size(); }\n\n    void\
-    \ apply(int _p, const _typeT& _x) {\n      ++_p;\n      while (_p <= (int)size())\
-    \ {\n        _tree[_p - 1] = _op(_tree[_p - 1], _x);\n        _p += _p & -_p;\n\
-    \      }\n    }\n\n    _typeT prod(int _r) const {\n      _typeT _s = _op.id;\n\
-    \      while (_r > 0) {\n        _s = _op(_s, _tree[_r - 1]);\n        _r -= _r\
-    \ & -_r;\n      }\n      return _s;\n    }\n    _typeT prod(int _l, int _r) const\
-    \ { return _op(prod(_r), _op.inv(prod(_l))); }\n\n    _typeT all_prod() { return\
-    \ prod(_tree.size()); }\n\n    _typeT get(int _p) { return _op(prod(_p + 1), _op.inv(prod(_p)));\
-    \ }\n\n    void set(int _p, const _typeT& _x) { apply(_p, _op(_x, _op.inv(get(_p))));\
-    \ }\n  };\n}\n#line 2 \"structure/UnionFind.hpp\"\n#include <algorithm>\n#line\
-    \ 4 \"structure/UnionFind.hpp\"\n#include <unordered_map>\n#line 8 \"structure/UnionFind.hpp\"\
-    \n\nnamespace kyopro {\n  template<class _typeContainer = std::vector<int>>\n\
-    \  struct UnionFind {\n  private:\n    _typeContainer _par;\n\n  public:\n   \
-    \ UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT _n) noexcept:\
-    \ _par(_n, -1) {}\n    template<class _typeC, std::enable_if_t<std::is_same_v<_typeContainer,\
-    \ std::decay_t<_typeC>>>>\n    UnionFind(_typeC&& _par): _par(std::forward<_typeC>(_par))\
-    \ {}\n\n    void resize(KYOPRO_BASE_UINT _x) { _par.resize(_x, -1); }\n    void\
-    \ assign(KYOPRO_BASE_UINT _x) { _par.assign(_x, -1); }\n    void reset() { std::fill(std::begin(_par),\
-    \ std::end(_par), -1); }\n\n    KYOPRO_BASE_UINT size() const noexcept { return\
-    \ _par.size(); }\n\n    KYOPRO_BASE_INT find(int _x) {\n      int _p = _x;\n \
-    \     while (_par[_p] >= 0) _p = _par[_p];\n      while (_x != _p) {\n       \
-    \ int _tmp = _x;\n        _x = _par[_x];\n        _par[_tmp] = _p;\n      }\n\
-    \      return _p;\n    }\n\n    bool merge(int _x, int _y) {\n      _x = find(_x),\
-    \ _y = find(_y);\n      if (_x == _y) return false;\n      if (_par[_x] > _par[_y])\
-    \ {\n        int _tmp = _x;\n        _x = _y;\n        _y = _tmp;\n      }\n \
-    \     _par[_x] += _par[_y];\n      _par[_y] = _x;\n      return true;\n    }\n\
-    \n    bool same(int _x, int _y) { return find(_x) == find(_y); }\n\n    KYOPRO_BASE_INT\
-    \ group_size(int _x) { return -_par[find(_x)]; }\n\n    std::vector<int> group_members(int\
-    \ _x) {\n      _x = find(_x);\n      std::vector<int> _a;\n      for (int _i =\
-    \ 0; _i < (int)(size()); ++_i) if (find(_i) == _x) _a.emplace_back(_i);\n    \
-    \  return _a;\n    }\n\n    template<class _typeVector = std::vector<KYOPRO_BASE_INT>>\n\
-    \    _typeVector roots() const {\n      _typeVector _a;\n      for (int _i = 0;\
-    \ _i < (int)(size()); ++_i) if (_par[_i] < 0) _a.emplace_back(_i);\n      return\
-    \ _a;\n    }\n\n    KYOPRO_BASE_INT group_count() const {\n      KYOPRO_BASE_INT\
-    \ _cnt = 0;\n      for (int _i = 0; _i < (int)(size()); ++_i) if (_par[_i] < 0)\
-    \ ++_cnt;\n      return _cnt;\n    }\n\n    template<class _typeMap = std::unordered_map<KYOPRO_BASE_INT,\
-    \ std::vector<KYOPRO_BASE_INT>>>\n    _typeMap all_group_members() {\n      _typeMap\
-    \ _group_members;\n      for (int _member = 0; _member < (int)(size()); ++_member)\
-    \ _group_members[find(_member)].emplace_back(_member);\n      return _group_members;\n\
-    \    }\n  };\n}\n#line 4 \"structure/all.hpp\"\n"
+    #endif\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class T>\n\
+    \  constexpr T power(T a, KYOPRO_BASE_UINT n, T init = 1) noexcept {\n    while\
+    \ (n > 0) {\n      if (n & 1) init *= a;\n      a *= a;\n      n >>= 1;\n    }\n\
+    \    return init;\n  }\n}\n#line 7 \"meta/constant.hpp\"\n\nnamespace kyopro {\n\
+    \  template<class T>\n  inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\n  inline\
+    \ constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\n  template<class T>\n\
+    \  inline constexpr T INF = std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\n\
+    \  inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\n  template<class\
+    \ T, KYOPRO_BASE_UINT decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  inline\
+    \ constexpr KYOPRO_BASE_FLOAT EPS = static_cast<T>(1) / power(10ULL, decimal_precision);\n\
+    \  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\n  template<class\
+    \ T>\n  inline constexpr T PI = 3.14159265358979323846;\n  inline constexpr KYOPRO_BASE_FLOAT\
+    \ pi = PI<KYOPRO_BASE_FLOAT>;\n}\n#line 4 \"function/monoid.hpp\"\n\nnamespace\
+    \ kyopro {\n  template<class T, T _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<T>);\n\
+    \    static constexpr T id = _id;\n    constexpr T operator ()(T a, T b) const\
+    \ noexcept { return a + b; }\n    constexpr T inv(T a) const noexcept { return\
+    \ -a; }\n  };\n\n  template<class T, T _id = 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<T>);\n\
+    \    static constexpr T id = _id;\n    constexpr T operator ()(T a, T b) const\
+    \ noexcept { return a * b; }\n    constexpr T inv(T a) const noexcept {\n    \
+    \  static_assert(!std::is_integral_v<T>);\n      return 1 / a;\n    }\n  };\n\n\
+    \  template<class T, T _id = std::is_integral_v<T> ? -INF<T> : -inf>\n  struct\
+    \ Max {\n    static_assert(std::is_arithmetic_v<T>);\n    static constexpr T id\
+    \ = _id;\n    constexpr T operator ()(T a, T b) const noexcept { return a > b\
+    \ ? a : b; }\n  };\n\n  template<class T, T _id = std::is_integral_v<T> ? INF<T>\
+    \ : inf>\n  struct Min {\n    static_assert(std::is_arithmetic_v<T>);\n    static\
+    \ constexpr T id = _id;\n    constexpr T operator ()(T a, T b) const noexcept\
+    \ { return a < b ? a : b; }\n  };\n}\n#line 7 \"structure/FenwickTree.hpp\"\n\n\
+    namespace kyopro {\n  template<class T, class Op = Plus<T>, class Container =\
+    \ std::vector<T>>\n  struct FenwickTree {\n  private:\n    [[no_unique_address]]\
+    \ Op op;\n    Container tree;\n\n  public:\n    using value_type = T;\n    using\
+    \ size_type = KYOPRO_BASE_UINT;\n    using reference = T&;\n    using const_reference\
+    \ = const T&;\n\n    FenwickTree() noexcept = default;\n    FenwickTree(KYOPRO_BASE_UINT\
+    \ n) noexcept: tree(n, op.id) {}\n    template<class C, std::enable_if_t<std::is_same_v<Container,\
+    \ std::decay_t<C>>>>\n    FenwickTree(C&& tree): tree(std::forward<C>(tree)) {}\n\
+    \n    KYOPRO_BASE_UINT size() noexcept { return tree.size(); }\n\n    void apply(int\
+    \ p, const T& x) {\n      ++p;\n      while (p <= (int)size()) {\n        tree[p\
+    \ - 1] = op(tree[p - 1], x);\n        p += p & -p;\n      }\n    }\n\n    T prod(int\
+    \ r) const {\n      T s = op.id;\n      while (r > 0) {\n        s = op(s, tree[r\
+    \ - 1]);\n        r -= r & -r;\n      }\n      return s;\n    }\n    T prod(int\
+    \ l, int r) const { return op(prod(r), op.inv(prod(l))); }\n\n    T all_prod()\
+    \ { return prod(tree.size()); }\n\n    T get(int p) { return op(prod(p + 1), op.inv(prod(p)));\
+    \ }\n\n    void set(int p, const T& x) { apply(p, op(x, op.inv(get(p)))); }\n\
+    \  };\n}\n#line 2 \"structure/UnionFind.hpp\"\n#include <algorithm>\n#line 4 \"\
+    structure/UnionFind.hpp\"\n#include <unordered_map>\n#line 8 \"structure/UnionFind.hpp\"\
+    \n\nnamespace kyopro {\n  template<class Container = std::vector<int>>\n  struct\
+    \ UnionFind {\n  private:\n    Container par;\n\n  public:\n    UnionFind() noexcept\
+    \ = default;\n    UnionFind(KYOPRO_BASE_UINT n) noexcept: par(n, -1) {}\n    template<class\
+    \ C, std::enable_if_t<std::is_same_v<Container, std::decay_t<C>>>>\n    UnionFind(C&&\
+    \ par): par(std::forward<C>(par)) {}\n\n    void resize(KYOPRO_BASE_UINT x) {\
+    \ par.resize(x, -1); }\n    void assign(KYOPRO_BASE_UINT x) { par.assign(x, -1);\
+    \ }\n    void reset() { std::fill(std::begin(par), std::end(par), -1); }\n\n \
+    \   KYOPRO_BASE_UINT size() const noexcept { return par.size(); }\n\n    KYOPRO_BASE_INT\
+    \ find(int x) {\n      int p = x;\n      while (par[p] >= 0) p = par[p];\n   \
+    \   while (x != p) {\n        int tmp = x;\n        x = par[x];\n        par[tmp]\
+    \ = p;\n      }\n      return p;\n    }\n\n    bool merge(int x, int y) {\n  \
+    \    x = find(x), y = find(y);\n      if (x == y) return false;\n      if (par[x]\
+    \ > par[y]) {\n        int tmp = x;\n        x = y;\n        y = tmp;\n      }\n\
+    \      par[x] += par[y];\n      par[y] = x;\n      return true;\n    }\n\n   \
+    \ bool same(int x, int y) { return find(x) == find(y); }\n\n    KYOPRO_BASE_INT\
+    \ group_size(int x) { return -par[find(x)]; }\n\n    std::vector<int> group_members(int\
+    \ x) {\n      x = find(x);\n      std::vector<int> a;\n      for (int i = 0; i\
+    \ < (int)(size()); ++i) if (find(i) == x) a.emplace_back(i);\n      return a;\n\
+    \    }\n\n    template<class Vector = std::vector<KYOPRO_BASE_INT>>\n    Vector\
+    \ roots() const {\n      Vector a;\n      for (int i = 0; i < (int)(size()); ++i)\
+    \ if (par[i] < 0) a.emplace_back(i);\n      return a;\n    }\n\n    KYOPRO_BASE_INT\
+    \ group_count() const {\n      KYOPRO_BASE_INT cnt = 0;\n      for (int i = 0;\
+    \ i < (int)(size()); ++i) if (par[i] < 0) ++cnt;\n      return cnt;\n    }\n\n\
+    \    template<class Map = std::unordered_map<KYOPRO_BASE_INT, std::vector<KYOPRO_BASE_INT>>>\n\
+    \    Map all_group_members() {\n      Map group_members;\n      for (int member\
+    \ = 0; member < (int)(size()); ++member) group_members[find(member)].emplace_back(member);\n\
+    \      return group_members;\n    }\n  };\n}\n#line 4 \"structure/all.hpp\"\n"
   code: '#pragma once
 
     #include "FenwickTree.hpp"
@@ -133,7 +126,7 @@ data:
   path: structure/all.hpp
   requiredBy:
   - all/all.hpp
-  timestamp: '2022-04-17 15:18:46+09:00'
+  timestamp: '2022-04-21 22:07:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: structure/all.hpp

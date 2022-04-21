@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
@@ -27,19 +27,18 @@ data:
     #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 5 \"template/make_array.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ _typeT>\n  constexpr auto make_array(const _typeT& _init = _typeT()) noexcept\
-    \ { return _init; }\n\n  template<class _typeT, KYOPRO_BASE_UINT _length, KYOPRO_BASE_UINT...\
-    \ _lengths>\n  constexpr auto make_array(const _typeT& _init = _typeT()) noexcept\
-    \ {\n    auto _elm = make_array<_typeT, _lengths...>(_init);\n    std::array<decltype(_elm),\
-    \ _length> _res;\n    for (auto& _i: _res) _i = _elm;\n    return std::move(_res);\n\
-    \  }\n}\n"
+    \ T>\n  constexpr auto make_array(const T& init = T()) noexcept { return init;\
+    \ }\n\n  template<class T, KYOPRO_BASE_UINT length, KYOPRO_BASE_UINT... lengths>\n\
+    \  constexpr auto make_array(const T& init = T()) noexcept {\n    auto elm = make_array<T,\
+    \ lengths...>(init);\n    std::array<decltype(elm), length> res;\n    for (auto&\
+    \ i: res) i = elm;\n    return std::move(res);\n  }\n}\n"
   code: "#pragma once\n#include <array>\n#include <utility>\n#include \"../meta/settings.hpp\"\
-    \n\nnamespace kyopro {\n  template<class _typeT>\n  constexpr auto make_array(const\
-    \ _typeT& _init = _typeT()) noexcept { return _init; }\n\n  template<class _typeT,\
-    \ KYOPRO_BASE_UINT _length, KYOPRO_BASE_UINT... _lengths>\n  constexpr auto make_array(const\
-    \ _typeT& _init = _typeT()) noexcept {\n    auto _elm = make_array<_typeT, _lengths...>(_init);\n\
-    \    std::array<decltype(_elm), _length> _res;\n    for (auto& _i: _res) _i =\
-    \ _elm;\n    return std::move(_res);\n  }\n}"
+    \n\nnamespace kyopro {\n  template<class T>\n  constexpr auto make_array(const\
+    \ T& init = T()) noexcept { return init; }\n\n  template<class T, KYOPRO_BASE_UINT\
+    \ length, KYOPRO_BASE_UINT... lengths>\n  constexpr auto make_array(const T& init\
+    \ = T()) noexcept {\n    auto elm = make_array<T, lengths...>(init);\n    std::array<decltype(elm),\
+    \ length> res;\n    for (auto& i: res) i = elm;\n    return std::move(res);\n\
+    \  }\n}"
   dependsOn:
   - meta/settings.hpp
   isVerificationFile: false
@@ -47,7 +46,7 @@ data:
   requiredBy:
   - template/all.hpp
   - all/all.hpp
-  timestamp: '2022-04-17 23:28:33+09:00'
+  timestamp: '2022-04-21 22:07:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/make_array.hpp

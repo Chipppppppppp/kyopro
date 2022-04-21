@@ -3,13 +3,13 @@ data:
   libraryCategories:
   - name: algorithm
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: algorithm/Hash.hpp
       title: algorithm/Hash.hpp
     - icon: ':warning:'
       path: algorithm/all.hpp
       title: algorithm/all.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: algorithm/bit.hpp
       title: algorithm/bit.hpp
     - icon: ':warning:'
@@ -20,6 +20,11 @@ data:
     - icon: ':warning:'
       path: all/all.hpp
       title: all/all.hpp
+  - name: .
+    pages:
+    - icon: ':warning:'
+      path: formatter.py
+      title: formatter.py
   - name: function
     pages:
     - icon: ':warning:'
@@ -28,18 +33,18 @@ data:
     - icon: ':warning:'
       path: function/all.hpp
       title: function/all.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: function/monoid.hpp
       title: function/monoid.hpp
   - name: math
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: math/DynamicModInt.hpp
       title: math/DynamicModInt.hpp
     - icon: ':warning:'
       path: math/ModInt.hpp
       title: math/ModInt.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: math/Montgomery.hpp
       title: math/Montgomery.hpp
     - icon: ':warning:'
@@ -54,16 +59,16 @@ data:
     - icon: ':warning:'
       path: math/euler_phi.hpp
       title: math/euler_phi.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: math/factorize.hpp
       title: math/factorize.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: math/is_prime.hpp
       title: math/is_prime.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: math/mod.hpp
       title: math/mod.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: math/power.hpp
       title: math/power.hpp
   - name: meta
@@ -71,21 +76,21 @@ data:
     - icon: ':warning:'
       path: meta/all.hpp
       title: meta/all.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: meta/constant.hpp
       title: meta/constant.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: meta/settings.hpp
       title: meta/settings.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: meta/trait.hpp
       title: meta/trait.hpp
   - name: structure
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: structure/FenwickTree.hpp
       title: structure/FenwickTree.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: structure/UnionFind.hpp
       title: structure/UnionFind.hpp
     - icon: ':warning:'
@@ -93,13 +98,13 @@ data:
       title: structure/all.hpp
   - name: system
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: system/all.hpp
       title: system/all.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: system/in.hpp
       title: system/in.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: system/out.hpp
       title: system/out.hpp
   - name: template
@@ -134,21 +139,21 @@ data:
   verificationCategories:
   - name: aoj
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: aoj/PrimeNumber.test.cpp
       title: aoj/PrimeNumber.test.cpp
   - name: yosupo
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: yosupo/UnionFind.test.cpp
       title: yosupo/UnionFind.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: yosupo/factorize.test.cpp
       title: yosupo/factorize.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: yosupo/many_aplusb.test.cpp
       title: yosupo/many_aplusb.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: yosupo/point_add_range_sum.test.cpp
       title: yosupo/point_add_range_sum.test.cpp
 layout: toppage
