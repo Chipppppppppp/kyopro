@@ -3,21 +3,21 @@
 #include "../meta/settings.hpp"
 
 namespace kyopro {
-  constexpr KYOPRO_BASE_UINT euler_phi(KYOPRO_BASE_UINT _n) noexcept {
-    std::uint_fast64_t _res = _n;
-    if ((_n & 1) == 0) {
-      _res -= _res >> 1;
-      _n >>= 1;
-      while ((_n & 1) == 0) _n >>= 1;
+  constexpr KYOPRO_BASE_UINT euler_phi(KYOPRO_BASE_UINT n) noexcept {
+    std::uint_fast64_t res = n;
+    if ((n & 1) == 0) {
+      res -= res >> 1;
+      n >>= 1;
+      while ((n & 1) == 0) n >>= 1;
     }
-    for (std::uint_fast64_t _i = 3; _i * _i <= _n; _i += 2) {
-      if (_n % _i == 0) {
-        _res -= _res / _i;
-        _n /= _i;
-        while (_n % _i == 0) _n /= _i;
+    for (std::uint_fast64_t i = 3; i * i <= n; i += 2) {
+      if (n % i == 0) {
+        res -= res / i;
+        n /= i;
+        while (n % i == 0) n /= i;
       }
     }
-    if (_n != 1) _res -= _res / _n;
-    return _res;
+    if (n != 1) res -= res / n;
+    return res;
   }
 }

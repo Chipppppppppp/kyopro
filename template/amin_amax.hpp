@@ -1,8 +1,8 @@
 #pragma once
 
 namespace kyopro {
-  template<class _typeT, class _typeU>
-  constexpr bool amin(_typeT& a, _typeU&& b) noexcept {
+  template<class T, class U>
+  constexpr bool amin(T& a, U&& b) noexcept {
     if (b < a) {
       a = b;
       return true;
@@ -10,8 +10,8 @@ namespace kyopro {
     return false;
   }
 
-  template<class _typeT, class _typeU>
-  constexpr bool amax(_typeT& a, _typeU&& b) noexcept {
+  template<class T, class U>
+  constexpr bool amax(T& a, U&& b) noexcept {
     if (a < b) {
       a = b;
       return true;

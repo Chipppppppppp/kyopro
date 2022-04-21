@@ -4,16 +4,16 @@
 #include "../meta/settings.hpp"
 
 namespace kyopro {
-  template<class _typeContainer = std::vector<KYOPRO_BASE_INT>>
-  _typeContainer divisors(KYOPRO_BASE_UINT _n) {
-    _typeContainer _lower, _upper;
-    std::uint_fast64_t _i;
-    for (_i = 1; _i * _i < _n; ++_i) if (_n % _i == 0) {
-      _lower.emplace_back(_i);
-      _upper.emplace_back(_n / _i);
+  template<class Container = std::vector<KYOPRO_BASE_INT>>
+  Container divisors(KYOPRO_BASE_UINT n) {
+    Container lower, upper;
+    std::uint_fast64_t i;
+    for (i = 1; i * i < n; ++i) if (n % i == 0) {
+      lower.emplace_back(i);
+      upper.emplace_back(n / i);
     }
-    if (_i * _i == _n) _lower.emplace_back(_i);
-    _lower.insert(end(_lower), rall(_upper));
-    return _lower;
+    if (i * i == n) lower.emplace_back(i);
+    lower.insert(end(lower), rall(upper));
+    return lower;
   }
 }

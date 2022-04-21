@@ -5,15 +5,15 @@
 #include "../meta/settings.hpp"
 
 namespace kyopro {
-  template<KYOPRO_BASE_UINT _idx = 0, KYOPRO_BASE_UINT _n, class _typeT>
-  auto make_vector(const KYOPRO_BASE_UINT (&_d)[_n], _typeT&& _init) noexcept {
-    if constexpr (_idx < _n) return std::vector(_d[_idx], make_vector<_idx + 1>(_d, std::forward<_typeT>(_init)));
-    else return _init;
+  template<KYOPRO_BASE_UINT idx = 0, KYOPRO_BASE_UINT n, class T>
+  auto make_vector(const KYOPRO_BASE_UINT (&d)[n], T&& init) noexcept {
+    if constexpr (idx < n) return std::vector(d[idx], make_vector<idx + 1>(d, std::forward<T>(init)));
+    else return init;
   }
 
-  template<class _typeT, KYOPRO_BASE_UINT _idx = 0, KYOPRO_BASE_UINT _n>
-  auto make_vector(const KYOPRO_BASE_UINT (&_d)[_n], const _typeT& _init = _typeT()) noexcept {
-    if constexpr (_idx < _n) return std::vector(_d[_idx], make_vector<_idx + 1>(_d, _init));
-    else return _init;
+  template<class T, KYOPRO_BASE_UINT idx = 0, KYOPRO_BASE_UINT n>
+  auto make_vector(const KYOPRO_BASE_UINT (&d)[n], const T& init = T()) noexcept {
+    if constexpr (idx < n) return std::vector(d[idx], make_vector<idx + 1>(d, init));
+    else return init;
   }
 }

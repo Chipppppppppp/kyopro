@@ -2,13 +2,13 @@
 #include "../meta/settings.hpp"
 
 namespace kyopro {
-  template<class _typeT>
-  constexpr _typeT power(_typeT _a, KYOPRO_BASE_UINT _n, _typeT _init = 1) noexcept {
-    while (_n > 0) {
-      if (_n & 1) _init *= _a;
-      _a *= _a;
-      _n >>= 1;
+  template<class T>
+  constexpr T power(T a, KYOPRO_BASE_UINT n, T init = 1) noexcept {
+    while (n > 0) {
+      if (n & 1) init *= a;
+      a *= a;
+      n >>= 1;
     }
-    return _init;
+    return init;
   }
 }

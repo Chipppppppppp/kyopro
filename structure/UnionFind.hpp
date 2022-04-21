@@ -7,76 +7,76 @@
 #include "../meta/settings.hpp"
 
 namespace kyopro {
-  template<class _typeContainer = std::vector<int>>
+  template<class Container = std::vector<int>>
   struct UnionFind {
   private:
-    _typeContainer _par;
+    Container par;
 
   public:
     UnionFind() noexcept = default;
-    UnionFind(KYOPRO_BASE_UINT _n) noexcept: _par(_n, -1) {}
-    template<class _typeC, std::enable_if_t<std::is_same_v<_typeContainer, std::decay_t<_typeC>>>>
-    UnionFind(_typeC&& _par): _par(std::forward<_typeC>(_par)) {}
+    UnionFind(KYOPRO_BASE_UINT n) noexcept: par(n, -1) {}
+    template<class C, std::enable_if_t<std::is_same_v<Container, std::decay_t<C>>>>
+    UnionFind(C&& par): par(std::forward<C>(par)) {}
 
-    void resize(KYOPRO_BASE_UINT _x) { _par.resize(_x, -1); }
-    void assign(KYOPRO_BASE_UINT _x) { _par.assign(_x, -1); }
-    void reset() { std::fill(std::begin(_par), std::end(_par), -1); }
+    void resize(KYOPRO_BASE_UINT x) { par.resize(x, -1); }
+    void assign(KYOPRO_BASE_UINT x) { par.assign(x, -1); }
+    void reset() { std::fill(std::begin(par), std::end(par), -1); }
 
-    KYOPRO_BASE_UINT size() const noexcept { return _par.size(); }
+    KYOPRO_BASE_UINT size() const noexcept { return par.size(); }
 
-    KYOPRO_BASE_INT find(int _x) {
-      int _p = _x;
-      while (_par[_p] >= 0) _p = _par[_p];
-      while (_x != _p) {
-        int _tmp = _x;
-        _x = _par[_x];
-        _par[_tmp] = _p;
+    KYOPRO_BASE_INT find(int x) {
+      int p = x;
+      while (par[p] >= 0) p = par[p];
+      while (x != p) {
+        int tmp = x;
+        x = par[x];
+        par[tmp] = p;
       }
-      return _p;
+      return p;
     }
 
-    bool merge(int _x, int _y) {
-      _x = find(_x), _y = find(_y);
-      if (_x == _y) return false;
-      if (_par[_x] > _par[_y]) {
-        int _tmp = _x;
-        _x = _y;
-        _y = _tmp;
+    bool merge(int x, int y) {
+      x = find(x), y = find(y);
+      if (x == y) return false;
+      if (par[x] > par[y]) {
+        int tmp = x;
+        x = y;
+        y = tmp;
       }
-      _par[_x] += _par[_y];
-      _par[_y] = _x;
+      par[x] += par[y];
+      par[y] = x;
       return true;
     }
 
-    bool same(int _x, int _y) { return find(_x) == find(_y); }
+    bool same(int x, int y) { return find(x) == find(y); }
 
-    KYOPRO_BASE_INT group_size(int _x) { return -_par[find(_x)]; }
+    KYOPRO_BASE_INT group_size(int x) { return -par[find(x)]; }
 
-    std::vector<int> group_members(int _x) {
-      _x = find(_x);
-      std::vector<int> _a;
-      for (int _i = 0; _i < (int)(size()); ++_i) if (find(_i) == _x) _a.emplace_back(_i);
-      return _a;
+    std::vector<int> group_members(int x) {
+      x = find(x);
+      std::vector<int> a;
+      for (int i = 0; i < (int)(size()); ++i) if (find(i) == x) a.emplace_back(i);
+      return a;
     }
 
-    template<class _typeVector = std::vector<KYOPRO_BASE_INT>>
-    _typeVector roots() const {
-      _typeVector _a;
-      for (int _i = 0; _i < (int)(size()); ++_i) if (_par[_i] < 0) _a.emplace_back(_i);
-      return _a;
+    template<class Vector = std::vector<KYOPRO_BASE_INT>>
+    Vector roots() const {
+      Vector a;
+      for (int i = 0; i < (int)(size()); ++i) if (par[i] < 0) a.emplace_back(i);
+      return a;
     }
 
     KYOPRO_BASE_INT group_count() const {
-      KYOPRO_BASE_INT _cnt = 0;
-      for (int _i = 0; _i < (int)(size()); ++_i) if (_par[_i] < 0) ++_cnt;
-      return _cnt;
+      KYOPRO_BASE_INT cnt = 0;
+      for (int i = 0; i < (int)(size()); ++i) if (par[i] < 0) ++cnt;
+      return cnt;
     }
 
-    template<class _typeMap = std::unordered_map<KYOPRO_BASE_INT, std::vector<KYOPRO_BASE_INT>>>
-    _typeMap all_group_members() {
-      _typeMap _group_members;
-      for (int _member = 0; _member < (int)(size()); ++_member) _group_members[find(_member)].emplace_back(_member);
-      return _group_members;
+    template<class Map = std::unordered_map<KYOPRO_BASE_INT, std::vector<KYOPRO_BASE_INT>>>
+    Map all_group_members() {
+      Map group_members;
+      for (int member = 0; member < (int)(size()); ++member) group_members[find(member)].emplace_back(member);
+      return group_members;
     }
   };
 }

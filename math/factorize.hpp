@@ -9,68 +9,68 @@
 #include "is_prime.hpp"
 
 namespace kyopro {
-  template<class _typeT>
-  constexpr _typeT pollard_rho(_typeT _p, KYOPRO_BASE_UINT _c) {
-    using _typeU = std::make_unsigned_t<_typeT>;
-    using _typeDynamicModInt = DynamicModInt<_typeU, KYOPRO_BASE_UINT(-1)>;
-    _typeU _n = _p;
-    _typeDynamicModInt::set_mod(_n);
-    _typeDynamicModInt _cc = _c;
-    auto _f = [=](_typeDynamicModInt _x) noexcept { return _x * _x + _cc; };
-    _typeDynamicModInt _x = 1, _y = 2, _z = 1, _q = 1;
-    _typeU _g = 1;
-    const int _m = 1 << (std::__lg(_n) / 5);
-    for (int _r = 1; _g == 1; _r <<= 1) {
-      _x = _y;
-      for (int _i = 0; _i < _r; ++_i) _y = _f(_y);
-      for (int _k = 0; _k < _r && _g == 1; _k += _m) {
-        _z = _y;
-        int _min = std::min(_m, _r - _k);
-        for (int _i = 0; _i < _min; ++_i) {
-          _y = _f(_y);
-          _q *= _x - _y;
+  template<class T>
+  constexpr T pollard_rho(T p, KYOPRO_BASE_UINT c) {
+    using U = std::make_unsigned_t<T>;
+    using DynamicModInt = DynamicModInt<U, KYOPRO_BASE_UINT(-1)>;
+    U n = p;
+    DynamicModInt::set_mod(n);
+    DynamicModInt cc = c;
+    auto f = [=](DynamicModInt x) noexcept { return x * x + cc; };
+    DynamicModInt x = 1, y = 2, z = 1, q = 1;
+    U g = 1;
+    const int m = 1 << (std::__lg(n) / 5);
+    for (int r = 1; g == 1; r <<= 1) {
+      x = y;
+      for (int i = 0; i < r; ++i) y = f(y);
+      for (int k = 0; k < r && g == 1; k += m) {
+        z = y;
+        int min = std::min(m, r - k);
+        for (int i = 0; i < min; ++i) {
+          y = f(y);
+          q *= x - y;
         }
-        _g = std::gcd(static_cast<_typeU>(_q), _n);
+        g = std::gcd(static_cast<U>(q), n);
       }
     }
-    if (_g == _n) {
+    if (g == n) {
       do {
-        _z = _f(_z);
-        _g = std::gcd(static_cast<_typeU>(_x - _z), _n);
-      } while (_g == 1);
+        z = f(z);
+        g = std::gcd(static_cast<U>(x - z), n);
+      } while (g == 1);
     }
-    return _g;
+    return g;
   }
 
-  KYOPRO_BASE_UINT find_factor(KYOPRO_BASE_UINT _n) noexcept {
-    static std::mt19937_64 _mt(std::random_device{}());
-    std::uniform_int_distribution<std::uint_fast64_t> _rnd(0, _n - 1);
-    if (is_prime(_n)) return _n;
-    for (int _i = 0; _i < 100; ++_i) {
-      std::uint_fast64_t _m = pollard_rho(_n, _rnd(_mt));
-      if (is_prime(_m)) return _m;
-      _n = _m;
+  KYOPRO_BASE_UINT find_factor(KYOPRO_BASE_UINT n) noexcept {
+    static std::mt19937_64 mt(std::random_device{}());
+    std::uniform_int_distribution<std::uint_fast64_t> rnd(0, n - 1);
+    if (is_prime(n)) return n;
+    for (int i = 0; i < 100; ++i) {
+      std::uint_fast64_t m = pollard_rho(n, rnd(mt));
+      if (is_prime(m)) return m;
+      n = m;
     }
     return 1;
   }
 
-  template<bool _sorted = true, class _typeContainer = std::vector<KYOPRO_BASE_INT>>
-  _typeContainer factorize(KYOPRO_BASE_UINT _n) {
-    _typeContainer _res;
-    for (int _p = 2; _p < 100 && _p * _p <= _n; ++_p) {
-      while (_n % _p == 0) {
-        _n /= _p;
-        _res.emplace_back(_p);
+  template<bool sorted = true, class Container = std::vector<KYOPRO_BASE_INT>>
+  Container factorize(KYOPRO_BASE_UINT n) {
+    Container res;
+    for (int p = 2; p < 100 && p * p <= n; ++p) {
+      while (n % p == 0) {
+        n /= p;
+        res.emplace_back(p);
       }
     }
-    while (_n > 1) {
-      std::uint_fast64_t _p = find_factor(_n);
+    while (n > 1) {
+      std::uint_fast64_t p = find_factor(n);
       do {
-        _n /= _p;
-        _res.emplace_back(_p);
-      } while (_n % _p == 0);
+        n /= p;
+        res.emplace_back(p);
+      } while (n % p == 0);
     }
-    if constexpr (_sorted) std::sort(_res.begin(), _res.end());
-    return _res;
+    if constexpr (sorted) std::sort(res.begin(), res.end());
+    return res;
   }
 }

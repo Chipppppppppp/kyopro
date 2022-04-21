@@ -1,6 +1,6 @@
 #pragma once
 #include <cassert>
-#include <cstdint>
+#include <cstddef>
 #include <limits>
 #include <type_traits>
 #include "../algorithm/Hash.hpp"
@@ -10,138 +10,138 @@
 #include "Montgomery.hpp"
 
 namespace kyopro {
-  template<class _typeT, KYOPRO_BASE_UINT = 0>
+  template<class T, KYOPRO_BASE_UINT = 0>
   struct DynamicModInt {
-    static_assert(std::is_unsigned_v<_typeT>, "Unsigned integer is required");
+    static_assert(std::is_unsigned_v<T>, "Unsigned integer is required");
 
   private:
-    using _larger_type = uint_least_t<std::numeric_limits<_typeT>::digits * 2>;
+    using larger_type = uint_least_t<std::numeric_limits<T>::digits * 2>;
 
-    inline static Montgomery<_typeT> _montgomery;
+    inline static Montgomery<T> montgomery;
 
   public:
-    _typeT value;
+    T value;
 
-    static void set_mod(_typeT _mod) noexcept {
-      _montgomery.set_mod(_mod);
+    static void set_mod(T mod) noexcept {
+      montgomery.set_mod(mod);
     }
 
     static KYOPRO_BASE_INT get_mod() noexcept {
-      return _montgomery.mod;
+      return montgomery.mod;
     }
 
     KYOPRO_BASE_INT get_val() noexcept {
-      return _montgomery.inverse_transform(value);
+      return montgomery.inverse_transform(value);
     }
 
     DynamicModInt() noexcept = default;
-    DynamicModInt(_typeT _value) noexcept: value(_montgomery.transform(floor_mod(_value, _montgomery.mod))) {}
+    DynamicModInt(T value) noexcept: value(montgomery.transform(floor_mod(value, montgomery.mod))) {}
 
-    template<class _typeU>
-    explicit operator _typeU() const noexcept { return _montgomery.inverse_transform(value); }
+    template<class U>
+    explicit operator U() const noexcept { return montgomery.inverse_transform(value); }
 
-    static DynamicModInt raw(_typeT _n) noexcept {
-      DynamicModInt _res;
-      _res.value = _n;
-      return _res;
+    static DynamicModInt raw(T n) noexcept {
+      DynamicModInt res;
+      res.value = n;
+      return res;
     }
 
-    DynamicModInt power(_typeT _n) const noexcept {
-      DynamicModInt _res = 1, _a = *this;
-      while (_n > 0) {
-        if (_n & 1) _res = _res * _a;
-        _a = _a * _a;
-        _n >>= 1;
+    DynamicModInt power(T n) const noexcept {
+      DynamicModInt res = 1, a = *this;
+      while (n > 0) {
+        if (n & 1) res = res * a;
+        a = a * a;
+        n >>= 1;
       }
-      return _res;
+      return res;
     }
 
     DynamicModInt inv() const noexcept {
-      _typeT _a = value, _b = _montgomery.mod;
-      std::make_signed_t<_typeT> _u = 1, _v = 0;
-      while (_b > 0) {
-        _typeT _t = _a / _b;
-        _a -= _t * _b;
-        std::swap(_a, _b);
-        _u -= _t * _v;
-        std::swap(_u, _v);
+      T a = value, b = montgomery.mod;
+      std::make_signed_t<T> u = 1, v = 0;
+      while (b > 0) {
+        T t = a / b;
+        a -= t * b;
+        std::swap(a, b);
+        u -= t * v;
+        std::swap(u, v);
       }
-      return static_cast<DynamicModInt>(_u);
+      return static_cast<DynamicModInt>(u);
     }
 
     DynamicModInt operator +() const noexcept { return *this; }
 
-    DynamicModInt operator -() const noexcept { return value == 0 ? 0 : _montgomery.mod - value; }
+    DynamicModInt operator -() const noexcept { return value == 0 ? 0 : montgomery.mod - value; }
 
     DynamicModInt& operator ++() noexcept {
-      if (++value >= _montgomery.mod) value -= _montgomery.mod;
+      if (++value >= montgomery.mod) value -= montgomery.mod;
       return *this;
     }
 
     DynamicModInt operator ++(int) noexcept {
-      DynamicModInt _before = *this;
+      DynamicModInt before = *this;
       operator ++();
-      return _before;
+      return before;
     }
 
     DynamicModInt& operator --() noexcept {
-      if (value == 0) value = _montgomery.mod;
+      if (value == 0) value = montgomery.mod;
       --value;
       return *this;
     }
 
     DynamicModInt operator --(int) noexcept {
-      DynamicModInt _before = *this;
+      DynamicModInt before = *this;
       operator --();
-      return _before;
+      return before;
     }
 
-    DynamicModInt& operator +=(DynamicModInt _rhs) noexcept {
-      if ((value += _rhs.value) >= mod) value -= mod;
+    DynamicModInt& operator +=(DynamicModInt rhs) noexcept {
+      if ((value += rhs.value) >= mod) value -= mod;
       return *this;
     }
 
-    DynamicModInt& operator -=(DynamicModInt _rhs) noexcept {
-      if (value < _rhs.value) value += mod;
-      value -= _rhs.value;
+    DynamicModInt& operator -=(DynamicModInt rhs) noexcept {
+      if (value < rhs.value) value += mod;
+      value -= rhs.value;
       return *this;
     }
 
-    DynamicModInt& operator *=(DynamicModInt _rhs) noexcept {
-      value = _montgomery.reduce(static_cast<_larger_type>(value) * _rhs.value);
+    DynamicModInt& operator *=(DynamicModInt rhs) noexcept {
+      value = montgomery.reduce(static_cast<larger_type>(value) * rhs.value);
       return *this;
     }
 
-    DynamicModInt& operator /=(DynamicModInt _rhs) noexcept {
-      value = _montgomery.reduce(static_cast<_larger_type>(value) * _rhs.inv().value);
+    DynamicModInt& operator /=(DynamicModInt rhs) noexcept {
+      value = montgomery.reduce(static_cast<larger_type>(value) * rhs.inv().value);
       return *this;
     }
 
-    friend DynamicModInt operator +(DynamicModInt _lhs, DynamicModInt _rhs) noexcept { return _lhs += _rhs; }
+    friend DynamicModInt operator +(DynamicModInt lhs, DynamicModInt rhs) noexcept { return lhs += rhs; }
 
-    friend DynamicModInt operator -(DynamicModInt _lhs, DynamicModInt _rhs) noexcept { return _lhs -= _rhs; }
+    friend DynamicModInt operator -(DynamicModInt lhs, DynamicModInt rhs) noexcept { return lhs -= rhs; }
 
-    friend DynamicModInt operator *(DynamicModInt _lhs, DynamicModInt _rhs) noexcept { return _lhs *= _rhs; }
+    friend DynamicModInt operator *(DynamicModInt lhs, DynamicModInt rhs) noexcept { return lhs *= rhs; }
 
-    friend DynamicModInt operator /(DynamicModInt _lhs, DynamicModInt _rhs) noexcept { return _lhs /= _rhs; }
+    friend DynamicModInt operator /(DynamicModInt lhs, DynamicModInt rhs) noexcept { return lhs /= rhs; }
 
-    friend bool operator ==(DynamicModInt _lhs, DynamicModInt _rhs) noexcept { return _lhs.value == _rhs.value; }
+    friend bool operator ==(DynamicModInt lhs, DynamicModInt rhs) noexcept { return lhs.value == rhs.value; }
 
-    friend bool operator !=(DynamicModInt _lhs, DynamicModInt _rhs) noexcept { return _lhs.value != _rhs.value; }
+    friend bool operator !=(DynamicModInt lhs, DynamicModInt rhs) noexcept { return lhs.value != rhs.value; }
 
-    template<class _typeScanner>
-    void scan(_typeScanner& _scanner) {
-      std::int_fast64_t _value;
-      _scanner.scan(_value);
-      value = _montgomery.transform(floor_mod(_value, _montgomery.mod));
+    template<class Scanner>
+    void scan(Scanner& scanner) {
+      std::int_fast64_t value;
+      scanner.scan(value);
+      value = montgomery.transform(floor_mod(value, montgomery.mod));
     }
 
-    template<class _typePrinter>
-    void print(_typePrinter& _printer) const {
-      _printer.print(_montgomery.inverse_transform(value));
+    template<class Printer>
+    void print(Printer& printer) const {
+      printer.print(montgomery.inverse_transform(value));
     }
   };
 
-  template<class _typeT, KYOPRO_BASE_UINT _kind>
-  struct Hash<DynamicModInt<_typeT, _kind>> { std::size_t operator ()(DynamicModInt<_typeT, _kind> _a) const noexcept { return static_cast<std::size_t>(_a); } };
+  template<class T, KYOPRO_BASE_UINT kind>
+  struct Hash<DynamicModInt<T, kind>> { std::size_t operator ()(DynamicModInt<T, kind> a) const noexcept { return static_cast<std::size_t>(a); } };
 }

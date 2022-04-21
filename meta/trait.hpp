@@ -21,75 +21,75 @@ struct std::is_floating_point<__float128>: std::true_type {};
 #endif
 
 namespace kyopro {
-  template<KYOPRO_BASE_UINT _size>
+  template<KYOPRO_BASE_UINT size>
   struct int_least {
   private:
-    static constexpr auto _get_type() noexcept {
-      static_assert(_size <= 128, "Integer size is too long");
-      if constexpr (_size <= 8) return std::int_least8_t();
-      else if constexpr (_size <= 16) return std::int_least16_t();
-      else if constexpr (_size <= 32) return std::int_least32_t();
-      else if constexpr (_size <= 64) return std::int_least64_t();
+    static constexpr auto get_type() noexcept {
+      static_assert(size <= 128, "Integer size is too long");
+      if constexpr (size <= 8) return std::int_least8_t();
+      else if constexpr (size <= 16) return std::int_least16_t();
+      else if constexpr (size <= 32) return std::int_least32_t();
+      else if constexpr (size <= 64) return std::int_least64_t();
       else return __int128_t();
     }
 
   public:
-    using type = decltype(_get_type());
+    using type = decltype(get_type());
   };
 
-  template<KYOPRO_BASE_UINT _size>
-  using int_least_t = typename int_least<_size>::type;
+  template<KYOPRO_BASE_UINT size>
+  using int_least_t = typename int_least<size>::type;
 
-  template<KYOPRO_BASE_UINT _size>
+  template<KYOPRO_BASE_UINT size>
   struct uint_least {
   private:
-    static constexpr auto _get_type() noexcept {
-      static_assert(_size <= 128, "Integer size is too long");
-      if constexpr (_size <= 8) return std::uint_least8_t();
-      else if constexpr (_size <= 16) return std::uint_least16_t();
-      else if constexpr (_size <= 32) return std::uint_least32_t();
-      else if constexpr (_size <= 64) return std::uint_least64_t();
+    static constexpr auto get_type() noexcept {
+      static_assert(size <= 128, "Integer size is too long");
+      if constexpr (size <= 8) return std::uint_least8_t();
+      else if constexpr (size <= 16) return std::uint_least16_t();
+      else if constexpr (size <= 32) return std::uint_least32_t();
+      else if constexpr (size <= 64) return std::uint_least64_t();
       else return __uint128_t();
     }
 
   public:
-    using type = decltype(_get_type());
+    using type = decltype(get_type());
   };
 
-  template<KYOPRO_BASE_UINT _size>
-  using uint_least_t = typename uint_least<_size>::type;
+  template<KYOPRO_BASE_UINT size>
+  using uint_least_t = typename uint_least<size>::type;
 
   template<class, class = void>
   struct is_iterator: std::false_type {};
-  template<class _typeT>
-  struct is_iterator<_typeT, std::void_t<typename std::iterator_traits<_typeT>::iterator_category>>: std::true_type {};
+  template<class T>
+  struct is_iterator<T, std::void_t<typename std::iterator_traits<T>::iterator_category>>: std::true_type {};
 
-  template<class _typeT>
-  constexpr bool is_iterator_v = is_iterator<_typeT>::value;
+  template<class T>
+  constexpr bool is_iterator_v = is_iterator<T>::value;
 
   template<class, class = void>
-  struct is_range: std::false_type {};
-  template<class _typeT>
-  struct is_range<_typeT, std::enable_if_t<is_iterator_v<decltype(std::begin(std::declval<_typeT>()))>>>: std::true_type {};
+  struct is_iterable: std::false_type {};
+  template<class T>
+  struct is_iterable<T, std::void_t<decltype(std::begin(std::declval<T>()))>>: std::true_type {};
 
-  template<class _typeT>
-  constexpr bool is_range_v = is_range<_typeT>::value;
+  template<class T>
+  constexpr bool is_iterable_v = is_iterable<T>::value;
 
   template<class>
   struct is_tuple: std::false_type {};
-  template<class _typeT, class _typeU>
-  struct is_tuple<std::pair<_typeT, _typeU>>: std::true_type {};
-  template<class... _typeArgs>
-  struct is_tuple<std::tuple<_typeArgs...>>: std::true_type {};
+  template<class T, class U>
+  struct is_tuple<std::pair<T, U>>: std::true_type {};
+  template<class... Args>
+  struct is_tuple<std::tuple<Args...>>: std::true_type {};
 
-  template<class _typeT>
-  constexpr bool is_tuple_v = is_tuple<_typeT>::value;
+  template<class T>
+  constexpr bool is_tuple_v = is_tuple<T>::value;
 
-  template<class, class = void>
-  struct is_container_adapter: std::false_type {};
-  template<class _typeT>
-  struct is_container_adapter<_typeT, std::void_t<decltype(std::empty(std::declval<_typeT>()))>>: std::negation<is_range<_typeT>> {};
+  template<class T>
+  struct iterable_value {
+    using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;
+  };
 
-  template<class _typeT>
-  constexpr bool is_container_adapter_v = is_container_adapter<_typeT>::value;
+  template<class T>
+  using iterable_value_t = iterable_value<T>::value;
 }

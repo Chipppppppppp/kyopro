@@ -6,47 +6,47 @@
 #include "../meta/settings.hpp"
 
 namespace kyopro {
-  template<class _typeT, class _typeOp = Plus<_typeT>, class _typeContainer = std::vector<_typeT>>
+  template<class T, class Op = Plus<T>, class Container = std::vector<T>>
   struct FenwickTree {
   private:
-    [[no_unique_address]] _typeOp _op;
-    _typeContainer _tree;
+    [[no_unique_address]] Op op;
+    Container tree;
 
   public:
-    using value_type = _typeT;
+    using value_type = T;
     using size_type = KYOPRO_BASE_UINT;
-    using reference = _typeT&;
-    using const_reference = const _typeT&;
+    using reference = T&;
+    using const_reference = const T&;
 
     FenwickTree() noexcept = default;
-    FenwickTree(KYOPRO_BASE_UINT _n) noexcept: _tree(_n, _op.id) {}
-    template<class _typeC, std::enable_if_t<std::is_same_v<_typeContainer, std::decay_t<_typeC>>>>
-    FenwickTree(_typeC&& _tree): _tree(std::forward<_typeC>(_tree)) {}
+    FenwickTree(KYOPRO_BASE_UINT n) noexcept: tree(n, op.id) {}
+    template<class C, std::enable_if_t<std::is_same_v<Container, std::decay_t<C>>>>
+    FenwickTree(C&& tree): tree(std::forward<C>(tree)) {}
 
-    KYOPRO_BASE_UINT size() noexcept { return _tree.size(); }
+    KYOPRO_BASE_UINT size() noexcept { return tree.size(); }
 
-    void apply(int _p, const _typeT& _x) {
-      ++_p;
-      while (_p <= (int)size()) {
-        _tree[_p - 1] = _op(_tree[_p - 1], _x);
-        _p += _p & -_p;
+    void apply(int p, const T& x) {
+      ++p;
+      while (p <= (int)size()) {
+        tree[p - 1] = op(tree[p - 1], x);
+        p += p & -p;
       }
     }
 
-    _typeT prod(int _r) const {
-      _typeT _s = _op.id;
-      while (_r > 0) {
-        _s = _op(_s, _tree[_r - 1]);
-        _r -= _r & -_r;
+    T prod(int r) const {
+      T s = op.id;
+      while (r > 0) {
+        s = op(s, tree[r - 1]);
+        r -= r & -r;
       }
-      return _s;
+      return s;
     }
-    _typeT prod(int _l, int _r) const { return _op(prod(_r), _op.inv(prod(_l))); }
+    T prod(int l, int r) const { return op(prod(r), op.inv(prod(l))); }
 
-    _typeT all_prod() { return prod(_tree.size()); }
+    T all_prod() { return prod(tree.size()); }
 
-    _typeT get(int _p) { return _op(prod(_p + 1), _op.inv(prod(_p))); }
+    T get(int p) { return op(prod(p + 1), op.inv(prod(p))); }
 
-    void set(int _p, const _typeT& _x) { apply(_p, _op(_x, _op.inv(get(_p)))); }
+    void set(int p, const T& x) { apply(p, op(x, op.inv(get(p)))); }
   };
 }

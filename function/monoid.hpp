@@ -3,33 +3,36 @@
 #include "../meta/constant.hpp"
 
 namespace kyopro {
-  template<class _typeT, _typeT _id = 0>
+  template<class T, T _id = 0>
   struct Plus {
-    static_assert(std::is_arithmetic_v<_typeT>);
-    static constexpr _typeT id = _id;
-    constexpr _typeT operator ()(_typeT _a, _typeT _b) const noexcept { return _a + _b; }
-    constexpr _typeT inv(_typeT _a) const noexcept { return -_a; }
+    static_assert(std::is_arithmetic_v<T>);
+    static constexpr T id = _id;
+    constexpr T operator ()(T a, T b) const noexcept { return a + b; }
+    constexpr T inv(T a) const noexcept { return -a; }
   };
-  template<class _typeT, _typeT _id = 1>
+
+  template<class T, T _id = 1>
   struct Mul {
-    static_assert(std::is_arithmetic_v<_typeT>);
-    static constexpr _typeT id = _id;
-    constexpr _typeT operator ()(_typeT _a, _typeT _b) const noexcept { return _a * _b; }
-    constexpr _typeT inv(_typeT _a) const noexcept {
-      static_assert(!std::is_integral_v<_typeT>);
-      return 1 / _a;
+    static_assert(std::is_arithmetic_v<T>);
+    static constexpr T id = _id;
+    constexpr T operator ()(T a, T b) const noexcept { return a * b; }
+    constexpr T inv(T a) const noexcept {
+      static_assert(!std::is_integral_v<T>);
+      return 1 / a;
     }
   };
-  template<class _typeT, _typeT _id = std::is_integral_v<_typeT> ? -INF<_typeT> : -inf>
+
+  template<class T, T _id = std::is_integral_v<T> ? -INF<T> : -inf>
   struct Max {
-    static_assert(std::is_arithmetic_v<_typeT>);
-    static constexpr _typeT id = _id;
-    constexpr _typeT operator ()(_typeT _a, _typeT _b) const noexcept { return _a > _b ? _a : _b; }
+    static_assert(std::is_arithmetic_v<T>);
+    static constexpr T id = _id;
+    constexpr T operator ()(T a, T b) const noexcept { return a > b ? a : b; }
   };
-  template<class _typeT, _typeT _id = std::is_integral_v<_typeT> ? INF<_typeT> : inf>
+
+  template<class T, T _id = std::is_integral_v<T> ? INF<T> : inf>
   struct Min {
-    static_assert(std::is_arithmetic_v<_typeT>);
-    static constexpr _typeT id = _id;
-    constexpr _typeT operator ()(_typeT _a, _typeT _b) const noexcept { return _a < _b ? _a : _b; }
+    static_assert(std::is_arithmetic_v<T>);
+    static constexpr T id = _id;
+    constexpr T operator ()(T a, T b) const noexcept { return a < b ? a : b; }
   };
 }

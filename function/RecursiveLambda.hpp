@@ -3,18 +3,18 @@
 #include <utility>
 
 namespace kyopro {
-  template<class _typeF>
+  template<class F>
   struct RecursiveLambda {
   private:
-    _typeF _func;
+    F func;
 
   public:
-    template<class _typeG>
-    constexpr RecursiveLambda(_typeG&& _func) noexcept: _func(std::forward<_typeG>(_func)) {}
-    template<class... _typeArgs>
-    constexpr decltype(auto) operator ()(_typeArgs&&... _args) const noexcept { return _func(*this, std::forward<_typeArgs>(_args)...); }
+    template<class G>
+    constexpr RecursiveLambda(G&& func) noexcept: func(std::forward<G>(func)) {}
+    template<class... Args>
+    constexpr decltype(auto) operator ()(Args&&... args) const noexcept { return func(*this, std::forward<Args>(args)...); }
   };
 
-  template<class _typeF>
-  RecursiveLambda(_typeF&&) -> RecursiveLambda<std::decay_t<_typeF>>;
+  template<class F>
+  RecursiveLambda(F&&) -> RecursiveLambda<std::decay_t<F>>;
 }
