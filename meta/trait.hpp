@@ -7,25 +7,12 @@
 #include <utility>
 #include "settings.hpp"
 
-template<>
-struct std::is_integral<__int128_t>: std::true_type {};
-template<>
-struct std::is_signed<__int128_t>: std::true_type {};
-template<>
-struct std::is_integral<__uint128_t>: std::true_type {};
-template<>
-struct std::is_unsigned<__uint128_t>: std::true_type {};
-#ifdef __SIZEOF_FLOAT128__
-template<>
-struct std::is_floating_point<__float128>: std::true_type {};
-#endif
-
 namespace kyopro {
   template<KYOPRO_BASE_UINT size>
   struct int_least {
   private:
     static constexpr auto get_type() noexcept {
-      static_assert(size <= 128, "Integer size is too long");
+      static_assert(size <= 128, "Integer size is too large");
       if constexpr (size <= 8) return std::int_least8_t();
       else if constexpr (size <= 16) return std::int_least16_t();
       else if constexpr (size <= 32) return std::int_least32_t();
@@ -44,7 +31,7 @@ namespace kyopro {
   struct uint_least {
   private:
     static constexpr auto get_type() noexcept {
-      static_assert(size <= 128, "Integer size is too long");
+      static_assert(size <= 128, "Integer size is too large");
       if constexpr (size <= 8) return std::uint_least8_t();
       else if constexpr (size <= 16) return std::uint_least16_t();
       else if constexpr (size <= 32) return std::uint_least32_t();
