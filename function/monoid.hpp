@@ -8,7 +8,7 @@ namespace kyopro {
     static_assert(std::is_arithmetic_v<T>);
     static constexpr T id = _id;
     constexpr T operator ()(T a, T b) const noexcept { return a + b; }
-    constexpr T inv(T a) const noexcept { return -a; }
+    constexpr T inverse(T a) const noexcept { return -a; }
   };
 
   template<class T, T _id = 1>
@@ -16,7 +16,7 @@ namespace kyopro {
     static_assert(std::is_arithmetic_v<T>);
     static constexpr T id = _id;
     constexpr T operator ()(T a, T b) const noexcept { return a * b; }
-    constexpr T inv(T a) const noexcept {
+    constexpr T inverse(T a) const noexcept {
       static_assert(!std::is_integral_v<T>);
       return 1 / a;
     }

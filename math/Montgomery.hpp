@@ -45,12 +45,12 @@ namespace kyopro {
     }
 
     constexpr T inverse_transform(T x) const noexcept {
-      return reduce(x);
+      T y = reduce(x);
+      return y >= mod ? y - mod : y;
     }
 
     constexpr T reduce(larger_type x) const noexcept {
-      T y = (x + static_cast<larger_type>(static_cast<T>(x) * r) * mod) >> std::numeric_limits<T>::digits;
-      return y >= mod ? y - mod : y;
+      return (x + static_cast<larger_type>(static_cast<T>(x) * r) * mod) >> std::numeric_limits<T>::digits;
     }
   };
 }

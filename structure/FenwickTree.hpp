@@ -41,12 +41,12 @@ namespace kyopro {
       }
       return s;
     }
-    T prod(int l, int r) const { return op(prod(r), op.inv(prod(l))); }
+    T prod(int l, int r) const { return op(prod(r), op.inverse(prod(l))); }
 
     T all_prod() { return prod(tree.size()); }
 
-    T get(int p) { return op(prod(p + 1), op.inv(prod(p))); }
+    T get(int p) { return op(prod(p + 1), op.inverse(prod(p))); }
 
-    void set(int p, const T& x) { apply(p, op(x, op.inv(get(p)))); }
+    void set(int p, const T& x) { apply(p, op(x, op.inverse(get(p)))); }
   };
 }

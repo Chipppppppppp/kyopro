@@ -50,7 +50,7 @@ namespace kyopro {
       return res;
     }
 
-    constexpr ModInt inv() const noexcept {
+    constexpr ModInt inverse() const noexcept {
       std::uint_fast64_t a = value, b = mod;
       std::int_fast64_t u = 1, v = 0;
       while (b > 0) {
@@ -107,7 +107,7 @@ namespace kyopro {
     }
 
     constexpr ModInt& operator /=(ModInt rhs) noexcept {
-      value = static_cast<uint_least_t<bit_len(mod) * 2>>(value) * rhs.inv().value % mod;
+      value = static_cast<uint_least_t<bit_len(mod) * 2>>(value) * rhs.inverse().value % mod;
       return *this;
     }
 
