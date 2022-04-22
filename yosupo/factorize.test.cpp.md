@@ -67,21 +67,17 @@ data:
     #include <limits>\n#line 4 \"algorithm/Hash.hpp\"\n#include <functional>\n#include\
     \ <tuple>\n#line 7 \"algorithm/Hash.hpp\"\n#include <utility>\n#line 2 \"meta/trait.hpp\"\
     \n#include <iterator>\n#include <queue>\n#line 5 \"meta/trait.hpp\"\n#include\
-    \ <stack>\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct std::is_integral<__int128_t>:\
-    \ std::true_type {};\ntemplate<>\nstruct std::is_signed<__int128_t>: std::true_type\
-    \ {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type {};\n\
-    template<>\nstruct std::is_unsigned<__uint128_t>: std::true_type {};\n#ifdef __SIZEOF_FLOAT128__\n\
-    template<>\nstruct std::is_floating_point<__float128>: std::true_type {};\n#endif\n\
-    \nnamespace kyopro {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least {\n\
-    \  private:\n    static constexpr auto get_type() noexcept {\n      static_assert(size\
-    \ <= 128, \"Integer size is too long\");\n      if constexpr (size <= 8) return\
-    \ std::int_least8_t();\n      else if constexpr (size <= 16) return std::int_least16_t();\n\
-    \      else if constexpr (size <= 32) return std::int_least32_t();\n      else\
-    \ if constexpr (size <= 64) return std::int_least64_t();\n      else return __int128_t();\n\
-    \    }\n\n  public:\n    using type = decltype(get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
-    \ size>\n  using int_least_t = typename int_least<size>::type;\n\n  template<KYOPRO_BASE_UINT\
+    \ <stack>\n#line 9 \"meta/trait.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    \ size>\n  struct int_least {\n  private:\n    static constexpr auto get_type()\
+    \ noexcept {\n      static_assert(size <= 128, \"Integer size is too large\");\n\
+    \      if constexpr (size <= 8) return std::int_least8_t();\n      else if constexpr\
+    \ (size <= 16) return std::int_least16_t();\n      else if constexpr (size <=\
+    \ 32) return std::int_least32_t();\n      else if constexpr (size <= 64) return\
+    \ std::int_least64_t();\n      else return __int128_t();\n    }\n\n  public:\n\
+    \    using type = decltype(get_type());\n  };\n\n  template<KYOPRO_BASE_UINT size>\n\
+    \  using int_least_t = typename int_least<size>::type;\n\n  template<KYOPRO_BASE_UINT\
     \ size>\n  struct uint_least {\n  private:\n    static constexpr auto get_type()\
-    \ noexcept {\n      static_assert(size <= 128, \"Integer size is too long\");\n\
+    \ noexcept {\n      static_assert(size <= 128, \"Integer size is too large\");\n\
     \      if constexpr (size <= 8) return std::uint_least8_t();\n      else if constexpr\
     \ (size <= 16) return std::uint_least16_t();\n      else if constexpr (size <=\
     \ 32) return std::uint_least32_t();\n      else if constexpr (size <= 64) return\
@@ -203,13 +199,13 @@ data:
     \nnamespace kyopro {\n  template<class T>\n  constexpr KYOPRO_BASE_INT pop_count(T\
     \ x) noexcept {\n    constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
     \    static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"Integer size is too long\");\n    if constexpr (digits <= std::numeric_limits<unsigned\
+    \ \"Integer size is too large\");\n    if constexpr (digits <= std::numeric_limits<unsigned\
     \ int>::digits) return __builtin_popcount(x);\n    else if constexpr (digits <=\
     \ std::numeric_limits<unsigned long>::digits) return __builtin_popcountl(x);\n\
     \    else return __builtin_popcountll(x);\n  }\n\n  template<class T>\n  constexpr\
     \ KYOPRO_BASE_INT leading_zero(T x) noexcept {\n    constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
     \    static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"Integer size is too long\");\n    if (x == 0) return 0;\n    if constexpr\
+    \ \"Integer size is too large\");\n    if (x == 0) return 0;\n    if constexpr\
     \ (digits <= std::numeric_limits<unsigned int>::digits) return __builtin_clz(x)\
     \ + digits - std::numeric_limits<unsigned int>::digits;\n    else if constexpr\
     \ (digits <= std::numeric_limits<unsigned long>::digits) return __builtin_clzl(x)\
@@ -217,14 +213,14 @@ data:
     \ + digits - std::numeric_limits<unsigned long long>::digits;\n  }\n\n  template<class\
     \ T>\n  constexpr KYOPRO_BASE_INT trailing_zero(T x) noexcept {\n    constexpr\
     \ auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n    static_assert(digits\
-    \ <= std::numeric_limits<unsigned long long>::digits, \"Integer size is too long\"\
+    \ <= std::numeric_limits<unsigned long long>::digits, \"Integer size is too large\"\
     );\n    if constexpr (digits <= std::numeric_limits<unsigned int>::digits) return\
     \ __builtin_ctz(x);\n    else if constexpr (digits <= std::numeric_limits<unsigned\
     \ long>::digits) return __builtin_ctzl(x);\n    else return __builtin_ctzll(x);\n\
     \  }\n\n  template<class T>\n  constexpr KYOPRO_BASE_INT bit_len(T x) noexcept\
     \ {\n    constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
     \    static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"Integer size is too long\");\n    if (x == 0) return 0;\n    if constexpr\
+    \ \"Integer size is too large\");\n    if (x == 0) return 0;\n    if constexpr\
     \ (digits <= std::numeric_limits<unsigned int>::digits) return std::numeric_limits<unsigned\
     \ int>::digits - __builtin_clz(x);\n    else if constexpr (digits <= std::numeric_limits<unsigned\
     \ long>::digits) return std::numeric_limits<unsigned long>::digits - __builtin_clzl(x);\n\
@@ -418,7 +414,7 @@ data:
   isVerificationFile: true
   path: yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2022-04-21 22:20:00+09:00'
+  timestamp: '2022-04-22 10:55:57+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/factorize.test.cpp

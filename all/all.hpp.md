@@ -131,14 +131,14 @@ data:
     #endif\n#line 5 \"algorithm/bit.hpp\"\n\nnamespace kyopro {\n  template<class\
     \ T>\n  constexpr KYOPRO_BASE_INT pop_count(T x) noexcept {\n    constexpr auto\
     \ digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n    static_assert(digits\
-    \ <= std::numeric_limits<unsigned long long>::digits, \"Integer size is too long\"\
+    \ <= std::numeric_limits<unsigned long long>::digits, \"Integer size is too large\"\
     );\n    if constexpr (digits <= std::numeric_limits<unsigned int>::digits) return\
     \ __builtin_popcount(x);\n    else if constexpr (digits <= std::numeric_limits<unsigned\
     \ long>::digits) return __builtin_popcountl(x);\n    else return __builtin_popcountll(x);\n\
     \  }\n\n  template<class T>\n  constexpr KYOPRO_BASE_INT leading_zero(T x) noexcept\
     \ {\n    constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
     \    static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"Integer size is too long\");\n    if (x == 0) return 0;\n    if constexpr\
+    \ \"Integer size is too large\");\n    if (x == 0) return 0;\n    if constexpr\
     \ (digits <= std::numeric_limits<unsigned int>::digits) return __builtin_clz(x)\
     \ + digits - std::numeric_limits<unsigned int>::digits;\n    else if constexpr\
     \ (digits <= std::numeric_limits<unsigned long>::digits) return __builtin_clzl(x)\
@@ -146,14 +146,14 @@ data:
     \ + digits - std::numeric_limits<unsigned long long>::digits;\n  }\n\n  template<class\
     \ T>\n  constexpr KYOPRO_BASE_INT trailing_zero(T x) noexcept {\n    constexpr\
     \ auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n    static_assert(digits\
-    \ <= std::numeric_limits<unsigned long long>::digits, \"Integer size is too long\"\
+    \ <= std::numeric_limits<unsigned long long>::digits, \"Integer size is too large\"\
     );\n    if constexpr (digits <= std::numeric_limits<unsigned int>::digits) return\
     \ __builtin_ctz(x);\n    else if constexpr (digits <= std::numeric_limits<unsigned\
     \ long>::digits) return __builtin_ctzl(x);\n    else return __builtin_ctzll(x);\n\
     \  }\n\n  template<class T>\n  constexpr KYOPRO_BASE_INT bit_len(T x) noexcept\
     \ {\n    constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
     \    static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"Integer size is too long\");\n    if (x == 0) return 0;\n    if constexpr\
+    \ \"Integer size is too large\");\n    if (x == 0) return 0;\n    if constexpr\
     \ (digits <= std::numeric_limits<unsigned int>::digits) return std::numeric_limits<unsigned\
     \ int>::digits - __builtin_clz(x);\n    else if constexpr (digits <= std::numeric_limits<unsigned\
     \ long>::digits) return std::numeric_limits<unsigned long>::digits - __builtin_clzl(x);\n\
@@ -174,21 +174,16 @@ data:
     \n#include <cstddef>\n#line 5 \"algorithm/Hash.hpp\"\n#include <tuple>\n#line\
     \ 7 \"algorithm/Hash.hpp\"\n#include <utility>\n#line 3 \"meta/trait.hpp\"\n#include\
     \ <queue>\n#line 5 \"meta/trait.hpp\"\n#include <stack>\n#line 9 \"meta/trait.hpp\"\
-    \n\ntemplate<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
-    struct std::is_signed<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
-    \ std::true_type {};\ntemplate<>\nstruct std::is_unsigned<__uint128_t>: std::true_type\
-    \ {};\n#ifdef __SIZEOF_FLOAT128__\ntemplate<>\nstruct std::is_floating_point<__float128>:\
-    \ std::true_type {};\n#endif\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
-    \ size>\n  struct int_least {\n  private:\n    static constexpr auto get_type()\
-    \ noexcept {\n      static_assert(size <= 128, \"Integer size is too long\");\n\
-    \      if constexpr (size <= 8) return std::int_least8_t();\n      else if constexpr\
-    \ (size <= 16) return std::int_least16_t();\n      else if constexpr (size <=\
-    \ 32) return std::int_least32_t();\n      else if constexpr (size <= 64) return\
-    \ std::int_least64_t();\n      else return __int128_t();\n    }\n\n  public:\n\
-    \    using type = decltype(get_type());\n  };\n\n  template<KYOPRO_BASE_UINT size>\n\
-    \  using int_least_t = typename int_least<size>::type;\n\n  template<KYOPRO_BASE_UINT\
+    \n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least\
+    \ {\n  private:\n    static constexpr auto get_type() noexcept {\n      static_assert(size\
+    \ <= 128, \"Integer size is too large\");\n      if constexpr (size <= 8) return\
+    \ std::int_least8_t();\n      else if constexpr (size <= 16) return std::int_least16_t();\n\
+    \      else if constexpr (size <= 32) return std::int_least32_t();\n      else\
+    \ if constexpr (size <= 64) return std::int_least64_t();\n      else return __int128_t();\n\
+    \    }\n\n  public:\n    using type = decltype(get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
+    \ size>\n  using int_least_t = typename int_least<size>::type;\n\n  template<KYOPRO_BASE_UINT\
     \ size>\n  struct uint_least {\n  private:\n    static constexpr auto get_type()\
-    \ noexcept {\n      static_assert(size <= 128, \"Integer size is too long\");\n\
+    \ noexcept {\n      static_assert(size <= 128, \"Integer size is too large\");\n\
     \      if constexpr (size <= 8) return std::uint_least8_t();\n      else if constexpr\
     \ (size <= 16) return std::uint_least16_t();\n      else if constexpr (size <=\
     \ 32) return std::uint_least32_t();\n      else if constexpr (size <= 64) return\
@@ -601,55 +596,54 @@ data:
     \  using lf = double;\n\n  using i8 = std::int8_t;\n  using u8 = std::uint8_t;\n\
     \  using i16 = std::int16_t;\n  using u16 = std::uint16_t;\n  using i32 = std::int32_t;\n\
     \  using u32 = std::uint32_t;\n  using i64 = std::int64_t;\n  using u64 = std::uint64_t;\n\
-    \  using i128 = __int128_t;\n  using u128 = __uint128_t;\n  #ifdef __SIZEOF_FLOAT128__\n\
-    \  using f128 = __float128;\n  #endif\n\n  using mint = ModInt<mod>;\n  using\
-    \ dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\n  template<class T, KYOPRO_BASE_UINT\
-    \ idx, class... Args>\n  struct agg_type {\n    using type = typename agg_type<T,\
-    \ idx - 1, T, Args...>::type;\n  };\n  template<class T, class... Args>\n  struct\
-    \ agg_type<T, 0, Args...> {\n    using type = std::tuple<Args...>;\n  };\n  template<class\
-    \ T>\n  struct agg_type<T, 0, T, T> {\n    using type = std::pair<T, T>;\n  };\n\
-    \n  template<class T, KYOPRO_BASE_UINT idx>\n  using agg = typename agg_type<T,\
-    \ idx>::type;\n\n  template<class T>\n  using vec = std::vector<T>;\n  template<class\
-    \ T>\n  using vvec = std::vector<vec<T>>;\n  template<class T>\n  using vvvec\
-    \ = std::vector<vvec<T>>;\n  template<class T>\n  using vvvvec = std::vector<vvvec<T>>;\n\
-    \  template<class T>\n  using vvvvvec = std::vector<vvvvec<T>>;\n\n  template<class\
-    \ Key, class Compare = std::less<Key>>\n  using mset = std::unordered_set<Key,\
-    \ Compare>;\n  template<class Key, class T, class Compare = std::less<Key>>\n\
-    \  using mmap = std::unordered_map<Key, T, Compare>;\n  template<class Key>\n\
-    \  using hset = std::unordered_set<Key, Hash<Key>>;\n  template<class Key, class\
-    \ T>\n  using hmap = std::unordered_map<Key, T, Hash<Key>>;\n  template<class\
-    \ Key>\n  using hmiset = std::unordered_multiset<Key, Hash<Key>>;\n  template<class\
-    \ Key, class T>\n  using hmmap = std::unordered_multimap<Key, T, Hash<Key>>;\n\
-    \  template<class T, class Compare = std::less<T>, class Container = std::vector<T>>\n\
-    \  using priq = std::priority_queue<T, Container, Compare>;\n  template<class\
-    \ T, class Compare = std::greater<T>, class Container = std::vector<T>>\n  using\
-    \ heapq = priq<T, Compare, Container>;\n}\n\nusing namespace std;\nusing namespace\
-    \ kyopro;\n#line 2 \"template/amin_amax.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ T, class U>\n  constexpr bool amin(T& a, U&& b) noexcept {\n    if (b < a) {\n\
-    \      a = b;\n      return true;\n    }\n    return false;\n  }\n\n  template<class\
-    \ T, class U>\n  constexpr bool amax(T& a, U&& b) noexcept {\n    if (a < b) {\n\
-    \      a = b;\n      return true;\n    }\n    return false;\n  }\n}\n#line 4 \"\
-    template/constant.hpp\"\n\nnamespace kyopro {\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 4> beside{{{1, 0}, {0, 1}, {-1, 0}, {0, -1}}};\n  inline constexpr\
-    \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1,\
-    \ 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}, {1, -1}}};\n}\n#line 4 \"template/len.hpp\"\
-    \n\nnamespace kyopro {\n  template<class T>\n  constexpr KYOPRO_BASE_INT len(T&&\
-    \ a) noexcept {\n    return std::size(a);\n  }\n}\n#line 5 \"template/macro.hpp\"\
-    \n\n#define KYOPRO_OVERLOAD_MACRO(_1, _2, _3, _4, name, ...) name\n#define KYOPRO_REP0()\
-    \ for (; ; )\n#define KYOPRO_REP1(i) for (KYOPRO_BASE_INT i = 0; ; ++(i))\n#define\
-    \ KYOPRO_REP2(i, last) for (KYOPRO_BASE_INT i = 0, KYOPRO_LAST_ ## i = (last);\
-    \ (i) < (KYOPRO_LAST_ ## i); ++(i))\n#define KYOPRO_REP3(i, first, last) for (KYOPRO_BASE_INT\
-    \ i = (first), KYOPRO_LAST_ ## i = last; (i) < (KYOPRO_LAST_ ## i); ++(i))\n#define\
-    \ KYOPRO_REP4(i, first, last, step) for (KYOPRO_BASE_INT i = (first), KYOPRO_LAST_\
-    \ ## i = (last), KYOPRO_STEP_ ## i = (step); (KYOPRO_STEP_ ## i) > 0 ? (i) < (KYOPRO_LAST_\
-    \ ## i) : (i) > (KYOPRO_LAST_ ## i); (i) += (KYOPRO_BASE_INT)(step))\n#define\
-    \ rep(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__ __VA_OPT__(,) KYOPRO_REP4, KYOPRO_REP3,\
-    \ KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\n#define KYOPRO_ITER2(i,\
-    \ last) for (auto i = std::decay_t<decltype(last)>(), KYOPRO_LAST_ ## i = (last);\
-    \ (i) != (KYOPRO_LAST_ ## i); ++(i))\n#define KYOPRO_ITER3(i, first, last) for\
-    \ (auto i = (first), KYOPRO_LAST_ ## i = (last); (i) != (KYOPRO_LAST_ ## i); ++(i))\n\
-    #define KYOPRO_ITER4(i, first, last, step) for (auto i = (first), KYOPRO_LAST_\
-    \ ## i = (last); (step) > 0 ? (i) < (KYOPRO_LAST_ ## i) : (i) > (KYOPRO_LAST_\
+    \  using i128 = __int128_t;\n  using u128 = __uint128_t;\n  using f128 = __float128;\n\
+    \n  using mint = ModInt<mod>;\n  using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\
+    \n  template<class T, KYOPRO_BASE_UINT idx, class... Args>\n  struct agg_type\
+    \ {\n    using type = typename agg_type<T, idx - 1, T, Args...>::type;\n  };\n\
+    \  template<class T, class... Args>\n  struct agg_type<T, 0, Args...> {\n    using\
+    \ type = std::tuple<Args...>;\n  };\n  template<class T>\n  struct agg_type<T,\
+    \ 0, T, T> {\n    using type = std::pair<T, T>;\n  };\n\n  template<class T, KYOPRO_BASE_UINT\
+    \ idx>\n  using agg = typename agg_type<T, idx>::type;\n\n  template<class T>\n\
+    \  using vec = std::vector<T>;\n  template<class T>\n  using vvec = std::vector<vec<T>>;\n\
+    \  template<class T>\n  using vvvec = std::vector<vvec<T>>;\n  template<class\
+    \ T>\n  using vvvvec = std::vector<vvvec<T>>;\n  template<class T>\n  using vvvvvec\
+    \ = std::vector<vvvvec<T>>;\n\n  template<class Key, class Compare = std::less<Key>>\n\
+    \  using mset = std::unordered_set<Key, Compare>;\n  template<class Key, class\
+    \ T, class Compare = std::less<Key>>\n  using mmap = std::unordered_map<Key, T,\
+    \ Compare>;\n  template<class Key>\n  using hset = std::unordered_set<Key, Hash<Key>>;\n\
+    \  template<class Key, class T>\n  using hmap = std::unordered_map<Key, T, Hash<Key>>;\n\
+    \  template<class Key>\n  using hmiset = std::unordered_multiset<Key, Hash<Key>>;\n\
+    \  template<class Key, class T>\n  using hmmap = std::unordered_multimap<Key,\
+    \ T, Hash<Key>>;\n  template<class T, class Compare = std::less<T>, class Container\
+    \ = std::vector<T>>\n  using priq = std::priority_queue<T, Container, Compare>;\n\
+    \  template<class T, class Compare = std::greater<T>, class Container = std::vector<T>>\n\
+    \  using heapq = priq<T, Compare, Container>;\n}\n\nusing namespace std;\nusing\
+    \ namespace kyopro;\n#line 2 \"template/amin_amax.hpp\"\n\nnamespace kyopro {\n\
+    \  template<class T, class U>\n  constexpr bool amin(T& a, U&& b) noexcept {\n\
+    \    if (b < a) {\n      a = b;\n      return true;\n    }\n    return false;\n\
+    \  }\n\n  template<class T, class U>\n  constexpr bool amax(T& a, U&& b) noexcept\
+    \ {\n    if (a < b) {\n      a = b;\n      return true;\n    }\n    return false;\n\
+    \  }\n}\n#line 4 \"template/constant.hpp\"\n\nnamespace kyopro {\n  inline constexpr\
+    \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 4> beside{{{1, 0}, {0,\
+    \ 1}, {-1, 0}, {0, -1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
+    \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
+    \ -1}, {0, -1}, {1, -1}}};\n}\n#line 4 \"template/len.hpp\"\n\nnamespace kyopro\
+    \ {\n  template<class T>\n  constexpr KYOPRO_BASE_INT len(T&& a) noexcept {\n\
+    \    return std::size(a);\n  }\n}\n#line 5 \"template/macro.hpp\"\n\n#define KYOPRO_OVERLOAD_MACRO(_1,\
+    \ _2, _3, _4, name, ...) name\n#define KYOPRO_REP0() for (; ; )\n#define KYOPRO_REP1(i)\
+    \ for (KYOPRO_BASE_INT i = 0; ; ++(i))\n#define KYOPRO_REP2(i, last) for (KYOPRO_BASE_INT\
+    \ i = 0, KYOPRO_LAST_ ## i = (last); (i) < (KYOPRO_LAST_ ## i); ++(i))\n#define\
+    \ KYOPRO_REP3(i, first, last) for (KYOPRO_BASE_INT i = (first), KYOPRO_LAST_ ##\
+    \ i = last; (i) < (KYOPRO_LAST_ ## i); ++(i))\n#define KYOPRO_REP4(i, first, last,\
+    \ step) for (KYOPRO_BASE_INT i = (first), KYOPRO_LAST_ ## i = (last), KYOPRO_STEP_\
+    \ ## i = (step); (KYOPRO_STEP_ ## i) > 0 ? (i) < (KYOPRO_LAST_ ## i) : (i) > (KYOPRO_LAST_\
+    \ ## i); (i) += (KYOPRO_BASE_INT)(step))\n#define rep(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__\
+    \ __VA_OPT__(,) KYOPRO_REP4, KYOPRO_REP3, KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\n\
+    #define KYOPRO_ITER2(i, last) for (auto i = std::decay_t<decltype(last)>(), KYOPRO_LAST_\
+    \ ## i = (last); (i) != (KYOPRO_LAST_ ## i); ++(i))\n#define KYOPRO_ITER3(i, first,\
+    \ last) for (auto i = (first), KYOPRO_LAST_ ## i = (last); (i) != (KYOPRO_LAST_\
+    \ ## i); ++(i))\n#define KYOPRO_ITER4(i, first, last, step) for (auto i = (first),\
+    \ KYOPRO_LAST_ ## i = (last); (step) > 0 ? (i) < (KYOPRO_LAST_ ## i) : (i) > (KYOPRO_LAST_\
     \ ## i); (i) += (step))\n#define iter(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__,\
     \ KYOPRO_ITER4, KYOPRO_ITER3, KYOPRO_ITER2)(__VA_ARGS__)\n#define KYOPRO_LAMBDA1(value)\
     \ ([&]() noexcept { return (value);})\n#define KYOPRO_LAMBDA2(_1, value) ([&](auto&&\
@@ -734,7 +728,7 @@ data:
   isVerificationFile: false
   path: all/all.hpp
   requiredBy: []
-  timestamp: '2022-04-21 22:20:00+09:00'
+  timestamp: '2022-04-22 10:55:57+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp
