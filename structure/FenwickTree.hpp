@@ -9,6 +9,9 @@ namespace kyopro {
   template<class T, class Op = Plus<T>, class Container = std::vector<T>>
   struct FenwickTree {
     using value_type = T;
+    using size_type = KYOPRO_BASE_UINT;
+    using reference = T&;
+    using const_reference = const T&;
     using operator_type = Op;
     using container_type = Container;
 
@@ -17,11 +20,6 @@ namespace kyopro {
     Container tree;
 
   public:
-    using value_type = T;
-    using size_type = KYOPRO_BASE_UINT;
-    using reference = T&;
-    using const_reference = const T&;
-
     FenwickTree() noexcept = default;
     FenwickTree(KYOPRO_BASE_UINT n) noexcept: tree(n, op.id) {}
     template<class C, std::enable_if_t<std::is_same_v<Container, std::decay_t<C>>>>
