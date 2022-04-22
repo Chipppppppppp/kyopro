@@ -1,6 +1,5 @@
 #pragma once
 #include <array>
-#include <utility>
 #include "../meta/settings.hpp"
 
 namespace kyopro {
@@ -12,6 +11,6 @@ namespace kyopro {
     auto elm = make_array<T, lengths...>(init);
     std::array<decltype(elm), length> res;
     for (auto& i: res) i = elm;
-    return std::move(res);
+    return res;
   }
 }
