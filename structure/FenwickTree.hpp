@@ -8,6 +8,10 @@
 namespace kyopro {
   template<class T, class Op = Plus<T>, class Container = std::vector<T>>
   struct FenwickTree {
+    using value_type = T;
+    using operator_type = Op;
+    using container_type = Container;
+
   private:
     [[no_unique_address]] Op op;
     Container tree;

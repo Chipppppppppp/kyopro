@@ -8,6 +8,7 @@ namespace kyopro {
   template<class T>
   struct Montgomery {
     static_assert(std::is_unsigned_v<T>, "Unsigned integer is required");
+    using value_type = T;
 
     T mod;
 

@@ -75,6 +75,7 @@ namespace kyopro {
 
   template<class Iterator, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>
   struct Scanner {
+    using iterator_type = Iterator;
     static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;
 
   private:

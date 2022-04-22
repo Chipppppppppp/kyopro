@@ -5,6 +5,8 @@
 namespace kyopro {
   template<class F>
   struct RecursiveLambda {
+    using value_type = F;
+
   private:
     F func;
 

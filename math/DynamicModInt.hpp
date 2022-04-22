@@ -9,9 +9,11 @@
 #include "Montgomery.hpp"
 
 namespace kyopro {
-  template<class T, KYOPRO_BASE_UINT = 0>
+  template<class T, KYOPRO_BASE_UINT _kind = 0>
   struct DynamicModInt {
     static_assert(std::is_unsigned_v<T>, "T must be unsigned integer");
+    using value_type = T;
+    static constexpr KYOPRO_BASE_INT kind = _kind;
 
   private:
     using larger_type = uint_least_t<std::numeric_limits<T>::digits * 2>;
@@ -88,13 +90,13 @@ namespace kyopro {
 
     DynamicModInt& operator +=(DynamicModInt rhs) noexcept {
       value += rhs.value - (mod << 1);
-      value = static_cast<std::make_signed_t<T>>(value) < 0 ? value + (mod << 1) : value;
+      if (static_cast<std::make_signed_t<T>>(value) < 0) value += mod << 1;
       return *this;
     }
 
     DynamicModInt& operator -=(DynamicModInt rhs) noexcept {
       value -= rhs.value;
-      value = static_cast<std::make_signed_t<T>>(value) < 0 ? value + (mod << 1) : value;
+      if (static_cast<std::make_signed_t<T>>(value) < 0) value += mod << 1;
       return *this;
     }
 
@@ -134,5 +136,9 @@ namespace kyopro {
   };
 
   template<class T, KYOPRO_BASE_UINT kind>
-  struct Hash<DynamicModInt<T, kind>> { std::size_t operator ()(DynamicModInt<T, kind> a) const noexcept { return static_cast<std::size_t>(a); } };
+  struct Hash<DynamicModInt<T, kind>> {
+    using value_type = DynamicModInt<T, kind>;
+
+    std::size_t operator ()(DynamicModInt<T, kind> a) const noexcept { return static_cast<std::size_t>(a); }
+  };
 }

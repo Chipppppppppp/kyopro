@@ -76,6 +76,7 @@ namespace kyopro {
 
   template<class Iterator, bool _sep = true, bool _end = true, bool _debug = false, bool _comment = false, bool _flush = false, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>
   struct Printer {
+    using iterator_type = Iterator;
     static constexpr bool sep = _sep, end = _end, debug = _debug, comment = _comment, flush = _flush;
     static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;
 
