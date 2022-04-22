@@ -4,22 +4,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
   - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   _extendedRequiredBy:
@@ -117,7 +117,7 @@ data:
     \ {};\n  template<class... Args>\n  struct is_tuple<std::tuple<Args...>>: std::true_type\
     \ {};\n\n  template<class T>\n  constexpr bool is_tuple_v = is_tuple<T>::value;\n\
     \n  template<class T>\n  struct iterable_value {\n    using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\n\
-    \  };\n\n  template<class T>\n  using iterable_value_t = typename iterable_value<T>::value;\n\
+    \  };\n\n  template<class T>\n  using iterable_value_t = typename iterable_value<T>::type;\n\
     }\n#line 9 \"structure/UnionFind.hpp\"\n\nnamespace kyopro {\n  template<class\
     \ Container = std::vector<int>>\n  struct UnionFind {\n    using value_type =\
     \ iterable_value_t<Container>;\n    using container_type = Container;\n\n  private:\n\
@@ -163,7 +163,7 @@ data:
   path: structure/all.hpp
   requiredBy:
   - all/all.hpp
-  timestamp: '2022-04-22 18:47:54+09:00'
+  timestamp: '2022-04-22 21:56:22+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: structure/all.hpp

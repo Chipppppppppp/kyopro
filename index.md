@@ -63,7 +63,7 @@ data:
     - icon: ':warning:'
       path: math/mod.hpp
       title: math/mod.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: math/power.hpp
       title: math/power.hpp
   - name: meta
@@ -74,10 +74,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: meta/constant.hpp
       title: meta/constant.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: meta/settings.hpp
       title: meta/settings.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: meta/trait.hpp
       title: meta/trait.hpp
   - name: structure
@@ -85,7 +85,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: structure/FenwickTree.hpp
       title: structure/FenwickTree.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: structure/UnionFind.hpp
       title: structure/UnionFind.hpp
     - icon: ':warning:'
@@ -93,13 +93,13 @@ data:
       title: structure/all.hpp
   - name: system
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: system/all.hpp
       title: system/all.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: system/in.hpp
       title: system/in.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: system/out.hpp
       title: system/out.hpp
   - name: template
@@ -139,7 +139,7 @@ data:
       title: aoj/PrimeNumber.test.cpp
   - name: yosupo
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: yosupo/UnionFind.test.cpp
       title: yosupo/UnionFind.test.cpp
     - icon: ':heavy_check_mark:'
