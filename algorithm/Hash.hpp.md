@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -88,36 +88,36 @@ data:
     \  };\n\n  template<class T>\n  using iterable_value_t = typename iterable_value<T>::value;\n\
     }\n#line 10 \"algorithm/Hash.hpp\"\n\nnamespace kyopro {\n  template<class, class\
     \ = void>\n  struct Hash;\n\n  template<class T>\n  struct Hash<T, std::enable_if_t<std::is_scalar_v<T>>>:\
-    \ std::hash<T> {\n    constexpr std::size_t operator ()(T a) const noexcept {\n\
-    \      return std::hash<T>::operator ()(a);\n    }\n  };\n\n  template<class T>\n\
-    \  struct Hash<T, std::enable_if_t<is_tuple_v<T>>> {\n    template<KYOPRO_BASE_UINT\
-    \ i = 0>\n    constexpr std::size_t operator ()(const T& a) const noexcept {\n\
-    \      if constexpr (i == std::tuple_size_v<T>) return std::tuple_size_v<T>;\n\
-    \      else {\n        std::uint_fast64_t seed = operator()<i + 1>(a);\n     \
-    \   return seed ^ (Hash<std::tuple_element_t<i, T>>()(std::get<i>(a)) + 0x9e3779b97f4a7c15LU\
-    \ + (seed << 12) + (seed >> 4));\n      }\n    }\n  };\n\n  template<class T>\n\
-    \  struct Hash<T, std::enable_if_t<is_iterable_v<T>>>: Hash<iterable_value_t<T>>\
-    \ {\n    constexpr std::size_t operator ()(const T& a) const noexcept {\n    \
-    \  std::uint_fast64_t seed = a.size();\n      for (auto& i: a) seed ^= Hash<iterable_value_t<T>>(i)\
-    \ + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4);\n      return seed;\n \
-    \   }\n  };\n}\n"
+    \ std::hash<T> {\n    using value_type = T;\n\n    constexpr std::size_t operator\
+    \ ()(T a) const noexcept {\n      return std::hash<T>::operator ()(a);\n    }\n\
+    \  };\n\n  template<class T>\n  struct Hash<T, std::enable_if_t<is_tuple_v<T>>>\
+    \ {\n    using value_type = T;\n\n    template<KYOPRO_BASE_UINT i = 0>\n    constexpr\
+    \ std::size_t operator ()(const T& a) const noexcept {\n      if constexpr (i\
+    \ == std::tuple_size_v<T>) return std::tuple_size_v<T>;\n      else {\n      \
+    \  std::uint_fast64_t seed = operator()<i + 1>(a);\n        return seed ^ (Hash<std::tuple_element_t<i,\
+    \ T>>()(std::get<i>(a)) + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4));\n\
+    \      }\n    }\n  };\n\n  template<class T>\n  struct Hash<T, std::enable_if_t<is_iterable_v<T>>>:\
+    \ Hash<iterable_value_t<T>> {\n    using value_type = T;\n\n    constexpr std::size_t\
+    \ operator ()(const T& a) const noexcept {\n      std::uint_fast64_t seed = a.size();\n\
+    \      for (auto& i: a) seed ^= Hash<iterable_value_t<T>>(i) + 0x9e3779b97f4a7c15LU\
+    \ + (seed << 12) + (seed >> 4);\n      return seed;\n    }\n  };\n}\n"
   code: "#pragma once\n#include <cstddef>\n#include <cstdint>\n#include <functional>\n\
     #include <tuple>\n#include <type_traits>\n#include <utility>\n#include \"../meta/settings.hpp\"\
     \n#include \"../meta/trait.hpp\"\n\nnamespace kyopro {\n  template<class, class\
     \ = void>\n  struct Hash;\n\n  template<class T>\n  struct Hash<T, std::enable_if_t<std::is_scalar_v<T>>>:\
-    \ std::hash<T> {\n    constexpr std::size_t operator ()(T a) const noexcept {\n\
-    \      return std::hash<T>::operator ()(a);\n    }\n  };\n\n  template<class T>\n\
-    \  struct Hash<T, std::enable_if_t<is_tuple_v<T>>> {\n    template<KYOPRO_BASE_UINT\
-    \ i = 0>\n    constexpr std::size_t operator ()(const T& a) const noexcept {\n\
-    \      if constexpr (i == std::tuple_size_v<T>) return std::tuple_size_v<T>;\n\
-    \      else {\n        std::uint_fast64_t seed = operator()<i + 1>(a);\n     \
-    \   return seed ^ (Hash<std::tuple_element_t<i, T>>()(std::get<i>(a)) + 0x9e3779b97f4a7c15LU\
-    \ + (seed << 12) + (seed >> 4));\n      }\n    }\n  };\n\n  template<class T>\n\
-    \  struct Hash<T, std::enable_if_t<is_iterable_v<T>>>: Hash<iterable_value_t<T>>\
-    \ {\n    constexpr std::size_t operator ()(const T& a) const noexcept {\n    \
-    \  std::uint_fast64_t seed = a.size();\n      for (auto& i: a) seed ^= Hash<iterable_value_t<T>>(i)\
-    \ + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4);\n      return seed;\n \
-    \   }\n  };\n}"
+    \ std::hash<T> {\n    using value_type = T;\n\n    constexpr std::size_t operator\
+    \ ()(T a) const noexcept {\n      return std::hash<T>::operator ()(a);\n    }\n\
+    \  };\n\n  template<class T>\n  struct Hash<T, std::enable_if_t<is_tuple_v<T>>>\
+    \ {\n    using value_type = T;\n\n    template<KYOPRO_BASE_UINT i = 0>\n    constexpr\
+    \ std::size_t operator ()(const T& a) const noexcept {\n      if constexpr (i\
+    \ == std::tuple_size_v<T>) return std::tuple_size_v<T>;\n      else {\n      \
+    \  std::uint_fast64_t seed = operator()<i + 1>(a);\n        return seed ^ (Hash<std::tuple_element_t<i,\
+    \ T>>()(std::get<i>(a)) + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4));\n\
+    \      }\n    }\n  };\n\n  template<class T>\n  struct Hash<T, std::enable_if_t<is_iterable_v<T>>>:\
+    \ Hash<iterable_value_t<T>> {\n    using value_type = T;\n\n    constexpr std::size_t\
+    \ operator ()(const T& a) const noexcept {\n      std::uint_fast64_t seed = a.size();\n\
+    \      for (auto& i: a) seed ^= Hash<iterable_value_t<T>>(i) + 0x9e3779b97f4a7c15LU\
+    \ + (seed << 12) + (seed >> 4);\n      return seed;\n    }\n  };\n}"
   dependsOn:
   - meta/settings.hpp
   - meta/trait.hpp
@@ -133,7 +133,7 @@ data:
   - template/all.hpp
   - template/alias.hpp
   - all/all.hpp
-  timestamp: '2022-04-22 10:55:57+09:00'
+  timestamp: '2022-04-22 18:45:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - aoj/PrimeNumber.test.cpp

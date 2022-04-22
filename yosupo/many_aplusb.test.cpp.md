@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/out.hpp
     title: system/out.hpp
   _extendedRequiredBy: []
@@ -92,10 +92,10 @@ data:
     \ *() const {\n        return reader.buffer[reader.idx];\n      }\n    };\n\n\
     \    iterator begin() noexcept {\n      return iterator(*this);\n    }\n  };\n\
     \n  Reader input(0);\n\n  template<class Iterator, KYOPRO_BASE_UINT _decimal_precision\
-    \ = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n    static constexpr KYOPRO_BASE_UINT\
-    \ decimal_precision = _decimal_precision;\n\n  private:\n    template<class, class\
-    \ = void>\n    struct has_scan: std::false_type {};\n    template<class T>\n \
-    \   struct has_scan<T, std::void_t<decltype(std::declval<T>().scan(std::declval<Scanner&>()))>>:\
+    \ = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n    using iterator_type = Iterator;\n\
+    \    static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;\n\
+    \n  private:\n    template<class, class = void>\n    struct has_scan: std::false_type\
+    \ {};\n    template<class T>\n    struct has_scan<T, std::void_t<decltype(std::declval<T>().scan(std::declval<Scanner&>()))>>:\
     \ std::true_type {};\n\n  public:\n    Iterator itr;\n\n    Scanner() noexcept\
     \ = default;\n    Scanner(Iterator itr) noexcept: itr(itr) {}\n\n    void discard_space()\
     \ {\n      while (('\\t' <= *itr && *itr <= '\\r') || *itr == ' ') ++itr;\n  \
@@ -147,11 +147,11 @@ data:
     \ iterator(*this);\n    }\n  };\n\n  Writer output(1), error(2);\n\n  template<class\
     \ Iterator, bool _sep = true, bool _end = true, bool _debug = false, bool _comment\
     \ = false, bool _flush = false, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
-    \  struct Printer {\n    static constexpr bool sep = _sep, end = _end, debug =\
-    \ _debug, comment = _comment, flush = _flush;\n    static constexpr KYOPRO_BASE_UINT\
-    \ decimal_precision = _decimal_precision;\n\n  private:\n    template<class, class\
-    \ = void>\n    struct has_print: std::false_type {};\n    template<class T>\n\
-    \    struct has_print<T, std::void_t<decltype(std::declval<T>().print(std::declval<Printer&>()))>>:\
+    \  struct Printer {\n    using iterator_type = Iterator;\n    static constexpr\
+    \ bool sep = _sep, end = _end, debug = _debug, comment = _comment, flush = _flush;\n\
+    \    static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;\n\
+    \n  private:\n    template<class, class = void>\n    struct has_print: std::false_type\
+    \ {};\n    template<class T>\n    struct has_print<T, std::void_t<decltype(std::declval<T>().print(std::declval<Printer&>()))>>:\
     \ std::true_type {};\n\n    void print_sep() {\n      if constexpr (debug) {\n\
     \        print(',');\n      }\n      print(' ');\n    }\n\n  public:\n\n    Iterator\
     \ itr;\n\n    Printer() noexcept = default;\n    Printer(Iterator itr) noexcept:\
@@ -209,7 +209,7 @@ data:
   isVerificationFile: true
   path: yosupo/many_aplusb.test.cpp
   requiredBy: []
-  timestamp: '2022-04-22 10:55:57+09:00'
+  timestamp: '2022-04-22 18:45:30+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/many_aplusb.test.cpp

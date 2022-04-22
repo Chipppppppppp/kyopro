@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
@@ -49,16 +49,16 @@ data:
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 6 \"math/Montgomery.hpp\"\n\nnamespace kyopro {\n  template<class\
     \ T>\n  struct Montgomery {\n    static_assert(std::is_unsigned_v<T>, \"Unsigned\
-    \ integer is required\");\n\n    T mod;\n\n  private:\n    using larger_type =\
-    \ uint_least_t<std::numeric_limits<T>::digits * 2>;\n\n    T r, n2;\n\n  public:\n\
-    \    constexpr void set_mod(T _mod) noexcept {\n      mod = _mod;\n      n2 =\
-    \ -static_cast<larger_type>(mod) % mod;\n      T t = 0;\n      r = 0;\n      for\
-    \ (int i = 0; i < std::numeric_limits<T>::digits; ++i) {\n        if (!(t & 1))\
-    \ {\n          t += mod;\n          r += static_cast<T>(1) << static_cast<T>(i);\n\
-    \        }\n        t >>= 1;\n      }\n    }\n\n    constexpr KYOPRO_BASE_INT\
-    \ get_mod() const noexcept {\n      return mod;\n    }\n\n    Montgomery() noexcept\
-    \ = default;\n    Montgomery(T mod) noexcept {\n      set_mod(mod);\n    }\n\n\
-    \    constexpr T transform(T x) const noexcept {\n      return reduce(static_cast<larger_type>(x)\
+    \ integer is required\");\n    using value_type = T;\n\n    T mod;\n\n  private:\n\
+    \    using larger_type = uint_least_t<std::numeric_limits<T>::digits * 2>;\n\n\
+    \    T r, n2;\n\n  public:\n    constexpr void set_mod(T _mod) noexcept {\n  \
+    \    mod = _mod;\n      n2 = -static_cast<larger_type>(mod) % mod;\n      T t\
+    \ = 0;\n      r = 0;\n      for (int i = 0; i < std::numeric_limits<T>::digits;\
+    \ ++i) {\n        if (!(t & 1)) {\n          t += mod;\n          r += static_cast<T>(1)\
+    \ << static_cast<T>(i);\n        }\n        t >>= 1;\n      }\n    }\n\n    constexpr\
+    \ KYOPRO_BASE_INT get_mod() const noexcept {\n      return mod;\n    }\n\n   \
+    \ Montgomery() noexcept = default;\n    Montgomery(T mod) noexcept {\n      set_mod(mod);\n\
+    \    }\n\n    constexpr T transform(T x) const noexcept {\n      return reduce(static_cast<larger_type>(x)\
     \ * n2);\n    }\n\n    constexpr T inverse_transform(T x) const noexcept {\n \
     \     T y = reduce(x);\n      return y >= mod ? y - mod : y;\n    }\n\n    constexpr\
     \ T reduce(larger_type x) const noexcept {\n      return (x + static_cast<larger_type>(static_cast<T>(x)\
@@ -66,10 +66,11 @@ data:
   code: "#pragma once\n#include <cstdint>\n#include <limits>\n#include <type_traits>\n\
     #include \"../meta/settings.hpp\"\n\nnamespace kyopro {\n  template<class T>\n\
     \  struct Montgomery {\n    static_assert(std::is_unsigned_v<T>, \"Unsigned integer\
-    \ is required\");\n\n    T mod;\n\n  private:\n    using larger_type = uint_least_t<std::numeric_limits<T>::digits\
-    \ * 2>;\n\n    T r, n2;\n\n  public:\n    constexpr void set_mod(T _mod) noexcept\
-    \ {\n      mod = _mod;\n      n2 = -static_cast<larger_type>(mod) % mod;\n   \
-    \   T t = 0;\n      r = 0;\n      for (int i = 0; i < std::numeric_limits<T>::digits;\
+    \ is required\");\n    using value_type = T;\n\n    T mod;\n\n  private:\n   \
+    \ using larger_type = uint_least_t<std::numeric_limits<T>::digits * 2>;\n\n  \
+    \  T r, n2;\n\n  public:\n    constexpr void set_mod(T _mod) noexcept {\n    \
+    \  mod = _mod;\n      n2 = -static_cast<larger_type>(mod) % mod;\n      T t =\
+    \ 0;\n      r = 0;\n      for (int i = 0; i < std::numeric_limits<T>::digits;\
     \ ++i) {\n        if (!(t & 1)) {\n          t += mod;\n          r += static_cast<T>(1)\
     \ << static_cast<T>(i);\n        }\n        t >>= 1;\n      }\n    }\n\n    constexpr\
     \ KYOPRO_BASE_INT get_mod() const noexcept {\n      return mod;\n    }\n\n   \
@@ -91,7 +92,7 @@ data:
   - template/all.hpp
   - template/alias.hpp
   - all/all.hpp
-  timestamp: '2022-04-22 15:09:39+09:00'
+  timestamp: '2022-04-22 18:45:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - aoj/PrimeNumber.test.cpp

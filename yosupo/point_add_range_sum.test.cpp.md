@@ -4,28 +4,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
   - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/out.hpp
     title: system/out.hpp
   _extendedRequiredBy: []
@@ -63,36 +63,39 @@ data:
     \ T>\n  inline constexpr T PI = 3.14159265358979323846;\n  inline constexpr KYOPRO_BASE_FLOAT\
     \ pi = PI<KYOPRO_BASE_FLOAT>;\n}\n#line 4 \"function/monoid.hpp\"\n\nnamespace\
     \ kyopro {\n  template<class T, T _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<T>);\n\
-    \    static constexpr T id = _id;\n    constexpr T operator ()(T a, T b) const\
-    \ noexcept { return a + b; }\n    constexpr T inverse(T a) const noexcept { return\
-    \ -a; }\n  };\n\n  template<class T, T _id = 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<T>);\n\
-    \    static constexpr T id = _id;\n    constexpr T operator ()(T a, T b) const\
-    \ noexcept { return a * b; }\n    constexpr T inverse(T a) const noexcept {\n\
-    \      static_assert(!std::is_integral_v<T>);\n      return 1 / a;\n    }\n  };\n\
-    \n  template<class T, T _id = std::is_integral_v<T> ? -INF<T> : -inf>\n  struct\
-    \ Max {\n    static_assert(std::is_arithmetic_v<T>);\n    static constexpr T id\
-    \ = _id;\n    constexpr T operator ()(T a, T b) const noexcept { return a > b\
-    \ ? a : b; }\n  };\n\n  template<class T, T _id = std::is_integral_v<T> ? INF<T>\
-    \ : inf>\n  struct Min {\n    static_assert(std::is_arithmetic_v<T>);\n    static\
-    \ constexpr T id = _id;\n    constexpr T operator ()(T a, T b) const noexcept\
-    \ { return a < b ? a : b; }\n  };\n}\n#line 7 \"structure/FenwickTree.hpp\"\n\n\
-    namespace kyopro {\n  template<class T, class Op = Plus<T>, class Container =\
-    \ std::vector<T>>\n  struct FenwickTree {\n  private:\n    [[no_unique_address]]\
-    \ Op op;\n    Container tree;\n\n  public:\n    using value_type = T;\n    using\
-    \ size_type = KYOPRO_BASE_UINT;\n    using reference = T&;\n    using const_reference\
-    \ = const T&;\n\n    FenwickTree() noexcept = default;\n    FenwickTree(KYOPRO_BASE_UINT\
-    \ n) noexcept: tree(n, op.id) {}\n    template<class C, std::enable_if_t<std::is_same_v<Container,\
-    \ std::decay_t<C>>>>\n    FenwickTree(C&& tree): tree(std::forward<C>(tree)) {}\n\
-    \n    KYOPRO_BASE_UINT size() noexcept { return tree.size(); }\n\n    void apply(int\
-    \ p, const T& x) {\n      ++p;\n      while (p <= (int)size()) {\n        tree[p\
-    \ - 1] = op(tree[p - 1], x);\n        p += p & -p;\n      }\n    }\n\n    T prod(int\
-    \ r) const {\n      T s = op.id;\n      while (r > 0) {\n        s = op(s, tree[r\
-    \ - 1]);\n        r -= r & -r;\n      }\n      return s;\n    }\n    T prod(int\
-    \ l, int r) const { return op(prod(r), op.inverse(prod(l))); }\n\n    T all_prod()\
-    \ { return prod(tree.size()); }\n\n    T get(int p) { return op(prod(p + 1), op.inverse(prod(p)));\
-    \ }\n\n    void set(int p, const T& x) { apply(p, op(x, op.inverse(get(p))));\
-    \ }\n  };\n}\n#line 2 \"system/in.hpp\"\n#include <unistd.h>\n#line 4 \"system/in.hpp\"\
-    \n#include <cstddef>\n#line 6 \"system/in.hpp\"\n#include <cstdio>\n#include <string>\n\
+    \    using value_type = T;\n    static constexpr T id = _id;\n\n    constexpr\
+    \ T operator ()(T a, T b) const noexcept { return a + b; }\n    constexpr T inverse(T\
+    \ a) const noexcept { return -a; }\n  };\n\n  template<class T, T _id = 1>\n \
+    \ struct Mul {\n    static_assert(std::is_arithmetic_v<T>);\n    using value_type\
+    \ = T;\n    static constexpr T id = _id;\n\n    constexpr T operator ()(T a, T\
+    \ b) const noexcept { return a * b; }\n    constexpr T inverse(T a) const noexcept\
+    \ {\n      static_assert(!std::is_integral_v<T>);\n      return 1 / a;\n    }\n\
+    \  };\n\n  template<class T, T _id = std::is_integral_v<T> ? -INF<T> : -inf>\n\
+    \  struct Max {\n    static_assert(std::is_arithmetic_v<T>);\n    using value_type\
+    \ = T;\n    static constexpr T id = _id;\n\n    constexpr T operator ()(T a, T\
+    \ b) const noexcept { return a > b ? a : b; }\n  };\n\n  template<class T, T _id\
+    \ = std::is_integral_v<T> ? INF<T> : inf>\n  struct Min {\n    static_assert(std::is_arithmetic_v<T>);\n\
+    \    using value_type = T;\n    static constexpr T id = _id;\n\n    constexpr\
+    \ T operator ()(T a, T b) const noexcept { return a < b ? a : b; }\n  };\n}\n\
+    #line 7 \"structure/FenwickTree.hpp\"\n\nnamespace kyopro {\n  template<class\
+    \ T, class Op = Plus<T>, class Container = std::vector<T>>\n  struct FenwickTree\
+    \ {\n    using value_type = T;\n    using size_type = KYOPRO_BASE_UINT;\n    using\
+    \ reference = T&;\n    using const_reference = const T&;\n    using operator_type\
+    \ = Op;\n    using container_type = Container;\n\n  private:\n    [[no_unique_address]]\
+    \ Op op;\n    Container tree;\n\n  public:\n    FenwickTree() noexcept = default;\n\
+    \    FenwickTree(KYOPRO_BASE_UINT n) noexcept: tree(n, op.id) {}\n    template<class\
+    \ C, std::enable_if_t<std::is_same_v<Container, std::decay_t<C>>>>\n    FenwickTree(C&&\
+    \ tree): tree(std::forward<C>(tree)) {}\n\n    KYOPRO_BASE_UINT size() noexcept\
+    \ { return tree.size(); }\n\n    void apply(int p, const T& x) {\n      ++p;\n\
+    \      while (p <= (int)size()) {\n        tree[p - 1] = op(tree[p - 1], x);\n\
+    \        p += p & -p;\n      }\n    }\n\n    T prod(int r) const {\n      T s\
+    \ = op.id;\n      while (r > 0) {\n        s = op(s, tree[r - 1]);\n        r\
+    \ -= r & -r;\n      }\n      return s;\n    }\n    T prod(int l, int r) const\
+    \ { return op(prod(r), op.inverse(prod(l))); }\n\n    T all_prod() { return prod(tree.size());\
+    \ }\n\n    T get(int p) { return op(prod(p + 1), op.inverse(prod(p))); }\n\n \
+    \   void set(int p, const T& x) { apply(p, op(x, op.inverse(get(p)))); }\n  };\n\
+    }\n#line 2 \"system/in.hpp\"\n#include <unistd.h>\n#line 4 \"system/in.hpp\"\n\
+    #include <cstddef>\n#line 6 \"system/in.hpp\"\n#include <cstdio>\n#include <string>\n\
     #include <tuple>\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#include <queue>\n\
     #line 5 \"meta/trait.hpp\"\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\nnamespace\
     \ kyopro {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least {\n  private:\n\
@@ -142,10 +145,10 @@ data:
     \ *() const {\n        return reader.buffer[reader.idx];\n      }\n    };\n\n\
     \    iterator begin() noexcept {\n      return iterator(*this);\n    }\n  };\n\
     \n  Reader input(0);\n\n  template<class Iterator, KYOPRO_BASE_UINT _decimal_precision\
-    \ = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n    static constexpr KYOPRO_BASE_UINT\
-    \ decimal_precision = _decimal_precision;\n\n  private:\n    template<class, class\
-    \ = void>\n    struct has_scan: std::false_type {};\n    template<class T>\n \
-    \   struct has_scan<T, std::void_t<decltype(std::declval<T>().scan(std::declval<Scanner&>()))>>:\
+    \ = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n    using iterator_type = Iterator;\n\
+    \    static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;\n\
+    \n  private:\n    template<class, class = void>\n    struct has_scan: std::false_type\
+    \ {};\n    template<class T>\n    struct has_scan<T, std::void_t<decltype(std::declval<T>().scan(std::declval<Scanner&>()))>>:\
     \ std::true_type {};\n\n  public:\n    Iterator itr;\n\n    Scanner() noexcept\
     \ = default;\n    Scanner(Iterator itr) noexcept: itr(itr) {}\n\n    void discard_space()\
     \ {\n      while (('\\t' <= *itr && *itr <= '\\r') || *itr == ' ') ++itr;\n  \
@@ -197,11 +200,11 @@ data:
     \ iterator(*this);\n    }\n  };\n\n  Writer output(1), error(2);\n\n  template<class\
     \ Iterator, bool _sep = true, bool _end = true, bool _debug = false, bool _comment\
     \ = false, bool _flush = false, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
-    \  struct Printer {\n    static constexpr bool sep = _sep, end = _end, debug =\
-    \ _debug, comment = _comment, flush = _flush;\n    static constexpr KYOPRO_BASE_UINT\
-    \ decimal_precision = _decimal_precision;\n\n  private:\n    template<class, class\
-    \ = void>\n    struct has_print: std::false_type {};\n    template<class T>\n\
-    \    struct has_print<T, std::void_t<decltype(std::declval<T>().print(std::declval<Printer&>()))>>:\
+    \  struct Printer {\n    using iterator_type = Iterator;\n    static constexpr\
+    \ bool sep = _sep, end = _end, debug = _debug, comment = _comment, flush = _flush;\n\
+    \    static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;\n\
+    \n  private:\n    template<class, class = void>\n    struct has_print: std::false_type\
+    \ {};\n    template<class T>\n    struct has_print<T, std::void_t<decltype(std::declval<T>().print(std::declval<Printer&>()))>>:\
     \ std::true_type {};\n\n    void print_sep() {\n      if constexpr (debug) {\n\
     \        print(',');\n      }\n      print(' ');\n    }\n\n  public:\n\n    Iterator\
     \ itr;\n\n    Printer() noexcept = default;\n    Printer(Iterator itr) noexcept:\
@@ -267,7 +270,7 @@ data:
   isVerificationFile: true
   path: yosupo/point_add_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-04-22 15:09:39+09:00'
+  timestamp: '2022-04-22 18:47:54+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/point_add_range_sum.test.cpp

@@ -7,13 +7,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
   - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
@@ -50,21 +50,23 @@ data:
     \ T>\n  inline constexpr T PI = 3.14159265358979323846;\n  inline constexpr KYOPRO_BASE_FLOAT\
     \ pi = PI<KYOPRO_BASE_FLOAT>;\n}\n#line 4 \"function/monoid.hpp\"\n\nnamespace\
     \ kyopro {\n  template<class T, T _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<T>);\n\
-    \    static constexpr T id = _id;\n    constexpr T operator ()(T a, T b) const\
-    \ noexcept { return a + b; }\n    constexpr T inverse(T a) const noexcept { return\
-    \ -a; }\n  };\n\n  template<class T, T _id = 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<T>);\n\
-    \    static constexpr T id = _id;\n    constexpr T operator ()(T a, T b) const\
-    \ noexcept { return a * b; }\n    constexpr T inverse(T a) const noexcept {\n\
-    \      static_assert(!std::is_integral_v<T>);\n      return 1 / a;\n    }\n  };\n\
-    \n  template<class T, T _id = std::is_integral_v<T> ? -INF<T> : -inf>\n  struct\
-    \ Max {\n    static_assert(std::is_arithmetic_v<T>);\n    static constexpr T id\
-    \ = _id;\n    constexpr T operator ()(T a, T b) const noexcept { return a > b\
-    \ ? a : b; }\n  };\n\n  template<class T, T _id = std::is_integral_v<T> ? INF<T>\
-    \ : inf>\n  struct Min {\n    static_assert(std::is_arithmetic_v<T>);\n    static\
-    \ constexpr T id = _id;\n    constexpr T operator ()(T a, T b) const noexcept\
-    \ { return a < b ? a : b; }\n  };\n}\n#line 4 \"function/RecursiveLambda.hpp\"\
-    \n\nnamespace kyopro {\n  template<class F>\n  struct RecursiveLambda {\n  private:\n\
-    \    F func;\n\n  public:\n    template<class G>\n    constexpr RecursiveLambda(G&&\
+    \    using value_type = T;\n    static constexpr T id = _id;\n\n    constexpr\
+    \ T operator ()(T a, T b) const noexcept { return a + b; }\n    constexpr T inverse(T\
+    \ a) const noexcept { return -a; }\n  };\n\n  template<class T, T _id = 1>\n \
+    \ struct Mul {\n    static_assert(std::is_arithmetic_v<T>);\n    using value_type\
+    \ = T;\n    static constexpr T id = _id;\n\n    constexpr T operator ()(T a, T\
+    \ b) const noexcept { return a * b; }\n    constexpr T inverse(T a) const noexcept\
+    \ {\n      static_assert(!std::is_integral_v<T>);\n      return 1 / a;\n    }\n\
+    \  };\n\n  template<class T, T _id = std::is_integral_v<T> ? -INF<T> : -inf>\n\
+    \  struct Max {\n    static_assert(std::is_arithmetic_v<T>);\n    using value_type\
+    \ = T;\n    static constexpr T id = _id;\n\n    constexpr T operator ()(T a, T\
+    \ b) const noexcept { return a > b ? a : b; }\n  };\n\n  template<class T, T _id\
+    \ = std::is_integral_v<T> ? INF<T> : inf>\n  struct Min {\n    static_assert(std::is_arithmetic_v<T>);\n\
+    \    using value_type = T;\n    static constexpr T id = _id;\n\n    constexpr\
+    \ T operator ()(T a, T b) const noexcept { return a < b ? a : b; }\n  };\n}\n\
+    #line 4 \"function/RecursiveLambda.hpp\"\n\nnamespace kyopro {\n  template<class\
+    \ F>\n  struct RecursiveLambda {\n    using value_type = F;\n\n  private:\n  \
+    \  F func;\n\n  public:\n    template<class G>\n    constexpr RecursiveLambda(G&&\
     \ func) noexcept: func(std::forward<G>(func)) {}\n    template<class... Args>\n\
     \    constexpr decltype(auto) operator ()(Args&&... args) const noexcept { return\
     \ func(*this, std::forward<Args>(args)...); }\n  };\n\n  template<class F>\n \
@@ -85,7 +87,7 @@ data:
   path: function/all.hpp
   requiredBy:
   - all/all.hpp
-  timestamp: '2022-04-22 15:09:39+09:00'
+  timestamp: '2022-04-22 18:45:30+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: function/all.hpp

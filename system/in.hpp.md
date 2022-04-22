@@ -1,27 +1,27 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/all.hpp
     title: system/all.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: aoj/PrimeNumber.test.cpp
     title: aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: yosupo/UnionFind.test.cpp
     title: yosupo/UnionFind.test.cpp
   - icon: ':heavy_check_mark:'
@@ -33,9 +33,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: yosupo/point_add_range_sum.test.cpp
     title: yosupo/point_add_range_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"system/in.hpp\"\n#include <unistd.h>\n#include <array>\n\
@@ -100,10 +100,10 @@ data:
     \ *() const {\n        return reader.buffer[reader.idx];\n      }\n    };\n\n\
     \    iterator begin() noexcept {\n      return iterator(*this);\n    }\n  };\n\
     \n  Reader input(0);\n\n  template<class Iterator, KYOPRO_BASE_UINT _decimal_precision\
-    \ = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n    static constexpr KYOPRO_BASE_UINT\
-    \ decimal_precision = _decimal_precision;\n\n  private:\n    template<class, class\
-    \ = void>\n    struct has_scan: std::false_type {};\n    template<class T>\n \
-    \   struct has_scan<T, std::void_t<decltype(std::declval<T>().scan(std::declval<Scanner&>()))>>:\
+    \ = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n    using iterator_type = Iterator;\n\
+    \    static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;\n\
+    \n  private:\n    template<class, class = void>\n    struct has_scan: std::false_type\
+    \ {};\n    template<class T>\n    struct has_scan<T, std::void_t<decltype(std::declval<T>().scan(std::declval<Scanner&>()))>>:\
     \ std::true_type {};\n\n  public:\n    Iterator itr;\n\n    Scanner() noexcept\
     \ = default;\n    Scanner(Iterator itr) noexcept: itr(itr) {}\n\n    void discard_space()\
     \ {\n      while (('\\t' <= *itr && *itr <= '\\r') || *itr == ' ') ++itr;\n  \
@@ -156,40 +156,41 @@ data:
     \      char& operator *() const {\n        return reader.buffer[reader.idx];\n\
     \      }\n    };\n\n    iterator begin() noexcept {\n      return iterator(*this);\n\
     \    }\n  };\n\n  Reader input(0);\n\n  template<class Iterator, KYOPRO_BASE_UINT\
-    \ _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n    static\
-    \ constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;\n\n  private:\n\
-    \    template<class, class = void>\n    struct has_scan: std::false_type {};\n\
-    \    template<class T>\n    struct has_scan<T, std::void_t<decltype(std::declval<T>().scan(std::declval<Scanner&>()))>>:\
-    \ std::true_type {};\n\n  public:\n    Iterator itr;\n\n    Scanner() noexcept\
-    \ = default;\n    Scanner(Iterator itr) noexcept: itr(itr) {}\n\n    void discard_space()\
-    \ {\n      while (('\\t' <= *itr && *itr <= '\\r') || *itr == ' ') ++itr;\n  \
-    \  }\n\n    void scan(char& a) {\n      discard_space();\n      a = *itr;\n  \
-    \    ++itr;\n    }\n    void scan(std::string& a) {\n      discard_space();\n\
-    \      for (auto& i: a) {\n        i = *itr;\n        ++itr;\n      }\n    }\n\
-    \    void scan(bool& a) {\n      discard_space();\n      while ('0' <= *itr &&\
-    \ *itr <= '9') {\n        if (*itr != '0') a = true;\n        ++itr;\n      }\n\
-    \    }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T> && !has_scan<T>::value>*\
-    \ = nullptr>\n    void scan(T& a) {\n      discard_space();\n      bool sgn =\
-    \ false;\n      if constexpr (!std::is_unsigned_v<T>) if (*itr == '-') {\n   \
-    \     sgn = true;\n        ++itr;\n      }\n      a = 0;\n      for (; '0' <=\
-    \ *itr && *itr <= '9'; ++itr) a = a * 10 + *itr - '0';\n      if (*itr == '.')\
-    \ {\n        ++itr;\n        if constexpr (std::is_floating_point_v<T>) {\n  \
-    \        constexpr std::uint_fast64_t power_decimal_precision = power(10ULL, decimal_precision);\n\
-    \          T d = 0;\n          std::uint_fast64_t i = 1;\n          for (; '0'\
-    \ <= *itr && *itr <= '9' && i < power_decimal_precision; i *= 10) {\n        \
-    \    d = d * 10 + *itr - '0';\n            ++itr;\n          }\n          a +=\
-    \ d / i;\n        }\n        while ('0' <= *itr && *itr <= '9') ++itr;\n     \
-    \ }\n      if constexpr (!std::is_unsigned_v<T>) if (sgn) a = -a;\n    }\n   \
-    \ template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_tuple_v<T> &&\
-    \ !has_scan<T>::value>* = nullptr>\n    void scan(T& a) {\n      if constexpr\
-    \ (i < std::tuple_size_v<T>) {\n        scan(std::get<i>(a));\n        scan<i\
-    \ + 1>(a);\n      }\n    }\n    template<class T, std::enable_if_t<is_iterable_v<T>\
-    \ && !has_scan<T>::value>* = nullptr>\n    void scan(T& a) {\n      for (auto&\
-    \ i: a) scan(i);\n    }\n    template<class T, std::enable_if_t<has_scan<T>::value>*\
-    \ = nullptr>\n    void scan(T& a) {\n      a.scan(*this);\n    }\n\n    void operator\
-    \ ()() {}\n    template<class Head, class... Args>\n    void operator ()(Head&\
-    \ head, Args&... args) {\n      scan(head);\n      operator ()(args...);\n   \
-    \ }\n  };\n\n  Scanner<Reader<>::iterator> scan(input.begin());\n}"
+    \ _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n    using\
+    \ iterator_type = Iterator;\n    static constexpr KYOPRO_BASE_UINT decimal_precision\
+    \ = _decimal_precision;\n\n  private:\n    template<class, class = void>\n   \
+    \ struct has_scan: std::false_type {};\n    template<class T>\n    struct has_scan<T,\
+    \ std::void_t<decltype(std::declval<T>().scan(std::declval<Scanner&>()))>>: std::true_type\
+    \ {};\n\n  public:\n    Iterator itr;\n\n    Scanner() noexcept = default;\n \
+    \   Scanner(Iterator itr) noexcept: itr(itr) {}\n\n    void discard_space() {\n\
+    \      while (('\\t' <= *itr && *itr <= '\\r') || *itr == ' ') ++itr;\n    }\n\
+    \n    void scan(char& a) {\n      discard_space();\n      a = *itr;\n      ++itr;\n\
+    \    }\n    void scan(std::string& a) {\n      discard_space();\n      for (auto&\
+    \ i: a) {\n        i = *itr;\n        ++itr;\n      }\n    }\n    void scan(bool&\
+    \ a) {\n      discard_space();\n      while ('0' <= *itr && *itr <= '9') {\n \
+    \       if (*itr != '0') a = true;\n        ++itr;\n      }\n    }\n    template<class\
+    \ T, std::enable_if_t<std::is_arithmetic_v<T> && !has_scan<T>::value>* = nullptr>\n\
+    \    void scan(T& a) {\n      discard_space();\n      bool sgn = false;\n    \
+    \  if constexpr (!std::is_unsigned_v<T>) if (*itr == '-') {\n        sgn = true;\n\
+    \        ++itr;\n      }\n      a = 0;\n      for (; '0' <= *itr && *itr <= '9';\
+    \ ++itr) a = a * 10 + *itr - '0';\n      if (*itr == '.') {\n        ++itr;\n\
+    \        if constexpr (std::is_floating_point_v<T>) {\n          constexpr std::uint_fast64_t\
+    \ power_decimal_precision = power(10ULL, decimal_precision);\n          T d =\
+    \ 0;\n          std::uint_fast64_t i = 1;\n          for (; '0' <= *itr && *itr\
+    \ <= '9' && i < power_decimal_precision; i *= 10) {\n            d = d * 10 +\
+    \ *itr - '0';\n            ++itr;\n          }\n          a += d / i;\n      \
+    \  }\n        while ('0' <= *itr && *itr <= '9') ++itr;\n      }\n      if constexpr\
+    \ (!std::is_unsigned_v<T>) if (sgn) a = -a;\n    }\n    template<KYOPRO_BASE_UINT\
+    \ i = 0, class T, std::enable_if_t<is_tuple_v<T> && !has_scan<T>::value>* = nullptr>\n\
+    \    void scan(T& a) {\n      if constexpr (i < std::tuple_size_v<T>) {\n    \
+    \    scan(std::get<i>(a));\n        scan<i + 1>(a);\n      }\n    }\n    template<class\
+    \ T, std::enable_if_t<is_iterable_v<T> && !has_scan<T>::value>* = nullptr>\n \
+    \   void scan(T& a) {\n      for (auto& i: a) scan(i);\n    }\n    template<class\
+    \ T, std::enable_if_t<has_scan<T>::value>* = nullptr>\n    void scan(T& a) {\n\
+    \      a.scan(*this);\n    }\n\n    void operator ()() {}\n    template<class\
+    \ Head, class... Args>\n    void operator ()(Head& head, Args&... args) {\n  \
+    \    scan(head);\n      operator ()(args...);\n    }\n  };\n\n  Scanner<Reader<>::iterator>\
+    \ scan(input.begin());\n}"
   dependsOn:
   - math/power.hpp
   - meta/settings.hpp
@@ -199,8 +200,8 @@ data:
   requiredBy:
   - system/all.hpp
   - all/all.hpp
-  timestamp: '2022-04-22 10:55:57+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-04-22 18:45:30+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - aoj/PrimeNumber.test.cpp
   - yosupo/many_aplusb.test.cpp
