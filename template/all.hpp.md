@@ -348,12 +348,12 @@ data:
     \ })\n#define lambda(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__, KYOPRO_LAMBDA4, KYOPRO_LAMBDA3,\
     \ KYOPRO_LAMBDA2, KYOPRO_LAMBDA1)(__VA_ARGS__)\n#define all(...) std::begin(__VA_ARGS__),\
     \ std::end(__VA_ARGS__)\n#define rall(...) std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\n\
-    #line 5 \"template/make_array.hpp\"\n\nnamespace kyopro {\n  template<class T>\n\
+    #line 4 \"template/make_array.hpp\"\n\nnamespace kyopro {\n  template<class T>\n\
     \  constexpr auto make_array(const T& init = T()) noexcept { return init; }\n\n\
     \  template<class T, KYOPRO_BASE_UINT length, KYOPRO_BASE_UINT... lengths>\n \
     \ constexpr auto make_array(const T& init = T()) noexcept {\n    auto elm = make_array<T,\
     \ lengths...>(init);\n    std::array<decltype(elm), length> res;\n    for (auto&\
-    \ i: res) i = elm;\n    return std::move(res);\n  }\n}\n#line 6 \"template/make_vector.hpp\"\
+    \ i: res) i = elm;\n    return res;\n  }\n}\n#line 6 \"template/make_vector.hpp\"\
     \n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT idx = 0, KYOPRO_BASE_UINT\
     \ n, class T>\n  auto make_vector(const KYOPRO_BASE_UINT (&d)[n], T&& init) noexcept\
     \ {\n    if constexpr (idx < n) return std::vector(d[idx], make_vector<idx + 1>(d,\
@@ -408,7 +408,7 @@ data:
   path: template/all.hpp
   requiredBy:
   - all/all.hpp
-  timestamp: '2022-04-22 10:55:57+09:00'
+  timestamp: '2022-04-22 12:35:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/all.hpp
