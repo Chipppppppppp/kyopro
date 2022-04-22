@@ -78,5 +78,5 @@ namespace kyopro {
   };
 
   template<class T>
-  using iterable_value_t = typename iterable_value<T>::value;
+  using iterable_value_t = typename iterable_value<T>::type;
 }
