@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
@@ -17,10 +17,10 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
@@ -29,16 +29,10 @@ data:
   - icon: ':warning:'
     path: template/all.hpp
     title: template/all.hpp
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: aoj/PrimeNumber.test.cpp
-    title: aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: yosupo/factorize.test.cpp
-    title: yosupo/factorize.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"algorithm/bit.hpp\"\n#include <limits>\n#include <type_traits>\n\
@@ -132,10 +126,8 @@ data:
   - template/alias.hpp
   - all/all.hpp
   timestamp: '2022-04-22 10:55:57+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - aoj/PrimeNumber.test.cpp
-  - yosupo/factorize.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: algorithm/bit.hpp
 layout: document
 redirect_from:

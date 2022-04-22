@@ -1,44 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: system/out.hpp
     title: system/out.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: aoj/PrimeNumber.test.cpp
-    title: aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: yosupo/UnionFind.test.cpp
-    title: yosupo/UnionFind.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: yosupo/factorize.test.cpp
-    title: yosupo/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: yosupo/many_aplusb.test.cpp
-    title: yosupo/many_aplusb.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: yosupo/point_add_range_sum.test.cpp
-    title: yosupo/point_add_range_sum.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"system/in.hpp\"\n#include <unistd.h>\n#include <array>\n\
@@ -220,13 +205,8 @@ data:
   requiredBy:
   - all/all.hpp
   timestamp: '2022-04-22 21:56:22+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - aoj/PrimeNumber.test.cpp
-  - yosupo/many_aplusb.test.cpp
-  - yosupo/UnionFind.test.cpp
-  - yosupo/factorize.test.cpp
-  - yosupo/point_add_range_sum.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: system/all.hpp
 layout: document
 redirect_from:

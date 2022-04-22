@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
@@ -20,13 +20,10 @@ data:
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: yosupo/point_add_range_sum.test.cpp
-    title: yosupo/point_add_range_sum.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"structure/FenwickTree.hpp\"\n#include <type_traits>\n#include\
@@ -115,9 +112,8 @@ data:
   - structure/all.hpp
   - all/all.hpp
   timestamp: '2022-04-22 18:47:54+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - yosupo/point_add_range_sum.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: structure/FenwickTree.hpp
 layout: document
 redirect_from:

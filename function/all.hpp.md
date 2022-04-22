@@ -4,16 +4,16 @@ data:
   - icon: ':warning:'
     path: function/RecursiveLambda.hpp
     title: function/RecursiveLambda.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
