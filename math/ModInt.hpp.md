@@ -157,8 +157,8 @@ data:
     \ ModInt() noexcept = default;\n    template<class T>\n    constexpr ModInt(T\
     \ value) noexcept: value(floor_mod(value, _mod)) {}\n\n    template<class T>\n\
     \    explicit constexpr operator T() const noexcept { return value; }\n\n    static\
-    \ constexpr ModInt raw(KYOPRO_BASE_UINT n) noexcept {\n      ModInt res;\n   \
-    \   res.value = n;\n      return res;\n    }\n\n    constexpr ModInt power(KYOPRO_BASE_UINT\
+    \ constexpr ModInt raw(value_type value) noexcept {\n      ModInt res;\n     \
+    \ res.value = value;\n      return res;\n    }\n\n    constexpr ModInt power(KYOPRO_BASE_UINT\
     \ n) const noexcept {\n      std::uint_fast64_t res = 1, a = value;\n      while\
     \ (n > 0) {\n        if (n & 1) res = res * a % _mod;\n        a = a * a % _mod;\n\
     \        n >>= 1;\n      }\n      return res;\n    }\n\n    constexpr ModInt inverse()\
@@ -208,8 +208,8 @@ data:
     \ get_mod() noexcept {\n      return mod;\n    }\n\n    constexpr ModInt() noexcept\
     \ = default;\n    template<class T>\n    constexpr ModInt(T value) noexcept: value(floor_mod(value,\
     \ _mod)) {}\n\n    template<class T>\n    explicit constexpr operator T() const\
-    \ noexcept { return value; }\n\n    static constexpr ModInt raw(KYOPRO_BASE_UINT\
-    \ n) noexcept {\n      ModInt res;\n      res.value = n;\n      return res;\n\
+    \ noexcept { return value; }\n\n    static constexpr ModInt raw(value_type value)\
+    \ noexcept {\n      ModInt res;\n      res.value = value;\n      return res;\n\
     \    }\n\n    constexpr ModInt power(KYOPRO_BASE_UINT n) const noexcept {\n  \
     \    std::uint_fast64_t res = 1, a = value;\n      while (n > 0) {\n        if\
     \ (n & 1) res = res * a % _mod;\n        a = a * a % _mod;\n        n >>= 1;\n\
@@ -264,7 +264,7 @@ data:
   - template/all.hpp
   - template/alias.hpp
   - all/all.hpp
-  timestamp: '2022-04-22 18:45:30+09:00'
+  timestamp: '2022-04-22 21:51:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/ModInt.hpp
