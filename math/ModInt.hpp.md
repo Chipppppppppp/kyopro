@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: math/mod.hpp
     title: math/mod.hpp
   - icon: ':heavy_check_mark:'
@@ -160,7 +160,7 @@ data:
     \ constexpr ModInt power(KYOPRO_BASE_UINT n) const noexcept {\n      std::uint_fast64_t\
     \ res = 1, a = value;\n      while (n > 0) {\n        if (n & 1) res = res * a\
     \ % mod;\n        a = a * a % mod;\n        n >>= 1;\n      }\n      return res;\n\
-    \    }\n\n    constexpr ModInt inv() const noexcept {\n      std::uint_fast64_t\
+    \    }\n\n    constexpr ModInt inverse() const noexcept {\n      std::uint_fast64_t\
     \ a = value, b = mod;\n      std::int_fast64_t u = 1, v = 0;\n      while (b >\
     \ 0) {\n        std::uint_fast64_t t = a / b;\n        a -= t * b;\n        std::swap(a,\
     \ b);\n        u -= t * v;\n        std::swap(u, v);\n      }\n      return floor_mod(u,\
@@ -180,16 +180,16 @@ data:
     \ *=(ModInt rhs) noexcept {\n      value = static_cast<uint_least_t<bit_len(mod)\
     \ * 2>>(value) * rhs.value % mod;\n      return *this;\n    }\n\n    constexpr\
     \ ModInt& operator /=(ModInt rhs) noexcept {\n      value = static_cast<uint_least_t<bit_len(mod)\
-    \ * 2>>(value) * rhs.inv().value % mod;\n      return *this;\n    }\n\n    friend\
-    \ constexpr ModInt operator +(ModInt lhs, ModInt rhs) noexcept { return lhs +=\
-    \ rhs; }\n\n    friend constexpr ModInt operator -(ModInt lhs, ModInt rhs) noexcept\
-    \ { return lhs -= rhs; }\n\n    friend constexpr ModInt operator *(ModInt lhs,\
-    \ ModInt rhs) noexcept { return lhs *= rhs; }\n\n    friend constexpr ModInt operator\
-    \ /(ModInt lhs, ModInt rhs) noexcept { return lhs /= rhs; }\n\n    friend constexpr\
-    \ bool operator ==(ModInt lhs, ModInt rhs) noexcept { return lhs.value == rhs.value;\
-    \ }\n\n    friend constexpr bool operator !=(ModInt lhs, ModInt rhs) noexcept\
-    \ { return lhs.value != rhs.value; }\n\n    template<class Scanner>\n    void\
-    \ scan(Scanner& scanner) {\n      std::int_fast64_t value;\n      scanner.scan(value);\n\
+    \ * 2>>(value) * rhs.inverse().value % mod;\n      return *this;\n    }\n\n  \
+    \  friend constexpr ModInt operator +(ModInt lhs, ModInt rhs) noexcept { return\
+    \ lhs += rhs; }\n\n    friend constexpr ModInt operator -(ModInt lhs, ModInt rhs)\
+    \ noexcept { return lhs -= rhs; }\n\n    friend constexpr ModInt operator *(ModInt\
+    \ lhs, ModInt rhs) noexcept { return lhs *= rhs; }\n\n    friend constexpr ModInt\
+    \ operator /(ModInt lhs, ModInt rhs) noexcept { return lhs /= rhs; }\n\n    friend\
+    \ constexpr bool operator ==(ModInt lhs, ModInt rhs) noexcept { return lhs.value\
+    \ == rhs.value; }\n\n    friend constexpr bool operator !=(ModInt lhs, ModInt\
+    \ rhs) noexcept { return lhs.value != rhs.value; }\n\n    template<class Scanner>\n\
+    \    void scan(Scanner& scanner) {\n      std::int_fast64_t value;\n      scanner.scan(value);\n\
     \      value = floor_mod(value, mod);\n    }\n\n    template<class Printer>\n\
     \    void print(Printer& printer) const {\n      printer.print(value);\n    }\n\
     \  };\n\n  template<KYOPRO_BASE_UINT mod>\n  struct Hash<ModInt<mod>> { constexpr\
@@ -211,9 +211,9 @@ data:
     \ power(KYOPRO_BASE_UINT n) const noexcept {\n      std::uint_fast64_t res = 1,\
     \ a = value;\n      while (n > 0) {\n        if (n & 1) res = res * a % mod;\n\
     \        a = a * a % mod;\n        n >>= 1;\n      }\n      return res;\n    }\n\
-    \n    constexpr ModInt inv() const noexcept {\n      std::uint_fast64_t a = value,\
-    \ b = mod;\n      std::int_fast64_t u = 1, v = 0;\n      while (b > 0) {\n   \
-    \     std::uint_fast64_t t = a / b;\n        a -= t * b;\n        std::swap(a,\
+    \n    constexpr ModInt inverse() const noexcept {\n      std::uint_fast64_t a\
+    \ = value, b = mod;\n      std::int_fast64_t u = 1, v = 0;\n      while (b > 0)\
+    \ {\n        std::uint_fast64_t t = a / b;\n        a -= t * b;\n        std::swap(a,\
     \ b);\n        u -= t * v;\n        std::swap(u, v);\n      }\n      return floor_mod(u,\
     \ mod);\n    }\n\n    constexpr ModInt operator +() const noexcept { return *this;\
     \ }\n\n    constexpr ModInt operator -() const noexcept { return value == 0 ?\
@@ -231,16 +231,16 @@ data:
     \ *=(ModInt rhs) noexcept {\n      value = static_cast<uint_least_t<bit_len(mod)\
     \ * 2>>(value) * rhs.value % mod;\n      return *this;\n    }\n\n    constexpr\
     \ ModInt& operator /=(ModInt rhs) noexcept {\n      value = static_cast<uint_least_t<bit_len(mod)\
-    \ * 2>>(value) * rhs.inv().value % mod;\n      return *this;\n    }\n\n    friend\
-    \ constexpr ModInt operator +(ModInt lhs, ModInt rhs) noexcept { return lhs +=\
-    \ rhs; }\n\n    friend constexpr ModInt operator -(ModInt lhs, ModInt rhs) noexcept\
-    \ { return lhs -= rhs; }\n\n    friend constexpr ModInt operator *(ModInt lhs,\
-    \ ModInt rhs) noexcept { return lhs *= rhs; }\n\n    friend constexpr ModInt operator\
-    \ /(ModInt lhs, ModInt rhs) noexcept { return lhs /= rhs; }\n\n    friend constexpr\
-    \ bool operator ==(ModInt lhs, ModInt rhs) noexcept { return lhs.value == rhs.value;\
-    \ }\n\n    friend constexpr bool operator !=(ModInt lhs, ModInt rhs) noexcept\
-    \ { return lhs.value != rhs.value; }\n\n    template<class Scanner>\n    void\
-    \ scan(Scanner& scanner) {\n      std::int_fast64_t value;\n      scanner.scan(value);\n\
+    \ * 2>>(value) * rhs.inverse().value % mod;\n      return *this;\n    }\n\n  \
+    \  friend constexpr ModInt operator +(ModInt lhs, ModInt rhs) noexcept { return\
+    \ lhs += rhs; }\n\n    friend constexpr ModInt operator -(ModInt lhs, ModInt rhs)\
+    \ noexcept { return lhs -= rhs; }\n\n    friend constexpr ModInt operator *(ModInt\
+    \ lhs, ModInt rhs) noexcept { return lhs *= rhs; }\n\n    friend constexpr ModInt\
+    \ operator /(ModInt lhs, ModInt rhs) noexcept { return lhs /= rhs; }\n\n    friend\
+    \ constexpr bool operator ==(ModInt lhs, ModInt rhs) noexcept { return lhs.value\
+    \ == rhs.value; }\n\n    friend constexpr bool operator !=(ModInt lhs, ModInt\
+    \ rhs) noexcept { return lhs.value != rhs.value; }\n\n    template<class Scanner>\n\
+    \    void scan(Scanner& scanner) {\n      std::int_fast64_t value;\n      scanner.scan(value);\n\
     \      value = floor_mod(value, mod);\n    }\n\n    template<class Printer>\n\
     \    void print(Printer& printer) const {\n      printer.print(value);\n    }\n\
     \  };\n\n  template<KYOPRO_BASE_UINT mod>\n  struct Hash<ModInt<mod>> { constexpr\
@@ -261,7 +261,7 @@ data:
   - template/all.hpp
   - template/alias.hpp
   - all/all.hpp
-  timestamp: '2022-04-22 10:55:57+09:00'
+  timestamp: '2022-04-22 15:09:39+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/ModInt.hpp

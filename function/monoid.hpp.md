@@ -57,12 +57,12 @@ data:
     \ pi = PI<KYOPRO_BASE_FLOAT>;\n}\n#line 4 \"function/monoid.hpp\"\n\nnamespace\
     \ kyopro {\n  template<class T, T _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<T>);\n\
     \    static constexpr T id = _id;\n    constexpr T operator ()(T a, T b) const\
-    \ noexcept { return a + b; }\n    constexpr T inv(T a) const noexcept { return\
+    \ noexcept { return a + b; }\n    constexpr T inverse(T a) const noexcept { return\
     \ -a; }\n  };\n\n  template<class T, T _id = 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<T>);\n\
     \    static constexpr T id = _id;\n    constexpr T operator ()(T a, T b) const\
-    \ noexcept { return a * b; }\n    constexpr T inv(T a) const noexcept {\n    \
-    \  static_assert(!std::is_integral_v<T>);\n      return 1 / a;\n    }\n  };\n\n\
-    \  template<class T, T _id = std::is_integral_v<T> ? -INF<T> : -inf>\n  struct\
+    \ noexcept { return a * b; }\n    constexpr T inverse(T a) const noexcept {\n\
+    \      static_assert(!std::is_integral_v<T>);\n      return 1 / a;\n    }\n  };\n\
+    \n  template<class T, T _id = std::is_integral_v<T> ? -INF<T> : -inf>\n  struct\
     \ Max {\n    static_assert(std::is_arithmetic_v<T>);\n    static constexpr T id\
     \ = _id;\n    constexpr T operator ()(T a, T b) const noexcept { return a > b\
     \ ? a : b; }\n  };\n\n  template<class T, T _id = std::is_integral_v<T> ? INF<T>\
@@ -72,12 +72,12 @@ data:
   code: "#pragma once\n#include <type_traits>\n#include \"../meta/constant.hpp\"\n\
     \nnamespace kyopro {\n  template<class T, T _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<T>);\n\
     \    static constexpr T id = _id;\n    constexpr T operator ()(T a, T b) const\
-    \ noexcept { return a + b; }\n    constexpr T inv(T a) const noexcept { return\
+    \ noexcept { return a + b; }\n    constexpr T inverse(T a) const noexcept { return\
     \ -a; }\n  };\n\n  template<class T, T _id = 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<T>);\n\
     \    static constexpr T id = _id;\n    constexpr T operator ()(T a, T b) const\
-    \ noexcept { return a * b; }\n    constexpr T inv(T a) const noexcept {\n    \
-    \  static_assert(!std::is_integral_v<T>);\n      return 1 / a;\n    }\n  };\n\n\
-    \  template<class T, T _id = std::is_integral_v<T> ? -INF<T> : -inf>\n  struct\
+    \ noexcept { return a * b; }\n    constexpr T inverse(T a) const noexcept {\n\
+    \      static_assert(!std::is_integral_v<T>);\n      return 1 / a;\n    }\n  };\n\
+    \n  template<class T, T _id = std::is_integral_v<T> ? -INF<T> : -inf>\n  struct\
     \ Max {\n    static_assert(std::is_arithmetic_v<T>);\n    static constexpr T id\
     \ = _id;\n    constexpr T operator ()(T a, T b) const noexcept { return a > b\
     \ ? a : b; }\n  };\n\n  template<class T, T _id = std::is_integral_v<T> ? INF<T>\
@@ -95,7 +95,7 @@ data:
   - structure/all.hpp
   - function/all.hpp
   - all/all.hpp
-  timestamp: '2022-04-21 22:07:36+09:00'
+  timestamp: '2022-04-22 15:09:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - yosupo/point_add_range_sum.test.cpp

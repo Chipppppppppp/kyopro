@@ -5,37 +5,22 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':heavy_check_mark:'
-    path: math/DynamicModInt.hpp
-    title: math/DynamicModInt.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  - icon: ':heavy_check_mark:'
-    path: math/factorize.hpp
-    title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
-    path: math/is_prime.hpp
-    title: math/is_prime.hpp
   - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
   - icon: ':warning:'
     path: template/all.hpp
     title: template/all.hpp
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: aoj/PrimeNumber.test.cpp
-    title: aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: yosupo/factorize.test.cpp
-    title: yosupo/factorize.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"math/mod.hpp\"\n#include <cassert>\n#include <type_traits>\n\
@@ -57,19 +42,14 @@ data:
   isVerificationFile: false
   path: math/mod.hpp
   requiredBy:
-  - math/DynamicModInt.hpp
-  - math/factorize.hpp
-  - math/is_prime.hpp
   - math/all.hpp
   - math/ModInt.hpp
   - template/all.hpp
   - template/alias.hpp
   - all/all.hpp
   timestamp: '2022-04-21 22:07:36+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - aoj/PrimeNumber.test.cpp
-  - yosupo/factorize.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: math/mod.hpp
 layout: document
 redirect_from:

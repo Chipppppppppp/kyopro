@@ -64,12 +64,12 @@ data:
     \ pi = PI<KYOPRO_BASE_FLOAT>;\n}\n#line 4 \"function/monoid.hpp\"\n\nnamespace\
     \ kyopro {\n  template<class T, T _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<T>);\n\
     \    static constexpr T id = _id;\n    constexpr T operator ()(T a, T b) const\
-    \ noexcept { return a + b; }\n    constexpr T inv(T a) const noexcept { return\
+    \ noexcept { return a + b; }\n    constexpr T inverse(T a) const noexcept { return\
     \ -a; }\n  };\n\n  template<class T, T _id = 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<T>);\n\
     \    static constexpr T id = _id;\n    constexpr T operator ()(T a, T b) const\
-    \ noexcept { return a * b; }\n    constexpr T inv(T a) const noexcept {\n    \
-    \  static_assert(!std::is_integral_v<T>);\n      return 1 / a;\n    }\n  };\n\n\
-    \  template<class T, T _id = std::is_integral_v<T> ? -INF<T> : -inf>\n  struct\
+    \ noexcept { return a * b; }\n    constexpr T inverse(T a) const noexcept {\n\
+    \      static_assert(!std::is_integral_v<T>);\n      return 1 / a;\n    }\n  };\n\
+    \n  template<class T, T _id = std::is_integral_v<T> ? -INF<T> : -inf>\n  struct\
     \ Max {\n    static_assert(std::is_arithmetic_v<T>);\n    static constexpr T id\
     \ = _id;\n    constexpr T operator ()(T a, T b) const noexcept { return a > b\
     \ ? a : b; }\n  };\n\n  template<class T, T _id = std::is_integral_v<T> ? INF<T>\
@@ -88,10 +88,10 @@ data:
     \ - 1] = op(tree[p - 1], x);\n        p += p & -p;\n      }\n    }\n\n    T prod(int\
     \ r) const {\n      T s = op.id;\n      while (r > 0) {\n        s = op(s, tree[r\
     \ - 1]);\n        r -= r & -r;\n      }\n      return s;\n    }\n    T prod(int\
-    \ l, int r) const { return op(prod(r), op.inv(prod(l))); }\n\n    T all_prod()\
-    \ { return prod(tree.size()); }\n\n    T get(int p) { return op(prod(p + 1), op.inv(prod(p)));\
-    \ }\n\n    void set(int p, const T& x) { apply(p, op(x, op.inv(get(p)))); }\n\
-    \  };\n}\n#line 2 \"system/in.hpp\"\n#include <unistd.h>\n#line 4 \"system/in.hpp\"\
+    \ l, int r) const { return op(prod(r), op.inverse(prod(l))); }\n\n    T all_prod()\
+    \ { return prod(tree.size()); }\n\n    T get(int p) { return op(prod(p + 1), op.inverse(prod(p)));\
+    \ }\n\n    void set(int p, const T& x) { apply(p, op(x, op.inverse(get(p))));\
+    \ }\n  };\n}\n#line 2 \"system/in.hpp\"\n#include <unistd.h>\n#line 4 \"system/in.hpp\"\
     \n#include <cstddef>\n#line 6 \"system/in.hpp\"\n#include <cstdio>\n#include <string>\n\
     #include <tuple>\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#include <queue>\n\
     #line 5 \"meta/trait.hpp\"\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\nnamespace\
@@ -267,7 +267,7 @@ data:
   isVerificationFile: true
   path: yosupo/point_add_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-04-22 10:55:57+09:00'
+  timestamp: '2022-04-22 15:09:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: yosupo/point_add_range_sum.test.cpp

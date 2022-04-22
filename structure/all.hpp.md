@@ -54,12 +54,12 @@ data:
     \ pi = PI<KYOPRO_BASE_FLOAT>;\n}\n#line 4 \"function/monoid.hpp\"\n\nnamespace\
     \ kyopro {\n  template<class T, T _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<T>);\n\
     \    static constexpr T id = _id;\n    constexpr T operator ()(T a, T b) const\
-    \ noexcept { return a + b; }\n    constexpr T inv(T a) const noexcept { return\
+    \ noexcept { return a + b; }\n    constexpr T inverse(T a) const noexcept { return\
     \ -a; }\n  };\n\n  template<class T, T _id = 1>\n  struct Mul {\n    static_assert(std::is_arithmetic_v<T>);\n\
     \    static constexpr T id = _id;\n    constexpr T operator ()(T a, T b) const\
-    \ noexcept { return a * b; }\n    constexpr T inv(T a) const noexcept {\n    \
-    \  static_assert(!std::is_integral_v<T>);\n      return 1 / a;\n    }\n  };\n\n\
-    \  template<class T, T _id = std::is_integral_v<T> ? -INF<T> : -inf>\n  struct\
+    \ noexcept { return a * b; }\n    constexpr T inverse(T a) const noexcept {\n\
+    \      static_assert(!std::is_integral_v<T>);\n      return 1 / a;\n    }\n  };\n\
+    \n  template<class T, T _id = std::is_integral_v<T> ? -INF<T> : -inf>\n  struct\
     \ Max {\n    static_assert(std::is_arithmetic_v<T>);\n    static constexpr T id\
     \ = _id;\n    constexpr T operator ()(T a, T b) const noexcept { return a > b\
     \ ? a : b; }\n  };\n\n  template<class T, T _id = std::is_integral_v<T> ? INF<T>\
@@ -78,11 +78,11 @@ data:
     \ - 1] = op(tree[p - 1], x);\n        p += p & -p;\n      }\n    }\n\n    T prod(int\
     \ r) const {\n      T s = op.id;\n      while (r > 0) {\n        s = op(s, tree[r\
     \ - 1]);\n        r -= r & -r;\n      }\n      return s;\n    }\n    T prod(int\
-    \ l, int r) const { return op(prod(r), op.inv(prod(l))); }\n\n    T all_prod()\
-    \ { return prod(tree.size()); }\n\n    T get(int p) { return op(prod(p + 1), op.inv(prod(p)));\
-    \ }\n\n    void set(int p, const T& x) { apply(p, op(x, op.inv(get(p)))); }\n\
-    \  };\n}\n#line 2 \"structure/UnionFind.hpp\"\n#include <algorithm>\n#line 4 \"\
-    structure/UnionFind.hpp\"\n#include <unordered_map>\n#line 8 \"structure/UnionFind.hpp\"\
+    \ l, int r) const { return op(prod(r), op.inverse(prod(l))); }\n\n    T all_prod()\
+    \ { return prod(tree.size()); }\n\n    T get(int p) { return op(prod(p + 1), op.inverse(prod(p)));\
+    \ }\n\n    void set(int p, const T& x) { apply(p, op(x, op.inverse(get(p))));\
+    \ }\n  };\n}\n#line 2 \"structure/UnionFind.hpp\"\n#include <algorithm>\n#line\
+    \ 4 \"structure/UnionFind.hpp\"\n#include <unordered_map>\n#line 8 \"structure/UnionFind.hpp\"\
     \n\nnamespace kyopro {\n  template<class Container = std::vector<int>>\n  struct\
     \ UnionFind {\n  private:\n    Container par;\n\n  public:\n    UnionFind() noexcept\
     \ = default;\n    UnionFind(KYOPRO_BASE_UINT n) noexcept: par(n, -1) {}\n    template<class\
@@ -126,7 +126,7 @@ data:
   path: structure/all.hpp
   requiredBy:
   - all/all.hpp
-  timestamp: '2022-04-21 22:07:36+09:00'
+  timestamp: '2022-04-22 15:09:39+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: structure/all.hpp

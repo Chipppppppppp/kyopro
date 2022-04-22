@@ -60,10 +60,9 @@ data:
     \ = default;\n    Montgomery(T mod) noexcept {\n      set_mod(mod);\n    }\n\n\
     \    constexpr T transform(T x) const noexcept {\n      return reduce(static_cast<larger_type>(x)\
     \ * n2);\n    }\n\n    constexpr T inverse_transform(T x) const noexcept {\n \
-    \     return reduce(x);\n    }\n\n    constexpr T reduce(larger_type x) const\
-    \ noexcept {\n      T y = (x + static_cast<larger_type>(static_cast<T>(x) * r)\
-    \ * mod) >> std::numeric_limits<T>::digits;\n      return y >= mod ? y - mod :\
-    \ y;\n    }\n  };\n}\n"
+    \     T y = reduce(x);\n      return y >= mod ? y - mod : y;\n    }\n\n    constexpr\
+    \ T reduce(larger_type x) const noexcept {\n      return (x + static_cast<larger_type>(static_cast<T>(x)\
+    \ * r) * mod) >> std::numeric_limits<T>::digits;\n    }\n  };\n}\n"
   code: "#pragma once\n#include <cstdint>\n#include <limits>\n#include <type_traits>\n\
     #include \"../meta/settings.hpp\"\n\nnamespace kyopro {\n  template<class T>\n\
     \  struct Montgomery {\n    static_assert(std::is_unsigned_v<T>, \"Unsigned integer\
@@ -77,10 +76,9 @@ data:
     \ Montgomery() noexcept = default;\n    Montgomery(T mod) noexcept {\n      set_mod(mod);\n\
     \    }\n\n    constexpr T transform(T x) const noexcept {\n      return reduce(static_cast<larger_type>(x)\
     \ * n2);\n    }\n\n    constexpr T inverse_transform(T x) const noexcept {\n \
-    \     return reduce(x);\n    }\n\n    constexpr T reduce(larger_type x) const\
-    \ noexcept {\n      T y = (x + static_cast<larger_type>(static_cast<T>(x) * r)\
-    \ * mod) >> std::numeric_limits<T>::digits;\n      return y >= mod ? y - mod :\
-    \ y;\n    }\n  };\n}"
+    \     T y = reduce(x);\n      return y >= mod ? y - mod : y;\n    }\n\n    constexpr\
+    \ T reduce(larger_type x) const noexcept {\n      return (x + static_cast<larger_type>(static_cast<T>(x)\
+    \ * r) * mod) >> std::numeric_limits<T>::digits;\n    }\n  };\n}"
   dependsOn:
   - meta/settings.hpp
   isVerificationFile: false
@@ -93,7 +91,7 @@ data:
   - template/all.hpp
   - template/alias.hpp
   - all/all.hpp
-  timestamp: '2022-04-21 22:07:36+09:00'
+  timestamp: '2022-04-22 15:09:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - aoj/PrimeNumber.test.cpp
