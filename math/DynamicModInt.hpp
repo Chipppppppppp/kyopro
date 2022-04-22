@@ -66,7 +66,7 @@ namespace kyopro {
     DynamicModInt operator -() const noexcept { return value == 0 ? 0 : montgomery.mod - value; }
 
     DynamicModInt& operator ++() noexcept {
-      if (++value >= montgomery.mod) value -= montgomery.mod;
+      operator +(1);
       return *this;
     }
 
@@ -77,8 +77,7 @@ namespace kyopro {
     }
 
     DynamicModInt& operator --() noexcept {
-      if (value == 0) value = montgomery.mod;
-      --value;
+      operator -(1);
       return *this;
     }
 
@@ -89,14 +88,12 @@ namespace kyopro {
     }
 
     DynamicModInt& operator +=(DynamicModInt rhs) noexcept {
-      value += rhs.value - (mod << 1);
-      if (static_cast<std::make_signed_t<T>>(value) < 0) value += mod << 1;
+      if (static_cast<std::make_signed_t<T>>(value += rhs.value - (montgomery.mod << 1)) < 0) value += montgomery.mod << 1;
       return *this;
     }
 
     DynamicModInt& operator -=(DynamicModInt rhs) noexcept {
-      value -= rhs.value;
-      if (static_cast<std::make_signed_t<T>>(value) < 0) value += mod << 1;
+      if (static_cast<std::make_signed_t<T>>(value -= rhs.value) < 0) value += montgomery.mod << 1;
       return *this;
     }
 
