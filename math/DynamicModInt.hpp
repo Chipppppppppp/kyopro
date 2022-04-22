@@ -36,14 +36,14 @@ namespace kyopro {
     }
 
     DynamicModInt() noexcept = default;
-    DynamicModInt(T value) noexcept: value(montgomery.transform(value)) {}
+    DynamicModInt(T value) noexcept: value(montgomery.transform(value % montgomery.mod + montgomery.mod)) {}
 
     template<class U>
     explicit operator U() const noexcept { return montgomery.inverse_transform(value); }
 
-    static DynamicModInt raw(T n) noexcept {
+    static DynamicModInt raw(T value) noexcept {
       DynamicModInt res;
-      res.value = n;
+      res.value = montgomery.transform(value);
       return res;
     }
 
@@ -66,7 +66,7 @@ namespace kyopro {
     DynamicModInt operator -() const noexcept { return value == 0 ? 0 : montgomery.mod - value; }
 
     DynamicModInt& operator ++() noexcept {
-      operator +(1);
+      operator +=(DynamicModInt::raw(1));
       return *this;
     }
 
@@ -77,7 +77,7 @@ namespace kyopro {
     }
 
     DynamicModInt& operator --() noexcept {
-      operator -(1);
+      operator -=(DynamicModInt::raw(1));
       return *this;
     }
 
@@ -88,12 +88,12 @@ namespace kyopro {
     }
 
     DynamicModInt& operator +=(DynamicModInt rhs) noexcept {
-      if (static_cast<std::make_signed_t<T>>(value += rhs.value - (montgomery.mod << 1)) < 0) value += montgomery.mod << 1;
+      if ((value += rhs.value - (montgomery.mod << 1)) > std::numeric_limits<std::make_signed_t<T>>::max()) value += montgomery.mod << 1;
       return *this;
     }
 
     DynamicModInt& operator -=(DynamicModInt rhs) noexcept {
-      if (static_cast<std::make_signed_t<T>>(value -= rhs.value) < 0) value += montgomery.mod << 1;
+      if ((value -= rhs.value) > std::numeric_limits<std::make_signed_t<T>>::max()) value += montgomery.mod << 1;
       return *this;
     }
 
@@ -123,7 +123,7 @@ namespace kyopro {
     void scan(Scanner& scanner) {
       std::int_fast64_t value;
       scanner.scan(value);
-      value = montgomery.transform(value);
+      value = montgomery.transform(value % montgomery.mod + montgomery.mod);
     }
 
     template<class Printer>

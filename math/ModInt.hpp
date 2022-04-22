@@ -35,9 +35,9 @@ namespace kyopro {
     template<class T>
     explicit constexpr operator T() const noexcept { return value; }
 
-    static constexpr ModInt raw(KYOPRO_BASE_UINT n) noexcept {
+    static constexpr ModInt raw(value_type value) noexcept {
       ModInt res;
-      res.value = n;
+      res.value = value;
       return res;
     }
 

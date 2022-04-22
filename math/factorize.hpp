@@ -4,6 +4,7 @@
 #include <numeric>
 #include <random>
 #include <type_traits>
+#include "../algorithm/bit.hpp"
 #include "../meta/settings.hpp"
 #include "DynamicModInt.hpp"
 #include "is_prime.hpp"
@@ -17,9 +18,9 @@ namespace kyopro {
     DynamicModInt::set_mod(n);
     DynamicModInt cc = c;
     auto f = [=](DynamicModInt x) noexcept { return x * x + cc; };
-    DynamicModInt x = 1, y = 2, z = 1, q = 1;
+    auto x = DynamicModInt::raw(1), y = DynamicModInt::raw(2), z = DynamicModInt::raw(1), q = DynamicModInt::raw(1);
     U g = 1;
-    const int m = 1 << (std::__lg(n) / 5);
+    const int m = 1 << (ceil_bit(n) / 5);
     for (int r = 1; g == 1; r <<= 1) {
       x = y;
       for (int i = 0; i < r; ++i) y = f(y);
