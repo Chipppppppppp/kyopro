@@ -20,7 +20,7 @@ namespace kyopro {
     auto f = [=](DynamicModInt x) noexcept { return x * x + cc; };
     auto x = DynamicModInt::raw(1), y = DynamicModInt::raw(2), z = DynamicModInt::raw(1), q = DynamicModInt::raw(1);
     U g = 1;
-    const int m = 1 << (ceil_bit(n) / 5);
+    const int m = 1 << (floor_bit(n) / 5);
     for (int r = 1; g == 1; r <<= 1) {
       x = y;
       for (int i = 0; i < r; ++i) y = f(y);
