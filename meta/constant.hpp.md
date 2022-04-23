@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
@@ -14,10 +14,10 @@ data:
   - icon: ':warning:'
     path: function/all.hpp
     title: function/all.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
@@ -26,16 +26,16 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
     path: meta/all.hpp
     title: meta/all.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':warning:'
@@ -47,10 +47,19 @@ data:
   - icon: ':warning:'
     path: template/all.hpp
     title: template/all.hpp
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/aoj/PrimeNumber.test.cpp
+    title: verify/aoj/PrimeNumber.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/factorize.test.cpp
+    title: verify/yosupo/factorize.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/point_add_range_sum.test.cpp
+    title: verify/yosupo/point_add_range_sum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"meta/constant.hpp\"\n#include <array>\n#include <limits>\n\
@@ -106,8 +115,11 @@ data:
   - template/alias.hpp
   - all/all.hpp
   timestamp: '2022-04-21 22:07:36+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/aoj/PrimeNumber.test.cpp
+  - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
 documentation_of: meta/constant.hpp
 layout: document
 redirect_from:

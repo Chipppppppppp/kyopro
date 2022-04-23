@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
@@ -17,16 +17,19 @@ data:
   - icon: ':warning:'
     path: function/all.hpp
     title: function/all.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/point_add_range_sum.test.cpp
+    title: verify/yosupo/point_add_range_sum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"function/monoid.hpp\"\n#include <type_traits>\n#line 2 \"\
@@ -95,8 +98,9 @@ data:
   - function/all.hpp
   - all/all.hpp
   timestamp: '2022-04-22 18:45:30+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yosupo/point_add_range_sum.test.cpp
 documentation_of: function/monoid.hpp
 layout: document
 redirect_from:

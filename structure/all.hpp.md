@@ -1,25 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   _extendedRequiredBy:

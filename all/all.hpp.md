@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
   - icon: ':warning:'
     path: algorithm/all.hpp
     title: algorithm/all.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
@@ -19,16 +19,16 @@ data:
   - icon: ':warning:'
     path: function/all.hpp
     title: function/all.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
   - icon: ':warning:'
@@ -43,46 +43,46 @@ data:
   - icon: ':warning:'
     path: math/euler_phi.hpp
     title: math/euler_phi.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
   - icon: ':warning:'
     path: meta/all.hpp
     title: meta/all.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: system/out.hpp
     title: system/out.hpp
   - icon: ':warning:'

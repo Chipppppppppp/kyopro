@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -14,10 +14,13 @@ data:
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/unionfind.test.cpp
+    title: verify/yosupo/unionfind.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"structure/UnionFind.hpp\"\n#include <algorithm>\n#include\
@@ -127,8 +130,9 @@ data:
   - structure/all.hpp
   - all/all.hpp
   timestamp: '2022-04-22 21:56:22+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yosupo/unionfind.test.cpp
 documentation_of: structure/UnionFind.hpp
 layout: document
 redirect_from:
