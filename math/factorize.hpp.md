@@ -233,7 +233,7 @@ data:
     \ KYOPRO_BASE_UINT(-1)>;\n    U n = p;\n    DynamicModInt::set_mod(n);\n    DynamicModInt\
     \ cc = c;\n    auto f = [=](DynamicModInt x) noexcept { return x * x + cc; };\n\
     \    auto x = DynamicModInt::raw(1), y = DynamicModInt::raw(2), z = DynamicModInt::raw(1),\
-    \ q = DynamicModInt::raw(1);\n    U g = 1;\n    const int m = 1 << (ceil_bit(n)\
+    \ q = DynamicModInt::raw(1);\n    U g = 1;\n    const int m = 1 << (floor_bit(n)\
     \ / 5);\n    for (int r = 1; g == 1; r <<= 1) {\n      x = y;\n      for (int\
     \ i = 0; i < r; ++i) y = f(y);\n      for (int k = 0; k < r && g == 1; k += m)\
     \ {\n        z = y;\n        int min = std::min(m, r - k);\n        for (int i\
@@ -262,24 +262,24 @@ data:
     \    DynamicModInt cc = c;\n    auto f = [=](DynamicModInt x) noexcept { return\
     \ x * x + cc; };\n    auto x = DynamicModInt::raw(1), y = DynamicModInt::raw(2),\
     \ z = DynamicModInt::raw(1), q = DynamicModInt::raw(1);\n    U g = 1;\n    const\
-    \ int m = 1 << (ceil_bit(n) / 5);\n    for (int r = 1; g == 1; r <<= 1) {\n  \
-    \    x = y;\n      for (int i = 0; i < r; ++i) y = f(y);\n      for (int k = 0;\
-    \ k < r && g == 1; k += m) {\n        z = y;\n        int min = std::min(m, r\
-    \ - k);\n        for (int i = 0; i < min; ++i) {\n          y = f(y);\n      \
-    \    q *= x - y;\n        }\n        g = std::gcd(static_cast<U>(q), n);\n   \
-    \   }\n    }\n    if (g == n) {\n      do {\n        z = f(z);\n        g = std::gcd(static_cast<U>(x\
-    \ - z), n);\n      } while (g == 1);\n    }\n    return g;\n  }\n\n  KYOPRO_BASE_UINT\
-    \ find_factor(KYOPRO_BASE_UINT n) noexcept {\n    static std::mt19937_64 mt(std::random_device{}());\n\
-    \    std::uniform_int_distribution<std::uint_fast64_t> rnd(0, n - 1);\n    if\
-    \ (is_prime(n)) return n;\n    for (int i = 0; i < 100; ++i) {\n      std::uint_fast64_t\
-    \ m = pollard_rho(n, rnd(mt));\n      if (is_prime(m)) return m;\n      n = m;\n\
-    \    }\n    return 1;\n  }\n\n  template<bool sorted = true, class Container =\
-    \ std::vector<KYOPRO_BASE_INT>>\n  Container factorize(KYOPRO_BASE_UINT n) {\n\
-    \    Container res;\n    for (int p = 2; p < 100 && p * p <= n; ++p) {\n     \
-    \ while (n % p == 0) {\n        n /= p;\n        res.emplace_back(p);\n      }\n\
-    \    }\n    while (n > 1) {\n      std::uint_fast64_t p = find_factor(n);\n  \
-    \    do {\n        n /= p;\n        res.emplace_back(p);\n      } while (n % p\
-    \ == 0);\n    }\n    if constexpr (sorted) std::sort(res.begin(), res.end());\n\
+    \ int m = 1 << (floor_bit(n) / 5);\n    for (int r = 1; g == 1; r <<= 1) {\n \
+    \     x = y;\n      for (int i = 0; i < r; ++i) y = f(y);\n      for (int k =\
+    \ 0; k < r && g == 1; k += m) {\n        z = y;\n        int min = std::min(m,\
+    \ r - k);\n        for (int i = 0; i < min; ++i) {\n          y = f(y);\n    \
+    \      q *= x - y;\n        }\n        g = std::gcd(static_cast<U>(q), n);\n \
+    \     }\n    }\n    if (g == n) {\n      do {\n        z = f(z);\n        g =\
+    \ std::gcd(static_cast<U>(x - z), n);\n      } while (g == 1);\n    }\n    return\
+    \ g;\n  }\n\n  KYOPRO_BASE_UINT find_factor(KYOPRO_BASE_UINT n) noexcept {\n \
+    \   static std::mt19937_64 mt(std::random_device{}());\n    std::uniform_int_distribution<std::uint_fast64_t>\
+    \ rnd(0, n - 1);\n    if (is_prime(n)) return n;\n    for (int i = 0; i < 100;\
+    \ ++i) {\n      std::uint_fast64_t m = pollard_rho(n, rnd(mt));\n      if (is_prime(m))\
+    \ return m;\n      n = m;\n    }\n    return 1;\n  }\n\n  template<bool sorted\
+    \ = true, class Container = std::vector<KYOPRO_BASE_INT>>\n  Container factorize(KYOPRO_BASE_UINT\
+    \ n) {\n    Container res;\n    for (int p = 2; p < 100 && p * p <= n; ++p) {\n\
+    \      while (n % p == 0) {\n        n /= p;\n        res.emplace_back(p);\n \
+    \     }\n    }\n    while (n > 1) {\n      std::uint_fast64_t p = find_factor(n);\n\
+    \      do {\n        n /= p;\n        res.emplace_back(p);\n      } while (n %\
+    \ p == 0);\n    }\n    if constexpr (sorted) std::sort(res.begin(), res.end());\n\
     \    return res;\n  }\n}"
   dependsOn:
   - algorithm/bit.hpp
@@ -296,7 +296,7 @@ data:
   requiredBy:
   - math/all.hpp
   - all/all.hpp
-  timestamp: '2022-04-22 21:56:22+09:00'
+  timestamp: '2022-04-23 20:37:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo/factorize.test.cpp

@@ -357,7 +357,7 @@ data:
     \ KYOPRO_BASE_UINT(-1)>;\n    U n = p;\n    DynamicModInt::set_mod(n);\n    DynamicModInt\
     \ cc = c;\n    auto f = [=](DynamicModInt x) noexcept { return x * x + cc; };\n\
     \    auto x = DynamicModInt::raw(1), y = DynamicModInt::raw(2), z = DynamicModInt::raw(1),\
-    \ q = DynamicModInt::raw(1);\n    U g = 1;\n    const int m = 1 << (ceil_bit(n)\
+    \ q = DynamicModInt::raw(1);\n    U g = 1;\n    const int m = 1 << (floor_bit(n)\
     \ / 5);\n    for (int r = 1; g == 1; r <<= 1) {\n      x = y;\n      for (int\
     \ i = 0; i < r; ++i) y = f(y);\n      for (int k = 0; k < r && g == 1; k += m)\
     \ {\n        z = y;\n        int min = std::min(m, r - k);\n        for (int i\
@@ -733,7 +733,7 @@ data:
   isVerificationFile: false
   path: all/all.hpp
   requiredBy: []
-  timestamp: '2022-04-22 21:56:22+09:00'
+  timestamp: '2022-04-23 20:37:11+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp
