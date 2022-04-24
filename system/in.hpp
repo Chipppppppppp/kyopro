@@ -99,10 +99,11 @@ namespace kyopro {
       a = *itr;
       ++itr;
     }
-    void scan(std::string& a) {
+    template<class CharT, class Traits>
+    void scan(std::basic_string<CharT, Traits>& a) {
       discard_space();
-      for (auto& i: a) {
-        i = *itr;
+      while ((*itr < '\t' || '\r' < *itr) && *itr != ' ') {
+        a += *itr;
         ++itr;
       }
     }

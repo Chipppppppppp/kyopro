@@ -107,7 +107,8 @@ namespace kyopro {
     void print(const char* a) {
       for (; *a; ++a) print(*a);
     }
-    void print(const std::string& a) {
+    template<class CharT, class Traits>
+    void print(const std::basic_string<CharT, Traits>& a) {
       for (auto i: a) print(i);
     }
     void print(bool a) {
@@ -174,7 +175,10 @@ namespace kyopro {
     }
     template<bool first = true, class Head, class... Args>
     void operator ()(Head&& head, Args&&... args) {
-      if constexpr (comment && first) print('#');
+      if constexpr (comment && first) {
+        print('#');
+        print(' ');
+      }
       if constexpr (sep && !first) print_sep();
       print(head);
       operator ()<false>(std::forward<Args>(args)...);
