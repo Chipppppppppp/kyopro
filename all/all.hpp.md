@@ -504,8 +504,9 @@ data:
     \ = default;\n    Scanner(Iterator itr) noexcept: itr(itr) {}\n\n    void discard_space()\
     \ {\n      while (('\\t' <= *itr && *itr <= '\\r') || *itr == ' ') ++itr;\n  \
     \  }\n\n    void scan(char& a) {\n      discard_space();\n      a = *itr;\n  \
-    \    ++itr;\n    }\n    void scan(std::string& a) {\n      discard_space();\n\
-    \      for (auto& i: a) {\n        i = *itr;\n        ++itr;\n      }\n    }\n\
+    \    ++itr;\n    }\n    template<class CharT, class Traits>\n    void scan(std::basic_string<CharT,\
+    \ Traits>& a) {\n      discard_space();\n      while ((*itr < '\\t' || '\\r' <\
+    \ *itr) && *itr != ' ') {\n        a += *itr;\n        ++itr;\n      }\n    }\n\
     \    void scan(bool& a) {\n      discard_space();\n      while ('0' <= *itr &&\
     \ *itr <= '9') {\n        if (*itr != '0') a = true;\n        ++itr;\n      }\n\
     \    }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T> && !has_scan<T>::value>*\
@@ -561,17 +562,18 @@ data:
     \ itr;\n\n    Printer() noexcept = default;\n    Printer(Iterator itr) noexcept:\
     \ itr(itr) {}\n\n    void print(char a) {\n      *itr = a;\n      ++itr;\n   \
     \ }\n    void print(const char* a) {\n      for (; *a; ++a) print(*a);\n    }\n\
-    \    void print(const std::string& a) {\n      for (auto i: a) print(i);\n   \
-    \ }\n    void print(bool a) {\n      print(static_cast<char>('0' + a));\n    }\n\
-    \    template<class T, std::enable_if_t<std::is_arithmetic_v<T> && !has_print<T>::value>*\
-    \ = nullptr>\n    void print(T a) {\n      if constexpr (std::is_signed_v<T>)\
-    \ if (a < 0) {\n        print('-');\n        a = -a;\n      }\n      std::uint_fast64_t\
-    \ p = a;\n      a -= p;\n      std::string s;\n      do {\n        s += '0' +\
-    \ p % 10;\n        p /= 10;\n      } while (p > 0);\n      for (auto i = s.rbegin();\
-    \ i != s.rend(); ++i) print(*i);\n      if constexpr (std::is_integral_v<T>) return;\n\
-    \      print('.');\n      for (int i = 0; i < static_cast<int>(decimal_precision);\
-    \ ++i) {\n        a *= 10;\n        print('0' + static_cast<std::uint_fast64_t>(a)\
-    \ % 10);\n      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_tuple_v<T>\
+    \    template<class CharT, class Traits>\n    void print(const std::basic_string<CharT,\
+    \ Traits>& a) {\n      for (auto i: a) print(i);\n    }\n    void print(bool a)\
+    \ {\n      print(static_cast<char>('0' + a));\n    }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T>\
+    \ && !has_print<T>::value>* = nullptr>\n    void print(T a) {\n      if constexpr\
+    \ (std::is_signed_v<T>) if (a < 0) {\n        print('-');\n        a = -a;\n \
+    \     }\n      std::uint_fast64_t p = a;\n      a -= p;\n      std::string s;\n\
+    \      do {\n        s += '0' + p % 10;\n        p /= 10;\n      } while (p >\
+    \ 0);\n      for (auto i = s.rbegin(); i != s.rend(); ++i) print(*i);\n      if\
+    \ constexpr (std::is_integral_v<T>) return;\n      print('.');\n      for (int\
+    \ i = 0; i < static_cast<int>(decimal_precision); ++i) {\n        a *= 10;\n \
+    \       print('0' + static_cast<std::uint_fast64_t>(a) % 10);\n      }\n    }\n\
+    \    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_tuple_v<T>\
     \ && !has_print<T>::value>* = nullptr>\n    void print(const T& a) {\n      if\
     \ constexpr (debug && i == 0) print('{');\n      if constexpr (std::tuple_size_v<T>\
     \ != 0) print(std::get<i>(a));\n      if constexpr (i + 1 < std::tuple_size_v<T>)\
@@ -590,19 +592,19 @@ data:
     \ (comment && first) print('#');\n      if constexpr (end) print('\\n');\n   \
     \   if constexpr (flush) itr.flush();\n    }\n    template<bool first = true,\
     \ class Head, class... Args>\n    void operator ()(Head&& head, Args&&... args)\
-    \ {\n      if constexpr (comment && first) print('#');\n      if constexpr (sep\
-    \ && !first) print_sep();\n      print(head);\n      operator ()<false>(std::forward<Args>(args)...);\n\
-    \    }\n  };\n\n  Printer<Writer<>::iterator, false, false> print(output.begin()),\
-    \ eprint(error.begin());\n  Printer<Writer<>::iterator> println(output.begin()),\
-    \ eprintln(error.begin());\n  Printer<Writer<>::iterator, true, true, true, true>\
-    \ debug(output.begin()), edebug(error.begin());\n}\n#line 9 \"template/alias.hpp\"\
-    \n#include <set>\n#include <map>\n#include <unordered_set>\n#line 19 \"template/alias.hpp\"\
-    \n\nnamespace kyopro {\n  using ll = long long;\n  using ull = unsigned long long;\n\
-    \  using lf = double;\n\n  using i8 = std::int8_t;\n  using u8 = std::uint8_t;\n\
-    \  using i16 = std::int16_t;\n  using u16 = std::uint16_t;\n  using i32 = std::int32_t;\n\
-    \  using u32 = std::uint32_t;\n  using i64 = std::int64_t;\n  using u64 = std::uint64_t;\n\
-    \  using i128 = __int128_t;\n  using u128 = __uint128_t;\n  using f128 = __float128;\n\
-    \n  using mint = ModInt<mod>;\n  using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\
+    \ {\n      if constexpr (comment && first) {\n        print('#');\n        print('\
+    \ ');\n      }\n      if constexpr (sep && !first) print_sep();\n      print(head);\n\
+    \      operator ()<false>(std::forward<Args>(args)...);\n    }\n  };\n\n  Printer<Writer<>::iterator,\
+    \ false, false> print(output.begin()), eprint(error.begin());\n  Printer<Writer<>::iterator>\
+    \ println(output.begin()), eprintln(error.begin());\n  Printer<Writer<>::iterator,\
+    \ true, true, true, true> debug(output.begin()), edebug(error.begin());\n}\n#line\
+    \ 9 \"template/alias.hpp\"\n#include <set>\n#include <map>\n#include <unordered_set>\n\
+    #line 19 \"template/alias.hpp\"\n\nnamespace kyopro {\n  using ll = long long;\n\
+    \  using ull = unsigned long long;\n  using lf = double;\n\n  using i8 = std::int8_t;\n\
+    \  using u8 = std::uint8_t;\n  using i16 = std::int16_t;\n  using u16 = std::uint16_t;\n\
+    \  using i32 = std::int32_t;\n  using u32 = std::uint32_t;\n  using i64 = std::int64_t;\n\
+    \  using u64 = std::uint64_t;\n  using i128 = __int128_t;\n  using u128 = __uint128_t;\n\
+    \  using f128 = __float128;\n\n  using mint = ModInt<mod>;\n  using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\
     \n  template<class T, KYOPRO_BASE_UINT idx, class... Args>\n  struct agg_type\
     \ {\n    using type = typename agg_type<T, idx - 1, T, Args...>::type;\n  };\n\
     \  template<class T, class... Args>\n  struct agg_type<T, 0, Args...> {\n    using\
@@ -629,10 +631,10 @@ data:
     \  }\n\n  template<class T, class U>\n  constexpr bool amax(T& a, U&& b) noexcept\
     \ {\n    if (a < b) {\n      a = b;\n      return true;\n    }\n    return false;\n\
     \  }\n}\n#line 4 \"template/constant.hpp\"\n\nnamespace kyopro {\n  inline constexpr\
-    \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 4> beside{{{1, 0}, {0,\
-    \ 1}, {-1, 0}, {0, -1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 8> around{{{1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}, {-1,\
-    \ -1}, {0, -1}, {1, -1}}};\n}\n#line 4 \"template/len.hpp\"\n\nnamespace kyopro\
+    \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 4> beside{{{-1, 0},\
+    \ {0, -1}, {1, 0}, {0, 1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
+    \ KYOPRO_BASE_INT>, 8> around{{{-1, 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1,\
+    \ 1}, {0, 1}, {-1, 1}}};\n}\n#line 4 \"template/len.hpp\"\n\nnamespace kyopro\
     \ {\n  template<class T>\n  constexpr KYOPRO_BASE_INT len(T&& a) noexcept {\n\
     \    return std::size(a);\n  }\n}\n#line 5 \"template/macro.hpp\"\n\n#define KYOPRO_OVERLOAD_MACRO(_1,\
     \ _2, _3, _4, name, ...) name\n#define KYOPRO_REP0() for (; ; )\n#define KYOPRO_REP1(i)\
@@ -733,7 +735,7 @@ data:
   isVerificationFile: false
   path: all/all.hpp
   requiredBy: []
-  timestamp: '2022-04-23 20:37:11+09:00'
+  timestamp: '2022-04-24 20:57:00+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp
