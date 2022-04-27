@@ -49,10 +49,10 @@ data:
     #endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class T>\n\
-    \  constexpr T power(T a, KYOPRO_BASE_UINT n, T init = 1) noexcept {\n    while\
+    #endif\n#line 3 \"math/power.hpp\"\n\nnamespace kpr {\n  template<class T>\n \
+    \ constexpr T power(T a, KYOPRO_BASE_UINT n, T init = 1) noexcept {\n    while\
     \ (n > 0) {\n      if (n & 1) init *= a;\n      a *= a;\n      n >>= 1;\n    }\n\
-    \    return init;\n  }\n}\n#line 7 \"meta/constant.hpp\"\n\nnamespace kyopro {\n\
+    \    return init;\n  }\n}\n#line 7 \"meta/constant.hpp\"\n\nnamespace kpr {\n\
     \  template<class T>\n  inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\n  inline\
     \ constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\n  template<class T>\n\
     \  inline constexpr T INF = std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\n\
@@ -62,7 +62,7 @@ data:
     \  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\n  template<class\
     \ T>\n  inline constexpr T PI = 3.14159265358979323846;\n  inline constexpr KYOPRO_BASE_FLOAT\
     \ pi = PI<KYOPRO_BASE_FLOAT>;\n}\n#line 4 \"function/monoid.hpp\"\n\nnamespace\
-    \ kyopro {\n  template<class T, T _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<T>);\n\
+    \ kpr {\n  template<class T, T _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<T>);\n\
     \    using value_type = T;\n    static constexpr T id = _id;\n\n    constexpr\
     \ T operator ()(T a, T b) const noexcept { return a + b; }\n    constexpr T inverse(T\
     \ a) const noexcept { return -a; }\n  };\n\n  template<class T, T _id = 1>\n \
@@ -77,8 +77,8 @@ data:
     \ = std::is_integral_v<T> ? INF<T> : inf>\n  struct Min {\n    static_assert(std::is_arithmetic_v<T>);\n\
     \    using value_type = T;\n    static constexpr T id = _id;\n\n    constexpr\
     \ T operator ()(T a, T b) const noexcept { return a < b ? a : b; }\n  };\n}\n\
-    #line 7 \"structure/FenwickTree.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ T, class Op = Plus<T>, class Container = std::vector<T>>\n  struct FenwickTree\
+    #line 7 \"structure/FenwickTree.hpp\"\n\nnamespace kpr {\n  template<class T,\
+    \ class Op = Plus<T>, class Container = std::vector<T>>\n  struct FenwickTree\
     \ {\n    using value_type = T;\n    using size_type = KYOPRO_BASE_UINT;\n    using\
     \ reference = T&;\n    using const_reference = const T&;\n    using operator_type\
     \ = Op;\n    using container_type = Container;\n\n  private:\n    [[no_unique_address]]\
@@ -98,7 +98,7 @@ data:
     #include <cstddef>\n#line 6 \"system/in.hpp\"\n#include <cstdio>\n#include <string>\n\
     #include <tuple>\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#include <queue>\n\
     #line 5 \"meta/trait.hpp\"\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\nnamespace\
-    \ kyopro {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least {\n  private:\n\
+    \ kpr {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least {\n  private:\n\
     \    static constexpr auto get_type() noexcept {\n      static_assert(size <=\
     \ 128, \"Integer size is too large\");\n      if constexpr (size <= 8) return\
     \ std::int_least8_t();\n      else if constexpr (size <= 16) return std::int_least16_t();\n\
@@ -126,7 +126,7 @@ data:
     \ {};\n\n  template<class T>\n  constexpr bool is_tuple_v = is_tuple<T>::value;\n\
     \n  template<class T>\n  struct iterable_value {\n    using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\n\
     \  };\n\n  template<class T>\n  using iterable_value_t = typename iterable_value<T>::type;\n\
-    }\n#line 14 \"system/in.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    }\n#line 14 \"system/in.hpp\"\n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT\
     \ _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Reader {\n    static constexpr KYOPRO_BASE_UINT\
     \ buf_size = _buf_size;\n\n  private:\n    int fd, idx;\n    std::array<char,\
     \ buf_size> buffer;\n\n  public:\n    Reader() {\n      read(fd, buffer.begin(),\
@@ -180,27 +180,27 @@ data:
     \ ()() {}\n    template<class Head, class... Args>\n    void operator ()(Head&\
     \ head, Args&... args) {\n      scan(head);\n      operator ()(args...);\n   \
     \ }\n  };\n\n  Scanner<Reader<>::iterator> scan(input.begin());\n}\n#line 13 \"\
-    system/out.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _buf_size\
-    \ = KYOPRO_BUFFER_SIZE>\n  struct Writer {\n    static constexpr KYOPRO_BASE_UINT\
-    \ buf_size = _buf_size;\n\n  private:\n    int fd, idx;\n    std::array<char,\
-    \ buf_size> buffer;\n\n  public:\n    Writer() noexcept = default;\n    Writer(int\
-    \ fd) noexcept: fd(fd), idx(0), buffer() {}\n    Writer(FILE* fp) noexcept: fd(fileno(fp)),\
-    \ idx(0), buffer() {}\n\n    ~Writer() {\n      write(fd, buffer.begin(), idx);\n\
-    \    }\n\n    struct iterator {\n    private:\n      Writer& writer;\n\n    public:\n\
-    \      using difference_type = void;\n      using value_type = void;\n      using\
-    \ pointer = void;\n      using reference = void;\n      using iterator_category\
-    \ = std::output_iterator_tag;\n\n      iterator() noexcept = default;\n      iterator(Writer&\
-    \ writer) noexcept: writer(writer) {}\n\n      iterator& operator ++() {\n   \
-    \     ++writer.idx;\n        if (writer.idx == buf_size) {\n          write(writer.fd,\
-    \ writer.buffer.begin(), buf_size);\n          writer.idx = 0;\n        }\n  \
-    \      return *this;\n      }\n\n      iterator operator ++(int) {\n        iterator\
-    \ before = *this;\n        operator ++();\n        return before;\n      }\n\n\
-    \      char& operator *() const {\n        return writer.buffer[writer.idx];\n\
-    \      }\n\n      void flush() const {\n        write(writer.fd, writer.buffer.begin(),\
-    \ writer.idx);\n      }\n    };\n\n    iterator begin() noexcept {\n      return\
-    \ iterator(*this);\n    }\n  };\n\n  Writer output(1), error(2);\n\n  template<class\
-    \ Iterator, bool _sep = true, bool _end = true, bool _debug = false, bool _comment\
-    \ = false, bool _flush = false, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
+    system/out.hpp\"\n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>\n\
+    \  struct Writer {\n    static constexpr KYOPRO_BASE_UINT buf_size = _buf_size;\n\
+    \n  private:\n    int fd, idx;\n    std::array<char, buf_size> buffer;\n\n  public:\n\
+    \    Writer() noexcept = default;\n    Writer(int fd) noexcept: fd(fd), idx(0),\
+    \ buffer() {}\n    Writer(FILE* fp) noexcept: fd(fileno(fp)), idx(0), buffer()\
+    \ {}\n\n    ~Writer() {\n      write(fd, buffer.begin(), idx);\n    }\n\n    struct\
+    \ iterator {\n    private:\n      Writer& writer;\n\n    public:\n      using\
+    \ difference_type = void;\n      using value_type = void;\n      using pointer\
+    \ = void;\n      using reference = void;\n      using iterator_category = std::output_iterator_tag;\n\
+    \n      iterator() noexcept = default;\n      iterator(Writer& writer) noexcept:\
+    \ writer(writer) {}\n\n      iterator& operator ++() {\n        ++writer.idx;\n\
+    \        if (writer.idx == buf_size) {\n          write(writer.fd, writer.buffer.begin(),\
+    \ buf_size);\n          writer.idx = 0;\n        }\n        return *this;\n  \
+    \    }\n\n      iterator operator ++(int) {\n        iterator before = *this;\n\
+    \        operator ++();\n        return before;\n      }\n\n      char& operator\
+    \ *() const {\n        return writer.buffer[writer.idx];\n      }\n\n      void\
+    \ flush() const {\n        write(writer.fd, writer.buffer.begin(), writer.idx);\n\
+    \      }\n    };\n\n    iterator begin() noexcept {\n      return iterator(*this);\n\
+    \    }\n  };\n\n  Writer output(1), error(2);\n\n  template<class Iterator, bool\
+    \ _sep = true, bool _end = true, bool _debug = false, bool _comment = false, bool\
+    \ _flush = false, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
     \  struct Printer {\n    using iterator_type = Iterator;\n    static constexpr\
     \ bool sep = _sep, end = _end, debug = _debug, comment = _comment, flush = _flush;\n\
     \    static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;\n\
@@ -248,17 +248,16 @@ data:
     \ println(output.begin()), eprintln(error.begin());\n  Printer<Writer<>::iterator,\
     \ true, true, true, true> debug(output.begin()), edebug(error.begin());\n}\n#line\
     \ 4 \"verify/yosupo/point_add_range_sum.test.cpp\"\n\nint main() {\n  int n, q;\n\
-    \  kyopro::scan(n, q);\n  kyopro::FenwickTree<long long> ft(n);\n  for (int i\
-    \ = 0; i < n; ++i) {\n    int a;\n    kyopro::scan(a);\n    ft.apply(i, a);\n\
-    \  }\n  for (int i = 0; i < q; ++i) {\n    int t, x, y;\n    kyopro::scan(t, x,\
-    \ y);\n    if (t == 0) ft.apply(x, y);\n    else kyopro::println(ft.prod(x, y));\n\
-    \  }\n}\n"
+    \  kpr::scan(n, q);\n  kpr::FenwickTree<long long> ft(n);\n  for (int i = 0; i\
+    \ < n; ++i) {\n    int a;\n    kpr::scan(a);\n    ft.apply(i, a);\n  }\n  for\
+    \ (int i = 0; i < q; ++i) {\n    int t, x, y;\n    kpr::scan(t, x, y);\n    if\
+    \ (t == 0) ft.apply(x, y);\n    else kpr::println(ft.prod(x, y));\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_range_sum\"\n\
     #include \"../../structure/FenwickTree.hpp\"\n#include \"../../system/all.hpp\"\
-    \n\nint main() {\n  int n, q;\n  kyopro::scan(n, q);\n  kyopro::FenwickTree<long\
-    \ long> ft(n);\n  for (int i = 0; i < n; ++i) {\n    int a;\n    kyopro::scan(a);\n\
-    \    ft.apply(i, a);\n  }\n  for (int i = 0; i < q; ++i) {\n    int t, x, y;\n\
-    \    kyopro::scan(t, x, y);\n    if (t == 0) ft.apply(x, y);\n    else kyopro::println(ft.prod(x,\
+    \n\nint main() {\n  int n, q;\n  kpr::scan(n, q);\n  kpr::FenwickTree<long long>\
+    \ ft(n);\n  for (int i = 0; i < n; ++i) {\n    int a;\n    kpr::scan(a);\n   \
+    \ ft.apply(i, a);\n  }\n  for (int i = 0; i < q; ++i) {\n    int t, x, y;\n  \
+    \  kpr::scan(t, x, y);\n    if (t == 0) ft.apply(x, y);\n    else kpr::println(ft.prod(x,\
     \ y));\n  }\n}"
   dependsOn:
   - structure/FenwickTree.hpp
@@ -273,7 +272,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo/point_add_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-04-24 20:57:00+09:00'
+  timestamp: '2022-04-27 22:05:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yosupo/point_add_range_sum.test.cpp

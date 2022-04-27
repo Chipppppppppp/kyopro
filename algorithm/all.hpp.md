@@ -35,9 +35,9 @@ data:
     #define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n#endif\n\n\
     #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 5 \"algorithm/bit.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ T>\n  constexpr KYOPRO_BASE_INT pop_count(T x) noexcept {\n    constexpr auto\
-    \ digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n    static_assert(digits\
+    #endif\n#line 5 \"algorithm/bit.hpp\"\n\nnamespace kpr {\n  template<class T>\n\
+    \  constexpr KYOPRO_BASE_INT pop_count(T x) noexcept {\n    constexpr auto digits\
+    \ = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n    static_assert(digits\
     \ <= std::numeric_limits<unsigned long long>::digits, \"Integer size is too large\"\
     );\n    if constexpr (digits <= std::numeric_limits<unsigned int>::digits) return\
     \ __builtin_popcount(x);\n    else if constexpr (digits <= std::numeric_limits<unsigned\
@@ -70,8 +70,8 @@ data:
     \  constexpr KYOPRO_BASE_INT ceil_bit(T x) noexcept {\n    if (x == 0) return\
     \ 0;\n    return bit_len(x - static_cast<T>(1));\n  }\n}\n#line 2 \"algorithm/compress.hpp\"\
     \n#include <algorithm>\n#include <functional>\n#include <iterator>\n#include <unordered_map>\n\
-    #include <vector>\n#line 8 \"algorithm/compress.hpp\"\n\nnamespace kyopro {\n\
-    \  template<class T, class Container = std::unordered_map<typename std::iterator_traits<T>::value_type,\
+    #include <vector>\n#line 8 \"algorithm/compress.hpp\"\n\nnamespace kpr {\n  template<class\
+    \ T, class Container = std::unordered_map<typename std::iterator_traits<T>::value_type,\
     \ KYOPRO_BASE_INT>, class Compare>\n  auto compress(T first, T last, Compare comp\
     \ = std::less<typename std::iterator_traits<T>::value_type>()) {\n    std::vector<typename\
     \ std::iterator_traits<T>::value_type> vec(first, last);\n    std::sort(vec.begin(),\
@@ -81,8 +81,8 @@ data:
     \n#include <cstddef>\n#line 5 \"algorithm/Hash.hpp\"\n#include <tuple>\n#line\
     \ 7 \"algorithm/Hash.hpp\"\n#include <utility>\n#line 3 \"meta/trait.hpp\"\n#include\
     \ <queue>\n#line 5 \"meta/trait.hpp\"\n#include <stack>\n#line 9 \"meta/trait.hpp\"\
-    \n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least\
-    \ {\n  private:\n    static constexpr auto get_type() noexcept {\n      static_assert(size\
+    \n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least {\n\
+    \  private:\n    static constexpr auto get_type() noexcept {\n      static_assert(size\
     \ <= 128, \"Integer size is too large\");\n      if constexpr (size <= 8) return\
     \ std::int_least8_t();\n      else if constexpr (size <= 16) return std::int_least16_t();\n\
     \      else if constexpr (size <= 32) return std::int_least32_t();\n      else\
@@ -109,7 +109,7 @@ data:
     \ {};\n\n  template<class T>\n  constexpr bool is_tuple_v = is_tuple<T>::value;\n\
     \n  template<class T>\n  struct iterable_value {\n    using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\n\
     \  };\n\n  template<class T>\n  using iterable_value_t = typename iterable_value<T>::type;\n\
-    }\n#line 10 \"algorithm/Hash.hpp\"\n\nnamespace kyopro {\n  template<class, class\
+    }\n#line 10 \"algorithm/Hash.hpp\"\n\nnamespace kpr {\n  template<class, class\
     \ = void>\n  struct Hash;\n\n  template<class T>\n  struct Hash<T, std::enable_if_t<std::is_scalar_v<T>>>:\
     \ std::hash<T> {\n    using value_type = T;\n\n    constexpr std::size_t operator\
     \ ()(T a) const noexcept {\n      return std::hash<T>::operator ()(a);\n    }\n\
@@ -142,7 +142,7 @@ data:
   path: algorithm/all.hpp
   requiredBy:
   - all/all.hpp
-  timestamp: '2022-04-22 21:56:22+09:00'
+  timestamp: '2022-04-27 22:05:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm/all.hpp

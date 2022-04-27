@@ -34,7 +34,7 @@ data:
     #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#include <queue>\n#include\
-    \ <limits>\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\nnamespace kyopro {\n\
+    \ <limits>\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\nnamespace kpr {\n\
     \  template<KYOPRO_BASE_UINT size>\n  struct int_least {\n  private:\n    static\
     \ constexpr auto get_type() noexcept {\n      static_assert(size <= 128, \"Integer\
     \ size is too large\");\n      if constexpr (size <= 8) return std::int_least8_t();\n\
@@ -63,10 +63,10 @@ data:
     \ {};\n\n  template<class T>\n  constexpr bool is_tuple_v = is_tuple<T>::value;\n\
     \n  template<class T>\n  struct iterable_value {\n    using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\n\
     \  };\n\n  template<class T>\n  using iterable_value_t = typename iterable_value<T>::type;\n\
-    }\n#line 9 \"structure/UnionFind.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ Container = std::vector<int>>\n  struct UnionFind {\n    using value_type =\
-    \ iterable_value_t<Container>;\n    using container_type = Container;\n\n  private:\n\
-    \    Container par;\n\n  public:\n    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT\
+    }\n#line 9 \"structure/UnionFind.hpp\"\n\nnamespace kpr {\n  template<class Container\
+    \ = std::vector<int>>\n  struct UnionFind {\n    using value_type = iterable_value_t<Container>;\n\
+    \    using container_type = Container;\n\n  private:\n    Container par;\n\n \
+    \ public:\n    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT\
     \ n) noexcept: par(n, -1) {}\n    template<class C, std::enable_if_t<std::is_same_v<Container,\
     \ std::decay_t<C>>>>\n    UnionFind(C&& par): par(std::forward<C>(par)) {}\n\n\
     \    void resize(KYOPRO_BASE_UINT x) { par.resize(x, -1); }\n    void assign(KYOPRO_BASE_UINT\
@@ -93,7 +93,7 @@ data:
     \      return group_members;\n    }\n  };\n}\n"
   code: "#pragma once\n#include <algorithm>\n#include <type_traits>\n#include <unordered_map>\n\
     #include <utility>\n#include <vector>\n#include \"../meta/settings.hpp\"\n#include\
-    \ \"../meta/trait.hpp\"\n\nnamespace kyopro {\n  template<class Container = std::vector<int>>\n\
+    \ \"../meta/trait.hpp\"\n\nnamespace kpr {\n  template<class Container = std::vector<int>>\n\
     \  struct UnionFind {\n    using value_type = iterable_value_t<Container>;\n \
     \   using container_type = Container;\n\n  private:\n    Container par;\n\n  public:\n\
     \    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT n) noexcept:\
@@ -129,7 +129,7 @@ data:
   requiredBy:
   - structure/all.hpp
   - all/all.hpp
-  timestamp: '2022-04-22 21:56:22+09:00'
+  timestamp: '2022-04-27 22:05:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo/unionfind.test.cpp

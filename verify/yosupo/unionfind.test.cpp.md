@@ -43,7 +43,7 @@ data:
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#include <queue>\n#include\
-    \ <limits>\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\nnamespace kyopro {\n\
+    \ <limits>\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\nnamespace kpr {\n\
     \  template<KYOPRO_BASE_UINT size>\n  struct int_least {\n  private:\n    static\
     \ constexpr auto get_type() noexcept {\n      static_assert(size <= 128, \"Integer\
     \ size is too large\");\n      if constexpr (size <= 8) return std::int_least8_t();\n\
@@ -72,10 +72,10 @@ data:
     \ {};\n\n  template<class T>\n  constexpr bool is_tuple_v = is_tuple<T>::value;\n\
     \n  template<class T>\n  struct iterable_value {\n    using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\n\
     \  };\n\n  template<class T>\n  using iterable_value_t = typename iterable_value<T>::type;\n\
-    }\n#line 9 \"structure/UnionFind.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ Container = std::vector<int>>\n  struct UnionFind {\n    using value_type =\
-    \ iterable_value_t<Container>;\n    using container_type = Container;\n\n  private:\n\
-    \    Container par;\n\n  public:\n    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT\
+    }\n#line 9 \"structure/UnionFind.hpp\"\n\nnamespace kpr {\n  template<class Container\
+    \ = std::vector<int>>\n  struct UnionFind {\n    using value_type = iterable_value_t<Container>;\n\
+    \    using container_type = Container;\n\n  private:\n    Container par;\n\n \
+    \ public:\n    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT\
     \ n) noexcept: par(n, -1) {}\n    template<class C, std::enable_if_t<std::is_same_v<Container,\
     \ std::decay_t<C>>>>\n    UnionFind(C&& par): par(std::forward<C>(par)) {}\n\n\
     \    void resize(KYOPRO_BASE_UINT x) { par.resize(x, -1); }\n    void assign(KYOPRO_BASE_UINT\
@@ -102,10 +102,10 @@ data:
     \      return group_members;\n    }\n  };\n}\n#line 2 \"system/in.hpp\"\n#include\
     \ <unistd.h>\n#include <array>\n#include <cstddef>\n#line 6 \"system/in.hpp\"\n\
     #include <cstdio>\n#include <string>\n#include <tuple>\n#line 3 \"math/power.hpp\"\
-    \n\nnamespace kyopro {\n  template<class T>\n  constexpr T power(T a, KYOPRO_BASE_UINT\
+    \n\nnamespace kpr {\n  template<class T>\n  constexpr T power(T a, KYOPRO_BASE_UINT\
     \ n, T init = 1) noexcept {\n    while (n > 0) {\n      if (n & 1) init *= a;\n\
     \      a *= a;\n      n >>= 1;\n    }\n    return init;\n  }\n}\n#line 14 \"system/in.hpp\"\
-    \n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>\n\
+    \n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>\n\
     \  struct Reader {\n    static constexpr KYOPRO_BASE_UINT buf_size = _buf_size;\n\
     \n  private:\n    int fd, idx;\n    std::array<char, buf_size> buffer;\n\n  public:\n\
     \    Reader() {\n      read(fd, buffer.begin(), buf_size);\n    }\n    Reader(int\
@@ -159,27 +159,27 @@ data:
     \ ()() {}\n    template<class Head, class... Args>\n    void operator ()(Head&\
     \ head, Args&... args) {\n      scan(head);\n      operator ()(args...);\n   \
     \ }\n  };\n\n  Scanner<Reader<>::iterator> scan(input.begin());\n}\n#line 13 \"\
-    system/out.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _buf_size\
-    \ = KYOPRO_BUFFER_SIZE>\n  struct Writer {\n    static constexpr KYOPRO_BASE_UINT\
-    \ buf_size = _buf_size;\n\n  private:\n    int fd, idx;\n    std::array<char,\
-    \ buf_size> buffer;\n\n  public:\n    Writer() noexcept = default;\n    Writer(int\
-    \ fd) noexcept: fd(fd), idx(0), buffer() {}\n    Writer(FILE* fp) noexcept: fd(fileno(fp)),\
-    \ idx(0), buffer() {}\n\n    ~Writer() {\n      write(fd, buffer.begin(), idx);\n\
-    \    }\n\n    struct iterator {\n    private:\n      Writer& writer;\n\n    public:\n\
-    \      using difference_type = void;\n      using value_type = void;\n      using\
-    \ pointer = void;\n      using reference = void;\n      using iterator_category\
-    \ = std::output_iterator_tag;\n\n      iterator() noexcept = default;\n      iterator(Writer&\
-    \ writer) noexcept: writer(writer) {}\n\n      iterator& operator ++() {\n   \
-    \     ++writer.idx;\n        if (writer.idx == buf_size) {\n          write(writer.fd,\
-    \ writer.buffer.begin(), buf_size);\n          writer.idx = 0;\n        }\n  \
-    \      return *this;\n      }\n\n      iterator operator ++(int) {\n        iterator\
-    \ before = *this;\n        operator ++();\n        return before;\n      }\n\n\
-    \      char& operator *() const {\n        return writer.buffer[writer.idx];\n\
-    \      }\n\n      void flush() const {\n        write(writer.fd, writer.buffer.begin(),\
-    \ writer.idx);\n      }\n    };\n\n    iterator begin() noexcept {\n      return\
-    \ iterator(*this);\n    }\n  };\n\n  Writer output(1), error(2);\n\n  template<class\
-    \ Iterator, bool _sep = true, bool _end = true, bool _debug = false, bool _comment\
-    \ = false, bool _flush = false, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
+    system/out.hpp\"\n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>\n\
+    \  struct Writer {\n    static constexpr KYOPRO_BASE_UINT buf_size = _buf_size;\n\
+    \n  private:\n    int fd, idx;\n    std::array<char, buf_size> buffer;\n\n  public:\n\
+    \    Writer() noexcept = default;\n    Writer(int fd) noexcept: fd(fd), idx(0),\
+    \ buffer() {}\n    Writer(FILE* fp) noexcept: fd(fileno(fp)), idx(0), buffer()\
+    \ {}\n\n    ~Writer() {\n      write(fd, buffer.begin(), idx);\n    }\n\n    struct\
+    \ iterator {\n    private:\n      Writer& writer;\n\n    public:\n      using\
+    \ difference_type = void;\n      using value_type = void;\n      using pointer\
+    \ = void;\n      using reference = void;\n      using iterator_category = std::output_iterator_tag;\n\
+    \n      iterator() noexcept = default;\n      iterator(Writer& writer) noexcept:\
+    \ writer(writer) {}\n\n      iterator& operator ++() {\n        ++writer.idx;\n\
+    \        if (writer.idx == buf_size) {\n          write(writer.fd, writer.buffer.begin(),\
+    \ buf_size);\n          writer.idx = 0;\n        }\n        return *this;\n  \
+    \    }\n\n      iterator operator ++(int) {\n        iterator before = *this;\n\
+    \        operator ++();\n        return before;\n      }\n\n      char& operator\
+    \ *() const {\n        return writer.buffer[writer.idx];\n      }\n\n      void\
+    \ flush() const {\n        write(writer.fd, writer.buffer.begin(), writer.idx);\n\
+    \      }\n    };\n\n    iterator begin() noexcept {\n      return iterator(*this);\n\
+    \    }\n  };\n\n  Writer output(1), error(2);\n\n  template<class Iterator, bool\
+    \ _sep = true, bool _end = true, bool _debug = false, bool _comment = false, bool\
+    \ _flush = false, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
     \  struct Printer {\n    using iterator_type = Iterator;\n    static constexpr\
     \ bool sep = _sep, end = _end, debug = _debug, comment = _comment, flush = _flush;\n\
     \    static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;\n\
@@ -226,15 +226,15 @@ data:
     \ false, false> print(output.begin()), eprint(error.begin());\n  Printer<Writer<>::iterator>\
     \ println(output.begin()), eprintln(error.begin());\n  Printer<Writer<>::iterator,\
     \ true, true, true, true> debug(output.begin()), edebug(error.begin());\n}\n#line\
-    \ 4 \"verify/yosupo/unionfind.test.cpp\"\n\nint main() {\n  int n, q;\n  kyopro::scan(n,\
-    \ q);\n  kyopro::UnionFind uf(n);\n  for (int i = 0; i < q; ++i) {\n    int t,\
-    \ u, v;\n    kyopro::scan(t, u, v);\n    if (t == 0) uf.merge(u, v);\n    else\
-    \ kyopro::println(uf.same(u, v));\n  }\n}\n"
+    \ 4 \"verify/yosupo/unionfind.test.cpp\"\n\nint main() {\n  int n, q;\n  kpr::scan(n,\
+    \ q);\n  kpr::UnionFind uf(n);\n  for (int i = 0; i < q; ++i) {\n    int t, u,\
+    \ v;\n    kpr::scan(t, u, v);\n    if (t == 0) uf.merge(u, v);\n    else kpr::println(uf.same(u,\
+    \ v));\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\n#include \"\
     ../../structure/UnionFind.hpp\"\n#include \"../../system/all.hpp\"\n\nint main()\
-    \ {\n  int n, q;\n  kyopro::scan(n, q);\n  kyopro::UnionFind uf(n);\n  for (int\
-    \ i = 0; i < q; ++i) {\n    int t, u, v;\n    kyopro::scan(t, u, v);\n    if (t\
-    \ == 0) uf.merge(u, v);\n    else kyopro::println(uf.same(u, v));\n  }\n}"
+    \ {\n  int n, q;\n  kpr::scan(n, q);\n  kpr::UnionFind uf(n);\n  for (int i =\
+    \ 0; i < q; ++i) {\n    int t, u, v;\n    kpr::scan(t, u, v);\n    if (t == 0)\
+    \ uf.merge(u, v);\n    else kpr::println(uf.same(u, v));\n  }\n}"
   dependsOn:
   - structure/UnionFind.hpp
   - meta/settings.hpp
@@ -246,7 +246,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo/unionfind.test.cpp
   requiredBy: []
-  timestamp: '2022-04-24 20:57:00+09:00'
+  timestamp: '2022-04-27 22:05:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yosupo/unionfind.test.cpp

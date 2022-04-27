@@ -46,7 +46,7 @@ data:
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 3 \"meta/trait.hpp\"\n#include <queue>\n#include <limits>\n#include\
-    \ <stack>\n#line 9 \"meta/trait.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    \ <stack>\n#line 9 \"meta/trait.hpp\"\n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT\
     \ size>\n  struct int_least {\n  private:\n    static constexpr auto get_type()\
     \ noexcept {\n      static_assert(size <= 128, \"Integer size is too large\");\n\
     \      if constexpr (size <= 8) return std::int_least8_t();\n      else if constexpr\
@@ -75,7 +75,7 @@ data:
     \ {};\n\n  template<class T>\n  constexpr bool is_tuple_v = is_tuple<T>::value;\n\
     \n  template<class T>\n  struct iterable_value {\n    using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\n\
     \  };\n\n  template<class T>\n  using iterable_value_t = typename iterable_value<T>::type;\n\
-    }\n#line 13 \"system/out.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    }\n#line 13 \"system/out.hpp\"\n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT\
     \ _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Writer {\n    static constexpr KYOPRO_BASE_UINT\
     \ buf_size = _buf_size;\n\n  private:\n    int fd, idx;\n    std::array<char,\
     \ buf_size> buffer;\n\n  public:\n    Writer() noexcept = default;\n    Writer(int\
@@ -145,7 +145,7 @@ data:
   code: "#pragma once\n#include <unistd.h>\n#include <array>\n#include <cstdint>\n\
     #include <cstdio>\n#include <iterator>\n#include <string>\n#include <tuple>\n\
     #include <type_traits>\n#include <utility>\n#include \"../meta/settings.hpp\"\n\
-    #include \"../meta/trait.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    #include \"../meta/trait.hpp\"\n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT\
     \ _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Writer {\n    static constexpr KYOPRO_BASE_UINT\
     \ buf_size = _buf_size;\n\n  private:\n    int fd, idx;\n    std::array<char,\
     \ buf_size> buffer;\n\n  public:\n    Writer() noexcept = default;\n    Writer(int\
@@ -220,7 +220,7 @@ data:
   requiredBy:
   - system/all.hpp
   - all/all.hpp
-  timestamp: '2022-04-24 20:57:00+09:00'
+  timestamp: '2022-04-27 22:05:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp

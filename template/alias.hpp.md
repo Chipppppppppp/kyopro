@@ -57,8 +57,8 @@ data:
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#line 9 \"meta/trait.hpp\"\
-    \n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least\
-    \ {\n  private:\n    static constexpr auto get_type() noexcept {\n      static_assert(size\
+    \n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least {\n\
+    \  private:\n    static constexpr auto get_type() noexcept {\n      static_assert(size\
     \ <= 128, \"Integer size is too large\");\n      if constexpr (size <= 8) return\
     \ std::int_least8_t();\n      else if constexpr (size <= 16) return std::int_least16_t();\n\
     \      else if constexpr (size <= 32) return std::int_least32_t();\n      else\
@@ -85,7 +85,7 @@ data:
     \ {};\n\n  template<class T>\n  constexpr bool is_tuple_v = is_tuple<T>::value;\n\
     \n  template<class T>\n  struct iterable_value {\n    using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\n\
     \  };\n\n  template<class T>\n  using iterable_value_t = typename iterable_value<T>::type;\n\
-    }\n#line 10 \"algorithm/Hash.hpp\"\n\nnamespace kyopro {\n  template<class, class\
+    }\n#line 10 \"algorithm/Hash.hpp\"\n\nnamespace kpr {\n  template<class, class\
     \ = void>\n  struct Hash;\n\n  template<class T>\n  struct Hash<T, std::enable_if_t<std::is_scalar_v<T>>>:\
     \ std::hash<T> {\n    using value_type = T;\n\n    constexpr std::size_t operator\
     \ ()(T a) const noexcept {\n      return std::hash<T>::operator ()(a);\n    }\n\
@@ -101,10 +101,10 @@ data:
     \      for (auto& i: a) seed ^= Hash<iterable_value_t<T>>(i) + 0x9e3779b97f4a7c15LU\
     \ + (seed << 12) + (seed >> 4);\n      return seed;\n    }\n  };\n}\n#line 2 \"\
     math/DynamicModInt.hpp\"\n#include <cassert>\n#line 2 \"meta/constant.hpp\"\n\
-    #include <array>\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class\
+    #include <array>\n#line 3 \"math/power.hpp\"\n\nnamespace kpr {\n  template<class\
     \ T>\n  constexpr T power(T a, KYOPRO_BASE_UINT n, T init = 1) noexcept {\n  \
     \  while (n > 0) {\n      if (n & 1) init *= a;\n      a *= a;\n      n >>= 1;\n\
-    \    }\n    return init;\n  }\n}\n#line 7 \"meta/constant.hpp\"\n\nnamespace kyopro\
+    \    }\n    return init;\n  }\n}\n#line 7 \"meta/constant.hpp\"\n\nnamespace kpr\
     \ {\n  template<class T>\n  inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\n  inline\
     \ constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\n  template<class T>\n\
     \  inline constexpr T INF = std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\n\
@@ -114,7 +114,7 @@ data:
     \  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\n  template<class\
     \ T>\n  inline constexpr T PI = 3.14159265358979323846;\n  inline constexpr KYOPRO_BASE_FLOAT\
     \ pi = PI<KYOPRO_BASE_FLOAT>;\n}\n#line 6 \"math/Montgomery.hpp\"\n\nnamespace\
-    \ kyopro {\n  template<class T>\n  struct Montgomery {\n    static_assert(std::is_unsigned_v<T>,\
+    \ kpr {\n  template<class T>\n  struct Montgomery {\n    static_assert(std::is_unsigned_v<T>,\
     \ \"Unsigned integer is required\");\n    using value_type = T;\n\n    T mod;\n\
     \n  private:\n    using larger_type = uint_least_t<std::numeric_limits<T>::digits\
     \ * 2>;\n\n    T r, n2;\n\n  public:\n    constexpr void set_mod(T _mod) noexcept\
@@ -129,7 +129,7 @@ data:
     \     T y = reduce(x);\n      return y >= mod ? y - mod : y;\n    }\n\n    constexpr\
     \ T reduce(larger_type x) const noexcept {\n      return (x + static_cast<larger_type>(static_cast<T>(x)\
     \ * r) * mod) >> std::numeric_limits<T>::digits;\n    }\n  };\n}\n#line 10 \"\
-    math/DynamicModInt.hpp\"\n\nnamespace kyopro {\n  template<class T, KYOPRO_BASE_UINT\
+    math/DynamicModInt.hpp\"\n\nnamespace kpr {\n  template<class T, KYOPRO_BASE_UINT\
     \ _kind = 0>\n  struct DynamicModInt {\n    static_assert(std::is_unsigned_v<T>,\
     \ \"T must be unsigned integer\");\n    using value_type = T;\n    static constexpr\
     \ KYOPRO_BASE_INT kind = _kind;\n\n  private:\n    using larger_type = uint_least_t<std::numeric_limits<T>::digits\
@@ -179,7 +179,7 @@ data:
     \    }\n  };\n\n  template<class T, KYOPRO_BASE_UINT kind>\n  struct Hash<DynamicModInt<T,\
     \ kind>> {\n    using value_type = DynamicModInt<T, kind>;\n\n    std::size_t\
     \ operator ()(DynamicModInt<T, kind> a) const noexcept { return static_cast<std::size_t>(a);\
-    \ }\n  };\n}\n#line 5 \"algorithm/bit.hpp\"\n\nnamespace kyopro {\n  template<class\
+    \ }\n  };\n}\n#line 5 \"algorithm/bit.hpp\"\n\nnamespace kpr {\n  template<class\
     \ T>\n  constexpr KYOPRO_BASE_INT pop_count(T x) noexcept {\n    constexpr auto\
     \ digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n    static_assert(digits\
     \ <= std::numeric_limits<unsigned long long>::digits, \"Integer size is too large\"\
@@ -213,13 +213,13 @@ data:
     \ {\n    return bit_len(x >> static_cast<T>(1));\n  }\n\n  template<class T>\n\
     \  constexpr KYOPRO_BASE_INT ceil_bit(T x) noexcept {\n    if (x == 0) return\
     \ 0;\n    return bit_len(x - static_cast<T>(1));\n  }\n}\n#line 4 \"math/mod.hpp\"\
-    \n\nnamespace kyopro {\n  template<class T, class U>\n  constexpr std::common_type_t<T,\
+    \n\nnamespace kpr {\n  template<class T, class U>\n  constexpr std::common_type_t<T,\
     \ U> floor_mod(T x, U m) noexcept {\n    static_assert(std::is_integral_v<T> &&\
     \ std::is_integral_v<U>, \"Integer is required\");\n    if constexpr (std::is_unsigned_v<T>\
     \ || std::is_unsigned_v<U>) return x % m;\n    return (x %= m) < 0 ? x + m : x;\n\
     \  }\n\n  template<class T, class U>\n  constexpr std::common_type_t<T, U> ceil_mod(T\
     \ x, U m) noexcept {\n    return m - floor_mod(x - 1, m) - static_cast<T>(1);\n\
-    \  }\n}\n#line 14 \"math/ModInt.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    \  }\n}\n#line 14 \"math/ModInt.hpp\"\n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT\
     \ m>\n  struct ModInt {\n    using value_type = uint_least_t<bit_len(m * 2 - 2)>;\n\
     \    static constexpr KYOPRO_BASE_INT mod = m;\n\n  private:\n    static constexpr\
     \ value_type _mod = m;\n\n  public:\n    value_type value;\n\n    static constexpr\
@@ -267,7 +267,7 @@ data:
     \  };\n\n  template<KYOPRO_BASE_UINT _mod>\n  struct Hash<ModInt<_mod>> {\n  \
     \  using value_type = ModInt<_mod>;\n    constexpr std::size_t operator ()(ModInt<_mod>\
     \ a) const noexcept { return static_cast<std::size_t>(a); }\n  };\n}\n#line 19\
-    \ \"template/alias.hpp\"\n\nnamespace kyopro {\n  using ll = long long;\n  using\
+    \ \"template/alias.hpp\"\n\nnamespace kpr {\n  using ll = long long;\n  using\
     \ ull = unsigned long long;\n  using lf = double;\n\n  using i8 = std::int8_t;\n\
     \  using u8 = std::uint8_t;\n  using i16 = std::int16_t;\n  using u16 = std::uint16_t;\n\
     \  using i32 = std::int32_t;\n  using u32 = std::uint32_t;\n  using i64 = std::int64_t;\n\
@@ -293,15 +293,15 @@ data:
     \ = std::vector<T>>\n  using priq = std::priority_queue<T, Container, Compare>;\n\
     \  template<class T, class Compare = std::greater<T>, class Container = std::vector<T>>\n\
     \  using heapq = priq<T, Compare, Container>;\n}\n\nusing namespace std;\nusing\
-    \ namespace kyopro;\n"
+    \ namespace kpr;\n"
   code: "#pragma once\n#include <cstdint>\n#include <limits>\n#include <functional>\n\
     #include <tuple>\n#include <utility>\n#include <vector>\n#include <string>\n#include\
     \ <set>\n#include <map>\n#include <unordered_set>\n#include <unordered_map>\n\
     #include <queue>\n#include <stack>\n#include \"../algorithm/Hash.hpp\"\n#include\
     \ \"../math/DynamicModInt.hpp\"\n#include \"../math/ModInt.hpp\"\n#include \"\
-    ../meta/settings.hpp\"\n\nnamespace kyopro {\n  using ll = long long;\n  using\
-    \ ull = unsigned long long;\n  using lf = double;\n\n  using i8 = std::int8_t;\n\
-    \  using u8 = std::uint8_t;\n  using i16 = std::int16_t;\n  using u16 = std::uint16_t;\n\
+    ../meta/settings.hpp\"\n\nnamespace kpr {\n  using ll = long long;\n  using ull\
+    \ = unsigned long long;\n  using lf = double;\n\n  using i8 = std::int8_t;\n \
+    \ using u8 = std::uint8_t;\n  using i16 = std::int16_t;\n  using u16 = std::uint16_t;\n\
     \  using i32 = std::int32_t;\n  using u32 = std::uint32_t;\n  using i64 = std::int64_t;\n\
     \  using u64 = std::uint64_t;\n  using i128 = __int128_t;\n  using u128 = __uint128_t;\n\
     \  using f128 = __float128;\n\n  using mint = ModInt<mod>;\n  using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\
@@ -325,7 +325,7 @@ data:
     \ = std::vector<T>>\n  using priq = std::priority_queue<T, Container, Compare>;\n\
     \  template<class T, class Compare = std::greater<T>, class Container = std::vector<T>>\n\
     \  using heapq = priq<T, Compare, Container>;\n}\n\nusing namespace std;\nusing\
-    \ namespace kyopro;"
+    \ namespace kpr;"
   dependsOn:
   - algorithm/Hash.hpp
   - meta/settings.hpp
@@ -342,7 +342,7 @@ data:
   requiredBy:
   - template/all.hpp
   - all/all.hpp
-  timestamp: '2022-04-22 21:56:22+09:00'
+  timestamp: '2022-04-27 22:05:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/alias.hpp

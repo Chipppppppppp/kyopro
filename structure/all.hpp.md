@@ -42,10 +42,10 @@ data:
     \ KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class T>\n\
-    \  constexpr T power(T a, KYOPRO_BASE_UINT n, T init = 1) noexcept {\n    while\
+    #endif\n#line 3 \"math/power.hpp\"\n\nnamespace kpr {\n  template<class T>\n \
+    \ constexpr T power(T a, KYOPRO_BASE_UINT n, T init = 1) noexcept {\n    while\
     \ (n > 0) {\n      if (n & 1) init *= a;\n      a *= a;\n      n >>= 1;\n    }\n\
-    \    return init;\n  }\n}\n#line 7 \"meta/constant.hpp\"\n\nnamespace kyopro {\n\
+    \    return init;\n  }\n}\n#line 7 \"meta/constant.hpp\"\n\nnamespace kpr {\n\
     \  template<class T>\n  inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\n  inline\
     \ constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\n  template<class T>\n\
     \  inline constexpr T INF = std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\n\
@@ -55,7 +55,7 @@ data:
     \  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\n  template<class\
     \ T>\n  inline constexpr T PI = 3.14159265358979323846;\n  inline constexpr KYOPRO_BASE_FLOAT\
     \ pi = PI<KYOPRO_BASE_FLOAT>;\n}\n#line 4 \"function/monoid.hpp\"\n\nnamespace\
-    \ kyopro {\n  template<class T, T _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<T>);\n\
+    \ kpr {\n  template<class T, T _id = 0>\n  struct Plus {\n    static_assert(std::is_arithmetic_v<T>);\n\
     \    using value_type = T;\n    static constexpr T id = _id;\n\n    constexpr\
     \ T operator ()(T a, T b) const noexcept { return a + b; }\n    constexpr T inverse(T\
     \ a) const noexcept { return -a; }\n  };\n\n  template<class T, T _id = 1>\n \
@@ -70,8 +70,8 @@ data:
     \ = std::is_integral_v<T> ? INF<T> : inf>\n  struct Min {\n    static_assert(std::is_arithmetic_v<T>);\n\
     \    using value_type = T;\n    static constexpr T id = _id;\n\n    constexpr\
     \ T operator ()(T a, T b) const noexcept { return a < b ? a : b; }\n  };\n}\n\
-    #line 7 \"structure/FenwickTree.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ T, class Op = Plus<T>, class Container = std::vector<T>>\n  struct FenwickTree\
+    #line 7 \"structure/FenwickTree.hpp\"\n\nnamespace kpr {\n  template<class T,\
+    \ class Op = Plus<T>, class Container = std::vector<T>>\n  struct FenwickTree\
     \ {\n    using value_type = T;\n    using size_type = KYOPRO_BASE_UINT;\n    using\
     \ reference = T&;\n    using const_reference = const T&;\n    using operator_type\
     \ = Op;\n    using container_type = Container;\n\n  private:\n    [[no_unique_address]]\
@@ -90,8 +90,8 @@ data:
     }\n#line 2 \"structure/UnionFind.hpp\"\n#include <algorithm>\n#line 4 \"structure/UnionFind.hpp\"\
     \n#include <unordered_map>\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n\
     #include <queue>\n#line 5 \"meta/trait.hpp\"\n#include <stack>\n#line 9 \"meta/trait.hpp\"\
-    \n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least\
-    \ {\n  private:\n    static constexpr auto get_type() noexcept {\n      static_assert(size\
+    \n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least {\n\
+    \  private:\n    static constexpr auto get_type() noexcept {\n      static_assert(size\
     \ <= 128, \"Integer size is too large\");\n      if constexpr (size <= 8) return\
     \ std::int_least8_t();\n      else if constexpr (size <= 16) return std::int_least16_t();\n\
     \      else if constexpr (size <= 32) return std::int_least32_t();\n      else\
@@ -118,10 +118,10 @@ data:
     \ {};\n\n  template<class T>\n  constexpr bool is_tuple_v = is_tuple<T>::value;\n\
     \n  template<class T>\n  struct iterable_value {\n    using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\n\
     \  };\n\n  template<class T>\n  using iterable_value_t = typename iterable_value<T>::type;\n\
-    }\n#line 9 \"structure/UnionFind.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ Container = std::vector<int>>\n  struct UnionFind {\n    using value_type =\
-    \ iterable_value_t<Container>;\n    using container_type = Container;\n\n  private:\n\
-    \    Container par;\n\n  public:\n    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT\
+    }\n#line 9 \"structure/UnionFind.hpp\"\n\nnamespace kpr {\n  template<class Container\
+    \ = std::vector<int>>\n  struct UnionFind {\n    using value_type = iterable_value_t<Container>;\n\
+    \    using container_type = Container;\n\n  private:\n    Container par;\n\n \
+    \ public:\n    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT\
     \ n) noexcept: par(n, -1) {}\n    template<class C, std::enable_if_t<std::is_same_v<Container,\
     \ std::decay_t<C>>>>\n    UnionFind(C&& par): par(std::forward<C>(par)) {}\n\n\
     \    void resize(KYOPRO_BASE_UINT x) { par.resize(x, -1); }\n    void assign(KYOPRO_BASE_UINT\
@@ -163,7 +163,7 @@ data:
   path: structure/all.hpp
   requiredBy:
   - all/all.hpp
-  timestamp: '2022-04-22 21:56:22+09:00'
+  timestamp: '2022-04-27 22:05:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: structure/all.hpp

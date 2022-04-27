@@ -24,14 +24,14 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"math/mod.hpp\"\n#include <cassert>\n#include <type_traits>\n\
-    \nnamespace kyopro {\n  template<class T, class U>\n  constexpr std::common_type_t<T,\
+    \nnamespace kpr {\n  template<class T, class U>\n  constexpr std::common_type_t<T,\
     \ U> floor_mod(T x, U m) noexcept {\n    static_assert(std::is_integral_v<T> &&\
     \ std::is_integral_v<U>, \"Integer is required\");\n    if constexpr (std::is_unsigned_v<T>\
     \ || std::is_unsigned_v<U>) return x % m;\n    return (x %= m) < 0 ? x + m : x;\n\
     \  }\n\n  template<class T, class U>\n  constexpr std::common_type_t<T, U> ceil_mod(T\
     \ x, U m) noexcept {\n    return m - floor_mod(x - 1, m) - static_cast<T>(1);\n\
     \  }\n}\n"
-  code: "#pragma once\n#include <cassert>\n#include <type_traits>\n\nnamespace kyopro\
+  code: "#pragma once\n#include <cassert>\n#include <type_traits>\n\nnamespace kpr\
     \ {\n  template<class T, class U>\n  constexpr std::common_type_t<T, U> floor_mod(T\
     \ x, U m) noexcept {\n    static_assert(std::is_integral_v<T> && std::is_integral_v<U>,\
     \ \"Integer is required\");\n    if constexpr (std::is_unsigned_v<T> || std::is_unsigned_v<U>)\
@@ -47,7 +47,7 @@ data:
   - template/all.hpp
   - template/alias.hpp
   - all/all.hpp
-  timestamp: '2022-04-21 22:07:36+09:00'
+  timestamp: '2022-04-27 22:05:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/mod.hpp

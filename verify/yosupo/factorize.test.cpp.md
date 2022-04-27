@@ -61,9 +61,9 @@ data:
     #define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n#endif\n\n\
     #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 5 \"algorithm/bit.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ T>\n  constexpr KYOPRO_BASE_INT pop_count(T x) noexcept {\n    constexpr auto\
-    \ digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n    static_assert(digits\
+    #endif\n#line 5 \"algorithm/bit.hpp\"\n\nnamespace kpr {\n  template<class T>\n\
+    \  constexpr KYOPRO_BASE_INT pop_count(T x) noexcept {\n    constexpr auto digits\
+    \ = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n    static_assert(digits\
     \ <= std::numeric_limits<unsigned long long>::digits, \"Integer size is too large\"\
     );\n    if constexpr (digits <= std::numeric_limits<unsigned int>::digits) return\
     \ __builtin_popcount(x);\n    else if constexpr (digits <= std::numeric_limits<unsigned\
@@ -98,7 +98,7 @@ data:
     \n#include <cassert>\n#include <cstddef>\n#line 4 \"algorithm/Hash.hpp\"\n#include\
     \ <functional>\n#include <tuple>\n#line 7 \"algorithm/Hash.hpp\"\n#include <utility>\n\
     #line 2 \"meta/trait.hpp\"\n#include <iterator>\n#include <queue>\n#line 5 \"\
-    meta/trait.hpp\"\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\nnamespace kyopro\
+    meta/trait.hpp\"\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\nnamespace kpr\
     \ {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least {\n  private:\n   \
     \ static constexpr auto get_type() noexcept {\n      static_assert(size <= 128,\
     \ \"Integer size is too large\");\n      if constexpr (size <= 8) return std::int_least8_t();\n\
@@ -127,7 +127,7 @@ data:
     \ {};\n\n  template<class T>\n  constexpr bool is_tuple_v = is_tuple<T>::value;\n\
     \n  template<class T>\n  struct iterable_value {\n    using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\n\
     \  };\n\n  template<class T>\n  using iterable_value_t = typename iterable_value<T>::type;\n\
-    }\n#line 10 \"algorithm/Hash.hpp\"\n\nnamespace kyopro {\n  template<class, class\
+    }\n#line 10 \"algorithm/Hash.hpp\"\n\nnamespace kpr {\n  template<class, class\
     \ = void>\n  struct Hash;\n\n  template<class T>\n  struct Hash<T, std::enable_if_t<std::is_scalar_v<T>>>:\
     \ std::hash<T> {\n    using value_type = T;\n\n    constexpr std::size_t operator\
     \ ()(T a) const noexcept {\n      return std::hash<T>::operator ()(a);\n    }\n\
@@ -143,10 +143,10 @@ data:
     \      for (auto& i: a) seed ^= Hash<iterable_value_t<T>>(i) + 0x9e3779b97f4a7c15LU\
     \ + (seed << 12) + (seed >> 4);\n      return seed;\n    }\n  };\n}\n#line 2 \"\
     meta/constant.hpp\"\n#include <array>\n#line 3 \"math/power.hpp\"\n\nnamespace\
-    \ kyopro {\n  template<class T>\n  constexpr T power(T a, KYOPRO_BASE_UINT n,\
-    \ T init = 1) noexcept {\n    while (n > 0) {\n      if (n & 1) init *= a;\n \
-    \     a *= a;\n      n >>= 1;\n    }\n    return init;\n  }\n}\n#line 7 \"meta/constant.hpp\"\
-    \n\nnamespace kyopro {\n  template<class T>\n  inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\n\
+    \ kpr {\n  template<class T>\n  constexpr T power(T a, KYOPRO_BASE_UINT n, T init\
+    \ = 1) noexcept {\n    while (n > 0) {\n      if (n & 1) init *= a;\n      a *=\
+    \ a;\n      n >>= 1;\n    }\n    return init;\n  }\n}\n#line 7 \"meta/constant.hpp\"\
+    \n\nnamespace kpr {\n  template<class T>\n  inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\n\
     \  inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\n  template<class\
     \ T>\n  inline constexpr T INF = std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\n\
     \  inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\n  template<class\
@@ -155,7 +155,7 @@ data:
     \  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\n  template<class\
     \ T>\n  inline constexpr T PI = 3.14159265358979323846;\n  inline constexpr KYOPRO_BASE_FLOAT\
     \ pi = PI<KYOPRO_BASE_FLOAT>;\n}\n#line 6 \"math/Montgomery.hpp\"\n\nnamespace\
-    \ kyopro {\n  template<class T>\n  struct Montgomery {\n    static_assert(std::is_unsigned_v<T>,\
+    \ kpr {\n  template<class T>\n  struct Montgomery {\n    static_assert(std::is_unsigned_v<T>,\
     \ \"Unsigned integer is required\");\n    using value_type = T;\n\n    T mod;\n\
     \n  private:\n    using larger_type = uint_least_t<std::numeric_limits<T>::digits\
     \ * 2>;\n\n    T r, n2;\n\n  public:\n    constexpr void set_mod(T _mod) noexcept\
@@ -170,7 +170,7 @@ data:
     \     T y = reduce(x);\n      return y >= mod ? y - mod : y;\n    }\n\n    constexpr\
     \ T reduce(larger_type x) const noexcept {\n      return (x + static_cast<larger_type>(static_cast<T>(x)\
     \ * r) * mod) >> std::numeric_limits<T>::digits;\n    }\n  };\n}\n#line 10 \"\
-    math/DynamicModInt.hpp\"\n\nnamespace kyopro {\n  template<class T, KYOPRO_BASE_UINT\
+    math/DynamicModInt.hpp\"\n\nnamespace kpr {\n  template<class T, KYOPRO_BASE_UINT\
     \ _kind = 0>\n  struct DynamicModInt {\n    static_assert(std::is_unsigned_v<T>,\
     \ \"T must be unsigned integer\");\n    using value_type = T;\n    static constexpr\
     \ KYOPRO_BASE_INT kind = _kind;\n\n  private:\n    using larger_type = uint_least_t<std::numeric_limits<T>::digits\
@@ -220,7 +220,7 @@ data:
     \    }\n  };\n\n  template<class T, KYOPRO_BASE_UINT kind>\n  struct Hash<DynamicModInt<T,\
     \ kind>> {\n    using value_type = DynamicModInt<T, kind>;\n\n    std::size_t\
     \ operator ()(DynamicModInt<T, kind> a) const noexcept { return static_cast<std::size_t>(a);\
-    \ }\n  };\n}\n#line 7 \"math/is_prime.hpp\"\n\nnamespace kyopro {\n  template<class\
+    \ }\n  };\n}\n#line 7 \"math/is_prime.hpp\"\n\nnamespace kpr {\n  template<class\
     \ T>\n  constexpr bool is_prime(T x) {\n    using U = std::make_unsigned_t<T>;\n\
     \    using DynamicModInt = DynamicModInt<U, KYOPRO_BASE_UINT(-1)>;\n    U n =\
     \ x;\n    if (n <= 1) return false;\n    if (!(n & 1)) return n == 2;\n    DynamicModInt::set_mod(n);\n\
@@ -235,7 +235,7 @@ data:
     \ {\n      for (auto i: (std::uint_fast64_t[7]){2, 325, 9375, 28178, 450775, 9780504,\
     \ 1795265022}) {\n        if (n <= i) return true;\n        if (ng(i)) return\
     \ false;\n      }\n    }\n    return true;\n  }\n}\n#line 11 \"math/factorize.hpp\"\
-    \n\nnamespace kyopro {\n  template<class T>\n  constexpr T pollard_rho(T p, KYOPRO_BASE_UINT\
+    \n\nnamespace kpr {\n  template<class T>\n  constexpr T pollard_rho(T p, KYOPRO_BASE_UINT\
     \ c) {\n    using U = std::make_unsigned_t<T>;\n    using DynamicModInt = DynamicModInt<U,\
     \ KYOPRO_BASE_UINT(-1)>;\n    U n = p;\n    DynamicModInt::set_mod(n);\n    DynamicModInt\
     \ cc = c;\n    auto f = [=](DynamicModInt x) noexcept { return x * x + cc; };\n\
@@ -261,7 +261,7 @@ data:
     \ == 0);\n    }\n    if constexpr (sorted) std::sort(res.begin(), res.end());\n\
     \    return res;\n  }\n}\n#line 2 \"system/in.hpp\"\n#include <unistd.h>\n#line\
     \ 6 \"system/in.hpp\"\n#include <cstdio>\n#include <string>\n#line 14 \"system/in.hpp\"\
-    \n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>\n\
+    \n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>\n\
     \  struct Reader {\n    static constexpr KYOPRO_BASE_UINT buf_size = _buf_size;\n\
     \n  private:\n    int fd, idx;\n    std::array<char, buf_size> buffer;\n\n  public:\n\
     \    Reader() {\n      read(fd, buffer.begin(), buf_size);\n    }\n    Reader(int\
@@ -315,27 +315,27 @@ data:
     \ ()() {}\n    template<class Head, class... Args>\n    void operator ()(Head&\
     \ head, Args&... args) {\n      scan(head);\n      operator ()(args...);\n   \
     \ }\n  };\n\n  Scanner<Reader<>::iterator> scan(input.begin());\n}\n#line 13 \"\
-    system/out.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _buf_size\
-    \ = KYOPRO_BUFFER_SIZE>\n  struct Writer {\n    static constexpr KYOPRO_BASE_UINT\
-    \ buf_size = _buf_size;\n\n  private:\n    int fd, idx;\n    std::array<char,\
-    \ buf_size> buffer;\n\n  public:\n    Writer() noexcept = default;\n    Writer(int\
-    \ fd) noexcept: fd(fd), idx(0), buffer() {}\n    Writer(FILE* fp) noexcept: fd(fileno(fp)),\
-    \ idx(0), buffer() {}\n\n    ~Writer() {\n      write(fd, buffer.begin(), idx);\n\
-    \    }\n\n    struct iterator {\n    private:\n      Writer& writer;\n\n    public:\n\
-    \      using difference_type = void;\n      using value_type = void;\n      using\
-    \ pointer = void;\n      using reference = void;\n      using iterator_category\
-    \ = std::output_iterator_tag;\n\n      iterator() noexcept = default;\n      iterator(Writer&\
-    \ writer) noexcept: writer(writer) {}\n\n      iterator& operator ++() {\n   \
-    \     ++writer.idx;\n        if (writer.idx == buf_size) {\n          write(writer.fd,\
-    \ writer.buffer.begin(), buf_size);\n          writer.idx = 0;\n        }\n  \
-    \      return *this;\n      }\n\n      iterator operator ++(int) {\n        iterator\
-    \ before = *this;\n        operator ++();\n        return before;\n      }\n\n\
-    \      char& operator *() const {\n        return writer.buffer[writer.idx];\n\
-    \      }\n\n      void flush() const {\n        write(writer.fd, writer.buffer.begin(),\
-    \ writer.idx);\n      }\n    };\n\n    iterator begin() noexcept {\n      return\
-    \ iterator(*this);\n    }\n  };\n\n  Writer output(1), error(2);\n\n  template<class\
-    \ Iterator, bool _sep = true, bool _end = true, bool _debug = false, bool _comment\
-    \ = false, bool _flush = false, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
+    system/out.hpp\"\n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>\n\
+    \  struct Writer {\n    static constexpr KYOPRO_BASE_UINT buf_size = _buf_size;\n\
+    \n  private:\n    int fd, idx;\n    std::array<char, buf_size> buffer;\n\n  public:\n\
+    \    Writer() noexcept = default;\n    Writer(int fd) noexcept: fd(fd), idx(0),\
+    \ buffer() {}\n    Writer(FILE* fp) noexcept: fd(fileno(fp)), idx(0), buffer()\
+    \ {}\n\n    ~Writer() {\n      write(fd, buffer.begin(), idx);\n    }\n\n    struct\
+    \ iterator {\n    private:\n      Writer& writer;\n\n    public:\n      using\
+    \ difference_type = void;\n      using value_type = void;\n      using pointer\
+    \ = void;\n      using reference = void;\n      using iterator_category = std::output_iterator_tag;\n\
+    \n      iterator() noexcept = default;\n      iterator(Writer& writer) noexcept:\
+    \ writer(writer) {}\n\n      iterator& operator ++() {\n        ++writer.idx;\n\
+    \        if (writer.idx == buf_size) {\n          write(writer.fd, writer.buffer.begin(),\
+    \ buf_size);\n          writer.idx = 0;\n        }\n        return *this;\n  \
+    \    }\n\n      iterator operator ++(int) {\n        iterator before = *this;\n\
+    \        operator ++();\n        return before;\n      }\n\n      char& operator\
+    \ *() const {\n        return writer.buffer[writer.idx];\n      }\n\n      void\
+    \ flush() const {\n        write(writer.fd, writer.buffer.begin(), writer.idx);\n\
+    \      }\n    };\n\n    iterator begin() noexcept {\n      return iterator(*this);\n\
+    \    }\n  };\n\n  Writer output(1), error(2);\n\n  template<class Iterator, bool\
+    \ _sep = true, bool _end = true, bool _debug = false, bool _comment = false, bool\
+    \ _flush = false, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
     \  struct Printer {\n    using iterator_type = Iterator;\n    static constexpr\
     \ bool sep = _sep, end = _end, debug = _debug, comment = _comment, flush = _flush;\n\
     \    static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;\n\
@@ -382,14 +382,13 @@ data:
     \ false, false> print(output.begin()), eprint(error.begin());\n  Printer<Writer<>::iterator>\
     \ println(output.begin()), eprintln(error.begin());\n  Printer<Writer<>::iterator,\
     \ true, true, true, true> debug(output.begin()), edebug(error.begin());\n}\n#line\
-    \ 4 \"verify/yosupo/factorize.test.cpp\"\n\nint main() {\n  long long q;\n  kyopro::scan(q);\n\
-    \  for (int i = 0; i < q; ++i) {\n    long long a;\n    kyopro::scan(a);\n   \
-    \ auto res = kyopro::factorize(a);\n    kyopro::println(res.size(), res);\n  }\n\
-    }\n"
+    \ 4 \"verify/yosupo/factorize.test.cpp\"\n\nint main() {\n  long long q;\n  kpr::scan(q);\n\
+    \  for (int i = 0; i < q; ++i) {\n    long long a;\n    kpr::scan(a);\n    auto\
+    \ res = kpr::factorize(a);\n    kpr::println(res.size(), res);\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\n#include \"\
     ../../math/factorize.hpp\"\n#include \"../../system/all.hpp\"\n\nint main() {\n\
-    \  long long q;\n  kyopro::scan(q);\n  for (int i = 0; i < q; ++i) {\n    long\
-    \ long a;\n    kyopro::scan(a);\n    auto res = kyopro::factorize(a);\n    kyopro::println(res.size(),\
+    \  long long q;\n  kpr::scan(q);\n  for (int i = 0; i < q; ++i) {\n    long long\
+    \ a;\n    kpr::scan(a);\n    auto res = kpr::factorize(a);\n    kpr::println(res.size(),\
     \ res);\n  }\n}"
   dependsOn:
   - math/factorize.hpp
@@ -408,7 +407,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2022-04-24 20:57:00+09:00'
+  timestamp: '2022-04-27 22:05:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yosupo/factorize.test.cpp
