@@ -1,7 +1,7 @@
 {
-"verify/aoj/PrimeNumber.test.cpp": "2022-04-22 22:11:54 +0900",
-"verify/yosupo/factorize.test.cpp": "2022-04-23 20:37:11 +0900",
-"verify/yosupo/many_aplusb.test.cpp": "2022-04-22 22:11:54 +0900",
-"verify/yosupo/point_add_range_sum.test.cpp": "2022-04-22 22:11:54 +0900",
-"verify/yosupo/unionfind.test.cpp": "2022-04-22 22:11:54 +0900"
+"verify/aoj/PrimeNumber.test.cpp": "2022-04-24 20:57:00 +0900",
+"verify/yosupo/factorize.test.cpp": "2022-04-24 20:57:00 +0900",
+"verify/yosupo/many_aplusb.test.cpp": "2022-04-24 20:57:00 +0900",
+"verify/yosupo/point_add_range_sum.test.cpp": "2022-04-24 20:57:00 +0900",
+"verify/yosupo/unionfind.test.cpp": "2022-04-24 20:57:00 +0900"
 }
