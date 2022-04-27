@@ -4,12 +4,12 @@
 
 int main() {
   int t;
-  kyopro::scan(t);
+  kpr::scan(t);
   int cnt = 0;
   for (int i = 0; i < t; ++i) {
     long long x;
-    kyopro::scan(x);
-    if (kyopro::is_prime(x)) ++cnt;
+    kpr::scan(x);
+    if (kpr::is_prime(x)) ++cnt;
   }
-  kyopro::println(cnt);
+  kpr::println(cnt);
 }

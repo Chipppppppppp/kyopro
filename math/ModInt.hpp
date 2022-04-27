@@ -12,7 +12,7 @@
 #include "../meta/trait.hpp"
 #include "mod.hpp"
 
-namespace kyopro {
+namespace kpr {
   template<KYOPRO_BASE_UINT m>
   struct ModInt {
     using value_type = uint_least_t<bit_len(m * 2 - 2)>;

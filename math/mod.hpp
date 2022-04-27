@@ -2,7 +2,7 @@
 #include <cassert>
 #include <type_traits>
 
-namespace kyopro {
+namespace kpr {
   template<class T, class U>
   constexpr std::common_type_t<T, U> floor_mod(T x, U m) noexcept {
     static_assert(std::is_integral_v<T> && std::is_integral_v<U>, "Integer is required");

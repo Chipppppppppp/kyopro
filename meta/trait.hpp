@@ -7,7 +7,7 @@
 #include <utility>
 #include "settings.hpp"
 
-namespace kyopro {
+namespace kpr {
   template<KYOPRO_BASE_UINT size>
   struct int_least {
   private:

@@ -5,7 +5,7 @@
 #include "../function/monoid.hpp"
 #include "../meta/settings.hpp"
 
-namespace kyopro {
+namespace kpr {
   template<class T, class Op = Plus<T>, class Container = std::vector<T>>
   struct FenwickTree {
     using value_type = T;

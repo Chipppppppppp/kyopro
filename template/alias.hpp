@@ -17,7 +17,7 @@
 #include "../math/ModInt.hpp"
 #include "../meta/settings.hpp"
 
-namespace kyopro {
+namespace kpr {
   using ll = long long;
   using ull = unsigned long long;
   using lf = double;
@@ -83,4 +83,4 @@ namespace kyopro {
 }
 
 using namespace std;
-using namespace kyopro;
+using namespace kpr;

@@ -5,7 +5,7 @@
 #include "../math/power.hpp"
 #include "settings.hpp"
 
-namespace kyopro {
+namespace kpr {
   template<class T>
   inline constexpr T MOD = KYOPRO_DEFAULT_MOD;
   inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;

@@ -4,17 +4,17 @@
 
 int main() {
   int n, q;
-  kyopro::scan(n, q);
-  kyopro::FenwickTree<long long> ft(n);
+  kpr::scan(n, q);
+  kpr::FenwickTree<long long> ft(n);
   for (int i = 0; i < n; ++i) {
     int a;
-    kyopro::scan(a);
+    kpr::scan(a);
     ft.apply(i, a);
   }
   for (int i = 0; i < q; ++i) {
     int t, x, y;
-    kyopro::scan(t, x, y);
+    kpr::scan(t, x, y);
     if (t == 0) ft.apply(x, y);
-    else kyopro::println(ft.prod(x, y));
+    else kpr::println(ft.prod(x, y));
   }
 }

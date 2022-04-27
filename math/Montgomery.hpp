@@ -4,7 +4,7 @@
 #include <type_traits>
 #include "../meta/settings.hpp"
 
-namespace kyopro {
+namespace kpr {
   template<class T>
   struct Montgomery {
     static_assert(std::is_unsigned_v<T>, "Unsigned integer is required");

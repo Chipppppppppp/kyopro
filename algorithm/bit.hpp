@@ -3,7 +3,7 @@
 #include <type_traits>
 #include "../meta/settings.hpp"
 
-namespace kyopro {
+namespace kpr {
   template<class T>
   constexpr KYOPRO_BASE_INT pop_count(T x) noexcept {
     constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;

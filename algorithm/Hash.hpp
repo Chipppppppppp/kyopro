@@ -8,7 +8,7 @@
 #include "../meta/settings.hpp"
 #include "../meta/trait.hpp"
 
-namespace kyopro {
+namespace kpr {
   template<class, class = void>
   struct Hash;
 

@@ -8,7 +8,7 @@
 #include "../meta/settings.hpp"
 #include "Montgomery.hpp"
 
-namespace kyopro {
+namespace kpr {
   template<class T, KYOPRO_BASE_UINT _kind = 0>
   struct DynamicModInt {
     static_assert(std::is_unsigned_v<T>, "T must be unsigned integer");

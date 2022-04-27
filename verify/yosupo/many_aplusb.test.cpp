@@ -3,10 +3,10 @@
 
 int main() {
   int t;
-  kyopro::scan(t);
+  kpr::scan(t);
   for (int i = 0; i < t; ++i) {
     long long a, b;
-    kyopro::scan(a, b);
-    kyopro::println(a + b);
+    kpr::scan(a, b);
+    kpr::println(a + b);
   }
 }

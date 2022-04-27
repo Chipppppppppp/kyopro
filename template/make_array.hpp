@@ -2,7 +2,7 @@
 #include <array>
 #include "../meta/settings.hpp"
 
-namespace kyopro {
+namespace kpr {
   template<class T>
   constexpr auto make_array(const T& init = T()) noexcept { return init; }
 

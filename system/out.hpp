@@ -11,7 +11,7 @@
 #include "../meta/settings.hpp"
 #include "../meta/trait.hpp"
 
-namespace kyopro {
+namespace kpr {
   template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>
   struct Writer {
     static constexpr KYOPRO_BASE_UINT buf_size = _buf_size;

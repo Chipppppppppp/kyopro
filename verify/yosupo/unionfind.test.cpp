@@ -4,12 +4,12 @@
 
 int main() {
   int n, q;
-  kyopro::scan(n, q);
-  kyopro::UnionFind uf(n);
+  kpr::scan(n, q);
+  kpr::UnionFind uf(n);
   for (int i = 0; i < q; ++i) {
     int t, u, v;
-    kyopro::scan(t, u, v);
+    kpr::scan(t, u, v);
     if (t == 0) uf.merge(u, v);
-    else kyopro::println(uf.same(u, v));
+    else kpr::println(uf.same(u, v));
   }
 }
