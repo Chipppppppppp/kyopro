@@ -229,46 +229,46 @@ data:
   isVerificationFile: false
   path: meta/settings.hpp
   requiredBy:
-  - math/DynamicModInt.hpp
-  - math/factorize.hpp
-  - math/is_prime.hpp
-  - math/all.hpp
-  - math/ModInt.hpp
-  - math/Montgomery.hpp
-  - math/power.hpp
-  - math/divisors.hpp
-  - math/euler_phi.hpp
-  - system/all.hpp
+  - function/monoid.hpp
+  - function/all.hpp
   - system/out.hpp
+  - system/all.hpp
   - system/in.hpp
   - meta/constant.hpp
   - meta/all.hpp
   - meta/trait.hpp
-  - algorithm/compress.hpp
-  - algorithm/bit.hpp
-  - algorithm/Hash.hpp
-  - algorithm/all.hpp
-  - structure/FenwickTree.hpp
-  - structure/all.hpp
-  - structure/UnionFind.hpp
-  - function/monoid.hpp
-  - function/all.hpp
-  - template/make_vector.hpp
+  - all/all.hpp
   - template/constant.hpp
   - template/all.hpp
-  - template/alias.hpp
-  - template/len.hpp
-  - template/macro.hpp
   - template/make_array.hpp
-  - all/all.hpp
+  - template/make_vector.hpp
+  - template/len.hpp
+  - template/alias.hpp
+  - template/macro.hpp
+  - math/DynamicModInt.hpp
+  - math/is_prime.hpp
+  - math/divisors.hpp
+  - math/factorize.hpp
+  - math/all.hpp
+  - math/euler_phi.hpp
+  - math/power.hpp
+  - math/ModInt.hpp
+  - math/Montgomery.hpp
+  - structure/FenwickTree.hpp
+  - structure/UnionFind.hpp
+  - structure/all.hpp
+  - algorithm/compress.hpp
+  - algorithm/bit.hpp
+  - algorithm/all.hpp
+  - algorithm/Hash.hpp
   timestamp: '2022-03-19 00:51:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp
-  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/unionfind.test.cpp
   - verify/yosupo/factorize.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
 documentation_of: meta/settings.hpp
 layout: document
 redirect_from:

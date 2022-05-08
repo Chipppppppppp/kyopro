@@ -53,6 +53,9 @@ data:
   - icon: ':warning:'
     path: template/all.hpp
     title: template/all.hpp
+  - icon: ':warning:'
+    path: template/macro.hpp
+    title: template/macro.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/aoj/PrimeNumber.test.cpp
@@ -84,40 +87,11 @@ data:
     #define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n#endif\n\n\
     #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 9 \"meta/trait.hpp\"\n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT\
-    \ size>\n  struct int_least {\n  private:\n    static constexpr auto get_type()\
-    \ noexcept {\n      static_assert(size <= 128, \"Integer size is too large\");\n\
-    \      if constexpr (size <= 8) return std::int_least8_t();\n      else if constexpr\
-    \ (size <= 16) return std::int_least16_t();\n      else if constexpr (size <=\
-    \ 32) return std::int_least32_t();\n      else if constexpr (size <= 64) return\
-    \ std::int_least64_t();\n      else return __int128_t();\n    }\n\n  public:\n\
-    \    using type = decltype(get_type());\n  };\n\n  template<KYOPRO_BASE_UINT size>\n\
-    \  using int_least_t = typename int_least<size>::type;\n\n  template<KYOPRO_BASE_UINT\
-    \ size>\n  struct uint_least {\n  private:\n    static constexpr auto get_type()\
-    \ noexcept {\n      static_assert(size <= 128, \"Integer size is too large\");\n\
-    \      if constexpr (size <= 8) return std::uint_least8_t();\n      else if constexpr\
-    \ (size <= 16) return std::uint_least16_t();\n      else if constexpr (size <=\
-    \ 32) return std::uint_least32_t();\n      else if constexpr (size <= 64) return\
-    \ std::uint_least64_t();\n      else return __uint128_t();\n    }\n\n  public:\n\
-    \    using type = decltype(get_type());\n  };\n\n  template<KYOPRO_BASE_UINT size>\n\
-    \  using uint_least_t = typename uint_least<size>::type;\n\n  template<class,\
-    \ class = void>\n  struct is_iterator: std::false_type {};\n  template<class T>\n\
-    \  struct is_iterator<T, std::void_t<typename std::iterator_traits<T>::iterator_category>>:\
-    \ std::true_type {};\n\n  template<class T>\n  constexpr bool is_iterator_v =\
-    \ is_iterator<T>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
-    \ std::false_type {};\n  template<class T>\n  struct is_iterable<T, std::void_t<decltype(std::begin(std::declval<T>()))>>:\
-    \ std::true_type {};\n\n  template<class T>\n  constexpr bool is_iterable_v =\
-    \ is_iterable<T>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
-    \ {};\n  template<class T, class U>\n  struct is_tuple<std::pair<T, U>>: std::true_type\
-    \ {};\n  template<class... Args>\n  struct is_tuple<std::tuple<Args...>>: std::true_type\
-    \ {};\n\n  template<class T>\n  constexpr bool is_tuple_v = is_tuple<T>::value;\n\
-    \n  template<class T>\n  struct iterable_value {\n    using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\n\
-    \  };\n\n  template<class T>\n  using iterable_value_t = typename iterable_value<T>::type;\n\
-    }\n"
-  code: "#pragma once\n#include <iterator>\n#include <queue>\n#include <limits>\n\
-    #include <stack>\n#include <type_traits>\n#include <utility>\n#include \"settings.hpp\"\
-    \n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least {\n\
-    \  private:\n    static constexpr auto get_type() noexcept {\n      static_assert(size\
+    #endif\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct std::is_integral<__int128_t>:\
+    \ std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type\
+    \ {};\ntemplate<>\nstruct std::is_floating_point<__float128>: std::true_type {};\n\
+    \nnamespace kpr {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least {\n \
+    \ private:\n    static constexpr auto get_type() noexcept {\n      static_assert(size\
     \ <= 128, \"Integer size is too large\");\n      if constexpr (size <= 8) return\
     \ std::int_least8_t();\n      else if constexpr (size <= 16) return std::int_least16_t();\n\
     \      else if constexpr (size <= 32) return std::int_least32_t();\n      else\
@@ -144,36 +118,70 @@ data:
     \ {};\n\n  template<class T>\n  constexpr bool is_tuple_v = is_tuple<T>::value;\n\
     \n  template<class T>\n  struct iterable_value {\n    using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\n\
     \  };\n\n  template<class T>\n  using iterable_value_t = typename iterable_value<T>::type;\n\
+    }\n"
+  code: "#pragma once\n#include <iterator>\n#include <queue>\n#include <limits>\n\
+    #include <stack>\n#include <type_traits>\n#include <utility>\n#include \"settings.hpp\"\
+    \n\ntemplate<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
+    struct std::is_integral<__uint128_t>: std::true_type {};\ntemplate<>\nstruct std::is_floating_point<__float128>:\
+    \ std::true_type {};\n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT size>\n \
+    \ struct int_least {\n  private:\n    static constexpr auto get_type() noexcept\
+    \ {\n      static_assert(size <= 128, \"Integer size is too large\");\n      if\
+    \ constexpr (size <= 8) return std::int_least8_t();\n      else if constexpr (size\
+    \ <= 16) return std::int_least16_t();\n      else if constexpr (size <= 32) return\
+    \ std::int_least32_t();\n      else if constexpr (size <= 64) return std::int_least64_t();\n\
+    \      else return __int128_t();\n    }\n\n  public:\n    using type = decltype(get_type());\n\
+    \  };\n\n  template<KYOPRO_BASE_UINT size>\n  using int_least_t = typename int_least<size>::type;\n\
+    \n  template<KYOPRO_BASE_UINT size>\n  struct uint_least {\n  private:\n    static\
+    \ constexpr auto get_type() noexcept {\n      static_assert(size <= 128, \"Integer\
+    \ size is too large\");\n      if constexpr (size <= 8) return std::uint_least8_t();\n\
+    \      else if constexpr (size <= 16) return std::uint_least16_t();\n      else\
+    \ if constexpr (size <= 32) return std::uint_least32_t();\n      else if constexpr\
+    \ (size <= 64) return std::uint_least64_t();\n      else return __uint128_t();\n\
+    \    }\n\n  public:\n    using type = decltype(get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
+    \ size>\n  using uint_least_t = typename uint_least<size>::type;\n\n  template<class,\
+    \ class = void>\n  struct is_iterator: std::false_type {};\n  template<class T>\n\
+    \  struct is_iterator<T, std::void_t<typename std::iterator_traits<T>::iterator_category>>:\
+    \ std::true_type {};\n\n  template<class T>\n  constexpr bool is_iterator_v =\
+    \ is_iterator<T>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
+    \ std::false_type {};\n  template<class T>\n  struct is_iterable<T, std::void_t<decltype(std::begin(std::declval<T>()))>>:\
+    \ std::true_type {};\n\n  template<class T>\n  constexpr bool is_iterable_v =\
+    \ is_iterable<T>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
+    \ {};\n  template<class T, class U>\n  struct is_tuple<std::pair<T, U>>: std::true_type\
+    \ {};\n  template<class... Args>\n  struct is_tuple<std::tuple<Args...>>: std::true_type\
+    \ {};\n\n  template<class T>\n  constexpr bool is_tuple_v = is_tuple<T>::value;\n\
+    \n  template<class T>\n  struct iterable_value {\n    using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\n\
+    \  };\n\n  template<class T>\n  using iterable_value_t = typename iterable_value<T>::type;\n\
     }"
   dependsOn:
   - meta/settings.hpp
   isVerificationFile: false
   path: meta/trait.hpp
   requiredBy:
-  - math/DynamicModInt.hpp
-  - math/factorize.hpp
-  - math/is_prime.hpp
-  - math/all.hpp
-  - math/ModInt.hpp
-  - system/all.hpp
   - system/out.hpp
+  - system/all.hpp
   - system/in.hpp
   - meta/all.hpp
-  - algorithm/Hash.hpp
-  - algorithm/all.hpp
-  - structure/all.hpp
-  - structure/UnionFind.hpp
+  - all/all.hpp
   - template/all.hpp
   - template/alias.hpp
-  - all/all.hpp
-  timestamp: '2022-04-27 22:05:10+09:00'
+  - template/macro.hpp
+  - math/DynamicModInt.hpp
+  - math/is_prime.hpp
+  - math/factorize.hpp
+  - math/all.hpp
+  - math/ModInt.hpp
+  - structure/UnionFind.hpp
+  - structure/all.hpp
+  - algorithm/all.hpp
+  - algorithm/Hash.hpp
+  timestamp: '2022-05-08 20:22:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp
-  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/unionfind.test.cpp
   - verify/yosupo/factorize.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
 documentation_of: meta/trait.hpp
 layout: document
 redirect_from:

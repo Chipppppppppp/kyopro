@@ -34,13 +34,15 @@ data:
     #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#include <queue>\n#include\
-    \ <limits>\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\nnamespace kpr {\n\
-    \  template<KYOPRO_BASE_UINT size>\n  struct int_least {\n  private:\n    static\
-    \ constexpr auto get_type() noexcept {\n      static_assert(size <= 128, \"Integer\
-    \ size is too large\");\n      if constexpr (size <= 8) return std::int_least8_t();\n\
-    \      else if constexpr (size <= 16) return std::int_least16_t();\n      else\
-    \ if constexpr (size <= 32) return std::int_least32_t();\n      else if constexpr\
-    \ (size <= 64) return std::int_least64_t();\n      else return __int128_t();\n\
+    \ <limits>\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct\
+    \ std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
+    \ std::true_type {};\ntemplate<>\nstruct std::is_floating_point<__float128>: std::true_type\
+    \ {};\n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least\
+    \ {\n  private:\n    static constexpr auto get_type() noexcept {\n      static_assert(size\
+    \ <= 128, \"Integer size is too large\");\n      if constexpr (size <= 8) return\
+    \ std::int_least8_t();\n      else if constexpr (size <= 16) return std::int_least16_t();\n\
+    \      else if constexpr (size <= 32) return std::int_least32_t();\n      else\
+    \ if constexpr (size <= 64) return std::int_least64_t();\n      else return __int128_t();\n\
     \    }\n\n  public:\n    using type = decltype(get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
     \ size>\n  using int_least_t = typename int_least<size>::type;\n\n  template<KYOPRO_BASE_UINT\
     \ size>\n  struct uint_least {\n  private:\n    static constexpr auto get_type()\
@@ -127,9 +129,9 @@ data:
   isVerificationFile: false
   path: structure/UnionFind.hpp
   requiredBy:
-  - structure/all.hpp
   - all/all.hpp
-  timestamp: '2022-04-27 22:05:10+09:00'
+  - structure/all.hpp
+  timestamp: '2022-05-08 20:22:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo/unionfind.test.cpp

@@ -42,8 +42,8 @@ data:
   isVerificationFile: false
   path: template/make_array.hpp
   requiredBy:
-  - template/all.hpp
   - all/all.hpp
+  - template/all.hpp
   timestamp: '2022-04-27 22:05:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

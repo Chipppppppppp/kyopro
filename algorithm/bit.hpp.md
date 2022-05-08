@@ -123,14 +123,14 @@ data:
   isVerificationFile: false
   path: algorithm/bit.hpp
   requiredBy:
-  - math/factorize.hpp
+  - all/all.hpp
+  - template/all.hpp
+  - template/alias.hpp
   - math/is_prime.hpp
+  - math/factorize.hpp
   - math/all.hpp
   - math/ModInt.hpp
   - algorithm/all.hpp
-  - template/all.hpp
-  - template/alias.hpp
-  - all/all.hpp
   timestamp: '2022-04-27 22:05:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

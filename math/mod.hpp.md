@@ -42,11 +42,11 @@ data:
   isVerificationFile: false
   path: math/mod.hpp
   requiredBy:
-  - math/all.hpp
-  - math/ModInt.hpp
+  - all/all.hpp
   - template/all.hpp
   - template/alias.hpp
-  - all/all.hpp
+  - math/all.hpp
+  - math/ModInt.hpp
   timestamp: '2022-04-27 22:05:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

@@ -174,22 +174,24 @@ data:
     \n#include <cstddef>\n#line 5 \"algorithm/Hash.hpp\"\n#include <tuple>\n#line\
     \ 7 \"algorithm/Hash.hpp\"\n#include <utility>\n#line 3 \"meta/trait.hpp\"\n#include\
     \ <queue>\n#line 5 \"meta/trait.hpp\"\n#include <stack>\n#line 9 \"meta/trait.hpp\"\
-    \n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least {\n\
-    \  private:\n    static constexpr auto get_type() noexcept {\n      static_assert(size\
-    \ <= 128, \"Integer size is too large\");\n      if constexpr (size <= 8) return\
-    \ std::int_least8_t();\n      else if constexpr (size <= 16) return std::int_least16_t();\n\
-    \      else if constexpr (size <= 32) return std::int_least32_t();\n      else\
-    \ if constexpr (size <= 64) return std::int_least64_t();\n      else return __int128_t();\n\
+    \n\ntemplate<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
+    struct std::is_integral<__uint128_t>: std::true_type {};\ntemplate<>\nstruct std::is_floating_point<__float128>:\
+    \ std::true_type {};\n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT size>\n \
+    \ struct int_least {\n  private:\n    static constexpr auto get_type() noexcept\
+    \ {\n      static_assert(size <= 128, \"Integer size is too large\");\n      if\
+    \ constexpr (size <= 8) return std::int_least8_t();\n      else if constexpr (size\
+    \ <= 16) return std::int_least16_t();\n      else if constexpr (size <= 32) return\
+    \ std::int_least32_t();\n      else if constexpr (size <= 64) return std::int_least64_t();\n\
+    \      else return __int128_t();\n    }\n\n  public:\n    using type = decltype(get_type());\n\
+    \  };\n\n  template<KYOPRO_BASE_UINT size>\n  using int_least_t = typename int_least<size>::type;\n\
+    \n  template<KYOPRO_BASE_UINT size>\n  struct uint_least {\n  private:\n    static\
+    \ constexpr auto get_type() noexcept {\n      static_assert(size <= 128, \"Integer\
+    \ size is too large\");\n      if constexpr (size <= 8) return std::uint_least8_t();\n\
+    \      else if constexpr (size <= 16) return std::uint_least16_t();\n      else\
+    \ if constexpr (size <= 32) return std::uint_least32_t();\n      else if constexpr\
+    \ (size <= 64) return std::uint_least64_t();\n      else return __uint128_t();\n\
     \    }\n\n  public:\n    using type = decltype(get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
-    \ size>\n  using int_least_t = typename int_least<size>::type;\n\n  template<KYOPRO_BASE_UINT\
-    \ size>\n  struct uint_least {\n  private:\n    static constexpr auto get_type()\
-    \ noexcept {\n      static_assert(size <= 128, \"Integer size is too large\");\n\
-    \      if constexpr (size <= 8) return std::uint_least8_t();\n      else if constexpr\
-    \ (size <= 16) return std::uint_least16_t();\n      else if constexpr (size <=\
-    \ 32) return std::uint_least32_t();\n      else if constexpr (size <= 64) return\
-    \ std::uint_least64_t();\n      else return __uint128_t();\n    }\n\n  public:\n\
-    \    using type = decltype(get_type());\n  };\n\n  template<KYOPRO_BASE_UINT size>\n\
-    \  using uint_least_t = typename uint_least<size>::type;\n\n  template<class,\
+    \ size>\n  using uint_least_t = typename uint_least<size>::type;\n\n  template<class,\
     \ class = void>\n  struct is_iterator: std::false_type {};\n  template<class T>\n\
     \  struct is_iterator<T, std::void_t<typename std::iterator_traits<T>::iterator_category>>:\
     \ std::true_type {};\n\n  template<class T>\n  constexpr bool is_iterator_v =\
@@ -635,24 +637,22 @@ data:
     \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{-1, 0},\
     \ {-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1, 1}, {0, 1}, {-1, 1}}};\n}\n#line 4 \"\
     template/len.hpp\"\n\nnamespace kpr {\n  template<class T>\n  constexpr KYOPRO_BASE_INT\
-    \ len(T&& a) noexcept {\n    return std::size(a);\n  }\n}\n#line 5 \"template/macro.hpp\"\
-    \n\n#define KYOPRO_OVERLOAD_MACRO(_1, _2, _3, _4, name, ...) name\n#define KYOPRO_REP0()\
-    \ for (; ; )\n#define KYOPRO_REP1(i) for (KYOPRO_BASE_INT i = 0; ; ++(i))\n#define\
-    \ KYOPRO_REP2(i, last) for (KYOPRO_BASE_INT i = 0, KYOPRO_LAST_ ## i = (last);\
-    \ (i) < (KYOPRO_LAST_ ## i); ++(i))\n#define KYOPRO_REP3(i, first, last) for (KYOPRO_BASE_INT\
-    \ i = (first), KYOPRO_LAST_ ## i = last; (i) < (KYOPRO_LAST_ ## i); ++(i))\n#define\
-    \ KYOPRO_REP4(i, first, last, step) for (KYOPRO_BASE_INT i = (first), KYOPRO_LAST_\
-    \ ## i = (last), KYOPRO_STEP_ ## i = (step); (KYOPRO_STEP_ ## i) > 0 ? (i) < (KYOPRO_LAST_\
-    \ ## i) : (i) > (KYOPRO_LAST_ ## i); (i) += (KYOPRO_BASE_INT)(step))\n#define\
+    \ len(T&& a) noexcept {\n    return std::size(a);\n  }\n}\n#line 8 \"template/macro.hpp\"\
+    \n\nnamespace kyopro::helper {\n  template<KYOPRO_BASE_UINT len>\n  constexpr\
+    \ KYOPRO_BASE_UINT va_args_size(const char (&s)[len]) noexcept {\n    if constexpr\
+    \ (len == 0) return 0;\n    KYOPRO_BASE_UINT cnt = 1;\n    for (auto i: s) if\
+    \ (i == ',') ++cnt;\n    return cnt;\n  }\n\n  template<class F, KYOPRO_BASE_UINT...\
+    \ idx>\n  auto read_impl(F&& f, std::integer_sequence<KYOPRO_BASE_UINT, idx...>)\
+    \ {\n    auto res = std::tuple{(static_cast<void>(idx), f())...};\n    scan(res);\n\
+    \    return res;\n  }\n}\n#define read(init, ...) auto [__VA_ARGS__] = kyopro::helper::read_impl([&]\
+    \ { return init; }, std::make_integer_sequence<KYOPRO_BASE_UINT, kyopro::helper::va_args_size(#__VA_ARGS__)>())\n\
+    #define KYOPRO_OVERLOAD_MACRO(_1, _2, _3, _4, name, ...) name\n#define KYOPRO_REP0()\
+    \ for (; ; )\n#define KYOPRO_REP1(last) KYOPRO_REP2(KYOPRO_COUNTER, last)\n#define\
+    \ KYOPRO_REP2(i, last) for (auto i = std::decay_t<decltype(last)>(), KYOPRO_LAST\
+    \ = (last); (i) < (KYOPRO_LAST); ++(i))\n#define KYOPRO_REP3(i, first, last) for\
+    \ (auto i = (first), KYOPRO_LAST = last; (i) < (KYOPRO_LAST); ++(i))\n#define\
     \ rep(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__ __VA_OPT__(,) KYOPRO_REP4, KYOPRO_REP3,\
-    \ KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\n#define KYOPRO_ITER2(i,\
-    \ last) for (auto i = std::decay_t<decltype(last)>(), KYOPRO_LAST_ ## i = (last);\
-    \ (i) != (KYOPRO_LAST_ ## i); ++(i))\n#define KYOPRO_ITER3(i, first, last) for\
-    \ (auto i = (first), KYOPRO_LAST_ ## i = (last); (i) != (KYOPRO_LAST_ ## i); ++(i))\n\
-    #define KYOPRO_ITER4(i, first, last, step) for (auto i = (first), KYOPRO_LAST_\
-    \ ## i = (last); (step) > 0 ? (i) < (KYOPRO_LAST_ ## i) : (i) > (KYOPRO_LAST_\
-    \ ## i); (i) += (step))\n#define iter(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__,\
-    \ KYOPRO_ITER4, KYOPRO_ITER3, KYOPRO_ITER2)(__VA_ARGS__)\n#define KYOPRO_LAMBDA1(value)\
+    \ KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\n#define KYOPRO_LAMBDA1(value)\
     \ ([&]() noexcept { return (value);})\n#define KYOPRO_LAMBDA2(_1, value) ([&](auto&&\
     \ _1) noexcept { return (value); })\n#define KYOPRO_LAMBDA3(_1, _2, value) ([&](auto&&\
     \ _1, auto&& _2) noexcept { return (value); })\n#define KYOPRO_LAMBDA4(_1, _2,\
@@ -735,7 +735,7 @@ data:
   isVerificationFile: false
   path: all/all.hpp
   requiredBy: []
-  timestamp: '2022-04-27 22:05:10+09:00'
+  timestamp: '2022-05-08 20:22:54+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp

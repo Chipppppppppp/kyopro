@@ -97,10 +97,12 @@ data:
     }\n#line 2 \"system/in.hpp\"\n#include <unistd.h>\n#line 4 \"system/in.hpp\"\n\
     #include <cstddef>\n#line 6 \"system/in.hpp\"\n#include <cstdio>\n#include <string>\n\
     #include <tuple>\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#include <queue>\n\
-    #line 5 \"meta/trait.hpp\"\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\nnamespace\
-    \ kpr {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least {\n  private:\n\
-    \    static constexpr auto get_type() noexcept {\n      static_assert(size <=\
-    \ 128, \"Integer size is too large\");\n      if constexpr (size <= 8) return\
+    #line 5 \"meta/trait.hpp\"\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\n\
+    struct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
+    \ std::true_type {};\ntemplate<>\nstruct std::is_floating_point<__float128>: std::true_type\
+    \ {};\n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least\
+    \ {\n  private:\n    static constexpr auto get_type() noexcept {\n      static_assert(size\
+    \ <= 128, \"Integer size is too large\");\n      if constexpr (size <= 8) return\
     \ std::int_least8_t();\n      else if constexpr (size <= 16) return std::int_least16_t();\n\
     \      else if constexpr (size <= 32) return std::int_least32_t();\n      else\
     \ if constexpr (size <= 64) return std::int_least64_t();\n      else return __int128_t();\n\
@@ -272,7 +274,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo/point_add_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-04-27 22:05:10+09:00'
+  timestamp: '2022-05-08 20:22:54+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yosupo/point_add_range_sum.test.cpp
