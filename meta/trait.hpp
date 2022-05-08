@@ -7,6 +7,13 @@
 #include <utility>
 #include "settings.hpp"
 
+template<>
+struct std::is_integral<__int128_t>: std::true_type {};
+template<>
+struct std::is_integral<__uint128_t>: std::true_type {};
+template<>
+struct std::is_floating_point<__float128>: std::true_type {};
+
 namespace kpr {
   template<KYOPRO_BASE_UINT size>
   struct int_least {

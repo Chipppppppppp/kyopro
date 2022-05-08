@@ -1,19 +1,34 @@
 #pragma once
 #include <iterator>
+#include <tuple>
 #include <type_traits>
+#include <utility>
 #include "../meta/settings.hpp"
+#include "../system/in.hpp"
 
+namespace kyopro::helper {
+  template<KYOPRO_BASE_UINT len>
+  constexpr KYOPRO_BASE_UINT va_args_size(const char (&s)[len]) noexcept {
+    if constexpr (len == 0) return 0;
+    KYOPRO_BASE_UINT cnt = 1;
+    for (auto i: s) if (i == ',') ++cnt;
+    return cnt;
+  }
+
+  template<class F, KYOPRO_BASE_UINT... idx>
+  auto read_impl(F&& f, std::integer_sequence<KYOPRO_BASE_UINT, idx...>) {
+    auto res = std::tuple{(static_cast<void>(idx), f())...};
+    scan(res);
+    return res;
+  }
+}
+#define read(init, ...) auto [__VA_ARGS__] = kyopro::helper::read_impl([&] { return init; }, std::make_integer_sequence<KYOPRO_BASE_UINT, kyopro::helper::va_args_size(#__VA_ARGS__)>())
 #define KYOPRO_OVERLOAD_MACRO(_1, _2, _3, _4, name, ...) name
 #define KYOPRO_REP0() for (; ; )
-#define KYOPRO_REP1(i) for (KYOPRO_BASE_INT i = 0; ; ++(i))
-#define KYOPRO_REP2(i, last) for (KYOPRO_BASE_INT i = 0, KYOPRO_LAST_ ## i = (last); (i) < (KYOPRO_LAST_ ## i); ++(i))
-#define KYOPRO_REP3(i, first, last) for (KYOPRO_BASE_INT i = (first), KYOPRO_LAST_ ## i = last; (i) < (KYOPRO_LAST_ ## i); ++(i))
-#define KYOPRO_REP4(i, first, last, step) for (KYOPRO_BASE_INT i = (first), KYOPRO_LAST_ ## i = (last), KYOPRO_STEP_ ## i = (step); (KYOPRO_STEP_ ## i) > 0 ? (i) < (KYOPRO_LAST_ ## i) : (i) > (KYOPRO_LAST_ ## i); (i) += (KYOPRO_BASE_INT)(step))
+#define KYOPRO_REP1(last) KYOPRO_REP2(KYOPRO_COUNTER, last)
+#define KYOPRO_REP2(i, last) for (auto i = std::decay_t<decltype(last)>(), KYOPRO_LAST = (last); (i) < (KYOPRO_LAST); ++(i))
+#define KYOPRO_REP3(i, first, last) for (auto i = (first), KYOPRO_LAST = last; (i) < (KYOPRO_LAST); ++(i))
 #define rep(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__ __VA_OPT__(,) KYOPRO_REP4, KYOPRO_REP3, KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)
-#define KYOPRO_ITER2(i, last) for (auto i = std::decay_t<decltype(last)>(), KYOPRO_LAST_ ## i = (last); (i) != (KYOPRO_LAST_ ## i); ++(i))
-#define KYOPRO_ITER3(i, first, last) for (auto i = (first), KYOPRO_LAST_ ## i = (last); (i) != (KYOPRO_LAST_ ## i); ++(i))
-#define KYOPRO_ITER4(i, first, last, step) for (auto i = (first), KYOPRO_LAST_ ## i = (last); (step) > 0 ? (i) < (KYOPRO_LAST_ ## i) : (i) > (KYOPRO_LAST_ ## i); (i) += (step))
-#define iter(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__, KYOPRO_ITER4, KYOPRO_ITER3, KYOPRO_ITER2)(__VA_ARGS__)
 #define KYOPRO_LAMBDA1(value) ([&]() noexcept { return (value);})
 #define KYOPRO_LAMBDA2(_1, value) ([&](auto&& _1) noexcept { return (value); })
 #define KYOPRO_LAMBDA3(_1, _2, value) ([&](auto&& _1, auto&& _2) noexcept { return (value); })
