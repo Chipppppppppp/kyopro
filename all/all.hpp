@@ -5,4 +5,3 @@
 #include "../meta/all.hpp"
 #include "../structure/all.hpp"
 #include "../system/all.hpp"
-#include "../template/all.hpp"
