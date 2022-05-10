@@ -3,8 +3,8 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: all/all.hpp
-    title: all/all.hpp
+    path: kyopro.hpp
+    title: kyopro.hpp
   - icon: ':warning:'
     path: template/all.hpp
     title: template/all.hpp
@@ -30,7 +30,7 @@ data:
   isVerificationFile: false
   path: template/min_max_different_types.hpp
   requiredBy:
-  - all/all.hpp
+  - kyopro.hpp
   - template/all.hpp
   timestamp: '2022-04-21 22:07:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS

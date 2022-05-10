@@ -14,6 +14,9 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
+  - icon: ':warning:'
+    path: kyopro.hpp
+    title: kyopro.hpp
   - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
@@ -160,6 +163,7 @@ data:
   - system/out.hpp
   - system/all.hpp
   - system/in.hpp
+  - kyopro.hpp
   - meta/all.hpp
   - all/all.hpp
   - template/all.hpp

@@ -31,6 +31,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: function/monoid.hpp
       title: function/monoid.hpp
+  - name: .
+    pages:
+    - icon: ':warning:'
+      path: kyopro.hpp
+      title: kyopro.hpp
   - name: math
     pages:
     - icon: ':heavy_check_mark:'
@@ -131,6 +136,9 @@ data:
     - icon: ':warning:'
       path: template/min_max_different_types.hpp
       title: template/min_max_different_types.hpp
+    - icon: ':warning:'
+      path: template/stl.hpp
+      title: template/stl.hpp
   verificationCategories:
   - name: verify/aoj
     pages:

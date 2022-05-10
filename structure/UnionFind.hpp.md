@@ -12,6 +12,9 @@ data:
     path: all/all.hpp
     title: all/all.hpp
   - icon: ':warning:'
+    path: kyopro.hpp
+    title: kyopro.hpp
+  - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
   _extendedVerifiedWith:
@@ -129,6 +132,7 @@ data:
   isVerificationFile: false
   path: structure/UnionFind.hpp
   requiredBy:
+  - kyopro.hpp
   - all/all.hpp
   - structure/all.hpp
   timestamp: '2022-05-08 20:22:54+09:00'

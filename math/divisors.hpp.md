@@ -9,6 +9,9 @@ data:
     path: all/all.hpp
     title: all/all.hpp
   - icon: ':warning:'
+    path: kyopro.hpp
+    title: kyopro.hpp
+  - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
   _extendedVerifiedWith: []
@@ -43,6 +46,7 @@ data:
   isVerificationFile: false
   path: math/divisors.hpp
   requiredBy:
+  - kyopro.hpp
   - all/all.hpp
   - math/all.hpp
   timestamp: '2022-04-27 22:05:10+09:00'

@@ -11,6 +11,9 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
+  - icon: ':warning:'
+    path: kyopro.hpp
+    title: kyopro.hpp
   - icon: ':heavy_check_mark:'
     path: system/all.hpp
     title: system/all.hpp
@@ -221,6 +224,7 @@ data:
   path: system/out.hpp
   requiredBy:
   - system/all.hpp
+  - kyopro.hpp
   - all/all.hpp
   timestamp: '2022-05-08 20:22:54+09:00'
   verificationStatus: LIBRARY_ALL_AC

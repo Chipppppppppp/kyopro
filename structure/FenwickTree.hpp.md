@@ -18,6 +18,9 @@ data:
     path: all/all.hpp
     title: all/all.hpp
   - icon: ':warning:'
+    path: kyopro.hpp
+    title: kyopro.hpp
+  - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
   _extendedVerifiedWith:
@@ -112,6 +115,7 @@ data:
   isVerificationFile: false
   path: structure/FenwickTree.hpp
   requiredBy:
+  - kyopro.hpp
   - all/all.hpp
   - structure/all.hpp
   timestamp: '2022-04-27 22:05:10+09:00'

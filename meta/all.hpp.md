@@ -17,6 +17,9 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
+  - icon: ':warning:'
+    path: kyopro.hpp
+    title: kyopro.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -93,6 +96,7 @@ data:
   isVerificationFile: false
   path: meta/all.hpp
   requiredBy:
+  - kyopro.hpp
   - all/all.hpp
   timestamp: '2022-05-08 20:22:54+09:00'
   verificationStatus: LIBRARY_NO_TESTS

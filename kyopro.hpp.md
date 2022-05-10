@@ -14,6 +14,9 @@ data:
     path: algorithm/compress.hpp
     title: algorithm/compress.hpp
   - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':warning:'
     path: function/RecursiveLambda.hpp
     title: function/RecursiveLambda.hpp
   - icon: ':warning:'
@@ -85,10 +88,37 @@ data:
   - icon: ':heavy_check_mark:'
     path: system/out.hpp
     title: system/out.hpp
-  _extendedRequiredBy:
   - icon: ':warning:'
-    path: kyopro.hpp
-    title: kyopro.hpp
+    path: template/alias.hpp
+    title: template/alias.hpp
+  - icon: ':warning:'
+    path: template/all.hpp
+    title: template/all.hpp
+  - icon: ':warning:'
+    path: template/amin_amax.hpp
+    title: template/amin_amax.hpp
+  - icon: ':warning:'
+    path: template/constant.hpp
+    title: template/constant.hpp
+  - icon: ':warning:'
+    path: template/len.hpp
+    title: template/len.hpp
+  - icon: ':warning:'
+    path: template/macro.hpp
+    title: template/macro.hpp
+  - icon: ':warning:'
+    path: template/make_array.hpp
+    title: template/make_array.hpp
+  - icon: ':warning:'
+    path: template/make_vector.hpp
+    title: template/make_vector.hpp
+  - icon: ':warning:'
+    path: template/min_max_different_types.hpp
+    title: template/min_max_different_types.hpp
+  - icon: ':warning:'
+    path: template/stl.hpp
+    title: template/stl.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -576,21 +606,112 @@ data:
     \ false, false> print(output.begin()), eprint(error.begin());\n  Printer<Writer<>::iterator>\
     \ println(output.begin()), eprintln(error.begin());\n  Printer<Writer<>::iterator,\
     \ true, true, true, true> debug(output.begin()), edebug(error.begin());\n}\n#line\
-    \ 8 \"all/all.hpp\"\n"
+    \ 9 \"template/alias.hpp\"\n#include <set>\n#include <map>\n#include <unordered_set>\n\
+    #line 19 \"template/alias.hpp\"\n\nnamespace kpr {\n  using ll = long long;\n\
+    \  using ull = unsigned long long;\n  using lf = double;\n\n  using i8 = std::int8_t;\n\
+    \  using u8 = std::uint8_t;\n  using i16 = std::int16_t;\n  using u16 = std::uint16_t;\n\
+    \  using i32 = std::int32_t;\n  using u32 = std::uint32_t;\n  using i64 = std::int64_t;\n\
+    \  using u64 = std::uint64_t;\n  using i128 = __int128_t;\n  using u128 = __uint128_t;\n\
+    \  using f128 = __float128;\n\n  using mint = ModInt<mod>;\n  using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\
+    \n  template<class T, KYOPRO_BASE_UINT idx, class... Args>\n  struct agg_type\
+    \ {\n    using type = typename agg_type<T, idx - 1, T, Args...>::type;\n  };\n\
+    \  template<class T, class... Args>\n  struct agg_type<T, 0, Args...> {\n    using\
+    \ type = std::tuple<Args...>;\n  };\n  template<class T>\n  struct agg_type<T,\
+    \ 0, T, T> {\n    using type = std::pair<T, T>;\n  };\n\n  template<class T, KYOPRO_BASE_UINT\
+    \ idx>\n  using agg = typename agg_type<T, idx>::type;\n\n  template<class T>\n\
+    \  using vec = std::vector<T>;\n  template<class T>\n  using vvec = std::vector<vec<T>>;\n\
+    \  template<class T>\n  using vvvec = std::vector<vvec<T>>;\n  template<class\
+    \ T>\n  using vvvvec = std::vector<vvvec<T>>;\n  template<class T>\n  using vvvvvec\
+    \ = std::vector<vvvvec<T>>;\n\n  template<class Key, class Compare = std::less<Key>>\n\
+    \  using mset = std::unordered_set<Key, Compare>;\n  template<class Key, class\
+    \ T, class Compare = std::less<Key>>\n  using mmap = std::unordered_map<Key, T,\
+    \ Compare>;\n  template<class Key>\n  using hset = std::unordered_set<Key, Hash<Key>>;\n\
+    \  template<class Key, class T>\n  using hmap = std::unordered_map<Key, T, Hash<Key>>;\n\
+    \  template<class Key>\n  using hmiset = std::unordered_multiset<Key, Hash<Key>>;\n\
+    \  template<class Key, class T>\n  using hmmap = std::unordered_multimap<Key,\
+    \ T, Hash<Key>>;\n  template<class T, class Compare = std::less<T>, class Container\
+    \ = std::vector<T>>\n  using priq = std::priority_queue<T, Container, Compare>;\n\
+    \  template<class T, class Compare = std::greater<T>, class Container = std::vector<T>>\n\
+    \  using heapq = priq<T, Compare, Container>;\n}\n\nusing namespace std;\nusing\
+    \ namespace kpr;\n#line 2 \"template/amin_amax.hpp\"\n\nnamespace kpr {\n  template<class\
+    \ T, class U>\n  constexpr bool amin(T& a, U&& b) noexcept {\n    if (b < a) {\n\
+    \      a = b;\n      return true;\n    }\n    return false;\n  }\n\n  template<class\
+    \ T, class U>\n  constexpr bool amax(T& a, U&& b) noexcept {\n    if (a < b) {\n\
+    \      a = b;\n      return true;\n    }\n    return false;\n  }\n}\n#line 4 \"\
+    template/constant.hpp\"\n\nnamespace kpr {\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
+    \ KYOPRO_BASE_INT>, 4> beside{{{-1, 0}, {0, -1}, {1, 0}, {0, 1}}};\n  inline constexpr\
+    \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{-1, 0},\
+    \ {-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1, 1}, {0, 1}, {-1, 1}}};\n}\n#line 4 \"\
+    template/len.hpp\"\n\nnamespace kpr {\n  template<class T>\n  constexpr KYOPRO_BASE_INT\
+    \ len(T&& a) noexcept {\n    return std::size(a);\n  }\n}\n#line 8 \"template/macro.hpp\"\
+    \n\nnamespace kyopro::helper {\n  template<KYOPRO_BASE_UINT len>\n  constexpr\
+    \ KYOPRO_BASE_UINT va_args_size(const char (&s)[len]) noexcept {\n    if constexpr\
+    \ (len == 0) return 0;\n    KYOPRO_BASE_UINT cnt = 1;\n    for (auto i: s) if\
+    \ (i == ',') ++cnt;\n    return cnt;\n  }\n\n  template<class F, KYOPRO_BASE_UINT...\
+    \ idx>\n  auto read_impl(F&& f, std::integer_sequence<KYOPRO_BASE_UINT, idx...>)\
+    \ {\n    auto res = std::tuple{(static_cast<void>(idx), f())...};\n    scan(res);\n\
+    \    return res;\n  }\n}\n#define read(init, ...) auto [__VA_ARGS__] = kyopro::helper::read_impl([&]\
+    \ { return init; }, std::make_integer_sequence<KYOPRO_BASE_UINT, kyopro::helper::va_args_size(#__VA_ARGS__)>())\n\
+    #define KYOPRO_OVERLOAD_MACRO(_1, _2, _3, _4, name, ...) name\n#define KYOPRO_REP0()\
+    \ for (; ; )\n#define KYOPRO_REP1(last) KYOPRO_REP2(KYOPRO_COUNTER, last)\n#define\
+    \ KYOPRO_REP2(i, last) for (auto i = std::decay_t<decltype(last)>(), KYOPRO_LAST\
+    \ = (last); (i) < (KYOPRO_LAST); ++(i))\n#define KYOPRO_REP3(i, first, last) for\
+    \ (auto i = (first), KYOPRO_LAST = last; (i) < (KYOPRO_LAST); ++(i))\n#define\
+    \ rep(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__ __VA_OPT__(,) KYOPRO_REP4, KYOPRO_REP3,\
+    \ KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\n#define KYOPRO_LAMBDA1(value)\
+    \ ([&]() noexcept { return (value);})\n#define KYOPRO_LAMBDA2(_1, value) ([&](auto&&\
+    \ _1) noexcept { return (value); })\n#define KYOPRO_LAMBDA3(_1, _2, value) ([&](auto&&\
+    \ _1, auto&& _2) noexcept { return (value); })\n#define KYOPRO_LAMBDA4(_1, _2,\
+    \ _3, value) ([&](auto&& _1, auto&& _2, auto&& _3) noexcept { return (value);\
+    \ })\n#define lambda(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__, KYOPRO_LAMBDA4, KYOPRO_LAMBDA3,\
+    \ KYOPRO_LAMBDA2, KYOPRO_LAMBDA1)(__VA_ARGS__)\n#define all(...) std::begin(__VA_ARGS__),\
+    \ std::end(__VA_ARGS__)\n#define rall(...) std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\n\
+    #line 4 \"template/make_array.hpp\"\n\nnamespace kpr {\n  template<class T>\n\
+    \  constexpr auto make_array(const T& init = T()) noexcept { return init; }\n\n\
+    \  template<class T, KYOPRO_BASE_UINT length, KYOPRO_BASE_UINT... lengths>\n \
+    \ constexpr auto make_array(const T& init = T()) noexcept {\n    auto elm = make_array<T,\
+    \ lengths...>(init);\n    std::array<decltype(elm), length> res;\n    for (auto&\
+    \ i: res) i = elm;\n    return res;\n  }\n}\n#line 6 \"template/make_vector.hpp\"\
+    \n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT idx = 0, KYOPRO_BASE_UINT n,\
+    \ class T>\n  auto make_vector(const KYOPRO_BASE_UINT (&d)[n], T&& init) noexcept\
+    \ {\n    if constexpr (idx < n) return std::vector(d[idx], make_vector<idx + 1>(d,\
+    \ std::forward<T>(init)));\n    else return init;\n  }\n\n  template<class T,\
+    \ KYOPRO_BASE_UINT idx = 0, KYOPRO_BASE_UINT n>\n  auto make_vector(const KYOPRO_BASE_UINT\
+    \ (&d)[n], const T& init = T()) noexcept {\n    if constexpr (idx < n) return\
+    \ std::vector(d[idx], make_vector<idx + 1>(d, init));\n    else return init;\n\
+    \  }\n}\n#line 4 \"template/min_max_different_types.hpp\"\n\nusing std::min, std::max;\n\
+    \ntemplate<class T, class U, std::enable_if_t<!std::is_same_v<T, U>>* = nullptr>\n\
+    constexpr std::common_type_t<T, U> min(const T& a, const U& b) noexcept {\n  return\
+    \ a < b ? a : b;\n}\n\ntemplate<class T, class U, std::enable_if_t<!std::is_same_v<T,\
+    \ U>>* = nullptr>\nconstexpr std::common_type_t<T, U> max(const T& a, const U&\
+    \ b) noexcept {\n  return a > b ? a : b;\n}\n#line 3 \"template/stl.hpp\"\n#include\
+    \ <cctype>\n#include <cerrno>\n#include <cfloat>\n#include <ciso646>\n#include\
+    \ <climits>\n#include <clocale>\n#include <cmath>\n#include <csetjmp>\n#include\
+    \ <csignal>\n#include <cstdarg>\n#line 15 \"template/stl.hpp\"\n#include <cstdlib>\n\
+    #include <cstring>\n#include <ctime>\n\n#include <ccomplex>\n#include <cfenv>\n\
+    #include <cinttypes>\n#include <cstdalign>\n#include <cstdbool>\n#line 25 \"template/stl.hpp\"\
+    \n#include <ctgmath>\n#include <cwchar>\n#include <cwctype>\n\n#line 30 \"template/stl.hpp\"\
+    \n#include <bitset>\n#include <complex>\n#include <deque>\n#include <exception>\n\
+    #include <fstream>\n#line 36 \"template/stl.hpp\"\n#include <iomanip>\n#include\
+    \ <ios>\n#include <iosfwd>\n#include <iostream>\n#include <istream>\n#line 43\
+    \ \"template/stl.hpp\"\n#include <list>\n#include <locale>\n#line 46 \"template/stl.hpp\"\
+    \n#include <memory>\n#include <new>\n#line 49 \"template/stl.hpp\"\n#include <ostream>\n\
+    #line 52 \"template/stl.hpp\"\n#include <sstream>\n#line 54 \"template/stl.hpp\"\
+    \n#include <stdexcept>\n#include <streambuf>\n#line 57 \"template/stl.hpp\"\n\
+    #include <typeinfo>\n#line 59 \"template/stl.hpp\"\n#include <valarray>\n#line\
+    \ 61 \"template/stl.hpp\"\n\n#line 63 \"template/stl.hpp\"\n#include <atomic>\n\
+    #include <chrono>\n#include <condition_variable>\n#include <forward_list>\n#include\
+    \ <future>\n#include <initializer_list>\n#include <mutex>\n#line 71 \"template/stl.hpp\"\
+    \n#include <ratio>\n#include <regex>\n#include <scoped_allocator>\n#include <system_error>\n\
+    #include <thread>\n#line 77 \"template/stl.hpp\"\n#include <typeindex>\n#line\
+    \ 4 \"kyopro.hpp\"\n"
   code: '#pragma once
 
-    #include "../algorithm/all.hpp"
+    #include "all/all.hpp"
 
-    #include "../function/all.hpp"
-
-    #include "../math/all.hpp"
-
-    #include "../meta/all.hpp"
-
-    #include "../structure/all.hpp"
-
-    #include "../system/all.hpp"'
+    #include "template/all.hpp"'
   dependsOn:
+  - all/all.hpp
   - algorithm/all.hpp
   - algorithm/bit.hpp
   - meta/settings.hpp
@@ -619,17 +740,26 @@ data:
   - system/all.hpp
   - system/in.hpp
   - system/out.hpp
+  - template/all.hpp
+  - template/alias.hpp
+  - template/amin_amax.hpp
+  - template/constant.hpp
+  - template/len.hpp
+  - template/macro.hpp
+  - template/make_array.hpp
+  - template/make_vector.hpp
+  - template/min_max_different_types.hpp
+  - template/stl.hpp
   isVerificationFile: false
-  path: all/all.hpp
-  requiredBy:
-  - kyopro.hpp
+  path: kyopro.hpp
+  requiredBy: []
   timestamp: '2022-05-10 21:54:43+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: all/all.hpp
+documentation_of: kyopro.hpp
 layout: document
 redirect_from:
-- /library/all/all.hpp
-- /library/all/all.hpp.html
-title: all/all.hpp
+- /library/kyopro.hpp
+- /library/kyopro.hpp.html
+title: kyopro.hpp
 ---

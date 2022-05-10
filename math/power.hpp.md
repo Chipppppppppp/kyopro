@@ -14,6 +14,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
+  - icon: ':warning:'
+    path: kyopro.hpp
+    title: kyopro.hpp
   - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
@@ -102,6 +105,7 @@ data:
   - function/all.hpp
   - system/all.hpp
   - system/in.hpp
+  - kyopro.hpp
   - meta/constant.hpp
   - meta/all.hpp
   - all/all.hpp

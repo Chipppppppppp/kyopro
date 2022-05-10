@@ -6,6 +6,9 @@ data:
     path: all/all.hpp
     title: all/all.hpp
   - icon: ':warning:'
+    path: kyopro.hpp
+    title: kyopro.hpp
+  - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
   - icon: ':warning:'
@@ -42,6 +45,7 @@ data:
   isVerificationFile: false
   path: math/mod.hpp
   requiredBy:
+  - kyopro.hpp
   - all/all.hpp
   - template/all.hpp
   - template/alias.hpp

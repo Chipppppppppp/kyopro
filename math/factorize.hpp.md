@@ -33,6 +33,9 @@ data:
     path: all/all.hpp
     title: all/all.hpp
   - icon: ':warning:'
+    path: kyopro.hpp
+    title: kyopro.hpp
+  - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
   _extendedVerifiedWith:
@@ -296,6 +299,7 @@ data:
   isVerificationFile: false
   path: math/factorize.hpp
   requiredBy:
+  - kyopro.hpp
   - all/all.hpp
   - math/all.hpp
   timestamp: '2022-05-08 20:22:54+09:00'

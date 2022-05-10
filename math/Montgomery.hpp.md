@@ -8,6 +8,9 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
+  - icon: ':warning:'
+    path: kyopro.hpp
+    title: kyopro.hpp
   - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
@@ -85,6 +88,7 @@ data:
   isVerificationFile: false
   path: math/Montgomery.hpp
   requiredBy:
+  - kyopro.hpp
   - all/all.hpp
   - template/all.hpp
   - template/alias.hpp

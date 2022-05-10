@@ -58,10 +58,13 @@ data:
   - icon: ':warning:'
     path: template/min_max_different_types.hpp
     title: template/min_max_different_types.hpp
+  - icon: ':warning:'
+    path: template/stl.hpp
+    title: template/stl.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: all/all.hpp
-    title: all/all.hpp
+    path: kyopro.hpp
+    title: kyopro.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -426,7 +429,27 @@ data:
     \ U>>* = nullptr>\nconstexpr std::common_type_t<T, U> min(const T& a, const U&\
     \ b) noexcept {\n  return a < b ? a : b;\n}\n\ntemplate<class T, class U, std::enable_if_t<!std::is_same_v<T,\
     \ U>>* = nullptr>\nconstexpr std::common_type_t<T, U> max(const T& a, const U&\
-    \ b) noexcept {\n  return a > b ? a : b;\n}\n#line 10 \"template/all.hpp\"\n"
+    \ b) noexcept {\n  return a > b ? a : b;\n}\n#line 3 \"template/stl.hpp\"\n#include\
+    \ <cctype>\n#include <cerrno>\n#include <cfloat>\n#include <ciso646>\n#include\
+    \ <climits>\n#include <clocale>\n#include <cmath>\n#include <csetjmp>\n#include\
+    \ <csignal>\n#include <cstdarg>\n#line 15 \"template/stl.hpp\"\n#include <cstdlib>\n\
+    #include <cstring>\n#include <ctime>\n\n#include <ccomplex>\n#include <cfenv>\n\
+    #include <cinttypes>\n#include <cstdalign>\n#include <cstdbool>\n#line 25 \"template/stl.hpp\"\
+    \n#include <ctgmath>\n#include <cwchar>\n#include <cwctype>\n\n#line 30 \"template/stl.hpp\"\
+    \n#include <bitset>\n#include <complex>\n#include <deque>\n#include <exception>\n\
+    #include <fstream>\n#line 36 \"template/stl.hpp\"\n#include <iomanip>\n#include\
+    \ <ios>\n#include <iosfwd>\n#include <iostream>\n#include <istream>\n#line 43\
+    \ \"template/stl.hpp\"\n#include <list>\n#include <locale>\n#line 46 \"template/stl.hpp\"\
+    \n#include <memory>\n#include <new>\n#include <numeric>\n#include <ostream>\n\
+    #line 52 \"template/stl.hpp\"\n#include <sstream>\n#line 54 \"template/stl.hpp\"\
+    \n#include <stdexcept>\n#include <streambuf>\n#line 57 \"template/stl.hpp\"\n\
+    #include <typeinfo>\n#line 59 \"template/stl.hpp\"\n#include <valarray>\n#line\
+    \ 61 \"template/stl.hpp\"\n\n#line 63 \"template/stl.hpp\"\n#include <atomic>\n\
+    #include <chrono>\n#include <condition_variable>\n#include <forward_list>\n#include\
+    \ <future>\n#include <initializer_list>\n#include <mutex>\n#include <random>\n\
+    #include <ratio>\n#include <regex>\n#include <scoped_allocator>\n#include <system_error>\n\
+    #include <thread>\n#line 77 \"template/stl.hpp\"\n#include <typeindex>\n#line\
+    \ 11 \"template/all.hpp\"\n"
   code: '#pragma once
 
     #include "alias.hpp"
@@ -443,7 +466,9 @@ data:
 
     #include "make_vector.hpp"
 
-    #include "min_max_different_types.hpp"'
+    #include "min_max_different_types.hpp"
+
+    #include "stl.hpp"'
   dependsOn:
   - template/alias.hpp
   - algorithm/Hash.hpp
@@ -464,11 +489,12 @@ data:
   - template/make_array.hpp
   - template/make_vector.hpp
   - template/min_max_different_types.hpp
+  - template/stl.hpp
   isVerificationFile: false
   path: template/all.hpp
   requiredBy:
-  - all/all.hpp
-  timestamp: '2022-05-08 20:22:54+09:00'
+  - kyopro.hpp
+  timestamp: '2022-05-10 21:54:43+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/all.hpp

@@ -15,8 +15,8 @@ data:
     title: system/in.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: all/all.hpp
-    title: all/all.hpp
+    path: kyopro.hpp
+    title: kyopro.hpp
   - icon: ':warning:'
     path: template/all.hpp
     title: template/all.hpp
@@ -181,7 +181,7 @@ data:
   isVerificationFile: false
   path: template/macro.hpp
   requiredBy:
-  - all/all.hpp
+  - kyopro.hpp
   - template/all.hpp
   timestamp: '2022-05-08 20:22:54+09:00'
   verificationStatus: LIBRARY_NO_TESTS

@@ -17,6 +17,9 @@ data:
   - icon: ':warning:'
     path: function/all.hpp
     title: function/all.hpp
+  - icon: ':warning:'
+    path: kyopro.hpp
+    title: kyopro.hpp
   - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
@@ -94,6 +97,7 @@ data:
   path: function/monoid.hpp
   requiredBy:
   - function/all.hpp
+  - kyopro.hpp
   - all/all.hpp
   - structure/FenwickTree.hpp
   - structure/all.hpp

@@ -24,6 +24,9 @@ data:
     path: all/all.hpp
     title: all/all.hpp
   - icon: ':warning:'
+    path: kyopro.hpp
+    title: kyopro.hpp
+  - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
   - icon: ':heavy_check_mark:'
@@ -251,6 +254,7 @@ data:
   isVerificationFile: false
   path: math/DynamicModInt.hpp
   requiredBy:
+  - kyopro.hpp
   - all/all.hpp
   - template/all.hpp
   - template/alias.hpp

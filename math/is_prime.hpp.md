@@ -30,6 +30,9 @@ data:
     path: all/all.hpp
     title: all/all.hpp
   - icon: ':warning:'
+    path: kyopro.hpp
+    title: kyopro.hpp
+  - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
   - icon: ':heavy_check_mark:'
@@ -260,6 +263,7 @@ data:
   isVerificationFile: false
   path: math/is_prime.hpp
   requiredBy:
+  - kyopro.hpp
   - all/all.hpp
   - math/factorize.hpp
   - math/all.hpp
