@@ -3,11 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':warning:'
-    path: kyopro.hpp
-    title: kyopro.hpp
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
@@ -37,9 +37,9 @@ data:
   isVerificationFile: false
   path: math/div.hpp
   requiredBy:
-  - kyopro.hpp
   - all/all.hpp
   - math/all.hpp
+  - all.hpp
   timestamp: '2022-04-27 22:05:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

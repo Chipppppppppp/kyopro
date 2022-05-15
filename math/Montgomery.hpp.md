@@ -6,11 +6,11 @@ data:
     title: meta/settings.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':warning:'
-    path: kyopro.hpp
-    title: kyopro.hpp
   - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
@@ -88,19 +88,19 @@ data:
   isVerificationFile: false
   path: math/Montgomery.hpp
   requiredBy:
-  - kyopro.hpp
   - all/all.hpp
-  - template/all.hpp
-  - template/alias.hpp
-  - math/DynamicModInt.hpp
   - math/is_prime.hpp
-  - math/factorize.hpp
+  - math/DynamicModInt.hpp
   - math/all.hpp
+  - math/factorize.hpp
+  - all.hpp
+  - template/alias.hpp
+  - template/all.hpp
   timestamp: '2022-04-27 22:05:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/aoj/PrimeNumber.test.cpp
   - verify/yosupo/factorize.test.cpp
+  - verify/aoj/PrimeNumber.test.cpp
 documentation_of: math/Montgomery.hpp
 layout: document
 redirect_from:

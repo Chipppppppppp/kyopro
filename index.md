@@ -20,6 +20,11 @@ data:
     - icon: ':warning:'
       path: all/all.hpp
       title: all/all.hpp
+  - name: .
+    pages:
+    - icon: ':warning:'
+      path: all.hpp
+      title: all.hpp
   - name: function
     pages:
     - icon: ':warning:'
@@ -31,11 +36,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: function/monoid.hpp
       title: function/monoid.hpp
-  - name: .
-    pages:
-    - icon: ':warning:'
-      path: kyopro.hpp
-      title: kyopro.hpp
   - name: math
     pages:
     - icon: ':heavy_check_mark:'

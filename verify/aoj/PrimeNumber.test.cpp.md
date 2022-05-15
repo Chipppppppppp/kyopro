@@ -314,50 +314,54 @@ data:
     \    static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;\n\
     \n  private:\n    template<class, class = void>\n    struct has_print: std::false_type\
     \ {};\n    template<class T>\n    struct has_print<T, std::void_t<decltype(std::declval<T>().print(std::declval<Printer&>()))>>:\
-    \ std::true_type {};\n\n    void print_sep() {\n      if constexpr (debug) {\n\
-    \        print(',');\n      }\n      print(' ');\n    }\n\n  public:\n\n    Iterator\
-    \ itr;\n\n    Printer() noexcept = default;\n    Printer(Iterator itr) noexcept:\
-    \ itr(itr) {}\n\n    void print(char a) {\n      *itr = a;\n      ++itr;\n   \
-    \ }\n    void print(const char* a) {\n      for (; *a; ++a) print(*a);\n    }\n\
-    \    template<class CharT, class Traits>\n    void print(const std::basic_string<CharT,\
-    \ Traits>& a) {\n      for (auto i: a) print(i);\n    }\n    void print(bool a)\
-    \ {\n      print(static_cast<char>('0' + a));\n    }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T>\
-    \ && !has_print<T>::value>* = nullptr>\n    void print(T a) {\n      if constexpr\
-    \ (std::is_signed_v<T>) if (a < 0) {\n        print('-');\n        a = -a;\n \
-    \     }\n      std::uint_fast64_t p = a;\n      a -= p;\n      std::string s;\n\
-    \      do {\n        s += '0' + p % 10;\n        p /= 10;\n      } while (p >\
-    \ 0);\n      for (auto i = s.rbegin(); i != s.rend(); ++i) print(*i);\n      if\
-    \ constexpr (std::is_integral_v<T>) return;\n      print('.');\n      for (int\
-    \ i = 0; i < static_cast<int>(decimal_precision); ++i) {\n        a *= 10;\n \
-    \       print('0' + static_cast<std::uint_fast64_t>(a) % 10);\n      }\n    }\n\
-    \    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_tuple_v<T>\
+    \ std::true_type {};\n\n  public:\n\n    Iterator itr;\n\n    Printer() noexcept\
+    \ = default;\n    Printer(Iterator itr) noexcept: itr(itr) {}\n\n    void print_char(char\
+    \ c) {\n      *itr = c;\n      ++itr;\n    }\n\n    void print_sep() {\n     \
+    \ if constexpr (debug) {\n        print_char(',');\n      }\n      print_char('\
+    \ ');\n    }\n\n    void print(char a) {\n      if constexpr (debug) print_char('\\\
+    '');\n      print_char(a);\n      if constexpr (debug) print_char('\\'');\n  \
+    \  }\n    void print(const char* a) {\n      if constexpr (debug) print_char('\"\
+    ');\n      for (; *a; ++a) print_char(*a);\n      if constexpr (debug) print_char('\"\
+    ');\n    }\n    template<class CharT, class Traits>\n    void print(const std::basic_string<CharT,\
+    \ Traits>& a) {\n      if constexpr (debug) print_char('\"');\n      for (auto\
+    \ i: a) print_char(i);\n      if constexpr (debug) print_char('\"');\n    }\n\
+    \    void print(bool a) {\n      print_char(static_cast<char>('0' + a));\n   \
+    \ }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T> && !has_print<T>::value>*\
+    \ = nullptr>\n    void print(T a) {\n      if constexpr (std::is_signed_v<T>)\
+    \ if (a < 0) {\n        print_char('-');\n        a = -a;\n      }\n      std::uint_fast64_t\
+    \ p = a;\n      a -= p;\n      std::string s;\n      do {\n        s += '0' +\
+    \ p % 10;\n        p /= 10;\n      } while (p > 0);\n      for (auto i = s.rbegin();\
+    \ i != s.rend(); ++i) print_char(*i);\n      if constexpr (std::is_integral_v<T>)\
+    \ return;\n      print_char('.');\n      for (int i = 0; i < static_cast<int>(decimal_precision);\
+    \ ++i) {\n        a *= 10;\n        print_char('0' + static_cast<std::uint_fast64_t>(a)\
+    \ % 10);\n      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_tuple_v<T>\
     \ && !has_print<T>::value>* = nullptr>\n    void print(const T& a) {\n      if\
-    \ constexpr (debug && i == 0) print('{');\n      if constexpr (std::tuple_size_v<T>\
+    \ constexpr (debug && i == 0) print_char('{');\n      if constexpr (std::tuple_size_v<T>\
     \ != 0) print(std::get<i>(a));\n      if constexpr (i + 1 < std::tuple_size_v<T>)\
     \ {\n        if constexpr (sep) print_sep();\n        print<i + 1>(a);\n     \
-    \ } else if constexpr (debug) print('}');\n    }\n    template<class T, std::enable_if_t<is_iterable_v<T>\
+    \ } else if constexpr (debug) print_char('}');\n    }\n    template<class T, std::enable_if_t<is_iterable_v<T>\
     \ && !has_print<T>::value>* = nullptr>\n    void print(const T& a) {\n      if\
-    \ constexpr (debug) print('{');\n      if (std::empty(a)) return;\n      for (auto\
-    \ i = std::begin(a); ; ) {\n        print(*i);\n        if (++i != std::end(a))\
+    \ constexpr (debug) print_char('{');\n      if (std::empty(a)) return;\n     \
+    \ for (auto i = std::begin(a); ; ) {\n        print(*i);\n        if (++i != std::end(a))\
     \ {\n          if constexpr (sep) {\n            if constexpr (debug) {\n    \
-    \          print(',');\n              print(' ');\n            } else if constexpr\
-    \ (std::is_arithmetic_v<std::decay_t<decltype(std::declval<T>()[0])>>) print('\
-    \ ');\n            else print('\\n');\n          }\n        } else break;\n  \
-    \    }\n      if constexpr (debug) print('}');\n    }\n    template<class T, std::enable_if_t<has_print<T>::value>*\
-    \ = nullptr>\n    void print(const T& a) {\n      a.print(*this);\n    }\n\n \
-    \   template<bool first = true>\n    void operator ()() {\n      if constexpr\
-    \ (comment && first) print('#');\n      if constexpr (end) print('\\n');\n   \
-    \   if constexpr (flush) itr.flush();\n    }\n    template<bool first = true,\
-    \ class Head, class... Args>\n    void operator ()(Head&& head, Args&&... args)\
-    \ {\n      if constexpr (comment && first) {\n        print('#');\n        print('\
-    \ ');\n      }\n      if constexpr (sep && !first) print_sep();\n      print(head);\n\
+    \          print_char(',');\n              print_char(' ');\n            } else\
+    \ if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<T>()[0])>>)\
+    \ print_char(' ');\n            else print_char('\\n');\n          }\n       \
+    \ } else break;\n      }\n      if constexpr (debug) print_char('}');\n    }\n\
+    \    template<class T, std::enable_if_t<has_print<T>::value>* = nullptr>\n   \
+    \ void print(const T& a) {\n      a.print(*this);\n    }\n\n    template<bool\
+    \ first = true>\n    void operator ()() {\n      if constexpr (comment && first)\
+    \ print_char('#');\n      if constexpr (end) print_char('\\n');\n      if constexpr\
+    \ (flush) itr.flush();\n    }\n    template<bool first = true, class Head, class...\
+    \ Args>\n    void operator ()(Head&& head, Args&&... args) {\n      if constexpr\
+    \ (comment && first) {\n        print_char('#');\n        print_char(' ');\n \
+    \     }\n      if constexpr (sep && !first) print_sep();\n      print(head);\n\
     \      operator ()<false>(std::forward<Args>(args)...);\n    }\n  };\n\n  Printer<Writer<>::iterator,\
     \ false, false> print(output.begin()), eprint(error.begin());\n  Printer<Writer<>::iterator>\
-    \ println(output.begin()), eprintln(error.begin());\n  Printer<Writer<>::iterator,\
-    \ true, true, true, true> debug(output.begin()), edebug(error.begin());\n}\n#line\
-    \ 4 \"verify/aoj/PrimeNumber.test.cpp\"\n\nint main() {\n  int t;\n  kpr::scan(t);\n\
-    \  int cnt = 0;\n  for (int i = 0; i < t; ++i) {\n    long long x;\n    kpr::scan(x);\n\
-    \    if (kpr::is_prime(x)) ++cnt;\n  }\n  kpr::println(cnt);\n}\n"
+    \ println(output.begin()), eprintln(error.begin());\n}\n#line 4 \"verify/aoj/PrimeNumber.test.cpp\"\
+    \n\nint main() {\n  int t;\n  kpr::scan(t);\n  int cnt = 0;\n  for (int i = 0;\
+    \ i < t; ++i) {\n    long long x;\n    kpr::scan(x);\n    if (kpr::is_prime(x))\
+    \ ++cnt;\n  }\n  kpr::println(cnt);\n}\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_1_C&lang=ja\"\
     \n#include \"../../math/is_prime.hpp\"\n#include \"../../system/all.hpp\"\n\n\
     int main() {\n  int t;\n  kpr::scan(t);\n  int cnt = 0;\n  for (int i = 0; i <\
@@ -379,7 +383,7 @@ data:
   isVerificationFile: true
   path: verify/aoj/PrimeNumber.test.cpp
   requiredBy: []
-  timestamp: '2022-05-08 20:22:54+09:00'
+  timestamp: '2022-05-15 16:50:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/aoj/PrimeNumber.test.cpp

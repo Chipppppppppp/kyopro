@@ -12,11 +12,11 @@ data:
     title: meta/trait.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':warning:'
-    path: kyopro.hpp
-    title: kyopro.hpp
   - icon: ':heavy_check_mark:'
     path: system/all.hpp
     title: system/all.hpp
@@ -211,19 +211,19 @@ data:
   isVerificationFile: false
   path: system/in.hpp
   requiredBy:
-  - system/all.hpp
-  - kyopro.hpp
   - all/all.hpp
-  - template/all.hpp
+  - system/all.hpp
+  - all.hpp
   - template/macro.hpp
+  - template/all.hpp
   timestamp: '2022-05-08 20:22:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/aoj/PrimeNumber.test.cpp
   - verify/yosupo/point_add_range_sum.test.cpp
-  - verify/yosupo/unionfind.test.cpp
   - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/unionfind.test.cpp
   - verify/yosupo/many_aplusb.test.cpp
+  - verify/aoj/PrimeNumber.test.cpp
 documentation_of: system/in.hpp
 layout: document
 redirect_from:

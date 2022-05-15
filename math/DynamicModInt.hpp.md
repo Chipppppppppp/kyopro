@@ -21,11 +21,11 @@ data:
     title: meta/trait.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':warning:'
-    path: kyopro.hpp
-    title: kyopro.hpp
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
@@ -254,18 +254,18 @@ data:
   isVerificationFile: false
   path: math/DynamicModInt.hpp
   requiredBy:
-  - kyopro.hpp
   - all/all.hpp
-  - template/all.hpp
-  - template/alias.hpp
   - math/is_prime.hpp
-  - math/factorize.hpp
   - math/all.hpp
+  - math/factorize.hpp
+  - all.hpp
+  - template/alias.hpp
+  - template/all.hpp
   timestamp: '2022-05-08 20:22:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/aoj/PrimeNumber.test.cpp
   - verify/yosupo/factorize.test.cpp
+  - verify/aoj/PrimeNumber.test.cpp
 documentation_of: math/DynamicModInt.hpp
 layout: document
 redirect_from:

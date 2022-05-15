@@ -15,11 +15,11 @@ data:
     title: meta/settings.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':warning:'
-    path: kyopro.hpp
-    title: kyopro.hpp
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
@@ -115,9 +115,9 @@ data:
   isVerificationFile: false
   path: structure/FenwickTree.hpp
   requiredBy:
-  - kyopro.hpp
   - all/all.hpp
   - structure/all.hpp
+  - all.hpp
   timestamp: '2022-04-27 22:05:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

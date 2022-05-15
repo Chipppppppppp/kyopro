@@ -12,11 +12,11 @@ data:
     path: algorithm/all.hpp
     title: algorithm/all.hpp
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':warning:'
-    path: kyopro.hpp
-    title: kyopro.hpp
   - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
@@ -160,32 +160,32 @@ data:
   isVerificationFile: false
   path: meta/trait.hpp
   requiredBy:
+  - meta/all.hpp
+  - all/all.hpp
   - system/out.hpp
   - system/all.hpp
   - system/in.hpp
-  - kyopro.hpp
-  - meta/all.hpp
-  - all/all.hpp
-  - template/all.hpp
-  - template/alias.hpp
-  - template/macro.hpp
-  - math/DynamicModInt.hpp
-  - math/is_prime.hpp
-  - math/factorize.hpp
-  - math/all.hpp
-  - math/ModInt.hpp
   - structure/UnionFind.hpp
   - structure/all.hpp
-  - algorithm/all.hpp
+  - math/ModInt.hpp
+  - math/is_prime.hpp
+  - math/DynamicModInt.hpp
+  - math/all.hpp
+  - math/factorize.hpp
+  - all.hpp
+  - template/macro.hpp
+  - template/alias.hpp
+  - template/all.hpp
   - algorithm/Hash.hpp
+  - algorithm/all.hpp
   timestamp: '2022-05-08 20:22:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/aoj/PrimeNumber.test.cpp
   - verify/yosupo/point_add_range_sum.test.cpp
-  - verify/yosupo/unionfind.test.cpp
   - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/unionfind.test.cpp
   - verify/yosupo/many_aplusb.test.cpp
+  - verify/aoj/PrimeNumber.test.cpp
 documentation_of: meta/trait.hpp
 layout: document
 redirect_from:
