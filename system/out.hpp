@@ -86,13 +86,6 @@ namespace kpr {
     template<class T>
     struct has_print<T, std::void_t<decltype(std::declval<T>().print(std::declval<Printer&>()))>>: std::true_type {};
 
-    void print_sep() {
-      if constexpr (debug) {
-        print(',');
-      }
-      print(' ');
-    }
-
   public:
 
     Iterator itr;
@@ -100,24 +93,41 @@ namespace kpr {
     Printer() noexcept = default;
     Printer(Iterator itr) noexcept: itr(itr) {}
 
-    void print(char a) {
-      *itr = a;
+    void print_char(char c) {
+      *itr = c;
       ++itr;
     }
+
+    void print_sep() {
+      if constexpr (debug) {
+        print_char(',');
+      }
+      print_char(' ');
+    }
+
+    void print(char a) {
+      if constexpr (debug) print_char('\'');
+      print_char(a);
+      if constexpr (debug) print_char('\'');
+    }
     void print(const char* a) {
-      for (; *a; ++a) print(*a);
+      if constexpr (debug) print_char('"');
+      for (; *a; ++a) print_char(*a);
+      if constexpr (debug) print_char('"');
     }
     template<class CharT, class Traits>
     void print(const std::basic_string<CharT, Traits>& a) {
-      for (auto i: a) print(i);
+      if constexpr (debug) print_char('"');
+      for (auto i: a) print_char(i);
+      if constexpr (debug) print_char('"');
     }
     void print(bool a) {
-      print(static_cast<char>('0' + a));
+      print_char(static_cast<char>('0' + a));
     }
     template<class T, std::enable_if_t<std::is_arithmetic_v<T> && !has_print<T>::value>* = nullptr>
     void print(T a) {
       if constexpr (std::is_signed_v<T>) if (a < 0) {
-        print('-');
+        print_char('-');
         a = -a;
       }
       std::uint_fast64_t p = a;
@@ -127,40 +137,40 @@ namespace kpr {
         s += '0' + p % 10;
         p /= 10;
       } while (p > 0);
-      for (auto i = s.rbegin(); i != s.rend(); ++i) print(*i);
+      for (auto i = s.rbegin(); i != s.rend(); ++i) print_char(*i);
       if constexpr (std::is_integral_v<T>) return;
-      print('.');
+      print_char('.');
       for (int i = 0; i < static_cast<int>(decimal_precision); ++i) {
         a *= 10;
-        print('0' + static_cast<std::uint_fast64_t>(a) % 10);
+        print_char('0' + static_cast<std::uint_fast64_t>(a) % 10);
       }
     }
     template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_tuple_v<T> && !has_print<T>::value>* = nullptr>
     void print(const T& a) {
-      if constexpr (debug && i == 0) print('{');
+      if constexpr (debug && i == 0) print_char('{');
       if constexpr (std::tuple_size_v<T> != 0) print(std::get<i>(a));
       if constexpr (i + 1 < std::tuple_size_v<T>) {
         if constexpr (sep) print_sep();
         print<i + 1>(a);
-      } else if constexpr (debug) print('}');
+      } else if constexpr (debug) print_char('}');
     }
     template<class T, std::enable_if_t<is_iterable_v<T> && !has_print<T>::value>* = nullptr>
     void print(const T& a) {
-      if constexpr (debug) print('{');
+      if constexpr (debug) print_char('{');
       if (std::empty(a)) return;
       for (auto i = std::begin(a); ; ) {
         print(*i);
         if (++i != std::end(a)) {
           if constexpr (sep) {
             if constexpr (debug) {
-              print(',');
-              print(' ');
-            } else if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<T>()[0])>>) print(' ');
-            else print('\n');
+              print_char(',');
+              print_char(' ');
+            } else if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<T>()[0])>>) print_char(' ');
+            else print_char('\n');
           }
         } else break;
       }
-      if constexpr (debug) print('}');
+      if constexpr (debug) print_char('}');
     }
     template<class T, std::enable_if_t<has_print<T>::value>* = nullptr>
     void print(const T& a) {
@@ -169,15 +179,15 @@ namespace kpr {
 
     template<bool first = true>
     void operator ()() {
-      if constexpr (comment && first) print('#');
-      if constexpr (end) print('\n');
+      if constexpr (comment && first) print_char('#');
+      if constexpr (end) print_char('\n');
       if constexpr (flush) itr.flush();
     }
     template<bool first = true, class Head, class... Args>
     void operator ()(Head&& head, Args&&... args) {
       if constexpr (comment && first) {
-        print('#');
-        print(' ');
+        print_char('#');
+        print_char(' ');
       }
       if constexpr (sep && !first) print_sep();
       print(head);
@@ -187,5 +197,4 @@ namespace kpr {
 
   Printer<Writer<>::iterator, false, false> print(output.begin()), eprint(error.begin());
   Printer<Writer<>::iterator> println(output.begin()), eprintln(error.begin());
-  Printer<Writer<>::iterator, true, true, true, true> debug(output.begin()), edebug(error.begin());
 }
