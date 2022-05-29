@@ -34,16 +34,27 @@ namespace kpr::helper {
 
 #define read(init, ...) auto [__VA_ARGS__] = kpr::helper::read_impl([&] { return init; }, std::make_integer_sequence<KYOPRO_BASE_UINT, kpr::helper::va_args_size(#__VA_ARGS__)>())
 #define debug(...) (kpr::print('#', 'l', 'i', 'n', 'e', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__) != 0>(#__VA_ARGS__), kpr::helper::debug_impl(__VA_ARGS__))
+
 #define KYOPRO_OVERLOAD_MACRO(_1, _2, _3, _4, name, ...) name
+
 #define KYOPRO_REP0() for (; ; )
 #define KYOPRO_REP1(last) KYOPRO_REP2(KYOPRO_COUNTER, last)
 #define KYOPRO_REP2(i, last) for (auto i = std::decay_t<decltype(last)>(), KYOPRO_LAST = (last); (i) < (KYOPRO_LAST); ++(i))
 #define KYOPRO_REP3(i, first, last) for (auto i = (first), KYOPRO_LAST = last; (i) < (KYOPRO_LAST); ++(i))
 #define rep(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__ __VA_OPT__(,) KYOPRO_REP4, KYOPRO_REP3, KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)
+
+#define KYOPRO_MATCH1(_1) break; case _1:
+#define KYOPRO_MATCH2(_1, _2) break; case _1: case _2:
+#define KYOPRO_MATCH3(_1, _2, _3) break; case _1: case _2: case _3:
+#define KYOPRO_MATCH4(_1, _2, _3, _4) break; case _1: case _2: case _3: case _4:
+#define match(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__, KYOPRO_MATCH4, KYOPRO_MATCH3, KYOPRO_MATCH2, KYOPRO_MATCH1)(__VA_ARGS__)
+#define otherwise break; default:
+
 #define KYOPRO_LAMBDA1(value) ([&]() noexcept { return (value);})
 #define KYOPRO_LAMBDA2(_1, value) ([&](auto&& _1) noexcept { return (value); })
 #define KYOPRO_LAMBDA3(_1, _2, value) ([&](auto&& _1, auto&& _2) noexcept { return (value); })
 #define KYOPRO_LAMBDA4(_1, _2, _3, value) ([&](auto&& _1, auto&& _2, auto&& _3) noexcept { return (value); })
 #define lambda(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__, KYOPRO_LAMBDA4, KYOPRO_LAMBDA3, KYOPRO_LAMBDA2, KYOPRO_LAMBDA1)(__VA_ARGS__)
+
 #define all(...) std::begin(__VA_ARGS__), std::end(__VA_ARGS__)
 #define rall(...) std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)
