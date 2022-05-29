@@ -160,31 +160,31 @@ data:
   isVerificationFile: false
   path: meta/trait.hpp
   requiredBy:
-  - meta/all.hpp
+  - template/macro.hpp
+  - template/all.hpp
+  - template/alias.hpp
+  - algorithm/all.hpp
+  - algorithm/Hash.hpp
   - all/all.hpp
+  - math/ModInt.hpp
+  - math/all.hpp
+  - math/factorize.hpp
+  - math/DynamicModInt.hpp
+  - math/is_prime.hpp
   - system/out.hpp
   - system/all.hpp
   - system/in.hpp
-  - structure/UnionFind.hpp
-  - structure/all.hpp
-  - math/ModInt.hpp
-  - math/is_prime.hpp
-  - math/DynamicModInt.hpp
-  - math/all.hpp
-  - math/factorize.hpp
   - all.hpp
-  - template/macro.hpp
-  - template/alias.hpp
-  - template/all.hpp
-  - algorithm/Hash.hpp
-  - algorithm/all.hpp
+  - structure/all.hpp
+  - structure/UnionFind.hpp
+  - meta/all.hpp
   timestamp: '2022-05-08 20:22:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yosupo/point_add_range_sum.test.cpp
-  - verify/yosupo/factorize.test.cpp
-  - verify/yosupo/unionfind.test.cpp
   - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/unionfind.test.cpp
   - verify/aoj/PrimeNumber.test.cpp
 documentation_of: meta/trait.hpp
 layout: document

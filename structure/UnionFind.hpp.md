@@ -133,8 +133,8 @@ data:
   path: structure/UnionFind.hpp
   requiredBy:
   - all/all.hpp
-  - structure/all.hpp
   - all.hpp
+  - structure/all.hpp
   timestamp: '2022-05-08 20:22:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

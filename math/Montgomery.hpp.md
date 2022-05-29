@@ -88,14 +88,14 @@ data:
   isVerificationFile: false
   path: math/Montgomery.hpp
   requiredBy:
+  - template/all.hpp
+  - template/alias.hpp
   - all/all.hpp
-  - math/is_prime.hpp
-  - math/DynamicModInt.hpp
   - math/all.hpp
   - math/factorize.hpp
+  - math/DynamicModInt.hpp
+  - math/is_prime.hpp
   - all.hpp
-  - template/alias.hpp
-  - template/all.hpp
   timestamp: '2022-04-27 22:05:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

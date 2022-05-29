@@ -254,13 +254,13 @@ data:
   isVerificationFile: false
   path: math/DynamicModInt.hpp
   requiredBy:
+  - template/all.hpp
+  - template/alias.hpp
   - all/all.hpp
-  - math/is_prime.hpp
   - math/all.hpp
   - math/factorize.hpp
+  - math/is_prime.hpp
   - all.hpp
-  - template/alias.hpp
-  - template/all.hpp
   timestamp: '2022-05-08 20:22:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

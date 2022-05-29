@@ -97,9 +97,9 @@ data:
   path: function/monoid.hpp
   requiredBy:
   - all/all.hpp
-  - structure/FenwickTree.hpp
-  - structure/all.hpp
   - all.hpp
+  - structure/all.hpp
+  - structure/FenwickTree.hpp
   - function/all.hpp
   timestamp: '2022-04-27 22:05:10+09:00'
   verificationStatus: LIBRARY_ALL_AC

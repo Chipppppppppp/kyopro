@@ -101,31 +101,31 @@ data:
   isVerificationFile: false
   path: math/power.hpp
   requiredBy:
-  - meta/all.hpp
-  - meta/constant.hpp
+  - template/macro.hpp
+  - template/all.hpp
+  - template/alias.hpp
   - all/all.hpp
-  - system/all.hpp
-  - system/in.hpp
-  - structure/FenwickTree.hpp
-  - structure/all.hpp
   - math/ModInt.hpp
-  - math/is_prime.hpp
-  - math/DynamicModInt.hpp
   - math/all.hpp
   - math/factorize.hpp
+  - math/DynamicModInt.hpp
+  - math/is_prime.hpp
+  - system/all.hpp
+  - system/in.hpp
   - all.hpp
-  - template/macro.hpp
-  - template/alias.hpp
-  - template/all.hpp
+  - structure/all.hpp
+  - structure/FenwickTree.hpp
+  - meta/all.hpp
+  - meta/constant.hpp
   - function/all.hpp
   - function/monoid.hpp
   timestamp: '2022-04-27 22:05:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yosupo/point_add_range_sum.test.cpp
-  - verify/yosupo/factorize.test.cpp
-  - verify/yosupo/unionfind.test.cpp
   - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/unionfind.test.cpp
   - verify/aoj/PrimeNumber.test.cpp
 documentation_of: math/power.hpp
 layout: document

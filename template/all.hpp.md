@@ -490,20 +490,25 @@ data:
     \ read(init, ...) auto [__VA_ARGS__] = kpr::helper::read_impl([&] { return init;\
     \ }, std::make_integer_sequence<KYOPRO_BASE_UINT, kpr::helper::va_args_size(#__VA_ARGS__)>())\n\
     #define debug(...) (kpr::print('#', 'l', 'i', 'n', 'e', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
-    \ != 0>(#__VA_ARGS__), kpr::helper::debug_impl(__VA_ARGS__))\n#define KYOPRO_OVERLOAD_MACRO(_1,\
-    \ _2, _3, _4, name, ...) name\n#define KYOPRO_REP0() for (; ; )\n#define KYOPRO_REP1(last)\
+    \ != 0>(#__VA_ARGS__), kpr::helper::debug_impl(__VA_ARGS__))\n\n#define KYOPRO_OVERLOAD_MACRO(_1,\
+    \ _2, _3, _4, name, ...) name\n\n#define KYOPRO_REP0() for (; ; )\n#define KYOPRO_REP1(last)\
     \ KYOPRO_REP2(KYOPRO_COUNTER, last)\n#define KYOPRO_REP2(i, last) for (auto i\
     \ = std::decay_t<decltype(last)>(), KYOPRO_LAST = (last); (i) < (KYOPRO_LAST);\
     \ ++(i))\n#define KYOPRO_REP3(i, first, last) for (auto i = (first), KYOPRO_LAST\
     \ = last; (i) < (KYOPRO_LAST); ++(i))\n#define rep(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__\
     \ __VA_OPT__(,) KYOPRO_REP4, KYOPRO_REP3, KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\n\
-    #define KYOPRO_LAMBDA1(value) ([&]() noexcept { return (value);})\n#define KYOPRO_LAMBDA2(_1,\
-    \ value) ([&](auto&& _1) noexcept { return (value); })\n#define KYOPRO_LAMBDA3(_1,\
-    \ _2, value) ([&](auto&& _1, auto&& _2) noexcept { return (value); })\n#define\
-    \ KYOPRO_LAMBDA4(_1, _2, _3, value) ([&](auto&& _1, auto&& _2, auto&& _3) noexcept\
-    \ { return (value); })\n#define lambda(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__,\
+    \n#define KYOPRO_MATCH1(_1) break; case _1:\n#define KYOPRO_MATCH2(_1, _2) break;\
+    \ case _1: case _2:\n#define KYOPRO_MATCH3(_1, _2, _3) break; case _1: case _2:\
+    \ case _3:\n#define KYOPRO_MATCH4(_1, _2, _3, _4) break; case _1: case _2: case\
+    \ _3: case _4:\n#define match(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__, KYOPRO_MATCH4,\
+    \ KYOPRO_MATCH3, KYOPRO_MATCH2, KYOPRO_MATCH1)(__VA_ARGS__)\n#define otherwise\
+    \ break; default:\n\n#define KYOPRO_LAMBDA1(value) ([&]() noexcept { return (value);})\n\
+    #define KYOPRO_LAMBDA2(_1, value) ([&](auto&& _1) noexcept { return (value); })\n\
+    #define KYOPRO_LAMBDA3(_1, _2, value) ([&](auto&& _1, auto&& _2) noexcept { return\
+    \ (value); })\n#define KYOPRO_LAMBDA4(_1, _2, _3, value) ([&](auto&& _1, auto&&\
+    \ _2, auto&& _3) noexcept { return (value); })\n#define lambda(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__,\
     \ KYOPRO_LAMBDA4, KYOPRO_LAMBDA3, KYOPRO_LAMBDA2, KYOPRO_LAMBDA1)(__VA_ARGS__)\n\
-    #define all(...) std::begin(__VA_ARGS__), std::end(__VA_ARGS__)\n#define rall(...)\
+    \n#define all(...) std::begin(__VA_ARGS__), std::end(__VA_ARGS__)\n#define rall(...)\
     \ std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\n#line 4 \"template/make_array.hpp\"\
     \n\nnamespace kpr {\n  template<class T>\n  constexpr auto make_array(const T&\
     \ init = T()) noexcept { return init; }\n\n  template<class T, KYOPRO_BASE_UINT\
@@ -569,7 +574,7 @@ data:
   path: template/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-05-15 16:50:55+09:00'
+  timestamp: '2022-05-29 19:25:32+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/all.hpp
