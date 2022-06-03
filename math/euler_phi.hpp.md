@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
@@ -47,9 +47,9 @@ data:
   isVerificationFile: false
   path: math/euler_phi.hpp
   requiredBy:
-  - all/all.hpp
   - math/all.hpp
   - all.hpp
+  - all/all.hpp
   timestamp: '2022-04-27 22:05:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

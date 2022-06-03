@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -14,7 +14,7 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: system/all.hpp
     title: system/all.hpp
   - icon: ':warning:'
@@ -24,24 +24,24 @@ data:
     path: template/macro.hpp
     title: template/macro.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/many_aplusb.test.cpp
     title: verify/yosupo/many_aplusb.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/point_add_range_sum.test.cpp
     title: verify/yosupo/point_add_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"system/out.hpp\"\n#include <unistd.h>\n#include <array>\n\
@@ -124,39 +124,39 @@ data:
     \ Traits>& a) {\n      if constexpr (debug) print_char('\"');\n      for (auto\
     \ i: a) print_char(i);\n      if constexpr (debug) print_char('\"');\n    }\n\
     \    void print(bool a) {\n      print_char(static_cast<char>('0' + a));\n   \
-    \ }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T> && !has_print<T>::value>*\
-    \ = nullptr>\n    void print(T a) {\n      if constexpr (std::is_signed_v<T>)\
+    \ }\n    template<class T, class = std::enable_if_t<std::is_arithmetic_v<T> &&\
+    \ !has_print<T>::value>>\n    void print(T a) {\n      if constexpr (std::is_signed_v<T>)\
     \ if (a < 0) {\n        print_char('-');\n        a = -a;\n      }\n      std::uint_fast64_t\
     \ p = a;\n      a -= p;\n      std::string s;\n      do {\n        s += '0' +\
     \ p % 10;\n        p /= 10;\n      } while (p > 0);\n      for (auto i = s.rbegin();\
     \ i != s.rend(); ++i) print_char(*i);\n      if constexpr (std::is_integral_v<T>)\
     \ return;\n      print_char('.');\n      for (int i = 0; i < static_cast<int>(decimal_precision);\
     \ ++i) {\n        a *= 10;\n        print_char('0' + static_cast<std::uint_fast64_t>(a)\
-    \ % 10);\n      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_tuple_v<T>\
-    \ && !has_print<T>::value>* = nullptr>\n    void print(const T& a) {\n      if\
-    \ constexpr (debug && i == 0) print_char('{');\n      if constexpr (std::tuple_size_v<T>\
-    \ != 0) print(std::get<i>(a));\n      if constexpr (i + 1 < std::tuple_size_v<T>)\
-    \ {\n        if constexpr (sep) print_sep();\n        print<i + 1>(a);\n     \
-    \ } else if constexpr (debug) print_char('}');\n    }\n    template<class T, std::enable_if_t<is_iterable_v<T>\
-    \ && !has_print<T>::value>* = nullptr>\n    void print(const T& a) {\n      if\
-    \ constexpr (debug) print_char('{');\n      if (std::empty(a)) return;\n     \
-    \ for (auto i = std::begin(a); ; ) {\n        print(*i);\n        if (++i != std::end(a))\
-    \ {\n          if constexpr (sep) {\n            if constexpr (debug) {\n    \
-    \          print_char(',');\n              print_char(' ');\n            } else\
-    \ if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<T>()[0])>>)\
+    \ % 10);\n      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, class\
+    \ = std::enable_if_t<is_tuple_v<T> && !has_print<T>::value>>\n    void print(const\
+    \ T& a) {\n      if constexpr (debug && i == 0) print_char('{');\n      if constexpr\
+    \ (std::tuple_size_v<T> != 0) print(std::get<i>(a));\n      if constexpr (i +\
+    \ 1 < std::tuple_size_v<T>) {\n        if constexpr (sep) print_sep();\n     \
+    \   print<i + 1>(a);\n      } else if constexpr (debug) print_char('}');\n   \
+    \ }\n    template<class T, class = std::enable_if_t<is_iterable_v<T> && !has_print<T>::value>>\n\
+    \    void print(const T& a) {\n      if constexpr (debug) print_char('{');\n \
+    \     if (std::empty(a)) return;\n      for (auto i = std::begin(a); ; ) {\n \
+    \       print(*i);\n        if (++i != std::end(a)) {\n          if constexpr\
+    \ (sep) {\n            if constexpr (debug) {\n              print_char(',');\n\
+    \              print_char(' ');\n            } else if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<T>()[0])>>)\
     \ print_char(' ');\n            else print_char('\\n');\n          }\n       \
     \ } else break;\n      }\n      if constexpr (debug) print_char('}');\n    }\n\
-    \    template<class T, std::enable_if_t<has_print<T>::value>* = nullptr>\n   \
-    \ void print(const T& a) {\n      a.print(*this);\n    }\n\n    template<bool\
-    \ first = true>\n    void operator ()() {\n      if constexpr (comment && first)\
-    \ print_char('#');\n      if constexpr (end) print_char('\\n');\n      if constexpr\
-    \ (flush) itr.flush();\n    }\n    template<bool first = true, class Head, class...\
-    \ Args>\n    void operator ()(Head&& head, Args&&... args) {\n      if constexpr\
-    \ (comment && first) {\n        print_char('#');\n        print_char(' ');\n \
-    \     }\n      if constexpr (sep && !first) print_sep();\n      print(head);\n\
-    \      operator ()<false>(std::forward<Args>(args)...);\n    }\n  };\n\n  Printer<Writer<>::iterator,\
-    \ false, false> print(output.begin()), eprint(error.begin());\n  Printer<Writer<>::iterator>\
-    \ println(output.begin()), eprintln(error.begin());\n}\n"
+    \    template<class T, class = std::enable_if_t<has_print<T>::value>>\n    void\
+    \ print(const T& a) {\n      a.print(*this);\n    }\n\n    template<bool first\
+    \ = true>\n    void operator ()() {\n      if constexpr (comment && first) print_char('#');\n\
+    \      if constexpr (end) print_char('\\n');\n      if constexpr (flush) itr.flush();\n\
+    \    }\n    template<bool first = true, class Head, class... Args>\n    void operator\
+    \ ()(Head&& head, Args&&... args) {\n      if constexpr (comment && first) {\n\
+    \        print_char('#');\n        print_char(' ');\n      }\n      if constexpr\
+    \ (sep && !first) print_sep();\n      print(head);\n      operator ()<false>(std::forward<Args>(args)...);\n\
+    \    }\n  };\n\n  Printer<Writer<>::iterator, false, false> print(output.begin()),\
+    \ eprint(error.begin());\n  Printer<Writer<>::iterator> println(output.begin()),\
+    \ eprintln(error.begin());\n}\n"
   code: "#pragma once\n#include <unistd.h>\n#include <array>\n#include <cstdint>\n\
     #include <cstdio>\n#include <iterator>\n#include <string>\n#include <tuple>\n\
     #include <type_traits>\n#include <utility>\n#include \"../meta/settings.hpp\"\n\
@@ -198,58 +198,58 @@ data:
     \ Traits>& a) {\n      if constexpr (debug) print_char('\"');\n      for (auto\
     \ i: a) print_char(i);\n      if constexpr (debug) print_char('\"');\n    }\n\
     \    void print(bool a) {\n      print_char(static_cast<char>('0' + a));\n   \
-    \ }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T> && !has_print<T>::value>*\
-    \ = nullptr>\n    void print(T a) {\n      if constexpr (std::is_signed_v<T>)\
+    \ }\n    template<class T, class = std::enable_if_t<std::is_arithmetic_v<T> &&\
+    \ !has_print<T>::value>>\n    void print(T a) {\n      if constexpr (std::is_signed_v<T>)\
     \ if (a < 0) {\n        print_char('-');\n        a = -a;\n      }\n      std::uint_fast64_t\
     \ p = a;\n      a -= p;\n      std::string s;\n      do {\n        s += '0' +\
     \ p % 10;\n        p /= 10;\n      } while (p > 0);\n      for (auto i = s.rbegin();\
     \ i != s.rend(); ++i) print_char(*i);\n      if constexpr (std::is_integral_v<T>)\
     \ return;\n      print_char('.');\n      for (int i = 0; i < static_cast<int>(decimal_precision);\
     \ ++i) {\n        a *= 10;\n        print_char('0' + static_cast<std::uint_fast64_t>(a)\
-    \ % 10);\n      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_tuple_v<T>\
-    \ && !has_print<T>::value>* = nullptr>\n    void print(const T& a) {\n      if\
-    \ constexpr (debug && i == 0) print_char('{');\n      if constexpr (std::tuple_size_v<T>\
-    \ != 0) print(std::get<i>(a));\n      if constexpr (i + 1 < std::tuple_size_v<T>)\
-    \ {\n        if constexpr (sep) print_sep();\n        print<i + 1>(a);\n     \
-    \ } else if constexpr (debug) print_char('}');\n    }\n    template<class T, std::enable_if_t<is_iterable_v<T>\
-    \ && !has_print<T>::value>* = nullptr>\n    void print(const T& a) {\n      if\
-    \ constexpr (debug) print_char('{');\n      if (std::empty(a)) return;\n     \
-    \ for (auto i = std::begin(a); ; ) {\n        print(*i);\n        if (++i != std::end(a))\
-    \ {\n          if constexpr (sep) {\n            if constexpr (debug) {\n    \
-    \          print_char(',');\n              print_char(' ');\n            } else\
-    \ if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<T>()[0])>>)\
+    \ % 10);\n      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, class\
+    \ = std::enable_if_t<is_tuple_v<T> && !has_print<T>::value>>\n    void print(const\
+    \ T& a) {\n      if constexpr (debug && i == 0) print_char('{');\n      if constexpr\
+    \ (std::tuple_size_v<T> != 0) print(std::get<i>(a));\n      if constexpr (i +\
+    \ 1 < std::tuple_size_v<T>) {\n        if constexpr (sep) print_sep();\n     \
+    \   print<i + 1>(a);\n      } else if constexpr (debug) print_char('}');\n   \
+    \ }\n    template<class T, class = std::enable_if_t<is_iterable_v<T> && !has_print<T>::value>>\n\
+    \    void print(const T& a) {\n      if constexpr (debug) print_char('{');\n \
+    \     if (std::empty(a)) return;\n      for (auto i = std::begin(a); ; ) {\n \
+    \       print(*i);\n        if (++i != std::end(a)) {\n          if constexpr\
+    \ (sep) {\n            if constexpr (debug) {\n              print_char(',');\n\
+    \              print_char(' ');\n            } else if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<T>()[0])>>)\
     \ print_char(' ');\n            else print_char('\\n');\n          }\n       \
     \ } else break;\n      }\n      if constexpr (debug) print_char('}');\n    }\n\
-    \    template<class T, std::enable_if_t<has_print<T>::value>* = nullptr>\n   \
-    \ void print(const T& a) {\n      a.print(*this);\n    }\n\n    template<bool\
-    \ first = true>\n    void operator ()() {\n      if constexpr (comment && first)\
-    \ print_char('#');\n      if constexpr (end) print_char('\\n');\n      if constexpr\
-    \ (flush) itr.flush();\n    }\n    template<bool first = true, class Head, class...\
-    \ Args>\n    void operator ()(Head&& head, Args&&... args) {\n      if constexpr\
-    \ (comment && first) {\n        print_char('#');\n        print_char(' ');\n \
-    \     }\n      if constexpr (sep && !first) print_sep();\n      print(head);\n\
-    \      operator ()<false>(std::forward<Args>(args)...);\n    }\n  };\n\n  Printer<Writer<>::iterator,\
-    \ false, false> print(output.begin()), eprint(error.begin());\n  Printer<Writer<>::iterator>\
-    \ println(output.begin()), eprintln(error.begin());\n}"
+    \    template<class T, class = std::enable_if_t<has_print<T>::value>>\n    void\
+    \ print(const T& a) {\n      a.print(*this);\n    }\n\n    template<bool first\
+    \ = true>\n    void operator ()() {\n      if constexpr (comment && first) print_char('#');\n\
+    \      if constexpr (end) print_char('\\n');\n      if constexpr (flush) itr.flush();\n\
+    \    }\n    template<bool first = true, class Head, class... Args>\n    void operator\
+    \ ()(Head&& head, Args&&... args) {\n      if constexpr (comment && first) {\n\
+    \        print_char('#');\n        print_char(' ');\n      }\n      if constexpr\
+    \ (sep && !first) print_sep();\n      print(head);\n      operator ()<false>(std::forward<Args>(args)...);\n\
+    \    }\n  };\n\n  Printer<Writer<>::iterator, false, false> print(output.begin()),\
+    \ eprint(error.begin());\n  Printer<Writer<>::iterator> println(output.begin()),\
+    \ eprintln(error.begin());\n}"
   dependsOn:
   - meta/settings.hpp
   - meta/trait.hpp
   isVerificationFile: false
   path: system/out.hpp
   requiredBy:
+  - all.hpp
+  - system/all.hpp
   - template/macro.hpp
   - template/all.hpp
   - all/all.hpp
-  - system/all.hpp
-  - all.hpp
-  timestamp: '2022-05-15 16:50:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-06-03 21:49:35+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - verify/yosupo/many_aplusb.test.cpp
-  - verify/yosupo/factorize.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
-  - verify/yosupo/unionfind.test.cpp
   - verify/aoj/PrimeNumber.test.cpp
+  - verify/yosupo/unionfind.test.cpp
+  - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
 documentation_of: system/out.hpp
 layout: document
 redirect_from:

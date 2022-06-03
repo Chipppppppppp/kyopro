@@ -1,11 +1,11 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
   - icon: ':warning:'
@@ -17,7 +17,7 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
@@ -26,28 +26,28 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
     path: meta/all.hpp
     title: meta/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: system/out.hpp
     title: system/out.hpp
   - icon: ':warning:'
@@ -60,24 +60,24 @@ data:
     path: template/macro.hpp
     title: template/macro.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/many_aplusb.test.cpp
     title: verify/yosupo/many_aplusb.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/point_add_range_sum.test.cpp
     title: verify/yosupo/point_add_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#include <queue>\n\
@@ -160,32 +160,32 @@ data:
   isVerificationFile: false
   path: meta/trait.hpp
   requiredBy:
+  - algorithm/all.hpp
+  - algorithm/Hash.hpp
+  - math/DynamicModInt.hpp
+  - math/ModInt.hpp
+  - math/all.hpp
+  - math/is_prime.hpp
+  - math/factorize.hpp
+  - all.hpp
+  - system/in.hpp
+  - system/out.hpp
+  - system/all.hpp
   - template/macro.hpp
   - template/all.hpp
   - template/alias.hpp
-  - algorithm/all.hpp
-  - algorithm/Hash.hpp
   - all/all.hpp
-  - math/ModInt.hpp
-  - math/all.hpp
-  - math/factorize.hpp
-  - math/DynamicModInt.hpp
-  - math/is_prime.hpp
-  - system/out.hpp
-  - system/all.hpp
-  - system/in.hpp
-  - all.hpp
-  - structure/all.hpp
-  - structure/UnionFind.hpp
   - meta/all.hpp
+  - structure/UnionFind.hpp
+  - structure/all.hpp
   timestamp: '2022-05-08 20:22:54+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - verify/yosupo/many_aplusb.test.cpp
-  - verify/yosupo/factorize.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
-  - verify/yosupo/unionfind.test.cpp
   - verify/aoj/PrimeNumber.test.cpp
+  - verify/yosupo/unionfind.test.cpp
+  - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
 documentation_of: meta/trait.hpp
 layout: document
 redirect_from:

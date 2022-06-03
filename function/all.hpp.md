@@ -4,16 +4,16 @@ data:
   - icon: ':warning:'
     path: function/RecursiveLambda.hpp
     title: function/RecursiveLambda.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
@@ -89,8 +89,8 @@ data:
   isVerificationFile: false
   path: function/all.hpp
   requiredBy:
-  - all/all.hpp
   - all.hpp
+  - all/all.hpp
   timestamp: '2022-04-27 22:05:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
