@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -17,7 +17,7 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: system/all.hpp
     title: system/all.hpp
   - icon: ':warning:'
@@ -27,24 +27,24 @@ data:
     path: template/macro.hpp
     title: template/macro.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo/many_aplusb.test.cpp
     title: verify/yosupo/many_aplusb.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo/point_add_range_sum.test.cpp
     title: verify/yosupo/point_add_range_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"system/in.hpp\"\n#include <unistd.h>\n#include <array>\n\
@@ -124,28 +124,28 @@ data:
     \ *itr) && *itr != ' ') {\n        a += *itr;\n        ++itr;\n      }\n    }\n\
     \    void scan(bool& a) {\n      discard_space();\n      while ('0' <= *itr &&\
     \ *itr <= '9') {\n        if (*itr != '0') a = true;\n        ++itr;\n      }\n\
-    \    }\n    template<class T, class = std::enable_if_t<std::is_arithmetic_v<T>\
-    \ && !has_scan<T>::value>>\n    void scan(T& a) {\n      discard_space();\n  \
-    \    bool sgn = false;\n      if constexpr (!std::is_unsigned_v<T>) if (*itr ==\
-    \ '-') {\n        sgn = true;\n        ++itr;\n      }\n      a = 0;\n      for\
-    \ (; '0' <= *itr && *itr <= '9'; ++itr) a = a * 10 + *itr - '0';\n      if (*itr\
-    \ == '.') {\n        ++itr;\n        if constexpr (std::is_floating_point_v<T>)\
-    \ {\n          constexpr std::uint_fast64_t power_decimal_precision = power(10ULL,\
-    \ decimal_precision);\n          T d = 0;\n          std::uint_fast64_t i = 1;\n\
-    \          for (; '0' <= *itr && *itr <= '9' && i < power_decimal_precision; i\
-    \ *= 10) {\n            d = d * 10 + *itr - '0';\n            ++itr;\n       \
-    \   }\n          a += d / i;\n        }\n        while ('0' <= *itr && *itr <=\
-    \ '9') ++itr;\n      }\n      if constexpr (!std::is_unsigned_v<T>) if (sgn) a\
-    \ = -a;\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, class = std::enable_if_t<is_tuple_v<T>\
-    \ && !has_scan<T>::value>>\n    void scan(T& a) {\n      if constexpr (i < std::tuple_size_v<T>)\
-    \ {\n        scan(std::get<i>(a));\n        scan<i + 1>(a);\n      }\n    }\n\
-    \    template<class T, class = std::enable_if_t<is_iterable_v<T> && !has_scan<T>::value>>\n\
-    \    void scan(T& a) {\n      for (auto& i: a) scan(i);\n    }\n    template<class\
-    \ T, class = std::enable_if_t<has_scan<T>::value>>\n    void scan(T& a) {\n  \
-    \    a.scan(*this);\n    }\n\n    void operator ()() {}\n    template<class Head,\
-    \ class... Args>\n    void operator ()(Head& head, Args&... args) {\n      scan(head);\n\
-    \      operator ()(args...);\n    }\n  };\n\n  Scanner<Reader<>::iterator> scan(input.begin());\n\
-    }\n"
+    \    }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T> && !has_scan<T>::value>*\
+    \ = nullptr>\n    void scan(T& a) {\n      discard_space();\n      bool sgn =\
+    \ false;\n      if constexpr (!std::is_unsigned_v<T>) if (*itr == '-') {\n   \
+    \     sgn = true;\n        ++itr;\n      }\n      a = 0;\n      for (; '0' <=\
+    \ *itr && *itr <= '9'; ++itr) a = a * 10 + *itr - '0';\n      if (*itr == '.')\
+    \ {\n        ++itr;\n        if constexpr (std::is_floating_point_v<T>) {\n  \
+    \        constexpr std::uint_fast64_t power_decimal_precision = power(10ULL, decimal_precision);\n\
+    \          T d = 0;\n          std::uint_fast64_t i = 1;\n          for (; '0'\
+    \ <= *itr && *itr <= '9' && i < power_decimal_precision; i *= 10) {\n        \
+    \    d = d * 10 + *itr - '0';\n            ++itr;\n          }\n          a +=\
+    \ d / i;\n        }\n        while ('0' <= *itr && *itr <= '9') ++itr;\n     \
+    \ }\n      if constexpr (!std::is_unsigned_v<T>) if (sgn) a = -a;\n    }\n   \
+    \ template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_tuple_v<T> &&\
+    \ !has_scan<T>::value>* = nullptr>\n    void scan(T& a) {\n      if constexpr\
+    \ (i < std::tuple_size_v<T>) {\n        scan(std::get<i>(a));\n        scan<i\
+    \ + 1>(a);\n      }\n    }\n    template<class T, std::enable_if_t<is_iterable_v<T>\
+    \ && !has_scan<T>::value>* = nullptr>\n    void scan(T& a) {\n      for (auto&\
+    \ i: a) scan(i);\n    }\n    template<class T, std::enable_if_t<has_scan<T>::value>*\
+    \ = nullptr>\n    void scan(T& a) {\n      a.scan(*this);\n    }\n\n    void operator\
+    \ ()() {}\n    template<class Head, class... Args>\n    void operator ()(Head&\
+    \ head, Args&... args) {\n      scan(head);\n      operator ()(args...);\n   \
+    \ }\n  };\n\n  Scanner<Reader<>::iterator> scan(input.begin());\n}\n"
   code: "#pragma once\n#include <unistd.h>\n#include <array>\n#include <cstddef>\n\
     #include <cstdint>\n#include <cstdio>\n#include <string>\n#include <tuple>\n#include\
     \ <type_traits>\n#include <utility>\n#include \"../math/power.hpp\"\n#include\
@@ -182,28 +182,28 @@ data:
     \ *itr) && *itr != ' ') {\n        a += *itr;\n        ++itr;\n      }\n    }\n\
     \    void scan(bool& a) {\n      discard_space();\n      while ('0' <= *itr &&\
     \ *itr <= '9') {\n        if (*itr != '0') a = true;\n        ++itr;\n      }\n\
-    \    }\n    template<class T, class = std::enable_if_t<std::is_arithmetic_v<T>\
-    \ && !has_scan<T>::value>>\n    void scan(T& a) {\n      discard_space();\n  \
-    \    bool sgn = false;\n      if constexpr (!std::is_unsigned_v<T>) if (*itr ==\
-    \ '-') {\n        sgn = true;\n        ++itr;\n      }\n      a = 0;\n      for\
-    \ (; '0' <= *itr && *itr <= '9'; ++itr) a = a * 10 + *itr - '0';\n      if (*itr\
-    \ == '.') {\n        ++itr;\n        if constexpr (std::is_floating_point_v<T>)\
-    \ {\n          constexpr std::uint_fast64_t power_decimal_precision = power(10ULL,\
-    \ decimal_precision);\n          T d = 0;\n          std::uint_fast64_t i = 1;\n\
-    \          for (; '0' <= *itr && *itr <= '9' && i < power_decimal_precision; i\
-    \ *= 10) {\n            d = d * 10 + *itr - '0';\n            ++itr;\n       \
-    \   }\n          a += d / i;\n        }\n        while ('0' <= *itr && *itr <=\
-    \ '9') ++itr;\n      }\n      if constexpr (!std::is_unsigned_v<T>) if (sgn) a\
-    \ = -a;\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, class = std::enable_if_t<is_tuple_v<T>\
-    \ && !has_scan<T>::value>>\n    void scan(T& a) {\n      if constexpr (i < std::tuple_size_v<T>)\
-    \ {\n        scan(std::get<i>(a));\n        scan<i + 1>(a);\n      }\n    }\n\
-    \    template<class T, class = std::enable_if_t<is_iterable_v<T> && !has_scan<T>::value>>\n\
-    \    void scan(T& a) {\n      for (auto& i: a) scan(i);\n    }\n    template<class\
-    \ T, class = std::enable_if_t<has_scan<T>::value>>\n    void scan(T& a) {\n  \
-    \    a.scan(*this);\n    }\n\n    void operator ()() {}\n    template<class Head,\
-    \ class... Args>\n    void operator ()(Head& head, Args&... args) {\n      scan(head);\n\
-    \      operator ()(args...);\n    }\n  };\n\n  Scanner<Reader<>::iterator> scan(input.begin());\n\
-    }"
+    \    }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T> && !has_scan<T>::value>*\
+    \ = nullptr>\n    void scan(T& a) {\n      discard_space();\n      bool sgn =\
+    \ false;\n      if constexpr (!std::is_unsigned_v<T>) if (*itr == '-') {\n   \
+    \     sgn = true;\n        ++itr;\n      }\n      a = 0;\n      for (; '0' <=\
+    \ *itr && *itr <= '9'; ++itr) a = a * 10 + *itr - '0';\n      if (*itr == '.')\
+    \ {\n        ++itr;\n        if constexpr (std::is_floating_point_v<T>) {\n  \
+    \        constexpr std::uint_fast64_t power_decimal_precision = power(10ULL, decimal_precision);\n\
+    \          T d = 0;\n          std::uint_fast64_t i = 1;\n          for (; '0'\
+    \ <= *itr && *itr <= '9' && i < power_decimal_precision; i *= 10) {\n        \
+    \    d = d * 10 + *itr - '0';\n            ++itr;\n          }\n          a +=\
+    \ d / i;\n        }\n        while ('0' <= *itr && *itr <= '9') ++itr;\n     \
+    \ }\n      if constexpr (!std::is_unsigned_v<T>) if (sgn) a = -a;\n    }\n   \
+    \ template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_tuple_v<T> &&\
+    \ !has_scan<T>::value>* = nullptr>\n    void scan(T& a) {\n      if constexpr\
+    \ (i < std::tuple_size_v<T>) {\n        scan(std::get<i>(a));\n        scan<i\
+    \ + 1>(a);\n      }\n    }\n    template<class T, std::enable_if_t<is_iterable_v<T>\
+    \ && !has_scan<T>::value>* = nullptr>\n    void scan(T& a) {\n      for (auto&\
+    \ i: a) scan(i);\n    }\n    template<class T, std::enable_if_t<has_scan<T>::value>*\
+    \ = nullptr>\n    void scan(T& a) {\n      a.scan(*this);\n    }\n\n    void operator\
+    \ ()() {}\n    template<class Head, class... Args>\n    void operator ()(Head&\
+    \ head, Args&... args) {\n      scan(head);\n      operator ()(args...);\n   \
+    \ }\n  };\n\n  Scanner<Reader<>::iterator> scan(input.begin());\n}"
   dependsOn:
   - math/power.hpp
   - meta/settings.hpp
@@ -216,8 +216,8 @@ data:
   - template/macro.hpp
   - template/all.hpp
   - all/all.hpp
-  timestamp: '2022-06-03 21:49:35+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-05-08 20:22:54+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp
   - verify/yosupo/unionfind.test.cpp
