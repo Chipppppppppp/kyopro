@@ -220,7 +220,7 @@ data:
     \      }\n    }\n  };\n\n  template<class T>\n  struct Hash<T, std::enable_if_t<is_iterable_v<T>>>:\
     \ Hash<iterable_value_t<T>> {\n    using value_type = T;\n\n    constexpr std::size_t\
     \ operator ()(const T& a) const noexcept {\n      std::uint_fast64_t seed = a.size();\n\
-    \      for (auto& i: a) seed ^= Hash<iterable_value_t<T>>(i) + 0x9e3779b97f4a7c15LU\
+    \      for (auto&& i: a) seed ^= Hash<iterable_value_t<T>>(i) + 0x9e3779b97f4a7c15LU\
     \ + (seed << 12) + (seed >> 4);\n      return seed;\n    }\n  };\n}\n#line 5 \"\
     algorithm/all.hpp\"\n"
   code: '#pragma once
@@ -242,7 +242,7 @@ data:
   requiredBy:
   - all.hpp
   - all/all.hpp
-  timestamp: '2022-06-05 22:50:06+09:00'
+  timestamp: '2022-06-05 23:14:49+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm/all.hpp

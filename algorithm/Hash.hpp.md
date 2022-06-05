@@ -197,7 +197,7 @@ data:
     \      }\n    }\n  };\n\n  template<class T>\n  struct Hash<T, std::enable_if_t<is_iterable_v<T>>>:\
     \ Hash<iterable_value_t<T>> {\n    using value_type = T;\n\n    constexpr std::size_t\
     \ operator ()(const T& a) const noexcept {\n      std::uint_fast64_t seed = a.size();\n\
-    \      for (auto& i: a) seed ^= Hash<iterable_value_t<T>>(i) + 0x9e3779b97f4a7c15LU\
+    \      for (auto&& i: a) seed ^= Hash<iterable_value_t<T>>(i) + 0x9e3779b97f4a7c15LU\
     \ + (seed << 12) + (seed >> 4);\n      return seed;\n    }\n  };\n}\n"
   code: "#pragma once\n#include <cstddef>\n#include <cstdint>\n#include <functional>\n\
     #include <tuple>\n#include <type_traits>\n#include <utility>\n#include \"../meta/aggregate.hpp\"\
@@ -215,8 +215,8 @@ data:
     \n  template<class T>\n  struct Hash<T, std::enable_if_t<is_iterable_v<T>>>: Hash<iterable_value_t<T>>\
     \ {\n    using value_type = T;\n\n    constexpr std::size_t operator ()(const\
     \ T& a) const noexcept {\n      std::uint_fast64_t seed = a.size();\n      for\
-    \ (auto& i: a) seed ^= Hash<iterable_value_t<T>>(i) + 0x9e3779b97f4a7c15LU + (seed\
-    \ << 12) + (seed >> 4);\n      return seed;\n    }\n  };\n}"
+    \ (auto&& i: a) seed ^= Hash<iterable_value_t<T>>(i) + 0x9e3779b97f4a7c15LU +\
+    \ (seed << 12) + (seed >> 4);\n      return seed;\n    }\n  };\n}"
   dependsOn:
   - meta/aggregate.hpp
   - meta/trait.hpp
@@ -234,7 +234,7 @@ data:
   - template/all.hpp
   - template/alias.hpp
   - all/all.hpp
-  timestamp: '2022-06-05 22:50:06+09:00'
+  timestamp: '2022-06-05 23:14:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp

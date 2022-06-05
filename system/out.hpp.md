@@ -212,20 +212,23 @@ data:
     \ ');\n    }\n\n    void print(char a) {\n      if constexpr (debug) print_char('\\\
     '');\n      print_char(a);\n      if constexpr (debug) print_char('\\'');\n  \
     \  }\n    void print(const char* a) {\n      if constexpr (debug) print_char('\"\
-    ');\n      for (; *a; ++a) print_char(*a);\n      if constexpr (debug) print_char('\"\
-    ');\n    }\n    template<class CharT, class Traits>\n    void print(const std::basic_string<CharT,\
-    \ Traits>& a) {\n      if constexpr (debug) print_char('\"');\n      for (auto\
+    ');\n      for (; *a != '\\0'; ++a) print_char(*a);\n      if constexpr (debug)\
+    \ print_char('\"');\n    }\n    template<std::size_t len>\n    void print(const\
+    \ char (&a)[len]) {\n      if constexpr (debug) print_char('\"');\n      for (auto\
     \ i: a) print_char(i);\n      if constexpr (debug) print_char('\"');\n    }\n\
-    \    void print(bool a) {\n      print_char(static_cast<char>('0' + a));\n   \
-    \ }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T> && !has_print<T>::value>*\
-    \ = nullptr>\n    void print(T a) {\n      if constexpr (std::is_signed_v<T>)\
-    \ if (a < 0) {\n        print_char('-');\n        a = -a;\n      }\n      std::uint_fast64_t\
-    \ p = a;\n      a -= p;\n      std::string s;\n      do {\n        s += '0' +\
-    \ p % 10;\n        p /= 10;\n      } while (p > 0);\n      for (auto i = s.rbegin();\
-    \ i != s.rend(); ++i) print_char(*i);\n      if constexpr (std::is_integral_v<T>)\
-    \ return;\n      print_char('.');\n      for (int i = 0; i < static_cast<int>(decimal_precision);\
-    \ ++i) {\n        a *= 10;\n        print_char('0' + static_cast<std::uint_fast64_t>(a)\
-    \ % 10);\n      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T>\
+    \    void print(const std::string& a) {\n      if constexpr (debug) print_char('\"\
+    ');\n      for (auto i: a) print_char(i);\n      if constexpr (debug) print_char('\"\
+    ');\n    }\n    void print(bool a) {\n      print_char(static_cast<char>('0' +\
+    \ a));\n    }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T>\
+    \ && !has_print<T>::value>* = nullptr>\n    void print(T a) {\n      if constexpr\
+    \ (std::is_signed_v<T>) if (a < 0) {\n        print_char('-');\n        a = -a;\n\
+    \      }\n      std::uint_fast64_t p = a;\n      a -= p;\n      std::string s;\n\
+    \      do {\n        s += '0' + p % 10;\n        p /= 10;\n      } while (p >\
+    \ 0);\n      for (auto i = s.rbegin(); i != s.rend(); ++i) print_char(*i);\n \
+    \     if constexpr (std::is_integral_v<T>) return;\n      print_char('.');\n \
+    \     for (int i = 0; i < static_cast<int>(decimal_precision); ++i) {\n      \
+    \  a *= 10;\n        print_char('0' + static_cast<std::uint_fast64_t>(a) % 10);\n\
+    \      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T>\
     \ && !has_print<T>::value>* = nullptr>\n    void print(const T& a) {\n      if\
     \ constexpr (debug && i == 0) print_char('{');\n      if constexpr (aggregate_size_v<T>\
     \ != 0) print(access<i>(a));\n      if constexpr (i + 1 < aggregate_size_v<T>)\
@@ -287,20 +290,23 @@ data:
     \ ');\n    }\n\n    void print(char a) {\n      if constexpr (debug) print_char('\\\
     '');\n      print_char(a);\n      if constexpr (debug) print_char('\\'');\n  \
     \  }\n    void print(const char* a) {\n      if constexpr (debug) print_char('\"\
-    ');\n      for (; *a; ++a) print_char(*a);\n      if constexpr (debug) print_char('\"\
-    ');\n    }\n    template<class CharT, class Traits>\n    void print(const std::basic_string<CharT,\
-    \ Traits>& a) {\n      if constexpr (debug) print_char('\"');\n      for (auto\
+    ');\n      for (; *a != '\\0'; ++a) print_char(*a);\n      if constexpr (debug)\
+    \ print_char('\"');\n    }\n    template<std::size_t len>\n    void print(const\
+    \ char (&a)[len]) {\n      if constexpr (debug) print_char('\"');\n      for (auto\
     \ i: a) print_char(i);\n      if constexpr (debug) print_char('\"');\n    }\n\
-    \    void print(bool a) {\n      print_char(static_cast<char>('0' + a));\n   \
-    \ }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T> && !has_print<T>::value>*\
-    \ = nullptr>\n    void print(T a) {\n      if constexpr (std::is_signed_v<T>)\
-    \ if (a < 0) {\n        print_char('-');\n        a = -a;\n      }\n      std::uint_fast64_t\
-    \ p = a;\n      a -= p;\n      std::string s;\n      do {\n        s += '0' +\
-    \ p % 10;\n        p /= 10;\n      } while (p > 0);\n      for (auto i = s.rbegin();\
-    \ i != s.rend(); ++i) print_char(*i);\n      if constexpr (std::is_integral_v<T>)\
-    \ return;\n      print_char('.');\n      for (int i = 0; i < static_cast<int>(decimal_precision);\
-    \ ++i) {\n        a *= 10;\n        print_char('0' + static_cast<std::uint_fast64_t>(a)\
-    \ % 10);\n      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T>\
+    \    void print(const std::string& a) {\n      if constexpr (debug) print_char('\"\
+    ');\n      for (auto i: a) print_char(i);\n      if constexpr (debug) print_char('\"\
+    ');\n    }\n    void print(bool a) {\n      print_char(static_cast<char>('0' +\
+    \ a));\n    }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T>\
+    \ && !has_print<T>::value>* = nullptr>\n    void print(T a) {\n      if constexpr\
+    \ (std::is_signed_v<T>) if (a < 0) {\n        print_char('-');\n        a = -a;\n\
+    \      }\n      std::uint_fast64_t p = a;\n      a -= p;\n      std::string s;\n\
+    \      do {\n        s += '0' + p % 10;\n        p /= 10;\n      } while (p >\
+    \ 0);\n      for (auto i = s.rbegin(); i != s.rend(); ++i) print_char(*i);\n \
+    \     if constexpr (std::is_integral_v<T>) return;\n      print_char('.');\n \
+    \     for (int i = 0; i < static_cast<int>(decimal_precision); ++i) {\n      \
+    \  a *= 10;\n        print_char('0' + static_cast<std::uint_fast64_t>(a) % 10);\n\
+    \      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T>\
     \ && !has_print<T>::value>* = nullptr>\n    void print(const T& a) {\n      if\
     \ constexpr (debug && i == 0) print_char('{');\n      if constexpr (aggregate_size_v<T>\
     \ != 0) print(access<i>(a));\n      if constexpr (i + 1 < aggregate_size_v<T>)\
@@ -337,7 +343,7 @@ data:
   - template/macro.hpp
   - template/all.hpp
   - all/all.hpp
-  timestamp: '2022-06-05 22:50:06+09:00'
+  timestamp: '2022-06-05 23:14:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp

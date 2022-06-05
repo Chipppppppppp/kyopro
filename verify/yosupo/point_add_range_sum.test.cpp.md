@@ -235,41 +235,41 @@ data:
     \   Scanner(Iterator itr) noexcept: itr(itr) {}\n\n    void discard_space() {\n\
     \      while (('\\t' <= *itr && *itr <= '\\r') || *itr == ' ') ++itr;\n    }\n\
     \n    void scan(char& a) {\n      discard_space();\n      a = *itr;\n      ++itr;\n\
-    \    }\n    template<class CharT, class Traits>\n    void scan(std::basic_string<CharT,\
-    \ Traits>& a) {\n      discard_space();\n      while ((*itr < '\\t' || '\\r' <\
-    \ *itr) && *itr != ' ') {\n        a += *itr;\n        ++itr;\n      }\n    }\n\
-    \    void scan(bool& a) {\n      discard_space();\n      while ('0' <= *itr &&\
-    \ *itr <= '9') {\n        if (*itr != '0') a = true;\n        ++itr;\n      }\n\
-    \    }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T> && !has_scan<T>::value>*\
-    \ = nullptr>\n    void scan(T& a) {\n      discard_space();\n      bool sgn =\
-    \ false;\n      if constexpr (!std::is_unsigned_v<T>) if (*itr == '-') {\n   \
-    \     sgn = true;\n        ++itr;\n      }\n      a = 0;\n      for (; '0' <=\
-    \ *itr && *itr <= '9'; ++itr) a = a * 10 + *itr - '0';\n      if (*itr == '.')\
-    \ {\n        ++itr;\n        if constexpr (std::is_floating_point_v<T>) {\n  \
-    \        constexpr std::uint_fast64_t power_decimal_precision = power(10ULL, decimal_precision);\n\
-    \          T d = 0;\n          std::uint_fast64_t i = 1;\n          for (; '0'\
-    \ <= *itr && *itr <= '9' && i < power_decimal_precision; i *= 10) {\n        \
-    \    d = d * 10 + *itr - '0';\n            ++itr;\n          }\n          a +=\
-    \ d / i;\n        }\n        while ('0' <= *itr && *itr <= '9') ++itr;\n     \
-    \ }\n      if constexpr (!std::is_unsigned_v<T>) if (sgn) a = -a;\n    }\n   \
-    \ template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T> && !has_scan<T>::value>*\
-    \ = nullptr>\n    void scan(T& a) {\n      if constexpr (i < std::tuple_size_v<T>)\
-    \ {\n        scan(std::get<i>(a));\n        scan<i + 1>(a);\n      }\n    }\n\
-    \    template<class T, std::enable_if_t<is_iterable_v<T> && !has_scan<T>::value>*\
-    \ = nullptr>\n    void scan(T& a) {\n      for (auto& i: a) scan(i);\n    }\n\
-    \    template<class T, std::enable_if_t<has_scan<T>::value>* = nullptr>\n    void\
-    \ scan(T& a) {\n      a.scan(*this);\n    }\n\n    void operator ()() {}\n   \
-    \ template<class Head, class... Args>\n    void operator ()(Head& head, Args&...\
-    \ args) {\n      scan(head);\n      operator ()(args...);\n    }\n  };\n\n  Scanner<Reader<>::iterator>\
-    \ scan(input.begin());\n}\n#line 7 \"meta/aggregate.hpp\"\n\nnamespace kyopro\
-    \ {\n  namespace helper {\n    #define DEFINE_ACCESS(n, ...) \\\n    template<std::size_t\
-    \ idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>> == n>* = nullptr>\\\
-    \n    constexpr decltype(auto) access_impl(T&& aggregate, char) noexcept {\\\n\
-    \      auto&& [__VA_ARGS__] = std::forward<T>(aggregate);\\\n      return std::get<idx>(std::forward_as_tuple(__VA_ARGS__));\\\
-    \n    }\n\n    DEFINE_ACCESS(1, a)\n    DEFINE_ACCESS(2, a, b)\n    DEFINE_ACCESS(3,\
-    \ a, b, c)\n    DEFINE_ACCESS(4, a, b, c, d)\n    DEFINE_ACCESS(5, a, b, c, d,\
-    \ e)\n    DEFINE_ACCESS(6, a, b, c, d, e, f)\n    DEFINE_ACCESS(7, a, b, c, d,\
-    \ e, f, g)\n    DEFINE_ACCESS(8, a, b, c, d, e, f, g, h)\n\n    template<std::size_t\
+    \    }\n    void scan(std::string& a) {\n      discard_space();\n      while ((*itr\
+    \ < '\\t' || '\\r' < *itr) && *itr != ' ') {\n        a += *itr;\n        ++itr;\n\
+    \      }\n    }\n    void scan(bool& a) {\n      discard_space();\n      while\
+    \ ('0' <= *itr && *itr <= '9') {\n        if (*itr != '0') a = true;\n       \
+    \ ++itr;\n      }\n    }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T>\
+    \ && !has_scan<T>::value>* = nullptr>\n    void scan(T& a) {\n      discard_space();\n\
+    \      bool sgn = false;\n      if constexpr (!std::is_unsigned_v<T>) if (*itr\
+    \ == '-') {\n        sgn = true;\n        ++itr;\n      }\n      a = 0;\n    \
+    \  for (; '0' <= *itr && *itr <= '9'; ++itr) a = a * 10 + *itr - '0';\n      if\
+    \ (*itr == '.') {\n        ++itr;\n        if constexpr (std::is_floating_point_v<T>)\
+    \ {\n          constexpr std::uint_fast64_t power_decimal_precision = power(10ULL,\
+    \ decimal_precision);\n          T d = 0;\n          std::uint_fast64_t i = 1;\n\
+    \          for (; '0' <= *itr && *itr <= '9' && i < power_decimal_precision; i\
+    \ *= 10) {\n            d = d * 10 + *itr - '0';\n            ++itr;\n       \
+    \   }\n          a += d / i;\n        }\n        while ('0' <= *itr && *itr <=\
+    \ '9') ++itr;\n      }\n      if constexpr (!std::is_unsigned_v<T>) if (sgn) a\
+    \ = -a;\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T>\
+    \ && !has_scan<T>::value>* = nullptr>\n    void scan(T& a) {\n      if constexpr\
+    \ (i < std::tuple_size_v<T>) {\n        scan(std::get<i>(a));\n        scan<i\
+    \ + 1>(a);\n      }\n    }\n    template<class T, std::enable_if_t<is_iterable_v<T>\
+    \ && !has_scan<T>::value>* = nullptr>\n    void scan(T& a) {\n      for (auto&&\
+    \ i: a) scan(i);\n    }\n    template<class T, std::enable_if_t<has_scan<T>::value>*\
+    \ = nullptr>\n    void scan(T& a) {\n      a.scan(*this);\n    }\n\n    void operator\
+    \ ()() {}\n    template<class Head, class... Args>\n    void operator ()(Head&\
+    \ head, Args&... args) {\n      scan(head);\n      operator ()(args...);\n   \
+    \ }\n  };\n\n  Scanner<Reader<>::iterator> scan(input.begin());\n}\n#line 7 \"\
+    meta/aggregate.hpp\"\n\nnamespace kyopro {\n  namespace helper {\n    #define\
+    \ DEFINE_ACCESS(n, ...) \\\n    template<std::size_t idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>>\
+    \ == n>* = nullptr>\\\n    constexpr decltype(auto) access_impl(T&& aggregate,\
+    \ char) noexcept {\\\n      auto&& [__VA_ARGS__] = std::forward<T>(aggregate);\\\
+    \n      return std::get<idx>(std::forward_as_tuple(__VA_ARGS__));\\\n    }\n\n\
+    \    DEFINE_ACCESS(1, a)\n    DEFINE_ACCESS(2, a, b)\n    DEFINE_ACCESS(3, a,\
+    \ b, c)\n    DEFINE_ACCESS(4, a, b, c, d)\n    DEFINE_ACCESS(5, a, b, c, d, e)\n\
+    \    DEFINE_ACCESS(6, a, b, c, d, e, f)\n    DEFINE_ACCESS(7, a, b, c, d, e, f,\
+    \ g)\n    DEFINE_ACCESS(8, a, b, c, d, e, f, g, h)\n\n    template<std::size_t\
     \ idx, class T, std::void_t<decltype(std::get<idx>(std::declval<std::decay_t<T>>()))>*\
     \ = nullptr>\n    constexpr decltype(auto) access_impl(T&& aggregate, bool) noexcept\
     \ {\n      return std::get<idx>(std::forward<T>(aggregate));\n    }\n\n    #undef\
@@ -308,20 +308,23 @@ data:
     \ ');\n    }\n\n    void print(char a) {\n      if constexpr (debug) print_char('\\\
     '');\n      print_char(a);\n      if constexpr (debug) print_char('\\'');\n  \
     \  }\n    void print(const char* a) {\n      if constexpr (debug) print_char('\"\
-    ');\n      for (; *a; ++a) print_char(*a);\n      if constexpr (debug) print_char('\"\
-    ');\n    }\n    template<class CharT, class Traits>\n    void print(const std::basic_string<CharT,\
-    \ Traits>& a) {\n      if constexpr (debug) print_char('\"');\n      for (auto\
+    ');\n      for (; *a != '\\0'; ++a) print_char(*a);\n      if constexpr (debug)\
+    \ print_char('\"');\n    }\n    template<std::size_t len>\n    void print(const\
+    \ char (&a)[len]) {\n      if constexpr (debug) print_char('\"');\n      for (auto\
     \ i: a) print_char(i);\n      if constexpr (debug) print_char('\"');\n    }\n\
-    \    void print(bool a) {\n      print_char(static_cast<char>('0' + a));\n   \
-    \ }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T> && !has_print<T>::value>*\
-    \ = nullptr>\n    void print(T a) {\n      if constexpr (std::is_signed_v<T>)\
-    \ if (a < 0) {\n        print_char('-');\n        a = -a;\n      }\n      std::uint_fast64_t\
-    \ p = a;\n      a -= p;\n      std::string s;\n      do {\n        s += '0' +\
-    \ p % 10;\n        p /= 10;\n      } while (p > 0);\n      for (auto i = s.rbegin();\
-    \ i != s.rend(); ++i) print_char(*i);\n      if constexpr (std::is_integral_v<T>)\
-    \ return;\n      print_char('.');\n      for (int i = 0; i < static_cast<int>(decimal_precision);\
-    \ ++i) {\n        a *= 10;\n        print_char('0' + static_cast<std::uint_fast64_t>(a)\
-    \ % 10);\n      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T>\
+    \    void print(const std::string& a) {\n      if constexpr (debug) print_char('\"\
+    ');\n      for (auto i: a) print_char(i);\n      if constexpr (debug) print_char('\"\
+    ');\n    }\n    void print(bool a) {\n      print_char(static_cast<char>('0' +\
+    \ a));\n    }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T>\
+    \ && !has_print<T>::value>* = nullptr>\n    void print(T a) {\n      if constexpr\
+    \ (std::is_signed_v<T>) if (a < 0) {\n        print_char('-');\n        a = -a;\n\
+    \      }\n      std::uint_fast64_t p = a;\n      a -= p;\n      std::string s;\n\
+    \      do {\n        s += '0' + p % 10;\n        p /= 10;\n      } while (p >\
+    \ 0);\n      for (auto i = s.rbegin(); i != s.rend(); ++i) print_char(*i);\n \
+    \     if constexpr (std::is_integral_v<T>) return;\n      print_char('.');\n \
+    \     for (int i = 0; i < static_cast<int>(decimal_precision); ++i) {\n      \
+    \  a *= 10;\n        print_char('0' + static_cast<std::uint_fast64_t>(a) % 10);\n\
+    \      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T>\
     \ && !has_print<T>::value>* = nullptr>\n    void print(const T& a) {\n      if\
     \ constexpr (debug && i == 0) print_char('{');\n      if constexpr (aggregate_size_v<T>\
     \ != 0) print(access<i>(a));\n      if constexpr (i + 1 < aggregate_size_v<T>)\
@@ -372,7 +375,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo/point_add_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-06-05 22:50:06+09:00'
+  timestamp: '2022-06-05 23:14:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yosupo/point_add_range_sum.test.cpp
