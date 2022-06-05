@@ -2,7 +2,7 @@
 #include <type_traits>
 #include <utility>
 
-namespace kpr {
+namespace kyopro {
   template<class F>
   struct RecursiveLambda {
     using value_type = F;

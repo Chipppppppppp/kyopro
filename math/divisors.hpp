@@ -3,7 +3,7 @@
 #include <vector>
 #include "../meta/settings.hpp"
 
-namespace kpr {
+namespace kyopro {
   template<class Container = std::vector<KYOPRO_BASE_INT>>
   Container divisors(KYOPRO_BASE_UINT n) {
     Container lower, upper;

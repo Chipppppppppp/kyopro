@@ -2,7 +2,7 @@
 #include <cstdint>
 #include "../meta/settings.hpp"
 
-namespace kpr {
+namespace kyopro {
   constexpr KYOPRO_BASE_UINT euler_phi(KYOPRO_BASE_UINT n) noexcept {
     std::uint_fast64_t res = n;
     if ((n & 1) == 0) {

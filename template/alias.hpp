@@ -17,7 +17,7 @@
 #include "../math/ModInt.hpp"
 #include "../meta/settings.hpp"
 
-namespace kpr {
+namespace kyopro {
   using ll = long long;
   using ull = unsigned long long;
   using lf = double;
@@ -52,6 +52,11 @@ namespace kpr {
 
   template<class T, KYOPRO_BASE_UINT idx>
   using agg = typename agg_type<T, idx>::type;
+  using ll1 = agg<ll, 1>;
+  using ll2 = agg<ll, 2>;
+  using ll3 = agg<ll, 3>;
+  using ll4 = agg<ll, 4>;
+  using ll5 = agg<ll, 5>;
 
   template<class T>
   using vec = std::vector<T>;
@@ -83,4 +88,4 @@ namespace kpr {
 }
 
 using namespace std;
-using namespace kpr;
+using namespace kyopro;

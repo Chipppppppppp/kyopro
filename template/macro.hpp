@@ -6,7 +6,7 @@
 #include "../meta/settings.hpp"
 #include "../system/all.hpp"
 
-namespace kpr::helper {
+namespace kyopro::helper {
   template<KYOPRO_BASE_UINT len>
   constexpr KYOPRO_BASE_UINT va_args_size(const char (&s)[len]) noexcept {
     if constexpr (len == 1) return 0;
@@ -32,8 +32,8 @@ namespace kpr::helper {
   void print_if<false>(const char*) {}
 }
 
-#define read(init, ...) auto [__VA_ARGS__] = kpr::helper::read_impl([&] { return init; }, std::make_integer_sequence<KYOPRO_BASE_UINT, kpr::helper::va_args_size(#__VA_ARGS__)>())
-#define debug(...) (kpr::print('#', 'l', 'i', 'n', 'e', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__) != 0>(#__VA_ARGS__), kpr::helper::debug_impl(__VA_ARGS__))
+#define read(init, ...) auto [__VA_ARGS__] = kyopro::helper::read_impl([&] { return init; }, std::make_integer_sequence<KYOPRO_BASE_UINT, kyopro::helper::va_args_size(#__VA_ARGS__)>())
+#define debug(...) (kyopro::print('#', 'l', 'i', 'n', 'e', ' ', __LINE__, ':'), kyopro::helper::print_if<kyopro::helper::va_args_size(#__VA_ARGS__) != 0>(#__VA_ARGS__), kyopro::helper::debug_impl(__VA_ARGS__))
 
 #define KYOPRO_OVERLOAD_MACRO(_1, _2, _3, _4, name, ...) name
 

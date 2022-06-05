@@ -12,7 +12,7 @@
 #include "../meta/settings.hpp"
 #include "../meta/trait.hpp"
 
-namespace kpr {
+namespace kyopro {
   template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>
   struct Reader {
     static constexpr KYOPRO_BASE_UINT buf_size = _buf_size;
@@ -140,7 +140,7 @@ namespace kpr {
       }
       if constexpr (!std::is_unsigned_v<T>) if (sgn) a = -a;
     }
-    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_tuple_v<T> && !has_scan<T>::value>* = nullptr>
+    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T> && !has_scan<T>::value>* = nullptr>
     void scan(T& a) {
       if constexpr (i < std::tuple_size_v<T>) {
         scan(std::get<i>(a));

@@ -4,11 +4,11 @@
 
 int main() {
   long long q;
-  kpr::scan(q);
+  kyopro::scan(q);
   for (int i = 0; i < q; ++i) {
     long long a;
-    kpr::scan(a);
-    auto res = kpr::factorize(a);
-    kpr::println(res.size(), res);
+    kyopro::scan(a);
+    auto res = kyopro::factorize(a);
+    kyopro::println(res.size(), res);
   }
 }

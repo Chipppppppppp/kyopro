@@ -9,7 +9,7 @@
 #include "DynamicModInt.hpp"
 #include "is_prime.hpp"
 
-namespace kpr {
+namespace kyopro {
   template<class T>
   constexpr T pollard_rho(T p, KYOPRO_BASE_UINT c) {
     using U = std::make_unsigned_t<T>;

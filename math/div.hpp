@@ -1,7 +1,7 @@
 #pragma once
 #include <type_traits>
 
-namespace kpr {
+namespace kyopro {
   template<class T, class U>
   constexpr std::common_type_t<T, U> floor_div(T x, U m) noexcept {
     static_assert(std::is_integral_v<T> && std::is_integral_v<U>, "Integer is required");

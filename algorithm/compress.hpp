@@ -6,7 +6,7 @@
 #include <vector>
 #include "../meta/settings.hpp"
 
-namespace kpr {
+namespace kyopro {
   template<class T, class Container = std::unordered_map<typename std::iterator_traits<T>::value_type, KYOPRO_BASE_INT>, class Compare>
   auto compress(T first, T last, Compare comp = std::less<typename std::iterator_traits<T>::value_type>()) {
     std::vector<typename std::iterator_traits<T>::value_type> vec(first, last);

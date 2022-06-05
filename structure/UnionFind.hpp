@@ -7,7 +7,7 @@
 #include "../meta/settings.hpp"
 #include "../meta/trait.hpp"
 
-namespace kpr {
+namespace kyopro {
   template<class Container = std::vector<int>>
   struct UnionFind {
     using value_type = iterable_value_t<Container>;

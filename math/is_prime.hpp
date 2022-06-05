@@ -5,7 +5,7 @@
 #include "../meta/settings.hpp"
 #include "DynamicModInt.hpp"
 
-namespace kpr {
+namespace kyopro {
   template<class T>
   constexpr bool is_prime(T x) {
     using U = std::make_unsigned_t<T>;

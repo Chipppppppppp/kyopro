@@ -2,7 +2,7 @@
 #include <type_traits>
 #include "../meta/constant.hpp"
 
-namespace kpr {
+namespace kyopro {
   template<class T, T _id = 0>
   struct Plus {
     static_assert(std::is_arithmetic_v<T>);

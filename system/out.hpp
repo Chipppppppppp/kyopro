@@ -8,10 +8,11 @@
 #include <tuple>
 #include <type_traits>
 #include <utility>
+#include "../meta/aggregate.hpp"
 #include "../meta/settings.hpp"
 #include "../meta/trait.hpp"
 
-namespace kpr {
+namespace kyopro {
   template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>
   struct Writer {
     static constexpr KYOPRO_BASE_UINT buf_size = _buf_size;
@@ -145,11 +146,11 @@ namespace kpr {
         print_char('0' + static_cast<std::uint_fast64_t>(a) % 10);
       }
     }
-    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_tuple_v<T> && !has_print<T>::value>* = nullptr>
+    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T> && !has_print<T>::value>* = nullptr>
     void print(const T& a) {
       if constexpr (debug && i == 0) print_char('{');
-      if constexpr (std::tuple_size_v<T> != 0) print(std::get<i>(a));
-      if constexpr (i + 1 < std::tuple_size_v<T>) {
+      if constexpr (std::aggregate_size_v<T> != 0) print(access<i>(a));
+      if constexpr (i + 1 < std::aggregate_size_v<T>) {
         if constexpr (sep) print_sep();
         print<i + 1>(a);
       } else if constexpr (debug) print_char('}');

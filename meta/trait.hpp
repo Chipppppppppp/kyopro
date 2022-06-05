@@ -14,7 +14,7 @@ struct std::is_integral<__uint128_t>: std::true_type {};
 template<>
 struct std::is_floating_point<__float128>: std::true_type {};
 
-namespace kpr {
+namespace kyopro {
   template<KYOPRO_BASE_UINT size>
   struct int_least {
   private:
@@ -69,16 +69,6 @@ namespace kpr {
   template<class T>
   constexpr bool is_iterable_v = is_iterable<T>::value;
 
-  template<class>
-  struct is_tuple: std::false_type {};
-  template<class T, class U>
-  struct is_tuple<std::pair<T, U>>: std::true_type {};
-  template<class... Args>
-  struct is_tuple<std::tuple<Args...>>: std::true_type {};
-
-  template<class T>
-  constexpr bool is_tuple_v = is_tuple<T>::value;
-
   template<class T>
   struct iterable_value {
     using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;
@@ -86,4 +76,160 @@ namespace kpr {
 
   template<class T>
   using iterable_value_t = typename iterable_value<T>::type;
+
+  namespace helper {
+    struct CastableToAny {
+      template<class T>
+      operator T() const noexcept;
+    };
+
+    template<class T, std::size_t... idx, std::void_t<decltype(T{((void)idx, CastableToAny{})...})>* = nullptr>
+    constexpr bool is_aggregate_initializable(std::index_sequence<idx...>, bool) noexcept {
+      return true;
+    }
+    template<class T, std::size_t... idx>
+    constexpr bool is_aggregate_initializable(std::index_sequence<idx...>, char) noexcept {
+      return false;
+    }
+
+    template<class T, std::size_t n, std::enable_if_t<is_aggregate_initializable<T>(std::make_index_sequence<n>(), false)>* = nullptr>
+    constexpr std::size_t aggregate_size_impl() {
+      return n;
+    }
+    template<class T, std::size_t n, std::enable_if_t<!is_aggregate_initializable<T>(std::make_index_sequence<n>(), false)>* = nullptr>
+    constexpr std::size_t aggregate_size_impl() {
+      static_assert(n != 0, "Aggregate is required");
+      return aggregate_size_impl<T, n - 1>();
+    }
+  }
+
+  template<class T, class = void>
+  struct aggregate_size {
+    static_assert(std::is_aggregate_v<T>, "Aggregate is required");
+    static constexpr std::size_t value = helper::aggregate_size_impl<T, std::numeric_limits<unsigned char>::digits * sizeof(T)>();
+  };
+  template<class T>
+  struct aggregate_size<T, std::void_t<decltype(std::tuple_size<T>::value)>> {
+    static_assert(std::is_aggregate_v<T>, "Aggregate is required");
+    static constexpr std::size_t value = std::tuple_size_v<T>;
+  };
+  template<class T>
+  constexpr std::size_t aggregate_size_v = aggregate_size<T>::value;
+
+  template<std::size_t idx, class T>
+  struct aggregate_element {
+    static_assert(std::is_aggregate_v<T>);
+
+  private:
+    template<class T>
+    struct Type {
+      using type = T;
+    };
+
+    template<std::size_t idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>> == 1>* = nullptr>
+    constexpr auto get_type(T aggregate, char) noexcept {
+      auto&& [a] = aggregate;
+      static_assert(idx < 1, "Tuple index out of range");
+      return Type<decltype(a)>();
+    }
+    template<std::size_t idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>> == 2>* = nullptr>
+    constexpr auto get_type(T aggregate, char) noexcept {
+      auto&& [a, b] = aggregate;
+      static_assert(idx < 2, "Tuple index out of range");
+      if constexpr (idx == 0) return Type<decltype(a)>();
+      else return Type<decltype(b)>();
+    }
+    template<std::size_t idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>> == 3>* = nullptr>
+    constexpr auto get_type(T aggregate, char) noexcept {
+      auto&& [a, b, c] = aggregate;
+      static_assert(idx < 3, "Tuple index out of range");
+      if constexpr (idx == 0) return Type<decltype(a)>();
+      else if constexpr (idx == 1) return Type<decltype(b)>();
+      else return Type<decltype(c)>();
+    }
+    template<std::size_t idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>> == 4>* = nullptr>
+    constexpr auto access_impl(T aggregate, char) noexcept {
+      auto&& [a, b, c, d] = aggregate;
+      static_assert(idx < 4, "Tuple index out of range");
+      if constexpr (idx == 0) return Type<decltype(a)>();
+      else if constexpr (idx == 1) return Type<decltype(b)>();
+      else if constexpr (idx == 2) return Type<decltype(c)>();
+      else return Type<decltype(d)>();
+    }
+    template<std::size_t idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>> == 5>* = nullptr>
+    constexpr auto get_type(T aggregate, char) noexcept {
+      auto&& [a, b, c, d, e] = aggregate;
+      static_assert(idx < 5, "Tuple index out of range");
+      if constexpr (idx == 0) return Type<decltype(a)>();
+      else if constexpr (idx == 1) return Type<decltype(b)>();
+      else if constexpr (idx == 2) return Type<decltype(c)>();
+      else if constexpr (idx == 3) return Type<decltype(d)>();
+      else return Type<decltype(e)>();
+    }
+    template<std::size_t idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>> == 6>* = nullptr>
+    constexpr auto get_type(T aggregate, char) noexcept {
+      auto&& [a, b, c, d, e, f] = aggregate;
+      static_assert(idx < 6, "Tuple index out of range");
+      if constexpr (idx == 0) return Type<decltype(a)>();
+      else if constexpr (idx == 1) return Type<decltype(b)>();
+      else if constexpr (idx == 2) return Type<decltype(c)>();
+      else if constexpr (idx == 3) return Type<decltype(d)>();
+      else if constexpr (idx == 4) return Type<decltype(e)>();
+      else return Type<decltype(f)>();
+    }
+    template<std::size_t idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>> == 7>* = nullptr>
+    constexpr auto get_type(T aggregate, char) noexcept {
+      auto&& [a, b, c, d, e, f, g] = aggregate;
+      static_assert(idx < 7, "Tuple index out of range");
+      if constexpr (idx == 0) return Type<decltype(a)>();
+      else if constexpr (idx == 1) return Type<decltype(b)>();
+      else if constexpr (idx == 2) return Type<decltype(c)>();
+      else if constexpr (idx == 3) return Type<decltype(d)>();
+      else if constexpr (idx == 4) return Type<decltype(e)>();
+      else if constexpr (idx == 5) return Type<decltype(f)>();
+      else return Type<decltype(g)>();
+    }
+    template<std::size_t idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>> == 8>* = nullptr>
+    constexpr auto get_type(T aggregate, char) noexcept {
+      auto&& [a, b, c, d, e, f, g, h] = aggregate;
+      static_assert(idx < 8, "Tuple index out of range");
+      if constexpr (idx == 0) return Type<decltype(a)>();
+      else if constexpr (idx == 1) return Type<decltype(b)>();
+      else if constexpr (idx == 2) return Type<decltype(c)>();
+      else if constexpr (idx == 3) return Type<decltype(d)>();
+      else if constexpr (idx == 4) return Type<decltype(e)>();
+      else if constexpr (idx == 5) return Type<decltype(f)>();
+      else if constexpr (idx == 6) return Type<decltype(g)>();
+      else return Type<decltype(h)>();
+    }
+    template<std::size_t idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>> == 8>* = nullptr>
+    constexpr auto get_type(T aggregate, char) noexcept {
+      auto&& [a, b, c, d, e, f, g, h] = aggregate;
+      static_assert(idx < 8, "Tuple index out of range");
+      if constexpr (idx == 0) return Type<decltype(a)>();
+      else if constexpr (idx == 1) return Type<decltype(b)>();
+      else if constexpr (idx == 2) return Type<decltype(c)>();
+      else if constexpr (idx == 3) return Type<decltype(d)>();
+      else if constexpr (idx == 4) return Type<decltype(e)>();
+      else if constexpr (idx == 5) return Type<decltype(f)>();
+      else if constexpr (idx == 6) return Type<decltype(g)>();
+      else return Type<decltype(h)>();
+    }
+    template<std::size_t idx, class T, std::void_t<std::tuple_element_t<T>>* = nullptr>
+    constexpr auto get_type(T, bool) noexcept {
+      return Type<std::tuple_element_t<T>>();
+    }
+
+  public:
+    using type = typename decltype(get_type(std::declval<T>(), false))::type;
+  };
+
+  template<std::size_t idx, class T>
+  using aggregate_element_t = typename aggregate_element<idx, T>::type;
+
+  template<class T>
+  struct is_agg: std::conjunction<std::is_aggregate<T>, std::negation<is_iterable<T>>> {};
+
+  template<class T>
+  inline constexpr bool is_agg_v = is_agg<T>::value;
 }
