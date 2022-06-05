@@ -61,13 +61,15 @@ namespace kyopro {
   template<class T>
   using vec = std::vector<T>;
   template<class T>
-  using vvec = std::vector<vec<T>>;
+  using vec1 = vec<T>;
   template<class T>
-  using vvvec = std::vector<vvec<T>>;
+  using vec2 = std::vector<vec1<T>>;
   template<class T>
-  using vvvvec = std::vector<vvvec<T>>;
+  using vec3 = std::vector<vec2<T>>;
   template<class T>
-  using vvvvvec = std::vector<vvvvec<T>>;
+  using vec4 = std::vector<vec3<T>>;
+  template<class T>
+  using vec5 = std::vector<vec4<T>>;
 
   template<class Key, class Compare = std::less<Key>>
   using mset = std::unordered_set<Key, Compare>;
