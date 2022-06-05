@@ -2,54 +2,86 @@
 data:
   _extendedDependsOn:
   - icon: ':x:'
-    path: math/power.hpp
-    title: math/power.hpp
-  - icon: ':x:'
-    path: meta/constant.hpp
-    title: meta/constant.hpp
-  - icon: ':x:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
+  - icon: ':x:'
+    path: algorithm/Hash.hpp
+    title: algorithm/Hash.hpp
+  - icon: ':warning:'
+    path: algorithm/all.hpp
+    title: algorithm/all.hpp
   - icon: ':warning:'
     path: all.hpp
     title: all.hpp
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: math/DynamicModInt.hpp
+    title: math/DynamicModInt.hpp
+  - icon: ':warning:'
+    path: math/ModInt.hpp
+    title: math/ModInt.hpp
+  - icon: ':warning:'
+    path: math/all.hpp
+    title: math/all.hpp
+  - icon: ':x:'
+    path: math/factorize.hpp
+    title: math/factorize.hpp
+  - icon: ':x:'
+    path: math/is_prime.hpp
+    title: math/is_prime.hpp
+  - icon: ':x:'
+    path: system/all.hpp
+    title: system/all.hpp
+  - icon: ':x:'
+    path: system/out.hpp
+    title: system/out.hpp
+  - icon: ':warning:'
+    path: template/alias.hpp
+    title: template/alias.hpp
+  - icon: ':warning:'
+    path: template/all.hpp
+    title: template/all.hpp
+  - icon: ':warning:'
+    path: template/macro.hpp
+    title: template/macro.hpp
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: verify/aoj/PrimeNumber.test.cpp
+    title: verify/aoj/PrimeNumber.test.cpp
+  - icon: ':x:'
+    path: verify/yosupo/factorize.test.cpp
+    title: verify/yosupo/factorize.test.cpp
+  - icon: ':x:'
+    path: verify/yosupo/many_aplusb.test.cpp
+    title: verify/yosupo/many_aplusb.test.cpp
+  - icon: ':x:'
+    path: verify/yosupo/point_add_range_sum.test.cpp
+    title: verify/yosupo/point_add_range_sum.test.cpp
+  - icon: ':x:'
+    path: verify/yosupo/unionfind.test.cpp
+    title: verify/yosupo/unionfind.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"meta/constant.hpp\"\n#include <array>\n#include <limits>\n\
-    #include <utility>\n#line 2 \"meta/settings.hpp\"\n#include <cstdint>\n\n#ifndef\
-    \ KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n\
-    #define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n\
-    #define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define\
-    \ KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(998244353)\n#endif\n\n#ifndef\
-    \ KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
+  bundledCode: "#line 2 \"meta/aggregate.hpp\"\n#include <cstdint>\n#include <tuple>\n\
+    #include <type_traits>\n#include <utility>\n#line 2 \"meta/trait.hpp\"\n#include\
+    \ <iterator>\n#include <queue>\n#include <limits>\n#include <stack>\n#line 3 \"\
+    meta/settings.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n\
+    #endif\n\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\
+    \n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef\
+    \ KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(998244353)\n\
+    #endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class T>\n\
-    \  constexpr T power(T a, KYOPRO_BASE_UINT n, T init = 1) noexcept {\n    while\
-    \ (n > 0) {\n      if (n & 1) init *= a;\n      a *= a;\n      n >>= 1;\n    }\n\
-    \    return init;\n  }\n}\n#line 7 \"meta/constant.hpp\"\n\nnamespace kyopro {\n\
-    \  template<class T>\n  inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\n  inline\
-    \ constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\n  template<class T>\n\
-    \  inline constexpr T INF = std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\n\
-    \  inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\n  template<class\
-    \ T, KYOPRO_BASE_UINT decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  inline\
-    \ constexpr KYOPRO_BASE_FLOAT EPS = static_cast<T>(1) / power(10ULL, decimal_precision);\n\
-    \  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\n  template<class\
-    \ T>\n  inline constexpr T PI = 3.14159265358979323846;\n  inline constexpr KYOPRO_BASE_FLOAT\
-    \ pi = PI<KYOPRO_BASE_FLOAT>;\n}\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n\
-    #include <queue>\n#line 5 \"meta/trait.hpp\"\n#include <stack>\n#include <type_traits>\n\
-    #line 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct std::is_integral<__int128_t>:\
+    #endif\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct std::is_integral<__int128_t>:\
     \ std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type\
     \ {};\ntemplate<>\nstruct std::is_floating_point<__float128>: std::true_type {};\n\
     \nnamespace kyopro {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least {\n\
@@ -165,31 +197,69 @@ data:
     \ = typename aggregate_element<idx, T>::type;\n\n  template<class T>\n  struct\
     \ is_agg: std::conjunction<std::is_aggregate<T>, std::negation<is_iterable<T>>>\
     \ {};\n\n  template<class T>\n  inline constexpr bool is_agg_v = is_agg<T>::value;\n\
-    }\n#line 5 \"meta/all.hpp\"\n"
-  code: '#pragma once
-
-    #include "constant.hpp"
-
-    #include "settings.hpp"
-
-    #include "trait.hpp"'
+    }\n#line 7 \"meta/aggregate.hpp\"\n\nnamespace kyopro {\n  namespace helper {\n\
+    \    #define DEFINE_ACCESS(n, ...) \\\n    template<std::size_t idx, class T,\
+    \ std::enable_if_t<aggregate_size_v<std::decay_t<T>> == n>* = nullptr>\\\n   \
+    \ constexpr decltype(auto) access_impl(T&& aggregate, char) noexcept {\\\n   \
+    \   auto&& [__VA_ARGS__] = std::forward<T>(aggregate);\\\n      return std::get<idx>(std::forward_as_tuple(__VA_ARGS__));\\\
+    \n    }\n\n    DEFINE_ACCESS(1, a)\n    DEFINE_ACCESS(2, a, b)\n    DEFINE_ACCESS(3,\
+    \ a, b, c)\n    DEFINE_ACCESS(4, a, b, c, d)\n    DEFINE_ACCESS(5, a, b, c, d,\
+    \ e)\n    DEFINE_ACCESS(6, a, b, c, d, e, f)\n    DEFINE_ACCESS(7, a, b, c, d,\
+    \ e, f, g)\n    DEFINE_ACCESS(8, a, b, c, d, e, f, g, h)\n\n    template<std::size_t\
+    \ idx, class T, std::void_t<decltype(std::get<idx>(std::declval<std::decay_t<T>>()))>*\
+    \ = nullptr>\n    constexpr decltype(auto) access_impl(T&& aggregate, bool) noexcept\
+    \ {\n      return std::get<idx>(std::forward<T>(aggregate));\n    }\n\n    #undef\
+    \ DEFINE_ACCESS\n  }\n\n  template<std::size_t idx, class T>\n  constexpr decltype(auto)\
+    \ access(T&& aggregate) noexcept {\n    return helper::access_impl<idx>(std::forward<T>(aggregate),\
+    \ false);\n  }\n}\n"
+  code: "#pragma once\n#include <cstdint>\n#include <tuple>\n#include <type_traits>\n\
+    #include <utility>\n#include \"trait.hpp\"\n\nnamespace kyopro {\n  namespace\
+    \ helper {\n    #define DEFINE_ACCESS(n, ...) \\\n    template<std::size_t idx,\
+    \ class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>> == n>* = nullptr>\\\
+    \n    constexpr decltype(auto) access_impl(T&& aggregate, char) noexcept {\\\n\
+    \      auto&& [__VA_ARGS__] = std::forward<T>(aggregate);\\\n      return std::get<idx>(std::forward_as_tuple(__VA_ARGS__));\\\
+    \n    }\n\n    DEFINE_ACCESS(1, a)\n    DEFINE_ACCESS(2, a, b)\n    DEFINE_ACCESS(3,\
+    \ a, b, c)\n    DEFINE_ACCESS(4, a, b, c, d)\n    DEFINE_ACCESS(5, a, b, c, d,\
+    \ e)\n    DEFINE_ACCESS(6, a, b, c, d, e, f)\n    DEFINE_ACCESS(7, a, b, c, d,\
+    \ e, f, g)\n    DEFINE_ACCESS(8, a, b, c, d, e, f, g, h)\n\n    template<std::size_t\
+    \ idx, class T, std::void_t<decltype(std::get<idx>(std::declval<std::decay_t<T>>()))>*\
+    \ = nullptr>\n    constexpr decltype(auto) access_impl(T&& aggregate, bool) noexcept\
+    \ {\n      return std::get<idx>(std::forward<T>(aggregate));\n    }\n\n    #undef\
+    \ DEFINE_ACCESS\n  }\n\n  template<std::size_t idx, class T>\n  constexpr decltype(auto)\
+    \ access(T&& aggregate) noexcept {\n    return helper::access_impl<idx>(std::forward<T>(aggregate),\
+    \ false);\n  }\n}"
   dependsOn:
-  - meta/constant.hpp
-  - math/power.hpp
-  - meta/settings.hpp
   - meta/trait.hpp
+  - meta/settings.hpp
   isVerificationFile: false
-  path: meta/all.hpp
+  path: meta/aggregate.hpp
   requiredBy:
+  - algorithm/all.hpp
+  - algorithm/Hash.hpp
+  - math/DynamicModInt.hpp
+  - math/ModInt.hpp
+  - math/all.hpp
+  - math/is_prime.hpp
+  - math/factorize.hpp
   - all.hpp
+  - system/out.hpp
+  - system/all.hpp
+  - template/macro.hpp
+  - template/all.hpp
+  - template/alias.hpp
   - all/all.hpp
   timestamp: '2022-06-05 22:20:26+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
-documentation_of: meta/all.hpp
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - verify/aoj/PrimeNumber.test.cpp
+  - verify/yosupo/unionfind.test.cpp
+  - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+documentation_of: meta/aggregate.hpp
 layout: document
 redirect_from:
-- /library/meta/all.hpp
-- /library/meta/all.hpp.html
-title: meta/all.hpp
+- /library/meta/aggregate.hpp
+- /library/meta/aggregate.hpp.html
+title: meta/aggregate.hpp
 ---

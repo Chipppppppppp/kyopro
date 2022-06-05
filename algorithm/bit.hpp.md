@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
@@ -20,10 +20,10 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
@@ -33,15 +33,15 @@ data:
     path: template/all.hpp
     title: template/all.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"algorithm/bit.hpp\"\n#include <limits>\n#include <type_traits>\n\
@@ -53,9 +53,9 @@ data:
     #define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n#endif\n\n\
     #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 5 \"algorithm/bit.hpp\"\n\nnamespace kpr {\n  template<class T>\n\
-    \  constexpr KYOPRO_BASE_INT pop_count(T x) noexcept {\n    constexpr auto digits\
-    \ = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n    static_assert(digits\
+    #endif\n#line 5 \"algorithm/bit.hpp\"\n\nnamespace kyopro {\n  template<class\
+    \ T>\n  constexpr KYOPRO_BASE_INT pop_count(T x) noexcept {\n    constexpr auto\
+    \ digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n    static_assert(digits\
     \ <= std::numeric_limits<unsigned long long>::digits, \"Integer size is too large\"\
     );\n    if constexpr (digits <= std::numeric_limits<unsigned int>::digits) return\
     \ __builtin_popcount(x);\n    else if constexpr (digits <= std::numeric_limits<unsigned\
@@ -88,7 +88,7 @@ data:
     \  constexpr KYOPRO_BASE_INT ceil_bit(T x) noexcept {\n    if (x == 0) return\
     \ 0;\n    return bit_len(x - static_cast<T>(1));\n  }\n}\n"
   code: "#pragma once\n#include <limits>\n#include <type_traits>\n#include \"../meta/settings.hpp\"\
-    \n\nnamespace kpr {\n  template<class T>\n  constexpr KYOPRO_BASE_INT pop_count(T\
+    \n\nnamespace kyopro {\n  template<class T>\n  constexpr KYOPRO_BASE_INT pop_count(T\
     \ x) noexcept {\n    constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
     \    static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
     \ \"Integer size is too large\");\n    if constexpr (digits <= std::numeric_limits<unsigned\
@@ -135,8 +135,8 @@ data:
   - template/all.hpp
   - template/alias.hpp
   - all/all.hpp
-  timestamp: '2022-04-27 22:05:10+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-06-05 22:20:26+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp
   - verify/yosupo/factorize.test.cpp

@@ -18,14 +18,14 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"function/RecursiveLambda.hpp\"\n#include <type_traits>\n\
-    #include <utility>\n\nnamespace kpr {\n  template<class F>\n  struct RecursiveLambda\
+    #include <utility>\n\nnamespace kyopro {\n  template<class F>\n  struct RecursiveLambda\
     \ {\n    using value_type = F;\n\n  private:\n    F func;\n\n  public:\n    template<class\
     \ G>\n    constexpr RecursiveLambda(G&& func) noexcept: func(std::forward<G>(func))\
     \ {}\n    template<class... Args>\n    constexpr decltype(auto) operator ()(Args&&...\
     \ args) const noexcept { return func(*this, std::forward<Args>(args)...); }\n\
     \  };\n\n  template<class F>\n  RecursiveLambda(F&&) -> RecursiveLambda<std::decay_t<F>>;\n\
     }\n"
-  code: "#pragma once\n#include <type_traits>\n#include <utility>\n\nnamespace kpr\
+  code: "#pragma once\n#include <type_traits>\n#include <utility>\n\nnamespace kyopro\
     \ {\n  template<class F>\n  struct RecursiveLambda {\n    using value_type = F;\n\
     \n  private:\n    F func;\n\n  public:\n    template<class G>\n    constexpr RecursiveLambda(G&&\
     \ func) noexcept: func(std::forward<G>(func)) {}\n    template<class... Args>\n\
@@ -39,7 +39,7 @@ data:
   - all.hpp
   - function/all.hpp
   - all/all.hpp
-  timestamp: '2022-04-27 22:05:10+09:00'
+  timestamp: '2022-06-05 22:20:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: function/RecursiveLambda.hpp

@@ -17,7 +17,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"math/div.hpp\"\n#include <type_traits>\n\nnamespace kpr\
+  bundledCode: "#line 2 \"math/div.hpp\"\n#include <type_traits>\n\nnamespace kyopro\
     \ {\n  template<class T, class U>\n  constexpr std::common_type_t<T, U> floor_div(T\
     \ x, U m) noexcept {\n    static_assert(std::is_integral_v<T> && std::is_integral_v<U>,\
     \ \"Integer is required\");\n    if constexpr (std::is_unsigned_v<T> || std::is_unsigned_v<U>)\
@@ -25,7 +25,7 @@ data:
     \ ^ (m < 0));\n  }\n\n  template<class T, class U>\n  constexpr std::common_type_t<T,\
     \ U> ceil_div(T x, U m) noexcept { return floor_div(x + m - static_cast<T>(1),\
     \ m); }\n}\n"
-  code: "#pragma once\n#include <type_traits>\n\nnamespace kpr {\n  template<class\
+  code: "#pragma once\n#include <type_traits>\n\nnamespace kyopro {\n  template<class\
     \ T, class U>\n  constexpr std::common_type_t<T, U> floor_div(T x, U m) noexcept\
     \ {\n    static_assert(std::is_integral_v<T> && std::is_integral_v<U>, \"Integer\
     \ is required\");\n    if constexpr (std::is_unsigned_v<T> || std::is_unsigned_v<U>)\
@@ -40,7 +40,7 @@ data:
   - math/all.hpp
   - all.hpp
   - all/all.hpp
-  timestamp: '2022-04-27 22:05:10+09:00'
+  timestamp: '2022-06-05 22:20:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/div.hpp

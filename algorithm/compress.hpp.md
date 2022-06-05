@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
@@ -30,7 +30,7 @@ data:
     #define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n#endif\n\n\
     #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 8 \"algorithm/compress.hpp\"\n\nnamespace kpr {\n  template<class\
+    #endif\n#line 8 \"algorithm/compress.hpp\"\n\nnamespace kyopro {\n  template<class\
     \ T, class Container = std::unordered_map<typename std::iterator_traits<T>::value_type,\
     \ KYOPRO_BASE_INT>, class Compare>\n  auto compress(T first, T last, Compare comp\
     \ = std::less<typename std::iterator_traits<T>::value_type>()) {\n    std::vector<typename\
@@ -40,7 +40,7 @@ data:
     \ ++i) mem[*i] = ++cnt;\n    return mem;\n  }\n}\n"
   code: "#pragma once\n#include <algorithm>\n#include <functional>\n#include <iterator>\n\
     #include <unordered_map>\n#include <vector>\n#include \"../meta/settings.hpp\"\
-    \n\nnamespace kpr {\n  template<class T, class Container = std::unordered_map<typename\
+    \n\nnamespace kyopro {\n  template<class T, class Container = std::unordered_map<typename\
     \ std::iterator_traits<T>::value_type, KYOPRO_BASE_INT>, class Compare>\n  auto\
     \ compress(T first, T last, Compare comp = std::less<typename std::iterator_traits<T>::value_type>())\
     \ {\n    std::vector<typename std::iterator_traits<T>::value_type> vec(first,\
@@ -55,7 +55,7 @@ data:
   - algorithm/all.hpp
   - all.hpp
   - all/all.hpp
-  timestamp: '2022-04-27 22:05:10+09:00'
+  timestamp: '2022-06-05 22:20:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm/compress.hpp

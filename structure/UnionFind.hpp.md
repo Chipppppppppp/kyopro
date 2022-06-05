@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -18,12 +18,12 @@ data:
     path: structure/all.hpp
     title: structure/all.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"structure/UnionFind.hpp\"\n#include <algorithm>\n#include\
@@ -40,7 +40,7 @@ data:
     \ <limits>\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct\
     \ std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
     \ std::true_type {};\ntemplate<>\nstruct std::is_floating_point<__float128>: std::true_type\
-    \ {};\n\nnamespace kpr {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least\
+    \ {};\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least\
     \ {\n  private:\n    static constexpr auto get_type() noexcept {\n      static_assert(size\
     \ <= 128, \"Integer size is too large\");\n      if constexpr (size <= 8) return\
     \ std::int_least8_t();\n      else if constexpr (size <= 16) return std::int_least16_t();\n\
@@ -62,16 +62,101 @@ data:
     \ is_iterator<T>::value;\n\n  template<class, class = void>\n  struct is_iterable:\
     \ std::false_type {};\n  template<class T>\n  struct is_iterable<T, std::void_t<decltype(std::begin(std::declval<T>()))>>:\
     \ std::true_type {};\n\n  template<class T>\n  constexpr bool is_iterable_v =\
-    \ is_iterable<T>::value;\n\n  template<class>\n  struct is_tuple: std::false_type\
-    \ {};\n  template<class T, class U>\n  struct is_tuple<std::pair<T, U>>: std::true_type\
-    \ {};\n  template<class... Args>\n  struct is_tuple<std::tuple<Args...>>: std::true_type\
-    \ {};\n\n  template<class T>\n  constexpr bool is_tuple_v = is_tuple<T>::value;\n\
-    \n  template<class T>\n  struct iterable_value {\n    using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\n\
-    \  };\n\n  template<class T>\n  using iterable_value_t = typename iterable_value<T>::type;\n\
-    }\n#line 9 \"structure/UnionFind.hpp\"\n\nnamespace kpr {\n  template<class Container\
-    \ = std::vector<int>>\n  struct UnionFind {\n    using value_type = iterable_value_t<Container>;\n\
-    \    using container_type = Container;\n\n  private:\n    Container par;\n\n \
-    \ public:\n    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT\
+    \ is_iterable<T>::value;\n\n  template<class T>\n  struct iterable_value {\n \
+    \   using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\n  };\n\
+    \n  template<class T>\n  using iterable_value_t = typename iterable_value<T>::type;\n\
+    \n  namespace helper {\n    struct CastableToAny {\n      template<class T>\n\
+    \      operator T() const noexcept;\n    };\n\n    template<class T, std::size_t...\
+    \ idx, std::void_t<decltype(T{((void)idx, CastableToAny{})...})>* = nullptr>\n\
+    \    constexpr bool is_aggregate_initializable(std::index_sequence<idx...>, bool)\
+    \ noexcept {\n      return true;\n    }\n    template<class T, std::size_t...\
+    \ idx>\n    constexpr bool is_aggregate_initializable(std::index_sequence<idx...>,\
+    \ char) noexcept {\n      return false;\n    }\n\n    template<class T, std::size_t\
+    \ n, std::enable_if_t<is_aggregate_initializable<T>(std::make_index_sequence<n>(),\
+    \ false)>* = nullptr>\n    constexpr std::size_t aggregate_size_impl() {\n   \
+    \   return n;\n    }\n    template<class T, std::size_t n, std::enable_if_t<!is_aggregate_initializable<T>(std::make_index_sequence<n>(),\
+    \ false)>* = nullptr>\n    constexpr std::size_t aggregate_size_impl() {\n   \
+    \   static_assert(n != 0, \"Aggregate is required\");\n      return aggregate_size_impl<T,\
+    \ n - 1>();\n    }\n  }\n\n  template<class T, class = void>\n  struct aggregate_size\
+    \ {\n    static_assert(std::is_aggregate_v<T>, \"Aggregate is required\");\n \
+    \   static constexpr std::size_t value = helper::aggregate_size_impl<T, std::numeric_limits<unsigned\
+    \ char>::digits * sizeof(T)>();\n  };\n  template<class T>\n  struct aggregate_size<T,\
+    \ std::void_t<decltype(std::tuple_size<T>::value)>> {\n    static_assert(std::is_aggregate_v<T>,\
+    \ \"Aggregate is required\");\n    static constexpr std::size_t value = std::tuple_size_v<T>;\n\
+    \  };\n  template<class T>\n  constexpr std::size_t aggregate_size_v = aggregate_size<T>::value;\n\
+    \n  template<std::size_t idx, class T>\n  struct aggregate_element {\n    static_assert(std::is_aggregate_v<T>);\n\
+    \n  private:\n    template<class T>\n    struct Type {\n      using type = T;\n\
+    \    };\n\n    template<std::size_t idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>>\
+    \ == 1>* = nullptr>\n    constexpr auto get_type(T aggregate, char) noexcept {\n\
+    \      auto&& [a] = aggregate;\n      static_assert(idx < 1, \"Tuple index out\
+    \ of range\");\n      return Type<decltype(a)>();\n    }\n    template<std::size_t\
+    \ idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>> == 2>* = nullptr>\n\
+    \    constexpr auto get_type(T aggregate, char) noexcept {\n      auto&& [a, b]\
+    \ = aggregate;\n      static_assert(idx < 2, \"Tuple index out of range\");\n\
+    \      if constexpr (idx == 0) return Type<decltype(a)>();\n      else return\
+    \ Type<decltype(b)>();\n    }\n    template<std::size_t idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>>\
+    \ == 3>* = nullptr>\n    constexpr auto get_type(T aggregate, char) noexcept {\n\
+    \      auto&& [a, b, c] = aggregate;\n      static_assert(idx < 3, \"Tuple index\
+    \ out of range\");\n      if constexpr (idx == 0) return Type<decltype(a)>();\n\
+    \      else if constexpr (idx == 1) return Type<decltype(b)>();\n      else return\
+    \ Type<decltype(c)>();\n    }\n    template<std::size_t idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>>\
+    \ == 4>* = nullptr>\n    constexpr auto access_impl(T aggregate, char) noexcept\
+    \ {\n      auto&& [a, b, c, d] = aggregate;\n      static_assert(idx < 4, \"Tuple\
+    \ index out of range\");\n      if constexpr (idx == 0) return Type<decltype(a)>();\n\
+    \      else if constexpr (idx == 1) return Type<decltype(b)>();\n      else if\
+    \ constexpr (idx == 2) return Type<decltype(c)>();\n      else return Type<decltype(d)>();\n\
+    \    }\n    template<std::size_t idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>>\
+    \ == 5>* = nullptr>\n    constexpr auto get_type(T aggregate, char) noexcept {\n\
+    \      auto&& [a, b, c, d, e] = aggregate;\n      static_assert(idx < 5, \"Tuple\
+    \ index out of range\");\n      if constexpr (idx == 0) return Type<decltype(a)>();\n\
+    \      else if constexpr (idx == 1) return Type<decltype(b)>();\n      else if\
+    \ constexpr (idx == 2) return Type<decltype(c)>();\n      else if constexpr (idx\
+    \ == 3) return Type<decltype(d)>();\n      else return Type<decltype(e)>();\n\
+    \    }\n    template<std::size_t idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>>\
+    \ == 6>* = nullptr>\n    constexpr auto get_type(T aggregate, char) noexcept {\n\
+    \      auto&& [a, b, c, d, e, f] = aggregate;\n      static_assert(idx < 6, \"\
+    Tuple index out of range\");\n      if constexpr (idx == 0) return Type<decltype(a)>();\n\
+    \      else if constexpr (idx == 1) return Type<decltype(b)>();\n      else if\
+    \ constexpr (idx == 2) return Type<decltype(c)>();\n      else if constexpr (idx\
+    \ == 3) return Type<decltype(d)>();\n      else if constexpr (idx == 4) return\
+    \ Type<decltype(e)>();\n      else return Type<decltype(f)>();\n    }\n    template<std::size_t\
+    \ idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>> == 7>* = nullptr>\n\
+    \    constexpr auto get_type(T aggregate, char) noexcept {\n      auto&& [a, b,\
+    \ c, d, e, f, g] = aggregate;\n      static_assert(idx < 7, \"Tuple index out\
+    \ of range\");\n      if constexpr (idx == 0) return Type<decltype(a)>();\n  \
+    \    else if constexpr (idx == 1) return Type<decltype(b)>();\n      else if constexpr\
+    \ (idx == 2) return Type<decltype(c)>();\n      else if constexpr (idx == 3) return\
+    \ Type<decltype(d)>();\n      else if constexpr (idx == 4) return Type<decltype(e)>();\n\
+    \      else if constexpr (idx == 5) return Type<decltype(f)>();\n      else return\
+    \ Type<decltype(g)>();\n    }\n    template<std::size_t idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>>\
+    \ == 8>* = nullptr>\n    constexpr auto get_type(T aggregate, char) noexcept {\n\
+    \      auto&& [a, b, c, d, e, f, g, h] = aggregate;\n      static_assert(idx <\
+    \ 8, \"Tuple index out of range\");\n      if constexpr (idx == 0) return Type<decltype(a)>();\n\
+    \      else if constexpr (idx == 1) return Type<decltype(b)>();\n      else if\
+    \ constexpr (idx == 2) return Type<decltype(c)>();\n      else if constexpr (idx\
+    \ == 3) return Type<decltype(d)>();\n      else if constexpr (idx == 4) return\
+    \ Type<decltype(e)>();\n      else if constexpr (idx == 5) return Type<decltype(f)>();\n\
+    \      else if constexpr (idx == 6) return Type<decltype(g)>();\n      else return\
+    \ Type<decltype(h)>();\n    }\n    template<std::size_t idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>>\
+    \ == 8>* = nullptr>\n    constexpr auto get_type(T aggregate, char) noexcept {\n\
+    \      auto&& [a, b, c, d, e, f, g, h] = aggregate;\n      static_assert(idx <\
+    \ 8, \"Tuple index out of range\");\n      if constexpr (idx == 0) return Type<decltype(a)>();\n\
+    \      else if constexpr (idx == 1) return Type<decltype(b)>();\n      else if\
+    \ constexpr (idx == 2) return Type<decltype(c)>();\n      else if constexpr (idx\
+    \ == 3) return Type<decltype(d)>();\n      else if constexpr (idx == 4) return\
+    \ Type<decltype(e)>();\n      else if constexpr (idx == 5) return Type<decltype(f)>();\n\
+    \      else if constexpr (idx == 6) return Type<decltype(g)>();\n      else return\
+    \ Type<decltype(h)>();\n    }\n    template<std::size_t idx, class T, std::void_t<std::tuple_element_t<T>>*\
+    \ = nullptr>\n    constexpr auto get_type(T, bool) noexcept {\n      return Type<std::tuple_element_t<T>>();\n\
+    \    }\n\n  public:\n    using type = typename decltype(get_type(std::declval<T>(),\
+    \ false))::type;\n  };\n\n  template<std::size_t idx, class T>\n  using aggregate_element_t\
+    \ = typename aggregate_element<idx, T>::type;\n\n  template<class T>\n  struct\
+    \ is_agg: std::conjunction<std::is_aggregate<T>, std::negation<is_iterable<T>>>\
+    \ {};\n\n  template<class T>\n  inline constexpr bool is_agg_v = is_agg<T>::value;\n\
+    }\n#line 9 \"structure/UnionFind.hpp\"\n\nnamespace kyopro {\n  template<class\
+    \ Container = std::vector<int>>\n  struct UnionFind {\n    using value_type =\
+    \ iterable_value_t<Container>;\n    using container_type = Container;\n\n  private:\n\
+    \    Container par;\n\n  public:\n    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT\
     \ n) noexcept: par(n, -1) {}\n    template<class C, std::enable_if_t<std::is_same_v<Container,\
     \ std::decay_t<C>>>>\n    UnionFind(C&& par): par(std::forward<C>(par)) {}\n\n\
     \    void resize(KYOPRO_BASE_UINT x) { par.resize(x, -1); }\n    void assign(KYOPRO_BASE_UINT\
@@ -98,7 +183,7 @@ data:
     \      return group_members;\n    }\n  };\n}\n"
   code: "#pragma once\n#include <algorithm>\n#include <type_traits>\n#include <unordered_map>\n\
     #include <utility>\n#include <vector>\n#include \"../meta/settings.hpp\"\n#include\
-    \ \"../meta/trait.hpp\"\n\nnamespace kpr {\n  template<class Container = std::vector<int>>\n\
+    \ \"../meta/trait.hpp\"\n\nnamespace kyopro {\n  template<class Container = std::vector<int>>\n\
     \  struct UnionFind {\n    using value_type = iterable_value_t<Container>;\n \
     \   using container_type = Container;\n\n  private:\n    Container par;\n\n  public:\n\
     \    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT n) noexcept:\
@@ -135,8 +220,8 @@ data:
   - all.hpp
   - all/all.hpp
   - structure/all.hpp
-  timestamp: '2022-05-08 20:22:54+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-06-05 22:20:26+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/yosupo/unionfind.test.cpp
 documentation_of: structure/UnionFind.hpp
