@@ -423,32 +423,33 @@ data:
     \ idx>\n  using agg = typename agg_type<T, idx>::type;\n  using ll1 = agg<ll,\
     \ 1>;\n  using ll2 = agg<ll, 2>;\n  using ll3 = agg<ll, 3>;\n  using ll4 = agg<ll,\
     \ 4>;\n  using ll5 = agg<ll, 5>;\n\n  template<class T>\n  using vec = std::vector<T>;\n\
-    \  template<class T>\n  using vvec = std::vector<vec<T>>;\n  template<class T>\n\
-    \  using vvvec = std::vector<vvec<T>>;\n  template<class T>\n  using vvvvec =\
-    \ std::vector<vvvec<T>>;\n  template<class T>\n  using vvvvvec = std::vector<vvvvec<T>>;\n\
-    \n  template<class Key, class Compare = std::less<Key>>\n  using mset = std::unordered_set<Key,\
-    \ Compare>;\n  template<class Key, class T, class Compare = std::less<Key>>\n\
-    \  using mmap = std::unordered_map<Key, T, Compare>;\n  template<class Key>\n\
-    \  using hset = std::unordered_set<Key, Hash<Key>>;\n  template<class Key, class\
-    \ T>\n  using hmap = std::unordered_map<Key, T, Hash<Key>>;\n  template<class\
-    \ Key>\n  using hmiset = std::unordered_multiset<Key, Hash<Key>>;\n  template<class\
-    \ Key, class T>\n  using hmmap = std::unordered_multimap<Key, T, Hash<Key>>;\n\
-    \  template<class T, class Compare = std::less<T>, class Container = std::vector<T>>\n\
-    \  using priq = std::priority_queue<T, Container, Compare>;\n  template<class\
-    \ T, class Compare = std::greater<T>, class Container = std::vector<T>>\n  using\
-    \ heapq = priq<T, Compare, Container>;\n}\n\nusing namespace std;\nusing namespace\
-    \ kyopro;\n#line 2 \"template/amin_amax.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ T, class U>\n  constexpr bool amin(T& a, U&& b) noexcept {\n    if (b < a) {\n\
-    \      a = b;\n      return true;\n    }\n    return false;\n  }\n\n  template<class\
-    \ T, class U>\n  constexpr bool amax(T& a, U&& b) noexcept {\n    if (a < b) {\n\
-    \      a = b;\n      return true;\n    }\n    return false;\n  }\n}\n#line 4 \"\
-    template/constant.hpp\"\n\nnamespace kyopro {\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 4> beside{{{-1, 0}, {0, -1}, {1, 0}, {0, 1}}};\n  inline constexpr\
-    \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{-1, 0},\
-    \ {-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1, 1}, {0, 1}, {-1, 1}}};\n}\n#line 4 \"\
-    template/len.hpp\"\n\nnamespace kyopro {\n  template<class T>\n  constexpr KYOPRO_BASE_INT\
-    \ len(T&& a) noexcept {\n    return std::size(a);\n  }\n}\n#line 2 \"system/in.hpp\"\
-    \n#include <unistd.h>\n#line 14 \"system/in.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    \  template<class T>\n  using vec1 = vec<T>;\n  template<class T>\n  using vec2\
+    \ = std::vector<vec1<T>>;\n  template<class T>\n  using vec3 = std::vector<vec2<T>>;\n\
+    \  template<class T>\n  using vec4 = std::vector<vec3<T>>;\n  template<class T>\n\
+    \  using vec5 = std::vector<vec4<T>>;\n\n  template<class Key, class Compare =\
+    \ std::less<Key>>\n  using mset = std::unordered_set<Key, Compare>;\n  template<class\
+    \ Key, class T, class Compare = std::less<Key>>\n  using mmap = std::unordered_map<Key,\
+    \ T, Compare>;\n  template<class Key>\n  using hset = std::unordered_set<Key,\
+    \ Hash<Key>>;\n  template<class Key, class T>\n  using hmap = std::unordered_map<Key,\
+    \ T, Hash<Key>>;\n  template<class Key>\n  using hmiset = std::unordered_multiset<Key,\
+    \ Hash<Key>>;\n  template<class Key, class T>\n  using hmmap = std::unordered_multimap<Key,\
+    \ T, Hash<Key>>;\n  template<class T, class Compare = std::less<T>, class Container\
+    \ = std::vector<T>>\n  using priq = std::priority_queue<T, Container, Compare>;\n\
+    \  template<class T, class Compare = std::greater<T>, class Container = std::vector<T>>\n\
+    \  using heapq = priq<T, Compare, Container>;\n}\n\nusing namespace std;\nusing\
+    \ namespace kyopro;\n#line 2 \"template/amin_amax.hpp\"\n\nnamespace kyopro {\n\
+    \  template<class T, class U>\n  constexpr bool amin(T& a, U&& b) noexcept {\n\
+    \    if (b < a) {\n      a = b;\n      return true;\n    }\n    return false;\n\
+    \  }\n\n  template<class T, class U>\n  constexpr bool amax(T& a, U&& b) noexcept\
+    \ {\n    if (a < b) {\n      a = b;\n      return true;\n    }\n    return false;\n\
+    \  }\n}\n#line 4 \"template/constant.hpp\"\n\nnamespace kyopro {\n  inline constexpr\
+    \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 4> beside{{{-1, 0},\
+    \ {0, -1}, {1, 0}, {0, 1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
+    \ KYOPRO_BASE_INT>, 8> around{{{-1, 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1,\
+    \ 1}, {0, 1}, {-1, 1}}};\n}\n#line 4 \"template/len.hpp\"\n\nnamespace kyopro\
+    \ {\n  template<class T>\n  constexpr KYOPRO_BASE_INT len(T&& a) noexcept {\n\
+    \    return std::size(a);\n  }\n}\n#line 2 \"system/in.hpp\"\n#include <unistd.h>\n\
+    #line 14 \"system/in.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
     \ _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Reader {\n    static constexpr KYOPRO_BASE_UINT\
     \ buf_size = _buf_size;\n\n  private:\n    int fd, idx;\n    std::array<char,\
     \ buf_size> buffer;\n\n  public:\n    Reader() {\n      read(fd, buffer.begin(),\
@@ -673,7 +674,7 @@ data:
   path: template/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-06-05 23:14:49+09:00'
+  timestamp: '2022-06-05 23:53:54+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/all.hpp

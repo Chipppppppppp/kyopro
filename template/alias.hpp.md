@@ -377,21 +377,21 @@ data:
     \ idx>\n  using agg = typename agg_type<T, idx>::type;\n  using ll1 = agg<ll,\
     \ 1>;\n  using ll2 = agg<ll, 2>;\n  using ll3 = agg<ll, 3>;\n  using ll4 = agg<ll,\
     \ 4>;\n  using ll5 = agg<ll, 5>;\n\n  template<class T>\n  using vec = std::vector<T>;\n\
-    \  template<class T>\n  using vvec = std::vector<vec<T>>;\n  template<class T>\n\
-    \  using vvvec = std::vector<vvec<T>>;\n  template<class T>\n  using vvvvec =\
-    \ std::vector<vvvec<T>>;\n  template<class T>\n  using vvvvvec = std::vector<vvvvec<T>>;\n\
-    \n  template<class Key, class Compare = std::less<Key>>\n  using mset = std::unordered_set<Key,\
-    \ Compare>;\n  template<class Key, class T, class Compare = std::less<Key>>\n\
-    \  using mmap = std::unordered_map<Key, T, Compare>;\n  template<class Key>\n\
-    \  using hset = std::unordered_set<Key, Hash<Key>>;\n  template<class Key, class\
-    \ T>\n  using hmap = std::unordered_map<Key, T, Hash<Key>>;\n  template<class\
-    \ Key>\n  using hmiset = std::unordered_multiset<Key, Hash<Key>>;\n  template<class\
-    \ Key, class T>\n  using hmmap = std::unordered_multimap<Key, T, Hash<Key>>;\n\
-    \  template<class T, class Compare = std::less<T>, class Container = std::vector<T>>\n\
-    \  using priq = std::priority_queue<T, Container, Compare>;\n  template<class\
-    \ T, class Compare = std::greater<T>, class Container = std::vector<T>>\n  using\
-    \ heapq = priq<T, Compare, Container>;\n}\n\nusing namespace std;\nusing namespace\
-    \ kyopro;\n"
+    \  template<class T>\n  using vec1 = vec<T>;\n  template<class T>\n  using vec2\
+    \ = std::vector<vec1<T>>;\n  template<class T>\n  using vec3 = std::vector<vec2<T>>;\n\
+    \  template<class T>\n  using vec4 = std::vector<vec3<T>>;\n  template<class T>\n\
+    \  using vec5 = std::vector<vec4<T>>;\n\n  template<class Key, class Compare =\
+    \ std::less<Key>>\n  using mset = std::unordered_set<Key, Compare>;\n  template<class\
+    \ Key, class T, class Compare = std::less<Key>>\n  using mmap = std::unordered_map<Key,\
+    \ T, Compare>;\n  template<class Key>\n  using hset = std::unordered_set<Key,\
+    \ Hash<Key>>;\n  template<class Key, class T>\n  using hmap = std::unordered_map<Key,\
+    \ T, Hash<Key>>;\n  template<class Key>\n  using hmiset = std::unordered_multiset<Key,\
+    \ Hash<Key>>;\n  template<class Key, class T>\n  using hmmap = std::unordered_multimap<Key,\
+    \ T, Hash<Key>>;\n  template<class T, class Compare = std::less<T>, class Container\
+    \ = std::vector<T>>\n  using priq = std::priority_queue<T, Container, Compare>;\n\
+    \  template<class T, class Compare = std::greater<T>, class Container = std::vector<T>>\n\
+    \  using heapq = priq<T, Compare, Container>;\n}\n\nusing namespace std;\nusing\
+    \ namespace kyopro;\n"
   code: "#pragma once\n#include <cstdint>\n#include <limits>\n#include <functional>\n\
     #include <tuple>\n#include <utility>\n#include <vector>\n#include <string>\n#include\
     \ <set>\n#include <map>\n#include <unordered_set>\n#include <unordered_map>\n\
@@ -411,21 +411,21 @@ data:
     \ idx>\n  using agg = typename agg_type<T, idx>::type;\n  using ll1 = agg<ll,\
     \ 1>;\n  using ll2 = agg<ll, 2>;\n  using ll3 = agg<ll, 3>;\n  using ll4 = agg<ll,\
     \ 4>;\n  using ll5 = agg<ll, 5>;\n\n  template<class T>\n  using vec = std::vector<T>;\n\
-    \  template<class T>\n  using vvec = std::vector<vec<T>>;\n  template<class T>\n\
-    \  using vvvec = std::vector<vvec<T>>;\n  template<class T>\n  using vvvvec =\
-    \ std::vector<vvvec<T>>;\n  template<class T>\n  using vvvvvec = std::vector<vvvvec<T>>;\n\
-    \n  template<class Key, class Compare = std::less<Key>>\n  using mset = std::unordered_set<Key,\
-    \ Compare>;\n  template<class Key, class T, class Compare = std::less<Key>>\n\
-    \  using mmap = std::unordered_map<Key, T, Compare>;\n  template<class Key>\n\
-    \  using hset = std::unordered_set<Key, Hash<Key>>;\n  template<class Key, class\
-    \ T>\n  using hmap = std::unordered_map<Key, T, Hash<Key>>;\n  template<class\
-    \ Key>\n  using hmiset = std::unordered_multiset<Key, Hash<Key>>;\n  template<class\
-    \ Key, class T>\n  using hmmap = std::unordered_multimap<Key, T, Hash<Key>>;\n\
-    \  template<class T, class Compare = std::less<T>, class Container = std::vector<T>>\n\
-    \  using priq = std::priority_queue<T, Container, Compare>;\n  template<class\
-    \ T, class Compare = std::greater<T>, class Container = std::vector<T>>\n  using\
-    \ heapq = priq<T, Compare, Container>;\n}\n\nusing namespace std;\nusing namespace\
-    \ kyopro;"
+    \  template<class T>\n  using vec1 = vec<T>;\n  template<class T>\n  using vec2\
+    \ = std::vector<vec1<T>>;\n  template<class T>\n  using vec3 = std::vector<vec2<T>>;\n\
+    \  template<class T>\n  using vec4 = std::vector<vec3<T>>;\n  template<class T>\n\
+    \  using vec5 = std::vector<vec4<T>>;\n\n  template<class Key, class Compare =\
+    \ std::less<Key>>\n  using mset = std::unordered_set<Key, Compare>;\n  template<class\
+    \ Key, class T, class Compare = std::less<Key>>\n  using mmap = std::unordered_map<Key,\
+    \ T, Compare>;\n  template<class Key>\n  using hset = std::unordered_set<Key,\
+    \ Hash<Key>>;\n  template<class Key, class T>\n  using hmap = std::unordered_map<Key,\
+    \ T, Hash<Key>>;\n  template<class Key>\n  using hmiset = std::unordered_multiset<Key,\
+    \ Hash<Key>>;\n  template<class Key, class T>\n  using hmmap = std::unordered_multimap<Key,\
+    \ T, Hash<Key>>;\n  template<class T, class Compare = std::less<T>, class Container\
+    \ = std::vector<T>>\n  using priq = std::priority_queue<T, Container, Compare>;\n\
+    \  template<class T, class Compare = std::greater<T>, class Container = std::vector<T>>\n\
+    \  using heapq = priq<T, Compare, Container>;\n}\n\nusing namespace std;\nusing\
+    \ namespace kyopro;"
   dependsOn:
   - algorithm/Hash.hpp
   - meta/aggregate.hpp
@@ -443,7 +443,7 @@ data:
   requiredBy:
   - all.hpp
   - template/all.hpp
-  timestamp: '2022-06-05 23:14:49+09:00'
+  timestamp: '2022-06-05 23:53:54+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/alias.hpp
