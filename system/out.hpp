@@ -113,11 +113,16 @@ namespace kyopro {
     }
     void print(const char* a) {
       if constexpr (debug) print_char('"');
-      for (; *a; ++a) print_char(*a);
+      for (; *a != '\0'; ++a) print_char(*a);
       if constexpr (debug) print_char('"');
     }
-    template<class CharT, class Traits>
-    void print(const std::basic_string<CharT, Traits>& a) {
+    template<std::size_t len>
+    void print(const char (&a)[len]) {
+      if constexpr (debug) print_char('"');
+      for (auto i: a) print_char(i);
+      if constexpr (debug) print_char('"');
+    }
+    void print(const std::string& a) {
       if constexpr (debug) print_char('"');
       for (auto i: a) print_char(i);
       if constexpr (debug) print_char('"');

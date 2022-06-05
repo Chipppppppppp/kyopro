@@ -42,7 +42,7 @@ namespace kyopro {
 
     constexpr std::size_t operator ()(const T& a) const noexcept {
       std::uint_fast64_t seed = a.size();
-      for (auto& i: a) seed ^= Hash<iterable_value_t<T>>(i) + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4);
+      for (auto&& i: a) seed ^= Hash<iterable_value_t<T>>(i) + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4);
       return seed;
     }
   };

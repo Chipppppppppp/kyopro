@@ -99,8 +99,7 @@ namespace kyopro {
       a = *itr;
       ++itr;
     }
-    template<class CharT, class Traits>
-    void scan(std::basic_string<CharT, Traits>& a) {
+    void scan(std::string& a) {
       discard_space();
       while ((*itr < '\t' || '\r' < *itr) && *itr != ' ') {
         a += *itr;
@@ -149,7 +148,7 @@ namespace kyopro {
     }
     template<class T, std::enable_if_t<is_iterable_v<T> && !has_scan<T>::value>* = nullptr>
     void scan(T& a) {
-      for (auto& i: a) scan(i);
+      for (auto&& i: a) scan(i);
     }
     template<class T, std::enable_if_t<has_scan<T>::value>* = nullptr>
     void scan(T& a) {
