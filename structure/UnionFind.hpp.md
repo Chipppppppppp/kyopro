@@ -142,27 +142,25 @@ data:
     \    return Type<std::tuple_element_t<idx, U>>();\n    }\n\n  public:\n    using\
     \ type = typename decltype(get_type(std::declval<T>(), false))::type;\n  };\n\n\
     \  template<std::size_t idx, class T>\n  using aggregate_element_t = typename\
-    \ aggregate_element<idx, T>::type;\n\n  template<class, class = void>\n  struct\
-    \ is_small_aggregate: std::false_type {};\n  template<class T>\n  struct is_small_aggregate<T,\
-    \ std::enable_if_t<std::is_aggregate_v<T>>>: std::conditional_t<aggregate_size_v<T>\
-    \ <= 8, std::true_type, std::false_type> {};\n\n  template<class T>\n  inline\
-    \ constexpr bool is_small_aggregate_v = is_small_aggregate<T>::value;\n}\n#line\
-    \ 9 \"structure/UnionFind.hpp\"\n\nnamespace kyopro {\n  template<class Container\
-    \ = std::vector<int>>\n  struct UnionFind {\n    using value_type = iterable_value_t<Container>;\n\
-    \    using container_type = Container;\n\n  private:\n    Container par;\n\n \
-    \ public:\n    UnionFind() noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT\
-    \ n) noexcept: par(n, -1) {}\n    template<class C, std::enable_if_t<std::is_same_v<Container,\
-    \ std::decay_t<C>>>>\n    UnionFind(C&& par): par(std::forward<C>(par)) {}\n\n\
-    \    void resize(KYOPRO_BASE_UINT x) { par.resize(x, -1); }\n    void assign(KYOPRO_BASE_UINT\
-    \ x) { par.assign(x, -1); }\n    void reset() { std::fill(std::begin(par), std::end(par),\
-    \ -1); }\n\n    KYOPRO_BASE_UINT size() const noexcept { return par.size(); }\n\
-    \n    KYOPRO_BASE_INT find(int x) {\n      int p = x;\n      while (par[p] >=\
-    \ 0) p = par[p];\n      while (x != p) {\n        int tmp = x;\n        x = par[x];\n\
-    \        par[tmp] = p;\n      }\n      return p;\n    }\n\n    bool merge(int\
-    \ x, int y) {\n      x = find(x), y = find(y);\n      if (x == y) return false;\n\
-    \      if (par[x] > par[y]) {\n        int tmp = x;\n        x = y;\n        y\
-    \ = tmp;\n      }\n      par[x] += par[y];\n      par[y] = x;\n      return true;\n\
-    \    }\n\n    bool same(int x, int y) { return find(x) == find(y); }\n\n    KYOPRO_BASE_INT\
+    \ aggregate_element<idx, T>::type;\n\n  template<class T>\n  struct is_agg: std::conjunction<std::is_aggregate<T>,\
+    \ std::negation<is_iterable<T>>> {};\n\n  template<class T>\n  inline constexpr\
+    \ bool is_agg_v = is_agg<T>::value;\n}\n#line 9 \"structure/UnionFind.hpp\"\n\n\
+    namespace kyopro {\n  template<class Container = std::vector<int>>\n  struct UnionFind\
+    \ {\n    using value_type = iterable_value_t<Container>;\n    using container_type\
+    \ = Container;\n\n  private:\n    Container par;\n\n  public:\n    UnionFind()\
+    \ noexcept = default;\n    UnionFind(KYOPRO_BASE_UINT n) noexcept: par(n, -1)\
+    \ {}\n    template<class C, std::enable_if_t<std::is_same_v<Container, std::decay_t<C>>>>\n\
+    \    UnionFind(C&& par): par(std::forward<C>(par)) {}\n\n    void resize(KYOPRO_BASE_UINT\
+    \ x) { par.resize(x, -1); }\n    void assign(KYOPRO_BASE_UINT x) { par.assign(x,\
+    \ -1); }\n    void reset() { std::fill(std::begin(par), std::end(par), -1); }\n\
+    \n    KYOPRO_BASE_UINT size() const noexcept { return par.size(); }\n\n    KYOPRO_BASE_INT\
+    \ find(int x) {\n      int p = x;\n      while (par[p] >= 0) p = par[p];\n   \
+    \   while (x != p) {\n        int tmp = x;\n        x = par[x];\n        par[tmp]\
+    \ = p;\n      }\n      return p;\n    }\n\n    bool merge(int x, int y) {\n  \
+    \    x = find(x), y = find(y);\n      if (x == y) return false;\n      if (par[x]\
+    \ > par[y]) {\n        int tmp = x;\n        x = y;\n        y = tmp;\n      }\n\
+    \      par[x] += par[y];\n      par[y] = x;\n      return true;\n    }\n\n   \
+    \ bool same(int x, int y) { return find(x) == find(y); }\n\n    KYOPRO_BASE_INT\
     \ group_size(int x) { return -par[find(x)]; }\n\n    std::vector<int> group_members(int\
     \ x) {\n      x = find(x);\n      std::vector<int> a;\n      for (int i = 0; i\
     \ < (int)(size()); ++i) if (find(i) == x) a.emplace_back(i);\n      return a;\n\
@@ -214,7 +212,7 @@ data:
   - all.hpp
   - all/all.hpp
   - structure/all.hpp
-  timestamp: '2022-06-07 00:04:50+09:00'
+  timestamp: '2022-06-05 22:50:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo/unionfind.test.cpp
