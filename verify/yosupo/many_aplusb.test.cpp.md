@@ -1,32 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/aggregate.hpp
     title: meta/aggregate.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: system/out.hpp
     title: system/out.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/many_aplusb
@@ -152,41 +152,42 @@ data:
     \    return Type<std::tuple_element_t<idx, U>>();\n    }\n\n  public:\n    using\
     \ type = typename decltype(get_type(std::declval<T>(), false))::type;\n  };\n\n\
     \  template<std::size_t idx, class T>\n  using aggregate_element_t = typename\
-    \ aggregate_element<idx, T>::type;\n\n  template<class T>\n  struct is_agg: std::conjunction<std::is_aggregate<T>,\
-    \ std::negation<is_iterable<T>>> {};\n\n  template<class T>\n  inline constexpr\
-    \ bool is_agg_v = is_agg<T>::value;\n}\n#line 14 \"system/in.hpp\"\n\nnamespace\
-    \ kyopro {\n  template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>\n  struct\
-    \ Reader {\n    static constexpr KYOPRO_BASE_UINT buf_size = _buf_size;\n\n  private:\n\
-    \    int fd, idx;\n    std::array<char, buf_size> buffer;\n\n  public:\n    Reader()\
-    \ {\n      read(fd, buffer.begin(), buf_size);\n    }\n    Reader(int fd): fd(fd),\
-    \ idx(0), buffer() {\n      read(fd, buffer.begin(), buf_size);\n    }\n    Reader(FILE*\
-    \ fp): fd(fileno(fp)), idx(0), buffer() {\n      read(fd, buffer.begin(), buf_size);\n\
-    \    }\n\n    struct iterator {\n    private:\n      Reader& reader;\n\n    public:\n\
-    \      using difference_type = void;\n      using value_type = void;\n      using\
-    \ pointer = void;\n      using reference = void;\n      using iterator_category\
-    \ = std::input_iterator_tag;\n\n      iterator() noexcept = default;\n      iterator(Reader&\
-    \ reader) noexcept: reader(reader) {}\n\n      iterator& operator ++() {\n   \
-    \     ++reader.idx;\n        if (reader.idx == buf_size) {\n          read(reader.fd,\
-    \ reader.buffer.begin(), buf_size);\n          reader.idx = 0;\n        }\n  \
-    \      return *this;\n      }\n\n      iterator operator ++(int) {\n        iterator\
-    \ before = *this;\n        operator ++();\n        return before;\n      }\n\n\
-    \      char& operator *() const {\n        return reader.buffer[reader.idx];\n\
-    \      }\n    };\n\n    iterator begin() noexcept {\n      return iterator(*this);\n\
-    \    }\n  };\n\n  Reader input(0);\n\n  template<class Iterator, KYOPRO_BASE_UINT\
-    \ _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n    using\
-    \ iterator_type = Iterator;\n    static constexpr KYOPRO_BASE_UINT decimal_precision\
-    \ = _decimal_precision;\n\n  private:\n    template<class, class = void>\n   \
-    \ struct has_scan: std::false_type {};\n    template<class T>\n    struct has_scan<T,\
-    \ std::void_t<decltype(std::declval<T>().scan(std::declval<Scanner&>()))>>: std::true_type\
-    \ {};\n\n  public:\n    Iterator itr;\n\n    Scanner() noexcept = default;\n \
-    \   Scanner(Iterator itr) noexcept: itr(itr) {}\n\n    void discard_space() {\n\
-    \      while (('\\t' <= *itr && *itr <= '\\r') || *itr == ' ') ++itr;\n    }\n\
-    \n    void scan(char& a) {\n      discard_space();\n      a = *itr;\n      ++itr;\n\
-    \    }\n    void scan(std::string& a) {\n      discard_space();\n      while ((*itr\
-    \ < '\\t' || '\\r' < *itr) && *itr != ' ') {\n        a += *itr;\n        ++itr;\n\
-    \      }\n    }\n    void scan(bool& a) {\n      discard_space();\n      while\
-    \ ('0' <= *itr && *itr <= '9') {\n        if (*itr != '0') a = true;\n       \
-    \ ++itr;\n      }\n    }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T>\
+    \ aggregate_element<idx, T>::type;\n\n  template<class, class = void>\n  struct\
+    \ is_small_aggregate: std::false_type {};\n  template<class T>\n  struct is_small_aggregate<T,\
+    \ std::enable_if_t<aggregate_size_v<T> <= 8>>: std::true_type {};\n\n  template<class\
+    \ T>\n  inline constexpr bool is_small_aggregate_v = is_small_aggregate<T>::value;\n\
+    }\n#line 14 \"system/in.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    \ _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Reader {\n    static constexpr KYOPRO_BASE_UINT\
+    \ buf_size = _buf_size;\n\n  private:\n    int fd, idx;\n    std::array<char,\
+    \ buf_size> buffer;\n\n  public:\n    Reader() {\n      read(fd, buffer.begin(),\
+    \ buf_size);\n    }\n    Reader(int fd): fd(fd), idx(0), buffer() {\n      read(fd,\
+    \ buffer.begin(), buf_size);\n    }\n    Reader(FILE* fp): fd(fileno(fp)), idx(0),\
+    \ buffer() {\n      read(fd, buffer.begin(), buf_size);\n    }\n\n    struct iterator\
+    \ {\n    private:\n      Reader& reader;\n\n    public:\n      using difference_type\
+    \ = void;\n      using value_type = void;\n      using pointer = void;\n     \
+    \ using reference = void;\n      using iterator_category = std::input_iterator_tag;\n\
+    \n      iterator() noexcept = default;\n      iterator(Reader& reader) noexcept:\
+    \ reader(reader) {}\n\n      iterator& operator ++() {\n        ++reader.idx;\n\
+    \        if (reader.idx == buf_size) {\n          read(reader.fd, reader.buffer.begin(),\
+    \ buf_size);\n          reader.idx = 0;\n        }\n        return *this;\n  \
+    \    }\n\n      iterator operator ++(int) {\n        iterator before = *this;\n\
+    \        operator ++();\n        return before;\n      }\n\n      char& operator\
+    \ *() const {\n        return reader.buffer[reader.idx];\n      }\n    };\n\n\
+    \    iterator begin() noexcept {\n      return iterator(*this);\n    }\n  };\n\
+    \n  Reader input(0);\n\n  template<class Iterator, KYOPRO_BASE_UINT _decimal_precision\
+    \ = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n    using iterator_type = Iterator;\n\
+    \    static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;\n\
+    \n  private:\n    template<class, class = void>\n    struct has_scan: std::false_type\
+    \ {};\n    template<class T>\n    struct has_scan<T, std::void_t<decltype(std::declval<T>().scan(std::declval<Scanner&>()))>>:\
+    \ std::true_type {};\n\n  public:\n    Iterator itr;\n\n    Scanner() noexcept\
+    \ = default;\n    Scanner(Iterator itr) noexcept: itr(itr) {}\n\n    void discard_space()\
+    \ {\n      while (('\\t' <= *itr && *itr <= '\\r') || *itr == ' ') ++itr;\n  \
+    \  }\n\n    void scan(char& a) {\n      discard_space();\n      a = *itr;\n  \
+    \    ++itr;\n    }\n    void scan(std::string& a) {\n      discard_space();\n\
+    \      while ((*itr < '\\t' || '\\r' < *itr) && *itr != ' ') {\n        a += *itr;\n\
+    \        ++itr;\n      }\n    }\n    void scan(bool& a) {\n      discard_space();\n\
+    \      while ('0' <= *itr && *itr <= '9') {\n        if (*itr != '0') a = true;\n\
+    \        ++itr;\n      }\n    }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T>\
     \ && !has_scan<T>::value>* = nullptr>\n    void scan(T& a) {\n      discard_space();\n\
     \      bool sgn = false;\n      if constexpr (!std::is_unsigned_v<T>) if (*itr\
     \ == '-') {\n        sgn = true;\n        ++itr;\n      }\n      a = 0;\n    \
@@ -198,7 +199,7 @@ data:
     \ *= 10) {\n            d = d * 10 + *itr - '0';\n            ++itr;\n       \
     \   }\n          a += d / i;\n        }\n        while ('0' <= *itr && *itr <=\
     \ '9') ++itr;\n      }\n      if constexpr (!std::is_unsigned_v<T>) if (sgn) a\
-    \ = -a;\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T>\
+    \ = -a;\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_small_aggregate_v<T>\
     \ && !has_scan<T>::value>* = nullptr>\n    void scan(T& a) {\n      if constexpr\
     \ (i < std::tuple_size_v<T>) {\n        scan(std::get<i>(a));\n        scan<i\
     \ + 1>(a);\n      }\n    }\n    template<class T, std::enable_if_t<is_iterable_v<T>\
@@ -271,7 +272,7 @@ data:
     \     if constexpr (std::is_integral_v<T>) return;\n      print_char('.');\n \
     \     for (int i = 0; i < static_cast<int>(decimal_precision); ++i) {\n      \
     \  a *= 10;\n        print_char('0' + static_cast<std::uint_fast64_t>(a) % 10);\n\
-    \      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T>\
+    \      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_small_aggregate_v<T>\
     \ && !has_print<T>::value>* = nullptr>\n    void print(const T& a) {\n      if\
     \ constexpr (debug && i == 0) print_char('{');\n      if constexpr (aggregate_size_v<T>\
     \ != 0) print(access<i>(a));\n      if constexpr (i + 1 < aggregate_size_v<T>)\
@@ -314,8 +315,8 @@ data:
   isVerificationFile: true
   path: verify/yosupo/many_aplusb.test.cpp
   requiredBy: []
-  timestamp: '2022-06-05 23:14:49+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-06-06 23:09:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/yosupo/many_aplusb.test.cpp
 layout: document

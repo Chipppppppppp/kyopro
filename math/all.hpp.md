@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
   - icon: ':warning:'
@@ -25,28 +25,28 @@ data:
   - icon: ':warning:'
     path: math/euler_phi.hpp
     title: math/euler_phi.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/aggregate.hpp
     title: meta/aggregate.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -191,13 +191,15 @@ data:
     \    return Type<std::tuple_element_t<idx, U>>();\n    }\n\n  public:\n    using\
     \ type = typename decltype(get_type(std::declval<T>(), false))::type;\n  };\n\n\
     \  template<std::size_t idx, class T>\n  using aggregate_element_t = typename\
-    \ aggregate_element<idx, T>::type;\n\n  template<class T>\n  struct is_agg: std::conjunction<std::is_aggregate<T>,\
-    \ std::negation<is_iterable<T>>> {};\n\n  template<class T>\n  inline constexpr\
-    \ bool is_agg_v = is_agg<T>::value;\n}\n#line 7 \"meta/aggregate.hpp\"\n\nnamespace\
-    \ kyopro {\n  namespace helper {\n    #define DEFINE_ACCESS(n, ...) \\\n    template<std::size_t\
-    \ idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>> == n>* = nullptr>\\\
-    \n    constexpr decltype(auto) access_impl(T&& aggregate, char) noexcept {\\\n\
-    \      auto&& [__VA_ARGS__] = std::forward<T>(aggregate);\\\n      return std::get<idx>(std::forward_as_tuple(__VA_ARGS__));\\\
+    \ aggregate_element<idx, T>::type;\n\n  template<class, class = void>\n  struct\
+    \ is_small_aggregate: std::false_type {};\n  template<class T>\n  struct is_small_aggregate<T,\
+    \ std::enable_if_t<aggregate_size_v<T> <= 8>>: std::true_type {};\n\n  template<class\
+    \ T>\n  inline constexpr bool is_small_aggregate_v = is_small_aggregate<T>::value;\n\
+    }\n#line 7 \"meta/aggregate.hpp\"\n\nnamespace kyopro {\n  namespace helper {\n\
+    \    #define DEFINE_ACCESS(n, ...) \\\n    template<std::size_t idx, class T,\
+    \ std::enable_if_t<aggregate_size_v<std::decay_t<T>> == n>* = nullptr>\\\n   \
+    \ constexpr decltype(auto) access_impl(T&& aggregate, char) noexcept {\\\n   \
+    \   auto&& [__VA_ARGS__] = std::forward<T>(aggregate);\\\n      return std::get<idx>(std::forward_as_tuple(__VA_ARGS__));\\\
     \n    }\n\n    DEFINE_ACCESS(1, a)\n    DEFINE_ACCESS(2, a, b)\n    DEFINE_ACCESS(3,\
     \ a, b, c)\n    DEFINE_ACCESS(4, a, b, c, d)\n    DEFINE_ACCESS(5, a, b, c, d,\
     \ e)\n    DEFINE_ACCESS(6, a, b, c, d, e, f)\n    DEFINE_ACCESS(7, a, b, c, d,\
@@ -211,7 +213,7 @@ data:
     \ class = void>\n  struct Hash;\n\n  template<class T>\n  struct Hash<T, std::enable_if_t<std::is_scalar_v<T>>>:\
     \ std::hash<T> {\n    using value_type = T;\n\n    constexpr std::size_t operator\
     \ ()(T a) const noexcept {\n      return std::hash<T>::operator ()(a);\n    }\n\
-    \  };\n\n  template<class T>\n  struct Hash<T, std::enable_if_t<is_agg_v<T>>>\
+    \  };\n\n  template<class T>\n  struct Hash<T, std::enable_if_t<is_small_aggregate_v<T>>>\
     \ {\n    using value_type = T;\n\n    template<KYOPRO_BASE_UINT i = 0>\n    constexpr\
     \ std::size_t operator ()(const T& a) const noexcept {\n      if constexpr (i\
     \ == aggregate_size_v<T>) return aggregate_size_v<T>;\n      else {\n        std::uint_fast64_t\
@@ -479,7 +481,7 @@ data:
   requiredBy:
   - all.hpp
   - all/all.hpp
-  timestamp: '2022-06-05 23:14:49+09:00'
+  timestamp: '2022-06-06 23:09:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/all.hpp

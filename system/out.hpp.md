@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/aggregate.hpp
     title: meta/aggregate.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -17,7 +17,7 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: system/all.hpp
     title: system/all.hpp
   - icon: ':warning:'
@@ -27,24 +27,24 @@ data:
     path: template/macro.hpp
     title: template/macro.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/many_aplusb.test.cpp
     title: verify/yosupo/many_aplusb.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/point_add_range_sum.test.cpp
     title: verify/yosupo/point_add_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"system/out.hpp\"\n#include <unistd.h>\n#include <array>\n\
@@ -163,13 +163,15 @@ data:
     \    return Type<std::tuple_element_t<idx, U>>();\n    }\n\n  public:\n    using\
     \ type = typename decltype(get_type(std::declval<T>(), false))::type;\n  };\n\n\
     \  template<std::size_t idx, class T>\n  using aggregate_element_t = typename\
-    \ aggregate_element<idx, T>::type;\n\n  template<class T>\n  struct is_agg: std::conjunction<std::is_aggregate<T>,\
-    \ std::negation<is_iterable<T>>> {};\n\n  template<class T>\n  inline constexpr\
-    \ bool is_agg_v = is_agg<T>::value;\n}\n#line 7 \"meta/aggregate.hpp\"\n\nnamespace\
-    \ kyopro {\n  namespace helper {\n    #define DEFINE_ACCESS(n, ...) \\\n    template<std::size_t\
-    \ idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>> == n>* = nullptr>\\\
-    \n    constexpr decltype(auto) access_impl(T&& aggregate, char) noexcept {\\\n\
-    \      auto&& [__VA_ARGS__] = std::forward<T>(aggregate);\\\n      return std::get<idx>(std::forward_as_tuple(__VA_ARGS__));\\\
+    \ aggregate_element<idx, T>::type;\n\n  template<class, class = void>\n  struct\
+    \ is_small_aggregate: std::false_type {};\n  template<class T>\n  struct is_small_aggregate<T,\
+    \ std::enable_if_t<aggregate_size_v<T> <= 8>>: std::true_type {};\n\n  template<class\
+    \ T>\n  inline constexpr bool is_small_aggregate_v = is_small_aggregate<T>::value;\n\
+    }\n#line 7 \"meta/aggregate.hpp\"\n\nnamespace kyopro {\n  namespace helper {\n\
+    \    #define DEFINE_ACCESS(n, ...) \\\n    template<std::size_t idx, class T,\
+    \ std::enable_if_t<aggregate_size_v<std::decay_t<T>> == n>* = nullptr>\\\n   \
+    \ constexpr decltype(auto) access_impl(T&& aggregate, char) noexcept {\\\n   \
+    \   auto&& [__VA_ARGS__] = std::forward<T>(aggregate);\\\n      return std::get<idx>(std::forward_as_tuple(__VA_ARGS__));\\\
     \n    }\n\n    DEFINE_ACCESS(1, a)\n    DEFINE_ACCESS(2, a, b)\n    DEFINE_ACCESS(3,\
     \ a, b, c)\n    DEFINE_ACCESS(4, a, b, c, d)\n    DEFINE_ACCESS(5, a, b, c, d,\
     \ e)\n    DEFINE_ACCESS(6, a, b, c, d, e, f)\n    DEFINE_ACCESS(7, a, b, c, d,\
@@ -228,7 +230,7 @@ data:
     \     if constexpr (std::is_integral_v<T>) return;\n      print_char('.');\n \
     \     for (int i = 0; i < static_cast<int>(decimal_precision); ++i) {\n      \
     \  a *= 10;\n        print_char('0' + static_cast<std::uint_fast64_t>(a) % 10);\n\
-    \      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T>\
+    \      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_small_aggregate_v<T>\
     \ && !has_print<T>::value>* = nullptr>\n    void print(const T& a) {\n      if\
     \ constexpr (debug && i == 0) print_char('{');\n      if constexpr (aggregate_size_v<T>\
     \ != 0) print(access<i>(a));\n      if constexpr (i + 1 < aggregate_size_v<T>)\
@@ -306,7 +308,7 @@ data:
     \     if constexpr (std::is_integral_v<T>) return;\n      print_char('.');\n \
     \     for (int i = 0; i < static_cast<int>(decimal_precision); ++i) {\n      \
     \  a *= 10;\n        print_char('0' + static_cast<std::uint_fast64_t>(a) % 10);\n\
-    \      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T>\
+    \      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_small_aggregate_v<T>\
     \ && !has_print<T>::value>* = nullptr>\n    void print(const T& a) {\n      if\
     \ constexpr (debug && i == 0) print_char('{');\n      if constexpr (aggregate_size_v<T>\
     \ != 0) print(access<i>(a));\n      if constexpr (i + 1 < aggregate_size_v<T>)\
@@ -343,8 +345,8 @@ data:
   - template/macro.hpp
   - template/all.hpp
   - all/all.hpp
-  timestamp: '2022-06-05 23:14:49+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-06-06 23:09:46+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp
   - verify/yosupo/unionfind.test.cpp
