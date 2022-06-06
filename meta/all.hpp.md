@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -156,9 +156,10 @@ data:
     \  template<std::size_t idx, class T>\n  using aggregate_element_t = typename\
     \ aggregate_element<idx, T>::type;\n\n  template<class, class = void>\n  struct\
     \ is_small_aggregate: std::false_type {};\n  template<class T>\n  struct is_small_aggregate<T,\
-    \ std::enable_if_t<aggregate_size_v<T> <= 8>>: std::true_type {};\n\n  template<class\
-    \ T>\n  inline constexpr bool is_small_aggregate_v = is_small_aggregate<T>::value;\n\
-    }\n#line 5 \"meta/all.hpp\"\n"
+    \ std::enable_if_t<std::is_aggregate_v<T>>>: std::conditional_t<aggregate_size_v<T>\
+    \ <= 8, std::true_type, std::false_type> {};\n\n  template<class T>\n  inline\
+    \ constexpr bool is_small_aggregate_v = is_small_aggregate<T>::value;\n}\n#line\
+    \ 5 \"meta/all.hpp\"\n"
   code: '#pragma once
 
     #include "constant.hpp"
@@ -176,7 +177,7 @@ data:
   requiredBy:
   - all.hpp
   - all/all.hpp
-  timestamp: '2022-06-06 23:09:46+09:00'
+  timestamp: '2022-06-07 00:04:50+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: meta/all.hpp

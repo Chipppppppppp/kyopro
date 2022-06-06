@@ -1,34 +1,34 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/aggregate.hpp
     title: meta/aggregate.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -42,12 +42,12 @@ data:
     path: math/all.hpp
     title: math/all.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"math/factorize.hpp\"\n#include <algorithm>\n#include <cstdint>\n\
@@ -204,17 +204,18 @@ data:
     \  template<std::size_t idx, class T>\n  using aggregate_element_t = typename\
     \ aggregate_element<idx, T>::type;\n\n  template<class, class = void>\n  struct\
     \ is_small_aggregate: std::false_type {};\n  template<class T>\n  struct is_small_aggregate<T,\
-    \ std::enable_if_t<aggregate_size_v<T> <= 8>>: std::true_type {};\n\n  template<class\
-    \ T>\n  inline constexpr bool is_small_aggregate_v = is_small_aggregate<T>::value;\n\
-    }\n#line 7 \"meta/aggregate.hpp\"\n\nnamespace kyopro {\n  namespace helper {\n\
-    \    #define DEFINE_ACCESS(n, ...) \\\n    template<std::size_t idx, class T,\
-    \ std::enable_if_t<aggregate_size_v<std::decay_t<T>> == n>* = nullptr>\\\n   \
-    \ constexpr decltype(auto) access_impl(T&& aggregate, char) noexcept {\\\n   \
-    \   auto&& [__VA_ARGS__] = std::forward<T>(aggregate);\\\n      return std::get<idx>(std::forward_as_tuple(__VA_ARGS__));\\\
-    \n    }\n\n    DEFINE_ACCESS(1, a)\n    DEFINE_ACCESS(2, a, b)\n    DEFINE_ACCESS(3,\
-    \ a, b, c)\n    DEFINE_ACCESS(4, a, b, c, d)\n    DEFINE_ACCESS(5, a, b, c, d,\
-    \ e)\n    DEFINE_ACCESS(6, a, b, c, d, e, f)\n    DEFINE_ACCESS(7, a, b, c, d,\
-    \ e, f, g)\n    DEFINE_ACCESS(8, a, b, c, d, e, f, g, h)\n\n    template<std::size_t\
+    \ std::enable_if_t<std::is_aggregate_v<T>>>: std::conditional_t<aggregate_size_v<T>\
+    \ <= 8, std::true_type, std::false_type> {};\n\n  template<class T>\n  inline\
+    \ constexpr bool is_small_aggregate_v = is_small_aggregate<T>::value;\n}\n#line\
+    \ 7 \"meta/aggregate.hpp\"\n\nnamespace kyopro {\n  namespace helper {\n    #define\
+    \ DEFINE_ACCESS(n, ...) \\\n    template<std::size_t idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>>\
+    \ == n>* = nullptr>\\\n    constexpr decltype(auto) access_impl(T&& aggregate,\
+    \ char) noexcept {\\\n      auto&& [__VA_ARGS__] = std::forward<T>(aggregate);\\\
+    \n      return std::get<idx>(std::forward_as_tuple(__VA_ARGS__));\\\n    }\n\n\
+    \    DEFINE_ACCESS(1, a)\n    DEFINE_ACCESS(2, a, b)\n    DEFINE_ACCESS(3, a,\
+    \ b, c)\n    DEFINE_ACCESS(4, a, b, c, d)\n    DEFINE_ACCESS(5, a, b, c, d, e)\n\
+    \    DEFINE_ACCESS(6, a, b, c, d, e, f)\n    DEFINE_ACCESS(7, a, b, c, d, e, f,\
+    \ g)\n    DEFINE_ACCESS(8, a, b, c, d, e, f, g, h)\n\n    template<std::size_t\
     \ idx, class T, std::void_t<decltype(std::get<idx>(std::declval<std::decay_t<T>>()))>*\
     \ = nullptr>\n    constexpr decltype(auto) access_impl(T&& aggregate, bool) noexcept\
     \ {\n      return std::get<idx>(std::forward<T>(aggregate));\n    }\n\n    #undef\
@@ -398,8 +399,8 @@ data:
   - math/all.hpp
   - all.hpp
   - all/all.hpp
-  timestamp: '2022-06-06 23:09:46+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-06-07 00:04:50+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo/factorize.test.cpp
 documentation_of: math/factorize.hpp
