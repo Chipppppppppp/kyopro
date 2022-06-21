@@ -243,8 +243,8 @@ data:
     \ && !has_scan<T>::value>* = nullptr>\n    void scan(T& a) {\n      discard_space();\n\
     \      bool sgn = false;\n      if constexpr (!std::is_unsigned_v<T>) if (*itr\
     \ == '-') {\n        sgn = true;\n        ++itr;\n      }\n      a = 0;\n    \
-    \  for (; '0' <= *itr && *itr <= '9'; ++itr) a = a * 10 + (*itr & 15);\n     \
-    \ if (*itr == '.') {\n        ++itr;\n        if constexpr (std::is_floating_point_v<T>)\
+    \  for (; '0' <= *itr && *itr <= '9'; ++itr) a = a * 10 + *itr - '0';\n      if\
+    \ (*itr == '.') {\n        ++itr;\n        if constexpr (std::is_floating_point_v<T>)\
     \ {\n          constexpr std::uint_fast64_t power_decimal_precision = power(10ULL,\
     \ decimal_precision);\n          T d = 0;\n          std::uint_fast64_t i = 1;\n\
     \          for (; '0' <= *itr && *itr <= '9' && i < power_decimal_precision; i\
@@ -375,7 +375,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo/point_add_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-06-21 23:46:55+09:00'
+  timestamp: '2022-06-21 23:56:23+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yosupo/point_add_range_sum.test.cpp
