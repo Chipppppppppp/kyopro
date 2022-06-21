@@ -1,5 +1,7 @@
 #pragma once
+#include <cstddef>
 #include <iterator>
+#include <memory>
 #include <tuple>
 #include <type_traits>
 #include <utility>
@@ -15,11 +17,9 @@ namespace kyopro::helper {
     return cnt;
   }
 
-  template<class F, KYOPRO_BASE_UINT... idx>
-  auto read_impl(F&& f, std::integer_sequence<KYOPRO_BASE_UINT, idx...>) {
-    auto res = std::tuple{(static_cast<void>(idx), f())...};
-    scan(res);
-    return res;
+  template<class F, std::size_t... idx>
+  auto read_impl(F&& f, std::index_sequence<idx...>) {
+    return std::tuple{(static_cast<void>(idx), f())...};
   }
 
   Printer<Writer<>::iterator, true, true, true> debug_impl(output.begin());
@@ -32,7 +32,13 @@ namespace kyopro::helper {
   void print_if<false>(const char*) {}
 }
 
-#define read(init, ...) auto [__VA_ARGS__] = kyopro::helper::read_impl([&] { return init; }, std::make_integer_sequence<KYOPRO_BASE_UINT, kyopro::helper::va_args_size(#__VA_ARGS__)>())
+#define read(type_or_init, ...) auto [__VA_ARGS__] = kyopro::helper::read_impl(([]() {\
+  using T = std::decay_t<decltype(*new type_or_init)>;\
+  alignas(T) std::byte storage[sizeof(T)];\
+  T* p = new (storage) type_or_init;\
+  kyopro::scan(*p);\
+  return std::move(*p);\
+}), std::make_index_sequence<kyopro::helper::va_args_size(#__VA_ARGS__)>())
 #define debug(...) (kyopro::print('#', 'l', 'i', 'n', 'e', ' ', __LINE__, ':'), kyopro::helper::print_if<kyopro::helper::va_args_size(#__VA_ARGS__) != 0>(#__VA_ARGS__), kyopro::helper::debug_impl(__VA_ARGS__))
 
 #define KYOPRO_OVERLOAD_MACRO(_1, _2, _3, _4, name, ...) name
