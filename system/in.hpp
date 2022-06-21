@@ -122,7 +122,7 @@ namespace kyopro {
         ++itr;
       }
       a = 0;
-      for (; '0' <= *itr && *itr <= '9'; ++itr) a = a * 10 + *itr - '0';
+      for (; '0' <= *itr && *itr <= '9'; ++itr) a = a * 10 + (*itr & 15);
       if (*itr == '.') {
         ++itr;
         if constexpr (std::is_floating_point_v<T>) {
