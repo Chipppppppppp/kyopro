@@ -315,33 +315,33 @@ data:
   isVerificationFile: false
   path: meta/trait.hpp
   requiredBy:
-  - algorithm/all.hpp
+  - all/all.hpp
   - algorithm/Hash.hpp
-  - math/DynamicModInt.hpp
-  - math/ModInt.hpp
-  - math/all.hpp
-  - math/is_prime.hpp
-  - math/factorize.hpp
-  - all.hpp
+  - algorithm/all.hpp
+  - template/macro.hpp
+  - template/alias.hpp
+  - template/all.hpp
   - system/in.hpp
   - system/out.hpp
   - system/all.hpp
-  - template/macro.hpp
-  - template/all.hpp
-  - template/alias.hpp
-  - all/all.hpp
-  - meta/all.hpp
   - meta/aggregate.hpp
+  - meta/all.hpp
+  - math/ModInt.hpp
+  - math/DynamicModInt.hpp
+  - math/is_prime.hpp
+  - math/factorize.hpp
+  - math/all.hpp
   - structure/UnionFind.hpp
   - structure/all.hpp
+  - all.hpp
   timestamp: '2022-06-05 22:50:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/aoj/PrimeNumber.test.cpp
   - verify/yosupo/unionfind.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/factorize.test.cpp
   - verify/yosupo/many_aplusb.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/aoj/PrimeNumber.test.cpp
 documentation_of: meta/trait.hpp
 layout: document
 redirect_from:

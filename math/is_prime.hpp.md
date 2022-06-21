@@ -357,15 +357,15 @@ data:
   isVerificationFile: false
   path: math/is_prime.hpp
   requiredBy:
-  - math/all.hpp
-  - math/factorize.hpp
-  - all.hpp
   - all/all.hpp
+  - math/factorize.hpp
+  - math/all.hpp
+  - all.hpp
   timestamp: '2022-06-05 23:14:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/aoj/PrimeNumber.test.cpp
   - verify/yosupo/factorize.test.cpp
+  - verify/aoj/PrimeNumber.test.cpp
 documentation_of: math/is_prime.hpp
 layout: document
 redirect_from:

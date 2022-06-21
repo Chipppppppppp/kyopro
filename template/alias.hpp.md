@@ -441,8 +441,8 @@ data:
   isVerificationFile: false
   path: template/alias.hpp
   requiredBy:
-  - all.hpp
   - template/all.hpp
+  - all.hpp
   timestamp: '2022-06-05 23:53:54+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

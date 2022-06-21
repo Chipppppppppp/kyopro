@@ -332,8 +332,8 @@ data:
   isVerificationFile: false
   path: template/stl.hpp
   requiredBy:
-  - all.hpp
   - template/all.hpp
+  - all.hpp
   timestamp: '2022-05-10 21:54:43+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
