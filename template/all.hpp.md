@@ -575,18 +575,19 @@ data:
     \     }\n      if constexpr (sep && !first) print_sep();\n      print(head);\n\
     \      operator ()<false>(std::forward<Args>(args)...);\n    }\n  };\n\n  Printer<Writer<>::iterator,\
     \ false, false> print(output.begin()), eprint(error.begin());\n  Printer<Writer<>::iterator>\
-    \ println(output.begin()), eprintln(error.begin());\n}\n#line 8 \"template/macro.hpp\"\
+    \ println(output.begin()), eprintln(error.begin());\n}\n#line 10 \"template/macro.hpp\"\
     \n\nnamespace kyopro::helper {\n  template<KYOPRO_BASE_UINT len>\n  constexpr\
     \ KYOPRO_BASE_UINT va_args_size(const char (&s)[len]) noexcept {\n    if constexpr\
     \ (len == 1) return 0;\n    KYOPRO_BASE_UINT cnt = 1;\n    for (auto i: s) if\
-    \ (i == ',') ++cnt;\n    return cnt;\n  }\n\n  template<class F, KYOPRO_BASE_UINT...\
-    \ idx>\n  auto read_impl(F&& f, std::integer_sequence<KYOPRO_BASE_UINT, idx...>)\
-    \ {\n    auto res = std::tuple{(static_cast<void>(idx), f())...};\n    scan(res);\n\
-    \    return res;\n  }\n\n  Printer<Writer<>::iterator, true, true, true> debug_impl(output.begin());\n\
+    \ (i == ',') ++cnt;\n    return cnt;\n  }\n\n  template<class F, std::size_t...\
+    \ idx>\n  auto read_impl(F&& f, std::index_sequence<idx...>) {\n    return std::tuple{(static_cast<void>(idx),\
+    \ f())...};\n  }\n\n  Printer<Writer<>::iterator, true, true, true> debug_impl(output.begin());\n\
     \n  template<bool>\n  void print_if(const char* s) {\n    print(' ', s, ' ', '=',\
     \ ' ');\n  }\n  template<>\n  void print_if<false>(const char*) {}\n}\n\n#define\
-    \ read(init, ...) auto [__VA_ARGS__] = kyopro::helper::read_impl([&] { return\
-    \ init; }, std::make_integer_sequence<KYOPRO_BASE_UINT, kyopro::helper::va_args_size(#__VA_ARGS__)>())\n\
+    \ read(type_or_init, ...) auto [__VA_ARGS__] = kyopro::helper::read_impl(([]()\
+    \ {\\\n  using T = std::decay_t<decltype(*new type_or_init)>;\\\n  alignas(T)\
+    \ std::byte storage[sizeof(T)];\\\n  T* p = new (storage) type_or_init;\\\n  kyopro::scan(*p);\\\
+    \n  return std::move(*p);\\\n}), std::make_index_sequence<kyopro::helper::va_args_size(#__VA_ARGS__)>())\n\
     #define debug(...) (kyopro::print('#', 'l', 'i', 'n', 'e', ' ', __LINE__, ':'),\
     \ kyopro::helper::print_if<kyopro::helper::va_args_size(#__VA_ARGS__) != 0>(#__VA_ARGS__),\
     \ kyopro::helper::debug_impl(__VA_ARGS__))\n\n#define KYOPRO_OVERLOAD_MACRO(_1,\
@@ -674,7 +675,7 @@ data:
   path: template/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-06-21 23:56:23+09:00'
+  timestamp: '2022-06-22 01:27:22+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/all.hpp
