@@ -36,9 +36,9 @@ data:
   isVerificationFile: false
   path: function/RecursiveLambda.hpp
   requiredBy:
-  - all/all.hpp
-  - function/all.hpp
   - all.hpp
+  - function/all.hpp
+  - all/all.hpp
   timestamp: '2022-06-05 22:20:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

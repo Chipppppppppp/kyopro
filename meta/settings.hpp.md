@@ -235,47 +235,47 @@ data:
   isVerificationFile: false
   path: meta/settings.hpp
   requiredBy:
-  - all/all.hpp
-  - algorithm/compress.hpp
-  - algorithm/Hash.hpp
-  - algorithm/bit.hpp
-  - algorithm/all.hpp
-  - function/monoid.hpp
+  - all.hpp
   - function/all.hpp
-  - template/len.hpp
-  - template/make_array.hpp
-  - template/macro.hpp
-  - template/alias.hpp
-  - template/constant.hpp
-  - template/make_vector.hpp
+  - function/monoid.hpp
+  - math/all.hpp
+  - math/factorize.hpp
+  - math/euler_phi.hpp
+  - math/Montgomery.hpp
+  - math/divisors.hpp
+  - math/power.hpp
+  - math/ModInt.hpp
+  - math/is_prime.hpp
+  - math/DynamicModInt.hpp
+  - algorithm/all.hpp
+  - algorithm/bit.hpp
+  - algorithm/Hash.hpp
+  - algorithm/compress.hpp
+  - all/all.hpp
   - template/all.hpp
-  - system/in.hpp
-  - system/out.hpp
-  - system/all.hpp
+  - template/len.hpp
+  - template/alias.hpp
+  - template/macro.hpp
+  - template/make_vector.hpp
+  - template/constant.hpp
+  - template/make_array.hpp
+  - meta/all.hpp
+  - meta/aggregate.hpp
   - meta/trait.hpp
   - meta/constant.hpp
-  - meta/aggregate.hpp
-  - meta/all.hpp
-  - math/ModInt.hpp
-  - math/DynamicModInt.hpp
-  - math/power.hpp
-  - math/is_prime.hpp
-  - math/Montgomery.hpp
-  - math/euler_phi.hpp
-  - math/divisors.hpp
-  - math/factorize.hpp
-  - math/all.hpp
+  - structure/all.hpp
   - structure/FenwickTree.hpp
   - structure/UnionFind.hpp
-  - structure/all.hpp
-  - all.hpp
+  - system/all.hpp
+  - system/out.hpp
+  - system/in.hpp
   timestamp: '2022-03-19 00:51:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/yosupo/many_aplusb.test.cpp
   - verify/yosupo/unionfind.test.cpp
   - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/factorize.test.cpp
-  - verify/yosupo/many_aplusb.test.cpp
   - verify/aoj/PrimeNumber.test.cpp
 documentation_of: meta/settings.hpp
 layout: document

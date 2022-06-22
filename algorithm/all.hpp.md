@@ -240,8 +240,8 @@ data:
   isVerificationFile: false
   path: algorithm/all.hpp
   requiredBy:
-  - all/all.hpp
   - all.hpp
+  - all/all.hpp
   timestamp: '2022-06-05 23:14:49+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

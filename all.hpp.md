@@ -765,11 +765,13 @@ data:
     \ 1}, {0, 1}, {-1, 1}}};\n}\n#line 4 \"template/len.hpp\"\n\nnamespace kyopro\
     \ {\n  template<class T>\n  constexpr KYOPRO_BASE_INT len(T&& a) noexcept {\n\
     \    return std::size(a);\n  }\n}\n#line 10 \"template/macro.hpp\"\n\nnamespace\
-    \ kyopro::helper {\n  template<KYOPRO_BASE_UINT len>\n  constexpr KYOPRO_BASE_UINT\
+    \ kyopro::helper {\n  template<std::size_t len>\n  constexpr KYOPRO_BASE_UINT\
     \ va_args_size(const char (&s)[len]) noexcept {\n    if constexpr (len == 1) return\
-    \ 0;\n    KYOPRO_BASE_UINT cnt = 1;\n    for (auto i: s) if (i == ',') ++cnt;\n\
-    \    return cnt;\n  }\n\n  template<class F, std::size_t... idx>\n  auto read_impl(F&&\
-    \ f, std::index_sequence<idx...>) {\n    return std::tuple{(static_cast<void>(idx),\
+    \ 0;\n    KYOPRO_BASE_UINT cnt = 1;\n    std::uint_fast64_t bracket = 0;\n   \
+    \ for (auto i: s) {\n      if (i == '(') ++bracket;\n      else if (i == ')')\
+    \ --bracket;\n      else if (i == ',' && bracket == 0) ++cnt;\n    }\n    return\
+    \ cnt;\n  }\n\n  template<class F, std::size_t... idx>\n  auto read_impl(F&& f,\
+    \ std::index_sequence<idx...>) {\n    return std::tuple{(static_cast<void>(idx),\
     \ f())...};\n  }\n\n  Printer<Writer<>::iterator, true, true, true> debug_impl(output.begin());\n\
     \n  template<bool>\n  void print_if(const char* s) {\n    print(' ', s, ' ', '=',\
     \ ' ');\n  }\n  template<>\n  void print_if<false>(const char*) {}\n}\n\n#define\
@@ -866,7 +868,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2022-06-22 01:27:22+09:00'
+  timestamp: '2022-06-22 22:50:07+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp

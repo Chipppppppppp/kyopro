@@ -115,9 +115,9 @@ data:
   isVerificationFile: false
   path: structure/FenwickTree.hpp
   requiredBy:
+  - all.hpp
   - all/all.hpp
   - structure/all.hpp
-  - all.hpp
   timestamp: '2022-06-05 22:20:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

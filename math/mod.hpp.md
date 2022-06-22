@@ -45,12 +45,12 @@ data:
   isVerificationFile: false
   path: math/mod.hpp
   requiredBy:
-  - all/all.hpp
-  - template/alias.hpp
-  - template/all.hpp
-  - math/ModInt.hpp
-  - math/all.hpp
   - all.hpp
+  - math/all.hpp
+  - math/ModInt.hpp
+  - all/all.hpp
+  - template/all.hpp
+  - template/alias.hpp
   timestamp: '2022-06-05 22:20:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

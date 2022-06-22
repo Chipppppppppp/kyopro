@@ -357,10 +357,10 @@ data:
   isVerificationFile: false
   path: math/is_prime.hpp
   requiredBy:
-  - all/all.hpp
-  - math/factorize.hpp
-  - math/all.hpp
   - all.hpp
+  - math/all.hpp
+  - math/factorize.hpp
+  - all/all.hpp
   timestamp: '2022-06-05 23:14:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

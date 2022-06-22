@@ -576,11 +576,13 @@ data:
     \      operator ()<false>(std::forward<Args>(args)...);\n    }\n  };\n\n  Printer<Writer<>::iterator,\
     \ false, false> print(output.begin()), eprint(error.begin());\n  Printer<Writer<>::iterator>\
     \ println(output.begin()), eprintln(error.begin());\n}\n#line 10 \"template/macro.hpp\"\
-    \n\nnamespace kyopro::helper {\n  template<KYOPRO_BASE_UINT len>\n  constexpr\
-    \ KYOPRO_BASE_UINT va_args_size(const char (&s)[len]) noexcept {\n    if constexpr\
-    \ (len == 1) return 0;\n    KYOPRO_BASE_UINT cnt = 1;\n    for (auto i: s) if\
-    \ (i == ',') ++cnt;\n    return cnt;\n  }\n\n  template<class F, std::size_t...\
-    \ idx>\n  auto read_impl(F&& f, std::index_sequence<idx...>) {\n    return std::tuple{(static_cast<void>(idx),\
+    \n\nnamespace kyopro::helper {\n  template<std::size_t len>\n  constexpr KYOPRO_BASE_UINT\
+    \ va_args_size(const char (&s)[len]) noexcept {\n    if constexpr (len == 1) return\
+    \ 0;\n    KYOPRO_BASE_UINT cnt = 1;\n    std::uint_fast64_t bracket = 0;\n   \
+    \ for (auto i: s) {\n      if (i == '(') ++bracket;\n      else if (i == ')')\
+    \ --bracket;\n      else if (i == ',' && bracket == 0) ++cnt;\n    }\n    return\
+    \ cnt;\n  }\n\n  template<class F, std::size_t... idx>\n  auto read_impl(F&& f,\
+    \ std::index_sequence<idx...>) {\n    return std::tuple{(static_cast<void>(idx),\
     \ f())...};\n  }\n\n  Printer<Writer<>::iterator, true, true, true> debug_impl(output.begin());\n\
     \n  template<bool>\n  void print_if(const char* s) {\n    print(' ', s, ' ', '=',\
     \ ' ');\n  }\n  template<>\n  void print_if<false>(const char*) {}\n}\n\n#define\
@@ -675,7 +677,7 @@ data:
   path: template/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-06-22 01:27:22+09:00'
+  timestamp: '2022-06-22 22:50:07+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/all.hpp
