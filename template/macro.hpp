@@ -9,11 +9,16 @@
 #include "../system/all.hpp"
 
 namespace kyopro::helper {
-  template<KYOPRO_BASE_UINT len>
+  template<std::size_t len>
   constexpr KYOPRO_BASE_UINT va_args_size(const char (&s)[len]) noexcept {
     if constexpr (len == 1) return 0;
     KYOPRO_BASE_UINT cnt = 1;
-    for (auto i: s) if (i == ',') ++cnt;
+    std::uint_fast64_t bracket = 0;
+    for (auto i: s) {
+      if (i == '(') ++bracket;
+      else if (i == ')') --bracket;
+      else if (i == ',' && bracket == 0) ++cnt;
+    }
     return cnt;
   }
 
