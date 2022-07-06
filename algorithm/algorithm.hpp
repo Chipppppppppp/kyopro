@@ -1,0 +1,5 @@
+#include <algorithm>
+
+namespace kyopro {
+  
+}
