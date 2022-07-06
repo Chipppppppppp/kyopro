@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -17,7 +17,7 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/all.hpp
     title: system/all.hpp
   - icon: ':warning:'
@@ -27,10 +27,10 @@ data:
     path: template/macro.hpp
     title: template/macro.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
   - icon: ':heavy_check_mark:'
@@ -42,9 +42,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"system/in.hpp\"\n#include <unistd.h>\n#include <array>\n\
@@ -292,7 +292,7 @@ data:
   - template/macro.hpp
   - system/all.hpp
   timestamp: '2022-06-21 23:56:23+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/yosupo/many_aplusb.test.cpp
   - verify/yosupo/unionfind.test.cpp

@@ -1,28 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/aggregate.hpp
     title: meta/aggregate.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/out.hpp
     title: system/out.hpp
   _extendedRequiredBy: []

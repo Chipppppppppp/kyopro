@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
     path: algorithm/compress.hpp
     title: algorithm/compress.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/aggregate.hpp
     title: meta/aggregate.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -41,70 +41,75 @@ data:
     #define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n#endif\n\n\
     #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 5 \"algorithm/bit.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ T>\n  constexpr KYOPRO_BASE_INT pop_count(T x) noexcept {\n    constexpr auto\
-    \ digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n    static_assert(digits\
-    \ <= std::numeric_limits<unsigned long long>::digits, \"Integer size is too large\"\
-    );\n    if constexpr (digits <= std::numeric_limits<unsigned int>::digits) return\
-    \ __builtin_popcount(x);\n    else if constexpr (digits <= std::numeric_limits<unsigned\
-    \ long>::digits) return __builtin_popcountl(x);\n    else return __builtin_popcountll(x);\n\
-    \  }\n\n  template<class T>\n  constexpr KYOPRO_BASE_INT leading_zero(T x) noexcept\
-    \ {\n    constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
-    \    static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"Integer size is too large\");\n    if (x == 0) return 0;\n    if constexpr\
+    #endif\n#line 5 \"algorithm/bit.hpp\"\n\nnamespace kyopro {\n  inline constexpr\
+    \ struct {\n    template<class T>\n    constexpr KYOPRO_BASE_INT operator ()(T\
+    \ x) noexcept {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
+    \      static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
+    \ \"Integer size is too large\");\n      if constexpr (digits <= std::numeric_limits<unsigned\
+    \ int>::digits) return __builtin_popcount(x);\n      else if constexpr (digits\
+    \ <= std::numeric_limits<unsigned long>::digits) return __builtin_popcountl(x);\n\
+    \      else return __builtin_popcountll(x);\n    }\n  } pop_count;\n\n  inline\
+    \ constexpr struct {\n    template<class T>\n    constexpr KYOPRO_BASE_INT operator\
+    \ ()(T x) noexcept {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
+    \      static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
+    \ \"Integer size is too large\");\n      if (x == 0) return 0;\n      if constexpr\
     \ (digits <= std::numeric_limits<unsigned int>::digits) return __builtin_clz(x)\
-    \ + digits - std::numeric_limits<unsigned int>::digits;\n    else if constexpr\
+    \ + digits - std::numeric_limits<unsigned int>::digits;\n      else if constexpr\
     \ (digits <= std::numeric_limits<unsigned long>::digits) return __builtin_clzl(x)\
-    \ + digits - std::numeric_limits<unsigned long>::digits;\n    else return __builtin_clzll(x)\
-    \ + digits - std::numeric_limits<unsigned long long>::digits;\n  }\n\n  template<class\
-    \ T>\n  constexpr KYOPRO_BASE_INT trailing_zero(T x) noexcept {\n    constexpr\
-    \ auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n    static_assert(digits\
+    \ + digits - std::numeric_limits<unsigned long>::digits;\n      else return __builtin_clzll(x)\
+    \ + digits - std::numeric_limits<unsigned long long>::digits;\n    }\n  } leading_zero;\n\
+    \n  inline constexpr struct {\n    template<class T>\n    constexpr KYOPRO_BASE_INT\
+    \ operator ()(T x) noexcept {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
+    \      static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
+    \ \"Integer size is too large\");\n      if constexpr (digits <= std::numeric_limits<unsigned\
+    \ int>::digits) return __builtin_ctz(x);\n      else if constexpr (digits <= std::numeric_limits<unsigned\
+    \ long>::digits) return __builtin_ctzl(x);\n      else return __builtin_ctzll(x);\n\
+    \    }\n  } trailing_zero;\n\n  inline constexpr struct {\n    template<class\
+    \ T>\n    constexpr KYOPRO_BASE_INT operator ()(T x) noexcept {\n      constexpr\
+    \ auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n      static_assert(digits\
     \ <= std::numeric_limits<unsigned long long>::digits, \"Integer size is too large\"\
-    );\n    if constexpr (digits <= std::numeric_limits<unsigned int>::digits) return\
-    \ __builtin_ctz(x);\n    else if constexpr (digits <= std::numeric_limits<unsigned\
-    \ long>::digits) return __builtin_ctzl(x);\n    else return __builtin_ctzll(x);\n\
-    \  }\n\n  template<class T>\n  constexpr KYOPRO_BASE_INT bit_len(T x) noexcept\
-    \ {\n    constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
-    \    static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"Integer size is too large\");\n    if (x == 0) return 0;\n    if constexpr\
-    \ (digits <= std::numeric_limits<unsigned int>::digits) return std::numeric_limits<unsigned\
-    \ int>::digits - __builtin_clz(x);\n    else if constexpr (digits <= std::numeric_limits<unsigned\
-    \ long>::digits) return std::numeric_limits<unsigned long>::digits - __builtin_clzl(x);\n\
-    \    else return std::numeric_limits<unsigned long long>::digits - __builtin_clzll(x);\n\
-    \  }\n\n  template<class T>\n  constexpr KYOPRO_BASE_INT floor_bit(T x) noexcept\
-    \ {\n    return bit_len(x >> static_cast<T>(1));\n  }\n\n  template<class T>\n\
-    \  constexpr KYOPRO_BASE_INT ceil_bit(T x) noexcept {\n    if (x == 0) return\
-    \ 0;\n    return bit_len(x - static_cast<T>(1));\n  }\n}\n#line 2 \"algorithm/compress.hpp\"\
-    \n#include <algorithm>\n#include <functional>\n#include <iterator>\n#include <unordered_map>\n\
-    #include <vector>\n#line 8 \"algorithm/compress.hpp\"\n\nnamespace kyopro {\n\
-    \  template<class T, class Container = std::unordered_map<typename std::iterator_traits<T>::value_type,\
-    \ KYOPRO_BASE_INT>, class Compare>\n  auto compress(T first, T last, Compare comp\
-    \ = std::less<typename std::iterator_traits<T>::value_type>()) {\n    std::vector<typename\
-    \ std::iterator_traits<T>::value_type> vec(first, last);\n    std::sort(vec.begin(),\
-    \ vec.end(), comp);\n    auto end = std::unique(vec.begin(), vec.end());\n   \
-    \ Container mem;\n    int cnt = -1;\n    for (auto i = vec.begin(); i != end;\
-    \ ++i) mem[*i] = ++cnt;\n    return mem;\n  }\n}\n#line 2 \"algorithm/Hash.hpp\"\
-    \n#include <cstddef>\n#line 5 \"algorithm/Hash.hpp\"\n#include <tuple>\n#line\
-    \ 7 \"algorithm/Hash.hpp\"\n#include <utility>\n#line 3 \"meta/trait.hpp\"\n#include\
-    \ <queue>\n#line 5 \"meta/trait.hpp\"\n#include <stack>\n#line 9 \"meta/trait.hpp\"\
-    \n\ntemplate<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
-    struct std::is_integral<__uint128_t>: std::true_type {};\ntemplate<>\nstruct std::is_floating_point<__float128>:\
-    \ std::true_type {};\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT size>\n\
-    \  struct int_least {\n  private:\n    static constexpr auto get_type() noexcept\
-    \ {\n      static_assert(size <= 128, \"Integer size is too large\");\n      if\
-    \ constexpr (size <= 8) return std::int_least8_t();\n      else if constexpr (size\
-    \ <= 16) return std::int_least16_t();\n      else if constexpr (size <= 32) return\
-    \ std::int_least32_t();\n      else if constexpr (size <= 64) return std::int_least64_t();\n\
-    \      else return __int128_t();\n    }\n\n  public:\n    using type = decltype(get_type());\n\
-    \  };\n\n  template<KYOPRO_BASE_UINT size>\n  using int_least_t = typename int_least<size>::type;\n\
-    \n  template<KYOPRO_BASE_UINT size>\n  struct uint_least {\n  private:\n    static\
-    \ constexpr auto get_type() noexcept {\n      static_assert(size <= 128, \"Integer\
-    \ size is too large\");\n      if constexpr (size <= 8) return std::uint_least8_t();\n\
-    \      else if constexpr (size <= 16) return std::uint_least16_t();\n      else\
-    \ if constexpr (size <= 32) return std::uint_least32_t();\n      else if constexpr\
-    \ (size <= 64) return std::uint_least64_t();\n      else return __uint128_t();\n\
+    );\n      if (x == 0) return 0;\n      if constexpr (digits <= std::numeric_limits<unsigned\
+    \ int>::digits) return std::numeric_limits<unsigned int>::digits - __builtin_clz(x);\n\
+    \      else if constexpr (digits <= std::numeric_limits<unsigned long>::digits)\
+    \ return std::numeric_limits<unsigned long>::digits - __builtin_clzl(x);\n   \
+    \   else return std::numeric_limits<unsigned long long>::digits - __builtin_clzll(x);\n\
+    \    }\n  } bit_len;\n\n  inline constexpr struct {\n    template<class T>\n \
+    \   constexpr KYOPRO_BASE_INT operator ()(T x) noexcept {\n      return bit_len(x\
+    \ >> static_cast<T>(1));\n    }\n  } floor_bit;\n\n  inline constexpr struct {\n\
+    \    template<class T>\n    constexpr KYOPRO_BASE_INT operator ()(T x) noexcept\
+    \ {\n      if (x == 0) return 0;\n      return bit_len(x - static_cast<T>(1));\n\
+    \    }\n  } ceil_bit;\n}\n#line 2 \"algorithm/compress.hpp\"\n#include <algorithm>\n\
+    #include <functional>\n#include <iterator>\n#include <unordered_map>\n#include\
+    \ <vector>\n#line 8 \"algorithm/compress.hpp\"\n\nnamespace kyopro {\n  inline\
+    \ constexpr struct {\n    template<class T, class Container = std::unordered_map<typename\
+    \ std::iterator_traits<T>::value_type, KYOPRO_BASE_INT>, class Compare>\n    constexpr\
+    \ auto operator ()(T first, T last, Compare comp = std::less<typename std::iterator_traits<T>::value_type>())\
+    \ {\n      std::vector<typename std::iterator_traits<T>::value_type> vec(first,\
+    \ last);\n      std::sort(vec.begin(), vec.end(), comp);\n      auto end = std::unique(vec.begin(),\
+    \ vec.end());\n      Container mem;\n      int cnt = -1;\n      for (auto i =\
+    \ vec.begin(); i != end; ++i) mem[*i] = ++cnt;\n      return mem;\n    }\n  }\
+    \ compress;\n}\n#line 2 \"algorithm/Hash.hpp\"\n#include <cstddef>\n#line 5 \"\
+    algorithm/Hash.hpp\"\n#include <tuple>\n#line 7 \"algorithm/Hash.hpp\"\n#include\
+    \ <utility>\n#line 3 \"meta/trait.hpp\"\n#include <queue>\n#line 5 \"meta/trait.hpp\"\
+    \n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct std::is_integral<__int128_t>:\
+    \ std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type\
+    \ {};\ntemplate<>\nstruct std::is_floating_point<__float128>: std::true_type {};\n\
+    \nnamespace kyopro {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least {\n\
+    \  private:\n    static constexpr auto get_type() noexcept {\n      static_assert(size\
+    \ <= 128, \"Integer size is too large\");\n      if constexpr (size <= 8) return\
+    \ std::int_least8_t();\n      else if constexpr (size <= 16) return std::int_least16_t();\n\
+    \      else if constexpr (size <= 32) return std::int_least32_t();\n      else\
+    \ if constexpr (size <= 64) return std::int_least64_t();\n      else return __int128_t();\n\
     \    }\n\n  public:\n    using type = decltype(get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
-    \ size>\n  using uint_least_t = typename uint_least<size>::type;\n\n  template<class,\
+    \ size>\n  using int_least_t = typename int_least<size>::type;\n\n  template<KYOPRO_BASE_UINT\
+    \ size>\n  struct uint_least {\n  private:\n    static constexpr auto get_type()\
+    \ noexcept {\n      static_assert(size <= 128, \"Integer size is too large\");\n\
+    \      if constexpr (size <= 8) return std::uint_least8_t();\n      else if constexpr\
+    \ (size <= 16) return std::uint_least16_t();\n      else if constexpr (size <=\
+    \ 32) return std::uint_least32_t();\n      else if constexpr (size <= 64) return\
+    \ std::uint_least64_t();\n      else return __uint128_t();\n    }\n\n  public:\n\
+    \    using type = decltype(get_type());\n  };\n\n  template<KYOPRO_BASE_UINT size>\n\
+    \  using uint_least_t = typename uint_least<size>::type;\n\n  template<class,\
     \ class = void>\n  struct is_iterator: std::false_type {};\n  template<class T>\n\
     \  struct is_iterator<T, std::void_t<typename std::iterator_traits<T>::iterator_category>>:\
     \ std::true_type {};\n\n  template<class T>\n  constexpr bool is_iterator_v =\
@@ -242,7 +247,7 @@ data:
   requiredBy:
   - all.hpp
   - all/all.hpp
-  timestamp: '2022-06-05 23:14:49+09:00'
+  timestamp: '2022-07-07 01:22:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm/all.hpp

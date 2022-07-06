@@ -18,21 +18,23 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"math/div.hpp\"\n#include <type_traits>\n\nnamespace kyopro\
-    \ {\n  template<class T, class U>\n  constexpr std::common_type_t<T, U> floor_div(T\
-    \ x, U m) noexcept {\n    static_assert(std::is_integral_v<T> && std::is_integral_v<U>,\
-    \ \"Integer is required\");\n    if constexpr (std::is_unsigned_v<T> || std::is_unsigned_v<U>)\
-    \ return x / m;\n    auto d = x / m;\n    return d * m == x ? d : d - ((x < 0)\
-    \ ^ (m < 0));\n  }\n\n  template<class T, class U>\n  constexpr std::common_type_t<T,\
-    \ U> ceil_div(T x, U m) noexcept { return floor_div(x + m - static_cast<T>(1),\
-    \ m); }\n}\n"
-  code: "#pragma once\n#include <type_traits>\n\nnamespace kyopro {\n  template<class\
-    \ T, class U>\n  constexpr std::common_type_t<T, U> floor_div(T x, U m) noexcept\
-    \ {\n    static_assert(std::is_integral_v<T> && std::is_integral_v<U>, \"Integer\
-    \ is required\");\n    if constexpr (std::is_unsigned_v<T> || std::is_unsigned_v<U>)\
-    \ return x / m;\n    auto d = x / m;\n    return d * m == x ? d : d - ((x < 0)\
-    \ ^ (m < 0));\n  }\n\n  template<class T, class U>\n  constexpr std::common_type_t<T,\
-    \ U> ceil_div(T x, U m) noexcept { return floor_div(x + m - static_cast<T>(1),\
-    \ m); }\n}\n"
+    \ {\n  inline constexpr struct {\n    template<class T, class U>\n    constexpr\
+    \ std::common_type_t<T, U> operator ()(T x, U m) noexcept {\n      static_assert(std::is_integral_v<T>\
+    \ && std::is_integral_v<U>, \"Integer is required\");\n      if constexpr (std::is_unsigned_v<T>\
+    \ || std::is_unsigned_v<U>) return x / m;\n      auto d = x / m;\n      return\
+    \ d * m == x ? d : d - ((x < 0) ^ (m < 0));\n    }\n  } floor_div;\n\n  inline\
+    \ constexpr struct {\n    template<class T, class U>\n    constexpr std::common_type_t<T,\
+    \ U> operator ()(T x, U m) noexcept { return floor_div(x + m - static_cast<T>(1),\
+    \ m); }\n  } ceil_div;\n}\n"
+  code: "#pragma once\n#include <type_traits>\n\nnamespace kyopro {\n  inline constexpr\
+    \ struct {\n    template<class T, class U>\n    constexpr std::common_type_t<T,\
+    \ U> operator ()(T x, U m) noexcept {\n      static_assert(std::is_integral_v<T>\
+    \ && std::is_integral_v<U>, \"Integer is required\");\n      if constexpr (std::is_unsigned_v<T>\
+    \ || std::is_unsigned_v<U>) return x / m;\n      auto d = x / m;\n      return\
+    \ d * m == x ? d : d - ((x < 0) ^ (m < 0));\n    }\n  } floor_div;\n\n  inline\
+    \ constexpr struct {\n    template<class T, class U>\n    constexpr std::common_type_t<T,\
+    \ U> operator ()(T x, U m) noexcept { return floor_div(x + m - static_cast<T>(1),\
+    \ m); }\n  } ceil_div;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: math/div.hpp
@@ -40,7 +42,7 @@ data:
   - all.hpp
   - math/all.hpp
   - all/all.hpp
-  timestamp: '2022-06-05 22:20:26+09:00'
+  timestamp: '2022-07-07 01:22:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/div.hpp

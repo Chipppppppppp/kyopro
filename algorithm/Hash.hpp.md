@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/aggregate.hpp
     title: meta/aggregate.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -20,7 +20,7 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
@@ -29,10 +29,10 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
@@ -42,15 +42,15 @@ data:
     path: template/all.hpp
     title: template/all.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"algorithm/Hash.hpp\"\n#include <cstddef>\n#include <cstdint>\n\
@@ -235,7 +235,7 @@ data:
   - template/all.hpp
   - template/alias.hpp
   timestamp: '2022-06-05 23:14:49+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/yosupo/factorize.test.cpp
   - verify/aoj/PrimeNumber.test.cpp
