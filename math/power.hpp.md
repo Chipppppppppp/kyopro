@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
@@ -17,7 +17,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
@@ -26,16 +26,16 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
     path: meta/all.hpp
     title: meta/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
   - icon: ':heavy_check_mark:'
@@ -44,10 +44,10 @@ data:
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/in.hpp
     title: system/in.hpp
   - icon: ':warning:'
@@ -60,10 +60,10 @@ data:
     path: template/macro.hpp
     title: template/macro.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
   - icon: ':heavy_check_mark:'
@@ -75,9 +75,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"meta/settings.hpp\"\n#include <cstdint>\n\n#ifndef KYOPRO_BASE_INT\n\
@@ -88,14 +88,16 @@ data:
     #define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n#endif\n\n\
     #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class T>\n\
-    \  constexpr T power(T a, KYOPRO_BASE_UINT n, T init = 1) noexcept {\n    while\
-    \ (n > 0) {\n      if (n & 1) init *= a;\n      a *= a;\n      n >>= 1;\n    }\n\
-    \    return init;\n  }\n}\n"
+    #endif\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n  inline constexpr struct\
+    \ {\n    template<class T>\n    constexpr T operator ()(T a, KYOPRO_BASE_UINT\
+    \ n, T init = 1) const noexcept {\n      while (n > 0) {\n        if (n & 1) init\
+    \ *= a;\n        a *= a;\n        n >>= 1;\n      }\n      return init;\n    }\n\
+    \  } power;\n}\n"
   code: "#pragma once\n#include \"../meta/settings.hpp\"\n\nnamespace kyopro {\n \
-    \ template<class T>\n  constexpr T power(T a, KYOPRO_BASE_UINT n, T init = 1)\
-    \ noexcept {\n    while (n > 0) {\n      if (n & 1) init *= a;\n      a *= a;\n\
-    \      n >>= 1;\n    }\n    return init;\n  }\n}"
+    \ inline constexpr struct {\n    template<class T>\n    constexpr T operator ()(T\
+    \ a, KYOPRO_BASE_UINT n, T init = 1) const noexcept {\n      while (n > 0) {\n\
+    \        if (n & 1) init *= a;\n        a *= a;\n        n >>= 1;\n      }\n \
+    \     return init;\n    }\n  } power;\n}"
   dependsOn:
   - meta/settings.hpp
   isVerificationFile: false
@@ -119,8 +121,8 @@ data:
   - structure/FenwickTree.hpp
   - system/all.hpp
   - system/in.hpp
-  timestamp: '2022-06-05 22:20:26+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2022-07-07 16:11:50+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo/many_aplusb.test.cpp
   - verify/yosupo/unionfind.test.cpp

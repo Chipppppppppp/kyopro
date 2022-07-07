@@ -1,28 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/aggregate.hpp
     title: meta/aggregate.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/out.hpp
     title: system/out.hpp
   _extendedRequiredBy: []
@@ -184,32 +184,33 @@ data:
     \      return group_members;\n    }\n  };\n}\n#line 2 \"system/in.hpp\"\n#include\
     \ <unistd.h>\n#include <array>\n#include <cstddef>\n#line 6 \"system/in.hpp\"\n\
     #include <cstdio>\n#include <string>\n#include <tuple>\n#line 3 \"math/power.hpp\"\
-    \n\nnamespace kyopro {\n  template<class T>\n  constexpr T power(T a, KYOPRO_BASE_UINT\
-    \ n, T init = 1) noexcept {\n    while (n > 0) {\n      if (n & 1) init *= a;\n\
-    \      a *= a;\n      n >>= 1;\n    }\n    return init;\n  }\n}\n#line 14 \"system/in.hpp\"\
-    \n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>\n\
-    \  struct Reader {\n    static constexpr KYOPRO_BASE_UINT buf_size = _buf_size;\n\
-    \n  private:\n    int fd, idx;\n    std::array<char, buf_size> buffer;\n\n  public:\n\
-    \    Reader() {\n      read(fd, buffer.begin(), buf_size);\n    }\n    Reader(int\
-    \ fd): fd(fd), idx(0), buffer() {\n      read(fd, buffer.begin(), buf_size);\n\
-    \    }\n    Reader(FILE* fp): fd(fileno(fp)), idx(0), buffer() {\n      read(fd,\
-    \ buffer.begin(), buf_size);\n    }\n\n    struct iterator {\n    private:\n \
-    \     Reader& reader;\n\n    public:\n      using difference_type = void;\n  \
-    \    using value_type = void;\n      using pointer = void;\n      using reference\
-    \ = void;\n      using iterator_category = std::input_iterator_tag;\n\n      iterator()\
-    \ noexcept = default;\n      iterator(Reader& reader) noexcept: reader(reader)\
-    \ {}\n\n      iterator& operator ++() {\n        ++reader.idx;\n        if (reader.idx\
-    \ == buf_size) {\n          read(reader.fd, reader.buffer.begin(), buf_size);\n\
-    \          reader.idx = 0;\n        }\n        return *this;\n      }\n\n    \
-    \  iterator operator ++(int) {\n        iterator before = *this;\n        operator\
-    \ ++();\n        return before;\n      }\n\n      char& operator *() const {\n\
-    \        return reader.buffer[reader.idx];\n      }\n    };\n\n    iterator begin()\
-    \ noexcept {\n      return iterator(*this);\n    }\n  };\n\n  Reader input(0);\n\
-    \n  template<class Iterator, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
-    \  struct Scanner {\n    using iterator_type = Iterator;\n    static constexpr\
-    \ KYOPRO_BASE_UINT decimal_precision = _decimal_precision;\n\n  private:\n   \
-    \ template<class, class = void>\n    struct has_scan: std::false_type {};\n  \
-    \  template<class T>\n    struct has_scan<T, std::void_t<decltype(std::declval<T>().scan(std::declval<Scanner&>()))>>:\
+    \n\nnamespace kyopro {\n  inline constexpr struct {\n    template<class T>\n \
+    \   constexpr T operator ()(T a, KYOPRO_BASE_UINT n, T init = 1) const noexcept\
+    \ {\n      while (n > 0) {\n        if (n & 1) init *= a;\n        a *= a;\n \
+    \       n >>= 1;\n      }\n      return init;\n    }\n  } power;\n}\n#line 14\
+    \ \"system/in.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _buf_size\
+    \ = KYOPRO_BUFFER_SIZE>\n  struct Reader {\n    static constexpr KYOPRO_BASE_UINT\
+    \ buf_size = _buf_size;\n\n  private:\n    int fd, idx;\n    std::array<char,\
+    \ buf_size> buffer;\n\n  public:\n    Reader() {\n      read(fd, buffer.begin(),\
+    \ buf_size);\n    }\n    Reader(int fd): fd(fd), idx(0), buffer() {\n      read(fd,\
+    \ buffer.begin(), buf_size);\n    }\n    Reader(FILE* fp): fd(fileno(fp)), idx(0),\
+    \ buffer() {\n      read(fd, buffer.begin(), buf_size);\n    }\n\n    struct iterator\
+    \ {\n    private:\n      Reader& reader;\n\n    public:\n      using difference_type\
+    \ = void;\n      using value_type = void;\n      using pointer = void;\n     \
+    \ using reference = void;\n      using iterator_category = std::input_iterator_tag;\n\
+    \n      iterator() noexcept = default;\n      iterator(Reader& reader) noexcept:\
+    \ reader(reader) {}\n\n      iterator& operator ++() {\n        ++reader.idx;\n\
+    \        if (reader.idx == buf_size) {\n          read(reader.fd, reader.buffer.begin(),\
+    \ buf_size);\n          reader.idx = 0;\n        }\n        return *this;\n  \
+    \    }\n\n      iterator operator ++(int) {\n        iterator before = *this;\n\
+    \        operator ++();\n        return before;\n      }\n\n      char& operator\
+    \ *() const {\n        return reader.buffer[reader.idx];\n      }\n    };\n\n\
+    \    iterator begin() noexcept {\n      return iterator(*this);\n    }\n  };\n\
+    \n  Reader input(0);\n\n  template<class Iterator, KYOPRO_BASE_UINT _decimal_precision\
+    \ = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n    using iterator_type = Iterator;\n\
+    \    static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;\n\
+    \n  private:\n    template<class, class = void>\n    struct has_scan: std::false_type\
+    \ {};\n    template<class T>\n    struct has_scan<T, std::void_t<decltype(std::declval<T>().scan(std::declval<Scanner&>()))>>:\
     \ std::true_type {};\n\n  public:\n    Iterator itr;\n\n    Scanner() noexcept\
     \ = default;\n    Scanner(Iterator itr) noexcept: itr(itr) {}\n\n    void discard_space()\
     \ {\n      while (('\\t' <= *itr && *itr <= '\\r') || *itr == ' ') ++itr;\n  \
@@ -349,7 +350,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo/unionfind.test.cpp
   requiredBy: []
-  timestamp: '2022-06-21 23:56:23+09:00'
+  timestamp: '2022-07-07 16:11:50+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yosupo/unionfind.test.cpp

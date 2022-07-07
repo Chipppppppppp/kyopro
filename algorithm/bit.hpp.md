@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
@@ -20,10 +20,10 @@ data:
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
@@ -33,15 +33,15 @@ data:
     path: template/all.hpp
     title: template/all.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"algorithm/bit.hpp\"\n#include <limits>\n#include <type_traits>\n\
@@ -55,14 +55,14 @@ data:
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 5 \"algorithm/bit.hpp\"\n\nnamespace kyopro {\n  inline constexpr\
     \ struct {\n    template<class T>\n    constexpr KYOPRO_BASE_INT operator ()(T\
-    \ x) noexcept {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
+    \ x) const noexcept {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
     \      static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
     \ \"Integer size is too large\");\n      if constexpr (digits <= std::numeric_limits<unsigned\
     \ int>::digits) return __builtin_popcount(x);\n      else if constexpr (digits\
     \ <= std::numeric_limits<unsigned long>::digits) return __builtin_popcountl(x);\n\
     \      else return __builtin_popcountll(x);\n    }\n  } pop_count;\n\n  inline\
     \ constexpr struct {\n    template<class T>\n    constexpr KYOPRO_BASE_INT operator\
-    \ ()(T x) noexcept {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
+    \ ()(T x) const noexcept {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
     \      static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
     \ \"Integer size is too large\");\n      if (x == 0) return 0;\n      if constexpr\
     \ (digits <= std::numeric_limits<unsigned int>::digits) return __builtin_clz(x)\
@@ -71,13 +71,13 @@ data:
     \ + digits - std::numeric_limits<unsigned long>::digits;\n      else return __builtin_clzll(x)\
     \ + digits - std::numeric_limits<unsigned long long>::digits;\n    }\n  } leading_zero;\n\
     \n  inline constexpr struct {\n    template<class T>\n    constexpr KYOPRO_BASE_INT\
-    \ operator ()(T x) noexcept {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
+    \ operator ()(T x) const noexcept {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
     \      static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
     \ \"Integer size is too large\");\n      if constexpr (digits <= std::numeric_limits<unsigned\
     \ int>::digits) return __builtin_ctz(x);\n      else if constexpr (digits <= std::numeric_limits<unsigned\
     \ long>::digits) return __builtin_ctzl(x);\n      else return __builtin_ctzll(x);\n\
     \    }\n  } trailing_zero;\n\n  inline constexpr struct {\n    template<class\
-    \ T>\n    constexpr KYOPRO_BASE_INT operator ()(T x) noexcept {\n      constexpr\
+    \ T>\n    constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {\n      constexpr\
     \ auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n      static_assert(digits\
     \ <= std::numeric_limits<unsigned long long>::digits, \"Integer size is too large\"\
     );\n      if (x == 0) return 0;\n      if constexpr (digits <= std::numeric_limits<unsigned\
@@ -86,22 +86,22 @@ data:
     \ return std::numeric_limits<unsigned long>::digits - __builtin_clzl(x);\n   \
     \   else return std::numeric_limits<unsigned long long>::digits - __builtin_clzll(x);\n\
     \    }\n  } bit_len;\n\n  inline constexpr struct {\n    template<class T>\n \
-    \   constexpr KYOPRO_BASE_INT operator ()(T x) noexcept {\n      return bit_len(x\
-    \ >> static_cast<T>(1));\n    }\n  } floor_bit;\n\n  inline constexpr struct {\n\
-    \    template<class T>\n    constexpr KYOPRO_BASE_INT operator ()(T x) noexcept\
-    \ {\n      if (x == 0) return 0;\n      return bit_len(x - static_cast<T>(1));\n\
+    \   constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {\n      return\
+    \ bit_len(x >> static_cast<T>(1));\n    }\n  } floor_bit;\n\n  inline constexpr\
+    \ struct {\n    template<class T>\n    constexpr KYOPRO_BASE_INT operator ()(T\
+    \ x) const noexcept {\n      if (x == 0) return 0;\n      return bit_len(x - static_cast<T>(1));\n\
     \    }\n  } ceil_bit;\n}\n"
   code: "#pragma once\n#include <limits>\n#include <type_traits>\n#include \"../meta/settings.hpp\"\
     \n\nnamespace kyopro {\n  inline constexpr struct {\n    template<class T>\n \
-    \   constexpr KYOPRO_BASE_INT operator ()(T x) noexcept {\n      constexpr auto\
-    \ digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n      static_assert(digits\
+    \   constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {\n      constexpr\
+    \ auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n      static_assert(digits\
     \ <= std::numeric_limits<unsigned long long>::digits, \"Integer size is too large\"\
     );\n      if constexpr (digits <= std::numeric_limits<unsigned int>::digits) return\
     \ __builtin_popcount(x);\n      else if constexpr (digits <= std::numeric_limits<unsigned\
     \ long>::digits) return __builtin_popcountl(x);\n      else return __builtin_popcountll(x);\n\
     \    }\n  } pop_count;\n\n  inline constexpr struct {\n    template<class T>\n\
-    \    constexpr KYOPRO_BASE_INT operator ()(T x) noexcept {\n      constexpr auto\
-    \ digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n      static_assert(digits\
+    \    constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {\n      constexpr\
+    \ auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n      static_assert(digits\
     \ <= std::numeric_limits<unsigned long long>::digits, \"Integer size is too large\"\
     );\n      if (x == 0) return 0;\n      if constexpr (digits <= std::numeric_limits<unsigned\
     \ int>::digits) return __builtin_clz(x) + digits - std::numeric_limits<unsigned\
@@ -109,14 +109,14 @@ data:
     \ long>::digits) return __builtin_clzl(x) + digits - std::numeric_limits<unsigned\
     \ long>::digits;\n      else return __builtin_clzll(x) + digits - std::numeric_limits<unsigned\
     \ long long>::digits;\n    }\n  } leading_zero;\n\n  inline constexpr struct {\n\
-    \    template<class T>\n    constexpr KYOPRO_BASE_INT operator ()(T x) noexcept\
+    \    template<class T>\n    constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept\
     \ {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
     \      static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
     \ \"Integer size is too large\");\n      if constexpr (digits <= std::numeric_limits<unsigned\
     \ int>::digits) return __builtin_ctz(x);\n      else if constexpr (digits <= std::numeric_limits<unsigned\
     \ long>::digits) return __builtin_ctzl(x);\n      else return __builtin_ctzll(x);\n\
     \    }\n  } trailing_zero;\n\n  inline constexpr struct {\n    template<class\
-    \ T>\n    constexpr KYOPRO_BASE_INT operator ()(T x) noexcept {\n      constexpr\
+    \ T>\n    constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {\n      constexpr\
     \ auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n      static_assert(digits\
     \ <= std::numeric_limits<unsigned long long>::digits, \"Integer size is too large\"\
     );\n      if (x == 0) return 0;\n      if constexpr (digits <= std::numeric_limits<unsigned\
@@ -125,10 +125,10 @@ data:
     \ return std::numeric_limits<unsigned long>::digits - __builtin_clzl(x);\n   \
     \   else return std::numeric_limits<unsigned long long>::digits - __builtin_clzll(x);\n\
     \    }\n  } bit_len;\n\n  inline constexpr struct {\n    template<class T>\n \
-    \   constexpr KYOPRO_BASE_INT operator ()(T x) noexcept {\n      return bit_len(x\
-    \ >> static_cast<T>(1));\n    }\n  } floor_bit;\n\n  inline constexpr struct {\n\
-    \    template<class T>\n    constexpr KYOPRO_BASE_INT operator ()(T x) noexcept\
-    \ {\n      if (x == 0) return 0;\n      return bit_len(x - static_cast<T>(1));\n\
+    \   constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {\n      return\
+    \ bit_len(x >> static_cast<T>(1));\n    }\n  } floor_bit;\n\n  inline constexpr\
+    \ struct {\n    template<class T>\n    constexpr KYOPRO_BASE_INT operator ()(T\
+    \ x) const noexcept {\n      if (x == 0) return 0;\n      return bit_len(x - static_cast<T>(1));\n\
     \    }\n  } ceil_bit;\n}"
   dependsOn:
   - meta/settings.hpp
@@ -144,8 +144,8 @@ data:
   - all/all.hpp
   - template/all.hpp
   - template/alias.hpp
-  timestamp: '2022-07-07 01:22:05+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-07-07 16:11:50+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo/factorize.test.cpp
   - verify/aoj/PrimeNumber.test.cpp

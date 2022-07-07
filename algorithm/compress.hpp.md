@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
@@ -34,7 +34,7 @@ data:
     \ struct {\n    template<class T, class Container = std::unordered_map<typename\
     \ std::iterator_traits<T>::value_type, KYOPRO_BASE_INT>, class Compare>\n    constexpr\
     \ auto operator ()(T first, T last, Compare comp = std::less<typename std::iterator_traits<T>::value_type>())\
-    \ {\n      std::vector<typename std::iterator_traits<T>::value_type> vec(first,\
+    \ const {\n      std::vector<typename std::iterator_traits<T>::value_type> vec(first,\
     \ last);\n      std::sort(vec.begin(), vec.end(), comp);\n      auto end = std::unique(vec.begin(),\
     \ vec.end());\n      Container mem;\n      int cnt = -1;\n      for (auto i =\
     \ vec.begin(); i != end; ++i) mem[*i] = ++cnt;\n      return mem;\n    }\n  }\
@@ -45,7 +45,7 @@ data:
     \ Container = std::unordered_map<typename std::iterator_traits<T>::value_type,\
     \ KYOPRO_BASE_INT>, class Compare>\n    constexpr auto operator ()(T first, T\
     \ last, Compare comp = std::less<typename std::iterator_traits<T>::value_type>())\
-    \ {\n      std::vector<typename std::iterator_traits<T>::value_type> vec(first,\
+    \ const {\n      std::vector<typename std::iterator_traits<T>::value_type> vec(first,\
     \ last);\n      std::sort(vec.begin(), vec.end(), comp);\n      auto end = std::unique(vec.begin(),\
     \ vec.end());\n      Container mem;\n      int cnt = -1;\n      for (auto i =\
     \ vec.begin(); i != end; ++i) mem[*i] = ++cnt;\n      return mem;\n    }\n  }\
@@ -58,7 +58,7 @@ data:
   - all.hpp
   - algorithm/all.hpp
   - all/all.hpp
-  timestamp: '2022-07-07 01:22:05+09:00'
+  timestamp: '2022-07-07 16:11:50+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm/compress.hpp

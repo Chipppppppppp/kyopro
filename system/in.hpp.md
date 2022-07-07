@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -17,7 +17,7 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/all.hpp
     title: system/all.hpp
   - icon: ':warning:'
@@ -27,10 +27,10 @@ data:
     path: template/macro.hpp
     title: template/macro.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
   - icon: ':heavy_check_mark:'
@@ -42,9 +42,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"system/in.hpp\"\n#include <unistd.h>\n#include <array>\n\
@@ -57,29 +57,30 @@ data:
     #ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n  template<class T>\n\
-    \  constexpr T power(T a, KYOPRO_BASE_UINT n, T init = 1) noexcept {\n    while\
-    \ (n > 0) {\n      if (n & 1) init *= a;\n      a *= a;\n      n >>= 1;\n    }\n\
-    \    return init;\n  }\n}\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#include\
-    \ <queue>\n#include <limits>\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\n\
-    template<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
-    struct std::is_integral<__uint128_t>: std::true_type {};\ntemplate<>\nstruct std::is_floating_point<__float128>:\
-    \ std::true_type {};\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT size>\n\
-    \  struct int_least {\n  private:\n    static constexpr auto get_type() noexcept\
-    \ {\n      static_assert(size <= 128, \"Integer size is too large\");\n      if\
-    \ constexpr (size <= 8) return std::int_least8_t();\n      else if constexpr (size\
-    \ <= 16) return std::int_least16_t();\n      else if constexpr (size <= 32) return\
-    \ std::int_least32_t();\n      else if constexpr (size <= 64) return std::int_least64_t();\n\
-    \      else return __int128_t();\n    }\n\n  public:\n    using type = decltype(get_type());\n\
-    \  };\n\n  template<KYOPRO_BASE_UINT size>\n  using int_least_t = typename int_least<size>::type;\n\
-    \n  template<KYOPRO_BASE_UINT size>\n  struct uint_least {\n  private:\n    static\
-    \ constexpr auto get_type() noexcept {\n      static_assert(size <= 128, \"Integer\
-    \ size is too large\");\n      if constexpr (size <= 8) return std::uint_least8_t();\n\
-    \      else if constexpr (size <= 16) return std::uint_least16_t();\n      else\
-    \ if constexpr (size <= 32) return std::uint_least32_t();\n      else if constexpr\
-    \ (size <= 64) return std::uint_least64_t();\n      else return __uint128_t();\n\
+    #endif\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n  inline constexpr struct\
+    \ {\n    template<class T>\n    constexpr T operator ()(T a, KYOPRO_BASE_UINT\
+    \ n, T init = 1) const noexcept {\n      while (n > 0) {\n        if (n & 1) init\
+    \ *= a;\n        a *= a;\n        n >>= 1;\n      }\n      return init;\n    }\n\
+    \  } power;\n}\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#include <queue>\n\
+    #include <limits>\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\n\
+    struct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
+    \ std::true_type {};\ntemplate<>\nstruct std::is_floating_point<__float128>: std::true_type\
+    \ {};\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least\
+    \ {\n  private:\n    static constexpr auto get_type() noexcept {\n      static_assert(size\
+    \ <= 128, \"Integer size is too large\");\n      if constexpr (size <= 8) return\
+    \ std::int_least8_t();\n      else if constexpr (size <= 16) return std::int_least16_t();\n\
+    \      else if constexpr (size <= 32) return std::int_least32_t();\n      else\
+    \ if constexpr (size <= 64) return std::int_least64_t();\n      else return __int128_t();\n\
     \    }\n\n  public:\n    using type = decltype(get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
-    \ size>\n  using uint_least_t = typename uint_least<size>::type;\n\n  template<class,\
+    \ size>\n  using int_least_t = typename int_least<size>::type;\n\n  template<KYOPRO_BASE_UINT\
+    \ size>\n  struct uint_least {\n  private:\n    static constexpr auto get_type()\
+    \ noexcept {\n      static_assert(size <= 128, \"Integer size is too large\");\n\
+    \      if constexpr (size <= 8) return std::uint_least8_t();\n      else if constexpr\
+    \ (size <= 16) return std::uint_least16_t();\n      else if constexpr (size <=\
+    \ 32) return std::uint_least32_t();\n      else if constexpr (size <= 64) return\
+    \ std::uint_least64_t();\n      else return __uint128_t();\n    }\n\n  public:\n\
+    \    using type = decltype(get_type());\n  };\n\n  template<KYOPRO_BASE_UINT size>\n\
+    \  using uint_least_t = typename uint_least<size>::type;\n\n  template<class,\
     \ class = void>\n  struct is_iterator: std::false_type {};\n  template<class T>\n\
     \  struct is_iterator<T, std::void_t<typename std::iterator_traits<T>::iterator_category>>:\
     \ std::true_type {};\n\n  template<class T>\n  constexpr bool is_iterator_v =\
@@ -291,8 +292,8 @@ data:
   - template/all.hpp
   - template/macro.hpp
   - system/all.hpp
-  timestamp: '2022-06-21 23:56:23+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2022-07-07 16:11:50+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo/many_aplusb.test.cpp
   - verify/yosupo/unionfind.test.cpp

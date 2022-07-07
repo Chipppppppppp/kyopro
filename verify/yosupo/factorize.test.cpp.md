@@ -1,53 +1,53 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/aggregate.hpp
     title: meta/aggregate.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/out.hpp
     title: system/out.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/factorize
@@ -66,14 +66,14 @@ data:
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 5 \"algorithm/bit.hpp\"\n\nnamespace kyopro {\n  inline constexpr\
     \ struct {\n    template<class T>\n    constexpr KYOPRO_BASE_INT operator ()(T\
-    \ x) noexcept {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
+    \ x) const noexcept {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
     \      static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
     \ \"Integer size is too large\");\n      if constexpr (digits <= std::numeric_limits<unsigned\
     \ int>::digits) return __builtin_popcount(x);\n      else if constexpr (digits\
     \ <= std::numeric_limits<unsigned long>::digits) return __builtin_popcountl(x);\n\
     \      else return __builtin_popcountll(x);\n    }\n  } pop_count;\n\n  inline\
     \ constexpr struct {\n    template<class T>\n    constexpr KYOPRO_BASE_INT operator\
-    \ ()(T x) noexcept {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
+    \ ()(T x) const noexcept {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
     \      static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
     \ \"Integer size is too large\");\n      if (x == 0) return 0;\n      if constexpr\
     \ (digits <= std::numeric_limits<unsigned int>::digits) return __builtin_clz(x)\
@@ -82,13 +82,13 @@ data:
     \ + digits - std::numeric_limits<unsigned long>::digits;\n      else return __builtin_clzll(x)\
     \ + digits - std::numeric_limits<unsigned long long>::digits;\n    }\n  } leading_zero;\n\
     \n  inline constexpr struct {\n    template<class T>\n    constexpr KYOPRO_BASE_INT\
-    \ operator ()(T x) noexcept {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
+    \ operator ()(T x) const noexcept {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
     \      static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
     \ \"Integer size is too large\");\n      if constexpr (digits <= std::numeric_limits<unsigned\
     \ int>::digits) return __builtin_ctz(x);\n      else if constexpr (digits <= std::numeric_limits<unsigned\
     \ long>::digits) return __builtin_ctzl(x);\n      else return __builtin_ctzll(x);\n\
     \    }\n  } trailing_zero;\n\n  inline constexpr struct {\n    template<class\
-    \ T>\n    constexpr KYOPRO_BASE_INT operator ()(T x) noexcept {\n      constexpr\
+    \ T>\n    constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {\n      constexpr\
     \ auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n      static_assert(digits\
     \ <= std::numeric_limits<unsigned long long>::digits, \"Integer size is too large\"\
     );\n      if (x == 0) return 0;\n      if constexpr (digits <= std::numeric_limits<unsigned\
@@ -97,10 +97,10 @@ data:
     \ return std::numeric_limits<unsigned long>::digits - __builtin_clzl(x);\n   \
     \   else return std::numeric_limits<unsigned long long>::digits - __builtin_clzll(x);\n\
     \    }\n  } bit_len;\n\n  inline constexpr struct {\n    template<class T>\n \
-    \   constexpr KYOPRO_BASE_INT operator ()(T x) noexcept {\n      return bit_len(x\
-    \ >> static_cast<T>(1));\n    }\n  } floor_bit;\n\n  inline constexpr struct {\n\
-    \    template<class T>\n    constexpr KYOPRO_BASE_INT operator ()(T x) noexcept\
-    \ {\n      if (x == 0) return 0;\n      return bit_len(x - static_cast<T>(1));\n\
+    \   constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {\n      return\
+    \ bit_len(x >> static_cast<T>(1));\n    }\n  } floor_bit;\n\n  inline constexpr\
+    \ struct {\n    template<class T>\n    constexpr KYOPRO_BASE_INT operator ()(T\
+    \ x) const noexcept {\n      if (x == 0) return 0;\n      return bit_len(x - static_cast<T>(1));\n\
     \    }\n  } ceil_bit;\n}\n#line 2 \"math/DynamicModInt.hpp\"\n#include <cassert>\n\
     #include <cstddef>\n#line 4 \"algorithm/Hash.hpp\"\n#include <functional>\n#include\
     \ <tuple>\n#line 7 \"algorithm/Hash.hpp\"\n#include <utility>\n#line 2 \"meta/trait.hpp\"\
@@ -242,9 +242,10 @@ data:
     \      for (auto&& i: a) seed ^= Hash<iterable_value_t<T>>(i) + 0x9e3779b97f4a7c15LU\
     \ + (seed << 12) + (seed >> 4);\n      return seed;\n    }\n  };\n}\n#line 2 \"\
     meta/constant.hpp\"\n#include <array>\n#line 3 \"math/power.hpp\"\n\nnamespace\
-    \ kyopro {\n  template<class T>\n  constexpr T power(T a, KYOPRO_BASE_UINT n,\
-    \ T init = 1) noexcept {\n    while (n > 0) {\n      if (n & 1) init *= a;\n \
-    \     a *= a;\n      n >>= 1;\n    }\n    return init;\n  }\n}\n#line 7 \"meta/constant.hpp\"\
+    \ kyopro {\n  inline constexpr struct {\n    template<class T>\n    constexpr\
+    \ T operator ()(T a, KYOPRO_BASE_UINT n, T init = 1) const noexcept {\n      while\
+    \ (n > 0) {\n        if (n & 1) init *= a;\n        a *= a;\n        n >>= 1;\n\
+    \      }\n      return init;\n    }\n  } power;\n}\n#line 7 \"meta/constant.hpp\"\
     \n\nnamespace kyopro {\n  template<class T>\n  inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\n\
     \  inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\n  template<class\
     \ T>\n  inline constexpr T INF = std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\n\
@@ -319,47 +320,52 @@ data:
     \    }\n  };\n\n  template<class T, KYOPRO_BASE_UINT kind>\n  struct Hash<DynamicModInt<T,\
     \ kind>> {\n    using value_type = DynamicModInt<T, kind>;\n\n    std::size_t\
     \ operator ()(DynamicModInt<T, kind> a) const noexcept { return static_cast<std::size_t>(a);\
-    \ }\n  };\n}\n#line 7 \"math/is_prime.hpp\"\n\nnamespace kyopro {\n  template<class\
-    \ T>\n  constexpr bool is_prime(T x) {\n    using U = std::make_unsigned_t<T>;\n\
-    \    using DynamicModInt = DynamicModInt<U, KYOPRO_BASE_UINT(-1)>;\n    U n =\
-    \ x;\n    if (n <= 1) return false;\n    if (!(n & 1)) return n == 2;\n    DynamicModInt::set_mod(n);\n\
-    \    std::uint_fast64_t d = (n - 1) >> trailing_zero(n - 1);\n    DynamicModInt\
-    \ one = 1, minus_one = n - 1;\n    auto ng = [&](std::uint_fast64_t a) noexcept\
-    \ {\n      auto y = DynamicModInt(a).power(d);\n      std::uint_fast64_t t = d;\n\
-    \      while (y != one and y != minus_one and t != n - 1) y *= y, t <<= 1;\n \
-    \     if (y != minus_one and !(t & 1)) return true;\n      return false;\n   \
-    \ };\n    if (std::numeric_limits<U>::digits <= 32 || n < (static_cast<U>(1) <<\
-    \ 32)) {\n      for (auto i: (std::uint_fast64_t[3]){2, 7, 61}) {\n        if\
-    \ (n <= i) return true;\n        if (ng(i)) return false;\n      }\n    } else\
-    \ {\n      for (auto i: (std::uint_fast64_t[7]){2, 325, 9375, 28178, 450775, 9780504,\
-    \ 1795265022}) {\n        if (n <= i) return true;\n        if (ng(i)) return\
-    \ false;\n      }\n    }\n    return true;\n  }\n}\n#line 11 \"math/factorize.hpp\"\
-    \n\nnamespace kyopro {\n  template<class T>\n  constexpr T pollard_rho(T p, KYOPRO_BASE_UINT\
-    \ c) {\n    using U = std::make_unsigned_t<T>;\n    using DynamicModInt = DynamicModInt<U,\
-    \ KYOPRO_BASE_UINT(-1)>;\n    U n = p;\n    DynamicModInt::set_mod(n);\n    DynamicModInt\
-    \ cc = c;\n    auto f = [=](DynamicModInt x) noexcept { return x * x + cc; };\n\
-    \    auto x = DynamicModInt::raw(1), y = DynamicModInt::raw(2), z = DynamicModInt::raw(1),\
-    \ q = DynamicModInt::raw(1);\n    U g = 1;\n    const int m = 1 << (floor_bit(n)\
-    \ / 5);\n    for (int r = 1; g == 1; r <<= 1) {\n      x = y;\n      for (int\
-    \ i = 0; i < r; ++i) y = f(y);\n      for (int k = 0; k < r && g == 1; k += m)\
-    \ {\n        z = y;\n        int min = std::min(m, r - k);\n        for (int i\
-    \ = 0; i < min; ++i) {\n          y = f(y);\n          q *= x - y;\n        }\n\
-    \        g = std::gcd(static_cast<U>(q), n);\n      }\n    }\n    if (g == n)\
-    \ {\n      do {\n        z = f(z);\n        g = std::gcd(static_cast<U>(x - z),\
-    \ n);\n      } while (g == 1);\n    }\n    return g;\n  }\n\n  KYOPRO_BASE_UINT\
-    \ find_factor(KYOPRO_BASE_UINT n) noexcept {\n    static std::mt19937_64 mt(std::random_device{}());\n\
-    \    std::uniform_int_distribution<std::uint_fast64_t> rnd(0, n - 1);\n    if\
-    \ (is_prime(n)) return n;\n    for (int i = 0; i < 100; ++i) {\n      std::uint_fast64_t\
-    \ m = pollard_rho(n, rnd(mt));\n      if (is_prime(m)) return m;\n      n = m;\n\
-    \    }\n    return 1;\n  }\n\n  template<bool sorted = true, class Container =\
-    \ std::vector<KYOPRO_BASE_INT>>\n  Container factorize(KYOPRO_BASE_UINT n) {\n\
-    \    Container res;\n    for (int p = 2; p < 100 && p * p <= n; ++p) {\n     \
-    \ while (n % p == 0) {\n        n /= p;\n        res.emplace_back(p);\n      }\n\
-    \    }\n    while (n > 1) {\n      std::uint_fast64_t p = find_factor(n);\n  \
-    \    do {\n        n /= p;\n        res.emplace_back(p);\n      } while (n % p\
-    \ == 0);\n    }\n    if constexpr (sorted) std::sort(res.begin(), res.end());\n\
-    \    return res;\n  }\n}\n#line 2 \"system/in.hpp\"\n#include <unistd.h>\n#line\
-    \ 6 \"system/in.hpp\"\n#include <cstdio>\n#include <string>\n#line 14 \"system/in.hpp\"\
+    \ }\n  };\n}\n#line 7 \"math/is_prime.hpp\"\n\nnamespace kyopro {\n  inline constexpr\
+    \ struct {\n    template<class T>\n    constexpr bool operator ()(T x) const {\n\
+    \      using U = std::make_unsigned_t<T>;\n      using DynamicModInt = DynamicModInt<U,\
+    \ KYOPRO_BASE_UINT(-1)>;\n      U n = x;\n      if (n <= 1) return false;\n  \
+    \    if (!(n & 1)) return n == 2;\n      DynamicModInt::set_mod(n);\n      std::uint_fast64_t\
+    \ d = (n - 1) >> trailing_zero(n - 1);\n      DynamicModInt one = 1, minus_one\
+    \ = n - 1;\n      auto ng = [&](std::uint_fast64_t a) noexcept {\n        auto\
+    \ y = DynamicModInt(a).power(d);\n        std::uint_fast64_t t = d;\n        while\
+    \ (y != one and y != minus_one and t != n - 1) y *= y, t <<= 1;\n        if (y\
+    \ != minus_one and !(t & 1)) return true;\n        return false;\n      };\n \
+    \     if (std::numeric_limits<U>::digits <= 32 || n < (static_cast<U>(1) << 32))\
+    \ {\n        for (auto i: (std::uint_fast64_t[3]){2, 7, 61}) {\n          if (n\
+    \ <= i) return true;\n          if (ng(i)) return false;\n        }\n      } else\
+    \ {\n        for (auto i: (std::uint_fast64_t[7]){2, 325, 9375, 28178, 450775,\
+    \ 9780504, 1795265022}) {\n          if (n <= i) return true;\n          if (ng(i))\
+    \ return false;\n        }\n      }\n      return true;\n    }\n  } is_prime;\n\
+    }\n#line 11 \"math/factorize.hpp\"\n\nnamespace kyopro {\n  inline constexpr struct\
+    \ {\n    template<class T>\n    constexpr T operator ()(T p, KYOPRO_BASE_UINT\
+    \ c) const {\n      using U = std::make_unsigned_t<T>;\n      using DynamicModInt\
+    \ = DynamicModInt<U, KYOPRO_BASE_UINT(-1)>;\n      U n = p;\n      DynamicModInt::set_mod(n);\n\
+    \      DynamicModInt cc = c;\n      auto f = [=](DynamicModInt x) noexcept { return\
+    \ x * x + cc; };\n      auto x = DynamicModInt::raw(1), y = DynamicModInt::raw(2),\
+    \ z = DynamicModInt::raw(1), q = DynamicModInt::raw(1);\n      U g = 1;\n    \
+    \  const int m = 1 << (floor_bit(n) / 5);\n      for (int r = 1; g == 1; r <<=\
+    \ 1) {\n        x = y;\n        for (int i = 0; i < r; ++i) y = f(y);\n      \
+    \  for (int k = 0; k < r && g == 1; k += m) {\n          z = y;\n          int\
+    \ min = std::min(m, r - k);\n          for (int i = 0; i < min; ++i) {\n     \
+    \       y = f(y);\n            q *= x - y;\n          }\n          g = std::gcd(static_cast<U>(q),\
+    \ n);\n        }\n      }\n      if (g == n) {\n        do {\n          z = f(z);\n\
+    \          g = std::gcd(static_cast<U>(x - z), n);\n        } while (g == 1);\n\
+    \      }\n      return g;\n    }\n  } pollard_rho;\n\n  inline constexpr struct\
+    \ {\n    KYOPRO_BASE_UINT operator ()(KYOPRO_BASE_UINT n) const noexcept {\n \
+    \     static std::mt19937_64 mt(std::random_device{}());\n      std::uniform_int_distribution<std::uint_fast64_t>\
+    \ rnd(0, n - 1);\n      if (is_prime(n)) return n;\n      for (int i = 0; i <\
+    \ 100; ++i) {\n        std::uint_fast64_t m = pollard_rho(n, rnd(mt));\n     \
+    \   if (is_prime(m)) return m;\n        n = m;\n      }\n      return 1;\n   \
+    \ }\n  } find_factor;\n\n  inline constexpr struct {\n    template<bool sorted\
+    \ = true, class Container = std::vector<KYOPRO_BASE_INT>>\n    Container operator\
+    \ ()(KYOPRO_BASE_UINT n) const {\n      Container res;\n      for (int p = 2;\
+    \ p < 100 && p * p <= n; ++p) {\n        while (n % p == 0) {\n          n /=\
+    \ p;\n          res.emplace_back(p);\n        }\n      }\n      while (n > 1)\
+    \ {\n        std::uint_fast64_t p = find_factor(n);\n        do {\n          n\
+    \ /= p;\n          res.emplace_back(p);\n        } while (n % p == 0);\n     \
+    \ }\n      if constexpr (sorted) std::sort(res.begin(), res.end());\n      return\
+    \ res;\n    }\n  } factorize;\n}\n#line 2 \"system/in.hpp\"\n#include <unistd.h>\n\
+    #line 6 \"system/in.hpp\"\n#include <cstdio>\n#include <string>\n#line 14 \"system/in.hpp\"\
     \n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>\n\
     \  struct Reader {\n    static constexpr KYOPRO_BASE_UINT buf_size = _buf_size;\n\
     \n  private:\n    int fd, idx;\n    std::array<char, buf_size> buffer;\n\n  public:\n\
@@ -513,8 +519,8 @@ data:
   isVerificationFile: true
   path: verify/yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2022-07-07 01:22:05+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-07-07 16:11:50+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yosupo/factorize.test.cpp
 layout: document

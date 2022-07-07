@@ -1,28 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/aggregate.hpp
     title: meta/aggregate.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -58,14 +58,14 @@ data:
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 5 \"algorithm/bit.hpp\"\n\nnamespace kyopro {\n  inline constexpr\
     \ struct {\n    template<class T>\n    constexpr KYOPRO_BASE_INT operator ()(T\
-    \ x) noexcept {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
+    \ x) const noexcept {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
     \      static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
     \ \"Integer size is too large\");\n      if constexpr (digits <= std::numeric_limits<unsigned\
     \ int>::digits) return __builtin_popcount(x);\n      else if constexpr (digits\
     \ <= std::numeric_limits<unsigned long>::digits) return __builtin_popcountl(x);\n\
     \      else return __builtin_popcountll(x);\n    }\n  } pop_count;\n\n  inline\
     \ constexpr struct {\n    template<class T>\n    constexpr KYOPRO_BASE_INT operator\
-    \ ()(T x) noexcept {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
+    \ ()(T x) const noexcept {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
     \      static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
     \ \"Integer size is too large\");\n      if (x == 0) return 0;\n      if constexpr\
     \ (digits <= std::numeric_limits<unsigned int>::digits) return __builtin_clz(x)\
@@ -74,13 +74,13 @@ data:
     \ + digits - std::numeric_limits<unsigned long>::digits;\n      else return __builtin_clzll(x)\
     \ + digits - std::numeric_limits<unsigned long long>::digits;\n    }\n  } leading_zero;\n\
     \n  inline constexpr struct {\n    template<class T>\n    constexpr KYOPRO_BASE_INT\
-    \ operator ()(T x) noexcept {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
+    \ operator ()(T x) const noexcept {\n      constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
     \      static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
     \ \"Integer size is too large\");\n      if constexpr (digits <= std::numeric_limits<unsigned\
     \ int>::digits) return __builtin_ctz(x);\n      else if constexpr (digits <= std::numeric_limits<unsigned\
     \ long>::digits) return __builtin_ctzl(x);\n      else return __builtin_ctzll(x);\n\
     \    }\n  } trailing_zero;\n\n  inline constexpr struct {\n    template<class\
-    \ T>\n    constexpr KYOPRO_BASE_INT operator ()(T x) noexcept {\n      constexpr\
+    \ T>\n    constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {\n      constexpr\
     \ auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n      static_assert(digits\
     \ <= std::numeric_limits<unsigned long long>::digits, \"Integer size is too large\"\
     );\n      if (x == 0) return 0;\n      if constexpr (digits <= std::numeric_limits<unsigned\
@@ -89,10 +89,10 @@ data:
     \ return std::numeric_limits<unsigned long>::digits - __builtin_clzl(x);\n   \
     \   else return std::numeric_limits<unsigned long long>::digits - __builtin_clzll(x);\n\
     \    }\n  } bit_len;\n\n  inline constexpr struct {\n    template<class T>\n \
-    \   constexpr KYOPRO_BASE_INT operator ()(T x) noexcept {\n      return bit_len(x\
-    \ >> static_cast<T>(1));\n    }\n  } floor_bit;\n\n  inline constexpr struct {\n\
-    \    template<class T>\n    constexpr KYOPRO_BASE_INT operator ()(T x) noexcept\
-    \ {\n      if (x == 0) return 0;\n      return bit_len(x - static_cast<T>(1));\n\
+    \   constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {\n      return\
+    \ bit_len(x >> static_cast<T>(1));\n    }\n  } floor_bit;\n\n  inline constexpr\
+    \ struct {\n    template<class T>\n    constexpr KYOPRO_BASE_INT operator ()(T\
+    \ x) const noexcept {\n      if (x == 0) return 0;\n      return bit_len(x - static_cast<T>(1));\n\
     \    }\n  } ceil_bit;\n}\n#line 4 \"algorithm/Hash.hpp\"\n#include <functional>\n\
     #include <tuple>\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#include <queue>\n\
     #line 5 \"meta/trait.hpp\"\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\n\
@@ -232,9 +232,10 @@ data:
     \      for (auto&& i: a) seed ^= Hash<iterable_value_t<T>>(i) + 0x9e3779b97f4a7c15LU\
     \ + (seed << 12) + (seed >> 4);\n      return seed;\n    }\n  };\n}\n#line 2 \"\
     meta/constant.hpp\"\n#include <array>\n#line 3 \"math/power.hpp\"\n\nnamespace\
-    \ kyopro {\n  template<class T>\n  constexpr T power(T a, KYOPRO_BASE_UINT n,\
-    \ T init = 1) noexcept {\n    while (n > 0) {\n      if (n & 1) init *= a;\n \
-    \     a *= a;\n      n >>= 1;\n    }\n    return init;\n  }\n}\n#line 7 \"meta/constant.hpp\"\
+    \ kyopro {\n  inline constexpr struct {\n    template<class T>\n    constexpr\
+    \ T operator ()(T a, KYOPRO_BASE_UINT n, T init = 1) const noexcept {\n      while\
+    \ (n > 0) {\n        if (n & 1) init *= a;\n        a *= a;\n        n >>= 1;\n\
+    \      }\n      return init;\n    }\n  } power;\n}\n#line 7 \"meta/constant.hpp\"\
     \n\nnamespace kyopro {\n  template<class T>\n  inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\n\
     \  inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\n  template<class\
     \ T>\n  inline constexpr T INF = std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\n\
@@ -244,14 +245,15 @@ data:
     \  inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\n  template<class\
     \ T>\n  inline constexpr T PI = 3.14159265358979323846;\n  inline constexpr KYOPRO_BASE_FLOAT\
     \ pi = PI<KYOPRO_BASE_FLOAT>;\n}\n#line 4 \"math/mod.hpp\"\n\nnamespace kyopro\
-    \ {\n  template<class T, class U>\n  constexpr std::common_type_t<T, U> floor_mod(T\
-    \ x, U m) noexcept {\n    static_assert(std::is_integral_v<T> && std::is_integral_v<U>,\
-    \ \"Integer is required\");\n    if constexpr (std::is_unsigned_v<T> || std::is_unsigned_v<U>)\
-    \ return x % m;\n    return (x %= m) < 0 ? x + m : x;\n  }\n\n  template<class\
-    \ T, class U>\n  constexpr std::common_type_t<T, U> ceil_mod(T x, U m) noexcept\
-    \ {\n    return m - floor_mod(x - 1, m) - static_cast<T>(1);\n  }\n}\n#line 14\
-    \ \"math/ModInt.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT m>\n\
-    \  struct ModInt {\n    using value_type = uint_least_t<bit_len(m * 2 - 2)>;\n\
+    \ {\n  inline constexpr struct {\n    template<class T, class U>\n    constexpr\
+    \ std::common_type_t<T, U> operator ()(T x, U m) const noexcept {\n      static_assert(std::is_integral_v<T>\
+    \ && std::is_integral_v<U>, \"Integer is required\");\n      if constexpr (std::is_unsigned_v<T>\
+    \ || std::is_unsigned_v<U>) return x % m;\n      return (x %= m) < 0 ? x + m :\
+    \ x;\n    }\n  } floor_mod;\n\n  inline constexpr struct {\n    template<class\
+    \ T, class U>\n    constexpr std::common_type_t<T, U> operator ()(T x, U m) const\
+    \ noexcept {\n      return m - floor_mod(x - 1, m) - static_cast<T>(1);\n    }\n\
+    \   } ceil_mod;\n}\n#line 14 \"math/ModInt.hpp\"\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT\
+    \ m>\n  struct ModInt {\n    using value_type = uint_least_t<bit_len(m * 2 - 2)>;\n\
     \    static constexpr KYOPRO_BASE_INT mod = m;\n\n  private:\n    static constexpr\
     \ value_type _mod = m;\n\n  public:\n    value_type value;\n\n    static constexpr\
     \ KYOPRO_BASE_INT get_mod() noexcept {\n      return mod;\n    }\n\n    constexpr\
@@ -367,7 +369,7 @@ data:
   - all/all.hpp
   - template/all.hpp
   - template/alias.hpp
-  timestamp: '2022-07-07 01:22:05+09:00'
+  timestamp: '2022-07-07 16:11:50+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/ModInt.hpp
