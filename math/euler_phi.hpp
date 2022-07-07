@@ -4,7 +4,7 @@
 
 namespace kyopro {
   inline constexpr struct {
-    constexpr KYOPRO_BASE_UINT operator ()(KYOPRO_BASE_UINT n) noexcept {
+    constexpr KYOPRO_BASE_UINT operator ()(KYOPRO_BASE_UINT n) const noexcept {
       std::uint_fast64_t res = n;
       if ((n & 1) == 0) {
         res -= res >> 1;

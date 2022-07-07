@@ -6,7 +6,7 @@
 namespace kyopro {
   inline constexpr struct {
     template<class Container = std::vector<KYOPRO_BASE_INT>>
-    Container operator ()(KYOPRO_BASE_UINT n) {
+    Container operator ()(KYOPRO_BASE_UINT n) const {
       Container lower, upper;
       std::uint_fast64_t i;
       for (i = 1; i * i < n; ++i) if (n % i == 0) {

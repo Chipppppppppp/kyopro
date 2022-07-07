@@ -6,7 +6,7 @@
 namespace kyopro {
   inline constexpr struct {
     template<class T>
-    constexpr KYOPRO_BASE_INT operator ()(T x) noexcept {
+    constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {
       constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;
       static_assert(digits <= std::numeric_limits<unsigned long long>::digits, "Integer size is too large");
       if constexpr (digits <= std::numeric_limits<unsigned int>::digits) return __builtin_popcount(x);
@@ -17,7 +17,7 @@ namespace kyopro {
 
   inline constexpr struct {
     template<class T>
-    constexpr KYOPRO_BASE_INT operator ()(T x) noexcept {
+    constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {
       constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;
       static_assert(digits <= std::numeric_limits<unsigned long long>::digits, "Integer size is too large");
       if (x == 0) return 0;
@@ -29,7 +29,7 @@ namespace kyopro {
 
   inline constexpr struct {
     template<class T>
-    constexpr KYOPRO_BASE_INT operator ()(T x) noexcept {
+    constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {
       constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;
       static_assert(digits <= std::numeric_limits<unsigned long long>::digits, "Integer size is too large");
       if constexpr (digits <= std::numeric_limits<unsigned int>::digits) return __builtin_ctz(x);
@@ -40,7 +40,7 @@ namespace kyopro {
 
   inline constexpr struct {
     template<class T>
-    constexpr KYOPRO_BASE_INT operator ()(T x) noexcept {
+    constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {
       constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;
       static_assert(digits <= std::numeric_limits<unsigned long long>::digits, "Integer size is too large");
       if (x == 0) return 0;
@@ -52,14 +52,14 @@ namespace kyopro {
 
   inline constexpr struct {
     template<class T>
-    constexpr KYOPRO_BASE_INT operator ()(T x) noexcept {
+    constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {
       return bit_len(x >> static_cast<T>(1));
     }
   } floor_bit;
 
   inline constexpr struct {
     template<class T>
-    constexpr KYOPRO_BASE_INT operator ()(T x) noexcept {
+    constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {
       if (x == 0) return 0;
       return bit_len(x - static_cast<T>(1));
     }

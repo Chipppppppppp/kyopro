@@ -3,8 +3,10 @@
 #include "../meta/settings.hpp"
 
 namespace kyopro {
-  template<class T>
-  constexpr KYOPRO_BASE_INT len(T&& a) noexcept {
-    return std::size(a);
-  }
+  inline constexpr struct {
+    template<class T>
+    constexpr KYOPRO_BASE_INT operator ()(T&& a) const noexcept {
+      return std::size(a);
+    }
+  } len;
 }
