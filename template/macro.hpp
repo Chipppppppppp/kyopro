@@ -27,14 +27,12 @@ namespace kyopro::helper {
     return std::tuple{(static_cast<void>(idx), f())...};
   }
 
-  Printer<Writer<>::iterator, true, true, true> debug_impl(output.begin());
+  Printer<Writer<>::iterator, true, true, true, true, true> debug_impl(output.begin());
 
-  template<bool>
-  void print_if(const char* s) {
-    print(' ', s, ' ', '=', ' ');
+  template<bool flag, std::size_t len>
+  void print_if(const char (&s)[len]) {
+    if constexpr (flag) print(' ', s);
   }
-  template<>
-  void print_if<false>(const char*) {}
 }
 
 #define read(type_or_init, ...) auto [__VA_ARGS__] = kyopro::helper::read_impl(([]() {\
@@ -44,7 +42,7 @@ namespace kyopro::helper {
   kyopro::scan(*p);\
   return std::move(*p);\
 }), std::make_index_sequence<kyopro::helper::va_args_size(#__VA_ARGS__)>())
-#define debug(...) (kyopro::print('#', 'l', 'i', 'n', 'e', ' ', __LINE__, ':'), kyopro::helper::print_if<kyopro::helper::va_args_size(#__VA_ARGS__) != 0>(#__VA_ARGS__), kyopro::helper::debug_impl(__VA_ARGS__))
+#define debug(...) (kyopro::print('#', ' ', 'l', 'i', 'n', 'e', ' ', __LINE__, ':'), kyopro::helper::print_if<kyopro::helper::va_args_size(#__VA_ARGS__) != 0>(#__VA_ARGS__), kyopro::print('\n'), kyopro::helper::debug_impl(__VA_ARGS__))
 
 #define KYOPRO_OVERLOAD_MACRO(_1, _2, _3, _4, name, ...) name
 

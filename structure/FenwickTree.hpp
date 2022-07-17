@@ -6,7 +6,7 @@
 #include "../meta/settings.hpp"
 
 namespace kyopro {
-  template<class T, class Op = Plus<T>, class Container = std::vector<T>>
+  template<class T, class Op = Add<T>, class Container = std::vector<T>>
   struct FenwickTree {
     using value_type = T;
     using size_type = KYOPRO_BASE_UINT;

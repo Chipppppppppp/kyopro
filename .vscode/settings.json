@@ -91,6 +91,11 @@
     "typeindex": "cpp",
     "variant": "cpp",
     "cfenv": "cpp",
-    "cinttypes": "cpp"
+    "cinttypes": "cpp",
+    "csetjmp": "cpp",
+    "forward_list": "cpp",
+    "regex": "cpp",
+    "scoped_allocator": "cpp",
+    "valarray": "cpp"
   }
 }

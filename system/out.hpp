@@ -1,6 +1,8 @@
 #pragma once
 #include <unistd.h>
+#include <algorithm>
 #include <array>
+#include <cmath>
 #include <cstdint>
 #include <cstdio>
 #include <iterator>
@@ -13,7 +15,7 @@
 #include "../meta/trait.hpp"
 
 namespace kyopro {
-  template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>
+  template<std::size_t _buf_size = KYOPRO_BUFFER_SIZE>
   struct Writer {
     static constexpr KYOPRO_BASE_UINT buf_size = _buf_size;
 
@@ -75,10 +77,10 @@ namespace kyopro {
 
   Writer output(1), error(2);
 
-  template<class Iterator, bool _sep = true, bool _end = true, bool _debug = false, bool _comment = false, bool _flush = false, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>
+  template<class Iterator, bool _sep = true, bool _sep_line = true, bool _end_line = true, bool _debug = false, bool _comment = false, bool _flush = false, std::size_t _decimal_precision = KYOPRO_DECIMAL_PRECISION>
   struct Printer {
     using iterator_type = Iterator;
-    static constexpr bool sep = _sep, end = _end, debug = _debug, comment = _comment, flush = _flush;
+    static constexpr bool sep = _sep, end_line = _end_line, sep_line = _sep_line, debug = _debug, comment = _comment, flush = _flush;
     static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;
 
   private:
@@ -88,6 +90,26 @@ namespace kyopro {
     struct has_print<T, std::void_t<decltype(std::declval<T>().print(std::declval<Printer&>()))>>: std::true_type {};
 
   public:
+
+    template<class, class = void>
+    struct max_rank {
+      static constexpr std::size_t value = 0;
+    };
+    template<class T>
+    struct max_rank<T, std::enable_if_t<is_agg_v<T>>> {
+      template<std::size_t... idx>
+      static constexpr bool get_value_rank(std::index_sequence<idx...>) {
+        return std::max({max_rank<aggregate_element_t<idx, T>>::value...});
+      }
+      static constexpr std::size_t value = get_value_rank(std::make_index_sequence<aggregate_size_v<T>>()) + 1;
+    };
+    template<class T>
+    struct max_rank<T, std::enable_if_t<is_iterable_v<T>>> {
+      static constexpr std::size_t value = max_rank<iterable_value_t<T>>::value + 1;
+    };
+
+    template<class T>
+    static constexpr KYOPRO_BASE_UINT max_rank_v = max_rank<T>::value;
 
     Iterator itr;
 
@@ -99,11 +121,18 @@ namespace kyopro {
       ++itr;
     }
 
+    template<std::size_t rank>
     void print_sep() {
-      if constexpr (debug) {
-        print_char(',');
+      if constexpr (sep) {
+        if constexpr (debug) print_char(',');
+        if constexpr (sep_line && rank >= 2) {
+          print_char('\n');
+          if constexpr (comment) {
+            print_char('#');
+            print_char(' ');
+          }
+        } else print_char(' ');
       }
-      print_char(' ');
     }
 
     void print(char a) {
@@ -132,12 +161,25 @@ namespace kyopro {
     }
     template<class T, std::enable_if_t<std::is_arithmetic_v<T> && !has_print<T>::value>* = nullptr>
     void print(T a) {
+      if constexpr (std::is_floating_point_v<T>) {
+        if (a == std::numeric_limits<T>::infinity()) {
+          print("inf");
+          return;
+        }
+        if (a == -std::numeric_limits<T>::infinity()) {
+          print("-inf");
+          return;
+        }
+        if (std::isnan(a)) {
+          print("nan");
+          return;
+        }
+      }
       if constexpr (std::is_signed_v<T>) if (a < 0) {
         print_char('-');
         a = -a;
       }
       std::uint_fast64_t p = a;
-      a -= p;
       std::string s;
       do {
         s += '0' + p % 10;
@@ -146,47 +188,42 @@ namespace kyopro {
       for (auto i = s.rbegin(); i != s.rend(); ++i) print_char(*i);
       if constexpr (std::is_integral_v<T>) return;
       print_char('.');
+      a -= p;
       for (int i = 0; i < static_cast<int>(decimal_precision); ++i) {
         a *= 10;
         print_char('0' + static_cast<std::uint_fast64_t>(a) % 10);
       }
     }
     template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T> && !has_print<T>::value>* = nullptr>
-    void print(const T& a) {
+    void print(T&& a) {
       if constexpr (debug && i == 0) print_char('{');
       if constexpr (aggregate_size_v<T> != 0) print(access<i>(a));
       if constexpr (i + 1 < aggregate_size_v<T>) {
-        if constexpr (sep) print_sep();
+        print_sep<max_rank_v<std::decay_t<T>>>();
         print<i + 1>(a);
       } else if constexpr (debug) print_char('}');
     }
     template<class T, std::enable_if_t<is_iterable_v<T> && !has_print<T>::value>* = nullptr>
-    void print(const T& a) {
+    void print(T&& a) {
       if constexpr (debug) print_char('{');
       if (std::empty(a)) return;
       for (auto i = std::begin(a); ; ) {
         print(*i);
         if (++i != std::end(a)) {
-          if constexpr (sep) {
-            if constexpr (debug) {
-              print_char(',');
-              print_char(' ');
-            } else if constexpr (std::is_arithmetic_v<std::decay_t<decltype(std::declval<T>()[0])>>) print_char(' ');
-            else print_char('\n');
-          }
+          print_sep<max_rank_v<std::decay_t<T>>>();
         } else break;
       }
       if constexpr (debug) print_char('}');
     }
     template<class T, std::enable_if_t<has_print<T>::value>* = nullptr>
-    void print(const T& a) {
+    void print(T&& a) {
       a.print(*this);
     }
 
     template<bool first = true>
     void operator ()() {
       if constexpr (comment && first) print_char('#');
-      if constexpr (end) print_char('\n');
+      if constexpr (end_line) print_char('\n');
       if constexpr (flush) itr.flush();
     }
     template<bool first = true, class Head, class... Args>
@@ -195,12 +232,12 @@ namespace kyopro {
         print_char('#');
         print_char(' ');
       }
-      if constexpr (sep && !first) print_sep();
-      print(head);
+      if constexpr (sep && !first) print_sep<0>();
+      print(std::forward<Head>(head));
       operator ()<false>(std::forward<Args>(args)...);
     }
   };
 
-  Printer<Writer<>::iterator, false, false> print(output.begin()), eprint(error.begin());
+  Printer<Writer<>::iterator, false, false, false> print(output.begin()), eprint(error.begin());
   Printer<Writer<>::iterator> println(output.begin()), eprintln(error.begin());
 }

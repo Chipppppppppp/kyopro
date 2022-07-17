@@ -13,7 +13,7 @@
 #include "../meta/trait.hpp"
 
 namespace kyopro {
-  template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>
+  template<std::size_t _buf_size = KYOPRO_BUFFER_SIZE>
   struct Reader {
     static constexpr KYOPRO_BASE_UINT buf_size = _buf_size;
 
@@ -73,7 +73,7 @@ namespace kyopro {
 
   Reader input(0);
 
-  template<class Iterator, KYOPRO_BASE_UINT _decimal_precision = KYOPRO_DECIMAL_PRECISION>
+  template<class Iterator, std::size_t _decimal_precision = KYOPRO_DECIMAL_PRECISION>
   struct Scanner {
     using iterator_type = Iterator;
     static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;

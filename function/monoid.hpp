@@ -1,10 +1,11 @@
 #pragma once
+#include <limits>
 #include <type_traits>
 #include "../meta/constant.hpp"
 
 namespace kyopro {
   template<class T, T _id = 0>
-  struct Plus {
+  struct Add {
     static_assert(std::is_arithmetic_v<T>);
     using value_type = T;
     static constexpr T id = _id;
@@ -26,21 +27,21 @@ namespace kyopro {
     }
   };
 
-  template<class T, T _id = std::is_integral_v<T> ? -INF<T> : -inf>
-  struct Max {
-    static_assert(std::is_arithmetic_v<T>);
-    using value_type = T;
-    static constexpr T id = _id;
-
-    constexpr T operator ()(T a, T b) const noexcept { return a > b ? a : b; }
-  };
-
-  template<class T, T _id = std::is_integral_v<T> ? INF<T> : inf>
+  template<class T, T _id = std::is_integral_v<T> ? INF<T> : std::numeric_limits<T>::infinity()>
   struct Min {
     static_assert(std::is_arithmetic_v<T>);
     using value_type = T;
     static constexpr T id = _id;
 
     constexpr T operator ()(T a, T b) const noexcept { return a < b ? a : b; }
+  };
+
+  template<class T, T _id = std::is_integral_v<T> ? std::is_signed_v<T> ? -INF<T> : 0 : -std::numeric_limits<T>::infinity()>
+  struct Max {
+    static_assert(std::is_arithmetic_v<T>);
+    using value_type = T;
+    static constexpr T id = _id;
+
+    constexpr T operator ()(T a, T b) const noexcept { return a > b ? a : b; }
   };
 }
