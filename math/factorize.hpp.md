@@ -407,9 +407,9 @@ data:
   isVerificationFile: false
   path: math/factorize.hpp
   requiredBy:
-  - all.hpp
-  - math/all.hpp
   - all/all.hpp
+  - math/all.hpp
+  - all.hpp
   timestamp: '2022-07-07 16:11:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

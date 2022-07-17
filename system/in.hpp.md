@@ -170,8 +170,8 @@ data:
     \ aggregate_element<idx, T>::type;\n\n  template<class T>\n  struct is_agg: std::conjunction<std::is_aggregate<T>,\
     \ std::negation<is_iterable<T>>> {};\n\n  template<class T>\n  inline constexpr\
     \ bool is_agg_v = is_agg<T>::value;\n}\n#line 14 \"system/in.hpp\"\n\nnamespace\
-    \ kyopro {\n  template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>\n  struct\
-    \ Reader {\n    static constexpr KYOPRO_BASE_UINT buf_size = _buf_size;\n\n  private:\n\
+    \ kyopro {\n  template<std::size_t _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Reader\
+    \ {\n    static constexpr KYOPRO_BASE_UINT buf_size = _buf_size;\n\n  private:\n\
     \    int fd, idx;\n    std::array<char, buf_size> buffer;\n\n  public:\n    Reader()\
     \ {\n      read(fd, buffer.begin(), buf_size);\n    }\n    Reader(int fd): fd(fd),\
     \ idx(0), buffer() {\n      read(fd, buffer.begin(), buf_size);\n    }\n    Reader(FILE*\
@@ -187,21 +187,20 @@ data:
     \ before = *this;\n        operator ++();\n        return before;\n      }\n\n\
     \      char& operator *() const {\n        return reader.buffer[reader.idx];\n\
     \      }\n    };\n\n    iterator begin() noexcept {\n      return iterator(*this);\n\
-    \    }\n  };\n\n  Reader input(0);\n\n  template<class Iterator, KYOPRO_BASE_UINT\
-    \ _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n    using\
-    \ iterator_type = Iterator;\n    static constexpr KYOPRO_BASE_UINT decimal_precision\
-    \ = _decimal_precision;\n\n  private:\n    template<class, class = void>\n   \
-    \ struct has_scan: std::false_type {};\n    template<class T>\n    struct has_scan<T,\
-    \ std::void_t<decltype(std::declval<T>().scan(std::declval<Scanner&>()))>>: std::true_type\
-    \ {};\n\n  public:\n    Iterator itr;\n\n    Scanner() noexcept = default;\n \
-    \   Scanner(Iterator itr) noexcept: itr(itr) {}\n\n    void discard_space() {\n\
-    \      while (('\\t' <= *itr && *itr <= '\\r') || *itr == ' ') ++itr;\n    }\n\
-    \n    void scan(char& a) {\n      discard_space();\n      a = *itr;\n      ++itr;\n\
-    \    }\n    void scan(std::string& a) {\n      discard_space();\n      while ((*itr\
-    \ < '\\t' || '\\r' < *itr) && *itr != ' ') {\n        a += *itr;\n        ++itr;\n\
-    \      }\n    }\n    void scan(bool& a) {\n      discard_space();\n      while\
-    \ ('0' <= *itr && *itr <= '9') {\n        if (*itr != '0') a = true;\n       \
-    \ ++itr;\n      }\n    }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T>\
+    \    }\n  };\n\n  Reader input(0);\n\n  template<class Iterator, std::size_t _decimal_precision\
+    \ = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n    using iterator_type = Iterator;\n\
+    \    static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;\n\
+    \n  private:\n    template<class, class = void>\n    struct has_scan: std::false_type\
+    \ {};\n    template<class T>\n    struct has_scan<T, std::void_t<decltype(std::declval<T>().scan(std::declval<Scanner&>()))>>:\
+    \ std::true_type {};\n\n  public:\n    Iterator itr;\n\n    Scanner() noexcept\
+    \ = default;\n    Scanner(Iterator itr) noexcept: itr(itr) {}\n\n    void discard_space()\
+    \ {\n      while (('\\t' <= *itr && *itr <= '\\r') || *itr == ' ') ++itr;\n  \
+    \  }\n\n    void scan(char& a) {\n      discard_space();\n      a = *itr;\n  \
+    \    ++itr;\n    }\n    void scan(std::string& a) {\n      discard_space();\n\
+    \      while ((*itr < '\\t' || '\\r' < *itr) && *itr != ' ') {\n        a += *itr;\n\
+    \        ++itr;\n      }\n    }\n    void scan(bool& a) {\n      discard_space();\n\
+    \      while ('0' <= *itr && *itr <= '9') {\n        if (*itr != '0') a = true;\n\
+    \        ++itr;\n      }\n    }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T>\
     \ && !has_scan<T>::value>* = nullptr>\n    void scan(T& a) {\n      discard_space();\n\
     \      bool sgn = false;\n      if constexpr (!std::is_unsigned_v<T>) if (*itr\
     \ == '-') {\n        sgn = true;\n        ++itr;\n      }\n      a = 0;\n    \
@@ -227,9 +226,9 @@ data:
     #include <cstdint>\n#include <cstdio>\n#include <string>\n#include <tuple>\n#include\
     \ <type_traits>\n#include <utility>\n#include \"../math/power.hpp\"\n#include\
     \ \"../meta/settings.hpp\"\n#include \"../meta/trait.hpp\"\n\nnamespace kyopro\
-    \ {\n  template<KYOPRO_BASE_UINT _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Reader\
-    \ {\n    static constexpr KYOPRO_BASE_UINT buf_size = _buf_size;\n\n  private:\n\
-    \    int fd, idx;\n    std::array<char, buf_size> buffer;\n\n  public:\n    Reader()\
+    \ {\n  template<std::size_t _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Reader {\n\
+    \    static constexpr KYOPRO_BASE_UINT buf_size = _buf_size;\n\n  private:\n \
+    \   int fd, idx;\n    std::array<char, buf_size> buffer;\n\n  public:\n    Reader()\
     \ {\n      read(fd, buffer.begin(), buf_size);\n    }\n    Reader(int fd): fd(fd),\
     \ idx(0), buffer() {\n      read(fd, buffer.begin(), buf_size);\n    }\n    Reader(FILE*\
     \ fp): fd(fileno(fp)), idx(0), buffer() {\n      read(fd, buffer.begin(), buf_size);\n\
@@ -244,21 +243,20 @@ data:
     \ before = *this;\n        operator ++();\n        return before;\n      }\n\n\
     \      char& operator *() const {\n        return reader.buffer[reader.idx];\n\
     \      }\n    };\n\n    iterator begin() noexcept {\n      return iterator(*this);\n\
-    \    }\n  };\n\n  Reader input(0);\n\n  template<class Iterator, KYOPRO_BASE_UINT\
-    \ _decimal_precision = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n    using\
-    \ iterator_type = Iterator;\n    static constexpr KYOPRO_BASE_UINT decimal_precision\
-    \ = _decimal_precision;\n\n  private:\n    template<class, class = void>\n   \
-    \ struct has_scan: std::false_type {};\n    template<class T>\n    struct has_scan<T,\
-    \ std::void_t<decltype(std::declval<T>().scan(std::declval<Scanner&>()))>>: std::true_type\
-    \ {};\n\n  public:\n    Iterator itr;\n\n    Scanner() noexcept = default;\n \
-    \   Scanner(Iterator itr) noexcept: itr(itr) {}\n\n    void discard_space() {\n\
-    \      while (('\\t' <= *itr && *itr <= '\\r') || *itr == ' ') ++itr;\n    }\n\
-    \n    void scan(char& a) {\n      discard_space();\n      a = *itr;\n      ++itr;\n\
-    \    }\n    void scan(std::string& a) {\n      discard_space();\n      while ((*itr\
-    \ < '\\t' || '\\r' < *itr) && *itr != ' ') {\n        a += *itr;\n        ++itr;\n\
-    \      }\n    }\n    void scan(bool& a) {\n      discard_space();\n      while\
-    \ ('0' <= *itr && *itr <= '9') {\n        if (*itr != '0') a = true;\n       \
-    \ ++itr;\n      }\n    }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T>\
+    \    }\n  };\n\n  Reader input(0);\n\n  template<class Iterator, std::size_t _decimal_precision\
+    \ = KYOPRO_DECIMAL_PRECISION>\n  struct Scanner {\n    using iterator_type = Iterator;\n\
+    \    static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;\n\
+    \n  private:\n    template<class, class = void>\n    struct has_scan: std::false_type\
+    \ {};\n    template<class T>\n    struct has_scan<T, std::void_t<decltype(std::declval<T>().scan(std::declval<Scanner&>()))>>:\
+    \ std::true_type {};\n\n  public:\n    Iterator itr;\n\n    Scanner() noexcept\
+    \ = default;\n    Scanner(Iterator itr) noexcept: itr(itr) {}\n\n    void discard_space()\
+    \ {\n      while (('\\t' <= *itr && *itr <= '\\r') || *itr == ' ') ++itr;\n  \
+    \  }\n\n    void scan(char& a) {\n      discard_space();\n      a = *itr;\n  \
+    \    ++itr;\n    }\n    void scan(std::string& a) {\n      discard_space();\n\
+    \      while ((*itr < '\\t' || '\\r' < *itr) && *itr != ' ') {\n        a += *itr;\n\
+    \        ++itr;\n      }\n    }\n    void scan(bool& a) {\n      discard_space();\n\
+    \      while ('0' <= *itr && *itr <= '9') {\n        if (*itr != '0') a = true;\n\
+    \        ++itr;\n      }\n    }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T>\
     \ && !has_scan<T>::value>* = nullptr>\n    void scan(T& a) {\n      discard_space();\n\
     \      bool sgn = false;\n      if constexpr (!std::is_unsigned_v<T>) if (*itr\
     \ == '-') {\n        sgn = true;\n        ++itr;\n      }\n      a = 0;\n    \
@@ -287,19 +285,19 @@ data:
   isVerificationFile: false
   path: system/in.hpp
   requiredBy:
-  - all.hpp
   - all/all.hpp
+  - all.hpp
   - template/all.hpp
   - template/macro.hpp
   - system/all.hpp
-  timestamp: '2022-07-07 16:11:50+09:00'
+  timestamp: '2022-07-17 16:51:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yosupo/many_aplusb.test.cpp
-  - verify/yosupo/unionfind.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
-  - verify/yosupo/factorize.test.cpp
   - verify/aoj/PrimeNumber.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/unionfind.test.cpp
+  - verify/yosupo/factorize.test.cpp
 documentation_of: system/in.hpp
 layout: document
 redirect_from:

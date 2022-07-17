@@ -88,19 +88,19 @@ data:
   isVerificationFile: false
   path: math/Montgomery.hpp
   requiredBy:
-  - all.hpp
-  - math/all.hpp
-  - math/factorize.hpp
-  - math/is_prime.hpp
-  - math/DynamicModInt.hpp
   - all/all.hpp
-  - template/all.hpp
+  - math/DynamicModInt.hpp
+  - math/is_prime.hpp
+  - math/factorize.hpp
+  - math/all.hpp
+  - all.hpp
   - template/alias.hpp
+  - template/all.hpp
   timestamp: '2022-06-05 22:20:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yosupo/factorize.test.cpp
   - verify/aoj/PrimeNumber.test.cpp
+  - verify/yosupo/factorize.test.cpp
 documentation_of: math/Montgomery.hpp
 layout: document
 redirect_from:

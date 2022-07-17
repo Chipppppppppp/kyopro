@@ -7,9 +7,6 @@ data:
       path: algorithm/Hash.hpp
       title: algorithm/Hash.hpp
     - icon: ':warning:'
-      path: algorithm/algorithm.hpp
-      title: algorithm/algorithm.hpp
-    - icon: ':warning:'
       path: algorithm/all.hpp
       title: algorithm/all.hpp
     - icon: ':heavy_check_mark:'
