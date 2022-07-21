@@ -195,28 +195,28 @@ namespace kyopro {
       }
     }
     template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T> && !has_print<T>::value>* = nullptr>
-    void print(T&& a) {
+    void print(const T& a) {
       if constexpr (debug && i == 0) print_char('{');
       if constexpr (aggregate_size_v<T> != 0) print(access<i>(a));
       if constexpr (i + 1 < aggregate_size_v<T>) {
-        print_sep<max_rank_v<std::decay_t<T>>>();
+        print_sep<max_rank_v<T>>();
         print<i + 1>(a);
       } else if constexpr (debug) print_char('}');
     }
     template<class T, std::enable_if_t<is_iterable_v<T> && !has_print<T>::value>* = nullptr>
-    void print(T&& a) {
+    void print(const T& a) {
       if constexpr (debug) print_char('{');
       if (std::empty(a)) return;
       for (auto i = std::begin(a); ; ) {
         print(*i);
         if (++i != std::end(a)) {
-          print_sep<max_rank_v<std::decay_t<T>>>();
+          print_sep<max_rank_v<T>>();
         } else break;
       }
       if constexpr (debug) print_char('}');
     }
     template<class T, std::enable_if_t<has_print<T>::value>* = nullptr>
-    void print(T&& a) {
+    void print(const T& a) {
       a.print(*this);
     }
 

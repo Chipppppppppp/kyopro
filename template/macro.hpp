@@ -33,15 +33,17 @@ namespace kyopro::helper {
   void print_if(const char (&s)[len]) {
     if constexpr (flag) print(' ', s);
   }
+
+  struct LambdaArg {};
 }
 
-#define read(type_or_init, ...) auto [__VA_ARGS__] = kyopro::helper::read_impl(([]() {\
-  using T = std::decay_t<decltype(*new type_or_init)>;\
-  alignas(T) std::byte storage[sizeof(T)];\
-  T* p = new (storage) type_or_init;\
-  kyopro::scan(*p);\
-  return std::move(*p);\
-}), std::make_index_sequence<kyopro::helper::va_args_size(#__VA_ARGS__)>())
+#define read(type_or_init, ...) auto [__VA_ARGS__] = (kyopro::helper::read_impl(([]() { \
+  using T = std::decay_t<decltype(*new type_or_init)>;                                  \
+  alignas(T) std::byte storage[sizeof(T)];                                              \
+  T* p = new (storage) type_or_init;                                                    \
+  kyopro::scan(*p);                                                                     \
+  return std::move(*p);                                                                 \
+}), std::make_index_sequence<kyopro::helper::va_args_size(#__VA_ARGS__)>()))
 #define debug(...) (kyopro::print('#', ' ', 'l', 'i', 'n', 'e', ' ', __LINE__, ':'), kyopro::helper::print_if<kyopro::helper::va_args_size(#__VA_ARGS__) != 0>(#__VA_ARGS__), kyopro::print('\n'), kyopro::helper::debug_impl(__VA_ARGS__))
 
 #define KYOPRO_OVERLOAD_MACRO(_1, _2, _3, _4, name, ...) name
@@ -59,11 +61,12 @@ namespace kyopro::helper {
 #define match(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__, KYOPRO_MATCH4, KYOPRO_MATCH3, KYOPRO_MATCH2, KYOPRO_MATCH1)(__VA_ARGS__)
 #define otherwise break; default:
 
-#define KYOPRO_LAMBDA1(value) ([&]() noexcept { return (value);})
-#define KYOPRO_LAMBDA2(_1, value) ([&](auto&& _1) noexcept { return (value); })
-#define KYOPRO_LAMBDA3(_1, _2, value) ([&](auto&& _1, auto&& _2) noexcept { return (value); })
-#define KYOPRO_LAMBDA4(_1, _2, _3, value) ([&](auto&& _1, auto&& _2, auto&& _3) noexcept { return (value); })
-#define lambda(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__, KYOPRO_LAMBDA4, KYOPRO_LAMBDA3, KYOPRO_LAMBDA2, KYOPRO_LAMBDA1)(__VA_ARGS__)
+#define lambda(...) ([&](auto&&... args) noexcept {\
+  [[maybe_unused]] auto&& $0 = std::forward<std::tuple_element_t<0, std::tuple<decltype(args)..., kyopro::helper::LambdaArg>>>(std::get<0>(std::forward_as_tuple(args..., kyopro::helper::LambdaArg{})));\
+  [[maybe_unused]] auto&& $1 = std::forward<std::tuple_element_t<1, std::tuple<decltype(args)..., kyopro::helper::LambdaArg, kyopro::helper::LambdaArg>>>(std::get<1>(std::forward_as_tuple(args..., kyopro::helper::LambdaArg{}, kyopro::helper::LambdaArg{})));\
+  [[maybe_unused]] auto&& $2 = std::forward<std::tuple_element_t<2, std::tuple<decltype(args)..., kyopro::helper::LambdaArg, kyopro::helper::LambdaArg, kyopro::helper::LambdaArg>>>(std::get<2>(std::forward_as_tuple(args..., kyopro::helper::LambdaArg{}, kyopro::helper::LambdaArg{}, kyopro::helper::LambdaArg{})));\
+  return (__VA_ARGS__);\
+})
 
 #define all(...) std::begin(__VA_ARGS__), std::end(__VA_ARGS__)
 #define rall(...) std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)
