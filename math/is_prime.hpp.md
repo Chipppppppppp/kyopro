@@ -367,8 +367,8 @@ data:
   path: math/is_prime.hpp
   requiredBy:
   - all/all.hpp
-  - math/factorize.hpp
   - math/all.hpp
+  - math/factorize.hpp
   - all.hpp
   timestamp: '2022-07-07 16:11:50+09:00'
   verificationStatus: LIBRARY_ALL_AC

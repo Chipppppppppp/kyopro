@@ -89,13 +89,13 @@ data:
   path: math/Montgomery.hpp
   requiredBy:
   - all/all.hpp
-  - math/DynamicModInt.hpp
-  - math/is_prime.hpp
-  - math/factorize.hpp
   - math/all.hpp
+  - math/factorize.hpp
+  - math/is_prime.hpp
+  - math/DynamicModInt.hpp
   - all.hpp
-  - template/alias.hpp
   - template/all.hpp
+  - template/alias.hpp
   timestamp: '2022-06-05 22:20:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

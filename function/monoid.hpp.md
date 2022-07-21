@@ -100,10 +100,10 @@ data:
   path: function/monoid.hpp
   requiredBy:
   - all/all.hpp
-  - structure/FenwickTree.hpp
   - structure/all.hpp
-  - function/all.hpp
+  - structure/FenwickTree.hpp
   - all.hpp
+  - function/all.hpp
   timestamp: '2022-07-17 16:51:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

@@ -116,9 +116,6 @@ data:
     path: template/make_vector.hpp
     title: template/make_vector.hpp
   - icon: ':warning:'
-    path: template/min_max_different_types.hpp
-    title: template/min_max_different_types.hpp
-  - icon: ':warning:'
     path: template/stl.hpp
     title: template/stl.hpp
   _extendedRequiredBy: []
@@ -715,53 +712,53 @@ data:
     \     print_char('.');\n      a -= p;\n      for (int i = 0; i < static_cast<int>(decimal_precision);\
     \ ++i) {\n        a *= 10;\n        print_char('0' + static_cast<std::uint_fast64_t>(a)\
     \ % 10);\n      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T>\
-    \ && !has_print<T>::value>* = nullptr>\n    void print(T&& a) {\n      if constexpr\
-    \ (debug && i == 0) print_char('{');\n      if constexpr (aggregate_size_v<T>\
+    \ && !has_print<T>::value>* = nullptr>\n    void print(const T& a) {\n      if\
+    \ constexpr (debug && i == 0) print_char('{');\n      if constexpr (aggregate_size_v<T>\
     \ != 0) print(access<i>(a));\n      if constexpr (i + 1 < aggregate_size_v<T>)\
-    \ {\n        print_sep<max_rank_v<std::decay_t<T>>>();\n        print<i + 1>(a);\n\
-    \      } else if constexpr (debug) print_char('}');\n    }\n    template<class\
-    \ T, std::enable_if_t<is_iterable_v<T> && !has_print<T>::value>* = nullptr>\n\
-    \    void print(T&& a) {\n      if constexpr (debug) print_char('{');\n      if\
-    \ (std::empty(a)) return;\n      for (auto i = std::begin(a); ; ) {\n        print(*i);\n\
-    \        if (++i != std::end(a)) {\n          print_sep<max_rank_v<std::decay_t<T>>>();\n\
-    \        } else break;\n      }\n      if constexpr (debug) print_char('}');\n\
-    \    }\n    template<class T, std::enable_if_t<has_print<T>::value>* = nullptr>\n\
-    \    void print(T&& a) {\n      a.print(*this);\n    }\n\n    template<bool first\
-    \ = true>\n    void operator ()() {\n      if constexpr (comment && first) print_char('#');\n\
-    \      if constexpr (end_line) print_char('\\n');\n      if constexpr (flush)\
-    \ itr.flush();\n    }\n    template<bool first = true, class Head, class... Args>\n\
-    \    void operator ()(Head&& head, Args&&... args) {\n      if constexpr (comment\
-    \ && first) {\n        print_char('#');\n        print_char(' ');\n      }\n \
-    \     if constexpr (sep && !first) print_sep<0>();\n      print(std::forward<Head>(head));\n\
-    \      operator ()<false>(std::forward<Args>(args)...);\n    }\n  };\n\n  Printer<Writer<>::iterator,\
-    \ false, false, false> print(output.begin()), eprint(error.begin());\n  Printer<Writer<>::iterator>\
-    \ println(output.begin()), eprintln(error.begin());\n}\n#line 3 \"template/stl.hpp\"\
-    \n#include <cctype>\n#include <cerrno>\n#include <cfloat>\n#include <ciso646>\n\
-    #include <climits>\n#include <clocale>\n#line 10 \"template/stl.hpp\"\n#include\
-    \ <csetjmp>\n#include <csignal>\n#include <cstdarg>\n#line 15 \"template/stl.hpp\"\
-    \n#include <cstdlib>\n#include <cstring>\n#include <ctime>\n\n#include <ccomplex>\n\
-    #include <cfenv>\n#include <cinttypes>\n#include <cstdalign>\n#include <cstdbool>\n\
-    #line 25 \"template/stl.hpp\"\n#include <ctgmath>\n#include <cwchar>\n#include\
-    \ <cwctype>\n\n#line 30 \"template/stl.hpp\"\n#include <bitset>\n#include <complex>\n\
-    #include <deque>\n#include <exception>\n#include <fstream>\n#line 36 \"template/stl.hpp\"\
-    \n#include <iomanip>\n#include <ios>\n#include <iosfwd>\n#include <iostream>\n\
-    #include <istream>\n#line 43 \"template/stl.hpp\"\n#include <list>\n#include <locale>\n\
-    #include <map>\n#include <memory>\n#include <new>\n#line 49 \"template/stl.hpp\"\
-    \n#include <ostream>\n#line 51 \"template/stl.hpp\"\n#include <set>\n#include\
-    \ <sstream>\n#line 54 \"template/stl.hpp\"\n#include <stdexcept>\n#include <streambuf>\n\
-    #line 57 \"template/stl.hpp\"\n#include <typeinfo>\n#line 59 \"template/stl.hpp\"\
-    \n#include <valarray>\n#line 61 \"template/stl.hpp\"\n\n#line 63 \"template/stl.hpp\"\
-    \n#include <atomic>\n#include <chrono>\n#include <condition_variable>\n#include\
-    \ <forward_list>\n#include <future>\n#include <initializer_list>\n#include <mutex>\n\
-    #line 71 \"template/stl.hpp\"\n#include <ratio>\n#include <regex>\n#include <scoped_allocator>\n\
-    #include <system_error>\n#include <thread>\n#line 77 \"template/stl.hpp\"\n#include\
-    \ <typeindex>\n#line 80 \"template/stl.hpp\"\n#include <unordered_set>\n#line\
-    \ 19 \"template/alias.hpp\"\n\nnamespace kyopro {\n  using ll = long long;\n \
-    \ using ull = unsigned long long;\n  using lf = double;\n\n  using i8 = std::int8_t;\n\
-    \  using u8 = std::uint8_t;\n  using i16 = std::int16_t;\n  using u16 = std::uint16_t;\n\
-    \  using i32 = std::int32_t;\n  using u32 = std::uint32_t;\n  using i64 = std::int64_t;\n\
-    \  using u64 = std::uint64_t;\n  using i128 = __int128_t;\n  using u128 = __uint128_t;\n\
-    \  using f128 = __float128;\n\n  using mint = ModInt<mod>;\n  using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\
+    \ {\n        print_sep<max_rank_v<T>>();\n        print<i + 1>(a);\n      } else\
+    \ if constexpr (debug) print_char('}');\n    }\n    template<class T, std::enable_if_t<is_iterable_v<T>\
+    \ && !has_print<T>::value>* = nullptr>\n    void print(const T& a) {\n      if\
+    \ constexpr (debug) print_char('{');\n      if (std::empty(a)) return;\n     \
+    \ for (auto i = std::begin(a); ; ) {\n        print(*i);\n        if (++i != std::end(a))\
+    \ {\n          print_sep<max_rank_v<T>>();\n        } else break;\n      }\n \
+    \     if constexpr (debug) print_char('}');\n    }\n    template<class T, std::enable_if_t<has_print<T>::value>*\
+    \ = nullptr>\n    void print(const T& a) {\n      a.print(*this);\n    }\n\n \
+    \   template<bool first = true>\n    void operator ()() {\n      if constexpr\
+    \ (comment && first) print_char('#');\n      if constexpr (end_line) print_char('\\\
+    n');\n      if constexpr (flush) itr.flush();\n    }\n    template<bool first\
+    \ = true, class Head, class... Args>\n    void operator ()(Head&& head, Args&&...\
+    \ args) {\n      if constexpr (comment && first) {\n        print_char('#');\n\
+    \        print_char(' ');\n      }\n      if constexpr (sep && !first) print_sep<0>();\n\
+    \      print(std::forward<Head>(head));\n      operator ()<false>(std::forward<Args>(args)...);\n\
+    \    }\n  };\n\n  Printer<Writer<>::iterator, false, false, false> print(output.begin()),\
+    \ eprint(error.begin());\n  Printer<Writer<>::iterator> println(output.begin()),\
+    \ eprintln(error.begin());\n}\n#line 3 \"template/stl.hpp\"\n#include <cctype>\n\
+    #include <cerrno>\n#include <cfloat>\n#include <ciso646>\n#include <climits>\n\
+    #include <clocale>\n#line 10 \"template/stl.hpp\"\n#include <csetjmp>\n#include\
+    \ <csignal>\n#include <cstdarg>\n#line 15 \"template/stl.hpp\"\n#include <cstdlib>\n\
+    #include <cstring>\n#include <ctime>\n\n#include <ccomplex>\n#include <cfenv>\n\
+    #include <cinttypes>\n#include <cstdalign>\n#include <cstdbool>\n#line 25 \"template/stl.hpp\"\
+    \n#include <ctgmath>\n#include <cwchar>\n#include <cwctype>\n\n#line 30 \"template/stl.hpp\"\
+    \n#include <bitset>\n#include <complex>\n#include <deque>\n#include <exception>\n\
+    #include <fstream>\n#line 36 \"template/stl.hpp\"\n#include <iomanip>\n#include\
+    \ <ios>\n#include <iosfwd>\n#include <iostream>\n#include <istream>\n#line 43\
+    \ \"template/stl.hpp\"\n#include <list>\n#include <locale>\n#include <map>\n#include\
+    \ <memory>\n#include <new>\n#line 49 \"template/stl.hpp\"\n#include <ostream>\n\
+    #line 51 \"template/stl.hpp\"\n#include <set>\n#include <sstream>\n#line 54 \"\
+    template/stl.hpp\"\n#include <stdexcept>\n#include <streambuf>\n#line 57 \"template/stl.hpp\"\
+    \n#include <typeinfo>\n#line 59 \"template/stl.hpp\"\n#include <valarray>\n#line\
+    \ 61 \"template/stl.hpp\"\n\n#line 63 \"template/stl.hpp\"\n#include <atomic>\n\
+    #include <chrono>\n#include <condition_variable>\n#include <forward_list>\n#include\
+    \ <future>\n#include <initializer_list>\n#include <mutex>\n#line 71 \"template/stl.hpp\"\
+    \n#include <ratio>\n#include <regex>\n#include <scoped_allocator>\n#include <system_error>\n\
+    #include <thread>\n#line 77 \"template/stl.hpp\"\n#include <typeindex>\n#line\
+    \ 80 \"template/stl.hpp\"\n#include <unordered_set>\n#line 19 \"template/alias.hpp\"\
+    \n\nnamespace kyopro {\n  using ll = long long;\n  using ull = unsigned long long;\n\
+    \  using lf = double;\n\n  using i8 = std::int8_t;\n  using u8 = std::uint8_t;\n\
+    \  using i16 = std::int16_t;\n  using u16 = std::uint16_t;\n  using i32 = std::int32_t;\n\
+    \  using u32 = std::uint32_t;\n  using i64 = std::int64_t;\n  using u64 = std::uint64_t;\n\
+    \  using i128 = __int128_t;\n  using u128 = __uint128_t;\n  using f128 = __float128;\n\
+    \n  using mint = ModInt<mod>;\n  using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\
     \n  template<class T, KYOPRO_BASE_UINT idx, class... Args>\n  struct agg_type\
     \ {\n    using type = typename agg_type<T, idx - 1, T, Args...>::type;\n  };\n\
     \  template<class T, class... Args>\n  struct agg_type<T, 0, Args...> {\n    using\
@@ -806,10 +803,14 @@ data:
     \ f())...};\n  }\n\n  Printer<Writer<>::iterator, true, true, true, true, true>\
     \ debug_impl(output.begin());\n\n  template<bool flag, std::size_t len>\n  void\
     \ print_if(const char (&s)[len]) {\n    if constexpr (flag) print(' ', s);\n \
-    \ }\n}\n\n#define read(type_or_init, ...) auto [__VA_ARGS__] = kyopro::helper::read_impl(([]()\
-    \ {\\\n  using T = std::decay_t<decltype(*new type_or_init)>;\\\n  alignas(T)\
-    \ std::byte storage[sizeof(T)];\\\n  T* p = new (storage) type_or_init;\\\n  kyopro::scan(*p);\\\
-    \n  return std::move(*p);\\\n}), std::make_index_sequence<kyopro::helper::va_args_size(#__VA_ARGS__)>())\n\
+    \ }\n\n  struct LambdaArg {};\n}\n\n#define read(type_or_init, ...) auto [__VA_ARGS__]\
+    \ = (kyopro::helper::read_impl(([]() { \\\n  using T = std::decay_t<decltype(*new\
+    \ type_or_init)>;                                  \\\n  alignas(T) std::byte\
+    \ storage[sizeof(T)];                                              \\\n  T* p\
+    \ = new (storage) type_or_init;                                              \
+    \      \\\n  kyopro::scan(*p);                                               \
+    \                      \\\n  return std::move(*p);                           \
+    \                                      \\\n}), std::make_index_sequence<kyopro::helper::va_args_size(#__VA_ARGS__)>()))\n\
     #define debug(...) (kyopro::print('#', ' ', 'l', 'i', 'n', 'e', ' ', __LINE__,\
     \ ':'), kyopro::helper::print_if<kyopro::helper::va_args_size(#__VA_ARGS__) !=\
     \ 0>(#__VA_ARGS__), kyopro::print('\\n'), kyopro::helper::debug_impl(__VA_ARGS__))\n\
@@ -824,19 +825,22 @@ data:
     \ KYOPRO_MATCH3(_1, _2, _3) break; case _1: case _2: case _3:\n#define KYOPRO_MATCH4(_1,\
     \ _2, _3, _4) break; case _1: case _2: case _3: case _4:\n#define match(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__,\
     \ KYOPRO_MATCH4, KYOPRO_MATCH3, KYOPRO_MATCH2, KYOPRO_MATCH1)(__VA_ARGS__)\n#define\
-    \ otherwise break; default:\n\n#define KYOPRO_LAMBDA1(value) ([&]() noexcept {\
-    \ return (value);})\n#define KYOPRO_LAMBDA2(_1, value) ([&](auto&& _1) noexcept\
-    \ { return (value); })\n#define KYOPRO_LAMBDA3(_1, _2, value) ([&](auto&& _1,\
-    \ auto&& _2) noexcept { return (value); })\n#define KYOPRO_LAMBDA4(_1, _2, _3,\
-    \ value) ([&](auto&& _1, auto&& _2, auto&& _3) noexcept { return (value); })\n\
-    #define lambda(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__, KYOPRO_LAMBDA4, KYOPRO_LAMBDA3,\
-    \ KYOPRO_LAMBDA2, KYOPRO_LAMBDA1)(__VA_ARGS__)\n\n#define all(...) std::begin(__VA_ARGS__),\
-    \ std::end(__VA_ARGS__)\n#define rall(...) std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\n\
-    #line 4 \"template/make_array.hpp\"\n\nnamespace kyopro {\n  inline constexpr\
-    \ struct {\n    template<class T>\n    constexpr auto operator ()(const T& init\
-    \ = T()) noexcept { return init; }\n\n    template<class T, KYOPRO_BASE_UINT length,\
-    \ KYOPRO_BASE_UINT... lengths>\n    constexpr auto operator ()(const T& init =\
-    \ T()) noexcept {\n      auto elm = operator ()<T, lengths...>(init);\n      std::array<decltype(elm),\
+    \ otherwise break; default:\n\n#define lambda(...) ([&](auto&&... args) noexcept\
+    \ {\\\n  [[maybe_unused]] auto&& $0 = std::forward<std::tuple_element_t<0, std::tuple<decltype(args)...,\
+    \ kyopro::helper::LambdaArg>>>(std::get<0>(std::forward_as_tuple(args..., kyopro::helper::LambdaArg{})));\\\
+    \n  [[maybe_unused]] auto&& $1 = std::forward<std::tuple_element_t<1, std::tuple<decltype(args)...,\
+    \ kyopro::helper::LambdaArg, kyopro::helper::LambdaArg>>>(std::get<1>(std::forward_as_tuple(args...,\
+    \ kyopro::helper::LambdaArg{}, kyopro::helper::LambdaArg{})));\\\n  [[maybe_unused]]\
+    \ auto&& $2 = std::forward<std::tuple_element_t<2, std::tuple<decltype(args)...,\
+    \ kyopro::helper::LambdaArg, kyopro::helper::LambdaArg, kyopro::helper::LambdaArg>>>(std::get<2>(std::forward_as_tuple(args...,\
+    \ kyopro::helper::LambdaArg{}, kyopro::helper::LambdaArg{}, kyopro::helper::LambdaArg{})));\\\
+    \n  return (__VA_ARGS__);\\\n})\n\n#define all(...) std::begin(__VA_ARGS__), std::end(__VA_ARGS__)\n\
+    #define rall(...) std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\n#line 4 \"\
+    template/make_array.hpp\"\n\nnamespace kyopro {\n  inline constexpr struct {\n\
+    \    template<class T>\n    constexpr auto operator ()(const T& init = T()) noexcept\
+    \ { return init; }\n\n    template<class T, KYOPRO_BASE_UINT length, KYOPRO_BASE_UINT...\
+    \ lengths>\n    constexpr auto operator ()(const T& init = T()) noexcept {\n \
+    \     auto elm = operator ()<T, lengths...>(init);\n      std::array<decltype(elm),\
     \ length> res;\n      for (auto& i: res) i = elm;\n      return res;\n    }\n\
     \  } make_array;\n}\n#line 6 \"template/make_vector.hpp\"\n\nnamespace kyopro\
     \ {\n  inline constexpr struct {\n    template<KYOPRO_BASE_UINT idx = 0, KYOPRO_BASE_UINT\
@@ -846,12 +850,8 @@ data:
     \    template<class T, KYOPRO_BASE_UINT idx = 0, KYOPRO_BASE_UINT n>\n    auto\
     \ operator ()(const KYOPRO_BASE_UINT (&d)[n], const T& init = T()) noexcept {\n\
     \      if constexpr (idx < n) return std::vector(d[idx], operator ()<idx + 1>(d,\
-    \ init));\n      else return init;\n    }\n  } make_vector;\n}\n#line 4 \"template/min_max_different_types.hpp\"\
-    \n\nusing std::min, std::max;\n\ntemplate<class T, class U, std::enable_if_t<!std::is_same_v<T,\
-    \ U>>* = nullptr>\nconstexpr std::common_type_t<T, U> min(const T& a, const U&\
-    \ b) noexcept {\n  return a < b ? a : b;\n}\n\ntemplate<class T, class U, std::enable_if_t<!std::is_same_v<T,\
-    \ U>>* = nullptr>\nconstexpr std::common_type_t<T, U> max(const T& a, const U&\
-    \ b) noexcept {\n  return a > b ? a : b;\n}\n#line 4 \"all.hpp\"\n"
+    \ init));\n      else return init;\n    }\n  } make_vector;\n}\n#line 4 \"all.hpp\"\
+    \n"
   code: '#pragma once
 
     #include "all/all.hpp"
@@ -897,11 +897,10 @@ data:
   - template/macro.hpp
   - template/make_array.hpp
   - template/make_vector.hpp
-  - template/min_max_different_types.hpp
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2022-07-17 16:51:20+09:00'
+  timestamp: '2022-07-21 21:43:09+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp

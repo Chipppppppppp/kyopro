@@ -685,28 +685,27 @@ data:
     \     print_char('.');\n      a -= p;\n      for (int i = 0; i < static_cast<int>(decimal_precision);\
     \ ++i) {\n        a *= 10;\n        print_char('0' + static_cast<std::uint_fast64_t>(a)\
     \ % 10);\n      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T>\
-    \ && !has_print<T>::value>* = nullptr>\n    void print(T&& a) {\n      if constexpr\
-    \ (debug && i == 0) print_char('{');\n      if constexpr (aggregate_size_v<T>\
+    \ && !has_print<T>::value>* = nullptr>\n    void print(const T& a) {\n      if\
+    \ constexpr (debug && i == 0) print_char('{');\n      if constexpr (aggregate_size_v<T>\
     \ != 0) print(access<i>(a));\n      if constexpr (i + 1 < aggregate_size_v<T>)\
-    \ {\n        print_sep<max_rank_v<std::decay_t<T>>>();\n        print<i + 1>(a);\n\
-    \      } else if constexpr (debug) print_char('}');\n    }\n    template<class\
-    \ T, std::enable_if_t<is_iterable_v<T> && !has_print<T>::value>* = nullptr>\n\
-    \    void print(T&& a) {\n      if constexpr (debug) print_char('{');\n      if\
-    \ (std::empty(a)) return;\n      for (auto i = std::begin(a); ; ) {\n        print(*i);\n\
-    \        if (++i != std::end(a)) {\n          print_sep<max_rank_v<std::decay_t<T>>>();\n\
-    \        } else break;\n      }\n      if constexpr (debug) print_char('}');\n\
-    \    }\n    template<class T, std::enable_if_t<has_print<T>::value>* = nullptr>\n\
-    \    void print(T&& a) {\n      a.print(*this);\n    }\n\n    template<bool first\
-    \ = true>\n    void operator ()() {\n      if constexpr (comment && first) print_char('#');\n\
-    \      if constexpr (end_line) print_char('\\n');\n      if constexpr (flush)\
-    \ itr.flush();\n    }\n    template<bool first = true, class Head, class... Args>\n\
-    \    void operator ()(Head&& head, Args&&... args) {\n      if constexpr (comment\
-    \ && first) {\n        print_char('#');\n        print_char(' ');\n      }\n \
-    \     if constexpr (sep && !first) print_sep<0>();\n      print(std::forward<Head>(head));\n\
-    \      operator ()<false>(std::forward<Args>(args)...);\n    }\n  };\n\n  Printer<Writer<>::iterator,\
-    \ false, false, false> print(output.begin()), eprint(error.begin());\n  Printer<Writer<>::iterator>\
-    \ println(output.begin()), eprintln(error.begin());\n}\n#line 8 \"all/all.hpp\"\
-    \n"
+    \ {\n        print_sep<max_rank_v<T>>();\n        print<i + 1>(a);\n      } else\
+    \ if constexpr (debug) print_char('}');\n    }\n    template<class T, std::enable_if_t<is_iterable_v<T>\
+    \ && !has_print<T>::value>* = nullptr>\n    void print(const T& a) {\n      if\
+    \ constexpr (debug) print_char('{');\n      if (std::empty(a)) return;\n     \
+    \ for (auto i = std::begin(a); ; ) {\n        print(*i);\n        if (++i != std::end(a))\
+    \ {\n          print_sep<max_rank_v<T>>();\n        } else break;\n      }\n \
+    \     if constexpr (debug) print_char('}');\n    }\n    template<class T, std::enable_if_t<has_print<T>::value>*\
+    \ = nullptr>\n    void print(const T& a) {\n      a.print(*this);\n    }\n\n \
+    \   template<bool first = true>\n    void operator ()() {\n      if constexpr\
+    \ (comment && first) print_char('#');\n      if constexpr (end_line) print_char('\\\
+    n');\n      if constexpr (flush) itr.flush();\n    }\n    template<bool first\
+    \ = true, class Head, class... Args>\n    void operator ()(Head&& head, Args&&...\
+    \ args) {\n      if constexpr (comment && first) {\n        print_char('#');\n\
+    \        print_char(' ');\n      }\n      if constexpr (sep && !first) print_sep<0>();\n\
+    \      print(std::forward<Head>(head));\n      operator ()<false>(std::forward<Args>(args)...);\n\
+    \    }\n  };\n\n  Printer<Writer<>::iterator, false, false, false> print(output.begin()),\
+    \ eprint(error.begin());\n  Printer<Writer<>::iterator> println(output.begin()),\
+    \ eprintln(error.begin());\n}\n#line 8 \"all/all.hpp\"\n"
   code: '#pragma once
 
     #include "../algorithm/all.hpp"
@@ -754,7 +753,7 @@ data:
   path: all/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-07-17 16:51:20+09:00'
+  timestamp: '2022-07-21 21:43:09+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp

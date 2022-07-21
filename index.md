@@ -137,9 +137,6 @@ data:
       path: template/make_vector.hpp
       title: template/make_vector.hpp
     - icon: ':warning:'
-      path: template/min_max_different_types.hpp
-      title: template/min_max_different_types.hpp
-    - icon: ':warning:'
       path: template/stl.hpp
       title: template/stl.hpp
   verificationCategories:

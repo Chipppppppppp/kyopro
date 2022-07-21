@@ -52,8 +52,8 @@ data:
   - math/ModInt.hpp
   - math/all.hpp
   - all.hpp
-  - template/alias.hpp
   - template/all.hpp
+  - template/alias.hpp
   timestamp: '2022-07-07 16:11:50+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
