@@ -1,6 +1,7 @@
 #pragma once
 #include <unistd.h>
 #include <array>
+#include <bitset>
 #include <cstddef>
 #include <cstdint>
 #include <cstdio>
@@ -99,6 +100,10 @@ namespace kyopro {
       a = *itr;
       ++itr;
     }
+    void scan(bool& a) {
+      discard_space();
+      a = *itr != '0';
+    }
     void scan(std::string& a) {
       discard_space();
       while ((*itr < '\t' || '\r' < *itr) && *itr != ' ') {
@@ -106,10 +111,11 @@ namespace kyopro {
         ++itr;
       }
     }
-    void scan(bool& a) {
+    template<std::size_t len>
+    void scan(std::bitset<len>& a) {
       discard_space();
-      while ('0' <= *itr && *itr <= '9') {
-        if (*itr != '0') a = true;
+      for (int i = len - 1; i >= 0; ++i) {
+        a[i] = *itr != '0';
         ++itr;
       }
     }

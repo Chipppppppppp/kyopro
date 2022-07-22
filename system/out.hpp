@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <algorithm>
 #include <array>
+#include <bitset>
 #include <cmath>
 #include <cstdint>
 #include <cstdio>
@@ -140,6 +141,9 @@ namespace kyopro {
       print_char(a);
       if constexpr (debug) print_char('\'');
     }
+    void print(bool a) {
+      print_char(static_cast<char>('0' + a));
+    }
     void print(const char* a) {
       if constexpr (debug) print_char('"');
       for (; *a != '\0'; ++a) print_char(*a);
@@ -156,8 +160,9 @@ namespace kyopro {
       for (auto i: a) print_char(i);
       if constexpr (debug) print_char('"');
     }
-    void print(bool a) {
-      print_char(static_cast<char>('0' + a));
+    template<std::size_t len>
+    void print(const std::bitset<len>& a) {
+      for (int i = len - 1; i >= 0; --i) print(a[i]);
     }
     template<class T, std::enable_if_t<std::is_arithmetic_v<T> && !has_print<T>::value>* = nullptr>
     void print(T a) {
