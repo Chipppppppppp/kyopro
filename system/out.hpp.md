@@ -48,14 +48,15 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"system/out.hpp\"\n#include <unistd.h>\n#include <algorithm>\n\
-    #include <array>\n#include <cmath>\n#include <cstdint>\n#include <cstdio>\n#include\
-    \ <iterator>\n#include <string>\n#include <tuple>\n#include <type_traits>\n#include\
-    \ <utility>\n#line 3 \"meta/trait.hpp\"\n#include <queue>\n#include <limits>\n\
-    #include <stack>\n#line 3 \"meta/settings.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n#define\
-    \ KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT\
-    \ std::uint64_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT\
-    \ double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(998244353)\n\
-    #endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
+    #include <array>\n#include <bitset>\n#include <cmath>\n#include <cstdint>\n#include\
+    \ <cstdio>\n#include <iterator>\n#include <string>\n#include <tuple>\n#include\
+    \ <type_traits>\n#include <utility>\n#line 3 \"meta/trait.hpp\"\n#include <queue>\n\
+    #include <limits>\n#include <stack>\n#line 3 \"meta/settings.hpp\"\n\n#ifndef\
+    \ KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n\
+    #define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n\
+    #define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define\
+    \ KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(998244353)\n#endif\n\n#ifndef\
+    \ KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct std::is_integral<__int128_t>:\
@@ -179,7 +180,7 @@ data:
     \ {\n      return std::get<idx>(std::forward<T>(aggregate));\n    }\n\n    #undef\
     \ DEFINE_ACCESS\n  }\n\n  template<std::size_t idx, class T>\n  constexpr decltype(auto)\
     \ access(T&& aggregate) noexcept {\n    return helper::access_impl<idx>(std::forward<T>(aggregate),\
-    \ false);\n  }\n}\n#line 16 \"system/out.hpp\"\n\nnamespace kyopro {\n  template<std::size_t\
+    \ false);\n  }\n}\n#line 17 \"system/out.hpp\"\n\nnamespace kyopro {\n  template<std::size_t\
     \ _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Writer {\n    static constexpr KYOPRO_BASE_UINT\
     \ buf_size = _buf_size;\n\n  private:\n    int fd, idx;\n    std::array<char,\
     \ buf_size> buffer;\n\n  public:\n    Writer() noexcept = default;\n    Writer(int\
@@ -224,26 +225,28 @@ data:
     \            print_char(' ');\n          }\n        } else print_char(' ');\n\
     \      }\n    }\n\n    void print(char a) {\n      if constexpr (debug) print_char('\\\
     '');\n      print_char(a);\n      if constexpr (debug) print_char('\\'');\n  \
-    \  }\n    void print(const char* a) {\n      if constexpr (debug) print_char('\"\
+    \  }\n    void print(bool a) {\n      print_char(static_cast<char>('0' + a));\n\
+    \    }\n    void print(const char* a) {\n      if constexpr (debug) print_char('\"\
     ');\n      for (; *a != '\\0'; ++a) print_char(*a);\n      if constexpr (debug)\
     \ print_char('\"');\n    }\n    template<std::size_t len>\n    void print(const\
     \ char (&a)[len]) {\n      if constexpr (debug) print_char('\"');\n      for (auto\
     \ i: a) print_char(i);\n      if constexpr (debug) print_char('\"');\n    }\n\
     \    void print(const std::string& a) {\n      if constexpr (debug) print_char('\"\
     ');\n      for (auto i: a) print_char(i);\n      if constexpr (debug) print_char('\"\
-    ');\n    }\n    void print(bool a) {\n      print_char(static_cast<char>('0' +\
-    \ a));\n    }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T>\
-    \ && !has_print<T>::value>* = nullptr>\n    void print(T a) {\n      if constexpr\
-    \ (std::is_floating_point_v<T>) {\n        if (a == std::numeric_limits<T>::infinity())\
-    \ {\n          print(\"inf\");\n          return;\n        }\n        if (a ==\
-    \ -std::numeric_limits<T>::infinity()) {\n          print(\"-inf\");\n       \
-    \   return;\n        }\n        if (std::isnan(a)) {\n          print(\"nan\"\
-    );\n          return;\n        }\n      }\n      if constexpr (std::is_signed_v<T>)\
-    \ if (a < 0) {\n        print_char('-');\n        a = -a;\n      }\n      std::uint_fast64_t\
-    \ p = a;\n      std::string s;\n      do {\n        s += '0' + p % 10;\n     \
-    \   p /= 10;\n      } while (p > 0);\n      for (auto i = s.rbegin(); i != s.rend();\
-    \ ++i) print_char(*i);\n      if constexpr (std::is_integral_v<T>) return;\n \
-    \     print_char('.');\n      a -= p;\n      for (int i = 0; i < static_cast<int>(decimal_precision);\
+    ');\n    }\n    template<std::size_t len>\n    void print(const std::bitset<len>&\
+    \ a) {\n      for (int i = len - 1; i >= 0; --i) print(a[i]);\n    }\n    template<class\
+    \ T, std::enable_if_t<std::is_arithmetic_v<T> && !has_print<T>::value>* = nullptr>\n\
+    \    void print(T a) {\n      if constexpr (std::is_floating_point_v<T>) {\n \
+    \       if (a == std::numeric_limits<T>::infinity()) {\n          print(\"inf\"\
+    );\n          return;\n        }\n        if (a == -std::numeric_limits<T>::infinity())\
+    \ {\n          print(\"-inf\");\n          return;\n        }\n        if (std::isnan(a))\
+    \ {\n          print(\"nan\");\n          return;\n        }\n      }\n      if\
+    \ constexpr (std::is_signed_v<T>) if (a < 0) {\n        print_char('-');\n   \
+    \     a = -a;\n      }\n      std::uint_fast64_t p = a;\n      std::string s;\n\
+    \      do {\n        s += '0' + p % 10;\n        p /= 10;\n      } while (p >\
+    \ 0);\n      for (auto i = s.rbegin(); i != s.rend(); ++i) print_char(*i);\n \
+    \     if constexpr (std::is_integral_v<T>) return;\n      print_char('.');\n \
+    \     a -= p;\n      for (int i = 0; i < static_cast<int>(decimal_precision);\
     \ ++i) {\n        a *= 10;\n        print_char('0' + static_cast<std::uint_fast64_t>(a)\
     \ % 10);\n      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T>\
     \ && !has_print<T>::value>* = nullptr>\n    void print(const T& a) {\n      if\
@@ -268,11 +271,11 @@ data:
     \ eprint(error.begin());\n  Printer<Writer<>::iterator> println(output.begin()),\
     \ eprintln(error.begin());\n}\n"
   code: "#pragma once\n#include <unistd.h>\n#include <algorithm>\n#include <array>\n\
-    #include <cmath>\n#include <cstdint>\n#include <cstdio>\n#include <iterator>\n\
-    #include <string>\n#include <tuple>\n#include <type_traits>\n#include <utility>\n\
-    #include \"../meta/aggregate.hpp\"\n#include \"../meta/settings.hpp\"\n#include\
-    \ \"../meta/trait.hpp\"\n\nnamespace kyopro {\n  template<std::size_t _buf_size\
-    \ = KYOPRO_BUFFER_SIZE>\n  struct Writer {\n    static constexpr KYOPRO_BASE_UINT\
+    #include <bitset>\n#include <cmath>\n#include <cstdint>\n#include <cstdio>\n#include\
+    \ <iterator>\n#include <string>\n#include <tuple>\n#include <type_traits>\n#include\
+    \ <utility>\n#include \"../meta/aggregate.hpp\"\n#include \"../meta/settings.hpp\"\
+    \n#include \"../meta/trait.hpp\"\n\nnamespace kyopro {\n  template<std::size_t\
+    \ _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Writer {\n    static constexpr KYOPRO_BASE_UINT\
     \ buf_size = _buf_size;\n\n  private:\n    int fd, idx;\n    std::array<char,\
     \ buf_size> buffer;\n\n  public:\n    Writer() noexcept = default;\n    Writer(int\
     \ fd) noexcept: fd(fd), idx(0), buffer() {}\n    Writer(FILE* fp) noexcept: fd(fileno(fp)),\
@@ -316,26 +319,28 @@ data:
     \            print_char(' ');\n          }\n        } else print_char(' ');\n\
     \      }\n    }\n\n    void print(char a) {\n      if constexpr (debug) print_char('\\\
     '');\n      print_char(a);\n      if constexpr (debug) print_char('\\'');\n  \
-    \  }\n    void print(const char* a) {\n      if constexpr (debug) print_char('\"\
+    \  }\n    void print(bool a) {\n      print_char(static_cast<char>('0' + a));\n\
+    \    }\n    void print(const char* a) {\n      if constexpr (debug) print_char('\"\
     ');\n      for (; *a != '\\0'; ++a) print_char(*a);\n      if constexpr (debug)\
     \ print_char('\"');\n    }\n    template<std::size_t len>\n    void print(const\
     \ char (&a)[len]) {\n      if constexpr (debug) print_char('\"');\n      for (auto\
     \ i: a) print_char(i);\n      if constexpr (debug) print_char('\"');\n    }\n\
     \    void print(const std::string& a) {\n      if constexpr (debug) print_char('\"\
     ');\n      for (auto i: a) print_char(i);\n      if constexpr (debug) print_char('\"\
-    ');\n    }\n    void print(bool a) {\n      print_char(static_cast<char>('0' +\
-    \ a));\n    }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T>\
-    \ && !has_print<T>::value>* = nullptr>\n    void print(T a) {\n      if constexpr\
-    \ (std::is_floating_point_v<T>) {\n        if (a == std::numeric_limits<T>::infinity())\
-    \ {\n          print(\"inf\");\n          return;\n        }\n        if (a ==\
-    \ -std::numeric_limits<T>::infinity()) {\n          print(\"-inf\");\n       \
-    \   return;\n        }\n        if (std::isnan(a)) {\n          print(\"nan\"\
-    );\n          return;\n        }\n      }\n      if constexpr (std::is_signed_v<T>)\
-    \ if (a < 0) {\n        print_char('-');\n        a = -a;\n      }\n      std::uint_fast64_t\
-    \ p = a;\n      std::string s;\n      do {\n        s += '0' + p % 10;\n     \
-    \   p /= 10;\n      } while (p > 0);\n      for (auto i = s.rbegin(); i != s.rend();\
-    \ ++i) print_char(*i);\n      if constexpr (std::is_integral_v<T>) return;\n \
-    \     print_char('.');\n      a -= p;\n      for (int i = 0; i < static_cast<int>(decimal_precision);\
+    ');\n    }\n    template<std::size_t len>\n    void print(const std::bitset<len>&\
+    \ a) {\n      for (int i = len - 1; i >= 0; --i) print(a[i]);\n    }\n    template<class\
+    \ T, std::enable_if_t<std::is_arithmetic_v<T> && !has_print<T>::value>* = nullptr>\n\
+    \    void print(T a) {\n      if constexpr (std::is_floating_point_v<T>) {\n \
+    \       if (a == std::numeric_limits<T>::infinity()) {\n          print(\"inf\"\
+    );\n          return;\n        }\n        if (a == -std::numeric_limits<T>::infinity())\
+    \ {\n          print(\"-inf\");\n          return;\n        }\n        if (std::isnan(a))\
+    \ {\n          print(\"nan\");\n          return;\n        }\n      }\n      if\
+    \ constexpr (std::is_signed_v<T>) if (a < 0) {\n        print_char('-');\n   \
+    \     a = -a;\n      }\n      std::uint_fast64_t p = a;\n      std::string s;\n\
+    \      do {\n        s += '0' + p % 10;\n        p /= 10;\n      } while (p >\
+    \ 0);\n      for (auto i = s.rbegin(); i != s.rend(); ++i) print_char(*i);\n \
+    \     if constexpr (std::is_integral_v<T>) return;\n      print_char('.');\n \
+    \     a -= p;\n      for (int i = 0; i < static_cast<int>(decimal_precision);\
     \ ++i) {\n        a *= 10;\n        print_char('0' + static_cast<std::uint_fast64_t>(a)\
     \ % 10);\n      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T>\
     \ && !has_print<T>::value>* = nullptr>\n    void print(const T& a) {\n      if\
@@ -371,7 +376,7 @@ data:
   - all.hpp
   - template/macro.hpp
   - template/all.hpp
-  timestamp: '2022-07-21 21:43:09+09:00'
+  timestamp: '2022-07-23 00:24:28+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp

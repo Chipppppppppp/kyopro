@@ -99,27 +99,27 @@ data:
     \ { return prod(tree.size()); }\n\n    T get(int p) { return op(prod(p + 1), op.inverse(prod(p)));\
     \ }\n\n    void set(int p, const T& x) { apply(p, op(x, op.inverse(get(p))));\
     \ }\n  };\n}\n#line 2 \"system/in.hpp\"\n#include <unistd.h>\n#line 4 \"system/in.hpp\"\
-    \n#include <cstddef>\n#line 6 \"system/in.hpp\"\n#include <cstdio>\n#include <string>\n\
-    #include <tuple>\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n#include <queue>\n\
-    #line 5 \"meta/trait.hpp\"\n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\n\
-    struct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
-    \ std::true_type {};\ntemplate<>\nstruct std::is_floating_point<__float128>: std::true_type\
-    \ {};\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT size>\n  struct int_least\
-    \ {\n  private:\n    static constexpr auto get_type() noexcept {\n      static_assert(size\
-    \ <= 128, \"Integer size is too large\");\n      if constexpr (size <= 8) return\
-    \ std::int_least8_t();\n      else if constexpr (size <= 16) return std::int_least16_t();\n\
-    \      else if constexpr (size <= 32) return std::int_least32_t();\n      else\
-    \ if constexpr (size <= 64) return std::int_least64_t();\n      else return __int128_t();\n\
+    \n#include <bitset>\n#include <cstddef>\n#line 7 \"system/in.hpp\"\n#include <cstdio>\n\
+    #include <string>\n#include <tuple>\n#line 2 \"meta/trait.hpp\"\n#include <iterator>\n\
+    #include <queue>\n#line 5 \"meta/trait.hpp\"\n#include <stack>\n#line 9 \"meta/trait.hpp\"\
+    \n\ntemplate<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
+    struct std::is_integral<__uint128_t>: std::true_type {};\ntemplate<>\nstruct std::is_floating_point<__float128>:\
+    \ std::true_type {};\n\nnamespace kyopro {\n  template<KYOPRO_BASE_UINT size>\n\
+    \  struct int_least {\n  private:\n    static constexpr auto get_type() noexcept\
+    \ {\n      static_assert(size <= 128, \"Integer size is too large\");\n      if\
+    \ constexpr (size <= 8) return std::int_least8_t();\n      else if constexpr (size\
+    \ <= 16) return std::int_least16_t();\n      else if constexpr (size <= 32) return\
+    \ std::int_least32_t();\n      else if constexpr (size <= 64) return std::int_least64_t();\n\
+    \      else return __int128_t();\n    }\n\n  public:\n    using type = decltype(get_type());\n\
+    \  };\n\n  template<KYOPRO_BASE_UINT size>\n  using int_least_t = typename int_least<size>::type;\n\
+    \n  template<KYOPRO_BASE_UINT size>\n  struct uint_least {\n  private:\n    static\
+    \ constexpr auto get_type() noexcept {\n      static_assert(size <= 128, \"Integer\
+    \ size is too large\");\n      if constexpr (size <= 8) return std::uint_least8_t();\n\
+    \      else if constexpr (size <= 16) return std::uint_least16_t();\n      else\
+    \ if constexpr (size <= 32) return std::uint_least32_t();\n      else if constexpr\
+    \ (size <= 64) return std::uint_least64_t();\n      else return __uint128_t();\n\
     \    }\n\n  public:\n    using type = decltype(get_type());\n  };\n\n  template<KYOPRO_BASE_UINT\
-    \ size>\n  using int_least_t = typename int_least<size>::type;\n\n  template<KYOPRO_BASE_UINT\
-    \ size>\n  struct uint_least {\n  private:\n    static constexpr auto get_type()\
-    \ noexcept {\n      static_assert(size <= 128, \"Integer size is too large\");\n\
-    \      if constexpr (size <= 8) return std::uint_least8_t();\n      else if constexpr\
-    \ (size <= 16) return std::uint_least16_t();\n      else if constexpr (size <=\
-    \ 32) return std::uint_least32_t();\n      else if constexpr (size <= 64) return\
-    \ std::uint_least64_t();\n      else return __uint128_t();\n    }\n\n  public:\n\
-    \    using type = decltype(get_type());\n  };\n\n  template<KYOPRO_BASE_UINT size>\n\
-    \  using uint_least_t = typename uint_least<size>::type;\n\n  template<class,\
+    \ size>\n  using uint_least_t = typename uint_least<size>::type;\n\n  template<class,\
     \ class = void>\n  struct is_iterator: std::false_type {};\n  template<class T>\n\
     \  struct is_iterator<T, std::void_t<typename std::iterator_traits<T>::iterator_category>>:\
     \ std::true_type {};\n\n  template<class T>\n  constexpr bool is_iterator_v =\
@@ -208,7 +208,7 @@ data:
     \  template<std::size_t idx, class T>\n  using aggregate_element_t = typename\
     \ aggregate_element<idx, T>::type;\n\n  template<class T>\n  struct is_agg: std::conjunction<std::is_aggregate<T>,\
     \ std::negation<is_iterable<T>>> {};\n\n  template<class T>\n  inline constexpr\
-    \ bool is_agg_v = is_agg<T>::value;\n}\n#line 14 \"system/in.hpp\"\n\nnamespace\
+    \ bool is_agg_v = is_agg<T>::value;\n}\n#line 15 \"system/in.hpp\"\n\nnamespace\
     \ kyopro {\n  template<std::size_t _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Reader\
     \ {\n    static constexpr KYOPRO_BASE_UINT buf_size = _buf_size;\n\n  private:\n\
     \    int fd, idx;\n    std::array<char, buf_size> buffer;\n\n  public:\n    Reader()\
@@ -235,35 +235,37 @@ data:
     \ = default;\n    Scanner(Iterator itr) noexcept: itr(itr) {}\n\n    void discard_space()\
     \ {\n      while (('\\t' <= *itr && *itr <= '\\r') || *itr == ' ') ++itr;\n  \
     \  }\n\n    void scan(char& a) {\n      discard_space();\n      a = *itr;\n  \
-    \    ++itr;\n    }\n    void scan(std::string& a) {\n      discard_space();\n\
+    \    ++itr;\n    }\n    void scan(bool& a) {\n      discard_space();\n      a\
+    \ = *itr != '0';\n    }\n    void scan(std::string& a) {\n      discard_space();\n\
     \      while ((*itr < '\\t' || '\\r' < *itr) && *itr != ' ') {\n        a += *itr;\n\
-    \        ++itr;\n      }\n    }\n    void scan(bool& a) {\n      discard_space();\n\
-    \      while ('0' <= *itr && *itr <= '9') {\n        if (*itr != '0') a = true;\n\
-    \        ++itr;\n      }\n    }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T>\
-    \ && !has_scan<T>::value>* = nullptr>\n    void scan(T& a) {\n      discard_space();\n\
-    \      bool sgn = false;\n      if constexpr (!std::is_unsigned_v<T>) if (*itr\
-    \ == '-') {\n        sgn = true;\n        ++itr;\n      }\n      a = 0;\n    \
-    \  for (; '0' <= *itr && *itr <= '9'; ++itr) a = a * 10 + *itr - '0';\n      if\
-    \ (*itr == '.') {\n        ++itr;\n        if constexpr (std::is_floating_point_v<T>)\
-    \ {\n          constexpr std::uint_fast64_t power_decimal_precision = power(10ULL,\
-    \ decimal_precision);\n          T d = 0;\n          std::uint_fast64_t i = 1;\n\
-    \          for (; '0' <= *itr && *itr <= '9' && i < power_decimal_precision; i\
-    \ *= 10) {\n            d = d * 10 + *itr - '0';\n            ++itr;\n       \
-    \   }\n          a += d / i;\n        }\n        while ('0' <= *itr && *itr <=\
-    \ '9') ++itr;\n      }\n      if constexpr (!std::is_unsigned_v<T>) if (sgn) a\
-    \ = -a;\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T>\
-    \ && !has_scan<T>::value>* = nullptr>\n    void scan(T& a) {\n      if constexpr\
-    \ (i < std::tuple_size_v<T>) {\n        scan(std::get<i>(a));\n        scan<i\
-    \ + 1>(a);\n      }\n    }\n    template<class T, std::enable_if_t<is_iterable_v<T>\
-    \ && !has_scan<T>::value>* = nullptr>\n    void scan(T& a) {\n      for (auto&&\
-    \ i: a) scan(i);\n    }\n    template<class T, std::enable_if_t<has_scan<T>::value>*\
-    \ = nullptr>\n    void scan(T& a) {\n      a.scan(*this);\n    }\n\n    void operator\
-    \ ()() {}\n    template<class Head, class... Args>\n    void operator ()(Head&\
-    \ head, Args&... args) {\n      scan(head);\n      operator ()(args...);\n   \
-    \ }\n  };\n\n  Scanner<Reader<>::iterator> scan(input.begin());\n}\n#line 3 \"\
-    system/out.hpp\"\n#include <algorithm>\n#line 5 \"system/out.hpp\"\n#include <cmath>\n\
-    #line 7 \"meta/aggregate.hpp\"\n\nnamespace kyopro {\n  namespace helper {\n \
-    \   #define DEFINE_ACCESS(n, ...) \\\n    template<std::size_t idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>>\
+    \        ++itr;\n      }\n    }\n    template<std::size_t len>\n    void scan(std::bitset<len>&\
+    \ a) {\n      discard_space();\n      for (int i = len - 1; i >= 0; ++i) {\n \
+    \       a[i] = *itr != '0';\n        ++itr;\n      }\n    }\n    template<class\
+    \ T, std::enable_if_t<std::is_arithmetic_v<T> && !has_scan<T>::value>* = nullptr>\n\
+    \    void scan(T& a) {\n      discard_space();\n      bool sgn = false;\n    \
+    \  if constexpr (!std::is_unsigned_v<T>) if (*itr == '-') {\n        sgn = true;\n\
+    \        ++itr;\n      }\n      a = 0;\n      for (; '0' <= *itr && *itr <= '9';\
+    \ ++itr) a = a * 10 + *itr - '0';\n      if (*itr == '.') {\n        ++itr;\n\
+    \        if constexpr (std::is_floating_point_v<T>) {\n          constexpr std::uint_fast64_t\
+    \ power_decimal_precision = power(10ULL, decimal_precision);\n          T d =\
+    \ 0;\n          std::uint_fast64_t i = 1;\n          for (; '0' <= *itr && *itr\
+    \ <= '9' && i < power_decimal_precision; i *= 10) {\n            d = d * 10 +\
+    \ *itr - '0';\n            ++itr;\n          }\n          a += d / i;\n      \
+    \  }\n        while ('0' <= *itr && *itr <= '9') ++itr;\n      }\n      if constexpr\
+    \ (!std::is_unsigned_v<T>) if (sgn) a = -a;\n    }\n    template<KYOPRO_BASE_UINT\
+    \ i = 0, class T, std::enable_if_t<is_agg_v<T> && !has_scan<T>::value>* = nullptr>\n\
+    \    void scan(T& a) {\n      if constexpr (i < std::tuple_size_v<T>) {\n    \
+    \    scan(std::get<i>(a));\n        scan<i + 1>(a);\n      }\n    }\n    template<class\
+    \ T, std::enable_if_t<is_iterable_v<T> && !has_scan<T>::value>* = nullptr>\n \
+    \   void scan(T& a) {\n      for (auto&& i: a) scan(i);\n    }\n    template<class\
+    \ T, std::enable_if_t<has_scan<T>::value>* = nullptr>\n    void scan(T& a) {\n\
+    \      a.scan(*this);\n    }\n\n    void operator ()() {}\n    template<class\
+    \ Head, class... Args>\n    void operator ()(Head& head, Args&... args) {\n  \
+    \    scan(head);\n      operator ()(args...);\n    }\n  };\n\n  Scanner<Reader<>::iterator>\
+    \ scan(input.begin());\n}\n#line 3 \"system/out.hpp\"\n#include <algorithm>\n\
+    #line 6 \"system/out.hpp\"\n#include <cmath>\n#line 7 \"meta/aggregate.hpp\"\n\
+    \nnamespace kyopro {\n  namespace helper {\n    #define DEFINE_ACCESS(n, ...)\
+    \ \\\n    template<std::size_t idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>>\
     \ == n>* = nullptr>\\\n    constexpr decltype(auto) access_impl(T&& aggregate,\
     \ char) noexcept {\\\n      auto&& [__VA_ARGS__] = std::forward<T>(aggregate);\\\
     \n      return std::get<idx>(std::forward_as_tuple(__VA_ARGS__));\\\n    }\n\n\
@@ -276,7 +278,7 @@ data:
     \ {\n      return std::get<idx>(std::forward<T>(aggregate));\n    }\n\n    #undef\
     \ DEFINE_ACCESS\n  }\n\n  template<std::size_t idx, class T>\n  constexpr decltype(auto)\
     \ access(T&& aggregate) noexcept {\n    return helper::access_impl<idx>(std::forward<T>(aggregate),\
-    \ false);\n  }\n}\n#line 16 \"system/out.hpp\"\n\nnamespace kyopro {\n  template<std::size_t\
+    \ false);\n  }\n}\n#line 17 \"system/out.hpp\"\n\nnamespace kyopro {\n  template<std::size_t\
     \ _buf_size = KYOPRO_BUFFER_SIZE>\n  struct Writer {\n    static constexpr KYOPRO_BASE_UINT\
     \ buf_size = _buf_size;\n\n  private:\n    int fd, idx;\n    std::array<char,\
     \ buf_size> buffer;\n\n  public:\n    Writer() noexcept = default;\n    Writer(int\
@@ -321,26 +323,28 @@ data:
     \            print_char(' ');\n          }\n        } else print_char(' ');\n\
     \      }\n    }\n\n    void print(char a) {\n      if constexpr (debug) print_char('\\\
     '');\n      print_char(a);\n      if constexpr (debug) print_char('\\'');\n  \
-    \  }\n    void print(const char* a) {\n      if constexpr (debug) print_char('\"\
+    \  }\n    void print(bool a) {\n      print_char(static_cast<char>('0' + a));\n\
+    \    }\n    void print(const char* a) {\n      if constexpr (debug) print_char('\"\
     ');\n      for (; *a != '\\0'; ++a) print_char(*a);\n      if constexpr (debug)\
     \ print_char('\"');\n    }\n    template<std::size_t len>\n    void print(const\
     \ char (&a)[len]) {\n      if constexpr (debug) print_char('\"');\n      for (auto\
     \ i: a) print_char(i);\n      if constexpr (debug) print_char('\"');\n    }\n\
     \    void print(const std::string& a) {\n      if constexpr (debug) print_char('\"\
     ');\n      for (auto i: a) print_char(i);\n      if constexpr (debug) print_char('\"\
-    ');\n    }\n    void print(bool a) {\n      print_char(static_cast<char>('0' +\
-    \ a));\n    }\n    template<class T, std::enable_if_t<std::is_arithmetic_v<T>\
-    \ && !has_print<T>::value>* = nullptr>\n    void print(T a) {\n      if constexpr\
-    \ (std::is_floating_point_v<T>) {\n        if (a == std::numeric_limits<T>::infinity())\
-    \ {\n          print(\"inf\");\n          return;\n        }\n        if (a ==\
-    \ -std::numeric_limits<T>::infinity()) {\n          print(\"-inf\");\n       \
-    \   return;\n        }\n        if (std::isnan(a)) {\n          print(\"nan\"\
-    );\n          return;\n        }\n      }\n      if constexpr (std::is_signed_v<T>)\
-    \ if (a < 0) {\n        print_char('-');\n        a = -a;\n      }\n      std::uint_fast64_t\
-    \ p = a;\n      std::string s;\n      do {\n        s += '0' + p % 10;\n     \
-    \   p /= 10;\n      } while (p > 0);\n      for (auto i = s.rbegin(); i != s.rend();\
-    \ ++i) print_char(*i);\n      if constexpr (std::is_integral_v<T>) return;\n \
-    \     print_char('.');\n      a -= p;\n      for (int i = 0; i < static_cast<int>(decimal_precision);\
+    ');\n    }\n    template<std::size_t len>\n    void print(const std::bitset<len>&\
+    \ a) {\n      for (int i = len - 1; i >= 0; --i) print(a[i]);\n    }\n    template<class\
+    \ T, std::enable_if_t<std::is_arithmetic_v<T> && !has_print<T>::value>* = nullptr>\n\
+    \    void print(T a) {\n      if constexpr (std::is_floating_point_v<T>) {\n \
+    \       if (a == std::numeric_limits<T>::infinity()) {\n          print(\"inf\"\
+    );\n          return;\n        }\n        if (a == -std::numeric_limits<T>::infinity())\
+    \ {\n          print(\"-inf\");\n          return;\n        }\n        if (std::isnan(a))\
+    \ {\n          print(\"nan\");\n          return;\n        }\n      }\n      if\
+    \ constexpr (std::is_signed_v<T>) if (a < 0) {\n        print_char('-');\n   \
+    \     a = -a;\n      }\n      std::uint_fast64_t p = a;\n      std::string s;\n\
+    \      do {\n        s += '0' + p % 10;\n        p /= 10;\n      } while (p >\
+    \ 0);\n      for (auto i = s.rbegin(); i != s.rend(); ++i) print_char(*i);\n \
+    \     if constexpr (std::is_integral_v<T>) return;\n      print_char('.');\n \
+    \     a -= p;\n      for (int i = 0; i < static_cast<int>(decimal_precision);\
     \ ++i) {\n        a *= 10;\n        print_char('0' + static_cast<std::uint_fast64_t>(a)\
     \ % 10);\n      }\n    }\n    template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T>\
     \ && !has_print<T>::value>* = nullptr>\n    void print(const T& a) {\n      if\
@@ -390,7 +394,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo/point_add_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-07-21 21:43:09+09:00'
+  timestamp: '2022-07-23 00:24:28+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yosupo/point_add_range_sum.test.cpp
