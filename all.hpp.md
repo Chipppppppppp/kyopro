@@ -317,7 +317,7 @@ data:
     \ T>>()(access<i>(a)) + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4));\n\
     \      }\n    }\n  };\n\n  template<class T>\n  struct Hash<T, std::enable_if_t<is_iterable_v<T>>>:\
     \ Hash<iterable_value_t<T>> {\n    using value_type = T;\n\n    constexpr std::size_t\
-    \ operator ()(const T& a) const noexcept {\n      std::uint_fast64_t seed = a.size();\n\
+    \ operator ()(const T& a) const {\n      std::uint_fast64_t seed = a.size();\n\
     \      for (auto&& i: a) seed ^= Hash<iterable_value_t<T>>(i) + 0x9e3779b97f4a7c15LU\
     \ + (seed << 12) + (seed >> 4);\n      return seed;\n    }\n  };\n}\n#line 2 \"\
     meta/constant.hpp\"\n#include <array>\n#line 3 \"math/power.hpp\"\n\nnamespace\
@@ -354,18 +354,19 @@ data:
     \ value_type = F;\n\n  private:\n    F func;\n\n  public:\n    template<class\
     \ G>\n    constexpr RecursiveLambda(G&& func) noexcept: func(std::forward<G>(func))\
     \ {}\n    template<class... Args>\n    constexpr decltype(auto) operator ()(Args&&...\
-    \ args) const noexcept { return func(*this, std::forward<Args>(args)...); }\n\
-    \  };\n\n  template<class F>\n  RecursiveLambda(F&&) -> RecursiveLambda<std::decay_t<F>>;\n\
-    }\n#line 3 \"math/div.hpp\"\n\nnamespace kyopro {\n  inline constexpr struct {\n\
-    \    template<class T, class U>\n    constexpr std::common_type_t<T, U> operator\
-    \ ()(T x, U m) const noexcept {\n      static_assert(std::is_integral_v<T> &&\
-    \ std::is_integral_v<U>, \"Integer is required\");\n      if constexpr (std::is_unsigned_v<T>\
-    \ || std::is_unsigned_v<U>) return x / m;\n      auto d = x / m;\n      return\
-    \ d * m == x ? d : d - ((x < 0) ^ (m < 0));\n    }\n  } floor_div;\n\n  inline\
-    \ constexpr struct {\n    template<class T, class U>\n    constexpr std::common_type_t<T,\
-    \ U> operator ()(T x, U m) const noexcept { return floor_div(x + m - static_cast<T>(1),\
-    \ m); }\n  } ceil_div;\n}\n#line 5 \"math/divisors.hpp\"\n\nnamespace kyopro {\n\
-    \  inline constexpr struct {\n    template<class Container = std::vector<KYOPRO_BASE_INT>>\n\
+    \ args) const noexcept(noexcept(func(*this, std::forward<Args>(args)...))) { return\
+    \ func(*this, std::forward<Args>(args)...); }\n  };\n\n  template<class F>\n \
+    \ RecursiveLambda(F&&) -> RecursiveLambda<std::decay_t<F>>;\n}\n#line 3 \"math/div.hpp\"\
+    \n\nnamespace kyopro {\n  inline constexpr struct {\n    template<class T, class\
+    \ U>\n    constexpr std::common_type_t<T, U> operator ()(T x, U m) const noexcept\
+    \ {\n      static_assert(std::is_integral_v<T> && std::is_integral_v<U>, \"Integer\
+    \ is required\");\n      if constexpr (std::is_unsigned_v<T> || std::is_unsigned_v<U>)\
+    \ return x / m;\n      auto d = x / m;\n      return d * m == x ? d : d - ((x\
+    \ < 0) ^ (m < 0));\n    }\n  } floor_div;\n\n  inline constexpr struct {\n   \
+    \ template<class T, class U>\n    constexpr std::common_type_t<T, U> operator\
+    \ ()(T x, U m) const noexcept { return floor_div(x + m - static_cast<T>(1), m);\
+    \ }\n  } ceil_div;\n}\n#line 5 \"math/divisors.hpp\"\n\nnamespace kyopro {\n \
+    \ inline constexpr struct {\n    template<class Container = std::vector<KYOPRO_BASE_INT>>\n\
     \    Container operator ()(KYOPRO_BASE_UINT n) const {\n      Container lower,\
     \ upper;\n      std::uint_fast64_t i;\n      for (i = 1; i * i < n; ++i) if (n\
     \ % i == 0) {\n        lower.emplace_back(i);\n        upper.emplace_back(n /\
@@ -785,13 +786,13 @@ data:
     \  template<class T, class Compare = std::greater<T>, class Container = std::vector<T>>\n\
     \  using heapq = priq<T, Compare, Container>;\n}\n\nusing namespace std;\nusing\
     \ namespace kyopro;\n#line 2 \"template/amin_amax.hpp\"\n\nnamespace kyopro {\n\
-    \  template<class T, class U>\n  constexpr bool amin(T& a, U&& b) noexcept {\n\
-    \    if (b < a) {\n      a = b;\n      return true;\n    }\n    return false;\n\
-    \  }\n\n  template<class T, class U>\n  constexpr bool amax(T& a, U&& b) noexcept\
-    \ {\n    if (a < b) {\n      a = b;\n      return true;\n    }\n    return false;\n\
-    \  }\n}\n#line 4 \"template/constant.hpp\"\n\nnamespace kyopro {\n  inline constexpr\
-    \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 4> beside{{{-1, 0},\
-    \ {0, -1}, {1, 0}, {0, 1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
+    \  template<class T, class U = T>\n  constexpr bool amin(T& a, const U& b) noexcept\
+    \ {\n    if (b < a) {\n      a = b;\n      return true;\n    }\n    return false;\n\
+    \  }\n\n  template<class T, class U = T>\n  constexpr bool amax(T& a, const U&\
+    \ b) noexcept {\n    if (a < b) {\n      a = b;\n      return true;\n    }\n \
+    \   return false;\n  }\n}\n#line 4 \"template/constant.hpp\"\n\nnamespace kyopro\
+    \ {\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>,\
+    \ 4> beside{{{-1, 0}, {0, -1}, {1, 0}, {0, 1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
     \ KYOPRO_BASE_INT>, 8> around{{{-1, 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1,\
     \ 1}, {0, 1}, {-1, 1}}};\n}\n#line 4 \"template/len.hpp\"\n\nnamespace kyopro\
     \ {\n  inline constexpr struct {\n    template<class T>\n    constexpr KYOPRO_BASE_INT\
@@ -903,7 +904,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2022-07-23 00:24:28+09:00'
+  timestamp: '2022-07-23 19:26:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp

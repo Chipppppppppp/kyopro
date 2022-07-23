@@ -237,7 +237,7 @@ data:
     \ T>>()(access<i>(a)) + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4));\n\
     \      }\n    }\n  };\n\n  template<class T>\n  struct Hash<T, std::enable_if_t<is_iterable_v<T>>>:\
     \ Hash<iterable_value_t<T>> {\n    using value_type = T;\n\n    constexpr std::size_t\
-    \ operator ()(const T& a) const noexcept {\n      std::uint_fast64_t seed = a.size();\n\
+    \ operator ()(const T& a) const {\n      std::uint_fast64_t seed = a.size();\n\
     \      for (auto&& i: a) seed ^= Hash<iterable_value_t<T>>(i) + 0x9e3779b97f4a7c15LU\
     \ + (seed << 12) + (seed >> 4);\n      return seed;\n    }\n  };\n}\n#line 3 \"\
     math/power.hpp\"\n\nnamespace kyopro {\n  inline constexpr struct {\n    template<class\
@@ -440,13 +440,13 @@ data:
     \  template<class T, class Compare = std::greater<T>, class Container = std::vector<T>>\n\
     \  using heapq = priq<T, Compare, Container>;\n}\n\nusing namespace std;\nusing\
     \ namespace kyopro;\n#line 2 \"template/amin_amax.hpp\"\n\nnamespace kyopro {\n\
-    \  template<class T, class U>\n  constexpr bool amin(T& a, U&& b) noexcept {\n\
-    \    if (b < a) {\n      a = b;\n      return true;\n    }\n    return false;\n\
-    \  }\n\n  template<class T, class U>\n  constexpr bool amax(T& a, U&& b) noexcept\
-    \ {\n    if (a < b) {\n      a = b;\n      return true;\n    }\n    return false;\n\
-    \  }\n}\n#line 4 \"template/constant.hpp\"\n\nnamespace kyopro {\n  inline constexpr\
-    \ std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 4> beside{{{-1, 0},\
-    \ {0, -1}, {1, 0}, {0, 1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
+    \  template<class T, class U = T>\n  constexpr bool amin(T& a, const U& b) noexcept\
+    \ {\n    if (b < a) {\n      a = b;\n      return true;\n    }\n    return false;\n\
+    \  }\n\n  template<class T, class U = T>\n  constexpr bool amax(T& a, const U&\
+    \ b) noexcept {\n    if (a < b) {\n      a = b;\n      return true;\n    }\n \
+    \   return false;\n  }\n}\n#line 4 \"template/constant.hpp\"\n\nnamespace kyopro\
+    \ {\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>,\
+    \ 4> beside{{{-1, 0}, {0, -1}, {1, 0}, {0, 1}}};\n  inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
     \ KYOPRO_BASE_INT>, 8> around{{{-1, 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1,\
     \ 1}, {0, 1}, {-1, 1}}};\n}\n#line 4 \"template/len.hpp\"\n\nnamespace kyopro\
     \ {\n  inline constexpr struct {\n    template<class T>\n    constexpr KYOPRO_BASE_INT\
@@ -699,7 +699,7 @@ data:
   path: template/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-07-23 00:24:28+09:00'
+  timestamp: '2022-07-23 19:26:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/all.hpp

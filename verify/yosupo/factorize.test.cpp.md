@@ -238,7 +238,7 @@ data:
     \ T>>()(access<i>(a)) + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4));\n\
     \      }\n    }\n  };\n\n  template<class T>\n  struct Hash<T, std::enable_if_t<is_iterable_v<T>>>:\
     \ Hash<iterable_value_t<T>> {\n    using value_type = T;\n\n    constexpr std::size_t\
-    \ operator ()(const T& a) const noexcept {\n      std::uint_fast64_t seed = a.size();\n\
+    \ operator ()(const T& a) const {\n      std::uint_fast64_t seed = a.size();\n\
     \      for (auto&& i: a) seed ^= Hash<iterable_value_t<T>>(i) + 0x9e3779b97f4a7c15LU\
     \ + (seed << 12) + (seed >> 4);\n      return seed;\n    }\n  };\n}\n#line 2 \"\
     meta/constant.hpp\"\n#include <array>\n#line 3 \"math/power.hpp\"\n\nnamespace\
@@ -537,7 +537,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2022-07-23 00:24:28+09:00'
+  timestamp: '2022-07-23 19:26:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yosupo/factorize.test.cpp

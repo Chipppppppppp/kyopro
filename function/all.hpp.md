@@ -73,9 +73,10 @@ data:
     \ value_type = F;\n\n  private:\n    F func;\n\n  public:\n    template<class\
     \ G>\n    constexpr RecursiveLambda(G&& func) noexcept: func(std::forward<G>(func))\
     \ {}\n    template<class... Args>\n    constexpr decltype(auto) operator ()(Args&&...\
-    \ args) const noexcept { return func(*this, std::forward<Args>(args)...); }\n\
-    \  };\n\n  template<class F>\n  RecursiveLambda(F&&) -> RecursiveLambda<std::decay_t<F>>;\n\
-    }\n#line 4 \"function/all.hpp\"\n"
+    \ args) const noexcept(noexcept(func(*this, std::forward<Args>(args)...))) { return\
+    \ func(*this, std::forward<Args>(args)...); }\n  };\n\n  template<class F>\n \
+    \ RecursiveLambda(F&&) -> RecursiveLambda<std::decay_t<F>>;\n}\n#line 4 \"function/all.hpp\"\
+    \n"
   code: '#pragma once
 
     #include "monoid.hpp"
@@ -92,7 +93,7 @@ data:
   requiredBy:
   - all/all.hpp
   - all.hpp
-  timestamp: '2022-07-17 16:51:20+09:00'
+  timestamp: '2022-07-23 19:26:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: function/all.hpp
