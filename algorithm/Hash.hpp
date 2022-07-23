@@ -40,7 +40,7 @@ namespace kyopro {
   struct Hash<T, std::enable_if_t<is_iterable_v<T>>>: Hash<iterable_value_t<T>> {
     using value_type = T;
 
-    constexpr std::size_t operator ()(const T& a) const noexcept {
+    constexpr std::size_t operator ()(const T& a) const {
       std::uint_fast64_t seed = a.size();
       for (auto&& i: a) seed ^= Hash<iterable_value_t<T>>(i) + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4);
       return seed;
