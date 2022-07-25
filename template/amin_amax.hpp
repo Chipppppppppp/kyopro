@@ -1,21 +1,21 @@
 #pragma once
 
 namespace kyopro {
-  template<class T, class U = T>
-  constexpr bool amin(T& a, const U& b) noexcept {
-    if (b < a) {
-      a = b;
-      return true;
+    template<class T, class U = T>
+    constexpr bool amin(T& a, const U& b) noexcept {
+        if (b < a) {
+        a = b;
+        return true;
+        }
+        return false;
     }
-    return false;
-  }
 
-  template<class T, class U = T>
-  constexpr bool amax(T& a, const U& b) noexcept {
-    if (a < b) {
-      a = b;
-      return true;
+    template<class T, class U = T>
+    constexpr bool amax(T& a, const U& b) noexcept {
+        if (a < b) {
+        a = b;
+        return true;
+        }
+        return false;
     }
-    return false;
-  }
-}
+} // namespace kyopro
