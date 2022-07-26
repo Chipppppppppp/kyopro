@@ -26,25 +26,27 @@ data:
     #define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n#endif\n\n\
     #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 6 \"template/make_vector.hpp\"\n\nnamespace kyopro {\n  inline constexpr\
-    \ struct {\n    template<KYOPRO_BASE_UINT idx = 0, KYOPRO_BASE_UINT n, class T>\n\
-    \    auto operator ()(const KYOPRO_BASE_UINT (&d)[n], T&& init) noexcept {\n \
-    \     if constexpr (idx < n) return std::vector(d[idx], operator ()<idx + 1>(d,\
-    \ std::forward<T>(init)));\n      else return init;\n    }\n\n    template<class\
-    \ T, KYOPRO_BASE_UINT idx = 0, KYOPRO_BASE_UINT n>\n    auto operator ()(const\
-    \ KYOPRO_BASE_UINT (&d)[n], const T& init = T()) noexcept {\n      if constexpr\
-    \ (idx < n) return std::vector(d[idx], operator ()<idx + 1>(d, init));\n     \
-    \ else return init;\n    }\n  } make_vector;\n}\n"
+    #endif\n#line 6 \"template/make_vector.hpp\"\n\nnamespace kyopro {\n    inline\
+    \ constexpr struct {\n        template<KYOPRO_BASE_UINT idx = 0, KYOPRO_BASE_UINT\
+    \ n, class T>\n        auto operator ()(const KYOPRO_BASE_UINT (&d)[n], T&& init)\
+    \ noexcept {\n        if constexpr (idx < n) return std::vector(d[idx], operator\
+    \ ()<idx + 1>(d, std::forward<T>(init)));\n        else return init;\n       \
+    \ }\n\n        template<class T, KYOPRO_BASE_UINT idx = 0, KYOPRO_BASE_UINT n>\n\
+    \        auto operator ()(const KYOPRO_BASE_UINT (&d)[n], const T& init = T())\
+    \ noexcept {\n        if constexpr (idx < n) return std::vector(d[idx], operator\
+    \ ()<idx + 1>(d, init));\n        else return init;\n        }\n    } make_vector;\n\
+    } // namespace kyopro\n"
   code: "#pragma once\n#include <cstdint>\n#include <utility>\n#include <vector>\n\
-    #include \"../meta/settings.hpp\"\n\nnamespace kyopro {\n  inline constexpr struct\
-    \ {\n    template<KYOPRO_BASE_UINT idx = 0, KYOPRO_BASE_UINT n, class T>\n   \
-    \ auto operator ()(const KYOPRO_BASE_UINT (&d)[n], T&& init) noexcept {\n    \
-    \  if constexpr (idx < n) return std::vector(d[idx], operator ()<idx + 1>(d, std::forward<T>(init)));\n\
-    \      else return init;\n    }\n\n    template<class T, KYOPRO_BASE_UINT idx\
-    \ = 0, KYOPRO_BASE_UINT n>\n    auto operator ()(const KYOPRO_BASE_UINT (&d)[n],\
-    \ const T& init = T()) noexcept {\n      if constexpr (idx < n) return std::vector(d[idx],\
-    \ operator ()<idx + 1>(d, init));\n      else return init;\n    }\n  } make_vector;\n\
-    }"
+    #include \"../meta/settings.hpp\"\n\nnamespace kyopro {\n    inline constexpr\
+    \ struct {\n        template<KYOPRO_BASE_UINT idx = 0, KYOPRO_BASE_UINT n, class\
+    \ T>\n        auto operator ()(const KYOPRO_BASE_UINT (&d)[n], T&& init) noexcept\
+    \ {\n        if constexpr (idx < n) return std::vector(d[idx], operator ()<idx\
+    \ + 1>(d, std::forward<T>(init)));\n        else return init;\n        }\n\n \
+    \       template<class T, KYOPRO_BASE_UINT idx = 0, KYOPRO_BASE_UINT n>\n    \
+    \    auto operator ()(const KYOPRO_BASE_UINT (&d)[n], const T& init = T()) noexcept\
+    \ {\n        if constexpr (idx < n) return std::vector(d[idx], operator ()<idx\
+    \ + 1>(d, init));\n        else return init;\n        }\n    } make_vector;\n\
+    } // namespace kyopro"
   dependsOn:
   - meta/settings.hpp
   isVerificationFile: false
@@ -52,7 +54,7 @@ data:
   requiredBy:
   - all.hpp
   - template/all.hpp
-  timestamp: '2022-07-07 16:11:50+09:00'
+  timestamp: '2022-07-25 23:25:51+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/make_vector.hpp

@@ -28,21 +28,22 @@ data:
     #endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 5 \"math/divisors.hpp\"\n\nnamespace kyopro {\n  inline constexpr\
-    \ struct {\n    template<class Container = std::vector<KYOPRO_BASE_INT>>\n   \
-    \ Container operator ()(KYOPRO_BASE_UINT n) const {\n      Container lower, upper;\n\
-    \      std::uint_fast64_t i;\n      for (i = 1; i * i < n; ++i) if (n % i == 0)\
-    \ {\n        lower.emplace_back(i);\n        upper.emplace_back(n / i);\n    \
-    \  }\n      if (i * i == n) lower.emplace_back(i);\n      lower.insert(end(lower),\
-    \ rall(upper));\n      return lower;\n    }\n  } divisors;\n}\n"
+    #endif\n#line 5 \"math/divisors.hpp\"\n\nnamespace kyopro {\n    inline constexpr\
+    \ struct {\n        template<class Container = std::vector<KYOPRO_BASE_INT>>\n\
+    \        Container operator ()(KYOPRO_BASE_UINT n) const {\n        Container\
+    \ lower, upper;\n        std::uint_fast64_t i;\n        for (i = 1; i * i < n;\
+    \ ++i) if (n % i == 0) {\n            lower.emplace_back(i);\n            upper.emplace_back(n\
+    \ / i);\n        }\n        if (i * i == n) lower.emplace_back(i);\n        lower.insert(end(lower),\
+    \ rall(upper));\n        return lower;\n        }\n    } divisors;\n} // namespace\
+    \ kyopro\n"
   code: "#pragma once\n#include <cstdint>\n#include <vector>\n#include \"../meta/settings.hpp\"\
-    \n\nnamespace kyopro {\n  inline constexpr struct {\n    template<class Container\
-    \ = std::vector<KYOPRO_BASE_INT>>\n    Container operator ()(KYOPRO_BASE_UINT\
-    \ n) const {\n      Container lower, upper;\n      std::uint_fast64_t i;\n   \
-    \   for (i = 1; i * i < n; ++i) if (n % i == 0) {\n        lower.emplace_back(i);\n\
-    \        upper.emplace_back(n / i);\n      }\n      if (i * i == n) lower.emplace_back(i);\n\
-    \      lower.insert(end(lower), rall(upper));\n      return lower;\n    }\n  }\
-    \ divisors;\n}"
+    \n\nnamespace kyopro {\n    inline constexpr struct {\n        template<class\
+    \ Container = std::vector<KYOPRO_BASE_INT>>\n        Container operator ()(KYOPRO_BASE_UINT\
+    \ n) const {\n        Container lower, upper;\n        std::uint_fast64_t i;\n\
+    \        for (i = 1; i * i < n; ++i) if (n % i == 0) {\n            lower.emplace_back(i);\n\
+    \            upper.emplace_back(n / i);\n        }\n        if (i * i == n) lower.emplace_back(i);\n\
+    \        lower.insert(end(lower), rall(upper));\n        return lower;\n     \
+    \   }\n    } divisors;\n} // namespace kyopro"
   dependsOn:
   - meta/settings.hpp
   isVerificationFile: false
@@ -51,7 +52,7 @@ data:
   - all/all.hpp
   - math/all.hpp
   - all.hpp
-  timestamp: '2022-07-07 16:11:50+09:00'
+  timestamp: '2022-07-25 23:25:51+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/divisors.hpp

@@ -27,23 +27,25 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"math/mod.hpp\"\n#include <cassert>\n#include <type_traits>\n\
-    \nnamespace kyopro {\n  inline constexpr struct {\n    template<class T, class\
-    \ U>\n    constexpr std::common_type_t<T, U> operator ()(T x, U m) const noexcept\
-    \ {\n      static_assert(std::is_integral_v<T> && std::is_integral_v<U>, \"Integer\
-    \ is required\");\n      if constexpr (std::is_unsigned_v<T> || std::is_unsigned_v<U>)\
-    \ return x % m;\n      return (x %= m) < 0 ? x + m : x;\n    }\n  } floor_mod;\n\
-    \n  inline constexpr struct {\n    template<class T, class U>\n    constexpr std::common_type_t<T,\
-    \ U> operator ()(T x, U m) const noexcept {\n      return m - floor_mod(x - 1,\
-    \ m) - static_cast<T>(1);\n    }\n   } ceil_mod;\n}\n"
+    \nnamespace kyopro {\n    inline constexpr struct {\n        template<class T,\
+    \ class U>\n        constexpr std::common_type_t<T, U> operator ()(T x, U m) const\
+    \ noexcept {\n        static_assert(std::is_integral_v<T> && std::is_integral_v<U>,\
+    \ \"Integer is required\");\n        if constexpr (std::is_unsigned_v<T> || std::is_unsigned_v<U>)\
+    \ return x % m;\n        return (x %= m) < 0 ? x + m : x;\n        }\n    } floor_mod;\n\
+    \n    inline constexpr struct {\n        template<class T, class U>\n        constexpr\
+    \ std::common_type_t<T, U> operator ()(T x, U m) const noexcept {\n        return\
+    \ m - floor_mod(x - 1, m) - static_cast<T>(1);\n        }\n    } ceil_mod;\n}\
+    \ // namespace kyopro\n"
   code: "#pragma once\n#include <cassert>\n#include <type_traits>\n\nnamespace kyopro\
-    \ {\n  inline constexpr struct {\n    template<class T, class U>\n    constexpr\
-    \ std::common_type_t<T, U> operator ()(T x, U m) const noexcept {\n      static_assert(std::is_integral_v<T>\
-    \ && std::is_integral_v<U>, \"Integer is required\");\n      if constexpr (std::is_unsigned_v<T>\
-    \ || std::is_unsigned_v<U>) return x % m;\n      return (x %= m) < 0 ? x + m :\
-    \ x;\n    }\n  } floor_mod;\n\n  inline constexpr struct {\n    template<class\
-    \ T, class U>\n    constexpr std::common_type_t<T, U> operator ()(T x, U m) const\
-    \ noexcept {\n      return m - floor_mod(x - 1, m) - static_cast<T>(1);\n    }\n\
-    \   } ceil_mod;\n}\n"
+    \ {\n    inline constexpr struct {\n        template<class T, class U>\n     \
+    \   constexpr std::common_type_t<T, U> operator ()(T x, U m) const noexcept {\n\
+    \        static_assert(std::is_integral_v<T> && std::is_integral_v<U>, \"Integer\
+    \ is required\");\n        if constexpr (std::is_unsigned_v<T> || std::is_unsigned_v<U>)\
+    \ return x % m;\n        return (x %= m) < 0 ? x + m : x;\n        }\n    } floor_mod;\n\
+    \n    inline constexpr struct {\n        template<class T, class U>\n        constexpr\
+    \ std::common_type_t<T, U> operator ()(T x, U m) const noexcept {\n        return\
+    \ m - floor_mod(x - 1, m) - static_cast<T>(1);\n        }\n    } ceil_mod;\n}\
+    \ // namespace kyopro"
   dependsOn: []
   isVerificationFile: false
   path: math/mod.hpp
@@ -54,7 +56,7 @@ data:
   - all.hpp
   - template/all.hpp
   - template/alias.hpp
-  timestamp: '2022-07-07 16:11:50+09:00'
+  timestamp: '2022-07-25 23:25:51+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/mod.hpp
