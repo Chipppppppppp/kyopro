@@ -210,15 +210,15 @@ data:
     \ noexcept = default;\n            template<class F>\n            iterator(F&&\
     \ func, BaseIterator itr) noexcept: func(std::forward<F>(func)), BaseIterator(itr)\
     \ {}\n\n            constexpr decltype(auto) operator *() const noexcept {\n \
-    \               return func(**this);\n            }\n        };\n\n        using\
-    \ reverse_iterator = std::reverse_iterator<iterator>;\n\n        constexpr iterator\
-    \ begin() {\n            return iterator(func, range.begin());\n        }\n\n\
-    \        constexpr iterator end() {\n            return iterator(func, range.end());\n\
-    \        }\n\n        constexpr iterator rbegin() {\n            return reverse_iterator(func,\
-    \ range.rbegin());\n        }\n\n        constexpr iterator rend() {\n       \
-    \     return reverse_iterator(func, range.rend());\n        }\n    };\n\n    template<class\
-    \ F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>, std::decay_t<R>>;\n\
-    }\n#line 4 \"iterator/all.hpp\"\n"
+    \               return func(BaseIterator::operator *());\n            }\n    \
+    \    };\n\n        using reverse_iterator = std::reverse_iterator<iterator>;\n\
+    \n        constexpr iterator begin() {\n            return iterator(func, range.begin());\n\
+    \        }\n\n        constexpr iterator end() {\n            return iterator(func,\
+    \ range.end());\n        }\n\n        constexpr iterator rbegin() {\n        \
+    \    return reverse_iterator(func, range.rbegin());\n        }\n\n        constexpr\
+    \ iterator rend() {\n            return reverse_iterator(func, range.rend());\n\
+    \        }\n    };\n\n    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>,\
+    \ std::decay_t<R>>;\n}\n#line 4 \"iterator/all.hpp\"\n"
   code: '#pragma once
 
     #include "imap.hpp"
@@ -234,7 +234,7 @@ data:
   requiredBy:
   - all/all.hpp
   - all.hpp
-  timestamp: '2022-07-28 18:29:30+09:00'
+  timestamp: '2022-07-28 18:35:57+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: iterator/all.hpp
