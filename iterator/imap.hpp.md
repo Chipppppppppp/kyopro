@@ -214,10 +214,10 @@ data:
     \    };\n\n        using reverse_iterator = std::reverse_iterator<iterator>;\n\
     \n        constexpr iterator begin() {\n            return iterator(func, range.begin());\n\
     \        }\n\n        constexpr iterator end() {\n            return iterator(func,\
-    \ range.end());\n        }\n\n        constexpr iterator rbegin() {\n        \
-    \    return reverse_iterator(func, range.rbegin());\n        }\n\n        constexpr\
-    \ iterator rend() {\n            return reverse_iterator(func, range.rend());\n\
-    \        }\n    };\n\n    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>,\
+    \ range.end());\n        }\n\n        constexpr reverse_iterator rbegin() {\n\
+    \            return reverse_iterator(end());\n        }\n\n        constexpr reverse_iterator\
+    \ rend() {\n            return reverse_iterator(begin());\n        }\n    };\n\
+    \n    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>,\
     \ std::decay_t<R>>;\n}\n"
   code: "#pragma once\n#include <cstddef>\n#include <iterator>\n#include <type_traits>\n\
     #include <utility>\n#include \"iterator_base.hpp\"\n#include \"../meta/trait.hpp\"\
@@ -238,10 +238,10 @@ data:
     \    };\n\n        using reverse_iterator = std::reverse_iterator<iterator>;\n\
     \n        constexpr iterator begin() {\n            return iterator(func, range.begin());\n\
     \        }\n\n        constexpr iterator end() {\n            return iterator(func,\
-    \ range.end());\n        }\n\n        constexpr iterator rbegin() {\n        \
-    \    return reverse_iterator(func, range.rbegin());\n        }\n\n        constexpr\
-    \ iterator rend() {\n            return reverse_iterator(func, range.rend());\n\
-    \        }\n    };\n\n    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>,\
+    \ range.end());\n        }\n\n        constexpr reverse_iterator rbegin() {\n\
+    \            return reverse_iterator(end());\n        }\n\n        constexpr reverse_iterator\
+    \ rend() {\n            return reverse_iterator(begin());\n        }\n    };\n\
+    \n    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>,\
     \ std::decay_t<R>>;\n}"
   dependsOn:
   - iterator/iterator_base.hpp
@@ -253,7 +253,7 @@ data:
   - all/all.hpp
   - iterator/all.hpp
   - all.hpp
-  timestamp: '2022-07-28 18:35:57+09:00'
+  timestamp: '2022-07-28 18:40:08+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: iterator/imap.hpp
