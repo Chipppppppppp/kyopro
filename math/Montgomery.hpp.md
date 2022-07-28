@@ -5,12 +5,6 @@ data:
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
-  - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
-    path: all/all.hpp
-    title: all/all.hpp
   - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
@@ -55,52 +49,52 @@ data:
     Unsigned integer is required\");\n        using value_type = T;\n\n        T mod;\n\
     \n    private:\n        using larger_type = uint_least_t<std::numeric_limits<T>::digits\
     \ * 2>;\n\n        T r, n2;\n\n    public:\n        constexpr void set_mod(T _mod)\
-    \ noexcept {\n        mod = _mod;\n        n2 = -static_cast<larger_type>(mod)\
-    \ % mod;\n        T t = 0;\n        r = 0;\n        for (int i = 0; i < std::numeric_limits<T>::digits;\
-    \ ++i) {\n            if (!(t & 1)) {\n            t += mod;\n            r +=\
-    \ static_cast<T>(1) << static_cast<T>(i);\n            }\n            t >>= 1;\n\
-    \        }\n        }\n\n        constexpr KYOPRO_BASE_INT get_mod() const noexcept\
-    \ {\n        return mod;\n        }\n\n        Montgomery() noexcept = default;\n\
-    \        Montgomery(T mod) noexcept {\n        set_mod(mod);\n        }\n\n  \
-    \      constexpr T transform(T x) const noexcept {\n        return reduce(static_cast<larger_type>(x)\
+    \ noexcept {\n            mod = _mod;\n            n2 = -static_cast<larger_type>(mod)\
+    \ % mod;\n            T t = 0;\n            r = 0;\n            for (int i = 0;\
+    \ i < std::numeric_limits<T>::digits; ++i) {\n                if (!(t & 1)) {\n\
+    \                t += mod;\n                r += static_cast<T>(1) << static_cast<T>(i);\n\
+    \                }\n                t >>= 1;\n            }\n        }\n\n   \
+    \     constexpr KYOPRO_BASE_INT get_mod() const noexcept {\n            return\
+    \ mod;\n        }\n\n        Montgomery() noexcept = default;\n        Montgomery(T\
+    \ mod) noexcept {\n            set_mod(mod);\n        }\n\n        constexpr T\
+    \ transform(T x) const noexcept {\n            return reduce(static_cast<larger_type>(x)\
     \ * n2);\n        }\n\n        constexpr T inverse_transform(T x) const noexcept\
-    \ {\n        T y = reduce(x);\n        return y >= mod ? y - mod : y;\n      \
-    \  }\n\n        constexpr T reduce(larger_type x) const noexcept {\n        return\
-    \ (x + static_cast<larger_type>(static_cast<T>(x) * r) * mod) >> std::numeric_limits<T>::digits;\n\
-    \        }\n    };\n} // namespace kyopro\n"
+    \ {\n            T y = reduce(x);\n            return y >= mod ? y - mod : y;\n\
+    \        }\n\n        constexpr T reduce(larger_type x) const noexcept {\n   \
+    \         return (x + static_cast<larger_type>(static_cast<T>(x) * r) * mod) >>\
+    \ std::numeric_limits<T>::digits;\n        }\n    };\n} // namespace kyopro\n"
   code: "#pragma once\n#include <cstdint>\n#include <limits>\n#include <type_traits>\n\
     #include \"../meta/settings.hpp\"\n\nnamespace kyopro {\n    template<class T>\n\
     \    struct Montgomery {\n        static_assert(std::is_unsigned_v<T>, \"Unsigned\
     \ integer is required\");\n        using value_type = T;\n\n        T mod;\n\n\
     \    private:\n        using larger_type = uint_least_t<std::numeric_limits<T>::digits\
     \ * 2>;\n\n        T r, n2;\n\n    public:\n        constexpr void set_mod(T _mod)\
-    \ noexcept {\n        mod = _mod;\n        n2 = -static_cast<larger_type>(mod)\
-    \ % mod;\n        T t = 0;\n        r = 0;\n        for (int i = 0; i < std::numeric_limits<T>::digits;\
-    \ ++i) {\n            if (!(t & 1)) {\n            t += mod;\n            r +=\
-    \ static_cast<T>(1) << static_cast<T>(i);\n            }\n            t >>= 1;\n\
-    \        }\n        }\n\n        constexpr KYOPRO_BASE_INT get_mod() const noexcept\
-    \ {\n        return mod;\n        }\n\n        Montgomery() noexcept = default;\n\
-    \        Montgomery(T mod) noexcept {\n        set_mod(mod);\n        }\n\n  \
-    \      constexpr T transform(T x) const noexcept {\n        return reduce(static_cast<larger_type>(x)\
+    \ noexcept {\n            mod = _mod;\n            n2 = -static_cast<larger_type>(mod)\
+    \ % mod;\n            T t = 0;\n            r = 0;\n            for (int i = 0;\
+    \ i < std::numeric_limits<T>::digits; ++i) {\n                if (!(t & 1)) {\n\
+    \                t += mod;\n                r += static_cast<T>(1) << static_cast<T>(i);\n\
+    \                }\n                t >>= 1;\n            }\n        }\n\n   \
+    \     constexpr KYOPRO_BASE_INT get_mod() const noexcept {\n            return\
+    \ mod;\n        }\n\n        Montgomery() noexcept = default;\n        Montgomery(T\
+    \ mod) noexcept {\n            set_mod(mod);\n        }\n\n        constexpr T\
+    \ transform(T x) const noexcept {\n            return reduce(static_cast<larger_type>(x)\
     \ * n2);\n        }\n\n        constexpr T inverse_transform(T x) const noexcept\
-    \ {\n        T y = reduce(x);\n        return y >= mod ? y - mod : y;\n      \
-    \  }\n\n        constexpr T reduce(larger_type x) const noexcept {\n        return\
-    \ (x + static_cast<larger_type>(static_cast<T>(x) * r) * mod) >> std::numeric_limits<T>::digits;\n\
-    \        }\n    };\n} // namespace kyopro"
+    \ {\n            T y = reduce(x);\n            return y >= mod ? y - mod : y;\n\
+    \        }\n\n        constexpr T reduce(larger_type x) const noexcept {\n   \
+    \         return (x + static_cast<larger_type>(static_cast<T>(x) * r) * mod) >>\
+    \ std::numeric_limits<T>::digits;\n        }\n    };\n} // namespace kyopro"
   dependsOn:
   - meta/settings.hpp
   isVerificationFile: false
   path: math/Montgomery.hpp
   requiredBy:
-  - all/all.hpp
   - math/all.hpp
   - math/factorize.hpp
   - math/is_prime.hpp
   - math/DynamicModInt.hpp
-  - all.hpp
   - template/all.hpp
   - template/alias.hpp
-  timestamp: '2022-07-25 23:25:51+09:00'
+  timestamp: '2022-07-28 17:38:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp

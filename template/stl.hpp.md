@@ -3,9 +3,6 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
     path: template/all.hpp
     title: template/all.hpp
   _extendedVerifiedWith: []
@@ -332,7 +329,6 @@ data:
   isVerificationFile: false
   path: template/stl.hpp
   requiredBy:
-  - all.hpp
   - template/all.hpp
   timestamp: '2022-05-10 21:54:43+09:00'
   verificationStatus: LIBRARY_NO_TESTS

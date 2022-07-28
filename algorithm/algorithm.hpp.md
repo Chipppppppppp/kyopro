@@ -1,12 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: math/power.hpp
-    title: math/power.hpp
-  - icon: ':heavy_check_mark:'
-    path: meta/constant.hpp
-    title: meta/constant.hpp
+  - icon: ':warning:'
+    path: function/compare.hpp
+    title: function/compare.hpp
+  - icon: ':warning:'
+    path: function/identity.hpp
+    title: function/identity.hpp
   - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
@@ -20,35 +20,39 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"meta/constant.hpp\"\n#include <array>\n#include <limits>\n\
-    #include <utility>\n#line 2 \"meta/settings.hpp\"\n#include <cstdint>\n\n#ifndef\
-    \ KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n\
-    #define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n\
-    #define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define\
-    \ KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(998244353)\n#endif\n\n#ifndef\
-    \ KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
+  bundledCode: "#line 2 \"algorithm/algorithm.hpp\"\n#include <algorithm>\n#include\
+    \ <functional>\n#include <iterator>\n#include <type_traits>\n#include <unordered_map>\n\
+    #include <utility>\n#include <vector>\n#line 2 \"function/compare.hpp\"\n\nnamespace\
+    \ kyopro {\n    struct Equal {\n        template<class T>\n        constexpr bool\
+    \ operator()(const T& x, const T& y) const noexcept(noexcept(x == y)) {\n    \
+    \        return x == y;\n        }\n    };\n\n    struct NotEqual {\n        template<class\
+    \ T>\n        constexpr bool operator()(const T& x, const T& y) const noexcept(noexcept(x\
+    \ != y)) {\n            return x != y;\n        }\n    };\n\n    struct Less {\n\
+    \        template<class T>\n        constexpr bool operator()(const T& x, const\
+    \ T& y) const noexcept(noexcept(x < y)) {\n            return x < y;\n       \
+    \ }\n    };\n\n    struct LessEqual {\n        template<class T>\n        constexpr\
+    \ bool operator()(const T& x, const T& y) const noexcept(noexcept(x <= y)) {\n\
+    \            return x <= y;\n        }\n    };\n\n    struct Greater {\n     \
+    \   template<class T>\n        constexpr bool operator()(const T& x, const T&\
+    \ y) const noexcept(noexcept(x > y)) {\n            return x > y;\n        }\n\
+    \    };\n\n    struct GreaterEqual {\n        template<class T>\n        constexpr\
+    \ bool operator()(const T& x, const T& y) const noexcept(noexcept(x >= y)) {\n\
+    \            return x >= y;\n        }\n    };\n} // namespace kyopro\n#line 3\
+    \ \"function/identity.hpp\"\n\nnamespace kyopro {\n    struct Identity {\n   \
+    \     template<class T>\n        T&& operator ()(T&& a) const noexcept {\n   \
+    \         return std::forward<T>(a);\n        }\n    };\n}\n#line 2 \"meta/settings.hpp\"\
+    \n#include <cstdint>\n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n\
+    #endif\n\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\
+    \n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef\
+    \ KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(998244353)\n\
+    #endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n    inline constexpr\
-    \ struct {\n        template<class T>\n        constexpr T operator ()(T a, KYOPRO_BASE_UINT\
-    \ n, T init = 1) const noexcept {\n            while (n > 0) {\n             \
-    \   if (n & 1) init *= a;\n                a *= a;\n                n >>= 1;\n\
-    \            }\n            return init;\n        }\n    } power;\n} // namespace\
-    \ kyopro\n#line 7 \"meta/constant.hpp\"\n\nnamespace kyopro {\n    template<class\
-    \ T>\n    inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\n    inline constexpr KYOPRO_BASE_INT\
-    \ mod = MOD<KYOPRO_BASE_INT>;\n\n    template<class T>\n    inline constexpr T\
-    \ INF = std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\n    inline constexpr\
-    \ KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\n    template<class T, KYOPRO_BASE_UINT\
-    \ decimal_precision = KYOPRO_DECIMAL_PRECISION>\n    inline constexpr KYOPRO_BASE_FLOAT\
-    \ EPS = static_cast<T>(1) / power(10ULL, decimal_precision);\n    inline constexpr\
-    \ KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\n    template<class T>\n \
-    \   inline constexpr T PI = 3.14159265358979323846;\n    inline constexpr KYOPRO_BASE_FLOAT\
-    \ pi = PI<KYOPRO_BASE_FLOAT>;\n} // namespace kyopro\n#line 2 \"meta/trait.hpp\"\
-    \n#include <iterator>\n#include <queue>\n#line 5 \"meta/trait.hpp\"\n#include\
-    \ <stack>\n#include <type_traits>\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\n\
-    struct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
-    \ std::true_type {};\ntemplate<>\nstruct std::is_floating_point<__float128>: std::true_type\
-    \ {};\n\nnamespace kyopro {\n    template<KYOPRO_BASE_UINT size>\n    struct int_least\
+    #endif\n#line 3 \"meta/trait.hpp\"\n#include <queue>\n#include <limits>\n#include\
+    \ <stack>\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct std::is_integral<__int128_t>:\
+    \ std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type\
+    \ {};\ntemplate<>\nstruct std::is_floating_point<__float128>: std::true_type {};\n\
+    \nnamespace kyopro {\n    template<KYOPRO_BASE_UINT size>\n    struct int_least\
     \ {\n    private:\n        static constexpr auto get_type() noexcept {\n     \
     \       static_assert(size <= 128, \"Integer size is too large\");\n         \
     \   if constexpr (size <= 8) return std::int_least8_t{};\n            else if\
@@ -162,29 +166,71 @@ data:
     \ = typename aggregate_element<idx, T>::type;\n\n    template<class T>\n    struct\
     \ is_agg: std::conjunction<std::is_aggregate<T>, std::negation<is_iterable<T>>>\
     \ {};\n\n    template<class T>\n    inline constexpr bool is_agg_v = is_agg<T>::value;\n\
-    } // namespace kyopro\n#line 5 \"meta/all.hpp\"\n"
-  code: '#pragma once
-
-    #include "constant.hpp"
-
-    #include "settings.hpp"
-
-    #include "trait.hpp"'
+    } // namespace kyopro\n#line 13 \"algorithm/algorithm.hpp\"\n\nnamespace kyopro::range\
+    \ {\n    inline constexpr struct {\n        template<class Container = void, class\
+    \ T, class Proj = Identity, class Compare = Less>\n        constexpr auto operator\
+    \ ()(T range, const Proj& proj = {}, const Compare& comp = {}) const {\n     \
+    \       sort(std::begin(range), std::end(range), proj, comp);\n            auto\
+    \ end = std::unique(std::begin(range), std::end(range));\n            std::conditional_t<std::is_same_v<Container,\
+    \ void>, std::unordered_map<typename std::iterator_traits<Iterator>::value_type,\
+    \ KYOPRO_BASE_INT>, Container> mem;\n            int cnt = 0;\n            for\
+    \ (auto i = std::begin(range); i != end; ++i) mem[*i] = cnt++;\n            return\
+    \ mem;\n        }\n    } compress;\n\n    inline constexpr struct {\n        template<class\
+    \ T, class Proj = Identity>\n        constexpr bool operator ()(T&& range, const\
+    \ Proj& proj = {}) const {\n            return std::all_of(std::begin(range),\
+    \ std::end(range), proj);\n        }\n    } all_of;\n\n    inline constexpr struct\
+    \ {\n        template<class T, class Proj = Identity>\n        constexpr bool\
+    \ operator ()(T&& range, const Proj& proj = {}) const {\n            return std::any_of(std::begin(range),\
+    \ std::end(range), proj);\n        }\n    } any_of;\n\n    inline constexpr struct\
+    \ {\n        template<class T, class Proj = Identity>\n        constexpr bool\
+    \ operator ()(T&& range, const Proj& proj = {}) const {\n            return std::none_of(std::begin(range),\
+    \ std::end(range), proj);\n        }\n    } none_of;\n\n    inline constexpr struct\
+    \ {\n        template<class T, class Func, class Proj = Identity>\n        constexpr\
+    \ auto operator ()(T&& range, const Func& func, const Proj& proj = {}) const {\n\
+    \            return std::for_each(std::begin(range), std::end(range), func);\n\
+    \        }\n    } for_each;\n} // namespace kyopro::range\n"
+  code: "#pragma once\n#include <algorithm>\n#include <functional>\n#include <iterator>\n\
+    #include <type_traits>\n#include <unordered_map>\n#include <utility>\n#include\
+    \ <vector>\n#include \"../function/compare.hpp\"\n#include \"../function/identity.hpp\"\
+    \n#include \"../meta/settings.hpp\"\n#include \"../meta/trait.hpp\"\n\nnamespace\
+    \ kyopro::range {\n    inline constexpr struct {\n        template<class Container\
+    \ = void, class T, class Proj = Identity, class Compare = Less>\n        constexpr\
+    \ auto operator ()(T range, const Proj& proj = {}, const Compare& comp = {}) const\
+    \ {\n            sort(std::begin(range), std::end(range), proj, comp);\n     \
+    \       auto end = std::unique(std::begin(range), std::end(range));\n        \
+    \    std::conditional_t<std::is_same_v<Container, void>, std::unordered_map<typename\
+    \ std::iterator_traits<Iterator>::value_type, KYOPRO_BASE_INT>, Container> mem;\n\
+    \            int cnt = 0;\n            for (auto i = std::begin(range); i != end;\
+    \ ++i) mem[*i] = cnt++;\n            return mem;\n        }\n    } compress;\n\
+    \n    inline constexpr struct {\n        template<class T, class Proj = Identity>\n\
+    \        constexpr bool operator ()(T&& range, const Proj& proj = {}) const {\n\
+    \            return std::all_of(std::begin(range), std::end(range), proj);\n \
+    \       }\n    } all_of;\n\n    inline constexpr struct {\n        template<class\
+    \ T, class Proj = Identity>\n        constexpr bool operator ()(T&& range, const\
+    \ Proj& proj = {}) const {\n            return std::any_of(std::begin(range),\
+    \ std::end(range), proj);\n        }\n    } any_of;\n\n    inline constexpr struct\
+    \ {\n        template<class T, class Proj = Identity>\n        constexpr bool\
+    \ operator ()(T&& range, const Proj& proj = {}) const {\n            return std::none_of(std::begin(range),\
+    \ std::end(range), proj);\n        }\n    } none_of;\n\n    inline constexpr struct\
+    \ {\n        template<class T, class Func, class Proj = Identity>\n        constexpr\
+    \ auto operator ()(T&& range, const Func& func, const Proj& proj = {}) const {\n\
+    \            return std::for_each(std::begin(range), std::end(range), func);\n\
+    \        }\n    } for_each;\n} // namespace kyopro::range"
   dependsOn:
-  - meta/constant.hpp
-  - math/power.hpp
+  - function/compare.hpp
+  - function/identity.hpp
   - meta/settings.hpp
   - meta/trait.hpp
   isVerificationFile: false
-  path: meta/all.hpp
+  path: algorithm/algorithm.hpp
   requiredBy: []
   timestamp: '2022-07-28 17:38:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: meta/all.hpp
+documentation_of: algorithm/algorithm.hpp
 layout: document
 redirect_from:
-- /library/meta/all.hpp
-- /library/meta/all.hpp.html
-title: meta/all.hpp
+- /library/algorithm/algorithm.hpp
+- /library/algorithm/algorithm.hpp.html
+title: algorithm/algorithm.hpp
 ---

@@ -6,12 +6,6 @@ data:
     title: meta/settings.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
-    path: all/all.hpp
-    title: all/all.hpp
-  - icon: ':warning:'
     path: function/all.hpp
     title: function/all.hpp
   - icon: ':heavy_check_mark:'
@@ -90,21 +84,21 @@ data:
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n    inline constexpr\
     \ struct {\n        template<class T>\n        constexpr T operator ()(T a, KYOPRO_BASE_UINT\
-    \ n, T init = 1) const noexcept {\n        while (n > 0) {\n            if (n\
-    \ & 1) init *= a;\n            a *= a;\n            n >>= 1;\n        }\n    \
-    \    return init;\n        }\n    } power;\n} // namespace kyopro\n"
+    \ n, T init = 1) const noexcept {\n            while (n > 0) {\n             \
+    \   if (n & 1) init *= a;\n                a *= a;\n                n >>= 1;\n\
+    \            }\n            return init;\n        }\n    } power;\n} // namespace\
+    \ kyopro\n"
   code: "#pragma once\n#include \"../meta/settings.hpp\"\n\nnamespace kyopro {\n \
     \   inline constexpr struct {\n        template<class T>\n        constexpr T\
-    \ operator ()(T a, KYOPRO_BASE_UINT n, T init = 1) const noexcept {\n        while\
-    \ (n > 0) {\n            if (n & 1) init *= a;\n            a *= a;\n        \
-    \    n >>= 1;\n        }\n        return init;\n        }\n    } power;\n} //\
-    \ namespace kyopro"
+    \ operator ()(T a, KYOPRO_BASE_UINT n, T init = 1) const noexcept {\n        \
+    \    while (n > 0) {\n                if (n & 1) init *= a;\n                a\
+    \ *= a;\n                n >>= 1;\n            }\n            return init;\n \
+    \       }\n    } power;\n} // namespace kyopro"
   dependsOn:
   - meta/settings.hpp
   isVerificationFile: false
   path: math/power.hpp
   requiredBy:
-  - all/all.hpp
   - system/all.hpp
   - system/in.hpp
   - math/ModInt.hpp
@@ -114,7 +108,6 @@ data:
   - math/DynamicModInt.hpp
   - structure/all.hpp
   - structure/FenwickTree.hpp
-  - all.hpp
   - function/all.hpp
   - function/monoid.hpp
   - template/macro.hpp
@@ -122,7 +115,7 @@ data:
   - template/alias.hpp
   - meta/all.hpp
   - meta/constant.hpp
-  timestamp: '2022-07-25 23:25:51+09:00'
+  timestamp: '2022-07-28 17:38:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp

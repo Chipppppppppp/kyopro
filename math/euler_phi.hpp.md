@@ -6,12 +6,6 @@ data:
     title: meta/settings.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
-    path: all/all.hpp
-    title: all/all.hpp
-  - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
   _extendedVerifiedWith: []
@@ -30,31 +24,31 @@ data:
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 4 \"math/euler_phi.hpp\"\n\nnamespace kyopro {\n    inline constexpr\
     \ struct {\n        constexpr KYOPRO_BASE_UINT operator ()(KYOPRO_BASE_UINT n)\
-    \ const noexcept {\n        std::uint_fast64_t res = n;\n        if ((n & 1) ==\
-    \ 0) {\n            res -= res >> 1;\n            n >>= 1;\n            while\
-    \ ((n & 1) == 0) n >>= 1;\n        }\n        for (std::uint_fast64_t i = 3; i\
-    \ * i <= n; i += 2) {\n            if (n % i == 0) {\n            res -= res /\
-    \ i;\n            n /= i;\n            while (n % i == 0) n /= i;\n          \
-    \  }\n        }\n        if (n != 1) res -= res / n;\n        return res;\n  \
-    \      }\n    } euler_phi;\n} // namespace kyopro\n"
+    \ const noexcept {\n            std::uint_fast64_t res = n;\n            if ((n\
+    \ & 1) == 0) {\n                res -= res >> 1;\n                n >>= 1;\n \
+    \               while ((n & 1) == 0) n >>= 1;\n            }\n            for\
+    \ (std::uint_fast64_t i = 3; i * i <= n; i += 2) {\n                if (n % i\
+    \ == 0) {\n                res -= res / i;\n                n /= i;\n        \
+    \        while (n % i == 0) n /= i;\n                }\n            }\n      \
+    \      if (n != 1) res -= res / n;\n            return res;\n        }\n    }\
+    \ euler_phi;\n} // namespace kyopro\n"
   code: "#pragma once\n#include <cstdint>\n#include \"../meta/settings.hpp\"\n\nnamespace\
     \ kyopro {\n    inline constexpr struct {\n        constexpr KYOPRO_BASE_UINT\
-    \ operator ()(KYOPRO_BASE_UINT n) const noexcept {\n        std::uint_fast64_t\
-    \ res = n;\n        if ((n & 1) == 0) {\n            res -= res >> 1;\n      \
-    \      n >>= 1;\n            while ((n & 1) == 0) n >>= 1;\n        }\n      \
-    \  for (std::uint_fast64_t i = 3; i * i <= n; i += 2) {\n            if (n % i\
-    \ == 0) {\n            res -= res / i;\n            n /= i;\n            while\
-    \ (n % i == 0) n /= i;\n            }\n        }\n        if (n != 1) res -= res\
-    \ / n;\n        return res;\n        }\n    } euler_phi;\n} // namespace kyopro"
+    \ operator ()(KYOPRO_BASE_UINT n) const noexcept {\n            std::uint_fast64_t\
+    \ res = n;\n            if ((n & 1) == 0) {\n                res -= res >> 1;\n\
+    \                n >>= 1;\n                while ((n & 1) == 0) n >>= 1;\n   \
+    \         }\n            for (std::uint_fast64_t i = 3; i * i <= n; i += 2) {\n\
+    \                if (n % i == 0) {\n                res -= res / i;\n        \
+    \        n /= i;\n                while (n % i == 0) n /= i;\n               \
+    \ }\n            }\n            if (n != 1) res -= res / n;\n            return\
+    \ res;\n        }\n    } euler_phi;\n} // namespace kyopro"
   dependsOn:
   - meta/settings.hpp
   isVerificationFile: false
   path: math/euler_phi.hpp
   requiredBy:
-  - all/all.hpp
   - math/all.hpp
-  - all.hpp
-  timestamp: '2022-07-25 23:25:51+09:00'
+  timestamp: '2022-07-28 17:38:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/euler_phi.hpp

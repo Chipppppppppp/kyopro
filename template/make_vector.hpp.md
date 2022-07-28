@@ -6,9 +6,6 @@ data:
     title: meta/settings.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
     path: template/all.hpp
     title: template/all.hpp
   _extendedVerifiedWith: []
@@ -29,32 +26,31 @@ data:
     #endif\n#line 6 \"template/make_vector.hpp\"\n\nnamespace kyopro {\n    inline\
     \ constexpr struct {\n        template<KYOPRO_BASE_UINT idx = 0, KYOPRO_BASE_UINT\
     \ n, class T>\n        auto operator ()(const KYOPRO_BASE_UINT (&d)[n], T&& init)\
-    \ noexcept {\n        if constexpr (idx < n) return std::vector(d[idx], operator\
-    \ ()<idx + 1>(d, std::forward<T>(init)));\n        else return init;\n       \
-    \ }\n\n        template<class T, KYOPRO_BASE_UINT idx = 0, KYOPRO_BASE_UINT n>\n\
-    \        auto operator ()(const KYOPRO_BASE_UINT (&d)[n], const T& init = T())\
-    \ noexcept {\n        if constexpr (idx < n) return std::vector(d[idx], operator\
-    \ ()<idx + 1>(d, init));\n        else return init;\n        }\n    } make_vector;\n\
-    } // namespace kyopro\n"
+    \ noexcept {\n            if constexpr (idx < n) return std::vector(d[idx], operator\
+    \ ()<idx + 1>(d, std::forward<T>(init)));\n            else return init;\n   \
+    \     }\n\n        template<class T, KYOPRO_BASE_UINT idx = 0, KYOPRO_BASE_UINT\
+    \ n>\n        auto operator ()(const KYOPRO_BASE_UINT (&d)[n], const T& init =\
+    \ T()) noexcept {\n            if constexpr (idx < n) return std::vector(d[idx],\
+    \ operator ()<idx + 1>(d, init));\n            else return init;\n        }\n\
+    \    } make_vector;\n} // namespace kyopro\n"
   code: "#pragma once\n#include <cstdint>\n#include <utility>\n#include <vector>\n\
     #include \"../meta/settings.hpp\"\n\nnamespace kyopro {\n    inline constexpr\
     \ struct {\n        template<KYOPRO_BASE_UINT idx = 0, KYOPRO_BASE_UINT n, class\
     \ T>\n        auto operator ()(const KYOPRO_BASE_UINT (&d)[n], T&& init) noexcept\
-    \ {\n        if constexpr (idx < n) return std::vector(d[idx], operator ()<idx\
-    \ + 1>(d, std::forward<T>(init)));\n        else return init;\n        }\n\n \
-    \       template<class T, KYOPRO_BASE_UINT idx = 0, KYOPRO_BASE_UINT n>\n    \
-    \    auto operator ()(const KYOPRO_BASE_UINT (&d)[n], const T& init = T()) noexcept\
-    \ {\n        if constexpr (idx < n) return std::vector(d[idx], operator ()<idx\
-    \ + 1>(d, init));\n        else return init;\n        }\n    } make_vector;\n\
+    \ {\n            if constexpr (idx < n) return std::vector(d[idx], operator ()<idx\
+    \ + 1>(d, std::forward<T>(init)));\n            else return init;\n        }\n\
+    \n        template<class T, KYOPRO_BASE_UINT idx = 0, KYOPRO_BASE_UINT n>\n  \
+    \      auto operator ()(const KYOPRO_BASE_UINT (&d)[n], const T& init = T()) noexcept\
+    \ {\n            if constexpr (idx < n) return std::vector(d[idx], operator ()<idx\
+    \ + 1>(d, init));\n            else return init;\n        }\n    } make_vector;\n\
     } // namespace kyopro"
   dependsOn:
   - meta/settings.hpp
   isVerificationFile: false
   path: template/make_vector.hpp
   requiredBy:
-  - all.hpp
   - template/all.hpp
-  timestamp: '2022-07-25 23:25:51+09:00'
+  timestamp: '2022-07-28 17:38:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/make_vector.hpp

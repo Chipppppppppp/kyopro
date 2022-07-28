@@ -7,14 +7,14 @@ data:
       path: algorithm/Hash.hpp
       title: algorithm/Hash.hpp
     - icon: ':warning:'
+      path: algorithm/algorithm.hpp
+      title: algorithm/algorithm.hpp
+    - icon: ':warning:'
       path: algorithm/all.hpp
       title: algorithm/all.hpp
     - icon: ':heavy_check_mark:'
       path: algorithm/bit.hpp
       title: algorithm/bit.hpp
-    - icon: ':warning:'
-      path: algorithm/compress.hpp
-      title: algorithm/compress.hpp
   - name: all
     pages:
     - icon: ':warning:'
@@ -33,9 +33,23 @@ data:
     - icon: ':warning:'
       path: function/all.hpp
       title: function/all.hpp
+    - icon: ':warning:'
+      path: function/compare.hpp
+      title: function/compare.hpp
+    - icon: ':warning:'
+      path: function/identity.hpp
+      title: function/identity.hpp
     - icon: ':heavy_check_mark:'
       path: function/monoid.hpp
       title: function/monoid.hpp
+  - name: iterator
+    pages:
+    - icon: ':warning:'
+      path: iterator/imap.hpp
+      title: iterator/imap.hpp
+    - icon: ':warning:'
+      path: iterator/iterator_base.hpp
+      title: iterator/iterator_base.hpp
   - name: math
     pages:
     - icon: ':heavy_check_mark:'

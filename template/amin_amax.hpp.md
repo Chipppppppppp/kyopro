@@ -3,9 +3,6 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
     path: template/all.hpp
     title: template/all.hpp
   _extendedVerifiedWith: []
@@ -16,23 +13,23 @@ data:
     links: []
   bundledCode: "#line 2 \"template/amin_amax.hpp\"\n\nnamespace kyopro {\n    template<class\
     \ T, class U = T>\n    constexpr bool amin(T& a, const U& b) noexcept {\n    \
-    \    if (b < a) {\n        a = b;\n        return true;\n        }\n        return\
-    \ false;\n    }\n\n    template<class T, class U = T>\n    constexpr bool amax(T&\
-    \ a, const U& b) noexcept {\n        if (a < b) {\n        a = b;\n        return\
-    \ true;\n        }\n        return false;\n    }\n} // namespace kyopro\n"
+    \    if (b < a) {\n            a = b;\n            return true;\n        }\n \
+    \       return false;\n    }\n\n    template<class T, class U = T>\n    constexpr\
+    \ bool amax(T& a, const U& b) noexcept {\n        if (a < b) {\n            a\
+    \ = b;\n            return true;\n        }\n        return false;\n    }\n} //\
+    \ namespace kyopro\n"
   code: "#pragma once\n\nnamespace kyopro {\n    template<class T, class U = T>\n\
     \    constexpr bool amin(T& a, const U& b) noexcept {\n        if (b < a) {\n\
-    \        a = b;\n        return true;\n        }\n        return false;\n    }\n\
-    \n    template<class T, class U = T>\n    constexpr bool amax(T& a, const U& b)\
-    \ noexcept {\n        if (a < b) {\n        a = b;\n        return true;\n   \
-    \     }\n        return false;\n    }\n} // namespace kyopro"
+    \            a = b;\n            return true;\n        }\n        return false;\n\
+    \    }\n\n    template<class T, class U = T>\n    constexpr bool amax(T& a, const\
+    \ U& b) noexcept {\n        if (a < b) {\n            a = b;\n            return\
+    \ true;\n        }\n        return false;\n    }\n} // namespace kyopro"
   dependsOn: []
   isVerificationFile: false
   path: template/amin_amax.hpp
   requiredBy:
-  - all.hpp
   - template/all.hpp
-  timestamp: '2022-07-25 23:25:51+09:00'
+  timestamp: '2022-07-28 17:38:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/amin_amax.hpp

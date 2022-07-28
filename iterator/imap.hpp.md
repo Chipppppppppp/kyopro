@@ -1,12 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: math/power.hpp
-    title: math/power.hpp
-  - icon: ':heavy_check_mark:'
-    path: meta/constant.hpp
-    title: meta/constant.hpp
+  - icon: ':warning:'
+    path: iterator/iterator_base.hpp
+    title: iterator/iterator_base.hpp
   - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
@@ -20,35 +17,63 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"meta/constant.hpp\"\n#include <array>\n#include <limits>\n\
-    #include <utility>\n#line 2 \"meta/settings.hpp\"\n#include <cstdint>\n\n#ifndef\
-    \ KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n\
-    #define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n\
-    #define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define\
-    \ KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(998244353)\n#endif\n\n#ifndef\
-    \ KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
+  bundledCode: "#line 2 \"iterator/imap.hpp\"\n#include <cstddef>\n#include <iterator>\n\
+    #include <type_traits>\n#include <utility>\n#line 4 \"iterator/iterator_base.hpp\"\
+    \n\nnamespace kyopro {\n    template<class, class, class, class>\n    struct IteratorBase;\n\
+    \n    template<class Derived, class ValueType, class Dereference>\n    struct\
+    \ IteratorBase<Derived, ValueType, Dereference, std::forward_iterator_tag> {\n\
+    \        using value_type = ValueType;\n        using pointer = ValueType*;\n\
+    \        using reference = ValueType&;\n        using difference_type = std::ptrdiff_t;\n\
+    \        using iterator_category = std::forward_iterator_tag;\n\n        virtual\
+    \ constexpr reference operator *() const noexcept;\n        virtual constexpr\
+    \ Derived& operator ++() noexcept;\n        virtual constexpr bool operator ==(const\
+    \ Derived&) const noexcept;\n\n        constexpr Derived operator ++(int) noexcept\
+    \ {\n            Derived before = *this;\n            ++*this;\n            return\
+    \ before;\n        }\n        constexpr Dereference operator !=(const Derived&\
+    \ rhs) const noexcept {\n            return !(*this == rhs);\n        }\n    };\n\
+    \n    template<class Derived, class ValueType, class Dereference>\n    struct\
+    \ IteratorBase<Derived, ValueType, Dereference, std::bidirectional_iterator_tag>:\
+    \ IteratorBase<Derived, ValueType, Dereference, std::forward_iterator_tag> {\n\
+    \        using iterator_category = std::bidirectional_iterator_tag;\n\n      \
+    \  virtual constexpr Derived& operator --() noexcept;\n\n        constexpr Derived\
+    \ operator --(int) noexcept {\n            Derived before = *this;\n         \
+    \   --*this;\n            return before;\n        }\n    };\n\n    template<class\
+    \ Derived, class ValueType, class Dereference>\n    struct IteratorBase<Derived,\
+    \ ValueType, Dereference, std::random_access_iterator_tag>: IteratorBase<Derived,\
+    \ ValueType, Dereference, std::bidirectional_iterator_tag> {\n        using iterator_category\
+    \ = std::random_access_iterator_tag;\n\n        virtual constexpr Derived operator\
+    \ +(std::ptrdiff_t rhs) const noexcept;\n        virtual constexpr std::ptrdiff_t\
+    \ operator -(const Derived&) const noexcept;\n\n    private:\n        virtual\
+    \ constexpr int compare(const Derived&) const noexcept;\n\n    public:\n\n   \
+    \     constexpr Derived& operator +=(std::ptrdiff_t rhs) noexcept {\n        \
+    \    return *this = *this + rhs;\n        }\n        constexpr Derived operator\
+    \ -(std::ptrdiff_t rhs) const noexcept {\n            return *this + -rhs;\n \
+    \       }\n        constexpr Derived& operator -=(std::ptrdiff_t rhs) noexcept\
+    \ {\n            return *this = *this - rhs;\n        }\n        virtual constexpr\
+    \ bool operator ==(const Derived& rhs) const noexcept {\n            return compare(rhs)\
+    \ == 0;\n        }\n        virtual constexpr bool operator !=(const Derived&\
+    \ rhs) const noexcept {\n            return compare(rhs) != 0;\n        }\n  \
+    \      virtual constexpr bool operator <(const Derived& rhs) const noexcept {\n\
+    \            return compare(rhs) < 0;\n        }\n        virtual constexpr bool\
+    \ operator <=(const Derived& rhs) const noexcept {\n            return compare(rhs)\
+    \ <= 0;\n        }\n        virtual constexpr bool operator >(const Derived& rhs)\
+    \ const noexcept {\n            return compare(rhs) > 0;\n        }\n        virtual\
+    \ constexpr bool operator >=(const Derived& rhs) const noexcept {\n          \
+    \  return compare(rhs) >= 0;\n        }\n        virtual constexpr bool operator\
+    \ [](std::size_t idx) const noexcept {\n            return *(*this + idx);\n \
+    \       }\n    };\n} // namespace kyopro\n#line 3 \"meta/trait.hpp\"\n#include\
+    \ <queue>\n#include <limits>\n#include <stack>\n#line 2 \"meta/settings.hpp\"\n\
+    #include <cstdint>\n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n\
+    #endif\n\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\
+    \n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef\
+    \ KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(998244353)\n\
+    #endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
-    #endif\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n    inline constexpr\
-    \ struct {\n        template<class T>\n        constexpr T operator ()(T a, KYOPRO_BASE_UINT\
-    \ n, T init = 1) const noexcept {\n            while (n > 0) {\n             \
-    \   if (n & 1) init *= a;\n                a *= a;\n                n >>= 1;\n\
-    \            }\n            return init;\n        }\n    } power;\n} // namespace\
-    \ kyopro\n#line 7 \"meta/constant.hpp\"\n\nnamespace kyopro {\n    template<class\
-    \ T>\n    inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\n    inline constexpr KYOPRO_BASE_INT\
-    \ mod = MOD<KYOPRO_BASE_INT>;\n\n    template<class T>\n    inline constexpr T\
-    \ INF = std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\n    inline constexpr\
-    \ KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\n    template<class T, KYOPRO_BASE_UINT\
-    \ decimal_precision = KYOPRO_DECIMAL_PRECISION>\n    inline constexpr KYOPRO_BASE_FLOAT\
-    \ EPS = static_cast<T>(1) / power(10ULL, decimal_precision);\n    inline constexpr\
-    \ KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\n    template<class T>\n \
-    \   inline constexpr T PI = 3.14159265358979323846;\n    inline constexpr KYOPRO_BASE_FLOAT\
-    \ pi = PI<KYOPRO_BASE_FLOAT>;\n} // namespace kyopro\n#line 2 \"meta/trait.hpp\"\
-    \n#include <iterator>\n#include <queue>\n#line 5 \"meta/trait.hpp\"\n#include\
-    \ <stack>\n#include <type_traits>\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\n\
-    struct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
-    \ std::true_type {};\ntemplate<>\nstruct std::is_floating_point<__float128>: std::true_type\
-    \ {};\n\nnamespace kyopro {\n    template<KYOPRO_BASE_UINT size>\n    struct int_least\
+    #endif\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct std::is_integral<__int128_t>:\
+    \ std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type\
+    \ {};\ntemplate<>\nstruct std::is_floating_point<__float128>: std::true_type {};\n\
+    \nnamespace kyopro {\n    template<KYOPRO_BASE_UINT size>\n    struct int_least\
     \ {\n    private:\n        static constexpr auto get_type() noexcept {\n     \
     \       static_assert(size <= 128, \"Integer size is too large\");\n         \
     \   if constexpr (size <= 8) return std::int_least8_t{};\n            else if\
@@ -162,29 +187,55 @@ data:
     \ = typename aggregate_element<idx, T>::type;\n\n    template<class T>\n    struct\
     \ is_agg: std::conjunction<std::is_aggregate<T>, std::negation<is_iterable<T>>>\
     \ {};\n\n    template<class T>\n    inline constexpr bool is_agg_v = is_agg<T>::value;\n\
-    } // namespace kyopro\n#line 5 \"meta/all.hpp\"\n"
-  code: '#pragma once
-
-    #include "constant.hpp"
-
-    #include "settings.hpp"
-
-    #include "trait.hpp"'
+    } // namespace kyopro\n#line 8 \"iterator/imap.hpp\"\n\nnamespace kyopro {\n \
+    \   template<class Func, class Range>\n    struct imap {\n        using value_type\
+    \ = std::decay_t<decltype(func(std::declval<iterable_value_t<Range>>()))>;\n \
+    \       using size_type = std::size_t;\n        using difference_type = std::ptrdiff_t;\n\
+    \        using reference = value_type&;\n        using const_reference = const\
+    \ value_type&;\n        using pointer = value_type*;\n        using const_pointer\
+    \ = const value_type*;\n\n    private:\n        Func func;\n        Range range;\n\
+    \n        template<class F, class R>\n        imap(F&& func, R&& range): func(std::forward<F>(func)),\
+    \ range(std::forward<R>(range)) {}\n\n    public:\n        using BaseIterator\
+    \ = std::decay_t<decltype(std::begin(std::declval<Range>()))>;\n\n        struct\
+    \ iterator: BaseIterator {\n        private:\n            Func func;\n\n     \
+    \   public:\n            iterator() noexcept = default;\n            template<class\
+    \ F>\n            iterator(F&& func, BaseIterator itr) noexcept: func(std::forward<F>(func)),\
+    \ itr(itr) {}\n\n            constexpr decltype(auto) operator *() const noexcept\
+    \ {\n                return func(*itr);\n            }\n        };\n    };\n\n\
+    \    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>, std::decay_t<R>>;\n\
+    }\n"
+  code: "#pragma once\n#include <cstddef>\n#include <iterator>\n#include <type_traits>\n\
+    #include <utility>\n#include \"iterator_base.hpp\"\n#include \"../meta/trait.hpp\"\
+    \n\nnamespace kyopro {\n    template<class Func, class Range>\n    struct imap\
+    \ {\n        using value_type = std::decay_t<decltype(func(std::declval<iterable_value_t<Range>>()))>;\n\
+    \        using size_type = std::size_t;\n        using difference_type = std::ptrdiff_t;\n\
+    \        using reference = value_type&;\n        using const_reference = const\
+    \ value_type&;\n        using pointer = value_type*;\n        using const_pointer\
+    \ = const value_type*;\n\n    private:\n        Func func;\n        Range range;\n\
+    \n        template<class F, class R>\n        imap(F&& func, R&& range): func(std::forward<F>(func)),\
+    \ range(std::forward<R>(range)) {}\n\n    public:\n        using BaseIterator\
+    \ = std::decay_t<decltype(std::begin(std::declval<Range>()))>;\n\n        struct\
+    \ iterator: BaseIterator {\n        private:\n            Func func;\n\n     \
+    \   public:\n            iterator() noexcept = default;\n            template<class\
+    \ F>\n            iterator(F&& func, BaseIterator itr) noexcept: func(std::forward<F>(func)),\
+    \ itr(itr) {}\n\n            constexpr decltype(auto) operator *() const noexcept\
+    \ {\n                return func(*itr);\n            }\n        };\n    };\n\n\
+    \    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>, std::decay_t<R>>;\n\
+    }"
   dependsOn:
-  - meta/constant.hpp
-  - math/power.hpp
-  - meta/settings.hpp
+  - iterator/iterator_base.hpp
   - meta/trait.hpp
+  - meta/settings.hpp
   isVerificationFile: false
-  path: meta/all.hpp
+  path: iterator/imap.hpp
   requiredBy: []
   timestamp: '2022-07-28 17:38:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: meta/all.hpp
+documentation_of: iterator/imap.hpp
 layout: document
 redirect_from:
-- /library/meta/all.hpp
-- /library/meta/all.hpp.html
-title: meta/all.hpp
+- /library/iterator/imap.hpp
+- /library/iterator/imap.hpp.html
+title: iterator/imap.hpp
 ---

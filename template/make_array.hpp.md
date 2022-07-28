@@ -6,9 +6,6 @@ data:
     title: meta/settings.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
     path: template/all.hpp
     title: template/all.hpp
   _extendedVerifiedWith: []
@@ -27,28 +24,27 @@ data:
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 4 \"template/make_array.hpp\"\n\nnamespace kyopro {\n    inline\
     \ constexpr struct {\n        template<class T>\n        constexpr auto operator\
-    \ ()(const T& init = T()) noexcept {\n        return init;\n        }\n\n    \
-    \    template<class T, KYOPRO_BASE_UINT length, KYOPRO_BASE_UINT... lengths>\n\
-    \        constexpr auto operator ()(const T& init = T()) noexcept {\n        auto\
-    \ elm = operator ()<T, lengths...>(init);\n        std::array<decltype(elm), length>\
-    \ res;\n        for (auto& i: res) i = elm;\n        return res;\n        }\n\
-    \    } make_array;\n} // namespace kyopro\n"
+    \ ()(const T& init = T()) noexcept {\n            return init;\n        }\n\n\
+    \        template<class T, KYOPRO_BASE_UINT length, KYOPRO_BASE_UINT... lengths>\n\
+    \        constexpr auto operator ()(const T& init = T()) noexcept {\n        \
+    \    auto elm = operator ()<T, lengths...>(init);\n            std::array<decltype(elm),\
+    \ length> res;\n            for (auto& i: res) i = elm;\n            return res;\n\
+    \        }\n    } make_array;\n} // namespace kyopro\n"
   code: "#pragma once\n#include <array>\n#include \"../meta/settings.hpp\"\n\nnamespace\
     \ kyopro {\n    inline constexpr struct {\n        template<class T>\n       \
-    \ constexpr auto operator ()(const T& init = T()) noexcept {\n        return init;\n\
-    \        }\n\n        template<class T, KYOPRO_BASE_UINT length, KYOPRO_BASE_UINT...\
+    \ constexpr auto operator ()(const T& init = T()) noexcept {\n            return\
+    \ init;\n        }\n\n        template<class T, KYOPRO_BASE_UINT length, KYOPRO_BASE_UINT...\
     \ lengths>\n        constexpr auto operator ()(const T& init = T()) noexcept {\n\
-    \        auto elm = operator ()<T, lengths...>(init);\n        std::array<decltype(elm),\
-    \ length> res;\n        for (auto& i: res) i = elm;\n        return res;\n   \
-    \     }\n    } make_array;\n} // namespace kyopro"
+    \            auto elm = operator ()<T, lengths...>(init);\n            std::array<decltype(elm),\
+    \ length> res;\n            for (auto& i: res) i = elm;\n            return res;\n\
+    \        }\n    } make_array;\n} // namespace kyopro"
   dependsOn:
   - meta/settings.hpp
   isVerificationFile: false
   path: template/make_array.hpp
   requiredBy:
-  - all.hpp
   - template/all.hpp
-  timestamp: '2022-07-25 23:25:51+09:00'
+  timestamp: '2022-07-28 17:38:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/make_array.hpp
