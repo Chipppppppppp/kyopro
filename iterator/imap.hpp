@@ -52,12 +52,12 @@ namespace kyopro {
             return iterator(func, range.end());
         }
 
-        constexpr iterator rbegin() {
-            return reverse_iterator(func, range.rbegin());
+        constexpr reverse_iterator rbegin() {
+            return reverse_iterator(end());
         }
 
-        constexpr iterator rend() {
-            return reverse_iterator(func, range.rend());
+        constexpr reverse_iterator rend() {
+            return reverse_iterator(begin());
         }
     };
 
