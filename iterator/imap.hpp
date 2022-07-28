@@ -38,7 +38,7 @@ namespace kyopro {
             iterator(F&& func, BaseIterator itr) noexcept: func(std::forward<F>(func)), BaseIterator(itr) {}
 
             constexpr decltype(auto) operator *() const noexcept {
-                return func(**this);
+                return func(BaseIterator::operator *());
             }
         };
 
