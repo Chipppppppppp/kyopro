@@ -198,39 +198,51 @@ data:
     \ {};\n\n    template<class T>\n    inline constexpr bool is_agg_v = is_agg<T>::value;\n\
     } // namespace kyopro\n#line 8 \"iterator/imap.hpp\"\n\nnamespace kyopro {\n \
     \   template<class Func, class Range>\n    struct imap {\n        using value_type\
-    \ = std::decay_t<decltype(func(std::declval<iterable_value_t<Range>>()))>;\n \
-    \       using size_type = std::size_t;\n        using difference_type = std::ptrdiff_t;\n\
-    \        using reference = value_type&;\n        using const_reference = const\
-    \ value_type&;\n        using pointer = value_type*;\n        using const_pointer\
-    \ = const value_type*;\n\n    private:\n        Func func;\n        Range range;\n\
-    \n        template<class F, class R>\n        imap(F&& func, R&& range): func(std::forward<F>(func)),\
-    \ range(std::forward<R>(range)) {}\n\n    public:\n        using BaseIterator\
-    \ = std::decay_t<decltype(std::begin(std::declval<Range>()))>;\n\n        struct\
-    \ iterator: BaseIterator {\n        private:\n            Func func;\n\n     \
-    \   public:\n            iterator() noexcept = default;\n            template<class\
-    \ F>\n            iterator(F&& func, BaseIterator itr) noexcept: func(std::forward<F>(func)),\
-    \ BaseIterator(itr) {}\n\n            constexpr decltype(auto) operator *() const\
-    \ noexcept {\n                return func(**this);\n            }\n        };\n\
-    \    };\n\n    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>,\
-    \ std::decay_t<R>>;\n}\n"
-  code: "#pragma once\n#include <cstddef>\n#include <iterator>\n#include <type_traits>\n\
-    #include <utility>\n#include \"iterator_base.hpp\"\n#include \"../meta/trait.hpp\"\
-    \n\nnamespace kyopro {\n    template<class Func, class Range>\n    struct imap\
-    \ {\n        using value_type = std::decay_t<decltype(func(std::declval<iterable_value_t<Range>>()))>;\n\
+    \ = std::decay_t<decltype(std::declval<Func>()(std::declval<iterable_value_t<Range>>()))>;\n\
     \        using size_type = std::size_t;\n        using difference_type = std::ptrdiff_t;\n\
     \        using reference = value_type&;\n        using const_reference = const\
     \ value_type&;\n        using pointer = value_type*;\n        using const_pointer\
-    \ = const value_type*;\n\n    private:\n        Func func;\n        Range range;\n\
-    \n        template<class F, class R>\n        imap(F&& func, R&& range): func(std::forward<F>(func)),\
-    \ range(std::forward<R>(range)) {}\n\n    public:\n        using BaseIterator\
-    \ = std::decay_t<decltype(std::begin(std::declval<Range>()))>;\n\n        struct\
-    \ iterator: BaseIterator {\n        private:\n            Func func;\n\n     \
-    \   public:\n            iterator() noexcept = default;\n            template<class\
-    \ F>\n            iterator(F&& func, BaseIterator itr) noexcept: func(std::forward<F>(func)),\
-    \ BaseIterator(itr) {}\n\n            constexpr decltype(auto) operator *() const\
-    \ noexcept {\n                return func(**this);\n            }\n        };\n\
-    \    };\n\n    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>,\
-    \ std::decay_t<R>>;\n}"
+    \ = const value_type*;\n\n    private:\n        using BaseIterator = std::decay_t<decltype(std::begin(std::declval<Range>()))>;\n\
+    \n        Func func;\n        Range range;\n\n    public:\n\n        template<class\
+    \ F, class R>\n        imap(F&& func, R&& range): func(std::forward<F>(func)),\
+    \ range(std::forward<R>(range)) {}\n\n        struct iterator: BaseIterator {\n\
+    \        private:\n            Func func;\n\n        public:\n            iterator()\
+    \ noexcept = default;\n            template<class F>\n            iterator(F&&\
+    \ func, BaseIterator itr) noexcept: func(std::forward<F>(func)), BaseIterator(itr)\
+    \ {}\n\n            constexpr decltype(auto) operator *() const noexcept {\n \
+    \               return func(**this);\n            }\n        };\n\n        using\
+    \ reverse_iterator = std::reverse_iterator<iterator>;\n\n        constexpr iterator\
+    \ begin() {\n            return iterator(func, range.begin());\n        }\n\n\
+    \        constexpr iterator end() {\n            return iterator(func, range.end());\n\
+    \        }\n\n        constexpr iterator rbegin() {\n            return reverse_iterator(func,\
+    \ range.rbegin());\n        }\n\n        constexpr iterator rend() {\n       \
+    \     return reverse_iterator(func, range.rend());\n        }\n    };\n\n    template<class\
+    \ F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>, std::decay_t<R>>;\n\
+    }\n"
+  code: "#pragma once\n#include <cstddef>\n#include <iterator>\n#include <type_traits>\n\
+    #include <utility>\n#include \"iterator_base.hpp\"\n#include \"../meta/trait.hpp\"\
+    \n\nnamespace kyopro {\n    template<class Func, class Range>\n    struct imap\
+    \ {\n        using value_type = std::decay_t<decltype(std::declval<Func>()(std::declval<iterable_value_t<Range>>()))>;\n\
+    \        using size_type = std::size_t;\n        using difference_type = std::ptrdiff_t;\n\
+    \        using reference = value_type&;\n        using const_reference = const\
+    \ value_type&;\n        using pointer = value_type*;\n        using const_pointer\
+    \ = const value_type*;\n\n    private:\n        using BaseIterator = std::decay_t<decltype(std::begin(std::declval<Range>()))>;\n\
+    \n        Func func;\n        Range range;\n\n    public:\n\n        template<class\
+    \ F, class R>\n        imap(F&& func, R&& range): func(std::forward<F>(func)),\
+    \ range(std::forward<R>(range)) {}\n\n        struct iterator: BaseIterator {\n\
+    \        private:\n            Func func;\n\n        public:\n            iterator()\
+    \ noexcept = default;\n            template<class F>\n            iterator(F&&\
+    \ func, BaseIterator itr) noexcept: func(std::forward<F>(func)), BaseIterator(itr)\
+    \ {}\n\n            constexpr decltype(auto) operator *() const noexcept {\n \
+    \               return func(**this);\n            }\n        };\n\n        using\
+    \ reverse_iterator = std::reverse_iterator<iterator>;\n\n        constexpr iterator\
+    \ begin() {\n            return iterator(func, range.begin());\n        }\n\n\
+    \        constexpr iterator end() {\n            return iterator(func, range.end());\n\
+    \        }\n\n        constexpr iterator rbegin() {\n            return reverse_iterator(func,\
+    \ range.rbegin());\n        }\n\n        constexpr iterator rend() {\n       \
+    \     return reverse_iterator(func, range.rend());\n        }\n    };\n\n    template<class\
+    \ F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>, std::decay_t<R>>;\n\
+    }"
   dependsOn:
   - iterator/iterator_base.hpp
   - meta/trait.hpp
@@ -241,7 +253,7 @@ data:
   - all/all.hpp
   - iterator/all.hpp
   - all.hpp
-  timestamp: '2022-07-28 18:04:44+09:00'
+  timestamp: '2022-07-28 18:29:30+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: iterator/imap.hpp
