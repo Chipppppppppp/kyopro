@@ -34,10 +34,10 @@ namespace kyopro {
         public:
             iterator() noexcept = default;
             template<class F>
-            iterator(F&& func, BaseIterator itr) noexcept: func(std::forward<F>(func)), itr(itr) {}
+            iterator(F&& func, BaseIterator itr) noexcept: func(std::forward<F>(func)), BaseIterator(itr) {}
 
             constexpr decltype(auto) operator *() const noexcept {
-                return func(*itr);
+                return func(**this);
             }
         };
     };
