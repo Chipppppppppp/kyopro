@@ -25,7 +25,7 @@ namespace kyopro {
 
         template<std::size_t idx, class T, std::void_t<decltype(std::get<idx>(std::declval<std::decay_t<T>>()))>* = nullptr>
         constexpr decltype(auto) access_impl(T&& aggregate, bool) noexcept {
-        return std::get<idx>(std::forward<T>(aggregate));
+            return std::get<idx>(std::forward<T>(aggregate));
         }
 
         #undef DEFINE_ACCESS

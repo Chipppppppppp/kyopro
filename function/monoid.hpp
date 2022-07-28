@@ -10,15 +10,15 @@ namespace kyopro {
         using value_type = T;
 
         constexpr T id() const noexcept {
-        return _id;
+            return _id;
         }
 
         constexpr T operator ()(T a, T b) const noexcept {
-        return a + b;
+            return a + b;
         }
 
         constexpr T inverse(T a) const noexcept {
-        return -a;
+            return -a;
         }
     };
 
@@ -28,16 +28,16 @@ namespace kyopro {
         using value_type = T;
 
         constexpr T id() const noexcept {
-        return _id;
+            return _id;
         }
 
         constexpr T operator ()(T a, T b) const noexcept {
-        return a * b;
+            return a * b;
         }
 
         constexpr T inverse(T a) const noexcept {
         static_assert(!std::is_integral_v<T>);
-        return 1 / a;
+            return 1 / a;
         }
     };
 
@@ -47,11 +47,11 @@ namespace kyopro {
         using value_type = T;
 
         constexpr T id() const noexcept {
-        return _id;
+            return _id;
         }
 
         constexpr T operator ()(T a, T b) const noexcept {
-        return a < b ? a : b;
+            return a < b ? a : b;
         }
     };
 
@@ -61,11 +61,11 @@ namespace kyopro {
         using value_type = T;
 
         constexpr T id() const noexcept {
-        return _id;
+            return _id;
         }
 
         constexpr T operator ()(T a, T b) const noexcept {
-        return a > b ? a : b;
+            return a > b ? a : b;
         }
     };
 } // namespace kyopro

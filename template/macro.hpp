@@ -15,9 +15,9 @@ namespace kyopro::helper {
         KYOPRO_BASE_UINT cnt = 1;
         std::uint_fast64_t bracket = 0;
         for (auto i: s) {
-        if (i == '(') ++bracket;
-        else if (i == ')') --bracket;
-        else if (i == ',' && bracket == 0) ++cnt;
+            if (i == '(') ++bracket;
+            else if (i == ')') --bracket;
+            else if (i == ',' && bracket == 0) ++cnt;
         }
         return cnt;
     }
@@ -43,7 +43,9 @@ auto [__VA_ARGS__] = (kyopro::helper::read_impl(([]() {                         
     alignas(T) std::byte storage[sizeof(T)];                                              \
     T* p = new (storage) type_or_init;                                                    \
     kyopro::scan(*p);                                                                     \
-    return std::move(*p);                                                                 \
+    T res = std::move(*p);                                                                \
+    p->~T();                                                                              \
+    return res;                                                                           \
 }), std::make_index_sequence<kyopro::helper::va_args_size(#__VA_ARGS__)>()))
 #define debug(...) (kyopro::print('#', ' ', 'l', 'i', 'n', 'e', ' ', __LINE__, ':'), kyopro::helper::print_if<kyopro::helper::va_args_size(#__VA_ARGS__) != 0>(#__VA_ARGS__), kyopro::print('\n'), kyopro::helper::debug_impl(__VA_ARGS__))
 

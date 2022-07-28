@@ -24,15 +24,15 @@ namespace kyopro {
         T value;
 
         static void set_mod(T mod) noexcept {
-        montgomery.set_mod(mod);
+            montgomery.set_mod(mod);
         }
 
         static KYOPRO_BASE_INT get_mod() noexcept {
-        return montgomery.mod;
+            return montgomery.mod;
         }
 
         KYOPRO_BASE_INT get_val() noexcept {
-        return montgomery.inverse_transform(value);
+            return montgomery.inverse_transform(value);
         }
 
         DynamicModInt() noexcept = default;
@@ -40,113 +40,113 @@ namespace kyopro {
 
         template<class U>
         explicit operator U() const noexcept {
-        return montgomery.inverse_transform(value);
+            return montgomery.inverse_transform(value);
         }
 
         static DynamicModInt raw(T value) noexcept {
-        DynamicModInt res;
-        res.value = montgomery.transform(value);
-        return res;
+            DynamicModInt res;
+            res.value = montgomery.transform(value);
+            return res;
         }
 
         DynamicModInt power(KYOPRO_BASE_UINT n) const noexcept {
-        DynamicModInt res = 1, a = *this;
-        while (n > 0) {
-            if (n & 1) res = res * a;
-            a = a * a;
-            n >>= 1;
-        }
-        return res;
+            DynamicModInt res = 1, a = *this;
+            while (n > 0) {
+                if (n & 1) res = res * a;
+                a = a * a;
+                n >>= 1;
+            }
+            return res;
         }
 
         DynamicModInt inverse() const noexcept {
-        return power(montgomery.mod - 2);
+            return power(montgomery.mod - 2);
         }
 
         DynamicModInt operator +() const noexcept {
-        return *this;
+            return *this;
         }
 
         DynamicModInt operator -() const noexcept {
-        return value == 0 ? 0 : montgomery.mod - value;
+            return value == 0 ? 0 : montgomery.mod - value;
         }
 
         DynamicModInt& operator ++() noexcept {
-        operator +=(DynamicModInt::raw(1));
-        return *this;
+            *this += DynamicModInt::raw(1);
+            return *this;
         }
 
         DynamicModInt operator ++(int) noexcept {
-        DynamicModInt before = *this;
-        operator ++();
-        return before;
+            DynamicModInt before = *this;
+            ++*this;
+            return before;
         }
 
         DynamicModInt& operator --() noexcept {
-        operator -=(DynamicModInt::raw(1));
-        return *this;
+            *this -= DynamicModInt::raw(1);
+            return *this;
         }
 
         DynamicModInt operator --(int) noexcept {
-        DynamicModInt before = *this;
-        operator --();
-        return before;
+            DynamicModInt before = *this;
+            --*this;
+            return before;
         }
 
         DynamicModInt& operator +=(DynamicModInt rhs) noexcept {
-        if ((value += rhs.value - (montgomery.mod << 1)) > std::numeric_limits<std::make_signed_t<T>>::max()) value += montgomery.mod << 1;
-        return *this;
+            if ((value += rhs.value - (montgomery.mod << 1)) > std::numeric_limits<std::make_signed_t<T>>::max()) value += montgomery.mod << 1;
+            return *this;
         }
 
         DynamicModInt& operator -=(DynamicModInt rhs) noexcept {
-        if ((value -= rhs.value) > std::numeric_limits<std::make_signed_t<T>>::max()) value += montgomery.mod << 1;
-        return *this;
+            if ((value -= rhs.value) > std::numeric_limits<std::make_signed_t<T>>::max()) value += montgomery.mod << 1;
+            return *this;
         }
 
         DynamicModInt& operator *=(DynamicModInt rhs) noexcept {
-        value = montgomery.reduce(static_cast<larger_type>(value) * rhs.value);
-        return *this;
+            value = montgomery.reduce(static_cast<larger_type>(value) * rhs.value);
+            return *this;
         }
 
         DynamicModInt& operator /=(DynamicModInt rhs) noexcept {
-        value = montgomery.reduce(static_cast<larger_type>(value) * rhs.inverse().value);
-        return *this;
+            value = montgomery.reduce(static_cast<larger_type>(value) * rhs.inverse().value);
+            return *this;
         }
 
         friend DynamicModInt operator +(DynamicModInt lhs, DynamicModInt rhs) noexcept {
-        return lhs += rhs;
+            return lhs += rhs;
         }
 
         friend DynamicModInt operator -(DynamicModInt lhs, DynamicModInt rhs) noexcept {
-        return lhs -= rhs;
+            return lhs -= rhs;
         }
 
         friend DynamicModInt operator *(DynamicModInt lhs, DynamicModInt rhs) noexcept {
-        return lhs *= rhs;
+            return lhs *= rhs;
         }
 
         friend DynamicModInt operator /(DynamicModInt lhs, DynamicModInt rhs) noexcept {
-        return lhs /= rhs;
+            return lhs /= rhs;
         }
 
         friend bool operator ==(DynamicModInt lhs, DynamicModInt rhs) noexcept {
-        return lhs.value == rhs.value;
+            return lhs.value == rhs.value;
         }
 
         friend bool operator !=(DynamicModInt lhs, DynamicModInt rhs) noexcept {
-        return lhs.value != rhs.value;
+            return lhs.value != rhs.value;
         }
 
         template<class Scanner>
         void scan(Scanner& scanner) {
-        std::int_fast64_t value;
-        scanner.scan(value);
-        value = montgomery.transform(value % montgomery.mod + montgomery.mod);
+            std::int_fast64_t value;
+            scanner.scan(value);
+            value = montgomery.transform(value % montgomery.mod + montgomery.mod);
         }
 
         template<class Printer>
         void print(Printer& printer) const {
-        printer.print(montgomery.inverse_transform(value));
+            printer.print(montgomery.inverse_transform(value));
         }
     };
 
@@ -155,7 +155,7 @@ namespace kyopro {
         using value_type = DynamicModInt<T, kind>;
 
         std::size_t operator ()(DynamicModInt<T, kind> a) const noexcept {
-        return static_cast<std::size_t>(a);
+            return static_cast<std::size_t>(a);
         }
     };
 } // namespace kyopro

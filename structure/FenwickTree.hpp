@@ -26,35 +26,35 @@ namespace kyopro {
         FenwickTree(C&& tree): tree(std::forward<C>(tree)) {}
 
         KYOPRO_BASE_UINT size() noexcept {
-        return tree.size();
+            return tree.size();
         }
 
         void apply(int p, const T& x) {
-        ++p;
-        while (p <= (int)size()) {
-            tree[p - 1] = op(tree[p - 1], x);
-            p += p & -p;
-        }
+            ++p;
+            while (p <= (int)size()) {
+                tree[p - 1] = op(tree[p - 1], x);
+                p += p & -p;
+            }
         }
 
         T prod(int r) const {
-        T s = op.id();
-        while (r > 0) {
-            s = op(s, tree[r - 1]);
-            r -= r & -r;
-        }
-        return s;
+            T s = op.id();
+            while (r > 0) {
+                s = op(s, tree[r - 1]);
+                r -= r & -r;
+            }
+            return s;
         }
         T prod(int l, int r) const {
-        return op(prod(r), op.inverse(prod(l)));
+            return op(prod(r), op.inverse(prod(l)));
         }
 
         T all_prod() {
-        return prod(tree.size());
+            return prod(tree.size());
         }
 
         T get(int p) {
-        return op(prod(p + 1), op.inverse(prod(p)));
+            return op(prod(p + 1), op.inverse(prod(p)));
         }
 
         void set(int p, const T& x) { apply(p, op(x, op.inverse(get(p)))); }
