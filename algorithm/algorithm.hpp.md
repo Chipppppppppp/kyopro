@@ -176,34 +176,8 @@ data:
     \ is_agg: std::conjunction<std::is_aggregate<T>, std::negation<is_iterable<T>>>\
     \ {};\n\n    template<class T>\n    inline constexpr bool is_agg_v = is_agg<T>::value;\n\
     } // namespace kyopro\n#line 13 \"algorithm/algorithm.hpp\"\n\nnamespace kyopro::range\
-    \ {\n    inline constexpr struct {\n        template<class Container = void, class\
-    \ T, class Proj = Identity, class Compare = Less>\n        constexpr auto operator\
-    \ ()(T range, const Proj& proj = {}, const Compare& comp = {}) const {\n     \
-    \       sort(std::begin(range), std::end(range), proj, comp);\n            auto\
-    \ end = std::unique(std::begin(range), std::end(range));\n            std::conditional_t<std::is_same_v<Container,\
-    \ void>, std::unordered_map<typename std::iterator_traits<Iterator>::value_type,\
-    \ KYOPRO_BASE_INT>, Container> mem;\n            int cnt = 0;\n            for\
-    \ (auto i = std::begin(range); i != end; ++i) mem[*i] = cnt++;\n            return\
-    \ mem;\n        }\n    } compress;\n\n    inline constexpr struct {\n        template<class\
-    \ T, class Proj = Identity>\n        constexpr bool operator ()(T&& range, const\
-    \ Proj& proj = {}) const {\n            return std::all_of(std::begin(range),\
-    \ std::end(range), proj);\n        }\n    } all_of;\n\n    inline constexpr struct\
-    \ {\n        template<class T, class Proj = Identity>\n        constexpr bool\
-    \ operator ()(T&& range, const Proj& proj = {}) const {\n            return std::any_of(std::begin(range),\
-    \ std::end(range), proj);\n        }\n    } any_of;\n\n    inline constexpr struct\
-    \ {\n        template<class T, class Proj = Identity>\n        constexpr bool\
-    \ operator ()(T&& range, const Proj& proj = {}) const {\n            return std::none_of(std::begin(range),\
-    \ std::end(range), proj);\n        }\n    } none_of;\n\n    inline constexpr struct\
-    \ {\n        template<class T, class Func, class Proj = Identity>\n        constexpr\
-    \ auto operator ()(T&& range, const Func& func, const Proj& proj = {}) const {\n\
-    \            return std::for_each(std::begin(range), std::end(range), func);\n\
-    \        }\n    } for_each;\n} // namespace kyopro::range\n"
-  code: "#pragma once\n#include <algorithm>\n#include <functional>\n#include <iterator>\n\
-    #include <type_traits>\n#include <unordered_map>\n#include <utility>\n#include\
-    \ <vector>\n#include \"../function/compare.hpp\"\n#include \"../function/identity.hpp\"\
-    \n#include \"../meta/settings.hpp\"\n#include \"../meta/trait.hpp\"\n\nnamespace\
-    \ kyopro::range {\n    inline constexpr struct {\n        template<class Container\
-    \ = void, class T, class Proj = Identity, class Compare = Less>\n        constexpr\
+    \ {\n    /*\n    inline constexpr struct {\n        template<class Container =\
+    \ void, class T, class Proj = Identity, class Compare = Less>\n        constexpr\
     \ auto operator ()(T range, const Proj& proj = {}, const Compare& comp = {}) const\
     \ {\n            sort(std::begin(range), std::end(range), proj, comp);\n     \
     \       auto end = std::unique(std::begin(range), std::end(range));\n        \
@@ -211,20 +185,39 @@ data:
     \ std::iterator_traits<Iterator>::value_type, KYOPRO_BASE_INT>, Container> mem;\n\
     \            int cnt = 0;\n            for (auto i = std::begin(range); i != end;\
     \ ++i) mem[*i] = cnt++;\n            return mem;\n        }\n    } compress;\n\
-    \n    inline constexpr struct {\n        template<class T, class Proj = Identity>\n\
-    \        constexpr bool operator ()(T&& range, const Proj& proj = {}) const {\n\
-    \            return std::all_of(std::begin(range), std::end(range), proj);\n \
-    \       }\n    } all_of;\n\n    inline constexpr struct {\n        template<class\
+    \    */\n\n    inline constexpr struct {\n        template<class T, class Proj\
+    \ = Identity>\n        constexpr bool operator ()(T&& range, const Proj& proj\
+    \ = {}) const {\n            return std::all_of(std::begin(range), std::end(range),\
+    \ proj);\n        }\n    } all_of;\n\n    inline constexpr struct {\n        template<class\
     \ T, class Proj = Identity>\n        constexpr bool operator ()(T&& range, const\
     \ Proj& proj = {}) const {\n            return std::any_of(std::begin(range),\
     \ std::end(range), proj);\n        }\n    } any_of;\n\n    inline constexpr struct\
     \ {\n        template<class T, class Proj = Identity>\n        constexpr bool\
     \ operator ()(T&& range, const Proj& proj = {}) const {\n            return std::none_of(std::begin(range),\
-    \ std::end(range), proj);\n        }\n    } none_of;\n\n    inline constexpr struct\
-    \ {\n        template<class T, class Func, class Proj = Identity>\n        constexpr\
-    \ auto operator ()(T&& range, const Func& func, const Proj& proj = {}) const {\n\
-    \            return std::for_each(std::begin(range), std::end(range), func);\n\
-    \        }\n    } for_each;\n} // namespace kyopro::range"
+    \ std::end(range), proj);\n        }\n    } none_of;\n} // namespace kyopro::range\n"
+  code: "#pragma once\n#include <algorithm>\n#include <functional>\n#include <iterator>\n\
+    #include <type_traits>\n#include <unordered_map>\n#include <utility>\n#include\
+    \ <vector>\n#include \"../function/compare.hpp\"\n#include \"../function/identity.hpp\"\
+    \n#include \"../meta/settings.hpp\"\n#include \"../meta/trait.hpp\"\n\nnamespace\
+    \ kyopro::range {\n    /*\n    inline constexpr struct {\n        template<class\
+    \ Container = void, class T, class Proj = Identity, class Compare = Less>\n  \
+    \      constexpr auto operator ()(T range, const Proj& proj = {}, const Compare&\
+    \ comp = {}) const {\n            sort(std::begin(range), std::end(range), proj,\
+    \ comp);\n            auto end = std::unique(std::begin(range), std::end(range));\n\
+    \            std::conditional_t<std::is_same_v<Container, void>, std::unordered_map<typename\
+    \ std::iterator_traits<Iterator>::value_type, KYOPRO_BASE_INT>, Container> mem;\n\
+    \            int cnt = 0;\n            for (auto i = std::begin(range); i != end;\
+    \ ++i) mem[*i] = cnt++;\n            return mem;\n        }\n    } compress;\n\
+    \    */\n\n    inline constexpr struct {\n        template<class T, class Proj\
+    \ = Identity>\n        constexpr bool operator ()(T&& range, const Proj& proj\
+    \ = {}) const {\n            return std::all_of(std::begin(range), std::end(range),\
+    \ proj);\n        }\n    } all_of;\n\n    inline constexpr struct {\n        template<class\
+    \ T, class Proj = Identity>\n        constexpr bool operator ()(T&& range, const\
+    \ Proj& proj = {}) const {\n            return std::any_of(std::begin(range),\
+    \ std::end(range), proj);\n        }\n    } any_of;\n\n    inline constexpr struct\
+    \ {\n        template<class T, class Proj = Identity>\n        constexpr bool\
+    \ operator ()(T&& range, const Proj& proj = {}) const {\n            return std::none_of(std::begin(range),\
+    \ std::end(range), proj);\n        }\n    } none_of;\n} // namespace kyopro::range"
   dependsOn:
   - function/compare.hpp
   - function/identity.hpp
@@ -236,7 +229,7 @@ data:
   - all/all.hpp
   - all.hpp
   - algorithm/all.hpp
-  timestamp: '2022-07-28 17:38:13+09:00'
+  timestamp: '2022-07-28 18:02:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm/algorithm.hpp
