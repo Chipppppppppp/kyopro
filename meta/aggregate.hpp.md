@@ -11,6 +11,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
+  - icon: ':warning:'
+    path: algorithm/all.hpp
+    title: algorithm/all.hpp
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
   - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
@@ -234,6 +243,7 @@ data:
   isVerificationFile: false
   path: meta/aggregate.hpp
   requiredBy:
+  - all/all.hpp
   - system/all.hpp
   - system/out.hpp
   - math/ModInt.hpp
@@ -241,7 +251,9 @@ data:
   - math/factorize.hpp
   - math/is_prime.hpp
   - math/DynamicModInt.hpp
+  - all.hpp
   - algorithm/Hash.hpp
+  - algorithm/all.hpp
   - template/macro.hpp
   - template/all.hpp
   - template/alias.hpp

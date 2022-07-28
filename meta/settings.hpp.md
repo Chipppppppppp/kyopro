@@ -8,15 +8,27 @@ data:
   - icon: ':warning:'
     path: algorithm/algorithm.hpp
     title: algorithm/algorithm.hpp
+  - icon: ':warning:'
+    path: algorithm/all.hpp
+    title: algorithm/all.hpp
   - icon: ':heavy_check_mark:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
   - icon: ':warning:'
     path: function/all.hpp
     title: function/all.hpp
   - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
+  - icon: ':warning:'
+    path: iterator/all.hpp
+    title: iterator/all.hpp
   - icon: ':warning:'
     path: iterator/imap.hpp
     title: iterator/imap.hpp
@@ -229,6 +241,7 @@ data:
   isVerificationFile: false
   path: meta/settings.hpp
   requiredBy:
+  - all/all.hpp
   - system/all.hpp
   - system/in.hpp
   - system/out.hpp
@@ -244,11 +257,14 @@ data:
   - structure/all.hpp
   - structure/UnionFind.hpp
   - structure/FenwickTree.hpp
+  - iterator/all.hpp
   - iterator/imap.hpp
+  - all.hpp
   - function/all.hpp
   - function/monoid.hpp
   - algorithm/algorithm.hpp
   - algorithm/Hash.hpp
+  - algorithm/all.hpp
   - algorithm/bit.hpp
   - template/make_vector.hpp
   - template/macro.hpp

@@ -12,6 +12,18 @@ data:
     path: algorithm/algorithm.hpp
     title: algorithm/algorithm.hpp
   - icon: ':warning:'
+    path: algorithm/all.hpp
+    title: algorithm/all.hpp
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':warning:'
+    path: iterator/all.hpp
+    title: iterator/all.hpp
+  - icon: ':warning:'
     path: iterator/imap.hpp
     title: iterator/imap.hpp
   - icon: ':heavy_check_mark:'
@@ -332,6 +344,7 @@ data:
   isVerificationFile: false
   path: meta/trait.hpp
   requiredBy:
+  - all/all.hpp
   - system/all.hpp
   - system/in.hpp
   - system/out.hpp
@@ -342,9 +355,12 @@ data:
   - math/DynamicModInt.hpp
   - structure/all.hpp
   - structure/UnionFind.hpp
+  - iterator/all.hpp
   - iterator/imap.hpp
+  - all.hpp
   - algorithm/algorithm.hpp
   - algorithm/Hash.hpp
+  - algorithm/all.hpp
   - template/macro.hpp
   - template/all.hpp
   - template/alias.hpp

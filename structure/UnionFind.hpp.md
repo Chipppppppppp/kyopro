@@ -9,6 +9,12 @@ data:
     title: meta/trait.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
   _extendedVerifiedWith:
@@ -223,7 +229,9 @@ data:
   isVerificationFile: false
   path: structure/UnionFind.hpp
   requiredBy:
+  - all/all.hpp
   - structure/all.hpp
+  - all.hpp
   timestamp: '2022-07-28 17:38:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

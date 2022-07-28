@@ -27,6 +27,12 @@ data:
     title: meta/trait.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
   - icon: ':warning:'
@@ -402,7 +408,9 @@ data:
   isVerificationFile: false
   path: math/ModInt.hpp
   requiredBy:
+  - all/all.hpp
   - math/all.hpp
+  - all.hpp
   - template/all.hpp
   - template/alias.hpp
   timestamp: '2022-07-28 17:38:13+09:00'

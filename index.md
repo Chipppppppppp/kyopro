@@ -45,6 +45,9 @@ data:
   - name: iterator
     pages:
     - icon: ':warning:'
+      path: iterator/all.hpp
+      title: iterator/all.hpp
+    - icon: ':warning:'
       path: iterator/imap.hpp
       title: iterator/imap.hpp
     - icon: ':warning:'

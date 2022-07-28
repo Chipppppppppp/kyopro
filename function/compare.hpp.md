@@ -6,6 +6,15 @@ data:
     path: algorithm/algorithm.hpp
     title: algorithm/algorithm.hpp
   - icon: ':warning:'
+    path: algorithm/all.hpp
+    title: algorithm/all.hpp
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':warning:'
     path: function/all.hpp
     title: function/all.hpp
   _extendedVerifiedWith: []
@@ -50,8 +59,11 @@ data:
   isVerificationFile: false
   path: function/compare.hpp
   requiredBy:
+  - all/all.hpp
+  - all.hpp
   - function/all.hpp
   - algorithm/algorithm.hpp
+  - algorithm/all.hpp
   timestamp: '2022-07-28 17:38:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

@@ -6,6 +6,9 @@ data:
     title: meta/settings.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
     path: template/all.hpp
     title: template/all.hpp
   _extendedVerifiedWith: []
@@ -49,6 +52,7 @@ data:
   isVerificationFile: false
   path: template/make_vector.hpp
   requiredBy:
+  - all.hpp
   - template/all.hpp
   timestamp: '2022-07-28 17:38:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS

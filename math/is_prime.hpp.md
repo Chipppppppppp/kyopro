@@ -30,6 +30,12 @@ data:
     title: meta/trait.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
   - icon: ':heavy_check_mark:'
@@ -400,8 +406,10 @@ data:
   isVerificationFile: false
   path: math/is_prime.hpp
   requiredBy:
+  - all/all.hpp
   - math/all.hpp
   - math/factorize.hpp
+  - all.hpp
   timestamp: '2022-07-28 17:38:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
