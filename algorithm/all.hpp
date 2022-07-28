@@ -1,4 +1,4 @@
 #pragma once
 #include "bit.hpp"
-#include "compress.hpp"
+#include "algorithm.hpp"
 #include "Hash.hpp"
