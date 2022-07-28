@@ -9,7 +9,7 @@
 namespace kyopro {
     template<class Func, class Range>
     struct imap {
-        using value_type = std::decay_t<decltype(func(std::declval<iterable_value_t<Range>>()))>;
+        using value_type = std::decay_t<decltype(std::declval<Func>()(std::declval<iterable_value_t<Range>>()))>;
         using size_type = std::size_t;
         using difference_type = std::ptrdiff_t;
         using reference = value_type&;
@@ -18,14 +18,15 @@ namespace kyopro {
         using const_pointer = const value_type*;
 
     private:
+        using BaseIterator = std::decay_t<decltype(std::begin(std::declval<Range>()))>;
+
         Func func;
         Range range;
 
+    public:
+
         template<class F, class R>
         imap(F&& func, R&& range): func(std::forward<F>(func)), range(std::forward<R>(range)) {}
-
-    public:
-        using BaseIterator = std::decay_t<decltype(std::begin(std::declval<Range>()))>;
 
         struct iterator: BaseIterator {
         private:
@@ -40,6 +41,24 @@ namespace kyopro {
                 return func(**this);
             }
         };
+
+        using reverse_iterator = std::reverse_iterator<iterator>;
+
+        constexpr iterator begin() {
+            return iterator(func, range.begin());
+        }
+
+        constexpr iterator end() {
+            return iterator(func, range.end());
+        }
+
+        constexpr iterator rbegin() {
+            return reverse_iterator(func, range.rbegin());
+        }
+
+        constexpr iterator rend() {
+            return reverse_iterator(func, range.rend());
+        }
     };
 
     template<class F, class R>
