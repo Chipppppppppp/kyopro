@@ -212,12 +212,14 @@ data:
     \ {}\n\n            constexpr decltype(auto) operator *() const noexcept {\n \
     \               return func(BaseIterator::operator *());\n            }\n    \
     \    };\n\n        using reverse_iterator = std::reverse_iterator<iterator>;\n\
-    \n        constexpr iterator begin() {\n            return iterator(func, range.begin());\n\
-    \        }\n\n        constexpr iterator end() {\n            return iterator(func,\
-    \ range.end());\n        }\n\n        constexpr reverse_iterator rbegin() {\n\
-    \            return reverse_iterator(end());\n        }\n\n        constexpr reverse_iterator\
-    \ rend() {\n            return reverse_iterator(begin());\n        }\n    };\n\
-    \n    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>,\
+    \n        constexpr iterator begin() const noexcept {\n            return iterator(func,\
+    \ range.begin());\n        }\n\n        constexpr iterator end() const noexcept\
+    \ {\n            return iterator(func, range.end());\n        }\n\n        constexpr\
+    \ reverse_iterator rbegin() const noexcept {\n            return reverse_iterator(end());\n\
+    \        }\n\n        constexpr reverse_iterator rend() const noexcept {\n   \
+    \         return reverse_iterator(begin());\n        }\n\n        constexpr bool\
+    \ empty() const noexcept {\n            return begin() == end();\n        }\n\
+    \    };\n\n    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>,\
     \ std::decay_t<R>>;\n}\n"
   code: "#pragma once\n#include <cstddef>\n#include <iterator>\n#include <type_traits>\n\
     #include <utility>\n#include \"iterator_base.hpp\"\n#include \"../meta/trait.hpp\"\
@@ -236,12 +238,14 @@ data:
     \ {}\n\n            constexpr decltype(auto) operator *() const noexcept {\n \
     \               return func(BaseIterator::operator *());\n            }\n    \
     \    };\n\n        using reverse_iterator = std::reverse_iterator<iterator>;\n\
-    \n        constexpr iterator begin() {\n            return iterator(func, range.begin());\n\
-    \        }\n\n        constexpr iterator end() {\n            return iterator(func,\
-    \ range.end());\n        }\n\n        constexpr reverse_iterator rbegin() {\n\
-    \            return reverse_iterator(end());\n        }\n\n        constexpr reverse_iterator\
-    \ rend() {\n            return reverse_iterator(begin());\n        }\n    };\n\
-    \n    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>,\
+    \n        constexpr iterator begin() const noexcept {\n            return iterator(func,\
+    \ range.begin());\n        }\n\n        constexpr iterator end() const noexcept\
+    \ {\n            return iterator(func, range.end());\n        }\n\n        constexpr\
+    \ reverse_iterator rbegin() const noexcept {\n            return reverse_iterator(end());\n\
+    \        }\n\n        constexpr reverse_iterator rend() const noexcept {\n   \
+    \         return reverse_iterator(begin());\n        }\n\n        constexpr bool\
+    \ empty() const noexcept {\n            return begin() == end();\n        }\n\
+    \    };\n\n    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>,\
     \ std::decay_t<R>>;\n}"
   dependsOn:
   - iterator/iterator_base.hpp
@@ -253,7 +257,7 @@ data:
   - all/all.hpp
   - iterator/all.hpp
   - all.hpp
-  timestamp: '2022-07-28 18:40:08+09:00'
+  timestamp: '2022-07-28 18:47:11+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: iterator/imap.hpp

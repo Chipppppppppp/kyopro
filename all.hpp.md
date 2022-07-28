@@ -489,12 +489,14 @@ data:
     \ {}\n\n            constexpr decltype(auto) operator *() const noexcept {\n \
     \               return func(BaseIterator::operator *());\n            }\n    \
     \    };\n\n        using reverse_iterator = std::reverse_iterator<iterator>;\n\
-    \n        constexpr iterator begin() {\n            return iterator(func, range.begin());\n\
-    \        }\n\n        constexpr iterator end() {\n            return iterator(func,\
-    \ range.end());\n        }\n\n        constexpr reverse_iterator rbegin() {\n\
-    \            return reverse_iterator(end());\n        }\n\n        constexpr reverse_iterator\
-    \ rend() {\n            return reverse_iterator(begin());\n        }\n    };\n\
-    \n    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>,\
+    \n        constexpr iterator begin() const noexcept {\n            return iterator(func,\
+    \ range.begin());\n        }\n\n        constexpr iterator end() const noexcept\
+    \ {\n            return iterator(func, range.end());\n        }\n\n        constexpr\
+    \ reverse_iterator rbegin() const noexcept {\n            return reverse_iterator(end());\n\
+    \        }\n\n        constexpr reverse_iterator rend() const noexcept {\n   \
+    \         return reverse_iterator(begin());\n        }\n\n        constexpr bool\
+    \ empty() const noexcept {\n            return begin() == end();\n        }\n\
+    \    };\n\n    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>,\
     \ std::decay_t<R>>;\n}\n#line 3 \"math/div.hpp\"\n\nnamespace kyopro {\n    inline\
     \ constexpr struct {\n        template<class T, class U>\n        constexpr std::common_type_t<T,\
     \ U> operator ()(T x, U m) const noexcept {\n            static_assert(std::is_integral_v<T>\
@@ -1143,7 +1145,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2022-07-28 18:40:08+09:00'
+  timestamp: '2022-07-28 18:47:11+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp
