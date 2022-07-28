@@ -459,11 +459,11 @@ data:
     \ iterator: BaseIterator {\n        private:\n            Func func;\n\n     \
     \   public:\n            iterator() noexcept = default;\n            template<class\
     \ F>\n            iterator(F&& func, BaseIterator itr) noexcept: func(std::forward<F>(func)),\
-    \ itr(itr) {}\n\n            constexpr decltype(auto) operator *() const noexcept\
-    \ {\n                return func(*itr);\n            }\n        };\n    };\n\n\
-    \    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>, std::decay_t<R>>;\n\
-    }\n#line 3 \"math/div.hpp\"\n\nnamespace kyopro {\n    inline constexpr struct\
-    \ {\n        template<class T, class U>\n        constexpr std::common_type_t<T,\
+    \ BaseIterator(itr) {}\n\n            constexpr decltype(auto) operator *() const\
+    \ noexcept {\n                return func(**this);\n            }\n        };\n\
+    \    };\n\n    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>,\
+    \ std::decay_t<R>>;\n}\n#line 3 \"math/div.hpp\"\n\nnamespace kyopro {\n    inline\
+    \ constexpr struct {\n        template<class T, class U>\n        constexpr std::common_type_t<T,\
     \ U> operator ()(T x, U m) const noexcept {\n            static_assert(std::is_integral_v<T>\
     \ && std::is_integral_v<U>, \"Integer is required\");\n            if constexpr\
     \ (std::is_unsigned_v<T> || std::is_unsigned_v<U>) return x / m;\n           \
@@ -966,7 +966,7 @@ data:
   path: all/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-07-28 18:02:24+09:00'
+  timestamp: '2022-07-28 18:04:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp

@@ -209,10 +209,10 @@ data:
     \ iterator: BaseIterator {\n        private:\n            Func func;\n\n     \
     \   public:\n            iterator() noexcept = default;\n            template<class\
     \ F>\n            iterator(F&& func, BaseIterator itr) noexcept: func(std::forward<F>(func)),\
-    \ itr(itr) {}\n\n            constexpr decltype(auto) operator *() const noexcept\
-    \ {\n                return func(*itr);\n            }\n        };\n    };\n\n\
-    \    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>, std::decay_t<R>>;\n\
-    }\n"
+    \ BaseIterator(itr) {}\n\n            constexpr decltype(auto) operator *() const\
+    \ noexcept {\n                return func(**this);\n            }\n        };\n\
+    \    };\n\n    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>,\
+    \ std::decay_t<R>>;\n}\n"
   code: "#pragma once\n#include <cstddef>\n#include <iterator>\n#include <type_traits>\n\
     #include <utility>\n#include \"iterator_base.hpp\"\n#include \"../meta/trait.hpp\"\
     \n\nnamespace kyopro {\n    template<class Func, class Range>\n    struct imap\
@@ -227,10 +227,10 @@ data:
     \ iterator: BaseIterator {\n        private:\n            Func func;\n\n     \
     \   public:\n            iterator() noexcept = default;\n            template<class\
     \ F>\n            iterator(F&& func, BaseIterator itr) noexcept: func(std::forward<F>(func)),\
-    \ itr(itr) {}\n\n            constexpr decltype(auto) operator *() const noexcept\
-    \ {\n                return func(*itr);\n            }\n        };\n    };\n\n\
-    \    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>, std::decay_t<R>>;\n\
-    }"
+    \ BaseIterator(itr) {}\n\n            constexpr decltype(auto) operator *() const\
+    \ noexcept {\n                return func(**this);\n            }\n        };\n\
+    \    };\n\n    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>,\
+    \ std::decay_t<R>>;\n}"
   dependsOn:
   - iterator/iterator_base.hpp
   - meta/trait.hpp
@@ -241,7 +241,7 @@ data:
   - all/all.hpp
   - iterator/all.hpp
   - all.hpp
-  timestamp: '2022-07-28 17:38:13+09:00'
+  timestamp: '2022-07-28 18:04:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: iterator/imap.hpp

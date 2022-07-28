@@ -209,10 +209,10 @@ data:
     \ iterator: BaseIterator {\n        private:\n            Func func;\n\n     \
     \   public:\n            iterator() noexcept = default;\n            template<class\
     \ F>\n            iterator(F&& func, BaseIterator itr) noexcept: func(std::forward<F>(func)),\
-    \ itr(itr) {}\n\n            constexpr decltype(auto) operator *() const noexcept\
-    \ {\n                return func(*itr);\n            }\n        };\n    };\n\n\
-    \    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>, std::decay_t<R>>;\n\
-    }\n#line 4 \"iterator/all.hpp\"\n"
+    \ BaseIterator(itr) {}\n\n            constexpr decltype(auto) operator *() const\
+    \ noexcept {\n                return func(**this);\n            }\n        };\n\
+    \    };\n\n    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>,\
+    \ std::decay_t<R>>;\n}\n#line 4 \"iterator/all.hpp\"\n"
   code: '#pragma once
 
     #include "imap.hpp"
@@ -228,7 +228,7 @@ data:
   requiredBy:
   - all/all.hpp
   - all.hpp
-  timestamp: '2022-07-28 17:52:03+09:00'
+  timestamp: '2022-07-28 18:04:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: iterator/all.hpp
