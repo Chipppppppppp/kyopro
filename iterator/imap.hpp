@@ -44,20 +44,24 @@ namespace kyopro {
 
         using reverse_iterator = std::reverse_iterator<iterator>;
 
-        constexpr iterator begin() {
+        constexpr iterator begin() const noexcept {
             return iterator(func, range.begin());
         }
 
-        constexpr iterator end() {
+        constexpr iterator end() const noexcept {
             return iterator(func, range.end());
         }
 
-        constexpr reverse_iterator rbegin() {
+        constexpr reverse_iterator rbegin() const noexcept {
             return reverse_iterator(end());
         }
 
-        constexpr reverse_iterator rend() {
+        constexpr reverse_iterator rend() const noexcept {
             return reverse_iterator(begin());
+        }
+
+        constexpr bool empty() const noexcept {
+            return begin() == end();
         }
     };
 
