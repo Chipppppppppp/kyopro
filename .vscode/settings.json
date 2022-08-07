@@ -96,6 +96,7 @@
     "forward_list": "cpp",
     "regex": "cpp",
     "scoped_allocator": "cpp",
-    "valarray": "cpp"
+    "valarray": "cpp",
+    "span": "cpp"
   }
 }

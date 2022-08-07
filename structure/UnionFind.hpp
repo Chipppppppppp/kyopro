@@ -10,7 +10,7 @@
 namespace kyopro {
     template<class Container = std::vector<int>>
     struct UnionFind {
-        using value_type = iterable_value_t<Container>;
+        using value_type = range_value_t<Container>;
         using container_type = Container;
 
     private:
@@ -18,15 +18,15 @@ namespace kyopro {
 
     public:
         UnionFind() noexcept = default;
-        UnionFind(KYOPRO_BASE_UINT n) noexcept: par(n, -1) {}
+        UnionFind(std::size_t n) noexcept: par(n, -1) {}
         template<class C, std::enable_if_t<std::is_same_v<Container, std::decay_t<C>>>>
         UnionFind(C&& par): par(std::forward<C>(par)) {}
 
-        void resize(KYOPRO_BASE_UINT x) { par.resize(x, -1); }
-        void assign(KYOPRO_BASE_UINT x) { par.assign(x, -1); }
+        void resize(std::size_t x) { par.resize(x, -1); }
+        void assign(std::size_t x) { par.assign(x, -1); }
         void reset() { std::fill(std::begin(par), std::end(par), -1); }
 
-        KYOPRO_BASE_UINT size() const noexcept {
+        std::size_t size() const noexcept {
             return par.size();
         }
 

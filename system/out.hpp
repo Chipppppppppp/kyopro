@@ -16,15 +16,17 @@
 #include "../meta/trait.hpp"
 
 namespace kyopro {
-    template<std::size_t _buf_size = KYOPRO_BUFFER_SIZE>
+    template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>
     struct Writer {
-        static constexpr KYOPRO_BASE_UINT buf_size = _buf_size;
-
     private:
         int fd, idx;
         std::array<char, buf_size> buffer;
 
     public:
+        static constexpr KYOPRO_BASE_INT get_buf_size() noexcept {
+            return buf_size;
+        }
+
         Writer() noexcept = default;
         Writer(int fd) noexcept: fd(fd), idx(0), buffer() {}
         Writer(FILE* fp) noexcept: fd(fileno(fp)), idx(0), buffer() {}
@@ -78,11 +80,10 @@ namespace kyopro {
 
     Writer output(1), error(2);
 
-    template<class Iterator, bool _sep = true, bool _sep_line = true, bool _end_line = true, bool _debug = false, bool _comment = false, bool _flush = false, std::size_t _decimal_precision = KYOPRO_DECIMAL_PRECISION>
+    template<class Iterator, bool _sep = true, bool _sep_line = true, bool _end_line = true, bool _debug = false, bool _comment = false, bool _flush = false, std::size_t decimal_precision = KYOPRO_DECIMAL_PRECISION>
     struct Printer {
         using iterator_type = Iterator;
         static constexpr bool sep = _sep, end_line = _end_line, sep_line = _sep_line, debug = _debug, comment = _comment, flush = _flush;
-        static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;
 
     private:
         template<class, class = void>
@@ -91,6 +92,9 @@ namespace kyopro {
         struct has_print<T, std::void_t<decltype(std::declval<T>().print(std::declval<Printer&>()))>>: std::true_type {};
 
     public:
+        static constexpr KYOPRO_BASE_INT get_decimal_precision() noexcept {
+            return decimal_precision;
+        }
 
         template<class, class = void>
         struct max_rank {
@@ -105,8 +109,8 @@ namespace kyopro {
             static constexpr std::size_t value = get_value_rank(std::make_index_sequence<aggregate_size_v<T>>()) + 1;
         };
         template<class T>
-        struct max_rank<T, std::enable_if_t<is_iterable_v<T>>> {
-            static constexpr std::size_t value = max_rank<iterable_value_t<T>>::value + 1;
+        struct max_rank<T, std::enable_if_t<is_range_v<T>>> {
+            static constexpr std::size_t value = max_rank<range_value_t<T>>::value + 1;
         };
 
         template<class T>
@@ -127,11 +131,11 @@ namespace kyopro {
             if constexpr (sep) {
                 if constexpr (debug) print_char(',');
                 if constexpr (sep_line && rank >= 2) {
-                print_char('\n');
-                if constexpr (comment) {
-                    print_char('#');
-                    print_char(' ');
-                }
+                    print_char('\n');
+                    if constexpr (comment) {
+                        print_char('#');
+                        print_char(' ');
+                    }
                 } else print_char(' ');
             }
         }
@@ -199,7 +203,7 @@ namespace kyopro {
                 print_char('0' + static_cast<std::uint_fast64_t>(a) % 10);
             }
         }
-        template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T> && !has_print<T>::value>* = nullptr>
+        template<std::size_t i = 0, class T, std::enable_if_t<is_agg_v<T> && !has_print<T>::value>* = nullptr>
         void print(const T& a) {
             if constexpr (debug && i == 0) print_char('{');
             if constexpr (aggregate_size_v<T> != 0) print(access<i>(a));
@@ -208,7 +212,7 @@ namespace kyopro {
                 print<i + 1>(a);
             } else if constexpr (debug) print_char('}');
         }
-        template<class T, std::enable_if_t<is_iterable_v<T> && !has_print<T>::value>* = nullptr>
+        template<class T, std::enable_if_t<is_range_v<T> && !has_print<T>::value>* = nullptr>
         void print(const T& a) {
             if constexpr (debug) print_char('{');
             if (std::empty(a)) return;

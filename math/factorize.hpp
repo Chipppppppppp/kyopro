@@ -1,5 +1,6 @@
 #pragma once
 #include <algorithm>
+#include <cstddef>
 #include <cstdint>
 #include <numeric>
 #include <random>
@@ -12,9 +13,9 @@
 namespace kyopro {
     inline constexpr struct {
         template<class T>
-        constexpr T operator ()(T p, KYOPRO_BASE_UINT c) const {
+        constexpr T operator ()(T p, std::uint_fast64_t c) const {
             using U = std::make_unsigned_t<T>;
-            using DynamicModInt = DynamicModInt<U, KYOPRO_BASE_UINT(-1)>;
+            using DynamicModInt = helper::InternalDynamicModInt<U>;
             U n = p;
             DynamicModInt::set_mod(n);
             DynamicModInt cc = c;
@@ -48,7 +49,7 @@ namespace kyopro {
     } pollard_rho;
 
     inline constexpr struct {
-        KYOPRO_BASE_UINT operator ()(KYOPRO_BASE_UINT n) const noexcept {
+        KYOPRO_BASE_UINT operator ()(std::uint_fast64_t n) const noexcept {
             static std::mt19937_64 mt(std::random_device{}());
             std::uniform_int_distribution<std::uint_fast64_t> rnd(0, n - 1);
             if (is_prime(n)) return n;
@@ -63,7 +64,7 @@ namespace kyopro {
 
     inline constexpr struct {
         template<bool sorted = true, class Container = std::vector<KYOPRO_BASE_INT>>
-        Container operator ()(KYOPRO_BASE_UINT n) const {
+        Container operator ()(std::uint_fast64_t n) const {
             Container res;
             for (int p = 2; p < 100 && p * p <= n; ++p) {
                 while (n % p == 0) {

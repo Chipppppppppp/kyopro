@@ -1,11 +1,11 @@
 #pragma once
+#include <cstddef>
 #include <iterator>
 #include <queue>
 #include <limits>
 #include <stack>
 #include <type_traits>
 #include <utility>
-#include "settings.hpp"
 
 template<>
 struct std::is_integral<__int128_t>: std::true_type {};
@@ -15,7 +15,7 @@ template<>
 struct std::is_floating_point<__float128>: std::true_type {};
 
 namespace kyopro {
-    template<KYOPRO_BASE_UINT size>
+    template<std::size_t size>
     struct int_least {
     private:
         static constexpr auto get_type() noexcept {
@@ -31,10 +31,10 @@ namespace kyopro {
         using type = decltype(get_type());
     };
 
-    template<KYOPRO_BASE_UINT size>
+    template<std::size_t size>
     using int_least_t = typename int_least<size>::type;
 
-    template<KYOPRO_BASE_UINT size>
+    template<std::size_t size>
     struct uint_least {
     private:
         static constexpr auto get_type() noexcept {
@@ -50,7 +50,7 @@ namespace kyopro {
         using type = decltype(get_type());
     };
 
-    template<KYOPRO_BASE_UINT size>
+    template<std::size_t size>
     using uint_least_t = typename uint_least<size>::type;
 
     template<class, class = void>
@@ -62,20 +62,36 @@ namespace kyopro {
     constexpr bool is_iterator_v = is_iterator<T>::value;
 
     template<class, class = void>
-    struct is_iterable: std::false_type {};
+    struct is_range: std::false_type {};
     template<class T>
-    struct is_iterable<T, std::void_t<decltype(std::begin(std::declval<std::add_lvalue_reference_t<T>>()), std::end(std::declval<std::add_lvalue_reference_t<T>>()))>>: std::true_type {};
+    struct is_range<T, std::void_t<decltype(std::begin(std::declval<std::add_lvalue_reference_t<T>>()), std::end(std::declval<std::add_lvalue_reference_t<T>>()))>>: std::true_type {};
 
     template<class T>
-    constexpr bool is_iterable_v = is_iterable<T>::value;
+    constexpr bool is_range_v = is_range<T>::value;
 
     template<class T>
-    struct iterable_value {
+    struct range_iterator {
+        using type = std::decay_t<decltype(std::begin(std::declval<T>()))>;
+    };
+
+    template<class T>
+    using range_iterator_t = typename range_iterator<T>::type;
+
+    template<class T>
+    struct range_const_iterator {
+        using type = std::decay_t<decltype(std::cbegin(std::declval<T>()))>;
+    };
+
+    template<class T>
+    using range_const_iterator_t = typename range_iterator<T>::type;
+
+    template<class T>
+    struct range_value {
         using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;
     };
 
     template<class T>
-    using iterable_value_t = typename iterable_value<T>::type;
+    using range_value_t = typename range_value<T>::type;
 
     namespace helper {
         struct CastableToAny {
@@ -215,7 +231,7 @@ namespace kyopro {
     using aggregate_element_t = typename aggregate_element<idx, T>::type;
 
     template<class T>
-    struct is_agg: std::conjunction<std::is_aggregate<T>, std::negation<is_iterable<T>>> {};
+    struct is_agg: std::conjunction<std::is_aggregate<T>, std::negation<is_range<T>>> {};
 
     template<class T>
     inline constexpr bool is_agg_v = is_agg<T>::value;

@@ -14,15 +14,17 @@
 #include "../meta/trait.hpp"
 
 namespace kyopro {
-    template<std::size_t _buf_size = KYOPRO_BUFFER_SIZE>
+    template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>
     struct Reader {
-        static constexpr KYOPRO_BASE_UINT buf_size = _buf_size;
-
     private:
         int fd, idx;
         std::array<char, buf_size> buffer;
 
     public:
+        static constexpr KYOPRO_BASE_INT get_buf_size() noexcept {
+            return buf_size;
+        }
+
         Reader() {
             read(fd, buffer.begin(), buf_size);
         }
@@ -50,8 +52,8 @@ namespace kyopro {
             iterator& operator ++() {
                 ++reader.idx;
                 if (reader.idx == buf_size) {
-                read(reader.fd, reader.buffer.begin(), buf_size);
-                reader.idx = 0;
+                    read(reader.fd, reader.buffer.begin(), buf_size);
+                    reader.idx = 0;
                 }
                 return *this;
             }
@@ -74,11 +76,9 @@ namespace kyopro {
 
     Reader input(0);
 
-    template<class Iterator, std::size_t _decimal_precision = KYOPRO_DECIMAL_PRECISION>
+    template<class Iterator, std::size_t decimal_precision = KYOPRO_DECIMAL_PRECISION>
     struct Scanner {
         using iterator_type = Iterator;
-        static constexpr KYOPRO_BASE_UINT decimal_precision = _decimal_precision;
-
     private:
         template<class, class = void>
         struct has_scan: std::false_type {};
@@ -87,6 +87,10 @@ namespace kyopro {
 
     public:
         Iterator itr;
+
+        static constexpr KYOPRO_BASE_INT get_decimal_precision() noexcept {
+            return decimal_precision;
+        }
 
         Scanner() noexcept = default;
         Scanner(Iterator itr) noexcept: itr(itr) {}
@@ -132,27 +136,27 @@ namespace kyopro {
             if (*itr == '.') {
                 ++itr;
                 if constexpr (std::is_floating_point_v<T>) {
-                constexpr std::uint_fast64_t power_decimal_precision = power(10ULL, decimal_precision);
-                T d = 0;
-                std::uint_fast64_t i = 1;
-                for (; '0' <= *itr && *itr <= '9' && i < power_decimal_precision; i *= 10) {
-                    d = d * 10 + *itr - '0';
-                    ++itr;
-                }
-                a += d / i;
+                    constexpr std::uint_fast64_t power_decimal_precision = power(10ULL, decimal_precision);
+                    T d = 0;
+                    std::uint_fast64_t i = 1;
+                    for (; '0' <= *itr && *itr <= '9' && i < power_decimal_precision; i *= 10) {
+                        d = d * 10 + *itr - '0';
+                        ++itr;
+                    }
+                    a += d / i;
                 }
                 while ('0' <= *itr && *itr <= '9') ++itr;
             }
             if constexpr (!std::is_unsigned_v<T>) if (sgn) a = -a;
         }
-        template<KYOPRO_BASE_UINT i = 0, class T, std::enable_if_t<is_agg_v<T> && !has_scan<T>::value>* = nullptr>
+        template<std::size_t i = 0, class T, std::enable_if_t<is_agg_v<T> && !has_scan<T>::value>* = nullptr>
         void scan(T& a) {
             if constexpr (i < std::tuple_size_v<T>) {
                 scan(std::get<i>(a));
                 scan<i + 1>(a);
             }
         }
-        template<class T, std::enable_if_t<is_iterable_v<T> && !has_scan<T>::value>* = nullptr>
+        template<class T, std::enable_if_t<is_range_v<T> && !has_scan<T>::value>* = nullptr>
         void scan(T& a) {
             for (auto&& i: a) scan(i);
         }

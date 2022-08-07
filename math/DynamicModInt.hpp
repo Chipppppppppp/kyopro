@@ -9,11 +9,10 @@
 #include "Montgomery.hpp"
 
 namespace kyopro {
-    template<class T, KYOPRO_BASE_UINT _kind = 0>
+    template<class T, std::size_t kind = 0>
     struct DynamicModInt {
         static_assert(std::is_unsigned_v<T>, "T must be unsigned integer");
         using value_type = T;
-        static constexpr KYOPRO_BASE_INT kind = _kind;
 
     private:
         using larger_type = uint_least_t<std::numeric_limits<T>::digits * 2>;
@@ -22,6 +21,10 @@ namespace kyopro {
 
     public:
         T value;
+
+        static constexpr KYOPRO_BASE_INT get_kind() noexcept {
+            return kind;
+        }
 
         static void set_mod(T mod) noexcept {
             montgomery.set_mod(mod);
@@ -49,7 +52,7 @@ namespace kyopro {
             return res;
         }
 
-        DynamicModInt power(KYOPRO_BASE_UINT n) const noexcept {
+        DynamicModInt power(std::uint_fast64_t n) const noexcept {
             DynamicModInt res = 1, a = *this;
             while (n > 0) {
                 if (n & 1) res = res * a;
@@ -150,7 +153,12 @@ namespace kyopro {
         }
     };
 
-    template<class T, KYOPRO_BASE_UINT kind>
+    namespace helper {
+        template<class T>
+        struct InternalDynamicModInt: DynamicModInt<T> {};
+    } // namespace helper
+
+    template<class T, std::size_t kind>
     struct Hash<DynamicModInt<T, kind>> {
         using value_type = DynamicModInt<T, kind>;
 

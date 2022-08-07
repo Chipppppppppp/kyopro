@@ -5,14 +5,13 @@
 #include <tuple>
 #include <type_traits>
 #include <utility>
-#include "../meta/settings.hpp"
 #include "../system/all.hpp"
 
 namespace kyopro::helper {
     template<std::size_t len>
-    constexpr KYOPRO_BASE_UINT va_args_size(const char (&s)[len]) noexcept {
+    constexpr std::size_t va_args_size(const char (&s)[len]) noexcept {
         if constexpr (len == 1) return 0;
-        KYOPRO_BASE_UINT cnt = 1;
+        std::size_t cnt = 1;
         std::uint_fast64_t bracket = 0;
         for (auto i: s) {
             if (i == '(') ++bracket;

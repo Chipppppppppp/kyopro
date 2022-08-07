@@ -1,4 +1,5 @@
 #pragma once
+#include <cstddef>
 #include <cstdint>
 #include <type_traits>
 #include "../algorithm/bit.hpp"
@@ -10,7 +11,7 @@ namespace kyopro {
         template<class T>
         constexpr bool operator ()(T x) const {
             using U = std::make_unsigned_t<T>;
-            using DynamicModInt = DynamicModInt<U, KYOPRO_BASE_UINT(-1)>;
+            using DynamicModInt = helper::InternalDynamicModInt<U>;
             U n = x;
             if (n <= 1) return false;
             if (!(n & 1)) return n == 2;

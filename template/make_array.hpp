@@ -1,6 +1,6 @@
 #pragma once
+#include <cstddef>
 #include <array>
-#include "../meta/settings.hpp"
 
 namespace kyopro {
     inline constexpr struct {
@@ -9,7 +9,7 @@ namespace kyopro {
             return init;
         }
 
-        template<class T, KYOPRO_BASE_UINT length, KYOPRO_BASE_UINT... lengths>
+        template<class T, std::size_t length, std::size_t... lengths>
         constexpr auto operator ()(const T& init = T()) noexcept {
             auto elm = operator ()<T, lengths...>(init);
             std::array<decltype(elm), length> res;

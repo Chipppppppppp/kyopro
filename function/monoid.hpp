@@ -4,68 +4,71 @@
 #include "../meta/constant.hpp"
 
 namespace kyopro {
-    template<class T, T _id = 0>
+    template<class T>
     struct Add {
-        static_assert(std::is_arithmetic_v<T>);
         using value_type = T;
 
         constexpr T id() const noexcept {
-            return _id;
+            return T{};
         }
 
-        constexpr T operator ()(T a, T b) const noexcept {
+        constexpr T operator ()(const T& a, const T& b) const noexcept {
             return a + b;
         }
 
-        constexpr T inverse(T a) const noexcept {
+        constexpr T inverse(const T& a) const noexcept {
             return -a;
         }
     };
 
-    template<class T, T _id = 1>
+    template<class T>
     struct Mul {
-        static_assert(std::is_arithmetic_v<T>);
         using value_type = T;
 
         constexpr T id() const noexcept {
-            return _id;
+            return 1;
         }
 
-        constexpr T operator ()(T a, T b) const noexcept {
+        constexpr T operator ()(const T& a, const T& b) const noexcept {
             return a * b;
         }
 
-        constexpr T inverse(T a) const noexcept {
-        static_assert(!std::is_integral_v<T>);
+        constexpr T inverse(const T& a) const noexcept {
             return 1 / a;
         }
     };
 
-    template<class T, T _id = std::is_integral_v<T> ? INF<T> : std::numeric_limits<T>::infinity()>
+    template<class T>
     struct Min {
-        static_assert(std::is_arithmetic_v<T>);
         using value_type = T;
 
         constexpr T id() const noexcept {
-            return _id;
+            return std::is_integral_v<T> ? INF<T> : std::numeric_limits<T>::infinity();
         }
 
-        constexpr T operator ()(T a, T b) const noexcept {
+        constexpr T operator ()(const T& a, const T& b) const noexcept {
             return a < b ? a : b;
         }
     };
 
-    template<class T, T _id = std::is_integral_v<T> ? std::is_signed_v<T> ? -INF<T> : 0 : -std::numeric_limits<T>::infinity()>
+    template<class T>
     struct Max {
-        static_assert(std::is_arithmetic_v<T>);
         using value_type = T;
 
         constexpr T id() const noexcept {
-            return _id;
+            return std::is_integral_v<T> ? std::is_signed_v<T> ? -INF<T> : 0 : -std::numeric_limits<T>::infinity();
         }
 
-        constexpr T operator ()(T a, T b) const noexcept {
+        constexpr T operator ()(const T& a, const T& b) const noexcept {
             return a > b ? a : b;
         }
     };
+
+    template<class, class = void>
+    struct has_inversible: std::false_type {};
+    template<class T>
+    struct has_inverse<T, std::void_t<decltype(&T::inverse)>>: std::true_type {};
+
+    template<class T>
+    inline constexpr bool has_inverse_v = has_inverse<T>::value;
 } // namespace kyopro

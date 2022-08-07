@@ -37,7 +37,7 @@ namespace kyopro {
     using mint = ModInt<mod>;
     using dmint = DynamicModInt<KYOPRO_BASE_UINT>;
 
-    template<class T, KYOPRO_BASE_UINT idx, class... Args>
+    template<class T, std::size_t idx, class... Args>
     struct agg_type {
         using type = typename agg_type<T, idx - 1, T, Args...>::type;
     };
@@ -50,7 +50,7 @@ namespace kyopro {
         using type = std::pair<T, T>;
     };
 
-    template<class T, KYOPRO_BASE_UINT idx>
+    template<class T, std::size_t idx>
     using agg = typename agg_type<T, idx>::type;
     using ll1 = agg<ll, 1>;
     using ll2 = agg<ll, 2>;
