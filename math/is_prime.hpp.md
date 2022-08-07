@@ -1,65 +1,59 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/aggregate.hpp
     title: meta/aggregate.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
-    path: all/all.hpp
-    title: all/all.hpp
-  - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"math/is_prime.hpp\"\n#include <cstdint>\n#include <type_traits>\n\
-    #line 2 \"algorithm/bit.hpp\"\n#include <limits>\n#line 3 \"meta/settings.hpp\"\
-    \n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n\
-    #ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef\
-    \ KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n\
-    #define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(998244353)\n#endif\n\n\
-    #ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
+  bundledCode: "#line 2 \"math/is_prime.hpp\"\n#include <cstddef>\n#include <cstdint>\n\
+    #include <type_traits>\n#line 2 \"algorithm/bit.hpp\"\n#include <limits>\n#line\
+    \ 3 \"meta/settings.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT\
+    \ std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n\
+    #endif\n\n#ifndef KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\
+    \n#ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(998244353)\n\
+    #endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 5 \"algorithm/bit.hpp\"\n\nnamespace kyopro {\n    inline constexpr\
@@ -104,39 +98,44 @@ data:
     \ KYOPRO_BASE_INT operator ()(T x) const noexcept {\n            if (x == 0) return\
     \ 0;\n            return bit_len(x - static_cast<T>(1));\n        }\n    } ceil_bit;\n\
     } // namespace kyopro\n#line 2 \"math/DynamicModInt.hpp\"\n#include <cassert>\n\
-    #include <cstddef>\n#line 4 \"algorithm/Hash.hpp\"\n#include <functional>\n#include\
-    \ <tuple>\n#line 7 \"algorithm/Hash.hpp\"\n#include <utility>\n#line 2 \"meta/trait.hpp\"\
-    \n#include <iterator>\n#include <queue>\n#line 5 \"meta/trait.hpp\"\n#include\
-    \ <stack>\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct std::is_integral<__int128_t>:\
+    #line 4 \"algorithm/Hash.hpp\"\n#include <functional>\n#include <tuple>\n#line\
+    \ 7 \"algorithm/Hash.hpp\"\n#include <utility>\n#line 3 \"meta/trait.hpp\"\n#include\
+    \ <iterator>\n#include <queue>\n#line 6 \"meta/trait.hpp\"\n#include <stack>\n\
+    #line 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct std::is_integral<__int128_t>:\
     \ std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type\
     \ {};\ntemplate<>\nstruct std::is_floating_point<__float128>: std::true_type {};\n\
-    \nnamespace kyopro {\n    template<KYOPRO_BASE_UINT size>\n    struct int_least\
-    \ {\n    private:\n        static constexpr auto get_type() noexcept {\n     \
-    \       static_assert(size <= 128, \"Integer size is too large\");\n         \
-    \   if constexpr (size <= 8) return std::int_least8_t{};\n            else if\
-    \ constexpr (size <= 16) return std::int_least16_t{};\n            else if constexpr\
-    \ (size <= 32) return std::int_least32_t{};\n            else if constexpr (size\
-    \ <= 64) return std::int_least64_t{};\n            else return __int128_t{};\n\
-    \        }\n\n    public:\n        using type = decltype(get_type());\n    };\n\
-    \n    template<KYOPRO_BASE_UINT size>\n    using int_least_t = typename int_least<size>::type;\n\
-    \n    template<KYOPRO_BASE_UINT size>\n    struct uint_least {\n    private:\n\
-    \        static constexpr auto get_type() noexcept {\n            static_assert(size\
+    \nnamespace kyopro {\n    template<std::size_t size>\n    struct int_least {\n\
+    \    private:\n        static constexpr auto get_type() noexcept {\n         \
+    \   static_assert(size <= 128, \"Integer size is too large\");\n            if\
+    \ constexpr (size <= 8) return std::int_least8_t{};\n            else if constexpr\
+    \ (size <= 16) return std::int_least16_t{};\n            else if constexpr (size\
+    \ <= 32) return std::int_least32_t{};\n            else if constexpr (size <=\
+    \ 64) return std::int_least64_t{};\n            else return __int128_t{};\n  \
+    \      }\n\n    public:\n        using type = decltype(get_type());\n    };\n\n\
+    \    template<std::size_t size>\n    using int_least_t = typename int_least<size>::type;\n\
+    \n    template<std::size_t size>\n    struct uint_least {\n    private:\n    \
+    \    static constexpr auto get_type() noexcept {\n            static_assert(size\
     \ <= 128, \"Integer size is too large\");\n            if constexpr (size <= 8)\
     \ return std::uint_least8_t{};\n            else if constexpr (size <= 16) return\
     \ std::uint_least16_t{};\n            else if constexpr (size <= 32) return std::uint_least32_t{};\n\
     \            else if constexpr (size <= 64) return std::uint_least64_t{};\n  \
     \          else return __uint128_t{};\n        }\n\n    public:\n        using\
-    \ type = decltype(get_type());\n    };\n\n    template<KYOPRO_BASE_UINT size>\n\
-    \    using uint_least_t = typename uint_least<size>::type;\n\n    template<class,\
+    \ type = decltype(get_type());\n    };\n\n    template<std::size_t size>\n   \
+    \ using uint_least_t = typename uint_least<size>::type;\n\n    template<class,\
     \ class = void>\n    struct is_iterator: std::false_type {};\n    template<class\
     \ T>\n    struct is_iterator<T, std::void_t<typename std::iterator_traits<T>::iterator_category>>:\
     \ std::true_type {};\n\n    template<class T>\n    constexpr bool is_iterator_v\
-    \ = is_iterator<T>::value;\n\n    template<class, class = void>\n    struct is_iterable:\
-    \ std::false_type {};\n    template<class T>\n    struct is_iterable<T, std::void_t<decltype(std::begin(std::declval<std::add_lvalue_reference_t<T>>()),\
+    \ = is_iterator<T>::value;\n\n    template<class, class = void>\n    struct is_range:\
+    \ std::false_type {};\n    template<class T>\n    struct is_range<T, std::void_t<decltype(std::begin(std::declval<std::add_lvalue_reference_t<T>>()),\
     \ std::end(std::declval<std::add_lvalue_reference_t<T>>()))>>: std::true_type\
-    \ {};\n\n    template<class T>\n    constexpr bool is_iterable_v = is_iterable<T>::value;\n\
-    \n    template<class T>\n    struct iterable_value {\n        using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\n\
-    \    };\n\n    template<class T>\n    using iterable_value_t = typename iterable_value<T>::type;\n\
+    \ {};\n\n    template<class T>\n    constexpr bool is_range_v = is_range<T>::value;\n\
+    \n    template<class T>\n    struct range_iterator {\n        using type = std::decay_t<decltype(std::begin(std::declval<T>()))>;\n\
+    \    };\n\n    template<class T>\n    using range_iterator_t = typename range_iterator<T>::type;\n\
+    \n    template<class T>\n    struct range_const_iterator {\n        using type\
+    \ = std::decay_t<decltype(std::cbegin(std::declval<T>()))>;\n    };\n\n    template<class\
+    \ T>\n    using range_const_iterator_t = typename range_iterator<T>::type;\n\n\
+    \    template<class T>\n    struct range_value {\n        using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\n\
+    \    };\n\n    template<class T>\n    using range_value_t = typename range_value<T>::type;\n\
     \n    namespace helper {\n        struct CastableToAny {\n            template<class\
     \ T>\n            operator T() const noexcept;\n        };\n\n        template<class\
     \ T, std::size_t... idx, std::void_t<decltype(T{((void)idx, CastableToAny{})...})>*\
@@ -222,8 +221,8 @@ data:
     \        using type = typename decltype(get_type(std::declval<T>(), false))::type;\n\
     \    };\n\n    template<std::size_t idx, class T>\n    using aggregate_element_t\
     \ = typename aggregate_element<idx, T>::type;\n\n    template<class T>\n    struct\
-    \ is_agg: std::conjunction<std::is_aggregate<T>, std::negation<is_iterable<T>>>\
-    \ {};\n\n    template<class T>\n    inline constexpr bool is_agg_v = is_agg<T>::value;\n\
+    \ is_agg: std::conjunction<std::is_aggregate<T>, std::negation<is_range<T>>> {};\n\
+    \n    template<class T>\n    inline constexpr bool is_agg_v = is_agg<T>::value;\n\
     } // namespace kyopro\n#line 7 \"meta/aggregate.hpp\"\n\nnamespace kyopro {\n\
     \    namespace helper {\n        #define DEFINE_ACCESS(n, ...)               \
     \                                                            \\\n        template<std::size_t\
@@ -248,20 +247,20 @@ data:
     \ {\n        using value_type = T;\n\n        constexpr std::size_t operator ()(T\
     \ a) const noexcept {\n            return std::hash<T>::operator ()(a);\n    \
     \    }\n    };\n\n    template<class T>\n    struct Hash<T, std::enable_if_t<is_agg_v<T>>>\
-    \ {\n        using value_type = T;\n\n        template<KYOPRO_BASE_UINT i = 0>\n\
-    \        constexpr std::size_t operator ()(const T& a) const noexcept {\n    \
-    \        if constexpr (i == aggregate_size_v<T>) return aggregate_size_v<T>;\n\
-    \            else {\n                std::uint_fast64_t seed = operator()<i +\
-    \ 1>(a);\n                return seed ^ (Hash<aggregate_element_t<i, T>>()(access<i>(a))\
+    \ {\n        using value_type = T;\n\n        template<std::size_t i = 0>\n  \
+    \      constexpr std::size_t operator ()(const T& a) const noexcept {\n      \
+    \      if constexpr (i == aggregate_size_v<T>) return aggregate_size_v<T>;\n \
+    \           else {\n                std::uint_fast64_t seed = operator()<i + 1>(a);\n\
+    \                return seed ^ (Hash<aggregate_element_t<i, T>>()(access<i>(a))\
     \ + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4));\n            }\n     \
-    \   }\n    };\n\n    template<class T>\n    struct Hash<T, std::enable_if_t<is_iterable_v<T>>>:\
-    \ Hash<iterable_value_t<T>> {\n        using value_type = T;\n\n        constexpr\
+    \   }\n    };\n\n    template<class T>\n    struct Hash<T, std::enable_if_t<is_range_v<T>>>:\
+    \ Hash<range_value_t<T>> {\n        using value_type = T;\n\n        constexpr\
     \ std::size_t operator ()(const T& a) const {\n            std::uint_fast64_t\
-    \ seed = a.size();\n            for (auto&& i: a) seed ^= Hash<iterable_value_t<T>>(i)\
+    \ seed = a.size();\n            for (auto&& i: a) seed ^= Hash<range_value_t<T>>(i)\
     \ + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4);\n            return seed;\n\
     \        }\n    };\n} // namespace kyopro\n#line 2 \"meta/constant.hpp\"\n#include\
     \ <array>\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n    inline constexpr\
-    \ struct {\n        template<class T>\n        constexpr T operator ()(T a, KYOPRO_BASE_UINT\
+    \ struct {\n        template<class T>\n        constexpr T operator ()(T a, std::uint_fast64_t\
     \ n, T init = 1) const noexcept {\n            while (n > 0) {\n             \
     \   if (n & 1) init *= a;\n                a *= a;\n                n >>= 1;\n\
     \            }\n            return init;\n        }\n    } power;\n} // namespace\
@@ -294,26 +293,26 @@ data:
     \ x) const noexcept {\n            return (x + static_cast<larger_type>(static_cast<T>(x)\
     \ * r) * mod) >> std::numeric_limits<T>::digits;\n        }\n    };\n} // namespace\
     \ kyopro\n#line 10 \"math/DynamicModInt.hpp\"\n\nnamespace kyopro {\n    template<class\
-    \ T, KYOPRO_BASE_UINT _kind = 0>\n    struct DynamicModInt {\n        static_assert(std::is_unsigned_v<T>,\
-    \ \"T must be unsigned integer\");\n        using value_type = T;\n        static\
-    \ constexpr KYOPRO_BASE_INT kind = _kind;\n\n    private:\n        using larger_type\
-    \ = uint_least_t<std::numeric_limits<T>::digits * 2>;\n\n        inline static\
-    \ Montgomery<T> montgomery;\n\n    public:\n        T value;\n\n        static\
-    \ void set_mod(T mod) noexcept {\n            montgomery.set_mod(mod);\n     \
-    \   }\n\n        static KYOPRO_BASE_INT get_mod() noexcept {\n            return\
-    \ montgomery.mod;\n        }\n\n        KYOPRO_BASE_INT get_val() noexcept {\n\
-    \            return montgomery.inverse_transform(value);\n        }\n\n      \
-    \  DynamicModInt() noexcept = default;\n        DynamicModInt(T value) noexcept:\
-    \ value(montgomery.transform(value % montgomery.mod + montgomery.mod)) {}\n\n\
-    \        template<class U>\n        explicit operator U() const noexcept {\n \
-    \           return montgomery.inverse_transform(value);\n        }\n\n       \
-    \ static DynamicModInt raw(T value) noexcept {\n            DynamicModInt res;\n\
-    \            res.value = montgomery.transform(value);\n            return res;\n\
-    \        }\n\n        DynamicModInt power(KYOPRO_BASE_UINT n) const noexcept {\n\
-    \            DynamicModInt res = 1, a = *this;\n            while (n > 0) {\n\
-    \                if (n & 1) res = res * a;\n                a = a * a;\n     \
-    \           n >>= 1;\n            }\n            return res;\n        }\n\n  \
-    \      DynamicModInt inverse() const noexcept {\n            return power(montgomery.mod\
+    \ T, std::size_t kind = 0>\n    struct DynamicModInt {\n        static_assert(std::is_unsigned_v<T>,\
+    \ \"T must be unsigned integer\");\n        using value_type = T;\n\n    private:\n\
+    \        using larger_type = uint_least_t<std::numeric_limits<T>::digits * 2>;\n\
+    \n        inline static Montgomery<T> montgomery;\n\n    public:\n        T value;\n\
+    \n        static constexpr KYOPRO_BASE_INT get_kind() noexcept {\n           \
+    \ return kind;\n        }\n\n        static void set_mod(T mod) noexcept {\n \
+    \           montgomery.set_mod(mod);\n        }\n\n        static KYOPRO_BASE_INT\
+    \ get_mod() noexcept {\n            return montgomery.mod;\n        }\n\n    \
+    \    KYOPRO_BASE_INT get_val() noexcept {\n            return montgomery.inverse_transform(value);\n\
+    \        }\n\n        DynamicModInt() noexcept = default;\n        DynamicModInt(T\
+    \ value) noexcept: value(montgomery.transform(value % montgomery.mod + montgomery.mod))\
+    \ {}\n\n        template<class U>\n        explicit operator U() const noexcept\
+    \ {\n            return montgomery.inverse_transform(value);\n        }\n\n  \
+    \      static DynamicModInt raw(T value) noexcept {\n            DynamicModInt\
+    \ res;\n            res.value = montgomery.transform(value);\n            return\
+    \ res;\n        }\n\n        DynamicModInt power(std::uint_fast64_t n) const noexcept\
+    \ {\n            DynamicModInt res = 1, a = *this;\n            while (n > 0)\
+    \ {\n                if (n & 1) res = res * a;\n                a = a * a;\n \
+    \               n >>= 1;\n            }\n            return res;\n        }\n\n\
+    \        DynamicModInt inverse() const noexcept {\n            return power(montgomery.mod\
     \ - 2);\n        }\n\n        DynamicModInt operator +() const noexcept {\n  \
     \          return *this;\n        }\n\n        DynamicModInt operator -() const\
     \ noexcept {\n            return value == 0 ? 0 : montgomery.mod - value;\n  \
@@ -350,16 +349,17 @@ data:
     \            value = montgomery.transform(value % montgomery.mod + montgomery.mod);\n\
     \        }\n\n        template<class Printer>\n        void print(Printer& printer)\
     \ const {\n            printer.print(montgomery.inverse_transform(value));\n \
-    \       }\n    };\n\n    template<class T, KYOPRO_BASE_UINT kind>\n    struct\
-    \ Hash<DynamicModInt<T, kind>> {\n        using value_type = DynamicModInt<T,\
-    \ kind>;\n\n        std::size_t operator ()(DynamicModInt<T, kind> a) const noexcept\
-    \ {\n            return static_cast<std::size_t>(a);\n        }\n    };\n} //\
-    \ namespace kyopro\n#line 7 \"math/is_prime.hpp\"\n\nnamespace kyopro {\n    inline\
-    \ constexpr struct {\n        template<class T>\n        constexpr bool operator\
-    \ ()(T x) const {\n            using U = std::make_unsigned_t<T>;\n          \
-    \  using DynamicModInt = DynamicModInt<U, KYOPRO_BASE_UINT(-1)>;\n           \
-    \ U n = x;\n            if (n <= 1) return false;\n            if (!(n & 1)) return\
-    \ n == 2;\n            DynamicModInt::set_mod(n);\n            std::uint_fast64_t\
+    \       }\n    };\n\n    namespace helper {\n        template<class T>\n     \
+    \   struct InternalDynamicModInt: DynamicModInt<T> {};\n    } // namespace helper\n\
+    \n    template<class T, std::size_t kind>\n    struct Hash<DynamicModInt<T, kind>>\
+    \ {\n        using value_type = DynamicModInt<T, kind>;\n\n        std::size_t\
+    \ operator ()(DynamicModInt<T, kind> a) const noexcept {\n            return static_cast<std::size_t>(a);\n\
+    \        }\n    };\n} // namespace kyopro\n#line 8 \"math/is_prime.hpp\"\n\nnamespace\
+    \ kyopro {\n    inline constexpr struct {\n        template<class T>\n       \
+    \ constexpr bool operator ()(T x) const {\n            using U = std::make_unsigned_t<T>;\n\
+    \            using DynamicModInt = helper::InternalDynamicModInt<U>;\n       \
+    \     U n = x;\n            if (n <= 1) return false;\n            if (!(n & 1))\
+    \ return n == 2;\n            DynamicModInt::set_mod(n);\n            std::uint_fast64_t\
     \ d = (n - 1) >> trailing_zero(n - 1);\n            DynamicModInt one = 1, minus_one\
     \ = n - 1;\n            auto ng = [&](std::uint_fast64_t a) noexcept {\n     \
     \           auto y = DynamicModInt(a).power(d);\n                std::uint_fast64_t\
@@ -373,26 +373,27 @@ data:
     \ {\n                if (n <= i) return true;\n                if (ng(i)) return\
     \ false;\n                }\n            }\n            return true;\n       \
     \ }\n    } is_prime;\n} // namespace kyopro\n"
-  code: "#pragma once\n#include <cstdint>\n#include <type_traits>\n#include \"../algorithm/bit.hpp\"\
-    \n#include \"../meta/settings.hpp\"\n#include \"DynamicModInt.hpp\"\n\nnamespace\
-    \ kyopro {\n    inline constexpr struct {\n        template<class T>\n       \
-    \ constexpr bool operator ()(T x) const {\n            using U = std::make_unsigned_t<T>;\n\
-    \            using DynamicModInt = DynamicModInt<U, KYOPRO_BASE_UINT(-1)>;\n \
-    \           U n = x;\n            if (n <= 1) return false;\n            if (!(n\
-    \ & 1)) return n == 2;\n            DynamicModInt::set_mod(n);\n            std::uint_fast64_t\
-    \ d = (n - 1) >> trailing_zero(n - 1);\n            DynamicModInt one = 1, minus_one\
-    \ = n - 1;\n            auto ng = [&](std::uint_fast64_t a) noexcept {\n     \
-    \           auto y = DynamicModInt(a).power(d);\n                std::uint_fast64_t\
-    \ t = d;\n                while (y != one and y != minus_one and t != n - 1) y\
-    \ *= y, t <<= 1;\n                if (y != minus_one and !(t & 1)) return true;\n\
-    \                return false;\n            };\n            if (std::numeric_limits<U>::digits\
-    \ <= 32 || n < (static_cast<U>(1) << 32)) {\n                for (auto i: (std::uint_fast64_t[3]){2,\
-    \ 7, 61}) {\n                if (n <= i) return true;\n                if (ng(i))\
-    \ return false;\n                }\n            } else {\n                for\
-    \ (auto i: (std::uint_fast64_t[7]){2, 325, 9375, 28178, 450775, 9780504, 1795265022})\
-    \ {\n                if (n <= i) return true;\n                if (ng(i)) return\
-    \ false;\n                }\n            }\n            return true;\n       \
-    \ }\n    } is_prime;\n} // namespace kyopro"
+  code: "#pragma once\n#include <cstddef>\n#include <cstdint>\n#include <type_traits>\n\
+    #include \"../algorithm/bit.hpp\"\n#include \"../meta/settings.hpp\"\n#include\
+    \ \"DynamicModInt.hpp\"\n\nnamespace kyopro {\n    inline constexpr struct {\n\
+    \        template<class T>\n        constexpr bool operator ()(T x) const {\n\
+    \            using U = std::make_unsigned_t<T>;\n            using DynamicModInt\
+    \ = helper::InternalDynamicModInt<U>;\n            U n = x;\n            if (n\
+    \ <= 1) return false;\n            if (!(n & 1)) return n == 2;\n            DynamicModInt::set_mod(n);\n\
+    \            std::uint_fast64_t d = (n - 1) >> trailing_zero(n - 1);\n       \
+    \     DynamicModInt one = 1, minus_one = n - 1;\n            auto ng = [&](std::uint_fast64_t\
+    \ a) noexcept {\n                auto y = DynamicModInt(a).power(d);\n       \
+    \         std::uint_fast64_t t = d;\n                while (y != one and y !=\
+    \ minus_one and t != n - 1) y *= y, t <<= 1;\n                if (y != minus_one\
+    \ and !(t & 1)) return true;\n                return false;\n            };\n\
+    \            if (std::numeric_limits<U>::digits <= 32 || n < (static_cast<U>(1)\
+    \ << 32)) {\n                for (auto i: (std::uint_fast64_t[3]){2, 7, 61}) {\n\
+    \                if (n <= i) return true;\n                if (ng(i)) return false;\n\
+    \                }\n            } else {\n                for (auto i: (std::uint_fast64_t[7]){2,\
+    \ 325, 9375, 28178, 450775, 9780504, 1795265022}) {\n                if (n <=\
+    \ i) return true;\n                if (ng(i)) return false;\n                }\n\
+    \            }\n            return true;\n        }\n    } is_prime;\n} // namespace\
+    \ kyopro"
   dependsOn:
   - algorithm/bit.hpp
   - meta/settings.hpp
@@ -406,12 +407,10 @@ data:
   isVerificationFile: false
   path: math/is_prime.hpp
   requiredBy:
-  - all/all.hpp
   - math/all.hpp
   - math/factorize.hpp
-  - all.hpp
-  timestamp: '2022-07-28 17:38:13+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-08-08 07:54:18+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp
   - verify/yosupo/factorize.test.cpp

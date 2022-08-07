@@ -8,12 +8,6 @@ data:
   - icon: ':warning:'
     path: algorithm/all.hpp
     title: algorithm/all.hpp
-  - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
-    path: all/all.hpp
-    title: all/all.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -31,8 +25,6 @@ data:
   isVerificationFile: false
   path: function/identity.hpp
   requiredBy:
-  - all/all.hpp
-  - all.hpp
   - algorithm/algorithm.hpp
   - algorithm/all.hpp
   timestamp: '2022-07-28 17:38:13+09:00'

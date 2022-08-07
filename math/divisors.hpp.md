@@ -1,16 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
   _extendedRequiredBy:
-  - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
-    path: all/all.hpp
-    title: all/all.hpp
   - icon: ':warning:'
     path: math/all.hpp
     title: math/all.hpp
@@ -30,7 +24,7 @@ data:
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 5 \"math/divisors.hpp\"\n\nnamespace kyopro {\n    inline constexpr\
     \ struct {\n        template<class Container = std::vector<KYOPRO_BASE_INT>>\n\
-    \        Container operator ()(KYOPRO_BASE_UINT n) const {\n            Container\
+    \        Container operator ()(std::uint_fast64_t n) const {\n            Container\
     \ lower, upper;\n            std::uint_fast64_t i;\n            for (i = 1; i\
     \ * i < n; ++i) if (n % i == 0) {\n                lower.emplace_back(i);\n  \
     \              upper.emplace_back(n / i);\n            }\n            if (i *\
@@ -38,7 +32,7 @@ data:
     \            return lower;\n        }\n    } divisors;\n} // namespace kyopro\n"
   code: "#pragma once\n#include <cstdint>\n#include <vector>\n#include \"../meta/settings.hpp\"\
     \n\nnamespace kyopro {\n    inline constexpr struct {\n        template<class\
-    \ Container = std::vector<KYOPRO_BASE_INT>>\n        Container operator ()(KYOPRO_BASE_UINT\
+    \ Container = std::vector<KYOPRO_BASE_INT>>\n        Container operator ()(std::uint_fast64_t\
     \ n) const {\n            Container lower, upper;\n            std::uint_fast64_t\
     \ i;\n            for (i = 1; i * i < n; ++i) if (n % i == 0) {\n            \
     \    lower.emplace_back(i);\n                upper.emplace_back(n / i);\n    \
@@ -50,10 +44,8 @@ data:
   isVerificationFile: false
   path: math/divisors.hpp
   requiredBy:
-  - all/all.hpp
   - math/all.hpp
-  - all.hpp
-  timestamp: '2022-07-28 17:38:13+09:00'
+  timestamp: '2022-08-08 07:54:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/divisors.hpp

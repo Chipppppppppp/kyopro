@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
   - icon: ':warning:'
     path: algorithm/algorithm.hpp
     title: algorithm/algorithm.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
@@ -16,22 +16,16 @@ data:
   - icon: ':warning:'
     path: function/identity.hpp
     title: function/identity.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/aggregate.hpp
     title: meta/aggregate.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
-    path: all/all.hpp
-    title: all/all.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -109,37 +103,42 @@ data:
     \   }\n    };\n} // namespace kyopro\n#line 3 \"function/identity.hpp\"\n\nnamespace\
     \ kyopro {\n    struct Identity {\n        template<class T>\n        T&& operator\
     \ ()(T&& a) const noexcept {\n            return std::forward<T>(a);\n       \
-    \ }\n    };\n}\n#line 3 \"meta/trait.hpp\"\n#include <queue>\n#line 5 \"meta/trait.hpp\"\
-    \n#include <stack>\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct std::is_integral<__int128_t>:\
-    \ std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type\
-    \ {};\ntemplate<>\nstruct std::is_floating_point<__float128>: std::true_type {};\n\
-    \nnamespace kyopro {\n    template<KYOPRO_BASE_UINT size>\n    struct int_least\
-    \ {\n    private:\n        static constexpr auto get_type() noexcept {\n     \
-    \       static_assert(size <= 128, \"Integer size is too large\");\n         \
-    \   if constexpr (size <= 8) return std::int_least8_t{};\n            else if\
-    \ constexpr (size <= 16) return std::int_least16_t{};\n            else if constexpr\
-    \ (size <= 32) return std::int_least32_t{};\n            else if constexpr (size\
-    \ <= 64) return std::int_least64_t{};\n            else return __int128_t{};\n\
-    \        }\n\n    public:\n        using type = decltype(get_type());\n    };\n\
-    \n    template<KYOPRO_BASE_UINT size>\n    using int_least_t = typename int_least<size>::type;\n\
-    \n    template<KYOPRO_BASE_UINT size>\n    struct uint_least {\n    private:\n\
-    \        static constexpr auto get_type() noexcept {\n            static_assert(size\
+    \ }\n    };\n}\n#line 2 \"meta/trait.hpp\"\n#include <cstddef>\n#line 4 \"meta/trait.hpp\"\
+    \n#include <queue>\n#line 6 \"meta/trait.hpp\"\n#include <stack>\n#line 9 \"meta/trait.hpp\"\
+    \n\ntemplate<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
+    struct std::is_integral<__uint128_t>: std::true_type {};\ntemplate<>\nstruct std::is_floating_point<__float128>:\
+    \ std::true_type {};\n\nnamespace kyopro {\n    template<std::size_t size>\n \
+    \   struct int_least {\n    private:\n        static constexpr auto get_type()\
+    \ noexcept {\n            static_assert(size <= 128, \"Integer size is too large\"\
+    );\n            if constexpr (size <= 8) return std::int_least8_t{};\n       \
+    \     else if constexpr (size <= 16) return std::int_least16_t{};\n          \
+    \  else if constexpr (size <= 32) return std::int_least32_t{};\n            else\
+    \ if constexpr (size <= 64) return std::int_least64_t{};\n            else return\
+    \ __int128_t{};\n        }\n\n    public:\n        using type = decltype(get_type());\n\
+    \    };\n\n    template<std::size_t size>\n    using int_least_t = typename int_least<size>::type;\n\
+    \n    template<std::size_t size>\n    struct uint_least {\n    private:\n    \
+    \    static constexpr auto get_type() noexcept {\n            static_assert(size\
     \ <= 128, \"Integer size is too large\");\n            if constexpr (size <= 8)\
     \ return std::uint_least8_t{};\n            else if constexpr (size <= 16) return\
     \ std::uint_least16_t{};\n            else if constexpr (size <= 32) return std::uint_least32_t{};\n\
     \            else if constexpr (size <= 64) return std::uint_least64_t{};\n  \
     \          else return __uint128_t{};\n        }\n\n    public:\n        using\
-    \ type = decltype(get_type());\n    };\n\n    template<KYOPRO_BASE_UINT size>\n\
-    \    using uint_least_t = typename uint_least<size>::type;\n\n    template<class,\
+    \ type = decltype(get_type());\n    };\n\n    template<std::size_t size>\n   \
+    \ using uint_least_t = typename uint_least<size>::type;\n\n    template<class,\
     \ class = void>\n    struct is_iterator: std::false_type {};\n    template<class\
     \ T>\n    struct is_iterator<T, std::void_t<typename std::iterator_traits<T>::iterator_category>>:\
     \ std::true_type {};\n\n    template<class T>\n    constexpr bool is_iterator_v\
-    \ = is_iterator<T>::value;\n\n    template<class, class = void>\n    struct is_iterable:\
-    \ std::false_type {};\n    template<class T>\n    struct is_iterable<T, std::void_t<decltype(std::begin(std::declval<std::add_lvalue_reference_t<T>>()),\
+    \ = is_iterator<T>::value;\n\n    template<class, class = void>\n    struct is_range:\
+    \ std::false_type {};\n    template<class T>\n    struct is_range<T, std::void_t<decltype(std::begin(std::declval<std::add_lvalue_reference_t<T>>()),\
     \ std::end(std::declval<std::add_lvalue_reference_t<T>>()))>>: std::true_type\
-    \ {};\n\n    template<class T>\n    constexpr bool is_iterable_v = is_iterable<T>::value;\n\
-    \n    template<class T>\n    struct iterable_value {\n        using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\n\
-    \    };\n\n    template<class T>\n    using iterable_value_t = typename iterable_value<T>::type;\n\
+    \ {};\n\n    template<class T>\n    constexpr bool is_range_v = is_range<T>::value;\n\
+    \n    template<class T>\n    struct range_iterator {\n        using type = std::decay_t<decltype(std::begin(std::declval<T>()))>;\n\
+    \    };\n\n    template<class T>\n    using range_iterator_t = typename range_iterator<T>::type;\n\
+    \n    template<class T>\n    struct range_const_iterator {\n        using type\
+    \ = std::decay_t<decltype(std::cbegin(std::declval<T>()))>;\n    };\n\n    template<class\
+    \ T>\n    using range_const_iterator_t = typename range_iterator<T>::type;\n\n\
+    \    template<class T>\n    struct range_value {\n        using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\n\
+    \    };\n\n    template<class T>\n    using range_value_t = typename range_value<T>::type;\n\
     \n    namespace helper {\n        struct CastableToAny {\n            template<class\
     \ T>\n            operator T() const noexcept;\n        };\n\n        template<class\
     \ T, std::size_t... idx, std::void_t<decltype(T{((void)idx, CastableToAny{})...})>*\
@@ -225,8 +224,8 @@ data:
     \        using type = typename decltype(get_type(std::declval<T>(), false))::type;\n\
     \    };\n\n    template<std::size_t idx, class T>\n    using aggregate_element_t\
     \ = typename aggregate_element<idx, T>::type;\n\n    template<class T>\n    struct\
-    \ is_agg: std::conjunction<std::is_aggregate<T>, std::negation<is_iterable<T>>>\
-    \ {};\n\n    template<class T>\n    inline constexpr bool is_agg_v = is_agg<T>::value;\n\
+    \ is_agg: std::conjunction<std::is_aggregate<T>, std::negation<is_range<T>>> {};\n\
+    \n    template<class T>\n    inline constexpr bool is_agg_v = is_agg<T>::value;\n\
     } // namespace kyopro\n#line 13 \"algorithm/algorithm.hpp\"\n\nnamespace kyopro::range\
     \ {\n    /*\n    inline constexpr struct {\n        template<class Container =\
     \ void, class T, class Proj = Identity, class Compare = Less>\n        constexpr\
@@ -247,14 +246,14 @@ data:
     \ {\n        template<class T, class Proj = Identity>\n        constexpr bool\
     \ operator ()(T&& range, const Proj& proj = {}) const {\n            return std::none_of(std::begin(range),\
     \ std::end(range), proj);\n        }\n    } none_of;\n} // namespace kyopro::range\n\
-    #line 2 \"algorithm/Hash.hpp\"\n#include <cstddef>\n#line 5 \"algorithm/Hash.hpp\"\
-    \n#include <tuple>\n#line 7 \"meta/aggregate.hpp\"\n\nnamespace kyopro {\n   \
-    \ namespace helper {\n        #define DEFINE_ACCESS(n, ...)                  \
-    \                                                         \\\n        template<std::size_t\
-    \ idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>> == n>* = nullptr>\
-    \ \\\n            constexpr decltype(auto) access_impl(T&& aggregate, char) noexcept\
-    \ {                                \\\n            auto&& [__VA_ARGS__] = std::forward<T>(aggregate);\
-    \                                                  \\\n            return std::get<idx>(std::forward_as_tuple(__VA_ARGS__));\
+    #line 5 \"algorithm/Hash.hpp\"\n#include <tuple>\n#line 7 \"meta/aggregate.hpp\"\
+    \n\nnamespace kyopro {\n    namespace helper {\n        #define DEFINE_ACCESS(n,\
+    \ ...)                                                                       \
+    \    \\\n        template<std::size_t idx, class T, std::enable_if_t<aggregate_size_v<std::decay_t<T>>\
+    \ == n>* = nullptr> \\\n            constexpr decltype(auto) access_impl(T&& aggregate,\
+    \ char) noexcept {                                \\\n            auto&& [__VA_ARGS__]\
+    \ = std::forward<T>(aggregate);                                              \
+    \    \\\n            return std::get<idx>(std::forward_as_tuple(__VA_ARGS__));\
     \                                           \\\n        }\n\n        DEFINE_ACCESS(1,\
     \ a)\n        DEFINE_ACCESS(2, a, b)\n        DEFINE_ACCESS(3, a, b, c)\n    \
     \    DEFINE_ACCESS(4, a, b, c, d)\n        DEFINE_ACCESS(5, a, b, c, d, e)\n \
@@ -272,16 +271,16 @@ data:
     \ {\n        using value_type = T;\n\n        constexpr std::size_t operator ()(T\
     \ a) const noexcept {\n            return std::hash<T>::operator ()(a);\n    \
     \    }\n    };\n\n    template<class T>\n    struct Hash<T, std::enable_if_t<is_agg_v<T>>>\
-    \ {\n        using value_type = T;\n\n        template<KYOPRO_BASE_UINT i = 0>\n\
-    \        constexpr std::size_t operator ()(const T& a) const noexcept {\n    \
-    \        if constexpr (i == aggregate_size_v<T>) return aggregate_size_v<T>;\n\
-    \            else {\n                std::uint_fast64_t seed = operator()<i +\
-    \ 1>(a);\n                return seed ^ (Hash<aggregate_element_t<i, T>>()(access<i>(a))\
+    \ {\n        using value_type = T;\n\n        template<std::size_t i = 0>\n  \
+    \      constexpr std::size_t operator ()(const T& a) const noexcept {\n      \
+    \      if constexpr (i == aggregate_size_v<T>) return aggregate_size_v<T>;\n \
+    \           else {\n                std::uint_fast64_t seed = operator()<i + 1>(a);\n\
+    \                return seed ^ (Hash<aggregate_element_t<i, T>>()(access<i>(a))\
     \ + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4));\n            }\n     \
-    \   }\n    };\n\n    template<class T>\n    struct Hash<T, std::enable_if_t<is_iterable_v<T>>>:\
-    \ Hash<iterable_value_t<T>> {\n        using value_type = T;\n\n        constexpr\
+    \   }\n    };\n\n    template<class T>\n    struct Hash<T, std::enable_if_t<is_range_v<T>>>:\
+    \ Hash<range_value_t<T>> {\n        using value_type = T;\n\n        constexpr\
     \ std::size_t operator ()(const T& a) const {\n            std::uint_fast64_t\
-    \ seed = a.size();\n            for (auto&& i: a) seed ^= Hash<iterable_value_t<T>>(i)\
+    \ seed = a.size();\n            for (auto&& i: a) seed ^= Hash<range_value_t<T>>(i)\
     \ + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4);\n            return seed;\n\
     \        }\n    };\n} // namespace kyopro\n#line 5 \"algorithm/all.hpp\"\n"
   code: '#pragma once
@@ -302,10 +301,8 @@ data:
   - meta/aggregate.hpp
   isVerificationFile: false
   path: algorithm/all.hpp
-  requiredBy:
-  - all/all.hpp
-  - all.hpp
-  timestamp: '2022-07-28 18:02:24+09:00'
+  requiredBy: []
+  timestamp: '2022-08-08 07:54:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm/all.hpp

@@ -3,12 +3,6 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
-    path: all/all.hpp
-    title: all/all.hpp
-  - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
   - icon: ':warning:'
@@ -50,10 +44,8 @@ data:
   isVerificationFile: false
   path: math/mod.hpp
   requiredBy:
-  - all/all.hpp
   - math/ModInt.hpp
   - math/all.hpp
-  - all.hpp
   - template/all.hpp
   - template/alias.hpp
   timestamp: '2022-07-28 17:38:13+09:00'

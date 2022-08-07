@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
   - icon: ':warning:'
@@ -11,34 +11,22 @@ data:
   - icon: ':warning:'
     path: algorithm/all.hpp
     title: algorithm/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
-    path: all/all.hpp
-    title: all/all.hpp
-  - icon: ':warning:'
     path: function/all.hpp
     title: function/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':warning:'
-    path: iterator/all.hpp
-    title: iterator/all.hpp
-  - icon: ':warning:'
-    path: iterator/imap.hpp
-    title: iterator/imap.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
   - icon: ':warning:'
@@ -50,28 +38,28 @@ data:
   - icon: ':warning:'
     path: math/euler_phi.hpp
     title: math/euler_phi.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':heavy_check_mark:'
-    path: math/power.hpp
-    title: math/power.hpp
-  - icon: ':heavy_check_mark:'
-    path: meta/aggregate.hpp
-    title: meta/aggregate.hpp
   - icon: ':warning:'
     path: meta/all.hpp
     title: meta/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
-    path: meta/trait.hpp
-    title: meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
+    path: range/all.hpp
+    title: range/all.hpp
+  - icon: ':warning:'
+    path: range/imap.hpp
+    title: range/imap.hpp
+  - icon: ':warning:'
+    path: range/range_base.hpp
+    title: range/range_base.hpp
+  - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':heavy_check_mark:'
@@ -80,13 +68,13 @@ data:
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/out.hpp
     title: system/out.hpp
   - icon: ':warning:'
@@ -104,31 +92,25 @@ data:
   - icon: ':warning:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':warning:'
-    path: template/make_array.hpp
-    title: template/make_array.hpp
-  - icon: ':warning:'
-    path: template/make_vector.hpp
-    title: template/make_vector.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/many_aplusb.test.cpp
     title: verify/yosupo/many_aplusb.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/point_add_range_sum.test.cpp
     title: verify/yosupo/point_add_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: '#line 2 "meta/settings.hpp"
@@ -241,7 +223,6 @@ data:
   isVerificationFile: false
   path: meta/settings.hpp
   requiredBy:
-  - all/all.hpp
   - system/all.hpp
   - system/in.hpp
   - system/out.hpp
@@ -253,32 +234,27 @@ data:
   - math/is_prime.hpp
   - math/DynamicModInt.hpp
   - math/euler_phi.hpp
-  - math/power.hpp
   - structure/all.hpp
   - structure/UnionFind.hpp
   - structure/FenwickTree.hpp
-  - iterator/all.hpp
-  - iterator/imap.hpp
-  - all.hpp
+  - range/all.hpp
+  - range/range_base.hpp
+  - range/imap.hpp
   - function/all.hpp
   - function/monoid.hpp
   - algorithm/algorithm.hpp
   - algorithm/Hash.hpp
   - algorithm/all.hpp
   - algorithm/bit.hpp
-  - template/make_vector.hpp
   - template/macro.hpp
   - template/all.hpp
   - template/constant.hpp
   - template/alias.hpp
   - template/len.hpp
-  - template/make_array.hpp
-  - meta/aggregate.hpp
-  - meta/trait.hpp
   - meta/all.hpp
   - meta/constant.hpp
   timestamp: '2022-03-19 00:51:47+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp
   - verify/yosupo/point_add_range_sum.test.cpp

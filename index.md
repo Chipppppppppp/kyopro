@@ -3,7 +3,7 @@ data:
   libraryCategories:
   - name: algorithm
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: algorithm/Hash.hpp
       title: algorithm/Hash.hpp
     - icon: ':warning:'
@@ -12,7 +12,7 @@ data:
     - icon: ':warning:'
       path: algorithm/all.hpp
       title: algorithm/all.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: algorithm/bit.hpp
       title: algorithm/bit.hpp
   - name: all
@@ -39,29 +39,18 @@ data:
     - icon: ':warning:'
       path: function/identity.hpp
       title: function/identity.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: function/monoid.hpp
       title: function/monoid.hpp
-  - name: iterator
-    pages:
-    - icon: ':warning:'
-      path: iterator/all.hpp
-      title: iterator/all.hpp
-    - icon: ':warning:'
-      path: iterator/imap.hpp
-      title: iterator/imap.hpp
-    - icon: ':warning:'
-      path: iterator/iterator_base.hpp
-      title: iterator/iterator_base.hpp
   - name: math
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: math/DynamicModInt.hpp
       title: math/DynamicModInt.hpp
     - icon: ':warning:'
       path: math/ModInt.hpp
       title: math/ModInt.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: math/Montgomery.hpp
       title: math/Montgomery.hpp
     - icon: ':warning:'
@@ -76,38 +65,52 @@ data:
     - icon: ':warning:'
       path: math/euler_phi.hpp
       title: math/euler_phi.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: math/factorize.hpp
       title: math/factorize.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: math/is_prime.hpp
       title: math/is_prime.hpp
     - icon: ':warning:'
       path: math/mod.hpp
       title: math/mod.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: math/power.hpp
       title: math/power.hpp
   - name: meta
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: meta/aggregate.hpp
       title: meta/aggregate.hpp
     - icon: ':warning:'
       path: meta/all.hpp
       title: meta/all.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: meta/constant.hpp
       title: meta/constant.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: meta/settings.hpp
       title: meta/settings.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: meta/trait.hpp
       title: meta/trait.hpp
+  - name: range
+    pages:
+    - icon: ':warning:'
+      path: range/all.hpp
+      title: range/all.hpp
+    - icon: ':warning:'
+      path: range/imap.hpp
+      title: range/imap.hpp
+    - icon: ':warning:'
+      path: range/iterator_base.hpp
+      title: range/iterator_base.hpp
+    - icon: ':warning:'
+      path: range/range_base.hpp
+      title: range/range_base.hpp
   - name: structure
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: structure/FenwickTree.hpp
       title: structure/FenwickTree.hpp
     - icon: ':heavy_check_mark:'
@@ -118,13 +121,13 @@ data:
       title: structure/all.hpp
   - name: system
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: system/all.hpp
       title: system/all.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: system/in.hpp
       title: system/in.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: system/out.hpp
       title: system/out.hpp
   - name: template
@@ -159,18 +162,18 @@ data:
   verificationCategories:
   - name: verify/aoj
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/aoj/PrimeNumber.test.cpp
       title: verify/aoj/PrimeNumber.test.cpp
   - name: verify/yosupo
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/yosupo/factorize.test.cpp
       title: verify/yosupo/factorize.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/yosupo/many_aplusb.test.cpp
       title: verify/yosupo/many_aplusb.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/yosupo/point_add_range_sum.test.cpp
       title: verify/yosupo/point_add_range_sum.test.cpp
     - icon: ':heavy_check_mark:'
