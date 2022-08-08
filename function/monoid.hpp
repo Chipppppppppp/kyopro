@@ -65,7 +65,7 @@ namespace kyopro {
     };
 
     template<class, class = void>
-    struct has_inversible: std::false_type {};
+    struct has_inverse: std::false_type {};
     template<class T>
     struct has_inverse<T, std::void_t<decltype(&T::inverse)>>: std::true_type {};
 

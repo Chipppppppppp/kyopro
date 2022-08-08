@@ -11,15 +11,15 @@ namespace kyopro {
         template<class T>
         constexpr bool operator ()(T x) const {
             using U = std::make_unsigned_t<T>;
-            using DynamicModInt = helper::InternalDynamicModInt<U>;
+            using dmint = DynamicModInt<U, 0, true>;
             U n = x;
             if (n <= 1) return false;
             if (!(n & 1)) return n == 2;
-            DynamicModInt::set_mod(n);
+            dmint::set_mod(n);
             std::uint_fast64_t d = (n - 1) >> trailing_zero(n - 1);
-            DynamicModInt one = 1, minus_one = n - 1;
+            dmint one = 1, minus_one = n - 1;
             auto ng = [&](std::uint_fast64_t a) noexcept {
-                auto y = DynamicModInt(a).power(d);
+                auto y = dmint(a).power(d);
                 std::uint_fast64_t t = d;
                 while (y != one and y != minus_one and t != n - 1) y *= y, t <<= 1;
                 if (y != minus_one and !(t & 1)) return true;

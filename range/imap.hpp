@@ -9,7 +9,7 @@
 
 namespace kyopro {
     template<class Func, class Range>
-    struct imap: RangeBase<imap> {
+    struct imap: RangeBase<imap<Func, Range>, typename std::iterator_traits<range_iterator_t<Range>>::iterator_category> {
     private:
         using BaseIterator = range_iterator_t<Range>;
         using BaseConstIterator = range_const_iterator_t<Range>;
@@ -23,7 +23,7 @@ namespace kyopro {
         imap(F&& func, R&& range) noexcept: func(std::forward<F>(func)), range(std::forward<R>(range)) {}
 
         struct iterator: BaseIterator {
-            using value_type = std::decay_t<std::invoke_result_t<Func, decltype(*std::declval<BaseIterator>{})>>;
+            using value_type = std::decay_t<std::invoke_result_t<Func, decltype(*std::declval<BaseIterator>())>>;
             using pointer = value_type*;
             using reference = value_type&;
 
@@ -41,7 +41,7 @@ namespace kyopro {
         };
 
         struct const_iterator: BaseConstIterator {
-            using value_type = const std::decay_t<std::invoke_result_t<Func, decltype(*std::declval<BaseIterator>{})>>;
+            using value_type = const std::decay_t<std::invoke_result_t<Func, decltype(*std::declval<BaseIterator>())>>;
             using pointer = value_type*;
             using reference = value_type&;
 
@@ -57,9 +57,6 @@ namespace kyopro {
                 return std::invoke(func, BaseIterator::operator *());
             }
         };
-
-        using reverse_iterator = std::reverse_iterator<iterator>;
-        using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
         constexpr iterator begin() const noexcept {
             return iterator(func, std::begin(range));

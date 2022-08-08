@@ -3,11 +3,10 @@
 #include <iterator>
 #include <stdexcept>
 #include <string>
-#include "iterator_base.hpp"
 #include "../system/out.hpp"
 
 namespace kyopro {
-    template<class Derived, class = typename Derived::iterator::iterator_category>
+    template<class, class>
     struct RangeBase;
 
     template<class Derived>
@@ -20,10 +19,10 @@ namespace kyopro {
         using pointer = value_type*;
         using const_pointer = const value_type*;
 
-        virtual constexpr Derived::iterator begin() const noexcept;
-        virtual constexpr Derived::iterator end() const noexcept;
-        virtual constexpr Derived::iterator cbegin() const noexcept;
-        virtual constexpr Derived::iterator cend() const noexcept;
+        virtual constexpr typename Derived::iterator begin() const noexcept;
+        virtual constexpr typename Derived::iterator end() const noexcept;
+        virtual constexpr typename Derived::const_iterator cbegin() const noexcept;
+        virtual constexpr typename Derived::const_iterator cend() const noexcept;
 
         virtual constexpr bool empty() const noexcept {
             return begin() == end();
@@ -38,11 +37,16 @@ namespace kyopro {
     };
 
     template<class Derived>
-    struct RangeBase<Derived, std::bidirectional_iterator_tag>: IteratorBase<Derived, std::forward_iterator_tag> {
+    struct RangeBase<Derived, std::bidirectional_iterator_tag>: RangeBase<Derived, std::forward_iterator_tag> {
     protected:
         using iterator_category = std::bidirectional_iterator_tag;
-        using reverse_iterator = std::reverse_iterator<Derived::iterator>;
-        using const_reverse_iterator = std::reverse_iterator<Derived::const_iterator>;
+        using reverse_iterator = std::reverse_iterator<typename Derived::iterator>;
+        using const_reverse_iterator = std::reverse_iterator<typename Derived::const_iterator>;
+
+        virtual constexpr typename Derived::iterator begin() const noexcept;
+        virtual constexpr typename Derived::iterator end() const noexcept;
+        virtual constexpr typename Derived::const_iterator cbegin() const noexcept;
+        virtual constexpr typename Derived::const_iterator cend() const noexcept;
 
         virtual constexpr reverse_iterator rbegin() const noexcept {
             return reverse_iterator(end());
@@ -66,7 +70,12 @@ namespace kyopro {
     };
 
     template<class Derived>
-    struct RangeBase<Derived, std::random_access_iterator_tag>: IteratorBase<Derived, std::bidirectional_iterator_tag> {
+    struct RangeBase<Derived, std::random_access_iterator_tag>: RangeBase<Derived, std::bidirectional_iterator_tag> {
+        virtual constexpr typename Derived::iterator begin() const noexcept;
+        virtual constexpr typename Derived::iterator end() const noexcept;
+        virtual constexpr typename Derived::const_iterator cbegin() const noexcept;
+        virtual constexpr typename Derived::const_iterator cend() const noexcept;
+
         virtual constexpr std::size_t size() const noexcept {
             return end() - begin();
         }

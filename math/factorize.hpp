@@ -15,14 +15,14 @@ namespace kyopro {
         template<class T>
         constexpr T operator ()(T p, std::uint_fast64_t c) const {
             using U = std::make_unsigned_t<T>;
-            using DynamicModInt = helper::InternalDynamicModInt<U>;
+            using dmint = DynamicModInt<U, 0, true>;
             U n = p;
-            DynamicModInt::set_mod(n);
-            DynamicModInt cc = c;
-            auto f = [=](DynamicModInt x) noexcept {
+            dmint::set_mod(n);
+            dmint cc = c;
+            auto f = [=](dmint x) noexcept {
                 return x * x + cc;
             };
-            auto x = DynamicModInt::raw(1), y = DynamicModInt::raw(2), z = DynamicModInt::raw(1), q = DynamicModInt::raw(1);
+            auto x = dmint::raw(1), y = dmint::raw(2), z = dmint::raw(1), q = dmint::raw(1);
             U g = 1;
             const int m = 1 << (floor_bit(n) / 5);
             for (int r = 1; g == 1; r <<= 1) {

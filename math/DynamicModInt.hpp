@@ -9,7 +9,7 @@
 #include "Montgomery.hpp"
 
 namespace kyopro {
-    template<class T, std::size_t kind = 0>
+    template<class T, std::size_t kind = 0, bool = false>
     struct DynamicModInt {
         static_assert(std::is_unsigned_v<T>, "T must be unsigned integer");
         using value_type = T;
@@ -152,11 +152,6 @@ namespace kyopro {
             printer.print(montgomery.inverse_transform(value));
         }
     };
-
-    namespace helper {
-        template<class T>
-        struct InternalDynamicModInt: DynamicModInt<T> {};
-    } // namespace helper
 
     template<class T, std::size_t kind>
     struct Hash<DynamicModInt<T, kind>> {
