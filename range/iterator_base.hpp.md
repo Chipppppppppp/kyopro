@@ -3,6 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':warning:'
     path: range/all.hpp
     title: range/all.hpp
   - icon: ':warning:'
@@ -110,6 +116,8 @@ data:
   isVerificationFile: false
   path: range/iterator_base.hpp
   requiredBy:
+  - all/all.hpp
+  - all.hpp
   - range/all.hpp
   - range/range_base.hpp
   - range/imap.hpp

@@ -49,7 +49,13 @@ data:
   - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -548,7 +554,9 @@ data:
   - math/ModInt.hpp
   isVerificationFile: false
   path: math/all.hpp
-  requiredBy: []
+  requiredBy:
+  - all/all.hpp
+  - all.hpp
   timestamp: '2022-08-08 07:54:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

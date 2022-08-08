@@ -3,6 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':warning:'
     path: function/all.hpp
     title: function/all.hpp
   _extendedVerifiedWith: []
@@ -33,6 +39,8 @@ data:
   isVerificationFile: false
   path: function/RecursiveLambda.hpp
   requiredBy:
+  - all/all.hpp
+  - all.hpp
   - function/all.hpp
   timestamp: '2022-07-28 17:38:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS

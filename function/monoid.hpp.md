@@ -12,6 +12,12 @@ data:
     title: meta/settings.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':warning:'
     path: function/all.hpp
     title: function/all.hpp
   - icon: ':x:'
@@ -108,8 +114,10 @@ data:
   isVerificationFile: false
   path: function/monoid.hpp
   requiredBy:
+  - all/all.hpp
   - structure/all.hpp
   - structure/FenwickTree.hpp
+  - all.hpp
   - function/all.hpp
   timestamp: '2022-08-08 07:54:18+09:00'
   verificationStatus: LIBRARY_ALL_WA

@@ -11,6 +11,12 @@ data:
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
   - icon: ':question:'
     path: system/all.hpp
     title: system/all.hpp
@@ -320,7 +326,9 @@ data:
   isVerificationFile: false
   path: system/in.hpp
   requiredBy:
+  - all/all.hpp
   - system/all.hpp
+  - all.hpp
   - template/macro.hpp
   - template/all.hpp
   timestamp: '2022-08-08 07:54:18+09:00'

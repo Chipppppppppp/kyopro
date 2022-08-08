@@ -9,6 +9,12 @@ data:
     title: meta/settings.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':warning:'
     path: function/all.hpp
     title: function/all.hpp
   - icon: ':x:'
@@ -100,6 +106,7 @@ data:
   isVerificationFile: false
   path: meta/constant.hpp
   requiredBy:
+  - all/all.hpp
   - math/ModInt.hpp
   - math/all.hpp
   - math/factorize.hpp
@@ -107,6 +114,7 @@ data:
   - math/DynamicModInt.hpp
   - structure/all.hpp
   - structure/FenwickTree.hpp
+  - all.hpp
   - function/all.hpp
   - function/monoid.hpp
   - template/all.hpp

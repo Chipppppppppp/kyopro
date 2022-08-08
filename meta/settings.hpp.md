@@ -15,6 +15,12 @@ data:
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':warning:'
     path: function/all.hpp
     title: function/all.hpp
   - icon: ':x:'
@@ -223,6 +229,7 @@ data:
   isVerificationFile: false
   path: meta/settings.hpp
   requiredBy:
+  - all/all.hpp
   - system/all.hpp
   - system/in.hpp
   - system/out.hpp
@@ -237,6 +244,7 @@ data:
   - structure/all.hpp
   - structure/UnionFind.hpp
   - structure/FenwickTree.hpp
+  - all.hpp
   - range/all.hpp
   - range/range_base.hpp
   - range/imap.hpp
