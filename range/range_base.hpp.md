@@ -10,9 +10,6 @@ data:
   - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':warning:'
-    path: range/iterator_base.hpp
-    title: range/iterator_base.hpp
   - icon: ':question:'
     path: system/out.hpp
     title: system/out.hpp
@@ -36,67 +33,22 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"range/range_base.hpp\"\n#include <cstddef>\n#include <iterator>\n\
-    #include <stdexcept>\n#include <string>\n#line 4 \"range/iterator_base.hpp\"\n\
-    #include <type_traits>\n\nnamespace kyopro {\n    template<class, class, bool\
-    \ = false>\n    struct IteratorBase;\n\n    template<class Derived, bool Const>\n\
-    \    struct IteratorBase<Derived, std::forward_iterator_tag, Const> {\n      \
-    \  using value_type = std::decay_t<decltype(*std::declval<Derived>())>;\n    \
-    \    using pointer = value_type*;\n        using reference = value_type&;\n  \
-    \      using difference_type = std::ptrdiff_t;\n        using iterator_category\
-    \ = std::forward_iterator_tag;\n\n        virtual constexpr std::conditional_t<Const,\
-    \ const decltype(*std::declval<Derived>()), decltype(*std::declval<Derived>())>\
-    \ operator *() const noexcept;\n        virtual constexpr Derived& operator ++()\
-    \ noexcept;\n        virtual constexpr bool operator ==(const Derived&) const\
-    \ noexcept;\n\n        constexpr Derived operator ++(int) noexcept {\n       \
-    \     Derived before = *this;\n            ++*this;\n            return before;\n\
-    \        }\n\n        constexpr bool operator !=(const Derived& rhs) const noexcept\
-    \ {\n            return !(*this == rhs);\n        }\n    };\n\n    template<class\
-    \ Derived, bool Const>\n    struct IteratorBase<Derived, std::bidirectional_iterator_tag,\
-    \ Const>: IteratorBase<Derived, std::forward_iterator_tag, Const> {\n        using\
-    \ iterator_category = std::bidirectional_iterator_tag;\n\n        virtual constexpr\
-    \ Derived& operator --() noexcept;\n\n        constexpr Derived operator --(int)\
-    \ noexcept {\n            Derived before = *this;\n            --*this;\n    \
-    \        return before;\n        }\n    };\n\n    template<class Derived, bool\
-    \ Const>\n    struct IteratorBase<Derived, std::random_access_iterator_tag, Const>:\
-    \ IteratorBase<Derived, std::bidirectional_iterator_tag, Const> {\n        using\
-    \ iterator_category = std::random_access_iterator_tag;\n\n        virtual constexpr\
-    \ Derived operator +(std::ptrdiff_t rhs) const noexcept;\n        virtual constexpr\
-    \ std::ptrdiff_t operator -(const Derived&) const noexcept;\n\n    private:\n\
-    \        virtual constexpr int compare(const Derived&) const noexcept;\n\n   \
-    \ public:\n\n        constexpr Derived& operator +=(std::ptrdiff_t rhs) noexcept\
-    \ {\n            return *this = *this + rhs;\n        }\n\n        constexpr Derived\
-    \ operator -(std::ptrdiff_t rhs) const noexcept {\n            return *this +\
-    \ -rhs;\n        }\n\n        constexpr Derived& operator -=(std::ptrdiff_t rhs)\
-    \ noexcept {\n            return *this = *this - rhs;\n        }\n\n        virtual\
-    \ constexpr std::conditional_t<Const, const decltype(*std::declval<Derived>()),\
-    \ decltype(*std::declval<Derived>())> operator [](std::size_t idx) const noexcept\
-    \ {\n            return *(*this + idx);\n        }\n\n        virtual constexpr\
-    \ bool operator ==(const Derived& rhs) const noexcept {\n            return compare(rhs)\
-    \ == 0;\n        }\n        virtual constexpr bool operator !=(const Derived&\
-    \ rhs) const noexcept {\n            return compare(rhs) != 0;\n        }\n  \
-    \      virtual constexpr bool operator <(const Derived& rhs) const noexcept {\n\
-    \            return compare(rhs) < 0;\n        }\n        virtual constexpr bool\
-    \ operator <=(const Derived& rhs) const noexcept {\n            return compare(rhs)\
-    \ <= 0;\n        }\n        virtual constexpr bool operator >(const Derived& rhs)\
-    \ const noexcept {\n            return compare(rhs) > 0;\n        }\n        virtual\
-    \ constexpr bool operator >=(const Derived& rhs) const noexcept {\n          \
-    \  return compare(rhs) >= 0;\n        }\n    };\n} // namespace kyopro\n#line\
-    \ 2 \"system/out.hpp\"\n#include <unistd.h>\n#include <algorithm>\n#include <array>\n\
-    #include <bitset>\n#include <cmath>\n#include <cstdint>\n#include <cstdio>\n#line\
-    \ 11 \"system/out.hpp\"\n#include <tuple>\n#line 13 \"system/out.hpp\"\n#include\
-    \ <utility>\n#line 4 \"meta/trait.hpp\"\n#include <queue>\n#include <limits>\n\
-    #include <stack>\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct std::is_integral<__int128_t>:\
-    \ std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type\
-    \ {};\ntemplate<>\nstruct std::is_floating_point<__float128>: std::true_type {};\n\
-    \nnamespace kyopro {\n    template<std::size_t size>\n    struct int_least {\n\
-    \    private:\n        static constexpr auto get_type() noexcept {\n         \
-    \   static_assert(size <= 128, \"Integer size is too large\");\n            if\
-    \ constexpr (size <= 8) return std::int_least8_t{};\n            else if constexpr\
-    \ (size <= 16) return std::int_least16_t{};\n            else if constexpr (size\
-    \ <= 32) return std::int_least32_t{};\n            else if constexpr (size <=\
-    \ 64) return std::int_least64_t{};\n            else return __int128_t{};\n  \
-    \      }\n\n    public:\n        using type = decltype(get_type());\n    };\n\n\
-    \    template<std::size_t size>\n    using int_least_t = typename int_least<size>::type;\n\
+    #include <stdexcept>\n#include <string>\n#line 2 \"system/out.hpp\"\n#include\
+    \ <unistd.h>\n#include <algorithm>\n#include <array>\n#include <bitset>\n#include\
+    \ <cmath>\n#include <cstdint>\n#include <cstdio>\n#line 11 \"system/out.hpp\"\n\
+    #include <tuple>\n#include <type_traits>\n#include <utility>\n#line 4 \"meta/trait.hpp\"\
+    \n#include <queue>\n#include <limits>\n#include <stack>\n#line 9 \"meta/trait.hpp\"\
+    \n\ntemplate<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
+    struct std::is_integral<__uint128_t>: std::true_type {};\ntemplate<>\nstruct std::is_floating_point<__float128>:\
+    \ std::true_type {};\n\nnamespace kyopro {\n    template<std::size_t size>\n \
+    \   struct int_least {\n    private:\n        static constexpr auto get_type()\
+    \ noexcept {\n            static_assert(size <= 128, \"Integer size is too large\"\
+    );\n            if constexpr (size <= 8) return std::int_least8_t{};\n       \
+    \     else if constexpr (size <= 16) return std::int_least16_t{};\n          \
+    \  else if constexpr (size <= 32) return std::int_least32_t{};\n            else\
+    \ if constexpr (size <= 64) return std::int_least64_t{};\n            else return\
+    \ __int128_t{};\n        }\n\n    public:\n        using type = decltype(get_type());\n\
+    \    };\n\n    template<std::size_t size>\n    using int_least_t = typename int_least<size>::type;\n\
     \n    template<std::size_t size>\n    struct uint_least {\n    private:\n    \
     \    static constexpr auto get_type() noexcept {\n            static_assert(size\
     \ <= 128, \"Integer size is too large\");\n            if constexpr (size <= 8)\
@@ -337,25 +289,30 @@ data:
     \            print(std::forward<Head>(head));\n            operator ()<false>(std::forward<Args>(args)...);\n\
     \        }\n    };\n\n    Printer<Writer<>::iterator, false, false, false> print(output.begin()),\
     \ eprint(error.begin());\n    Printer<Writer<>::iterator> println(output.begin()),\
-    \ eprintln(error.begin());\n} // namespace kyopro\n#line 8 \"range/range_base.hpp\"\
-    \n\nnamespace kyopro {\n    template<class Derived, class = typename Derived::iterator::iterator_category>\n\
-    \    struct RangeBase;\n\n    template<class Derived>\n    struct RangeBase<Derived,\
-    \ std::forward_iterator_tag> {\n        using value_type = typename Derived::iterator::value_type;\n\
-    \        using size_type = std::size_t;\n        using difference_type = std::ptrdiff_t;\n\
+    \ eprintln(error.begin());\n} // namespace kyopro\n#line 7 \"range/range_base.hpp\"\
+    \n\nnamespace kyopro {\n    template<class, class>\n    struct RangeBase;\n\n\
+    \    template<class Derived>\n    struct RangeBase<Derived, std::forward_iterator_tag>\
+    \ {\n        using value_type = typename Derived::iterator::value_type;\n    \
+    \    using size_type = std::size_t;\n        using difference_type = std::ptrdiff_t;\n\
     \        using reference = value_type&;\n        using const_reference = const\
     \ value_type&;\n        using pointer = value_type*;\n        using const_pointer\
-    \ = const value_type*;\n\n        virtual constexpr Derived::iterator begin()\
-    \ const noexcept;\n        virtual constexpr Derived::iterator end() const noexcept;\n\
-    \        virtual constexpr Derived::iterator cbegin() const noexcept;\n      \
-    \  virtual constexpr Derived::iterator cend() const noexcept;\n\n        virtual\
-    \ constexpr bool empty() const noexcept {\n            return begin() == end();\n\
-    \        }\n\n        constexpr decltype(auto) front() noexcept {\n          \
-    \  return *begin();\n        }\n        constexpr decltype(auto) front() const\
-    \ noexcept {\n            return *cbegin();\n        }\n    };\n\n    template<class\
-    \ Derived>\n    struct RangeBase<Derived, std::bidirectional_iterator_tag>: IteratorBase<Derived,\
-    \ std::forward_iterator_tag> {\n    protected:\n        using iterator_category\
-    \ = std::bidirectional_iterator_tag;\n        using reverse_iterator = std::reverse_iterator<Derived::iterator>;\n\
-    \        using const_reverse_iterator = std::reverse_iterator<Derived::const_iterator>;\n\
+    \ = const value_type*;\n\n        virtual constexpr typename Derived::iterator\
+    \ begin() const noexcept;\n        virtual constexpr typename Derived::iterator\
+    \ end() const noexcept;\n        virtual constexpr typename Derived::const_iterator\
+    \ cbegin() const noexcept;\n        virtual constexpr typename Derived::const_iterator\
+    \ cend() const noexcept;\n\n        virtual constexpr bool empty() const noexcept\
+    \ {\n            return begin() == end();\n        }\n\n        constexpr decltype(auto)\
+    \ front() noexcept {\n            return *begin();\n        }\n        constexpr\
+    \ decltype(auto) front() const noexcept {\n            return *cbegin();\n   \
+    \     }\n    };\n\n    template<class Derived>\n    struct RangeBase<Derived,\
+    \ std::bidirectional_iterator_tag>: RangeBase<Derived, std::forward_iterator_tag>\
+    \ {\n    protected:\n        using iterator_category = std::bidirectional_iterator_tag;\n\
+    \        using reverse_iterator = std::reverse_iterator<typename Derived::iterator>;\n\
+    \        using const_reverse_iterator = std::reverse_iterator<typename Derived::const_iterator>;\n\
+    \n        virtual constexpr typename Derived::iterator begin() const noexcept;\n\
+    \        virtual constexpr typename Derived::iterator end() const noexcept;\n\
+    \        virtual constexpr typename Derived::const_iterator cbegin() const noexcept;\n\
+    \        virtual constexpr typename Derived::const_iterator cend() const noexcept;\n\
     \n        virtual constexpr reverse_iterator rbegin() const noexcept {\n     \
     \       return reverse_iterator(end());\n        }\n        virtual constexpr\
     \ reverse_iterator rend() const noexcept {\n            return reverse_iterator(begin());\n\
@@ -366,32 +323,40 @@ data:
     \ back() noexcept {\n            return *rbegin();\n        }\n        constexpr\
     \ decltype(auto) back() const noexcept {\n            return *crbegin();\n   \
     \     }\n    };\n\n    template<class Derived>\n    struct RangeBase<Derived,\
-    \ std::random_access_iterator_tag>: IteratorBase<Derived, std::bidirectional_iterator_tag>\
-    \ {\n        virtual constexpr std::size_t size() const noexcept {\n         \
-    \   return end() - begin();\n        }\n\n        constexpr decltype(auto) operator\
-    \ [](std::size_t idx) {\n            return *(begin() + idx);\n        }\n   \
-    \     constexpr decltype(auto) operator [](std::size_t idx) const {\n        \
-    \    return *(cbegin() + idx);\n        }\n    };\n} // namespace kyopro\n"
+    \ std::random_access_iterator_tag>: RangeBase<Derived, std::bidirectional_iterator_tag>\
+    \ {\n        virtual constexpr typename Derived::iterator begin() const noexcept;\n\
+    \        virtual constexpr typename Derived::iterator end() const noexcept;\n\
+    \        virtual constexpr typename Derived::const_iterator cbegin() const noexcept;\n\
+    \        virtual constexpr typename Derived::const_iterator cend() const noexcept;\n\
+    \n        virtual constexpr std::size_t size() const noexcept {\n            return\
+    \ end() - begin();\n        }\n\n        constexpr decltype(auto) operator [](std::size_t\
+    \ idx) {\n            return *(begin() + idx);\n        }\n        constexpr decltype(auto)\
+    \ operator [](std::size_t idx) const {\n            return *(cbegin() + idx);\n\
+    \        }\n    };\n} // namespace kyopro\n"
   code: "#pragma once\n#include <cstddef>\n#include <iterator>\n#include <stdexcept>\n\
-    #include <string>\n#include \"iterator_base.hpp\"\n#include \"../system/out.hpp\"\
-    \n\nnamespace kyopro {\n    template<class Derived, class = typename Derived::iterator::iterator_category>\n\
-    \    struct RangeBase;\n\n    template<class Derived>\n    struct RangeBase<Derived,\
+    #include <string>\n#include \"../system/out.hpp\"\n\nnamespace kyopro {\n    template<class,\
+    \ class>\n    struct RangeBase;\n\n    template<class Derived>\n    struct RangeBase<Derived,\
     \ std::forward_iterator_tag> {\n        using value_type = typename Derived::iterator::value_type;\n\
     \        using size_type = std::size_t;\n        using difference_type = std::ptrdiff_t;\n\
     \        using reference = value_type&;\n        using const_reference = const\
     \ value_type&;\n        using pointer = value_type*;\n        using const_pointer\
-    \ = const value_type*;\n\n        virtual constexpr Derived::iterator begin()\
-    \ const noexcept;\n        virtual constexpr Derived::iterator end() const noexcept;\n\
-    \        virtual constexpr Derived::iterator cbegin() const noexcept;\n      \
-    \  virtual constexpr Derived::iterator cend() const noexcept;\n\n        virtual\
-    \ constexpr bool empty() const noexcept {\n            return begin() == end();\n\
-    \        }\n\n        constexpr decltype(auto) front() noexcept {\n          \
-    \  return *begin();\n        }\n        constexpr decltype(auto) front() const\
-    \ noexcept {\n            return *cbegin();\n        }\n    };\n\n    template<class\
-    \ Derived>\n    struct RangeBase<Derived, std::bidirectional_iterator_tag>: IteratorBase<Derived,\
-    \ std::forward_iterator_tag> {\n    protected:\n        using iterator_category\
-    \ = std::bidirectional_iterator_tag;\n        using reverse_iterator = std::reverse_iterator<Derived::iterator>;\n\
-    \        using const_reverse_iterator = std::reverse_iterator<Derived::const_iterator>;\n\
+    \ = const value_type*;\n\n        virtual constexpr typename Derived::iterator\
+    \ begin() const noexcept;\n        virtual constexpr typename Derived::iterator\
+    \ end() const noexcept;\n        virtual constexpr typename Derived::const_iterator\
+    \ cbegin() const noexcept;\n        virtual constexpr typename Derived::const_iterator\
+    \ cend() const noexcept;\n\n        virtual constexpr bool empty() const noexcept\
+    \ {\n            return begin() == end();\n        }\n\n        constexpr decltype(auto)\
+    \ front() noexcept {\n            return *begin();\n        }\n        constexpr\
+    \ decltype(auto) front() const noexcept {\n            return *cbegin();\n   \
+    \     }\n    };\n\n    template<class Derived>\n    struct RangeBase<Derived,\
+    \ std::bidirectional_iterator_tag>: RangeBase<Derived, std::forward_iterator_tag>\
+    \ {\n    protected:\n        using iterator_category = std::bidirectional_iterator_tag;\n\
+    \        using reverse_iterator = std::reverse_iterator<typename Derived::iterator>;\n\
+    \        using const_reverse_iterator = std::reverse_iterator<typename Derived::const_iterator>;\n\
+    \n        virtual constexpr typename Derived::iterator begin() const noexcept;\n\
+    \        virtual constexpr typename Derived::iterator end() const noexcept;\n\
+    \        virtual constexpr typename Derived::const_iterator cbegin() const noexcept;\n\
+    \        virtual constexpr typename Derived::const_iterator cend() const noexcept;\n\
     \n        virtual constexpr reverse_iterator rbegin() const noexcept {\n     \
     \       return reverse_iterator(end());\n        }\n        virtual constexpr\
     \ reverse_iterator rend() const noexcept {\n            return reverse_iterator(begin());\n\
@@ -402,14 +367,17 @@ data:
     \ back() noexcept {\n            return *rbegin();\n        }\n        constexpr\
     \ decltype(auto) back() const noexcept {\n            return *crbegin();\n   \
     \     }\n    };\n\n    template<class Derived>\n    struct RangeBase<Derived,\
-    \ std::random_access_iterator_tag>: IteratorBase<Derived, std::bidirectional_iterator_tag>\
-    \ {\n        virtual constexpr std::size_t size() const noexcept {\n         \
-    \   return end() - begin();\n        }\n\n        constexpr decltype(auto) operator\
-    \ [](std::size_t idx) {\n            return *(begin() + idx);\n        }\n   \
-    \     constexpr decltype(auto) operator [](std::size_t idx) const {\n        \
-    \    return *(cbegin() + idx);\n        }\n    };\n} // namespace kyopro"
+    \ std::random_access_iterator_tag>: RangeBase<Derived, std::bidirectional_iterator_tag>\
+    \ {\n        virtual constexpr typename Derived::iterator begin() const noexcept;\n\
+    \        virtual constexpr typename Derived::iterator end() const noexcept;\n\
+    \        virtual constexpr typename Derived::const_iterator cbegin() const noexcept;\n\
+    \        virtual constexpr typename Derived::const_iterator cend() const noexcept;\n\
+    \n        virtual constexpr std::size_t size() const noexcept {\n            return\
+    \ end() - begin();\n        }\n\n        constexpr decltype(auto) operator [](std::size_t\
+    \ idx) {\n            return *(begin() + idx);\n        }\n        constexpr decltype(auto)\
+    \ operator [](std::size_t idx) const {\n            return *(cbegin() + idx);\n\
+    \        }\n    };\n} // namespace kyopro"
   dependsOn:
-  - range/iterator_base.hpp
   - system/out.hpp
   - meta/aggregate.hpp
   - meta/trait.hpp
@@ -421,7 +389,7 @@ data:
   - all.hpp
   - range/all.hpp
   - range/imap.hpp
-  timestamp: '2022-08-08 07:54:18+09:00'
+  timestamp: '2022-08-08 14:06:09+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: range/range_base.hpp

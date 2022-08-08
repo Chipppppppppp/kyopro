@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
   - icon: ':warning:'
@@ -25,10 +25,10 @@ data:
   - icon: ':warning:'
     path: math/euler_phi.hpp
     title: math/euler_phi.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
@@ -40,7 +40,7 @@ data:
   - icon: ':question:'
     path: meta/aggregate.hpp
     title: meta/aggregate.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: meta/constant.hpp
     title: meta/constant.hpp
   - icon: ':question:'
@@ -284,37 +284,37 @@ data:
     \ x) const noexcept {\n            return (x + static_cast<larger_type>(static_cast<T>(x)\
     \ * r) * mod) >> std::numeric_limits<T>::digits;\n        }\n    };\n} // namespace\
     \ kyopro\n#line 10 \"math/DynamicModInt.hpp\"\n\nnamespace kyopro {\n    template<class\
-    \ T, std::size_t kind = 0>\n    struct DynamicModInt {\n        static_assert(std::is_unsigned_v<T>,\
-    \ \"T must be unsigned integer\");\n        using value_type = T;\n\n    private:\n\
-    \        using larger_type = uint_least_t<std::numeric_limits<T>::digits * 2>;\n\
-    \n        inline static Montgomery<T> montgomery;\n\n    public:\n        T value;\n\
-    \n        static constexpr KYOPRO_BASE_INT get_kind() noexcept {\n           \
-    \ return kind;\n        }\n\n        static void set_mod(T mod) noexcept {\n \
-    \           montgomery.set_mod(mod);\n        }\n\n        static KYOPRO_BASE_INT\
-    \ get_mod() noexcept {\n            return montgomery.mod;\n        }\n\n    \
-    \    KYOPRO_BASE_INT get_val() noexcept {\n            return montgomery.inverse_transform(value);\n\
-    \        }\n\n        DynamicModInt() noexcept = default;\n        DynamicModInt(T\
-    \ value) noexcept: value(montgomery.transform(value % montgomery.mod + montgomery.mod))\
-    \ {}\n\n        template<class U>\n        explicit operator U() const noexcept\
-    \ {\n            return montgomery.inverse_transform(value);\n        }\n\n  \
-    \      static DynamicModInt raw(T value) noexcept {\n            DynamicModInt\
-    \ res;\n            res.value = montgomery.transform(value);\n            return\
-    \ res;\n        }\n\n        DynamicModInt power(std::uint_fast64_t n) const noexcept\
-    \ {\n            DynamicModInt res = 1, a = *this;\n            while (n > 0)\
-    \ {\n                if (n & 1) res = res * a;\n                a = a * a;\n \
-    \               n >>= 1;\n            }\n            return res;\n        }\n\n\
-    \        DynamicModInt inverse() const noexcept {\n            return power(montgomery.mod\
-    \ - 2);\n        }\n\n        DynamicModInt operator +() const noexcept {\n  \
-    \          return *this;\n        }\n\n        DynamicModInt operator -() const\
-    \ noexcept {\n            return value == 0 ? 0 : montgomery.mod - value;\n  \
-    \      }\n\n        DynamicModInt& operator ++() noexcept {\n            *this\
-    \ += DynamicModInt::raw(1);\n            return *this;\n        }\n\n        DynamicModInt\
-    \ operator ++(int) noexcept {\n            DynamicModInt before = *this;\n   \
-    \         ++*this;\n            return before;\n        }\n\n        DynamicModInt&\
-    \ operator --() noexcept {\n            *this -= DynamicModInt::raw(1);\n    \
-    \        return *this;\n        }\n\n        DynamicModInt operator --(int) noexcept\
-    \ {\n            DynamicModInt before = *this;\n            --*this;\n       \
-    \     return before;\n        }\n\n        DynamicModInt& operator +=(DynamicModInt\
+    \ T, std::size_t kind = 0, bool = false>\n    struct DynamicModInt {\n       \
+    \ static_assert(std::is_unsigned_v<T>, \"T must be unsigned integer\");\n    \
+    \    using value_type = T;\n\n    private:\n        using larger_type = uint_least_t<std::numeric_limits<T>::digits\
+    \ * 2>;\n\n        inline static Montgomery<T> montgomery;\n\n    public:\n  \
+    \      T value;\n\n        static constexpr KYOPRO_BASE_INT get_kind() noexcept\
+    \ {\n            return kind;\n        }\n\n        static void set_mod(T mod)\
+    \ noexcept {\n            montgomery.set_mod(mod);\n        }\n\n        static\
+    \ KYOPRO_BASE_INT get_mod() noexcept {\n            return montgomery.mod;\n \
+    \       }\n\n        KYOPRO_BASE_INT get_val() noexcept {\n            return\
+    \ montgomery.inverse_transform(value);\n        }\n\n        DynamicModInt() noexcept\
+    \ = default;\n        DynamicModInt(T value) noexcept: value(montgomery.transform(value\
+    \ % montgomery.mod + montgomery.mod)) {}\n\n        template<class U>\n      \
+    \  explicit operator U() const noexcept {\n            return montgomery.inverse_transform(value);\n\
+    \        }\n\n        static DynamicModInt raw(T value) noexcept {\n         \
+    \   DynamicModInt res;\n            res.value = montgomery.transform(value);\n\
+    \            return res;\n        }\n\n        DynamicModInt power(std::uint_fast64_t\
+    \ n) const noexcept {\n            DynamicModInt res = 1, a = *this;\n       \
+    \     while (n > 0) {\n                if (n & 1) res = res * a;\n           \
+    \     a = a * a;\n                n >>= 1;\n            }\n            return\
+    \ res;\n        }\n\n        DynamicModInt inverse() const noexcept {\n      \
+    \      return power(montgomery.mod - 2);\n        }\n\n        DynamicModInt operator\
+    \ +() const noexcept {\n            return *this;\n        }\n\n        DynamicModInt\
+    \ operator -() const noexcept {\n            return value == 0 ? 0 : montgomery.mod\
+    \ - value;\n        }\n\n        DynamicModInt& operator ++() noexcept {\n   \
+    \         *this += DynamicModInt::raw(1);\n            return *this;\n       \
+    \ }\n\n        DynamicModInt operator ++(int) noexcept {\n            DynamicModInt\
+    \ before = *this;\n            ++*this;\n            return before;\n        }\n\
+    \n        DynamicModInt& operator --() noexcept {\n            *this -= DynamicModInt::raw(1);\n\
+    \            return *this;\n        }\n\n        DynamicModInt operator --(int)\
+    \ noexcept {\n            DynamicModInt before = *this;\n            --*this;\n\
+    \            return before;\n        }\n\n        DynamicModInt& operator +=(DynamicModInt\
     \ rhs) noexcept {\n            if ((value += rhs.value - (montgomery.mod << 1))\
     \ > std::numeric_limits<std::make_signed_t<T>>::max()) value += montgomery.mod\
     \ << 1;\n            return *this;\n        }\n\n        DynamicModInt& operator\
@@ -340,10 +340,8 @@ data:
     \            value = montgomery.transform(value % montgomery.mod + montgomery.mod);\n\
     \        }\n\n        template<class Printer>\n        void print(Printer& printer)\
     \ const {\n            printer.print(montgomery.inverse_transform(value));\n \
-    \       }\n    };\n\n    namespace helper {\n        template<class T>\n     \
-    \   struct InternalDynamicModInt: DynamicModInt<T> {};\n    } // namespace helper\n\
-    \n    template<class T, std::size_t kind>\n    struct Hash<DynamicModInt<T, kind>>\
-    \ {\n        using value_type = DynamicModInt<T, kind>;\n\n        std::size_t\
+    \       }\n    };\n\n    template<class T, std::size_t kind>\n    struct Hash<DynamicModInt<T,\
+    \ kind>> {\n        using value_type = DynamicModInt<T, kind>;\n\n        std::size_t\
     \ operator ()(DynamicModInt<T, kind> a) const noexcept {\n            return static_cast<std::size_t>(a);\n\
     \        }\n    };\n} // namespace kyopro\n#line 4 \"math/euler_phi.hpp\"\n\n\
     namespace kyopro {\n    inline constexpr struct {\n        constexpr KYOPRO_BASE_INT\
@@ -400,15 +398,15 @@ data:
     } // namespace kyopro\n#line 8 \"math/is_prime.hpp\"\n\nnamespace kyopro {\n \
     \   inline constexpr struct {\n        template<class T>\n        constexpr bool\
     \ operator ()(T x) const {\n            using U = std::make_unsigned_t<T>;\n \
-    \           using DynamicModInt = helper::InternalDynamicModInt<U>;\n        \
-    \    U n = x;\n            if (n <= 1) return false;\n            if (!(n & 1))\
-    \ return n == 2;\n            DynamicModInt::set_mod(n);\n            std::uint_fast64_t\
-    \ d = (n - 1) >> trailing_zero(n - 1);\n            DynamicModInt one = 1, minus_one\
-    \ = n - 1;\n            auto ng = [&](std::uint_fast64_t a) noexcept {\n     \
-    \           auto y = DynamicModInt(a).power(d);\n                std::uint_fast64_t\
-    \ t = d;\n                while (y != one and y != minus_one and t != n - 1) y\
-    \ *= y, t <<= 1;\n                if (y != minus_one and !(t & 1)) return true;\n\
-    \                return false;\n            };\n            if (std::numeric_limits<U>::digits\
+    \           using dmint = DynamicModInt<U, 0, true>;\n            U n = x;\n \
+    \           if (n <= 1) return false;\n            if (!(n & 1)) return n == 2;\n\
+    \            dmint::set_mod(n);\n            std::uint_fast64_t d = (n - 1) >>\
+    \ trailing_zero(n - 1);\n            dmint one = 1, minus_one = n - 1;\n     \
+    \       auto ng = [&](std::uint_fast64_t a) noexcept {\n                auto y\
+    \ = dmint(a).power(d);\n                std::uint_fast64_t t = d;\n          \
+    \      while (y != one and y != minus_one and t != n - 1) y *= y, t <<= 1;\n \
+    \               if (y != minus_one and !(t & 1)) return true;\n              \
+    \  return false;\n            };\n            if (std::numeric_limits<U>::digits\
     \ <= 32 || n < (static_cast<U>(1) << 32)) {\n                for (auto i: (std::uint_fast64_t[3]){2,\
     \ 7, 61}) {\n                if (n <= i) return true;\n                if (ng(i))\
     \ return false;\n                }\n            } else {\n                for\
@@ -418,24 +416,23 @@ data:
     \ }\n    } is_prime;\n} // namespace kyopro\n#line 12 \"math/factorize.hpp\"\n\
     \nnamespace kyopro {\n    inline constexpr struct {\n        template<class T>\n\
     \        constexpr T operator ()(T p, std::uint_fast64_t c) const {\n        \
-    \    using U = std::make_unsigned_t<T>;\n            using DynamicModInt = helper::InternalDynamicModInt<U>;\n\
-    \            U n = p;\n            DynamicModInt::set_mod(n);\n            DynamicModInt\
-    \ cc = c;\n            auto f = [=](DynamicModInt x) noexcept {\n            \
-    \    return x * x + cc;\n            };\n            auto x = DynamicModInt::raw(1),\
-    \ y = DynamicModInt::raw(2), z = DynamicModInt::raw(1), q = DynamicModInt::raw(1);\n\
-    \            U g = 1;\n            const int m = 1 << (floor_bit(n) / 5);\n  \
-    \          for (int r = 1; g == 1; r <<= 1) {\n                x = y;\n      \
-    \          for (int i = 0; i < r; ++i) y = f(y);\n                for (int k =\
-    \ 0; k < r && g == 1; k += m) {\n                z = y;\n                int min\
-    \ = std::min(m, r - k);\n                for (int i = 0; i < min; ++i) {\n   \
-    \                 y = f(y);\n                    q *= x - y;\n               \
-    \ }\n                g = std::gcd(static_cast<U>(q), n);\n                }\n\
-    \            }\n            if (g == n) {\n                do {\n            \
-    \    z = f(z);\n                g = std::gcd(static_cast<U>(x - z), n);\n    \
-    \            } while (g == 1);\n            }\n            return g;\n       \
-    \ }\n    } pollard_rho;\n\n    inline constexpr struct {\n        KYOPRO_BASE_UINT\
-    \ operator ()(std::uint_fast64_t n) const noexcept {\n            static std::mt19937_64\
-    \ mt(std::random_device{}());\n            std::uniform_int_distribution<std::uint_fast64_t>\
+    \    using U = std::make_unsigned_t<T>;\n            using dmint = DynamicModInt<U,\
+    \ 0, true>;\n            U n = p;\n            dmint::set_mod(n);\n          \
+    \  dmint cc = c;\n            auto f = [=](dmint x) noexcept {\n             \
+    \   return x * x + cc;\n            };\n            auto x = dmint::raw(1), y\
+    \ = dmint::raw(2), z = dmint::raw(1), q = dmint::raw(1);\n            U g = 1;\n\
+    \            const int m = 1 << (floor_bit(n) / 5);\n            for (int r =\
+    \ 1; g == 1; r <<= 1) {\n                x = y;\n                for (int i =\
+    \ 0; i < r; ++i) y = f(y);\n                for (int k = 0; k < r && g == 1; k\
+    \ += m) {\n                z = y;\n                int min = std::min(m, r - k);\n\
+    \                for (int i = 0; i < min; ++i) {\n                    y = f(y);\n\
+    \                    q *= x - y;\n                }\n                g = std::gcd(static_cast<U>(q),\
+    \ n);\n                }\n            }\n            if (g == n) {\n         \
+    \       do {\n                z = f(z);\n                g = std::gcd(static_cast<U>(x\
+    \ - z), n);\n                } while (g == 1);\n            }\n            return\
+    \ g;\n        }\n    } pollard_rho;\n\n    inline constexpr struct {\n       \
+    \ KYOPRO_BASE_UINT operator ()(std::uint_fast64_t n) const noexcept {\n      \
+    \      static std::mt19937_64 mt(std::random_device{}());\n            std::uniform_int_distribution<std::uint_fast64_t>\
     \ rnd(0, n - 1);\n            if (is_prime(n)) return n;\n            for (int\
     \ i = 0; i < 100; ++i) {\n                std::uint_fast64_t m = pollard_rho(n,\
     \ rnd(mt));\n                if (is_prime(m)) return m;\n                n = m;\n\
@@ -557,7 +554,7 @@ data:
   requiredBy:
   - all/all.hpp
   - all.hpp
-  timestamp: '2022-08-08 07:54:18+09:00'
+  timestamp: '2022-08-08 14:06:09+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/all.hpp

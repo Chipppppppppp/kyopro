@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
   - icon: ':warning:'
@@ -10,7 +10,7 @@ data:
   - icon: ':warning:'
     path: algorithm/all.hpp
     title: algorithm/all.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
@@ -31,13 +31,13 @@ data:
   - icon: ':x:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
   - icon: ':warning:'
@@ -52,10 +52,10 @@ data:
   - icon: ':warning:'
     path: math/euler_phi.hpp
     title: math/euler_phi.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
@@ -70,7 +70,7 @@ data:
   - icon: ':warning:'
     path: meta/all.hpp
     title: meta/all.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: meta/constant.hpp
     title: meta/constant.hpp
   - icon: ':question:'
@@ -428,7 +428,7 @@ data:
     \ ? -INF<T> : 0 : -std::numeric_limits<T>::infinity();\n        }\n\n        constexpr\
     \ T operator ()(const T& a, const T& b) const noexcept {\n            return a\
     \ > b ? a : b;\n        }\n    };\n\n    template<class, class = void>\n    struct\
-    \ has_inversible: std::false_type {};\n    template<class T>\n    struct has_inverse<T,\
+    \ has_inverse: std::false_type {};\n    template<class T>\n    struct has_inverse<T,\
     \ std::void_t<decltype(&T::inverse)>>: std::true_type {};\n\n    template<class\
     \ T>\n    inline constexpr bool has_inverse_v = has_inverse<T>::value;\n} // namespace\
     \ kyopro\n#line 4 \"function/RecursiveLambda.hpp\"\n\nnamespace kyopro {\n   \
@@ -476,37 +476,37 @@ data:
     \ x) const noexcept {\n            return (x + static_cast<larger_type>(static_cast<T>(x)\
     \ * r) * mod) >> std::numeric_limits<T>::digits;\n        }\n    };\n} // namespace\
     \ kyopro\n#line 10 \"math/DynamicModInt.hpp\"\n\nnamespace kyopro {\n    template<class\
-    \ T, std::size_t kind = 0>\n    struct DynamicModInt {\n        static_assert(std::is_unsigned_v<T>,\
-    \ \"T must be unsigned integer\");\n        using value_type = T;\n\n    private:\n\
-    \        using larger_type = uint_least_t<std::numeric_limits<T>::digits * 2>;\n\
-    \n        inline static Montgomery<T> montgomery;\n\n    public:\n        T value;\n\
-    \n        static constexpr KYOPRO_BASE_INT get_kind() noexcept {\n           \
-    \ return kind;\n        }\n\n        static void set_mod(T mod) noexcept {\n \
-    \           montgomery.set_mod(mod);\n        }\n\n        static KYOPRO_BASE_INT\
-    \ get_mod() noexcept {\n            return montgomery.mod;\n        }\n\n    \
-    \    KYOPRO_BASE_INT get_val() noexcept {\n            return montgomery.inverse_transform(value);\n\
-    \        }\n\n        DynamicModInt() noexcept = default;\n        DynamicModInt(T\
-    \ value) noexcept: value(montgomery.transform(value % montgomery.mod + montgomery.mod))\
-    \ {}\n\n        template<class U>\n        explicit operator U() const noexcept\
-    \ {\n            return montgomery.inverse_transform(value);\n        }\n\n  \
-    \      static DynamicModInt raw(T value) noexcept {\n            DynamicModInt\
-    \ res;\n            res.value = montgomery.transform(value);\n            return\
-    \ res;\n        }\n\n        DynamicModInt power(std::uint_fast64_t n) const noexcept\
-    \ {\n            DynamicModInt res = 1, a = *this;\n            while (n > 0)\
-    \ {\n                if (n & 1) res = res * a;\n                a = a * a;\n \
-    \               n >>= 1;\n            }\n            return res;\n        }\n\n\
-    \        DynamicModInt inverse() const noexcept {\n            return power(montgomery.mod\
-    \ - 2);\n        }\n\n        DynamicModInt operator +() const noexcept {\n  \
-    \          return *this;\n        }\n\n        DynamicModInt operator -() const\
-    \ noexcept {\n            return value == 0 ? 0 : montgomery.mod - value;\n  \
-    \      }\n\n        DynamicModInt& operator ++() noexcept {\n            *this\
-    \ += DynamicModInt::raw(1);\n            return *this;\n        }\n\n        DynamicModInt\
-    \ operator ++(int) noexcept {\n            DynamicModInt before = *this;\n   \
-    \         ++*this;\n            return before;\n        }\n\n        DynamicModInt&\
-    \ operator --() noexcept {\n            *this -= DynamicModInt::raw(1);\n    \
-    \        return *this;\n        }\n\n        DynamicModInt operator --(int) noexcept\
-    \ {\n            DynamicModInt before = *this;\n            --*this;\n       \
-    \     return before;\n        }\n\n        DynamicModInt& operator +=(DynamicModInt\
+    \ T, std::size_t kind = 0, bool = false>\n    struct DynamicModInt {\n       \
+    \ static_assert(std::is_unsigned_v<T>, \"T must be unsigned integer\");\n    \
+    \    using value_type = T;\n\n    private:\n        using larger_type = uint_least_t<std::numeric_limits<T>::digits\
+    \ * 2>;\n\n        inline static Montgomery<T> montgomery;\n\n    public:\n  \
+    \      T value;\n\n        static constexpr KYOPRO_BASE_INT get_kind() noexcept\
+    \ {\n            return kind;\n        }\n\n        static void set_mod(T mod)\
+    \ noexcept {\n            montgomery.set_mod(mod);\n        }\n\n        static\
+    \ KYOPRO_BASE_INT get_mod() noexcept {\n            return montgomery.mod;\n \
+    \       }\n\n        KYOPRO_BASE_INT get_val() noexcept {\n            return\
+    \ montgomery.inverse_transform(value);\n        }\n\n        DynamicModInt() noexcept\
+    \ = default;\n        DynamicModInt(T value) noexcept: value(montgomery.transform(value\
+    \ % montgomery.mod + montgomery.mod)) {}\n\n        template<class U>\n      \
+    \  explicit operator U() const noexcept {\n            return montgomery.inverse_transform(value);\n\
+    \        }\n\n        static DynamicModInt raw(T value) noexcept {\n         \
+    \   DynamicModInt res;\n            res.value = montgomery.transform(value);\n\
+    \            return res;\n        }\n\n        DynamicModInt power(std::uint_fast64_t\
+    \ n) const noexcept {\n            DynamicModInt res = 1, a = *this;\n       \
+    \     while (n > 0) {\n                if (n & 1) res = res * a;\n           \
+    \     a = a * a;\n                n >>= 1;\n            }\n            return\
+    \ res;\n        }\n\n        DynamicModInt inverse() const noexcept {\n      \
+    \      return power(montgomery.mod - 2);\n        }\n\n        DynamicModInt operator\
+    \ +() const noexcept {\n            return *this;\n        }\n\n        DynamicModInt\
+    \ operator -() const noexcept {\n            return value == 0 ? 0 : montgomery.mod\
+    \ - value;\n        }\n\n        DynamicModInt& operator ++() noexcept {\n   \
+    \         *this += DynamicModInt::raw(1);\n            return *this;\n       \
+    \ }\n\n        DynamicModInt operator ++(int) noexcept {\n            DynamicModInt\
+    \ before = *this;\n            ++*this;\n            return before;\n        }\n\
+    \n        DynamicModInt& operator --() noexcept {\n            *this -= DynamicModInt::raw(1);\n\
+    \            return *this;\n        }\n\n        DynamicModInt operator --(int)\
+    \ noexcept {\n            DynamicModInt before = *this;\n            --*this;\n\
+    \            return before;\n        }\n\n        DynamicModInt& operator +=(DynamicModInt\
     \ rhs) noexcept {\n            if ((value += rhs.value - (montgomery.mod << 1))\
     \ > std::numeric_limits<std::make_signed_t<T>>::max()) value += montgomery.mod\
     \ << 1;\n            return *this;\n        }\n\n        DynamicModInt& operator\
@@ -532,10 +532,8 @@ data:
     \            value = montgomery.transform(value % montgomery.mod + montgomery.mod);\n\
     \        }\n\n        template<class Printer>\n        void print(Printer& printer)\
     \ const {\n            printer.print(montgomery.inverse_transform(value));\n \
-    \       }\n    };\n\n    namespace helper {\n        template<class T>\n     \
-    \   struct InternalDynamicModInt: DynamicModInt<T> {};\n    } // namespace helper\n\
-    \n    template<class T, std::size_t kind>\n    struct Hash<DynamicModInt<T, kind>>\
-    \ {\n        using value_type = DynamicModInt<T, kind>;\n\n        std::size_t\
+    \       }\n    };\n\n    template<class T, std::size_t kind>\n    struct Hash<DynamicModInt<T,\
+    \ kind>> {\n        using value_type = DynamicModInt<T, kind>;\n\n        std::size_t\
     \ operator ()(DynamicModInt<T, kind> a) const noexcept {\n            return static_cast<std::size_t>(a);\n\
     \        }\n    };\n} // namespace kyopro\n#line 4 \"math/euler_phi.hpp\"\n\n\
     namespace kyopro {\n    inline constexpr struct {\n        constexpr KYOPRO_BASE_INT\
@@ -550,15 +548,15 @@ data:
     \n#include <numeric>\n#include <random>\n#line 8 \"math/is_prime.hpp\"\n\nnamespace\
     \ kyopro {\n    inline constexpr struct {\n        template<class T>\n       \
     \ constexpr bool operator ()(T x) const {\n            using U = std::make_unsigned_t<T>;\n\
-    \            using DynamicModInt = helper::InternalDynamicModInt<U>;\n       \
-    \     U n = x;\n            if (n <= 1) return false;\n            if (!(n & 1))\
-    \ return n == 2;\n            DynamicModInt::set_mod(n);\n            std::uint_fast64_t\
-    \ d = (n - 1) >> trailing_zero(n - 1);\n            DynamicModInt one = 1, minus_one\
-    \ = n - 1;\n            auto ng = [&](std::uint_fast64_t a) noexcept {\n     \
-    \           auto y = DynamicModInt(a).power(d);\n                std::uint_fast64_t\
-    \ t = d;\n                while (y != one and y != minus_one and t != n - 1) y\
-    \ *= y, t <<= 1;\n                if (y != minus_one and !(t & 1)) return true;\n\
-    \                return false;\n            };\n            if (std::numeric_limits<U>::digits\
+    \            using dmint = DynamicModInt<U, 0, true>;\n            U n = x;\n\
+    \            if (n <= 1) return false;\n            if (!(n & 1)) return n ==\
+    \ 2;\n            dmint::set_mod(n);\n            std::uint_fast64_t d = (n -\
+    \ 1) >> trailing_zero(n - 1);\n            dmint one = 1, minus_one = n - 1;\n\
+    \            auto ng = [&](std::uint_fast64_t a) noexcept {\n                auto\
+    \ y = dmint(a).power(d);\n                std::uint_fast64_t t = d;\n        \
+    \        while (y != one and y != minus_one and t != n - 1) y *= y, t <<= 1;\n\
+    \                if (y != minus_one and !(t & 1)) return true;\n             \
+    \   return false;\n            };\n            if (std::numeric_limits<U>::digits\
     \ <= 32 || n < (static_cast<U>(1) << 32)) {\n                for (auto i: (std::uint_fast64_t[3]){2,\
     \ 7, 61}) {\n                if (n <= i) return true;\n                if (ng(i))\
     \ return false;\n                }\n            } else {\n                for\
@@ -568,24 +566,23 @@ data:
     \ }\n    } is_prime;\n} // namespace kyopro\n#line 12 \"math/factorize.hpp\"\n\
     \nnamespace kyopro {\n    inline constexpr struct {\n        template<class T>\n\
     \        constexpr T operator ()(T p, std::uint_fast64_t c) const {\n        \
-    \    using U = std::make_unsigned_t<T>;\n            using DynamicModInt = helper::InternalDynamicModInt<U>;\n\
-    \            U n = p;\n            DynamicModInt::set_mod(n);\n            DynamicModInt\
-    \ cc = c;\n            auto f = [=](DynamicModInt x) noexcept {\n            \
-    \    return x * x + cc;\n            };\n            auto x = DynamicModInt::raw(1),\
-    \ y = DynamicModInt::raw(2), z = DynamicModInt::raw(1), q = DynamicModInt::raw(1);\n\
-    \            U g = 1;\n            const int m = 1 << (floor_bit(n) / 5);\n  \
-    \          for (int r = 1; g == 1; r <<= 1) {\n                x = y;\n      \
-    \          for (int i = 0; i < r; ++i) y = f(y);\n                for (int k =\
-    \ 0; k < r && g == 1; k += m) {\n                z = y;\n                int min\
-    \ = std::min(m, r - k);\n                for (int i = 0; i < min; ++i) {\n   \
-    \                 y = f(y);\n                    q *= x - y;\n               \
-    \ }\n                g = std::gcd(static_cast<U>(q), n);\n                }\n\
-    \            }\n            if (g == n) {\n                do {\n            \
-    \    z = f(z);\n                g = std::gcd(static_cast<U>(x - z), n);\n    \
-    \            } while (g == 1);\n            }\n            return g;\n       \
-    \ }\n    } pollard_rho;\n\n    inline constexpr struct {\n        KYOPRO_BASE_UINT\
-    \ operator ()(std::uint_fast64_t n) const noexcept {\n            static std::mt19937_64\
-    \ mt(std::random_device{}());\n            std::uniform_int_distribution<std::uint_fast64_t>\
+    \    using U = std::make_unsigned_t<T>;\n            using dmint = DynamicModInt<U,\
+    \ 0, true>;\n            U n = p;\n            dmint::set_mod(n);\n          \
+    \  dmint cc = c;\n            auto f = [=](dmint x) noexcept {\n             \
+    \   return x * x + cc;\n            };\n            auto x = dmint::raw(1), y\
+    \ = dmint::raw(2), z = dmint::raw(1), q = dmint::raw(1);\n            U g = 1;\n\
+    \            const int m = 1 << (floor_bit(n) / 5);\n            for (int r =\
+    \ 1; g == 1; r <<= 1) {\n                x = y;\n                for (int i =\
+    \ 0; i < r; ++i) y = f(y);\n                for (int k = 0; k < r && g == 1; k\
+    \ += m) {\n                z = y;\n                int min = std::min(m, r - k);\n\
+    \                for (int i = 0; i < min; ++i) {\n                    y = f(y);\n\
+    \                    q *= x - y;\n                }\n                g = std::gcd(static_cast<U>(q),\
+    \ n);\n                }\n            }\n            if (g == n) {\n         \
+    \       do {\n                z = f(z);\n                g = std::gcd(static_cast<U>(x\
+    \ - z), n);\n                } while (g == 1);\n            }\n            return\
+    \ g;\n        }\n    } pollard_rho;\n\n    inline constexpr struct {\n       \
+    \ KYOPRO_BASE_UINT operator ()(std::uint_fast64_t n) const noexcept {\n      \
+    \      static std::mt19937_64 mt(std::random_device{}());\n            std::uniform_int_distribution<std::uint_fast64_t>\
     \ rnd(0, n - 1);\n            if (is_prime(n)) return n;\n            for (int\
     \ i = 0; i < 100; ++i) {\n                std::uint_fast64_t m = pollard_rho(n,\
     \ rnd(mt));\n                if (is_prime(m)) return m;\n                n = m;\n\
@@ -664,64 +661,21 @@ data:
     \ {\n        using value_type = ModInt<mod>;\n        constexpr std::size_t operator\
     \ ()(ModInt<mod> a) const noexcept {\n            return static_cast<std::size_t>(a);\n\
     \        }\n    };\n} // namespace kyopro\n#line 4 \"range/range_base.hpp\"\n\
-    #include <stdexcept>\n#include <string>\n#line 5 \"range/iterator_base.hpp\"\n\
-    \nnamespace kyopro {\n    template<class, class, bool = false>\n    struct IteratorBase;\n\
-    \n    template<class Derived, bool Const>\n    struct IteratorBase<Derived, std::forward_iterator_tag,\
-    \ Const> {\n        using value_type = std::decay_t<decltype(*std::declval<Derived>())>;\n\
-    \        using pointer = value_type*;\n        using reference = value_type&;\n\
-    \        using difference_type = std::ptrdiff_t;\n        using iterator_category\
-    \ = std::forward_iterator_tag;\n\n        virtual constexpr std::conditional_t<Const,\
-    \ const decltype(*std::declval<Derived>()), decltype(*std::declval<Derived>())>\
-    \ operator *() const noexcept;\n        virtual constexpr Derived& operator ++()\
-    \ noexcept;\n        virtual constexpr bool operator ==(const Derived&) const\
-    \ noexcept;\n\n        constexpr Derived operator ++(int) noexcept {\n       \
-    \     Derived before = *this;\n            ++*this;\n            return before;\n\
-    \        }\n\n        constexpr bool operator !=(const Derived& rhs) const noexcept\
-    \ {\n            return !(*this == rhs);\n        }\n    };\n\n    template<class\
-    \ Derived, bool Const>\n    struct IteratorBase<Derived, std::bidirectional_iterator_tag,\
-    \ Const>: IteratorBase<Derived, std::forward_iterator_tag, Const> {\n        using\
-    \ iterator_category = std::bidirectional_iterator_tag;\n\n        virtual constexpr\
-    \ Derived& operator --() noexcept;\n\n        constexpr Derived operator --(int)\
-    \ noexcept {\n            Derived before = *this;\n            --*this;\n    \
-    \        return before;\n        }\n    };\n\n    template<class Derived, bool\
-    \ Const>\n    struct IteratorBase<Derived, std::random_access_iterator_tag, Const>:\
-    \ IteratorBase<Derived, std::bidirectional_iterator_tag, Const> {\n        using\
-    \ iterator_category = std::random_access_iterator_tag;\n\n        virtual constexpr\
-    \ Derived operator +(std::ptrdiff_t rhs) const noexcept;\n        virtual constexpr\
-    \ std::ptrdiff_t operator -(const Derived&) const noexcept;\n\n    private:\n\
-    \        virtual constexpr int compare(const Derived&) const noexcept;\n\n   \
-    \ public:\n\n        constexpr Derived& operator +=(std::ptrdiff_t rhs) noexcept\
-    \ {\n            return *this = *this + rhs;\n        }\n\n        constexpr Derived\
-    \ operator -(std::ptrdiff_t rhs) const noexcept {\n            return *this +\
-    \ -rhs;\n        }\n\n        constexpr Derived& operator -=(std::ptrdiff_t rhs)\
-    \ noexcept {\n            return *this = *this - rhs;\n        }\n\n        virtual\
-    \ constexpr std::conditional_t<Const, const decltype(*std::declval<Derived>()),\
-    \ decltype(*std::declval<Derived>())> operator [](std::size_t idx) const noexcept\
-    \ {\n            return *(*this + idx);\n        }\n\n        virtual constexpr\
-    \ bool operator ==(const Derived& rhs) const noexcept {\n            return compare(rhs)\
-    \ == 0;\n        }\n        virtual constexpr bool operator !=(const Derived&\
-    \ rhs) const noexcept {\n            return compare(rhs) != 0;\n        }\n  \
-    \      virtual constexpr bool operator <(const Derived& rhs) const noexcept {\n\
-    \            return compare(rhs) < 0;\n        }\n        virtual constexpr bool\
-    \ operator <=(const Derived& rhs) const noexcept {\n            return compare(rhs)\
-    \ <= 0;\n        }\n        virtual constexpr bool operator >(const Derived& rhs)\
-    \ const noexcept {\n            return compare(rhs) > 0;\n        }\n        virtual\
-    \ constexpr bool operator >=(const Derived& rhs) const noexcept {\n          \
-    \  return compare(rhs) >= 0;\n        }\n    };\n} // namespace kyopro\n#line\
-    \ 2 \"system/out.hpp\"\n#include <unistd.h>\n#line 5 \"system/out.hpp\"\n#include\
-    \ <bitset>\n#include <cmath>\n#line 8 \"system/out.hpp\"\n#include <cstdio>\n\
-    #line 17 \"system/out.hpp\"\n\nnamespace kyopro {\n    template<std::size_t buf_size\
-    \ = KYOPRO_BUFFER_SIZE>\n    struct Writer {\n    private:\n        int fd, idx;\n\
-    \        std::array<char, buf_size> buffer;\n\n    public:\n        static constexpr\
-    \ KYOPRO_BASE_INT get_buf_size() noexcept {\n            return buf_size;\n  \
-    \      }\n\n        Writer() noexcept = default;\n        Writer(int fd) noexcept:\
-    \ fd(fd), idx(0), buffer() {}\n        Writer(FILE* fp) noexcept: fd(fileno(fp)),\
-    \ idx(0), buffer() {}\n\n        ~Writer() {\n            write(fd, buffer.begin(),\
-    \ idx);\n        }\n\n        struct iterator {\n        private:\n          \
-    \  Writer& writer;\n\n        public:\n            using difference_type = void;\n\
-    \            using value_type = void;\n            using pointer = void;\n   \
-    \         using reference = void;\n            using iterator_category = std::output_iterator_tag;\n\
-    \n            iterator() noexcept = default;\n            iterator(Writer& writer)\
+    #include <stdexcept>\n#include <string>\n#line 2 \"system/out.hpp\"\n#include\
+    \ <unistd.h>\n#line 5 \"system/out.hpp\"\n#include <bitset>\n#include <cmath>\n\
+    #line 8 \"system/out.hpp\"\n#include <cstdio>\n#line 17 \"system/out.hpp\"\n\n\
+    namespace kyopro {\n    template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>\n\
+    \    struct Writer {\n    private:\n        int fd, idx;\n        std::array<char,\
+    \ buf_size> buffer;\n\n    public:\n        static constexpr KYOPRO_BASE_INT get_buf_size()\
+    \ noexcept {\n            return buf_size;\n        }\n\n        Writer() noexcept\
+    \ = default;\n        Writer(int fd) noexcept: fd(fd), idx(0), buffer() {}\n \
+    \       Writer(FILE* fp) noexcept: fd(fileno(fp)), idx(0), buffer() {}\n\n   \
+    \     ~Writer() {\n            write(fd, buffer.begin(), idx);\n        }\n\n\
+    \        struct iterator {\n        private:\n            Writer& writer;\n\n\
+    \        public:\n            using difference_type = void;\n            using\
+    \ value_type = void;\n            using pointer = void;\n            using reference\
+    \ = void;\n            using iterator_category = std::output_iterator_tag;\n\n\
+    \            iterator() noexcept = default;\n            iterator(Writer& writer)\
     \ noexcept: writer(writer) {}\n\n            iterator& operator ++() {\n     \
     \           ++writer.idx;\n                if (writer.idx == buf_size) {\n   \
     \             write(writer.fd, writer.buffer.begin(), buf_size);\n           \
@@ -814,25 +768,30 @@ data:
     \            print(std::forward<Head>(head));\n            operator ()<false>(std::forward<Args>(args)...);\n\
     \        }\n    };\n\n    Printer<Writer<>::iterator, false, false, false> print(output.begin()),\
     \ eprint(error.begin());\n    Printer<Writer<>::iterator> println(output.begin()),\
-    \ eprintln(error.begin());\n} // namespace kyopro\n#line 8 \"range/range_base.hpp\"\
-    \n\nnamespace kyopro {\n    template<class Derived, class = typename Derived::iterator::iterator_category>\n\
-    \    struct RangeBase;\n\n    template<class Derived>\n    struct RangeBase<Derived,\
-    \ std::forward_iterator_tag> {\n        using value_type = typename Derived::iterator::value_type;\n\
-    \        using size_type = std::size_t;\n        using difference_type = std::ptrdiff_t;\n\
+    \ eprintln(error.begin());\n} // namespace kyopro\n#line 7 \"range/range_base.hpp\"\
+    \n\nnamespace kyopro {\n    template<class, class>\n    struct RangeBase;\n\n\
+    \    template<class Derived>\n    struct RangeBase<Derived, std::forward_iterator_tag>\
+    \ {\n        using value_type = typename Derived::iterator::value_type;\n    \
+    \    using size_type = std::size_t;\n        using difference_type = std::ptrdiff_t;\n\
     \        using reference = value_type&;\n        using const_reference = const\
     \ value_type&;\n        using pointer = value_type*;\n        using const_pointer\
-    \ = const value_type*;\n\n        virtual constexpr Derived::iterator begin()\
-    \ const noexcept;\n        virtual constexpr Derived::iterator end() const noexcept;\n\
-    \        virtual constexpr Derived::iterator cbegin() const noexcept;\n      \
-    \  virtual constexpr Derived::iterator cend() const noexcept;\n\n        virtual\
-    \ constexpr bool empty() const noexcept {\n            return begin() == end();\n\
-    \        }\n\n        constexpr decltype(auto) front() noexcept {\n          \
-    \  return *begin();\n        }\n        constexpr decltype(auto) front() const\
-    \ noexcept {\n            return *cbegin();\n        }\n    };\n\n    template<class\
-    \ Derived>\n    struct RangeBase<Derived, std::bidirectional_iterator_tag>: IteratorBase<Derived,\
-    \ std::forward_iterator_tag> {\n    protected:\n        using iterator_category\
-    \ = std::bidirectional_iterator_tag;\n        using reverse_iterator = std::reverse_iterator<Derived::iterator>;\n\
-    \        using const_reverse_iterator = std::reverse_iterator<Derived::const_iterator>;\n\
+    \ = const value_type*;\n\n        virtual constexpr typename Derived::iterator\
+    \ begin() const noexcept;\n        virtual constexpr typename Derived::iterator\
+    \ end() const noexcept;\n        virtual constexpr typename Derived::const_iterator\
+    \ cbegin() const noexcept;\n        virtual constexpr typename Derived::const_iterator\
+    \ cend() const noexcept;\n\n        virtual constexpr bool empty() const noexcept\
+    \ {\n            return begin() == end();\n        }\n\n        constexpr decltype(auto)\
+    \ front() noexcept {\n            return *begin();\n        }\n        constexpr\
+    \ decltype(auto) front() const noexcept {\n            return *cbegin();\n   \
+    \     }\n    };\n\n    template<class Derived>\n    struct RangeBase<Derived,\
+    \ std::bidirectional_iterator_tag>: RangeBase<Derived, std::forward_iterator_tag>\
+    \ {\n    protected:\n        using iterator_category = std::bidirectional_iterator_tag;\n\
+    \        using reverse_iterator = std::reverse_iterator<typename Derived::iterator>;\n\
+    \        using const_reverse_iterator = std::reverse_iterator<typename Derived::const_iterator>;\n\
+    \n        virtual constexpr typename Derived::iterator begin() const noexcept;\n\
+    \        virtual constexpr typename Derived::iterator end() const noexcept;\n\
+    \        virtual constexpr typename Derived::const_iterator cbegin() const noexcept;\n\
+    \        virtual constexpr typename Derived::const_iterator cend() const noexcept;\n\
     \n        virtual constexpr reverse_iterator rbegin() const noexcept {\n     \
     \       return reverse_iterator(end());\n        }\n        virtual constexpr\
     \ reverse_iterator rend() const noexcept {\n            return reverse_iterator(begin());\n\
@@ -843,20 +802,25 @@ data:
     \ back() noexcept {\n            return *rbegin();\n        }\n        constexpr\
     \ decltype(auto) back() const noexcept {\n            return *crbegin();\n   \
     \     }\n    };\n\n    template<class Derived>\n    struct RangeBase<Derived,\
-    \ std::random_access_iterator_tag>: IteratorBase<Derived, std::bidirectional_iterator_tag>\
-    \ {\n        virtual constexpr std::size_t size() const noexcept {\n         \
-    \   return end() - begin();\n        }\n\n        constexpr decltype(auto) operator\
-    \ [](std::size_t idx) {\n            return *(begin() + idx);\n        }\n   \
-    \     constexpr decltype(auto) operator [](std::size_t idx) const {\n        \
-    \    return *(cbegin() + idx);\n        }\n    };\n} // namespace kyopro\n#line\
-    \ 9 \"range/imap.hpp\"\n\nnamespace kyopro {\n    template<class Func, class Range>\n\
-    \    struct imap: RangeBase<imap> {\n    private:\n        using BaseIterator\
-    \ = range_iterator_t<Range>;\n        using BaseConstIterator = range_const_iterator_t<Range>;\n\
-    \n        Func func;\n        Range range;\n\n    public:\n        imap() noexcept\
-    \ = default;\n        template<class F, class R>\n        imap(F&& func, R&& range)\
-    \ noexcept: func(std::forward<F>(func)), range(std::forward<R>(range)) {}\n\n\
-    \        struct iterator: BaseIterator {\n            using value_type = std::decay_t<std::invoke_result_t<Func,\
-    \ decltype(*std::declval<BaseIterator>{})>>;\n            using pointer = value_type*;\n\
+    \ std::random_access_iterator_tag>: RangeBase<Derived, std::bidirectional_iterator_tag>\
+    \ {\n        virtual constexpr typename Derived::iterator begin() const noexcept;\n\
+    \        virtual constexpr typename Derived::iterator end() const noexcept;\n\
+    \        virtual constexpr typename Derived::const_iterator cbegin() const noexcept;\n\
+    \        virtual constexpr typename Derived::const_iterator cend() const noexcept;\n\
+    \n        virtual constexpr std::size_t size() const noexcept {\n            return\
+    \ end() - begin();\n        }\n\n        constexpr decltype(auto) operator [](std::size_t\
+    \ idx) {\n            return *(begin() + idx);\n        }\n        constexpr decltype(auto)\
+    \ operator [](std::size_t idx) const {\n            return *(cbegin() + idx);\n\
+    \        }\n    };\n} // namespace kyopro\n#line 9 \"range/imap.hpp\"\n\nnamespace\
+    \ kyopro {\n    template<class Func, class Range>\n    struct imap: RangeBase<imap<Func,\
+    \ Range>, typename std::iterator_traits<range_iterator_t<Range>>::iterator_category>\
+    \ {\n    private:\n        using BaseIterator = range_iterator_t<Range>;\n   \
+    \     using BaseConstIterator = range_const_iterator_t<Range>;\n\n        Func\
+    \ func;\n        Range range;\n\n    public:\n        imap() noexcept = default;\n\
+    \        template<class F, class R>\n        imap(F&& func, R&& range) noexcept:\
+    \ func(std::forward<F>(func)), range(std::forward<R>(range)) {}\n\n        struct\
+    \ iterator: BaseIterator {\n            using value_type = std::decay_t<std::invoke_result_t<Func,\
+    \ decltype(*std::declval<BaseIterator>())>>;\n            using pointer = value_type*;\n\
     \            using reference = value_type&;\n\n        private:\n            Func\
     \ func;\n\n        public:\n            iterator() noexcept = default;\n     \
     \       template<class F, class Itr>\n            iterator(F&& func, Itr&& itr)\
@@ -864,40 +828,83 @@ data:
     \ {}\n\n            constexpr decltype(auto) operator *() const noexcept {\n \
     \               return std::invoke(func, BaseIterator::operator *());\n      \
     \      }\n        };\n\n        struct const_iterator: BaseConstIterator {\n \
-    \           using value_type = const std::decay_t<std::invoke_result_t<Func, decltype(*std::declval<BaseIterator>{})>>;\n\
+    \           using value_type = const std::decay_t<std::invoke_result_t<Func, decltype(*std::declval<BaseIterator>())>>;\n\
     \            using pointer = value_type*;\n            using reference = value_type&;\n\
     \n        private:\n            Func func;\n\n        public:\n            const_iterator()\
     \ noexcept = default;\n            template<class F, class Itr>\n            const_iterator(F&&\
     \ func, Itr&& itr) noexcept: func(std::forward<F>(func)), BaseConstIterator(std::forward<Itr>(itr))\
     \ {}\n\n            constexpr const std::invoke_result_t<Func, decltype(*std::declval<BaseIterator>())>\
     \ operator *() const noexcept {\n                return std::invoke(func, BaseIterator::operator\
-    \ *());\n            }\n        };\n\n        using reverse_iterator = std::reverse_iterator<iterator>;\n\
-    \        using const_reverse_iterator = std::reverse_iterator<const_iterator>;\n\
-    \n        constexpr iterator begin() const noexcept {\n            return iterator(func,\
-    \ std::begin(range));\n        }\n\n        constexpr iterator end() const noexcept\
-    \ {\n            return iterator(func, std::end(range));\n        }\n\n      \
-    \  constexpr const_iterator cbegin() const noexcept {\n            return const_iterator(func,\
-    \ std::begin(range));\n        }\n\n        constexpr const_iterator cend() const\
-    \ noexcept {\n            return const_iterator(func, std::end(range));\n    \
-    \    }\n    };\n\n    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>,\
-    \ std::decay_t<R>>;\n} // namespace kyopro\n#line 6 \"structure/FenwickTree.hpp\"\
-    \n\nnamespace kyopro {\n    template<class T, class Op = Add<T>, class Container\
-    \ = std::vector<T>>\n    struct FenwickTree: private Op {\n        using value_type\
-    \ = T;\n        using size_type = std::size_t;\n        using reference = T&;\n\
-    \        using const_reference = const T&;\n        using operator_type = Op;\n\
-    \        using container_type = Container;\n\n    private:\n        Container\
-    \ tree;\n\n    public:\n        FenwickTree() noexcept = default;\n        FenwickTree(std::size_t\
-    \ n) noexcept: tree(n, Op::id()) {}\n\n        std::size_t size() noexcept {\n\
-    \            return tree.size();\n        }\n\n        void apply(int p, const\
-    \ T& x) {\n            ++p;\n            while (p <= (int)size()) {\n        \
-    \        tree[p - 1] = Op::operator ()(tree[p - 1], x);\n                p +=\
-    \ p & -p;\n            }\n        }\n\n        T prod(int r) const {\n       \
-    \     T s = Op::id();\n            while (r > 0) {\n                s = Op::operator\
-    \ ()(s, tree[r - 1]);\n                r -= r & -r;\n            }\n         \
-    \   return s;\n        }\n        T prod(int l, int r) const {\n            static_assert(has_inverse_v<Op>,\
-    \ \"Operator doesn't have an inverse\");\n            return Op::operator ()(prod(r),\
-    \ Op::inverse(prod(l)));\n        }\n\n        T all_prod() {\n            return\
-    \ prod(tree.size());\n        }\n\n        T get(int p) {\n            static_assert(has_inverse_v<Op>,\
+    \ *());\n            }\n        };\n\n        constexpr iterator begin() const\
+    \ noexcept {\n            return iterator(func, std::begin(range));\n        }\n\
+    \n        constexpr iterator end() const noexcept {\n            return iterator(func,\
+    \ std::end(range));\n        }\n\n        constexpr const_iterator cbegin() const\
+    \ noexcept {\n            return const_iterator(func, std::begin(range));\n  \
+    \      }\n\n        constexpr const_iterator cend() const noexcept {\n       \
+    \     return const_iterator(func, std::end(range));\n        }\n    };\n\n   \
+    \ template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>, std::decay_t<R>>;\n\
+    } // namespace kyopro\n#line 5 \"range/iterator_base.hpp\"\n\nnamespace kyopro\
+    \ {\n    template<class, class, bool = false>\n    struct IteratorBase;\n\n  \
+    \  template<class Derived, bool Const>\n    struct IteratorBase<Derived, std::forward_iterator_tag,\
+    \ Const> {\n        using value_type = std::decay_t<decltype(*std::declval<Derived>())>;\n\
+    \        using pointer = value_type*;\n        using reference = value_type&;\n\
+    \        using difference_type = std::ptrdiff_t;\n        using iterator_category\
+    \ = std::forward_iterator_tag;\n\n        virtual constexpr std::conditional_t<Const,\
+    \ const decltype(*std::declval<Derived>()), decltype(*std::declval<Derived>())>\
+    \ operator *() const noexcept;\n        virtual constexpr Derived& operator ++()\
+    \ noexcept;\n        virtual constexpr bool operator ==(const Derived&) const\
+    \ noexcept;\n\n        constexpr Derived operator ++(int) noexcept {\n       \
+    \     Derived before = *this;\n            ++*this;\n            return before;\n\
+    \        }\n\n        constexpr bool operator !=(const Derived& rhs) const noexcept\
+    \ {\n            return !(*this == rhs);\n        }\n    };\n\n    template<class\
+    \ Derived, bool Const>\n    struct IteratorBase<Derived, std::bidirectional_iterator_tag,\
+    \ Const>: IteratorBase<Derived, std::forward_iterator_tag, Const> {\n        using\
+    \ iterator_category = std::bidirectional_iterator_tag;\n\n        virtual constexpr\
+    \ Derived& operator --() noexcept;\n\n        constexpr Derived operator --(int)\
+    \ noexcept {\n            Derived before = *this;\n            --*this;\n    \
+    \        return before;\n        }\n    };\n\n    template<class Derived, bool\
+    \ Const>\n    struct IteratorBase<Derived, std::random_access_iterator_tag, Const>:\
+    \ IteratorBase<Derived, std::bidirectional_iterator_tag, Const> {\n        using\
+    \ iterator_category = std::random_access_iterator_tag;\n\n        virtual constexpr\
+    \ Derived operator +(std::ptrdiff_t rhs) const noexcept;\n        virtual constexpr\
+    \ std::ptrdiff_t operator -(const Derived&) const noexcept;\n\n    private:\n\
+    \        virtual constexpr int compare(const Derived&) const noexcept;\n\n   \
+    \ public:\n\n        constexpr Derived& operator +=(std::ptrdiff_t rhs) noexcept\
+    \ {\n            return *this = *this + rhs;\n        }\n\n        constexpr Derived\
+    \ operator -(std::ptrdiff_t rhs) const noexcept {\n            return *this +\
+    \ -rhs;\n        }\n\n        constexpr Derived& operator -=(std::ptrdiff_t rhs)\
+    \ noexcept {\n            return *this = *this - rhs;\n        }\n\n        virtual\
+    \ constexpr std::conditional_t<Const, const decltype(*std::declval<Derived>()),\
+    \ decltype(*std::declval<Derived>())> operator [](std::size_t idx) const noexcept\
+    \ {\n            return *(*this + idx);\n        }\n\n        virtual constexpr\
+    \ bool operator ==(const Derived& rhs) const noexcept {\n            return compare(rhs)\
+    \ == 0;\n        }\n        virtual constexpr bool operator !=(const Derived&\
+    \ rhs) const noexcept {\n            return compare(rhs) != 0;\n        }\n  \
+    \      virtual constexpr bool operator <(const Derived& rhs) const noexcept {\n\
+    \            return compare(rhs) < 0;\n        }\n        virtual constexpr bool\
+    \ operator <=(const Derived& rhs) const noexcept {\n            return compare(rhs)\
+    \ <= 0;\n        }\n        virtual constexpr bool operator >(const Derived& rhs)\
+    \ const noexcept {\n            return compare(rhs) > 0;\n        }\n        virtual\
+    \ constexpr bool operator >=(const Derived& rhs) const noexcept {\n          \
+    \  return compare(rhs) >= 0;\n        }\n    };\n} // namespace kyopro\n#line\
+    \ 6 \"structure/FenwickTree.hpp\"\n\nnamespace kyopro {\n    template<class T,\
+    \ class Op = Add<T>, class Container = std::vector<T>>\n    struct FenwickTree:\
+    \ private Op {\n        using value_type = T;\n        using size_type = std::size_t;\n\
+    \        using reference = T&;\n        using const_reference = const T&;\n  \
+    \      using operator_type = Op;\n        using container_type = Container;\n\n\
+    \    private:\n        Container tree;\n\n    public:\n        FenwickTree() noexcept\
+    \ = default;\n        FenwickTree(std::size_t n) noexcept: tree(n, Op::id()) {}\n\
+    \n        std::size_t size() noexcept {\n            return tree.size();\n   \
+    \     }\n\n        void apply(int p, const T& x) {\n            ++p;\n       \
+    \     while (p <= (int)size()) {\n                tree[p - 1] = Op::operator ()(tree[p\
+    \ - 1], x);\n                p += p & -p;\n            }\n        }\n\n      \
+    \  T prod(int r) const {\n            T s = Op::id();\n            while (r >\
+    \ 0) {\n                s = Op::operator ()(s, tree[r - 1]);\n               \
+    \ r -= r & -r;\n            }\n            return s;\n        }\n        T prod(int\
+    \ l, int r) const {\n            static_assert(has_inverse_v<Op>, \"Operator doesn't\
+    \ have an inverse\");\n            return Op::operator ()(prod(r), Op::inverse(prod(l)));\n\
+    \        }\n\n        T all_prod() {\n            return prod(tree.size());\n\
+    \        }\n\n        T get(int p) {\n            static_assert(has_inverse_v<Op>,\
     \ \"Operator doesn't have an inverse\");\n            return Op::operator ()(prod(p\
     \ + 1), Op::inverse(prod(p)));\n        }\n\n        void set(int p, const T&\
     \ x) {\n            static_assert(has_inverse_v<Op>, \"Operator doesn't have an\
@@ -1179,8 +1186,8 @@ data:
   - range/all.hpp
   - range/imap.hpp
   - range/range_base.hpp
-  - range/iterator_base.hpp
   - system/out.hpp
+  - range/iterator_base.hpp
   - structure/all.hpp
   - structure/FenwickTree.hpp
   - structure/UnionFind.hpp
@@ -1198,7 +1205,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2022-08-08 13:16:02+09:00'
+  timestamp: '2022-08-08 14:06:09+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp

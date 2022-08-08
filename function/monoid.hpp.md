@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: meta/constant.hpp
     title: meta/constant.hpp
   - icon: ':question:'
@@ -79,7 +79,7 @@ data:
     \ ? -INF<T> : 0 : -std::numeric_limits<T>::infinity();\n        }\n\n        constexpr\
     \ T operator ()(const T& a, const T& b) const noexcept {\n            return a\
     \ > b ? a : b;\n        }\n    };\n\n    template<class, class = void>\n    struct\
-    \ has_inversible: std::false_type {};\n    template<class T>\n    struct has_inverse<T,\
+    \ has_inverse: std::false_type {};\n    template<class T>\n    struct has_inverse<T,\
     \ std::void_t<decltype(&T::inverse)>>: std::true_type {};\n\n    template<class\
     \ T>\n    inline constexpr bool has_inverse_v = has_inverse<T>::value;\n} // namespace\
     \ kyopro\n"
@@ -103,7 +103,7 @@ data:
     \ ? -INF<T> : 0 : -std::numeric_limits<T>::infinity();\n        }\n\n        constexpr\
     \ T operator ()(const T& a, const T& b) const noexcept {\n            return a\
     \ > b ? a : b;\n        }\n    };\n\n    template<class, class = void>\n    struct\
-    \ has_inversible: std::false_type {};\n    template<class T>\n    struct has_inverse<T,\
+    \ has_inverse: std::false_type {};\n    template<class T>\n    struct has_inverse<T,\
     \ std::void_t<decltype(&T::inverse)>>: std::true_type {};\n\n    template<class\
     \ T>\n    inline constexpr bool has_inverse_v = has_inverse<T>::value;\n} // namespace\
     \ kyopro"
@@ -119,7 +119,7 @@ data:
   - structure/FenwickTree.hpp
   - all.hpp
   - function/all.hpp
-  timestamp: '2022-08-08 07:54:18+09:00'
+  timestamp: '2022-08-08 14:06:09+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/yosupo/point_add_range_sum.test.cpp

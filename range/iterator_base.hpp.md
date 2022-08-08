@@ -11,12 +11,6 @@ data:
   - icon: ':warning:'
     path: range/all.hpp
     title: range/all.hpp
-  - icon: ':warning:'
-    path: range/imap.hpp
-    title: range/imap.hpp
-  - icon: ':warning:'
-    path: range/range_base.hpp
-    title: range/range_base.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -119,8 +113,6 @@ data:
   - all/all.hpp
   - all.hpp
   - range/all.hpp
-  - range/range_base.hpp
-  - range/imap.hpp
   timestamp: '2022-08-08 07:54:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
