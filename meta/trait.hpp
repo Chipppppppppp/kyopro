@@ -7,7 +7,7 @@
 #include <type_traits>
 #include <utility>
 
-#ifdef __STRICT_ANSI__ && __SIZEOF_INT128__
+#if defined(__STRICT_ANSI__) && defined(__SIZEOF_INT128__)
 template<>
 struct std::is_integral<__int128_t>: std::true_type {};
 template<>
