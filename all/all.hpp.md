@@ -25,7 +25,7 @@ data:
   - icon: ':warning:'
     path: function/identity.hpp
     title: function/identity.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
   - icon: ':heavy_check_mark:'
@@ -58,22 +58,22 @@ data:
   - icon: ':warning:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/aggregate.hpp
     title: meta/aggregate.hpp
   - icon: ':warning:'
     path: meta/all.hpp
     title: meta/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   - icon: ':warning:'
@@ -88,7 +88,7 @@ data:
   - icon: ':warning:'
     path: range/range_base.hpp
     title: range/range_base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':heavy_check_mark:'
@@ -97,13 +97,13 @@ data:
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/out.hpp
     title: system/out.hpp
   _extendedRequiredBy:
@@ -189,15 +189,15 @@ data:
     \ ()(T&& a) const noexcept {\n            return std::forward<T>(a);\n       \
     \ }\n    };\n}\n#line 2 \"meta/trait.hpp\"\n#include <cstddef>\n#line 4 \"meta/trait.hpp\"\
     \n#include <queue>\n#line 6 \"meta/trait.hpp\"\n#include <stack>\n#line 9 \"meta/trait.hpp\"\
-    \n\ntemplate<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
-    struct std::is_integral<__uint128_t>: std::true_type {};\ntemplate<>\nstruct std::is_floating_point<__float128>:\
-    \ std::true_type {};\n\nnamespace kyopro {\n    template<std::size_t size>\n \
-    \   struct int_least {\n    private:\n        static constexpr auto get_type()\
-    \ noexcept {\n            static_assert(size <= 128, \"Integer size is too large\"\
-    );\n            if constexpr (size <= 8) return std::int_least8_t{};\n       \
-    \     else if constexpr (size <= 16) return std::int_least16_t{};\n          \
-    \  else if constexpr (size <= 32) return std::int_least32_t{};\n            else\
-    \ if constexpr (size <= 64) return std::int_least64_t{};\n            else return\
+    \n\n#ifdef __STRICT_ANSI__ && __SIZEOF_INT128__\ntemplate<>\nstruct std::is_integral<__int128_t>:\
+    \ std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type\
+    \ {};\n#endif\n\n\nnamespace kyopro {\n    template<std::size_t size>\n    struct\
+    \ int_least {\n    private:\n        static constexpr auto get_type() noexcept\
+    \ {\n            static_assert(size <= 128, \"Integer size is too large\");\n\
+    \            if constexpr (size <= 8) return std::int_least8_t{};\n          \
+    \  else if constexpr (size <= 16) return std::int_least16_t{};\n            else\
+    \ if constexpr (size <= 32) return std::int_least32_t{};\n            else if\
+    \ constexpr (size <= 64) return std::int_least64_t{};\n            else return\
     \ __int128_t{};\n        }\n\n    public:\n        using type = decltype(get_type());\n\
     \    };\n\n    template<std::size_t size>\n    using int_least_t = typename int_least<size>::type;\n\
     \n    template<std::size_t size>\n    struct uint_least {\n    private:\n    \
@@ -1035,7 +1035,7 @@ data:
   path: all/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-08-08 14:06:09+09:00'
+  timestamp: '2022-08-09 17:09:09+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp

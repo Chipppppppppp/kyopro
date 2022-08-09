@@ -19,19 +19,19 @@ data:
   - icon: ':warning:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/aggregate.hpp
     title: meta/aggregate.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -53,15 +53,15 @@ data:
     #include <unordered_map>\n#include <queue>\n#include <stack>\n#line 2 \"algorithm/Hash.hpp\"\
     \n#include <cstddef>\n#line 6 \"algorithm/Hash.hpp\"\n#include <type_traits>\n\
     #line 3 \"meta/trait.hpp\"\n#include <iterator>\n#line 9 \"meta/trait.hpp\"\n\n\
-    template<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
-    struct std::is_integral<__uint128_t>: std::true_type {};\ntemplate<>\nstruct std::is_floating_point<__float128>:\
-    \ std::true_type {};\n\nnamespace kyopro {\n    template<std::size_t size>\n \
-    \   struct int_least {\n    private:\n        static constexpr auto get_type()\
-    \ noexcept {\n            static_assert(size <= 128, \"Integer size is too large\"\
-    );\n            if constexpr (size <= 8) return std::int_least8_t{};\n       \
-    \     else if constexpr (size <= 16) return std::int_least16_t{};\n          \
-    \  else if constexpr (size <= 32) return std::int_least32_t{};\n            else\
-    \ if constexpr (size <= 64) return std::int_least64_t{};\n            else return\
+    #ifdef __STRICT_ANSI__ && __SIZEOF_INT128__\ntemplate<>\nstruct std::is_integral<__int128_t>:\
+    \ std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type\
+    \ {};\n#endif\n\n\nnamespace kyopro {\n    template<std::size_t size>\n    struct\
+    \ int_least {\n    private:\n        static constexpr auto get_type() noexcept\
+    \ {\n            static_assert(size <= 128, \"Integer size is too large\");\n\
+    \            if constexpr (size <= 8) return std::int_least8_t{};\n          \
+    \  else if constexpr (size <= 16) return std::int_least16_t{};\n            else\
+    \ if constexpr (size <= 32) return std::int_least32_t{};\n            else if\
+    \ constexpr (size <= 64) return std::int_least64_t{};\n            else return\
     \ __int128_t{};\n        }\n\n    public:\n        using type = decltype(get_type());\n\
     \    };\n\n    template<std::size_t size>\n    using int_least_t = typename int_least<size>::type;\n\
     \n    template<std::size_t size>\n    struct uint_least {\n    private:\n    \
@@ -423,9 +423,10 @@ data:
     \    using lf = double;\n\n    using i8 = std::int8_t;\n    using u8 = std::uint8_t;\n\
     \    using i16 = std::int16_t;\n    using u16 = std::uint16_t;\n    using i32\
     \ = std::int32_t;\n    using u32 = std::uint32_t;\n    using i64 = std::int64_t;\n\
-    \    using u64 = std::uint64_t;\n    using i128 = __int128_t;\n    using u128\
-    \ = __uint128_t;\n    using f128 = __float128;\n\n    using mint = ModInt<mod>;\n\
-    \    using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\n    template<class T, std::size_t\
+    \    using u64 = std::uint64_t;\n    #ifdef __SIZEOF_INT128__\n    using i128\
+    \ = __int128_t;\n    using u128 = __uint128_t;\n    #endif\n    #ifdef __SIZEOF_FLOAT128__\n\
+    \    using f128 = __float128;\n    #endif\n\n    using mint = ModInt<mod>;\n \
+    \   using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\n    template<class T, std::size_t\
     \ idx, class... Args>\n    struct agg_type {\n        using type = typename agg_type<T,\
     \ idx - 1, T, Args...>::type;\n    };\n    template<class T, class... Args>\n\
     \    struct agg_type<T, 0, Args...> {\n        using type = std::tuple<Args...>;\n\
@@ -459,9 +460,10 @@ data:
     \ ull = unsigned long long;\n    using lf = double;\n\n    using i8 = std::int8_t;\n\
     \    using u8 = std::uint8_t;\n    using i16 = std::int16_t;\n    using u16 =\
     \ std::uint16_t;\n    using i32 = std::int32_t;\n    using u32 = std::uint32_t;\n\
-    \    using i64 = std::int64_t;\n    using u64 = std::uint64_t;\n    using i128\
-    \ = __int128_t;\n    using u128 = __uint128_t;\n    using f128 = __float128;\n\
-    \n    using mint = ModInt<mod>;\n    using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\
+    \    using i64 = std::int64_t;\n    using u64 = std::uint64_t;\n    #ifdef __SIZEOF_INT128__\n\
+    \    using i128 = __int128_t;\n    using u128 = __uint128_t;\n    #endif\n   \
+    \ #ifdef __SIZEOF_FLOAT128__\n    using f128 = __float128;\n    #endif\n\n   \
+    \ using mint = ModInt<mod>;\n    using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\
     \n    template<class T, std::size_t idx, class... Args>\n    struct agg_type {\n\
     \        using type = typename agg_type<T, idx - 1, T, Args...>::type;\n    };\n\
     \    template<class T, class... Args>\n    struct agg_type<T, 0, Args...> {\n\
@@ -503,7 +505,7 @@ data:
   requiredBy:
   - all.hpp
   - template/all.hpp
-  timestamp: '2022-08-08 14:06:09+09:00'
+  timestamp: '2022-08-09 17:09:09+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/alias.hpp

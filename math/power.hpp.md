@@ -11,7 +11,7 @@ data:
   - icon: ':warning:'
     path: function/all.hpp
     title: function/all.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
   - icon: ':heavy_check_mark:'
@@ -32,19 +32,19 @@ data:
   - icon: ':warning:'
     path: meta/all.hpp
     title: meta/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':warning:'
     path: structure/all.hpp
     title: structure/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/in.hpp
     title: system/in.hpp
   - icon: ':warning:'
@@ -66,24 +66,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/many_aplusb.test.cpp
     title: verify/yosupo/many_aplusb.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo/point_add_range_sum.test.cpp
     title: verify/yosupo/point_add_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"math/power.hpp\"\n#include <cstddef>\n\nnamespace kyopro\
+  bundledCode: "#line 2 \"math/power.hpp\"\n#include <cstdint>\n\nnamespace kyopro\
     \ {\n    inline constexpr struct {\n        template<class T>\n        constexpr\
     \ T operator ()(T a, std::uint_fast64_t n, T init = 1) const noexcept {\n    \
     \        while (n > 0) {\n                if (n & 1) init *= a;\n            \
     \    a *= a;\n                n >>= 1;\n            }\n            return init;\n\
     \        }\n    } power;\n} // namespace kyopro\n"
-  code: "#pragma once\n#include <cstddef>\n\nnamespace kyopro {\n    inline constexpr\
+  code: "#pragma once\n#include <cstdint>\n\nnamespace kyopro {\n    inline constexpr\
     \ struct {\n        template<class T>\n        constexpr T operator ()(T a, std::uint_fast64_t\
     \ n, T init = 1) const noexcept {\n            while (n > 0) {\n             \
     \   if (n & 1) init *= a;\n                a *= a;\n                n >>= 1;\n\
@@ -111,8 +111,8 @@ data:
   - template/alias.hpp
   - meta/all.hpp
   - meta/constant.hpp
-  timestamp: '2022-08-08 07:54:18+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2022-08-09 17:09:09+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp
   - verify/yosupo/point_add_range_sum.test.cpp

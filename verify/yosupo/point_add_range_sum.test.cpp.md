@@ -1,41 +1,41 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/aggregate.hpp
     title: meta/aggregate.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/out.hpp
     title: system/out.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_add_range_sum
@@ -45,18 +45,18 @@ data:
     \ \"https://judge.yosupo.jp/problem/point_add_range_sum\"\n#line 2 \"structure/FenwickTree.hpp\"\
     \n#include <cstddef>\n#include <utility>\n#include <vector>\n#line 2 \"function/monoid.hpp\"\
     \n#include <limits>\n#include <type_traits>\n#line 2 \"meta/constant.hpp\"\n#include\
-    \ <array>\n#line 3 \"math/power.hpp\"\n\nnamespace kyopro {\n    inline constexpr\
-    \ struct {\n        template<class T>\n        constexpr T operator ()(T a, std::uint_fast64_t\
-    \ n, T init = 1) const noexcept {\n            while (n > 0) {\n             \
-    \   if (n & 1) init *= a;\n                a *= a;\n                n >>= 1;\n\
-    \            }\n            return init;\n        }\n    } power;\n} // namespace\
-    \ kyopro\n#line 2 \"meta/settings.hpp\"\n#include <cstdint>\n\n#ifndef KYOPRO_BASE_INT\n\
-    #define KYOPRO_BASE_INT std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n#define\
-    \ KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n#define\
-    \ KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n#define KYOPRO_DEFAULT_MOD\
-    \ static_cast<KYOPRO_BASE_UINT>(998244353)\n#endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n\
-    #define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n#endif\n\n\
-    #ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
+    \ <array>\n#line 2 \"math/power.hpp\"\n#include <cstdint>\n\nnamespace kyopro\
+    \ {\n    inline constexpr struct {\n        template<class T>\n        constexpr\
+    \ T operator ()(T a, std::uint_fast64_t n, T init = 1) const noexcept {\n    \
+    \        while (n > 0) {\n                if (n & 1) init *= a;\n            \
+    \    a *= a;\n                n >>= 1;\n            }\n            return init;\n\
+    \        }\n    } power;\n} // namespace kyopro\n#line 3 \"meta/settings.hpp\"\
+    \n\n#ifndef KYOPRO_BASE_INT\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\n\
+    #ifndef KYOPRO_BASE_UINT\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef\
+    \ KYOPRO_BASE_FLOAT\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n\
+    #define KYOPRO_DEFAULT_MOD static_cast<KYOPRO_BASE_UINT>(998244353)\n#endif\n\n\
+    #ifndef KYOPRO_DECIMAL_PRECISION\n#define KYOPRO_DECIMAL_PRECISION static_cast<KYOPRO_BASE_UINT>(12)\n\
+    #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 7 \"meta/constant.hpp\"\n\nnamespace kyopro {\n    template<class\
     \ T>\n    inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\n    inline constexpr KYOPRO_BASE_INT\
@@ -116,29 +116,28 @@ data:
     \ <unistd.h>\n#line 4 \"system/in.hpp\"\n#include <bitset>\n#line 7 \"system/in.hpp\"\
     \n#include <cstdio>\n#include <string>\n#include <tuple>\n#line 3 \"meta/trait.hpp\"\
     \n#include <iterator>\n#include <queue>\n#line 6 \"meta/trait.hpp\"\n#include\
-    \ <stack>\n#line 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct std::is_integral<__int128_t>:\
-    \ std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type\
-    \ {};\ntemplate<>\nstruct std::is_floating_point<__float128>: std::true_type {};\n\
-    \nnamespace kyopro {\n    template<std::size_t size>\n    struct int_least {\n\
-    \    private:\n        static constexpr auto get_type() noexcept {\n         \
-    \   static_assert(size <= 128, \"Integer size is too large\");\n            if\
-    \ constexpr (size <= 8) return std::int_least8_t{};\n            else if constexpr\
-    \ (size <= 16) return std::int_least16_t{};\n            else if constexpr (size\
-    \ <= 32) return std::int_least32_t{};\n            else if constexpr (size <=\
-    \ 64) return std::int_least64_t{};\n            else return __int128_t{};\n  \
-    \      }\n\n    public:\n        using type = decltype(get_type());\n    };\n\n\
-    \    template<std::size_t size>\n    using int_least_t = typename int_least<size>::type;\n\
-    \n    template<std::size_t size>\n    struct uint_least {\n    private:\n    \
-    \    static constexpr auto get_type() noexcept {\n            static_assert(size\
+    \ <stack>\n#line 9 \"meta/trait.hpp\"\n\n#ifdef __STRICT_ANSI__ && __SIZEOF_INT128__\n\
+    template<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
+    struct std::is_integral<__uint128_t>: std::true_type {};\n#endif\n\n\nnamespace\
+    \ kyopro {\n    template<std::size_t size>\n    struct int_least {\n    private:\n\
+    \        static constexpr auto get_type() noexcept {\n            static_assert(size\
     \ <= 128, \"Integer size is too large\");\n            if constexpr (size <= 8)\
-    \ return std::uint_least8_t{};\n            else if constexpr (size <= 16) return\
-    \ std::uint_least16_t{};\n            else if constexpr (size <= 32) return std::uint_least32_t{};\n\
-    \            else if constexpr (size <= 64) return std::uint_least64_t{};\n  \
-    \          else return __uint128_t{};\n        }\n\n    public:\n        using\
-    \ type = decltype(get_type());\n    };\n\n    template<std::size_t size>\n   \
-    \ using uint_least_t = typename uint_least<size>::type;\n\n    template<class,\
-    \ class = void>\n    struct is_iterator: std::false_type {};\n    template<class\
-    \ T>\n    struct is_iterator<T, std::void_t<typename std::iterator_traits<T>::iterator_category>>:\
+    \ return std::int_least8_t{};\n            else if constexpr (size <= 16) return\
+    \ std::int_least16_t{};\n            else if constexpr (size <= 32) return std::int_least32_t{};\n\
+    \            else if constexpr (size <= 64) return std::int_least64_t{};\n   \
+    \         else return __int128_t{};\n        }\n\n    public:\n        using type\
+    \ = decltype(get_type());\n    };\n\n    template<std::size_t size>\n    using\
+    \ int_least_t = typename int_least<size>::type;\n\n    template<std::size_t size>\n\
+    \    struct uint_least {\n    private:\n        static constexpr auto get_type()\
+    \ noexcept {\n            static_assert(size <= 128, \"Integer size is too large\"\
+    );\n            if constexpr (size <= 8) return std::uint_least8_t{};\n      \
+    \      else if constexpr (size <= 16) return std::uint_least16_t{};\n        \
+    \    else if constexpr (size <= 32) return std::uint_least32_t{};\n          \
+    \  else if constexpr (size <= 64) return std::uint_least64_t{};\n            else\
+    \ return __uint128_t{};\n        }\n\n    public:\n        using type = decltype(get_type());\n\
+    \    };\n\n    template<std::size_t size>\n    using uint_least_t = typename uint_least<size>::type;\n\
+    \n    template<class, class = void>\n    struct is_iterator: std::false_type {};\n\
+    \    template<class T>\n    struct is_iterator<T, std::void_t<typename std::iterator_traits<T>::iterator_category>>:\
     \ std::true_type {};\n\n    template<class T>\n    constexpr bool is_iterator_v\
     \ = is_iterator<T>::value;\n\n    template<class, class = void>\n    struct is_range:\
     \ std::false_type {};\n    template<class T>\n    struct is_range<T, std::void_t<decltype(std::begin(std::declval<std::add_lvalue_reference_t<T>>()),\
@@ -453,8 +452,8 @@ data:
   isVerificationFile: true
   path: verify/yosupo/point_add_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-08-08 14:06:09+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-08-09 17:09:09+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yosupo/point_add_range_sum.test.cpp
 layout: document

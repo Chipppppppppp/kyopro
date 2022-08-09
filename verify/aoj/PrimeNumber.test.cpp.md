@@ -16,28 +16,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/aggregate.hpp
     title: meta/aggregate.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/settings.hpp
     title: meta/settings.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/all.hpp
     title: system/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: system/out.hpp
     title: system/out.hpp
   _extendedRequiredBy: []
@@ -105,18 +105,17 @@ data:
     #line 4 \"algorithm/Hash.hpp\"\n#include <functional>\n#include <tuple>\n#line\
     \ 7 \"algorithm/Hash.hpp\"\n#include <utility>\n#line 3 \"meta/trait.hpp\"\n#include\
     \ <iterator>\n#include <queue>\n#line 6 \"meta/trait.hpp\"\n#include <stack>\n\
-    #line 9 \"meta/trait.hpp\"\n\ntemplate<>\nstruct std::is_integral<__int128_t>:\
-    \ std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type\
-    \ {};\ntemplate<>\nstruct std::is_floating_point<__float128>: std::true_type {};\n\
-    \nnamespace kyopro {\n    template<std::size_t size>\n    struct int_least {\n\
-    \    private:\n        static constexpr auto get_type() noexcept {\n         \
-    \   static_assert(size <= 128, \"Integer size is too large\");\n            if\
-    \ constexpr (size <= 8) return std::int_least8_t{};\n            else if constexpr\
-    \ (size <= 16) return std::int_least16_t{};\n            else if constexpr (size\
-    \ <= 32) return std::int_least32_t{};\n            else if constexpr (size <=\
-    \ 64) return std::int_least64_t{};\n            else return __int128_t{};\n  \
-    \      }\n\n    public:\n        using type = decltype(get_type());\n    };\n\n\
-    \    template<std::size_t size>\n    using int_least_t = typename int_least<size>::type;\n\
+    #line 9 \"meta/trait.hpp\"\n\n#ifdef __STRICT_ANSI__ && __SIZEOF_INT128__\ntemplate<>\n\
+    struct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
+    \ std::true_type {};\n#endif\n\n\nnamespace kyopro {\n    template<std::size_t\
+    \ size>\n    struct int_least {\n    private:\n        static constexpr auto get_type()\
+    \ noexcept {\n            static_assert(size <= 128, \"Integer size is too large\"\
+    );\n            if constexpr (size <= 8) return std::int_least8_t{};\n       \
+    \     else if constexpr (size <= 16) return std::int_least16_t{};\n          \
+    \  else if constexpr (size <= 32) return std::int_least32_t{};\n            else\
+    \ if constexpr (size <= 64) return std::int_least64_t{};\n            else return\
+    \ __int128_t{};\n        }\n\n    public:\n        using type = decltype(get_type());\n\
+    \    };\n\n    template<std::size_t size>\n    using int_least_t = typename int_least<size>::type;\n\
     \n    template<std::size_t size>\n    struct uint_least {\n    private:\n    \
     \    static constexpr auto get_type() noexcept {\n            static_assert(size\
     \ <= 128, \"Integer size is too large\");\n            if constexpr (size <= 8)\
@@ -573,7 +572,7 @@ data:
   isVerificationFile: true
   path: verify/aoj/PrimeNumber.test.cpp
   requiredBy: []
-  timestamp: '2022-08-08 14:06:09+09:00'
+  timestamp: '2022-08-09 17:09:09+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/aoj/PrimeNumber.test.cpp

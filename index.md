@@ -39,7 +39,7 @@ data:
     - icon: ':warning:'
       path: function/identity.hpp
       title: function/identity.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: function/monoid.hpp
       title: function/monoid.hpp
   - name: math
@@ -74,24 +74,24 @@ data:
     - icon: ':warning:'
       path: math/mod.hpp
       title: math/mod.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: math/power.hpp
       title: math/power.hpp
   - name: meta
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: meta/aggregate.hpp
       title: meta/aggregate.hpp
     - icon: ':warning:'
       path: meta/all.hpp
       title: meta/all.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: meta/constant.hpp
       title: meta/constant.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: meta/settings.hpp
       title: meta/settings.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: meta/trait.hpp
       title: meta/trait.hpp
   - name: range
@@ -110,7 +110,7 @@ data:
       title: range/range_base.hpp
   - name: structure
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: structure/FenwickTree.hpp
       title: structure/FenwickTree.hpp
     - icon: ':heavy_check_mark:'
@@ -121,13 +121,13 @@ data:
       title: structure/all.hpp
   - name: system
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: system/all.hpp
       title: system/all.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: system/in.hpp
       title: system/in.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: system/out.hpp
       title: system/out.hpp
   - name: template
@@ -173,7 +173,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yosupo/many_aplusb.test.cpp
       title: verify/yosupo/many_aplusb.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/yosupo/point_add_range_sum.test.cpp
       title: verify/yosupo/point_add_range_sum.test.cpp
     - icon: ':heavy_check_mark:'
