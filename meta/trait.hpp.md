@@ -94,28 +94,28 @@ data:
     links: []
   bundledCode: "#line 2 \"meta/trait.hpp\"\n#include <cstddef>\n#include <iterator>\n\
     #include <queue>\n#include <limits>\n#include <stack>\n#include <type_traits>\n\
-    #include <utility>\n\n#ifdef __STRICT_ANSI__ && __SIZEOF_INT128__\ntemplate<>\n\
-    struct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
-    \ std::true_type {};\n#endif\n\n\nnamespace kyopro {\n    template<std::size_t\
-    \ size>\n    struct int_least {\n    private:\n        static constexpr auto get_type()\
-    \ noexcept {\n            static_assert(size <= 128, \"Integer size is too large\"\
-    );\n            if constexpr (size <= 8) return std::int_least8_t{};\n       \
-    \     else if constexpr (size <= 16) return std::int_least16_t{};\n          \
-    \  else if constexpr (size <= 32) return std::int_least32_t{};\n            else\
-    \ if constexpr (size <= 64) return std::int_least64_t{};\n            else return\
-    \ __int128_t{};\n        }\n\n    public:\n        using type = decltype(get_type());\n\
-    \    };\n\n    template<std::size_t size>\n    using int_least_t = typename int_least<size>::type;\n\
-    \n    template<std::size_t size>\n    struct uint_least {\n    private:\n    \
-    \    static constexpr auto get_type() noexcept {\n            static_assert(size\
+    #include <utility>\n\n#if defined(__STRICT_ANSI__) && defined(__SIZEOF_INT128__)\n\
+    template<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
+    struct std::is_integral<__uint128_t>: std::true_type {};\n#endif\n\n\nnamespace\
+    \ kyopro {\n    template<std::size_t size>\n    struct int_least {\n    private:\n\
+    \        static constexpr auto get_type() noexcept {\n            static_assert(size\
     \ <= 128, \"Integer size is too large\");\n            if constexpr (size <= 8)\
-    \ return std::uint_least8_t{};\n            else if constexpr (size <= 16) return\
-    \ std::uint_least16_t{};\n            else if constexpr (size <= 32) return std::uint_least32_t{};\n\
-    \            else if constexpr (size <= 64) return std::uint_least64_t{};\n  \
-    \          else return __uint128_t{};\n        }\n\n    public:\n        using\
-    \ type = decltype(get_type());\n    };\n\n    template<std::size_t size>\n   \
-    \ using uint_least_t = typename uint_least<size>::type;\n\n    template<class,\
-    \ class = void>\n    struct is_iterator: std::false_type {};\n    template<class\
-    \ T>\n    struct is_iterator<T, std::void_t<typename std::iterator_traits<T>::iterator_category>>:\
+    \ return std::int_least8_t{};\n            else if constexpr (size <= 16) return\
+    \ std::int_least16_t{};\n            else if constexpr (size <= 32) return std::int_least32_t{};\n\
+    \            else if constexpr (size <= 64) return std::int_least64_t{};\n   \
+    \         else return __int128_t{};\n        }\n\n    public:\n        using type\
+    \ = decltype(get_type());\n    };\n\n    template<std::size_t size>\n    using\
+    \ int_least_t = typename int_least<size>::type;\n\n    template<std::size_t size>\n\
+    \    struct uint_least {\n    private:\n        static constexpr auto get_type()\
+    \ noexcept {\n            static_assert(size <= 128, \"Integer size is too large\"\
+    );\n            if constexpr (size <= 8) return std::uint_least8_t{};\n      \
+    \      else if constexpr (size <= 16) return std::uint_least16_t{};\n        \
+    \    else if constexpr (size <= 32) return std::uint_least32_t{};\n          \
+    \  else if constexpr (size <= 64) return std::uint_least64_t{};\n            else\
+    \ return __uint128_t{};\n        }\n\n    public:\n        using type = decltype(get_type());\n\
+    \    };\n\n    template<std::size_t size>\n    using uint_least_t = typename uint_least<size>::type;\n\
+    \n    template<class, class = void>\n    struct is_iterator: std::false_type {};\n\
+    \    template<class T>\n    struct is_iterator<T, std::void_t<typename std::iterator_traits<T>::iterator_category>>:\
     \ std::true_type {};\n\n    template<class T>\n    constexpr bool is_iterator_v\
     \ = is_iterator<T>::value;\n\n    template<class, class = void>\n    struct is_range:\
     \ std::false_type {};\n    template<class T>\n    struct is_range<T, std::void_t<decltype(std::begin(std::declval<std::add_lvalue_reference_t<T>>()),\
@@ -218,15 +218,15 @@ data:
     } // namespace kyopro\n"
   code: "#pragma once\n#include <cstddef>\n#include <iterator>\n#include <queue>\n\
     #include <limits>\n#include <stack>\n#include <type_traits>\n#include <utility>\n\
-    \n#ifdef __STRICT_ANSI__ && __SIZEOF_INT128__\ntemplate<>\nstruct std::is_integral<__int128_t>:\
-    \ std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type\
-    \ {};\n#endif\n\n\nnamespace kyopro {\n    template<std::size_t size>\n    struct\
-    \ int_least {\n    private:\n        static constexpr auto get_type() noexcept\
-    \ {\n            static_assert(size <= 128, \"Integer size is too large\");\n\
-    \            if constexpr (size <= 8) return std::int_least8_t{};\n          \
-    \  else if constexpr (size <= 16) return std::int_least16_t{};\n            else\
-    \ if constexpr (size <= 32) return std::int_least32_t{};\n            else if\
-    \ constexpr (size <= 64) return std::int_least64_t{};\n            else return\
+    \n#if defined(__STRICT_ANSI__) && defined(__SIZEOF_INT128__)\ntemplate<>\nstruct\
+    \ std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>:\
+    \ std::true_type {};\n#endif\n\n\nnamespace kyopro {\n    template<std::size_t\
+    \ size>\n    struct int_least {\n    private:\n        static constexpr auto get_type()\
+    \ noexcept {\n            static_assert(size <= 128, \"Integer size is too large\"\
+    );\n            if constexpr (size <= 8) return std::int_least8_t{};\n       \
+    \     else if constexpr (size <= 16) return std::int_least16_t{};\n          \
+    \  else if constexpr (size <= 32) return std::int_least32_t{};\n            else\
+    \ if constexpr (size <= 64) return std::int_least64_t{};\n            else return\
     \ __int128_t{};\n        }\n\n    public:\n        using type = decltype(get_type());\n\
     \    };\n\n    template<std::size_t size>\n    using int_least_t = typename int_least<size>::type;\n\
     \n    template<std::size_t size>\n    struct uint_least {\n    private:\n    \
@@ -367,7 +367,7 @@ data:
   - template/alias.hpp
   - meta/aggregate.hpp
   - meta/all.hpp
-  timestamp: '2022-08-09 17:09:09+09:00'
+  timestamp: '2022-08-09 17:24:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp

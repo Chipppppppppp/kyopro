@@ -51,8 +51,8 @@ data:
     \   inline constexpr T PI = 3.14159265358979323846;\n    inline constexpr KYOPRO_BASE_FLOAT\
     \ pi = PI<KYOPRO_BASE_FLOAT>;\n} // namespace kyopro\n#line 2 \"meta/trait.hpp\"\
     \n#include <cstddef>\n#include <iterator>\n#include <queue>\n#line 6 \"meta/trait.hpp\"\
-    \n#include <stack>\n#include <type_traits>\n#line 9 \"meta/trait.hpp\"\n\n#ifdef\
-    \ __STRICT_ANSI__ && __SIZEOF_INT128__\ntemplate<>\nstruct std::is_integral<__int128_t>:\
+    \n#include <stack>\n#include <type_traits>\n#line 9 \"meta/trait.hpp\"\n\n#if\
+    \ defined(__STRICT_ANSI__) && defined(__SIZEOF_INT128__)\ntemplate<>\nstruct std::is_integral<__int128_t>:\
     \ std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type\
     \ {};\n#endif\n\n\nnamespace kyopro {\n    template<std::size_t size>\n    struct\
     \ int_least {\n    private:\n        static constexpr auto get_type() noexcept\
@@ -191,7 +191,7 @@ data:
   requiredBy:
   - all/all.hpp
   - all.hpp
-  timestamp: '2022-08-09 17:09:09+09:00'
+  timestamp: '2022-08-09 17:24:40+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: meta/all.hpp

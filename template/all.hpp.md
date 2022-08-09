@@ -96,8 +96,8 @@ data:
     #include <initializer_list>\n#include <mutex>\n#include <random>\n#include <ratio>\n\
     #include <regex>\n#include <scoped_allocator>\n#include <system_error>\n#include\
     \ <thread>\n#include <tuple>\n#include <typeindex>\n#include <type_traits>\n#include\
-    \ <unordered_map>\n#include <unordered_set>\n#line 9 \"meta/trait.hpp\"\n\n#ifdef\
-    \ __STRICT_ANSI__ && __SIZEOF_INT128__\ntemplate<>\nstruct std::is_integral<__int128_t>:\
+    \ <unordered_map>\n#include <unordered_set>\n#line 9 \"meta/trait.hpp\"\n\n#if\
+    \ defined(__STRICT_ANSI__) && defined(__SIZEOF_INT128__)\ntemplate<>\nstruct std::is_integral<__int128_t>:\
     \ std::true_type {};\ntemplate<>\nstruct std::is_integral<__uint128_t>: std::true_type\
     \ {};\n#endif\n\n\nnamespace kyopro {\n    template<std::size_t size>\n    struct\
     \ int_least {\n    private:\n        static constexpr auto get_type() noexcept\
@@ -800,7 +800,7 @@ data:
   path: template/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2022-08-09 17:09:09+09:00'
+  timestamp: '2022-08-09 17:24:40+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/all.hpp

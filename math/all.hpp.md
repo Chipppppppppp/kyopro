@@ -92,7 +92,7 @@ data:
     \ <limits>\n#line 4 \"algorithm/Hash.hpp\"\n#include <functional>\n#include <tuple>\n\
     #line 7 \"algorithm/Hash.hpp\"\n#include <utility>\n#line 3 \"meta/trait.hpp\"\
     \n#include <iterator>\n#include <queue>\n#line 6 \"meta/trait.hpp\"\n#include\
-    \ <stack>\n#line 9 \"meta/trait.hpp\"\n\n#ifdef __STRICT_ANSI__ && __SIZEOF_INT128__\n\
+    \ <stack>\n#line 9 \"meta/trait.hpp\"\n\n#if defined(__STRICT_ANSI__) && defined(__SIZEOF_INT128__)\n\
     template<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
     struct std::is_integral<__uint128_t>: std::true_type {};\n#endif\n\n\nnamespace\
     \ kyopro {\n    template<std::size_t size>\n    struct int_least {\n    private:\n\
@@ -553,7 +553,7 @@ data:
   requiredBy:
   - all/all.hpp
   - all.hpp
-  timestamp: '2022-08-09 17:09:09+09:00'
+  timestamp: '2022-08-09 17:24:40+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/all.hpp

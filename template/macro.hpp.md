@@ -52,7 +52,7 @@ data:
     #endif\n\n#ifndef KYOPRO_INF_DIV\n#define KYOPRO_INF_DIV static_cast<KYOPRO_BASE_UINT>(3)\n\
     #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n#define KYOPRO_BUFFER_SIZE static_cast<KYOPRO_BASE_UINT>(2048)\n\
     #endif\n#line 4 \"meta/trait.hpp\"\n#include <queue>\n#include <limits>\n#include\
-    \ <stack>\n#line 9 \"meta/trait.hpp\"\n\n#ifdef __STRICT_ANSI__ && __SIZEOF_INT128__\n\
+    \ <stack>\n#line 9 \"meta/trait.hpp\"\n\n#if defined(__STRICT_ANSI__) && defined(__SIZEOF_INT128__)\n\
     template<>\nstruct std::is_integral<__int128_t>: std::true_type {};\ntemplate<>\n\
     struct std::is_integral<__uint128_t>: std::true_type {};\n#endif\n\n\nnamespace\
     \ kyopro {\n    template<std::size_t size>\n    struct int_least {\n    private:\n\
@@ -501,7 +501,7 @@ data:
   requiredBy:
   - all.hpp
   - template/all.hpp
-  timestamp: '2022-08-09 17:09:09+09:00'
+  timestamp: '2022-08-09 17:24:40+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/macro.hpp
