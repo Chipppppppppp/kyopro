@@ -1,5 +1,5 @@
 #pragma once
-#include <cstddef>
+#include <cstdint>
 
 namespace kyopro {
     inline constexpr struct {

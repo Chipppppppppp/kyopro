@@ -7,12 +7,13 @@
 #include <type_traits>
 #include <utility>
 
+#ifdef __STRICT_ANSI__ && __SIZEOF_INT128__
 template<>
 struct std::is_integral<__int128_t>: std::true_type {};
 template<>
 struct std::is_integral<__uint128_t>: std::true_type {};
-template<>
-struct std::is_floating_point<__float128>: std::true_type {};
+#endif
+
 
 namespace kyopro {
     template<std::size_t size>
