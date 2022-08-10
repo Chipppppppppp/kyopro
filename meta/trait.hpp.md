@@ -44,9 +44,6 @@ data:
   - icon: ':warning:'
     path: range/imap.hpp
     title: range/imap.hpp
-  - icon: ':warning:'
-    path: range/range_base.hpp
-    title: range/range_base.hpp
   - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
@@ -357,7 +354,6 @@ data:
   - structure/UnionFind.hpp
   - all.hpp
   - range/all.hpp
-  - range/range_base.hpp
   - range/imap.hpp
   - algorithm/algorithm.hpp
   - algorithm/Hash.hpp

@@ -17,15 +17,6 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':warning:'
-    path: range/all.hpp
-    title: range/all.hpp
-  - icon: ':warning:'
-    path: range/imap.hpp
-    title: range/imap.hpp
-  - icon: ':warning:'
-    path: range/range_base.hpp
-    title: range/range_base.hpp
   - icon: ':heavy_check_mark:'
     path: system/all.hpp
     title: system/all.hpp
@@ -432,9 +423,6 @@ data:
   - all/all.hpp
   - system/all.hpp
   - all.hpp
-  - range/all.hpp
-  - range/range_base.hpp
-  - range/imap.hpp
   - template/macro.hpp
   - template/all.hpp
   timestamp: '2022-08-09 17:24:40+09:00'

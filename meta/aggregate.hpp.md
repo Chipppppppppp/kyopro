@@ -32,15 +32,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':warning:'
-    path: range/all.hpp
-    title: range/all.hpp
-  - icon: ':warning:'
-    path: range/imap.hpp
-    title: range/imap.hpp
-  - icon: ':warning:'
-    path: range/range_base.hpp
-    title: range/range_base.hpp
   - icon: ':heavy_check_mark:'
     path: system/all.hpp
     title: system/all.hpp
@@ -254,9 +245,6 @@ data:
   - math/is_prime.hpp
   - math/DynamicModInt.hpp
   - all.hpp
-  - range/all.hpp
-  - range/range_base.hpp
-  - range/imap.hpp
   - algorithm/Hash.hpp
   - algorithm/all.hpp
   - template/macro.hpp

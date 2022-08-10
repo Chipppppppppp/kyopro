@@ -56,15 +56,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':warning:'
-    path: range/all.hpp
-    title: range/all.hpp
-  - icon: ':warning:'
-    path: range/imap.hpp
-    title: range/imap.hpp
-  - icon: ':warning:'
-    path: range/range_base.hpp
-    title: range/range_base.hpp
   - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
@@ -245,9 +236,6 @@ data:
   - structure/UnionFind.hpp
   - structure/FenwickTree.hpp
   - all.hpp
-  - range/all.hpp
-  - range/range_base.hpp
-  - range/imap.hpp
   - function/all.hpp
   - function/monoid.hpp
   - algorithm/algorithm.hpp
