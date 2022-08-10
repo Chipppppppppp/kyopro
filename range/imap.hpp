@@ -9,7 +9,7 @@
 
 namespace kyopro {
     template<class Func, class Range>
-    struct imap: RangeBase<imap<Func, Range>, typename std::iterator_traits<range_iterator_t<Range>>::iterator_category> {
+    struct imap: RangeBase<imap<Func, Range>, std::invoke_result_t<Func, range_value_t<Range>>> {
     private:
         using BaseIterator = range_iterator_t<Range>;
         using BaseConstIterator = range_const_iterator_t<Range>;

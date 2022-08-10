@@ -1,17 +1,12 @@
 #pragma once
 #include <cstddef>
 #include <iterator>
-#include <stdexcept>
-#include <string>
-#include "../system/out.hpp"
+#include <type_traits>
 
 namespace kyopro {
-    template<class, class>
-    struct RangeBase;
-
-    template<class Derived>
-    struct RangeBase<Derived, std::forward_iterator_tag> {
-        using value_type = typename Derived::iterator::value_type;
+    template<class Derived, class ValueType>
+    struct RangeBase {
+        using value_type = ValueType;
         using size_type = std::size_t;
         using difference_type = std::ptrdiff_t;
         using reference = value_type&;
@@ -19,12 +14,27 @@ namespace kyopro {
         using pointer = value_type*;
         using const_pointer = const value_type*;
 
-        virtual constexpr typename Derived::iterator begin() const noexcept;
-        virtual constexpr typename Derived::iterator end() const noexcept;
-        virtual constexpr typename Derived::const_iterator cbegin() const noexcept;
-        virtual constexpr typename Derived::const_iterator cend() const noexcept;
+        Derived& down_cast() noexcept {
+            return static_cast<Derived&>(*this);
+        }
 
-        virtual constexpr bool empty() const noexcept {
+        constexpr auto begin() const noexcept {
+            return down_cast().begin();
+        }
+
+        constexpr auto end() const noexcept {
+            return down_cast().end();
+        }
+
+        constexpr auto cbegin() const noexcept {
+            return down_cast().cbegin();
+        }
+
+        constexpr auto cend() const noexcept {
+            return down_cast().cend();
+        }
+
+        constexpr bool empty() const noexcept {
             return begin() == end();
         }
 
@@ -34,30 +44,20 @@ namespace kyopro {
         constexpr decltype(auto) front() const noexcept {
             return *cbegin();
         }
-    };
 
-    template<class Derived>
-    struct RangeBase<Derived, std::bidirectional_iterator_tag>: RangeBase<Derived, std::forward_iterator_tag> {
-    protected:
-        using iterator_category = std::bidirectional_iterator_tag;
-        using reverse_iterator = std::reverse_iterator<typename Derived::iterator>;
-        using const_reverse_iterator = std::reverse_iterator<typename Derived::const_iterator>;
-
-        virtual constexpr typename Derived::iterator begin() const noexcept;
-        virtual constexpr typename Derived::iterator end() const noexcept;
-        virtual constexpr typename Derived::const_iterator cbegin() const noexcept;
-        virtual constexpr typename Derived::const_iterator cend() const noexcept;
-
-        virtual constexpr reverse_iterator rbegin() const noexcept {
+        constexpr reverse_iterator rbegin() const noexcept {
             return reverse_iterator(end());
         }
-        virtual constexpr reverse_iterator rend() const noexcept {
+
+        constexpr reverse_iterator rend() const noexcept {
             return reverse_iterator(begin());
         }
-        virtual constexpr const_reverse_iterator crbegin() const noexcept {
+
+        constexpr const_reverse_iterator crbegin() const noexcept {
             return const_reverse_iterator(cend());
         }
-        virtual constexpr const_reverse_iterator crend() const noexcept {
+
+        constexpr const_reverse_iterator crend() const noexcept {
             return const_reverse_iterator(cbegin());
         }
 
@@ -67,16 +67,8 @@ namespace kyopro {
         constexpr decltype(auto) back() const noexcept {
             return *crbegin();
         }
-    };
 
-    template<class Derived>
-    struct RangeBase<Derived, std::random_access_iterator_tag>: RangeBase<Derived, std::bidirectional_iterator_tag> {
-        virtual constexpr typename Derived::iterator begin() const noexcept;
-        virtual constexpr typename Derived::iterator end() const noexcept;
-        virtual constexpr typename Derived::const_iterator cbegin() const noexcept;
-        virtual constexpr typename Derived::const_iterator cend() const noexcept;
-
-        virtual constexpr std::size_t size() const noexcept {
+        constexpr std::size_t size() const noexcept {
             return end() - begin();
         }
 
