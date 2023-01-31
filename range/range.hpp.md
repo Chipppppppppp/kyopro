@@ -5,12 +5,18 @@ data:
     path: meta/trait.hpp
     title: meta/trait.hpp
   - icon: ':warning:'
+    path: range/imap.hpp
+    title: range/imap.hpp
+  - icon: ':warning:'
+    path: range/irange.hpp
+    title: range/irange.hpp
+  - icon: ':warning:'
+    path: range/iterator_base.hpp
+    title: range/iterator_base.hpp
+  - icon: ':warning:'
     path: range/range_base.hpp
     title: range/range_base.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: range/range.hpp
-    title: range/range.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -192,56 +198,128 @@ data:
     \ std::begin(range)};\n        }\n\n        constexpr const_iterator cend() const\
     \ noexcept {\n            return const_iterator{func, std::end(range)};\n    \
     \    }\n    };\n\n    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>,\
-    \ std::decay_t<R>>;\n} // namespace kpr\n"
-  code: "#pragma once\n#include <cstddef>\n#include <functional>\n#include <iterator>\n\
-    #include <type_traits>\n#include <utility>\n#include \"range_base.hpp\"\n#include\
-    \ \"../meta/trait.hpp\"\n\nnamespace kpr {\n    template<class Func, class Range>\n\
-    \    struct imap: RangeBase<imap<Func, Range>, std::invoke_result_t<Func, range_value_t<Range>>>\
-    \ {\n    private:\n        using BaseIterator = range_iterator_t<Range>;\n   \
-    \     using BaseConstIterator = range_const_iterator_t<Range>;\n\n        Func\
-    \ func;\n        Range range;\n\n    public:\n        imap() noexcept = default;\n\
-    \        template<class F, class R>\n        imap(F&& func, R&& range) noexcept:\
-    \ func(std::forward<F>(func)), range(std::forward<R>(range)) {}\n\n        struct\
-    \ iterator: BaseIterator {\n            using value_type = std::decay_t<std::invoke_result_t<Func,\
-    \ decltype(*std::declval<BaseIterator>())>>;\n            using pointer = value_type*;\n\
-    \            using reference = value_type&;\n\n        private:\n            Func\
-    \ func;\n\n        public:\n            iterator() noexcept = default;\n     \
-    \       template<class F, class Itr>\n            iterator(F&& func, Itr&& itr)\
-    \ noexcept: func(std::forward<F>(func)), BaseIterator(std::forward<Itr>(itr))\
-    \ {}\n\n            constexpr decltype(auto) operator *() const noexcept {\n \
-    \               return std::invoke(func, BaseIterator::operator *());\n      \
-    \      }\n        };\n\n        struct const_iterator: BaseConstIterator {\n \
-    \           using value_type = const std::decay_t<std::invoke_result_t<Func, decltype(*std::declval<BaseIterator>())>>;\n\
-    \            using pointer = value_type*;\n            using reference = value_type&;\n\
-    \n        private:\n            Func func;\n\n        public:\n            const_iterator()\
-    \ noexcept = default;\n            template<class F, class Itr>\n            const_iterator(F&&\
-    \ func, Itr&& itr) noexcept: func(std::forward<F>(func)), BaseConstIterator(std::forward<Itr>(itr))\
-    \ {}\n\n            constexpr const decltype(auto) operator *() const noexcept\
-    \ {\n                return std::invoke(func, BaseIterator::operator *());\n \
-    \           }\n        };\n\n\n        using reverse_iterator = std::reverse_iterator<iterator>;\n\
+    \ std::decay_t<R>>;\n} // namespace kpr\n#line 5 \"range/iterator_base.hpp\"\n\
+    \nnamespace kpr {\n    template<class, class, class>\n    struct IteratorBase;\n\
+    \n    template<class Derived, class ValueType>\n    struct IteratorBase<Derived,\
+    \ ValueType, std::forward_iterator_tag> {\n        using value_type = std::decay_t<ValueType>;\n\
+    \        using pointer = value_type*;\n        using reference = value_type&;\n\
+    \        using difference_type = std::ptrdiff_t;\n        using iterator_category\
+    \ = std::forward_iterator_tag;\n\n        virtual constexpr ValueType operator\
+    \ *() const noexcept;\n        virtual constexpr Derived& operator ++() noexcept;\n\
+    \        virtual constexpr bool operator ==(const Derived&) const noexcept;\n\n\
+    \        constexpr Derived operator ++(int) noexcept {\n            Derived before\
+    \ = *this;\n            ++*this;\n            return before;\n        }\n\n  \
+    \      constexpr bool operator !=(const Derived& rhs) const noexcept {\n     \
+    \       return !(*this == rhs);\n        }\n    };\n\n    template<class Derived,\
+    \ class ValueType>\n    struct IteratorBase<Derived, ValueType, std::bidirectional_iterator_tag>:\
+    \ IteratorBase<Derived, ValueType, std::forward_iterator_tag> {\n        using\
+    \ iterator_category = std::bidirectional_iterator_tag;\n\n        virtual constexpr\
+    \ Derived& operator --() noexcept;\n\n        constexpr Derived operator --(int)\
+    \ noexcept {\n            Derived before = *this;\n            --*this;\n    \
+    \        return before;\n        }\n    };\n\n    template<class Derived, class\
+    \ ValueType>\n    struct IteratorBase<Derived, ValueType, std::random_access_iterator_tag>:\
+    \ IteratorBase<Derived, ValueType, std::bidirectional_iterator_tag> {\n      \
+    \  using iterator_category = std::random_access_iterator_tag;\n\n        virtual\
+    \ constexpr Derived operator +(std::ptrdiff_t rhs) const noexcept;\n        virtual\
+    \ constexpr std::ptrdiff_t operator -(const Derived&) const noexcept;\n\n    private:\n\
+    \        virtual constexpr int compare(const Derived&) const noexcept;\n\n   \
+    \ public:\n\n        constexpr Derived& operator +=(std::ptrdiff_t rhs) noexcept\
+    \ {\n            return *this = *this + rhs;\n        }\n\n        constexpr Derived\
+    \ operator -(std::ptrdiff_t rhs) const noexcept {\n            return *this +\
+    \ -rhs;\n        }\n\n        constexpr Derived& operator -=(std::ptrdiff_t rhs)\
+    \ noexcept {\n            return *this = *this - rhs;\n        }\n\n        constexpr\
+    \ decltype(auto) operator [](std::size_t idx) const noexcept {\n            return\
+    \ *(*this + idx);\n        }\n\n        constexpr bool operator ==(const Derived&\
+    \ rhs) const noexcept {\n            return compare(rhs) == 0;\n        }\n  \
+    \      constexpr bool operator !=(const Derived& rhs) const noexcept {\n     \
+    \       return compare(rhs) != 0;\n        }\n        constexpr bool operator\
+    \ <(const Derived& rhs) const noexcept {\n            return compare(rhs) < 0;\n\
+    \        }\n        constexpr bool operator <=(const Derived& rhs) const noexcept\
+    \ {\n            return compare(rhs) <= 0;\n        }\n        constexpr bool\
+    \ operator >(const Derived& rhs) const noexcept {\n            return compare(rhs)\
+    \ > 0;\n        }\n        constexpr bool operator >=(const Derived& rhs) const\
+    \ noexcept {\n            return compare(rhs) >= 0;\n        }\n    };\n} // namespace\
+    \ kpr\n#line 10 \"range/irange.hpp\"\n\nnamespace kpr {\n    template<class T>\n\
+    \    struct irange: RangeBase<irange<T>, T> {\n    private:\n        T first,\
+    \ last;\n\n        template<class, class = void, class = void, class = void>\n\
+    \        struct get_iterator_category;\n        template<class ValueType, class\
+    \ Void>\n        struct get_iterator_category<ValueType, std::void_t<decltype(++std::declval<ValueType>())>,\
+    \ Void, Void> {\n            using type = std::forward_iterator_tag;\n       \
+    \ };\n        template<class ValueType, class Void>\n        struct get_iterator_category<ValueType,\
+    \ std::void_t<decltype(++std::declval<ValueType>())>, std::void_t<decltype(--std::declval<ValueType>())>,\
+    \ Void> {\n            using type = std::bidirectional_iterator_tag;\n       \
+    \ };\n        template<class ValueType>\n        struct get_iterator_category<ValueType,\
+    \ std::void_t<decltype(++std::declval<ValueType>())>, std::void_t<decltype(--std::declval<ValueType>())>,\
+    \ std::void_t<decltype(std::declval<T>() < std::declval<ValueType>(), std::declval<ValueType>()\
+    \ > std::declval<ValueType>(), std::declval<ValueType>() + std::declval<std::ptrdiff_t>(),\
+    \ std::declval<ValueType>() - std::declval<ValueType>())>> {\n            using\
+    \ type = std::random_access_iterator_tag;\n        };\n\n    public:\n       \
+    \ irange() noexcept = default;\n        template<class F, class L>\n        irange(F&&\
+    \ first, L&& last) noexcept: first(std::forward<F>(first)), last(std::forward<L>(last))\
+    \ {}\n\n        struct iterator: IteratorBase<iterator, const T&, typename get_iterator_category<T&>::type>\
+    \ {\n        private:\n            T itr;\n\n            constexpr int compare(const\
+    \ iterator& rhs) const noexcept {\n                if (itr < rhs.itr) return -1;\n\
+    \                else if (itr > rhs.itr) return 1;\n                else return\
+    \ 0;\n            }\n\n        public:\n            iterator() noexcept = default;\n\
+    \            template<class Itr>\n            iterator(Itr&& itr) noexcept: itr(std::forward<Itr>(itr))\
+    \ {}\n\n            constexpr const T& operator *() const noexcept {\n       \
+    \         return itr;\n            }\n\n            constexpr iterator& operator\
+    \ ++() noexcept {\n                ++itr;\n                return *this;\n   \
+    \         }\n\n            constexpr iterator& operator --() noexcept {\n    \
+    \            --itr;\n                return *this;\n            }\n\n        \
+    \    constexpr iterator operator +(std::ptrdiff_t rhs) const noexcept {\n    \
+    \            return iterator{itr + rhs};\n            }\n\n            constexpr\
+    \ std::ptrdiff_t operator -(const iterator& rhs) const noexcept {\n          \
+    \      return itr - rhs.itr;\n            }\n        };\n\n        struct const_iterator:\
+    \ IteratorBase<const_iterator, const T&, typename get_iterator_category<T&>::type>\
+    \ {\n        private:\n            T itr;\n\n            constexpr int compare(const\
+    \ const_iterator& rhs) const noexcept {\n                if (itr < rhs.itr) return\
+    \ -1;\n                else if (itr > rhs.itr) return 1;\n                else\
+    \ return 0;\n            }\n\n        public:\n            const_iterator() noexcept\
+    \ = default;\n            template<class Itr>\n            const_iterator(Itr&&\
+    \ itr) noexcept: itr(std::forward<Itr>(itr)) {}\n\n            constexpr const\
+    \ T& operator *() const noexcept {\n                return itr;\n            }\n\
+    \n            constexpr const_iterator& operator ++() noexcept {\n           \
+    \     ++itr;\n                return *this;\n            }\n\n            constexpr\
+    \ const_iterator& operator --() noexcept {\n                --itr;\n         \
+    \       return *this;\n            }\n\n            constexpr const_iterator operator\
+    \ +(std::ptrdiff_t rhs) const noexcept {\n                return iterator{itr\
+    \ + rhs};\n            }\n\n            constexpr std::ptrdiff_t operator -(const\
+    \ const_iterator& rhs) const noexcept {\n                return itr - rhs.itr;\n\
+    \            }\n        };\n\n\n        using reverse_iterator = std::reverse_iterator<iterator>;\n\
     \        using const_reverse_iterator = std::reverse_iterator<const_iterator>;\n\
-    \n\n        constexpr iterator begin() const noexcept {\n            return iterator{func,\
-    \ std::begin(range)};\n        }\n\n        constexpr iterator end() const noexcept\
-    \ {\n            return iterator{func, std::end(range)};\n        }\n\n      \
-    \  constexpr const_iterator cbegin() const noexcept {\n            return const_iterator{func,\
-    \ std::begin(range)};\n        }\n\n        constexpr const_iterator cend() const\
-    \ noexcept {\n            return const_iterator{func, std::end(range)};\n    \
-    \    }\n    };\n\n    template<class F, class R>\n    imap(F&&, R&&) -> imap<std::decay_t<F>,\
-    \ std::decay_t<R>>;\n} // namespace kpr\n"
+    \n\n        constexpr iterator begin() const noexcept {\n            return iterator{first};\n\
+    \        }\n\n        constexpr iterator end() const noexcept {\n            return\
+    \ iterator{last};\n        }\n\n        constexpr const_iterator cbegin() const\
+    \ noexcept {\n            return const_iterator{first};\n        }\n\n       \
+    \ constexpr const_iterator cend() const noexcept {\n            return const_iterator{last};\n\
+    \        }\n    };\n\n    template<class F, class L>\n    irange(F&&, L&&) ->\
+    \ irange<std::decay_t<F>>;\n} // namespace kpr\n#line 6 \"range/range.hpp\"\n"
+  code: '#pragma once
+
+    #include "imap.hpp"
+
+    #include "irange.hpp"
+
+    #include "iterator_base.hpp"
+
+    #include "range_base.hpp"'
   dependsOn:
+  - range/imap.hpp
   - range/range_base.hpp
   - meta/trait.hpp
+  - range/irange.hpp
+  - range/iterator_base.hpp
   isVerificationFile: false
-  path: range/imap.hpp
-  requiredBy:
-  - range/range.hpp
+  path: range/range.hpp
+  requiredBy: []
   timestamp: '2023-02-01 00:00:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: range/imap.hpp
+documentation_of: range/range.hpp
 layout: document
 redirect_from:
-- /library/range/imap.hpp
-- /library/range/imap.hpp.html
-title: range/imap.hpp
+- /library/range/range.hpp
+- /library/range/range.hpp.html
+title: range/range.hpp
 ---

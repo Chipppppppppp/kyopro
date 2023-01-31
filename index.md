@@ -3,16 +3,13 @@ data:
   libraryCategories:
   - name: algorithm
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: algorithm/Hash.hpp
       title: algorithm/Hash.hpp
     - icon: ':warning:'
       path: algorithm/algorithm.hpp
       title: algorithm/algorithm.hpp
     - icon: ':warning:'
-      path: algorithm/all.hpp
-      title: algorithm/all.hpp
-    - icon: ':heavy_check_mark:'
       path: algorithm/bit.hpp
       title: algorithm/bit.hpp
   - name: all
@@ -31,31 +28,28 @@ data:
       path: function/RecursiveLambda.hpp
       title: function/RecursiveLambda.hpp
     - icon: ':warning:'
-      path: function/all.hpp
-      title: function/all.hpp
-    - icon: ':warning:'
       path: function/compare.hpp
       title: function/compare.hpp
     - icon: ':warning:'
-      path: function/identity.hpp
-      title: function/identity.hpp
-    - icon: ':heavy_check_mark:'
+      path: function/function.hpp
+      title: function/function.hpp
+    - icon: ':warning:'
       path: function/monoid.hpp
       title: function/monoid.hpp
   - name: math
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
+      path: math/Barrett.hpp
+      title: math/Barrett.hpp
+    - icon: ':warning:'
       path: math/DynamicModInt.hpp
       title: math/DynamicModInt.hpp
     - icon: ':warning:'
       path: math/ModInt.hpp
       title: math/ModInt.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: math/Montgomery.hpp
       title: math/Montgomery.hpp
-    - icon: ':warning:'
-      path: math/all.hpp
-      title: math/all.hpp
     - icon: ':warning:'
       path: math/div.hpp
       title: math/div.hpp
@@ -65,79 +59,82 @@ data:
     - icon: ':warning:'
       path: math/euler_phi.hpp
       title: math/euler_phi.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: math/factorize.hpp
       title: math/factorize.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: math/is_prime.hpp
       title: math/is_prime.hpp
     - icon: ':warning:'
+      path: math/math.hpp
+      title: math/math.hpp
+    - icon: ':warning:'
       path: math/mod.hpp
       title: math/mod.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: math/power.hpp
       title: math/power.hpp
   - name: meta
     pages:
-    - icon: ':heavy_check_mark:'
-      path: meta/aggregate.hpp
-      title: meta/aggregate.hpp
     - icon: ':warning:'
-      path: meta/all.hpp
-      title: meta/all.hpp
-    - icon: ':heavy_check_mark:'
       path: meta/constant.hpp
       title: meta/constant.hpp
-    - icon: ':heavy_check_mark:'
-      path: meta/settings.hpp
-      title: meta/settings.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
+      path: meta/meta.hpp
+      title: meta/meta.hpp
+    - icon: ':warning:'
+      path: meta/setting.hpp
+      title: "\u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u578B"
+    - icon: ':warning:'
       path: meta/trait.hpp
       title: meta/trait.hpp
+    - icon: ':warning:'
+      path: meta/tuple_like.hpp
+      title: meta/tuple_like.hpp
   - name: range
     pages:
-    - icon: ':warning:'
-      path: range/all.hpp
-      title: range/all.hpp
     - icon: ':warning:'
       path: range/imap.hpp
       title: range/imap.hpp
     - icon: ':warning:'
+      path: range/irange.hpp
+      title: range/irange.hpp
+    - icon: ':warning:'
       path: range/iterator_base.hpp
       title: range/iterator_base.hpp
+    - icon: ':warning:'
+      path: range/range.hpp
+      title: range/range.hpp
     - icon: ':warning:'
       path: range/range_base.hpp
       title: range/range_base.hpp
   - name: structure
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: structure/FenwickTree.hpp
       title: structure/FenwickTree.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: structure/UnionFind.hpp
       title: structure/UnionFind.hpp
     - icon: ':warning:'
-      path: structure/all.hpp
-      title: structure/all.hpp
+      path: structure/structure.hpp
+      title: structure/structure.hpp
   - name: system
     pages:
-    - icon: ':heavy_check_mark:'
-      path: system/all.hpp
-      title: system/all.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: system/in.hpp
       title: system/in.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: system/out.hpp
       title: system/out.hpp
+    - icon: ':warning:'
+      path: system/system.hpp
+      title: system/system.hpp
   - name: template
     pages:
     - icon: ':warning:'
       path: template/alias.hpp
       title: template/alias.hpp
-    - icon: ':warning:'
-      path: template/all.hpp
-      title: template/all.hpp
     - icon: ':warning:'
       path: template/amin_amax.hpp
       title: template/amin_amax.hpp
@@ -159,24 +156,27 @@ data:
     - icon: ':warning:'
       path: template/stl.hpp
       title: template/stl.hpp
+    - icon: ':warning:'
+      path: template/template.hpp
+      title: template/template.hpp
   verificationCategories:
   - name: verify/aoj
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/aoj/PrimeNumber.test.cpp
       title: verify/aoj/PrimeNumber.test.cpp
   - name: verify/yosupo
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/yosupo/factorize.test.cpp
       title: verify/yosupo/factorize.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/yosupo/many_aplusb.test.cpp
       title: verify/yosupo/many_aplusb.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/yosupo/point_add_range_sum.test.cpp
       title: verify/yosupo/point_add_range_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/yosupo/unionfind.test.cpp
       title: verify/yosupo/unionfind.test.cpp
 layout: toppage

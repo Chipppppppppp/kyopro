@@ -16,10 +16,13 @@ data:
   - icon: ':warning:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  _extendedRequiredBy:
   - icon: ':warning:'
-    path: structure/structure.hpp
-    title: structure/structure.hpp
+    path: structure/FenwickTree.hpp
+    title: structure/FenwickTree.hpp
+  - icon: ':warning:'
+    path: structure/UnionFind.hpp
+    title: structure/UnionFind.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -227,48 +230,64 @@ data:
     \ + 1), Op::inverse(prod(p)));\n        }\n\n        void set(int p, const T&\
     \ x) {\n            static_assert(has_inverse_v<Op>, \"Operator doesn't have an\
     \ inverse\");\n            apply(p, Op::operator ()(x, Op::inverse(get(p))));\n\
-    \        }\n    };\n} // namespace kpr\n"
-  code: "#pragma once\n#include <cstddef>\n#include <utility>\n#include <vector>\n\
-    #include \"../function/monoid.hpp\"\n\nnamespace kpr {\n    template<class T,\
-    \ class Op = Add<T>, class Container = std::vector<T>>\n    struct FenwickTree:\
-    \ private Op {\n        using value_type = T;\n        using size_type = std::size_t;\n\
-    \        using reference = T&;\n        using const_reference = const T&;\n  \
-    \      using operator_type = Op;\n        using container_type = Container;\n\n\
-    \    private:\n        Container tree;\n\n    public:\n        FenwickTree() noexcept\
-    \ = default;\n        FenwickTree(std::size_t n) noexcept: tree(n, Op::id()) {}\n\
-    \n        std::size_t size() noexcept {\n            return tree.size();\n   \
-    \     }\n\n        void apply(int p, const T& x) {\n            ++p;\n       \
-    \     while (p <= (int)size()) {\n                tree[p - 1] = Op::operator ()(tree[p\
-    \ - 1], x);\n                p += p & -p;\n            }\n        }\n\n      \
-    \  T prod(int r) const {\n            T s = Op::id();\n            while (r >\
-    \ 0) {\n                s = Op::operator ()(s, tree[r - 1]);\n               \
-    \ r -= r & -r;\n            }\n            return s;\n        }\n        T prod(int\
-    \ l, int r) const {\n            static_assert(has_inverse_v<Op>, \"Operator doesn't\
-    \ have an inverse\");\n            return Op::operator ()(prod(r), Op::inverse(prod(l)));\n\
-    \        }\n\n        T all_prod() {\n            return prod(tree.size());\n\
-    \        }\n\n        T get(int p) {\n            static_assert(has_inverse_v<Op>,\
-    \ \"Operator doesn't have an inverse\");\n            return Op::operator ()(prod(p\
-    \ + 1), Op::inverse(prod(p)));\n        }\n\n        void set(int p, const T&\
-    \ x) {\n            static_assert(has_inverse_v<Op>, \"Operator doesn't have an\
-    \ inverse\");\n            apply(p, Op::operator ()(x, Op::inverse(get(p))));\n\
-    \        }\n    };\n} // namespace kpr\n"
+    \        }\n    };\n} // namespace kpr\n#line 2 \"structure/UnionFind.hpp\"\n\
+    #include <algorithm>\n#line 4 \"structure/UnionFind.hpp\"\n#include <unordered_map>\n\
+    #line 9 \"structure/UnionFind.hpp\"\n\nnamespace kpr {\n    template<class Container\
+    \ = std::vector<int>>\n    struct UnionFind {\n        using value_type = range_value_t<Container>;\n\
+    \        using container_type = Container;\n\n    private:\n        Container\
+    \ par;\n\n    public:\n        UnionFind() noexcept = default;\n        UnionFind(std::size_t\
+    \ n) noexcept: par(n, -1) {}\n        template<class C, std::enable_if_t<std::is_same_v<Container,\
+    \ std::decay_t<C>>>>\n        UnionFind(C&& par): par(std::forward<C>(par)) {}\n\
+    \n        void resize(std::size_t x) { par.resize(x, -1); }\n        void assign(std::size_t\
+    \ x) { par.assign(x, -1); }\n        void reset() { std::fill(std::begin(par),\
+    \ std::end(par), -1); }\n\n        std::size_t size() const noexcept {\n     \
+    \       return par.size();\n        }\n\n        KYOPRO_BASE_INT find(int x) {\n\
+    \            int p = x;\n            while (par[p] >= 0) p = par[p];\n       \
+    \     while (x != p) {\n                int tmp = x;\n                x = par[x];\n\
+    \                par[tmp] = p;\n            }\n            return p;\n       \
+    \ }\n\n        bool merge(int x, int y) {\n            x = find(x), y = find(y);\n\
+    \            if (x == y) return false;\n            if (par[x] > par[y]) {\n \
+    \               int tmp = x;\n                x = y;\n                y = tmp;\n\
+    \            }\n            par[x] += par[y];\n            par[y] = x;\n     \
+    \       return true;\n        }\n\n        bool same(int x, int y) {\n       \
+    \     return find(x) == find(y);\n        }\n\n        KYOPRO_BASE_INT group_size(int\
+    \ x) {\n            return -par[find(x)];\n        }\n\n        std::vector<int>\
+    \ group_members(int x) {\n            x = find(x);\n            std::vector<int>\
+    \ a;\n            for (int i = 0; i < (int)(size()); ++i) if (find(i) == x) a.emplace_back(i);\n\
+    \            return a;\n        }\n\n        template<class Vector = std::vector<KYOPRO_BASE_INT>>\n\
+    \        Vector roots() const {\n            Vector a;\n            for (int i\
+    \ = 0; i < (int)(size()); ++i) if (par[i] < 0) a.emplace_back(i);\n          \
+    \  return a;\n        }\n\n        KYOPRO_BASE_INT group_count() const {\n   \
+    \         KYOPRO_BASE_INT cnt = 0;\n            for (int i = 0; i < (int)(size());\
+    \ ++i) if (par[i] < 0) ++cnt;\n            return cnt;\n        }\n\n        template<class\
+    \ Map = std::unordered_map<KYOPRO_BASE_INT, std::vector<KYOPRO_BASE_INT>>>\n \
+    \       Map all_group_members() {\n            Map group_members;\n          \
+    \  for (int member = 0; member < (int)(size()); ++member) group_members[find(member)].emplace_back(member);\n\
+    \            return group_members;\n        }\n    };\n} // namespace kpr\n#line\
+    \ 4 \"structure/structure.hpp\"\n"
+  code: '#pragma once
+
+    #include "FenwickTree.hpp"
+
+    #include "UnionFind.hpp"'
   dependsOn:
+  - structure/FenwickTree.hpp
   - function/monoid.hpp
   - meta/constant.hpp
   - math/power.hpp
   - meta/setting.hpp
   - meta/trait.hpp
+  - structure/UnionFind.hpp
   isVerificationFile: false
-  path: structure/FenwickTree.hpp
-  requiredBy:
-  - structure/structure.hpp
+  path: structure/structure.hpp
+  requiredBy: []
   timestamp: '2023-02-01 00:00:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: structure/FenwickTree.hpp
+documentation_of: structure/structure.hpp
 layout: document
 redirect_from:
-- /library/structure/FenwickTree.hpp
-- /library/structure/FenwickTree.hpp.html
-title: structure/FenwickTree.hpp
+- /library/structure/structure.hpp
+- /library/structure/structure.hpp.html
+title: structure/structure.hpp
 ---

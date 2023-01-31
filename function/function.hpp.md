@@ -2,6 +2,12 @@
 data:
   _extendedDependsOn:
   - icon: ':warning:'
+    path: function/RecursiveLambda.hpp
+    title: function/RecursiveLambda.hpp
+  - icon: ':warning:'
+    path: function/compare.hpp
+    title: function/compare.hpp
+  - icon: ':warning:'
     path: function/monoid.hpp
     title: function/monoid.hpp
   - icon: ':warning:'
@@ -16,37 +22,52 @@ data:
   - icon: ':warning:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: structure/structure.hpp
-    title: structure/structure.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"structure/FenwickTree.hpp\"\n#include <cstddef>\n#include\
-    \ <utility>\n#include <vector>\n#line 2 \"function/monoid.hpp\"\n#include <limits>\n\
-    #include <type_traits>\n#line 2 \"math/power.hpp\"\n#include <cstdint>\n\nnamespace\
-    \ kpr {\n    [[maybe_unused]] inline constexpr struct {\n        template<class\
-    \ T>\n        constexpr T operator ()(T a, std::uint_fast64_t n, T init = 1) const\
-    \ noexcept {\n            while (n > 0) {\n                if (n & 1) init *=\
-    \ a;\n                a *= a;\n                n >>= 1;\n            }\n     \
-    \       return init;\n        }\n    } power;\n} // namespace kpr\n#line 3 \"\
-    meta/setting.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n/// @brief \u57FA\u672C\u7B26\u53F7\
-    \u4ED8\u304D\u6574\u6570\u578B\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\
-    \n#ifndef KYOPRO_BASE_UINT\n/// @brief \u57FA\u672C\u7B26\u53F7\u306A\u3057\u6574\
-    \u6570\u578B\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n\
-    /// @brief \u57FA\u672C\u6D6E\u52D5\u5C0F\u6570\u70B9\u6570\u578B\n#define KYOPRO_BASE_FLOAT\
-    \ double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n/// @brief \u554F\u984C\u3067\u8A2D\
-    \u5B9A\u3055\u308C\u305Fmod\n#define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))\n\
-    #endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n/// @brief \u5C0F\u6570\u7CBE\u5EA6\
-    (\u6841)\n#define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))\n\
-    #endif\n\n#ifndef KYOPRO_INF_DIV\n/// @brief \u7121\u9650\u5927\u3092\u8868\u3059\
-    \u6574\u6570\u304C\u6700\u5927\u5024\u306E\u4F55\u5206\u306E\u4E00\u304B\u3092\
-    \u8868\u3059\n#define KYOPRO_INF_DIV (static_cast<KYOPRO_BASE_UINT>(3))\n#endif\n\
-    \n#ifndef KYOPRO_BUFFER_SIZE\n/// @brief \u30C7\u30D5\u30A9\u30EB\u30C8\u306E\u30D0\
+  bundledCode: "#line 2 \"function/compare.hpp\"\n\nnamespace kpr {\n    // operator\
+    \ =\u3067\u6BD4\u8F03\n    struct Equal {\n        template<class T>\n       \
+    \ constexpr bool operator()(const T& x, const T& y) const noexcept(noexcept(x\
+    \ == y)) {\n            return x == y;\n        }\n    };\n\n    // operator !=\u3067\
+    \u6BD4\u8F03\n    struct NotEqual {\n        template<class T>\n        constexpr\
+    \ bool operator()(const T& x, const T& y) const noexcept(noexcept(x != y)) {\n\
+    \            return x != y;\n        }\n    };\n\n    // operator <\u306E\u95A2\
+    \u6570\u30AF\u30E9\u30B9\n    struct Less {\n        template<class T>\n     \
+    \   constexpr bool operator()(const T& x, const T& y) const noexcept(noexcept(x\
+    \ < y)) {\n            return x < y;\n        }\n    };\n\n    // operator <=\u306E\
+    \u95A2\u6570\u30AF\u30E9\u30B9\n    struct LessEqual {\n        template<class\
+    \ T>\n        constexpr bool operator()(const T& x, const T& y) const noexcept(noexcept(x\
+    \ <= y)) {\n            return x <= y;\n        }\n    };\n\n    // operator >\u306E\
+    \u95A2\u6570\u30AF\u30E9\u30B9\n    struct Greater {\n        template<class T>\n\
+    \        constexpr bool operator()(const T& x, const T& y) const noexcept(noexcept(x\
+    \ > y)) {\n            return x > y;\n        }\n    };\n\n    // operator >=\u306E\
+    \u95A2\u6570\u30AF\u30E9\u30B9\n    struct GreaterEqual {\n        template<class\
+    \ T>\n        constexpr bool operator()(const T& x, const T& y) const noexcept(noexcept(x\
+    \ >= y)) {\n            return x >= y;\n        }\n    };\n} // namespace kpr\n\
+    #line 2 \"function/monoid.hpp\"\n#include <limits>\n#include <type_traits>\n#line\
+    \ 2 \"math/power.hpp\"\n#include <cstdint>\n\nnamespace kpr {\n    [[maybe_unused]]\
+    \ inline constexpr struct {\n        template<class T>\n        constexpr T operator\
+    \ ()(T a, std::uint_fast64_t n, T init = 1) const noexcept {\n            while\
+    \ (n > 0) {\n                if (n & 1) init *= a;\n                a *= a;\n\
+    \                n >>= 1;\n            }\n            return init;\n        }\n\
+    \    } power;\n} // namespace kpr\n#line 3 \"meta/setting.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n\
+    /// @brief \u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u578B\n#define KYOPRO_BASE_INT\
+    \ std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n/// @brief \u57FA\u672C\u7B26\
+    \u53F7\u306A\u3057\u6574\u6570\u578B\n#define KYOPRO_BASE_UINT std::uint64_t\n\
+    #endif\n\n#ifndef KYOPRO_BASE_FLOAT\n/// @brief \u57FA\u672C\u6D6E\u52D5\u5C0F\
+    \u6570\u70B9\u6570\u578B\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef\
+    \ KYOPRO_DEFAULT_MOD\n/// @brief \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305F\
+    mod\n#define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))\n#endif\n\
+    \n#ifndef KYOPRO_DECIMAL_PRECISION\n/// @brief \u5C0F\u6570\u7CBE\u5EA6(\u6841\
+    )\n#define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))\n#endif\n\
+    \n#ifndef KYOPRO_INF_DIV\n/// @brief \u7121\u9650\u5927\u3092\u8868\u3059\u6574\
+    \u6570\u304C\u6700\u5927\u5024\u306E\u4F55\u5206\u306E\u4E00\u304B\u3092\u8868\
+    \u3059\n#define KYOPRO_INF_DIV (static_cast<KYOPRO_BASE_UINT>(3))\n#endif\n\n\
+    #ifndef KYOPRO_BUFFER_SIZE\n/// @brief \u30C7\u30D5\u30A9\u30EB\u30C8\u306E\u30D0\
     \u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\n#define KYOPRO_BUFFER_SIZE (static_cast<KYOPRO_BASE_UINT>(2048))\n\
     #endif\n#line 5 \"meta/constant.hpp\"\n\nnamespace kpr {\n    // \u554F\u984C\u3067\
     \u8A2D\u5B9A\u3055\u308C\u305Fmod\n    template<class T>\n    inline constexpr\
@@ -62,18 +83,18 @@ data:
     \u6570\u8AA4\u5DEE\n    inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\
     \n\n    // \u5186\u5468\u7387\n    template<class T>\n    inline constexpr T PI\
     \ = 3.14159265358979323846;\n\n    // \u5186\u5468\u7387\n    inline constexpr\
-    \ KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n} // namespace kpr\n#line 3 \"\
-    meta/trait.hpp\"\n#include <iterator>\n#include <tuple>\n#line 7 \"meta/trait.hpp\"\
-    \n\nnamespace kpr {\n    namespace helper {\n        template<class T>\n     \
-    \   struct is_integer_helper {\n            static constexpr bool value = std::is_integral_v<T>;\n\
-    \        };\n\n        #ifdef __SIZEOF_INT128__\n        template<>\n        struct\
-    \ is_integer_helper<__int128_t> {\n            static constexpr bool value = true;\n\
-    \        };\n\n        template<>\n        struct is_integer_helper<__uint128_t>\
-    \ {\n            static constexpr bool value = true;\n        };\n        #endif\n\
-    \    } // namespace helper\n\n    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\
-    \u308B\n    template<class T>\n    struct is_integer {\n        static constexpr\
-    \ bool value = helper::is_integer_helper<std::remove_cv_t<T>>::value;\n    };\n\
-    \n    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\u308B\n    template<class\
+    \ KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n} // namespace kpr\n#line 2 \"\
+    meta/trait.hpp\"\n#include <cstddef>\n#include <iterator>\n#include <tuple>\n\
+    #line 6 \"meta/trait.hpp\"\n#include <utility>\n\nnamespace kpr {\n    namespace\
+    \ helper {\n        template<class T>\n        struct is_integer_helper {\n  \
+    \          static constexpr bool value = std::is_integral_v<T>;\n        };\n\n\
+    \        #ifdef __SIZEOF_INT128__\n        template<>\n        struct is_integer_helper<__int128_t>\
+    \ {\n            static constexpr bool value = true;\n        };\n\n        template<>\n\
+    \        struct is_integer_helper<__uint128_t> {\n            static constexpr\
+    \ bool value = true;\n        };\n        #endif\n    } // namespace helper\n\n\
+    \    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\u308B\n    template<class\
+    \ T>\n    struct is_integer {\n        static constexpr bool value = helper::is_integer_helper<std::remove_cv_t<T>>::value;\n\
+    \    };\n\n    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\u308B\n    template<class\
     \ T>\n    inline constexpr bool is_integer_v = is_integer<T>::value;\n\n\n   \
     \ // \u578BT\u304C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u304B\u8ABF\u3079\u308B\
     \n    template<class T>\n    struct is_signed_integer {\n        static constexpr\
@@ -205,70 +226,43 @@ data:
     \    struct has_inverse<T, std::void_t<decltype(&T::inverse)>> {\n        static\
     \ constexpr bool value = true;\n    };\n\n    // inverse\u3092\u6301\u3064\u304B\
     \u8ABF\u3079\u308B\n    template<class T>\n    inline constexpr bool has_inverse_v\
-    \ = has_inverse<T>::value;\n} // namespace kpr\n#line 6 \"structure/FenwickTree.hpp\"\
-    \n\nnamespace kpr {\n    template<class T, class Op = Add<T>, class Container\
-    \ = std::vector<T>>\n    struct FenwickTree: private Op {\n        using value_type\
-    \ = T;\n        using size_type = std::size_t;\n        using reference = T&;\n\
-    \        using const_reference = const T&;\n        using operator_type = Op;\n\
-    \        using container_type = Container;\n\n    private:\n        Container\
-    \ tree;\n\n    public:\n        FenwickTree() noexcept = default;\n        FenwickTree(std::size_t\
-    \ n) noexcept: tree(n, Op::id()) {}\n\n        std::size_t size() noexcept {\n\
-    \            return tree.size();\n        }\n\n        void apply(int p, const\
-    \ T& x) {\n            ++p;\n            while (p <= (int)size()) {\n        \
-    \        tree[p - 1] = Op::operator ()(tree[p - 1], x);\n                p +=\
-    \ p & -p;\n            }\n        }\n\n        T prod(int r) const {\n       \
-    \     T s = Op::id();\n            while (r > 0) {\n                s = Op::operator\
-    \ ()(s, tree[r - 1]);\n                r -= r & -r;\n            }\n         \
-    \   return s;\n        }\n        T prod(int l, int r) const {\n            static_assert(has_inverse_v<Op>,\
-    \ \"Operator doesn't have an inverse\");\n            return Op::operator ()(prod(r),\
-    \ Op::inverse(prod(l)));\n        }\n\n        T all_prod() {\n            return\
-    \ prod(tree.size());\n        }\n\n        T get(int p) {\n            static_assert(has_inverse_v<Op>,\
-    \ \"Operator doesn't have an inverse\");\n            return Op::operator ()(prod(p\
-    \ + 1), Op::inverse(prod(p)));\n        }\n\n        void set(int p, const T&\
-    \ x) {\n            static_assert(has_inverse_v<Op>, \"Operator doesn't have an\
-    \ inverse\");\n            apply(p, Op::operator ()(x, Op::inverse(get(p))));\n\
-    \        }\n    };\n} // namespace kpr\n"
-  code: "#pragma once\n#include <cstddef>\n#include <utility>\n#include <vector>\n\
-    #include \"../function/monoid.hpp\"\n\nnamespace kpr {\n    template<class T,\
-    \ class Op = Add<T>, class Container = std::vector<T>>\n    struct FenwickTree:\
-    \ private Op {\n        using value_type = T;\n        using size_type = std::size_t;\n\
-    \        using reference = T&;\n        using const_reference = const T&;\n  \
-    \      using operator_type = Op;\n        using container_type = Container;\n\n\
-    \    private:\n        Container tree;\n\n    public:\n        FenwickTree() noexcept\
-    \ = default;\n        FenwickTree(std::size_t n) noexcept: tree(n, Op::id()) {}\n\
-    \n        std::size_t size() noexcept {\n            return tree.size();\n   \
-    \     }\n\n        void apply(int p, const T& x) {\n            ++p;\n       \
-    \     while (p <= (int)size()) {\n                tree[p - 1] = Op::operator ()(tree[p\
-    \ - 1], x);\n                p += p & -p;\n            }\n        }\n\n      \
-    \  T prod(int r) const {\n            T s = Op::id();\n            while (r >\
-    \ 0) {\n                s = Op::operator ()(s, tree[r - 1]);\n               \
-    \ r -= r & -r;\n            }\n            return s;\n        }\n        T prod(int\
-    \ l, int r) const {\n            static_assert(has_inverse_v<Op>, \"Operator doesn't\
-    \ have an inverse\");\n            return Op::operator ()(prod(r), Op::inverse(prod(l)));\n\
-    \        }\n\n        T all_prod() {\n            return prod(tree.size());\n\
-    \        }\n\n        T get(int p) {\n            static_assert(has_inverse_v<Op>,\
-    \ \"Operator doesn't have an inverse\");\n            return Op::operator ()(prod(p\
-    \ + 1), Op::inverse(prod(p)));\n        }\n\n        void set(int p, const T&\
-    \ x) {\n            static_assert(has_inverse_v<Op>, \"Operator doesn't have an\
-    \ inverse\");\n            apply(p, Op::operator ()(x, Op::inverse(get(p))));\n\
-    \        }\n    };\n} // namespace kpr\n"
+    \ = has_inverse<T>::value;\n} // namespace kpr\n#line 4 \"function/RecursiveLambda.hpp\"\
+    \n\nnamespace kpr {\n    // \u518D\u5E30\u53EF\u80FD\u95A2\u6570\u30AF\u30E9\u30B9\
+    \n    template<class F>\n    struct RecursiveLambda {\n        using value_type\
+    \ = F;\n\n    private:\n        F func;\n\n    public:\n        template<class\
+    \ G>\n        constexpr RecursiveLambda(G&& func) noexcept: func(std::forward<G>(func))\
+    \ {}\n        template<class... Args>\n        constexpr decltype(auto) operator\
+    \ ()(Args&&... args) const noexcept(noexcept(func(*this, std::forward<Args>(args)...)))\
+    \ {\n            return func(*this, std::forward<Args>(args)...);\n        }\n\
+    \    };\n\n    template<class F>\n    RecursiveLambda(F&&) -> RecursiveLambda<std::decay_t<F>>;\n\
+    } // namespace kpr\n#line 5 \"function/function.hpp\"\n"
+  code: '#pragma once
+
+    #include "compare.hpp"
+
+    #include "monoid.hpp"
+
+    #include "RecursiveLambda.hpp"
+
+    '
   dependsOn:
+  - function/compare.hpp
   - function/monoid.hpp
   - meta/constant.hpp
   - math/power.hpp
   - meta/setting.hpp
   - meta/trait.hpp
+  - function/RecursiveLambda.hpp
   isVerificationFile: false
-  path: structure/FenwickTree.hpp
-  requiredBy:
-  - structure/structure.hpp
+  path: function/function.hpp
+  requiredBy: []
   timestamp: '2023-02-01 00:00:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: structure/FenwickTree.hpp
+documentation_of: function/function.hpp
 layout: document
 redirect_from:
-- /library/structure/FenwickTree.hpp
-- /library/structure/FenwickTree.hpp.html
-title: structure/FenwickTree.hpp
+- /library/function/function.hpp
+- /library/function/function.hpp.html
+title: function/function.hpp
 ---

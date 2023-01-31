@@ -3,10 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
-  _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
-  attributes: {}
+  _isVerificationFailed: false
+  _pathExtension: hpp
+  _verificationStatusIcon: ':warning:'
+  attributes:
+    links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.1/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
@@ -16,28 +17,27 @@ data:
     , line 401, in update\n    self.update(self._resolve(pathlib.Path(included), included_from=path))\n\
     \  File \"/opt/hostedtoolcache/Python/3.11.1/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 401, in update\n    self.update(self._resolve(pathlib.Path(included), included_from=path))\n\
-    \  File \"/opt/hostedtoolcache/Python/3.11.1/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
-    , line 401, in update\n    self.update(self._resolve(pathlib.Path(included), included_from=path))\n\
     \                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n \
     \ File \"/opt/hostedtoolcache/Python/3.11.1/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 260, in _resolve\n    raise BundleErrorAt(path, -1, \"no such header\"\
     )\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: ../meta/aggregate.hpp:\
     \ line -1: no such header\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/many_aplusb\"\n#include\
-    \ \"../../system/system.hpp\"\n\nint main() {\n  int t;\n  kpr::scan(t);\n  for\
-    \ (int i = 0; i < t; ++i) {\n    long long a, b;\n    kpr::scan(a, b);\n    kpr::println(a\
-    \ + b);\n  }\n}\n"
+  code: '#pragma once
+
+    #include "in.hpp"
+
+    #include "out.hpp"'
   dependsOn: []
-  isVerificationFile: true
-  path: verify/yosupo/many_aplusb.test.cpp
+  isVerificationFile: false
+  path: system/system.hpp
   requiredBy: []
   timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: verify/yosupo/many_aplusb.test.cpp
+documentation_of: system/system.hpp
 layout: document
 redirect_from:
-- /verify/verify/yosupo/many_aplusb.test.cpp
-- /verify/verify/yosupo/many_aplusb.test.cpp.html
-title: verify/yosupo/many_aplusb.test.cpp
+- /library/system/system.hpp
+- /library/system/system.hpp.html
+title: system/system.hpp
 ---

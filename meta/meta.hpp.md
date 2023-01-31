@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':warning:'
-    path: function/monoid.hpp
-    title: function/monoid.hpp
-  - icon: ':warning:'
     path: math/power.hpp
     title: math/power.hpp
   - icon: ':warning:'
@@ -16,38 +13,36 @@ data:
   - icon: ':warning:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  _extendedRequiredBy:
   - icon: ':warning:'
-    path: structure/structure.hpp
-    title: structure/structure.hpp
+    path: meta/tuple_like.hpp
+    title: meta/tuple_like.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"structure/FenwickTree.hpp\"\n#include <cstddef>\n#include\
-    \ <utility>\n#include <vector>\n#line 2 \"function/monoid.hpp\"\n#include <limits>\n\
-    #include <type_traits>\n#line 2 \"math/power.hpp\"\n#include <cstdint>\n\nnamespace\
-    \ kpr {\n    [[maybe_unused]] inline constexpr struct {\n        template<class\
-    \ T>\n        constexpr T operator ()(T a, std::uint_fast64_t n, T init = 1) const\
-    \ noexcept {\n            while (n > 0) {\n                if (n & 1) init *=\
-    \ a;\n                a *= a;\n                n >>= 1;\n            }\n     \
-    \       return init;\n        }\n    } power;\n} // namespace kpr\n#line 3 \"\
-    meta/setting.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n/// @brief \u57FA\u672C\u7B26\u53F7\
-    \u4ED8\u304D\u6574\u6570\u578B\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\
-    \n#ifndef KYOPRO_BASE_UINT\n/// @brief \u57FA\u672C\u7B26\u53F7\u306A\u3057\u6574\
-    \u6570\u578B\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n\
-    /// @brief \u57FA\u672C\u6D6E\u52D5\u5C0F\u6570\u70B9\u6570\u578B\n#define KYOPRO_BASE_FLOAT\
-    \ double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n/// @brief \u554F\u984C\u3067\u8A2D\
-    \u5B9A\u3055\u308C\u305Fmod\n#define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))\n\
-    #endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n/// @brief \u5C0F\u6570\u7CBE\u5EA6\
-    (\u6841)\n#define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))\n\
-    #endif\n\n#ifndef KYOPRO_INF_DIV\n/// @brief \u7121\u9650\u5927\u3092\u8868\u3059\
-    \u6574\u6570\u304C\u6700\u5927\u5024\u306E\u4F55\u5206\u306E\u4E00\u304B\u3092\
-    \u8868\u3059\n#define KYOPRO_INF_DIV (static_cast<KYOPRO_BASE_UINT>(3))\n#endif\n\
-    \n#ifndef KYOPRO_BUFFER_SIZE\n/// @brief \u30C7\u30D5\u30A9\u30EB\u30C8\u306E\u30D0\
-    \u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\n#define KYOPRO_BUFFER_SIZE (static_cast<KYOPRO_BASE_UINT>(2048))\n\
+  bundledCode: "#line 2 \"meta/constant.hpp\"\n#include <limits>\n#line 2 \"math/power.hpp\"\
+    \n#include <cstdint>\n\nnamespace kpr {\n    [[maybe_unused]] inline constexpr\
+    \ struct {\n        template<class T>\n        constexpr T operator ()(T a, std::uint_fast64_t\
+    \ n, T init = 1) const noexcept {\n            while (n > 0) {\n             \
+    \   if (n & 1) init *= a;\n                a *= a;\n                n >>= 1;\n\
+    \            }\n            return init;\n        }\n    } power;\n} // namespace\
+    \ kpr\n#line 3 \"meta/setting.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n/// @brief \u57FA\
+    \u672C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u578B\n#define KYOPRO_BASE_INT std::int64_t\n\
+    #endif\n\n#ifndef KYOPRO_BASE_UINT\n/// @brief \u57FA\u672C\u7B26\u53F7\u306A\u3057\
+    \u6574\u6570\u578B\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef\
+    \ KYOPRO_BASE_FLOAT\n/// @brief \u57FA\u672C\u6D6E\u52D5\u5C0F\u6570\u70B9\u6570\
+    \u578B\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n\
+    /// @brief \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305Fmod\n#define KYOPRO_DEFAULT_MOD\
+    \ (static_cast<KYOPRO_BASE_UINT>(998244353))\n#endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n\
+    /// @brief \u5C0F\u6570\u7CBE\u5EA6(\u6841)\n#define KYOPRO_DECIMAL_PRECISION\
+    \ (static_cast<KYOPRO_BASE_UINT>(12))\n#endif\n\n#ifndef KYOPRO_INF_DIV\n/// @brief\
+    \ \u7121\u9650\u5927\u3092\u8868\u3059\u6574\u6570\u304C\u6700\u5927\u5024\u306E\
+    \u4F55\u5206\u306E\u4E00\u304B\u3092\u8868\u3059\n#define KYOPRO_INF_DIV (static_cast<KYOPRO_BASE_UINT>(3))\n\
+    #endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n/// @brief \u30C7\u30D5\u30A9\u30EB\u30C8\
+    \u306E\u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\n#define KYOPRO_BUFFER_SIZE (static_cast<KYOPRO_BASE_UINT>(2048))\n\
     #endif\n#line 5 \"meta/constant.hpp\"\n\nnamespace kpr {\n    // \u554F\u984C\u3067\
     \u8A2D\u5B9A\u3055\u308C\u305Fmod\n    template<class T>\n    inline constexpr\
     \ T MOD = KYOPRO_DEFAULT_MOD;\n\n    // \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\
@@ -62,18 +57,18 @@ data:
     \u6570\u8AA4\u5DEE\n    inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\
     \n\n    // \u5186\u5468\u7387\n    template<class T>\n    inline constexpr T PI\
     \ = 3.14159265358979323846;\n\n    // \u5186\u5468\u7387\n    inline constexpr\
-    \ KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n} // namespace kpr\n#line 3 \"\
-    meta/trait.hpp\"\n#include <iterator>\n#include <tuple>\n#line 7 \"meta/trait.hpp\"\
-    \n\nnamespace kpr {\n    namespace helper {\n        template<class T>\n     \
-    \   struct is_integer_helper {\n            static constexpr bool value = std::is_integral_v<T>;\n\
-    \        };\n\n        #ifdef __SIZEOF_INT128__\n        template<>\n        struct\
-    \ is_integer_helper<__int128_t> {\n            static constexpr bool value = true;\n\
-    \        };\n\n        template<>\n        struct is_integer_helper<__uint128_t>\
-    \ {\n            static constexpr bool value = true;\n        };\n        #endif\n\
-    \    } // namespace helper\n\n    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\
-    \u308B\n    template<class T>\n    struct is_integer {\n        static constexpr\
-    \ bool value = helper::is_integer_helper<std::remove_cv_t<T>>::value;\n    };\n\
-    \n    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\u308B\n    template<class\
+    \ KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n} // namespace kpr\n#line 2 \"\
+    meta/trait.hpp\"\n#include <cstddef>\n#include <iterator>\n#include <tuple>\n\
+    #include <type_traits>\n#include <utility>\n\nnamespace kpr {\n    namespace helper\
+    \ {\n        template<class T>\n        struct is_integer_helper {\n         \
+    \   static constexpr bool value = std::is_integral_v<T>;\n        };\n\n     \
+    \   #ifdef __SIZEOF_INT128__\n        template<>\n        struct is_integer_helper<__int128_t>\
+    \ {\n            static constexpr bool value = true;\n        };\n\n        template<>\n\
+    \        struct is_integer_helper<__uint128_t> {\n            static constexpr\
+    \ bool value = true;\n        };\n        #endif\n    } // namespace helper\n\n\
+    \    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\u308B\n    template<class\
+    \ T>\n    struct is_integer {\n        static constexpr bool value = helper::is_integer_helper<std::remove_cv_t<T>>::value;\n\
+    \    };\n\n    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\u308B\n    template<class\
     \ T>\n    inline constexpr bool is_integer_v = is_integer<T>::value;\n\n\n   \
     \ // \u578BT\u304C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u304B\u8ABF\u3079\u308B\
     \n    template<class T>\n    struct is_signed_integer {\n        static constexpr\
@@ -174,101 +169,88 @@ data:
     \n    template<class T>\n    struct range_value {\n        using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\n\
     \    };\n\n    // Range\u578BT\u304B\u3089\u8981\u7D20\u306E\u578B\u3092\u8ABF\
     \u3079\u308B\n    template<class T>\n    using range_value_t = typename range_value<T>::type;\n\
-    } // namespace kpr\n#line 6 \"function/monoid.hpp\"\n\nnamespace kpr {\n    //\
-    \ \u8DB3\u3057\u7B97\u306Emonoid\n    template<class T>\n    struct Add {\n  \
-    \      static_assert(is_arithmetic_v<T>, \"T must be an arithmetic type\");\n\n\
-    \        using value_type = T;\n\n        constexpr T id() const noexcept {\n\
-    \            return T{};\n        }\n\n        constexpr T operator ()(const T&\
-    \ a, const T& b) const noexcept {\n            return a + b;\n        }\n\n  \
-    \      constexpr T inverse(const T& a) const noexcept {\n            static_assert(std::is_signed_v<T>,\
-    \ \"T must be a signed type\")\n            return -a;\n        }\n    };\n\n\
-    \    // \u639B\u3051\u7B97\u306Emonoid\n    template<class T>\n    struct Mul\
-    \ {\n        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic type\"\
-    );\n\n        using value_type = T;\n\n        constexpr T id() const noexcept\
-    \ {\n            return 1;\n        }\n\n        constexpr T operator ()(const\
-    \ T& a, const T& b) const noexcept {\n            return a * b;\n        }\n\n\
-    \        constexpr T inverse(const T& a) const noexcept {\n            return\
-    \ 1 / a;\n        }\n    };\n\n    // min\u306Emonoid\n    template<class T>\n\
-    \    struct Min {\n        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic\
-    \ type\");\n\n        using value_type = T;\n\n        constexpr T id() const\
-    \ noexcept {\n            return is_integer_v<T> ? INF<T> : std::numeric_limits<T>::infinity();\n\
-    \        }\n\n        constexpr T operator ()(const T& a, const T& b) const noexcept\
-    \ {\n            return a < b ? a : b;\n        }\n    };\n\n    // max\u306E\
-    monoid\n    template<class T>\n    struct Max {\n        static_assert(is_arithmetic_v<T>,\
-    \ \"T must be an arithmetic type\");\n\n        using value_type = T;\n\n    \
-    \    constexpr T id() const noexcept {\n            return is_integer_v<T> ? is_signed_integer<T>\
-    \ ? -INF<T> : 0 : -std::numeric_limits<T>::infinity();\n        }\n\n        constexpr\
-    \ T operator ()(const T& a, const T& b) const noexcept {\n            return a\
-    \ > b ? a : b;\n        }\n    };\n\n\n    // inverse\u3092\u6301\u3064\u304B\u8ABF\
-    \u3079\u308B\n    template<class, class = void>\n    struct has_inverse {\n  \
-    \      static constexpr bool value = false;\n    };\n\n    template<class T>\n\
-    \    struct has_inverse<T, std::void_t<decltype(&T::inverse)>> {\n        static\
-    \ constexpr bool value = true;\n    };\n\n    // inverse\u3092\u6301\u3064\u304B\
-    \u8ABF\u3079\u308B\n    template<class T>\n    inline constexpr bool has_inverse_v\
-    \ = has_inverse<T>::value;\n} // namespace kpr\n#line 6 \"structure/FenwickTree.hpp\"\
-    \n\nnamespace kpr {\n    template<class T, class Op = Add<T>, class Container\
-    \ = std::vector<T>>\n    struct FenwickTree: private Op {\n        using value_type\
-    \ = T;\n        using size_type = std::size_t;\n        using reference = T&;\n\
-    \        using const_reference = const T&;\n        using operator_type = Op;\n\
-    \        using container_type = Container;\n\n    private:\n        Container\
-    \ tree;\n\n    public:\n        FenwickTree() noexcept = default;\n        FenwickTree(std::size_t\
-    \ n) noexcept: tree(n, Op::id()) {}\n\n        std::size_t size() noexcept {\n\
-    \            return tree.size();\n        }\n\n        void apply(int p, const\
-    \ T& x) {\n            ++p;\n            while (p <= (int)size()) {\n        \
-    \        tree[p - 1] = Op::operator ()(tree[p - 1], x);\n                p +=\
-    \ p & -p;\n            }\n        }\n\n        T prod(int r) const {\n       \
-    \     T s = Op::id();\n            while (r > 0) {\n                s = Op::operator\
-    \ ()(s, tree[r - 1]);\n                r -= r & -r;\n            }\n         \
-    \   return s;\n        }\n        T prod(int l, int r) const {\n            static_assert(has_inverse_v<Op>,\
-    \ \"Operator doesn't have an inverse\");\n            return Op::operator ()(prod(r),\
-    \ Op::inverse(prod(l)));\n        }\n\n        T all_prod() {\n            return\
-    \ prod(tree.size());\n        }\n\n        T get(int p) {\n            static_assert(has_inverse_v<Op>,\
-    \ \"Operator doesn't have an inverse\");\n            return Op::operator ()(prod(p\
-    \ + 1), Op::inverse(prod(p)));\n        }\n\n        void set(int p, const T&\
-    \ x) {\n            static_assert(has_inverse_v<Op>, \"Operator doesn't have an\
-    \ inverse\");\n            apply(p, Op::operator ()(x, Op::inverse(get(p))));\n\
-    \        }\n    };\n} // namespace kpr\n"
-  code: "#pragma once\n#include <cstddef>\n#include <utility>\n#include <vector>\n\
-    #include \"../function/monoid.hpp\"\n\nnamespace kpr {\n    template<class T,\
-    \ class Op = Add<T>, class Container = std::vector<T>>\n    struct FenwickTree:\
-    \ private Op {\n        using value_type = T;\n        using size_type = std::size_t;\n\
-    \        using reference = T&;\n        using const_reference = const T&;\n  \
-    \      using operator_type = Op;\n        using container_type = Container;\n\n\
-    \    private:\n        Container tree;\n\n    public:\n        FenwickTree() noexcept\
-    \ = default;\n        FenwickTree(std::size_t n) noexcept: tree(n, Op::id()) {}\n\
-    \n        std::size_t size() noexcept {\n            return tree.size();\n   \
-    \     }\n\n        void apply(int p, const T& x) {\n            ++p;\n       \
-    \     while (p <= (int)size()) {\n                tree[p - 1] = Op::operator ()(tree[p\
-    \ - 1], x);\n                p += p & -p;\n            }\n        }\n\n      \
-    \  T prod(int r) const {\n            T s = Op::id();\n            while (r >\
-    \ 0) {\n                s = Op::operator ()(s, tree[r - 1]);\n               \
-    \ r -= r & -r;\n            }\n            return s;\n        }\n        T prod(int\
-    \ l, int r) const {\n            static_assert(has_inverse_v<Op>, \"Operator doesn't\
-    \ have an inverse\");\n            return Op::operator ()(prod(r), Op::inverse(prod(l)));\n\
-    \        }\n\n        T all_prod() {\n            return prod(tree.size());\n\
-    \        }\n\n        T get(int p) {\n            static_assert(has_inverse_v<Op>,\
-    \ \"Operator doesn't have an inverse\");\n            return Op::operator ()(prod(p\
-    \ + 1), Op::inverse(prod(p)));\n        }\n\n        void set(int p, const T&\
-    \ x) {\n            static_assert(has_inverse_v<Op>, \"Operator doesn't have an\
-    \ inverse\");\n            apply(p, Op::operator ()(x, Op::inverse(get(p))));\n\
-    \        }\n    };\n} // namespace kpr\n"
+    } // namespace kpr\n#line 7 \"meta/tuple_like.hpp\"\n\nnamespace kpr {\n    namespace\
+    \ helper {\n        struct CastableToAny {\n            template<class T>\n  \
+    \          operator T() const noexcept;\n        };\n\n        template<class\
+    \ T, std::size_t... idx, std::void_t<decltype(T{((void)idx, CastableToAny{})...})>*\
+    \ = nullptr>\n        constexpr bool is_aggregate_initializable(std::index_sequence<idx...>,\
+    \ bool) noexcept {\n            return true;\n        }\n        template<class\
+    \ T, std::size_t... idx>\n        constexpr bool is_aggregate_initializable(std::index_sequence<idx...>,\
+    \ char) noexcept {\n            return false;\n        }\n\n        template<class\
+    \ T, std::size_t n = sizeof(T) * 8, std::enable_if_t<is_aggregate_initializable<T>(std::make_index_sequence<n>(),\
+    \ false)>* = nullptr>\n        constexpr std::size_t aggregate_size() {\n    \
+    \        return n;\n        }\n        template<class T, std::size_t n = sizeof(T)\
+    \ * 8, std::enable_if_t<!is_aggregate_initializable<T>(std::make_index_sequence<n>(),\
+    \ false)>* = nullptr>\n        constexpr std::size_t aggregate_size() {\n    \
+    \        return aggregate_size<T, n - 1>();\n        }\n    } // namespace helper\n\
+    \n    // tuple_like\u306A\u578BT\u306E\u5927\u304D\u3055\u3092\u8ABF\u3079\u308B\
+    \n    template<class T, class = void>\n    struct tuple_like_size {\n        static_assert(std::is_aggregate_v<T>,\
+    \ \"T must be tuple_like\");\n        static constexpr std::size_t value = helper::aggregate_size<T>();\n\
+    \    };\n\n    template<class T>\n    struct tuple_like_size<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
+    \ {\n        static constexpr std::size_t value = std::tuple_size_v<T>;\n    };\n\
+    \n    // tuple_like\u306A\u578BT\u306E\u5927\u304D\u3055\u3092\u8ABF\u3079\u308B\
+    \n    template<class T>\n    inline constexpr std::size_t tuple_like_size_v =\
+    \ tuple_like_size<T>::value;\n\n\n    // \u578BT\u304Ctuple_like\u304B\u8ABF\u3079\
+    \u308B\n    template<class, class = void>\n    struct is_tuple_like {\n      \
+    \  static constexpr bool value = false;\n    };\n\n    template<class T>\n   \
+    \ struct is_tuple_like<T, std::void_t<decltype(tuple_like_size<T>::value)>> {\n\
+    \        static constexpr bool value = true;\n    };\n\n    // \u578BT\u304Ctuple_like\u304B\
+    \u8ABF\u3079\u308B\n    template<class T>\n    inline constexpr bool is_tuple_like_v\
+    \ = is_tuple_like<T>::value;\n\n\n    // tuple-like\u306A\u30AA\u30D6\u30B8\u30A7\
+    \u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\u95A2\u6570\
+    \u30AF\u30E9\u30B9\n    template<class T, class = void>\n    struct GetFunction\
+    \ {\n        static_assert(std::is_aggregate_v<T>, \"T is not gettable\");\n \
+    \       template<std::size_t idx>\n        static constexpr decltype(auto) get(U&&\
+    \ tuple_like) {\n            return std::get<idx>(std::forward<U>(tuple_like));\n\
+    \        }\n    };\n\n    #define DEFINE_GET(n, ...)                         \
+    \                    \\\n    template<class T>                               \
+    \                       \\\n    struct GetFunction<T, std::enable_if_t<tuple_like_size_v<T>\
+    \ == n>> {   \\\n        template<std::size_t idx, class U>                  \
+    \               \\\n        static constexpr decltype(auto) get(U&& aggregate)\
+    \ noexcept { \\\n            auto&& [__VA_ARGS__] = std::forward<U>(aggregate);\
+    \             \\\n            return std::get<idx>(std::forward_as_tuple(__VA_ARGS__));\
+    \      \\\n        }                                                         \
+    \         \\\n    };\n\n    DEFINE_GET(1, a)\n    DEFINE_GET(2, a, b)\n    DEFINE_GET(3,\
+    \ a, b, c)\n    DEFINE_GET(4, a, b, c, d)\n    DEFINE_GET(5, a, b, c, d, e)\n\
+    \    DEFINE_GET(6, a, b, c, d, e, f)\n    DEFINE_GET(7, a, b, c, d, e, f, g)\n\
+    \    DEFINE_GET(8, a, b, c, d, e, f, g, h)\n\n    #undef DEFINE_GET\n\n    //\
+    \ tuple-\n    inline constexpr struct {\n        template<class T>\n        constexpr\
+    \ decltype(auto) operator ()(T&& tuple_like) const noexcept {\n            return\
+    \ GetFunction<std::decay_t<T>>::function<idx>(std::forward<T>(tuple_like));\n\
+    \        }\n    } get;\n\n\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx <\
+    \ 8)\u756A\u76EE\u306E\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t\
+    \ idx, class T>\n    struct tuple_like_element {\n        using type = decltype(get(std::declval<T>()));\n\
+    \    };\n\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\
+    \u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t idx,\
+    \ class T>\n    using tuple_like_element_t = typename tuple_like_element<idx,\
+    \ T>::type;\n} // namespace kpr\n#line 6 \"meta/meta.hpp\"\n"
+  code: '#pragma once
+
+    #include "constant.hpp"
+
+    #include "setting.hpp"
+
+    #include "trait.hpp"
+
+    #include "tuple_like.hpp"
+
+    '
   dependsOn:
-  - function/monoid.hpp
   - meta/constant.hpp
   - math/power.hpp
   - meta/setting.hpp
   - meta/trait.hpp
+  - meta/tuple_like.hpp
   isVerificationFile: false
-  path: structure/FenwickTree.hpp
-  requiredBy:
-  - structure/structure.hpp
+  path: meta/meta.hpp
+  requiredBy: []
   timestamp: '2023-02-01 00:00:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: structure/FenwickTree.hpp
+documentation_of: meta/meta.hpp
 layout: document
 redirect_from:
-- /library/structure/FenwickTree.hpp
-- /library/structure/FenwickTree.hpp.html
-title: structure/FenwickTree.hpp
+- /library/meta/meta.hpp
+- /library/meta/meta.hpp.html
+title: meta/meta.hpp
 ---

@@ -9,31 +9,16 @@ data:
     title: meta/trait.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: algorithm/algorithm.hpp
-    title: algorithm/algorithm.hpp
-  - icon: ':warning:'
-    path: math/ModInt.hpp
-    title: math/ModInt.hpp
-  - icon: ':warning:'
-    path: math/factorize.hpp
-    title: math/factorize.hpp
-  - icon: ':warning:'
-    path: math/is_prime.hpp
-    title: math/is_prime.hpp
-  - icon: ':warning:'
     path: math/math.hpp
     title: math/math.hpp
-  - icon: ':warning:'
-    path: template/alias.hpp
-    title: template/alias.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"algorithm/bit.hpp\"\n#include <limits>\n#include <type_traits>\n\
-    #line 2 \"meta/setting.hpp\"\n#include <cstdint>\n\n#ifndef KYOPRO_BASE_INT\n\
+  bundledCode: "#line 2 \"math/Barrett.hpp\"\n#include <cstdint>\n#include <limits>\n\
+    #include <type_traits>\n#line 3 \"meta/setting.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n\
     /// @brief \u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u578B\n#define KYOPRO_BASE_INT\
     \ std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n/// @brief \u57FA\u672C\u7B26\
     \u53F7\u306A\u3057\u6574\u6570\u578B\n#define KYOPRO_BASE_UINT std::uint64_t\n\
@@ -160,122 +145,46 @@ data:
     \n    template<class T>\n    struct range_value {\n        using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\n\
     \    };\n\n    // Range\u578BT\u304B\u3089\u8981\u7D20\u306E\u578B\u3092\u8ABF\
     \u3079\u308B\n    template<class T>\n    using range_value_t = typename range_value<T>::type;\n\
-    } // namespace kpr\n#line 6 \"algorithm/bit.hpp\"\n\nnamespace kpr {\n    // \u7ACB\
-    \u3063\u3066\u3044\u308Bbit\u306E\u500B\u6570\u3092\u8FD4\u3059\n    [[maybe_unused]]\
-    \ inline constexpr struct {\n        template<class T>\n        constexpr KYOPRO_BASE_INT\
-    \ operator ()(T x) const noexcept {\n            static_assert(is_integer_v<T>,\
-    \ \"The argument must be an integer\");\n            constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
-    \            static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"The integer type of the argument is too large\");\n            if constexpr\
-    \ (digits <= std::numeric_limits<unsigned int>::digits) return __builtin_popcount(x);\n\
-    \            else if constexpr (digits <= std::numeric_limits<unsigned long>::digits)\
-    \ return __builtin_popcountl(x);\n            else return __builtin_popcountll(x);\n\
-    \        }\n    } pop_count;\n\n    [[maybe_unused]] inline constexpr struct {\n\
-    \        template<class T>\n        constexpr KYOPRO_BASE_INT operator ()(T x)\
-    \ const noexcept {\n            static_assert(is_integer_v<T>, \"The argument\
-    \ must be an integer\");\n            constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
-    \            static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"The integer type of the argument is too large\");\n            if (x == 0)\
-    \ return 0;\n            if constexpr (digits <= std::numeric_limits<unsigned\
-    \ int>::digits) return __builtin_clz(x) + digits - std::numeric_limits<unsigned\
-    \ int>::digits;\n            else if constexpr (digits <= std::numeric_limits<unsigned\
-    \ long>::digits) return __builtin_clzl(x) + digits - std::numeric_limits<unsigned\
-    \ long>::digits;\n            else return __builtin_clzll(x) + digits - std::numeric_limits<unsigned\
-    \ long long>::digits;\n        }\n    } lzero_count;\n\n    [[maybe_unused]] inline\
-    \ constexpr struct {\n        template<class T>\n        constexpr KYOPRO_BASE_INT\
-    \ operator ()(T x) const noexcept {\n            static_assert(is_integer_v<T>,\
-    \ \"The argument must be an integer\");\n            constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
-    \            static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"The integer type of the argument is too large\");\n            if constexpr\
-    \ (digits <= std::numeric_limits<unsigned int>::digits) return __builtin_ctz(x);\n\
-    \            else if constexpr (digits <= std::numeric_limits<unsigned long>::digits)\
-    \ return __builtin_ctzl(x);\n            else return __builtin_ctzll(x);\n   \
-    \     }\n    } rzero_count;\n\n    [[maybe_unused]] inline constexpr struct {\n\
-    \        template<class T>\n        constexpr KYOPRO_BASE_INT operator ()(T x)\
-    \ const noexcept {\n            static_assert(is_integer_v<T>, \"The argument\
-    \ must be an integer\");\n            constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
-    \            static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"The integer type of the argument is too large\");\n            if (x == 0)\
-    \ return 0;\n            if constexpr (digits <= std::numeric_limits<unsigned\
-    \ int>::digits) return std::numeric_limits<unsigned int>::digits - __builtin_clz(x);\n\
-    \            else if constexpr (digits <= std::numeric_limits<unsigned long>::digits)\
-    \ return std::numeric_limits<unsigned long>::digits - __builtin_clzl(x);\n   \
-    \         else return std::numeric_limits<unsigned long long>::digits - __builtin_clzll(x);\n\
-    \        }\n    } bit_len;\n\n    [[maybe_unused]] inline constexpr struct {\n\
-    \        template<class T>\n        constexpr KYOPRO_BASE_INT operator ()(T x)\
-    \ const noexcept {\n            return bit_len(x >> static_cast<T>(1));\n    \
-    \    }\n    } floor_bit;\n\n    [[maybe_unused]] inline constexpr struct {\n \
-    \       template<class T>\n        constexpr KYOPRO_BASE_INT operator ()(T x)\
-    \ const noexcept {\n            if (x == 0) return 0;\n            return bit_len(x\
-    \ - static_cast<T>(1));\n        }\n    } ceil_bit;\n} // namespace kpr\n"
-  code: "#pragma once\n#include <limits>\n#include <type_traits>\n#include \"../meta/setting.hpp\"\
-    \n#include \"../meta/trait.hpp\"\n\nnamespace kpr {\n    // \u7ACB\u3063\u3066\
-    \u3044\u308Bbit\u306E\u500B\u6570\u3092\u8FD4\u3059\n    [[maybe_unused]] inline\
-    \ constexpr struct {\n        template<class T>\n        constexpr KYOPRO_BASE_INT\
-    \ operator ()(T x) const noexcept {\n            static_assert(is_integer_v<T>,\
-    \ \"The argument must be an integer\");\n            constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
-    \            static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"The integer type of the argument is too large\");\n            if constexpr\
-    \ (digits <= std::numeric_limits<unsigned int>::digits) return __builtin_popcount(x);\n\
-    \            else if constexpr (digits <= std::numeric_limits<unsigned long>::digits)\
-    \ return __builtin_popcountl(x);\n            else return __builtin_popcountll(x);\n\
-    \        }\n    } pop_count;\n\n    [[maybe_unused]] inline constexpr struct {\n\
-    \        template<class T>\n        constexpr KYOPRO_BASE_INT operator ()(T x)\
-    \ const noexcept {\n            static_assert(is_integer_v<T>, \"The argument\
-    \ must be an integer\");\n            constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
-    \            static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"The integer type of the argument is too large\");\n            if (x == 0)\
-    \ return 0;\n            if constexpr (digits <= std::numeric_limits<unsigned\
-    \ int>::digits) return __builtin_clz(x) + digits - std::numeric_limits<unsigned\
-    \ int>::digits;\n            else if constexpr (digits <= std::numeric_limits<unsigned\
-    \ long>::digits) return __builtin_clzl(x) + digits - std::numeric_limits<unsigned\
-    \ long>::digits;\n            else return __builtin_clzll(x) + digits - std::numeric_limits<unsigned\
-    \ long long>::digits;\n        }\n    } lzero_count;\n\n    [[maybe_unused]] inline\
-    \ constexpr struct {\n        template<class T>\n        constexpr KYOPRO_BASE_INT\
-    \ operator ()(T x) const noexcept {\n            static_assert(is_integer_v<T>,\
-    \ \"The argument must be an integer\");\n            constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
-    \            static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"The integer type of the argument is too large\");\n            if constexpr\
-    \ (digits <= std::numeric_limits<unsigned int>::digits) return __builtin_ctz(x);\n\
-    \            else if constexpr (digits <= std::numeric_limits<unsigned long>::digits)\
-    \ return __builtin_ctzl(x);\n            else return __builtin_ctzll(x);\n   \
-    \     }\n    } rzero_count;\n\n    [[maybe_unused]] inline constexpr struct {\n\
-    \        template<class T>\n        constexpr KYOPRO_BASE_INT operator ()(T x)\
-    \ const noexcept {\n            static_assert(is_integer_v<T>, \"The argument\
-    \ must be an integer\");\n            constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\n\
-    \            static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"The integer type of the argument is too large\");\n            if (x == 0)\
-    \ return 0;\n            if constexpr (digits <= std::numeric_limits<unsigned\
-    \ int>::digits) return std::numeric_limits<unsigned int>::digits - __builtin_clz(x);\n\
-    \            else if constexpr (digits <= std::numeric_limits<unsigned long>::digits)\
-    \ return std::numeric_limits<unsigned long>::digits - __builtin_clzl(x);\n   \
-    \         else return std::numeric_limits<unsigned long long>::digits - __builtin_clzll(x);\n\
-    \        }\n    } bit_len;\n\n    [[maybe_unused]] inline constexpr struct {\n\
-    \        template<class T>\n        constexpr KYOPRO_BASE_INT operator ()(T x)\
-    \ const noexcept {\n            return bit_len(x >> static_cast<T>(1));\n    \
-    \    }\n    } floor_bit;\n\n    [[maybe_unused]] inline constexpr struct {\n \
-    \       template<class T>\n        constexpr KYOPRO_BASE_INT operator ()(T x)\
-    \ const noexcept {\n            if (x == 0) return 0;\n            return bit_len(x\
-    \ - static_cast<T>(1));\n        }\n    } ceil_bit;\n} // namespace kpr\n"
+    } // namespace kpr\n#line 7 \"math/Barrett.hpp\"\n\nnamespace kyopro {\n    //\
+    \ Barrett Reduction\n    template<class T>\n    struct Barrett {\n        static_assert(is_unsigned_integer_v<T>,\
+    \ \"The given type must be an unsigned integer type\");\n\n        using value_type\
+    \ = T;\n\n        T mod;\n\n    private:\n        using larger_type = next_integer_t<T>;\n\
+    \n        larger_type m;\n\n    public:\n        constexpr void set_mod(T mod)\
+    \ noexcept {\n            this->mod = mod;\n            m = (static_cast<larger_type>(1)\
+    \ << 64) / mod;\n        }\n\n        constexpr KYOPRO_BASE_INT get_mod() const\
+    \ noexcept {\n            return mod;\n        }\n\n        Barrett() noexcept\
+    \ = default;\n        Barrett(T mod) noexcept: mod(mod), m((static_cast<larger_type>(1)\
+    \ << 64) / mod) {}\n\n        constexpr T reduce(T x) const noexcept {\n     \
+    \       x -= static_cast<T>((x * m) >> 64) * mod;\n            return x < mod\
+    \ ? x : x - mod;\n        }\n    };\n} // namespace kpr\n"
+  code: "#pragma once\n#include <cstdint>\n#include <limits>\n#include <type_traits>\n\
+    #include \"../meta/setting.hpp\"\n#include \"../meta/trait.hpp\"\n\nnamespace\
+    \ kyopro {\n    // Barrett Reduction\n    template<class T>\n    struct Barrett\
+    \ {\n        static_assert(is_unsigned_integer_v<T>, \"The given type must be\
+    \ an unsigned integer type\");\n\n        using value_type = T;\n\n        T mod;\n\
+    \n    private:\n        using larger_type = next_integer_t<T>;\n\n        larger_type\
+    \ m;\n\n    public:\n        constexpr void set_mod(T mod) noexcept {\n      \
+    \      this->mod = mod;\n            m = (static_cast<larger_type>(1) << 64) /\
+    \ mod;\n        }\n\n        constexpr KYOPRO_BASE_INT get_mod() const noexcept\
+    \ {\n            return mod;\n        }\n\n        Barrett() noexcept = default;\n\
+    \        Barrett(T mod) noexcept: mod(mod), m((static_cast<larger_type>(1) <<\
+    \ 64) / mod) {}\n\n        constexpr T reduce(T x) const noexcept {\n        \
+    \    x -= static_cast<T>((x * m) >> 64) * mod;\n            return x < mod ? x\
+    \ : x - mod;\n        }\n    };\n} // namespace kpr\n"
   dependsOn:
   - meta/setting.hpp
   - meta/trait.hpp
   isVerificationFile: false
-  path: algorithm/bit.hpp
+  path: math/Barrett.hpp
   requiredBy:
-  - template/alias.hpp
-  - math/ModInt.hpp
-  - math/is_prime.hpp
   - math/math.hpp
-  - math/factorize.hpp
-  - algorithm/algorithm.hpp
   timestamp: '2023-02-01 00:00:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: algorithm/bit.hpp
+documentation_of: math/Barrett.hpp
 layout: document
 redirect_from:
-- /library/algorithm/bit.hpp
-- /library/algorithm/bit.hpp.html
-title: algorithm/bit.hpp
+- /library/math/Barrett.hpp
+- /library/math/Barrett.hpp.html
+title: math/Barrett.hpp
 ---
