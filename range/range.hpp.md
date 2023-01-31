@@ -188,13 +188,13 @@ data:
     \ {}\n\n            constexpr decltype(auto) operator *() const noexcept {\n \
     \               return std::invoke(func, BaseIterator::operator *());\n      \
     \      }\n        };\n\n        struct const_iterator: BaseConstIterator {\n \
-    \           using value_type = const std::decay_t<std::invoke_result_t<Func, decltype(*std::declval<BaseIterator>())>>;\n\
+    \           using value_type = const std::decay_t<std::invoke_result_t<Func, decltype(*std::declval<BaseConstIterator>())>>;\n\
     \            using pointer = value_type*;\n            using reference = value_type&;\n\
     \n        private:\n            Func func;\n\n        public:\n            const_iterator()\
     \ noexcept = default;\n            template<class F, class Itr>\n            const_iterator(F&&\
     \ func, Itr&& itr) noexcept: func(std::forward<F>(func)), BaseConstIterator(std::forward<Itr>(itr))\
-    \ {}\n\n            constexpr const decltype(auto) operator *() const noexcept\
-    \ {\n                return std::invoke(func, BaseIterator::operator *());\n \
+    \ {}\n\n            constexpr decltype(auto) operator *() const noexcept {\n \
+    \               return std::invoke(func, BaseConstIterator::operator *());\n \
     \           }\n        };\n\n\n        using reverse_iterator = std::reverse_iterator<iterator>;\n\
     \        using const_reverse_iterator = std::reverse_iterator<const_iterator>;\n\
     \n\n        constexpr iterator begin() const noexcept {\n            return iterator{func,\
@@ -321,7 +321,7 @@ data:
   requiredBy:
   - all/all.hpp
   - all.hpp
-  timestamp: '2023-02-01 00:00:26+09:00'
+  timestamp: '2023-02-01 01:52:38+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: range/range.hpp

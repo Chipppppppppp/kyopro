@@ -201,8 +201,8 @@ data:
     \u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\u95A2\u6570\
     \u30AF\u30E9\u30B9\n    template<class T, class = void>\n    struct GetFunction\
     \ {\n        static_assert(std::is_aggregate_v<T>, \"T is not gettable\");\n \
-    \       template<std::size_t idx>\n        static constexpr decltype(auto) get(U&&\
-    \ tuple_like) {\n            return std::get<idx>(std::forward<U>(tuple_like));\n\
+    \       template<std::size_t idx>\n        static constexpr decltype(auto) get(T&&\
+    \ tuple_like) {\n            return std::get<idx>(std::forward<T>(tuple_like));\n\
     \        }\n    };\n\n    #define DEFINE_GET(n, ...)                         \
     \                    \\\n    template<class T>                               \
     \                       \\\n    struct GetFunction<T, std::enable_if_t<tuple_like_size_v<T>\
@@ -214,54 +214,56 @@ data:
     \         \\\n    };\n\n    DEFINE_GET(1, a)\n    DEFINE_GET(2, a, b)\n    DEFINE_GET(3,\
     \ a, b, c)\n    DEFINE_GET(4, a, b, c, d)\n    DEFINE_GET(5, a, b, c, d, e)\n\
     \    DEFINE_GET(6, a, b, c, d, e, f)\n    DEFINE_GET(7, a, b, c, d, e, f, g)\n\
-    \    DEFINE_GET(8, a, b, c, d, e, f, g, h)\n\n    #undef DEFINE_GET\n\n    //\
-    \ tuple-\n    inline constexpr struct {\n        template<class T>\n        constexpr\
-    \ decltype(auto) operator ()(T&& tuple_like) const noexcept {\n            return\
-    \ GetFunction<std::decay_t<T>>::function<idx>(std::forward<T>(tuple_like));\n\
-    \        }\n    } get;\n\n\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx <\
-    \ 8)\u756A\u76EE\u306E\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t\
-    \ idx, class T>\n    struct tuple_like_element {\n        using type = decltype(get(std::declval<T>()));\n\
-    \    };\n\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\
-    \u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t idx,\
-    \ class T>\n    using tuple_like_element_t = typename tuple_like_element<idx,\
-    \ T>::type;\n} // namespace kpr\n#line 9 \"algorithm/Hash.hpp\"\n\nnamespace kpr\
-    \ {\n    // \u30CF\u30C3\u30B7\u30E5(tuple_like, range\u5BFE\u5FDC)\n    template<class,\
+    \    DEFINE_GET(8, a, b, c, d, e, f, g, h)\n\n    #undef DEFINE_GET\n\n    namespace\
+    \ helper {\n        template<std::size_t idx>\n        struct GetHelper {\n  \
+    \          template<class T>\n            constexpr decltype(auto) operator ()(T&&\
+    \ tuple_like) const noexcept {\n                return GetFunction<std::decay_t<T>>::template\
+    \ function<idx>(std::forward<T>(tuple_like));\n            }\n        };\n   \
+    \ }\n\n    // tuple-like\u306A\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306Eidx(0\
+    \ <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\n    template<std::size_t idx>\n\
+    \    inline constexpr helper::GetHelper<idx> get;\n\n\n    // tuple-like\u306A\
+    \u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\u8981\u7D20\u306E\u578B\u3092\
+    \u8ABF\u3079\u308B\n    template<std::size_t idx, class T>\n    struct tuple_like_element\
+    \ {\n        using type = decltype(get<idx>(std::declval<T>()));\n    };\n\n \
+    \   // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\u8981\u7D20\
+    \u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t idx, class T>\n\
+    \    using tuple_like_element_t = typename tuple_like_element<idx, T>::type;\n\
+    } // namespace kpr\n#line 9 \"algorithm/Hash.hpp\"\n\nnamespace kpr {\n    //\
+    \ \u30CF\u30C3\u30B7\u30E5(tuple_like, range\u5BFE\u5FDC)\n    template<class,\
     \ class = void>\n    struct Hash;\n\n    template<class T>\n    struct Hash<T,\
     \ std::enable_if_t<std::is_scalar_v<T>>> {\n        using value_type = T;\n\n\
-    \    private:\n        static constexpr std::hash<T> hasher;\n\n    public:\n\
     \        constexpr std::size_t operator ()(T a) const noexcept {\n           \
-    \ return hasher(a);\n        }\n    };\n\n    template<class T>\n    struct Hash<T,\
-    \ std::enable_if_t<is_tuple_like_v<T> && !is_range_v<T>>> {\n        using value_type\
-    \ = T;\n\n        template<std::size_t i = 0>\n        constexpr std::size_t operator\
-    \ ()(const T& a) const noexcept {\n            if constexpr (i == tuple_like_size_v<T>)\
+    \ return std::hash<T>{}(a);\n        }\n    };\n\n    template<class T>\n    struct\
+    \ Hash<T, std::enable_if_t<is_tuple_like_v<T> && !is_range_v<T>>> {\n        using\
+    \ value_type = T;\n\n        template<std::size_t i = 0>\n        constexpr std::size_t\
+    \ operator ()(const T& a) const noexcept {\n            if constexpr (i == tuple_like_size_v<T>)\
     \ return tuple_like_size_v<T>;\n            else {\n                std::size_t\
     \ seed = operator()<i + 1>(a);\n                return seed ^ (Hash<tuple_like_element_t<i,\
     \ T>>{}(get<i>(a)) + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4));\n   \
     \         }\n        }\n    };\n\n    template<class T>\n    struct Hash<T, std::enable_if_t<is_range_v<T>>>:\
-    \ Hash<range_value_t<T>> {\n        using value_type = T;\n\n    private:\n  \
-    \      static constexpr Hash<range_value_t<T>> hasher;\n\n    public:\n      \
-    \  constexpr std::size_t operator ()(const T& a) const {\n            std::size_t\
-    \ seed = std::size(a);\n            for (auto&& i: a) seed ^= hasher(i) + 0x9e3779b97f4a7c15LU\
-    \ + (seed << 12) + (seed >> 4);\n            return seed;\n        }\n    };\n\
-    } // namespace kpr\n#line 3 \"math/power.hpp\"\n\nnamespace kpr {\n    [[maybe_unused]]\
-    \ inline constexpr struct {\n        template<class T>\n        constexpr T operator\
-    \ ()(T a, std::uint_fast64_t n, T init = 1) const noexcept {\n            while\
-    \ (n > 0) {\n                if (n & 1) init *= a;\n                a *= a;\n\
-    \                n >>= 1;\n            }\n            return init;\n        }\n\
-    \    } power;\n} // namespace kpr\n#line 3 \"meta/setting.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n\
-    /// @brief \u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u578B\n#define KYOPRO_BASE_INT\
-    \ std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n/// @brief \u57FA\u672C\u7B26\
-    \u53F7\u306A\u3057\u6574\u6570\u578B\n#define KYOPRO_BASE_UINT std::uint64_t\n\
-    #endif\n\n#ifndef KYOPRO_BASE_FLOAT\n/// @brief \u57FA\u672C\u6D6E\u52D5\u5C0F\
-    \u6570\u70B9\u6570\u578B\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef\
-    \ KYOPRO_DEFAULT_MOD\n/// @brief \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305F\
-    mod\n#define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))\n#endif\n\
-    \n#ifndef KYOPRO_DECIMAL_PRECISION\n/// @brief \u5C0F\u6570\u7CBE\u5EA6(\u6841\
-    )\n#define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))\n#endif\n\
-    \n#ifndef KYOPRO_INF_DIV\n/// @brief \u7121\u9650\u5927\u3092\u8868\u3059\u6574\
-    \u6570\u304C\u6700\u5927\u5024\u306E\u4F55\u5206\u306E\u4E00\u304B\u3092\u8868\
-    \u3059\n#define KYOPRO_INF_DIV (static_cast<KYOPRO_BASE_UINT>(3))\n#endif\n\n\
-    #ifndef KYOPRO_BUFFER_SIZE\n/// @brief \u30C7\u30D5\u30A9\u30EB\u30C8\u306E\u30D0\
+    \ Hash<range_value_t<T>> {\n        using value_type = T;\n\n        constexpr\
+    \ std::size_t operator ()(const T& a) const {\n            std::size_t seed =\
+    \ std::size(a);\n            for (auto&& i: a) seed ^= Hash<range_value_t<T>>{}(i)\
+    \ + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4);\n            return seed;\n\
+    \        }\n    };\n} // namespace kpr\n#line 3 \"math/power.hpp\"\n\nnamespace\
+    \ kpr {\n    [[maybe_unused]] inline constexpr struct {\n        template<class\
+    \ T>\n        constexpr T operator ()(T a, std::uint_fast64_t n, T init = 1) const\
+    \ noexcept {\n            while (n > 0) {\n                if (n & 1) init *=\
+    \ a;\n                a *= a;\n                n >>= 1;\n            }\n     \
+    \       return init;\n        }\n    } power;\n} // namespace kpr\n#line 3 \"\
+    meta/setting.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n/// @brief \u57FA\u672C\u7B26\u53F7\
+    \u4ED8\u304D\u6574\u6570\u578B\n#define KYOPRO_BASE_INT std::int64_t\n#endif\n\
+    \n#ifndef KYOPRO_BASE_UINT\n/// @brief \u57FA\u672C\u7B26\u53F7\u306A\u3057\u6574\
+    \u6570\u578B\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n\
+    /// @brief \u57FA\u672C\u6D6E\u52D5\u5C0F\u6570\u70B9\u6570\u578B\n#define KYOPRO_BASE_FLOAT\
+    \ double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n/// @brief \u554F\u984C\u3067\u8A2D\
+    \u5B9A\u3055\u308C\u305Fmod\n#define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))\n\
+    #endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n/// @brief \u5C0F\u6570\u7CBE\u5EA6\
+    (\u6841)\n#define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))\n\
+    #endif\n\n#ifndef KYOPRO_INF_DIV\n/// @brief \u7121\u9650\u5927\u3092\u8868\u3059\
+    \u6574\u6570\u304C\u6700\u5927\u5024\u306E\u4F55\u5206\u306E\u4E00\u304B\u3092\
+    \u8868\u3059\n#define KYOPRO_INF_DIV (static_cast<KYOPRO_BASE_UINT>(3))\n#endif\n\
+    \n#ifndef KYOPRO_BUFFER_SIZE\n/// @brief \u30C7\u30D5\u30A9\u30EB\u30C8\u306E\u30D0\
     \u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\n#define KYOPRO_BUFFER_SIZE (static_cast<KYOPRO_BASE_UINT>(2048))\n\
     #endif\n#line 5 \"meta/constant.hpp\"\n\nnamespace kpr {\n    // \u554F\u984C\u3067\
     \u8A2D\u5B9A\u3055\u308C\u305Fmod\n    template<class T>\n    inline constexpr\
@@ -440,7 +442,7 @@ data:
   - math/math.hpp
   - math/factorize.hpp
   - all.hpp
-  timestamp: '2023-02-01 00:00:26+09:00'
+  timestamp: '2023-02-01 01:52:38+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp

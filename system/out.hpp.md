@@ -50,17 +50,32 @@ data:
   bundledCode: "#line 2 \"system/out.hpp\"\n#include <unistd.h>\n#include <algorithm>\n\
     #include <array>\n#include <bitset>\n#include <cmath>\n#include <cstdint>\n#include\
     \ <cstdio>\n#include <iterator>\n#include <string>\n#include <tuple>\n#include\
-    \ <type_traits>\n#include <utility>\n#line 2 \"meta/tuple_like.hpp\"\n#include\
-    \ <cstddef>\n#line 7 \"meta/trait.hpp\"\n\nnamespace kpr {\n    namespace helper\
-    \ {\n        template<class T>\n        struct is_integer_helper {\n         \
-    \   static constexpr bool value = std::is_integral_v<T>;\n        };\n\n     \
-    \   #ifdef __SIZEOF_INT128__\n        template<>\n        struct is_integer_helper<__int128_t>\
-    \ {\n            static constexpr bool value = true;\n        };\n\n        template<>\n\
-    \        struct is_integer_helper<__uint128_t> {\n            static constexpr\
-    \ bool value = true;\n        };\n        #endif\n    } // namespace helper\n\n\
-    \    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\u308B\n    template<class\
-    \ T>\n    struct is_integer {\n        static constexpr bool value = helper::is_integer_helper<std::remove_cv_t<T>>::value;\n\
-    \    };\n\n    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\u308B\n    template<class\
+    \ <type_traits>\n#include <utility>\n#line 3 \"meta/setting.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n\
+    /// @brief \u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u578B\n#define KYOPRO_BASE_INT\
+    \ std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n/// @brief \u57FA\u672C\u7B26\
+    \u53F7\u306A\u3057\u6574\u6570\u578B\n#define KYOPRO_BASE_UINT std::uint64_t\n\
+    #endif\n\n#ifndef KYOPRO_BASE_FLOAT\n/// @brief \u57FA\u672C\u6D6E\u52D5\u5C0F\
+    \u6570\u70B9\u6570\u578B\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef\
+    \ KYOPRO_DEFAULT_MOD\n/// @brief \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305F\
+    mod\n#define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))\n#endif\n\
+    \n#ifndef KYOPRO_DECIMAL_PRECISION\n/// @brief \u5C0F\u6570\u7CBE\u5EA6(\u6841\
+    )\n#define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))\n#endif\n\
+    \n#ifndef KYOPRO_INF_DIV\n/// @brief \u7121\u9650\u5927\u3092\u8868\u3059\u6574\
+    \u6570\u304C\u6700\u5927\u5024\u306E\u4F55\u5206\u306E\u4E00\u304B\u3092\u8868\
+    \u3059\n#define KYOPRO_INF_DIV (static_cast<KYOPRO_BASE_UINT>(3))\n#endif\n\n\
+    #ifndef KYOPRO_BUFFER_SIZE\n/// @brief \u30C7\u30D5\u30A9\u30EB\u30C8\u306E\u30D0\
+    \u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\n#define KYOPRO_BUFFER_SIZE (static_cast<KYOPRO_BASE_UINT>(2048))\n\
+    #endif\n#line 2 \"meta/trait.hpp\"\n#include <cstddef>\n#line 7 \"meta/trait.hpp\"\
+    \n\nnamespace kpr {\n    namespace helper {\n        template<class T>\n     \
+    \   struct is_integer_helper {\n            static constexpr bool value = std::is_integral_v<T>;\n\
+    \        };\n\n        #ifdef __SIZEOF_INT128__\n        template<>\n        struct\
+    \ is_integer_helper<__int128_t> {\n            static constexpr bool value = true;\n\
+    \        };\n\n        template<>\n        struct is_integer_helper<__uint128_t>\
+    \ {\n            static constexpr bool value = true;\n        };\n        #endif\n\
+    \    } // namespace helper\n\n    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\
+    \u308B\n    template<class T>\n    struct is_integer {\n        static constexpr\
+    \ bool value = helper::is_integer_helper<std::remove_cv_t<T>>::value;\n    };\n\
+    \n    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\u308B\n    template<class\
     \ T>\n    inline constexpr bool is_integer_v = is_integer<T>::value;\n\n\n   \
     \ // \u578BT\u304C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u304B\u8ABF\u3079\u308B\
     \n    template<class T>\n    struct is_signed_integer {\n        static constexpr\
@@ -192,8 +207,8 @@ data:
     \u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\u95A2\u6570\
     \u30AF\u30E9\u30B9\n    template<class T, class = void>\n    struct GetFunction\
     \ {\n        static_assert(std::is_aggregate_v<T>, \"T is not gettable\");\n \
-    \       template<std::size_t idx>\n        static constexpr decltype(auto) get(U&&\
-    \ tuple_like) {\n            return std::get<idx>(std::forward<U>(tuple_like));\n\
+    \       template<std::size_t idx>\n        static constexpr decltype(auto) get(T&&\
+    \ tuple_like) {\n            return std::get<idx>(std::forward<T>(tuple_like));\n\
     \        }\n    };\n\n    #define DEFINE_GET(n, ...)                         \
     \                    \\\n    template<class T>                               \
     \                       \\\n    struct GetFunction<T, std::enable_if_t<tuple_like_size_v<T>\
@@ -205,32 +220,21 @@ data:
     \         \\\n    };\n\n    DEFINE_GET(1, a)\n    DEFINE_GET(2, a, b)\n    DEFINE_GET(3,\
     \ a, b, c)\n    DEFINE_GET(4, a, b, c, d)\n    DEFINE_GET(5, a, b, c, d, e)\n\
     \    DEFINE_GET(6, a, b, c, d, e, f)\n    DEFINE_GET(7, a, b, c, d, e, f, g)\n\
-    \    DEFINE_GET(8, a, b, c, d, e, f, g, h)\n\n    #undef DEFINE_GET\n\n    //\
-    \ tuple-\n    inline constexpr struct {\n        template<class T>\n        constexpr\
-    \ decltype(auto) operator ()(T&& tuple_like) const noexcept {\n            return\
-    \ GetFunction<std::decay_t<T>>::function<idx>(std::forward<T>(tuple_like));\n\
-    \        }\n    } get;\n\n\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx <\
-    \ 8)\u756A\u76EE\u306E\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t\
-    \ idx, class T>\n    struct tuple_like_element {\n        using type = decltype(get(std::declval<T>()));\n\
-    \    };\n\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\
-    \u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t idx,\
-    \ class T>\n    using tuple_like_element_t = typename tuple_like_element<idx,\
-    \ T>::type;\n} // namespace kpr\n#line 3 \"meta/setting.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n\
-    /// @brief \u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u578B\n#define KYOPRO_BASE_INT\
-    \ std::int64_t\n#endif\n\n#ifndef KYOPRO_BASE_UINT\n/// @brief \u57FA\u672C\u7B26\
-    \u53F7\u306A\u3057\u6574\u6570\u578B\n#define KYOPRO_BASE_UINT std::uint64_t\n\
-    #endif\n\n#ifndef KYOPRO_BASE_FLOAT\n/// @brief \u57FA\u672C\u6D6E\u52D5\u5C0F\
-    \u6570\u70B9\u6570\u578B\n#define KYOPRO_BASE_FLOAT double\n#endif\n\n#ifndef\
-    \ KYOPRO_DEFAULT_MOD\n/// @brief \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305F\
-    mod\n#define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))\n#endif\n\
-    \n#ifndef KYOPRO_DECIMAL_PRECISION\n/// @brief \u5C0F\u6570\u7CBE\u5EA6(\u6841\
-    )\n#define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))\n#endif\n\
-    \n#ifndef KYOPRO_INF_DIV\n/// @brief \u7121\u9650\u5927\u3092\u8868\u3059\u6574\
-    \u6570\u304C\u6700\u5927\u5024\u306E\u4F55\u5206\u306E\u4E00\u304B\u3092\u8868\
-    \u3059\n#define KYOPRO_INF_DIV (static_cast<KYOPRO_BASE_UINT>(3))\n#endif\n\n\
-    #ifndef KYOPRO_BUFFER_SIZE\n/// @brief \u30C7\u30D5\u30A9\u30EB\u30C8\u306E\u30D0\
-    \u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\n#define KYOPRO_BUFFER_SIZE (static_cast<KYOPRO_BASE_UINT>(2048))\n\
-    #endif\n#line 17 \"system/out.hpp\"\n\nnamespace kpr {\n    template<std::size_t\
+    \    DEFINE_GET(8, a, b, c, d, e, f, g, h)\n\n    #undef DEFINE_GET\n\n    namespace\
+    \ helper {\n        template<std::size_t idx>\n        struct GetHelper {\n  \
+    \          template<class T>\n            constexpr decltype(auto) operator ()(T&&\
+    \ tuple_like) const noexcept {\n                return GetFunction<std::decay_t<T>>::template\
+    \ function<idx>(std::forward<T>(tuple_like));\n            }\n        };\n   \
+    \ }\n\n    // tuple-like\u306A\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306Eidx(0\
+    \ <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\n    template<std::size_t idx>\n\
+    \    inline constexpr helper::GetHelper<idx> get;\n\n\n    // tuple-like\u306A\
+    \u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\u8981\u7D20\u306E\u578B\u3092\
+    \u8ABF\u3079\u308B\n    template<std::size_t idx, class T>\n    struct tuple_like_element\
+    \ {\n        using type = decltype(get<idx>(std::declval<T>()));\n    };\n\n \
+    \   // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\u8981\u7D20\
+    \u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t idx, class T>\n\
+    \    using tuple_like_element_t = typename tuple_like_element<idx, T>::type;\n\
+    } // namespace kpr\n#line 17 \"system/out.hpp\"\n\nnamespace kpr {\n    template<std::size_t\
     \ buf_size = KYOPRO_BUFFER_SIZE>\n    struct Writer {\n    private:\n        int\
     \ fd, idx;\n        std::array<char, buf_size> buffer;\n\n    public:\n      \
     \  static constexpr KYOPRO_BASE_INT get_buf_size() noexcept {\n            return\
@@ -265,11 +269,12 @@ data:
     \ get_decimal_precision() noexcept {\n            return decimal_precision;\n\
     \        }\n\n        template<class, class = void>\n        struct max_rank {\n\
     \            static constexpr std::size_t value = 0;\n        };\n        template<class\
-    \ T>\n        struct max_rank<T, std::enable_if_t<is_agg_v<T>>> {\n          \
-    \  template<std::size_t... idx>\n            static constexpr bool get_value_rank(std::index_sequence<idx...>)\
-    \ {\n                return std::max({max_rank<aggregate_element_t<idx, T>>::value...});\n\
-    \            }\n            static constexpr std::size_t value = get_value_rank(std::make_index_sequence<aggregate_size_v<T>>())\
-    \ + 1;\n        };\n        template<class T>\n        struct max_rank<T, std::enable_if_t<is_range_v<T>>>\
+    \ T>\n        struct max_rank<T, std::enable_if_t<is_tuple_like_v<T> && !is_range_v<T>>>\
+    \ {\n            template<std::size_t... idx>\n            static constexpr bool\
+    \ get_value_rank(std::index_sequence<idx...>) {\n                return std::max({max_rank<tuple_like_element_t<idx,\
+    \ T>>::value...});\n            }\n            static constexpr std::size_t value\
+    \ = get_value_rank(std::make_index_sequence<tuple_like_size_v<T>>()) + 1;\n  \
+    \      };\n        template<class T>\n        struct max_rank<T, std::enable_if_t<is_range_v<T>>>\
     \ {\n            static constexpr std::size_t value = max_rank<range_value_t<T>>::value\
     \ + 1;\n        };\n\n        template<class T>\n        static constexpr KYOPRO_BASE_UINT\
     \ max_rank_v = max_rank<T>::value;\n\n        Iterator itr;\n\n        Printer()\
@@ -310,11 +315,11 @@ data:
     \            print_char('.');\n            a -= p;\n            for (int i = 0;\
     \ i < static_cast<int>(decimal_precision); ++i) {\n                a *= 10;\n\
     \                print_char('0' + static_cast<std::uint_fast64_t>(a) % 10);\n\
-    \            }\n        }\n        template<std::size_t i = 0, class T, std::enable_if_t<is_agg_v<T>\
-    \ && !has_print<T>::value>* = nullptr>\n        void print(const T& a) {\n   \
-    \         if constexpr (debug && i == 0) print_char('{');\n            if constexpr\
-    \ (aggregate_size_v<T> != 0) print(access<i>(a));\n            if constexpr (i\
-    \ + 1 < aggregate_size_v<T>) {\n                print_sep<max_rank_v<T>>();\n\
+    \            }\n        }\n        template<std::size_t i = 0, class T, std::enable_if_t<is_tuple_like_v<T>\
+    \ && !is_range_v<T> && !has_print<T>::value>* = nullptr>\n        void print(const\
+    \ T& a) {\n            if constexpr (debug && i == 0) print_char('{');\n     \
+    \       if constexpr (tuple_like_size_v<T> != 0) print(get<i>(a));\n         \
+    \   if constexpr (i + 1 < tuple_like_size_v<T>) {\n                print_sep<max_rank_v<T>>();\n\
     \                print<i + 1>(a);\n            } else if constexpr (debug) print_char('}');\n\
     \        }\n        template<class T, std::enable_if_t<is_range_v<T> && !has_print<T>::value>*\
     \ = nullptr>\n        void print(const T& a) {\n            if constexpr (debug)\
@@ -338,8 +343,8 @@ data:
   code: "#pragma once\n#include <unistd.h>\n#include <algorithm>\n#include <array>\n\
     #include <bitset>\n#include <cmath>\n#include <cstdint>\n#include <cstdio>\n#include\
     \ <iterator>\n#include <string>\n#include <tuple>\n#include <type_traits>\n#include\
-    \ <utility>\n#include \"../meta/tuple_like.hpp\"\n#include \"../meta/setting.hpp\"\
-    \n#include \"../meta/trait.hpp\"\n\nnamespace kpr {\n    template<std::size_t\
+    \ <utility>\n#include \"../meta/setting.hpp\"\n#include \"../meta/trait.hpp\"\n\
+    #include \"../meta/tuple_like.hpp\"\n\nnamespace kpr {\n    template<std::size_t\
     \ buf_size = KYOPRO_BUFFER_SIZE>\n    struct Writer {\n    private:\n        int\
     \ fd, idx;\n        std::array<char, buf_size> buffer;\n\n    public:\n      \
     \  static constexpr KYOPRO_BASE_INT get_buf_size() noexcept {\n            return\
@@ -374,11 +379,12 @@ data:
     \ get_decimal_precision() noexcept {\n            return decimal_precision;\n\
     \        }\n\n        template<class, class = void>\n        struct max_rank {\n\
     \            static constexpr std::size_t value = 0;\n        };\n        template<class\
-    \ T>\n        struct max_rank<T, std::enable_if_t<is_agg_v<T>>> {\n          \
-    \  template<std::size_t... idx>\n            static constexpr bool get_value_rank(std::index_sequence<idx...>)\
-    \ {\n                return std::max({max_rank<aggregate_element_t<idx, T>>::value...});\n\
-    \            }\n            static constexpr std::size_t value = get_value_rank(std::make_index_sequence<aggregate_size_v<T>>())\
-    \ + 1;\n        };\n        template<class T>\n        struct max_rank<T, std::enable_if_t<is_range_v<T>>>\
+    \ T>\n        struct max_rank<T, std::enable_if_t<is_tuple_like_v<T> && !is_range_v<T>>>\
+    \ {\n            template<std::size_t... idx>\n            static constexpr bool\
+    \ get_value_rank(std::index_sequence<idx...>) {\n                return std::max({max_rank<tuple_like_element_t<idx,\
+    \ T>>::value...});\n            }\n            static constexpr std::size_t value\
+    \ = get_value_rank(std::make_index_sequence<tuple_like_size_v<T>>()) + 1;\n  \
+    \      };\n        template<class T>\n        struct max_rank<T, std::enable_if_t<is_range_v<T>>>\
     \ {\n            static constexpr std::size_t value = max_rank<range_value_t<T>>::value\
     \ + 1;\n        };\n\n        template<class T>\n        static constexpr KYOPRO_BASE_UINT\
     \ max_rank_v = max_rank<T>::value;\n\n        Iterator itr;\n\n        Printer()\
@@ -419,11 +425,11 @@ data:
     \            print_char('.');\n            a -= p;\n            for (int i = 0;\
     \ i < static_cast<int>(decimal_precision); ++i) {\n                a *= 10;\n\
     \                print_char('0' + static_cast<std::uint_fast64_t>(a) % 10);\n\
-    \            }\n        }\n        template<std::size_t i = 0, class T, std::enable_if_t<is_agg_v<T>\
-    \ && !has_print<T>::value>* = nullptr>\n        void print(const T& a) {\n   \
-    \         if constexpr (debug && i == 0) print_char('{');\n            if constexpr\
-    \ (aggregate_size_v<T> != 0) print(access<i>(a));\n            if constexpr (i\
-    \ + 1 < aggregate_size_v<T>) {\n                print_sep<max_rank_v<T>>();\n\
+    \            }\n        }\n        template<std::size_t i = 0, class T, std::enable_if_t<is_tuple_like_v<T>\
+    \ && !is_range_v<T> && !has_print<T>::value>* = nullptr>\n        void print(const\
+    \ T& a) {\n            if constexpr (debug && i == 0) print_char('{');\n     \
+    \       if constexpr (tuple_like_size_v<T> != 0) print(get<i>(a));\n         \
+    \   if constexpr (i + 1 < tuple_like_size_v<T>) {\n                print_sep<max_rank_v<T>>();\n\
     \                print<i + 1>(a);\n            } else if constexpr (debug) print_char('}');\n\
     \        }\n        template<class T, std::enable_if_t<is_range_v<T> && !has_print<T>::value>*\
     \ = nullptr>\n        void print(const T& a) {\n            if constexpr (debug)\
@@ -445,9 +451,9 @@ data:
     \ eprint(error.begin());\n    Printer<Writer<>::iterator> println(output.begin()),\
     \ eprintln(error.begin());\n} // namespace kpr\n"
   dependsOn:
-  - meta/tuple_like.hpp
-  - meta/trait.hpp
   - meta/setting.hpp
+  - meta/trait.hpp
+  - meta/tuple_like.hpp
   isVerificationFile: false
   path: system/out.hpp
   requiredBy:
@@ -456,7 +462,7 @@ data:
   - template/template.hpp
   - template/macro.hpp
   - all.hpp
-  timestamp: '2023-02-01 00:04:10+09:00'
+  timestamp: '2023-02-01 01:52:38+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp

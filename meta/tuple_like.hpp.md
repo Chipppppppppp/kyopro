@@ -36,6 +36,9 @@ data:
     path: meta/meta.hpp
     title: meta/meta.hpp
   - icon: ':x:'
+    path: system/in.hpp
+    title: system/in.hpp
+  - icon: ':x:'
     path: system/out.hpp
     title: system/out.hpp
   - icon: ':x:'
@@ -214,8 +217,8 @@ data:
     \u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\u95A2\u6570\
     \u30AF\u30E9\u30B9\n    template<class T, class = void>\n    struct GetFunction\
     \ {\n        static_assert(std::is_aggregate_v<T>, \"T is not gettable\");\n \
-    \       template<std::size_t idx>\n        static constexpr decltype(auto) get(U&&\
-    \ tuple_like) {\n            return std::get<idx>(std::forward<U>(tuple_like));\n\
+    \       template<std::size_t idx>\n        static constexpr decltype(auto) get(T&&\
+    \ tuple_like) {\n            return std::get<idx>(std::forward<T>(tuple_like));\n\
     \        }\n    };\n\n    #define DEFINE_GET(n, ...)                         \
     \                    \\\n    template<class T>                               \
     \                       \\\n    struct GetFunction<T, std::enable_if_t<tuple_like_size_v<T>\
@@ -227,17 +230,21 @@ data:
     \         \\\n    };\n\n    DEFINE_GET(1, a)\n    DEFINE_GET(2, a, b)\n    DEFINE_GET(3,\
     \ a, b, c)\n    DEFINE_GET(4, a, b, c, d)\n    DEFINE_GET(5, a, b, c, d, e)\n\
     \    DEFINE_GET(6, a, b, c, d, e, f)\n    DEFINE_GET(7, a, b, c, d, e, f, g)\n\
-    \    DEFINE_GET(8, a, b, c, d, e, f, g, h)\n\n    #undef DEFINE_GET\n\n    //\
-    \ tuple-\n    inline constexpr struct {\n        template<class T>\n        constexpr\
-    \ decltype(auto) operator ()(T&& tuple_like) const noexcept {\n            return\
-    \ GetFunction<std::decay_t<T>>::function<idx>(std::forward<T>(tuple_like));\n\
-    \        }\n    } get;\n\n\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx <\
-    \ 8)\u756A\u76EE\u306E\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t\
-    \ idx, class T>\n    struct tuple_like_element {\n        using type = decltype(get(std::declval<T>()));\n\
-    \    };\n\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\
-    \u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t idx,\
-    \ class T>\n    using tuple_like_element_t = typename tuple_like_element<idx,\
-    \ T>::type;\n} // namespace kpr\n"
+    \    DEFINE_GET(8, a, b, c, d, e, f, g, h)\n\n    #undef DEFINE_GET\n\n    namespace\
+    \ helper {\n        template<std::size_t idx>\n        struct GetHelper {\n  \
+    \          template<class T>\n            constexpr decltype(auto) operator ()(T&&\
+    \ tuple_like) const noexcept {\n                return GetFunction<std::decay_t<T>>::template\
+    \ function<idx>(std::forward<T>(tuple_like));\n            }\n        };\n   \
+    \ }\n\n    // tuple-like\u306A\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306Eidx(0\
+    \ <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\n    template<std::size_t idx>\n\
+    \    inline constexpr helper::GetHelper<idx> get;\n\n\n    // tuple-like\u306A\
+    \u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\u8981\u7D20\u306E\u578B\u3092\
+    \u8ABF\u3079\u308B\n    template<std::size_t idx, class T>\n    struct tuple_like_element\
+    \ {\n        using type = decltype(get<idx>(std::declval<T>()));\n    };\n\n \
+    \   // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\u8981\u7D20\
+    \u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t idx, class T>\n\
+    \    using tuple_like_element_t = typename tuple_like_element<idx, T>::type;\n\
+    } // namespace kpr\n"
   code: "#pragma once\n#include <cstddef>\n#include <type_traits>\n#include <tuple>\n\
     #include <utility>\n#include \"trait.hpp\"\n\nnamespace kpr {\n    namespace helper\
     \ {\n        struct CastableToAny {\n            template<class T>\n         \
@@ -270,8 +277,8 @@ data:
     \u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\u95A2\u6570\
     \u30AF\u30E9\u30B9\n    template<class T, class = void>\n    struct GetFunction\
     \ {\n        static_assert(std::is_aggregate_v<T>, \"T is not gettable\");\n \
-    \       template<std::size_t idx>\n        static constexpr decltype(auto) get(U&&\
-    \ tuple_like) {\n            return std::get<idx>(std::forward<U>(tuple_like));\n\
+    \       template<std::size_t idx>\n        static constexpr decltype(auto) get(T&&\
+    \ tuple_like) {\n            return std::get<idx>(std::forward<T>(tuple_like));\n\
     \        }\n    };\n\n    #define DEFINE_GET(n, ...)                         \
     \                    \\\n    template<class T>                               \
     \                       \\\n    struct GetFunction<T, std::enable_if_t<tuple_like_size_v<T>\
@@ -283,17 +290,21 @@ data:
     \         \\\n    };\n\n    DEFINE_GET(1, a)\n    DEFINE_GET(2, a, b)\n    DEFINE_GET(3,\
     \ a, b, c)\n    DEFINE_GET(4, a, b, c, d)\n    DEFINE_GET(5, a, b, c, d, e)\n\
     \    DEFINE_GET(6, a, b, c, d, e, f)\n    DEFINE_GET(7, a, b, c, d, e, f, g)\n\
-    \    DEFINE_GET(8, a, b, c, d, e, f, g, h)\n\n    #undef DEFINE_GET\n\n    //\
-    \ tuple-\n    inline constexpr struct {\n        template<class T>\n        constexpr\
-    \ decltype(auto) operator ()(T&& tuple_like) const noexcept {\n            return\
-    \ GetFunction<std::decay_t<T>>::function<idx>(std::forward<T>(tuple_like));\n\
-    \        }\n    } get;\n\n\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx <\
-    \ 8)\u756A\u76EE\u306E\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t\
-    \ idx, class T>\n    struct tuple_like_element {\n        using type = decltype(get(std::declval<T>()));\n\
-    \    };\n\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\
-    \u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t idx,\
-    \ class T>\n    using tuple_like_element_t = typename tuple_like_element<idx,\
-    \ T>::type;\n} // namespace kpr\n"
+    \    DEFINE_GET(8, a, b, c, d, e, f, g, h)\n\n    #undef DEFINE_GET\n\n    namespace\
+    \ helper {\n        template<std::size_t idx>\n        struct GetHelper {\n  \
+    \          template<class T>\n            constexpr decltype(auto) operator ()(T&&\
+    \ tuple_like) const noexcept {\n                return GetFunction<std::decay_t<T>>::template\
+    \ function<idx>(std::forward<T>(tuple_like));\n            }\n        };\n   \
+    \ }\n\n    // tuple-like\u306A\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306Eidx(0\
+    \ <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\n    template<std::size_t idx>\n\
+    \    inline constexpr helper::GetHelper<idx> get;\n\n\n    // tuple-like\u306A\
+    \u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\u8981\u7D20\u306E\u578B\u3092\
+    \u8ABF\u3079\u308B\n    template<std::size_t idx, class T>\n    struct tuple_like_element\
+    \ {\n        using type = decltype(get<idx>(std::declval<T>()));\n    };\n\n \
+    \   // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\u8981\u7D20\
+    \u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t idx, class T>\n\
+    \    using tuple_like_element_t = typename tuple_like_element<idx, T>::type;\n\
+    } // namespace kpr\n"
   dependsOn:
   - meta/trait.hpp
   isVerificationFile: false
@@ -301,6 +312,7 @@ data:
   requiredBy:
   - all/all.hpp
   - meta/meta.hpp
+  - system/in.hpp
   - system/out.hpp
   - system/system.hpp
   - template/template.hpp
@@ -314,7 +326,7 @@ data:
   - algorithm/Hash.hpp
   - algorithm/algorithm.hpp
   - all.hpp
-  timestamp: '2023-02-01 00:00:26+09:00'
+  timestamp: '2023-02-01 01:52:38+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp

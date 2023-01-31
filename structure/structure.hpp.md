@@ -190,7 +190,7 @@ data:
     \            return T{};\n        }\n\n        constexpr T operator ()(const T&\
     \ a, const T& b) const noexcept {\n            return a + b;\n        }\n\n  \
     \      constexpr T inverse(const T& a) const noexcept {\n            static_assert(std::is_signed_v<T>,\
-    \ \"T must be a signed type\")\n            return -a;\n        }\n    };\n\n\
+    \ \"T must be a signed type\");\n            return -a;\n        }\n    };\n\n\
     \    // \u639B\u3051\u7B97\u306Emonoid\n    template<class T>\n    struct Mul\
     \ {\n        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic type\"\
     );\n\n        using value_type = T;\n\n        constexpr T id() const noexcept\
@@ -200,20 +200,20 @@ data:
     \ 1 / a;\n        }\n    };\n\n    // min\u306Emonoid\n    template<class T>\n\
     \    struct Min {\n        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic\
     \ type\");\n\n        using value_type = T;\n\n        constexpr T id() const\
-    \ noexcept {\n            return is_integer_v<T> ? INF<T> : std::numeric_limits<T>::infinity();\n\
-    \        }\n\n        constexpr T operator ()(const T& a, const T& b) const noexcept\
-    \ {\n            return a < b ? a : b;\n        }\n    };\n\n    // max\u306E\
-    monoid\n    template<class T>\n    struct Max {\n        static_assert(is_arithmetic_v<T>,\
+    \ noexcept {\n            return std::numeric_limits<T>::has_infinity ? std::numeric_limits<T>::infinity()\
+    \ : INF<T>;\n        }\n\n        constexpr T operator ()(const T& a, const T&\
+    \ b) const noexcept {\n            return a < b ? a : b;\n        }\n    };\n\n\
+    \    // max\u306Emonoid\n    template<class T>\n    struct Max {\n        static_assert(is_arithmetic_v<T>,\
     \ \"T must be an arithmetic type\");\n\n        using value_type = T;\n\n    \
-    \    constexpr T id() const noexcept {\n            return is_integer_v<T> ? is_signed_integer<T>\
-    \ ? -INF<T> : 0 : -std::numeric_limits<T>::infinity();\n        }\n\n        constexpr\
-    \ T operator ()(const T& a, const T& b) const noexcept {\n            return a\
-    \ > b ? a : b;\n        }\n    };\n\n\n    // inverse\u3092\u6301\u3064\u304B\u8ABF\
-    \u3079\u308B\n    template<class, class = void>\n    struct has_inverse {\n  \
-    \      static constexpr bool value = false;\n    };\n\n    template<class T>\n\
-    \    struct has_inverse<T, std::void_t<decltype(&T::inverse)>> {\n        static\
-    \ constexpr bool value = true;\n    };\n\n    // inverse\u3092\u6301\u3064\u304B\
-    \u8ABF\u3079\u308B\n    template<class T>\n    inline constexpr bool has_inverse_v\
+    \    constexpr T id() const noexcept {\n            return std::numeric_limits<T>::has_infinity\
+    \ ? -std::numeric_limits<T>::infinity() : (std::is_signed_v<T> ? -INF<T> : 0);\n\
+    \        }\n\n        constexpr T operator ()(const T& a, const T& b) const noexcept\
+    \ {\n            return a > b ? a : b;\n        }\n    };\n\n\n    // inverse\u3092\
+    \u6301\u3064\u304B\u8ABF\u3079\u308B\n    template<class, class = void>\n    struct\
+    \ has_inverse {\n        static constexpr bool value = false;\n    };\n\n    template<class\
+    \ T>\n    struct has_inverse<T, std::void_t<decltype(&T::inverse)>> {\n      \
+    \  static constexpr bool value = true;\n    };\n\n    // inverse\u3092\u6301\u3064\
+    \u304B\u8ABF\u3079\u308B\n    template<class T>\n    inline constexpr bool has_inverse_v\
     \ = has_inverse<T>::value;\n} // namespace kpr\n#line 6 \"structure/FenwickTree.hpp\"\
     \n\nnamespace kpr {\n    template<class T, class Op = Add<T>, class Container\
     \ = std::vector<T>>\n    struct FenwickTree: private Op {\n        using value_type\
@@ -289,7 +289,7 @@ data:
   requiredBy:
   - all/all.hpp
   - all.hpp
-  timestamp: '2023-02-01 00:00:26+09:00'
+  timestamp: '2023-02-01 01:52:38+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: structure/structure.hpp

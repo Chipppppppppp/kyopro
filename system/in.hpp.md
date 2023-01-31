@@ -10,6 +10,9 @@ data:
   - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
+  - icon: ':x:'
+    path: meta/tuple_like.hpp
+    title: meta/tuple_like.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
     path: all.hpp
@@ -180,7 +183,65 @@ data:
     \n    template<class T>\n    struct range_value {\n        using type = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\n\
     \    };\n\n    // Range\u578BT\u304B\u3089\u8981\u7D20\u306E\u578B\u3092\u8ABF\
     \u3079\u308B\n    template<class T>\n    using range_value_t = typename range_value<T>::type;\n\
-    } // namespace kpr\n#line 15 \"system/in.hpp\"\n\nnamespace kpr {\n    template<std::size_t\
+    } // namespace kpr\n#line 7 \"meta/tuple_like.hpp\"\n\nnamespace kpr {\n    namespace\
+    \ helper {\n        struct CastableToAny {\n            template<class T>\n  \
+    \          operator T() const noexcept;\n        };\n\n        template<class\
+    \ T, std::size_t... idx, std::void_t<decltype(T{((void)idx, CastableToAny{})...})>*\
+    \ = nullptr>\n        constexpr bool is_aggregate_initializable(std::index_sequence<idx...>,\
+    \ bool) noexcept {\n            return true;\n        }\n        template<class\
+    \ T, std::size_t... idx>\n        constexpr bool is_aggregate_initializable(std::index_sequence<idx...>,\
+    \ char) noexcept {\n            return false;\n        }\n\n        template<class\
+    \ T, std::size_t n = sizeof(T) * 8, std::enable_if_t<is_aggregate_initializable<T>(std::make_index_sequence<n>(),\
+    \ false)>* = nullptr>\n        constexpr std::size_t aggregate_size() {\n    \
+    \        return n;\n        }\n        template<class T, std::size_t n = sizeof(T)\
+    \ * 8, std::enable_if_t<!is_aggregate_initializable<T>(std::make_index_sequence<n>(),\
+    \ false)>* = nullptr>\n        constexpr std::size_t aggregate_size() {\n    \
+    \        return aggregate_size<T, n - 1>();\n        }\n    } // namespace helper\n\
+    \n    // tuple_like\u306A\u578BT\u306E\u5927\u304D\u3055\u3092\u8ABF\u3079\u308B\
+    \n    template<class T, class = void>\n    struct tuple_like_size {\n        static_assert(std::is_aggregate_v<T>,\
+    \ \"T must be tuple_like\");\n        static constexpr std::size_t value = helper::aggregate_size<T>();\n\
+    \    };\n\n    template<class T>\n    struct tuple_like_size<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
+    \ {\n        static constexpr std::size_t value = std::tuple_size_v<T>;\n    };\n\
+    \n    // tuple_like\u306A\u578BT\u306E\u5927\u304D\u3055\u3092\u8ABF\u3079\u308B\
+    \n    template<class T>\n    inline constexpr std::size_t tuple_like_size_v =\
+    \ tuple_like_size<T>::value;\n\n\n    // \u578BT\u304Ctuple_like\u304B\u8ABF\u3079\
+    \u308B\n    template<class, class = void>\n    struct is_tuple_like {\n      \
+    \  static constexpr bool value = false;\n    };\n\n    template<class T>\n   \
+    \ struct is_tuple_like<T, std::void_t<decltype(tuple_like_size<T>::value)>> {\n\
+    \        static constexpr bool value = true;\n    };\n\n    // \u578BT\u304Ctuple_like\u304B\
+    \u8ABF\u3079\u308B\n    template<class T>\n    inline constexpr bool is_tuple_like_v\
+    \ = is_tuple_like<T>::value;\n\n\n    // tuple-like\u306A\u30AA\u30D6\u30B8\u30A7\
+    \u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\u95A2\u6570\
+    \u30AF\u30E9\u30B9\n    template<class T, class = void>\n    struct GetFunction\
+    \ {\n        static_assert(std::is_aggregate_v<T>, \"T is not gettable\");\n \
+    \       template<std::size_t idx>\n        static constexpr decltype(auto) get(T&&\
+    \ tuple_like) {\n            return std::get<idx>(std::forward<T>(tuple_like));\n\
+    \        }\n    };\n\n    #define DEFINE_GET(n, ...)                         \
+    \                    \\\n    template<class T>                               \
+    \                       \\\n    struct GetFunction<T, std::enable_if_t<tuple_like_size_v<T>\
+    \ == n>> {   \\\n        template<std::size_t idx, class U>                  \
+    \               \\\n        static constexpr decltype(auto) get(U&& aggregate)\
+    \ noexcept { \\\n            auto&& [__VA_ARGS__] = std::forward<U>(aggregate);\
+    \             \\\n            return std::get<idx>(std::forward_as_tuple(__VA_ARGS__));\
+    \      \\\n        }                                                         \
+    \         \\\n    };\n\n    DEFINE_GET(1, a)\n    DEFINE_GET(2, a, b)\n    DEFINE_GET(3,\
+    \ a, b, c)\n    DEFINE_GET(4, a, b, c, d)\n    DEFINE_GET(5, a, b, c, d, e)\n\
+    \    DEFINE_GET(6, a, b, c, d, e, f)\n    DEFINE_GET(7, a, b, c, d, e, f, g)\n\
+    \    DEFINE_GET(8, a, b, c, d, e, f, g, h)\n\n    #undef DEFINE_GET\n\n    namespace\
+    \ helper {\n        template<std::size_t idx>\n        struct GetHelper {\n  \
+    \          template<class T>\n            constexpr decltype(auto) operator ()(T&&\
+    \ tuple_like) const noexcept {\n                return GetFunction<std::decay_t<T>>::template\
+    \ function<idx>(std::forward<T>(tuple_like));\n            }\n        };\n   \
+    \ }\n\n    // tuple-like\u306A\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306Eidx(0\
+    \ <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\n    template<std::size_t idx>\n\
+    \    inline constexpr helper::GetHelper<idx> get;\n\n\n    // tuple-like\u306A\
+    \u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\u8981\u7D20\u306E\u578B\u3092\
+    \u8ABF\u3079\u308B\n    template<std::size_t idx, class T>\n    struct tuple_like_element\
+    \ {\n        using type = decltype(get<idx>(std::declval<T>()));\n    };\n\n \
+    \   // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\u8981\u7D20\
+    \u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t idx, class T>\n\
+    \    using tuple_like_element_t = typename tuple_like_element<idx, T>::type;\n\
+    } // namespace kpr\n#line 16 \"system/in.hpp\"\n\nnamespace kpr {\n    template<std::size_t\
     \ buf_size = KYOPRO_BUFFER_SIZE>\n    struct Reader {\n    private:\n        int\
     \ fd, idx;\n        std::array<char, buf_size> buffer;\n\n    public:\n      \
     \  static constexpr KYOPRO_BASE_INT get_buf_size() noexcept {\n            return\
@@ -233,48 +294,48 @@ data:
     \           ++itr;\n                    }\n                    a += d / i;\n \
     \               }\n                while ('0' <= *itr && *itr <= '9') ++itr;\n\
     \            }\n            if constexpr (!std::is_unsigned_v<T>) if (sgn) a =\
-    \ -a;\n        }\n        template<std::size_t i = 0, class T, std::enable_if_t<is_agg_v<T>\
-    \ && !has_scan<T>::value>* = nullptr>\n        void scan(T& a) {\n           \
-    \ if constexpr (i < std::tuple_size_v<T>) {\n                scan(std::get<i>(a));\n\
-    \                scan<i + 1>(a);\n            }\n        }\n        template<class\
-    \ T, std::enable_if_t<is_range_v<T> && !has_scan<T>::value>* = nullptr>\n    \
-    \    void scan(T& a) {\n            for (auto&& i: a) scan(i);\n        }\n  \
-    \      template<class T, std::enable_if_t<has_scan<T>::value>* = nullptr>\n  \
-    \      void scan(T& a) {\n            a.scan(*this);\n        }\n\n        void\
-    \ operator ()() {}\n        template<class Head, class... Args>\n        void\
-    \ operator ()(Head& head, Args&... args) {\n            scan(head);\n        \
-    \    operator ()(args...);\n        }\n    };\n\n    Scanner<Reader<>::iterator>\
+    \ -a;\n        }\n        template<std::size_t i = 0, class T, std::enable_if_t<is_tuple_like_v<T>\
+    \ && !is_range_v<T> && !has_scan<T>::value>* = nullptr>\n        void scan(T&\
+    \ a) {\n            if constexpr (i < std::tuple_size_v<T>) {\n              \
+    \  scan(std::get<i>(a));\n                scan<i + 1>(a);\n            }\n   \
+    \     }\n        template<class T, std::enable_if_t<is_range_v<T> && !has_scan<T>::value>*\
+    \ = nullptr>\n        void scan(T& a) {\n            for (auto&& i: a) scan(i);\n\
+    \        }\n        template<class T, std::enable_if_t<has_scan<T>::value>* =\
+    \ nullptr>\n        void scan(T& a) {\n            a.scan(*this);\n        }\n\
+    \n        void operator ()() {}\n        template<class Head, class... Args>\n\
+    \        void operator ()(Head& head, Args&... args) {\n            scan(head);\n\
+    \            operator ()(args...);\n        }\n    };\n\n    Scanner<Reader<>::iterator>\
     \ scan(input.begin());\n} // namespace kpr\n"
   code: "#pragma once\n#include <unistd.h>\n#include <array>\n#include <bitset>\n\
     #include <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <string>\n\
     #include <tuple>\n#include <type_traits>\n#include <utility>\n#include \"../math/power.hpp\"\
-    \n#include \"../meta/setting.hpp\"\n#include \"../meta/trait.hpp\"\n\nnamespace\
-    \ kpr {\n    template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>\n    struct Reader\
-    \ {\n    private:\n        int fd, idx;\n        std::array<char, buf_size> buffer;\n\
-    \n    public:\n        static constexpr KYOPRO_BASE_INT get_buf_size() noexcept\
-    \ {\n            return buf_size;\n        }\n\n        Reader() {\n         \
-    \   read(fd, buffer.begin(), buf_size);\n        }\n        Reader(int fd): fd(fd),\
+    \n#include \"../meta/setting.hpp\"\n#include \"../meta/trait.hpp\"\n#include \"\
+    ../meta/tuple_like.hpp\"\n\nnamespace kpr {\n    template<std::size_t buf_size\
+    \ = KYOPRO_BUFFER_SIZE>\n    struct Reader {\n    private:\n        int fd, idx;\n\
+    \        std::array<char, buf_size> buffer;\n\n    public:\n        static constexpr\
+    \ KYOPRO_BASE_INT get_buf_size() noexcept {\n            return buf_size;\n  \
+    \      }\n\n        Reader() {\n            read(fd, buffer.begin(), buf_size);\n\
+    \        }\n        Reader(int fd): fd(fd), idx(0), buffer() {\n            read(fd,\
+    \ buffer.begin(), buf_size);\n        }\n        Reader(FILE* fp): fd(fileno(fp)),\
     \ idx(0), buffer() {\n            read(fd, buffer.begin(), buf_size);\n      \
-    \  }\n        Reader(FILE* fp): fd(fileno(fp)), idx(0), buffer() {\n         \
-    \   read(fd, buffer.begin(), buf_size);\n        }\n\n        struct iterator\
-    \ {\n        private:\n            Reader& reader;\n\n        public:\n      \
-    \      using difference_type = void;\n            using value_type = void;\n \
-    \           using pointer = void;\n            using reference = void;\n     \
-    \       using iterator_category = std::input_iterator_tag;\n\n            iterator()\
-    \ noexcept = default;\n            iterator(Reader& reader) noexcept: reader(reader)\
-    \ {}\n\n            iterator& operator ++() {\n                ++reader.idx;\n\
-    \                if (reader.idx == buf_size) {\n                    read(reader.fd,\
-    \ reader.buffer.begin(), buf_size);\n                    reader.idx = 0;\n   \
-    \             }\n                return *this;\n            }\n\n            iterator\
-    \ operator ++(int) {\n                iterator before = *this;\n             \
-    \   operator ++();\n                return before;\n            }\n\n        \
-    \    char& operator *() const {\n                return reader.buffer[reader.idx];\n\
-    \            }\n        };\n\n        iterator begin() noexcept {\n          \
-    \  return iterator(*this);\n        }\n    };\n\n    Reader input(0);\n\n    template<class\
-    \ Iterator, std::size_t decimal_precision = KYOPRO_DECIMAL_PRECISION>\n    struct\
-    \ Scanner {\n        using iterator_type = Iterator;\n    private:\n        template<class,\
-    \ class = void>\n        struct has_scan: std::false_type {};\n        template<class\
-    \ T>\n        struct has_scan<T, std::void_t<decltype(std::declval<T>().scan(std::declval<Scanner&>()))>>:\
+    \  }\n\n        struct iterator {\n        private:\n            Reader& reader;\n\
+    \n        public:\n            using difference_type = void;\n            using\
+    \ value_type = void;\n            using pointer = void;\n            using reference\
+    \ = void;\n            using iterator_category = std::input_iterator_tag;\n\n\
+    \            iterator() noexcept = default;\n            iterator(Reader& reader)\
+    \ noexcept: reader(reader) {}\n\n            iterator& operator ++() {\n     \
+    \           ++reader.idx;\n                if (reader.idx == buf_size) {\n   \
+    \                 read(reader.fd, reader.buffer.begin(), buf_size);\n        \
+    \            reader.idx = 0;\n                }\n                return *this;\n\
+    \            }\n\n            iterator operator ++(int) {\n                iterator\
+    \ before = *this;\n                operator ++();\n                return before;\n\
+    \            }\n\n            char& operator *() const {\n                return\
+    \ reader.buffer[reader.idx];\n            }\n        };\n\n        iterator begin()\
+    \ noexcept {\n            return iterator(*this);\n        }\n    };\n\n    Reader\
+    \ input(0);\n\n    template<class Iterator, std::size_t decimal_precision = KYOPRO_DECIMAL_PRECISION>\n\
+    \    struct Scanner {\n        using iterator_type = Iterator;\n    private:\n\
+    \        template<class, class = void>\n        struct has_scan: std::false_type\
+    \ {};\n        template<class T>\n        struct has_scan<T, std::void_t<decltype(std::declval<T>().scan(std::declval<Scanner&>()))>>:\
     \ std::true_type {};\n\n    public:\n        Iterator itr;\n\n        static constexpr\
     \ KYOPRO_BASE_INT get_decimal_precision() noexcept {\n            return decimal_precision;\n\
     \        }\n\n        Scanner() noexcept = default;\n        Scanner(Iterator\
@@ -302,22 +363,23 @@ data:
     \           ++itr;\n                    }\n                    a += d / i;\n \
     \               }\n                while ('0' <= *itr && *itr <= '9') ++itr;\n\
     \            }\n            if constexpr (!std::is_unsigned_v<T>) if (sgn) a =\
-    \ -a;\n        }\n        template<std::size_t i = 0, class T, std::enable_if_t<is_agg_v<T>\
-    \ && !has_scan<T>::value>* = nullptr>\n        void scan(T& a) {\n           \
-    \ if constexpr (i < std::tuple_size_v<T>) {\n                scan(std::get<i>(a));\n\
-    \                scan<i + 1>(a);\n            }\n        }\n        template<class\
-    \ T, std::enable_if_t<is_range_v<T> && !has_scan<T>::value>* = nullptr>\n    \
-    \    void scan(T& a) {\n            for (auto&& i: a) scan(i);\n        }\n  \
-    \      template<class T, std::enable_if_t<has_scan<T>::value>* = nullptr>\n  \
-    \      void scan(T& a) {\n            a.scan(*this);\n        }\n\n        void\
-    \ operator ()() {}\n        template<class Head, class... Args>\n        void\
-    \ operator ()(Head& head, Args&... args) {\n            scan(head);\n        \
-    \    operator ()(args...);\n        }\n    };\n\n    Scanner<Reader<>::iterator>\
+    \ -a;\n        }\n        template<std::size_t i = 0, class T, std::enable_if_t<is_tuple_like_v<T>\
+    \ && !is_range_v<T> && !has_scan<T>::value>* = nullptr>\n        void scan(T&\
+    \ a) {\n            if constexpr (i < std::tuple_size_v<T>) {\n              \
+    \  scan(std::get<i>(a));\n                scan<i + 1>(a);\n            }\n   \
+    \     }\n        template<class T, std::enable_if_t<is_range_v<T> && !has_scan<T>::value>*\
+    \ = nullptr>\n        void scan(T& a) {\n            for (auto&& i: a) scan(i);\n\
+    \        }\n        template<class T, std::enable_if_t<has_scan<T>::value>* =\
+    \ nullptr>\n        void scan(T& a) {\n            a.scan(*this);\n        }\n\
+    \n        void operator ()() {}\n        template<class Head, class... Args>\n\
+    \        void operator ()(Head& head, Args&... args) {\n            scan(head);\n\
+    \            operator ()(args...);\n        }\n    };\n\n    Scanner<Reader<>::iterator>\
     \ scan(input.begin());\n} // namespace kpr\n"
   dependsOn:
   - math/power.hpp
   - meta/setting.hpp
   - meta/trait.hpp
+  - meta/tuple_like.hpp
   isVerificationFile: false
   path: system/in.hpp
   requiredBy:
@@ -326,7 +388,7 @@ data:
   - template/template.hpp
   - template/macro.hpp
   - all.hpp
-  timestamp: '2023-02-01 00:00:26+09:00'
+  timestamp: '2023-02-01 01:52:38+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp
