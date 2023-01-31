@@ -1,26 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':x:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
   - icon: ':warning:'
     path: algorithm/algorithm.hpp
     title: algorithm/algorithm.hpp
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':x:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
@@ -29,13 +35,40 @@ data:
   - icon: ':warning:'
     path: meta/meta.hpp
     title: meta/meta.hpp
+  - icon: ':x:'
+    path: system/out.hpp
+    title: system/out.hpp
+  - icon: ':x:'
+    path: system/system.hpp
+    title: system/system.hpp
   - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  - icon: ':warning:'
+    path: template/macro.hpp
+    title: template/macro.hpp
+  - icon: ':warning:'
+    path: template/template.hpp
+    title: template/template.hpp
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: verify/aoj/PrimeNumber.test.cpp
+    title: verify/aoj/PrimeNumber.test.cpp
+  - icon: ':x:'
+    path: verify/yosupo/factorize.test.cpp
+    title: verify/yosupo/factorize.test.cpp
+  - icon: ':x:'
+    path: verify/yosupo/many_aplusb.test.cpp
+    title: verify/yosupo/many_aplusb.test.cpp
+  - icon: ':x:'
+    path: verify/yosupo/point_add_range_sum.test.cpp
+    title: verify/yosupo/point_add_range_sum.test.cpp
+  - icon: ':x:'
+    path: verify/yosupo/unionfind.test.cpp
+    title: verify/yosupo/unionfind.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"meta/tuple_like.hpp\"\n#include <cstddef>\n#include <type_traits>\n\
@@ -266,7 +299,12 @@ data:
   isVerificationFile: false
   path: meta/tuple_like.hpp
   requiredBy:
+  - all/all.hpp
   - meta/meta.hpp
+  - system/out.hpp
+  - system/system.hpp
+  - template/template.hpp
+  - template/macro.hpp
   - template/alias.hpp
   - math/ModInt.hpp
   - math/is_prime.hpp
@@ -275,9 +313,15 @@ data:
   - math/DynamicModInt.hpp
   - algorithm/Hash.hpp
   - algorithm/algorithm.hpp
+  - all.hpp
   timestamp: '2023-02-01 00:00:26+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - verify/aoj/PrimeNumber.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/unionfind.test.cpp
+  - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
 documentation_of: meta/tuple_like.hpp
 layout: document
 redirect_from:

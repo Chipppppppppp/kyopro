@@ -1,7 +1,13 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: template/template.hpp
+    title: template/template.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -28,7 +34,9 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: template/make_array.hpp
-  requiredBy: []
+  requiredBy:
+  - template/template.hpp
+  - all.hpp
   timestamp: '2023-02-01 00:00:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

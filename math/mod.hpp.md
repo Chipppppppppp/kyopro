@@ -3,6 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
   - icon: ':warning:'
@@ -11,6 +17,9 @@ data:
   - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
+  - icon: ':warning:'
+    path: template/template.hpp
+    title: template/template.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -41,9 +50,12 @@ data:
   isVerificationFile: false
   path: math/mod.hpp
   requiredBy:
+  - all/all.hpp
+  - template/template.hpp
   - template/alias.hpp
   - math/ModInt.hpp
   - math/math.hpp
+  - all.hpp
   timestamp: '2023-02-01 00:00:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

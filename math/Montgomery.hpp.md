@@ -1,17 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':x:'
     path: meta/setting.hpp
     title: "\u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u578B"
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':x:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
@@ -20,10 +26,19 @@ data:
   - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  - icon: ':warning:'
+    path: template/template.hpp
+    title: template/template.hpp
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: verify/aoj/PrimeNumber.test.cpp
+    title: verify/aoj/PrimeNumber.test.cpp
+  - icon: ':x:'
+    path: verify/yosupo/factorize.test.cpp
+    title: verify/yosupo/factorize.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"math/Montgomery.hpp\"\n#include <cstdint>\n#include <limits>\n\
@@ -86,14 +101,19 @@ data:
   isVerificationFile: false
   path: math/Montgomery.hpp
   requiredBy:
+  - all/all.hpp
+  - template/template.hpp
   - template/alias.hpp
   - math/is_prime.hpp
   - math/math.hpp
   - math/factorize.hpp
   - math/DynamicModInt.hpp
+  - all.hpp
   timestamp: '2023-02-01 00:00:26+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - verify/aoj/PrimeNumber.test.cpp
+  - verify/yosupo/factorize.test.cpp
 documentation_of: math/Montgomery.hpp
 layout: document
 redirect_from:

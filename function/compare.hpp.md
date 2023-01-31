@@ -3,6 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':warning:'
     path: function/function.hpp
     title: function/function.hpp
   _extendedVerifiedWith: []
@@ -53,7 +59,9 @@ data:
   isVerificationFile: false
   path: function/compare.hpp
   requiredBy:
+  - all/all.hpp
   - function/function.hpp
+  - all.hpp
   timestamp: '2023-02-01 00:00:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

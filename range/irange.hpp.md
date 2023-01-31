@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   - icon: ':warning:'
@@ -11,6 +11,12 @@ data:
     path: range/range_base.hpp
     title: range/range_base.hpp
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
   - icon: ':warning:'
     path: range/range.hpp
     title: range/range.hpp
@@ -324,7 +330,9 @@ data:
   isVerificationFile: false
   path: range/irange.hpp
   requiredBy:
+  - all/all.hpp
   - range/range.hpp
+  - all.hpp
   timestamp: '2023-02-01 00:00:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

@@ -1,32 +1,41 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: meta/setting.hpp
     title: "\u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u578B"
-  - icon: ':warning:'
+  - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':warning:'
     path: function/function.hpp
     title: function/function.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':warning:'
     path: structure/structure.hpp
     title: structure/structure.hpp
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: verify/yosupo/point_add_range_sum.test.cpp
+    title: verify/yosupo/point_add_range_sum.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"function/monoid.hpp\"\n#include <limits>\n#include <type_traits>\n\
@@ -249,12 +258,15 @@ data:
   isVerificationFile: false
   path: function/monoid.hpp
   requiredBy:
+  - all/all.hpp
   - function/function.hpp
   - structure/structure.hpp
   - structure/FenwickTree.hpp
+  - all.hpp
   timestamp: '2023-02-01 00:00:26+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - verify/yosupo/point_add_range_sum.test.cpp
 documentation_of: function/monoid.hpp
 layout: document
 redirect_from:

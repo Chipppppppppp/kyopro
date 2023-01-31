@@ -2,25 +2,31 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':x:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
   - icon: ':warning:'
     path: algorithm/algorithm.hpp
     title: algorithm/algorithm.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':warning:'
     path: function/function.hpp
     title: function/function.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: function/monoid.hpp
     title: function/monoid.hpp
   - icon: ':warning:'
     path: math/Barrett.hpp
     title: math/Barrett.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
@@ -29,10 +35,10 @@ data:
   - icon: ':warning:'
     path: math/div.hpp
     title: math/div.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
@@ -41,7 +47,7 @@ data:
   - icon: ':warning:'
     path: meta/meta.hpp
     title: meta/meta.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
   - icon: ':warning:'
@@ -53,25 +59,52 @@ data:
   - icon: ':warning:'
     path: range/range.hpp
     title: range/range.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   - icon: ':warning:'
     path: structure/structure.hpp
     title: structure/structure.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: system/in.hpp
     title: system/in.hpp
+  - icon: ':x:'
+    path: system/out.hpp
+    title: system/out.hpp
+  - icon: ':x:'
+    path: system/system.hpp
+    title: system/system.hpp
   - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  - icon: ':warning:'
+    path: template/macro.hpp
+    title: template/macro.hpp
+  - icon: ':warning:'
+    path: template/template.hpp
+    title: template/template.hpp
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: verify/aoj/PrimeNumber.test.cpp
+    title: verify/aoj/PrimeNumber.test.cpp
+  - icon: ':x:'
+    path: verify/yosupo/factorize.test.cpp
+    title: verify/yosupo/factorize.test.cpp
+  - icon: ':x:'
+    path: verify/yosupo/many_aplusb.test.cpp
+    title: verify/yosupo/many_aplusb.test.cpp
+  - icon: ':x:'
+    path: verify/yosupo/point_add_range_sum.test.cpp
+    title: verify/yosupo/point_add_range_sum.test.cpp
+  - icon: ':x:'
+    path: verify/yosupo/unionfind.test.cpp
+    title: verify/yosupo/unionfind.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"meta/trait.hpp\"\n#include <cstddef>\n#include <iterator>\n\
@@ -303,11 +336,16 @@ data:
   isVerificationFile: false
   path: meta/trait.hpp
   requiredBy:
+  - all/all.hpp
   - meta/tuple_like.hpp
   - meta/meta.hpp
   - system/in.hpp
+  - system/out.hpp
+  - system/system.hpp
   - function/monoid.hpp
   - function/function.hpp
+  - template/template.hpp
+  - template/macro.hpp
   - template/alias.hpp
   - structure/structure.hpp
   - structure/FenwickTree.hpp
@@ -325,9 +363,15 @@ data:
   - algorithm/Hash.hpp
   - algorithm/algorithm.hpp
   - algorithm/bit.hpp
+  - all.hpp
   timestamp: '2023-02-01 00:00:26+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - verify/aoj/PrimeNumber.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/unionfind.test.cpp
+  - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
 documentation_of: meta/trait.hpp
 layout: document
 redirect_from:

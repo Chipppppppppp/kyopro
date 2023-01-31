@@ -3,6 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':warning:'
     path: range/irange.hpp
     title: range/irange.hpp
   - icon: ':warning:'
@@ -102,8 +108,10 @@ data:
   isVerificationFile: false
   path: range/iterator_base.hpp
   requiredBy:
+  - all/all.hpp
   - range/range.hpp
   - range/irange.hpp
+  - all.hpp
   timestamp: '2023-02-01 00:00:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

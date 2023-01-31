@@ -3,13 +3,13 @@ data:
   libraryCategories:
   - name: algorithm
     pages:
-    - icon: ':warning:'
+    - icon: ':x:'
       path: algorithm/Hash.hpp
       title: algorithm/Hash.hpp
     - icon: ':warning:'
       path: algorithm/algorithm.hpp
       title: algorithm/algorithm.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: algorithm/bit.hpp
       title: algorithm/bit.hpp
   - name: all
@@ -33,7 +33,7 @@ data:
     - icon: ':warning:'
       path: function/function.hpp
       title: function/function.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: function/monoid.hpp
       title: function/monoid.hpp
   - name: math
@@ -41,13 +41,13 @@ data:
     - icon: ':warning:'
       path: math/Barrett.hpp
       title: math/Barrett.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: math/DynamicModInt.hpp
       title: math/DynamicModInt.hpp
     - icon: ':warning:'
       path: math/ModInt.hpp
       title: math/ModInt.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: math/Montgomery.hpp
       title: math/Montgomery.hpp
     - icon: ':warning:'
@@ -59,10 +59,10 @@ data:
     - icon: ':warning:'
       path: math/euler_phi.hpp
       title: math/euler_phi.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: math/factorize.hpp
       title: math/factorize.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: math/is_prime.hpp
       title: math/is_prime.hpp
     - icon: ':warning:'
@@ -71,24 +71,24 @@ data:
     - icon: ':warning:'
       path: math/mod.hpp
       title: math/mod.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: math/power.hpp
       title: math/power.hpp
   - name: meta
     pages:
-    - icon: ':warning:'
+    - icon: ':x:'
       path: meta/constant.hpp
       title: meta/constant.hpp
     - icon: ':warning:'
       path: meta/meta.hpp
       title: meta/meta.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: meta/setting.hpp
       title: "\u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u578B"
-    - icon: ':warning:'
+    - icon: ':x:'
       path: meta/trait.hpp
       title: meta/trait.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: meta/tuple_like.hpp
       title: meta/tuple_like.hpp
   - name: range
@@ -110,10 +110,10 @@ data:
       title: range/range_base.hpp
   - name: structure
     pages:
-    - icon: ':warning:'
+    - icon: ':x:'
       path: structure/FenwickTree.hpp
       title: structure/FenwickTree.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: structure/UnionFind.hpp
       title: structure/UnionFind.hpp
     - icon: ':warning:'
@@ -121,13 +121,13 @@ data:
       title: structure/structure.hpp
   - name: system
     pages:
-    - icon: ':warning:'
+    - icon: ':x:'
       path: system/in.hpp
       title: system/in.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: system/out.hpp
       title: system/out.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: system/system.hpp
       title: system/system.hpp
   - name: template

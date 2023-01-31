@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
   _extendedRequiredBy:
@@ -12,15 +12,21 @@ data:
     path: algorithm/algorithm.hpp
     title: algorithm/algorithm.hpp
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
+    path: all/all.hpp
+    title: all/all.hpp
+  - icon: ':x:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
@@ -29,10 +35,19 @@ data:
   - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  - icon: ':warning:'
+    path: template/template.hpp
+    title: template/template.hpp
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: verify/aoj/PrimeNumber.test.cpp
+    title: verify/aoj/PrimeNumber.test.cpp
+  - icon: ':x:'
+    path: verify/yosupo/factorize.test.cpp
+    title: verify/yosupo/factorize.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"algorithm/Hash.hpp\"\n#include <cstddef>\n#include <functional>\n\
@@ -249,6 +264,8 @@ data:
   isVerificationFile: false
   path: algorithm/Hash.hpp
   requiredBy:
+  - all/all.hpp
+  - template/template.hpp
   - template/alias.hpp
   - math/ModInt.hpp
   - math/is_prime.hpp
@@ -256,9 +273,12 @@ data:
   - math/factorize.hpp
   - math/DynamicModInt.hpp
   - algorithm/algorithm.hpp
+  - all.hpp
   timestamp: '2023-02-01 00:00:26+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - verify/aoj/PrimeNumber.test.cpp
+  - verify/yosupo/factorize.test.cpp
 documentation_of: algorithm/Hash.hpp
 layout: document
 redirect_from:
