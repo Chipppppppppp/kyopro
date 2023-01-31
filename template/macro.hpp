@@ -5,7 +5,7 @@
 #include <tuple>
 #include <type_traits>
 #include <utility>
-#include "../system/all.hpp"
+#include "../system/system.hpp"
 
 namespace kpr::helper {
     template<std::size_t len>
