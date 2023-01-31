@@ -84,7 +84,7 @@ data:
       title: meta/meta.hpp
     - icon: ':x:'
       path: meta/setting.hpp
-      title: "\u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u578B"
+      title: meta/setting.hpp
     - icon: ':x:'
       path: meta/trait.hpp
       title: meta/trait.hpp
