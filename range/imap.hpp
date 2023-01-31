@@ -41,7 +41,7 @@ namespace kpr {
         };
 
         struct const_iterator: BaseConstIterator {
-            using value_type = const std::decay_t<std::invoke_result_t<Func, decltype(*std::declval<BaseIterator>())>>;
+            using value_type = const std::decay_t<std::invoke_result_t<Func, decltype(*std::declval<BaseConstIterator>())>>;
             using pointer = value_type*;
             using reference = value_type&;
 
@@ -53,8 +53,8 @@ namespace kpr {
             template<class F, class Itr>
             const_iterator(F&& func, Itr&& itr) noexcept: func(std::forward<F>(func)), BaseConstIterator(std::forward<Itr>(itr)) {}
 
-            constexpr const decltype(auto) operator *() const noexcept {
-                return std::invoke(func, BaseIterator::operator *());
+            constexpr decltype(auto) operator *() const noexcept {
+                return std::invoke(func, BaseConstIterator::operator *());
             }
         };
 

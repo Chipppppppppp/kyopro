@@ -16,7 +16,7 @@ namespace kpr {
             if (n <= 1) return false;
             if (!(n & 1)) return n == 2;
             dmint::set_mod(n);
-            std::uint_fast64_t d = (n - 1) >> count_rzero(n - 1);
+            std::uint_fast64_t d = (n - 1) >> rzero_count(n - 1);
             dmint one = 1, minus_one = n - 1;
             auto ng = [&](std::uint_fast64_t a) noexcept {
                 auto y = dmint(a).power(d);

@@ -12,6 +12,7 @@
 #include "../math/power.hpp"
 #include "../meta/setting.hpp"
 #include "../meta/trait.hpp"
+#include "../meta/tuple_like.hpp"
 
 namespace kpr {
     template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>
@@ -149,7 +150,7 @@ namespace kpr {
             }
             if constexpr (!std::is_unsigned_v<T>) if (sgn) a = -a;
         }
-        template<std::size_t i = 0, class T, std::enable_if_t<is_agg_v<T> && !has_scan<T>::value>* = nullptr>
+        template<std::size_t i = 0, class T, std::enable_if_t<is_tuple_like_v<T> && !is_range_v<T> && !has_scan<T>::value>* = nullptr>
         void scan(T& a) {
             if constexpr (i < std::tuple_size_v<T>) {
                 scan(std::get<i>(a));

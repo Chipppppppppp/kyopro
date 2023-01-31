@@ -69,8 +69,8 @@ namespace kpr {
     struct GetFunction {
         static_assert(std::is_aggregate_v<T>, "T is not gettable");
         template<std::size_t idx>
-        static constexpr decltype(auto) get(U&& tuple_like) {
-            return std::get<idx>(std::forward<U>(tuple_like));
+        static constexpr decltype(auto) get(T&& tuple_like) {
+            return std::get<idx>(std::forward<T>(tuple_like));
         }
     };
 
@@ -95,19 +95,25 @@ namespace kpr {
 
     #undef DEFINE_GET
 
-    // tuple-
-    inline constexpr struct {
-        template<class T>
-        constexpr decltype(auto) operator ()(T&& tuple_like) const noexcept {
-            return GetFunction<std::decay_t<T>>::function<idx>(std::forward<T>(tuple_like));
-        }
-    } get;
+    namespace helper {
+        template<std::size_t idx>
+        struct GetHelper {
+            template<class T>
+            constexpr decltype(auto) operator ()(T&& tuple_like) const noexcept {
+                return GetFunction<std::decay_t<T>>::template function<idx>(std::forward<T>(tuple_like));
+            }
+        };
+    }
+
+    // tuple-likeなオブジェクトのidx(0 <= idx < 8)番目を求める
+    template<std::size_t idx>
+    inline constexpr helper::GetHelper<idx> get;
 
 
     // tuple-likeな型Tのidx(0 <= idx < 8)番目の要素の型を調べる
     template<std::size_t idx, class T>
     struct tuple_like_element {
-        using type = decltype(get(std::declval<T>()));
+        using type = decltype(get<idx>(std::declval<T>()));
     };
 
     // tuple-likeな型Tのidx(0 <= idx < 8)番目の要素の型を調べる

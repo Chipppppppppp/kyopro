@@ -16,12 +16,8 @@ namespace kpr {
     struct Hash<T, std::enable_if_t<std::is_scalar_v<T>>> {
         using value_type = T;
 
-    private:
-        static constexpr std::hash<T> hasher;
-
-    public:
         constexpr std::size_t operator ()(T a) const noexcept {
-            return hasher(a);
+            return std::hash<T>{}(a);
         }
     };
 
@@ -43,13 +39,9 @@ namespace kpr {
     struct Hash<T, std::enable_if_t<is_range_v<T>>>: Hash<range_value_t<T>> {
         using value_type = T;
 
-    private:
-        static constexpr Hash<range_value_t<T>> hasher;
-
-    public:
         constexpr std::size_t operator ()(const T& a) const {
             std::size_t seed = std::size(a);
-            for (auto&& i: a) seed ^= hasher(i) + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4);
+            for (auto&& i: a) seed ^= Hash<range_value_t<T>>{}(i) + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4);
             return seed;
         }
     };

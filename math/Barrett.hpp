@@ -5,7 +5,7 @@
 #include "../meta/setting.hpp"
 #include "../meta/trait.hpp"
 
-namespace kyopro {
+namespace kpr {
     // Barrett Reduction
     template<class T>
     struct Barrett {

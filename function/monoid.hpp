@@ -21,7 +21,7 @@ namespace kpr {
         }
 
         constexpr T inverse(const T& a) const noexcept {
-            static_assert(std::is_signed_v<T>, "T must be a signed type")
+            static_assert(std::is_signed_v<T>, "T must be a signed type");
             return -a;
         }
     };
@@ -54,7 +54,7 @@ namespace kpr {
         using value_type = T;
 
         constexpr T id() const noexcept {
-            return is_integer_v<T> ? INF<T> : std::numeric_limits<T>::infinity();
+            return std::numeric_limits<T>::has_infinity ? std::numeric_limits<T>::infinity() : INF<T>;
         }
 
         constexpr T operator ()(const T& a, const T& b) const noexcept {
@@ -70,7 +70,7 @@ namespace kpr {
         using value_type = T;
 
         constexpr T id() const noexcept {
-            return is_integer_v<T> ? is_signed_integer<T> ? -INF<T> : 0 : -std::numeric_limits<T>::infinity();
+            return std::numeric_limits<T>::has_infinity ? -std::numeric_limits<T>::infinity() : (std::is_signed_v<T> ? -INF<T> : 0);
         }
 
         constexpr T operator ()(const T& a, const T& b) const noexcept {

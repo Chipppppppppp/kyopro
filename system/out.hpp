@@ -11,9 +11,9 @@
 #include <tuple>
 #include <type_traits>
 #include <utility>
-#include "../meta/tuple_like.hpp"
 #include "../meta/setting.hpp"
 #include "../meta/trait.hpp"
+#include "../meta/tuple_like.hpp"
 
 namespace kpr {
     template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>
@@ -101,12 +101,12 @@ namespace kpr {
             static constexpr std::size_t value = 0;
         };
         template<class T>
-        struct max_rank<T, std::enable_if_t<is_agg_v<T>>> {
+        struct max_rank<T, std::enable_if_t<is_tuple_like_v<T> && !is_range_v<T>>> {
             template<std::size_t... idx>
             static constexpr bool get_value_rank(std::index_sequence<idx...>) {
-                return std::max({max_rank<aggregate_element_t<idx, T>>::value...});
+                return std::max({max_rank<tuple_like_element_t<idx, T>>::value...});
             }
-            static constexpr std::size_t value = get_value_rank(std::make_index_sequence<aggregate_size_v<T>>()) + 1;
+            static constexpr std::size_t value = get_value_rank(std::make_index_sequence<tuple_like_size_v<T>>()) + 1;
         };
         template<class T>
         struct max_rank<T, std::enable_if_t<is_range_v<T>>> {
@@ -203,11 +203,11 @@ namespace kpr {
                 print_char('0' + static_cast<std::uint_fast64_t>(a) % 10);
             }
         }
-        template<std::size_t i = 0, class T, std::enable_if_t<is_agg_v<T> && !has_print<T>::value>* = nullptr>
+        template<std::size_t i = 0, class T, std::enable_if_t<is_tuple_like_v<T> && !is_range_v<T> && !has_print<T>::value>* = nullptr>
         void print(const T& a) {
             if constexpr (debug && i == 0) print_char('{');
-            if constexpr (aggregate_size_v<T> != 0) print(access<i>(a));
-            if constexpr (i + 1 < aggregate_size_v<T>) {
+            if constexpr (tuple_like_size_v<T> != 0) print(get<i>(a));
+            if constexpr (i + 1 < tuple_like_size_v<T>) {
                 print_sep<max_rank_v<T>>();
                 print<i + 1>(a);
             } else if constexpr (debug) print_char('}');
