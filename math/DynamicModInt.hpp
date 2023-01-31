@@ -1,21 +1,22 @@
 #pragma once
-#include <cassert>
 #include <cstddef>
+#include <cstdint>
 #include <limits>
 #include <type_traits>
 #include "../algorithm/Hash.hpp"
 #include "../meta/constant.hpp"
-#include "../meta/settings.hpp"
+#include "../meta/setting.hpp"
+#include "../meta/trait.hpp"
 #include "Montgomery.hpp"
 
-namespace kyopro {
+namespace kpr {
     template<class T, std::size_t kind = 0, bool = false>
     struct DynamicModInt {
-        static_assert(std::is_unsigned_v<T>, "T must be unsigned integer");
+        static_assert(std::is_unsigned_v<T>, "The given type must be an unsigned integer type");
         using value_type = T;
 
     private:
-        using larger_type = uint_least_t<std::numeric_limits<T>::digits * 2>;
+        using larger_type = next_integer_t<T>;
 
         inline static Montgomery<T> montgomery;
 
@@ -161,4 +162,4 @@ namespace kyopro {
             return static_cast<std::size_t>(a);
         }
     };
-} // namespace kyopro
+} // namespace kpr

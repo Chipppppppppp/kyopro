@@ -2,31 +2,32 @@
 #include <cstdint>
 #include <limits>
 #include <type_traits>
-#include "../meta/settings.hpp"
+#include "../meta/setting.hpp"
 
-namespace kyopro {
+namespace kpr {
     template<class T>
     struct Montgomery {
-        static_assert(std::is_unsigned_v<T>, "Unsigned integer is required");
+        static_assert(is_unsigned_integer_v<T>, "The given type must be an unsigned integer type");
+
         using value_type = T;
 
         T mod;
 
     private:
-        using larger_type = uint_least_t<std::numeric_limits<T>::digits * 2>;
+        using larger_type = next_integer_t<T>;
 
         T r, n2;
 
     public:
-        constexpr void set_mod(T _mod) noexcept {
-            mod = _mod;
+        constexpr void set_mod(T mod) noexcept {
+            this->mod = mod;
             n2 = -static_cast<larger_type>(mod) % mod;
             T t = 0;
             r = 0;
             for (int i = 0; i < std::numeric_limits<T>::digits; ++i) {
                 if (!(t & 1)) {
-                t += mod;
-                r += static_cast<T>(1) << static_cast<T>(i);
+                    t += mod;
+                    r += static_cast<T>(1) << static_cast<T>(i);
                 }
                 t >>= 1;
             }
@@ -54,4 +55,4 @@ namespace kyopro {
             return (x + static_cast<larger_type>(static_cast<T>(x) * r) * mod) >> std::numeric_limits<T>::digits;
         }
     };
-} // namespace kyopro
+} // namespace kpr

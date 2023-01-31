@@ -7,7 +7,7 @@
 #include "range_base.hpp"
 #include "../meta/trait.hpp"
 
-namespace kyopro {
+namespace kpr {
     template<class Func, class Range>
     struct imap: RangeBase<imap<Func, Range>, std::invoke_result_t<Func, range_value_t<Range>>> {
     private:
@@ -53,28 +53,33 @@ namespace kyopro {
             template<class F, class Itr>
             const_iterator(F&& func, Itr&& itr) noexcept: func(std::forward<F>(func)), BaseConstIterator(std::forward<Itr>(itr)) {}
 
-            constexpr const std::invoke_result_t<Func, decltype(*std::declval<BaseIterator>())> operator *() const noexcept {
+            constexpr const decltype(auto) operator *() const noexcept {
                 return std::invoke(func, BaseIterator::operator *());
             }
         };
 
+
+        using reverse_iterator = std::reverse_iterator<iterator>;
+        using const_reverse_iterator = std::reverse_iterator<const_iterator>;
+
+
         constexpr iterator begin() const noexcept {
-            return iterator(func, std::begin(range));
+            return iterator{func, std::begin(range)};
         }
 
         constexpr iterator end() const noexcept {
-            return iterator(func, std::end(range));
+            return iterator{func, std::end(range)};
         }
 
         constexpr const_iterator cbegin() const noexcept {
-            return const_iterator(func, std::begin(range));
+            return const_iterator{func, std::begin(range)};
         }
 
         constexpr const_iterator cend() const noexcept {
-            return const_iterator(func, std::end(range));
+            return const_iterator{func, std::end(range)};
         }
     };
 
     template<class F, class R>
     imap(F&&, R&&) -> imap<std::decay_t<F>, std::decay_t<R>>;
-} // namespace kyopro
+} // namespace kpr

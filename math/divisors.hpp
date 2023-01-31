@@ -1,21 +1,21 @@
 #pragma once
 #include <cstdint>
 #include <vector>
-#include "../meta/settings.hpp"
+#include "../meta/setting.hpp"
 
-namespace kyopro {
-    inline constexpr struct {
-        template<class Container = std::vector<KYOPRO_BASE_INT>>
-        Container operator ()(std::uint_fast64_t n) const {
-            Container lower, upper;
+namespace kpr {
+    // 全ての正の約数を返す
+    [[maybe_unused]] inline constexpr struct {
+        std::vector<KYOPRO_BASE_INT> operator ()(std::uint_fast64_t n) const {
+            std::vector<KYOPRO_BASE_INT> lower, upper;
             std::uint_fast64_t i;
             for (i = 1; i * i < n; ++i) if (n % i == 0) {
                 lower.emplace_back(i);
                 upper.emplace_back(n / i);
             }
             if (i * i == n) lower.emplace_back(i);
-            lower.insert(end(lower), rall(upper));
+            lower.insert(end(lower), upper.rbegin(), upper.rend());
             return lower;
         }
     } divisors;
-} // namespace kyopro
+} // namespace kpr

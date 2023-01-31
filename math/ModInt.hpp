@@ -8,11 +8,11 @@
 #include "../algorithm/bit.hpp"
 #include "../algorithm/Hash.hpp"
 #include "../meta/constant.hpp"
-#include "../meta/settings.hpp"
+#include "../meta/setting.hpp"
 #include "../meta/trait.hpp"
 #include "mod.hpp"
 
-namespace kyopro {
+namespace kpr {
     template<KYOPRO_BASE_UINT m>
     struct ModInt {
         using value_type = uint_least_t<bit_len(m * 2 - 2)>;
@@ -158,4 +158,4 @@ namespace kyopro {
             return static_cast<std::size_t>(a);
         }
     };
-} // namespace kyopro
+} // namespace kpr

@@ -10,10 +10,10 @@
 #include <type_traits>
 #include <utility>
 #include "../math/power.hpp"
-#include "../meta/settings.hpp"
+#include "../meta/setting.hpp"
 #include "../meta/trait.hpp"
 
-namespace kyopro {
+namespace kpr {
     template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>
     struct Reader {
     private:
@@ -174,4 +174,4 @@ namespace kyopro {
     };
 
     Scanner<Reader<>::iterator> scan(input.begin());
-} // namespace kyopro
+} // namespace kpr

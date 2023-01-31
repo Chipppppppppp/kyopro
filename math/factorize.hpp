@@ -6,12 +6,13 @@
 #include <random>
 #include <type_traits>
 #include "../algorithm/bit.hpp"
-#include "../meta/settings.hpp"
+#include "../meta/setting.hpp"
 #include "DynamicModInt.hpp"
 #include "is_prime.hpp"
 
-namespace kyopro {
-    inline constexpr struct {
+namespace kpr {
+    // 素因数分解
+    [[maybe_unused]] inline constexpr struct {
         template<class T>
         constexpr T operator ()(T p, std::uint_fast64_t c) const {
             using U = std::make_unsigned_t<T>;
@@ -48,7 +49,7 @@ namespace kyopro {
         }
     } pollard_rho;
 
-    inline constexpr struct {
+    [[maybe_unused]] inline constexpr struct {
         KYOPRO_BASE_UINT operator ()(std::uint_fast64_t n) const noexcept {
             static std::mt19937_64 mt(std::random_device{}());
             std::uniform_int_distribution<std::uint_fast64_t> rnd(0, n - 1);
@@ -62,7 +63,7 @@ namespace kyopro {
         }
     } find_factor;
 
-    inline constexpr struct {
+    [[maybe_unused]] inline constexpr struct {
         template<bool sorted = true, class Container = std::vector<KYOPRO_BASE_INT>>
         Container operator ()(std::uint_fast64_t n) const {
             Container res;
@@ -83,4 +84,4 @@ namespace kyopro {
             return res;
         }
     } factorize;
-} // namespace kyopro
+} // namespace kpr

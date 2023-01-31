@@ -4,10 +4,10 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
-#include "../meta/settings.hpp"
+#include "../meta/setting.hpp"
 #include "../meta/trait.hpp"
 
-namespace kyopro {
+namespace kpr {
     template<class Container = std::vector<int>>
     struct UnionFind {
         using value_type = range_value_t<Container>;
@@ -89,4 +89,4 @@ namespace kyopro {
             return group_members;
         }
     };
-} // namespace kyopro
+} // namespace kpr

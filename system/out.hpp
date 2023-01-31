@@ -12,10 +12,10 @@
 #include <type_traits>
 #include <utility>
 #include "../meta/aggregate.hpp"
-#include "../meta/settings.hpp"
+#include "../meta/setting.hpp"
 #include "../meta/trait.hpp"
 
-namespace kyopro {
+namespace kpr {
     template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>
     struct Writer {
     private:
@@ -249,4 +249,4 @@ namespace kyopro {
 
     Printer<Writer<>::iterator, false, false, false> print(output.begin()), eprint(error.begin());
     Printer<Writer<>::iterator> println(output.begin()), eprintln(error.begin());
-} // namespace kyopro
+} // namespace kpr

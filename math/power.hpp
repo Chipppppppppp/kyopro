@@ -1,8 +1,8 @@
 #pragma once
 #include <cstdint>
 
-namespace kyopro {
-    inline constexpr struct {
+namespace kpr {
+    [[maybe_unused]] inline constexpr struct {
         template<class T>
         constexpr T operator ()(T a, std::uint_fast64_t n, T init = 1) const noexcept {
             while (n > 0) {
@@ -13,4 +13,4 @@ namespace kyopro {
             return init;
         }
     } power;
-} // namespace kyopro
+} // namespace kpr

@@ -15,9 +15,9 @@
 #include "../algorithm/Hash.hpp"
 #include "../math/DynamicModInt.hpp"
 #include "../math/ModInt.hpp"
-#include "../meta/settings.hpp"
+#include "../meta/setting.hpp"
 
-namespace kyopro {
+namespace kpr {
     using ll = long long;
     using ull = unsigned long long;
     using lf = double;
@@ -91,7 +91,7 @@ namespace kyopro {
     using priq = std::priority_queue<T, Container, Compare>;
     template<class T, class Compare = std::greater<T>, class Container = std::vector<T>>
     using heapq = priq<T, Compare, Container>;
-} // namespace kyopro
+} // namespace kpr
 
 using namespace std;
-using namespace kyopro;
+using namespace kpr;

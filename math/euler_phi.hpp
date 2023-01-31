@@ -1,9 +1,10 @@
 #pragma once
 #include <cstdint>
-#include "../meta/settings.hpp"
+#include "../meta/setting.hpp"
 
-namespace kyopro {
-    inline constexpr struct {
+namespace kpr {
+    // オイラーのφ関数
+    [[maybe_unused]] inline constexpr struct {
         constexpr KYOPRO_BASE_INT operator ()(std::uint_fast64_t n) const noexcept {
             std::uint_fast64_t res = n;
             if ((n & 1) == 0) {
@@ -22,4 +23,4 @@ namespace kyopro {
             return res;
         }
     } euler_phi;
-} // namespace kyopro
+} // namespace kpr

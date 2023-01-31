@@ -7,7 +7,7 @@
 #include <utility>
 #include "../system/all.hpp"
 
-namespace kyopro::helper {
+namespace kpr::helper {
     template<std::size_t len>
     constexpr std::size_t va_args_size(const char (&s)[len]) noexcept {
         if constexpr (len == 1) return 0;
@@ -34,19 +34,19 @@ namespace kyopro::helper {
     }
 
     struct LambdaArg {};
-} // namespace kyopro::helper
+} // namespace kpr::helper
 
 #define read(type_or_init, ...)                                                           \
-auto [__VA_ARGS__] = (kyopro::helper::read_impl(([]() {                                   \
+auto [__VA_ARGS__] = (kpr::helper::read_impl(([]() {                                   \
     using T = std::decay_t<decltype(*new type_or_init)>;                                  \
     alignas(T) std::byte storage[sizeof(T)];                                              \
     T* p = new (storage) type_or_init;                                                    \
-    kyopro::scan(*p);                                                                     \
+    kpr::scan(*p);                                                                     \
     T res = std::move(*p);                                                                \
     p->~T();                                                                              \
     return res;                                                                           \
-}), std::make_index_sequence<kyopro::helper::va_args_size(#__VA_ARGS__)>()))
-#define debug(...) (kyopro::print('#', ' ', 'l', 'i', 'n', 'e', ' ', __LINE__, ':'), kyopro::helper::print_if<kyopro::helper::va_args_size(#__VA_ARGS__) != 0>(#__VA_ARGS__), kyopro::print('\n'), kyopro::helper::debug_impl(__VA_ARGS__))
+}), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))
+#define debug(...) (kpr::print('#', ' ', 'l', 'i', 'n', 'e', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__) != 0>(#__VA_ARGS__), kpr::print('\n'), kpr::helper::debug_impl(__VA_ARGS__))
 
 #define KYOPRO_OVERLOAD_MACRO(_1, _2, _3, _4, name, ...) name
 
@@ -63,11 +63,11 @@ auto [__VA_ARGS__] = (kyopro::helper::read_impl(([]() {                         
 #define match(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__, KYOPRO_MATCH4, KYOPRO_MATCH3, KYOPRO_MATCH2, KYOPRO_MATCH1)(__VA_ARGS__)
 #define otherwise break; default:
 
-#define lambda(...)                                                                                                                                                                                                                                                                                                         \
+#define $(...)                                                                                                                                                                                                                                                                                                         \
 ([&](auto&&... args) {                                                                                                                                                                                                                                                                                                      \
-    [[maybe_unused]] auto&& $0 = std::forward<std::tuple_element_t<0, std::tuple<decltype(args)..., kyopro::helper::LambdaArg>>>(std::get<0>(std::forward_as_tuple(args..., kyopro::helper::LambdaArg{})));                                                                                                                 \
-    [[maybe_unused]] auto&& $1 = std::forward<std::tuple_element_t<1, std::tuple<decltype(args)..., kyopro::helper::LambdaArg, kyopro::helper::LambdaArg>>>(std::get<1>(std::forward_as_tuple(args..., kyopro::helper::LambdaArg{}, kyopro::helper::LambdaArg{})));                                                         \
-    [[maybe_unused]] auto&& $2 = std::forward<std::tuple_element_t<2, std::tuple<decltype(args)..., kyopro::helper::LambdaArg, kyopro::helper::LambdaArg, kyopro::helper::LambdaArg>>>(std::get<2>(std::forward_as_tuple(args..., kyopro::helper::LambdaArg{}, kyopro::helper::LambdaArg{}, kyopro::helper::LambdaArg{}))); \
+    [[maybe_unused]] auto&& $0 = std::forward<std::tuple_element_t<0, std::tuple<decltype(args)..., kpr::helper::LambdaArg>>>(std::get<0>(std::forward_as_tuple(args..., kpr::helper::LambdaArg{})));                                                                                                                 \
+    [[maybe_unused]] auto&& $1 = std::forward<std::tuple_element_t<1, std::tuple<decltype(args)..., kpr::helper::LambdaArg, kpr::helper::LambdaArg>>>(std::get<1>(std::forward_as_tuple(args..., kpr::helper::LambdaArg{}, kpr::helper::LambdaArg{})));                                                         \
+    [[maybe_unused]] auto&& $2 = std::forward<std::tuple_element_t<2, std::tuple<decltype(args)..., kpr::helper::LambdaArg, kpr::helper::LambdaArg, kpr::helper::LambdaArg>>>(std::get<2>(std::forward_as_tuple(args..., kpr::helper::LambdaArg{}, kpr::helper::LambdaArg{}, kpr::helper::LambdaArg{}))); \
     return (__VA_ARGS__);                                                                                                                                                                                                                                                                                                   \
 })
 

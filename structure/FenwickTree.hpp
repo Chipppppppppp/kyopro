@@ -4,7 +4,7 @@
 #include <vector>
 #include "../function/monoid.hpp"
 
-namespace kyopro {
+namespace kpr {
     template<class T, class Op = Add<T>, class Container = std::vector<T>>
     struct FenwickTree: private Op {
         using value_type = T;
@@ -60,4 +60,4 @@ namespace kyopro {
             apply(p, Op::operator ()(x, Op::inverse(get(p))));
         }
     };
-} // namespace kyopro
+} // namespace kpr

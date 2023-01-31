@@ -2,7 +2,8 @@
 #include <type_traits>
 #include <utility>
 
-namespace kyopro {
+namespace kpr {
+    // 再帰可能関数クラス
     template<class F>
     struct RecursiveLambda {
         using value_type = F;
@@ -21,4 +22,4 @@ namespace kyopro {
 
     template<class F>
     RecursiveLambda(F&&) -> RecursiveLambda<std::decay_t<F>>;
-} // namespace kyopro
+} // namespace kpr

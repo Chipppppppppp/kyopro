@@ -1,4 +1,5 @@
 #pragma once
+#include "Barrett.hpp"
 #include "div.hpp"
 #include "divisors.hpp"
 #include "DynamicModInt.hpp"

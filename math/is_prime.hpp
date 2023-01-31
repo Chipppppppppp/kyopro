@@ -3,11 +3,11 @@
 #include <cstdint>
 #include <type_traits>
 #include "../algorithm/bit.hpp"
-#include "../meta/settings.hpp"
+#include "../meta/setting.hpp"
 #include "DynamicModInt.hpp"
 
-namespace kyopro {
-    inline constexpr struct {
+namespace kpr {
+    [[maybe_unused]] inline constexpr struct {
         template<class T>
         constexpr bool operator ()(T x) const {
             using U = std::make_unsigned_t<T>;
@@ -16,7 +16,7 @@ namespace kyopro {
             if (n <= 1) return false;
             if (!(n & 1)) return n == 2;
             dmint::set_mod(n);
-            std::uint_fast64_t d = (n - 1) >> trailing_zero(n - 1);
+            std::uint_fast64_t d = (n - 1) >> count_rzero(n - 1);
             dmint one = 1, minus_one = n - 1;
             auto ng = [&](std::uint_fast64_t a) noexcept {
                 auto y = dmint(a).power(d);
@@ -25,18 +25,23 @@ namespace kyopro {
                 if (y != minus_one and !(t & 1)) return true;
                 return false;
             };
-            if (std::numeric_limits<U>::digits <= 32 || n < (static_cast<U>(1) << 32)) {
+            if constexpr (std::numeric_limits<U>::digits <= 32) {
                 for (auto i: (std::uint_fast64_t[3]){2, 7, 61}) {
-                if (n <= i) return true;
-                if (ng(i)) return false;
+                    if (n <= i) return true;
+                    if (ng(i)) return false;
+                }
+            } else if (n < (static_cast<U>(1) << 32)) {
+                for (auto i: (std::uint_fast64_t[3]){2, 7, 61}) {
+                    if (n <= i) return true;
+                    if (ng(i)) return false;
                 }
             } else {
                 for (auto i: (std::uint_fast64_t[7]){2, 325, 9375, 28178, 450775, 9780504, 1795265022}) {
-                if (n <= i) return true;
-                if (ng(i)) return false;
+                    if (n <= i) return true;
+                    if (ng(i)) return false;
                 }
             }
             return true;
         }
     } is_prime;
-} // namespace kyopro
+} // namespace kpr

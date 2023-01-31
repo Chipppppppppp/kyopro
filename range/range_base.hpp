@@ -3,10 +3,10 @@
 #include <iterator>
 #include <type_traits>
 
-namespace kyopro {
+namespace kpr {
     template<class Derived, class ValueType>
     struct RangeBase {
-        using value_type = ValueType;
+        using value_type = std::decay_t<ValueType>;
         using size_type = std::size_t;
         using difference_type = std::ptrdiff_t;
         using reference = value_type&;
@@ -16,6 +16,9 @@ namespace kyopro {
 
         Derived& down_cast() noexcept {
             return static_cast<Derived&>(*this);
+        }
+        const Derived& down_cast() const noexcept {
+            return static_cast<const Derived&>(*this);
         }
 
         constexpr auto begin() const noexcept {
@@ -45,20 +48,20 @@ namespace kyopro {
             return *cbegin();
         }
 
-        constexpr reverse_iterator rbegin() const noexcept {
-            return reverse_iterator(end());
+        constexpr decltype(auto) rbegin() const noexcept {
+            return std::reverse_iterator(end());
         }
 
-        constexpr reverse_iterator rend() const noexcept {
-            return reverse_iterator(begin());
+        constexpr decltype(auto) rend() const noexcept {
+            return std::reverse_iterator(begin());
         }
 
-        constexpr const_reverse_iterator crbegin() const noexcept {
-            return const_reverse_iterator(cend());
+        constexpr decltype(auto) crbegin() const noexcept {
+            return std::reverse_iterator(cend());
         }
 
-        constexpr const_reverse_iterator crend() const noexcept {
-            return const_reverse_iterator(cbegin());
+        constexpr decltype(auto) crend() const noexcept {
+            return std::reverse_iterator(cbegin());
         }
 
         constexpr decltype(auto) back() noexcept {
@@ -79,4 +82,4 @@ namespace kyopro {
             return *(cbegin() + idx);
         }
     };
-} // namespace kyopro
+} // namespace kpr

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace kyopro {
+namespace kpr {
     template<class T, class U = T>
     constexpr bool amin(T& a, const U& b) noexcept {
         if (b < a) {
@@ -18,4 +18,4 @@ namespace kyopro {
         }
         return false;
     }
-} // namespace kyopro
+} // namespace kpr
