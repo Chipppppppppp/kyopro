@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -23,19 +23,19 @@ data:
   - icon: ':warning:'
     path: function/function.hpp
     title: function/function.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':warning:'
     path: structure/structure.hpp
     title: structure/structure.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo/point_add_range_sum.test.cpp
     title: verify/yosupo/point_add_range_sum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"function/monoid.hpp\"\n#include <limits>\n#include <type_traits>\n\
@@ -157,13 +157,13 @@ data:
     \n    template<class T>\n    using prev_integer_t = typename prev_integer<T>::type;\n\
     \n    // \u578BT\u304C\u30A4\u30C6\u30EC\u30FC\u30BF\u304B\u8ABF\u3079\u308B\n\
     \    template<class T, class = void>\n    struct is_iterator {\n        static\
-    \ constexpr bool value = false;\n    };\n    template<class T>\n    struct is_iterator<T,\
+    \ constexpr bool value = false;\n    };\n\n    template<class T>\n    struct is_iterator<T,\
     \ std::void_t<typename std::iterator_traits<T>::iterator_category>> {\n      \
     \  static constexpr bool value = true;\n    };\n\n    // \u578BT\u304C\u30A4\u30C6\
     \u30EC\u30FC\u30BF\u304B\u8ABF\u3079\u308B\n    template<class T>\n    inline\
     \ constexpr bool is_iterator_v = is_iterator<T>::value;\n\n\n    // \u578BT\u304C\
     Range\u304B\u8ABF\u3079\u308B\n    template<class T, class = void>\n    struct\
-    \ is_range {\n        static constexpr bool value = false;\n    };\n    template<class\
+    \ is_range {\n        static constexpr bool value = false;\n    };\n\n    template<class\
     \ T>\n    struct is_range<T, std::void_t<decltype(std::begin(std::declval<std::add_lvalue_reference_t<T>>()),\
     \ std::end(std::declval<std::add_lvalue_reference_t<T>>()))>> {\n        static\
     \ constexpr bool value = true;\n    };\n\n     // \u578BT\u304CRange\u304B\u8ABF\
@@ -262,8 +262,8 @@ data:
   - structure/structure.hpp
   - structure/FenwickTree.hpp
   - all.hpp
-  timestamp: '2023-02-01 01:57:29+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-02-01 12:39:48+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo/point_add_range_sum.test.cpp
 documentation_of: function/monoid.hpp

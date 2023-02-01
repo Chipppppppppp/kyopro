@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   - icon: ':warning:'
@@ -145,13 +145,13 @@ data:
     \n    template<class T>\n    using prev_integer_t = typename prev_integer<T>::type;\n\
     \n    // \u578BT\u304C\u30A4\u30C6\u30EC\u30FC\u30BF\u304B\u8ABF\u3079\u308B\n\
     \    template<class T, class = void>\n    struct is_iterator {\n        static\
-    \ constexpr bool value = false;\n    };\n    template<class T>\n    struct is_iterator<T,\
+    \ constexpr bool value = false;\n    };\n\n    template<class T>\n    struct is_iterator<T,\
     \ std::void_t<typename std::iterator_traits<T>::iterator_category>> {\n      \
     \  static constexpr bool value = true;\n    };\n\n    // \u578BT\u304C\u30A4\u30C6\
     \u30EC\u30FC\u30BF\u304B\u8ABF\u3079\u308B\n    template<class T>\n    inline\
     \ constexpr bool is_iterator_v = is_iterator<T>::value;\n\n\n    // \u578BT\u304C\
     Range\u304B\u8ABF\u3079\u308B\n    template<class T, class = void>\n    struct\
-    \ is_range {\n        static constexpr bool value = false;\n    };\n    template<class\
+    \ is_range {\n        static constexpr bool value = false;\n    };\n\n    template<class\
     \ T>\n    struct is_range<T, std::void_t<decltype(std::begin(std::declval<std::add_lvalue_reference_t<T>>()),\
     \ std::end(std::declval<std::add_lvalue_reference_t<T>>()))>> {\n        static\
     \ constexpr bool value = true;\n    };\n\n     // \u578BT\u304CRange\u304B\u8ABF\
@@ -321,7 +321,7 @@ data:
   requiredBy:
   - all/all.hpp
   - all.hpp
-  timestamp: '2023-02-01 01:52:38+09:00'
+  timestamp: '2023-02-01 12:39:48+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: range/range.hpp

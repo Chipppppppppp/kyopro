@@ -2,13 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
   - icon: ':warning:'
     path: algorithm/algorithm.hpp
     title: algorithm/algorithm.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
@@ -20,13 +20,13 @@ data:
   - icon: ':warning:'
     path: function/function.hpp
     title: function/function.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
   - icon: ':warning:'
     path: math/Barrett.hpp
     title: math/Barrett.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
@@ -35,10 +35,10 @@ data:
   - icon: ':warning:'
     path: math/div.hpp
     title: math/div.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
@@ -47,7 +47,7 @@ data:
   - icon: ':warning:'
     path: meta/meta.hpp
     title: meta/meta.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
   - icon: ':warning:'
@@ -59,22 +59,22 @@ data:
   - icon: ':warning:'
     path: range/range.hpp
     title: range/range.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   - icon: ':warning:'
     path: structure/structure.hpp
     title: structure/structure.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: system/out.hpp
     title: system/out.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: system/system.hpp
     title: system/system.hpp
   - icon: ':warning:'
@@ -87,24 +87,24 @@ data:
     path: template/template.hpp
     title: template/template.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo/many_aplusb.test.cpp
     title: verify/yosupo/many_aplusb.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo/point_add_range_sum.test.cpp
     title: verify/yosupo/point_add_range_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"meta/trait.hpp\"\n#include <cstddef>\n#include <iterator>\n\
@@ -192,13 +192,13 @@ data:
     \n    template<class T>\n    using prev_integer_t = typename prev_integer<T>::type;\n\
     \n    // \u578BT\u304C\u30A4\u30C6\u30EC\u30FC\u30BF\u304B\u8ABF\u3079\u308B\n\
     \    template<class T, class = void>\n    struct is_iterator {\n        static\
-    \ constexpr bool value = false;\n    };\n    template<class T>\n    struct is_iterator<T,\
+    \ constexpr bool value = false;\n    };\n\n    template<class T>\n    struct is_iterator<T,\
     \ std::void_t<typename std::iterator_traits<T>::iterator_category>> {\n      \
     \  static constexpr bool value = true;\n    };\n\n    // \u578BT\u304C\u30A4\u30C6\
     \u30EC\u30FC\u30BF\u304B\u8ABF\u3079\u308B\n    template<class T>\n    inline\
     \ constexpr bool is_iterator_v = is_iterator<T>::value;\n\n\n    // \u578BT\u304C\
     Range\u304B\u8ABF\u3079\u308B\n    template<class T, class = void>\n    struct\
-    \ is_range {\n        static constexpr bool value = false;\n    };\n    template<class\
+    \ is_range {\n        static constexpr bool value = false;\n    };\n\n    template<class\
     \ T>\n    struct is_range<T, std::void_t<decltype(std::begin(std::declval<std::add_lvalue_reference_t<T>>()),\
     \ std::end(std::declval<std::add_lvalue_reference_t<T>>()))>> {\n        static\
     \ constexpr bool value = true;\n    };\n\n     // \u578BT\u304CRange\u304B\u8ABF\
@@ -304,13 +304,13 @@ data:
     \n    template<class T>\n    using prev_integer_t = typename prev_integer<T>::type;\n\
     \n    // \u578BT\u304C\u30A4\u30C6\u30EC\u30FC\u30BF\u304B\u8ABF\u3079\u308B\n\
     \    template<class T, class = void>\n    struct is_iterator {\n        static\
-    \ constexpr bool value = false;\n    };\n    template<class T>\n    struct is_iterator<T,\
+    \ constexpr bool value = false;\n    };\n\n    template<class T>\n    struct is_iterator<T,\
     \ std::void_t<typename std::iterator_traits<T>::iterator_category>> {\n      \
     \  static constexpr bool value = true;\n    };\n\n    // \u578BT\u304C\u30A4\u30C6\
     \u30EC\u30FC\u30BF\u304B\u8ABF\u3079\u308B\n    template<class T>\n    inline\
     \ constexpr bool is_iterator_v = is_iterator<T>::value;\n\n\n    // \u578BT\u304C\
     Range\u304B\u8ABF\u3079\u308B\n    template<class T, class = void>\n    struct\
-    \ is_range {\n        static constexpr bool value = false;\n    };\n    template<class\
+    \ is_range {\n        static constexpr bool value = false;\n    };\n\n    template<class\
     \ T>\n    struct is_range<T, std::void_t<decltype(std::begin(std::declval<std::add_lvalue_reference_t<T>>()),\
     \ std::end(std::declval<std::add_lvalue_reference_t<T>>()))>> {\n        static\
     \ constexpr bool value = true;\n    };\n\n     // \u578BT\u304CRange\u304B\u8ABF\
@@ -364,8 +364,8 @@ data:
   - algorithm/algorithm.hpp
   - algorithm/bit.hpp
   - all.hpp
-  timestamp: '2023-02-01 00:00:26+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-02-01 12:39:48+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp
   - verify/yosupo/point_add_range_sum.test.cpp

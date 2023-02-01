@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
   - icon: ':warning:'
     path: algorithm/algorithm.hpp
     title: algorithm/algorithm.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
@@ -22,19 +22,19 @@ data:
   - icon: ':warning:'
     path: function/function.hpp
     title: function/function.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
   - icon: ':warning:'
     path: math/Barrett.hpp
     title: math/Barrett.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
   - icon: ':warning:'
@@ -46,10 +46,10 @@ data:
   - icon: ':warning:'
     path: math/euler_phi.hpp
     title: math/euler_phi.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
@@ -58,22 +58,22 @@ data:
   - icon: ':warning:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
   - icon: ':warning:'
     path: meta/meta.hpp
     title: meta/meta.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
   - icon: ':warning:'
@@ -91,22 +91,22 @@ data:
   - icon: ':warning:'
     path: range/range_base.hpp
     title: range/range_base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   - icon: ':warning:'
     path: structure/structure.hpp
     title: structure/structure.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: system/out.hpp
     title: system/out.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: system/system.hpp
     title: system/system.hpp
   - icon: ':warning:'
@@ -243,13 +243,13 @@ data:
     \n    template<class T>\n    using prev_integer_t = typename prev_integer<T>::type;\n\
     \n    // \u578BT\u304C\u30A4\u30C6\u30EC\u30FC\u30BF\u304B\u8ABF\u3079\u308B\n\
     \    template<class T, class = void>\n    struct is_iterator {\n        static\
-    \ constexpr bool value = false;\n    };\n    template<class T>\n    struct is_iterator<T,\
+    \ constexpr bool value = false;\n    };\n\n    template<class T>\n    struct is_iterator<T,\
     \ std::void_t<typename std::iterator_traits<T>::iterator_category>> {\n      \
     \  static constexpr bool value = true;\n    };\n\n    // \u578BT\u304C\u30A4\u30C6\
     \u30EC\u30FC\u30BF\u304B\u8ABF\u3079\u308B\n    template<class T>\n    inline\
     \ constexpr bool is_iterator_v = is_iterator<T>::value;\n\n\n    // \u578BT\u304C\
     Range\u304B\u8ABF\u3079\u308B\n    template<class T, class = void>\n    struct\
-    \ is_range {\n        static constexpr bool value = false;\n    };\n    template<class\
+    \ is_range {\n        static constexpr bool value = false;\n    };\n\n    template<class\
     \ T>\n    struct is_range<T, std::void_t<decltype(std::begin(std::declval<std::add_lvalue_reference_t<T>>()),\
     \ std::end(std::declval<std::add_lvalue_reference_t<T>>()))>> {\n        static\
     \ constexpr bool value = true;\n    };\n\n     // \u578BT\u304CRange\u304B\u8ABF\
@@ -342,14 +342,16 @@ data:
     \ tuple_like_size<T>::value;\n\n\n    // \u578BT\u304Ctuple_like\u304B\u8ABF\u3079\
     \u308B\n    template<class, class = void>\n    struct is_tuple_like {\n      \
     \  static constexpr bool value = false;\n    };\n\n    template<class T>\n   \
-    \ struct is_tuple_like<T, std::void_t<decltype(tuple_like_size<T>::value)>> {\n\
-    \        static constexpr bool value = true;\n    };\n\n    // \u578BT\u304Ctuple_like\u304B\
+    \ struct is_tuple_like<T, std::enable_if_t<std::is_aggregate_v<T>>> {\n      \
+    \  static constexpr bool value = true;\n    };\n\n    template<class T>\n    struct\
+    \ is_tuple_like<T, std::void_t<decltype(std::tuple_size<T>::value)>> {\n     \
+    \   static constexpr bool value = true;\n    };\n\n    // \u578BT\u304Ctuple_like\u304B\
     \u8ABF\u3079\u308B\n    template<class T>\n    inline constexpr bool is_tuple_like_v\
     \ = is_tuple_like<T>::value;\n\n\n    // tuple-like\u306A\u30AA\u30D6\u30B8\u30A7\
     \u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\u95A2\u6570\
     \u30AF\u30E9\u30B9\n    template<class T, class = void>\n    struct GetFunction\
-    \ {\n        static_assert(std::is_aggregate_v<T>, \"T is not gettable\");\n \
-    \       template<std::size_t idx>\n        static constexpr decltype(auto) get(T&&\
+    \ {\n        static_assert(is_tuple_like_v<T>, \"T is not gettable\");\n     \
+    \   template<std::size_t idx>\n        static constexpr decltype(auto) get(T&&\
     \ tuple_like) {\n            return std::get<idx>(std::forward<T>(tuple_like));\n\
     \        }\n    };\n\n    #define DEFINE_GET(n, ...)                         \
     \                    \\\n    template<class T>                               \
@@ -1303,7 +1305,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2023-02-01 01:57:29+09:00'
+  timestamp: '2023-02-01 12:39:48+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp
