@@ -55,7 +55,12 @@ namespace kpr {
     };
 
     template<class T>
-    struct is_tuple_like<T, std::void_t<decltype(tuple_like_size<T>::value)>> {
+    struct is_tuple_like<T, std::enable_if_t<std::is_aggregate_v<T>>> {
+        static constexpr bool value = true;
+    };
+
+    template<class T>
+    struct is_tuple_like<T, std::void_t<decltype(std::tuple_size<T>::value)>> {
         static constexpr bool value = true;
     };
 
@@ -67,7 +72,7 @@ namespace kpr {
     // tuple-likeなオブジェクトのidx(0 <= idx < 8)番目を求める関数クラス
     template<class T, class = void>
     struct GetFunction {
-        static_assert(std::is_aggregate_v<T>, "T is not gettable");
+        static_assert(is_tuple_like_v<T>, "T is not gettable");
         template<std::size_t idx>
         static constexpr decltype(auto) get(T&& tuple_like) {
             return std::get<idx>(std::forward<T>(tuple_like));

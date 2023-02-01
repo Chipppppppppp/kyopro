@@ -178,6 +178,7 @@ namespace kpr {
     struct is_iterator {
         static constexpr bool value = false;
     };
+
     template<class T>
     struct is_iterator<T, std::void_t<typename std::iterator_traits<T>::iterator_category>> {
         static constexpr bool value = true;
@@ -193,6 +194,7 @@ namespace kpr {
     struct is_range {
         static constexpr bool value = false;
     };
+
     template<class T>
     struct is_range<T, std::void_t<decltype(std::begin(std::declval<std::add_lvalue_reference_t<T>>()), std::end(std::declval<std::add_lvalue_reference_t<T>>()))>> {
         static constexpr bool value = true;
