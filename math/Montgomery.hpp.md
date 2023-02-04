@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/setting.hpp
     title: meta/setting.hpp
   _extendedRequiredBy:
@@ -11,13 +11,13 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
@@ -30,15 +30,15 @@ data:
     path: template/template.hpp
     title: template/template.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"math/Montgomery.hpp\"\n#include <cstdint>\n#include <limits>\n\
@@ -109,7 +109,7 @@ data:
   - math/DynamicModInt.hpp
   - all.hpp
   timestamp: '2023-02-01 01:57:29+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp
   - verify/yosupo/factorize.test.cpp

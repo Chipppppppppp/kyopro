@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/setting.hpp
     title: meta/setting.hpp
   _extendedRequiredBy:
@@ -17,19 +17,19 @@ data:
   - icon: ':warning:'
     path: function/function.hpp
     title: function/function.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
@@ -38,7 +38,7 @@ data:
   - icon: ':warning:'
     path: meta/meta.hpp
     title: meta/meta.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
   - icon: ':warning:'
@@ -51,18 +51,18 @@ data:
     path: template/template.hpp
     title: template/template.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/point_add_range_sum.test.cpp
     title: verify/yosupo/point_add_range_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"meta/constant.hpp\"\n#include <limits>\n#line 2 \"math/power.hpp\"\
@@ -87,34 +87,34 @@ data:
     \n#define KYOPRO_BUFFER_SIZE (static_cast<KYOPRO_BASE_UINT>(2048))\n#endif\n#line\
     \ 5 \"meta/constant.hpp\"\n\nnamespace kpr {\n    // \u554F\u984C\u3067\u8A2D\u5B9A\
     \u3055\u308C\u305Fmod\n    template<class T>\n    inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\n\
-    \n    // \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305Fmod\n    inline constexpr\
-    \ KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\n\n    // \u7121\u9650\u5927\u3092\
+    \    // \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305Fmod\n    inline constexpr\
+    \ KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\n    // \u7121\u9650\u5927\u3092\
     \u8868\u3059\u6574\u6570\n    template<class T>\n    inline constexpr T INF =\
-    \ std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\n\n    // \u7121\u9650\u5927\
-    \u3092\u8868\u3059\u6574\u6570\n    inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\
-    \n\n    // \u8A31\u5BB9\u3055\u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\n    template<class\
+    \ std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\n    // \u7121\u9650\u5927\u3092\
+    \u8868\u3059\u6574\u6570\n    inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\
+    \n    // \u8A31\u5BB9\u3055\u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\n    template<class\
     \ T, KYOPRO_BASE_UINT decimal_precision = KYOPRO_DECIMAL_PRECISION>\n    inline\
     \ constexpr KYOPRO_BASE_FLOAT EPS = static_cast<T>(1) / power(10ULL, decimal_precision);\n\
-    \n    // \u8A31\u5BB9\u3055\u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\n    inline constexpr\
-    \ KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\n\n    // \u5186\u5468\u7387\
+    \    // \u8A31\u5BB9\u3055\u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\n    inline constexpr\
+    \ KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\n    // \u5186\u5468\u7387\
     \n    template<class T>\n    inline constexpr T PI = 3.14159265358979323846;\n\
-    \n    // \u5186\u5468\u7387\n    inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n\
+    \    // \u5186\u5468\u7387\n    inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n\
     } // namespace kpr\n"
   code: "#pragma once\n#include <limits>\n#include \"../math/power.hpp\"\n#include\
     \ \"setting.hpp\"\n\nnamespace kpr {\n    // \u554F\u984C\u3067\u8A2D\u5B9A\u3055\
     \u308C\u305Fmod\n    template<class T>\n    inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\n\
-    \n    // \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305Fmod\n    inline constexpr\
-    \ KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\n\n    // \u7121\u9650\u5927\u3092\
+    \    // \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305Fmod\n    inline constexpr\
+    \ KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\n    // \u7121\u9650\u5927\u3092\
     \u8868\u3059\u6574\u6570\n    template<class T>\n    inline constexpr T INF =\
-    \ std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\n\n    // \u7121\u9650\u5927\
-    \u3092\u8868\u3059\u6574\u6570\n    inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\
-    \n\n    // \u8A31\u5BB9\u3055\u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\n    template<class\
+    \ std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\n    // \u7121\u9650\u5927\u3092\
+    \u8868\u3059\u6574\u6570\n    inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\
+    \n    // \u8A31\u5BB9\u3055\u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\n    template<class\
     \ T, KYOPRO_BASE_UINT decimal_precision = KYOPRO_DECIMAL_PRECISION>\n    inline\
     \ constexpr KYOPRO_BASE_FLOAT EPS = static_cast<T>(1) / power(10ULL, decimal_precision);\n\
-    \n    // \u8A31\u5BB9\u3055\u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\n    inline constexpr\
-    \ KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\n\n    // \u5186\u5468\u7387\
+    \    // \u8A31\u5BB9\u3055\u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\n    inline constexpr\
+    \ KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\n    // \u5186\u5468\u7387\
     \n    template<class T>\n    inline constexpr T PI = 3.14159265358979323846;\n\
-    \n    // \u5186\u5468\u7387\n    inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n\
+    \    // \u5186\u5468\u7387\n    inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n\
     } // namespace kpr\n"
   dependsOn:
   - math/power.hpp
@@ -136,8 +136,8 @@ data:
   - math/factorize.hpp
   - math/DynamicModInt.hpp
   - all.hpp
-  timestamp: '2023-02-01 01:57:29+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-02-04 13:16:05+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp
   - verify/yosupo/point_add_range_sum.test.cpp
