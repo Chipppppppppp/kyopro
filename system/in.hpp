@@ -33,7 +33,7 @@ namespace kpr {
         Reader(int fd): fd(fd), idx(0), buffer() {
             read(fd, buffer.begin(), buf_size);
         }
-        Reader(FILE* fp): fd(std::fileno(fp)), idx(0), buffer() {
+        Reader(FILE* fp): fd(fileno(fp)), idx(0), buffer() {
             read(fd, buffer.begin(), buf_size);
         }
 

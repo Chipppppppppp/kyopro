@@ -31,7 +31,7 @@ namespace kpr {
 
         Writer() noexcept = default;
         Writer(int fd) noexcept: fd(fd), idx(0), buffer() {}
-        Writer(FILE* fp) noexcept: fd(std::fileno(fp)), idx(0), buffer() {}
+        Writer(FILE* fp) noexcept: fd(fileno(fp)), idx(0), buffer() {}
 
         ~Writer() {
             write(fd, buffer.begin(), idx);
@@ -87,12 +87,12 @@ namespace kpr {
     Writer output(1), error(2);
 
     // 出力イテレータを用いて値を出力するクラス
-    template<class Iterator, bool _sep = true, bool _sep_line = true, bool _end_line = true, bool _debug = false, bool _comment = false, bool _flush = false, std::size_t decimal_precision = KYOPRO_DECIMAL_PRECISION>
+    template<class Iterator, bool _sep = true, bool _line = true, bool _debug = false, bool _comment = false, bool _flush = false, std::size_t decimal_precision = KYOPRO_DECIMAL_PRECISION>
     struct Printer {
         using iterator_type = Iterator;
 
         // 指定されたオプションを取得
-        static constexpr bool sep = _sep, end_line = _end_line, sep_line = _sep_line, debug = _debug, comment = _comment, flush = _flush;
+        static constexpr bool sep = _sep, line = _line, debug = _debug, comment = _comment, flush = _flush;
 
         // 指定された小数誤差を取得
         static constexpr KYOPRO_BASE_INT get_decimal_precision() noexcept {
@@ -115,6 +115,19 @@ namespace kpr {
         void print_sep() {
             if constexpr (sep) {
                 if constexpr (debug) print_char(',');
+                print_char(' ');
+            }
+        }
+
+        // 改行を出力する
+        void print_line() {
+            if constexpr (line) print_char('\n');
+        }
+
+        // コメント記号を出力する
+        void print_comment() {
+            if constexpr (comment) {
+                print_char('#');
                 print_char(' ');
             }
         }
@@ -143,7 +156,7 @@ namespace kpr {
         struct PrintFunction<T, std::enable_if_t<std::is_convertible_v<T, std::string_view>>> {
             static void print(Printer& printer, std::string_view a) {
                 if constexpr (debug) printer.print_char('"');
-                for (; *a != '\0'; ++a) printer.print_char(*a);
+                for (char i: a) printer.print_char(i);
                 if constexpr (debug) printer.print_char('"');
             }
         };
@@ -200,8 +213,8 @@ namespace kpr {
                 if constexpr (debug && i == 0) printer.print_char('{');
                 if constexpr (tuple_like_size_v<T> != 0) print(get<i>(a));
                 if constexpr (i + 1 < tuple_like_size_v<T>) {
-                    printer.print_sep<max_rank_v<T>>();
-                    PrintFunction<>::print<i + 1>(a);
+                    printer.print_sep();
+                    PrintFunction<T>::template print<i + 1>(a);
                 } else if constexpr (debug) print_char('}');
             }
         };
@@ -214,7 +227,7 @@ namespace kpr {
                 for (auto i = std::begin(a); ; ) {
                     print(*i);
                     if (++i != std::end(a)) {
-                    print_sep<max_rank_v<T>>();
+                        printer.print_sep();
                     } else break;
                 }
                 if constexpr (debug) print_char('}');
@@ -224,18 +237,15 @@ namespace kpr {
         // 複数の値を出力
         template<bool first = true>
         void operator ()() {
-            if constexpr (comment && first) print_char('#');
-            if constexpr (end_line) print_char('\n');
+            if constexpr (first) print_comment();
+            if constexpr (line) print_line();
             if constexpr (flush) itr.flush();
         }
         template<bool first = true, class Head, class... Args>
         void operator ()(Head&& head, Args&&... args) {
-            if constexpr (comment && first) {
-                print_char('#');
-                print_char(' ');
-            }
-            if constexpr (sep && !first) print_sep<0>();
-            PrintFunction<std::decay_t<Head>>::print(std::forward<Head>(head));
+            if constexpr (first) print_comment();
+            else print_sep();
+            PrintFunction<std::decay_t<Head>>::print(*this, std::forward<Head>(head));
             operator ()<false>(std::forward<Args>(args)...);
         }
     };
