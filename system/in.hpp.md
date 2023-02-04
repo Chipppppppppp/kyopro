@@ -252,9 +252,9 @@ data:
     \ noexcept {\n            return buf_size;\n        }\n\n        Reader() {\n\
     \            read(fd, buffer.begin(), buf_size);\n        }\n        Reader(int\
     \ fd): fd(fd), idx(0), buffer() {\n            read(fd, buffer.begin(), buf_size);\n\
-    \        }\n        Reader(FILE* fp): fd(std::fileno(fp)), idx(0), buffer() {\n\
-    \            read(fd, buffer.begin(), buf_size);\n        }\n\n        // \u5165\
-    \u529B\u30A4\u30C6\u30EC\u30FC\u30BF\n        struct iterator {\n        private:\n\
+    \        }\n        Reader(FILE* fp): fd(fileno(fp)), idx(0), buffer() {\n   \
+    \         read(fd, buffer.begin(), buf_size);\n        }\n\n        // \u5165\u529B\
+    \u30A4\u30C6\u30EC\u30FC\u30BF\n        struct iterator {\n        private:\n\
     \            Reader& reader;\n\n        public:\n            using difference_type\
     \ = void;\n            using value_type = void;\n            using pointer = void;\n\
     \            using reference = void;\n            using iterator_category = std::input_iterator_tag;\n\
@@ -343,7 +343,7 @@ data:
     \ constexpr KYOPRO_BASE_INT get_buf_size() noexcept {\n            return buf_size;\n\
     \        }\n\n        Reader() {\n            read(fd, buffer.begin(), buf_size);\n\
     \        }\n        Reader(int fd): fd(fd), idx(0), buffer() {\n            read(fd,\
-    \ buffer.begin(), buf_size);\n        }\n        Reader(FILE* fp): fd(std::fileno(fp)),\
+    \ buffer.begin(), buf_size);\n        }\n        Reader(FILE* fp): fd(fileno(fp)),\
     \ idx(0), buffer() {\n            read(fd, buffer.begin(), buf_size);\n      \
     \  }\n\n        // \u5165\u529B\u30A4\u30C6\u30EC\u30FC\u30BF\n        struct\
     \ iterator {\n        private:\n            Reader& reader;\n\n        public:\n\
@@ -435,7 +435,7 @@ data:
   - template/template.hpp
   - template/macro.hpp
   - all.hpp
-  timestamp: '2023-02-04 13:16:05+09:00'
+  timestamp: '2023-02-05 03:56:35+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp
