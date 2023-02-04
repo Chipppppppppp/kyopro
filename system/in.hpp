@@ -6,7 +6,6 @@
 #include <cstdint>
 #include <cstdio>
 #include <string>
-#include <tuple>
 #include <type_traits>
 #include <utility>
 #include "../math/power.hpp"
@@ -15,6 +14,7 @@
 #include "../meta/tuple_like.hpp"
 
 namespace kpr {
+    // バッファを用いてファイルを読み込むクラス
     template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>
     struct Reader {
     private:
@@ -22,6 +22,7 @@ namespace kpr {
         std::array<char, buf_size> buffer;
 
     public:
+        // バッファサイズを取得
         static constexpr KYOPRO_BASE_INT get_buf_size() noexcept {
             return buf_size;
         }
@@ -32,10 +33,11 @@ namespace kpr {
         Reader(int fd): fd(fd), idx(0), buffer() {
             read(fd, buffer.begin(), buf_size);
         }
-        Reader(FILE* fp): fd(fileno(fp)), idx(0), buffer() {
+        Reader(FILE* fp): fd(std::fileno(fp)), idx(0), buffer() {
             read(fd, buffer.begin(), buf_size);
         }
 
+        // 入力イテレータ
         struct iterator {
         private:
             Reader& reader;
@@ -70,25 +72,25 @@ namespace kpr {
             }
         };
 
+        // ファイルの最初を示すイテレータを取得
         iterator begin() noexcept {
             return iterator(*this);
         }
     };
 
+    // 標準入力
     Reader input(0);
 
+
+    // 入力イテレータを用いて値を入力するクラス
     template<class Iterator, std::size_t decimal_precision = KYOPRO_DECIMAL_PRECISION>
     struct Scanner {
         using iterator_type = Iterator;
-    private:
-        template<class, class = void>
-        struct has_scan: std::false_type {};
-        template<class T>
-        struct has_scan<T, std::void_t<decltype(std::declval<T>().scan(std::declval<Scanner&>()))>>: std::true_type {};
 
-    public:
+        // 入力イテレータ
         Iterator itr;
 
+        // 指定された小数誤差を取得
         static constexpr KYOPRO_BASE_INT get_decimal_precision() noexcept {
             return decimal_precision;
         }
@@ -96,83 +98,111 @@ namespace kpr {
         Scanner() noexcept = default;
         Scanner(Iterator itr) noexcept: itr(itr) {}
 
+        // 次の文字までの空白を無視する
         void discard_space() {
             while (('\t' <= *itr && *itr <= '\r') || *itr == ' ') ++itr;
         }
 
-        void scan(char& a) {
-            discard_space();
-            a = *itr;
-            ++itr;
-        }
-        void scan(bool& a) {
-            discard_space();
-            a = *itr != '0';
-        }
-        void scan(std::string& a) {
-            discard_space();
-            while ((*itr < '\t' || '\r' < *itr) && *itr != ' ') {
-                a += *itr;
-                ++itr;
-            }
-        }
-        template<std::size_t len>
-        void scan(std::bitset<len>& a) {
-            discard_space();
-            for (int i = len - 1; i >= 0; ++i) {
-                a[i] = *itr != '0';
-                ++itr;
-            }
-        }
-        template<class T, std::enable_if_t<std::is_arithmetic_v<T> && !has_scan<T>::value>* = nullptr>
-        void scan(T& a) {
-            discard_space();
-            bool sgn = false;
-            if constexpr (!std::is_unsigned_v<T>) if (*itr == '-') {
-                sgn = true;
-                ++itr;
-            }
-            a = 0;
-            for (; '0' <= *itr && *itr <= '9'; ++itr) a = a * 10 + *itr - '0';
-            if (*itr == '.') {
-                ++itr;
-                if constexpr (std::is_floating_point_v<T>) {
-                    constexpr std::uint_fast64_t power_decimal_precision = power(10ULL, decimal_precision);
-                    T d = 0;
-                    std::uint_fast64_t i = 1;
-                    for (; '0' <= *itr && *itr <= '9' && i < power_decimal_precision; i *= 10) {
-                        d = d * 10 + *itr - '0';
-                        ++itr;
-                    }
-                    a += d / i;
-                }
-                while ('0' <= *itr && *itr <= '9') ++itr;
-            }
-            if constexpr (!std::is_unsigned_v<T>) if (sgn) a = -a;
-        }
-        template<std::size_t i = 0, class T, std::enable_if_t<is_tuple_like_v<T> && !is_range_v<T> && !has_scan<T>::value>* = nullptr>
-        void scan(T& a) {
-            if constexpr (i < std::tuple_size_v<T>) {
-                scan(std::get<i>(a));
-                scan<i + 1>(a);
-            }
-        }
-        template<class T, std::enable_if_t<is_range_v<T> && !has_scan<T>::value>* = nullptr>
-        void scan(T& a) {
-            for (auto&& i: a) scan(i);
-        }
-        template<class T, std::enable_if_t<has_scan<T>::value>* = nullptr>
-        void scan(T& a) {
-            a.scan(*this);
-        }
+        // 値の入力の関数クラス
+        template<class, class = void>
+        struct ScanFunction;
 
+        template<class T>
+        struct ScanFunction<char, T> {
+            static void scan(Scanner& scanner, char& a) {
+                scanner.discard_space();
+                a = *scanner.itr;
+                ++scanner.itr;
+            }
+        };
+
+        template<class T>
+        struct ScanFunction<bool, T> {
+            static void scan(Scanner& scanner, bool& a) {
+                scanner.discard_space();
+                a = *scanner.itr != '0';
+            }
+        };
+
+        template<class T>
+        struct ScanFunction<T, std::string> {
+            static void scan(Scanner& scanner, std::string& a) {
+                scanner.discard_space();
+                a.clear();
+                while ((*scanner.itr < '\t' || '\r' < *scanner.itr) && *scanner.itr != ' ') {
+                    a += *scanner.itr;
+                    ++scanner.itr;
+                }
+            }
+        };
+
+        template<std::size_t len>
+        struct ScanFunction<std::bitset<len>> {
+            static void scan(Scanner& scanner, std::bitset<len>& a) {
+                scanner.discard_space();
+                for (int i = len - 1; i >= 0; ++i) {
+                    a[i] = *scanner.itr != '0';
+                    ++scanner.itr;
+                }
+            }
+        };
+
+        template<class T>
+        struct ScanFunction<T, std::enable_if_t<is_arithmetic_v<T>>> {
+            static void scan(Scanner& scanner, T& a) {
+                scanner.discard_space();
+                bool sgn = false;
+                if constexpr (!std::is_unsigned_v<T>) if (*scanner.itr == '-') {
+                    sgn = true;
+                    ++scanner.itr;
+                }
+                a = 0;
+                for (; '0' <= *scanner.itr && *scanner.itr <= '9'; ++scanner.itr) a = a * 10 + *scanner.itr - '0';
+                if (*scanner.itr == '.') {
+                    ++scanner.itr;
+                    if constexpr (std::is_floating_point_v<T>) {
+                        constexpr std::uint_fast64_t power_decimal_precision = power(10ULL, decimal_precision);
+                        T d = 0;
+                        std::uint_fast64_t i = 1;
+                        for (; '0' <= *scanner.itr && *scanner.itr <= '9' && i < power_decimal_precision; i *= 10) {
+                            d = d * 10 + *scanner.itr - '0';
+                            ++scanner.itr;
+                        }
+                        a += d / i;
+                    }
+                    while ('0' <= *scanner.itr && *scanner.itr <= '9') ++scanner.itr;
+                }
+                if constexpr (!std::is_unsigned_v<T>) if (sgn) a = -a;
+            }
+        };
+
+        template<class T>
+        struct ScanFunction<T, std::enable_if_t<is_tuple_like_v<T> && !is_range_v<T>>> {
+            template<std::size_t i = 0>
+            static void scan(Scanner& scanner, T& a) {
+                if constexpr (i < tuple_like_size_v<T>) {
+                    ScanFunction<std::decay_t<tuple_like_element_t<i, T>>>::scan(get<i>(a));
+                    scan<i + 1>(a);
+                }
+            }
+        };
+
+        template<class T>
+        struct ScanFunction<T, std::enable_if_t<is_range_v<T>>> {
+            static void scan(T& a) {
+                for (auto&& i: a) scan(i);
+            }
+        };
+
+        // 複数の値を入力
         void operator ()() {}
         template<class Head, class... Args>
         void operator ()(Head& head, Args&... args) {
-            scan(head);
+            ScanFunction<Head>::scan(*this, head);
             operator ()(args...);
         }
     };
 
+    // 標準入力から値を入力する関数
     Scanner<Reader<>::iterator> scan(input.begin());
 } // namespace kpr

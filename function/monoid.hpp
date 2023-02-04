@@ -54,7 +54,7 @@ namespace kpr {
         using value_type = T;
 
         constexpr T id() const noexcept {
-            return std::numeric_limits<T>::has_infinity ? std::numeric_limits<T>::infinity() : INF<T>;
+            return std::numeric_limits<T>::has_infinity ? -std::numeric_limits<T>::infinity() : INF<T>;
         }
 
         constexpr T operator ()(const T& a, const T& b) const noexcept {

@@ -1,9 +1,10 @@
 #pragma once
-#include "stl.hpp"
 #include "alias.hpp"
 #include "amin_amax.hpp"
 #include "constant.hpp"
+#include "fix_vector_bool.hpp"
 #include "len.hpp"
 #include "macro.hpp"
 #include "make_array.hpp"
 #include "make_vector.hpp"
+#include "stl.hpp"

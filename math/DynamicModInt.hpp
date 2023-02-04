@@ -13,6 +13,7 @@ namespace kpr {
     template<class T, std::size_t kind = 0, bool = false>
     struct DynamicModInt {
         static_assert(std::is_unsigned_v<T>, "The given type must be an unsigned integer type");
+
         using value_type = T;
 
     private:
