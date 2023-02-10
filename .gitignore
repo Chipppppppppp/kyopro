@@ -43,6 +43,3 @@
 
 # Built Visual Studio Code Extensions
 *.vsix
-
-# Ignore build test
-test.cpp
