@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-.vscode/
-=======
 # Prerequisites
 *.d
 
@@ -46,4 +43,6 @@
 
 # Built Visual Studio Code Extensions
 *.vsix
->>>>>>> refs/remotes/origin/main
+
+# Ignore build test
+test.cpp
