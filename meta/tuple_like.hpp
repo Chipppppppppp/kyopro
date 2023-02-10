@@ -105,7 +105,7 @@ namespace kpr {
         struct GetHelper {
             template<class T>
             constexpr decltype(auto) operator ()(T&& tuple_like) const noexcept {
-                return GetFunction<std::decay_t<T>>::template function<idx>(std::forward<T>(tuple_like));
+                return GetFunction<std::decay_t<T>>::template get<idx>(std::forward<T>(tuple_like));
             }
         };
     }
