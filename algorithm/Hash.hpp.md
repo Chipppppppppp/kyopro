@@ -212,12 +212,12 @@ data:
     \ helper {\n        template<std::size_t idx>\n        struct GetHelper {\n  \
     \          template<class T>\n            constexpr decltype(auto) operator ()(T&&\
     \ tuple_like) const noexcept {\n                return GetFunction<std::decay_t<T>>::template\
-    \ function<idx>(std::forward<T>(tuple_like));\n            }\n        };\n   \
-    \ }\n\n    // tuple-like\u306A\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306Eidx(0\
-    \ <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\n    template<std::size_t idx>\n\
-    \    inline constexpr helper::GetHelper<idx> get;\n\n\n    // tuple-like\u306A\
-    \u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\u8981\u7D20\u306E\u578B\u3092\
-    \u8ABF\u3079\u308B\n    template<std::size_t idx, class T>\n    struct tuple_like_element\
+    \ get<idx>(std::forward<T>(tuple_like));\n            }\n        };\n    }\n\n\
+    \    // tuple-like\u306A\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306Eidx(0 <= idx\
+    \ < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\n    template<std::size_t idx>\n  \
+    \  inline constexpr helper::GetHelper<idx> get;\n\n\n    // tuple-like\u306A\u578B\
+    T\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\u8981\u7D20\u306E\u578B\u3092\u8ABF\
+    \u3079\u308B\n    template<std::size_t idx, class T>\n    struct tuple_like_element\
     \ {\n        using type = decltype(get<idx>(std::declval<T>()));\n    };\n\n \
     \   // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\u8981\u7D20\
     \u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t idx, class T>\n\
@@ -276,7 +276,7 @@ data:
   - math/DynamicModInt.hpp
   - algorithm/algorithm.hpp
   - all.hpp
-  timestamp: '2023-02-04 13:16:05+09:00'
+  timestamp: '2023-02-10 23:05:45+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp

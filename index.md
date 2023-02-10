@@ -124,9 +124,9 @@ data:
     - icon: ':x:'
       path: system/in.hpp
       title: system/in.hpp
-    - icon: ':warning:'
-      path: system/option.hpp
-      title: system/option.hpp
+    - icon: ':x:'
+      path: system/io_option.hpp
+      title: system/io_option.hpp
     - icon: ':x:'
       path: system/out.hpp
       title: system/out.hpp
