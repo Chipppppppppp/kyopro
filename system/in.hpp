@@ -140,7 +140,7 @@ namespace kpr {
         void operator ()() {}
         template<class Head, class... Args>
         void operator ()(Head&& head, Args&&... args) {
-            ScanFunction<Head>::scan(*this, std::forward<Head>(head));
+            ScanFunction<std::decay_t<Head>>::scan(*this, std::forward<Head>(head));
             operator ()(std::forward<Args>(args)...);
         }
     };
@@ -155,6 +155,7 @@ namespace kpr {
         }
     };
 
+    template<>
     struct ScanFunction<bool> {
         template<class Scanner>
         static void scan(Scanner& scanner, bool& a) {
@@ -163,6 +164,7 @@ namespace kpr {
         }
     };
 
+    template<>
     struct ScanFunction<std::string> {
         template<class Scanner>
         static void scan(Scanner& scanner, std::string& a) {
@@ -223,11 +225,18 @@ namespace kpr {
                 Scanner::scan_arithmetic(a);
                 --a;
             }
+        };
+        template<std::size_t i = 0, class Scanner>
+        static void scan_impl(ScannerWrapper<Scanner>& scanner_wrapper, const Tuple& args_tuple) {
+            if constexpr (i < tuple_like_size_v<Tuple>) {
+                ScanFunction<std::decay_t<tuple_like_element_t<i, Tuple>>>::scan(scanner_wrapper, get<i>(args_tuple));
+                scan_impl<i + 1>(scanner_wrapper, args_tuple);
+            }
         }
         template<class Scanner>
         static void scan(Scanner& scanner, const Indexed<Tuple, idx>& a) {
             ScannerWrapper<Scanner>& scanner_wrapper = static_cast<ScannerWrapper<Scanner>&>(scanner);
-            ScanFunction<Tuple>::scan(scanner_wrapper, a.args_tuple);
+            scan_impl(scanner_wrapper, a.args_tuple);
         }
     };
 

@@ -122,20 +122,27 @@ namespace kpr {
         void print_arithmetic(T a) {
             if constexpr (is_floating_point_v<T>) {
                 if (a == std::numeric_limits<T>::infinity()) {
-                    PrintFunction<const char[4]>::print(printer, "inf");
+                    print_char('i');
+                    print_char('n');
+                    print_char('f');
                     return;
                 }
                 if (a == -std::numeric_limits<T>::infinity()) {
-                    PrintFunction<const char[5]>::print(printer, "-inf");
+                    print_char('-');
+                    print_char('i');
+                    print_char('n');
+                    print_char('f');
                     return;
                 }
                 if (std::isnan(a)) {
-                    PrintFunction<const char[4]>::print(printer, "nan");
+                    print_char('n');
+                    print_char('a');
+                    print_char('n');
                     return;
                 }
             }
             if constexpr (std::is_signed_v<T>) if (a < 0) {
-                printer.print_char('-');
+                print_char('-');
                 a = -a;
             }
             std::uint_fast64_t p = a;
@@ -144,13 +151,13 @@ namespace kpr {
                 s += '0' + p % 10;
                 p /= 10;
             } while (p > 0);
-            for (auto i = s.rbegin(); i != s.rend(); ++i) printer.print_char(*i);
+            for (auto i = s.rbegin(); i != s.rend(); ++i) print_char(*i);
             if constexpr (is_integer_v<T>) return;
-            printer.print_char('.');
+            print_char('.');
             a -= p;
             for (int i = 0; i < static_cast<int>(decimal_precision); ++i) {
                 a *= 10;
-                printer.print_char('0' + static_cast<std::uint_fast64_t>(a) % 10);
+                print_char('0' + static_cast<std::uint_fast64_t>(a) % 10);
             }
         }
 
@@ -197,9 +204,9 @@ namespace kpr {
     struct PrintFunction<char> {
         template<class Printer>
         static void print(Printer& printer, char a) {
-            if constexpr (debug) printer.print_char('\'');
+            if constexpr (printer.debug) printer.print_char('\'');
             printer.print_char(a);
-            if constexpr (debug) printer.print_char('\'');
+            if constexpr (printer.debug) printer.print_char('\'');
         }
     };
 
@@ -215,9 +222,9 @@ namespace kpr {
     struct PrintFunction<T, std::enable_if_t<std::is_convertible_v<T, std::string_view>>> {
         template<class Printer>
         static void print(Printer& printer, std::string_view a) {
-            if constexpr (debug) printer.print_char('"');
+            if constexpr (printer.debug) printer.print_char('"');
             for (char i: a) printer.print_char(i);
-            if constexpr (debug) printer.print_char('"');
+            if constexpr (printer.debug) printer.print_char('"');
         }
     };
 
@@ -233,35 +240,35 @@ namespace kpr {
     struct PrintFunction<T, std::enable_if_t<std::is_arithmetic_v<T>>> {
         template<class Printer>
         static void print(Printer& printer, T a) {
-
+            printer.print_arithmetic(a);
         }
     };
 
     template<class T>
     struct PrintFunction<T, std::enable_if_t<is_tuple_like_v<T> && !is_range_v<T>>> {
-        template<class Printer, std::size_t i = 0>
+        template<std::size_t i = 0, class Printer>
         static void print(Printer& printer, const T& a) {
-            if constexpr (debug && i == 0) printer.print_char('{');
+            if constexpr (printer.debug && i == 0) printer.print_char('{');
             if constexpr (tuple_like_size_v<T> != 0) PrintFunction<std::decay_t<tuple_like_element_t<i, T>>>::print(printer, get<i>(a));
             if constexpr (i + 1 < tuple_like_size_v<T>) {
                 printer.print_sep();
                 print<i + 1>(printer, a);
-            } else if constexpr (debug) printer.print_char('}');
+            } else if constexpr (printer.debug) printer.print_char('}');
         }
     };
 
     template<class T>
-    struct PrintFunction<T, std::enable_if_t<is_range_v<T>>> {
+    struct PrintFunction<T, std::enable_if_t<is_range_v<T> && !std::is_convertible_v<std::string_view>>> {
         template<class Printer>
         static void print(Printer& printer, const T& a) {
-            if constexpr (debug) print_char('{');
+            if constexpr (printer.debug) printer.print_char('{');
             if (std::empty(a)) return;
             for (auto i = std::begin(a); ; ) {
                 PrintFunction<range_value_t<T>>::print(printer, *i);
                 if (++i != std::end(a)) printer.print_sep();
                 else break;
             }
-            if constexpr (debug) print_char('}');
+            if constexpr (printer.debug) printer.print_char('}');
         }
     };
 
@@ -270,12 +277,12 @@ namespace kpr {
         template<class Printer>
         struct PrinterWrapper: Printer {
             template<class T>
-            void printer_arithmetic(T a) {
-                print_arithmetic(a - 1);
+            void print_arithmetic(T a) {
+                Printer::print_arithmetic(a + 1);
             }
         };
         template<class Printer>
-        static void scan(Printer& printer, const Indexed<Tuple, idx>& a) {
+        static void print(Printer& printer, const Indexed<Tuple, idx>& a) {
             PrinterWrapper<Printer>& printer_wrapper = static_cast<PrinterWrapper<Printer>&>(printer);
             PrintFunction<Tuple>::print(printer_wrapper, a.args_tuple);
         }
