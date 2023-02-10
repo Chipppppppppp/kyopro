@@ -336,120 +336,14 @@ data:
     \ eps = EPS<KYOPRO_BASE_FLOAT>;\r\n\r\n    // \u5186\u5468\u7387\r\n    template<class\
     \ T>\r\n    inline constexpr T PI = 3.14159265358979323846;\r\n    // \u5186\u5468\
     \u7387\r\n    inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\r\
-    \n} // namespace kpr\r\n#line 6 \"math/Montgomery.hpp\"\n\r\nnamespace kpr {\r\
-    \n    template<class T>\r\n    struct Montgomery {\r\n        static_assert(is_unsigned_integer_v<T>,\
-    \ \"The given type must be an unsigned integer type\");\r\n\r\n        using value_type\
-    \ = T;\r\n\r\n        T mod;\r\n\r\n    private:\r\n        using larger_type\
-    \ = next_integer_t<T>;\r\n\r\n        T r, n2;\r\n\r\n    public:\r\n        constexpr\
-    \ void set_mod(T mod) noexcept {\r\n            this->mod = mod;\r\n         \
-    \   n2 = -static_cast<larger_type>(mod) % mod;\r\n            T t = 0;\r\n   \
-    \         r = 0;\r\n            for (int i = 0; i < std::numeric_limits<T>::digits;\
-    \ ++i) {\r\n                if (!(t & 1)) {\r\n                    t += mod;\r\
-    \n                    r += static_cast<T>(1) << static_cast<T>(i);\r\n       \
-    \         }\r\n                t >>= 1;\r\n            }\r\n        }\r\n\r\n\
-    \        constexpr KYOPRO_BASE_INT get_mod() const noexcept {\r\n            return\
-    \ mod;\r\n        }\r\n\r\n        Montgomery() noexcept = default;\r\n      \
-    \  Montgomery(T mod) noexcept {\r\n            set_mod(mod);\r\n        }\r\n\r\
-    \n        constexpr T transform(T x) const noexcept {\r\n            return reduce(static_cast<larger_type>(x)\
-    \ * n2);\r\n        }\r\n\r\n        constexpr T inverse_transform(T x) const\
-    \ noexcept {\r\n            T y = reduce(x);\r\n            return y >= mod ?\
-    \ y - mod : y;\r\n        }\r\n\r\n        constexpr T reduce(larger_type x) const\
-    \ noexcept {\r\n            return (x + static_cast<larger_type>(static_cast<T>(x)\
-    \ * r) * mod) >> std::numeric_limits<T>::digits;\r\n        }\r\n    };\r\n} //\
-    \ namespace kpr\r\n#line 11 \"math/DynamicModInt.hpp\"\n\r\nnamespace kpr {\r\n\
-    \    template<class T, std::size_t kind = 0, bool = false>\r\n    struct DynamicModInt\
-    \ {\r\n        static_assert(std::is_unsigned_v<T>, \"The given type must be an\
-    \ unsigned integer type\");\r\n\r\n        using value_type = T;\r\n\r\n    private:\r\
-    \n        using larger_type = next_integer_t<T>;\r\n\r\n        inline static\
-    \ Montgomery<T> montgomery;\r\n\r\n    public:\r\n        T value;\r\n\r\n   \
-    \     static constexpr KYOPRO_BASE_INT get_kind() noexcept {\r\n            return\
-    \ kind;\r\n        }\r\n\r\n        static void set_mod(T mod) noexcept {\r\n\
-    \            montgomery.set_mod(mod);\r\n        }\r\n\r\n        static KYOPRO_BASE_INT\
-    \ get_mod() noexcept {\r\n            return montgomery.mod;\r\n        }\r\n\r\
-    \n        KYOPRO_BASE_INT get_val() noexcept {\r\n            return montgomery.inverse_transform(value);\r\
-    \n        }\r\n\r\n        DynamicModInt() noexcept = default;\r\n        DynamicModInt(T\
-    \ value) noexcept: value(montgomery.transform(value % montgomery.mod + montgomery.mod))\
-    \ {}\r\n\r\n        template<class U>\r\n        explicit operator U() const noexcept\
-    \ {\r\n            return montgomery.inverse_transform(value);\r\n        }\r\n\
-    \r\n        static DynamicModInt raw(T value) noexcept {\r\n            DynamicModInt\
-    \ res;\r\n            res.value = montgomery.transform(value);\r\n           \
-    \ return res;\r\n        }\r\n\r\n        DynamicModInt power(std::uint_fast64_t\
-    \ n) const noexcept {\r\n            DynamicModInt res = 1, a = *this;\r\n   \
-    \         while (n > 0) {\r\n                if (n & 1) res = res * a;\r\n   \
-    \             a = a * a;\r\n                n >>= 1;\r\n            }\r\n    \
-    \        return res;\r\n        }\r\n\r\n        DynamicModInt inverse() const\
-    \ noexcept {\r\n            return power(montgomery.mod - 2);\r\n        }\r\n\
-    \r\n        DynamicModInt operator +() const noexcept {\r\n            return\
-    \ *this;\r\n        }\r\n\r\n        DynamicModInt operator -() const noexcept\
-    \ {\r\n            return value == 0 ? 0 : montgomery.mod - value;\r\n       \
-    \ }\r\n\r\n        DynamicModInt& operator ++() noexcept {\r\n            *this\
-    \ += DynamicModInt::raw(1);\r\n            return *this;\r\n        }\r\n\r\n\
-    \        DynamicModInt operator ++(int) noexcept {\r\n            DynamicModInt\
-    \ before = *this;\r\n            ++*this;\r\n            return before;\r\n  \
-    \      }\r\n\r\n        DynamicModInt& operator --() noexcept {\r\n          \
-    \  *this -= DynamicModInt::raw(1);\r\n            return *this;\r\n        }\r\
-    \n\r\n        DynamicModInt operator --(int) noexcept {\r\n            DynamicModInt\
-    \ before = *this;\r\n            --*this;\r\n            return before;\r\n  \
-    \      }\r\n\r\n        DynamicModInt& operator +=(DynamicModInt rhs) noexcept\
-    \ {\r\n            if ((value += rhs.value - (montgomery.mod << 1)) > std::numeric_limits<std::make_signed_t<T>>::max())\
-    \ value += montgomery.mod << 1;\r\n            return *this;\r\n        }\r\n\r\
-    \n        DynamicModInt& operator -=(DynamicModInt rhs) noexcept {\r\n       \
-    \     if ((value -= rhs.value) > std::numeric_limits<std::make_signed_t<T>>::max())\
-    \ value += montgomery.mod << 1;\r\n            return *this;\r\n        }\r\n\r\
-    \n        DynamicModInt& operator *=(DynamicModInt rhs) noexcept {\r\n       \
-    \     value = montgomery.reduce(static_cast<larger_type>(value) * rhs.value);\r\
-    \n            return *this;\r\n        }\r\n\r\n        DynamicModInt& operator\
-    \ /=(DynamicModInt rhs) noexcept {\r\n            value = montgomery.reduce(static_cast<larger_type>(value)\
-    \ * rhs.inverse().value);\r\n            return *this;\r\n        }\r\n\r\n  \
-    \      friend DynamicModInt operator +(DynamicModInt lhs, DynamicModInt rhs) noexcept\
-    \ {\r\n            return lhs += rhs;\r\n        }\r\n\r\n        friend DynamicModInt\
-    \ operator -(DynamicModInt lhs, DynamicModInt rhs) noexcept {\r\n            return\
-    \ lhs -= rhs;\r\n        }\r\n\r\n        friend DynamicModInt operator *(DynamicModInt\
-    \ lhs, DynamicModInt rhs) noexcept {\r\n            return lhs *= rhs;\r\n   \
-    \     }\r\n\r\n        friend DynamicModInt operator /(DynamicModInt lhs, DynamicModInt\
-    \ rhs) noexcept {\r\n            return lhs /= rhs;\r\n        }\r\n\r\n     \
-    \   friend bool operator ==(DynamicModInt lhs, DynamicModInt rhs) noexcept {\r\
-    \n            return lhs.value == rhs.value;\r\n        }\r\n\r\n        friend\
-    \ bool operator !=(DynamicModInt lhs, DynamicModInt rhs) noexcept {\r\n      \
-    \      return lhs.value != rhs.value;\r\n        }\r\n\r\n        template<class\
-    \ Scanner>\r\n        void scan(Scanner& scanner) {\r\n            std::int_fast64_t\
-    \ value;\r\n            scanner.scan(value);\r\n            value = montgomery.transform(value\
-    \ % montgomery.mod + montgomery.mod);\r\n        }\r\n\r\n        template<class\
-    \ Printer>\r\n        void print(Printer& printer) const {\r\n            printer.print(montgomery.inverse_transform(value));\r\
-    \n        }\r\n    };\r\n\r\n    template<class T, std::size_t kind>\r\n    struct\
-    \ Hash<DynamicModInt<T, kind>> {\r\n        using value_type = DynamicModInt<T,\
-    \ kind>;\r\n\r\n        std::size_t operator ()(DynamicModInt<T, kind> a) const\
-    \ noexcept {\r\n            return static_cast<std::size_t>(a);\r\n        }\r\
-    \n    };\r\n} // namespace kpr\r\n#line 8 \"math/is_prime.hpp\"\n\r\nnamespace\
-    \ kpr {\r\n    [[maybe_unused]] inline constexpr struct {\r\n        template<class\
-    \ T>\r\n        constexpr bool operator ()(T x) const {\r\n            using U\
-    \ = std::make_unsigned_t<T>;\r\n            using dmint = DynamicModInt<U, 0,\
-    \ true>;\r\n            U n = x;\r\n            if (n <= 1) return false;\r\n\
-    \            if (!(n & 1)) return n == 2;\r\n            dmint::set_mod(n);\r\n\
-    \            std::uint_fast64_t d = (n - 1) >> rzero_count(n - 1);\r\n       \
-    \     dmint one = 1, minus_one = n - 1;\r\n            auto ng = [&](std::uint_fast64_t\
-    \ a) noexcept {\r\n                auto y = dmint(a).power(d);\r\n           \
-    \     std::uint_fast64_t t = d;\r\n                while (y != one and y != minus_one\
-    \ and t != n - 1) y *= y, t <<= 1;\r\n                if (y != minus_one and !(t\
-    \ & 1)) return true;\r\n                return false;\r\n            };\r\n  \
-    \          if constexpr (std::numeric_limits<U>::digits <= 32) {\r\n         \
-    \       for (auto i: (std::uint_fast64_t[3]){2, 7, 61}) {\r\n                \
-    \    if (n <= i) return true;\r\n                    if (ng(i)) return false;\r\
-    \n                }\r\n            } else if (n < (static_cast<U>(1) << 32)) {\r\
-    \n                for (auto i: (std::uint_fast64_t[3]){2, 7, 61}) {\r\n      \
-    \              if (n <= i) return true;\r\n                    if (ng(i)) return\
-    \ false;\r\n                }\r\n            } else {\r\n                for (auto\
-    \ i: (std::uint_fast64_t[7]){2, 325, 9375, 28178, 450775, 9780504, 1795265022})\
-    \ {\r\n                    if (n <= i) return true;\r\n                    if\
-    \ (ng(i)) return false;\r\n                }\r\n            }\r\n            return\
-    \ true;\r\n        }\r\n    } is_prime;\r\n} // namespace kpr\r\n#line 2 \"system/in.hpp\"\
-    \n#include <unistd.h>\r\n#include <array>\r\n#include <bitset>\r\n#line 7 \"system/in.hpp\"\
-    \n#include <cstdio>\r\n#include <string>\r\n#line 5 \"system/io_option.hpp\"\n\
-    \r\nnamespace kpr {\r\n    template<class Tuple, std::size_t idx>\r\n    struct\
-    \ Indexed {\r\n        Tuple args_tuple;\r\n        template<class... Args>\r\n\
-    \        constexpr Indexed(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
-    \ {}\r\n    };\r\n\r\n    template<std::size_t i, class... Args>\r\n    constexpr\
-    \ auto indexed(Args&&... args) noexcept {\r\n        return Indexed<std::tuple<Args>...,\
+    \n} // namespace kpr\r\n#line 2 \"system/in.hpp\"\n#include <unistd.h>\r\n#include\
+    \ <array>\r\n#include <bitset>\r\n#line 7 \"system/in.hpp\"\n#include <cstdio>\r\
+    \n#include <string>\r\n#line 5 \"system/io_option.hpp\"\n\r\nnamespace kpr {\r\
+    \n    template<class Tuple, std::size_t idx>\r\n    struct Indexed {\r\n     \
+    \   Tuple args_tuple;\r\n        template<class... Args>\r\n        constexpr\
+    \ Indexed(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...} {}\r\
+    \n    };\r\n\r\n    template<std::size_t i, class... Args>\r\n    constexpr auto\
+    \ indexed(Args&&... args) noexcept {\r\n        return Indexed<std::tuple<Args>...,\
     \ i>{std::forward<Args>(args)...};\r\n    }\r\n\r\n    template<class Tuple, bool...\
     \ seps>\r\n    struct SepWith {\r\n        Tuple args_tuple;\r\n        template<class...\
     \ Args>\r\n        constexpr SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
@@ -702,9 +596,121 @@ data:
     \u6E96\u51FA\u529B\u3001\u6A19\u6E96\u30A8\u30E9\u30FC\u51FA\u529B\u306B\u5024\
     \u3092\u51FA\u529B\u3059\u308B(\u6539\u884C\u3001\u533A\u5207\u308A\u6587\u5B57\
     \u3042\u308A)\r\n    Printer<Writer<>::iterator> println{output.begin()}, eprintln{error.begin()};\r\
-    \n} // namespace kpr\r\n#line 4 \"verify/aoj/PrimeNumber.test.cpp\"\n\r\nint main()\
-    \ {\r\n  int t;\r\n  kpr::scan(t);\r\n  int cnt = 0;\r\n  for (int i = 0; i <\
-    \ t; ++i) {\r\n    long long x;\r\n    kpr::scan(x);\r\n    if (kpr::is_prime(x))\
+    \n} // namespace kpr\r\n#line 6 \"math/Montgomery.hpp\"\n\r\nnamespace kpr {\r\
+    \n    template<class T>\r\n    struct Montgomery {\r\n        static_assert(is_unsigned_integer_v<T>,\
+    \ \"The given type must be an unsigned integer type\");\r\n\r\n        using value_type\
+    \ = T;\r\n\r\n        T mod;\r\n\r\n    private:\r\n        using larger_type\
+    \ = next_integer_t<T>;\r\n\r\n        T r, n2;\r\n\r\n    public:\r\n        constexpr\
+    \ void set_mod(T mod) noexcept {\r\n            this->mod = mod;\r\n         \
+    \   n2 = -static_cast<larger_type>(mod) % mod;\r\n            T t = 0;\r\n   \
+    \         r = 0;\r\n            for (int i = 0; i < std::numeric_limits<T>::digits;\
+    \ ++i) {\r\n                if (!(t & 1)) {\r\n                    t += mod;\r\
+    \n                    r += static_cast<T>(1) << static_cast<T>(i);\r\n       \
+    \         }\r\n                t >>= 1;\r\n            }\r\n        }\r\n\r\n\
+    \        constexpr KYOPRO_BASE_INT get_mod() const noexcept {\r\n            return\
+    \ mod;\r\n        }\r\n\r\n        Montgomery() noexcept = default;\r\n      \
+    \  Montgomery(T mod) noexcept {\r\n            set_mod(mod);\r\n        }\r\n\r\
+    \n        constexpr T transform(T x) const noexcept {\r\n            return reduce(static_cast<larger_type>(x)\
+    \ * n2);\r\n        }\r\n\r\n        constexpr T inverse_transform(T x) const\
+    \ noexcept {\r\n            T y = reduce(x);\r\n            return y >= mod ?\
+    \ y - mod : y;\r\n        }\r\n\r\n        constexpr T reduce(larger_type x) const\
+    \ noexcept {\r\n            return (x + static_cast<larger_type>(static_cast<T>(x)\
+    \ * r) * mod) >> std::numeric_limits<T>::digits;\r\n        }\r\n    };\r\n} //\
+    \ namespace kpr\r\n#line 13 \"math/DynamicModInt.hpp\"\n\r\nnamespace kpr {\r\n\
+    \    template<class T, std::size_t kind = 0, bool = false>\r\n    struct DynamicModInt\
+    \ {\r\n        static_assert(std::is_unsigned_v<T>, \"The given type must be an\
+    \ unsigned integer type\");\r\n\r\n        using value_type = T;\r\n\r\n    private:\r\
+    \n        using larger_type = next_integer_t<T>;\r\n\r\n        inline static\
+    \ Montgomery<T> montgomery;\r\n\r\n    public:\r\n        T value;\r\n\r\n   \
+    \     static constexpr KYOPRO_BASE_INT get_kind() noexcept {\r\n            return\
+    \ kind;\r\n        }\r\n\r\n        static void set_mod(T mod) noexcept {\r\n\
+    \            montgomery.set_mod(mod);\r\n        }\r\n\r\n        static KYOPRO_BASE_INT\
+    \ get_mod() noexcept {\r\n            return montgomery.mod;\r\n        }\r\n\r\
+    \n        KYOPRO_BASE_INT get_val() noexcept {\r\n            return montgomery.inverse_transform(value);\r\
+    \n        }\r\n\r\n        DynamicModInt() noexcept = default;\r\n        DynamicModInt(T\
+    \ value) noexcept: value(montgomery.transform(value % montgomery.mod + montgomery.mod))\
+    \ {}\r\n\r\n        template<class U>\r\n        explicit operator U() const noexcept\
+    \ {\r\n            return montgomery.inverse_transform(value);\r\n        }\r\n\
+    \r\n        static DynamicModInt raw(T value) noexcept {\r\n            DynamicModInt\
+    \ res;\r\n            res.value = montgomery.transform(value);\r\n           \
+    \ return res;\r\n        }\r\n\r\n        DynamicModInt power(std::uint_fast64_t\
+    \ n) const noexcept {\r\n            DynamicModInt res = 1, a = *this;\r\n   \
+    \         while (n > 0) {\r\n                if (n & 1) res = res * a;\r\n   \
+    \             a = a * a;\r\n                n >>= 1;\r\n            }\r\n    \
+    \        return res;\r\n        }\r\n\r\n        DynamicModInt inverse() const\
+    \ noexcept {\r\n            return power(montgomery.mod - 2);\r\n        }\r\n\
+    \r\n        DynamicModInt operator +() const noexcept {\r\n            return\
+    \ *this;\r\n        }\r\n\r\n        DynamicModInt operator -() const noexcept\
+    \ {\r\n            return value == 0 ? 0 : montgomery.mod - value;\r\n       \
+    \ }\r\n\r\n        DynamicModInt& operator ++() noexcept {\r\n            *this\
+    \ += DynamicModInt::raw(1);\r\n            return *this;\r\n        }\r\n\r\n\
+    \        DynamicModInt operator ++(int) noexcept {\r\n            DynamicModInt\
+    \ before = *this;\r\n            ++*this;\r\n            return before;\r\n  \
+    \      }\r\n\r\n        DynamicModInt& operator --() noexcept {\r\n          \
+    \  *this -= DynamicModInt::raw(1);\r\n            return *this;\r\n        }\r\
+    \n\r\n        DynamicModInt operator --(int) noexcept {\r\n            DynamicModInt\
+    \ before = *this;\r\n            --*this;\r\n            return before;\r\n  \
+    \      }\r\n\r\n        DynamicModInt& operator +=(DynamicModInt rhs) noexcept\
+    \ {\r\n            if ((value += rhs.value - (montgomery.mod << 1)) > std::numeric_limits<std::make_signed_t<T>>::max())\
+    \ value += montgomery.mod << 1;\r\n            return *this;\r\n        }\r\n\r\
+    \n        DynamicModInt& operator -=(DynamicModInt rhs) noexcept {\r\n       \
+    \     if ((value -= rhs.value) > std::numeric_limits<std::make_signed_t<T>>::max())\
+    \ value += montgomery.mod << 1;\r\n            return *this;\r\n        }\r\n\r\
+    \n        DynamicModInt& operator *=(DynamicModInt rhs) noexcept {\r\n       \
+    \     value = montgomery.reduce(static_cast<larger_type>(value) * rhs.value);\r\
+    \n            return *this;\r\n        }\r\n\r\n        DynamicModInt& operator\
+    \ /=(DynamicModInt rhs) noexcept {\r\n            value = montgomery.reduce(static_cast<larger_type>(value)\
+    \ * rhs.inverse().value);\r\n            return *this;\r\n        }\r\n\r\n  \
+    \      friend DynamicModInt operator +(DynamicModInt lhs, DynamicModInt rhs) noexcept\
+    \ {\r\n            return lhs += rhs;\r\n        }\r\n\r\n        friend DynamicModInt\
+    \ operator -(DynamicModInt lhs, DynamicModInt rhs) noexcept {\r\n            return\
+    \ lhs -= rhs;\r\n        }\r\n\r\n        friend DynamicModInt operator *(DynamicModInt\
+    \ lhs, DynamicModInt rhs) noexcept {\r\n            return lhs *= rhs;\r\n   \
+    \     }\r\n\r\n        friend DynamicModInt operator /(DynamicModInt lhs, DynamicModInt\
+    \ rhs) noexcept {\r\n            return lhs /= rhs;\r\n        }\r\n\r\n     \
+    \   friend bool operator ==(DynamicModInt lhs, DynamicModInt rhs) noexcept {\r\
+    \n            return lhs.value == rhs.value;\r\n        }\r\n\r\n        friend\
+    \ bool operator !=(DynamicModInt lhs, DynamicModInt rhs) noexcept {\r\n      \
+    \      return lhs.value != rhs.value;\r\n        }\r\n\r\n        friend struct\
+    \ ScanFunction<DynamicModInt>;\r\n\r\n        friend struct PrintFunction<DynamicModInt>;\r\
+    \n    };\r\n\r\n    template<class T, std::size_t kind>\r\n    struct ScanFunction<DynamicModInt<T,\
+    \ kind>> {\r\n        template<class Scanner>\r\n        static void scan(Scanner&\
+    \ scanner, DynamicModInt<T, kind>& a) {\r\n            std::int_fast64_t value;\r\
+    \n            ScanFunction<std::int_fast64_t>::scan(scanner, value);\r\n     \
+    \       a.value = a.montgomery.transform(value % a.montgomery.mod + a.montgomery.mod);\r\
+    \n        }\r\n    };\r\n\r\n    template<class T, std::size_t kind>\r\n    struct\
+    \ PrintFunction<DynamicModInt<T, kind>> {\r\n        template<class Printer>\r\
+    \n        static void print(Printer& printer, const DynamicModInt<T, kind>& a)\
+    \ {\r\n            PrintFunction<T>::print(printer, a.montgomery.inverse_transform(a.value));\r\
+    \n        }\r\n    };\r\n\r\n    template<class T, std::size_t kind>\r\n    struct\
+    \ Hash<DynamicModInt<T, kind>> {\r\n        using value_type = DynamicModInt<T,\
+    \ kind>;\r\n\r\n        std::size_t operator ()(DynamicModInt<T, kind> a) const\
+    \ noexcept {\r\n            return static_cast<std::size_t>(a);\r\n        }\r\
+    \n    };\r\n} // namespace kpr\r\n#line 8 \"math/is_prime.hpp\"\n\r\nnamespace\
+    \ kpr {\r\n    [[maybe_unused]] inline constexpr struct {\r\n        template<class\
+    \ T>\r\n        constexpr bool operator ()(T x) const {\r\n            using U\
+    \ = std::make_unsigned_t<T>;\r\n            using dmint = DynamicModInt<U, 0,\
+    \ true>;\r\n            U n = x;\r\n            if (n <= 1) return false;\r\n\
+    \            if (!(n & 1)) return n == 2;\r\n            dmint::set_mod(n);\r\n\
+    \            std::uint_fast64_t d = (n - 1) >> rzero_count(n - 1);\r\n       \
+    \     dmint one = 1, minus_one = n - 1;\r\n            auto ng = [&](std::uint_fast64_t\
+    \ a) noexcept {\r\n                auto y = dmint(a).power(d);\r\n           \
+    \     std::uint_fast64_t t = d;\r\n                while (y != one and y != minus_one\
+    \ and t != n - 1) y *= y, t <<= 1;\r\n                if (y != minus_one and !(t\
+    \ & 1)) return true;\r\n                return false;\r\n            };\r\n  \
+    \          if constexpr (std::numeric_limits<U>::digits <= 32) {\r\n         \
+    \       for (auto i: (std::uint_fast64_t[3]){2, 7, 61}) {\r\n                \
+    \    if (n <= i) return true;\r\n                    if (ng(i)) return false;\r\
+    \n                }\r\n            } else if (n < (static_cast<U>(1) << 32)) {\r\
+    \n                for (auto i: (std::uint_fast64_t[3]){2, 7, 61}) {\r\n      \
+    \              if (n <= i) return true;\r\n                    if (ng(i)) return\
+    \ false;\r\n                }\r\n            } else {\r\n                for (auto\
+    \ i: (std::uint_fast64_t[7]){2, 325, 9375, 28178, 450775, 9780504, 1795265022})\
+    \ {\r\n                    if (n <= i) return true;\r\n                    if\
+    \ (ng(i)) return false;\r\n                }\r\n            }\r\n            return\
+    \ true;\r\n        }\r\n    } is_prime;\r\n} // namespace kpr\r\n#line 4 \"verify/aoj/PrimeNumber.test.cpp\"\
+    \n\r\nint main() {\r\n  int t;\r\n  kpr::scan(t);\r\n  int cnt = 0;\r\n  for (int\
+    \ i = 0; i < t; ++i) {\r\n    long long x;\r\n    kpr::scan(x);\r\n    if (kpr::is_prime(x))\
     \ ++cnt;\r\n  }\r\n  kpr::println(cnt);\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_1_C&lang=ja\"\
     \r\n#include \"../../math/is_prime.hpp\"\r\n#include \"../../system/system.hpp\"\
@@ -721,15 +727,15 @@ data:
   - meta/tuple_like.hpp
   - meta/constant.hpp
   - math/power.hpp
-  - math/Montgomery.hpp
-  - system/system.hpp
   - system/in.hpp
   - system/io_option.hpp
   - system/out.hpp
+  - math/Montgomery.hpp
+  - system/system.hpp
   isVerificationFile: true
   path: verify/aoj/PrimeNumber.test.cpp
   requiredBy: []
-  timestamp: '2023-02-11 03:00:13+09:00'
+  timestamp: '2023-02-11 03:23:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/aoj/PrimeNumber.test.cpp

@@ -21,8 +21,26 @@ data:
     path: all/all.hpp
     title: all/all.hpp
   - icon: ':question:'
+    path: math/DynamicModInt.hpp
+    title: math/DynamicModInt.hpp
+  - icon: ':warning:'
+    path: math/ModInt.hpp
+    title: math/ModInt.hpp
+  - icon: ':x:'
+    path: math/factorize.hpp
+    title: math/factorize.hpp
+  - icon: ':question:'
+    path: math/is_prime.hpp
+    title: math/is_prime.hpp
+  - icon: ':warning:'
+    path: math/math.hpp
+    title: math/math.hpp
+  - icon: ':question:'
     path: system/system.hpp
     title: system/system.hpp
+  - icon: ':warning:'
+    path: template/alias.hpp
+    title: template/alias.hpp
   - icon: ':warning:'
     path: template/macro.hpp
     title: template/macro.hpp
@@ -550,6 +568,12 @@ data:
   - system/system.hpp
   - template/template.hpp
   - template/macro.hpp
+  - template/alias.hpp
+  - math/ModInt.hpp
+  - math/is_prime.hpp
+  - math/math.hpp
+  - math/factorize.hpp
+  - math/DynamicModInt.hpp
   - all.hpp
   timestamp: '2023-02-11 03:00:13+09:00'
   verificationStatus: LIBRARY_SOME_WA
