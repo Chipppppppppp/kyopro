@@ -10,6 +10,8 @@
 #include "../meta/constant.hpp"
 #include "../meta/setting.hpp"
 #include "../meta/trait.hpp"
+#include "../system/in.hpp"
+#include "../system/out.hpp"
 #include "mod.hpp"
 
 namespace kpr {
@@ -148,6 +150,24 @@ namespace kpr {
         template<class Printer>
         void print(Printer& printer) const {
             printer.print(value);
+        }
+    };
+
+    template<KYOPRO_BASE_UINT mod>
+    struct ScanFunction<ModInt<mod>> {
+        template<class Scanner>
+        static void scan(Scanner& scanner, ModInt<mod>& a) {
+            std::int_fast64_t value;
+            ScanFunction<std::int_fast64_t>::scan(scanner, value);
+            a.value = floor_mod(value, a.mod);
+        }
+    };
+
+    template<KYOPRO_BASE_UINT mod>
+    struct PrintFunction<ModInt<mod>> {
+        template<class Printer>
+        static void print(Printer& printer, ModInt<mod>& a) {
+            PrintFunction<typename ModInt<mod>::value_type>::print(printer, a.value);
         }
     };
 

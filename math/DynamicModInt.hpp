@@ -7,6 +7,8 @@
 #include "../meta/constant.hpp"
 #include "../meta/setting.hpp"
 #include "../meta/trait.hpp"
+#include "../system/in.hpp"
+#include "../system/out.hpp"
 #include "Montgomery.hpp"
 
 namespace kpr {
@@ -142,16 +144,26 @@ namespace kpr {
             return lhs.value != rhs.value;
         }
 
-        template<class Scanner>
-        void scan(Scanner& scanner) {
-            std::int_fast64_t value;
-            scanner.scan(value);
-            value = montgomery.transform(value % montgomery.mod + montgomery.mod);
-        }
+        friend struct ScanFunction<DynamicModInt>;
 
+        friend struct PrintFunction<DynamicModInt>;
+    };
+
+    template<class T, std::size_t kind>
+    struct ScanFunction<DynamicModInt<T, kind>> {
+        template<class Scanner>
+        static void scan(Scanner& scanner, DynamicModInt<T, kind>& a) {
+            std::int_fast64_t value;
+            ScanFunction<std::int_fast64_t>::scan(scanner, value);
+            a.value = a.montgomery.transform(value % a.montgomery.mod + a.montgomery.mod);
+        }
+    };
+
+    template<class T, std::size_t kind>
+    struct PrintFunction<DynamicModInt<T, kind>> {
         template<class Printer>
-        void print(Printer& printer) const {
-            printer.print(montgomery.inverse_transform(value));
+        static void print(Printer& printer, const DynamicModInt<T, kind>& a) {
+            PrintFunction<T>::print(printer, a.montgomery.inverse_transform(a.value));
         }
     };
 
