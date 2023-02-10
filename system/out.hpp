@@ -258,7 +258,7 @@ namespace kpr {
     };
 
     template<class T>
-    struct PrintFunction<T, std::enable_if_t<is_range_v<T> && !std::is_convertible_v<std::string_view>>> {
+    struct PrintFunction<T, std::enable_if_t<is_range_v<T> && !std::is_convertible_v<T, std::string_view>>> {
         template<class Printer>
         static void print(Printer& printer, const T& a) {
             if constexpr (printer.debug) printer.print_char('{');
