@@ -314,14 +314,15 @@ data:
     \ constexpr (!std::is_unsigned_v<T>) if (sgn) a = -a;\n        }\n\n        //\
     \ \u8907\u6570\u306E\u5024\u3092\u5165\u529B\n        void operator ()() {}\n\
     \        template<class Head, class... Args>\n        void operator ()(Head&&\
-    \ head, Args&&... args) {\n            ScanFunction<Head>::scan(*this, std::forward<Head>(head));\n\
-    \            operator ()(std::forward<Args>(args)...);\n        }\n    };\n\n\
-    \    template<>\n    struct ScanFunction<char> {\n        template<class Scanner>\n\
-    \        static void scan(Scanner& scanner, char& a) {\n            scanner.discard_space();\n\
-    \            a = *scanner.itr;\n            ++scanner.itr;\n        }\n    };\n\
-    \n    struct ScanFunction<bool> {\n        template<class Scanner>\n        static\
-    \ void scan(Scanner& scanner, bool& a) {\n            scanner.discard_space();\n\
-    \            a = *scanner.itr != '0';\n        }\n    };\n\n    struct ScanFunction<std::string>\
+    \ head, Args&&... args) {\n            ScanFunction<std::decay_t<Head>>::scan(*this,\
+    \ std::forward<Head>(head));\n            operator ()(std::forward<Args>(args)...);\n\
+    \        }\n    };\n\n    template<>\n    struct ScanFunction<char> {\n      \
+    \  template<class Scanner>\n        static void scan(Scanner& scanner, char& a)\
+    \ {\n            scanner.discard_space();\n            a = *scanner.itr;\n   \
+    \         ++scanner.itr;\n        }\n    };\n\n    template<>\n    struct ScanFunction<bool>\
+    \ {\n        template<class Scanner>\n        static void scan(Scanner& scanner,\
+    \ bool& a) {\n            scanner.discard_space();\n            a = *scanner.itr\
+    \ != '0';\n        }\n    };\n\n    template<>\n    struct ScanFunction<std::string>\
     \ {\n        template<class Scanner>\n        static void scan(Scanner& scanner,\
     \ std::string& a) {\n            scanner.discard_space();\n            a.clear();\n\
     \            while ((*scanner.itr < '\\t' || '\\r' < *scanner.itr) && *scanner.itr\
@@ -346,13 +347,17 @@ data:
     \ ScanFunction<Indexed<Tuple, idx>> {\n        template<class Scanner>\n     \
     \   struct ScannerWrapper: Scanner {\n            template<class T>\n        \
     \    void scan_arithmetic(T& a) {\n                Scanner::scan_arithmetic(a);\n\
-    \                --a;\n            }\n        }\n        template<class Scanner>\n\
-    \        static void scan(Scanner& scanner, const Indexed<Tuple, idx>& a) {\n\
-    \            ScannerWrapper<Scanner>& scanner_wrapper = static_cast<ScannerWrapper<Scanner>&>(scanner);\n\
-    \            ScanFunction<Tuple>::scan(scanner_wrapper, a.args_tuple);\n     \
-    \   }\n    };\n\n    // \u6A19\u6E96\u5165\u529B\u304B\u3089\u5024\u3092\u5165\
-    \u529B\u3059\u308B\u95A2\u6570\n    Scanner<Reader<>::iterator> scan{input.begin()};\n\
-    } // namespace kpr\n"
+    \                --a;\n            }\n        };\n        template<std::size_t\
+    \ i = 0, class Scanner>\n        static void scan_impl(ScannerWrapper<Scanner>&\
+    \ scanner_wrapper, const Tuple& args_tuple) {\n            if constexpr (i < tuple_like_size_v<Tuple>)\
+    \ {\n                ScanFunction<std::decay_t<tuple_like_element_t<i, Tuple>>>::scan(scanner_wrapper,\
+    \ get<i>(args_tuple));\n                scan_impl<i + 1>(scanner_wrapper, args_tuple);\n\
+    \            }\n        }\n        template<class Scanner>\n        static void\
+    \ scan(Scanner& scanner, const Indexed<Tuple, idx>& a) {\n            ScannerWrapper<Scanner>&\
+    \ scanner_wrapper = static_cast<ScannerWrapper<Scanner>&>(scanner);\n        \
+    \    scan_impl(scanner_wrapper, a.args_tuple);\n        }\n    };\n\n    // \u6A19\
+    \u6E96\u5165\u529B\u304B\u3089\u5024\u3092\u5165\u529B\u3059\u308B\u95A2\u6570\
+    \n    Scanner<Reader<>::iterator> scan{input.begin()};\n} // namespace kpr\n"
   code: "#pragma once\n#include <unistd.h>\n#include <array>\n#include <bitset>\n\
     #include <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <string>\n\
     #include <type_traits>\n#include <utility>\n#include \"io_option.hpp\"\n#include\
@@ -413,14 +418,15 @@ data:
     \ constexpr (!std::is_unsigned_v<T>) if (sgn) a = -a;\n        }\n\n        //\
     \ \u8907\u6570\u306E\u5024\u3092\u5165\u529B\n        void operator ()() {}\n\
     \        template<class Head, class... Args>\n        void operator ()(Head&&\
-    \ head, Args&&... args) {\n            ScanFunction<Head>::scan(*this, std::forward<Head>(head));\n\
-    \            operator ()(std::forward<Args>(args)...);\n        }\n    };\n\n\
-    \    template<>\n    struct ScanFunction<char> {\n        template<class Scanner>\n\
-    \        static void scan(Scanner& scanner, char& a) {\n            scanner.discard_space();\n\
-    \            a = *scanner.itr;\n            ++scanner.itr;\n        }\n    };\n\
-    \n    struct ScanFunction<bool> {\n        template<class Scanner>\n        static\
-    \ void scan(Scanner& scanner, bool& a) {\n            scanner.discard_space();\n\
-    \            a = *scanner.itr != '0';\n        }\n    };\n\n    struct ScanFunction<std::string>\
+    \ head, Args&&... args) {\n            ScanFunction<std::decay_t<Head>>::scan(*this,\
+    \ std::forward<Head>(head));\n            operator ()(std::forward<Args>(args)...);\n\
+    \        }\n    };\n\n    template<>\n    struct ScanFunction<char> {\n      \
+    \  template<class Scanner>\n        static void scan(Scanner& scanner, char& a)\
+    \ {\n            scanner.discard_space();\n            a = *scanner.itr;\n   \
+    \         ++scanner.itr;\n        }\n    };\n\n    template<>\n    struct ScanFunction<bool>\
+    \ {\n        template<class Scanner>\n        static void scan(Scanner& scanner,\
+    \ bool& a) {\n            scanner.discard_space();\n            a = *scanner.itr\
+    \ != '0';\n        }\n    };\n\n    template<>\n    struct ScanFunction<std::string>\
     \ {\n        template<class Scanner>\n        static void scan(Scanner& scanner,\
     \ std::string& a) {\n            scanner.discard_space();\n            a.clear();\n\
     \            while ((*scanner.itr < '\\t' || '\\r' < *scanner.itr) && *scanner.itr\
@@ -445,13 +451,17 @@ data:
     \ ScanFunction<Indexed<Tuple, idx>> {\n        template<class Scanner>\n     \
     \   struct ScannerWrapper: Scanner {\n            template<class T>\n        \
     \    void scan_arithmetic(T& a) {\n                Scanner::scan_arithmetic(a);\n\
-    \                --a;\n            }\n        }\n        template<class Scanner>\n\
-    \        static void scan(Scanner& scanner, const Indexed<Tuple, idx>& a) {\n\
-    \            ScannerWrapper<Scanner>& scanner_wrapper = static_cast<ScannerWrapper<Scanner>&>(scanner);\n\
-    \            ScanFunction<Tuple>::scan(scanner_wrapper, a.args_tuple);\n     \
-    \   }\n    };\n\n    // \u6A19\u6E96\u5165\u529B\u304B\u3089\u5024\u3092\u5165\
-    \u529B\u3059\u308B\u95A2\u6570\n    Scanner<Reader<>::iterator> scan{input.begin()};\n\
-    } // namespace kpr\n"
+    \                --a;\n            }\n        };\n        template<std::size_t\
+    \ i = 0, class Scanner>\n        static void scan_impl(ScannerWrapper<Scanner>&\
+    \ scanner_wrapper, const Tuple& args_tuple) {\n            if constexpr (i < tuple_like_size_v<Tuple>)\
+    \ {\n                ScanFunction<std::decay_t<tuple_like_element_t<i, Tuple>>>::scan(scanner_wrapper,\
+    \ get<i>(args_tuple));\n                scan_impl<i + 1>(scanner_wrapper, args_tuple);\n\
+    \            }\n        }\n        template<class Scanner>\n        static void\
+    \ scan(Scanner& scanner, const Indexed<Tuple, idx>& a) {\n            ScannerWrapper<Scanner>&\
+    \ scanner_wrapper = static_cast<ScannerWrapper<Scanner>&>(scanner);\n        \
+    \    scan_impl(scanner_wrapper, a.args_tuple);\n        }\n    };\n\n    // \u6A19\
+    \u6E96\u5165\u529B\u304B\u3089\u5024\u3092\u5165\u529B\u3059\u308B\u95A2\u6570\
+    \n    Scanner<Reader<>::iterator> scan{input.begin()};\n} // namespace kpr\n"
   dependsOn:
   - system/io_option.hpp
   - math/power.hpp
@@ -466,7 +476,7 @@ data:
   - template/template.hpp
   - template/macro.hpp
   - all.hpp
-  timestamp: '2023-02-10 23:05:45+09:00'
+  timestamp: '2023-02-11 01:12:45+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp

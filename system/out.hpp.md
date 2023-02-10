@@ -298,80 +298,85 @@ data:
     \u6570\u3001\u5C0F\u6570\u3092\u51FA\u529B\n        template<class T>\n      \
     \  void print_arithmetic(T a) {\n            if constexpr (is_floating_point_v<T>)\
     \ {\n                if (a == std::numeric_limits<T>::infinity()) {\n        \
-    \            PrintFunction<const char[4]>::print(printer, \"inf\");\n        \
-    \            return;\n                }\n                if (a == -std::numeric_limits<T>::infinity())\
-    \ {\n                    PrintFunction<const char[5]>::print(printer, \"-inf\"\
-    );\n                    return;\n                }\n                if (std::isnan(a))\
-    \ {\n                    PrintFunction<const char[4]>::print(printer, \"nan\"\
-    );\n                    return;\n                }\n            }\n          \
-    \  if constexpr (std::is_signed_v<T>) if (a < 0) {\n                printer.print_char('-');\n\
-    \                a = -a;\n            }\n            std::uint_fast64_t p = a;\n\
-    \            std::string s;\n            do {\n                s += '0' + p %\
-    \ 10;\n                p /= 10;\n            } while (p > 0);\n            for\
-    \ (auto i = s.rbegin(); i != s.rend(); ++i) printer.print_char(*i);\n        \
-    \    if constexpr (is_integer_v<T>) return;\n            printer.print_char('.');\n\
-    \            a -= p;\n            for (int i = 0; i < static_cast<int>(decimal_precision);\
-    \ ++i) {\n                a *= 10;\n                printer.print_char('0' + static_cast<std::uint_fast64_t>(a)\
-    \ % 10);\n            }\n        }\n\n        // \u533A\u5207\u308A\u3092\u51FA\
-    \u529B\u3059\u308B\n        void print_sep() {\n            if constexpr (debug)\
-    \ print_char(',');\n            if constexpr (space) print_char(' ');\n      \
-    \  }\n\n        // \u6700\u5F8C\u306E\u6587\u5B57\u3092\u51FA\u529B\u3059\u308B\
-    \n        void print_end() {\n            if constexpr (debug) print_char(',');\n\
-    \            if constexpr (line) print_char('\\n');\n        }\n\n        // \u30B3\
-    \u30E1\u30F3\u30C8\u8A18\u53F7\u3092\u51FA\u529B\u3059\u308B\n        void print_comment()\
-    \ {\n            if constexpr (comment) {\n                print_char('#');\n\
-    \                print_char(' ');\n            }\n        }\n\n        // \u8907\
-    \u6570\u306E\u5024\u3092\u51FA\u529B\n        template<bool first = true>\n  \
-    \      void operator ()() {\n            if constexpr (first) print_comment();\n\
-    \            print_end();\n            if constexpr (flush) itr.flush();\n   \
-    \     }\n        template<bool first = true, class Head, class... Args>\n    \
-    \    void operator ()(Head&& head, Args&&... args) {\n            if constexpr\
-    \ (first) print_comment();\n            else {\n                if constexpr (debug)\
-    \ print_char(',');\n                print_sep();\n            }\n            PrintFunction<std::decay_t<Head>>::print(*this,\
+    \            print_char('i');\n                    print_char('n');\n        \
+    \            print_char('f');\n                    return;\n                }\n\
+    \                if (a == -std::numeric_limits<T>::infinity()) {\n           \
+    \         print_char('-');\n                    print_char('i');\n           \
+    \         print_char('n');\n                    print_char('f');\n           \
+    \         return;\n                }\n                if (std::isnan(a)) {\n \
+    \                   print_char('n');\n                    print_char('a');\n \
+    \                   print_char('n');\n                    return;\n          \
+    \      }\n            }\n            if constexpr (std::is_signed_v<T>) if (a\
+    \ < 0) {\n                print_char('-');\n                a = -a;\n        \
+    \    }\n            std::uint_fast64_t p = a;\n            std::string s;\n  \
+    \          do {\n                s += '0' + p % 10;\n                p /= 10;\n\
+    \            } while (p > 0);\n            for (auto i = s.rbegin(); i != s.rend();\
+    \ ++i) print_char(*i);\n            if constexpr (is_integer_v<T>) return;\n \
+    \           print_char('.');\n            a -= p;\n            for (int i = 0;\
+    \ i < static_cast<int>(decimal_precision); ++i) {\n                a *= 10;\n\
+    \                print_char('0' + static_cast<std::uint_fast64_t>(a) % 10);\n\
+    \            }\n        }\n\n        // \u533A\u5207\u308A\u3092\u51FA\u529B\u3059\
+    \u308B\n        void print_sep() {\n            if constexpr (debug) print_char(',');\n\
+    \            if constexpr (space) print_char(' ');\n        }\n\n        // \u6700\
+    \u5F8C\u306E\u6587\u5B57\u3092\u51FA\u529B\u3059\u308B\n        void print_end()\
+    \ {\n            if constexpr (debug) print_char(',');\n            if constexpr\
+    \ (line) print_char('\\n');\n        }\n\n        // \u30B3\u30E1\u30F3\u30C8\u8A18\
+    \u53F7\u3092\u51FA\u529B\u3059\u308B\n        void print_comment() {\n       \
+    \     if constexpr (comment) {\n                print_char('#');\n           \
+    \     print_char(' ');\n            }\n        }\n\n        // \u8907\u6570\u306E\
+    \u5024\u3092\u51FA\u529B\n        template<bool first = true>\n        void operator\
+    \ ()() {\n            if constexpr (first) print_comment();\n            print_end();\n\
+    \            if constexpr (flush) itr.flush();\n        }\n        template<bool\
+    \ first = true, class Head, class... Args>\n        void operator ()(Head&& head,\
+    \ Args&&... args) {\n            if constexpr (first) print_comment();\n     \
+    \       else {\n                if constexpr (debug) print_char(',');\n      \
+    \          print_sep();\n            }\n            PrintFunction<std::decay_t<Head>>::print(*this,\
     \ std::forward<Head>(head));\n            operator ()<false>(std::forward<Args>(args)...);\n\
     \        }\n    };\n\n    template<>\n    struct PrintFunction<char> {\n     \
     \   template<class Printer>\n        static void print(Printer& printer, char\
-    \ a) {\n            if constexpr (debug) printer.print_char('\\'');\n        \
-    \    printer.print_char(a);\n            if constexpr (debug) printer.print_char('\\\
-    '');\n        }\n    };\n\n    template<>\n    struct PrintFunction<bool> {\n\
-    \        template<class Printer>\n        static void print(Printer& printer,\
-    \ bool a) {\n            printer.print_char(static_cast<char>('0' + a));\n   \
-    \     }\n    };\n\n    template<class T>\n    struct PrintFunction<T, std::enable_if_t<std::is_convertible_v<T,\
-    \ std::string_view>>> {\n        template<class Printer>\n        static void\
-    \ print(Printer& printer, std::string_view a) {\n            if constexpr (debug)\
-    \ printer.print_char('\"');\n            for (char i: a) printer.print_char(i);\n\
-    \            if constexpr (debug) printer.print_char('\"');\n        }\n    };\n\
-    \n    template<std::size_t len>\n    struct PrintFunction<std::bitset<len>> {\n\
-    \        template<class Printer>\n        static void print(Printer& printer,\
-    \ const std::bitset<len>& a) {\n            for (int i = len - 1; i >= 0; --i)\
-    \ PrintFunction<bool>::print(printer, a[i]);\n        }\n    };\n\n    template<class\
-    \ T>\n    struct PrintFunction<T, std::enable_if_t<std::is_arithmetic_v<T>>> {\n\
-    \        template<class Printer>\n        static void print(Printer& printer,\
-    \ T a) {\n\n        }\n    };\n\n    template<class T>\n    struct PrintFunction<T,\
-    \ std::enable_if_t<is_tuple_like_v<T> && !is_range_v<T>>> {\n        template<class\
-    \ Printer, std::size_t i = 0>\n        static void print(Printer& printer, const\
-    \ T& a) {\n            if constexpr (debug && i == 0) printer.print_char('{');\n\
-    \            if constexpr (tuple_like_size_v<T> != 0) PrintFunction<std::decay_t<tuple_like_element_t<i,\
+    \ a) {\n            if constexpr (printer.debug) printer.print_char('\\'');\n\
+    \            printer.print_char(a);\n            if constexpr (printer.debug)\
+    \ printer.print_char('\\'');\n        }\n    };\n\n    template<>\n    struct\
+    \ PrintFunction<bool> {\n        template<class Printer>\n        static void\
+    \ print(Printer& printer, bool a) {\n            printer.print_char(static_cast<char>('0'\
+    \ + a));\n        }\n    };\n\n    template<class T>\n    struct PrintFunction<T,\
+    \ std::enable_if_t<std::is_convertible_v<T, std::string_view>>> {\n        template<class\
+    \ Printer>\n        static void print(Printer& printer, std::string_view a) {\n\
+    \            if constexpr (printer.debug) printer.print_char('\"');\n        \
+    \    for (char i: a) printer.print_char(i);\n            if constexpr (printer.debug)\
+    \ printer.print_char('\"');\n        }\n    };\n\n    template<std::size_t len>\n\
+    \    struct PrintFunction<std::bitset<len>> {\n        template<class Printer>\n\
+    \        static void print(Printer& printer, const std::bitset<len>& a) {\n  \
+    \          for (int i = len - 1; i >= 0; --i) PrintFunction<bool>::print(printer,\
+    \ a[i]);\n        }\n    };\n\n    template<class T>\n    struct PrintFunction<T,\
+    \ std::enable_if_t<std::is_arithmetic_v<T>>> {\n        template<class Printer>\n\
+    \        static void print(Printer& printer, T a) {\n            printer.print_arithmetic(a);\n\
+    \        }\n    };\n\n    template<class T>\n    struct PrintFunction<T, std::enable_if_t<is_tuple_like_v<T>\
+    \ && !is_range_v<T>>> {\n        template<std::size_t i = 0, class Printer>\n\
+    \        static void print(Printer& printer, const T& a) {\n            if constexpr\
+    \ (printer.debug && i == 0) printer.print_char('{');\n            if constexpr\
+    \ (tuple_like_size_v<T> != 0) PrintFunction<std::decay_t<tuple_like_element_t<i,\
     \ T>>>::print(printer, get<i>(a));\n            if constexpr (i + 1 < tuple_like_size_v<T>)\
     \ {\n                printer.print_sep();\n                print<i + 1>(printer,\
-    \ a);\n            } else if constexpr (debug) printer.print_char('}');\n    \
-    \    }\n    };\n\n    template<class T>\n    struct PrintFunction<T, std::enable_if_t<is_range_v<T>>>\
-    \ {\n        template<class Printer>\n        static void print(Printer& printer,\
-    \ const T& a) {\n            if constexpr (debug) print_char('{');\n         \
-    \   if (std::empty(a)) return;\n            for (auto i = std::begin(a); ; ) {\n\
-    \                PrintFunction<range_value_t<T>>::print(printer, *i);\n      \
-    \          if (++i != std::end(a)) printer.print_sep();\n                else\
-    \ break;\n            }\n            if constexpr (debug) print_char('}');\n \
-    \       }\n    };\n\n    template<class Tuple, std::size_t idx>\n    struct PrintFunction<Indexed<Tuple,\
-    \ idx>> {\n        template<class Printer>\n        struct PrinterWrapper: Printer\
-    \ {\n            template<class T>\n            void printer_arithmetic(T a) {\n\
-    \                print_arithmetic(a - 1);\n            }\n        };\n       \
-    \ template<class Printer>\n        static void scan(Printer& printer, const Indexed<Tuple,\
-    \ idx>& a) {\n            PrinterWrapper<Printer>& printer_wrapper = static_cast<PrinterWrapper<Printer>&>(printer);\n\
-    \            PrintFunction<Tuple>::print(printer_wrapper, a.args_tuple);\n   \
-    \     }\n    };\n\n    // \u6A19\u6E96\u51FA\u529B\u3001\u6A19\u6E96\u30A8\u30E9\
-    \u30FC\u51FA\u529B\u306B\u5024\u3092\u51FA\u529B\u3059\u308B(\u6539\u884C\u3001\
-    \u533A\u5207\u308A\u6587\u5B57\u306A\u3057)\n    Printer<Writer<>::iterator, false,\
+    \ a);\n            } else if constexpr (printer.debug) printer.print_char('}');\n\
+    \        }\n    };\n\n    template<class T>\n    struct PrintFunction<T, std::enable_if_t<is_range_v<T>\
+    \ && !std::is_convertible_v<std::string_view>>> {\n        template<class Printer>\n\
+    \        static void print(Printer& printer, const T& a) {\n            if constexpr\
+    \ (printer.debug) printer.print_char('{');\n            if (std::empty(a)) return;\n\
+    \            for (auto i = std::begin(a); ; ) {\n                PrintFunction<range_value_t<T>>::print(printer,\
+    \ *i);\n                if (++i != std::end(a)) printer.print_sep();\n       \
+    \         else break;\n            }\n            if constexpr (printer.debug)\
+    \ printer.print_char('}');\n        }\n    };\n\n    template<class Tuple, std::size_t\
+    \ idx>\n    struct PrintFunction<Indexed<Tuple, idx>> {\n        template<class\
+    \ Printer>\n        struct PrinterWrapper: Printer {\n            template<class\
+    \ T>\n            void print_arithmetic(T a) {\n                Printer::print_arithmetic(a\
+    \ + 1);\n            }\n        };\n        template<class Printer>\n        static\
+    \ void print(Printer& printer, const Indexed<Tuple, idx>& a) {\n            PrinterWrapper<Printer>&\
+    \ printer_wrapper = static_cast<PrinterWrapper<Printer>&>(printer);\n        \
+    \    PrintFunction<Tuple>::print(printer_wrapper, a.args_tuple);\n        }\n\
+    \    };\n\n    // \u6A19\u6E96\u51FA\u529B\u3001\u6A19\u6E96\u30A8\u30E9\u30FC\
+    \u51FA\u529B\u306B\u5024\u3092\u51FA\u529B\u3059\u308B(\u6539\u884C\u3001\u533A\
+    \u5207\u308A\u6587\u5B57\u306A\u3057)\n    Printer<Writer<>::iterator, false,\
     \ false> print{output.begin()}, eprint{error.begin()};\n    // \u6A19\u6E96\u51FA\
     \u529B\u3001\u6A19\u6E96\u30A8\u30E9\u30FC\u51FA\u529B\u306B\u5024\u3092\u51FA\
     \u529B\u3059\u308B(\u6539\u884C\u3001\u533A\u5207\u308A\u6587\u5B57\u3042\u308A\
@@ -430,80 +435,85 @@ data:
     \u6570\u3001\u5C0F\u6570\u3092\u51FA\u529B\n        template<class T>\n      \
     \  void print_arithmetic(T a) {\n            if constexpr (is_floating_point_v<T>)\
     \ {\n                if (a == std::numeric_limits<T>::infinity()) {\n        \
-    \            PrintFunction<const char[4]>::print(printer, \"inf\");\n        \
-    \            return;\n                }\n                if (a == -std::numeric_limits<T>::infinity())\
-    \ {\n                    PrintFunction<const char[5]>::print(printer, \"-inf\"\
-    );\n                    return;\n                }\n                if (std::isnan(a))\
-    \ {\n                    PrintFunction<const char[4]>::print(printer, \"nan\"\
-    );\n                    return;\n                }\n            }\n          \
-    \  if constexpr (std::is_signed_v<T>) if (a < 0) {\n                printer.print_char('-');\n\
-    \                a = -a;\n            }\n            std::uint_fast64_t p = a;\n\
-    \            std::string s;\n            do {\n                s += '0' + p %\
-    \ 10;\n                p /= 10;\n            } while (p > 0);\n            for\
-    \ (auto i = s.rbegin(); i != s.rend(); ++i) printer.print_char(*i);\n        \
-    \    if constexpr (is_integer_v<T>) return;\n            printer.print_char('.');\n\
-    \            a -= p;\n            for (int i = 0; i < static_cast<int>(decimal_precision);\
-    \ ++i) {\n                a *= 10;\n                printer.print_char('0' + static_cast<std::uint_fast64_t>(a)\
-    \ % 10);\n            }\n        }\n\n        // \u533A\u5207\u308A\u3092\u51FA\
-    \u529B\u3059\u308B\n        void print_sep() {\n            if constexpr (debug)\
-    \ print_char(',');\n            if constexpr (space) print_char(' ');\n      \
-    \  }\n\n        // \u6700\u5F8C\u306E\u6587\u5B57\u3092\u51FA\u529B\u3059\u308B\
-    \n        void print_end() {\n            if constexpr (debug) print_char(',');\n\
-    \            if constexpr (line) print_char('\\n');\n        }\n\n        // \u30B3\
-    \u30E1\u30F3\u30C8\u8A18\u53F7\u3092\u51FA\u529B\u3059\u308B\n        void print_comment()\
-    \ {\n            if constexpr (comment) {\n                print_char('#');\n\
-    \                print_char(' ');\n            }\n        }\n\n        // \u8907\
-    \u6570\u306E\u5024\u3092\u51FA\u529B\n        template<bool first = true>\n  \
-    \      void operator ()() {\n            if constexpr (first) print_comment();\n\
-    \            print_end();\n            if constexpr (flush) itr.flush();\n   \
-    \     }\n        template<bool first = true, class Head, class... Args>\n    \
-    \    void operator ()(Head&& head, Args&&... args) {\n            if constexpr\
-    \ (first) print_comment();\n            else {\n                if constexpr (debug)\
-    \ print_char(',');\n                print_sep();\n            }\n            PrintFunction<std::decay_t<Head>>::print(*this,\
+    \            print_char('i');\n                    print_char('n');\n        \
+    \            print_char('f');\n                    return;\n                }\n\
+    \                if (a == -std::numeric_limits<T>::infinity()) {\n           \
+    \         print_char('-');\n                    print_char('i');\n           \
+    \         print_char('n');\n                    print_char('f');\n           \
+    \         return;\n                }\n                if (std::isnan(a)) {\n \
+    \                   print_char('n');\n                    print_char('a');\n \
+    \                   print_char('n');\n                    return;\n          \
+    \      }\n            }\n            if constexpr (std::is_signed_v<T>) if (a\
+    \ < 0) {\n                print_char('-');\n                a = -a;\n        \
+    \    }\n            std::uint_fast64_t p = a;\n            std::string s;\n  \
+    \          do {\n                s += '0' + p % 10;\n                p /= 10;\n\
+    \            } while (p > 0);\n            for (auto i = s.rbegin(); i != s.rend();\
+    \ ++i) print_char(*i);\n            if constexpr (is_integer_v<T>) return;\n \
+    \           print_char('.');\n            a -= p;\n            for (int i = 0;\
+    \ i < static_cast<int>(decimal_precision); ++i) {\n                a *= 10;\n\
+    \                print_char('0' + static_cast<std::uint_fast64_t>(a) % 10);\n\
+    \            }\n        }\n\n        // \u533A\u5207\u308A\u3092\u51FA\u529B\u3059\
+    \u308B\n        void print_sep() {\n            if constexpr (debug) print_char(',');\n\
+    \            if constexpr (space) print_char(' ');\n        }\n\n        // \u6700\
+    \u5F8C\u306E\u6587\u5B57\u3092\u51FA\u529B\u3059\u308B\n        void print_end()\
+    \ {\n            if constexpr (debug) print_char(',');\n            if constexpr\
+    \ (line) print_char('\\n');\n        }\n\n        // \u30B3\u30E1\u30F3\u30C8\u8A18\
+    \u53F7\u3092\u51FA\u529B\u3059\u308B\n        void print_comment() {\n       \
+    \     if constexpr (comment) {\n                print_char('#');\n           \
+    \     print_char(' ');\n            }\n        }\n\n        // \u8907\u6570\u306E\
+    \u5024\u3092\u51FA\u529B\n        template<bool first = true>\n        void operator\
+    \ ()() {\n            if constexpr (first) print_comment();\n            print_end();\n\
+    \            if constexpr (flush) itr.flush();\n        }\n        template<bool\
+    \ first = true, class Head, class... Args>\n        void operator ()(Head&& head,\
+    \ Args&&... args) {\n            if constexpr (first) print_comment();\n     \
+    \       else {\n                if constexpr (debug) print_char(',');\n      \
+    \          print_sep();\n            }\n            PrintFunction<std::decay_t<Head>>::print(*this,\
     \ std::forward<Head>(head));\n            operator ()<false>(std::forward<Args>(args)...);\n\
     \        }\n    };\n\n    template<>\n    struct PrintFunction<char> {\n     \
     \   template<class Printer>\n        static void print(Printer& printer, char\
-    \ a) {\n            if constexpr (debug) printer.print_char('\\'');\n        \
-    \    printer.print_char(a);\n            if constexpr (debug) printer.print_char('\\\
-    '');\n        }\n    };\n\n    template<>\n    struct PrintFunction<bool> {\n\
-    \        template<class Printer>\n        static void print(Printer& printer,\
-    \ bool a) {\n            printer.print_char(static_cast<char>('0' + a));\n   \
-    \     }\n    };\n\n    template<class T>\n    struct PrintFunction<T, std::enable_if_t<std::is_convertible_v<T,\
-    \ std::string_view>>> {\n        template<class Printer>\n        static void\
-    \ print(Printer& printer, std::string_view a) {\n            if constexpr (debug)\
-    \ printer.print_char('\"');\n            for (char i: a) printer.print_char(i);\n\
-    \            if constexpr (debug) printer.print_char('\"');\n        }\n    };\n\
-    \n    template<std::size_t len>\n    struct PrintFunction<std::bitset<len>> {\n\
-    \        template<class Printer>\n        static void print(Printer& printer,\
-    \ const std::bitset<len>& a) {\n            for (int i = len - 1; i >= 0; --i)\
-    \ PrintFunction<bool>::print(printer, a[i]);\n        }\n    };\n\n    template<class\
-    \ T>\n    struct PrintFunction<T, std::enable_if_t<std::is_arithmetic_v<T>>> {\n\
-    \        template<class Printer>\n        static void print(Printer& printer,\
-    \ T a) {\n\n        }\n    };\n\n    template<class T>\n    struct PrintFunction<T,\
-    \ std::enable_if_t<is_tuple_like_v<T> && !is_range_v<T>>> {\n        template<class\
-    \ Printer, std::size_t i = 0>\n        static void print(Printer& printer, const\
-    \ T& a) {\n            if constexpr (debug && i == 0) printer.print_char('{');\n\
-    \            if constexpr (tuple_like_size_v<T> != 0) PrintFunction<std::decay_t<tuple_like_element_t<i,\
+    \ a) {\n            if constexpr (printer.debug) printer.print_char('\\'');\n\
+    \            printer.print_char(a);\n            if constexpr (printer.debug)\
+    \ printer.print_char('\\'');\n        }\n    };\n\n    template<>\n    struct\
+    \ PrintFunction<bool> {\n        template<class Printer>\n        static void\
+    \ print(Printer& printer, bool a) {\n            printer.print_char(static_cast<char>('0'\
+    \ + a));\n        }\n    };\n\n    template<class T>\n    struct PrintFunction<T,\
+    \ std::enable_if_t<std::is_convertible_v<T, std::string_view>>> {\n        template<class\
+    \ Printer>\n        static void print(Printer& printer, std::string_view a) {\n\
+    \            if constexpr (printer.debug) printer.print_char('\"');\n        \
+    \    for (char i: a) printer.print_char(i);\n            if constexpr (printer.debug)\
+    \ printer.print_char('\"');\n        }\n    };\n\n    template<std::size_t len>\n\
+    \    struct PrintFunction<std::bitset<len>> {\n        template<class Printer>\n\
+    \        static void print(Printer& printer, const std::bitset<len>& a) {\n  \
+    \          for (int i = len - 1; i >= 0; --i) PrintFunction<bool>::print(printer,\
+    \ a[i]);\n        }\n    };\n\n    template<class T>\n    struct PrintFunction<T,\
+    \ std::enable_if_t<std::is_arithmetic_v<T>>> {\n        template<class Printer>\n\
+    \        static void print(Printer& printer, T a) {\n            printer.print_arithmetic(a);\n\
+    \        }\n    };\n\n    template<class T>\n    struct PrintFunction<T, std::enable_if_t<is_tuple_like_v<T>\
+    \ && !is_range_v<T>>> {\n        template<std::size_t i = 0, class Printer>\n\
+    \        static void print(Printer& printer, const T& a) {\n            if constexpr\
+    \ (printer.debug && i == 0) printer.print_char('{');\n            if constexpr\
+    \ (tuple_like_size_v<T> != 0) PrintFunction<std::decay_t<tuple_like_element_t<i,\
     \ T>>>::print(printer, get<i>(a));\n            if constexpr (i + 1 < tuple_like_size_v<T>)\
     \ {\n                printer.print_sep();\n                print<i + 1>(printer,\
-    \ a);\n            } else if constexpr (debug) printer.print_char('}');\n    \
-    \    }\n    };\n\n    template<class T>\n    struct PrintFunction<T, std::enable_if_t<is_range_v<T>>>\
-    \ {\n        template<class Printer>\n        static void print(Printer& printer,\
-    \ const T& a) {\n            if constexpr (debug) print_char('{');\n         \
-    \   if (std::empty(a)) return;\n            for (auto i = std::begin(a); ; ) {\n\
-    \                PrintFunction<range_value_t<T>>::print(printer, *i);\n      \
-    \          if (++i != std::end(a)) printer.print_sep();\n                else\
-    \ break;\n            }\n            if constexpr (debug) print_char('}');\n \
-    \       }\n    };\n\n    template<class Tuple, std::size_t idx>\n    struct PrintFunction<Indexed<Tuple,\
-    \ idx>> {\n        template<class Printer>\n        struct PrinterWrapper: Printer\
-    \ {\n            template<class T>\n            void printer_arithmetic(T a) {\n\
-    \                print_arithmetic(a - 1);\n            }\n        };\n       \
-    \ template<class Printer>\n        static void scan(Printer& printer, const Indexed<Tuple,\
-    \ idx>& a) {\n            PrinterWrapper<Printer>& printer_wrapper = static_cast<PrinterWrapper<Printer>&>(printer);\n\
-    \            PrintFunction<Tuple>::print(printer_wrapper, a.args_tuple);\n   \
-    \     }\n    };\n\n    // \u6A19\u6E96\u51FA\u529B\u3001\u6A19\u6E96\u30A8\u30E9\
-    \u30FC\u51FA\u529B\u306B\u5024\u3092\u51FA\u529B\u3059\u308B(\u6539\u884C\u3001\
-    \u533A\u5207\u308A\u6587\u5B57\u306A\u3057)\n    Printer<Writer<>::iterator, false,\
+    \ a);\n            } else if constexpr (printer.debug) printer.print_char('}');\n\
+    \        }\n    };\n\n    template<class T>\n    struct PrintFunction<T, std::enable_if_t<is_range_v<T>\
+    \ && !std::is_convertible_v<std::string_view>>> {\n        template<class Printer>\n\
+    \        static void print(Printer& printer, const T& a) {\n            if constexpr\
+    \ (printer.debug) printer.print_char('{');\n            if (std::empty(a)) return;\n\
+    \            for (auto i = std::begin(a); ; ) {\n                PrintFunction<range_value_t<T>>::print(printer,\
+    \ *i);\n                if (++i != std::end(a)) printer.print_sep();\n       \
+    \         else break;\n            }\n            if constexpr (printer.debug)\
+    \ printer.print_char('}');\n        }\n    };\n\n    template<class Tuple, std::size_t\
+    \ idx>\n    struct PrintFunction<Indexed<Tuple, idx>> {\n        template<class\
+    \ Printer>\n        struct PrinterWrapper: Printer {\n            template<class\
+    \ T>\n            void print_arithmetic(T a) {\n                Printer::print_arithmetic(a\
+    \ + 1);\n            }\n        };\n        template<class Printer>\n        static\
+    \ void print(Printer& printer, const Indexed<Tuple, idx>& a) {\n            PrinterWrapper<Printer>&\
+    \ printer_wrapper = static_cast<PrinterWrapper<Printer>&>(printer);\n        \
+    \    PrintFunction<Tuple>::print(printer_wrapper, a.args_tuple);\n        }\n\
+    \    };\n\n    // \u6A19\u6E96\u51FA\u529B\u3001\u6A19\u6E96\u30A8\u30E9\u30FC\
+    \u51FA\u529B\u306B\u5024\u3092\u51FA\u529B\u3059\u308B(\u6539\u884C\u3001\u533A\
+    \u5207\u308A\u6587\u5B57\u306A\u3057)\n    Printer<Writer<>::iterator, false,\
     \ false> print{output.begin()}, eprint{error.begin()};\n    // \u6A19\u6E96\u51FA\
     \u529B\u3001\u6A19\u6E96\u30A8\u30E9\u30FC\u51FA\u529B\u306B\u5024\u3092\u51FA\
     \u529B\u3059\u308B(\u6539\u884C\u3001\u533A\u5207\u308A\u6587\u5B57\u3042\u308A\
@@ -522,7 +532,7 @@ data:
   - template/template.hpp
   - template/macro.hpp
   - all.hpp
-  timestamp: '2023-02-10 23:05:45+09:00'
+  timestamp: '2023-02-11 01:12:45+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp
