@@ -3,13 +3,13 @@ data:
   libraryCategories:
   - name: algorithm
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: algorithm/Hash.hpp
       title: algorithm/Hash.hpp
     - icon: ':warning:'
       path: algorithm/algorithm.hpp
       title: algorithm/algorithm.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: algorithm/bit.hpp
       title: algorithm/bit.hpp
   - name: all
@@ -41,13 +41,13 @@ data:
     - icon: ':warning:'
       path: math/Barrett.hpp
       title: math/Barrett.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: math/DynamicModInt.hpp
       title: math/DynamicModInt.hpp
     - icon: ':warning:'
       path: math/ModInt.hpp
       title: math/ModInt.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: math/Montgomery.hpp
       title: math/Montgomery.hpp
     - icon: ':warning:'
@@ -59,10 +59,10 @@ data:
     - icon: ':warning:'
       path: math/euler_phi.hpp
       title: math/euler_phi.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: math/factorize.hpp
       title: math/factorize.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: math/is_prime.hpp
       title: math/is_prime.hpp
     - icon: ':warning:'
@@ -71,24 +71,24 @@ data:
     - icon: ':warning:'
       path: math/mod.hpp
       title: math/mod.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: math/power.hpp
       title: math/power.hpp
   - name: meta
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: meta/constant.hpp
       title: meta/constant.hpp
     - icon: ':warning:'
       path: meta/meta.hpp
       title: meta/meta.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: meta/setting.hpp
       title: meta/setting.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: meta/trait.hpp
       title: meta/trait.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: meta/tuple_like.hpp
       title: meta/tuple_like.hpp
   - name: range
@@ -121,16 +121,16 @@ data:
       title: structure/structure.hpp
   - name: system
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: system/in.hpp
       title: system/in.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: system/io_option.hpp
       title: system/io_option.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: system/out.hpp
       title: system/out.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: system/system.hpp
       title: system/system.hpp
   - name: template
@@ -173,7 +173,7 @@ data:
       title: verify/aoj/PrimeNumber.test.cpp
   - name: verify/yosupo
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/yosupo/factorize.test.cpp
       title: verify/yosupo/factorize.test.cpp
     - icon: ':heavy_check_mark:'
