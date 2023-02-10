@@ -1,49 +1,49 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
   - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: system/io_option.hpp
     title: system/io_option.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: system/out.hpp
     title: system/out.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: system/system.hpp
     title: system/system.hpp
   _extendedRequiredBy: []
@@ -719,7 +719,7 @@ data:
     \ {\r\n                printer.print_sep();\r\n                print<i + 1>(printer,\
     \ a);\r\n            } else if constexpr (printer.debug) printer.print_char('}');\r\
     \n        }\r\n    };\r\n\r\n    template<class T>\r\n    struct PrintFunction<T,\
-    \ std::enable_if_t<is_range_v<T> && !std::is_convertible_v<std::string_view>>>\
+    \ std::enable_if_t<is_range_v<T> && !std::is_convertible_v<T, std::string_view>>>\
     \ {\r\n        template<class Printer>\r\n        static void print(Printer& printer,\
     \ const T& a) {\r\n            if constexpr (printer.debug) printer.print_char('{');\r\
     \n            if (std::empty(a)) return;\r\n            for (auto i = std::begin(a);\
@@ -770,7 +770,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2023-02-11 02:36:17+09:00'
+  timestamp: '2023-02-11 03:00:13+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/yosupo/factorize.test.cpp

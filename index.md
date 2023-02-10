@@ -3,13 +3,13 @@ data:
   libraryCategories:
   - name: algorithm
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: algorithm/Hash.hpp
       title: algorithm/Hash.hpp
     - icon: ':warning:'
       path: algorithm/algorithm.hpp
       title: algorithm/algorithm.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: algorithm/bit.hpp
       title: algorithm/bit.hpp
   - name: all
@@ -22,9 +22,6 @@ data:
     - icon: ':warning:'
       path: all.hpp
       title: all.hpp
-    - icon: ':warning:'
-      path: test.cpp
-      title: test.cpp
   - name: function
     pages:
     - icon: ':warning:'
@@ -36,7 +33,7 @@ data:
     - icon: ':warning:'
       path: function/function.hpp
       title: function/function.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: function/monoid.hpp
       title: function/monoid.hpp
   - name: math
@@ -44,13 +41,13 @@ data:
     - icon: ':warning:'
       path: math/Barrett.hpp
       title: math/Barrett.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: math/DynamicModInt.hpp
       title: math/DynamicModInt.hpp
     - icon: ':warning:'
       path: math/ModInt.hpp
       title: math/ModInt.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: math/Montgomery.hpp
       title: math/Montgomery.hpp
     - icon: ':warning:'
@@ -65,7 +62,7 @@ data:
     - icon: ':x:'
       path: math/factorize.hpp
       title: math/factorize.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: math/is_prime.hpp
       title: math/is_prime.hpp
     - icon: ':warning:'
@@ -74,24 +71,24 @@ data:
     - icon: ':warning:'
       path: math/mod.hpp
       title: math/mod.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: math/power.hpp
       title: math/power.hpp
   - name: meta
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: meta/constant.hpp
       title: meta/constant.hpp
     - icon: ':warning:'
       path: meta/meta.hpp
       title: meta/meta.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: meta/setting.hpp
       title: meta/setting.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: meta/trait.hpp
       title: meta/trait.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: meta/tuple_like.hpp
       title: meta/tuple_like.hpp
   - name: range
@@ -113,10 +110,10 @@ data:
       title: range/range_base.hpp
   - name: structure
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: structure/FenwickTree.hpp
       title: structure/FenwickTree.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: structure/UnionFind.hpp
       title: structure/UnionFind.hpp
     - icon: ':warning:'
@@ -124,16 +121,16 @@ data:
       title: structure/structure.hpp
   - name: system
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: system/in.hpp
       title: system/in.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: system/io_option.hpp
       title: system/io_option.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: system/out.hpp
       title: system/out.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: system/system.hpp
       title: system/system.hpp
   - name: template
@@ -171,7 +168,7 @@ data:
   verificationCategories:
   - name: verify/aoj
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/aoj/PrimeNumber.test.cpp
       title: verify/aoj/PrimeNumber.test.cpp
   - name: verify/yosupo
@@ -179,13 +176,13 @@ data:
     - icon: ':x:'
       path: verify/yosupo/factorize.test.cpp
       title: verify/yosupo/factorize.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/yosupo/many_aplusb.test.cpp
       title: verify/yosupo/many_aplusb.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/yosupo/point_add_range_sum.test.cpp
       title: verify/yosupo/point_add_range_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/yosupo/unionfind.test.cpp
       title: verify/yosupo/unionfind.test.cpp
 layout: toppage

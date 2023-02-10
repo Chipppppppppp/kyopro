@@ -8,13 +8,13 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: system/out.hpp
     title: system/out.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: system/system.hpp
     title: system/system.hpp
   - icon: ':warning:'
@@ -23,28 +23,25 @@ data:
   - icon: ':warning:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':warning:'
-    path: test.cpp
-    title: test.cpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
   - icon: ':x:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo/many_aplusb.test.cpp
     title: verify/yosupo/many_aplusb.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo/point_add_range_sum.test.cpp
     title: verify/yosupo/point_add_range_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"system/io_option.hpp\"\n#include <cstddef>\r\n#include <tuple>\r\
@@ -81,10 +78,9 @@ data:
   - system/system.hpp
   - template/template.hpp
   - template/macro.hpp
-  - test.cpp
   - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp
   - verify/yosupo/point_add_range_sum.test.cpp

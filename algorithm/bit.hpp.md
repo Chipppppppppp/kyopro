@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -23,7 +23,7 @@ data:
   - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
@@ -36,7 +36,7 @@ data:
     path: template/template.hpp
     title: template/template.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
   - icon: ':x:'
@@ -44,7 +44,7 @@ data:
     title: verify/yosupo/factorize.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"algorithm/bit.hpp\"\n#include <limits>\r\n#include <type_traits>\r\
@@ -297,7 +297,7 @@ data:
   - algorithm/algorithm.hpp
   - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp
   - verify/yosupo/factorize.test.cpp

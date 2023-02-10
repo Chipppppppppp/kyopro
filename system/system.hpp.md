@@ -1,25 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: system/io_option.hpp
     title: system/io_option.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: system/out.hpp
     title: system/out.hpp
   _extendedRequiredBy:
@@ -36,24 +36,24 @@ data:
     path: template/template.hpp
     title: template/template.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
   - icon: ':x:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo/many_aplusb.test.cpp
     title: verify/yosupo/many_aplusb.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo/point_add_range_sum.test.cpp
     title: verify/yosupo/point_add_range_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"system/in.hpp\"\n#include <unistd.h>\r\n#include <array>\r\
@@ -490,7 +490,7 @@ data:
     \ {\r\n                printer.print_sep();\r\n                print<i + 1>(printer,\
     \ a);\r\n            } else if constexpr (printer.debug) printer.print_char('}');\r\
     \n        }\r\n    };\r\n\r\n    template<class T>\r\n    struct PrintFunction<T,\
-    \ std::enable_if_t<is_range_v<T> && !std::is_convertible_v<std::string_view>>>\
+    \ std::enable_if_t<is_range_v<T> && !std::is_convertible_v<T, std::string_view>>>\
     \ {\r\n        template<class Printer>\r\n        static void print(Printer& printer,\
     \ const T& a) {\r\n            if constexpr (printer.debug) printer.print_char('{');\r\
     \n            if (std::empty(a)) return;\r\n            for (auto i = std::begin(a);\
@@ -530,8 +530,8 @@ data:
   - template/template.hpp
   - template/macro.hpp
   - all.hpp
-  timestamp: '2023-02-11 02:36:17+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-02-11 03:00:13+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp
   - verify/yosupo/point_add_range_sum.test.cpp

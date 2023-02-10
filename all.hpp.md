@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
   - icon: ':warning:'
     path: algorithm/algorithm.hpp
     title: algorithm/algorithm.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
@@ -22,19 +22,19 @@ data:
   - icon: ':warning:'
     path: function/function.hpp
     title: function/function.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
   - icon: ':warning:'
     path: math/Barrett.hpp
     title: math/Barrett.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
   - icon: ':warning:'
@@ -49,7 +49,7 @@ data:
   - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
@@ -58,22 +58,22 @@ data:
   - icon: ':warning:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: meta/constant.hpp
     title: meta/constant.hpp
   - icon: ':warning:'
     path: meta/meta.hpp
     title: meta/meta.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
   - icon: ':warning:'
@@ -91,25 +91,25 @@ data:
   - icon: ':warning:'
     path: range/range_base.hpp
     title: range/range_base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/FenwickTree.hpp
     title: structure/FenwickTree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: structure/UnionFind.hpp
     title: structure/UnionFind.hpp
   - icon: ':warning:'
     path: structure/structure.hpp
     title: structure/structure.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: system/io_option.hpp
     title: system/io_option.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: system/out.hpp
     title: system/out.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: system/system.hpp
     title: system/system.hpp
   - icon: ':warning:'
@@ -1218,7 +1218,7 @@ data:
     \ {\r\n                printer.print_sep();\r\n                print<i + 1>(printer,\
     \ a);\r\n            } else if constexpr (printer.debug) printer.print_char('}');\r\
     \n        }\r\n    };\r\n\r\n    template<class T>\r\n    struct PrintFunction<T,\
-    \ std::enable_if_t<is_range_v<T> && !std::is_convertible_v<std::string_view>>>\
+    \ std::enable_if_t<is_range_v<T> && !std::is_convertible_v<T, std::string_view>>>\
     \ {\r\n        template<class Printer>\r\n        static void print(Printer& printer,\
     \ const T& a) {\r\n            if constexpr (printer.debug) printer.print_char('{');\r\
     \n            if (std::empty(a)) return;\r\n            for (auto i = std::begin(a);\
@@ -1304,21 +1304,15 @@ data:
     \ bracket == 0) ++cnt;\r\n        }\r\n        return cnt;\r\n    }\r\n\r\n  \
     \  template<class F, std::size_t... idx>\r\n    auto read_impl(F&& f, std::index_sequence<idx...>)\
     \ {\r\n        return std::tuple{(static_cast<void>(idx), f())...};\r\n    }\r\
-    \n\r\n    Printer<Writer<>::iterator, true, true, true, true, true> debug_impl(output.begin());\r\
+    \n\r\n    Printer<Writer<>::iterator, true, true, true, true> debug_impl(output.begin());\r\
     \n\r\n    template<bool flag, std::size_t len>\r\n    void print_if(const char\
     \ (&s)[len]) {\r\n        if constexpr (flag) print(' ', s);\r\n    }\r\n\r\n\
-    \    struct LambdaArg {};\r\n} // namespace kpr::helper\r\n\r\n#define read(type_or_init,\
-    \ ...)                                                           \\\r\nauto [__VA_ARGS__]\
-    \ = (kpr::helper::read_impl(([]() {                                   \\\r\n \
-    \   using T = std::decay_t<decltype(*new type_or_init)>;                     \
-    \             \\\r\n    alignas(T) std::byte storage[sizeof(T)];             \
-    \                                 \\\r\n    T* p = new (storage) type_or_init;\
-    \                                                    \\\r\n    kpr::scan(*p);\
-    \                                                                     \\\r\n \
-    \   T res = std::move(*p);                                                   \
-    \             \\\r\n    p->~T();                                             \
-    \                                 \\\r\n    return res;                      \
-    \                                                     \\\r\n}), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\r\
+    \    struct LambdaArg {};\r\n} // namespace kpr::helper\r\n\r\n#include <iostream>\r\
+    \n#define read(type_or_init, ...) \\\r\nauto [__VA_ARGS__] = (kpr::helper::read_impl(([]()\
+    \ { \\\r\n    using T = std::decay_t<decltype(*new type_or_init)>; \\\r\n    alignas(T)\
+    \ std::byte storage[sizeof(T)]; \\\r\n    T* p = new (storage) type_or_init; \\\
+    \r\n    kpr::scan(*p); \\\r\n    T res = std::move(*p); \\\r\n    p->~T(); \\\r\
+    \n    return res; \\\r\n}), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\r\
     \n#define debug(...) (kpr::print('#', ' ', 'l', 'i', 'n', 'e', ' ', __LINE__,\
     \ ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__) != 0>(#__VA_ARGS__),\
     \ kpr::print('\\n'), kpr::helper::debug_impl(__VA_ARGS__))\r\n\r\n#define KYOPRO_OVERLOAD_MACRO(_1,\
@@ -1334,58 +1328,58 @@ data:
     \ _2, _3, _4) break; case _1: case _2: case _3: case _4:\r\n#define match(...)\
     \ KYOPRO_OVERLOAD_MACRO(__VA_ARGS__, KYOPRO_MATCH4, KYOPRO_MATCH3, KYOPRO_MATCH2,\
     \ KYOPRO_MATCH1)(__VA_ARGS__)\r\n#define otherwise break; default:\r\n\r\n#define\
-    \ $(...)\\\r\n([&](auto&&... _args) {\\\r\n    auto _args_tuple = std::forward_as_tuple(_args...);\\\
-    \r\n    if constexpr (sizeof...(_args) == 0) {\\\r\n        return ([&]() { return\
-    \ (__VA_ARGS__); })();\\\r\n    } else if constexpr (sizeof...(_args) == 1) {\\\
-    \r\n        return ([&](auto&& $0) { return (__VA_ARGS__); })(get<0>(_args_tuple));\\\
-    \r\n    } else if constexpr (sizeof...(_args) == 2) {\\\r\n        return ([&](auto&&\
-    \ $0, auto&& $1) { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple));\\\
-    \r\n    } else if constexpr (sizeof...(_args) == 3) {\\\r\n        return ([&](auto&&\
-    \ $0, auto&& $1, auto&& $2) { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple),\
-    \ get<2>(_args_tuple));\\\r\n    } else if constexpr (sizeof...(_args) == 4) {\\\
-    \r\n        return ([&](auto&& $0, auto&& $1, auto&& $2, auto&& $3) { return (__VA_ARGS__);\
-    \ })(get<0>(_args_tuple), get<1>(_args_tuple), get<2>(_args_tuple), get<3>(_args_tuple));\\\
-    \r\n    }\\\r\n})\r\n\r\n#define all(...) std::begin(__VA_ARGS__), std::end(__VA_ARGS__)\r\
-    \n#define rall(...) std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\r\n#line\
-    \ 4 \"template/make_array.hpp\"\n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline\
-    \ constexpr struct {\r\n        template<class T>\r\n        constexpr auto operator\
-    \ ()(const T& init = {}) noexcept {\r\n            return init;\r\n        }\r\
-    \n\r\n        template<class T, std::size_t length, std::size_t... lengths>\r\n\
-    \        constexpr auto operator ()(const T& init = {}) noexcept {\r\n       \
-    \     auto elm = operator ()<T, lengths...>(init);\r\n            std::array<decltype(elm),\
-    \ length> res;\r\n            for (auto& i: res) i = elm;\r\n            return\
-    \ res;\r\n        }\r\n    } make_array;\r\n} // namespace kpr\r\n#line 6 \"template/make_vector.hpp\"\
-    \n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr struct {\r\n  \
-    \      template<std::size_t idx = 0, std::size_t n, class T>\r\n        auto operator\
-    \ ()(const std::size_t (&d)[n], T&& init) noexcept {\r\n            if constexpr\
-    \ (idx < n) return std::vector(d[idx], operator ()<idx + 1>(d, std::forward<T>(init)));\r\
-    \n            else return init;\r\n        }\r\n\r\n        template<class T,\
-    \ std::size_t idx = 0, std::size_t n>\r\n        auto operator ()(const std::size_t\
-    \ (&d)[n], const T& init = {}) noexcept {\r\n            if constexpr (idx < n)\
-    \ return std::vector(d[idx], operator ()<idx + 1>(d, init));\r\n            else\
-    \ return init;\r\n        }\r\n    } make_vector;\r\n} // namespace kpr\r\n#line\
-    \ 3 \"template/stl.hpp\"\n#include <cctype>\r\n#include <cerrno>\r\n#include <cfloat>\r\
-    \n#include <ciso646>\r\n#include <climits>\r\n#include <clocale>\r\n#line 10 \"\
-    template/stl.hpp\"\n#include <csetjmp>\r\n#include <csignal>\r\n#include <cstdarg>\r\
-    \n#line 15 \"template/stl.hpp\"\n#include <cstdlib>\r\n#include <cstring>\r\n\
-    #include <ctime>\r\n\r\n#include <ccomplex>\r\n#include <cfenv>\r\n#include <cinttypes>\r\
-    \n#include <cstdalign>\r\n#include <cstdbool>\r\n#line 25 \"template/stl.hpp\"\
-    \n#include <ctgmath>\r\n#include <cwchar>\r\n#include <cwctype>\r\n\r\n#line 31\
-    \ \"template/stl.hpp\"\n#include <complex>\r\n#include <deque>\r\n#include <exception>\r\
-    \n#include <fstream>\r\n#line 36 \"template/stl.hpp\"\n#include <iomanip>\r\n\
-    #include <ios>\r\n#include <iosfwd>\r\n#include <iostream>\r\n#include <istream>\r\
-    \n#line 43 \"template/stl.hpp\"\n#include <list>\r\n#include <locale>\r\n#line\
-    \ 47 \"template/stl.hpp\"\n#include <new>\r\n#line 49 \"template/stl.hpp\"\n#include\
-    \ <ostream>\r\n#line 52 \"template/stl.hpp\"\n#include <sstream>\r\n#line 54 \"\
-    template/stl.hpp\"\n#include <stdexcept>\r\n#include <streambuf>\r\n#line 57 \"\
-    template/stl.hpp\"\n#include <typeinfo>\r\n#line 59 \"template/stl.hpp\"\n#include\
-    \ <valarray>\r\n#line 61 \"template/stl.hpp\"\n\r\n#line 63 \"template/stl.hpp\"\
-    \n#include <atomic>\r\n#include <chrono>\r\n#include <condition_variable>\r\n\
-    #include <forward_list>\r\n#include <future>\r\n#include <initializer_list>\r\n\
-    #include <mutex>\r\n#line 71 \"template/stl.hpp\"\n#include <ratio>\r\n#include\
-    \ <regex>\r\n#include <scoped_allocator>\r\n#include <system_error>\r\n#include\
-    \ <thread>\r\n#line 77 \"template/stl.hpp\"\n#include <typeindex>\r\n#line 4 \"\
-    all.hpp\"\n"
+    \ $(...) \\\r\n([&](auto&&... _args) { \\\r\n    auto _args_tuple = std::forward_as_tuple(_args...);\
+    \ \\\r\n    if constexpr (sizeof...(_args) == 0) { \\\r\n        return ([&]()\
+    \ { return (__VA_ARGS__); })(); \\\r\n    } else if constexpr (sizeof...(_args)\
+    \ == 1) { \\\r\n        return ([&](auto&& $0) { return (__VA_ARGS__); })(get<0>(_args_tuple));\
+    \ \\\r\n    } else if constexpr (sizeof...(_args) == 2) { \\\r\n        return\
+    \ ([&](auto&& $0, auto&& $1) { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple));\
+    \ \\\r\n    } else if constexpr (sizeof...(_args) == 3) { \\\r\n        return\
+    \ ([&](auto&& $0, auto&& $1, auto&& $2) { return (__VA_ARGS__); })(get<0>(_args_tuple),\
+    \ get<1>(_args_tuple), get<2>(_args_tuple)); \\\r\n    } else if constexpr (sizeof...(_args)\
+    \ == 4) { \\\r\n        return ([&](auto&& $0, auto&& $1, auto&& $2, auto&& $3)\
+    \ { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple), get<2>(_args_tuple),\
+    \ get<3>(_args_tuple)); \\\r\n    } \\\r\n})\r\n\r\n#define all(...) std::begin(__VA_ARGS__),\
+    \ std::end(__VA_ARGS__)\r\n#define rall(...) std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\r\
+    \n#line 4 \"template/make_array.hpp\"\n\r\nnamespace kpr {\r\n    [[maybe_unused]]\
+    \ inline constexpr struct {\r\n        template<class T>\r\n        constexpr\
+    \ auto operator ()(const T& init = {}) noexcept {\r\n            return init;\r\
+    \n        }\r\n\r\n        template<class T, std::size_t length, std::size_t...\
+    \ lengths>\r\n        constexpr auto operator ()(const T& init = {}) noexcept\
+    \ {\r\n            auto elm = operator ()<T, lengths...>(init);\r\n          \
+    \  std::array<decltype(elm), length> res;\r\n            for (auto& i: res) i\
+    \ = elm;\r\n            return res;\r\n        }\r\n    } make_array;\r\n} //\
+    \ namespace kpr\r\n#line 6 \"template/make_vector.hpp\"\n\r\nnamespace kpr {\r\
+    \n    [[maybe_unused]] inline constexpr struct {\r\n        template<std::size_t\
+    \ idx = 0, std::size_t n, class T>\r\n        auto operator ()(const std::size_t\
+    \ (&d)[n], T&& init) noexcept {\r\n            if constexpr (idx < n) return std::vector(d[idx],\
+    \ operator ()<idx + 1>(d, std::forward<T>(init)));\r\n            else return\
+    \ init;\r\n        }\r\n\r\n        template<class T, std::size_t idx = 0, std::size_t\
+    \ n>\r\n        auto operator ()(const std::size_t (&d)[n], const T& init = {})\
+    \ noexcept {\r\n            if constexpr (idx < n) return std::vector(d[idx],\
+    \ operator ()<idx + 1>(d, init));\r\n            else return init;\r\n       \
+    \ }\r\n    } make_vector;\r\n} // namespace kpr\r\n#line 3 \"template/stl.hpp\"\
+    \n#include <cctype>\r\n#include <cerrno>\r\n#include <cfloat>\r\n#include <ciso646>\r\
+    \n#include <climits>\r\n#include <clocale>\r\n#line 10 \"template/stl.hpp\"\n\
+    #include <csetjmp>\r\n#include <csignal>\r\n#include <cstdarg>\r\n#line 15 \"\
+    template/stl.hpp\"\n#include <cstdlib>\r\n#include <cstring>\r\n#include <ctime>\r\
+    \n\r\n#include <ccomplex>\r\n#include <cfenv>\r\n#include <cinttypes>\r\n#include\
+    \ <cstdalign>\r\n#include <cstdbool>\r\n#line 25 \"template/stl.hpp\"\n#include\
+    \ <ctgmath>\r\n#include <cwchar>\r\n#include <cwctype>\r\n\r\n#line 31 \"template/stl.hpp\"\
+    \n#include <complex>\r\n#include <deque>\r\n#include <exception>\r\n#include <fstream>\r\
+    \n#line 36 \"template/stl.hpp\"\n#include <iomanip>\r\n#include <ios>\r\n#include\
+    \ <iosfwd>\r\n#line 40 \"template/stl.hpp\"\n#include <istream>\r\n#line 43 \"\
+    template/stl.hpp\"\n#include <list>\r\n#include <locale>\r\n#line 47 \"template/stl.hpp\"\
+    \n#include <new>\r\n#line 49 \"template/stl.hpp\"\n#include <ostream>\r\n#line\
+    \ 52 \"template/stl.hpp\"\n#include <sstream>\r\n#line 54 \"template/stl.hpp\"\
+    \n#include <stdexcept>\r\n#include <streambuf>\r\n#line 57 \"template/stl.hpp\"\
+    \n#include <typeinfo>\r\n#line 59 \"template/stl.hpp\"\n#include <valarray>\r\n\
+    #line 61 \"template/stl.hpp\"\n\r\n#line 63 \"template/stl.hpp\"\n#include <atomic>\r\
+    \n#include <chrono>\r\n#include <condition_variable>\r\n#include <forward_list>\r\
+    \n#include <future>\r\n#include <initializer_list>\r\n#include <mutex>\r\n#line\
+    \ 71 \"template/stl.hpp\"\n#include <ratio>\r\n#include <regex>\r\n#include <scoped_allocator>\r\
+    \n#include <system_error>\r\n#include <thread>\r\n#line 77 \"template/stl.hpp\"\
+    \n#include <typeindex>\r\n#line 4 \"all.hpp\"\n"
   code: "#pragma once\r\n#include \"all/all.hpp\"\r\n#include \"template/template.hpp\"\
     \r\n"
   dependsOn:
@@ -1439,7 +1433,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2023-02-11 02:36:17+09:00'
+  timestamp: '2023-02-11 03:00:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp

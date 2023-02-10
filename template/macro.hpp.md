@@ -1,28 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: system/io_option.hpp
     title: system/io_option.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: system/out.hpp
     title: system/out.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: system/system.hpp
     title: system/system.hpp
   _extendedRequiredBy:
@@ -473,7 +473,7 @@ data:
     \ {\r\n                printer.print_sep();\r\n                print<i + 1>(printer,\
     \ a);\r\n            } else if constexpr (printer.debug) printer.print_char('}');\r\
     \n        }\r\n    };\r\n\r\n    template<class T>\r\n    struct PrintFunction<T,\
-    \ std::enable_if_t<is_range_v<T> && !std::is_convertible_v<std::string_view>>>\
+    \ std::enable_if_t<is_range_v<T> && !std::is_convertible_v<T, std::string_view>>>\
     \ {\r\n        template<class Printer>\r\n        static void print(Printer& printer,\
     \ const T& a) {\r\n            if constexpr (printer.debug) printer.print_char('{');\r\
     \n            if (std::empty(a)) return;\r\n            for (auto i = std::begin(a);\
@@ -505,21 +505,15 @@ data:
     \ == 0) ++cnt;\r\n        }\r\n        return cnt;\r\n    }\r\n\r\n    template<class\
     \ F, std::size_t... idx>\r\n    auto read_impl(F&& f, std::index_sequence<idx...>)\
     \ {\r\n        return std::tuple{(static_cast<void>(idx), f())...};\r\n    }\r\
-    \n\r\n    Printer<Writer<>::iterator, true, true, true, true, true> debug_impl(output.begin());\r\
+    \n\r\n    Printer<Writer<>::iterator, true, true, true, true> debug_impl(output.begin());\r\
     \n\r\n    template<bool flag, std::size_t len>\r\n    void print_if(const char\
     \ (&s)[len]) {\r\n        if constexpr (flag) print(' ', s);\r\n    }\r\n\r\n\
-    \    struct LambdaArg {};\r\n} // namespace kpr::helper\r\n\r\n#define read(type_or_init,\
-    \ ...)                                                           \\\r\nauto [__VA_ARGS__]\
-    \ = (kpr::helper::read_impl(([]() {                                   \\\r\n \
-    \   using T = std::decay_t<decltype(*new type_or_init)>;                     \
-    \             \\\r\n    alignas(T) std::byte storage[sizeof(T)];             \
-    \                                 \\\r\n    T* p = new (storage) type_or_init;\
-    \                                                    \\\r\n    kpr::scan(*p);\
-    \                                                                     \\\r\n \
-    \   T res = std::move(*p);                                                   \
-    \             \\\r\n    p->~T();                                             \
-    \                                 \\\r\n    return res;                      \
-    \                                                     \\\r\n}), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\r\
+    \    struct LambdaArg {};\r\n} // namespace kpr::helper\r\n\r\n#include <iostream>\r\
+    \n#define read(type_or_init, ...) \\\r\nauto [__VA_ARGS__] = (kpr::helper::read_impl(([]()\
+    \ { \\\r\n    using T = std::decay_t<decltype(*new type_or_init)>; \\\r\n    alignas(T)\
+    \ std::byte storage[sizeof(T)]; \\\r\n    T* p = new (storage) type_or_init; \\\
+    \r\n    kpr::scan(*p); \\\r\n    T res = std::move(*p); \\\r\n    p->~T(); \\\r\
+    \n    return res; \\\r\n}), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\r\
     \n#define debug(...) (kpr::print('#', ' ', 'l', 'i', 'n', 'e', ' ', __LINE__,\
     \ ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__) != 0>(#__VA_ARGS__),\
     \ kpr::print('\\n'), kpr::helper::debug_impl(__VA_ARGS__))\r\n\r\n#define KYOPRO_OVERLOAD_MACRO(_1,\
@@ -535,19 +529,20 @@ data:
     \ _2, _3, _4) break; case _1: case _2: case _3: case _4:\r\n#define match(...)\
     \ KYOPRO_OVERLOAD_MACRO(__VA_ARGS__, KYOPRO_MATCH4, KYOPRO_MATCH3, KYOPRO_MATCH2,\
     \ KYOPRO_MATCH1)(__VA_ARGS__)\r\n#define otherwise break; default:\r\n\r\n#define\
-    \ $(...)\\\r\n([&](auto&&... _args) {\\\r\n    auto _args_tuple = std::forward_as_tuple(_args...);\\\
-    \r\n    if constexpr (sizeof...(_args) == 0) {\\\r\n        return ([&]() { return\
-    \ (__VA_ARGS__); })();\\\r\n    } else if constexpr (sizeof...(_args) == 1) {\\\
-    \r\n        return ([&](auto&& $0) { return (__VA_ARGS__); })(get<0>(_args_tuple));\\\
-    \r\n    } else if constexpr (sizeof...(_args) == 2) {\\\r\n        return ([&](auto&&\
-    \ $0, auto&& $1) { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple));\\\
-    \r\n    } else if constexpr (sizeof...(_args) == 3) {\\\r\n        return ([&](auto&&\
-    \ $0, auto&& $1, auto&& $2) { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple),\
-    \ get<2>(_args_tuple));\\\r\n    } else if constexpr (sizeof...(_args) == 4) {\\\
-    \r\n        return ([&](auto&& $0, auto&& $1, auto&& $2, auto&& $3) { return (__VA_ARGS__);\
-    \ })(get<0>(_args_tuple), get<1>(_args_tuple), get<2>(_args_tuple), get<3>(_args_tuple));\\\
-    \r\n    }\\\r\n})\r\n\r\n#define all(...) std::begin(__VA_ARGS__), std::end(__VA_ARGS__)\r\
-    \n#define rall(...) std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\r\n"
+    \ $(...) \\\r\n([&](auto&&... _args) { \\\r\n    auto _args_tuple = std::forward_as_tuple(_args...);\
+    \ \\\r\n    if constexpr (sizeof...(_args) == 0) { \\\r\n        return ([&]()\
+    \ { return (__VA_ARGS__); })(); \\\r\n    } else if constexpr (sizeof...(_args)\
+    \ == 1) { \\\r\n        return ([&](auto&& $0) { return (__VA_ARGS__); })(get<0>(_args_tuple));\
+    \ \\\r\n    } else if constexpr (sizeof...(_args) == 2) { \\\r\n        return\
+    \ ([&](auto&& $0, auto&& $1) { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple));\
+    \ \\\r\n    } else if constexpr (sizeof...(_args) == 3) { \\\r\n        return\
+    \ ([&](auto&& $0, auto&& $1, auto&& $2) { return (__VA_ARGS__); })(get<0>(_args_tuple),\
+    \ get<1>(_args_tuple), get<2>(_args_tuple)); \\\r\n    } else if constexpr (sizeof...(_args)\
+    \ == 4) { \\\r\n        return ([&](auto&& $0, auto&& $1, auto&& $2, auto&& $3)\
+    \ { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple), get<2>(_args_tuple),\
+    \ get<3>(_args_tuple)); \\\r\n    } \\\r\n})\r\n\r\n#define all(...) std::begin(__VA_ARGS__),\
+    \ std::end(__VA_ARGS__)\r\n#define rall(...) std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\r\
+    \n"
   code: "#pragma once\r\n#include <cstddef>\r\n#include <iterator>\r\n#include <memory>\r\
     \n#include <tuple>\r\n#include <type_traits>\r\n#include <utility>\r\n#include\
     \ \"../system/system.hpp\"\r\n\r\nnamespace kpr::helper {\r\n    template<std::size_t\
@@ -559,21 +554,14 @@ data:
     \   return cnt;\r\n    }\r\n\r\n    template<class F, std::size_t... idx>\r\n\
     \    auto read_impl(F&& f, std::index_sequence<idx...>) {\r\n        return std::tuple{(static_cast<void>(idx),\
     \ f())...};\r\n    }\r\n\r\n    Printer<Writer<>::iterator, true, true, true,\
-    \ true, true> debug_impl(output.begin());\r\n\r\n    template<bool flag, std::size_t\
+    \ true> debug_impl(output.begin());\r\n\r\n    template<bool flag, std::size_t\
     \ len>\r\n    void print_if(const char (&s)[len]) {\r\n        if constexpr (flag)\
     \ print(' ', s);\r\n    }\r\n\r\n    struct LambdaArg {};\r\n} // namespace kpr::helper\r\
-    \n\r\n#define read(type_or_init, ...)                                        \
-    \                   \\\r\nauto [__VA_ARGS__] = (kpr::helper::read_impl(([]() {\
-    \                                   \\\r\n    using T = std::decay_t<decltype(*new\
-    \ type_or_init)>;                                  \\\r\n    alignas(T) std::byte\
-    \ storage[sizeof(T)];                                              \\\r\n    T*\
-    \ p = new (storage) type_or_init;                                            \
-    \        \\\r\n    kpr::scan(*p);                                            \
-    \                         \\\r\n    T res = std::move(*p);                   \
-    \                                             \\\r\n    p->~T();             \
-    \                                                                 \\\r\n    return\
-    \ res;                                                                       \
-    \    \\\r\n}), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\r\
+    \n\r\n#include <iostream>\r\n#define read(type_or_init, ...) \\\r\nauto [__VA_ARGS__]\
+    \ = (kpr::helper::read_impl(([]() { \\\r\n    using T = std::decay_t<decltype(*new\
+    \ type_or_init)>; \\\r\n    alignas(T) std::byte storage[sizeof(T)]; \\\r\n  \
+    \  T* p = new (storage) type_or_init; \\\r\n    kpr::scan(*p); \\\r\n    T res\
+    \ = std::move(*p); \\\r\n    p->~T(); \\\r\n    return res; \\\r\n}), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\r\
     \n#define debug(...) (kpr::print('#', ' ', 'l', 'i', 'n', 'e', ' ', __LINE__,\
     \ ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__) != 0>(#__VA_ARGS__),\
     \ kpr::print('\\n'), kpr::helper::debug_impl(__VA_ARGS__))\r\n\r\n#define KYOPRO_OVERLOAD_MACRO(_1,\
@@ -589,19 +577,20 @@ data:
     \ _2, _3, _4) break; case _1: case _2: case _3: case _4:\r\n#define match(...)\
     \ KYOPRO_OVERLOAD_MACRO(__VA_ARGS__, KYOPRO_MATCH4, KYOPRO_MATCH3, KYOPRO_MATCH2,\
     \ KYOPRO_MATCH1)(__VA_ARGS__)\r\n#define otherwise break; default:\r\n\r\n#define\
-    \ $(...)\\\r\n([&](auto&&... _args) {\\\r\n    auto _args_tuple = std::forward_as_tuple(_args...);\\\
-    \r\n    if constexpr (sizeof...(_args) == 0) {\\\r\n        return ([&]() { return\
-    \ (__VA_ARGS__); })();\\\r\n    } else if constexpr (sizeof...(_args) == 1) {\\\
-    \r\n        return ([&](auto&& $0) { return (__VA_ARGS__); })(get<0>(_args_tuple));\\\
-    \r\n    } else if constexpr (sizeof...(_args) == 2) {\\\r\n        return ([&](auto&&\
-    \ $0, auto&& $1) { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple));\\\
-    \r\n    } else if constexpr (sizeof...(_args) == 3) {\\\r\n        return ([&](auto&&\
-    \ $0, auto&& $1, auto&& $2) { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple),\
-    \ get<2>(_args_tuple));\\\r\n    } else if constexpr (sizeof...(_args) == 4) {\\\
-    \r\n        return ([&](auto&& $0, auto&& $1, auto&& $2, auto&& $3) { return (__VA_ARGS__);\
-    \ })(get<0>(_args_tuple), get<1>(_args_tuple), get<2>(_args_tuple), get<3>(_args_tuple));\\\
-    \r\n    }\\\r\n})\r\n\r\n#define all(...) std::begin(__VA_ARGS__), std::end(__VA_ARGS__)\r\
-    \n#define rall(...) std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\r\n"
+    \ $(...) \\\r\n([&](auto&&... _args) { \\\r\n    auto _args_tuple = std::forward_as_tuple(_args...);\
+    \ \\\r\n    if constexpr (sizeof...(_args) == 0) { \\\r\n        return ([&]()\
+    \ { return (__VA_ARGS__); })(); \\\r\n    } else if constexpr (sizeof...(_args)\
+    \ == 1) { \\\r\n        return ([&](auto&& $0) { return (__VA_ARGS__); })(get<0>(_args_tuple));\
+    \ \\\r\n    } else if constexpr (sizeof...(_args) == 2) { \\\r\n        return\
+    \ ([&](auto&& $0, auto&& $1) { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple));\
+    \ \\\r\n    } else if constexpr (sizeof...(_args) == 3) { \\\r\n        return\
+    \ ([&](auto&& $0, auto&& $1, auto&& $2) { return (__VA_ARGS__); })(get<0>(_args_tuple),\
+    \ get<1>(_args_tuple), get<2>(_args_tuple)); \\\r\n    } else if constexpr (sizeof...(_args)\
+    \ == 4) { \\\r\n        return ([&](auto&& $0, auto&& $1, auto&& $2, auto&& $3)\
+    \ { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple), get<2>(_args_tuple),\
+    \ get<3>(_args_tuple)); \\\r\n    } \\\r\n})\r\n\r\n#define all(...) std::begin(__VA_ARGS__),\
+    \ std::end(__VA_ARGS__)\r\n#define rall(...) std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\r\
+    \n"
   dependsOn:
   - system/system.hpp
   - system/in.hpp
@@ -616,7 +605,7 @@ data:
   requiredBy:
   - template/template.hpp
   - all.hpp
-  timestamp: '2023-02-11 02:36:17+09:00'
+  timestamp: '2023-02-11 03:00:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/macro.hpp
