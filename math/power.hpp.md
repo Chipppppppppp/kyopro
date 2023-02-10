@@ -77,18 +77,19 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"math/power.hpp\"\n#include <cstdint>\n\nnamespace kpr {\n\
-    \    [[maybe_unused]] inline constexpr struct {\n        template<class T>\n \
-    \       constexpr T operator ()(T a, std::uint_fast64_t n, T init = 1) const noexcept\
-    \ {\n            while (n > 0) {\n                if (n & 1) init *= a;\n    \
-    \            a *= a;\n                n >>= 1;\n            }\n            return\
-    \ init;\n        }\n    } power;\n} // namespace kpr\n"
-  code: "#pragma once\n#include <cstdint>\n\nnamespace kpr {\n    [[maybe_unused]]\
-    \ inline constexpr struct {\n        template<class T>\n        constexpr T operator\
-    \ ()(T a, std::uint_fast64_t n, T init = 1) const noexcept {\n            while\
-    \ (n > 0) {\n                if (n & 1) init *= a;\n                a *= a;\n\
-    \                n >>= 1;\n            }\n            return init;\n        }\n\
-    \    } power;\n} // namespace kpr\n"
+  bundledCode: "#line 2 \"math/power.hpp\"\n#include <cstdint>\r\n\r\nnamespace kpr\
+    \ {\r\n    [[maybe_unused]] inline constexpr struct {\r\n        template<class\
+    \ T>\r\n        constexpr T operator ()(T a, std::uint_fast64_t n, T init = 1)\
+    \ const noexcept {\r\n            while (n > 0) {\r\n                if (n & 1)\
+    \ init *= a;\r\n                a *= a;\r\n                n >>= 1;\r\n      \
+    \      }\r\n            return init;\r\n        }\r\n    } power;\r\n} // namespace\
+    \ kpr\r\n"
+  code: "#pragma once\r\n#include <cstdint>\r\n\r\nnamespace kpr {\r\n    [[maybe_unused]]\
+    \ inline constexpr struct {\r\n        template<class T>\r\n        constexpr\
+    \ T operator ()(T a, std::uint_fast64_t n, T init = 1) const noexcept {\r\n  \
+    \          while (n > 0) {\r\n                if (n & 1) init *= a;\r\n      \
+    \          a *= a;\r\n                n >>= 1;\r\n            }\r\n          \
+    \  return init;\r\n        }\r\n    } power;\r\n} // namespace kpr\r\n"
   dependsOn: []
   isVerificationFile: false
   path: math/power.hpp
@@ -111,7 +112,7 @@ data:
   - math/factorize.hpp
   - math/DynamicModInt.hpp
   - all.hpp
-  timestamp: '2023-02-01 00:00:26+09:00'
+  timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp

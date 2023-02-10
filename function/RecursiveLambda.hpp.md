@@ -17,26 +17,27 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"function/RecursiveLambda.hpp\"\n#include <type_traits>\n\
-    #include <utility>\n\nnamespace kpr {\n    // \u518D\u5E30\u53EF\u80FD\u95A2\u6570\
-    \u30AF\u30E9\u30B9\n    template<class F>\n    struct RecursiveLambda {\n    \
-    \    using value_type = F;\n\n    private:\n        F func;\n\n    public:\n \
-    \       template<class G>\n        constexpr RecursiveLambda(G&& func) noexcept:\
-    \ func(std::forward<G>(func)) {}\n\n        template<class... Args>\n        constexpr\
-    \ decltype(auto) operator ()(Args&&... args) const noexcept(noexcept(func(*this,\
-    \ std::forward<Args>(args)...))) {\n            return func(*this, std::forward<Args>(args)...);\n\
-    \        }\n    };\n\n    template<class F>\n    RecursiveLambda(F&&) -> RecursiveLambda<std::decay_t<F>>;\n\
-    } // namespace kpr\n"
-  code: "#pragma once\n#include <type_traits>\n#include <utility>\n\nnamespace kpr\
-    \ {\n    // \u518D\u5E30\u53EF\u80FD\u95A2\u6570\u30AF\u30E9\u30B9\n    template<class\
-    \ F>\n    struct RecursiveLambda {\n        using value_type = F;\n\n    private:\n\
-    \        F func;\n\n    public:\n        template<class G>\n        constexpr\
-    \ RecursiveLambda(G&& func) noexcept: func(std::forward<G>(func)) {}\n\n     \
-    \   template<class... Args>\n        constexpr decltype(auto) operator ()(Args&&...\
-    \ args) const noexcept(noexcept(func(*this, std::forward<Args>(args)...))) {\n\
-    \            return func(*this, std::forward<Args>(args)...);\n        }\n   \
-    \ };\n\n    template<class F>\n    RecursiveLambda(F&&) -> RecursiveLambda<std::decay_t<F>>;\n\
-    } // namespace kpr\n"
+  bundledCode: "#line 2 \"function/RecursiveLambda.hpp\"\n#include <type_traits>\r\
+    \n#include <utility>\r\n\r\nnamespace kpr {\r\n    // \u518D\u5E30\u53EF\u80FD\
+    \u95A2\u6570\u30AF\u30E9\u30B9\r\n    template<class F>\r\n    struct RecursiveLambda\
+    \ {\r\n        using value_type = F;\r\n\r\n    private:\r\n        F func;\r\n\
+    \r\n    public:\r\n        template<class G>\r\n        constexpr RecursiveLambda(G&&\
+    \ func) noexcept: func(std::forward<G>(func)) {}\r\n\r\n        template<class...\
+    \ Args>\r\n        constexpr decltype(auto) operator ()(Args&&... args) const\
+    \ noexcept(noexcept(func(*this, std::forward<Args>(args)...))) {\r\n         \
+    \   return func(*this, std::forward<Args>(args)...);\r\n        }\r\n    };\r\n\
+    \r\n    template<class F>\r\n    RecursiveLambda(F&&) -> RecursiveLambda<std::decay_t<F>>;\r\
+    \n} // namespace kpr\r\n"
+  code: "#pragma once\r\n#include <type_traits>\r\n#include <utility>\r\n\r\nnamespace\
+    \ kpr {\r\n    // \u518D\u5E30\u53EF\u80FD\u95A2\u6570\u30AF\u30E9\u30B9\r\n \
+    \   template<class F>\r\n    struct RecursiveLambda {\r\n        using value_type\
+    \ = F;\r\n\r\n    private:\r\n        F func;\r\n\r\n    public:\r\n        template<class\
+    \ G>\r\n        constexpr RecursiveLambda(G&& func) noexcept: func(std::forward<G>(func))\
+    \ {}\r\n\r\n        template<class... Args>\r\n        constexpr decltype(auto)\
+    \ operator ()(Args&&... args) const noexcept(noexcept(func(*this, std::forward<Args>(args)...)))\
+    \ {\r\n            return func(*this, std::forward<Args>(args)...);\r\n      \
+    \  }\r\n    };\r\n\r\n    template<class F>\r\n    RecursiveLambda(F&&) -> RecursiveLambda<std::decay_t<F>>;\r\
+    \n} // namespace kpr\r\n"
   dependsOn: []
   isVerificationFile: false
   path: function/RecursiveLambda.hpp
@@ -44,7 +45,7 @@ data:
   - all/all.hpp
   - function/function.hpp
   - all.hpp
-  timestamp: '2023-02-04 13:16:05+09:00'
+  timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: function/RecursiveLambda.hpp

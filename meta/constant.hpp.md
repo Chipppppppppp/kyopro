@@ -65,57 +65,60 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"meta/constant.hpp\"\n#include <limits>\n#line 2 \"math/power.hpp\"\
-    \n#include <cstdint>\n\nnamespace kpr {\n    [[maybe_unused]] inline constexpr\
-    \ struct {\n        template<class T>\n        constexpr T operator ()(T a, std::uint_fast64_t\
-    \ n, T init = 1) const noexcept {\n            while (n > 0) {\n             \
-    \   if (n & 1) init *= a;\n                a *= a;\n                n >>= 1;\n\
-    \            }\n            return init;\n        }\n    } power;\n} // namespace\
-    \ kpr\n#line 3 \"meta/setting.hpp\"\n\n#ifndef KYOPRO_BASE_INT\n// \u57FA\u672C\
-    \u7B26\u53F7\u4ED8\u304D\u6574\u6570\u578B\n#define KYOPRO_BASE_INT std::int64_t\n\
-    #endif\n\n#ifndef KYOPRO_BASE_UINT\n// \u57FA\u672C\u7B26\u53F7\u306A\u3057\u6574\
-    \u6570\u578B\n#define KYOPRO_BASE_UINT std::uint64_t\n#endif\n\n#ifndef KYOPRO_BASE_FLOAT\n\
-    // \u57FA\u672C\u6D6E\u52D5\u5C0F\u6570\u70B9\u6570\u578B\n#define KYOPRO_BASE_FLOAT\
-    \ double\n#endif\n\n#ifndef KYOPRO_DEFAULT_MOD\n// \u554F\u984C\u3067\u8A2D\u5B9A\
-    \u3055\u308C\u305Fmod\n#define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))\n\
-    #endif\n\n#ifndef KYOPRO_DECIMAL_PRECISION\n// \u5C0F\u6570\u7CBE\u5EA6(\u6841\
-    )\n#define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))\n#endif\n\
-    \n#ifndef KYOPRO_INF_DIV\n// \u7121\u9650\u5927\u3092\u8868\u3059\u6574\u6570\u304C\
-    \u6700\u5927\u5024\u306E\u4F55\u5206\u306E\u4E00\u304B\u3092\u8868\u3059\n#define\
-    \ KYOPRO_INF_DIV (static_cast<KYOPRO_BASE_UINT>(3))\n#endif\n\n#ifndef KYOPRO_BUFFER_SIZE\n\
-    // \u30C7\u30D5\u30A9\u30EB\u30C8\u306E\u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\
-    \n#define KYOPRO_BUFFER_SIZE (static_cast<KYOPRO_BASE_UINT>(2048))\n#endif\n#line\
-    \ 5 \"meta/constant.hpp\"\n\nnamespace kpr {\n    // \u554F\u984C\u3067\u8A2D\u5B9A\
-    \u3055\u308C\u305Fmod\n    template<class T>\n    inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\n\
-    \    // \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305Fmod\n    inline constexpr\
-    \ KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\n    // \u7121\u9650\u5927\u3092\
-    \u8868\u3059\u6574\u6570\n    template<class T>\n    inline constexpr T INF =\
-    \ std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\n    // \u7121\u9650\u5927\u3092\
-    \u8868\u3059\u6574\u6570\n    inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\
-    \n    // \u8A31\u5BB9\u3055\u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\n    template<class\
-    \ T, KYOPRO_BASE_UINT decimal_precision = KYOPRO_DECIMAL_PRECISION>\n    inline\
-    \ constexpr KYOPRO_BASE_FLOAT EPS = static_cast<T>(1) / power(10ULL, decimal_precision);\n\
-    \    // \u8A31\u5BB9\u3055\u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\n    inline constexpr\
-    \ KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\n    // \u5186\u5468\u7387\
-    \n    template<class T>\n    inline constexpr T PI = 3.14159265358979323846;\n\
-    \    // \u5186\u5468\u7387\n    inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n\
-    } // namespace kpr\n"
-  code: "#pragma once\n#include <limits>\n#include \"../math/power.hpp\"\n#include\
-    \ \"setting.hpp\"\n\nnamespace kpr {\n    // \u554F\u984C\u3067\u8A2D\u5B9A\u3055\
-    \u308C\u305Fmod\n    template<class T>\n    inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\n\
-    \    // \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305Fmod\n    inline constexpr\
-    \ KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\n\n    // \u7121\u9650\u5927\u3092\
-    \u8868\u3059\u6574\u6570\n    template<class T>\n    inline constexpr T INF =\
-    \ std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\n    // \u7121\u9650\u5927\u3092\
-    \u8868\u3059\u6574\u6570\n    inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\n\
-    \n    // \u8A31\u5BB9\u3055\u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\n    template<class\
-    \ T, KYOPRO_BASE_UINT decimal_precision = KYOPRO_DECIMAL_PRECISION>\n    inline\
-    \ constexpr KYOPRO_BASE_FLOAT EPS = static_cast<T>(1) / power(10ULL, decimal_precision);\n\
-    \    // \u8A31\u5BB9\u3055\u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\n    inline constexpr\
-    \ KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\n\n    // \u5186\u5468\u7387\
-    \n    template<class T>\n    inline constexpr T PI = 3.14159265358979323846;\n\
-    \    // \u5186\u5468\u7387\n    inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\n\
-    } // namespace kpr\n"
+  bundledCode: "#line 2 \"meta/constant.hpp\"\n#include <limits>\r\n#line 2 \"math/power.hpp\"\
+    \n#include <cstdint>\r\n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr\
+    \ struct {\r\n        template<class T>\r\n        constexpr T operator ()(T a,\
+    \ std::uint_fast64_t n, T init = 1) const noexcept {\r\n            while (n >\
+    \ 0) {\r\n                if (n & 1) init *= a;\r\n                a *= a;\r\n\
+    \                n >>= 1;\r\n            }\r\n            return init;\r\n   \
+    \     }\r\n    } power;\r\n} // namespace kpr\r\n#line 3 \"meta/setting.hpp\"\n\
+    \r\n#ifndef KYOPRO_BASE_INT\r\n// \u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\
+    \u578B\r\n#define KYOPRO_BASE_INT std::int64_t\r\n#endif\r\n\r\n#ifndef KYOPRO_BASE_UINT\r\
+    \n// \u57FA\u672C\u7B26\u53F7\u306A\u3057\u6574\u6570\u578B\r\n#define KYOPRO_BASE_UINT\
+    \ std::uint64_t\r\n#endif\r\n\r\n#ifndef KYOPRO_BASE_FLOAT\r\n// \u57FA\u672C\u6D6E\
+    \u52D5\u5C0F\u6570\u70B9\u6570\u578B\r\n#define KYOPRO_BASE_FLOAT double\r\n#endif\r\
+    \n\r\n#ifndef KYOPRO_DEFAULT_MOD\r\n// \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\
+    \u305Fmod\r\n#define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))\r\
+    \n#endif\r\n\r\n#ifndef KYOPRO_DECIMAL_PRECISION\r\n// \u5C0F\u6570\u7CBE\u5EA6\
+    (\u6841)\r\n#define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))\r\
+    \n#endif\r\n\r\n#ifndef KYOPRO_INF_DIV\r\n// \u7121\u9650\u5927\u3092\u8868\u3059\
+    \u6574\u6570\u304C\u6700\u5927\u5024\u306E\u4F55\u5206\u306E\u4E00\u304B\u3092\
+    \u8868\u3059\r\n#define KYOPRO_INF_DIV (static_cast<KYOPRO_BASE_UINT>(3))\r\n\
+    #endif\r\n\r\n#ifndef KYOPRO_BUFFER_SIZE\r\n// \u30C7\u30D5\u30A9\u30EB\u30C8\u306E\
+    \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\r\n#define KYOPRO_BUFFER_SIZE (static_cast<KYOPRO_BASE_UINT>(2048))\r\
+    \n#endif\r\n#line 5 \"meta/constant.hpp\"\n\r\nnamespace kpr {\r\n    // \u554F\
+    \u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305Fmod\r\n    template<class T>\r\n   \
+    \ inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\r\n    // \u554F\u984C\u3067\u8A2D\
+    \u5B9A\u3055\u308C\u305Fmod\r\n    inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\r\
+    \n\r\n    // \u7121\u9650\u5927\u3092\u8868\u3059\u6574\u6570\r\n    template<class\
+    \ T>\r\n    inline constexpr T INF = std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\r\
+    \n    // \u7121\u9650\u5927\u3092\u8868\u3059\u6574\u6570\r\n    inline constexpr\
+    \ KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\r\n\r\n    // \u8A31\u5BB9\u3055\
+    \u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\r\n    template<class T, KYOPRO_BASE_UINT\
+    \ decimal_precision = KYOPRO_DECIMAL_PRECISION>\r\n    inline constexpr KYOPRO_BASE_FLOAT\
+    \ EPS = static_cast<T>(1) / power(10ULL, decimal_precision);\r\n    // \u8A31\u5BB9\
+    \u3055\u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\r\n    inline constexpr KYOPRO_BASE_FLOAT\
+    \ eps = EPS<KYOPRO_BASE_FLOAT>;\r\n\r\n    // \u5186\u5468\u7387\r\n    template<class\
+    \ T>\r\n    inline constexpr T PI = 3.14159265358979323846;\r\n    // \u5186\u5468\
+    \u7387\r\n    inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\r\
+    \n} // namespace kpr\r\n"
+  code: "#pragma once\r\n#include <limits>\r\n#include \"../math/power.hpp\"\r\n#include\
+    \ \"setting.hpp\"\r\n\r\nnamespace kpr {\r\n    // \u554F\u984C\u3067\u8A2D\u5B9A\
+    \u3055\u308C\u305Fmod\r\n    template<class T>\r\n    inline constexpr T MOD =\
+    \ KYOPRO_DEFAULT_MOD;\r\n    // \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305F\
+    mod\r\n    inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\r\n\r\n\
+    \    // \u7121\u9650\u5927\u3092\u8868\u3059\u6574\u6570\r\n    template<class\
+    \ T>\r\n    inline constexpr T INF = std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\r\
+    \n    // \u7121\u9650\u5927\u3092\u8868\u3059\u6574\u6570\r\n    inline constexpr\
+    \ KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\r\n\r\n    // \u8A31\u5BB9\u3055\
+    \u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\r\n    template<class T, KYOPRO_BASE_UINT\
+    \ decimal_precision = KYOPRO_DECIMAL_PRECISION>\r\n    inline constexpr KYOPRO_BASE_FLOAT\
+    \ EPS = static_cast<T>(1) / power(10ULL, decimal_precision);\r\n    // \u8A31\u5BB9\
+    \u3055\u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\r\n    inline constexpr KYOPRO_BASE_FLOAT\
+    \ eps = EPS<KYOPRO_BASE_FLOAT>;\r\n\r\n    // \u5186\u5468\u7387\r\n    template<class\
+    \ T>\r\n    inline constexpr T PI = 3.14159265358979323846;\r\n    // \u5186\u5468\
+    \u7387\r\n    inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\r\
+    \n} // namespace kpr\r\n"
   dependsOn:
   - math/power.hpp
   - meta/setting.hpp
@@ -136,7 +139,7 @@ data:
   - math/factorize.hpp
   - math/DynamicModInt.hpp
   - all.hpp
-  timestamp: '2023-02-04 13:16:05+09:00'
+  timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp

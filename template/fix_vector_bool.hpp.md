@@ -14,21 +14,22 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"template/fix_vector_bool.hpp\"\n#include <cstddef>\n#include\
-    \ <string>\n#include <vector>\n\ntemplate<>\nstruct std::vector<bool>: std::basic_string<bool>\
-    \ {\n    using std::basic_string<bool>::basic_string, std::basic_string<bool>::operator\
-    \ =;\n    explicit vector(std::size_t n): vector(n, false) {}\n};\n"
-  code: "#pragma once\n#include <cstddef>\n#include <string>\n#include <vector>\n\n\
-    template<>\nstruct std::vector<bool>: std::basic_string<bool> {\n    using std::basic_string<bool>::basic_string,\
-    \ std::basic_string<bool>::operator =;\n    explicit vector(std::size_t n): vector(n,\
-    \ false) {}\n};\n"
+  bundledCode: "#line 2 \"template/fix_vector_bool.hpp\"\n#include <cstddef>\r\n#include\
+    \ <string>\r\n#include <vector>\r\n\r\ntemplate<>\r\nstruct std::vector<bool>:\
+    \ std::basic_string<bool> {\r\n    using std::basic_string<bool>::basic_string,\
+    \ std::basic_string<bool>::operator =;\r\n    explicit vector(std::size_t n):\
+    \ vector(n, false) {}\r\n};\r\n"
+  code: "#pragma once\r\n#include <cstddef>\r\n#include <string>\r\n#include <vector>\r\
+    \n\r\ntemplate<>\r\nstruct std::vector<bool>: std::basic_string<bool> {\r\n  \
+    \  using std::basic_string<bool>::basic_string, std::basic_string<bool>::operator\
+    \ =;\r\n    explicit vector(std::size_t n): vector(n, false) {}\r\n};\r\n"
   dependsOn: []
   isVerificationFile: false
   path: template/fix_vector_bool.hpp
   requiredBy:
   - template/template.hpp
   - all.hpp
-  timestamp: '2023-02-04 13:16:05+09:00'
+  timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/fix_vector_bool.hpp

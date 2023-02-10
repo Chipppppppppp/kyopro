@@ -14,26 +14,27 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"template/amin_amax.hpp\"\n\nnamespace kpr {\n    template<class\
-    \ T, class U = T>\n    constexpr bool amin(T& a, const U& b) noexcept {\n    \
-    \    if (b < a) {\n            a = b;\n            return true;\n        }\n \
-    \       return false;\n    }\n\n    template<class T, class U = T>\n    constexpr\
-    \ bool amax(T& a, const U& b) noexcept {\n        if (a < b) {\n            a\
-    \ = b;\n            return true;\n        }\n        return false;\n    }\n} //\
-    \ namespace kpr\n"
-  code: "#pragma once\n\nnamespace kpr {\n    template<class T, class U = T>\n   \
-    \ constexpr bool amin(T& a, const U& b) noexcept {\n        if (b < a) {\n   \
-    \         a = b;\n            return true;\n        }\n        return false;\n\
-    \    }\n\n    template<class T, class U = T>\n    constexpr bool amax(T& a, const\
-    \ U& b) noexcept {\n        if (a < b) {\n            a = b;\n            return\
-    \ true;\n        }\n        return false;\n    }\n} // namespace kpr\n"
+  bundledCode: "#line 2 \"template/amin_amax.hpp\"\n\r\nnamespace kpr {\r\n    template<class\
+    \ T, class U = T>\r\n    constexpr bool amin(T& a, const U& b) noexcept {\r\n\
+    \        if (b < a) {\r\n            a = b;\r\n            return true;\r\n  \
+    \      }\r\n        return false;\r\n    }\r\n\r\n    template<class T, class\
+    \ U = T>\r\n    constexpr bool amax(T& a, const U& b) noexcept {\r\n        if\
+    \ (a < b) {\r\n            a = b;\r\n            return true;\r\n        }\r\n\
+    \        return false;\r\n    }\r\n} // namespace kpr\r\n"
+  code: "#pragma once\r\n\r\nnamespace kpr {\r\n    template<class T, class U = T>\r\
+    \n    constexpr bool amin(T& a, const U& b) noexcept {\r\n        if (b < a) {\r\
+    \n            a = b;\r\n            return true;\r\n        }\r\n        return\
+    \ false;\r\n    }\r\n\r\n    template<class T, class U = T>\r\n    constexpr bool\
+    \ amax(T& a, const U& b) noexcept {\r\n        if (a < b) {\r\n            a =\
+    \ b;\r\n            return true;\r\n        }\r\n        return false;\r\n   \
+    \ }\r\n} // namespace kpr\r\n"
   dependsOn: []
   isVerificationFile: false
   path: template/amin_amax.hpp
   requiredBy:
   - template/template.hpp
   - all.hpp
-  timestamp: '2023-02-01 00:00:26+09:00'
+  timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/amin_amax.hpp

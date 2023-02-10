@@ -23,6 +23,9 @@ data:
   - icon: ':warning:'
     path: template/template.hpp
     title: template/template.hpp
+  - icon: ':warning:'
+    path: test.cpp
+    title: test.cpp
   _extendedVerifiedWith:
   - icon: ':x:'
     path: verify/aoj/PrimeNumber.test.cpp
@@ -44,30 +47,30 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"system/io_option.hpp\"\n#include <cstddef>\n#include <tuple>\n\
-    #include <utility>\n\nnamespace kpr {\n    template<class Tuple, std::size_t idx>\n\
-    \    struct Indexed {\n        Tuple args_tuple;\n        template<class... Args>\n\
+  bundledCode: "#line 2 \"system/io_option.hpp\"\n#include <cstddef>\r\n#include <tuple>\r\
+    \n#include <utility>\r\n\r\nnamespace kpr {\r\n    template<class Tuple, std::size_t\
+    \ idx>\r\n    struct Indexed {\r\n        Tuple args_tuple;\r\n        template<class...\
+    \ Args>\r\n        constexpr Indexed(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
+    \ {}\r\n    };\r\n\r\n    template<std::size_t i, class... Args>\r\n    constexpr\
+    \ auto indexed(Args&&... args) noexcept {\r\n        return Indexed<std::tuple<Args>...,\
+    \ i>{std::forward<Args>(args)...};\r\n    }\r\n\r\n    template<class Tuple, bool...\
+    \ seps>\r\n    struct SepWith {\r\n        Tuple args_tuple;\r\n        template<class...\
+    \ Args>\r\n        constexpr SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
+    \ {}\r\n    };\r\n\r\n    template<bool... seps, class... Args>\r\n    constexpr\
+    \ auto sep_with(Args&&... args) noexcept {\r\n        return SepWith<std::tuple<Args...>,\
+    \ seps...>{std::forward<Args>(args)...};\r\n    }\r\n} // namespace kpr\r\n"
+  code: "#pragma once\r\n#include <cstddef>\r\n#include <tuple>\r\n#include <utility>\r\
+    \n\r\nnamespace kpr {\r\n    template<class Tuple, std::size_t idx>\r\n    struct\
+    \ Indexed {\r\n        Tuple args_tuple;\r\n        template<class... Args>\r\n\
     \        constexpr Indexed(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
-    \ {}\n    };\n\n    template<std::size_t i, class... Args>\n    constexpr auto\
-    \ indexed(Args&&... args) noexcept {\n        return Indexed<std::tuple<Args>...,\
-    \ i>{std::forward<Args>(args)...};\n    }\n\n    template<class Tuple, bool...\
-    \ seps>\n    struct SepWith {\n        Tuple args_tuple;\n        template<class...\
-    \ Args>\n        constexpr SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
-    \ {}\n    };\n\n    template<bool... seps, class... Args>\n    constexpr auto\
-    \ sep_with(Args&&... args) noexcept {\n        return SepWith<std::tuple<Args...>,\
-    \ seps...>{std::forward<Args>(args)...};\n    }\n} // namespace kpr\n"
-  code: "#pragma once\n#include <cstddef>\n#include <tuple>\n#include <utility>\n\n\
-    namespace kpr {\n    template<class Tuple, std::size_t idx>\n    struct Indexed\
-    \ {\n        Tuple args_tuple;\n        template<class... Args>\n        constexpr\
-    \ Indexed(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...} {}\n\
-    \    };\n\n    template<std::size_t i, class... Args>\n    constexpr auto indexed(Args&&...\
-    \ args) noexcept {\n        return Indexed<std::tuple<Args>..., i>{std::forward<Args>(args)...};\n\
-    \    }\n\n    template<class Tuple, bool... seps>\n    struct SepWith {\n    \
-    \    Tuple args_tuple;\n        template<class... Args>\n        constexpr SepWith(Args&&...\
-    \ args) noexcept: args_tuple{std::forward<Args>(args)...} {}\n    };\n\n    template<bool...\
-    \ seps, class... Args>\n    constexpr auto sep_with(Args&&... args) noexcept {\n\
-    \        return SepWith<std::tuple<Args...>, seps...>{std::forward<Args>(args)...};\n\
-    \    }\n} // namespace kpr\n"
+    \ {}\r\n    };\r\n\r\n    template<std::size_t i, class... Args>\r\n    constexpr\
+    \ auto indexed(Args&&... args) noexcept {\r\n        return Indexed<std::tuple<Args>...,\
+    \ i>{std::forward<Args>(args)...};\r\n    }\r\n\r\n    template<class Tuple, bool...\
+    \ seps>\r\n    struct SepWith {\r\n        Tuple args_tuple;\r\n        template<class...\
+    \ Args>\r\n        constexpr SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
+    \ {}\r\n    };\r\n\r\n    template<bool... seps, class... Args>\r\n    constexpr\
+    \ auto sep_with(Args&&... args) noexcept {\r\n        return SepWith<std::tuple<Args...>,\
+    \ seps...>{std::forward<Args>(args)...};\r\n    }\r\n} // namespace kpr\r\n"
   dependsOn: []
   isVerificationFile: false
   path: system/io_option.hpp
@@ -78,8 +81,9 @@ data:
   - system/system.hpp
   - template/template.hpp
   - template/macro.hpp
+  - test.cpp
   - all.hpp
-  timestamp: '2023-02-10 23:05:45+09:00'
+  timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp

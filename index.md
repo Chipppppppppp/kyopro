@@ -22,6 +22,9 @@ data:
     - icon: ':warning:'
       path: all.hpp
       title: all.hpp
+    - icon: ':warning:'
+      path: test.cpp
+      title: test.cpp
   - name: function
     pages:
     - icon: ':warning:'
