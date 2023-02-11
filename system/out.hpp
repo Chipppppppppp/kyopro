@@ -161,10 +161,19 @@ namespace kpr {
             }
         }
 
-        // 区切りを出力する
+        // 区切り文字を出力する
         void print_sep() {
             if constexpr (debug) print_char(',');
             if constexpr (space) print_char(' ');
+        }
+
+        // 区切り文字を出力する(型によって変更)
+        template<class type>
+        void print_sep_by_type() {
+            if constexpr (is_tuple_like_v<type> || is_range_v<type>) {
+                print_end();
+                if constexpr (comment) print_comment();
+            } else print_sep();
         }
 
         // 最後の文字を出力する
@@ -248,10 +257,11 @@ namespace kpr {
     struct PrintFunction<T, std::enable_if_t<is_tuple_like_v<T> && !is_range_v<T>>> {
         template<std::size_t i = 0, class Printer>
         static void print(Printer& printer, const T& a) {
+            using element_type = std::decay_t<tuple_like_element_t<i, T>>;
             if constexpr (Printer::debug && i == 0) printer.print_char('{');
-            if constexpr (tuple_like_size_v<T> != 0) PrintFunction<std::decay_t<tuple_like_element_t<i, T>>>::print(printer, get<i>(a));
+            if constexpr (tuple_like_size_v<T> != 0) PrintFunction<element_type>::print(printer, get<i>(a));
             if constexpr (i + 1 < tuple_like_size_v<T>) {
-                printer.print_sep();
+                printer.template print_sep_by_type<element_type>();
                 print<i + 1>(printer, a);
             } else if constexpr (Printer::debug) printer.print_char('}');
         }
@@ -261,11 +271,12 @@ namespace kpr {
     struct PrintFunction<T, std::enable_if_t<is_range_v<T> && !std::is_convertible_v<T, std::string_view>>> {
         template<class Printer>
         static void print(Printer& printer, const T& a) {
+            using value_type = range_value_t<T>;
             if constexpr (Printer::debug) printer.print_char('{');
             if (std::empty(a)) return;
             for (auto i = std::begin(a); ; ) {
-                PrintFunction<range_value_t<T>>::print(printer, *i);
-                if (++i != std::end(a)) printer.print_sep();
+                PrintFunction<value_type>::print(printer, *i);
+                if (++i != std::end(a)) printer.template print_sep_by_type<value_type>();
                 else break;
             }
             if constexpr (Printer::debug) printer.print_char('}');
