@@ -5,6 +5,7 @@
 #include "fix_vector_bool.hpp"
 #include "len.hpp"
 #include "macro.hpp"
+#include "main.hpp"
 #include "make_array.hpp"
 #include "make_vector.hpp"
 #include "stl.hpp"
