@@ -204,9 +204,9 @@ namespace kpr {
     struct PrintFunction<char> {
         template<class Printer>
         static void print(Printer& printer, char a) {
-            if constexpr (printer.debug) printer.print_char('\'');
+            if constexpr (Printer::debug) printer.print_char('\'');
             printer.print_char(a);
-            if constexpr (printer.debug) printer.print_char('\'');
+            if constexpr (Printer::debug) printer.print_char('\'');
         }
     };
 
@@ -222,9 +222,9 @@ namespace kpr {
     struct PrintFunction<T, std::enable_if_t<std::is_convertible_v<T, std::string_view>>> {
         template<class Printer>
         static void print(Printer& printer, std::string_view a) {
-            if constexpr (printer.debug) printer.print_char('"');
+            if constexpr (Printer::debug) printer.print_char('"');
             for (char i: a) printer.print_char(i);
-            if constexpr (printer.debug) printer.print_char('"');
+            if constexpr (Printer::debug) printer.print_char('"');
         }
     };
 
@@ -248,12 +248,12 @@ namespace kpr {
     struct PrintFunction<T, std::enable_if_t<is_tuple_like_v<T> && !is_range_v<T>>> {
         template<std::size_t i = 0, class Printer>
         static void print(Printer& printer, const T& a) {
-            if constexpr (printer.debug && i == 0) printer.print_char('{');
+            if constexpr (Printer::debug && i == 0) printer.print_char('{');
             if constexpr (tuple_like_size_v<T> != 0) PrintFunction<std::decay_t<tuple_like_element_t<i, T>>>::print(printer, get<i>(a));
             if constexpr (i + 1 < tuple_like_size_v<T>) {
                 printer.print_sep();
                 print<i + 1>(printer, a);
-            } else if constexpr (printer.debug) printer.print_char('}');
+            } else if constexpr (Printer::debug) printer.print_char('}');
         }
     };
 
@@ -261,14 +261,14 @@ namespace kpr {
     struct PrintFunction<T, std::enable_if_t<is_range_v<T> && !std::is_convertible_v<T, std::string_view>>> {
         template<class Printer>
         static void print(Printer& printer, const T& a) {
-            if constexpr (printer.debug) printer.print_char('{');
+            if constexpr (Printer::debug) printer.print_char('{');
             if (std::empty(a)) return;
             for (auto i = std::begin(a); ; ) {
                 PrintFunction<range_value_t<T>>::print(printer, *i);
                 if (++i != std::end(a)) printer.print_sep();
                 else break;
             }
-            if constexpr (printer.debug) printer.print_char('}');
+            if constexpr (Printer::debug) printer.print_char('}');
         }
     };
 
