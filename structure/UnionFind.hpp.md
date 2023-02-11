@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -17,6 +17,9 @@ data:
   - icon: ':warning:'
     path: structure/structure.hpp
     title: structure/structure.hpp
+  - icon: ':warning:'
+    path: verify/hello_world.cpp
+    title: verify/hello_world.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/unionfind.test.cpp
@@ -239,6 +242,7 @@ data:
   path: structure/UnionFind.hpp
   requiredBy:
   - all/all.hpp
+  - verify/hello_world.cpp
   - structure/structure.hpp
   - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'

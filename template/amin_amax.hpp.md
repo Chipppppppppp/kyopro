@@ -8,6 +8,9 @@ data:
   - icon: ':warning:'
     path: template/template.hpp
     title: template/template.hpp
+  - icon: ':warning:'
+    path: verify/hello_world.cpp
+    title: verify/hello_world.cpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -32,6 +35,7 @@ data:
   isVerificationFile: false
   path: template/amin_amax.hpp
   requiredBy:
+  - verify/hello_world.cpp
   - template/template.hpp
   - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'

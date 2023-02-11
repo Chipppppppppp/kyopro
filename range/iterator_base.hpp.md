@@ -14,6 +14,9 @@ data:
   - icon: ':warning:'
     path: range/range.hpp
     title: range/range.hpp
+  - icon: ':warning:'
+    path: verify/hello_world.cpp
+    title: verify/hello_world.cpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -112,6 +115,7 @@ data:
   path: range/iterator_base.hpp
   requiredBy:
   - all/all.hpp
+  - verify/hello_world.cpp
   - range/range.hpp
   - range/irange.hpp
   - all.hpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/setting.hpp
     title: meta/setting.hpp
   _extendedRequiredBy:
@@ -14,6 +14,9 @@ data:
   - icon: ':warning:'
     path: math/math.hpp
     title: math/math.hpp
+  - icon: ':warning:'
+    path: verify/hello_world.cpp
+    title: verify/hello_world.cpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -64,6 +67,7 @@ data:
   path: math/euler_phi.hpp
   requiredBy:
   - all/all.hpp
+  - verify/hello_world.cpp
   - math/math.hpp
   - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'

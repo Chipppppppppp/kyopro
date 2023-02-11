@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
   - icon: ':warning:'
     path: algorithm/algorithm.hpp
     title: algorithm/algorithm.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
@@ -25,13 +25,13 @@ data:
   - icon: ':warning:'
     path: math/Barrett.hpp
     title: math/Barrett.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
   - icon: ':warning:'
@@ -43,10 +43,10 @@ data:
   - icon: ':warning:'
     path: math/euler_phi.hpp
     title: math/euler_phi.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
@@ -55,22 +55,22 @@ data:
   - icon: ':warning:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/constant.hpp
     title: meta/constant.hpp
   - icon: ':warning:'
     path: meta/meta.hpp
     title: meta/meta.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
   - icon: ':warning:'
@@ -97,22 +97,25 @@ data:
   - icon: ':warning:'
     path: structure/structure.hpp
     title: structure/structure.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/in.hpp
     title: system/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/io_option.hpp
     title: system/io_option.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/out.hpp
     title: system/out.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: system/system.hpp
     title: system/system.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
     path: all.hpp
     title: all.hpp
+  - icon: ':warning:'
+    path: verify/hello_world.cpp
+    title: verify/hello_world.cpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -708,19 +711,19 @@ data:
     \ std::forward<Head>(head));\r\n            operator ()<false>(std::forward<Args>(args)...);\r\
     \n        }\r\n    };\r\n\r\n    template<>\r\n    struct PrintFunction<char>\
     \ {\r\n        template<class Printer>\r\n        static void print(Printer& printer,\
-    \ char a) {\r\n            if constexpr (Printer::debug) printer.print_char('\\\
-    '');\r\n            printer.print_char(a);\r\n            if constexpr (Printer::debug)\
+    \ char a) {\r\n            if constexpr (printer.debug) printer.print_char('\\\
+    '');\r\n            printer.print_char(a);\r\n            if constexpr (printer.debug)\
     \ printer.print_char('\\'');\r\n        }\r\n    };\r\n\r\n    template<>\r\n\
     \    struct PrintFunction<bool> {\r\n        template<class Printer>\r\n     \
     \   static void print(Printer& printer, bool a) {\r\n            printer.print_char(static_cast<char>('0'\
     \ + a));\r\n        }\r\n    };\r\n\r\n    template<class T>\r\n    struct PrintFunction<T,\
     \ std::enable_if_t<std::is_convertible_v<T, std::string_view>>> {\r\n        template<class\
     \ Printer>\r\n        static void print(Printer& printer, std::string_view a)\
-    \ {\r\n            if constexpr (Printer::debug) printer.print_char('\"');\r\n\
+    \ {\r\n            if constexpr (printer.debug) printer.print_char('\"');\r\n\
     \            for (char i: a) printer.print_char(i);\r\n            if constexpr\
-    \ (Printer::debug) printer.print_char('\"');\r\n        }\r\n    };\r\n\r\n  \
-    \  template<std::size_t len>\r\n    struct PrintFunction<std::bitset<len>> {\r\
-    \n        template<class Printer>\r\n        static void print(Printer& printer,\
+    \ (printer.debug) printer.print_char('\"');\r\n        }\r\n    };\r\n\r\n   \
+    \ template<std::size_t len>\r\n    struct PrintFunction<std::bitset<len>> {\r\n\
+    \        template<class Printer>\r\n        static void print(Printer& printer,\
     \ const std::bitset<len>& a) {\r\n            for (int i = len - 1; i >= 0; --i)\
     \ PrintFunction<bool>::print(printer, a[i]);\r\n        }\r\n    };\r\n\r\n  \
     \  template<class T>\r\n    struct PrintFunction<T, std::enable_if_t<std::is_arithmetic_v<T>>>\
@@ -729,19 +732,19 @@ data:
     \r\n    template<class T>\r\n    struct PrintFunction<T, std::enable_if_t<is_tuple_like_v<T>\
     \ && !is_range_v<T>>> {\r\n        template<std::size_t i = 0, class Printer>\r\
     \n        static void print(Printer& printer, const T& a) {\r\n            if\
-    \ constexpr (Printer::debug && i == 0) printer.print_char('{');\r\n          \
-    \  if constexpr (tuple_like_size_v<T> != 0) PrintFunction<std::decay_t<tuple_like_element_t<i,\
+    \ constexpr (printer.debug && i == 0) printer.print_char('{');\r\n           \
+    \ if constexpr (tuple_like_size_v<T> != 0) PrintFunction<std::decay_t<tuple_like_element_t<i,\
     \ T>>>::print(printer, get<i>(a));\r\n            if constexpr (i + 1 < tuple_like_size_v<T>)\
     \ {\r\n                printer.print_sep();\r\n                print<i + 1>(printer,\
-    \ a);\r\n            } else if constexpr (Printer::debug) printer.print_char('}');\r\
+    \ a);\r\n            } else if constexpr (printer.debug) printer.print_char('}');\r\
     \n        }\r\n    };\r\n\r\n    template<class T>\r\n    struct PrintFunction<T,\
     \ std::enable_if_t<is_range_v<T> && !std::is_convertible_v<T, std::string_view>>>\
     \ {\r\n        template<class Printer>\r\n        static void print(Printer& printer,\
-    \ const T& a) {\r\n            if constexpr (Printer::debug) printer.print_char('{');\r\
+    \ const T& a) {\r\n            if constexpr (printer.debug) printer.print_char('{');\r\
     \n            if (std::empty(a)) return;\r\n            for (auto i = std::begin(a);\
     \ ; ) {\r\n                PrintFunction<range_value_t<T>>::print(printer, *i);\r\
     \n                if (++i != std::end(a)) printer.print_sep();\r\n           \
-    \     else break;\r\n            }\r\n            if constexpr (Printer::debug)\
+    \     else break;\r\n            }\r\n            if constexpr (printer.debug)\
     \ printer.print_char('}');\r\n        }\r\n    };\r\n\r\n    template<class Tuple,\
     \ std::size_t idx>\r\n    struct PrintFunction<Indexed<Tuple, idx>> {\r\n    \
     \    template<class Printer>\r\n        struct PrinterWrapper: Printer {\r\n \
@@ -1272,8 +1275,9 @@ data:
   isVerificationFile: false
   path: all/all.hpp
   requiredBy:
+  - verify/hello_world.cpp
   - all.hpp
-  timestamp: '2023-02-11 03:32:59+09:00'
+  timestamp: '2023-02-11 03:23:39+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp

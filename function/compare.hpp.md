@@ -11,6 +11,9 @@ data:
   - icon: ':warning:'
     path: function/function.hpp
     title: function/function.hpp
+  - icon: ':warning:'
+    path: verify/hello_world.cpp
+    title: verify/hello_world.cpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -64,6 +67,7 @@ data:
   path: function/compare.hpp
   requiredBy:
   - all/all.hpp
+  - verify/hello_world.cpp
   - function/function.hpp
   - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'

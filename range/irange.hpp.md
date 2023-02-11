@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   - icon: ':warning:'
@@ -20,6 +20,9 @@ data:
   - icon: ':warning:'
     path: range/range.hpp
     title: range/range.hpp
+  - icon: ':warning:'
+    path: verify/hello_world.cpp
+    title: verify/hello_world.cpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -349,6 +352,7 @@ data:
   path: range/irange.hpp
   requiredBy:
   - all/all.hpp
+  - verify/hello_world.cpp
   - range/range.hpp
   - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
