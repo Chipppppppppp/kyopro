@@ -539,23 +539,29 @@ data:
     \ return;\r\n            print_char('.');\r\n            a -= p;\r\n         \
     \   for (int i = 0; i < static_cast<int>(decimal_precision); ++i) {\r\n      \
     \          a *= 10;\r\n                print_char('0' + static_cast<std::uint_fast64_t>(a)\
-    \ % 10);\r\n            }\r\n        }\r\n\r\n        // \u533A\u5207\u308A\u3092\
-    \u51FA\u529B\u3059\u308B\r\n        void print_sep() {\r\n            if constexpr\
-    \ (debug) print_char(',');\r\n            if constexpr (space) print_char(' ');\r\
-    \n        }\r\n\r\n        // \u6700\u5F8C\u306E\u6587\u5B57\u3092\u51FA\u529B\
-    \u3059\u308B\r\n        void print_end() {\r\n            if constexpr (debug)\
-    \ print_char(',');\r\n            if constexpr (line) print_char('\\n');\r\n \
-    \       }\r\n\r\n        // \u30B3\u30E1\u30F3\u30C8\u8A18\u53F7\u3092\u51FA\u529B\
-    \u3059\u308B\r\n        void print_comment() {\r\n            if constexpr (comment)\
-    \ {\r\n                print_char('#');\r\n                print_char(' ');\r\n\
-    \            }\r\n        }\r\n\r\n        // \u8907\u6570\u306E\u5024\u3092\u51FA\
-    \u529B\r\n        template<bool first = true>\r\n        void operator ()() {\r\
-    \n            if constexpr (first) print_comment();\r\n            print_end();\r\
-    \n            if constexpr (flush) itr.flush();\r\n        }\r\n        template<bool\
-    \ first = true, class Head, class... Args>\r\n        void operator ()(Head&&\
-    \ head, Args&&... args) {\r\n            if constexpr (first) print_comment();\r\
-    \n            else {\r\n                if constexpr (debug) print_char(',');\r\
-    \n                print_sep();\r\n            }\r\n            PrintFunction<std::decay_t<Head>>::print(*this,\
+    \ % 10);\r\n            }\r\n        }\r\n\r\n        // \u533A\u5207\u308A\u6587\
+    \u5B57\u3092\u51FA\u529B\u3059\u308B\r\n        void print_sep() {\r\n       \
+    \     if constexpr (debug) print_char(',');\r\n            if constexpr (space)\
+    \ print_char(' ');\r\n        }\r\n\r\n        // \u533A\u5207\u308A\u6587\u5B57\
+    \u3092\u51FA\u529B\u3059\u308B(\u578B\u306B\u3088\u3063\u3066\u5909\u66F4)\r\n\
+    \        template<class type>\r\n        void print_sep_by_type() {\r\n      \
+    \      if constexpr (is_tuple_like_v<type> || is_range_v<type>) {\r\n        \
+    \        print_end();\r\n                if constexpr (comment) print_comment();\r\
+    \n            } else print_sep();\r\n        }\r\n\r\n        // \u6700\u5F8C\u306E\
+    \u6587\u5B57\u3092\u51FA\u529B\u3059\u308B\r\n        void print_end() {\r\n \
+    \           if constexpr (debug) print_char(',');\r\n            if constexpr\
+    \ (line) print_char('\\n');\r\n        }\r\n\r\n        // \u30B3\u30E1\u30F3\u30C8\
+    \u8A18\u53F7\u3092\u51FA\u529B\u3059\u308B\r\n        void print_comment() {\r\
+    \n            if constexpr (comment) {\r\n                print_char('#');\r\n\
+    \                print_char(' ');\r\n            }\r\n        }\r\n\r\n      \
+    \  // \u8907\u6570\u306E\u5024\u3092\u51FA\u529B\r\n        template<bool first\
+    \ = true>\r\n        void operator ()() {\r\n            if constexpr (first)\
+    \ print_comment();\r\n            print_end();\r\n            if constexpr (flush)\
+    \ itr.flush();\r\n        }\r\n        template<bool first = true, class Head,\
+    \ class... Args>\r\n        void operator ()(Head&& head, Args&&... args) {\r\n\
+    \            if constexpr (first) print_comment();\r\n            else {\r\n \
+    \               if constexpr (debug) print_char(',');\r\n                print_sep();\r\
+    \n            }\r\n            PrintFunction<std::decay_t<Head>>::print(*this,\
     \ std::forward<Head>(head));\r\n            operator ()<false>(std::forward<Args>(args)...);\r\
     \n        }\r\n    };\r\n\r\n    template<>\r\n    struct PrintFunction<char>\
     \ {\r\n        template<class Printer>\r\n        static void print(Printer& printer,\
@@ -579,20 +585,22 @@ data:
     \ T a) {\r\n            printer.print_arithmetic(a);\r\n        }\r\n    };\r\n\
     \r\n    template<class T>\r\n    struct PrintFunction<T, std::enable_if_t<is_tuple_like_v<T>\
     \ && !is_range_v<T>>> {\r\n        template<std::size_t i = 0, class Printer>\r\
-    \n        static void print(Printer& printer, const T& a) {\r\n            if\
-    \ constexpr (Printer::debug && i == 0) printer.print_char('{');\r\n          \
-    \  if constexpr (tuple_like_size_v<T> != 0) PrintFunction<std::decay_t<tuple_like_element_t<i,\
-    \ T>>>::print(printer, get<i>(a));\r\n            if constexpr (i + 1 < tuple_like_size_v<T>)\
-    \ {\r\n                printer.print_sep();\r\n                print<i + 1>(printer,\
-    \ a);\r\n            } else if constexpr (Printer::debug) printer.print_char('}');\r\
+    \n        static void print(Printer& printer, const T& a) {\r\n            using\
+    \ element_type = std::decay_t<tuple_like_element_t<i, T>>;\r\n            if constexpr\
+    \ (Printer::debug && i == 0) printer.print_char('{');\r\n            if constexpr\
+    \ (tuple_like_size_v<T> != 0) PrintFunction<element_type>::print(printer, get<i>(a));\r\
+    \n            if constexpr (i + 1 < tuple_like_size_v<T>) {\r\n              \
+    \  printer.template print_sep_by_type<element_type>();\r\n                print<i\
+    \ + 1>(printer, a);\r\n            } else if constexpr (Printer::debug) printer.print_char('}');\r\
     \n        }\r\n    };\r\n\r\n    template<class T>\r\n    struct PrintFunction<T,\
     \ std::enable_if_t<is_range_v<T> && !std::is_convertible_v<T, std::string_view>>>\
     \ {\r\n        template<class Printer>\r\n        static void print(Printer& printer,\
-    \ const T& a) {\r\n            if constexpr (Printer::debug) printer.print_char('{');\r\
-    \n            if (std::empty(a)) return;\r\n            for (auto i = std::begin(a);\
-    \ ; ) {\r\n                PrintFunction<range_value_t<T>>::print(printer, *i);\r\
-    \n                if (++i != std::end(a)) printer.print_sep();\r\n           \
-    \     else break;\r\n            }\r\n            if constexpr (Printer::debug)\
+    \ const T& a) {\r\n            using value_type = range_value_t<T>;\r\n      \
+    \      if constexpr (Printer::debug) printer.print_char('{');\r\n            if\
+    \ (std::empty(a)) return;\r\n            for (auto i = std::begin(a); ; ) {\r\n\
+    \                PrintFunction<value_type>::print(printer, *i);\r\n          \
+    \      if (++i != std::end(a)) printer.template print_sep_by_type<value_type>();\r\
+    \n                else break;\r\n            }\r\n            if constexpr (Printer::debug)\
     \ printer.print_char('}');\r\n        }\r\n    };\r\n\r\n    template<class Tuple,\
     \ std::size_t idx>\r\n    struct PrintFunction<Indexed<Tuple, idx>> {\r\n    \
     \    template<class Printer>\r\n        struct PrinterWrapper: Printer {\r\n \
@@ -768,7 +776,7 @@ data:
   - math/math.hpp
   - math/factorize.hpp
   - all.hpp
-  timestamp: '2023-02-12 03:32:11+09:00'
+  timestamp: '2023-02-12 04:09:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp
