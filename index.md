@@ -154,6 +154,9 @@ data:
       path: template/macro.hpp
       title: template/macro.hpp
     - icon: ':warning:'
+      path: template/main.hpp
+      title: template/main.hpp
+    - icon: ':warning:'
       path: template/make_array.hpp
       title: template/make_array.hpp
     - icon: ':warning:'

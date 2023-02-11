@@ -134,6 +134,9 @@ data:
     path: template/macro.hpp
     title: template/macro.hpp
   - icon: ':warning:'
+    path: template/main.hpp
+    title: template/main.hpp
+  - icon: ':warning:'
     path: template/make_array.hpp
     title: template/make_array.hpp
   - icon: ':warning:'
@@ -1359,16 +1362,17 @@ data:
     \ { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple), get<2>(_args_tuple),\
     \ get<3>(_args_tuple)); \\\r\n    } \\\r\n})\r\n\r\n#define all(...) std::begin(__VA_ARGS__),\
     \ std::end(__VA_ARGS__)\r\n#define rall(...) std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\r\
-    \n#line 4 \"template/make_array.hpp\"\n\r\nnamespace kpr {\r\n    [[maybe_unused]]\
-    \ inline constexpr struct {\r\n        template<class T>\r\n        constexpr\
-    \ auto operator ()(const T& init = {}) noexcept {\r\n            return init;\r\
-    \n        }\r\n\r\n        template<class T, std::size_t length, std::size_t...\
-    \ lengths>\r\n        constexpr auto operator ()(const T& init = {}) noexcept\
-    \ {\r\n            auto elm = operator ()<T, lengths...>(init);\r\n          \
-    \  std::array<decltype(elm), length> res;\r\n            for (auto& i: res) i\
-    \ = elm;\r\n            return res;\r\n        }\r\n    } make_array;\r\n} //\
-    \ namespace kpr\r\n#line 6 \"template/make_vector.hpp\"\n\r\nnamespace kpr {\r\
-    \n    [[maybe_unused]] inline constexpr struct {\r\n        template<std::size_t\
+    \n#line 2 \"template/main.hpp\"\n\nnamespace kpr {\n    void main();\n} // namespace\
+    \ kpr\n\nint main() {\n    kpr::main();\n}\n#line 4 \"template/make_array.hpp\"\
+    \n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr struct {\r\n  \
+    \      template<class T>\r\n        constexpr auto operator ()(const T& init =\
+    \ {}) noexcept {\r\n            return init;\r\n        }\r\n\r\n        template<class\
+    \ T, std::size_t length, std::size_t... lengths>\r\n        constexpr auto operator\
+    \ ()(const T& init = {}) noexcept {\r\n            auto elm = operator ()<T, lengths...>(init);\r\
+    \n            std::array<decltype(elm), length> res;\r\n            for (auto&\
+    \ i: res) i = elm;\r\n            return res;\r\n        }\r\n    } make_array;\r\
+    \n} // namespace kpr\r\n#line 6 \"template/make_vector.hpp\"\n\r\nnamespace kpr\
+    \ {\r\n    [[maybe_unused]] inline constexpr struct {\r\n        template<std::size_t\
     \ idx = 0, std::size_t n, class T>\r\n        auto operator ()(const std::size_t\
     \ (&d)[n], T&& init) noexcept {\r\n            if constexpr (idx < n) return std::vector(d[idx],\
     \ operator ()<idx + 1>(d, std::forward<T>(init)));\r\n            else return\
@@ -1447,13 +1451,14 @@ data:
   - template/fix_vector_bool.hpp
   - template/len.hpp
   - template/macro.hpp
+  - template/main.hpp
   - template/make_array.hpp
   - template/make_vector.hpp
   - template/stl.hpp
   isVerificationFile: false
   path: verify/hello_world.cpp
   requiredBy: []
-  timestamp: '2023-02-12 02:13:58+09:00'
+  timestamp: '2023-02-12 02:55:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: verify/hello_world.cpp

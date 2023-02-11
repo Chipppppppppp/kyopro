@@ -610,7 +610,7 @@ data:
   - verify/hello_world.cpp
   - template/template.hpp
   - all.hpp
-  timestamp: '2023-02-12 02:13:58+09:00'
+  timestamp: '2023-02-12 02:55:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/macro.hpp

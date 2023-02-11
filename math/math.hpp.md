@@ -923,7 +923,7 @@ data:
   - all/all.hpp
   - verify/hello_world.cpp
   - all.hpp
-  timestamp: '2023-02-11 03:23:39+09:00'
+  timestamp: '2023-02-12 02:55:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/math.hpp
