@@ -36,7 +36,8 @@ namespace kpr::helper {
     struct LambdaArg {};
 } // namespace kpr::helper
 
-#include <iostream>
+#include <unistd.h>
+#include <istream>
 #define read(type_or_init, ...) \
 auto [__VA_ARGS__] = (kpr::helper::read_impl(([]() { \
     using T = std::decay_t<decltype(*new type_or_init)>; \
