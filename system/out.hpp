@@ -36,7 +36,7 @@ namespace kpr {
         Writer(FILE* fp) noexcept: fd(fileno(fp)), idx(0), buffer() {}
 
         ~Writer() {
-            (void)write(fd, buffer.begin(), idx);
+            write(fd, buffer.begin(), idx);
         }
 
         // 出力イテレータ

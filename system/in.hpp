@@ -29,13 +29,13 @@ namespace kpr {
         }
 
         Reader() {
-            (void)read(fd, buffer.begin(), buf_size);
+            read(fd, buffer.begin(), buf_size);
         }
         Reader(int fd): fd(fd), idx(0), buffer() {
-            (void)read(fd, buffer.begin(), buf_size);
+            read(fd, buffer.begin(), buf_size);
         }
         Reader(FILE* fp): fd(fileno(fp)), idx(0), buffer() {
-            (void)read(fd, buffer.begin(), buf_size);
+            read(fd, buffer.begin(), buf_size);
         }
 
         // 入力イテレータ
