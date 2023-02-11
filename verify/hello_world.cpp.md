@@ -541,7 +541,7 @@ data:
     \n        template<class... Args>\r\n        constexpr Indexed(Args&&... args)\
     \ noexcept: args_tuple{std::forward<Args>(args)...} {}\r\n    };\r\n\r\n    template<std::size_t\
     \ i, class... Args>\r\n    constexpr auto indexed(Args&&... args) noexcept {\r\
-    \n        return Indexed<std::tuple<Args>..., i>{std::forward<Args>(args)...};\r\
+    \n        return Indexed<std::tuple<Args...>, i>{std::forward<Args>(args)...};\r\
     \n    }\r\n\r\n    template<class Tuple, bool... seps>\r\n    struct SepWith {\r\
     \n        Tuple args_tuple;\r\n        template<class... Args>\r\n        constexpr\
     \ SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...} {}\r\
@@ -555,28 +555,29 @@ data:
     \ buf_size> buffer;\r\n\r\n    public:\r\n        // \u30D0\u30C3\u30D5\u30A1\u30B5\
     \u30A4\u30BA\u3092\u53D6\u5F97\r\n        static constexpr KYOPRO_BASE_INT get_buf_size()\
     \ noexcept {\r\n            return buf_size;\r\n        }\r\n\r\n        Reader()\
-    \ {\r\n            read(fd, buffer.begin(), buf_size);\r\n        }\r\n      \
-    \  Reader(int fd): fd(fd), idx(0), buffer() {\r\n            read(fd, buffer.begin(),\
-    \ buf_size);\r\n        }\r\n        Reader(FILE* fp): fd(fileno(fp)), idx(0),\
-    \ buffer() {\r\n            read(fd, buffer.begin(), buf_size);\r\n        }\r\
-    \n\r\n        // \u5165\u529B\u30A4\u30C6\u30EC\u30FC\u30BF\r\n        struct\
-    \ iterator {\r\n        private:\r\n            Reader& reader;\r\n\r\n      \
-    \  public:\r\n            using difference_type = void;\r\n            using value_type\
-    \ = void;\r\n            using pointer = void;\r\n            using reference\
-    \ = void;\r\n            using iterator_category = std::input_iterator_tag;\r\n\
-    \r\n            iterator() noexcept = default;\r\n            iterator(Reader&\
+    \ {\r\n            [[maybe_unused]] ssize_t res = read(fd, buffer.begin(), buf_size);\r\
+    \n        }\r\n        Reader(int fd): fd(fd), idx(0), buffer() {\r\n        \
+    \    [[maybe_unused]] ssize_t res = read(fd, buffer.begin(), buf_size);\r\n  \
+    \      }\r\n        Reader(FILE* fp): fd(fileno(fp)), idx(0), buffer() {\r\n \
+    \           [[maybe_unused]] ssize_t res = read(fd, buffer.begin(), buf_size);\r\
+    \n        }\r\n\r\n        // \u5165\u529B\u30A4\u30C6\u30EC\u30FC\u30BF\r\n \
+    \       struct iterator {\r\n        private:\r\n            Reader& reader;\r\
+    \n\r\n        public:\r\n            using difference_type = void;\r\n       \
+    \     using value_type = void;\r\n            using pointer = void;\r\n      \
+    \      using reference = void;\r\n            using iterator_category = std::input_iterator_tag;\r\
+    \n\r\n            iterator() noexcept = default;\r\n            iterator(Reader&\
     \ reader) noexcept: reader(reader) {}\r\n\r\n            iterator& operator ++()\
     \ {\r\n                ++reader.idx;\r\n                if (reader.idx == buf_size)\
-    \ {\r\n                    read(reader.fd, reader.buffer.begin(), buf_size);\r\
-    \n                    reader.idx = 0;\r\n                }\r\n               \
-    \ return *this;\r\n            }\r\n\r\n            iterator operator ++(int)\
-    \ {\r\n                iterator before = *this;\r\n                operator ++();\r\
-    \n                return before;\r\n            }\r\n\r\n            char& operator\
-    \ *() const {\r\n                return reader.buffer[reader.idx];\r\n       \
-    \     }\r\n        };\r\n\r\n        // \u30D5\u30A1\u30A4\u30EB\u306E\u6700\u521D\
-    \u3092\u793A\u3059\u30A4\u30C6\u30EC\u30FC\u30BF\u3092\u53D6\u5F97\r\n       \
-    \ iterator begin() noexcept {\r\n            return iterator(*this);\r\n     \
-    \   }\r\n    };\r\n\r\n    // \u6A19\u6E96\u5165\u529B\r\n    Reader input{0};\r\
+    \ {\r\n                    [[maybe_unused]] ssize_t res = read(reader.fd, reader.buffer.begin(),\
+    \ buf_size);\r\n                    reader.idx = 0;\r\n                }\r\n \
+    \               return *this;\r\n            }\r\n\r\n            iterator operator\
+    \ ++(int) {\r\n                iterator before = *this;\r\n                operator\
+    \ ++();\r\n                return before;\r\n            }\r\n\r\n           \
+    \ char& operator *() const {\r\n                return reader.buffer[reader.idx];\r\
+    \n            }\r\n        };\r\n\r\n        // \u30D5\u30A1\u30A4\u30EB\u306E\
+    \u6700\u521D\u3092\u793A\u3059\u30A4\u30C6\u30EC\u30FC\u30BF\u3092\u53D6\u5F97\
+    \r\n        iterator begin() noexcept {\r\n            return iterator(*this);\r\
+    \n        }\r\n    };\r\n\r\n    // \u6A19\u6E96\u5165\u529B\r\n    Reader input{0};\r\
     \n\r\n\r\n    // \u5024\u306E\u5165\u529B\u306E\u95A2\u6570\u30AF\u30E9\u30B9\r\
     \n    template<class, class = void>\r\n    struct ScanFunction;\r\n\r\n    //\
     \ \u5165\u529B\u30A4\u30C6\u30EC\u30FC\u30BF\u3092\u7528\u3044\u3066\u5024\u3092\
@@ -666,23 +667,24 @@ data:
     \     return buf_size;\r\n        }\r\n\r\n        Writer() noexcept = default;\r\
     \n        Writer(int fd) noexcept: fd(fd), idx(0), buffer() {}\r\n        Writer(FILE*\
     \ fp) noexcept: fd(fileno(fp)), idx(0), buffer() {}\r\n\r\n        ~Writer() {\r\
-    \n            write(fd, buffer.begin(), idx);\r\n        }\r\n\r\n        // \u51FA\
-    \u529B\u30A4\u30C6\u30EC\u30FC\u30BF\r\n        struct iterator {\r\n        private:\r\
-    \n            Writer& writer;\r\n\r\n        public:\r\n            using difference_type\
-    \ = void;\r\n            using value_type = void;\r\n            using pointer\
-    \ = void;\r\n            using reference = void;\r\n            using iterator_category\
-    \ = std::output_iterator_tag;\r\n\r\n            iterator() noexcept = default;\r\
-    \n            iterator(Writer& writer) noexcept: writer(writer) {}\r\n\r\n   \
-    \         iterator& operator ++() {\r\n                ++writer.idx;\r\n     \
-    \           if (writer.idx == buf_size) {\r\n                write(writer.fd,\
-    \ writer.buffer.begin(), buf_size);\r\n                writer.idx = 0;\r\n   \
-    \             }\r\n                return *this;\r\n            }\r\n\r\n    \
-    \        iterator operator ++(int) {\r\n                iterator before = *this;\r\
-    \n                operator ++();\r\n                return before;\r\n       \
-    \     }\r\n\r\n            char& operator *() const {\r\n                return\
-    \ writer.buffer[writer.idx];\r\n            }\r\n\r\n            // \u30D0\u30C3\
-    \u30D5\u30A1\u3092\u5168\u3066\u51FA\u529B\u3059\u308B\r\n            void flush()\
-    \ const {\r\n                write(writer.fd, writer.buffer.begin(), writer.idx);\r\
+    \n            [[maybe_unused]]ssize_t res = write(fd, buffer.begin(), idx);\r\n\
+    \        }\r\n\r\n        // \u51FA\u529B\u30A4\u30C6\u30EC\u30FC\u30BF\r\n  \
+    \      struct iterator {\r\n        private:\r\n            Writer& writer;\r\n\
+    \r\n        public:\r\n            using difference_type = void;\r\n         \
+    \   using value_type = void;\r\n            using pointer = void;\r\n        \
+    \    using reference = void;\r\n            using iterator_category = std::output_iterator_tag;\r\
+    \n\r\n            iterator() noexcept = default;\r\n            iterator(Writer&\
+    \ writer) noexcept: writer(writer) {}\r\n\r\n            iterator& operator ++()\
+    \ {\r\n                ++writer.idx;\r\n                if (writer.idx == buf_size)\
+    \ {\r\n                [[maybe_unused]]ssize_t res = write(writer.fd, writer.buffer.begin(),\
+    \ buf_size);\r\n                writer.idx = 0;\r\n                }\r\n     \
+    \           return *this;\r\n            }\r\n\r\n            iterator operator\
+    \ ++(int) {\r\n                iterator before = *this;\r\n                operator\
+    \ ++();\r\n                return before;\r\n            }\r\n\r\n           \
+    \ char& operator *() const {\r\n                return writer.buffer[writer.idx];\r\
+    \n            }\r\n\r\n            // \u30D0\u30C3\u30D5\u30A1\u3092\u5168\u3066\
+    \u51FA\u529B\u3059\u308B\r\n            void flush() const {\r\n             \
+    \   [[maybe_unused]] ssize_t res = write(writer.fd, writer.buffer.begin(), writer.idx);\r\
     \n            }\r\n        };\r\n\r\n        // \u30D5\u30A1\u30A4\u30EB\u306E\
     \u6700\u521D\u3092\u793A\u3059\u30A4\u30C6\u30EC\u30FC\u30BF\u3092\u53D6\u5F97\
     \r\n        iterator begin() noexcept {\r\n            return iterator(*this);\r\
@@ -1458,7 +1460,7 @@ data:
   isVerificationFile: false
   path: verify/hello_world.cpp
   requiredBy: []
-  timestamp: '2023-02-12 03:16:59+09:00'
+  timestamp: '2023-02-12 03:32:11+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: verify/hello_world.cpp

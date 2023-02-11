@@ -82,7 +82,7 @@ data:
     \ Indexed {\r\n        Tuple args_tuple;\r\n        template<class... Args>\r\n\
     \        constexpr Indexed(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
     \ {}\r\n    };\r\n\r\n    template<std::size_t i, class... Args>\r\n    constexpr\
-    \ auto indexed(Args&&... args) noexcept {\r\n        return Indexed<std::tuple<Args>...,\
+    \ auto indexed(Args&&... args) noexcept {\r\n        return Indexed<std::tuple<Args...>,\
     \ i>{std::forward<Args>(args)...};\r\n    }\r\n\r\n    template<class Tuple, bool...\
     \ seps>\r\n    struct SepWith {\r\n        Tuple args_tuple;\r\n        template<class...\
     \ Args>\r\n        constexpr SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
@@ -292,25 +292,26 @@ data:
     \n        // \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\u3092\u53D6\u5F97\r\n\
     \        static constexpr KYOPRO_BASE_INT get_buf_size() noexcept {\r\n      \
     \      return buf_size;\r\n        }\r\n\r\n        Reader() {\r\n           \
-    \ read(fd, buffer.begin(), buf_size);\r\n        }\r\n        Reader(int fd):\
-    \ fd(fd), idx(0), buffer() {\r\n            read(fd, buffer.begin(), buf_size);\r\
-    \n        }\r\n        Reader(FILE* fp): fd(fileno(fp)), idx(0), buffer() {\r\n\
-    \            read(fd, buffer.begin(), buf_size);\r\n        }\r\n\r\n        //\
-    \ \u5165\u529B\u30A4\u30C6\u30EC\u30FC\u30BF\r\n        struct iterator {\r\n\
-    \        private:\r\n            Reader& reader;\r\n\r\n        public:\r\n  \
-    \          using difference_type = void;\r\n            using value_type = void;\r\
-    \n            using pointer = void;\r\n            using reference = void;\r\n\
-    \            using iterator_category = std::input_iterator_tag;\r\n\r\n      \
-    \      iterator() noexcept = default;\r\n            iterator(Reader& reader)\
-    \ noexcept: reader(reader) {}\r\n\r\n            iterator& operator ++() {\r\n\
-    \                ++reader.idx;\r\n                if (reader.idx == buf_size)\
-    \ {\r\n                    read(reader.fd, reader.buffer.begin(), buf_size);\r\
-    \n                    reader.idx = 0;\r\n                }\r\n               \
-    \ return *this;\r\n            }\r\n\r\n            iterator operator ++(int)\
-    \ {\r\n                iterator before = *this;\r\n                operator ++();\r\
-    \n                return before;\r\n            }\r\n\r\n            char& operator\
-    \ *() const {\r\n                return reader.buffer[reader.idx];\r\n       \
-    \     }\r\n        };\r\n\r\n        // \u30D5\u30A1\u30A4\u30EB\u306E\u6700\u521D\
+    \ [[maybe_unused]] ssize_t res = read(fd, buffer.begin(), buf_size);\r\n     \
+    \   }\r\n        Reader(int fd): fd(fd), idx(0), buffer() {\r\n            [[maybe_unused]]\
+    \ ssize_t res = read(fd, buffer.begin(), buf_size);\r\n        }\r\n        Reader(FILE*\
+    \ fp): fd(fileno(fp)), idx(0), buffer() {\r\n            [[maybe_unused]] ssize_t\
+    \ res = read(fd, buffer.begin(), buf_size);\r\n        }\r\n\r\n        // \u5165\
+    \u529B\u30A4\u30C6\u30EC\u30FC\u30BF\r\n        struct iterator {\r\n        private:\r\
+    \n            Reader& reader;\r\n\r\n        public:\r\n            using difference_type\
+    \ = void;\r\n            using value_type = void;\r\n            using pointer\
+    \ = void;\r\n            using reference = void;\r\n            using iterator_category\
+    \ = std::input_iterator_tag;\r\n\r\n            iterator() noexcept = default;\r\
+    \n            iterator(Reader& reader) noexcept: reader(reader) {}\r\n\r\n   \
+    \         iterator& operator ++() {\r\n                ++reader.idx;\r\n     \
+    \           if (reader.idx == buf_size) {\r\n                    [[maybe_unused]]\
+    \ ssize_t res = read(reader.fd, reader.buffer.begin(), buf_size);\r\n        \
+    \            reader.idx = 0;\r\n                }\r\n                return *this;\r\
+    \n            }\r\n\r\n            iterator operator ++(int) {\r\n           \
+    \     iterator before = *this;\r\n                operator ++();\r\n         \
+    \       return before;\r\n            }\r\n\r\n            char& operator *()\
+    \ const {\r\n                return reader.buffer[reader.idx];\r\n           \
+    \ }\r\n        };\r\n\r\n        // \u30D5\u30A1\u30A4\u30EB\u306E\u6700\u521D\
     \u3092\u793A\u3059\u30A4\u30C6\u30EC\u30FC\u30BF\u3092\u53D6\u5F97\r\n       \
     \ iterator begin() noexcept {\r\n            return iterator(*this);\r\n     \
     \   }\r\n    };\r\n\r\n    // \u6A19\u6E96\u5165\u529B\r\n    Reader input{0};\r\
@@ -404,25 +405,26 @@ data:
     \n        // \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\u3092\u53D6\u5F97\r\n\
     \        static constexpr KYOPRO_BASE_INT get_buf_size() noexcept {\r\n      \
     \      return buf_size;\r\n        }\r\n\r\n        Reader() {\r\n           \
-    \ read(fd, buffer.begin(), buf_size);\r\n        }\r\n        Reader(int fd):\
-    \ fd(fd), idx(0), buffer() {\r\n            read(fd, buffer.begin(), buf_size);\r\
-    \n        }\r\n        Reader(FILE* fp): fd(fileno(fp)), idx(0), buffer() {\r\n\
-    \            read(fd, buffer.begin(), buf_size);\r\n        }\r\n\r\n        //\
-    \ \u5165\u529B\u30A4\u30C6\u30EC\u30FC\u30BF\r\n        struct iterator {\r\n\
-    \        private:\r\n            Reader& reader;\r\n\r\n        public:\r\n  \
-    \          using difference_type = void;\r\n            using value_type = void;\r\
-    \n            using pointer = void;\r\n            using reference = void;\r\n\
-    \            using iterator_category = std::input_iterator_tag;\r\n\r\n      \
-    \      iterator() noexcept = default;\r\n            iterator(Reader& reader)\
-    \ noexcept: reader(reader) {}\r\n\r\n            iterator& operator ++() {\r\n\
-    \                ++reader.idx;\r\n                if (reader.idx == buf_size)\
-    \ {\r\n                    read(reader.fd, reader.buffer.begin(), buf_size);\r\
-    \n                    reader.idx = 0;\r\n                }\r\n               \
-    \ return *this;\r\n            }\r\n\r\n            iterator operator ++(int)\
-    \ {\r\n                iterator before = *this;\r\n                operator ++();\r\
-    \n                return before;\r\n            }\r\n\r\n            char& operator\
-    \ *() const {\r\n                return reader.buffer[reader.idx];\r\n       \
-    \     }\r\n        };\r\n\r\n        // \u30D5\u30A1\u30A4\u30EB\u306E\u6700\u521D\
+    \ [[maybe_unused]] ssize_t res = read(fd, buffer.begin(), buf_size);\r\n     \
+    \   }\r\n        Reader(int fd): fd(fd), idx(0), buffer() {\r\n            [[maybe_unused]]\
+    \ ssize_t res = read(fd, buffer.begin(), buf_size);\r\n        }\r\n        Reader(FILE*\
+    \ fp): fd(fileno(fp)), idx(0), buffer() {\r\n            [[maybe_unused]] ssize_t\
+    \ res = read(fd, buffer.begin(), buf_size);\r\n        }\r\n\r\n        // \u5165\
+    \u529B\u30A4\u30C6\u30EC\u30FC\u30BF\r\n        struct iterator {\r\n        private:\r\
+    \n            Reader& reader;\r\n\r\n        public:\r\n            using difference_type\
+    \ = void;\r\n            using value_type = void;\r\n            using pointer\
+    \ = void;\r\n            using reference = void;\r\n            using iterator_category\
+    \ = std::input_iterator_tag;\r\n\r\n            iterator() noexcept = default;\r\
+    \n            iterator(Reader& reader) noexcept: reader(reader) {}\r\n\r\n   \
+    \         iterator& operator ++() {\r\n                ++reader.idx;\r\n     \
+    \           if (reader.idx == buf_size) {\r\n                    [[maybe_unused]]\
+    \ ssize_t res = read(reader.fd, reader.buffer.begin(), buf_size);\r\n        \
+    \            reader.idx = 0;\r\n                }\r\n                return *this;\r\
+    \n            }\r\n\r\n            iterator operator ++(int) {\r\n           \
+    \     iterator before = *this;\r\n                operator ++();\r\n         \
+    \       return before;\r\n            }\r\n\r\n            char& operator *()\
+    \ const {\r\n                return reader.buffer[reader.idx];\r\n           \
+    \ }\r\n        };\r\n\r\n        // \u30D5\u30A1\u30A4\u30EB\u306E\u6700\u521D\
     \u3092\u793A\u3059\u30A4\u30C6\u30EC\u30FC\u30BF\u3092\u53D6\u5F97\r\n       \
     \ iterator begin() noexcept {\r\n            return iterator(*this);\r\n     \
     \   }\r\n    };\r\n\r\n    // \u6A19\u6E96\u5165\u529B\r\n    Reader input{0};\r\
@@ -525,7 +527,7 @@ data:
   - math/factorize.hpp
   - math/DynamicModInt.hpp
   - all.hpp
-  timestamp: '2023-02-12 02:55:34+09:00'
+  timestamp: '2023-02-12 03:32:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp

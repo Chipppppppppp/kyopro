@@ -70,7 +70,7 @@ data:
     \ idx>\r\n    struct Indexed {\r\n        Tuple args_tuple;\r\n        template<class...\
     \ Args>\r\n        constexpr Indexed(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
     \ {}\r\n    };\r\n\r\n    template<std::size_t i, class... Args>\r\n    constexpr\
-    \ auto indexed(Args&&... args) noexcept {\r\n        return Indexed<std::tuple<Args>...,\
+    \ auto indexed(Args&&... args) noexcept {\r\n        return Indexed<std::tuple<Args...>,\
     \ i>{std::forward<Args>(args)...};\r\n    }\r\n\r\n    template<class Tuple, bool...\
     \ seps>\r\n    struct SepWith {\r\n        Tuple args_tuple;\r\n        template<class...\
     \ Args>\r\n        constexpr SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
@@ -82,7 +82,7 @@ data:
     \ Indexed {\r\n        Tuple args_tuple;\r\n        template<class... Args>\r\n\
     \        constexpr Indexed(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
     \ {}\r\n    };\r\n\r\n    template<std::size_t i, class... Args>\r\n    constexpr\
-    \ auto indexed(Args&&... args) noexcept {\r\n        return Indexed<std::tuple<Args>...,\
+    \ auto indexed(Args&&... args) noexcept {\r\n        return Indexed<std::tuple<Args...>,\
     \ i>{std::forward<Args>(args)...};\r\n    }\r\n\r\n    template<class Tuple, bool...\
     \ seps>\r\n    struct SepWith {\r\n        Tuple args_tuple;\r\n        template<class...\
     \ Args>\r\n        constexpr SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
@@ -107,7 +107,7 @@ data:
   - math/factorize.hpp
   - math/DynamicModInt.hpp
   - all.hpp
-  timestamp: '2023-02-11 02:36:17+09:00'
+  timestamp: '2023-02-12 03:32:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp
