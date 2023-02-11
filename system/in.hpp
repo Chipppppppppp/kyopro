@@ -29,13 +29,13 @@ namespace kpr {
         }
 
         Reader() {
-            read(fd, buffer.begin(), buf_size);
+            [[maybe_unused]] ssize_t res = read(fd, buffer.begin(), buf_size);
         }
         Reader(int fd): fd(fd), idx(0), buffer() {
-            read(fd, buffer.begin(), buf_size);
+            [[maybe_unused]] ssize_t res = read(fd, buffer.begin(), buf_size);
         }
         Reader(FILE* fp): fd(fileno(fp)), idx(0), buffer() {
-            read(fd, buffer.begin(), buf_size);
+            [[maybe_unused]] ssize_t res = read(fd, buffer.begin(), buf_size);
         }
 
         // 入力イテレータ
@@ -56,7 +56,7 @@ namespace kpr {
             iterator& operator ++() {
                 ++reader.idx;
                 if (reader.idx == buf_size) {
-                    read(reader.fd, reader.buffer.begin(), buf_size);
+                    [[maybe_unused]] ssize_t res = read(reader.fd, reader.buffer.begin(), buf_size);
                     reader.idx = 0;
                 }
                 return *this;

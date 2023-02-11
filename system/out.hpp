@@ -36,7 +36,7 @@ namespace kpr {
         Writer(FILE* fp) noexcept: fd(fileno(fp)), idx(0), buffer() {}
 
         ~Writer() {
-            write(fd, buffer.begin(), idx);
+            [[maybe_unused]]ssize_t res = write(fd, buffer.begin(), idx);
         }
 
         // 出力イテレータ
@@ -57,7 +57,7 @@ namespace kpr {
             iterator& operator ++() {
                 ++writer.idx;
                 if (writer.idx == buf_size) {
-                write(writer.fd, writer.buffer.begin(), buf_size);
+                [[maybe_unused]]ssize_t res = write(writer.fd, writer.buffer.begin(), buf_size);
                 writer.idx = 0;
                 }
                 return *this;
@@ -75,7 +75,7 @@ namespace kpr {
 
             // バッファを全て出力する
             void flush() const {
-                write(writer.fd, writer.buffer.begin(), writer.idx);
+                [[maybe_unused]] ssize_t res = write(writer.fd, writer.buffer.begin(), writer.idx);
             }
         };
 

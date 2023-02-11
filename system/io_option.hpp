@@ -13,7 +13,7 @@ namespace kpr {
 
     template<std::size_t i, class... Args>
     constexpr auto indexed(Args&&... args) noexcept {
-        return Indexed<std::tuple<Args>..., i>{std::forward<Args>(args)...};
+        return Indexed<std::tuple<Args...>, i>{std::forward<Args>(args)...};
     }
 
     template<class Tuple, bool... seps>
