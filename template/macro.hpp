@@ -48,7 +48,12 @@ auto [__VA_ARGS__] = (kpr::helper::read_impl(([]() { \
     p->~T(); \
     return res; \
 }), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))
+
+#ifdef NDEBUG
+#define debug(...) (void())
+#else
 #define debug(...) (kpr::print('#', ' ', 'l', 'i', 'n', 'e', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__) != 0>(#__VA_ARGS__), kpr::print('\n'), kpr::helper::debug_impl(__VA_ARGS__))
+#endif
 
 #define KYOPRO_OVERLOAD_MACRO(_1, _2, _3, _4, name, ...) name
 

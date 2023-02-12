@@ -200,10 +200,7 @@ namespace kpr {
         template<bool first = true, class Head, class... Args>
         void operator ()(Head&& head, Args&&... args) {
             if constexpr (first) print_comment();
-            else {
-                if constexpr (debug) print_char(',');
-                print_sep();
-            }
+            else print_sep();
             PrintFunction<std::decay_t<Head>>::print(*this, std::forward<Head>(head));
             operator ()<false>(std::forward<Args>(args)...);
         }
@@ -273,11 +270,12 @@ namespace kpr {
         static void print(Printer& printer, const T& a) {
             using value_type = range_value_t<T>;
             if constexpr (Printer::debug) printer.print_char('{');
-            if (std::empty(a)) return;
-            for (auto i = std::begin(a); ; ) {
-                PrintFunction<value_type>::print(printer, *i);
-                if (++i != std::end(a)) printer.template print_sep_by_type<value_type>();
-                else break;
+            if (!std::empty(a)) {
+                for (auto i = std::begin(a); ; ) {
+                    PrintFunction<value_type>::print(printer, *i);
+                    if (++i != std::end(a)) printer.template print_sep_by_type<value_type>();
+                    else break;
+                }
             }
             if constexpr (Printer::debug) printer.print_char('}');
         }
