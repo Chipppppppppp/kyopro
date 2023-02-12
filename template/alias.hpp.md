@@ -505,18 +505,17 @@ data:
     \ print_comment();\r\n            print_end();\r\n            if constexpr (flush)\
     \ itr.flush();\r\n        }\r\n        template<bool first = true, class Head,\
     \ class... Args>\r\n        void operator ()(Head&& head, Args&&... args) {\r\n\
-    \            if constexpr (first) print_comment();\r\n            else {\r\n \
-    \               if constexpr (debug) print_char(',');\r\n                print_sep();\r\
-    \n            }\r\n            PrintFunction<std::decay_t<Head>>::print(*this,\
-    \ std::forward<Head>(head));\r\n            operator ()<false>(std::forward<Args>(args)...);\r\
-    \n        }\r\n    };\r\n\r\n    template<>\r\n    struct PrintFunction<char>\
+    \            if constexpr (first) print_comment();\r\n            else print_sep();\r\
+    \n            PrintFunction<std::decay_t<Head>>::print(*this, std::forward<Head>(head));\r\
+    \n            operator ()<false>(std::forward<Args>(args)...);\r\n        }\r\n\
+    \    };\r\n\r\n    template<>\r\n    struct PrintFunction<char> {\r\n        template<class\
+    \ Printer>\r\n        static void print(Printer& printer, char a) {\r\n      \
+    \      if constexpr (Printer::debug) printer.print_char('\\'');\r\n          \
+    \  printer.print_char(a);\r\n            if constexpr (Printer::debug) printer.print_char('\\\
+    '');\r\n        }\r\n    };\r\n\r\n    template<>\r\n    struct PrintFunction<bool>\
     \ {\r\n        template<class Printer>\r\n        static void print(Printer& printer,\
-    \ char a) {\r\n            if constexpr (Printer::debug) printer.print_char('\\\
-    '');\r\n            printer.print_char(a);\r\n            if constexpr (Printer::debug)\
-    \ printer.print_char('\\'');\r\n        }\r\n    };\r\n\r\n    template<>\r\n\
-    \    struct PrintFunction<bool> {\r\n        template<class Printer>\r\n     \
-    \   static void print(Printer& printer, bool a) {\r\n            printer.print_char(static_cast<char>('0'\
-    \ + a));\r\n        }\r\n    };\r\n\r\n    template<class T>\r\n    struct PrintFunction<T,\
+    \ bool a) {\r\n            printer.print_char(static_cast<char>('0' + a));\r\n\
+    \        }\r\n    };\r\n\r\n    template<class T>\r\n    struct PrintFunction<T,\
     \ std::enable_if_t<std::is_convertible_v<T, std::string_view>>> {\r\n        template<class\
     \ Printer>\r\n        static void print(Printer& printer, std::string_view a)\
     \ {\r\n            if constexpr (Printer::debug) printer.print_char('\"');\r\n\
@@ -543,16 +542,16 @@ data:
     \ {\r\n        template<class Printer>\r\n        static void print(Printer& printer,\
     \ const T& a) {\r\n            using value_type = range_value_t<T>;\r\n      \
     \      if constexpr (Printer::debug) printer.print_char('{');\r\n            if\
-    \ (std::empty(a)) return;\r\n            for (auto i = std::begin(a); ; ) {\r\n\
-    \                PrintFunction<value_type>::print(printer, *i);\r\n          \
-    \      if (++i != std::end(a)) printer.template print_sep_by_type<value_type>();\r\
-    \n                else break;\r\n            }\r\n            if constexpr (Printer::debug)\
-    \ printer.print_char('}');\r\n        }\r\n    };\r\n\r\n    template<class Tuple,\
-    \ std::size_t idx>\r\n    struct PrintFunction<Indexed<Tuple, idx>> {\r\n    \
-    \    template<class Printer>\r\n        struct PrinterWrapper: Printer {\r\n \
-    \           template<class T>\r\n            void print_arithmetic(T a) {\r\n\
-    \                Printer::print_arithmetic(a + 1);\r\n            }\r\n      \
-    \  };\r\n        template<class Printer>\r\n        static void print(Printer&\
+    \ (!std::empty(a)) {\r\n                for (auto i = std::begin(a); ; ) {\r\n\
+    \                    PrintFunction<value_type>::print(printer, *i);\r\n      \
+    \              if (++i != std::end(a)) printer.template print_sep_by_type<value_type>();\r\
+    \n                    else break;\r\n                }\r\n            }\r\n  \
+    \          if constexpr (Printer::debug) printer.print_char('}');\r\n        }\r\
+    \n    };\r\n\r\n    template<class Tuple, std::size_t idx>\r\n    struct PrintFunction<Indexed<Tuple,\
+    \ idx>> {\r\n        template<class Printer>\r\n        struct PrinterWrapper:\
+    \ Printer {\r\n            template<class T>\r\n            void print_arithmetic(T\
+    \ a) {\r\n                Printer::print_arithmetic(a + 1);\r\n            }\r\
+    \n        };\r\n        template<class Printer>\r\n        static void print(Printer&\
     \ printer, const Indexed<Tuple, idx>& a) {\r\n            PrinterWrapper<Printer>&\
     \ printer_wrapper = static_cast<PrinterWrapper<Printer>&>(printer);\r\n      \
     \      PrintFunction<Tuple>::print(printer_wrapper, a.args_tuple);\r\n       \
@@ -876,7 +875,7 @@ data:
   - verify/hello_world.cpp
   - template/template.hpp
   - all.hpp
-  timestamp: '2023-02-12 04:09:24+09:00'
+  timestamp: '2023-02-12 22:41:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/alias.hpp

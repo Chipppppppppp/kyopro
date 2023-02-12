@@ -743,18 +743,17 @@ data:
     \ print_comment();\r\n            print_end();\r\n            if constexpr (flush)\
     \ itr.flush();\r\n        }\r\n        template<bool first = true, class Head,\
     \ class... Args>\r\n        void operator ()(Head&& head, Args&&... args) {\r\n\
-    \            if constexpr (first) print_comment();\r\n            else {\r\n \
-    \               if constexpr (debug) print_char(',');\r\n                print_sep();\r\
-    \n            }\r\n            PrintFunction<std::decay_t<Head>>::print(*this,\
-    \ std::forward<Head>(head));\r\n            operator ()<false>(std::forward<Args>(args)...);\r\
-    \n        }\r\n    };\r\n\r\n    template<>\r\n    struct PrintFunction<char>\
+    \            if constexpr (first) print_comment();\r\n            else print_sep();\r\
+    \n            PrintFunction<std::decay_t<Head>>::print(*this, std::forward<Head>(head));\r\
+    \n            operator ()<false>(std::forward<Args>(args)...);\r\n        }\r\n\
+    \    };\r\n\r\n    template<>\r\n    struct PrintFunction<char> {\r\n        template<class\
+    \ Printer>\r\n        static void print(Printer& printer, char a) {\r\n      \
+    \      if constexpr (Printer::debug) printer.print_char('\\'');\r\n          \
+    \  printer.print_char(a);\r\n            if constexpr (Printer::debug) printer.print_char('\\\
+    '');\r\n        }\r\n    };\r\n\r\n    template<>\r\n    struct PrintFunction<bool>\
     \ {\r\n        template<class Printer>\r\n        static void print(Printer& printer,\
-    \ char a) {\r\n            if constexpr (Printer::debug) printer.print_char('\\\
-    '');\r\n            printer.print_char(a);\r\n            if constexpr (Printer::debug)\
-    \ printer.print_char('\\'');\r\n        }\r\n    };\r\n\r\n    template<>\r\n\
-    \    struct PrintFunction<bool> {\r\n        template<class Printer>\r\n     \
-    \   static void print(Printer& printer, bool a) {\r\n            printer.print_char(static_cast<char>('0'\
-    \ + a));\r\n        }\r\n    };\r\n\r\n    template<class T>\r\n    struct PrintFunction<T,\
+    \ bool a) {\r\n            printer.print_char(static_cast<char>('0' + a));\r\n\
+    \        }\r\n    };\r\n\r\n    template<class T>\r\n    struct PrintFunction<T,\
     \ std::enable_if_t<std::is_convertible_v<T, std::string_view>>> {\r\n        template<class\
     \ Printer>\r\n        static void print(Printer& printer, std::string_view a)\
     \ {\r\n            if constexpr (Printer::debug) printer.print_char('\"');\r\n\
@@ -781,16 +780,16 @@ data:
     \ {\r\n        template<class Printer>\r\n        static void print(Printer& printer,\
     \ const T& a) {\r\n            using value_type = range_value_t<T>;\r\n      \
     \      if constexpr (Printer::debug) printer.print_char('{');\r\n            if\
-    \ (std::empty(a)) return;\r\n            for (auto i = std::begin(a); ; ) {\r\n\
-    \                PrintFunction<value_type>::print(printer, *i);\r\n          \
-    \      if (++i != std::end(a)) printer.template print_sep_by_type<value_type>();\r\
-    \n                else break;\r\n            }\r\n            if constexpr (Printer::debug)\
-    \ printer.print_char('}');\r\n        }\r\n    };\r\n\r\n    template<class Tuple,\
-    \ std::size_t idx>\r\n    struct PrintFunction<Indexed<Tuple, idx>> {\r\n    \
-    \    template<class Printer>\r\n        struct PrinterWrapper: Printer {\r\n \
-    \           template<class T>\r\n            void print_arithmetic(T a) {\r\n\
-    \                Printer::print_arithmetic(a + 1);\r\n            }\r\n      \
-    \  };\r\n        template<class Printer>\r\n        static void print(Printer&\
+    \ (!std::empty(a)) {\r\n                for (auto i = std::begin(a); ; ) {\r\n\
+    \                    PrintFunction<value_type>::print(printer, *i);\r\n      \
+    \              if (++i != std::end(a)) printer.template print_sep_by_type<value_type>();\r\
+    \n                    else break;\r\n                }\r\n            }\r\n  \
+    \          if constexpr (Printer::debug) printer.print_char('}');\r\n        }\r\
+    \n    };\r\n\r\n    template<class Tuple, std::size_t idx>\r\n    struct PrintFunction<Indexed<Tuple,\
+    \ idx>> {\r\n        template<class Printer>\r\n        struct PrinterWrapper:\
+    \ Printer {\r\n            template<class T>\r\n            void print_arithmetic(T\
+    \ a) {\r\n                Printer::print_arithmetic(a + 1);\r\n            }\r\
+    \n        };\r\n        template<class Printer>\r\n        static void print(Printer&\
     \ printer, const Indexed<Tuple, idx>& a) {\r\n            PrinterWrapper<Printer>&\
     \ printer_wrapper = static_cast<PrinterWrapper<Printer>&>(printer);\r\n      \
     \      PrintFunction<Tuple>::print(printer_wrapper, a.args_tuple);\r\n       \
@@ -1338,27 +1337,28 @@ data:
     \ type_or_init)>; \\\r\n    alignas(T) std::byte storage[sizeof(T)]; \\\r\n  \
     \  T* p = new (storage) type_or_init; \\\r\n    kpr::scan(*p); \\\r\n    T res\
     \ = std::move(*p); \\\r\n    p->~T(); \\\r\n    return res; \\\r\n}), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\r\
-    \n#define debug(...) (kpr::print('#', ' ', 'l', 'i', 'n', 'e', ' ', __LINE__,\
-    \ ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__) != 0>(#__VA_ARGS__),\
-    \ kpr::print('\\n'), kpr::helper::debug_impl(__VA_ARGS__))\r\n\r\n#define KYOPRO_OVERLOAD_MACRO(_1,\
-    \ _2, _3, _4, name, ...) name\r\n\r\n#define KYOPRO_REP0() for (; ; )\r\n#define\
-    \ KYOPRO_REP1(last) KYOPRO_REP2(KYOPRO_COUNTER, last)\r\n#define KYOPRO_REP2(i,\
-    \ last) for (auto i = std::decay_t<decltype(last)>(), KYOPRO_LAST = (last); (i)\
-    \ < (KYOPRO_LAST); ++(i))\r\n#define KYOPRO_REP3(i, first, last) for (auto i =\
-    \ (first), KYOPRO_LAST = last; (i) < (KYOPRO_LAST); ++(i))\r\n#define rep(...)\
-    \ KYOPRO_OVERLOAD_MACRO(__VA_ARGS__ __VA_OPT__(,) KYOPRO_REP4, KYOPRO_REP3, KYOPRO_REP2,\
-    \ KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\r\n\r\n#define KYOPRO_MATCH1(_1) break;\
-    \ case _1:\r\n#define KYOPRO_MATCH2(_1, _2) break; case _1: case _2:\r\n#define\
-    \ KYOPRO_MATCH3(_1, _2, _3) break; case _1: case _2: case _3:\r\n#define KYOPRO_MATCH4(_1,\
-    \ _2, _3, _4) break; case _1: case _2: case _3: case _4:\r\n#define match(...)\
-    \ KYOPRO_OVERLOAD_MACRO(__VA_ARGS__, KYOPRO_MATCH4, KYOPRO_MATCH3, KYOPRO_MATCH2,\
-    \ KYOPRO_MATCH1)(__VA_ARGS__)\r\n#define otherwise break; default:\r\n\r\n#define\
-    \ $(...) \\\r\n([&](auto&&... _args) { \\\r\n    auto _args_tuple = std::forward_as_tuple(_args...);\
-    \ \\\r\n    if constexpr (sizeof...(_args) == 0) { \\\r\n        return ([&]()\
-    \ { return (__VA_ARGS__); })(); \\\r\n    } else if constexpr (sizeof...(_args)\
-    \ == 1) { \\\r\n        return ([&](auto&& $0) { return (__VA_ARGS__); })(get<0>(_args_tuple));\
-    \ \\\r\n    } else if constexpr (sizeof...(_args) == 2) { \\\r\n        return\
-    \ ([&](auto&& $0, auto&& $1) { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple));\
+    \n\r\n#ifdef NDEBUG\r\n#define debug(...) (void())\r\n#else\r\n#define debug(...)\
+    \ (kpr::print('#', ' ', 'l', 'i', 'n', 'e', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
+    \ != 0>(#__VA_ARGS__), kpr::print('\\n'), kpr::helper::debug_impl(__VA_ARGS__))\r\
+    \n#endif\r\n\r\n#define KYOPRO_OVERLOAD_MACRO(_1, _2, _3, _4, name, ...) name\r\
+    \n\r\n#define KYOPRO_REP0() for (; ; )\r\n#define KYOPRO_REP1(last) KYOPRO_REP2(KYOPRO_COUNTER,\
+    \ last)\r\n#define KYOPRO_REP2(i, last) for (auto i = std::decay_t<decltype(last)>(),\
+    \ KYOPRO_LAST = (last); (i) < (KYOPRO_LAST); ++(i))\r\n#define KYOPRO_REP3(i,\
+    \ first, last) for (auto i = (first), KYOPRO_LAST = last; (i) < (KYOPRO_LAST);\
+    \ ++(i))\r\n#define rep(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__ __VA_OPT__(,) KYOPRO_REP4,\
+    \ KYOPRO_REP3, KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\r\n\r\n#define\
+    \ KYOPRO_MATCH1(_1) break; case _1:\r\n#define KYOPRO_MATCH2(_1, _2) break; case\
+    \ _1: case _2:\r\n#define KYOPRO_MATCH3(_1, _2, _3) break; case _1: case _2: case\
+    \ _3:\r\n#define KYOPRO_MATCH4(_1, _2, _3, _4) break; case _1: case _2: case _3:\
+    \ case _4:\r\n#define match(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__, KYOPRO_MATCH4,\
+    \ KYOPRO_MATCH3, KYOPRO_MATCH2, KYOPRO_MATCH1)(__VA_ARGS__)\r\n#define otherwise\
+    \ break; default:\r\n\r\n#define $(...) \\\r\n([&](auto&&... _args) { \\\r\n \
+    \   auto _args_tuple = std::forward_as_tuple(_args...); \\\r\n    if constexpr\
+    \ (sizeof...(_args) == 0) { \\\r\n        return ([&]() { return (__VA_ARGS__);\
+    \ })(); \\\r\n    } else if constexpr (sizeof...(_args) == 1) { \\\r\n       \
+    \ return ([&](auto&& $0) { return (__VA_ARGS__); })(get<0>(_args_tuple)); \\\r\
+    \n    } else if constexpr (sizeof...(_args) == 2) { \\\r\n        return ([&](auto&&\
+    \ $0, auto&& $1) { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple));\
     \ \\\r\n    } else if constexpr (sizeof...(_args) == 3) { \\\r\n        return\
     \ ([&](auto&& $0, auto&& $1, auto&& $2) { return (__VA_ARGS__); })(get<0>(_args_tuple),\
     \ get<1>(_args_tuple), get<2>(_args_tuple)); \\\r\n    } else if constexpr (sizeof...(_args)\
@@ -1461,7 +1461,7 @@ data:
   isVerificationFile: false
   path: verify/hello_world.cpp
   requiredBy: []
-  timestamp: '2023-02-12 12:23:39+09:00'
+  timestamp: '2023-02-12 22:41:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: verify/hello_world.cpp
