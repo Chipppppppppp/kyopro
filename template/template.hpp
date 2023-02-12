@@ -2,7 +2,6 @@
 #include "alias.hpp"
 #include "amin_amax.hpp"
 #include "constant.hpp"
-#include "fix_vector_bool.hpp"
 #include "len.hpp"
 #include "macro.hpp"
 #include "main.hpp"
