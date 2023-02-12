@@ -56,9 +56,6 @@ data:
     path: template/constant.hpp
     title: template/constant.hpp
   - icon: ':warning:'
-    path: template/fix_vector_bool.hpp
-    title: template/fix_vector_bool.hpp
-  - icon: ':warning:'
     path: template/len.hpp
     title: template/len.hpp
   - icon: ':warning:'
@@ -857,21 +854,18 @@ data:
     \ KYOPRO_BASE_INT>, 4> beside{{{-1, 0}, {0, -1}, {1, 0}, {0, 1}}};\r\n    inline\
     \ constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{-1,\
     \ 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1, 1}, {0, 1}, {-1, 1}}};\r\n} // namespace\
-    \ kpr\r\n#line 5 \"template/fix_vector_bool.hpp\"\n\r\ntemplate<>\r\nstruct std::vector<bool>:\
-    \ std::basic_string<bool> {\r\n    using std::basic_string<bool>::basic_string,\
-    \ std::basic_string<bool>::operator =;\r\n    explicit vector(std::size_t n):\
-    \ vector(n, false) {}\r\n};\r\n#line 4 \"template/len.hpp\"\n\r\nnamespace kpr\
-    \ {\r\n    [[maybe_unused]] inline constexpr struct {\r\n        template<class\
-    \ T>\r\n        constexpr KYOPRO_BASE_INT operator ()(T&& a) const noexcept {\r\
-    \n            return std::size(a);\r\n        }\r\n    } len;\r\n} // namespace\
-    \ kpr\r\n#line 4 \"template/macro.hpp\"\n#include <memory>\r\n#line 9 \"template/macro.hpp\"\
-    \n\r\nnamespace kpr::helper {\r\n    template<std::size_t len>\r\n    constexpr\
-    \ std::size_t va_args_size(const char (&s)[len]) noexcept {\r\n        if constexpr\
-    \ (len == 1) return 0;\r\n        std::size_t cnt = 1;\r\n        std::uint_fast64_t\
-    \ bracket = 0;\r\n        for (auto i: s) {\r\n            if (i == '(') ++bracket;\r\
-    \n            else if (i == ')') --bracket;\r\n            else if (i == ',' &&\
-    \ bracket == 0) ++cnt;\r\n        }\r\n        return cnt;\r\n    }\r\n\r\n  \
-    \  template<class F, std::size_t... idx>\r\n    auto read_impl(F&& f, std::index_sequence<idx...>)\
+    \ kpr\r\n#line 4 \"template/len.hpp\"\n\r\nnamespace kpr {\r\n    [[maybe_unused]]\
+    \ inline constexpr struct {\r\n        template<class T>\r\n        constexpr\
+    \ KYOPRO_BASE_INT operator ()(T&& a) const noexcept {\r\n            return std::size(a);\r\
+    \n        }\r\n    } len;\r\n} // namespace kpr\r\n#line 4 \"template/macro.hpp\"\
+    \n#include <memory>\r\n#line 9 \"template/macro.hpp\"\n\r\nnamespace kpr::helper\
+    \ {\r\n    template<std::size_t len>\r\n    constexpr std::size_t va_args_size(const\
+    \ char (&s)[len]) noexcept {\r\n        if constexpr (len == 1) return 0;\r\n\
+    \        std::size_t cnt = 1;\r\n        std::uint_fast64_t bracket = 0;\r\n \
+    \       for (auto i: s) {\r\n            if (i == '(') ++bracket;\r\n        \
+    \    else if (i == ')') --bracket;\r\n            else if (i == ',' && bracket\
+    \ == 0) ++cnt;\r\n        }\r\n        return cnt;\r\n    }\r\n\r\n    template<class\
+    \ F, std::size_t... idx>\r\n    auto read_impl(F&& f, std::index_sequence<idx...>)\
     \ {\r\n        return std::tuple{(static_cast<void>(idx), f())...};\r\n    }\r\
     \n\r\n    Printer<Writer<>::iterator, true, true, true, true> debug_impl(output.begin());\r\
     \n\r\n    template<bool flag, std::size_t len>\r\n    void print_if(const char\
@@ -948,12 +942,12 @@ data:
     #include <forward_list>\r\n#include <future>\r\n#include <initializer_list>\r\n\
     #include <mutex>\r\n#include <random>\r\n#include <ratio>\r\n#include <regex>\r\
     \n#include <scoped_allocator>\r\n#include <system_error>\r\n#include <thread>\r\
-    \n#line 77 \"template/stl.hpp\"\n#include <typeindex>\r\n#line 12 \"template/template.hpp\"\
+    \n#line 77 \"template/stl.hpp\"\n#include <typeindex>\r\n#line 11 \"template/template.hpp\"\
     \n"
   code: "#pragma once\r\n#include \"alias.hpp\"\r\n#include \"amin_amax.hpp\"\r\n\
-    #include \"constant.hpp\"\r\n#include \"fix_vector_bool.hpp\"\r\n#include \"len.hpp\"\
-    \r\n#include \"macro.hpp\"\r\n#include \"main.hpp\"\r\n#include \"make_array.hpp\"\
-    \r\n#include \"make_vector.hpp\"\r\n#include \"stl.hpp\"\r\n"
+    #include \"constant.hpp\"\r\n#include \"len.hpp\"\r\n#include \"macro.hpp\"\r\n\
+    #include \"main.hpp\"\r\n#include \"make_array.hpp\"\r\n#include \"make_vector.hpp\"\
+    \r\n#include \"stl.hpp\"\r\n"
   dependsOn:
   - template/alias.hpp
   - algorithm/Hash.hpp
@@ -972,7 +966,6 @@ data:
   - math/mod.hpp
   - template/amin_amax.hpp
   - template/constant.hpp
-  - template/fix_vector_bool.hpp
   - template/len.hpp
   - template/macro.hpp
   - system/system.hpp
@@ -985,7 +978,7 @@ data:
   requiredBy:
   - verify/hello_world.cpp
   - all.hpp
-  timestamp: '2023-02-12 04:09:24+09:00'
+  timestamp: '2023-02-12 12:23:39+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/template.hpp

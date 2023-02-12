@@ -145,9 +145,6 @@ data:
       path: template/constant.hpp
       title: template/constant.hpp
     - icon: ':warning:'
-      path: template/fix_vector_bool.hpp
-      title: template/fix_vector_bool.hpp
-    - icon: ':warning:'
       path: template/len.hpp
       title: template/len.hpp
     - icon: ':warning:'
