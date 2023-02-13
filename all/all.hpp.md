@@ -19,7 +19,7 @@ data:
   - icon: ':warning:'
     path: function/function.hpp
     title: function/function.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: function/monoid.hpp
     title: function/monoid.hpp
   - icon: ':warning:'
@@ -88,15 +88,6 @@ data:
   - icon: ':warning:'
     path: range/range_base.hpp
     title: range/range_base.hpp
-  - icon: ':heavy_check_mark:'
-    path: structure/FenwickTree.hpp
-    title: structure/FenwickTree.hpp
-  - icon: ':heavy_check_mark:'
-    path: structure/UnionFind.hpp
-    title: structure/UnionFind.hpp
-  - icon: ':warning:'
-    path: structure/structure.hpp
-    title: structure/structure.hpp
   - icon: ':heavy_check_mark:'
     path: system/in.hpp
     title: system/in.hpp
@@ -1179,71 +1170,10 @@ data:
     \n        }\r\n\r\n        constexpr const_iterator cend() const noexcept {\r\n\
     \            return const_iterator{last};\r\n        }\r\n    };\r\n\r\n    template<class\
     \ F, class L>\r\n    irange(F&&, L&&) -> irange<std::decay_t<F>>;\r\n} // namespace\
-    \ kpr\r\n#line 6 \"structure/FenwickTree.hpp\"\n\r\nnamespace kpr {\r\n    template<class\
-    \ T, class Op = Add<T>, class Container = std::vector<T>>\r\n    struct FenwickTree:\
-    \ private Op {\r\n        using value_type = T;\r\n        using size_type = std::size_t;\r\
-    \n        using reference = T&;\r\n        using const_reference = const T&;\r\
-    \n        using operator_type = Op;\r\n        using container_type = Container;\r\
-    \n\r\n    private:\r\n        Container tree;\r\n\r\n    public:\r\n        FenwickTree()\
-    \ noexcept = default;\r\n        FenwickTree(std::size_t n) noexcept: tree(n,\
-    \ Op::id()) {}\r\n\r\n        std::size_t size() noexcept {\r\n            return\
-    \ tree.size();\r\n        }\r\n\r\n        void apply(int p, const T& x) {\r\n\
-    \            ++p;\r\n            while (p <= (int)size()) {\r\n              \
-    \  tree[p - 1] = Op::operator ()(tree[p - 1], x);\r\n                p += p &\
-    \ -p;\r\n            }\r\n        }\r\n\r\n        T prod(int r) const {\r\n \
-    \           T s = Op::id();\r\n            while (r > 0) {\r\n               \
-    \ s = Op::operator ()(s, tree[r - 1]);\r\n                r -= r & -r;\r\n   \
-    \         }\r\n            return s;\r\n        }\r\n        T prod(int l, int\
-    \ r) const {\r\n            static_assert(has_inverse_v<Op>, \"Operator doesn't\
-    \ have an inverse\");\r\n            return Op::operator ()(prod(r), Op::inverse(prod(l)));\r\
-    \n        }\r\n\r\n        T all_prod() {\r\n            return prod(tree.size());\r\
-    \n        }\r\n\r\n        T get(int p) {\r\n            static_assert(has_inverse_v<Op>,\
-    \ \"Operator doesn't have an inverse\");\r\n            return Op::operator ()(prod(p\
-    \ + 1), Op::inverse(prod(p)));\r\n        }\r\n\r\n        void set(int p, const\
-    \ T& x) {\r\n            static_assert(has_inverse_v<Op>, \"Operator doesn't have\
-    \ an inverse\");\r\n            apply(p, Op::operator ()(x, Op::inverse(get(p))));\r\
-    \n        }\r\n    };\r\n} // namespace kpr\r\n#line 4 \"structure/UnionFind.hpp\"\
-    \n#include <unordered_map>\r\n#line 9 \"structure/UnionFind.hpp\"\n\r\nnamespace\
-    \ kpr {\r\n    template<class Container = std::vector<int>>\r\n    struct UnionFind\
-    \ {\r\n        using value_type = range_value_t<Container>;\r\n        using container_type\
-    \ = Container;\r\n\r\n    private:\r\n        Container par;\r\n\r\n    public:\r\
-    \n        UnionFind() noexcept = default;\r\n        UnionFind(std::size_t n)\
-    \ noexcept: par(n, -1) {}\r\n        template<class C, std::enable_if_t<std::is_same_v<Container,\
-    \ std::decay_t<C>>>>\r\n        UnionFind(C&& par): par(std::forward<C>(par))\
-    \ {}\r\n\r\n        void resize(std::size_t x) { par.resize(x, -1); }\r\n    \
-    \    void assign(std::size_t x) { par.assign(x, -1); }\r\n        void reset()\
-    \ { std::fill(std::begin(par), std::end(par), -1); }\r\n\r\n        std::size_t\
-    \ size() const noexcept {\r\n            return par.size();\r\n        }\r\n\r\
-    \n        KYOPRO_BASE_INT find(int x) {\r\n            int p = x;\r\n        \
-    \    while (par[p] >= 0) p = par[p];\r\n            while (x != p) {\r\n     \
-    \           int tmp = x;\r\n                x = par[x];\r\n                par[tmp]\
-    \ = p;\r\n            }\r\n            return p;\r\n        }\r\n\r\n        bool\
-    \ merge(int x, int y) {\r\n            x = find(x), y = find(y);\r\n         \
-    \   if (x == y) return false;\r\n            if (par[x] > par[y]) {\r\n      \
-    \          int tmp = x;\r\n                x = y;\r\n                y = tmp;\r\
-    \n            }\r\n            par[x] += par[y];\r\n            par[y] = x;\r\n\
-    \            return true;\r\n        }\r\n\r\n        bool same(int x, int y)\
-    \ {\r\n            return find(x) == find(y);\r\n        }\r\n\r\n        KYOPRO_BASE_INT\
-    \ group_size(int x) {\r\n            return -par[find(x)];\r\n        }\r\n\r\n\
-    \        std::vector<int> group_members(int x) {\r\n            x = find(x);\r\
-    \n            std::vector<int> a;\r\n            for (int i = 0; i < (int)(size());\
-    \ ++i) if (find(i) == x) a.emplace_back(i);\r\n            return a;\r\n     \
-    \   }\r\n\r\n        template<class Vector = std::vector<KYOPRO_BASE_INT>>\r\n\
-    \        Vector roots() const {\r\n            Vector a;\r\n            for (int\
-    \ i = 0; i < (int)(size()); ++i) if (par[i] < 0) a.emplace_back(i);\r\n      \
-    \      return a;\r\n        }\r\n\r\n        KYOPRO_BASE_INT group_count() const\
-    \ {\r\n            KYOPRO_BASE_INT cnt = 0;\r\n            for (int i = 0; i <\
-    \ (int)(size()); ++i) if (par[i] < 0) ++cnt;\r\n            return cnt;\r\n  \
-    \      }\r\n\r\n        template<class Map = std::unordered_map<KYOPRO_BASE_INT,\
-    \ std::vector<KYOPRO_BASE_INT>>>\r\n        Map all_group_members() {\r\n    \
-    \        Map group_members;\r\n            for (int member = 0; member < (int)(size());\
-    \ ++member) group_members[find(member)].emplace_back(member);\r\n            return\
-    \ group_members;\r\n        }\r\n    };\r\n} // namespace kpr\r\n#line 9 \"all/all.hpp\"\
-    \n"
+    \ kpr\r\n#line 8 \"all/all.hpp\"\n"
   code: "#pragma once\r\n#include \"../algorithm/algorithm.hpp\"\r\n#include \"../function/function.hpp\"\
     \r\n#include \"../math/math.hpp\"\r\n#include \"../meta/meta.hpp\"\r\n#include\
-    \ \"../range/range.hpp\"\r\n#include \"../structure/structure.hpp\"\r\n#include\
-    \ \"../system/system.hpp\"\r\n"
+    \ \"../range/range.hpp\"\r\n#include \"../system/system.hpp\"\r\n"
   dependsOn:
   - algorithm/algorithm.hpp
   - algorithm/bit.hpp
@@ -1277,16 +1207,13 @@ data:
   - range/range_base.hpp
   - range/irange.hpp
   - range/iterator_base.hpp
-  - structure/structure.hpp
-  - structure/FenwickTree.hpp
-  - structure/UnionFind.hpp
   - system/system.hpp
   isVerificationFile: false
   path: all/all.hpp
   requiredBy:
   - verify/hello_world.cpp
   - all.hpp
-  timestamp: '2023-02-12 22:41:44+09:00'
+  timestamp: '2023-02-14 01:39:39+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp

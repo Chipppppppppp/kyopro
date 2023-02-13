@@ -21,24 +21,24 @@ data:
     path: all/all.hpp
     title: all/all.hpp
   - icon: ':warning:'
+    path: data_structure/FenwickTree.hpp
+    title: data_structure/FenwickTree.hpp
+  - icon: ':warning:'
+    path: data_structure/data_structure.hpp
+    title: data_structure/data_structure.hpp
+  - icon: ':warning:'
+    path: data_structure/structure.hpp
+    title: data_structure/structure.hpp
+  - icon: ':warning:'
     path: function/function.hpp
     title: function/function.hpp
-  - icon: ':heavy_check_mark:'
-    path: structure/FenwickTree.hpp
-    title: structure/FenwickTree.hpp
-  - icon: ':warning:'
-    path: structure/structure.hpp
-    title: structure/structure.hpp
   - icon: ':warning:'
     path: verify/hello_world.cpp
     title: verify/hello_world.cpp
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/yosupo/point_add_range_sum.test.cpp
-    title: verify/yosupo/point_add_range_sum.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"function/monoid.hpp\"\n#include <limits>\r\n#include <type_traits>\r\
@@ -271,14 +271,14 @@ data:
   requiredBy:
   - all/all.hpp
   - verify/hello_world.cpp
+  - data_structure/data_structure.hpp
+  - data_structure/structure.hpp
+  - data_structure/FenwickTree.hpp
   - function/function.hpp
-  - structure/structure.hpp
-  - structure/FenwickTree.hpp
   - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/yosupo/point_add_range_sum.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: function/monoid.hpp
 layout: document
 redirect_from:

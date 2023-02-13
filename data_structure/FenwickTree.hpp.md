@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: function/monoid.hpp
     title: function/monoid.hpp
   - icon: ':heavy_check_mark:'
@@ -21,25 +21,22 @@ data:
     path: all.hpp
     title: all.hpp
   - icon: ':warning:'
-    path: all/all.hpp
-    title: all/all.hpp
+    path: data_structure/data_structure.hpp
+    title: data_structure/data_structure.hpp
   - icon: ':warning:'
-    path: structure/structure.hpp
-    title: structure/structure.hpp
+    path: data_structure/structure.hpp
+    title: data_structure/structure.hpp
   - icon: ':warning:'
     path: verify/hello_world.cpp
     title: verify/hello_world.cpp
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/yosupo/point_add_range_sum.test.cpp
-    title: verify/yosupo/point_add_range_sum.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"structure/FenwickTree.hpp\"\n#include <cstddef>\r\n#include\
-    \ <utility>\r\n#include <vector>\r\n#line 2 \"function/monoid.hpp\"\n#include\
+  bundledCode: "#line 2 \"data_structure/FenwickTree.hpp\"\n#include <cstddef>\r\n\
+    #include <utility>\r\n#include <vector>\r\n#line 2 \"function/monoid.hpp\"\n#include\
     \ <limits>\r\n#include <type_traits>\r\n#line 2 \"math/power.hpp\"\n#include <cstdint>\r\
     \n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr struct {\r\n  \
     \      template<class T>\r\n        constexpr T operator ()(T a, std::uint_fast64_t\
@@ -225,8 +222,8 @@ data:
     \      static constexpr bool value = true;\r\n    };\r\n\r\n    // inverse\u3092\
     \u6301\u3064\u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    inline constexpr\
     \ bool has_inverse_v = has_inverse<T>::value;\r\n} // namespace kpr\r\n#line 6\
-    \ \"structure/FenwickTree.hpp\"\n\r\nnamespace kpr {\r\n    template<class T,\
-    \ class Op = Add<T>, class Container = std::vector<T>>\r\n    struct FenwickTree:\
+    \ \"data_structure/FenwickTree.hpp\"\n\r\nnamespace kpr {\r\n    template<class\
+    \ T, class Op = Add<T>, class Container = std::vector<T>>\r\n    struct FenwickTree:\
     \ private Op {\r\n        using value_type = T;\r\n        using size_type = std::size_t;\r\
     \n        using reference = T&;\r\n        using const_reference = const T&;\r\
     \n        using operator_type = Op;\r\n        using container_type = Container;\r\
@@ -281,20 +278,19 @@ data:
   - meta/setting.hpp
   - meta/trait.hpp
   isVerificationFile: false
-  path: structure/FenwickTree.hpp
+  path: data_structure/FenwickTree.hpp
   requiredBy:
-  - all/all.hpp
   - verify/hello_world.cpp
-  - structure/structure.hpp
+  - data_structure/data_structure.hpp
+  - data_structure/structure.hpp
   - all.hpp
-  timestamp: '2023-02-11 02:36:17+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/yosupo/point_add_range_sum.test.cpp
-documentation_of: structure/FenwickTree.hpp
+  timestamp: '2023-02-14 01:39:39+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: data_structure/FenwickTree.hpp
 layout: document
 redirect_from:
-- /library/structure/FenwickTree.hpp
-- /library/structure/FenwickTree.hpp.html
-title: structure/FenwickTree.hpp
+- /library/data_structure/FenwickTree.hpp
+- /library/data_structure/FenwickTree.hpp.html
+title: data_structure/FenwickTree.hpp
 ---

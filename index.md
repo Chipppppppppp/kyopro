@@ -22,6 +22,20 @@ data:
     - icon: ':warning:'
       path: all.hpp
       title: all.hpp
+  - name: data_structure
+    pages:
+    - icon: ':warning:'
+      path: data_structure/FenwickTree.hpp
+      title: data_structure/FenwickTree.hpp
+    - icon: ':warning:'
+      path: data_structure/UnionFind.hpp
+      title: data_structure/UnionFind.hpp
+    - icon: ':warning:'
+      path: data_structure/data_structure.hpp
+      title: data_structure/data_structure.hpp
+    - icon: ':warning:'
+      path: data_structure/structure.hpp
+      title: data_structure/structure.hpp
   - name: function
     pages:
     - icon: ':warning:'
@@ -33,7 +47,7 @@ data:
     - icon: ':warning:'
       path: function/function.hpp
       title: function/function.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: function/monoid.hpp
       title: function/monoid.hpp
   - name: math
@@ -108,17 +122,11 @@ data:
     - icon: ':warning:'
       path: range/range_base.hpp
       title: range/range_base.hpp
-  - name: structure
+  - name: stl_wrapper
     pages:
-    - icon: ':heavy_check_mark:'
-      path: structure/FenwickTree.hpp
-      title: structure/FenwickTree.hpp
-    - icon: ':heavy_check_mark:'
-      path: structure/UnionFind.hpp
-      title: structure/UnionFind.hpp
     - icon: ':warning:'
-      path: structure/structure.hpp
-      title: structure/structure.hpp
+      path: stl_wrapper/vec.hpp
+      title: stl_wrapper/vec.hpp
   - name: system
     pages:
     - icon: ':heavy_check_mark:'
@@ -184,10 +192,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yosupo/many_aplusb.test.cpp
       title: verify/yosupo/many_aplusb.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/yosupo/point_add_range_sum.test.cpp
       title: verify/yosupo/point_add_range_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/yosupo/unionfind.test.cpp
       title: verify/yosupo/unionfind.test.cpp
 layout: toppage

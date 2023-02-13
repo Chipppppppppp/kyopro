@@ -9,9 +9,18 @@ data:
     path: all/all.hpp
     title: all/all.hpp
   - icon: ':warning:'
+    path: data_structure/FenwickTree.hpp
+    title: data_structure/FenwickTree.hpp
+  - icon: ':warning:'
+    path: data_structure/data_structure.hpp
+    title: data_structure/data_structure.hpp
+  - icon: ':warning:'
+    path: data_structure/structure.hpp
+    title: data_structure/structure.hpp
+  - icon: ':warning:'
     path: function/function.hpp
     title: function/function.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: function/monoid.hpp
     title: function/monoid.hpp
   - icon: ':heavy_check_mark:'
@@ -35,12 +44,6 @@ data:
   - icon: ':warning:'
     path: meta/meta.hpp
     title: meta/meta.hpp
-  - icon: ':heavy_check_mark:'
-    path: structure/FenwickTree.hpp
-    title: structure/FenwickTree.hpp
-  - icon: ':warning:'
-    path: structure/structure.hpp
-    title: structure/structure.hpp
   - icon: ':heavy_check_mark:'
     path: system/in.hpp
     title: system/in.hpp
@@ -69,12 +72,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/many_aplusb.test.cpp
     title: verify/yosupo/many_aplusb.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/yosupo/point_add_range_sum.test.cpp
-    title: verify/yosupo/point_add_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/yosupo/unionfind.test.cpp
-    title: verify/yosupo/unionfind.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -103,13 +100,14 @@ data:
   - meta/meta.hpp
   - system/in.hpp
   - system/system.hpp
+  - data_structure/data_structure.hpp
+  - data_structure/structure.hpp
+  - data_structure/FenwickTree.hpp
   - function/monoid.hpp
   - function/function.hpp
   - template/template.hpp
   - template/macro.hpp
   - template/alias.hpp
-  - structure/structure.hpp
-  - structure/FenwickTree.hpp
   - math/ModInt.hpp
   - math/is_prime.hpp
   - math/math.hpp
@@ -120,8 +118,6 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
-  - verify/yosupo/unionfind.test.cpp
   - verify/yosupo/factorize.test.cpp
   - verify/yosupo/many_aplusb.test.cpp
 documentation_of: math/power.hpp
