@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/FenwickTree.hpp
     title: data_structure/FenwickTree.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/UnionFind.hpp
     title: data_structure/UnionFind.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
   - icon: ':heavy_check_mark:'

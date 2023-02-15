@@ -19,7 +19,7 @@ data:
   - icon: ':warning:'
     path: function/function.hpp
     title: function/function.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
   - icon: ':warning:'

@@ -914,36 +914,34 @@ data:
     \n            std::array<decltype(elm), length> res;\r\n            for (auto&\
     \ i: res) i = elm;\r\n            return res;\r\n        }\r\n    } make_array;\r\
     \n} // namespace kpr\r\n#line 6 \"template/make_vector.hpp\"\n\r\nnamespace kpr\
-    \ {\r\n    [[maybe_unused]] inline constexpr struct {\r\n        template<std::size_t\
-    \ idx = 0, std::size_t n, class T>\r\n        auto operator ()(const std::size_t\
-    \ (&d)[n], T&& init) noexcept {\r\n            if constexpr (idx < n) return std::vector(d[idx],\
-    \ operator ()<idx + 1>(d, std::forward<T>(init)));\r\n            else return\
-    \ init;\r\n        }\r\n\r\n        template<class T, std::size_t idx = 0, std::size_t\
-    \ n>\r\n        auto operator ()(const std::size_t (&d)[n], const T& init = {})\
-    \ noexcept {\r\n            if constexpr (idx < n) return std::vector(d[idx],\
-    \ operator ()<idx + 1>(d, init));\r\n            else return init;\r\n       \
-    \ }\r\n    } make_vector;\r\n} // namespace kpr\r\n#line 3 \"template/stl.hpp\"\
-    \n#include <cctype>\r\n#include <cerrno>\r\n#include <cfloat>\r\n#include <ciso646>\r\
-    \n#include <climits>\r\n#include <clocale>\r\n#line 10 \"template/stl.hpp\"\n\
-    #include <csetjmp>\r\n#include <csignal>\r\n#include <cstdarg>\r\n#line 15 \"\
-    template/stl.hpp\"\n#include <cstdlib>\r\n#include <cstring>\r\n#include <ctime>\r\
-    \n\r\n#include <ccomplex>\r\n#include <cfenv>\r\n#include <cinttypes>\r\n#include\
-    \ <cstdalign>\r\n#include <cstdbool>\r\n#line 25 \"template/stl.hpp\"\n#include\
-    \ <ctgmath>\r\n#include <cwchar>\r\n#include <cwctype>\r\n\r\n#line 31 \"template/stl.hpp\"\
-    \n#include <complex>\r\n#include <deque>\r\n#include <exception>\r\n#include <fstream>\r\
-    \n#line 36 \"template/stl.hpp\"\n#include <iomanip>\r\n#include <ios>\r\n#include\
-    \ <iosfwd>\r\n#include <iostream>\r\n#line 43 \"template/stl.hpp\"\n#include <list>\r\
-    \n#include <locale>\r\n#line 47 \"template/stl.hpp\"\n#include <new>\r\n#include\
-    \ <numeric>\r\n#include <ostream>\r\n#line 52 \"template/stl.hpp\"\n#include <sstream>\r\
-    \n#line 54 \"template/stl.hpp\"\n#include <stdexcept>\r\n#include <streambuf>\r\
-    \n#line 57 \"template/stl.hpp\"\n#include <typeinfo>\r\n#line 59 \"template/stl.hpp\"\
-    \n#include <valarray>\r\n#line 61 \"template/stl.hpp\"\n\r\n#line 63 \"template/stl.hpp\"\
-    \n#include <atomic>\r\n#include <chrono>\r\n#include <condition_variable>\r\n\
-    #include <forward_list>\r\n#include <future>\r\n#include <initializer_list>\r\n\
-    #include <mutex>\r\n#include <random>\r\n#include <ratio>\r\n#include <regex>\r\
-    \n#include <scoped_allocator>\r\n#include <system_error>\r\n#include <thread>\r\
-    \n#line 77 \"template/stl.hpp\"\n#include <typeindex>\r\n#line 11 \"template/template.hpp\"\
-    \n"
+    \ {\r\n    [[maybe_unused]] inline constexpr struct {\r\n        template<class\
+    \ T, std::size_t n, std::size_t i = 0>\r\n        auto operator ()(const std::size_t\
+    \ (&d)[n], const T& init = {}) noexcept {\r\n            if constexpr (i < n)\
+    \ return std::vector(d[i], operator ()<T, n, i + 1>(d, init));\r\n           \
+    \ else return init;\r\n        }\r\n\r\n        template<class T, std::size_t\
+    \ n>\r\n        auto operator ()(const std::size_t (&d)[n]) noexcept {\r\n   \
+    \         return operator ()(d, T{});\r\n        }\r\n    } make_vector;\r\n}\
+    \ // namespace kpr\r\n#line 3 \"template/stl.hpp\"\n#include <cctype>\r\n#include\
+    \ <cerrno>\r\n#include <cfloat>\r\n#include <ciso646>\r\n#include <climits>\r\n\
+    #include <clocale>\r\n#line 10 \"template/stl.hpp\"\n#include <csetjmp>\r\n#include\
+    \ <csignal>\r\n#include <cstdarg>\r\n#line 15 \"template/stl.hpp\"\n#include <cstdlib>\r\
+    \n#include <cstring>\r\n#include <ctime>\r\n\r\n#include <ccomplex>\r\n#include\
+    \ <cfenv>\r\n#include <cinttypes>\r\n#include <cstdalign>\r\n#include <cstdbool>\r\
+    \n#line 25 \"template/stl.hpp\"\n#include <ctgmath>\r\n#include <cwchar>\r\n#include\
+    \ <cwctype>\r\n\r\n#line 31 \"template/stl.hpp\"\n#include <complex>\r\n#include\
+    \ <deque>\r\n#include <exception>\r\n#include <fstream>\r\n#line 36 \"template/stl.hpp\"\
+    \n#include <iomanip>\r\n#include <ios>\r\n#include <iosfwd>\r\n#include <iostream>\r\
+    \n#line 43 \"template/stl.hpp\"\n#include <list>\r\n#include <locale>\r\n#line\
+    \ 47 \"template/stl.hpp\"\n#include <new>\r\n#include <numeric>\r\n#include <ostream>\r\
+    \n#line 52 \"template/stl.hpp\"\n#include <sstream>\r\n#line 54 \"template/stl.hpp\"\
+    \n#include <stdexcept>\r\n#include <streambuf>\r\n#line 57 \"template/stl.hpp\"\
+    \n#include <typeinfo>\r\n#line 59 \"template/stl.hpp\"\n#include <valarray>\r\n\
+    #line 61 \"template/stl.hpp\"\n\r\n#line 63 \"template/stl.hpp\"\n#include <atomic>\r\
+    \n#include <chrono>\r\n#include <condition_variable>\r\n#include <forward_list>\r\
+    \n#include <future>\r\n#include <initializer_list>\r\n#include <mutex>\r\n#include\
+    \ <random>\r\n#include <ratio>\r\n#include <regex>\r\n#include <scoped_allocator>\r\
+    \n#include <system_error>\r\n#include <thread>\r\n#line 77 \"template/stl.hpp\"\
+    \n#include <typeindex>\r\n#line 11 \"template/template.hpp\"\n"
   code: "#pragma once\r\n#include \"alias.hpp\"\r\n#include \"amin_amax.hpp\"\r\n\
     #include \"constant.hpp\"\r\n#include \"len.hpp\"\r\n#include \"macro.hpp\"\r\n\
     #include \"main.hpp\"\r\n#include \"make_array.hpp\"\r\n#include \"make_vector.hpp\"\
@@ -978,7 +976,7 @@ data:
   requiredBy:
   - verify/hello_world.cpp
   - all.hpp
-  timestamp: '2023-02-12 22:41:44+09:00'
+  timestamp: '2023-02-16 00:00:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/template.hpp

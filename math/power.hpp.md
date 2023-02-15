@@ -8,7 +8,7 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/FenwickTree.hpp
     title: data_structure/FenwickTree.hpp
   - icon: ':warning:'
@@ -20,7 +20,7 @@ data:
   - icon: ':warning:'
     path: function/function.hpp
     title: function/function.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
   - icon: ':heavy_check_mark:'
@@ -72,6 +72,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/many_aplusb.test.cpp
     title: verify/yosupo/many_aplusb.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/point_add_range_sum.test.cpp
+    title: verify/yosupo/point_add_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/unionfind.test.cpp
+    title: verify/yosupo/unionfind.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -118,6 +124,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/aoj/PrimeNumber.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/unionfind.test.cpp
   - verify/yosupo/factorize.test.cpp
   - verify/yosupo/many_aplusb.test.cpp
 documentation_of: math/power.hpp

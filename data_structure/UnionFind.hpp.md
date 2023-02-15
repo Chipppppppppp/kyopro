@@ -20,10 +20,13 @@ data:
   - icon: ':warning:'
     path: verify/hello_world.cpp
     title: verify/hello_world.cpp
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/unionfind.test.cpp
+    title: verify/yosupo/unionfind.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"data_structure/UnionFind.hpp\"\n#include <algorithm>\r\n\
@@ -243,8 +246,9 @@ data:
   - data_structure/structure.hpp
   - all.hpp
   timestamp: '2023-02-14 01:39:39+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yosupo/unionfind.test.cpp
 documentation_of: data_structure/UnionFind.hpp
 layout: document
 redirect_from:

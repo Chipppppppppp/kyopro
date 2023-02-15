@@ -7,7 +7,7 @@ data:
   - icon: ':warning:'
     path: function/compare.hpp
     title: function/compare.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
   - icon: ':heavy_check_mark:'

@@ -9,22 +9,30 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"stl_wrapper/vec.hpp\"\n#include <cstdint>\n#include <vector>\n\
-    \nnamespace kpr {\n    template<class T, std::size_t d>\n    struct Vec: std::vector<Vec<T,\
-    \ d - 1>> {\n        using std::vector<Vec<T, d - 1>>::vector, std::vector<Vec<T,\
-    \ d - 1>>::operator =;\n        template<std::size_t i = 0>\n        Vec(const\
-    \ std::array<T, d>& l, const T& init) {\n            std::vector(l[i], Vec<T,\
-    \ d - 1>::Vec<i + 1>(l, init));\n        }\n    };\n} // namespace kpr\n"
+    \nnamespace kpr {\n    namespace helper {\n        template<std::size_t i = 0,\
+    \ std::size_t n, class T>\n        auto make_vec(const std::size_t (&d)[n], const\
+    \ T& init) noexcept {\n            if constexpr (i < n) return std::vector(d[i],\
+    \ make_vec<i + 1>(d, init));\n            else return init;\n        }\n    }\n\
+    \    template<class T, std::size_t n>\n    struct Vec: decltype(helper::make_vec(std::declval<const\
+    \ std::size_t (&)[n]>(), std::declval<const T&>())) {\n        using super = decltype(helper::make_vec(std::declval<const\
+    \ std::size_t (&)[n]>(), std::declval<const T&>()));\n        using super::vector,\
+    \ super::operator =;\n\n        Vec(const std::size_t (&d)[n], const T& init)\
+    \ noexcept: super{helper::make_vec(d, init)} {}\n    };\n} // namespace kpr\n"
   code: "#pragma once\n#include <cstdint>\n#include <vector>\n\nnamespace kpr {\n\
-    \    template<class T, std::size_t d>\n    struct Vec: std::vector<Vec<T, d -\
-    \ 1>> {\n        using std::vector<Vec<T, d - 1>>::vector, std::vector<Vec<T,\
-    \ d - 1>>::operator =;\n        template<std::size_t i = 0>\n        Vec(const\
-    \ std::array<T, d>& l, const T& init) {\n            std::vector(l[i], Vec<T,\
-    \ d - 1>::Vec<i + 1>(l, init));\n        }\n    };\n} // namespace kpr\n"
+    \    namespace helper {\n        template<std::size_t i = 0, std::size_t n, class\
+    \ T>\n        auto make_vec(const std::size_t (&d)[n], const T& init) noexcept\
+    \ {\n            if constexpr (i < n) return std::vector(d[i], make_vec<i + 1>(d,\
+    \ init));\n            else return init;\n        }\n    }\n    template<class\
+    \ T, std::size_t n>\n    struct Vec: decltype(helper::make_vec(std::declval<const\
+    \ std::size_t (&)[n]>(), std::declval<const T&>())) {\n        using super = decltype(helper::make_vec(std::declval<const\
+    \ std::size_t (&)[n]>(), std::declval<const T&>()));\n        using super::vector,\
+    \ super::operator =;\n\n        Vec(const std::size_t (&d)[n], const T& init)\
+    \ noexcept: super{helper::make_vec(d, init)} {}\n    };\n} // namespace kpr\n"
   dependsOn: []
   isVerificationFile: false
   path: stl_wrapper/vec.hpp
   requiredBy: []
-  timestamp: '2023-02-14 01:39:39+09:00'
+  timestamp: '2023-02-16 00:00:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: stl_wrapper/vec.hpp

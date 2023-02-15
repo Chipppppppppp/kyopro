@@ -19,26 +19,23 @@ data:
     links: []
   bundledCode: "#line 2 \"template/make_vector.hpp\"\n#include <cstddef>\r\n#include\
     \ <cstdint>\r\n#include <utility>\r\n#include <vector>\r\n\r\nnamespace kpr {\r\
-    \n    [[maybe_unused]] inline constexpr struct {\r\n        template<std::size_t\
-    \ idx = 0, std::size_t n, class T>\r\n        auto operator ()(const std::size_t\
-    \ (&d)[n], T&& init) noexcept {\r\n            if constexpr (idx < n) return std::vector(d[idx],\
-    \ operator ()<idx + 1>(d, std::forward<T>(init)));\r\n            else return\
-    \ init;\r\n        }\r\n\r\n        template<class T, std::size_t idx = 0, std::size_t\
-    \ n>\r\n        auto operator ()(const std::size_t (&d)[n], const T& init = {})\
-    \ noexcept {\r\n            if constexpr (idx < n) return std::vector(d[idx],\
-    \ operator ()<idx + 1>(d, init));\r\n            else return init;\r\n       \
-    \ }\r\n    } make_vector;\r\n} // namespace kpr\r\n"
+    \n    [[maybe_unused]] inline constexpr struct {\r\n        template<class T,\
+    \ std::size_t n, std::size_t i = 0>\r\n        auto operator ()(const std::size_t\
+    \ (&d)[n], const T& init = {}) noexcept {\r\n            if constexpr (i < n)\
+    \ return std::vector(d[i], operator ()<T, n, i + 1>(d, init));\r\n           \
+    \ else return init;\r\n        }\r\n\r\n        template<class T, std::size_t\
+    \ n>\r\n        auto operator ()(const std::size_t (&d)[n]) noexcept {\r\n   \
+    \         return operator ()(d, T{});\r\n        }\r\n    } make_vector;\r\n}\
+    \ // namespace kpr\r\n"
   code: "#pragma once\r\n#include <cstddef>\r\n#include <cstdint>\r\n#include <utility>\r\
     \n#include <vector>\r\n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr\
-    \ struct {\r\n        template<std::size_t idx = 0, std::size_t n, class T>\r\n\
-    \        auto operator ()(const std::size_t (&d)[n], T&& init) noexcept {\r\n\
-    \            if constexpr (idx < n) return std::vector(d[idx], operator ()<idx\
-    \ + 1>(d, std::forward<T>(init)));\r\n            else return init;\r\n      \
-    \  }\r\n\r\n        template<class T, std::size_t idx = 0, std::size_t n>\r\n\
+    \ struct {\r\n        template<class T, std::size_t n, std::size_t i = 0>\r\n\
     \        auto operator ()(const std::size_t (&d)[n], const T& init = {}) noexcept\
-    \ {\r\n            if constexpr (idx < n) return std::vector(d[idx], operator\
-    \ ()<idx + 1>(d, init));\r\n            else return init;\r\n        }\r\n   \
-    \ } make_vector;\r\n} // namespace kpr\r\n"
+    \ {\r\n            if constexpr (i < n) return std::vector(d[i], operator ()<T,\
+    \ n, i + 1>(d, init));\r\n            else return init;\r\n        }\r\n\r\n \
+    \       template<class T, std::size_t n>\r\n        auto operator ()(const std::size_t\
+    \ (&d)[n]) noexcept {\r\n            return operator ()(d, T{});\r\n        }\r\
+    \n    } make_vector;\r\n} // namespace kpr\r\n"
   dependsOn: []
   isVerificationFile: false
   path: template/make_vector.hpp
@@ -46,7 +43,7 @@ data:
   - verify/hello_world.cpp
   - template/template.hpp
   - all.hpp
-  timestamp: '2023-02-11 02:36:17+09:00'
+  timestamp: '2023-02-16 00:00:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/make_vector.hpp

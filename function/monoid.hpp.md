@@ -20,7 +20,7 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/FenwickTree.hpp
     title: data_structure/FenwickTree.hpp
   - icon: ':warning:'
@@ -35,10 +35,13 @@ data:
   - icon: ':warning:'
     path: verify/hello_world.cpp
     title: verify/hello_world.cpp
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/point_add_range_sum.test.cpp
+    title: verify/yosupo/point_add_range_sum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"function/monoid.hpp\"\n#include <limits>\r\n#include <type_traits>\r\
@@ -277,8 +280,9 @@ data:
   - function/function.hpp
   - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yosupo/point_add_range_sum.test.cpp
 documentation_of: function/monoid.hpp
 layout: document
 redirect_from:

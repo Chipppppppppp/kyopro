@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
   - icon: ':heavy_check_mark:'
@@ -29,10 +29,13 @@ data:
   - icon: ':warning:'
     path: verify/hello_world.cpp
     title: verify/hello_world.cpp
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/point_add_range_sum.test.cpp
+    title: verify/yosupo/point_add_range_sum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"data_structure/FenwickTree.hpp\"\n#include <cstddef>\r\n\
@@ -285,8 +288,9 @@ data:
   - data_structure/structure.hpp
   - all.hpp
   timestamp: '2023-02-14 01:39:39+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yosupo/point_add_range_sum.test.cpp
 documentation_of: data_structure/FenwickTree.hpp
 layout: document
 redirect_from:
