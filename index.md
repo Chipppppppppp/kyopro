@@ -50,6 +50,20 @@ data:
     - icon: ':heavy_check_mark:'
       path: function/monoid.hpp
       title: function/monoid.hpp
+  - name: io
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: io/in.hpp
+      title: io/in.hpp
+    - icon: ':heavy_check_mark:'
+      path: io/io.hpp
+      title: io/io.hpp
+    - icon: ':heavy_check_mark:'
+      path: io/io_option.hpp
+      title: io/io_option.hpp
+    - icon: ':heavy_check_mark:'
+      path: io/out.hpp
+      title: io/out.hpp
   - name: math
     pages:
     - icon: ':warning:'
@@ -127,31 +141,26 @@ data:
     - icon: ':warning:'
       path: stl_wrapper/vec.hpp
       title: stl_wrapper/vec.hpp
-  - name: system
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: system/in.hpp
-      title: system/in.hpp
-    - icon: ':heavy_check_mark:'
-      path: system/io_option.hpp
-      title: system/io_option.hpp
-    - icon: ':heavy_check_mark:'
-      path: system/out.hpp
-      title: system/out.hpp
-    - icon: ':heavy_check_mark:'
-      path: system/system.hpp
-      title: system/system.hpp
   - name: template
     pages:
     - icon: ':warning:'
       path: template/alias.hpp
       title: template/alias.hpp
     - icon: ':warning:'
+      path: template/all_rall.hpp
+      title: template/all_rall.hpp
+    - icon: ':warning:'
       path: template/amin_amax.hpp
       title: template/amin_amax.hpp
     - icon: ':warning:'
       path: template/constant.hpp
       title: template/constant.hpp
+    - icon: ':warning:'
+      path: template/io.hpp
+      title: template/io.hpp
+    - icon: ':warning:'
+      path: template/lambda.hpp
+      title: template/lambda.hpp
     - icon: ':warning:'
       path: template/len.hpp
       title: template/len.hpp
@@ -167,6 +176,12 @@ data:
     - icon: ':warning:'
       path: template/make_vector.hpp
       title: template/make_vector.hpp
+    - icon: ':warning:'
+      path: template/match.hpp
+      title: template/match.hpp
+    - icon: ':warning:'
+      path: template/rep.hpp
+      title: template/rep.hpp
     - icon: ':warning:'
       path: template/stl.hpp
       title: template/stl.hpp

@@ -2,6 +2,18 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: io/in.hpp
+    title: io/in.hpp
+  - icon: ':heavy_check_mark:'
+    path: io/io.hpp
+    title: io/io.hpp
+  - icon: ':heavy_check_mark:'
+    path: io/io_option.hpp
+    title: io/io_option.hpp
+  - icon: ':heavy_check_mark:'
+    path: io/out.hpp
+    title: io/out.hpp
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
   - icon: ':heavy_check_mark:'
@@ -13,18 +25,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
-  - icon: ':heavy_check_mark:'
-    path: system/in.hpp
-    title: system/in.hpp
-  - icon: ':heavy_check_mark:'
-    path: system/io_option.hpp
-    title: system/io_option.hpp
-  - icon: ':heavy_check_mark:'
-    path: system/out.hpp
-    title: system/out.hpp
-  - icon: ':heavy_check_mark:'
-    path: system/system.hpp
-    title: system/system.hpp
+  - icon: ':warning:'
+    path: template/all_rall.hpp
+    title: template/all_rall.hpp
+  - icon: ':warning:'
+    path: template/io.hpp
+    title: template/io.hpp
+  - icon: ':warning:'
+    path: template/lambda.hpp
+    title: template/lambda.hpp
+  - icon: ':warning:'
+    path: template/match.hpp
+    title: template/match.hpp
+  - icon: ':warning:'
+    path: template/rep.hpp
+    title: template/rep.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
     path: all.hpp
@@ -41,21 +56,23 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"template/macro.hpp\"\n#include <cstddef>\r\n#include <iterator>\r\
-    \n#include <memory>\r\n#include <tuple>\r\n#include <type_traits>\r\n#include\
-    \ <utility>\r\n#line 2 \"system/in.hpp\"\n#include <unistd.h>\r\n#include <array>\r\
-    \n#include <bitset>\r\n#line 6 \"system/in.hpp\"\n#include <cstdint>\r\n#include\
-    \ <cstdio>\r\n#include <string>\r\n#line 5 \"system/io_option.hpp\"\n\r\nnamespace\
-    \ kpr {\r\n    template<class Tuple, std::size_t idx>\r\n    struct Indexed {\r\
+  bundledCode: "#line 2 \"template/all_rall.hpp\"\n#include <iterator>\n\n#define\
+    \ all(...) std::begin(__VA_ARGS__), std::end(__VA_ARGS__)\n#define rall(...) std::rbegin(__VA_ARGS__),\
+    \ std::rend(__VA_ARGS__)\n#line 2 \"template/io.hpp\"\n#include <unistd.h>\n#include\
+    \ <cstddef>\n#include <istream>\n#include <string_view>\n#include <tuple>\n#include\
+    \ <type_traits>\n#include <utility>\n#line 3 \"io/in.hpp\"\n#include <array>\r\
+    \n#include <bitset>\r\n#line 6 \"io/in.hpp\"\n#include <cstdint>\r\n#include <cstdio>\r\
+    \n#include <string>\r\n#line 5 \"io/io_option.hpp\"\n\r\nnamespace kpr {\r\n \
+    \   template<class Tuple, std::size_t idx>\r\n    struct Indexed {\r\n       \
+    \ Tuple args_tuple;\r\n        template<class... Args>\r\n        constexpr Indexed(Args&&...\
+    \ args) noexcept: args_tuple{std::forward<Args>(args)...} {}\r\n    };\r\n\r\n\
+    \    template<std::size_t i, class... Args>\r\n    constexpr auto indexed(Args&&...\
+    \ args) noexcept {\r\n        return Indexed<std::tuple<Args...>, i>{std::forward<Args>(args)...};\r\
+    \n    }\r\n\r\n    template<class Tuple, bool... seps>\r\n    struct SepWith {\r\
     \n        Tuple args_tuple;\r\n        template<class... Args>\r\n        constexpr\
-    \ Indexed(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...} {}\r\
-    \n    };\r\n\r\n    template<std::size_t i, class... Args>\r\n    constexpr auto\
-    \ indexed(Args&&... args) noexcept {\r\n        return Indexed<std::tuple<Args...>,\
-    \ i>{std::forward<Args>(args)...};\r\n    }\r\n\r\n    template<class Tuple, bool...\
-    \ seps>\r\n    struct SepWith {\r\n        Tuple args_tuple;\r\n        template<class...\
-    \ Args>\r\n        constexpr SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
-    \ {}\r\n    };\r\n\r\n    template<bool... seps, class... Args>\r\n    constexpr\
-    \ auto sep_with(Args&&... args) noexcept {\r\n        return SepWith<std::tuple<Args...>,\
+    \ SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...} {}\r\
+    \n    };\r\n\r\n    template<bool... seps, class... Args>\r\n    constexpr auto\
+    \ sep_with(Args&&... args) noexcept {\r\n        return SepWith<std::tuple<Args...>,\
     \ seps...>{std::forward<Args>(args)...};\r\n    }\r\n} // namespace kpr\r\n#line\
     \ 3 \"math/power.hpp\"\n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr\
     \ struct {\r\n        template<class T>\r\n        constexpr T operator ()(T a,\
@@ -252,9 +269,9 @@ data:
     \n    };\r\n\r\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\
     \u306E\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n    template<std::size_t\
     \ idx, class T>\r\n    using tuple_like_element_t = typename tuple_like_element<idx,\
-    \ T>::type;\r\n} // namespace kpr\r\n#line 16 \"system/in.hpp\"\n\r\nnamespace\
-    \ kpr {\r\n    // \u30D0\u30C3\u30D5\u30A1\u3092\u7528\u3044\u3066\u30D5\u30A1\
-    \u30A4\u30EB\u3092\u8AAD\u307F\u8FBC\u3080\u30AF\u30E9\u30B9\r\n    template<std::size_t\
+    \ T>::type;\r\n} // namespace kpr\r\n#line 16 \"io/in.hpp\"\n\r\nnamespace kpr\
+    \ {\r\n    // \u30D0\u30C3\u30D5\u30A1\u3092\u7528\u3044\u3066\u30D5\u30A1\u30A4\
+    \u30EB\u3092\u8AAD\u307F\u8FBC\u3080\u30AF\u30E9\u30B9\r\n    template<std::size_t\
     \ buf_size = KYOPRO_BUFFER_SIZE>\r\n    struct Reader {\r\n    private:\r\n  \
     \      int fd, idx;\r\n        std::array<char, buf_size> buffer;\r\n\r\n    public:\r\
     \n        // \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\u3092\u53D6\u5F97\r\n\
@@ -360,24 +377,23 @@ data:
     \ = static_cast<ScannerWrapper<Scanner>&>(scanner);\r\n            scan_impl(scanner_wrapper,\
     \ a.args_tuple);\r\n        }\r\n    };\r\n\r\n    // \u6A19\u6E96\u5165\u529B\
     \u304B\u3089\u5024\u3092\u5165\u529B\u3059\u308B\u95A2\u6570\r\n    Scanner<Reader<>::iterator>\
-    \ scan{input.begin()};\r\n} // namespace kpr\r\n#line 3 \"system/out.hpp\"\n#include\
-    \ <algorithm>\r\n#line 6 \"system/out.hpp\"\n#include <cmath>\r\n#line 11 \"system/out.hpp\"\
-    \n#include <string_view>\r\n#line 19 \"system/out.hpp\"\n\r\nnamespace kpr {\r\
-    \n    // \u30D0\u30C3\u30D5\u30A1\u3092\u7528\u3044\u3066\u30D5\u30A1\u30A4\u30EB\
-    \u306B\u66F8\u304D\u8FBC\u3080\u30AF\u30E9\u30B9\r\n    template<std::size_t buf_size\
-    \ = KYOPRO_BUFFER_SIZE>\r\n    struct Writer {\r\n    private:\r\n        int\
-    \ fd, idx;\r\n        std::array<char, buf_size> buffer;\r\n\r\n    public:\r\n\
-    \        // \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\u3092\u53D6\u5F97\r\n \
-    \       static constexpr KYOPRO_BASE_INT get_buf_size() noexcept {\r\n       \
-    \     return buf_size;\r\n        }\r\n\r\n        Writer() noexcept = default;\r\
-    \n        Writer(int fd) noexcept: fd(fd), idx(0), buffer() {}\r\n        Writer(FILE*\
-    \ fp) noexcept: fd(fileno(fp)), idx(0), buffer() {}\r\n\r\n        ~Writer() {\r\
-    \n            [[maybe_unused]]ssize_t res = write(fd, buffer.begin(), idx);\r\n\
-    \        }\r\n\r\n        // \u51FA\u529B\u30A4\u30C6\u30EC\u30FC\u30BF\r\n  \
-    \      struct iterator {\r\n        private:\r\n            Writer& writer;\r\n\
-    \r\n        public:\r\n            using difference_type = void;\r\n         \
-    \   using value_type = void;\r\n            using pointer = void;\r\n        \
-    \    using reference = void;\r\n            using iterator_category = std::output_iterator_tag;\r\
+    \ scan{input.begin()};\r\n} // namespace kpr\r\n#line 3 \"io/out.hpp\"\n#include\
+    \ <algorithm>\r\n#line 6 \"io/out.hpp\"\n#include <cmath>\r\n#line 19 \"io/out.hpp\"\
+    \n\r\nnamespace kpr {\r\n    // \u30D0\u30C3\u30D5\u30A1\u3092\u7528\u3044\u3066\
+    \u30D5\u30A1\u30A4\u30EB\u306B\u66F8\u304D\u8FBC\u3080\u30AF\u30E9\u30B9\r\n \
+    \   template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>\r\n    struct Writer {\r\
+    \n    private:\r\n        int fd, idx;\r\n        std::array<char, buf_size> buffer;\r\
+    \n\r\n    public:\r\n        // \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\u3092\
+    \u53D6\u5F97\r\n        static constexpr KYOPRO_BASE_INT get_buf_size() noexcept\
+    \ {\r\n            return buf_size;\r\n        }\r\n\r\n        Writer() noexcept\
+    \ = default;\r\n        Writer(int fd) noexcept: fd(fd), idx(0), buffer() {}\r\
+    \n        Writer(FILE* fp) noexcept: fd(fileno(fp)), idx(0), buffer() {}\r\n\r\
+    \n        ~Writer() {\r\n            [[maybe_unused]]ssize_t res = write(fd, buffer.begin(),\
+    \ idx);\r\n        }\r\n\r\n        // \u51FA\u529B\u30A4\u30C6\u30EC\u30FC\u30BF\
+    \r\n        struct iterator {\r\n        private:\r\n            Writer& writer;\r\
+    \n\r\n        public:\r\n            using difference_type = void;\r\n       \
+    \     using value_type = void;\r\n            using pointer = void;\r\n      \
+    \      using reference = void;\r\n            using iterator_category = std::output_iterator_tag;\r\
     \n\r\n            iterator() noexcept = default;\r\n            iterator(Writer&\
     \ writer) noexcept: writer(writer) {}\r\n\r\n            iterator& operator ++()\
     \ {\r\n                ++writer.idx;\r\n                if (writer.idx == buf_size)\
@@ -508,120 +524,87 @@ data:
     \u6E96\u51FA\u529B\u3001\u6A19\u6E96\u30A8\u30E9\u30FC\u51FA\u529B\u306B\u5024\
     \u3092\u51FA\u529B\u3059\u308B(\u6539\u884C\u3001\u533A\u5207\u308A\u6587\u5B57\
     \u3042\u308A)\r\n    Printer<Writer<>::iterator> println{output.begin()}, eprintln{error.begin()};\r\
-    \n} // namespace kpr\r\n#line 9 \"template/macro.hpp\"\n\r\nnamespace kpr::helper\
-    \ {\r\n    template<std::size_t len>\r\n    constexpr std::size_t va_args_size(const\
-    \ char (&s)[len]) noexcept {\r\n        if constexpr (len == 1) return 0;\r\n\
-    \        std::size_t cnt = 1;\r\n        std::uint_fast64_t bracket = 0;\r\n \
-    \       for (auto i: s) {\r\n            if (i == '(') ++bracket;\r\n        \
-    \    else if (i == ')') --bracket;\r\n            else if (i == ',' && bracket\
-    \ == 0) ++cnt;\r\n        }\r\n        return cnt;\r\n    }\r\n\r\n    template<class\
-    \ F, std::size_t... idx>\r\n    auto read_impl(F&& f, std::index_sequence<idx...>)\
-    \ {\r\n        return std::tuple{(static_cast<void>(idx), f())...};\r\n    }\r\
-    \n\r\n    Printer<Writer<>::iterator, true, true, true, true> debug_impl(output.begin());\r\
-    \n\r\n    template<bool flag, std::size_t len>\r\n    void print_if(const char\
-    \ (&s)[len]) {\r\n        if constexpr (flag) print(' ', s);\r\n    }\r\n\r\n\
-    \    struct LambdaArg {};\r\n} // namespace kpr::helper\r\n\r\n#line 40 \"template/macro.hpp\"\
-    \n#include <istream>\r\n#define read(type_or_init, ...) \\\r\nauto [__VA_ARGS__]\
-    \ = (kpr::helper::read_impl(([]() { \\\r\n    using T = std::decay_t<decltype(*new\
-    \ type_or_init)>; \\\r\n    alignas(T) std::byte storage[sizeof(T)]; \\\r\n  \
-    \  T* p = new (storage) type_or_init; \\\r\n    kpr::scan(*p); \\\r\n    T res\
-    \ = std::move(*p); \\\r\n    p->~T(); \\\r\n    return res; \\\r\n}), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\r\
-    \n\r\n#ifdef NDEBUG\r\n#define debug(...) (void())\r\n#else\r\n#define debug(...)\
-    \ (kpr::print('#', ' ', 'l', 'i', 'n', 'e', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
-    \ != 0>(#__VA_ARGS__), kpr::print('\\n'), kpr::helper::debug_impl(__VA_ARGS__))\r\
-    \n#endif\r\n\r\n#define KYOPRO_OVERLOAD_MACRO(_1, _2, _3, _4, name, ...) name\r\
-    \n\r\n#define KYOPRO_REP0() for (; ; )\r\n#define KYOPRO_REP1(last) KYOPRO_REP2(KYOPRO_COUNTER,\
-    \ last)\r\n#define KYOPRO_REP2(i, last) for (auto i = std::decay_t<decltype(last)>(),\
-    \ KYOPRO_LAST = (last); (i) < (KYOPRO_LAST); ++(i))\r\n#define KYOPRO_REP3(i,\
-    \ first, last) for (auto i = (first), KYOPRO_LAST = last; (i) < (KYOPRO_LAST);\
-    \ ++(i))\r\n#define rep(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__ __VA_OPT__(,) KYOPRO_REP4,\
-    \ KYOPRO_REP3, KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\r\n\r\n#define\
-    \ KYOPRO_MATCH1(_1) break; case _1:\r\n#define KYOPRO_MATCH2(_1, _2) break; case\
-    \ _1: case _2:\r\n#define KYOPRO_MATCH3(_1, _2, _3) break; case _1: case _2: case\
-    \ _3:\r\n#define KYOPRO_MATCH4(_1, _2, _3, _4) break; case _1: case _2: case _3:\
-    \ case _4:\r\n#define match(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__, KYOPRO_MATCH4,\
-    \ KYOPRO_MATCH3, KYOPRO_MATCH2, KYOPRO_MATCH1)(__VA_ARGS__)\r\n#define otherwise\
-    \ break; default:\r\n\r\n#define $(...) \\\r\n([&](auto&&... _args) { \\\r\n \
-    \   auto _args_tuple = std::forward_as_tuple(_args...); \\\r\n    if constexpr\
-    \ (sizeof...(_args) == 0) { \\\r\n        return ([&]() { return (__VA_ARGS__);\
-    \ })(); \\\r\n    } else if constexpr (sizeof...(_args) == 1) { \\\r\n       \
-    \ return ([&](auto&& $0) { return (__VA_ARGS__); })(get<0>(_args_tuple)); \\\r\
-    \n    } else if constexpr (sizeof...(_args) == 2) { \\\r\n        return ([&](auto&&\
-    \ $0, auto&& $1) { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple));\
+    \n} // namespace kpr\r\n#line 10 \"template/io.hpp\"\n\nnamespace kpr::helper\
+    \ {\n    template<std::size_t len>\n    constexpr std::size_t va_args_size(const\
+    \ char (&s)[len]) noexcept {\n        if constexpr (len == 1) return 0;\n    \
+    \    std::size_t cnt = 1;\n        std::uint_fast64_t bracket = 0;\n        for\
+    \ (auto i: s) {\n            if (i == '(') ++bracket;\n            else if (i\
+    \ == ')') --bracket;\n            else if (i == ',' && bracket == 0) ++cnt;\n\
+    \        }\n        return cnt;\n    }\n\n    template<class F, std::size_t...\
+    \ idx>\n    auto read_impl(F&& f, std::index_sequence<idx...>) {\n        return\
+    \ std::tuple{(static_cast<void>(idx), f())...};\n    }\n\n    Printer<Writer<>::iterator,\
+    \ true, true, true, true> debug_impl(output.begin());\n\n    template<bool flag>\n\
+    \    void print_if(std::string_view sv) {\n        if constexpr (flag) print('\
+    \ ', sv);\n    }\n} // namespace kpr::helper\n\n#define read(type_or_init, ...)\
+    \ \\\n    auto [__VA_ARGS__] = (kpr::helper::read_impl(([]() { \\\n        using\
+    \ T = std::decay_t<decltype(*new type_or_init)>; \\\n        alignas(T) std::byte\
+    \ storage[sizeof(T)]; \\\n        T* p = new (storage) type_or_init; \\\n    \
+    \    kpr::scan(*p); \\\n        T res = std::move(*p); \\\n        p->~T(); \\\
+    \n        return res; \\\n    }), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\n\
+    \n#ifdef NDEBUG\n#define debug(...) (void())\n#else\n#define debug(...) (kpr::print('#',\
+    \ ' ', 'l', 'i', 'n', 'e', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
+    \ != 0>(#__VA_ARGS__), kpr::print('\\n'), kpr::helper::debug_impl(__VA_ARGS__))\n\
+    #endif\n#line 5 \"template/lambda.hpp\"\n\r\n#define $(...) \\\r\n([&](auto&&...\
+    \ _args) { \\\r\n    auto _args_tuple = std::forward_as_tuple(_args...); \\\r\n\
+    \    if constexpr (sizeof...(_args) == 0) { \\\r\n        return ([&]() { return\
+    \ (__VA_ARGS__); })(); \\\r\n    } else if constexpr (sizeof...(_args) == 1) {\
+    \ \\\r\n        return ([&](auto&& $0) { return (__VA_ARGS__); })(get<0>(_args_tuple));\
+    \ \\\r\n    } else if constexpr (sizeof...(_args) == 2) { \\\r\n        return\
+    \ ([&](auto&& $0, auto&& $1) { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple));\
     \ \\\r\n    } else if constexpr (sizeof...(_args) == 3) { \\\r\n        return\
     \ ([&](auto&& $0, auto&& $1, auto&& $2) { return (__VA_ARGS__); })(get<0>(_args_tuple),\
     \ get<1>(_args_tuple), get<2>(_args_tuple)); \\\r\n    } else if constexpr (sizeof...(_args)\
     \ == 4) { \\\r\n        return ([&](auto&& $0, auto&& $1, auto&& $2, auto&& $3)\
     \ { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple), get<2>(_args_tuple),\
-    \ get<3>(_args_tuple)); \\\r\n    } \\\r\n})\r\n\r\n#define all(...) std::begin(__VA_ARGS__),\
-    \ std::end(__VA_ARGS__)\r\n#define rall(...) std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\r\
-    \n"
-  code: "#pragma once\r\n#include <cstddef>\r\n#include <iterator>\r\n#include <memory>\r\
-    \n#include <tuple>\r\n#include <type_traits>\r\n#include <utility>\r\n#include\
-    \ \"../system/system.hpp\"\r\n\r\nnamespace kpr::helper {\r\n    template<std::size_t\
-    \ len>\r\n    constexpr std::size_t va_args_size(const char (&s)[len]) noexcept\
-    \ {\r\n        if constexpr (len == 1) return 0;\r\n        std::size_t cnt =\
-    \ 1;\r\n        std::uint_fast64_t bracket = 0;\r\n        for (auto i: s) {\r\
-    \n            if (i == '(') ++bracket;\r\n            else if (i == ')') --bracket;\r\
-    \n            else if (i == ',' && bracket == 0) ++cnt;\r\n        }\r\n     \
-    \   return cnt;\r\n    }\r\n\r\n    template<class F, std::size_t... idx>\r\n\
-    \    auto read_impl(F&& f, std::index_sequence<idx...>) {\r\n        return std::tuple{(static_cast<void>(idx),\
-    \ f())...};\r\n    }\r\n\r\n    Printer<Writer<>::iterator, true, true, true,\
-    \ true> debug_impl(output.begin());\r\n\r\n    template<bool flag, std::size_t\
-    \ len>\r\n    void print_if(const char (&s)[len]) {\r\n        if constexpr (flag)\
-    \ print(' ', s);\r\n    }\r\n\r\n    struct LambdaArg {};\r\n} // namespace kpr::helper\r\
-    \n\r\n#include <unistd.h>\r\n#include <istream>\r\n#define read(type_or_init,\
-    \ ...) \\\r\nauto [__VA_ARGS__] = (kpr::helper::read_impl(([]() { \\\r\n    using\
-    \ T = std::decay_t<decltype(*new type_or_init)>; \\\r\n    alignas(T) std::byte\
-    \ storage[sizeof(T)]; \\\r\n    T* p = new (storage) type_or_init; \\\r\n    kpr::scan(*p);\
-    \ \\\r\n    T res = std::move(*p); \\\r\n    p->~T(); \\\r\n    return res; \\\
-    \r\n}), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\r\
-    \n\r\n#ifdef NDEBUG\r\n#define debug(...) (void())\r\n#else\r\n#define debug(...)\
-    \ (kpr::print('#', ' ', 'l', 'i', 'n', 'e', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
-    \ != 0>(#__VA_ARGS__), kpr::print('\\n'), kpr::helper::debug_impl(__VA_ARGS__))\r\
-    \n#endif\r\n\r\n#define KYOPRO_OVERLOAD_MACRO(_1, _2, _3, _4, name, ...) name\r\
-    \n\r\n#define KYOPRO_REP0() for (; ; )\r\n#define KYOPRO_REP1(last) KYOPRO_REP2(KYOPRO_COUNTER,\
-    \ last)\r\n#define KYOPRO_REP2(i, last) for (auto i = std::decay_t<decltype(last)>(),\
-    \ KYOPRO_LAST = (last); (i) < (KYOPRO_LAST); ++(i))\r\n#define KYOPRO_REP3(i,\
-    \ first, last) for (auto i = (first), KYOPRO_LAST = last; (i) < (KYOPRO_LAST);\
-    \ ++(i))\r\n#define rep(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__ __VA_OPT__(,) KYOPRO_REP4,\
-    \ KYOPRO_REP3, KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\r\n\r\n#define\
-    \ KYOPRO_MATCH1(_1) break; case _1:\r\n#define KYOPRO_MATCH2(_1, _2) break; case\
-    \ _1: case _2:\r\n#define KYOPRO_MATCH3(_1, _2, _3) break; case _1: case _2: case\
-    \ _3:\r\n#define KYOPRO_MATCH4(_1, _2, _3, _4) break; case _1: case _2: case _3:\
-    \ case _4:\r\n#define match(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__, KYOPRO_MATCH4,\
-    \ KYOPRO_MATCH3, KYOPRO_MATCH2, KYOPRO_MATCH1)(__VA_ARGS__)\r\n#define otherwise\
-    \ break; default:\r\n\r\n#define $(...) \\\r\n([&](auto&&... _args) { \\\r\n \
-    \   auto _args_tuple = std::forward_as_tuple(_args...); \\\r\n    if constexpr\
-    \ (sizeof...(_args) == 0) { \\\r\n        return ([&]() { return (__VA_ARGS__);\
-    \ })(); \\\r\n    } else if constexpr (sizeof...(_args) == 1) { \\\r\n       \
-    \ return ([&](auto&& $0) { return (__VA_ARGS__); })(get<0>(_args_tuple)); \\\r\
-    \n    } else if constexpr (sizeof...(_args) == 2) { \\\r\n        return ([&](auto&&\
-    \ $0, auto&& $1) { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple));\
-    \ \\\r\n    } else if constexpr (sizeof...(_args) == 3) { \\\r\n        return\
-    \ ([&](auto&& $0, auto&& $1, auto&& $2) { return (__VA_ARGS__); })(get<0>(_args_tuple),\
-    \ get<1>(_args_tuple), get<2>(_args_tuple)); \\\r\n    } else if constexpr (sizeof...(_args)\
-    \ == 4) { \\\r\n        return ([&](auto&& $0, auto&& $1, auto&& $2, auto&& $3)\
-    \ { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple), get<2>(_args_tuple),\
-    \ get<3>(_args_tuple)); \\\r\n    } \\\r\n})\r\n\r\n#define all(...) std::begin(__VA_ARGS__),\
-    \ std::end(__VA_ARGS__)\r\n#define rall(...) std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\r\
-    \n"
+    \ get<3>(_args_tuple)); \\\r\n    } \\\r\n})\r\n#line 2 \"template/match.hpp\"\
+    \n\n#define KYOPRO_MATCH1(_1) break; case _1:\n#define KYOPRO_MATCH2(_1, _2) break;\
+    \ case _1: case _2:\n#define KYOPRO_MATCH3(_1, _2, _3) break; case _1: case _2:\
+    \ case _3:\n#define KYOPRO_MATCH4(_1, _2, _3, _4) break; case _1: case _2: case\
+    \ _3: case _4:\n\n#define KYOPRO_OVERLOAD_MATCH(_1, _2, _3, _4, name, ...) name\n\
+    #define match(...) KYOPRO_OVERLOAD_MATCH(__VA_ARGS__, KYOPRO_MATCH4, KYOPRO_MATCH3,\
+    \ KYOPRO_MATCH2, KYOPRO_MATCH1)(__VA_ARGS__)\n#define otherwise break; default:\n\
+    #line 3 \"template/rep.hpp\"\n\n#define KYOPRO_REP0() for (; ; )\n#define KYOPRO_REP1(last)\
+    \ KYOPRO_REP2(KYOPRO_COUNTER, last)\n#define KYOPRO_REP2(i, last) for (auto i\
+    \ = std::decay_t<decltype(last)>(), KYOPRO_LAST = (last); (i) < (KYOPRO_LAST);\
+    \ ++(i))\n#define KYOPRO_REP3(i, first, last) for (auto i = (first), KYOPRO_LAST\
+    \ = last; (i) < (KYOPRO_LAST); ++(i))\n\n#define KYOPRO_OVERLOAD_REP(_1, _2, _3,\
+    \ name, ...) name\n#define rep(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__ __VA_OPT__(,)\
+    \ KYOPRO_REP3, KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\n#line 7 \"\
+    template/macro.hpp\"\n"
+  code: '#pragma once
+
+    #include "all_rall.hpp"
+
+    #include "io.hpp"
+
+    #include "lambda.hpp"
+
+    #include "match.hpp"
+
+    #include "rep.hpp"
+
+    '
   dependsOn:
-  - system/system.hpp
-  - system/in.hpp
-  - system/io_option.hpp
+  - template/all_rall.hpp
+  - template/io.hpp
+  - io/io.hpp
+  - io/in.hpp
+  - io/io_option.hpp
   - math/power.hpp
   - meta/setting.hpp
   - meta/trait.hpp
   - meta/tuple_like.hpp
-  - system/out.hpp
+  - io/out.hpp
+  - template/lambda.hpp
+  - template/match.hpp
+  - template/rep.hpp
   isVerificationFile: false
   path: template/macro.hpp
   requiredBy:
   - verify/hello_world.cpp
   - template/template.hpp
   - all.hpp
-  timestamp: '2023-02-12 22:41:44+09:00'
+  timestamp: '2023-02-19 20:43:41+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/macro.hpp

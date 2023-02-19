@@ -32,6 +32,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
+  - icon: ':heavy_check_mark:'
+    path: io/in.hpp
+    title: io/in.hpp
+  - icon: ':heavy_check_mark:'
+    path: io/io.hpp
+    title: io/io.hpp
+  - icon: ':heavy_check_mark:'
+    path: io/out.hpp
+    title: io/out.hpp
   - icon: ':warning:'
     path: math/Barrett.hpp
     title: math/Barrett.hpp
@@ -65,21 +74,15 @@ data:
   - icon: ':warning:'
     path: meta/meta.hpp
     title: meta/meta.hpp
-  - icon: ':heavy_check_mark:'
-    path: system/in.hpp
-    title: system/in.hpp
-  - icon: ':heavy_check_mark:'
-    path: system/out.hpp
-    title: system/out.hpp
-  - icon: ':heavy_check_mark:'
-    path: system/system.hpp
-    title: system/system.hpp
   - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
   - icon: ':warning:'
     path: template/constant.hpp
     title: template/constant.hpp
+  - icon: ':warning:'
+    path: template/io.hpp
+    title: template/io.hpp
   - icon: ':warning:'
     path: template/len.hpp
     title: template/len.hpp
@@ -148,44 +151,45 @@ data:
   isVerificationFile: false
   path: meta/setting.hpp
   requiredBy:
-  - all/all.hpp
-  - verify/hello_world.cpp
-  - meta/constant.hpp
-  - meta/meta.hpp
-  - system/in.hpp
-  - system/out.hpp
-  - system/system.hpp
+  - math/math.hpp
+  - math/euler_phi.hpp
+  - math/is_prime.hpp
+  - math/divisors.hpp
+  - math/ModInt.hpp
+  - math/DynamicModInt.hpp
+  - math/Barrett.hpp
+  - math/Montgomery.hpp
+  - math/factorize.hpp
+  - data_structure/FenwickTree.hpp
   - data_structure/data_structure.hpp
   - data_structure/structure.hpp
-  - data_structure/FenwickTree.hpp
   - data_structure/UnionFind.hpp
-  - function/monoid.hpp
-  - function/function.hpp
-  - template/template.hpp
-  - template/len.hpp
-  - template/macro.hpp
-  - template/alias.hpp
+  - io/out.hpp
+  - io/in.hpp
+  - io/io.hpp
+  - verify/hello_world.cpp
   - template/constant.hpp
-  - math/ModInt.hpp
-  - math/Barrett.hpp
-  - math/is_prime.hpp
-  - math/euler_phi.hpp
-  - math/math.hpp
-  - math/factorize.hpp
-  - math/divisors.hpp
-  - math/Montgomery.hpp
-  - math/DynamicModInt.hpp
+  - template/len.hpp
+  - template/template.hpp
+  - template/io.hpp
+  - template/alias.hpp
+  - template/macro.hpp
   - algorithm/algorithm.hpp
   - algorithm/bit.hpp
+  - all/all.hpp
+  - function/monoid.hpp
+  - function/function.hpp
+  - meta/meta.hpp
+  - meta/constant.hpp
   - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/aoj/PrimeNumber.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/unionfind.test.cpp
-  - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/factorize.test.cpp
+  - verify/aoj/PrimeNumber.test.cpp
 documentation_of: meta/setting.hpp
 layout: document
 redirect_from:

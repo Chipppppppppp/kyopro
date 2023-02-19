@@ -241,9 +241,9 @@ data:
   isVerificationFile: false
   path: data_structure/UnionFind.hpp
   requiredBy:
-  - verify/hello_world.cpp
   - data_structure/data_structure.hpp
   - data_structure/structure.hpp
+  - verify/hello_world.cpp
   - all.hpp
   timestamp: '2023-02-14 01:39:39+09:00'
   verificationStatus: LIBRARY_ALL_AC

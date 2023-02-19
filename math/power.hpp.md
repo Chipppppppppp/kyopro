@@ -24,6 +24,12 @@ data:
     path: function/monoid.hpp
     title: function/monoid.hpp
   - icon: ':heavy_check_mark:'
+    path: io/in.hpp
+    title: io/in.hpp
+  - icon: ':heavy_check_mark:'
+    path: io/io.hpp
+    title: io/io.hpp
+  - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
@@ -44,15 +50,12 @@ data:
   - icon: ':warning:'
     path: meta/meta.hpp
     title: meta/meta.hpp
-  - icon: ':heavy_check_mark:'
-    path: system/in.hpp
-    title: system/in.hpp
-  - icon: ':heavy_check_mark:'
-    path: system/system.hpp
-    title: system/system.hpp
   - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
+  - icon: ':warning:'
+    path: template/io.hpp
+    title: template/io.hpp
   - icon: ':warning:'
     path: template/macro.hpp
     title: template/macro.hpp
@@ -100,34 +103,35 @@ data:
   isVerificationFile: false
   path: math/power.hpp
   requiredBy:
-  - all/all.hpp
-  - verify/hello_world.cpp
-  - meta/constant.hpp
-  - meta/meta.hpp
-  - system/in.hpp
-  - system/system.hpp
+  - math/math.hpp
+  - math/is_prime.hpp
+  - math/ModInt.hpp
+  - math/DynamicModInt.hpp
+  - math/factorize.hpp
+  - data_structure/FenwickTree.hpp
   - data_structure/data_structure.hpp
   - data_structure/structure.hpp
-  - data_structure/FenwickTree.hpp
+  - io/in.hpp
+  - io/io.hpp
+  - verify/hello_world.cpp
+  - template/template.hpp
+  - template/io.hpp
+  - template/alias.hpp
+  - template/macro.hpp
+  - all/all.hpp
   - function/monoid.hpp
   - function/function.hpp
-  - template/template.hpp
-  - template/macro.hpp
-  - template/alias.hpp
-  - math/ModInt.hpp
-  - math/is_prime.hpp
-  - math/math.hpp
-  - math/factorize.hpp
-  - math/DynamicModInt.hpp
+  - meta/meta.hpp
+  - meta/constant.hpp
   - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/aoj/PrimeNumber.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/unionfind.test.cpp
-  - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/factorize.test.cpp
+  - verify/aoj/PrimeNumber.test.cpp
 documentation_of: math/power.hpp
 layout: document
 redirect_from:

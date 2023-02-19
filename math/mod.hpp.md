@@ -56,12 +56,12 @@ data:
   isVerificationFile: false
   path: math/mod.hpp
   requiredBy:
-  - all/all.hpp
+  - math/math.hpp
+  - math/ModInt.hpp
   - verify/hello_world.cpp
   - template/template.hpp
   - template/alias.hpp
-  - math/ModInt.hpp
-  - math/math.hpp
+  - all/all.hpp
   - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS

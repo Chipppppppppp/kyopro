@@ -9,6 +9,15 @@ data:
     path: all/all.hpp
     title: all/all.hpp
   - icon: ':heavy_check_mark:'
+    path: io/in.hpp
+    title: io/in.hpp
+  - icon: ':heavy_check_mark:'
+    path: io/io.hpp
+    title: io/io.hpp
+  - icon: ':heavy_check_mark:'
+    path: io/out.hpp
+    title: io/out.hpp
+  - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
@@ -23,18 +32,12 @@ data:
   - icon: ':warning:'
     path: math/math.hpp
     title: math/math.hpp
-  - icon: ':heavy_check_mark:'
-    path: system/in.hpp
-    title: system/in.hpp
-  - icon: ':heavy_check_mark:'
-    path: system/out.hpp
-    title: system/out.hpp
-  - icon: ':heavy_check_mark:'
-    path: system/system.hpp
-    title: system/system.hpp
   - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
+  - icon: ':warning:'
+    path: template/io.hpp
+    title: template/io.hpp
   - icon: ':warning:'
     path: template/macro.hpp
     title: template/macro.hpp
@@ -65,7 +68,7 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"system/io_option.hpp\"\n#include <cstddef>\r\n#include <tuple>\r\
+  bundledCode: "#line 2 \"io/io_option.hpp\"\n#include <cstddef>\r\n#include <tuple>\r\
     \n#include <utility>\r\n\r\nnamespace kpr {\r\n    template<class Tuple, std::size_t\
     \ idx>\r\n    struct Indexed {\r\n        Tuple args_tuple;\r\n        template<class...\
     \ Args>\r\n        constexpr Indexed(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
@@ -91,34 +94,35 @@ data:
     \ seps...>{std::forward<Args>(args)...};\r\n    }\r\n} // namespace kpr\r\n"
   dependsOn: []
   isVerificationFile: false
-  path: system/io_option.hpp
+  path: io/io_option.hpp
   requiredBy:
-  - all/all.hpp
-  - verify/hello_world.cpp
-  - system/in.hpp
-  - system/out.hpp
-  - system/system.hpp
-  - template/template.hpp
-  - template/macro.hpp
-  - template/alias.hpp
-  - math/ModInt.hpp
-  - math/is_prime.hpp
   - math/math.hpp
-  - math/factorize.hpp
+  - math/is_prime.hpp
+  - math/ModInt.hpp
   - math/DynamicModInt.hpp
+  - math/factorize.hpp
+  - io/out.hpp
+  - io/in.hpp
+  - io/io.hpp
+  - verify/hello_world.cpp
+  - template/template.hpp
+  - template/io.hpp
+  - template/alias.hpp
+  - template/macro.hpp
+  - all/all.hpp
   - all.hpp
-  timestamp: '2023-02-12 03:32:11+09:00'
+  timestamp: '2023-02-19 20:41:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/aoj/PrimeNumber.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/unionfind.test.cpp
-  - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/many_aplusb.test.cpp
-documentation_of: system/io_option.hpp
+  - verify/yosupo/factorize.test.cpp
+  - verify/aoj/PrimeNumber.test.cpp
+documentation_of: io/io_option.hpp
 layout: document
 redirect_from:
-- /library/system/io_option.hpp
-- /library/system/io_option.hpp.html
-title: system/io_option.hpp
+- /library/io/io_option.hpp
+- /library/io/io_option.hpp.html
+title: io/io_option.hpp
 ---

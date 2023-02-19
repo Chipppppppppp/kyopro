@@ -2,21 +2,21 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: meta/setting.hpp
-    title: meta/setting.hpp
-  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
+  - icon: ':heavy_check_mark:'
+    path: meta/tuple_like.hpp
+    title: meta/tuple_like.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
     path: all.hpp
     title: all.hpp
   - icon: ':warning:'
-    path: all/all.hpp
-    title: all/all.hpp
+    path: template/macro.hpp
+    title: template/macro.hpp
   - icon: ':warning:'
-    path: math/math.hpp
-    title: math/math.hpp
+    path: template/template.hpp
+    title: template/template.hpp
   - icon: ':warning:'
     path: verify/hello_world.cpp
     title: verify/hello_world.cpp
@@ -26,33 +26,18 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"math/Barrett.hpp\"\n#include <cstdint>\r\n#include <limits>\r\
-    \n#include <type_traits>\r\n#line 3 \"meta/setting.hpp\"\n\r\n#ifndef KYOPRO_BASE_INT\r\
-    \n// \u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u578B\r\n#define KYOPRO_BASE_INT\
-    \ std::int64_t\r\n#endif\r\n\r\n#ifndef KYOPRO_BASE_UINT\r\n// \u57FA\u672C\u7B26\
-    \u53F7\u306A\u3057\u6574\u6570\u578B\r\n#define KYOPRO_BASE_UINT std::uint64_t\r\
-    \n#endif\r\n\r\n#ifndef KYOPRO_BASE_FLOAT\r\n// \u57FA\u672C\u6D6E\u52D5\u5C0F\
-    \u6570\u70B9\u6570\u578B\r\n#define KYOPRO_BASE_FLOAT double\r\n#endif\r\n\r\n\
-    #ifndef KYOPRO_DEFAULT_MOD\r\n// \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305F\
-    mod\r\n#define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))\r\
-    \n#endif\r\n\r\n#ifndef KYOPRO_DECIMAL_PRECISION\r\n// \u5C0F\u6570\u7CBE\u5EA6\
-    (\u6841)\r\n#define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))\r\
-    \n#endif\r\n\r\n#ifndef KYOPRO_INF_DIV\r\n// \u7121\u9650\u5927\u3092\u8868\u3059\
-    \u6574\u6570\u304C\u6700\u5927\u5024\u306E\u4F55\u5206\u306E\u4E00\u304B\u3092\
-    \u8868\u3059\r\n#define KYOPRO_INF_DIV (static_cast<KYOPRO_BASE_UINT>(3))\r\n\
-    #endif\r\n\r\n#ifndef KYOPRO_BUFFER_SIZE\r\n// \u30C7\u30D5\u30A9\u30EB\u30C8\u306E\
-    \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\r\n#define KYOPRO_BUFFER_SIZE (static_cast<KYOPRO_BASE_UINT>(2048))\r\
-    \n#endif\r\n#line 2 \"meta/trait.hpp\"\n#include <cstddef>\r\n#include <iterator>\r\
-    \n#include <tuple>\r\n#line 6 \"meta/trait.hpp\"\n#include <utility>\r\n\r\nnamespace\
-    \ kpr {\r\n    namespace helper {\r\n        template<class T>\r\n        struct\
-    \ is_integer_helper {\r\n            static constexpr bool value = std::is_integral_v<T>;\r\
-    \n        };\r\n\r\n        #ifdef __SIZEOF_INT128__\r\n        template<>\r\n\
-    \        struct is_integer_helper<__int128_t> {\r\n            static constexpr\
-    \ bool value = true;\r\n        };\r\n        template<>\r\n        struct is_integer_helper<__uint128_t>\
-    \ {\r\n            static constexpr bool value = true;\r\n        };\r\n     \
-    \   #endif\r\n    } // namespace helper\r\n\r\n    // \u578BT\u304C\u6574\u6570\
-    \u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    struct is_integer {\r\
-    \n        static constexpr bool value = helper::is_integer_helper<std::remove_cv_t<T>>::value;\r\
+  bundledCode: "#line 2 \"template/lambda.hpp\"\n#include <iterator>\r\n#include <tuple>\r\
+    \n#line 2 \"meta/tuple_like.hpp\"\n#include <cstddef>\r\n#include <type_traits>\r\
+    \n#line 5 \"meta/tuple_like.hpp\"\n#include <utility>\r\n#line 7 \"meta/trait.hpp\"\
+    \n\r\nnamespace kpr {\r\n    namespace helper {\r\n        template<class T>\r\
+    \n        struct is_integer_helper {\r\n            static constexpr bool value\
+    \ = std::is_integral_v<T>;\r\n        };\r\n\r\n        #ifdef __SIZEOF_INT128__\r\
+    \n        template<>\r\n        struct is_integer_helper<__int128_t> {\r\n   \
+    \         static constexpr bool value = true;\r\n        };\r\n        template<>\r\
+    \n        struct is_integer_helper<__uint128_t> {\r\n            static constexpr\
+    \ bool value = true;\r\n        };\r\n        #endif\r\n    } // namespace helper\r\
+    \n\r\n    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\u308B\r\n    template<class\
+    \ T>\r\n    struct is_integer {\r\n        static constexpr bool value = helper::is_integer_helper<std::remove_cv_t<T>>::value;\r\
     \n    };\r\n    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\u308B\r\n    template<class\
     \ T>\r\n    inline constexpr bool is_integer_v = is_integer<T>::value;\r\n\r\n\
     \    // \u578BT\u304C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u304B\u8ABF\u3079\u308B\
@@ -157,50 +142,111 @@ data:
     \ = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\r\n    };\r\n    //\
     \ Range\u578BT\u304B\u3089\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n\
     \    template<class T>\r\n    using range_value_t = typename range_value<T>::type;\r\
-    \n} // namespace kpr\r\n#line 7 \"math/Barrett.hpp\"\n\r\nnamespace kpr {\r\n\
-    \    // Barrett Reduction\r\n    template<class T>\r\n    struct Barrett {\r\n\
-    \        static_assert(is_unsigned_integer_v<T>, \"The given type must be an unsigned\
-    \ integer type\");\r\n\r\n        using value_type = T;\r\n\r\n        T mod;\r\
-    \n\r\n    private:\r\n        using larger_type = next_integer_t<T>;\r\n\r\n \
-    \       larger_type m;\r\n\r\n    public:\r\n        constexpr void set_mod(T\
-    \ mod) noexcept {\r\n            this->mod = mod;\r\n            m = (static_cast<larger_type>(1)\
-    \ << 64) / mod;\r\n        }\r\n\r\n        constexpr KYOPRO_BASE_INT get_mod()\
-    \ const noexcept {\r\n            return mod;\r\n        }\r\n\r\n        Barrett()\
-    \ noexcept = default;\r\n        Barrett(T mod) noexcept: mod(mod), m((static_cast<larger_type>(1)\
-    \ << 64) / mod) {}\r\n\r\n        constexpr T reduce(T x) const noexcept {\r\n\
-    \            x -= static_cast<T>((x * m) >> 64) * mod;\r\n            return x\
-    \ < mod ? x : x - mod;\r\n        }\r\n    };\r\n} // namespace kpr\r\n"
-  code: "#pragma once\r\n#include <cstdint>\r\n#include <limits>\r\n#include <type_traits>\r\
-    \n#include \"../meta/setting.hpp\"\r\n#include \"../meta/trait.hpp\"\r\n\r\nnamespace\
-    \ kpr {\r\n    // Barrett Reduction\r\n    template<class T>\r\n    struct Barrett\
-    \ {\r\n        static_assert(is_unsigned_integer_v<T>, \"The given type must be\
-    \ an unsigned integer type\");\r\n\r\n        using value_type = T;\r\n\r\n  \
-    \      T mod;\r\n\r\n    private:\r\n        using larger_type = next_integer_t<T>;\r\
-    \n\r\n        larger_type m;\r\n\r\n    public:\r\n        constexpr void set_mod(T\
-    \ mod) noexcept {\r\n            this->mod = mod;\r\n            m = (static_cast<larger_type>(1)\
-    \ << 64) / mod;\r\n        }\r\n\r\n        constexpr KYOPRO_BASE_INT get_mod()\
-    \ const noexcept {\r\n            return mod;\r\n        }\r\n\r\n        Barrett()\
-    \ noexcept = default;\r\n        Barrett(T mod) noexcept: mod(mod), m((static_cast<larger_type>(1)\
-    \ << 64) / mod) {}\r\n\r\n        constexpr T reduce(T x) const noexcept {\r\n\
-    \            x -= static_cast<T>((x * m) >> 64) * mod;\r\n            return x\
-    \ < mod ? x : x - mod;\r\n        }\r\n    };\r\n} // namespace kpr\r\n"
+    \n} // namespace kpr\r\n#line 7 \"meta/tuple_like.hpp\"\n\r\nnamespace kpr {\r\
+    \n    namespace helper {\r\n        struct CastableToAny {\r\n            template<class\
+    \ T>\r\n            operator T() const noexcept;\r\n        };\r\n\r\n       \
+    \ template<class T, std::size_t... idx, std::void_t<decltype(T{((void)idx, CastableToAny{})...})>*\
+    \ = nullptr>\r\n        constexpr bool is_aggregate_initializable(std::index_sequence<idx...>,\
+    \ bool) noexcept {\r\n            return true;\r\n        }\r\n        template<class\
+    \ T, std::size_t... idx>\r\n        constexpr bool is_aggregate_initializable(std::index_sequence<idx...>,\
+    \ char) noexcept {\r\n            return false;\r\n        }\r\n\r\n        template<class\
+    \ T, std::size_t n = sizeof(T) * 8, std::enable_if_t<is_aggregate_initializable<T>(std::make_index_sequence<n>(),\
+    \ false)>* = nullptr>\r\n        constexpr std::size_t aggregate_size() {\r\n\
+    \            return n;\r\n        }\r\n        template<class T, std::size_t n\
+    \ = sizeof(T) * 8, std::enable_if_t<!is_aggregate_initializable<T>(std::make_index_sequence<n>(),\
+    \ false)>* = nullptr>\r\n        constexpr std::size_t aggregate_size() {\r\n\
+    \            return aggregate_size<T, n - 1>();\r\n        }\r\n    } // namespace\
+    \ helper\r\n\r\n    // tuple_like\u306A\u578BT\u306E\u5927\u304D\u3055\u3092\u8ABF\
+    \u3079\u308B\r\n    template<class T, class = void>\r\n    struct tuple_like_size\
+    \ {\r\n        static_assert(std::is_aggregate_v<T>, \"T must be tuple_like\"\
+    );\r\n        static constexpr std::size_t value = helper::aggregate_size<T>();\r\
+    \n    };\r\n\r\n    template<class T>\r\n    struct tuple_like_size<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
+    \ {\r\n        static constexpr std::size_t value = std::tuple_size_v<T>;\r\n\
+    \    };\r\n\r\n    // tuple_like\u306A\u578BT\u306E\u5927\u304D\u3055\u3092\u8ABF\
+    \u3079\u308B\r\n    template<class T>\r\n    inline constexpr std::size_t tuple_like_size_v\
+    \ = tuple_like_size<T>::value;\r\n\r\n\r\n    // \u578BT\u304Ctuple_like\u304B\
+    \u8ABF\u3079\u308B\r\n    template<class, class = void>\r\n    struct is_tuple_like\
+    \ {\r\n        static constexpr bool value = false;\r\n    };\r\n\r\n    template<class\
+    \ T>\r\n    struct is_tuple_like<T, std::enable_if_t<std::is_aggregate_v<T>>>\
+    \ {\r\n        static constexpr bool value = true;\r\n    };\r\n\r\n    template<class\
+    \ T>\r\n    struct is_tuple_like<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
+    \ {\r\n        static constexpr bool value = true;\r\n    };\r\n\r\n    // \u578B\
+    T\u304Ctuple_like\u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    inline\
+    \ constexpr bool is_tuple_like_v = is_tuple_like<T>::value;\r\n\r\n\r\n    //\
+    \ tuple-like\u306A\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\
+    \u76EE\u3092\u6C42\u3081\u308B\u95A2\u6570\u30AF\u30E9\u30B9\r\n    template<class\
+    \ T, class = void>\r\n    struct GetFunction {\r\n        static_assert(is_tuple_like_v<T>,\
+    \ \"T is not gettable\");\r\n        template<std::size_t idx>\r\n        static\
+    \ constexpr decltype(auto) get(T&& tuple_like) {\r\n            return std::get<idx>(std::forward<T>(tuple_like));\r\
+    \n        }\r\n    };\r\n\r\n    #define DEFINE_GET(n, ...)                  \
+    \                           \\\r\n    template<class T>                      \
+    \                                \\\r\n    struct GetFunction<T, std::enable_if_t<tuple_like_size_v<T>\
+    \ == n>> {   \\\r\n        template<std::size_t idx, class U>                \
+    \                 \\\r\n        static constexpr decltype(auto) get(U&& aggregate)\
+    \ noexcept { \\\r\n            auto&& [__VA_ARGS__] = std::forward<U>(aggregate);\
+    \             \\\r\n            return std::get<idx>(std::forward_as_tuple(__VA_ARGS__));\
+    \      \\\r\n        }                                                       \
+    \           \\\r\n    };\r\n\r\n    DEFINE_GET(1, a)\r\n    DEFINE_GET(2, a, b)\r\
+    \n    DEFINE_GET(3, a, b, c)\r\n    DEFINE_GET(4, a, b, c, d)\r\n    DEFINE_GET(5,\
+    \ a, b, c, d, e)\r\n    DEFINE_GET(6, a, b, c, d, e, f)\r\n    DEFINE_GET(7, a,\
+    \ b, c, d, e, f, g)\r\n    DEFINE_GET(8, a, b, c, d, e, f, g, h)\r\n\r\n    #undef\
+    \ DEFINE_GET\r\n\r\n    namespace helper {\r\n        template<std::size_t idx>\r\
+    \n        struct GetHelper {\r\n            template<class T>\r\n            constexpr\
+    \ decltype(auto) operator ()(T&& tuple_like) const noexcept {\r\n            \
+    \    return GetFunction<std::decay_t<T>>::template get<idx>(std::forward<T>(tuple_like));\r\
+    \n            }\r\n        };\r\n    }\r\n\r\n    // tuple-like\u306A\u30AA\u30D6\
+    \u30B8\u30A7\u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\
+    \r\n    template<std::size_t idx>\r\n    inline constexpr helper::GetHelper<idx>\
+    \ get;\r\n\r\n\r\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\
+    \u306E\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n    template<std::size_t\
+    \ idx, class T>\r\n    struct tuple_like_element {\r\n        using type = decltype(get<idx>(std::declval<T>()));\r\
+    \n    };\r\n\r\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\
+    \u306E\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n    template<std::size_t\
+    \ idx, class T>\r\n    using tuple_like_element_t = typename tuple_like_element<idx,\
+    \ T>::type;\r\n} // namespace kpr\r\n#line 5 \"template/lambda.hpp\"\n\r\n#define\
+    \ $(...) \\\r\n([&](auto&&... _args) { \\\r\n    auto _args_tuple = std::forward_as_tuple(_args...);\
+    \ \\\r\n    if constexpr (sizeof...(_args) == 0) { \\\r\n        return ([&]()\
+    \ { return (__VA_ARGS__); })(); \\\r\n    } else if constexpr (sizeof...(_args)\
+    \ == 1) { \\\r\n        return ([&](auto&& $0) { return (__VA_ARGS__); })(get<0>(_args_tuple));\
+    \ \\\r\n    } else if constexpr (sizeof...(_args) == 2) { \\\r\n        return\
+    \ ([&](auto&& $0, auto&& $1) { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple));\
+    \ \\\r\n    } else if constexpr (sizeof...(_args) == 3) { \\\r\n        return\
+    \ ([&](auto&& $0, auto&& $1, auto&& $2) { return (__VA_ARGS__); })(get<0>(_args_tuple),\
+    \ get<1>(_args_tuple), get<2>(_args_tuple)); \\\r\n    } else if constexpr (sizeof...(_args)\
+    \ == 4) { \\\r\n        return ([&](auto&& $0, auto&& $1, auto&& $2, auto&& $3)\
+    \ { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple), get<2>(_args_tuple),\
+    \ get<3>(_args_tuple)); \\\r\n    } \\\r\n})\r\n"
+  code: "#pragma once\r\n#include <iterator>\r\n#include <tuple>\r\n#include \"../meta/tuple_like.hpp\"\
+    \r\n\r\n#define $(...) \\\r\n([&](auto&&... _args) { \\\r\n    auto _args_tuple\
+    \ = std::forward_as_tuple(_args...); \\\r\n    if constexpr (sizeof...(_args)\
+    \ == 0) { \\\r\n        return ([&]() { return (__VA_ARGS__); })(); \\\r\n   \
+    \ } else if constexpr (sizeof...(_args) == 1) { \\\r\n        return ([&](auto&&\
+    \ $0) { return (__VA_ARGS__); })(get<0>(_args_tuple)); \\\r\n    } else if constexpr\
+    \ (sizeof...(_args) == 2) { \\\r\n        return ([&](auto&& $0, auto&& $1) {\
+    \ return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple)); \\\r\n \
+    \   } else if constexpr (sizeof...(_args) == 3) { \\\r\n        return ([&](auto&&\
+    \ $0, auto&& $1, auto&& $2) { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple),\
+    \ get<2>(_args_tuple)); \\\r\n    } else if constexpr (sizeof...(_args) == 4)\
+    \ { \\\r\n        return ([&](auto&& $0, auto&& $1, auto&& $2, auto&& $3) { return\
+    \ (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple), get<2>(_args_tuple),\
+    \ get<3>(_args_tuple)); \\\r\n    } \\\r\n})\r\n"
   dependsOn:
-  - meta/setting.hpp
+  - meta/tuple_like.hpp
   - meta/trait.hpp
   isVerificationFile: false
-  path: math/Barrett.hpp
+  path: template/lambda.hpp
   requiredBy:
-  - math/math.hpp
   - verify/hello_world.cpp
-  - all/all.hpp
+  - template/template.hpp
+  - template/macro.hpp
   - all.hpp
-  timestamp: '2023-02-11 02:36:17+09:00'
+  timestamp: '2023-02-19 20:41:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: math/Barrett.hpp
+documentation_of: template/lambda.hpp
 layout: document
 redirect_from:
-- /library/math/Barrett.hpp
-- /library/math/Barrett.hpp.html
-title: math/Barrett.hpp
+- /library/template/lambda.hpp
+- /library/template/lambda.hpp.html
+title: template/lambda.hpp
 ---

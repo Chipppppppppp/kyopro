@@ -35,6 +35,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
+  - icon: ':heavy_check_mark:'
+    path: io/in.hpp
+    title: io/in.hpp
+  - icon: ':heavy_check_mark:'
+    path: io/io.hpp
+    title: io/io.hpp
+  - icon: ':heavy_check_mark:'
+    path: io/out.hpp
+    title: io/out.hpp
   - icon: ':warning:'
     path: math/Barrett.hpp
     title: math/Barrett.hpp
@@ -71,18 +80,15 @@ data:
   - icon: ':warning:'
     path: range/range.hpp
     title: range/range.hpp
-  - icon: ':heavy_check_mark:'
-    path: system/in.hpp
-    title: system/in.hpp
-  - icon: ':heavy_check_mark:'
-    path: system/out.hpp
-    title: system/out.hpp
-  - icon: ':heavy_check_mark:'
-    path: system/system.hpp
-    title: system/system.hpp
   - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
+  - icon: ':warning:'
+    path: template/io.hpp
+    title: template/io.hpp
+  - icon: ':warning:'
+    path: template/lambda.hpp
+    title: template/lambda.hpp
   - icon: ':warning:'
     path: template/macro.hpp
     title: template/macro.hpp
@@ -349,44 +355,46 @@ data:
   isVerificationFile: false
   path: meta/trait.hpp
   requiredBy:
-  - all/all.hpp
-  - verify/hello_world.cpp
-  - meta/tuple_like.hpp
-  - meta/meta.hpp
-  - system/in.hpp
-  - system/out.hpp
-  - system/system.hpp
+  - math/math.hpp
+  - math/is_prime.hpp
+  - math/ModInt.hpp
+  - math/DynamicModInt.hpp
+  - math/Barrett.hpp
+  - math/div.hpp
+  - math/factorize.hpp
+  - data_structure/FenwickTree.hpp
   - data_structure/data_structure.hpp
   - data_structure/structure.hpp
-  - data_structure/FenwickTree.hpp
   - data_structure/UnionFind.hpp
-  - function/monoid.hpp
-  - function/function.hpp
-  - template/template.hpp
-  - template/macro.hpp
-  - template/alias.hpp
   - range/range.hpp
-  - range/irange.hpp
   - range/imap.hpp
-  - math/ModInt.hpp
-  - math/Barrett.hpp
-  - math/is_prime.hpp
-  - math/math.hpp
-  - math/factorize.hpp
-  - math/div.hpp
-  - math/DynamicModInt.hpp
-  - algorithm/Hash.hpp
+  - range/irange.hpp
+  - io/out.hpp
+  - io/in.hpp
+  - io/io.hpp
+  - verify/hello_world.cpp
+  - template/lambda.hpp
+  - template/template.hpp
+  - template/io.hpp
+  - template/alias.hpp
+  - template/macro.hpp
   - algorithm/algorithm.hpp
   - algorithm/bit.hpp
+  - algorithm/Hash.hpp
+  - all/all.hpp
+  - function/monoid.hpp
+  - function/function.hpp
+  - meta/meta.hpp
+  - meta/tuple_like.hpp
   - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/aoj/PrimeNumber.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/unionfind.test.cpp
-  - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/factorize.test.cpp
+  - verify/aoj/PrimeNumber.test.cpp
 documentation_of: meta/trait.hpp
 layout: document
 redirect_from:

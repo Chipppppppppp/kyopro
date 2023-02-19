@@ -290,21 +290,21 @@ data:
   isVerificationFile: false
   path: algorithm/bit.hpp
   requiredBy:
-  - all/all.hpp
+  - math/math.hpp
+  - math/is_prime.hpp
+  - math/ModInt.hpp
+  - math/factorize.hpp
   - verify/hello_world.cpp
   - template/template.hpp
   - template/alias.hpp
-  - math/ModInt.hpp
-  - math/is_prime.hpp
-  - math/math.hpp
-  - math/factorize.hpp
   - algorithm/algorithm.hpp
+  - all/all.hpp
   - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/aoj/PrimeNumber.test.cpp
   - verify/yosupo/factorize.test.cpp
+  - verify/aoj/PrimeNumber.test.cpp
 documentation_of: algorithm/bit.hpp
 layout: document
 redirect_from:

@@ -272,11 +272,11 @@ data:
   isVerificationFile: false
   path: function/monoid.hpp
   requiredBy:
-  - all/all.hpp
-  - verify/hello_world.cpp
+  - data_structure/FenwickTree.hpp
   - data_structure/data_structure.hpp
   - data_structure/structure.hpp
-  - data_structure/FenwickTree.hpp
+  - verify/hello_world.cpp
+  - all/all.hpp
   - function/function.hpp
   - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'

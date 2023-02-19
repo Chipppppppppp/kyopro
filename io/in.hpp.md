@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: io/io_option.hpp
+    title: io/io_option.hpp
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
   - icon: ':heavy_check_mark:'
@@ -13,9 +16,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
-  - icon: ':heavy_check_mark:'
-    path: system/io_option.hpp
-    title: system/io_option.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
     path: all.hpp
@@ -23,6 +23,9 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
+  - icon: ':heavy_check_mark:'
+    path: io/io.hpp
+    title: io/io.hpp
   - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
@@ -38,12 +41,12 @@ data:
   - icon: ':warning:'
     path: math/math.hpp
     title: math/math.hpp
-  - icon: ':heavy_check_mark:'
-    path: system/system.hpp
-    title: system/system.hpp
   - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
+  - icon: ':warning:'
+    path: template/io.hpp
+    title: template/io.hpp
   - icon: ':warning:'
     path: template/macro.hpp
     title: template/macro.hpp
@@ -74,13 +77,13 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"system/in.hpp\"\n#include <unistd.h>\r\n#include <array>\r\
-    \n#include <bitset>\r\n#include <cstddef>\r\n#include <cstdint>\r\n#include <cstdio>\r\
+  bundledCode: "#line 2 \"io/in.hpp\"\n#include <unistd.h>\r\n#include <array>\r\n\
+    #include <bitset>\r\n#include <cstddef>\r\n#include <cstdint>\r\n#include <cstdio>\r\
     \n#include <string>\r\n#include <type_traits>\r\n#include <utility>\r\n#line 3\
-    \ \"system/io_option.hpp\"\n#include <tuple>\r\n#line 5 \"system/io_option.hpp\"\
-    \n\r\nnamespace kpr {\r\n    template<class Tuple, std::size_t idx>\r\n    struct\
-    \ Indexed {\r\n        Tuple args_tuple;\r\n        template<class... Args>\r\n\
-    \        constexpr Indexed(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
+    \ \"io/io_option.hpp\"\n#include <tuple>\r\n#line 5 \"io/io_option.hpp\"\n\r\n\
+    namespace kpr {\r\n    template<class Tuple, std::size_t idx>\r\n    struct Indexed\
+    \ {\r\n        Tuple args_tuple;\r\n        template<class... Args>\r\n      \
+    \  constexpr Indexed(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
     \ {}\r\n    };\r\n\r\n    template<std::size_t i, class... Args>\r\n    constexpr\
     \ auto indexed(Args&&... args) noexcept {\r\n        return Indexed<std::tuple<Args...>,\
     \ i>{std::forward<Args>(args)...};\r\n    }\r\n\r\n    template<class Tuple, bool...\
@@ -284,9 +287,9 @@ data:
     \n    };\r\n\r\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\
     \u306E\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n    template<std::size_t\
     \ idx, class T>\r\n    using tuple_like_element_t = typename tuple_like_element<idx,\
-    \ T>::type;\r\n} // namespace kpr\r\n#line 16 \"system/in.hpp\"\n\r\nnamespace\
-    \ kpr {\r\n    // \u30D0\u30C3\u30D5\u30A1\u3092\u7528\u3044\u3066\u30D5\u30A1\
-    \u30A4\u30EB\u3092\u8AAD\u307F\u8FBC\u3080\u30AF\u30E9\u30B9\r\n    template<std::size_t\
+    \ T>::type;\r\n} // namespace kpr\r\n#line 16 \"io/in.hpp\"\n\r\nnamespace kpr\
+    \ {\r\n    // \u30D0\u30C3\u30D5\u30A1\u3092\u7528\u3044\u3066\u30D5\u30A1\u30A4\
+    \u30EB\u3092\u8AAD\u307F\u8FBC\u3080\u30AF\u30E9\u30B9\r\n    template<std::size_t\
     \ buf_size = KYOPRO_BUFFER_SIZE>\r\n    struct Reader {\r\n    private:\r\n  \
     \      int fd, idx;\r\n        std::array<char, buf_size> buffer;\r\n\r\n    public:\r\
     \n        // \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\u3092\u53D6\u5F97\r\n\
@@ -507,38 +510,39 @@ data:
     \u304B\u3089\u5024\u3092\u5165\u529B\u3059\u308B\u95A2\u6570\r\n    Scanner<Reader<>::iterator>\
     \ scan{input.begin()};\r\n} // namespace kpr\r\n"
   dependsOn:
-  - system/io_option.hpp
+  - io/io_option.hpp
   - math/power.hpp
   - meta/setting.hpp
   - meta/trait.hpp
   - meta/tuple_like.hpp
   isVerificationFile: false
-  path: system/in.hpp
+  path: io/in.hpp
   requiredBy:
-  - all/all.hpp
-  - verify/hello_world.cpp
-  - system/system.hpp
-  - template/template.hpp
-  - template/macro.hpp
-  - template/alias.hpp
-  - math/ModInt.hpp
-  - math/is_prime.hpp
   - math/math.hpp
-  - math/factorize.hpp
+  - math/is_prime.hpp
+  - math/ModInt.hpp
   - math/DynamicModInt.hpp
+  - math/factorize.hpp
+  - io/io.hpp
+  - verify/hello_world.cpp
+  - template/template.hpp
+  - template/io.hpp
+  - template/alias.hpp
+  - template/macro.hpp
+  - all/all.hpp
   - all.hpp
-  timestamp: '2023-02-12 03:32:11+09:00'
+  timestamp: '2023-02-19 20:41:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/aoj/PrimeNumber.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/unionfind.test.cpp
-  - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/many_aplusb.test.cpp
-documentation_of: system/in.hpp
+  - verify/yosupo/factorize.test.cpp
+  - verify/aoj/PrimeNumber.test.cpp
+documentation_of: io/in.hpp
 layout: document
 redirect_from:
-- /library/system/in.hpp
-- /library/system/in.hpp.html
-title: system/in.hpp
+- /library/io/in.hpp
+- /library/io/in.hpp.html
+title: io/in.hpp
 ---

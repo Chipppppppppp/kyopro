@@ -5,6 +5,18 @@ data:
     path: data_structure/UnionFind.hpp
     title: data_structure/UnionFind.hpp
   - icon: ':heavy_check_mark:'
+    path: io/in.hpp
+    title: io/in.hpp
+  - icon: ':heavy_check_mark:'
+    path: io/io.hpp
+    title: io/io.hpp
+  - icon: ':heavy_check_mark:'
+    path: io/io_option.hpp
+    title: io/io_option.hpp
+  - icon: ':heavy_check_mark:'
+    path: io/out.hpp
+    title: io/out.hpp
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
   - icon: ':heavy_check_mark:'
@@ -16,18 +28,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
-  - icon: ':heavy_check_mark:'
-    path: system/in.hpp
-    title: system/in.hpp
-  - icon: ':heavy_check_mark:'
-    path: system/io_option.hpp
-    title: system/io_option.hpp
-  - icon: ':heavy_check_mark:'
-    path: system/out.hpp
-    title: system/out.hpp
-  - icon: ':heavy_check_mark:'
-    path: system/system.hpp
-    title: system/system.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -206,12 +206,12 @@ data:
     \ std::vector<KYOPRO_BASE_INT>>>\r\n        Map all_group_members() {\r\n    \
     \        Map group_members;\r\n            for (int member = 0; member < (int)(size());\
     \ ++member) group_members[find(member)].emplace_back(member);\r\n            return\
-    \ group_members;\r\n        }\r\n    };\r\n} // namespace kpr\r\n#line 2 \"system/in.hpp\"\
-    \n#include <unistd.h>\r\n#include <array>\r\n#include <bitset>\r\n#line 7 \"system/in.hpp\"\
-    \n#include <cstdio>\r\n#include <string>\r\n#line 5 \"system/io_option.hpp\"\n\
-    \r\nnamespace kpr {\r\n    template<class Tuple, std::size_t idx>\r\n    struct\
-    \ Indexed {\r\n        Tuple args_tuple;\r\n        template<class... Args>\r\n\
-    \        constexpr Indexed(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
+    \ group_members;\r\n        }\r\n    };\r\n} // namespace kpr\r\n#line 2 \"io/in.hpp\"\
+    \n#include <unistd.h>\r\n#include <array>\r\n#include <bitset>\r\n#line 7 \"io/in.hpp\"\
+    \n#include <cstdio>\r\n#include <string>\r\n#line 5 \"io/io_option.hpp\"\n\r\n\
+    namespace kpr {\r\n    template<class Tuple, std::size_t idx>\r\n    struct Indexed\
+    \ {\r\n        Tuple args_tuple;\r\n        template<class... Args>\r\n      \
+    \  constexpr Indexed(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
     \ {}\r\n    };\r\n\r\n    template<std::size_t i, class... Args>\r\n    constexpr\
     \ auto indexed(Args&&... args) noexcept {\r\n        return Indexed<std::tuple<Args...>,\
     \ i>{std::forward<Args>(args)...};\r\n    }\r\n\r\n    template<class Tuple, bool...\
@@ -286,9 +286,9 @@ data:
     \n    };\r\n\r\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\
     \u306E\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n    template<std::size_t\
     \ idx, class T>\r\n    using tuple_like_element_t = typename tuple_like_element<idx,\
-    \ T>::type;\r\n} // namespace kpr\r\n#line 16 \"system/in.hpp\"\n\r\nnamespace\
-    \ kpr {\r\n    // \u30D0\u30C3\u30D5\u30A1\u3092\u7528\u3044\u3066\u30D5\u30A1\
-    \u30A4\u30EB\u3092\u8AAD\u307F\u8FBC\u3080\u30AF\u30E9\u30B9\r\n    template<std::size_t\
+    \ T>::type;\r\n} // namespace kpr\r\n#line 16 \"io/in.hpp\"\n\r\nnamespace kpr\
+    \ {\r\n    // \u30D0\u30C3\u30D5\u30A1\u3092\u7528\u3044\u3066\u30D5\u30A1\u30A4\
+    \u30EB\u3092\u8AAD\u307F\u8FBC\u3080\u30AF\u30E9\u30B9\r\n    template<std::size_t\
     \ buf_size = KYOPRO_BUFFER_SIZE>\r\n    struct Reader {\r\n    private:\r\n  \
     \      int fd, idx;\r\n        std::array<char, buf_size> buffer;\r\n\r\n    public:\r\
     \n        // \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\u3092\u53D6\u5F97\r\n\
@@ -394,46 +394,45 @@ data:
     \ = static_cast<ScannerWrapper<Scanner>&>(scanner);\r\n            scan_impl(scanner_wrapper,\
     \ a.args_tuple);\r\n        }\r\n    };\r\n\r\n    // \u6A19\u6E96\u5165\u529B\
     \u304B\u3089\u5024\u3092\u5165\u529B\u3059\u308B\u95A2\u6570\r\n    Scanner<Reader<>::iterator>\
-    \ scan{input.begin()};\r\n} // namespace kpr\r\n#line 6 \"system/out.hpp\"\n#include\
-    \ <cmath>\r\n#line 11 \"system/out.hpp\"\n#include <string_view>\r\n#line 19 \"\
-    system/out.hpp\"\n\r\nnamespace kpr {\r\n    // \u30D0\u30C3\u30D5\u30A1\u3092\
-    \u7528\u3044\u3066\u30D5\u30A1\u30A4\u30EB\u306B\u66F8\u304D\u8FBC\u3080\u30AF\
-    \u30E9\u30B9\r\n    template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>\r\n  \
-    \  struct Writer {\r\n    private:\r\n        int fd, idx;\r\n        std::array<char,\
-    \ buf_size> buffer;\r\n\r\n    public:\r\n        // \u30D0\u30C3\u30D5\u30A1\u30B5\
-    \u30A4\u30BA\u3092\u53D6\u5F97\r\n        static constexpr KYOPRO_BASE_INT get_buf_size()\
-    \ noexcept {\r\n            return buf_size;\r\n        }\r\n\r\n        Writer()\
-    \ noexcept = default;\r\n        Writer(int fd) noexcept: fd(fd), idx(0), buffer()\
-    \ {}\r\n        Writer(FILE* fp) noexcept: fd(fileno(fp)), idx(0), buffer() {}\r\
-    \n\r\n        ~Writer() {\r\n            [[maybe_unused]]ssize_t res = write(fd,\
-    \ buffer.begin(), idx);\r\n        }\r\n\r\n        // \u51FA\u529B\u30A4\u30C6\
-    \u30EC\u30FC\u30BF\r\n        struct iterator {\r\n        private:\r\n      \
-    \      Writer& writer;\r\n\r\n        public:\r\n            using difference_type\
-    \ = void;\r\n            using value_type = void;\r\n            using pointer\
-    \ = void;\r\n            using reference = void;\r\n            using iterator_category\
-    \ = std::output_iterator_tag;\r\n\r\n            iterator() noexcept = default;\r\
-    \n            iterator(Writer& writer) noexcept: writer(writer) {}\r\n\r\n   \
-    \         iterator& operator ++() {\r\n                ++writer.idx;\r\n     \
-    \           if (writer.idx == buf_size) {\r\n                [[maybe_unused]]ssize_t\
-    \ res = write(writer.fd, writer.buffer.begin(), buf_size);\r\n               \
-    \ writer.idx = 0;\r\n                }\r\n                return *this;\r\n  \
-    \          }\r\n\r\n            iterator operator ++(int) {\r\n              \
-    \  iterator before = *this;\r\n                operator ++();\r\n            \
-    \    return before;\r\n            }\r\n\r\n            char& operator *() const\
-    \ {\r\n                return writer.buffer[writer.idx];\r\n            }\r\n\r\
-    \n            // \u30D0\u30C3\u30D5\u30A1\u3092\u5168\u3066\u51FA\u529B\u3059\u308B\
-    \r\n            void flush() const {\r\n                [[maybe_unused]] ssize_t\
-    \ res = write(writer.fd, writer.buffer.begin(), writer.idx);\r\n            }\r\
-    \n        };\r\n\r\n        // \u30D5\u30A1\u30A4\u30EB\u306E\u6700\u521D\u3092\
-    \u793A\u3059\u30A4\u30C6\u30EC\u30FC\u30BF\u3092\u53D6\u5F97\r\n        iterator\
-    \ begin() noexcept {\r\n            return iterator(*this);\r\n        }\r\n \
-    \   };\r\n\r\n    // \u6A19\u6E96\u51FA\u529B\u3001\u6A19\u6E96\u30A8\u30E9\u30FC\
-    \u51FA\u529B\r\n    Writer output{1}, error{2};\r\n\r\n    // \u5024\u306E\u51FA\
-    \u529B\u306E\u95A2\u6570\u30AF\u30E9\u30B9\r\n    template<class, class = void>\r\
-    \n    struct PrintFunction;\r\n\r\n    // \u51FA\u529B\u30A4\u30C6\u30EC\u30FC\
-    \u30BF\u3092\u7528\u3044\u3066\u5024\u3092\u51FA\u529B\u3059\u308B\u30AF\u30E9\
-    \u30B9\r\n    template<class Iterator, bool _space = true, bool _line = true,\
-    \ bool _debug = false, bool _comment = false, bool _flush = false, std::size_t\
+    \ scan{input.begin()};\r\n} // namespace kpr\r\n#line 6 \"io/out.hpp\"\n#include\
+    \ <cmath>\r\n#line 11 \"io/out.hpp\"\n#include <string_view>\r\n#line 19 \"io/out.hpp\"\
+    \n\r\nnamespace kpr {\r\n    // \u30D0\u30C3\u30D5\u30A1\u3092\u7528\u3044\u3066\
+    \u30D5\u30A1\u30A4\u30EB\u306B\u66F8\u304D\u8FBC\u3080\u30AF\u30E9\u30B9\r\n \
+    \   template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>\r\n    struct Writer {\r\
+    \n    private:\r\n        int fd, idx;\r\n        std::array<char, buf_size> buffer;\r\
+    \n\r\n    public:\r\n        // \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\u3092\
+    \u53D6\u5F97\r\n        static constexpr KYOPRO_BASE_INT get_buf_size() noexcept\
+    \ {\r\n            return buf_size;\r\n        }\r\n\r\n        Writer() noexcept\
+    \ = default;\r\n        Writer(int fd) noexcept: fd(fd), idx(0), buffer() {}\r\
+    \n        Writer(FILE* fp) noexcept: fd(fileno(fp)), idx(0), buffer() {}\r\n\r\
+    \n        ~Writer() {\r\n            [[maybe_unused]]ssize_t res = write(fd, buffer.begin(),\
+    \ idx);\r\n        }\r\n\r\n        // \u51FA\u529B\u30A4\u30C6\u30EC\u30FC\u30BF\
+    \r\n        struct iterator {\r\n        private:\r\n            Writer& writer;\r\
+    \n\r\n        public:\r\n            using difference_type = void;\r\n       \
+    \     using value_type = void;\r\n            using pointer = void;\r\n      \
+    \      using reference = void;\r\n            using iterator_category = std::output_iterator_tag;\r\
+    \n\r\n            iterator() noexcept = default;\r\n            iterator(Writer&\
+    \ writer) noexcept: writer(writer) {}\r\n\r\n            iterator& operator ++()\
+    \ {\r\n                ++writer.idx;\r\n                if (writer.idx == buf_size)\
+    \ {\r\n                [[maybe_unused]]ssize_t res = write(writer.fd, writer.buffer.begin(),\
+    \ buf_size);\r\n                writer.idx = 0;\r\n                }\r\n     \
+    \           return *this;\r\n            }\r\n\r\n            iterator operator\
+    \ ++(int) {\r\n                iterator before = *this;\r\n                operator\
+    \ ++();\r\n                return before;\r\n            }\r\n\r\n           \
+    \ char& operator *() const {\r\n                return writer.buffer[writer.idx];\r\
+    \n            }\r\n\r\n            // \u30D0\u30C3\u30D5\u30A1\u3092\u5168\u3066\
+    \u51FA\u529B\u3059\u308B\r\n            void flush() const {\r\n             \
+    \   [[maybe_unused]] ssize_t res = write(writer.fd, writer.buffer.begin(), writer.idx);\r\
+    \n            }\r\n        };\r\n\r\n        // \u30D5\u30A1\u30A4\u30EB\u306E\
+    \u6700\u521D\u3092\u793A\u3059\u30A4\u30C6\u30EC\u30FC\u30BF\u3092\u53D6\u5F97\
+    \r\n        iterator begin() noexcept {\r\n            return iterator(*this);\r\
+    \n        }\r\n    };\r\n\r\n    // \u6A19\u6E96\u51FA\u529B\u3001\u6A19\u6E96\
+    \u30A8\u30E9\u30FC\u51FA\u529B\r\n    Writer output{1}, error{2};\r\n\r\n    //\
+    \ \u5024\u306E\u51FA\u529B\u306E\u95A2\u6570\u30AF\u30E9\u30B9\r\n    template<class,\
+    \ class = void>\r\n    struct PrintFunction;\r\n\r\n    // \u51FA\u529B\u30A4\u30C6\
+    \u30EC\u30FC\u30BF\u3092\u7528\u3044\u3066\u5024\u3092\u51FA\u529B\u3059\u308B\
+    \u30AF\u30E9\u30B9\r\n    template<class Iterator, bool _space = true, bool _line\
+    \ = true, bool _debug = false, bool _comment = false, bool _flush = false, std::size_t\
     \ decimal_precision = KYOPRO_DECIMAL_PRECISION>\r\n    struct Printer {\r\n  \
     \      using iterator_type = Iterator;\r\n\r\n        // \u6307\u5B9A\u3055\u308C\
     \u305F\u30AA\u30D7\u30B7\u30E7\u30F3\r\n        static constexpr bool space =\
@@ -548,25 +547,25 @@ data:
     \n    if (t == 0) uf.merge(u, v);\r\n    else kpr::println(uf.same(u, v));\r\n\
     \  }\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\r\n#include\
-    \ \"../../data_structure/UnionFind.hpp\"\r\n#include \"../../system/system.hpp\"\
-    \r\n\r\nint main() {\r\n  int n, q;\r\n  kpr::scan(n, q);\r\n  kpr::UnionFind\
-    \ uf(n);\r\n  for (int i = 0; i < q; ++i) {\r\n    int t, u, v;\r\n    kpr::scan(t,\
-    \ u, v);\r\n    if (t == 0) uf.merge(u, v);\r\n    else kpr::println(uf.same(u,\
-    \ v));\r\n  }\r\n}\r\n"
+    \ \"../../data_structure/UnionFind.hpp\"\r\n#include \"../../io/io.hpp\"\r\n\r\
+    \nint main() {\r\n  int n, q;\r\n  kpr::scan(n, q);\r\n  kpr::UnionFind uf(n);\r\
+    \n  for (int i = 0; i < q; ++i) {\r\n    int t, u, v;\r\n    kpr::scan(t, u, v);\r\
+    \n    if (t == 0) uf.merge(u, v);\r\n    else kpr::println(uf.same(u, v));\r\n\
+    \  }\r\n}\r\n"
   dependsOn:
   - data_structure/UnionFind.hpp
   - meta/setting.hpp
   - meta/trait.hpp
-  - system/system.hpp
-  - system/in.hpp
-  - system/io_option.hpp
+  - io/io.hpp
+  - io/in.hpp
+  - io/io_option.hpp
   - math/power.hpp
   - meta/tuple_like.hpp
-  - system/out.hpp
+  - io/out.hpp
   isVerificationFile: true
   path: verify/yosupo/unionfind.test.cpp
   requiredBy: []
-  timestamp: '2023-02-16 00:00:05+09:00'
+  timestamp: '2023-02-19 20:41:56+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yosupo/unionfind.test.cpp
