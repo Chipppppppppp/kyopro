@@ -16,6 +16,7 @@
 #include "../math/DynamicModInt.hpp"
 #include "../math/ModInt.hpp"
 #include "../meta/setting.hpp"
+#include "../stl_wrapper/stl_wrapper.hpp"
 
 namespace kpr {
     using ll = long long;
@@ -65,15 +66,15 @@ namespace kpr {
     template<class T>
     using vec = std::vector<T>;
     template<class T>
-    using vec1 = vec<T>;
+    using vec1 = Vec<T, 1>;
     template<class T>
-    using vec2 = std::vector<vec1<T>>;
+    using vec2 = Vec<T, 2>;
     template<class T>
-    using vec3 = std::vector<vec2<T>>;
+    using vec3 = Vec<T, 3>;
     template<class T>
-    using vec4 = std::vector<vec3<T>>;
+    using vec4 = Vec<T, 4>;
     template<class T>
-    using vec5 = std::vector<vec4<T>>;
+    using vec5 = Vec<T, 5>;
 
     template<class Key, class Compare = std::less<Key>>
     using mset = std::unordered_set<Key, Compare>;
