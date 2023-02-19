@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/factorize"
 #include "../../math/factorize.hpp"
-#include "../../system/system.hpp"
+#include "../../io/io.hpp"
 
 int main() {
   long long q;

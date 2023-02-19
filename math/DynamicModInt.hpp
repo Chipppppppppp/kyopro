@@ -7,8 +7,8 @@
 #include "../meta/constant.hpp"
 #include "../meta/setting.hpp"
 #include "../meta/trait.hpp"
-#include "../system/in.hpp"
-#include "../system/out.hpp"
+#include "../io/in.hpp"
+#include "../io/out.hpp"
 #include "Montgomery.hpp"
 
 namespace kpr {
