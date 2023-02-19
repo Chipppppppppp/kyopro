@@ -932,7 +932,7 @@ data:
     \ = std::decay_t<decltype(last)>(), KYOPRO_LAST = (last); (i) < (KYOPRO_LAST);\
     \ ++(i))\n#define KYOPRO_REP3(i, first, last) for (auto i = (first), KYOPRO_LAST\
     \ = last; (i) < (KYOPRO_LAST); ++(i))\n\n#define KYOPRO_OVERLOAD_REP(_1, _2, _3,\
-    \ name, ...) name\n#define rep(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__ __VA_OPT__(,)\
+    \ name, ...) name\n#define rep(...) KYOPRO_OVERLOAD_REP(__VA_ARGS__ __VA_OPT__(,)\
     \ KYOPRO_REP3, KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\n#line 2 \"\
     template/main.hpp\"\n\nnamespace kpr {\n    void main();\n} // namespace kpr\n\
     \nint main() {\n    kpr::main();\n}\n#line 4 \"template/make_array.hpp\"\n\r\n\
@@ -1014,7 +1014,7 @@ data:
   requiredBy:
   - verify/hello_world.cpp
   - all.hpp
-  timestamp: '2023-02-19 20:56:24+09:00'
+  timestamp: '2023-02-20 00:38:21+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/template.hpp

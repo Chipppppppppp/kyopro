@@ -568,7 +568,7 @@ data:
     \ = std::decay_t<decltype(last)>(), KYOPRO_LAST = (last); (i) < (KYOPRO_LAST);\
     \ ++(i))\n#define KYOPRO_REP3(i, first, last) for (auto i = (first), KYOPRO_LAST\
     \ = last; (i) < (KYOPRO_LAST); ++(i))\n\n#define KYOPRO_OVERLOAD_REP(_1, _2, _3,\
-    \ name, ...) name\n#define rep(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__ __VA_OPT__(,)\
+    \ name, ...) name\n#define rep(...) KYOPRO_OVERLOAD_REP(__VA_ARGS__ __VA_OPT__(,)\
     \ KYOPRO_REP3, KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\n#line 7 \"\
     template/macro.hpp\"\n"
   code: '#pragma once
@@ -604,7 +604,7 @@ data:
   - verify/hello_world.cpp
   - template/template.hpp
   - all.hpp
-  timestamp: '2023-02-19 20:43:41+09:00'
+  timestamp: '2023-02-20 00:38:21+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/macro.hpp

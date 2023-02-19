@@ -38,8 +38,8 @@ data:
 
     #define KYOPRO_OVERLOAD_REP(_1, _2, _3, name, ...) name
 
-    #define rep(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__ __VA_OPT__(,) KYOPRO_REP3,
-    KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)
+    #define rep(...) KYOPRO_OVERLOAD_REP(__VA_ARGS__ __VA_OPT__(,) KYOPRO_REP3, KYOPRO_REP2,
+    KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)
 
     '
   code: '#pragma once
@@ -60,8 +60,8 @@ data:
 
     #define KYOPRO_OVERLOAD_REP(_1, _2, _3, name, ...) name
 
-    #define rep(...) KYOPRO_OVERLOAD_MACRO(__VA_ARGS__ __VA_OPT__(,) KYOPRO_REP3,
-    KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)
+    #define rep(...) KYOPRO_OVERLOAD_REP(__VA_ARGS__ __VA_OPT__(,) KYOPRO_REP3, KYOPRO_REP2,
+    KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)
 
     '
   dependsOn: []
@@ -72,7 +72,7 @@ data:
   - template/template.hpp
   - template/macro.hpp
   - all.hpp
-  timestamp: '2023-02-19 20:41:56+09:00'
+  timestamp: '2023-02-20 00:38:21+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/rep.hpp
