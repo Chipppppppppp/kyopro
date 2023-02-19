@@ -47,6 +47,12 @@ data:
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
   - icon: ':warning:'
+    path: stl_wrapper/stl_wrapper.hpp
+    title: stl_wrapper/stl_wrapper.hpp
+  - icon: ':warning:'
+    path: stl_wrapper/vec.hpp
+    title: stl_wrapper/vec.hpp
+  - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
   - icon: ':warning:'
@@ -823,29 +829,38 @@ data:
     \n    struct Hash<ModInt<mod>> {\r\n        using value_type = ModInt<mod>;\r\n\
     \        constexpr std::size_t operator ()(ModInt<mod> a) const noexcept {\r\n\
     \            return static_cast<std::size_t>(a);\r\n        }\r\n    };\r\n} //\
-    \ namespace kpr\r\n#line 19 \"template/alias.hpp\"\n\r\nnamespace kpr {\r\n  \
-    \  using ll = long long;\r\n    using ull = unsigned long long;\r\n    using lf\
-    \ = double;\r\n\r\n    using i8 = std::int8_t;\r\n    using u8 = std::uint8_t;\r\
-    \n    using i16 = std::int16_t;\r\n    using u16 = std::uint16_t;\r\n    using\
-    \ i32 = std::int32_t;\r\n    using u32 = std::uint32_t;\r\n    using i64 = std::int64_t;\r\
-    \n    using u64 = std::uint64_t;\r\n    #ifdef __SIZEOF_INT128__\r\n    using\
-    \ i128 = __int128_t;\r\n    using u128 = __uint128_t;\r\n    #endif\r\n    #ifdef\
-    \ __SIZEOF_FLOAT128__\r\n    using f128 = __float128;\r\n    #endif\r\n\r\n  \
-    \  using mint = ModInt<mod>;\r\n    using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\r\
-    \n\r\n    template<class T, std::size_t idx, class... Args>\r\n    struct agg_type\
-    \ {\r\n        using type = typename agg_type<T, idx - 1, T, Args...>::type;\r\
-    \n    };\r\n    template<class T, class... Args>\r\n    struct agg_type<T, 0,\
-    \ Args...> {\r\n        using type = std::tuple<Args...>;\r\n    };\r\n    template<class\
-    \ T>\r\n    struct agg_type<T, 0, T, T> {\r\n        using type = std::pair<T,\
-    \ T>;\r\n    };\r\n\r\n    template<class T, std::size_t idx>\r\n    using agg\
-    \ = typename agg_type<T, idx>::type;\r\n    using ll1 = agg<ll, 1>;\r\n    using\
-    \ ll2 = agg<ll, 2>;\r\n    using ll3 = agg<ll, 3>;\r\n    using ll4 = agg<ll,\
-    \ 4>;\r\n    using ll5 = agg<ll, 5>;\r\n\r\n    template<class T>\r\n    using\
-    \ vec = std::vector<T>;\r\n    template<class T>\r\n    using vec1 = vec<T>;\r\
-    \n    template<class T>\r\n    using vec2 = std::vector<vec1<T>>;\r\n    template<class\
-    \ T>\r\n    using vec3 = std::vector<vec2<T>>;\r\n    template<class T>\r\n  \
-    \  using vec4 = std::vector<vec3<T>>;\r\n    template<class T>\r\n    using vec5\
-    \ = std::vector<vec4<T>>;\r\n\r\n    template<class Key, class Compare = std::less<Key>>\r\
+    \ namespace kpr\r\n#line 4 \"stl_wrapper/vec.hpp\"\n\nnamespace kpr {\n    namespace\
+    \ helper {\n        template<std::size_t i = 0, std::size_t n, class T>\n    \
+    \    auto make_vec(const std::size_t (&d)[n], const T& init) noexcept {\n    \
+    \        if constexpr (i < n) return std::vector(d[i], make_vec<i + 1>(d, init));\n\
+    \            else return init;\n        }\n    }\n    template<class T, std::size_t\
+    \ n>\n    struct Vec: decltype(helper::make_vec(std::declval<const std::size_t\
+    \ (&)[n]>(), std::declval<const T&>())) {\n        using super = decltype(helper::make_vec(std::declval<const\
+    \ std::size_t (&)[n]>(), std::declval<const T&>()));\n        using super::vector,\
+    \ super::operator =;\n\n        Vec(const std::size_t (&d)[n], const T& init)\
+    \ noexcept: super{helper::make_vec(d, init)} {}\n    };\n} // namespace kpr\n\
+    #line 20 \"template/alias.hpp\"\n\r\nnamespace kpr {\r\n    using ll = long long;\r\
+    \n    using ull = unsigned long long;\r\n    using lf = double;\r\n\r\n    using\
+    \ i8 = std::int8_t;\r\n    using u8 = std::uint8_t;\r\n    using i16 = std::int16_t;\r\
+    \n    using u16 = std::uint16_t;\r\n    using i32 = std::int32_t;\r\n    using\
+    \ u32 = std::uint32_t;\r\n    using i64 = std::int64_t;\r\n    using u64 = std::uint64_t;\r\
+    \n    #ifdef __SIZEOF_INT128__\r\n    using i128 = __int128_t;\r\n    using u128\
+    \ = __uint128_t;\r\n    #endif\r\n    #ifdef __SIZEOF_FLOAT128__\r\n    using\
+    \ f128 = __float128;\r\n    #endif\r\n\r\n    using mint = ModInt<mod>;\r\n  \
+    \  using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\r\n\r\n    template<class T,\
+    \ std::size_t idx, class... Args>\r\n    struct agg_type {\r\n        using type\
+    \ = typename agg_type<T, idx - 1, T, Args...>::type;\r\n    };\r\n    template<class\
+    \ T, class... Args>\r\n    struct agg_type<T, 0, Args...> {\r\n        using type\
+    \ = std::tuple<Args...>;\r\n    };\r\n    template<class T>\r\n    struct agg_type<T,\
+    \ 0, T, T> {\r\n        using type = std::pair<T, T>;\r\n    };\r\n\r\n    template<class\
+    \ T, std::size_t idx>\r\n    using agg = typename agg_type<T, idx>::type;\r\n\
+    \    using ll1 = agg<ll, 1>;\r\n    using ll2 = agg<ll, 2>;\r\n    using ll3 =\
+    \ agg<ll, 3>;\r\n    using ll4 = agg<ll, 4>;\r\n    using ll5 = agg<ll, 5>;\r\n\
+    \r\n    template<class T>\r\n    using vec = std::vector<T>;\r\n    template<class\
+    \ T>\r\n    using vec1 = Vec<T, 1>;\r\n    template<class T>\r\n    using vec2\
+    \ = Vec<T, 2>;\r\n    template<class T>\r\n    using vec3 = Vec<T, 3>;\r\n   \
+    \ template<class T>\r\n    using vec4 = Vec<T, 4>;\r\n    template<class T>\r\n\
+    \    using vec5 = Vec<T, 5>;\r\n\r\n    template<class Key, class Compare = std::less<Key>>\r\
     \n    using mset = std::unordered_set<Key, Compare>;\r\n    template<class Key,\
     \ class T, class Compare = std::less<Key>>\r\n    using mmap = std::unordered_map<Key,\
     \ T, Compare>;\r\n    template<class Key>\r\n    using hset = std::unordered_set<Key,\
@@ -978,6 +993,8 @@ data:
   - math/ModInt.hpp
   - algorithm/bit.hpp
   - math/mod.hpp
+  - stl_wrapper/stl_wrapper.hpp
+  - stl_wrapper/vec.hpp
   - template/amin_amax.hpp
   - template/constant.hpp
   - template/len.hpp
@@ -997,7 +1014,7 @@ data:
   requiredBy:
   - verify/hello_world.cpp
   - all.hpp
-  timestamp: '2023-02-19 20:43:41+09:00'
+  timestamp: '2023-02-19 20:56:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/template.hpp

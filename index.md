@@ -139,6 +139,9 @@ data:
   - name: stl_wrapper
     pages:
     - icon: ':warning:'
+      path: stl_wrapper/stl_wrapper.hpp
+      title: stl_wrapper/stl_wrapper.hpp
+    - icon: ':warning:'
       path: stl_wrapper/vec.hpp
       title: stl_wrapper/vec.hpp
   - name: template

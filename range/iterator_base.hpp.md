@@ -3,20 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: all.hpp
-    title: all.hpp
-  - icon: ':warning:'
-    path: all/all.hpp
-    title: all/all.hpp
-  - icon: ':warning:'
     path: range/irange.hpp
     title: range/irange.hpp
   - icon: ':warning:'
     path: range/range.hpp
     title: range/range.hpp
-  - icon: ':warning:'
-    path: verify/hello_world.cpp
-    title: verify/hello_world.cpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -116,9 +107,6 @@ data:
   requiredBy:
   - range/range.hpp
   - range/irange.hpp
-  - verify/hello_world.cpp
-  - all/all.hpp
-  - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
