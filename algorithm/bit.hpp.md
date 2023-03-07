@@ -36,6 +36,9 @@ data:
     path: template/template.hpp
     title: template/template.hpp
   - icon: ':warning:'
+    path: test.cpp
+    title: test.cpp
+  - icon: ':warning:'
     path: verify/hello_world.cpp
     title: verify/hello_world.cpp
   _extendedVerifiedWith:
@@ -298,6 +301,7 @@ data:
   - template/template.hpp
   - template/alias.hpp
   - algorithm/algorithm.hpp
+  - test.cpp
   - all/all.hpp
   - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'

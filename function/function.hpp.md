@@ -30,6 +30,9 @@ data:
     path: all/all.hpp
     title: all/all.hpp
   - icon: ':warning:'
+    path: test.cpp
+    title: test.cpp
+  - icon: ':warning:'
     path: verify/hello_world.cpp
     title: verify/hello_world.cpp
   _extendedVerifiedWith: []
@@ -268,6 +271,7 @@ data:
   path: function/function.hpp
   requiredBy:
   - verify/hello_world.cpp
+  - test.cpp
   - all/all.hpp
   - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'

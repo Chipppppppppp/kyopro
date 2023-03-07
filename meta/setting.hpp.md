@@ -90,8 +90,14 @@ data:
     path: template/macro.hpp
     title: template/macro.hpp
   - icon: ':warning:'
+    path: template/named_tuple.hpp
+    title: template/named_tuple.hpp
+  - icon: ':warning:'
     path: template/template.hpp
     title: template/template.hpp
+  - icon: ':warning:'
+    path: test.cpp
+    title: test.cpp
   - icon: ':warning:'
     path: verify/hello_world.cpp
     title: verify/hello_world.cpp
@@ -174,8 +180,10 @@ data:
   - template/io.hpp
   - template/alias.hpp
   - template/macro.hpp
+  - template/named_tuple.hpp
   - algorithm/algorithm.hpp
   - algorithm/bit.hpp
+  - test.cpp
   - all/all.hpp
   - function/monoid.hpp
   - function/function.hpp

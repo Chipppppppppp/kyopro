@@ -22,6 +22,9 @@ data:
     - icon: ':warning:'
       path: all.hpp
       title: all.hpp
+    - icon: ':warning:'
+      path: test.cpp
+      title: test.cpp
   - name: data_structure
     pages:
     - icon: ':heavy_check_mark:'
@@ -136,14 +139,6 @@ data:
     - icon: ':warning:'
       path: range/range_base.hpp
       title: range/range_base.hpp
-  - name: stl_wrapper
-    pages:
-    - icon: ':warning:'
-      path: stl_wrapper/stl_wrapper.hpp
-      title: stl_wrapper/stl_wrapper.hpp
-    - icon: ':warning:'
-      path: stl_wrapper/vec.hpp
-      title: stl_wrapper/vec.hpp
   - name: template
     pages:
     - icon: ':warning:'
@@ -182,6 +177,9 @@ data:
     - icon: ':warning:'
       path: template/match.hpp
       title: template/match.hpp
+    - icon: ':warning:'
+      path: template/named_tuple.hpp
+      title: template/named_tuple.hpp
     - icon: ':warning:'
       path: template/rep.hpp
       title: template/rep.hpp

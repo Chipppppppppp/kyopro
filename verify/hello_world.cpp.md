@@ -101,12 +101,6 @@ data:
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
   - icon: ':warning:'
-    path: stl_wrapper/stl_wrapper.hpp
-    title: stl_wrapper/stl_wrapper.hpp
-  - icon: ':warning:'
-    path: stl_wrapper/vec.hpp
-    title: stl_wrapper/vec.hpp
-  - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
   - icon: ':warning:'
@@ -142,6 +136,9 @@ data:
   - icon: ':warning:'
     path: template/match.hpp
     title: template/match.hpp
+  - icon: ':warning:'
+    path: template/named_tuple.hpp
+    title: template/named_tuple.hpp
   - icon: ':warning:'
     path: template/rep.hpp
     title: template/rep.hpp
@@ -340,58 +337,51 @@ data:
     \ ()(T x) const noexcept {\r\n            if (x == 0) return 0;\r\n          \
     \  return bit_len(x - static_cast<T>(1));\r\n        }\r\n    } ceil_bit;\r\n\
     } // namespace kpr\r\n#line 3 \"algorithm/Hash.hpp\"\n#include <functional>\r\n\
-    #line 7 \"meta/tuple_like.hpp\"\n\r\nnamespace kpr {\r\n    namespace helper {\r\
+    #line 6 \"meta/tuple_like.hpp\"\n\r\nnamespace kpr {\r\n    namespace helper {\r\
     \n        struct CastableToAny {\r\n            template<class T>\r\n        \
     \    operator T() const noexcept;\r\n        };\r\n\r\n        template<class\
     \ T, std::size_t... idx, std::void_t<decltype(T{((void)idx, CastableToAny{})...})>*\
-    \ = nullptr>\r\n        constexpr bool is_aggregate_initializable(std::index_sequence<idx...>,\
+    \ = nullptr>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
     \ bool) noexcept {\r\n            return true;\r\n        }\r\n        template<class\
-    \ T, std::size_t... idx>\r\n        constexpr bool is_aggregate_initializable(std::index_sequence<idx...>,\
-    \ char) noexcept {\r\n            return false;\r\n        }\r\n\r\n        template<class\
-    \ T, std::size_t n = sizeof(T) * 8, std::enable_if_t<is_aggregate_initializable<T>(std::make_index_sequence<n>(),\
-    \ false)>* = nullptr>\r\n        constexpr std::size_t aggregate_size() {\r\n\
-    \            return n;\r\n        }\r\n        template<class T, std::size_t n\
-    \ = sizeof(T) * 8, std::enable_if_t<!is_aggregate_initializable<T>(std::make_index_sequence<n>(),\
-    \ false)>* = nullptr>\r\n        constexpr std::size_t aggregate_size() {\r\n\
-    \            return aggregate_size<T, n - 1>();\r\n        }\r\n    } // namespace\
-    \ helper\r\n\r\n    // tuple_like\u306A\u578BT\u306E\u5927\u304D\u3055\u3092\u8ABF\
-    \u3079\u308B\r\n    template<class T, class = void>\r\n    struct tuple_like_size\
-    \ {\r\n        static_assert(std::is_aggregate_v<T>, \"T must be tuple_like\"\
-    );\r\n        static constexpr std::size_t value = helper::aggregate_size<T>();\r\
-    \n    };\r\n\r\n    template<class T>\r\n    struct tuple_like_size<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
+    \ T, std::size_t... idx>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
+    \ char) noexcept {\r\n            return false;\r\n        }\n\n        template<class\
+    \ T, std::size_t n = sizeof(T) * 8, class = void>\n        struct constructible_size\
+    \ {\n            static_assert(n != 0, \"T is not constructible\");\n        \
+    \    static constexpr std::size_t value = constructible_size<T, n - 1>::value;\n\
+    \        };\n\n        template<class T, std::size_t n>\n        struct constructible_size<T,\
+    \ n, std::enable_if_t<is_constructible_with<T>(std::make_index_sequence<n>(),\
+    \ false)>> {\n            static constexpr std::size_t value = n;\n        };\r\
+    \n    } // namespace helper\r\n\n\r\n    // tuple_like\u306A\u578BT\u306E\u5927\
+    \u304D\u3055\u3092\u8ABF\u3079\u308B\r\n    template<class T, class = void>\r\n\
+    \    struct tuple_like_size {\r\n        static constexpr std::size_t value =\
+    \ helper::constructible_size<T>::value;\r\n    };\r\n\r\n    template<class T>\r\
+    \n    struct tuple_like_size<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
     \ {\r\n        static constexpr std::size_t value = std::tuple_size_v<T>;\r\n\
     \    };\r\n\r\n    // tuple_like\u306A\u578BT\u306E\u5927\u304D\u3055\u3092\u8ABF\
     \u3079\u308B\r\n    template<class T>\r\n    inline constexpr std::size_t tuple_like_size_v\
-    \ = tuple_like_size<T>::value;\r\n\r\n\r\n    // \u578BT\u304Ctuple_like\u304B\
-    \u8ABF\u3079\u308B\r\n    template<class, class = void>\r\n    struct is_tuple_like\
-    \ {\r\n        static constexpr bool value = false;\r\n    };\r\n\r\n    template<class\
-    \ T>\r\n    struct is_tuple_like<T, std::enable_if_t<std::is_aggregate_v<T>>>\
-    \ {\r\n        static constexpr bool value = true;\r\n    };\r\n\r\n    template<class\
-    \ T>\r\n    struct is_tuple_like<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
-    \ {\r\n        static constexpr bool value = true;\r\n    };\r\n\r\n    // \u578B\
-    T\u304Ctuple_like\u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    inline\
-    \ constexpr bool is_tuple_like_v = is_tuple_like<T>::value;\r\n\r\n\r\n    //\
-    \ tuple-like\u306A\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\
-    \u76EE\u3092\u6C42\u3081\u308B\u95A2\u6570\u30AF\u30E9\u30B9\r\n    template<class\
-    \ T, class = void>\r\n    struct GetFunction {\r\n        static_assert(is_tuple_like_v<T>,\
-    \ \"T is not gettable\");\r\n        template<std::size_t idx>\r\n        static\
-    \ constexpr decltype(auto) get(T&& tuple_like) {\r\n            return std::get<idx>(std::forward<T>(tuple_like));\r\
-    \n        }\r\n    };\r\n\r\n    #define DEFINE_GET(n, ...)                  \
-    \                           \\\r\n    template<class T>                      \
-    \                                \\\r\n    struct GetFunction<T, std::enable_if_t<tuple_like_size_v<T>\
-    \ == n>> {   \\\r\n        template<std::size_t idx, class U>                \
-    \                 \\\r\n        static constexpr decltype(auto) get(U&& aggregate)\
-    \ noexcept { \\\r\n            auto&& [__VA_ARGS__] = std::forward<U>(aggregate);\
-    \             \\\r\n            return std::get<idx>(std::forward_as_tuple(__VA_ARGS__));\
-    \      \\\r\n        }                                                       \
-    \           \\\r\n    };\r\n\r\n    DEFINE_GET(1, a)\r\n    DEFINE_GET(2, a, b)\r\
-    \n    DEFINE_GET(3, a, b, c)\r\n    DEFINE_GET(4, a, b, c, d)\r\n    DEFINE_GET(5,\
-    \ a, b, c, d, e)\r\n    DEFINE_GET(6, a, b, c, d, e, f)\r\n    DEFINE_GET(7, a,\
-    \ b, c, d, e, f, g)\r\n    DEFINE_GET(8, a, b, c, d, e, f, g, h)\r\n\r\n    #undef\
-    \ DEFINE_GET\r\n\r\n    namespace helper {\r\n        template<std::size_t idx>\r\
-    \n        struct GetHelper {\r\n            template<class T>\r\n            constexpr\
-    \ decltype(auto) operator ()(T&& tuple_like) const noexcept {\r\n            \
-    \    return GetFunction<std::decay_t<T>>::template get<idx>(std::forward<T>(tuple_like));\r\
+    \ = tuple_like_size<T>::value;\r\n\r\n\n    // tuple_like\u306A\u30AA\u30D6\u30B8\
+    \u30A7\u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\u95A2\
+    \u6570\u30AF\u30E9\u30B9\n    template<class T, class = void>\n    struct GetFunction\
+    \ {\n        #define GET(...) \\\n            { \\\n                auto&& [__VA_ARGS__]\
+    \ = std::forward<U>(tuple_like); \\\n                return std::get<idx> (std::forward_as_tuple(__VA_ARGS__));\
+    \ \\\n            }\n\n        template<std::size_t idx, class U>\n        static\
+    \ constexpr decltype(auto) get(U&& tuple_like) noexcept {\n            constexpr\
+    \ std::size_t size = tuple_like_size_v<T>;\n            static_assert(size !=\
+    \ 0, \"The size must not be 0\");\n            static_assert(size < 9, \"The size\
+    \ of tuple_like must be less than 9\");\n            if constexpr (size == 1)\
+    \ GET(a)\n            else if constexpr (size == 2) GET(a, b)\n            else\
+    \ if constexpr (size == 3) GET(a, b, c)\n            else if constexpr (size ==\
+    \ 4) GET(a, b, c, d)\n            else if constexpr (size == 5) GET(a, b, c, d,\
+    \ e)\n            else if constexpr (size == 6) GET(a, b, c, d, e, f)\n      \
+    \      else if constexpr (size == 7) GET(a, b, c, d, e, f, g)\n            else\
+    \ GET(a, b, c, d, e, f, g, h)\n        }\n\n        #undef GET\n    };\n\n   \
+    \ template<class T>\n    struct GetFunction<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
+    \ {\n        template<std::size_t idx, class U>\n        static constexpr decltype(auto)\
+    \ get(U&& tuple_like) noexcept {\n            return std::get<idx>(std::forward<U>(tuple_like));\n\
+    \        }\n    };\r\n\r\n    namespace helper {\n        template<std::size_t\
+    \ idx>\r\n        struct GetHelper {\r\n            template<class T>\r\n    \
+    \        constexpr decltype(auto) operator ()(T&& tuple_like) const noexcept {\r\
+    \n                return GetFunction<std::decay_t<T>>::template get<idx>(std::forward<T>(tuple_like));\r\
     \n            }\r\n        };\r\n    }\r\n\r\n    // tuple-like\u306A\u30AA\u30D6\
     \u30B8\u30A7\u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\
     \r\n    template<std::size_t idx>\r\n    inline constexpr helper::GetHelper<idx>\
@@ -401,13 +391,20 @@ data:
     \n    };\r\n\r\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\
     \u306E\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n    template<std::size_t\
     \ idx, class T>\r\n    using tuple_like_element_t = typename tuple_like_element<idx,\
-    \ T>::type;\r\n} // namespace kpr\r\n#line 9 \"algorithm/Hash.hpp\"\n\r\nnamespace\
-    \ kpr {\r\n    // \u30CF\u30C3\u30B7\u30E5(tuple_like, range\u5BFE\u5FDC)\r\n\
-    \    template<class, class = void>\r\n    struct Hash;\r\n\r\n    template<class\
-    \ T>\r\n    struct Hash<T, std::enable_if_t<std::is_scalar_v<T>>> {\r\n      \
-    \  using value_type = T;\r\n\r\n        constexpr std::size_t operator ()(T a)\
-    \ const noexcept {\r\n            return std::hash<T>{}(a);\r\n        }\r\n \
-    \   };\r\n\r\n    template<class T>\r\n    struct Hash<T, std::enable_if_t<is_tuple_like_v<T>\
+    \ T>::type;\n\n\n    // \u578BT\u304Ctuple_like\u304B\u8ABF\u3079\u308B\n    template<class,\
+    \ class = void>\n    struct is_tuple_like {\n        static constexpr bool value\
+    \ = false;\n    };\n\n    template<class T>\n    struct is_tuple_like<T, std::enable_if_t<std::is_aggregate_v<T>>>\
+    \ {\n        static constexpr bool value = true;\n    };\n\n    template<class\
+    \ T>\n    struct is_tuple_like<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
+    \ {\n        static constexpr bool value = true;\n    };\n\n    // \u578BT\u304C\
+    tuple_like\u304B\u8ABF\u3079\u308B\n    template<class T>\n    inline constexpr\
+    \ bool is_tuple_like_v = is_tuple_like<T>::value;\r\n} // namespace kpr\r\n#line\
+    \ 9 \"algorithm/Hash.hpp\"\n\r\nnamespace kpr {\r\n    // \u30CF\u30C3\u30B7\u30E5\
+    (tuple_like, range\u5BFE\u5FDC)\r\n    template<class, class = void>\r\n    struct\
+    \ Hash;\r\n\r\n    template<class T>\r\n    struct Hash<T, std::enable_if_t<std::is_scalar_v<T>>>\
+    \ {\r\n        using value_type = T;\r\n\r\n        constexpr std::size_t operator\
+    \ ()(T a) const noexcept {\r\n            return std::hash<T>{}(a);\r\n      \
+    \  }\r\n    };\r\n\r\n    template<class T>\r\n    struct Hash<T, std::enable_if_t<is_tuple_like_v<T>\
     \ && !is_range_v<T>>> {\r\n        using value_type = T;\r\n\r\n        template<std::size_t\
     \ i = 0>\r\n        constexpr std::size_t operator ()(const T& a) const noexcept\
     \ {\r\n            if constexpr (i == tuple_like_size_v<T>) return tuple_like_size_v<T>;\r\
@@ -1045,81 +1042,73 @@ data:
     \n    struct Hash<ModInt<mod>> {\r\n        using value_type = ModInt<mod>;\r\n\
     \        constexpr std::size_t operator ()(ModInt<mod> a) const noexcept {\r\n\
     \            return static_cast<std::size_t>(a);\r\n        }\r\n    };\r\n} //\
-    \ namespace kpr\r\n#line 4 \"stl_wrapper/vec.hpp\"\n\nnamespace kpr {\n    namespace\
-    \ helper {\n        template<std::size_t i = 0, std::size_t n, class T>\n    \
-    \    auto make_vec(const std::size_t (&d)[n], const T& init) noexcept {\n    \
-    \        if constexpr (i < n) return std::vector(d[i], make_vec<i + 1>(d, init));\n\
-    \            else return init;\n        }\n    }\n    template<class T, std::size_t\
-    \ n>\n    struct Vec: decltype(helper::make_vec(std::declval<const std::size_t\
-    \ (&)[n]>(), std::declval<const T&>())) {\n        using super = decltype(helper::make_vec(std::declval<const\
-    \ std::size_t (&)[n]>(), std::declval<const T&>()));\n        using super::vector,\
-    \ super::operator =;\n\n        Vec(const std::size_t (&d)[n], const T& init)\
-    \ noexcept: super{helper::make_vec(d, init)} {}\n    };\n} // namespace kpr\n\
-    #line 6 \"data_structure/FenwickTree.hpp\"\n\r\nnamespace kpr {\r\n    template<class\
-    \ T, class Op = Add<T>, class Container = std::vector<T>>\r\n    struct FenwickTree:\
-    \ private Op {\r\n        using value_type = T;\r\n        using size_type = std::size_t;\r\
-    \n        using reference = T&;\r\n        using const_reference = const T&;\r\
-    \n        using operator_type = Op;\r\n        using container_type = Container;\r\
-    \n\r\n    private:\r\n        Container tree;\r\n\r\n    public:\r\n        FenwickTree()\
-    \ noexcept = default;\r\n        FenwickTree(std::size_t n) noexcept: tree(n,\
-    \ Op::id()) {}\r\n\r\n        std::size_t size() noexcept {\r\n            return\
-    \ tree.size();\r\n        }\r\n\r\n        void apply(int p, const T& x) {\r\n\
-    \            ++p;\r\n            while (p <= (int)size()) {\r\n              \
-    \  tree[p - 1] = Op::operator ()(tree[p - 1], x);\r\n                p += p &\
-    \ -p;\r\n            }\r\n        }\r\n\r\n        T prod(int r) const {\r\n \
-    \           T s = Op::id();\r\n            while (r > 0) {\r\n               \
-    \ s = Op::operator ()(s, tree[r - 1]);\r\n                r -= r & -r;\r\n   \
-    \         }\r\n            return s;\r\n        }\r\n        T prod(int l, int\
-    \ r) const {\r\n            static_assert(has_inverse_v<Op>, \"Operator doesn't\
-    \ have an inverse\");\r\n            return Op::operator ()(prod(r), Op::inverse(prod(l)));\r\
-    \n        }\r\n\r\n        T all_prod() {\r\n            return prod(tree.size());\r\
-    \n        }\r\n\r\n        T get(int p) {\r\n            static_assert(has_inverse_v<Op>,\
-    \ \"Operator doesn't have an inverse\");\r\n            return Op::operator ()(prod(p\
-    \ + 1), Op::inverse(prod(p)));\r\n        }\r\n\r\n        void set(int p, const\
-    \ T& x) {\r\n            static_assert(has_inverse_v<Op>, \"Operator doesn't have\
-    \ an inverse\");\r\n            apply(p, Op::operator ()(x, Op::inverse(get(p))));\r\
-    \n        }\r\n    };\r\n} // namespace kpr\r\n#line 4 \"data_structure/UnionFind.hpp\"\
-    \n#include <unordered_map>\r\n#line 9 \"data_structure/UnionFind.hpp\"\n\r\nnamespace\
-    \ kpr {\r\n    template<class Container = std::vector<int>>\r\n    struct UnionFind\
-    \ {\r\n        using value_type = range_value_t<Container>;\r\n        using container_type\
-    \ = Container;\r\n\r\n    private:\r\n        Container par;\r\n\r\n    public:\r\
-    \n        UnionFind() noexcept = default;\r\n        UnionFind(std::size_t n)\
-    \ noexcept: par(n, -1) {}\r\n        template<class C, std::enable_if_t<std::is_same_v<Container,\
-    \ std::decay_t<C>>>>\r\n        UnionFind(C&& par): par(std::forward<C>(par))\
-    \ {}\r\n\r\n        void resize(std::size_t x) { par.resize(x, -1); }\r\n    \
-    \    void assign(std::size_t x) { par.assign(x, -1); }\r\n        void reset()\
-    \ { std::fill(std::begin(par), std::end(par), -1); }\r\n\r\n        std::size_t\
-    \ size() const noexcept {\r\n            return par.size();\r\n        }\r\n\r\
-    \n        KYOPRO_BASE_INT find(int x) {\r\n            int p = x;\r\n        \
-    \    while (par[p] >= 0) p = par[p];\r\n            while (x != p) {\r\n     \
-    \           int tmp = x;\r\n                x = par[x];\r\n                par[tmp]\
-    \ = p;\r\n            }\r\n            return p;\r\n        }\r\n\r\n        bool\
-    \ merge(int x, int y) {\r\n            x = find(x), y = find(y);\r\n         \
-    \   if (x == y) return false;\r\n            if (par[x] > par[y]) {\r\n      \
-    \          int tmp = x;\r\n                x = y;\r\n                y = tmp;\r\
-    \n            }\r\n            par[x] += par[y];\r\n            par[y] = x;\r\n\
-    \            return true;\r\n        }\r\n\r\n        bool same(int x, int y)\
-    \ {\r\n            return find(x) == find(y);\r\n        }\r\n\r\n        KYOPRO_BASE_INT\
-    \ group_size(int x) {\r\n            return -par[find(x)];\r\n        }\r\n\r\n\
-    \        std::vector<int> group_members(int x) {\r\n            x = find(x);\r\
-    \n            std::vector<int> a;\r\n            for (int i = 0; i < (int)(size());\
-    \ ++i) if (find(i) == x) a.emplace_back(i);\r\n            return a;\r\n     \
-    \   }\r\n\r\n        template<class Vector = std::vector<KYOPRO_BASE_INT>>\r\n\
-    \        Vector roots() const {\r\n            Vector a;\r\n            for (int\
-    \ i = 0; i < (int)(size()); ++i) if (par[i] < 0) a.emplace_back(i);\r\n      \
-    \      return a;\r\n        }\r\n\r\n        KYOPRO_BASE_INT group_count() const\
-    \ {\r\n            KYOPRO_BASE_INT cnt = 0;\r\n            for (int i = 0; i <\
-    \ (int)(size()); ++i) if (par[i] < 0) ++cnt;\r\n            return cnt;\r\n  \
-    \      }\r\n\r\n        template<class Map = std::unordered_map<KYOPRO_BASE_INT,\
-    \ std::vector<KYOPRO_BASE_INT>>>\r\n        Map all_group_members() {\r\n    \
-    \        Map group_members;\r\n            for (int member = 0; member < (int)(size());\
-    \ ++member) group_members[find(member)].emplace_back(member);\r\n            return\
-    \ group_members;\r\n        }\r\n    };\r\n} // namespace kpr\r\n#line 9 \"template/alias.hpp\"\
-    \n#include <set>\r\n#include <map>\r\n#include <unordered_set>\r\n#line 13 \"\
-    template/alias.hpp\"\n#include <queue>\r\n#include <stack>\r\n#line 20 \"template/alias.hpp\"\
-    \n\r\nnamespace kpr {\r\n    using ll = long long;\r\n    using ull = unsigned\
-    \ long long;\r\n    using lf = double;\r\n\r\n    using i8 = std::int8_t;\r\n\
-    \    using u8 = std::uint8_t;\r\n    using i16 = std::int16_t;\r\n    using u16\
+    \ namespace kpr\r\n#line 6 \"data_structure/FenwickTree.hpp\"\n\r\nnamespace kpr\
+    \ {\r\n    template<class T, class Op = Add<T>, class Container = std::vector<T>>\r\
+    \n    struct FenwickTree: private Op {\r\n        using value_type = T;\r\n  \
+    \      using size_type = std::size_t;\r\n        using reference = T&;\r\n   \
+    \     using const_reference = const T&;\r\n        using operator_type = Op;\r\
+    \n        using container_type = Container;\r\n\r\n    private:\r\n        Container\
+    \ tree;\r\n\r\n    public:\r\n        FenwickTree() noexcept = default;\r\n  \
+    \      FenwickTree(std::size_t n) noexcept: tree(n, Op::id()) {}\r\n\r\n     \
+    \   std::size_t size() noexcept {\r\n            return tree.size();\r\n     \
+    \   }\r\n\r\n        void apply(int p, const T& x) {\r\n            ++p;\r\n \
+    \           while (p <= (int)size()) {\r\n                tree[p - 1] = Op::operator\
+    \ ()(tree[p - 1], x);\r\n                p += p & -p;\r\n            }\r\n   \
+    \     }\r\n\r\n        T prod(int r) const {\r\n            T s = Op::id();\r\n\
+    \            while (r > 0) {\r\n                s = Op::operator ()(s, tree[r\
+    \ - 1]);\r\n                r -= r & -r;\r\n            }\r\n            return\
+    \ s;\r\n        }\r\n        T prod(int l, int r) const {\r\n            static_assert(has_inverse_v<Op>,\
+    \ \"Operator doesn't have an inverse\");\r\n            return Op::operator ()(prod(r),\
+    \ Op::inverse(prod(l)));\r\n        }\r\n\r\n        T all_prod() {\r\n      \
+    \      return prod(tree.size());\r\n        }\r\n\r\n        T get(int p) {\r\n\
+    \            static_assert(has_inverse_v<Op>, \"Operator doesn't have an inverse\"\
+    );\r\n            return Op::operator ()(prod(p + 1), Op::inverse(prod(p)));\r\
+    \n        }\r\n\r\n        void set(int p, const T& x) {\r\n            static_assert(has_inverse_v<Op>,\
+    \ \"Operator doesn't have an inverse\");\r\n            apply(p, Op::operator\
+    \ ()(x, Op::inverse(get(p))));\r\n        }\r\n    };\r\n} // namespace kpr\r\n\
+    #line 4 \"data_structure/UnionFind.hpp\"\n#include <unordered_map>\r\n#line 9\
+    \ \"data_structure/UnionFind.hpp\"\n\r\nnamespace kpr {\r\n    template<class\
+    \ Container = std::vector<int>>\r\n    struct UnionFind {\r\n        using value_type\
+    \ = range_value_t<Container>;\r\n        using container_type = Container;\r\n\
+    \r\n    private:\r\n        Container par;\r\n\r\n    public:\r\n        UnionFind()\
+    \ noexcept = default;\r\n        UnionFind(std::size_t n) noexcept: par(n, -1)\
+    \ {}\r\n        template<class C, std::enable_if_t<std::is_same_v<Container, std::decay_t<C>>>>\r\
+    \n        UnionFind(C&& par): par(std::forward<C>(par)) {}\r\n\r\n        void\
+    \ resize(std::size_t x) { par.resize(x, -1); }\r\n        void assign(std::size_t\
+    \ x) { par.assign(x, -1); }\r\n        void reset() { std::fill(std::begin(par),\
+    \ std::end(par), -1); }\r\n\r\n        std::size_t size() const noexcept {\r\n\
+    \            return par.size();\r\n        }\r\n\r\n        KYOPRO_BASE_INT find(int\
+    \ x) {\r\n            int p = x;\r\n            while (par[p] >= 0) p = par[p];\r\
+    \n            while (x != p) {\r\n                int tmp = x;\r\n           \
+    \     x = par[x];\r\n                par[tmp] = p;\r\n            }\r\n      \
+    \      return p;\r\n        }\r\n\r\n        bool merge(int x, int y) {\r\n  \
+    \          x = find(x), y = find(y);\r\n            if (x == y) return false;\r\
+    \n            if (par[x] > par[y]) {\r\n                int tmp = x;\r\n     \
+    \           x = y;\r\n                y = tmp;\r\n            }\r\n          \
+    \  par[x] += par[y];\r\n            par[y] = x;\r\n            return true;\r\n\
+    \        }\r\n\r\n        bool same(int x, int y) {\r\n            return find(x)\
+    \ == find(y);\r\n        }\r\n\r\n        KYOPRO_BASE_INT group_size(int x) {\r\
+    \n            return -par[find(x)];\r\n        }\r\n\r\n        std::vector<int>\
+    \ group_members(int x) {\r\n            x = find(x);\r\n            std::vector<int>\
+    \ a;\r\n            for (int i = 0; i < (int)(size()); ++i) if (find(i) == x)\
+    \ a.emplace_back(i);\r\n            return a;\r\n        }\r\n\r\n        template<class\
+    \ Vector = std::vector<KYOPRO_BASE_INT>>\r\n        Vector roots() const {\r\n\
+    \            Vector a;\r\n            for (int i = 0; i < (int)(size()); ++i)\
+    \ if (par[i] < 0) a.emplace_back(i);\r\n            return a;\r\n        }\r\n\
+    \r\n        KYOPRO_BASE_INT group_count() const {\r\n            KYOPRO_BASE_INT\
+    \ cnt = 0;\r\n            for (int i = 0; i < (int)(size()); ++i) if (par[i] <\
+    \ 0) ++cnt;\r\n            return cnt;\r\n        }\r\n\r\n        template<class\
+    \ Map = std::unordered_map<KYOPRO_BASE_INT, std::vector<KYOPRO_BASE_INT>>>\r\n\
+    \        Map all_group_members() {\r\n            Map group_members;\r\n     \
+    \       for (int member = 0; member < (int)(size()); ++member) group_members[find(member)].emplace_back(member);\r\
+    \n            return group_members;\r\n        }\r\n    };\r\n} // namespace kpr\r\
+    \n#line 3 \"template/alias.hpp\"\n#include <forward_list>\n#line 6 \"template/alias.hpp\"\
+    \n#include <list>\n#include <map>\n#include <queue>\n#include <set>\n#include\
+    \ <stack>\n#line 14 \"template/alias.hpp\"\n#include <unordered_set>\r\n#line\
+    \ 22 \"template/alias.hpp\"\n\r\nnamespace kpr {\n    using ushort = unsigned\
+    \ short;\r\n    using li = long long;\r\n    using uli = unsigned long long;\r\
+    \n    using lf = double;\n    using llf = long double;\r\n\r\n    using i8 = std::int8_t;\r\
+    \n    using u8 = std::uint8_t;\r\n    using i16 = std::int16_t;\r\n    using u16\
     \ = std::uint16_t;\r\n    using i32 = std::int32_t;\r\n    using u32 = std::uint32_t;\r\
     \n    using i64 = std::int64_t;\r\n    using u64 = std::uint64_t;\r\n    #ifdef\
     \ __SIZEOF_INT128__\r\n    using i128 = __int128_t;\r\n    using u128 = __uint128_t;\r\
@@ -1131,26 +1120,56 @@ data:
     \ Args...> {\r\n        using type = std::tuple<Args...>;\r\n    };\r\n    template<class\
     \ T>\r\n    struct agg_type<T, 0, T, T> {\r\n        using type = std::pair<T,\
     \ T>;\r\n    };\r\n\r\n    template<class T, std::size_t idx>\r\n    using agg\
-    \ = typename agg_type<T, idx>::type;\r\n    using ll1 = agg<ll, 1>;\r\n    using\
-    \ ll2 = agg<ll, 2>;\r\n    using ll3 = agg<ll, 3>;\r\n    using ll4 = agg<ll,\
-    \ 4>;\r\n    using ll5 = agg<ll, 5>;\r\n\r\n    template<class T>\r\n    using\
-    \ vec = std::vector<T>;\r\n    template<class T>\r\n    using vec1 = Vec<T, 1>;\r\
-    \n    template<class T>\r\n    using vec2 = Vec<T, 2>;\r\n    template<class T>\r\
-    \n    using vec3 = Vec<T, 3>;\r\n    template<class T>\r\n    using vec4 = Vec<T,\
-    \ 4>;\r\n    template<class T>\r\n    using vec5 = Vec<T, 5>;\r\n\r\n    template<class\
-    \ Key, class Compare = std::less<Key>>\r\n    using mset = std::unordered_set<Key,\
-    \ Compare>;\r\n    template<class Key, class T, class Compare = std::less<Key>>\r\
-    \n    using mmap = std::unordered_map<Key, T, Compare>;\r\n    template<class\
-    \ Key>\r\n    using hset = std::unordered_set<Key, Hash<Key>>;\r\n    template<class\
-    \ Key, class T>\r\n    using hmap = std::unordered_map<Key, T, Hash<Key>>;\r\n\
-    \    template<class Key>\r\n    using hmiset = std::unordered_multiset<Key, Hash<Key>>;\r\
-    \n    template<class Key, class T>\r\n    using hmmap = std::unordered_multimap<Key,\
-    \ T, Hash<Key>>;\r\n    template<class T, class Compare = std::less<T>, class\
-    \ Container = std::vector<T>>\r\n    using priq = std::priority_queue<T, Container,\
-    \ Compare>;\r\n    template<class T, class Compare = std::greater<T>, class Container\
-    \ = std::vector<T>>\r\n    using heapq = priq<T, Compare, Container>;\r\n} //\
-    \ namespace kpr\r\n\r\nusing namespace std;\r\nusing namespace kpr;\r\n#line 2\
-    \ \"template/amin_amax.hpp\"\n\r\nnamespace kpr {\r\n    template<class T, class\
+    \ = typename agg_type<T, idx>::type;\r\n    using li1 = agg<li, 1>;\r\n    using\
+    \ li2 = agg<li, 2>;\r\n    using li3 = agg<li, 3>;\r\n    using li4 = agg<li,\
+    \ 4>;\r\n    using li5 = agg<li, 5>;\n\n\n    #define DEFINE_ALIAS(name, short_name,\
+    \ value) \\\n        using short_name ## value = name<value>; \\\n        using\
+    \ short_name ## short_name ## value = name<value>; \\\n        using short_name\
+    \ ## short_name ## short_name ## value = name<value>; \\\n        using short_name\
+    \ ## short_name ## short_name ## short_name ## value = name<value>; \\\n     \
+    \   using V ## short_name ## short_name ## short_name ## short_name ## value =\
+    \ Vec<name<value>>; \\\n        using VV ## short_name ## short_name ## short_name\
+    \ ## short_name ## value = VVec<name<value>>;\n\n    #define DEFINE_CONTAINER_ALIAS(name,\
+    \ short_name) \\\n        DEFINE_ALIAS(name, short_name, int); \\\n        DEFINE_ALIAS(name,\
+    \ short_name, li); \\\n        DEFINE_ALIAS(name, short_name, float); \\\n   \
+    \     DEFINE_ALIAS(name, short_name, lf); \\\n        DEFINE_ALIAS(name, short_name,\
+    \ llf); \\\n        DEFINE_ALIAS(name, short_name, mint); \\\n        DEFINE_ALIAS(name,\
+    \ short_name, dmint); \\\n        DEFINE_ALIAS(name, short_name, li1); \\\n  \
+    \      DEFINE_ALIAS(name, short_name, li2); \\\n        DEFINE_ALIAS(name, short_name,\
+    \ li3); \\\n        DEFINE_ALIAS(name, short_name, li4); \\\n        DEFINE_ALIAS(name,\
+    \ short_name, li5);\n\r\n\r\n    template<class T>\r\n    using Vec = std::vector<T>;\n\
+    \    template<class T>\n    using VVec = Vec<Vec<T>>;\n    template<class T>\n\
+    \    using VVVec = Vec<VVec<T>>;\n    template<class T>\n    using VVVVec = Vec<VVVec<T>>;\n\
+    \    template<class T>\n    using VVVVVec = Vec<VVVVec<T>>;\n\n    DEFINE_CONTAINER_ALIAS(Vec,\
+    \ V);\n\n    template<class T>\n    using Deque = std::deque<T>;\n\n    DEFINE_CONTAINER_ALIAS(Deque,\
+    \ D);\n\n    template<class T>\n    using List = std::list<T>;\n\n    DEFINE_CONTAINER_ALIAS(List,\
+    \ L);\n\n    template<class T>\n    using ForwardList = std::forward_list<T>;\n\
+    \n    DEFINE_CONTAINER_ALIAS(ForwardList, FL);\n\n    template<class Key, class\
+    \ Compare = Less>\n    using Set = std::set<Key, Compare>;\n    template<class\
+    \ Key, class Compare = Less>\n    using Map = std::map<Key, Compare>;\n\n    DEFINE_CONTAINER_ALIAS(Set,\
+    \ S);\n    using Mlili = Map<li, li>;\n    using VMlili = Vec<Mlili>;\n\n    template<class\
+    \ Key, class Compare = Less>\n    using HashSet = std::unordered_set<Key, Compare>;\n\
+    \    template<class Key, class T, class Compare = Less>\n    using HashMap = std::unordered_map<Key,\
+    \ T, Compare>;\n\n    DEFINE_CONTAINER_ALIAS(HashSet, HS);\n    using HMlili =\
+    \ HashMap<li, li>;\n    using VHMlili = Vec<HMlili>;\n\n    template<class Key>\n\
+    \    using MultiSet = std::multiset<Key, Hash<Key>>;\n    template<class Key,\
+    \ class T>\n    using MultiMap = std::multimap<Key, T, Hash<Key>>;\n\n    DEFINE_CONTAINER_ALIAS(MultiSet,\
+    \ MS);\n    using MMlili = MultiMap<li, li>;\n    using VMMlili = Vec<MMlili>;\n\
+    \n    template<class Key>\n    using HashMultiSet = std::unordered_multiset<Key,\
+    \ Hash<Key>>;\n    template<class Key, class T>\n    using HashMultiMap = std::unordered_multimap<Key,\
+    \ T, Hash<Key>>;\n\n    DEFINE_CONTAINER_ALIAS(HashMultiSet, HMS);\n    using\
+    \ VHMSli = Vec<HMSli>;\n    using HMMli = HashMultiMap<li, li>;\n    using VHMMli\
+    \ = Vec<HMMli>;\n\n    template<class T, class Container = std::deque<T>>\n  \
+    \  using Queue = std::queue<T, Container>;\n\n    DEFINE_CONTAINER_ALIAS(Queue,\
+    \ Que);\n\n    template<class T, class Container = std::deque<T>>\n    using Stack\
+    \ = std::stack<T, Container>;\n\n    DEFINE_CONTAINER_ALIAS(Stack, Stk);\n\n \
+    \   template<class T, class Compare = Less, class Container = Vec<T>>\n    using\
+    \ PriQ = std::priority_queue<T, Container, Compare>;\n    template<class T, class\
+    \ Compare = Greater, class Container = Vec<T>>\n    using HeapQ = PriQ<T, Compare,\
+    \ Container>;\n\n    DEFINE_CONTAINER_ALIAS(PriQ, PQ);\n    DEFINE_CONTAINER_ALIAS(HeapQ,\
+    \ HQ);\n\n    template<std::size_t size>\n    using BitSet = std::bitset<size>;\r\
+    \n} // namespace kpr\r\n\r\nusing namespace std;\r\nusing namespace kpr;\r\n#line\
+    \ 2 \"template/amin_amax.hpp\"\n\r\nnamespace kpr {\r\n    template<class T, class\
     \ U = T>\r\n    constexpr bool amin(T& a, const U& b) noexcept {\r\n        if\
     \ (b < a) {\r\n            a = b;\r\n            return true;\r\n        }\r\n\
     \        return false;\r\n    }\r\n\r\n    template<class T, class U = T>\r\n\
@@ -1205,6 +1224,65 @@ data:
     \ _3: case _4:\n\n#define KYOPRO_OVERLOAD_MATCH(_1, _2, _3, _4, name, ...) name\n\
     #define match(...) KYOPRO_OVERLOAD_MATCH(__VA_ARGS__, KYOPRO_MATCH4, KYOPRO_MATCH3,\
     \ KYOPRO_MATCH2, KYOPRO_MATCH1)(__VA_ARGS__)\n#define otherwise break; default:\n\
+    #line 7 \"template/named_tuple.hpp\"\n\nnamespace kpr {\n    template<class Derived,\
+    \ std::size_t _size>\n    struct BaseNamedTuple {\n        using named_tuple_tag\
+    \ = void;\n        static constexpr std::size_t size = _size;\n\n    private:\n\
+    \        template<std::size_t i = 0, class T>\n        void assign(T&& named_tuple)\
+    \ noexcept {\n            if constexpr (i < tuple_like_size_v<Derived>) {\n  \
+    \              get<i>(static_cast<Derived&>(*this)) = get<i>(named_tuple);\n \
+    \               assign<i + 1>(std::forward<T>(named_tuple));\n            }\n\
+    \        }\n\n    public:\n        template<class T, typename std::decay_t<T>::named_tuple_tag*\
+    \ = nullptr>\n        BaseNamedTuple(T&& named_tuple) noexcept {\n           \
+    \ assign(std::forward<T>(named_tuple));\n        }\n\n        template<class...\
+    \ Args>\n        BaseNamedTuple(Args&&... args) noexcept {\n            assign(std::forward_as_tuple(std::forward<Args>(args)...));\n\
+    \        }\n    };\n\n    template<class T>\n    struct tuple_like_size<T, typename\
+    \ T::named_tuple_tag> {\n        static constexpr std::size_t value = T::size;\n\
+    \    };\n\n    template<class T>\n    struct GetFunction<T, typename T::named_tuple_tag>\
+    \ {\n        #define GET(...) \\\n            { \\\n                auto&& [__VA_ARGS__]\
+    \ = std::forward<U>(tuple_like); \\\n                return std::get<idx>(std::forward_as_tuple(__VA_ARGS__));\
+    \ \\\n            }\n        template<std::size_t idx, class U>\n        static\
+    \ constexpr decltype(auto) get(U&& tuple_like) noexcept {\n            static_assert(T::size\
+    \ != 0, \"The size must not be 0\"); \n            if constexpr (T::size == 1)\
+    \ GET(a)\n            else if constexpr (T::size == 2) GET(a, b)\n           \
+    \ else if constexpr (T::size == 3) GET(a, b, c)\n            else if constexpr\
+    \ (T::size == 4) GET(a, b, c, d)\n            else if constexpr (T::size == 5)\
+    \ GET(a, b, c, d, e)\n        }\n    };\n\n    template<class T>\n    struct is_tuple_like<T,\
+    \ typename T::named_tuple_tag> {\n        static constexpr bool value = true;\n\
+    \    };\n}\n\n#define KYOPRO_NAMED_TUPLE0() \\\n    ([] { \\\n        struct NamedTuple:\
+    \ kpr::BaseNamedTuple<NamedTuple, 0> { \\\n            using kpr::BaseNamedTuple<NamedTuple,\
+    \ 0>::BaseNamedTuple; \\\n        }; \\\n        return NamedTuple{}; \\\n   \
+    \ })()\n#define KYOPRO_NAMED_TUPLE1(name0, value0) \\\n    ([] { \\\n        struct\
+    \ NamedTuple: kpr::BaseNamedTuple<NamedTuple, 1> { \\\n            using kpr::BaseNamedTuple<NamedTuple,\
+    \ 1>::BaseNamedTuple; \\\n            std::decay_t<decltype(value0)> name0; \\\
+    \n        }; \\\n        return NamedTuple{value0}; \\\n    })()\n#define KYOPRO_NAMED_TUPLE2(name0,\
+    \ value0, name1, value1) \\\n    ([] { \\\n        struct NamedTuple: kpr::BaseNamedTuple<NamedTuple,\
+    \ 2> { \\\n            using kpr::BaseNamedTuple<NamedTuple, 2>::BaseNamedTuple;\
+    \ \\\n            std::decay_t<decltype(value0)> name0; \\\n            std::decay_t<decltype(value1)>\
+    \ name1; \\\n        }; \\\n        return NamedTuple{value0, value1}; \\\n  \
+    \  })()\n#define KYOPRO_NAMED_TUPLE3(name0, value0, name1, value1, name2, value2)\
+    \ \\\n    ([] { \\\n        struct NamedTuple: kpr::BaseNamedTuple<NamedTuple,\
+    \ 3> { \\\n            using kpr::BaseNamedTuple<NamedTuple, 3>::BaseNamedTuple;\
+    \ \\\n            std::decay_t<decltype(value0)> name0; \\\n            std::decay_t<decltype(value1)>\
+    \ name1; \\\n            std::decay_t<decltype(value2)> name2; \\\n        };\
+    \ \\\n        return NamedTuple{value0, value1, value2}; \\\n    })()\n#define\
+    \ KYOPRO_NAMED_TUPLE4(name0, value0, name1, value1, name2, value2, name3, value3)\
+    \ \\\n    ([] { \\\n        struct NamedTuple: kpr::BaseNamedTuple<NamedTuple,\
+    \ 4> { \\\n            using kpr::BaseNamedTuple<NamedTuple, 4>::BaseNamedTuple;\
+    \ \\\n            std::decay_t<decltype(value0)> name0; \\\n            std::decay_t<decltype(value1)>\
+    \ name1; \\\n            std::decay_t<decltype(value2)> name2; \\\n          \
+    \  std::decay_t<decltype(value3)> name3; \\\n        }; \\\n        return NamedTuple{value0,\
+    \ value1, value2, value3}; \\\n    })()\n#define KYOPRO_NAMED_TUPLE5(name0, value0,\
+    \ name1, value1, name2, value2, name3, value3, name4, value4) \\\n    ([] { \\\
+    \n        struct NamedTuple: kpr::BaseNamedTuple<NamedTuple, 5> { \\\n       \
+    \     using kpr::BaseNamedTuple<NamedTuple, 5>::BaseNamedTuple; \\\n         \
+    \   std::decay_t<decltype(value0)> name0; \\\n            std::decay_t<decltype(value1)>\
+    \ name1; \\\n            std::decay_t<decltype(value2)> name2; \\\n          \
+    \  std::decay_t<decltype(value3)> name3; \\\n            std::decay_t<decltype(value4)>\
+    \ name4; \\\n        }; \\\n        return NamedTuple{value0, value1, value2,\
+    \ value3, value4}; \\\n    })()\n\n#define KYOPRO_OVERLOAD_NAMED_TUPLE(_1, _2,\
+    \ _3, _4, _5, _6, _7, _8, _9, _10, name, ...) name\n\n#define $$(...) KYOPRO_OVERLOAD_NAMED_TUPLE(__VA_ARGS__\
+    \ __VA_OPT__(,) KYOPRO_NAMED_TUPLE5, nullptr, KYOPRO_NAMED_TUPLE4, nullptr, KYOPRO_NAMED_TUPLE3,\
+    \ nullptr, KYOPRO_NAMED_TUPLE2, nullptr, KYOPRO_NAMED_TUPLE1, nullptr, KYOPRO_NAMED_TUPLE0)(__VA_ARGS__)\n\
     #line 3 \"template/rep.hpp\"\n\n#define KYOPRO_REP0() for (; ; )\n#define KYOPRO_REP1(last)\
     \ KYOPRO_REP2(KYOPRO_COUNTER, last)\n#define KYOPRO_REP2(i, last) for (auto i\
     \ = std::decay_t<decltype(last)>(), KYOPRO_LAST = (last); (i) < (KYOPRO_LAST);\
@@ -1239,19 +1317,18 @@ data:
     \ <cwctype>\r\n\r\n#line 31 \"template/stl.hpp\"\n#include <complex>\r\n#include\
     \ <deque>\r\n#include <exception>\r\n#include <fstream>\r\n#line 36 \"template/stl.hpp\"\
     \n#include <iomanip>\r\n#include <ios>\r\n#include <iosfwd>\r\n#include <iostream>\r\
-    \n#line 43 \"template/stl.hpp\"\n#include <list>\r\n#include <locale>\r\n#line\
-    \ 46 \"template/stl.hpp\"\n#include <memory>\r\n#include <new>\r\n#line 49 \"\
-    template/stl.hpp\"\n#include <ostream>\r\n#line 52 \"template/stl.hpp\"\n#include\
-    \ <sstream>\r\n#line 54 \"template/stl.hpp\"\n#include <stdexcept>\r\n#include\
-    \ <streambuf>\r\n#line 57 \"template/stl.hpp\"\n#include <typeinfo>\r\n#line 59\
-    \ \"template/stl.hpp\"\n#include <valarray>\r\n#line 61 \"template/stl.hpp\"\n\
-    \r\n#line 63 \"template/stl.hpp\"\n#include <atomic>\r\n#include <chrono>\r\n\
-    #include <condition_variable>\r\n#include <forward_list>\r\n#include <future>\r\
-    \n#include <initializer_list>\r\n#include <mutex>\r\n#line 71 \"template/stl.hpp\"\
-    \n#include <ratio>\r\n#include <regex>\r\n#include <scoped_allocator>\r\n#include\
-    \ <system_error>\r\n#include <thread>\r\n#line 77 \"template/stl.hpp\"\n#include\
-    \ <typeindex>\r\n#line 2 \"verify/hello_world.cpp\"\n\nint main() {\n    println(\"\
-    Hello world!\");\n}\n"
+    \n#line 44 \"template/stl.hpp\"\n#include <locale>\r\n#line 46 \"template/stl.hpp\"\
+    \n#include <memory>\r\n#include <new>\r\n#line 49 \"template/stl.hpp\"\n#include\
+    \ <ostream>\r\n#line 52 \"template/stl.hpp\"\n#include <sstream>\r\n#line 54 \"\
+    template/stl.hpp\"\n#include <stdexcept>\r\n#include <streambuf>\r\n#line 57 \"\
+    template/stl.hpp\"\n#include <typeinfo>\r\n#line 59 \"template/stl.hpp\"\n#include\
+    \ <valarray>\r\n#line 61 \"template/stl.hpp\"\n\r\n#line 63 \"template/stl.hpp\"\
+    \n#include <atomic>\r\n#include <chrono>\r\n#include <condition_variable>\r\n\
+    #line 67 \"template/stl.hpp\"\n#include <future>\r\n#include <initializer_list>\r\
+    \n#include <mutex>\r\n#line 71 \"template/stl.hpp\"\n#include <ratio>\r\n#include\
+    \ <regex>\r\n#include <scoped_allocator>\r\n#include <system_error>\r\n#include\
+    \ <thread>\r\n#line 77 \"template/stl.hpp\"\n#include <typeindex>\r\n#line 2 \"\
+    verify/hello_world.cpp\"\n\nint main() {\n    println(\"Hello world!\");\n}\n"
   code: "#include \"../all.hpp\"\n\nint main() {\n    println(\"Hello world!\");\n\
     }\n"
   dependsOn:
@@ -1285,8 +1362,6 @@ data:
   - math/mod.hpp
   - math/ModInt.hpp
   - meta/meta.hpp
-  - stl_wrapper/stl_wrapper.hpp
-  - stl_wrapper/vec.hpp
   - data_structure/data_structure.hpp
   - data_structure/FenwickTree.hpp
   - data_structure/UnionFind.hpp
@@ -1300,6 +1375,7 @@ data:
   - template/io.hpp
   - template/lambda.hpp
   - template/match.hpp
+  - template/named_tuple.hpp
   - template/rep.hpp
   - template/main.hpp
   - template/make_array.hpp
@@ -1308,7 +1384,7 @@ data:
   isVerificationFile: false
   path: verify/hello_world.cpp
   requiredBy: []
-  timestamp: '2023-02-20 00:38:21+09:00'
+  timestamp: '2023-03-07 11:56:47+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: verify/hello_world.cpp

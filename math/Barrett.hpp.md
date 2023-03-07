@@ -18,6 +18,9 @@ data:
     path: math/math.hpp
     title: math/math.hpp
   - icon: ':warning:'
+    path: test.cpp
+    title: test.cpp
+  - icon: ':warning:'
     path: verify/hello_world.cpp
     title: verify/hello_world.cpp
   _extendedVerifiedWith: []
@@ -192,6 +195,7 @@ data:
   requiredBy:
   - math/math.hpp
   - verify/hello_world.cpp
+  - test.cpp
   - all/all.hpp
   - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'

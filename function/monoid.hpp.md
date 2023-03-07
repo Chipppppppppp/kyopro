@@ -33,6 +33,9 @@ data:
     path: function/function.hpp
     title: function/function.hpp
   - icon: ':warning:'
+    path: test.cpp
+    title: test.cpp
+  - icon: ':warning:'
     path: verify/hello_world.cpp
     title: verify/hello_world.cpp
   _extendedVerifiedWith:
@@ -276,6 +279,7 @@ data:
   - data_structure/data_structure.hpp
   - data_structure/structure.hpp
   - verify/hello_world.cpp
+  - test.cpp
   - all/all.hpp
   - function/function.hpp
   - all.hpp

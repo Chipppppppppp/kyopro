@@ -11,6 +11,9 @@ data:
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
+    path: all.hpp
+    title: all.hpp
+  - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
   - icon: ':heavy_check_mark:'
@@ -145,16 +148,10 @@ data:
   - icon: ':warning:'
     path: template/template.hpp
     title: template/template.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: test.cpp
-    title: test.cpp
-  - icon: ':warning:'
-    path: verify/hello_world.cpp
-    title: verify/hello_world.cpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
@@ -1330,11 +1327,15 @@ data:
     #line 67 \"template/stl.hpp\"\n#include <future>\r\n#include <initializer_list>\r\
     \n#include <mutex>\r\n#line 71 \"template/stl.hpp\"\n#include <ratio>\r\n#include\
     \ <regex>\r\n#include <scoped_allocator>\r\n#include <system_error>\r\n#include\
-    \ <thread>\r\n#line 77 \"template/stl.hpp\"\n#include <typeindex>\r\n#line 5 \"\
-    all.hpp\"\n"
-  code: "#pragma once\r\n#include \"all/all.hpp\"\r\n#include \"data_structure/data_structure.hpp\"\
-    \r\n#include \"template/template.hpp\"\r\n"
+    \ <thread>\r\n#line 77 \"template/stl.hpp\"\n#include <typeindex>\r\n#line 2 \"\
+    test.cpp\"\n\nvoid kpr::main() {\n  auto x = $$(a, 1, b, 2);\n  println(x);\n\
+    \  x = $$(a, 2, b, 3);\n  println(x);\n  x = {3, 4};\n  println(x);\n  println(get<0>(x),\
+    \ x.b);\n}\n"
+  code: "#include \"all.hpp\"\n\nvoid kpr::main() {\n  auto x = $$(a, 1, b, 2);\n\
+    \  println(x);\n  x = $$(a, 2, b, 3);\n  println(x);\n  x = {3, 4};\n  println(x);\n\
+    \  println(get<0>(x), x.b);\n}"
   dependsOn:
+  - all.hpp
   - all/all.hpp
   - algorithm/algorithm.hpp
   - algorithm/bit.hpp
@@ -1384,17 +1385,15 @@ data:
   - template/make_vector.hpp
   - template/stl.hpp
   isVerificationFile: false
-  path: all.hpp
-  requiredBy:
-  - verify/hello_world.cpp
-  - test.cpp
+  path: test.cpp
+  requiredBy: []
   timestamp: '2023-03-07 11:56:47+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: all.hpp
+documentation_of: test.cpp
 layout: document
 redirect_from:
-- /library/all.hpp
-- /library/all.hpp.html
-title: all.hpp
+- /library/test.cpp
+- /library/test.cpp.html
+title: test.cpp
 ---

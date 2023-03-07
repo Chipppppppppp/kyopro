@@ -185,58 +185,51 @@ data:
     \ = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\r\n    };\r\n    //\
     \ Range\u578BT\u304B\u3089\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n\
     \    template<class T>\r\n    using range_value_t = typename range_value<T>::type;\r\
-    \n} // namespace kpr\r\n#line 7 \"meta/tuple_like.hpp\"\n\r\nnamespace kpr {\r\
+    \n} // namespace kpr\r\n#line 6 \"meta/tuple_like.hpp\"\n\r\nnamespace kpr {\r\
     \n    namespace helper {\r\n        struct CastableToAny {\r\n            template<class\
     \ T>\r\n            operator T() const noexcept;\r\n        };\r\n\r\n       \
     \ template<class T, std::size_t... idx, std::void_t<decltype(T{((void)idx, CastableToAny{})...})>*\
-    \ = nullptr>\r\n        constexpr bool is_aggregate_initializable(std::index_sequence<idx...>,\
+    \ = nullptr>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
     \ bool) noexcept {\r\n            return true;\r\n        }\r\n        template<class\
-    \ T, std::size_t... idx>\r\n        constexpr bool is_aggregate_initializable(std::index_sequence<idx...>,\
-    \ char) noexcept {\r\n            return false;\r\n        }\r\n\r\n        template<class\
-    \ T, std::size_t n = sizeof(T) * 8, std::enable_if_t<is_aggregate_initializable<T>(std::make_index_sequence<n>(),\
-    \ false)>* = nullptr>\r\n        constexpr std::size_t aggregate_size() {\r\n\
-    \            return n;\r\n        }\r\n        template<class T, std::size_t n\
-    \ = sizeof(T) * 8, std::enable_if_t<!is_aggregate_initializable<T>(std::make_index_sequence<n>(),\
-    \ false)>* = nullptr>\r\n        constexpr std::size_t aggregate_size() {\r\n\
-    \            return aggregate_size<T, n - 1>();\r\n        }\r\n    } // namespace\
-    \ helper\r\n\r\n    // tuple_like\u306A\u578BT\u306E\u5927\u304D\u3055\u3092\u8ABF\
-    \u3079\u308B\r\n    template<class T, class = void>\r\n    struct tuple_like_size\
-    \ {\r\n        static_assert(std::is_aggregate_v<T>, \"T must be tuple_like\"\
-    );\r\n        static constexpr std::size_t value = helper::aggregate_size<T>();\r\
-    \n    };\r\n\r\n    template<class T>\r\n    struct tuple_like_size<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
+    \ T, std::size_t... idx>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
+    \ char) noexcept {\r\n            return false;\r\n        }\n\n        template<class\
+    \ T, std::size_t n = sizeof(T) * 8, class = void>\n        struct constructible_size\
+    \ {\n            static_assert(n != 0, \"T is not constructible\");\n        \
+    \    static constexpr std::size_t value = constructible_size<T, n - 1>::value;\n\
+    \        };\n\n        template<class T, std::size_t n>\n        struct constructible_size<T,\
+    \ n, std::enable_if_t<is_constructible_with<T>(std::make_index_sequence<n>(),\
+    \ false)>> {\n            static constexpr std::size_t value = n;\n        };\r\
+    \n    } // namespace helper\r\n\n\r\n    // tuple_like\u306A\u578BT\u306E\u5927\
+    \u304D\u3055\u3092\u8ABF\u3079\u308B\r\n    template<class T, class = void>\r\n\
+    \    struct tuple_like_size {\r\n        static constexpr std::size_t value =\
+    \ helper::constructible_size<T>::value;\r\n    };\r\n\r\n    template<class T>\r\
+    \n    struct tuple_like_size<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
     \ {\r\n        static constexpr std::size_t value = std::tuple_size_v<T>;\r\n\
     \    };\r\n\r\n    // tuple_like\u306A\u578BT\u306E\u5927\u304D\u3055\u3092\u8ABF\
     \u3079\u308B\r\n    template<class T>\r\n    inline constexpr std::size_t tuple_like_size_v\
-    \ = tuple_like_size<T>::value;\r\n\r\n\r\n    // \u578BT\u304Ctuple_like\u304B\
-    \u8ABF\u3079\u308B\r\n    template<class, class = void>\r\n    struct is_tuple_like\
-    \ {\r\n        static constexpr bool value = false;\r\n    };\r\n\r\n    template<class\
-    \ T>\r\n    struct is_tuple_like<T, std::enable_if_t<std::is_aggregate_v<T>>>\
-    \ {\r\n        static constexpr bool value = true;\r\n    };\r\n\r\n    template<class\
-    \ T>\r\n    struct is_tuple_like<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
-    \ {\r\n        static constexpr bool value = true;\r\n    };\r\n\r\n    // \u578B\
-    T\u304Ctuple_like\u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    inline\
-    \ constexpr bool is_tuple_like_v = is_tuple_like<T>::value;\r\n\r\n\r\n    //\
-    \ tuple-like\u306A\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\
-    \u76EE\u3092\u6C42\u3081\u308B\u95A2\u6570\u30AF\u30E9\u30B9\r\n    template<class\
-    \ T, class = void>\r\n    struct GetFunction {\r\n        static_assert(is_tuple_like_v<T>,\
-    \ \"T is not gettable\");\r\n        template<std::size_t idx>\r\n        static\
-    \ constexpr decltype(auto) get(T&& tuple_like) {\r\n            return std::get<idx>(std::forward<T>(tuple_like));\r\
-    \n        }\r\n    };\r\n\r\n    #define DEFINE_GET(n, ...)                  \
-    \                           \\\r\n    template<class T>                      \
-    \                                \\\r\n    struct GetFunction<T, std::enable_if_t<tuple_like_size_v<T>\
-    \ == n>> {   \\\r\n        template<std::size_t idx, class U>                \
-    \                 \\\r\n        static constexpr decltype(auto) get(U&& aggregate)\
-    \ noexcept { \\\r\n            auto&& [__VA_ARGS__] = std::forward<U>(aggregate);\
-    \             \\\r\n            return std::get<idx>(std::forward_as_tuple(__VA_ARGS__));\
-    \      \\\r\n        }                                                       \
-    \           \\\r\n    };\r\n\r\n    DEFINE_GET(1, a)\r\n    DEFINE_GET(2, a, b)\r\
-    \n    DEFINE_GET(3, a, b, c)\r\n    DEFINE_GET(4, a, b, c, d)\r\n    DEFINE_GET(5,\
-    \ a, b, c, d, e)\r\n    DEFINE_GET(6, a, b, c, d, e, f)\r\n    DEFINE_GET(7, a,\
-    \ b, c, d, e, f, g)\r\n    DEFINE_GET(8, a, b, c, d, e, f, g, h)\r\n\r\n    #undef\
-    \ DEFINE_GET\r\n\r\n    namespace helper {\r\n        template<std::size_t idx>\r\
-    \n        struct GetHelper {\r\n            template<class T>\r\n            constexpr\
-    \ decltype(auto) operator ()(T&& tuple_like) const noexcept {\r\n            \
-    \    return GetFunction<std::decay_t<T>>::template get<idx>(std::forward<T>(tuple_like));\r\
+    \ = tuple_like_size<T>::value;\r\n\r\n\n    // tuple_like\u306A\u30AA\u30D6\u30B8\
+    \u30A7\u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\u95A2\
+    \u6570\u30AF\u30E9\u30B9\n    template<class T, class = void>\n    struct GetFunction\
+    \ {\n        #define GET(...) \\\n            { \\\n                auto&& [__VA_ARGS__]\
+    \ = std::forward<U>(tuple_like); \\\n                return std::get<idx> (std::forward_as_tuple(__VA_ARGS__));\
+    \ \\\n            }\n\n        template<std::size_t idx, class U>\n        static\
+    \ constexpr decltype(auto) get(U&& tuple_like) noexcept {\n            constexpr\
+    \ std::size_t size = tuple_like_size_v<T>;\n            static_assert(size !=\
+    \ 0, \"The size must not be 0\");\n            static_assert(size < 9, \"The size\
+    \ of tuple_like must be less than 9\");\n            if constexpr (size == 1)\
+    \ GET(a)\n            else if constexpr (size == 2) GET(a, b)\n            else\
+    \ if constexpr (size == 3) GET(a, b, c)\n            else if constexpr (size ==\
+    \ 4) GET(a, b, c, d)\n            else if constexpr (size == 5) GET(a, b, c, d,\
+    \ e)\n            else if constexpr (size == 6) GET(a, b, c, d, e, f)\n      \
+    \      else if constexpr (size == 7) GET(a, b, c, d, e, f, g)\n            else\
+    \ GET(a, b, c, d, e, f, g, h)\n        }\n\n        #undef GET\n    };\n\n   \
+    \ template<class T>\n    struct GetFunction<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
+    \ {\n        template<std::size_t idx, class U>\n        static constexpr decltype(auto)\
+    \ get(U&& tuple_like) noexcept {\n            return std::get<idx>(std::forward<U>(tuple_like));\n\
+    \        }\n    };\r\n\r\n    namespace helper {\n        template<std::size_t\
+    \ idx>\r\n        struct GetHelper {\r\n            template<class T>\r\n    \
+    \        constexpr decltype(auto) operator ()(T&& tuple_like) const noexcept {\r\
+    \n                return GetFunction<std::decay_t<T>>::template get<idx>(std::forward<T>(tuple_like));\r\
     \n            }\r\n        };\r\n    }\r\n\r\n    // tuple-like\u306A\u30AA\u30D6\
     \u30B8\u30A7\u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\
     \r\n    template<std::size_t idx>\r\n    inline constexpr helper::GetHelper<idx>\
@@ -246,37 +239,44 @@ data:
     \n    };\r\n\r\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\
     \u306E\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n    template<std::size_t\
     \ idx, class T>\r\n    using tuple_like_element_t = typename tuple_like_element<idx,\
-    \ T>::type;\r\n} // namespace kpr\r\n#line 16 \"io/in.hpp\"\n\r\nnamespace kpr\
-    \ {\r\n    // \u30D0\u30C3\u30D5\u30A1\u3092\u7528\u3044\u3066\u30D5\u30A1\u30A4\
-    \u30EB\u3092\u8AAD\u307F\u8FBC\u3080\u30AF\u30E9\u30B9\r\n    template<std::size_t\
-    \ buf_size = KYOPRO_BUFFER_SIZE>\r\n    struct Reader {\r\n    private:\r\n  \
-    \      int fd, idx;\r\n        std::array<char, buf_size> buffer;\r\n\r\n    public:\r\
-    \n        // \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\u3092\u53D6\u5F97\r\n\
-    \        static constexpr KYOPRO_BASE_INT get_buf_size() noexcept {\r\n      \
-    \      return buf_size;\r\n        }\r\n\r\n        Reader() {\r\n           \
-    \ [[maybe_unused]] ssize_t res = read(fd, buffer.begin(), buf_size);\r\n     \
-    \   }\r\n        Reader(int fd): fd(fd), idx(0), buffer() {\r\n            [[maybe_unused]]\
-    \ ssize_t res = read(fd, buffer.begin(), buf_size);\r\n        }\r\n        Reader(FILE*\
-    \ fp): fd(fileno(fp)), idx(0), buffer() {\r\n            [[maybe_unused]] ssize_t\
-    \ res = read(fd, buffer.begin(), buf_size);\r\n        }\r\n\r\n        // \u5165\
-    \u529B\u30A4\u30C6\u30EC\u30FC\u30BF\r\n        struct iterator {\r\n        private:\r\
-    \n            Reader& reader;\r\n\r\n        public:\r\n            using difference_type\
-    \ = void;\r\n            using value_type = void;\r\n            using pointer\
-    \ = void;\r\n            using reference = void;\r\n            using iterator_category\
-    \ = std::input_iterator_tag;\r\n\r\n            iterator() noexcept = default;\r\
-    \n            iterator(Reader& reader) noexcept: reader(reader) {}\r\n\r\n   \
-    \         iterator& operator ++() {\r\n                ++reader.idx;\r\n     \
-    \           if (reader.idx == buf_size) {\r\n                    [[maybe_unused]]\
-    \ ssize_t res = read(reader.fd, reader.buffer.begin(), buf_size);\r\n        \
-    \            reader.idx = 0;\r\n                }\r\n                return *this;\r\
-    \n            }\r\n\r\n            iterator operator ++(int) {\r\n           \
-    \     iterator before = *this;\r\n                operator ++();\r\n         \
-    \       return before;\r\n            }\r\n\r\n            char& operator *()\
-    \ const {\r\n                return reader.buffer[reader.idx];\r\n           \
-    \ }\r\n        };\r\n\r\n        // \u30D5\u30A1\u30A4\u30EB\u306E\u6700\u521D\
-    \u3092\u793A\u3059\u30A4\u30C6\u30EC\u30FC\u30BF\u3092\u53D6\u5F97\r\n       \
-    \ iterator begin() noexcept {\r\n            return iterator(*this);\r\n     \
-    \   }\r\n    };\r\n\r\n    // \u6A19\u6E96\u5165\u529B\r\n    Reader input{0};\r\
+    \ T>::type;\n\n\n    // \u578BT\u304Ctuple_like\u304B\u8ABF\u3079\u308B\n    template<class,\
+    \ class = void>\n    struct is_tuple_like {\n        static constexpr bool value\
+    \ = false;\n    };\n\n    template<class T>\n    struct is_tuple_like<T, std::enable_if_t<std::is_aggregate_v<T>>>\
+    \ {\n        static constexpr bool value = true;\n    };\n\n    template<class\
+    \ T>\n    struct is_tuple_like<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
+    \ {\n        static constexpr bool value = true;\n    };\n\n    // \u578BT\u304C\
+    tuple_like\u304B\u8ABF\u3079\u308B\n    template<class T>\n    inline constexpr\
+    \ bool is_tuple_like_v = is_tuple_like<T>::value;\r\n} // namespace kpr\r\n#line\
+    \ 16 \"io/in.hpp\"\n\r\nnamespace kpr {\r\n    // \u30D0\u30C3\u30D5\u30A1\u3092\
+    \u7528\u3044\u3066\u30D5\u30A1\u30A4\u30EB\u3092\u8AAD\u307F\u8FBC\u3080\u30AF\
+    \u30E9\u30B9\r\n    template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>\r\n  \
+    \  struct Reader {\r\n    private:\r\n        int fd, idx;\r\n        std::array<char,\
+    \ buf_size> buffer;\r\n\r\n    public:\r\n        // \u30D0\u30C3\u30D5\u30A1\u30B5\
+    \u30A4\u30BA\u3092\u53D6\u5F97\r\n        static constexpr KYOPRO_BASE_INT get_buf_size()\
+    \ noexcept {\r\n            return buf_size;\r\n        }\r\n\r\n        Reader()\
+    \ {\r\n            [[maybe_unused]] ssize_t res = read(fd, buffer.begin(), buf_size);\r\
+    \n        }\r\n        Reader(int fd): fd(fd), idx(0), buffer() {\r\n        \
+    \    [[maybe_unused]] ssize_t res = read(fd, buffer.begin(), buf_size);\r\n  \
+    \      }\r\n        Reader(FILE* fp): fd(fileno(fp)), idx(0), buffer() {\r\n \
+    \           [[maybe_unused]] ssize_t res = read(fd, buffer.begin(), buf_size);\r\
+    \n        }\r\n\r\n        // \u5165\u529B\u30A4\u30C6\u30EC\u30FC\u30BF\r\n \
+    \       struct iterator {\r\n        private:\r\n            Reader& reader;\r\
+    \n\r\n        public:\r\n            using difference_type = void;\r\n       \
+    \     using value_type = void;\r\n            using pointer = void;\r\n      \
+    \      using reference = void;\r\n            using iterator_category = std::input_iterator_tag;\r\
+    \n\r\n            iterator() noexcept = default;\r\n            iterator(Reader&\
+    \ reader) noexcept: reader(reader) {}\r\n\r\n            iterator& operator ++()\
+    \ {\r\n                ++reader.idx;\r\n                if (reader.idx == buf_size)\
+    \ {\r\n                    [[maybe_unused]] ssize_t res = read(reader.fd, reader.buffer.begin(),\
+    \ buf_size);\r\n                    reader.idx = 0;\r\n                }\r\n \
+    \               return *this;\r\n            }\r\n\r\n            iterator operator\
+    \ ++(int) {\r\n                iterator before = *this;\r\n                operator\
+    \ ++();\r\n                return before;\r\n            }\r\n\r\n           \
+    \ char& operator *() const {\r\n                return reader.buffer[reader.idx];\r\
+    \n            }\r\n        };\r\n\r\n        // \u30D5\u30A1\u30A4\u30EB\u306E\
+    \u6700\u521D\u3092\u793A\u3059\u30A4\u30C6\u30EC\u30FC\u30BF\u3092\u53D6\u5F97\
+    \r\n        iterator begin() noexcept {\r\n            return iterator(*this);\r\
+    \n        }\r\n    };\r\n\r\n    // \u6A19\u6E96\u5165\u529B\r\n    Reader input{0};\r\
     \n\r\n\r\n    // \u5024\u306E\u5165\u529B\u306E\u95A2\u6570\u30AF\u30E9\u30B9\r\
     \n    template<class, class = void>\r\n    struct ScanFunction;\r\n\r\n    //\
     \ \u5165\u529B\u30A4\u30C6\u30EC\u30FC\u30BF\u3092\u7528\u3044\u3066\u5024\u3092\
@@ -522,7 +522,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo/many_aplusb.test.cpp
   requiredBy: []
-  timestamp: '2023-02-19 20:41:56+09:00'
+  timestamp: '2023-03-07 11:56:47+00:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yosupo/many_aplusb.test.cpp

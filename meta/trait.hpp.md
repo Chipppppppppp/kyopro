@@ -68,9 +68,6 @@ data:
   - icon: ':warning:'
     path: meta/meta.hpp
     title: meta/meta.hpp
-  - icon: ':heavy_check_mark:'
-    path: meta/tuple_like.hpp
-    title: meta/tuple_like.hpp
   - icon: ':warning:'
     path: range/imap.hpp
     title: range/imap.hpp
@@ -87,14 +84,17 @@ data:
     path: template/io.hpp
     title: template/io.hpp
   - icon: ':warning:'
-    path: template/lambda.hpp
-    title: template/lambda.hpp
-  - icon: ':warning:'
     path: template/macro.hpp
     title: template/macro.hpp
   - icon: ':warning:'
+    path: template/named_tuple.hpp
+    title: template/named_tuple.hpp
+  - icon: ':warning:'
     path: template/template.hpp
     title: template/template.hpp
+  - icon: ':warning:'
+    path: test.cpp
+    title: test.cpp
   - icon: ':warning:'
     path: verify/hello_world.cpp
     title: verify/hello_world.cpp
@@ -373,19 +373,19 @@ data:
   - io/in.hpp
   - io/io.hpp
   - verify/hello_world.cpp
-  - template/lambda.hpp
   - template/template.hpp
   - template/io.hpp
   - template/alias.hpp
   - template/macro.hpp
+  - template/named_tuple.hpp
   - algorithm/algorithm.hpp
   - algorithm/bit.hpp
   - algorithm/Hash.hpp
+  - test.cpp
   - all/all.hpp
   - function/monoid.hpp
   - function/function.hpp
   - meta/meta.hpp
-  - meta/tuple_like.hpp
   - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
