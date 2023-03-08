@@ -189,6 +189,9 @@ data:
     - icon: ':warning:'
       path: template/template.hpp
       title: template/template.hpp
+    - icon: ':warning:'
+      path: template/vals.hpp
+      title: template/vals.hpp
   - name: verify
     pages:
     - icon: ':warning:'

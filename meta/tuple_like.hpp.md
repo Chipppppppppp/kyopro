@@ -60,6 +60,9 @@ data:
     path: template/template.hpp
     title: template/template.hpp
   - icon: ':warning:'
+    path: template/vals.hpp
+    title: template/vals.hpp
+  - icon: ':warning:'
     path: test.cpp
     title: test.cpp
   - icon: ':warning:'
@@ -225,6 +228,7 @@ data:
   - io/in.hpp
   - io/io.hpp
   - verify/hello_world.cpp
+  - template/vals.hpp
   - template/lambda.hpp
   - template/template.hpp
   - template/io.hpp
