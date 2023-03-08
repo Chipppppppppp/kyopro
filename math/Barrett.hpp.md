@@ -193,11 +193,11 @@ data:
   isVerificationFile: false
   path: math/Barrett.hpp
   requiredBy:
-  - all/all.hpp
-  - all.hpp
-  - test.cpp
   - math/math.hpp
   - verify/hello_world.cpp
+  - test.cpp
+  - all/all.hpp
+  - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

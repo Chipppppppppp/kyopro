@@ -102,30 +102,30 @@ data:
   isVerificationFile: false
   path: io/io_option.hpp
   requiredBy:
-  - all/all.hpp
-  - all.hpp
-  - test.cpp
-  - math/factorize.hpp
+  - math/math.hpp
   - math/is_prime.hpp
   - math/ModInt.hpp
-  - math/math.hpp
   - math/DynamicModInt.hpp
-  - verify/hello_world.cpp
-  - template/named_tuple.hpp
-  - template/alias.hpp
-  - template/template.hpp
-  - template/macro.hpp
-  - template/io.hpp
-  - io/in.hpp
+  - math/factorize.hpp
   - io/out.hpp
+  - io/in.hpp
   - io/io.hpp
+  - verify/hello_world.cpp
+  - template/template.hpp
+  - template/io.hpp
+  - template/alias.hpp
+  - template/macro.hpp
+  - template/named_tuple.hpp
+  - test.cpp
+  - all/all.hpp
+  - all.hpp
   timestamp: '2023-02-19 20:41:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yosupo/factorize.test.cpp
-  - verify/yosupo/many_aplusb.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/unionfind.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/factorize.test.cpp
   - verify/aoj/PrimeNumber.test.cpp
 documentation_of: io/io_option.hpp
 layout: document

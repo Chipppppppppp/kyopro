@@ -293,17 +293,17 @@ data:
   isVerificationFile: false
   path: algorithm/bit.hpp
   requiredBy:
-  - all/all.hpp
-  - all.hpp
-  - algorithm/algorithm.hpp
-  - test.cpp
-  - math/factorize.hpp
+  - math/math.hpp
   - math/is_prime.hpp
   - math/ModInt.hpp
-  - math/math.hpp
+  - math/factorize.hpp
   - verify/hello_world.cpp
-  - template/alias.hpp
   - template/template.hpp
+  - template/alias.hpp
+  - algorithm/algorithm.hpp
+  - test.cpp
+  - all/all.hpp
+  - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

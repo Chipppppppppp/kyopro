@@ -109,36 +109,36 @@ data:
   isVerificationFile: false
   path: math/power.hpp
   requiredBy:
-  - all/all.hpp
-  - all.hpp
-  - data_structure/structure.hpp
-  - data_structure/data_structure.hpp
-  - data_structure/FenwickTree.hpp
-  - test.cpp
-  - function/function.hpp
-  - function/monoid.hpp
-  - math/factorize.hpp
+  - math/math.hpp
   - math/is_prime.hpp
   - math/ModInt.hpp
-  - math/math.hpp
   - math/DynamicModInt.hpp
-  - verify/hello_world.cpp
-  - template/named_tuple.hpp
-  - template/alias.hpp
-  - template/template.hpp
-  - template/macro.hpp
-  - template/io.hpp
-  - meta/meta.hpp
-  - meta/constant.hpp
+  - math/factorize.hpp
+  - data_structure/FenwickTree.hpp
+  - data_structure/data_structure.hpp
+  - data_structure/structure.hpp
   - io/in.hpp
   - io/io.hpp
+  - verify/hello_world.cpp
+  - template/template.hpp
+  - template/io.hpp
+  - template/alias.hpp
+  - template/macro.hpp
+  - template/named_tuple.hpp
+  - test.cpp
+  - all/all.hpp
+  - function/monoid.hpp
+  - function/function.hpp
+  - meta/meta.hpp
+  - meta/constant.hpp
+  - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yosupo/factorize.test.cpp
-  - verify/yosupo/many_aplusb.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/unionfind.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/factorize.test.cpp
   - verify/aoj/PrimeNumber.test.cpp
 documentation_of: math/power.hpp
 layout: document

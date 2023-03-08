@@ -47,11 +47,11 @@ data:
   isVerificationFile: false
   path: template/all_rall.hpp
   requiredBy:
-  - all.hpp
-  - test.cpp
   - verify/hello_world.cpp
   - template/template.hpp
   - template/macro.hpp
+  - test.cpp
+  - all.hpp
   timestamp: '2023-02-19 20:41:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

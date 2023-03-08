@@ -111,16 +111,15 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"template/alias.hpp\"\n#include <cstdint>\n#include <forward_list>\n\
-    #include <functional>\r\n#include <limits>\n#include <list>\n#include <map>\n\
-    #include <queue>\n#include <set>\n#include <stack>\n#include <string>\r\n#include\
-    \ <tuple>\n#include <unordered_map>\n#include <unordered_set>\r\n#include <utility>\r\
-    \n#include <vector>\r\n#line 2 \"algorithm/Hash.hpp\"\n#include <cstddef>\r\n\
-    #line 4 \"algorithm/Hash.hpp\"\n#include <iterator>\r\n#include <type_traits>\r\
-    \n#line 6 \"meta/tuple_like.hpp\"\n\r\nnamespace kpr {\r\n    namespace helper\
-    \ {\r\n        struct CastableToAny {\r\n            template<class T>\r\n   \
-    \         operator T() const noexcept;\r\n        };\r\n\r\n        template<class\
-    \ T, std::size_t... idx, std::void_t<decltype(T{((void)idx, CastableToAny{})...})>*\
-    \ = nullptr>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
+    #include <functional>\n#include <limits>\n#include <list>\n#include <map>\n#include\
+    \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
+    #include <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include\
+    \ <vector>\n#line 2 \"algorithm/Hash.hpp\"\n#include <cstddef>\r\n#line 4 \"algorithm/Hash.hpp\"\
+    \n#include <iterator>\r\n#include <type_traits>\r\n#line 6 \"meta/tuple_like.hpp\"\
+    \n\r\nnamespace kpr {\r\n    namespace helper {\r\n        struct CastableToAny\
+    \ {\r\n            template<class T>\r\n            operator T() const noexcept;\r\
+    \n        };\r\n\r\n        template<class T, std::size_t... idx, std::void_t<decltype(T{((void)idx,\
+    \ CastableToAny{})...})>* = nullptr>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
     \ bool) noexcept {\r\n            return true;\r\n        }\r\n        template<class\
     \ T, std::size_t... idx>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
     \ char) noexcept {\r\n            return false;\r\n        }\n\n        template<class\
@@ -854,45 +853,43 @@ data:
     \n    struct Hash<ModInt<mod>> {\r\n        using value_type = ModInt<mod>;\r\n\
     \        constexpr std::size_t operator ()(ModInt<mod> a) const noexcept {\r\n\
     \            return static_cast<std::size_t>(a);\r\n        }\r\n    };\r\n} //\
-    \ namespace kpr\r\n#line 22 \"template/alias.hpp\"\n\r\nnamespace kpr {\n    using\
-    \ ushort = unsigned short;\r\n    using li = long long;\r\n    using uli = unsigned\
-    \ long long;\r\n    using lf = double;\n    using llf = long double;\r\n\r\n \
-    \   using i8 = std::int8_t;\r\n    using u8 = std::uint8_t;\r\n    using i16 =\
-    \ std::int16_t;\r\n    using u16 = std::uint16_t;\r\n    using i32 = std::int32_t;\r\
-    \n    using u32 = std::uint32_t;\r\n    using i64 = std::int64_t;\r\n    using\
-    \ u64 = std::uint64_t;\r\n    #ifdef __SIZEOF_INT128__\r\n    using i128 = __int128_t;\r\
-    \n    using u128 = __uint128_t;\r\n    #endif\r\n    #ifdef __SIZEOF_FLOAT128__\r\
-    \n    using f128 = __float128;\r\n    #endif\r\n\r\n    using mint = ModInt<mod>;\r\
-    \n    using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\r\n\r\n    template<class\
-    \ T, std::size_t idx, class... Args>\r\n    struct agg_type {\r\n        using\
-    \ type = typename agg_type<T, idx - 1, T, Args...>::type;\r\n    };\r\n    template<class\
-    \ T, class... Args>\r\n    struct agg_type<T, 0, Args...> {\r\n        using type\
-    \ = std::tuple<Args...>;\r\n    };\r\n    template<class T>\r\n    struct agg_type<T,\
-    \ 0, T, T> {\r\n        using type = std::pair<T, T>;\r\n    };\r\n\r\n    template<class\
-    \ T, std::size_t idx>\r\n    using agg = typename agg_type<T, idx>::type;\r\n\
-    \    using li1 = agg<li, 1>;\r\n    using li2 = agg<li, 2>;\r\n    using li3 =\
-    \ agg<li, 3>;\r\n    using li4 = agg<li, 4>;\r\n    using li5 = agg<li, 5>;\n\n\
-    \n    #define DEFINE_ALIAS(name, short_name, value) \\\n        using short_name\
+    \ namespace kpr\r\n#line 22 \"template/alias.hpp\"\n\nnamespace kpr {\n    using\
+    \ ushort = unsigned short;\n    using li = long long;\n    using uli = unsigned\
+    \ long long;\n    using lf = double;\n    using llf = long double;\n\n    using\
+    \ i8 = std::int8_t;\n    using u8 = std::uint8_t;\n    using i16 = std::int16_t;\n\
+    \    using u16 = std::uint16_t;\n    using i32 = std::int32_t;\n    using u32\
+    \ = std::uint32_t;\n    using i64 = std::int64_t;\n    using u64 = std::uint64_t;\n\
+    \    #ifdef __SIZEOF_INT128__\n    using i128 = __int128_t;\n    using u128 =\
+    \ __uint128_t;\n    #endif\n    #ifdef __SIZEOF_FLOAT128__\n    using f128 = __float128;\n\
+    \    #endif\n\n    using mint = ModInt<mod>;\n    using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\
+    \n    template<class T, std::size_t idx, class... Args>\n    struct agg_type {\n\
+    \        using type = typename agg_type<T, idx - 1, T, Args...>::type;\n    };\n\
+    \    template<class T, class... Args>\n    struct agg_type<T, 0, Args...> {\n\
+    \        using type = std::tuple<Args...>;\n    };\n    template<class T>\n  \
+    \  struct agg_type<T, 0, T, T> {\n        using type = std::pair<T, T>;\n    };\n\
+    \n    template<class T, std::size_t idx>\n    using agg = typename agg_type<T,\
+    \ idx>::type;\n    using li1 = agg<li, 1>;\n    using li2 = agg<li, 2>;\n    using\
+    \ li3 = agg<li, 3>;\n    using li4 = agg<li, 4>;\n    using li5 = agg<li, 5>;\n\
+    \n\n    #define DEFINE_ALIAS(name, short_name, value) \\\n        using short_name\
     \ ## value = name<value>; \\\n        using short_name ## short_name ## value\
     \ = name<value>; \\\n        using short_name ## short_name ## short_name ## value\
     \ = name<value>; \\\n        using short_name ## short_name ## short_name ## short_name\
-    \ ## value = name<value>; \\\n        using V ## short_name ## short_name ## short_name\
-    \ ## short_name ## value = Vec<name<value>>; \\\n        using VV ## short_name\
-    \ ## short_name ## short_name ## short_name ## value = VVec<name<value>>;\n\n\
-    \    #define DEFINE_CONTAINER_ALIAS(name, short_name) \\\n        DEFINE_ALIAS(name,\
-    \ short_name, int); \\\n        DEFINE_ALIAS(name, short_name, li); \\\n     \
-    \   DEFINE_ALIAS(name, short_name, float); \\\n        DEFINE_ALIAS(name, short_name,\
-    \ lf); \\\n        DEFINE_ALIAS(name, short_name, llf); \\\n        DEFINE_ALIAS(name,\
-    \ short_name, mint); \\\n        DEFINE_ALIAS(name, short_name, dmint); \\\n \
-    \       DEFINE_ALIAS(name, short_name, li1); \\\n        DEFINE_ALIAS(name, short_name,\
-    \ li2); \\\n        DEFINE_ALIAS(name, short_name, li3); \\\n        DEFINE_ALIAS(name,\
-    \ short_name, li4); \\\n        DEFINE_ALIAS(name, short_name, li5);\n\r\n\r\n\
-    \    template<class T>\r\n    using Vec = std::vector<T>;\n    template<class\
-    \ T>\n    using VVec = Vec<Vec<T>>;\n    template<class T>\n    using VVVec =\
-    \ Vec<VVec<T>>;\n    template<class T>\n    using VVVVec = Vec<VVVec<T>>;\n  \
-    \  template<class T>\n    using VVVVVec = Vec<VVVVec<T>>;\n\n    DEFINE_CONTAINER_ALIAS(Vec,\
-    \ V);\n\n    template<class T>\n    using Deque = std::deque<T>;\n\n    DEFINE_CONTAINER_ALIAS(Deque,\
-    \ D);\n\n    template<class T>\n    using List = std::list<T>;\n\n    DEFINE_CONTAINER_ALIAS(List,\
+    \ ## value = name<value>; \\\n        using V ## short_name ## value = Vec<name<value>>;\
+    \ \\\n        using VV ## short_name ## value = VVec<name<value>>;\n\n    #define\
+    \ DEFINE_CONTAINER_ALIAS(name, short_name) \\\n        DEFINE_ALIAS(name, short_name,\
+    \ int); \\\n        DEFINE_ALIAS(name, short_name, li); \\\n        DEFINE_ALIAS(name,\
+    \ short_name, float); \\\n        DEFINE_ALIAS(name, short_name, lf); \\\n   \
+    \     DEFINE_ALIAS(name, short_name, llf); \\\n        DEFINE_ALIAS(name, short_name,\
+    \ mint); \\\n        DEFINE_ALIAS(name, short_name, dmint); \\\n        DEFINE_ALIAS(name,\
+    \ short_name, li1); \\\n        DEFINE_ALIAS(name, short_name, li2); \\\n    \
+    \    DEFINE_ALIAS(name, short_name, li3); \\\n        DEFINE_ALIAS(name, short_name,\
+    \ li4); \\\n        DEFINE_ALIAS(name, short_name, li5);\n\n\n    template<class\
+    \ T>\n    using Vec = std::vector<T>;\n    template<class T>\n    using VVec =\
+    \ Vec<Vec<T>>;\n    template<class T>\n    using VVVec = Vec<VVec<T>>;\n    template<class\
+    \ T>\n    using VVVVec = Vec<VVVec<T>>;\n    template<class T>\n    using VVVVVec\
+    \ = Vec<VVVVec<T>>;\n\n    DEFINE_CONTAINER_ALIAS(Vec, V);\n\n    template<class\
+    \ T>\n    using Deque = std::deque<T>;\n\n    DEFINE_CONTAINER_ALIAS(Deque, D);\n\
+    \n    template<class T>\n    using List = std::list<T>;\n\n    DEFINE_CONTAINER_ALIAS(List,\
     \ L);\n\n    template<class T>\n    using ForwardList = std::forward_list<T>;\n\
     \n    DEFINE_CONTAINER_ALIAS(ForwardList, FL);\n\n    template<class Key, class\
     \ Compare = Less>\n    using Set = std::set<Key, Compare>;\n    template<class\
@@ -917,31 +914,31 @@ data:
     \ PriQ = std::priority_queue<T, Container, Compare>;\n    template<class T, class\
     \ Compare = Greater, class Container = Vec<T>>\n    using HeapQ = PriQ<T, Compare,\
     \ Container>;\n\n    DEFINE_CONTAINER_ALIAS(PriQ, PQ);\n    DEFINE_CONTAINER_ALIAS(HeapQ,\
-    \ HQ);\n\n    template<std::size_t size>\n    using BitSet = std::bitset<size>;\r\
-    \n} // namespace kpr\r\n\r\nusing namespace std;\r\nusing namespace kpr;\r\n#line\
-    \ 2 \"template/amin_amax.hpp\"\n\r\nnamespace kpr {\r\n    template<class T, class\
-    \ U = T>\r\n    constexpr bool amin(T& a, const U& b) noexcept {\r\n        if\
-    \ (b < a) {\r\n            a = b;\r\n            return true;\r\n        }\r\n\
-    \        return false;\r\n    }\r\n\r\n    template<class T, class U = T>\r\n\
-    \    constexpr bool amax(T& a, const U& b) noexcept {\r\n        if (a < b) {\r\
-    \n            a = b;\r\n            return true;\r\n        }\r\n        return\
-    \ false;\r\n    }\r\n} // namespace kpr\r\n#line 4 \"template/constant.hpp\"\n\
-    \r\nnamespace kpr {\r\n    inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 4> beside{{{-1, 0}, {0, -1}, {1, 0}, {0, 1}}};\r\n    inline\
-    \ constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{-1,\
-    \ 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1, 1}, {0, 1}, {-1, 1}}};\r\n} // namespace\
-    \ kpr\r\n#line 4 \"template/len.hpp\"\n\r\nnamespace kpr {\r\n    [[maybe_unused]]\
-    \ inline constexpr struct {\r\n        template<class T>\r\n        constexpr\
-    \ KYOPRO_BASE_INT operator ()(T&& a) const noexcept {\r\n            return std::size(a);\r\
-    \n        }\r\n    } len;\r\n} // namespace kpr\r\n#line 3 \"template/all_rall.hpp\"\
-    \n\n#define all(...) std::begin(__VA_ARGS__), std::end(__VA_ARGS__)\n#define rall(...)\
-    \ std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\n#line 4 \"template/io.hpp\"\
-    \n#include <istream>\n#line 10 \"template/io.hpp\"\n\nnamespace kpr::helper {\n\
-    \    template<std::size_t len>\n    constexpr std::size_t va_args_size(const char\
-    \ (&s)[len]) noexcept {\n        if constexpr (len == 1) return 0;\n        std::size_t\
-    \ cnt = 1;\n        std::uint_fast64_t bracket = 0;\n        for (auto i: s) {\n\
-    \            if (i == '(') ++bracket;\n            else if (i == ')') --bracket;\n\
-    \            else if (i == ',' && bracket == 0) ++cnt;\n        }\n        return\
+    \ HQ);\n\n    template<std::size_t size>\n    using BitSet = std::bitset<size>;\n\
+    } // namespace kpr\n\nusing namespace std;\nusing namespace kpr;\n#line 2 \"template/amin_amax.hpp\"\
+    \n\r\nnamespace kpr {\r\n    template<class T, class U = T>\r\n    constexpr bool\
+    \ amin(T& a, const U& b) noexcept {\r\n        if (b < a) {\r\n            a =\
+    \ b;\r\n            return true;\r\n        }\r\n        return false;\r\n   \
+    \ }\r\n\r\n    template<class T, class U = T>\r\n    constexpr bool amax(T& a,\
+    \ const U& b) noexcept {\r\n        if (a < b) {\r\n            a = b;\r\n   \
+    \         return true;\r\n        }\r\n        return false;\r\n    }\r\n} //\
+    \ namespace kpr\r\n#line 4 \"template/constant.hpp\"\n\r\nnamespace kpr {\r\n\
+    \    inline constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>,\
+    \ 4> beside{{{-1, 0}, {0, -1}, {1, 0}, {0, 1}}};\r\n    inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
+    \ KYOPRO_BASE_INT>, 8> around{{{-1, 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1,\
+    \ 1}, {0, 1}, {-1, 1}}};\r\n} // namespace kpr\r\n#line 4 \"template/len.hpp\"\
+    \n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr struct {\r\n  \
+    \      template<class T>\r\n        constexpr KYOPRO_BASE_INT operator ()(T&&\
+    \ a) const noexcept {\r\n            return std::size(a);\r\n        }\r\n   \
+    \ } len;\r\n} // namespace kpr\r\n#line 3 \"template/all_rall.hpp\"\n\n#define\
+    \ all(...) std::begin(__VA_ARGS__), std::end(__VA_ARGS__)\n#define rall(...) std::rbegin(__VA_ARGS__),\
+    \ std::rend(__VA_ARGS__)\n#line 4 \"template/io.hpp\"\n#include <istream>\n#line\
+    \ 10 \"template/io.hpp\"\n\nnamespace kpr::helper {\n    template<std::size_t\
+    \ len>\n    constexpr std::size_t va_args_size(const char (&s)[len]) noexcept\
+    \ {\n        if constexpr (len == 1) return 0;\n        std::size_t cnt = 1;\n\
+    \        std::uint_fast64_t bracket = 0;\n        for (auto i: s) {\n        \
+    \    if (i == '(') ++bracket;\n            else if (i == ')') --bracket;\n   \
+    \         else if (i == ',' && bracket == 0) ++cnt;\n        }\n        return\
     \ cnt;\n    }\n\n    template<class F, std::size_t... idx>\n    auto read_impl(F&&\
     \ f, std::index_sequence<idx...>) {\n        return std::tuple{(static_cast<void>(idx),\
     \ f())...};\n    }\n\n    Printer<Writer<>::iterator, true, true, true, true>\
@@ -1117,10 +1114,10 @@ data:
   isVerificationFile: false
   path: template/template.hpp
   requiredBy:
-  - all.hpp
-  - test.cpp
   - verify/hello_world.cpp
-  timestamp: '2023-03-07 11:56:47+00:00'
+  - test.cpp
+  - all.hpp
+  timestamp: '2023-03-09 00:15:29+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/template.hpp

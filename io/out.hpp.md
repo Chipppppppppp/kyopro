@@ -593,28 +593,28 @@ data:
   isVerificationFile: false
   path: io/out.hpp
   requiredBy:
-  - all/all.hpp
-  - all.hpp
-  - test.cpp
-  - math/factorize.hpp
+  - math/math.hpp
   - math/is_prime.hpp
   - math/ModInt.hpp
-  - math/math.hpp
   - math/DynamicModInt.hpp
-  - verify/hello_world.cpp
-  - template/named_tuple.hpp
-  - template/alias.hpp
-  - template/template.hpp
-  - template/macro.hpp
-  - template/io.hpp
+  - math/factorize.hpp
   - io/io.hpp
+  - verify/hello_world.cpp
+  - template/template.hpp
+  - template/io.hpp
+  - template/alias.hpp
+  - template/macro.hpp
+  - template/named_tuple.hpp
+  - test.cpp
+  - all/all.hpp
+  - all.hpp
   timestamp: '2023-03-07 11:56:47+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yosupo/factorize.test.cpp
-  - verify/yosupo/many_aplusb.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/unionfind.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/factorize.test.cpp
   - verify/aoj/PrimeNumber.test.cpp
 documentation_of: io/out.hpp
 layout: document

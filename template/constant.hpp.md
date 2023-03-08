@@ -54,10 +54,10 @@ data:
   isVerificationFile: false
   path: template/constant.hpp
   requiredBy:
-  - all.hpp
-  - test.cpp
   - verify/hello_world.cpp
   - template/template.hpp
+  - test.cpp
+  - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

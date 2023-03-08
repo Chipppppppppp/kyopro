@@ -304,9 +304,9 @@ data:
   isVerificationFile: false
   path: data_structure/data_structure.hpp
   requiredBy:
-  - all.hpp
-  - test.cpp
   - verify/hello_world.cpp
+  - test.cpp
+  - all.hpp
   timestamp: '2023-02-14 01:39:39+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

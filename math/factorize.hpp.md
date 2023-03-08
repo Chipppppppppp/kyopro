@@ -822,11 +822,11 @@ data:
   isVerificationFile: false
   path: math/factorize.hpp
   requiredBy:
-  - all/all.hpp
-  - all.hpp
-  - test.cpp
   - math/math.hpp
   - verify/hello_world.cpp
+  - test.cpp
+  - all/all.hpp
+  - all.hpp
   timestamp: '2023-03-07 11:56:47+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

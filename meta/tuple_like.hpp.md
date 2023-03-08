@@ -219,35 +219,35 @@ data:
   isVerificationFile: false
   path: meta/tuple_like.hpp
   requiredBy:
-  - all/all.hpp
-  - all.hpp
+  - math/math.hpp
+  - math/is_prime.hpp
+  - math/ModInt.hpp
+  - math/DynamicModInt.hpp
+  - math/factorize.hpp
+  - io/out.hpp
+  - io/in.hpp
+  - io/io.hpp
+  - verify/hello_world.cpp
+  - template/vals.hpp
+  - template/lambda.hpp
+  - template/template.hpp
+  - template/io.hpp
+  - template/alias.hpp
+  - template/macro.hpp
+  - template/named_tuple.hpp
   - algorithm/algorithm.hpp
   - algorithm/Hash.hpp
   - test.cpp
-  - math/factorize.hpp
-  - math/is_prime.hpp
-  - math/ModInt.hpp
-  - math/math.hpp
-  - math/DynamicModInt.hpp
-  - verify/hello_world.cpp
-  - template/named_tuple.hpp
-  - template/alias.hpp
-  - template/template.hpp
-  - template/vals.hpp
-  - template/lambda.hpp
-  - template/macro.hpp
-  - template/io.hpp
+  - all/all.hpp
   - meta/meta.hpp
-  - io/in.hpp
-  - io/out.hpp
-  - io/io.hpp
+  - all.hpp
   timestamp: '2023-03-07 11:56:47+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yosupo/factorize.test.cpp
-  - verify/yosupo/many_aplusb.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/unionfind.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/factorize.test.cpp
   - verify/aoj/PrimeNumber.test.cpp
 documentation_of: meta/tuple_like.hpp
 layout: document

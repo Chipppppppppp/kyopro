@@ -355,45 +355,45 @@ data:
   isVerificationFile: false
   path: meta/trait.hpp
   requiredBy:
-  - all/all.hpp
-  - all.hpp
+  - math/math.hpp
+  - math/is_prime.hpp
+  - math/ModInt.hpp
+  - math/DynamicModInt.hpp
+  - math/Barrett.hpp
+  - math/div.hpp
+  - math/factorize.hpp
+  - data_structure/FenwickTree.hpp
+  - data_structure/data_structure.hpp
   - data_structure/structure.hpp
   - data_structure/UnionFind.hpp
-  - data_structure/data_structure.hpp
-  - data_structure/FenwickTree.hpp
-  - range/imap.hpp
   - range/range.hpp
+  - range/imap.hpp
   - range/irange.hpp
+  - io/out.hpp
+  - io/in.hpp
+  - io/io.hpp
+  - verify/hello_world.cpp
+  - template/template.hpp
+  - template/io.hpp
+  - template/alias.hpp
+  - template/macro.hpp
+  - template/named_tuple.hpp
   - algorithm/algorithm.hpp
   - algorithm/bit.hpp
   - algorithm/Hash.hpp
   - test.cpp
-  - function/function.hpp
+  - all/all.hpp
   - function/monoid.hpp
-  - math/factorize.hpp
-  - math/is_prime.hpp
-  - math/ModInt.hpp
-  - math/math.hpp
-  - math/DynamicModInt.hpp
-  - math/div.hpp
-  - math/Barrett.hpp
-  - verify/hello_world.cpp
-  - template/named_tuple.hpp
-  - template/alias.hpp
-  - template/template.hpp
-  - template/macro.hpp
-  - template/io.hpp
+  - function/function.hpp
   - meta/meta.hpp
-  - io/in.hpp
-  - io/out.hpp
-  - io/io.hpp
+  - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yosupo/factorize.test.cpp
-  - verify/yosupo/many_aplusb.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/unionfind.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/factorize.test.cpp
   - verify/aoj/PrimeNumber.test.cpp
 documentation_of: meta/trait.hpp
 layout: document

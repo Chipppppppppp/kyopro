@@ -75,13 +75,13 @@ data:
   isVerificationFile: false
   path: function/compare.hpp
   requiredBy:
-  - all/all.hpp
-  - all.hpp
-  - test.cpp
-  - function/function.hpp
   - verify/hello_world.cpp
-  - template/alias.hpp
   - template/template.hpp
+  - template/alias.hpp
+  - test.cpp
+  - all/all.hpp
+  - function/function.hpp
+  - all.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
