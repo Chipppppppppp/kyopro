@@ -73,8 +73,8 @@ namespace kpr {
         using short_name ## short_name ## value = name<value>; \
         using short_name ## short_name ## short_name ## value = name<value>; \
         using short_name ## short_name ## short_name ## short_name ## value = name<value>; \
-        using V ## short_name ## short_name ## short_name ## short_name ## value = Vec<name<value>>; \
-        using VV ## short_name ## short_name ## short_name ## short_name ## value = VVec<name<value>>;
+        using V ## short_name ## value = Vec<name<value>>; \
+        using VV ## short_name ## value = VVec<name<value>>;
 
     #define DEFINE_CONTAINER_ALIAS(name, short_name) \
         DEFINE_ALIAS(name, short_name, int); \
