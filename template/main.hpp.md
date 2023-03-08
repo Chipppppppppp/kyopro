@@ -28,10 +28,10 @@ data:
   isVerificationFile: false
   path: template/main.hpp
   requiredBy:
+  - all.hpp
+  - test.cpp
   - verify/hello_world.cpp
   - template/template.hpp
-  - test.cpp
-  - all.hpp
   timestamp: '2023-02-12 02:54:52+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

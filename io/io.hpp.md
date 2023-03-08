@@ -544,20 +544,20 @@ data:
   isVerificationFile: false
   path: io/io.hpp
   requiredBy:
-  - verify/hello_world.cpp
-  - template/template.hpp
-  - template/io.hpp
-  - template/macro.hpp
-  - test.cpp
   - all/all.hpp
   - all.hpp
+  - test.cpp
+  - verify/hello_world.cpp
+  - template/template.hpp
+  - template/macro.hpp
+  - template/io.hpp
   timestamp: '2023-03-07 11:56:47+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yosupo/unionfind.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
-  - verify/yosupo/many_aplusb.test.cpp
   - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/unionfind.test.cpp
   - verify/aoj/PrimeNumber.test.cpp
 documentation_of: io/io.hpp
 layout: document

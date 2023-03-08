@@ -963,10 +963,10 @@ data:
   isVerificationFile: false
   path: template/alias.hpp
   requiredBy:
+  - all.hpp
+  - test.cpp
   - verify/hello_world.cpp
   - template/template.hpp
-  - test.cpp
-  - all.hpp
   timestamp: '2023-03-07 11:56:47+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
