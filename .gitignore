@@ -43,11 +43,3 @@
 
 # Built Visual Studio Code Extensions
 *.vsix
-
-# Replit
-.replit
-replit.nix
-.ccls-cache/
-
-# Build Test
-test.cpp
