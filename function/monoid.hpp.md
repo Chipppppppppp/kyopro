@@ -33,9 +33,6 @@ data:
     path: function/function.hpp
     title: function/function.hpp
   - icon: ':warning:'
-    path: test.cpp
-    title: test.cpp
-  - icon: ':warning:'
     path: verify/hello_world.cpp
     title: verify/hello_world.cpp
   _extendedVerifiedWith:
@@ -280,7 +277,6 @@ data:
   - data_structure/structure.hpp
   - data_structure/data_structure.hpp
   - data_structure/FenwickTree.hpp
-  - test.cpp
   - function/function.hpp
   - verify/hello_world.cpp
   timestamp: '2023-02-11 02:36:17+09:00'

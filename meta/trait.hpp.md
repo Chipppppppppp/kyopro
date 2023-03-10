@@ -93,9 +93,6 @@ data:
     path: template/template.hpp
     title: template/template.hpp
   - icon: ':warning:'
-    path: test.cpp
-    title: test.cpp
-  - icon: ':warning:'
     path: verify/hello_world.cpp
     title: verify/hello_world.cpp
   _extendedVerifiedWith:
@@ -367,7 +364,6 @@ data:
   - algorithm/algorithm.hpp
   - algorithm/bit.hpp
   - algorithm/Hash.hpp
-  - test.cpp
   - function/function.hpp
   - function/monoid.hpp
   - math/factorize.hpp

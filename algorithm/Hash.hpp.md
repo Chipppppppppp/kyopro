@@ -39,9 +39,6 @@ data:
     path: template/template.hpp
     title: template/template.hpp
   - icon: ':warning:'
-    path: test.cpp
-    title: test.cpp
-  - icon: ':warning:'
     path: verify/hello_world.cpp
     title: verify/hello_world.cpp
   _extendedVerifiedWith:
@@ -282,7 +279,6 @@ data:
   - all/all.hpp
   - all.hpp
   - algorithm/algorithm.hpp
-  - test.cpp
   - math/factorize.hpp
   - math/is_prime.hpp
   - math/ModInt.hpp

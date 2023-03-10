@@ -9,9 +9,6 @@ data:
     path: template/template.hpp
     title: template/template.hpp
   - icon: ':warning:'
-    path: test.cpp
-    title: test.cpp
-  - icon: ':warning:'
     path: verify/hello_world.cpp
     title: verify/hello_world.cpp
   _extendedVerifiedWith: []
@@ -29,7 +26,6 @@ data:
   path: template/main.hpp
   requiredBy:
   - all.hpp
-  - test.cpp
   - verify/hello_world.cpp
   - template/template.hpp
   timestamp: '2023-02-12 02:54:52+09:00'

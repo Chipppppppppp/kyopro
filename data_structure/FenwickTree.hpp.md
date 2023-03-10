@@ -27,9 +27,6 @@ data:
     path: data_structure/structure.hpp
     title: data_structure/structure.hpp
   - icon: ':warning:'
-    path: test.cpp
-    title: test.cpp
-  - icon: ':warning:'
     path: verify/hello_world.cpp
     title: verify/hello_world.cpp
   _extendedVerifiedWith:
@@ -289,7 +286,6 @@ data:
   - all.hpp
   - data_structure/structure.hpp
   - data_structure/data_structure.hpp
-  - test.cpp
   - verify/hello_world.cpp
   timestamp: '2023-02-14 01:39:39+09:00'
   verificationStatus: LIBRARY_ALL_AC

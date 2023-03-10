@@ -66,9 +66,6 @@ data:
     path: template/template.hpp
     title: template/template.hpp
   - icon: ':warning:'
-    path: test.cpp
-    title: test.cpp
-  - icon: ':warning:'
     path: verify/hello_world.cpp
     title: verify/hello_world.cpp
   _extendedVerifiedWith:
@@ -114,7 +111,6 @@ data:
   - data_structure/structure.hpp
   - data_structure/data_structure.hpp
   - data_structure/FenwickTree.hpp
-  - test.cpp
   - function/function.hpp
   - function/monoid.hpp
   - math/factorize.hpp

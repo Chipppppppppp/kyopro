@@ -51,9 +51,6 @@ data:
     path: math/math.hpp
     title: math/math.hpp
   - icon: ':warning:'
-    path: test.cpp
-    title: test.cpp
-  - icon: ':warning:'
     path: verify/hello_world.cpp
     title: verify/hello_world.cpp
   _extendedVerifiedWith:
@@ -775,7 +772,6 @@ data:
   requiredBy:
   - all/all.hpp
   - all.hpp
-  - test.cpp
   - math/factorize.hpp
   - math/math.hpp
   - verify/hello_world.cpp

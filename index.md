@@ -22,9 +22,6 @@ data:
     - icon: ':warning:'
       path: all.hpp
       title: all.hpp
-    - icon: ':warning:'
-      path: test.cpp
-      title: test.cpp
   - name: data_structure
     pages:
     - icon: ':heavy_check_mark:'
