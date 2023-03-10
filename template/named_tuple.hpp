@@ -7,7 +7,7 @@
 
 namespace kpr {
     template<class Derived, std::size_t _size>
-    struct BaseNamedTuple {
+    struct NamedTupleBase {
         using named_tuple_tag = void;
         static constexpr std::size_t size = _size;
 
@@ -22,12 +22,12 @@ namespace kpr {
 
     public:
         template<class T, typename std::decay_t<T>::named_tuple_tag* = nullptr>
-        BaseNamedTuple(T&& named_tuple) noexcept {
+        NamedTupleBase(T&& named_tuple) noexcept {
             assign(std::forward<T>(named_tuple));
         }
 
         template<class... Args>
-        BaseNamedTuple(Args&&... args) noexcept {
+        NamedTupleBase(Args&&... args) noexcept {
             assign(std::forward_as_tuple(std::forward<Args>(args)...));
         }
     };
@@ -63,23 +63,23 @@ namespace kpr {
 
 #define KYOPRO_NAMED_TUPLE0() \
     ([] { \
-        struct NamedTuple: kpr::BaseNamedTuple<NamedTuple, 0> { \
-            using kpr::BaseNamedTuple<NamedTuple, 0>::BaseNamedTuple; \
+        struct NamedTuple: kpr::NamedTupleBase<NamedTuple, 0> { \
+            using kpr::NamedTupleBase<NamedTuple, 0>::NamedTupleBase; \
         }; \
         return NamedTuple{}; \
     })()
 #define KYOPRO_NAMED_TUPLE1(name0, value0) \
     ([] { \
-        struct NamedTuple: kpr::BaseNamedTuple<NamedTuple, 1> { \
-            using kpr::BaseNamedTuple<NamedTuple, 1>::BaseNamedTuple; \
+        struct NamedTuple: kpr::NamedTupleBase<NamedTuple, 1> { \
+            using kpr::NamedTupleBase<NamedTuple, 1>::NamedTupleBase; \
             std::decay_t<decltype(value0)> name0; \
         }; \
         return NamedTuple{value0}; \
     })()
 #define KYOPRO_NAMED_TUPLE2(name0, value0, name1, value1) \
     ([] { \
-        struct NamedTuple: kpr::BaseNamedTuple<NamedTuple, 2> { \
-            using kpr::BaseNamedTuple<NamedTuple, 2>::BaseNamedTuple; \
+        struct NamedTuple: kpr::NamedTupleBase<NamedTuple, 2> { \
+            using kpr::NamedTupleBase<NamedTuple, 2>::NamedTupleBase; \
             std::decay_t<decltype(value0)> name0; \
             std::decay_t<decltype(value1)> name1; \
         }; \
@@ -87,8 +87,8 @@ namespace kpr {
     })()
 #define KYOPRO_NAMED_TUPLE3(name0, value0, name1, value1, name2, value2) \
     ([] { \
-        struct NamedTuple: kpr::BaseNamedTuple<NamedTuple, 3> { \
-            using kpr::BaseNamedTuple<NamedTuple, 3>::BaseNamedTuple; \
+        struct NamedTuple: kpr::NamedTupleBase<NamedTuple, 3> { \
+            using kpr::NamedTupleBase<NamedTuple, 3>::NamedTupleBase; \
             std::decay_t<decltype(value0)> name0; \
             std::decay_t<decltype(value1)> name1; \
             std::decay_t<decltype(value2)> name2; \
@@ -97,8 +97,8 @@ namespace kpr {
     })()
 #define KYOPRO_NAMED_TUPLE4(name0, value0, name1, value1, name2, value2, name3, value3) \
     ([] { \
-        struct NamedTuple: kpr::BaseNamedTuple<NamedTuple, 4> { \
-            using kpr::BaseNamedTuple<NamedTuple, 4>::BaseNamedTuple; \
+        struct NamedTuple: kpr::NamedTupleBase<NamedTuple, 4> { \
+            using kpr::NamedTupleBase<NamedTuple, 4>::NamedTupleBase; \
             std::decay_t<decltype(value0)> name0; \
             std::decay_t<decltype(value1)> name1; \
             std::decay_t<decltype(value2)> name2; \
@@ -108,8 +108,8 @@ namespace kpr {
     })()
 #define KYOPRO_NAMED_TUPLE5(name0, value0, name1, value1, name2, value2, name3, value3, name4, value4) \
     ([] { \
-        struct NamedTuple: kpr::BaseNamedTuple<NamedTuple, 5> { \
-            using kpr::BaseNamedTuple<NamedTuple, 5>::BaseNamedTuple; \
+        struct NamedTuple: kpr::NamedTupleBase<NamedTuple, 5> { \
+            using kpr::NamedTupleBase<NamedTuple, 5>::NamedTupleBase; \
             std::decay_t<decltype(value0)> name0; \
             std::decay_t<decltype(value1)> name1; \
             std::decay_t<decltype(value2)> name2; \
