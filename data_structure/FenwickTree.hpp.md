@@ -286,11 +286,11 @@ data:
   isVerificationFile: false
   path: data_structure/FenwickTree.hpp
   requiredBy:
-  - data_structure/data_structure.hpp
-  - data_structure/structure.hpp
-  - verify/hello_world.cpp
-  - test.cpp
   - all.hpp
+  - data_structure/structure.hpp
+  - data_structure/data_structure.hpp
+  - test.cpp
+  - verify/hello_world.cpp
   timestamp: '2023-02-14 01:39:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

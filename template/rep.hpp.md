@@ -71,11 +71,11 @@ data:
   isVerificationFile: false
   path: template/rep.hpp
   requiredBy:
+  - all.hpp
+  - test.cpp
   - verify/hello_world.cpp
   - template/template.hpp
   - template/macro.hpp
-  - test.cpp
-  - all.hpp
   timestamp: '2023-02-20 00:38:21+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

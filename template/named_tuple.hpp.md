@@ -511,16 +511,16 @@ data:
     \u3092\u51FA\u529B\u3059\u308B(\u6539\u884C\u3001\u533A\u5207\u308A\u6587\u5B57\
     \u3042\u308A)\r\n    Printer<Writer<>::iterator> println{output.begin()}, eprintln{error.begin()};\r\
     \n} // namespace kpr\r\n#line 7 \"template/named_tuple.hpp\"\n\nnamespace kpr\
-    \ {\n    template<class Derived, std::size_t _size>\n    struct BaseNamedTuple\
+    \ {\n    template<class Derived, std::size_t _size>\n    struct NamedTupleBase\
     \ {\n        using named_tuple_tag = void;\n        static constexpr std::size_t\
     \ size = _size;\n\n    private:\n        template<std::size_t i = 0, class T>\n\
     \        void assign(T&& named_tuple) noexcept {\n            if constexpr (i\
     \ < tuple_like_size_v<Derived>) {\n                get<i>(static_cast<Derived&>(*this))\
     \ = get<i>(named_tuple);\n                assign<i + 1>(std::forward<T>(named_tuple));\n\
     \            }\n        }\n\n    public:\n        template<class T, typename std::decay_t<T>::named_tuple_tag*\
-    \ = nullptr>\n        BaseNamedTuple(T&& named_tuple) noexcept {\n           \
+    \ = nullptr>\n        NamedTupleBase(T&& named_tuple) noexcept {\n           \
     \ assign(std::forward<T>(named_tuple));\n        }\n\n        template<class...\
-    \ Args>\n        BaseNamedTuple(Args&&... args) noexcept {\n            assign(std::forward_as_tuple(std::forward<Args>(args)...));\n\
+    \ Args>\n        NamedTupleBase(Args&&... args) noexcept {\n            assign(std::forward_as_tuple(std::forward<Args>(args)...));\n\
     \        }\n    };\n\n    template<class T>\n    struct tuple_like_size<T, typename\
     \ T::named_tuple_tag> {\n        static constexpr std::size_t value = T::size;\n\
     \    };\n\n    template<class T>\n    struct GetFunction<T, typename T::named_tuple_tag>\
@@ -535,32 +535,32 @@ data:
     \ GET(a, b, c, d, e)\n        }\n    };\n\n    template<class T>\n    struct is_tuple_like<T,\
     \ typename T::named_tuple_tag> {\n        static constexpr bool value = true;\n\
     \    };\n}\n\n#define KYOPRO_NAMED_TUPLE0() \\\n    ([] { \\\n        struct NamedTuple:\
-    \ kpr::BaseNamedTuple<NamedTuple, 0> { \\\n            using kpr::BaseNamedTuple<NamedTuple,\
-    \ 0>::BaseNamedTuple; \\\n        }; \\\n        return NamedTuple{}; \\\n   \
+    \ kpr::NamedTupleBase<NamedTuple, 0> { \\\n            using kpr::NamedTupleBase<NamedTuple,\
+    \ 0>::NamedTupleBase; \\\n        }; \\\n        return NamedTuple{}; \\\n   \
     \ })()\n#define KYOPRO_NAMED_TUPLE1(name0, value0) \\\n    ([] { \\\n        struct\
-    \ NamedTuple: kpr::BaseNamedTuple<NamedTuple, 1> { \\\n            using kpr::BaseNamedTuple<NamedTuple,\
-    \ 1>::BaseNamedTuple; \\\n            std::decay_t<decltype(value0)> name0; \\\
+    \ NamedTuple: kpr::NamedTupleBase<NamedTuple, 1> { \\\n            using kpr::NamedTupleBase<NamedTuple,\
+    \ 1>::NamedTupleBase; \\\n            std::decay_t<decltype(value0)> name0; \\\
     \n        }; \\\n        return NamedTuple{value0}; \\\n    })()\n#define KYOPRO_NAMED_TUPLE2(name0,\
-    \ value0, name1, value1) \\\n    ([] { \\\n        struct NamedTuple: kpr::BaseNamedTuple<NamedTuple,\
-    \ 2> { \\\n            using kpr::BaseNamedTuple<NamedTuple, 2>::BaseNamedTuple;\
+    \ value0, name1, value1) \\\n    ([] { \\\n        struct NamedTuple: kpr::NamedTupleBase<NamedTuple,\
+    \ 2> { \\\n            using kpr::NamedTupleBase<NamedTuple, 2>::NamedTupleBase;\
     \ \\\n            std::decay_t<decltype(value0)> name0; \\\n            std::decay_t<decltype(value1)>\
     \ name1; \\\n        }; \\\n        return NamedTuple{value0, value1}; \\\n  \
     \  })()\n#define KYOPRO_NAMED_TUPLE3(name0, value0, name1, value1, name2, value2)\
-    \ \\\n    ([] { \\\n        struct NamedTuple: kpr::BaseNamedTuple<NamedTuple,\
-    \ 3> { \\\n            using kpr::BaseNamedTuple<NamedTuple, 3>::BaseNamedTuple;\
+    \ \\\n    ([] { \\\n        struct NamedTuple: kpr::NamedTupleBase<NamedTuple,\
+    \ 3> { \\\n            using kpr::NamedTupleBase<NamedTuple, 3>::NamedTupleBase;\
     \ \\\n            std::decay_t<decltype(value0)> name0; \\\n            std::decay_t<decltype(value1)>\
     \ name1; \\\n            std::decay_t<decltype(value2)> name2; \\\n        };\
     \ \\\n        return NamedTuple{value0, value1, value2}; \\\n    })()\n#define\
     \ KYOPRO_NAMED_TUPLE4(name0, value0, name1, value1, name2, value2, name3, value3)\
-    \ \\\n    ([] { \\\n        struct NamedTuple: kpr::BaseNamedTuple<NamedTuple,\
-    \ 4> { \\\n            using kpr::BaseNamedTuple<NamedTuple, 4>::BaseNamedTuple;\
+    \ \\\n    ([] { \\\n        struct NamedTuple: kpr::NamedTupleBase<NamedTuple,\
+    \ 4> { \\\n            using kpr::NamedTupleBase<NamedTuple, 4>::NamedTupleBase;\
     \ \\\n            std::decay_t<decltype(value0)> name0; \\\n            std::decay_t<decltype(value1)>\
     \ name1; \\\n            std::decay_t<decltype(value2)> name2; \\\n          \
     \  std::decay_t<decltype(value3)> name3; \\\n        }; \\\n        return NamedTuple{value0,\
     \ value1, value2, value3}; \\\n    })()\n#define KYOPRO_NAMED_TUPLE5(name0, value0,\
     \ name1, value1, name2, value2, name3, value3, name4, value4) \\\n    ([] { \\\
-    \n        struct NamedTuple: kpr::BaseNamedTuple<NamedTuple, 5> { \\\n       \
-    \     using kpr::BaseNamedTuple<NamedTuple, 5>::BaseNamedTuple; \\\n         \
+    \n        struct NamedTuple: kpr::NamedTupleBase<NamedTuple, 5> { \\\n       \
+    \     using kpr::NamedTupleBase<NamedTuple, 5>::NamedTupleBase; \\\n         \
     \   std::decay_t<decltype(value0)> name0; \\\n            std::decay_t<decltype(value1)>\
     \ name1; \\\n            std::decay_t<decltype(value2)> name2; \\\n          \
     \  std::decay_t<decltype(value3)> name3; \\\n            std::decay_t<decltype(value4)>\
@@ -571,16 +571,16 @@ data:
     \ nullptr, KYOPRO_NAMED_TUPLE2, nullptr, KYOPRO_NAMED_TUPLE1, nullptr, KYOPRO_NAMED_TUPLE0)(__VA_ARGS__)\n"
   code: "#pragma once\n#include <type_traits>\n#include <utility>\n#include \"../io/in.hpp\"\
     \n#include \"../io/out.hpp\"\n#include \"../meta/tuple_like.hpp\"\n\nnamespace\
-    \ kpr {\n    template<class Derived, std::size_t _size>\n    struct BaseNamedTuple\
+    \ kpr {\n    template<class Derived, std::size_t _size>\n    struct NamedTupleBase\
     \ {\n        using named_tuple_tag = void;\n        static constexpr std::size_t\
     \ size = _size;\n\n    private:\n        template<std::size_t i = 0, class T>\n\
     \        void assign(T&& named_tuple) noexcept {\n            if constexpr (i\
     \ < tuple_like_size_v<Derived>) {\n                get<i>(static_cast<Derived&>(*this))\
     \ = get<i>(named_tuple);\n                assign<i + 1>(std::forward<T>(named_tuple));\n\
     \            }\n        }\n\n    public:\n        template<class T, typename std::decay_t<T>::named_tuple_tag*\
-    \ = nullptr>\n        BaseNamedTuple(T&& named_tuple) noexcept {\n           \
+    \ = nullptr>\n        NamedTupleBase(T&& named_tuple) noexcept {\n           \
     \ assign(std::forward<T>(named_tuple));\n        }\n\n        template<class...\
-    \ Args>\n        BaseNamedTuple(Args&&... args) noexcept {\n            assign(std::forward_as_tuple(std::forward<Args>(args)...));\n\
+    \ Args>\n        NamedTupleBase(Args&&... args) noexcept {\n            assign(std::forward_as_tuple(std::forward<Args>(args)...));\n\
     \        }\n    };\n\n    template<class T>\n    struct tuple_like_size<T, typename\
     \ T::named_tuple_tag> {\n        static constexpr std::size_t value = T::size;\n\
     \    };\n\n    template<class T>\n    struct GetFunction<T, typename T::named_tuple_tag>\
@@ -595,32 +595,32 @@ data:
     \ GET(a, b, c, d, e)\n        }\n    };\n\n    template<class T>\n    struct is_tuple_like<T,\
     \ typename T::named_tuple_tag> {\n        static constexpr bool value = true;\n\
     \    };\n}\n\n#define KYOPRO_NAMED_TUPLE0() \\\n    ([] { \\\n        struct NamedTuple:\
-    \ kpr::BaseNamedTuple<NamedTuple, 0> { \\\n            using kpr::BaseNamedTuple<NamedTuple,\
-    \ 0>::BaseNamedTuple; \\\n        }; \\\n        return NamedTuple{}; \\\n   \
+    \ kpr::NamedTupleBase<NamedTuple, 0> { \\\n            using kpr::NamedTupleBase<NamedTuple,\
+    \ 0>::NamedTupleBase; \\\n        }; \\\n        return NamedTuple{}; \\\n   \
     \ })()\n#define KYOPRO_NAMED_TUPLE1(name0, value0) \\\n    ([] { \\\n        struct\
-    \ NamedTuple: kpr::BaseNamedTuple<NamedTuple, 1> { \\\n            using kpr::BaseNamedTuple<NamedTuple,\
-    \ 1>::BaseNamedTuple; \\\n            std::decay_t<decltype(value0)> name0; \\\
+    \ NamedTuple: kpr::NamedTupleBase<NamedTuple, 1> { \\\n            using kpr::NamedTupleBase<NamedTuple,\
+    \ 1>::NamedTupleBase; \\\n            std::decay_t<decltype(value0)> name0; \\\
     \n        }; \\\n        return NamedTuple{value0}; \\\n    })()\n#define KYOPRO_NAMED_TUPLE2(name0,\
-    \ value0, name1, value1) \\\n    ([] { \\\n        struct NamedTuple: kpr::BaseNamedTuple<NamedTuple,\
-    \ 2> { \\\n            using kpr::BaseNamedTuple<NamedTuple, 2>::BaseNamedTuple;\
+    \ value0, name1, value1) \\\n    ([] { \\\n        struct NamedTuple: kpr::NamedTupleBase<NamedTuple,\
+    \ 2> { \\\n            using kpr::NamedTupleBase<NamedTuple, 2>::NamedTupleBase;\
     \ \\\n            std::decay_t<decltype(value0)> name0; \\\n            std::decay_t<decltype(value1)>\
     \ name1; \\\n        }; \\\n        return NamedTuple{value0, value1}; \\\n  \
     \  })()\n#define KYOPRO_NAMED_TUPLE3(name0, value0, name1, value1, name2, value2)\
-    \ \\\n    ([] { \\\n        struct NamedTuple: kpr::BaseNamedTuple<NamedTuple,\
-    \ 3> { \\\n            using kpr::BaseNamedTuple<NamedTuple, 3>::BaseNamedTuple;\
+    \ \\\n    ([] { \\\n        struct NamedTuple: kpr::NamedTupleBase<NamedTuple,\
+    \ 3> { \\\n            using kpr::NamedTupleBase<NamedTuple, 3>::NamedTupleBase;\
     \ \\\n            std::decay_t<decltype(value0)> name0; \\\n            std::decay_t<decltype(value1)>\
     \ name1; \\\n            std::decay_t<decltype(value2)> name2; \\\n        };\
     \ \\\n        return NamedTuple{value0, value1, value2}; \\\n    })()\n#define\
     \ KYOPRO_NAMED_TUPLE4(name0, value0, name1, value1, name2, value2, name3, value3)\
-    \ \\\n    ([] { \\\n        struct NamedTuple: kpr::BaseNamedTuple<NamedTuple,\
-    \ 4> { \\\n            using kpr::BaseNamedTuple<NamedTuple, 4>::BaseNamedTuple;\
+    \ \\\n    ([] { \\\n        struct NamedTuple: kpr::NamedTupleBase<NamedTuple,\
+    \ 4> { \\\n            using kpr::NamedTupleBase<NamedTuple, 4>::NamedTupleBase;\
     \ \\\n            std::decay_t<decltype(value0)> name0; \\\n            std::decay_t<decltype(value1)>\
     \ name1; \\\n            std::decay_t<decltype(value2)> name2; \\\n          \
     \  std::decay_t<decltype(value3)> name3; \\\n        }; \\\n        return NamedTuple{value0,\
     \ value1, value2, value3}; \\\n    })()\n#define KYOPRO_NAMED_TUPLE5(name0, value0,\
     \ name1, value1, name2, value2, name3, value3, name4, value4) \\\n    ([] { \\\
-    \n        struct NamedTuple: kpr::BaseNamedTuple<NamedTuple, 5> { \\\n       \
-    \     using kpr::BaseNamedTuple<NamedTuple, 5>::BaseNamedTuple; \\\n         \
+    \n        struct NamedTuple: kpr::NamedTupleBase<NamedTuple, 5> { \\\n       \
+    \     using kpr::NamedTupleBase<NamedTuple, 5>::NamedTupleBase; \\\n         \
     \   std::decay_t<decltype(value0)> name0; \\\n            std::decay_t<decltype(value1)>\
     \ name1; \\\n            std::decay_t<decltype(value2)> name2; \\\n          \
     \  std::decay_t<decltype(value3)> name3; \\\n            std::decay_t<decltype(value4)>\
@@ -628,7 +628,7 @@ data:
     \ value3, value4}; \\\n    })()\n\n#define KYOPRO_OVERLOAD_NAMED_TUPLE(_1, _2,\
     \ _3, _4, _5, _6, _7, _8, _9, _10, name, ...) name\n\n#define $$(...) KYOPRO_OVERLOAD_NAMED_TUPLE(__VA_ARGS__\
     \ __VA_OPT__(,) KYOPRO_NAMED_TUPLE5, nullptr, KYOPRO_NAMED_TUPLE4, nullptr, KYOPRO_NAMED_TUPLE3,\
-    \ nullptr, KYOPRO_NAMED_TUPLE2, nullptr, KYOPRO_NAMED_TUPLE1, nullptr, KYOPRO_NAMED_TUPLE0)(__VA_ARGS__)"
+    \ nullptr, KYOPRO_NAMED_TUPLE2, nullptr, KYOPRO_NAMED_TUPLE1, nullptr, KYOPRO_NAMED_TUPLE0)(__VA_ARGS__)\n"
   dependsOn:
   - io/in.hpp
   - io/io_option.hpp
@@ -640,12 +640,12 @@ data:
   isVerificationFile: false
   path: template/named_tuple.hpp
   requiredBy:
+  - all.hpp
+  - test.cpp
   - verify/hello_world.cpp
   - template/template.hpp
   - template/macro.hpp
-  - test.cpp
-  - all.hpp
-  timestamp: '2023-03-07 11:56:47+00:00'
+  timestamp: '2023-03-10 22:42:57+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/named_tuple.hpp

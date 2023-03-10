@@ -308,10 +308,10 @@ data:
   isVerificationFile: false
   path: algorithm/algorithm.hpp
   requiredBy:
-  - verify/hello_world.cpp
-  - test.cpp
   - all/all.hpp
   - all.hpp
+  - test.cpp
+  - verify/hello_world.cpp
   timestamp: '2023-03-07 11:56:47+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

@@ -157,46 +157,46 @@ data:
   isVerificationFile: false
   path: meta/setting.hpp
   requiredBy:
-  - math/math.hpp
-  - math/euler_phi.hpp
-  - math/is_prime.hpp
-  - math/divisors.hpp
-  - math/ModInt.hpp
-  - math/DynamicModInt.hpp
-  - math/Barrett.hpp
-  - math/Montgomery.hpp
-  - math/factorize.hpp
-  - data_structure/FenwickTree.hpp
-  - data_structure/data_structure.hpp
+  - all/all.hpp
+  - all.hpp
   - data_structure/structure.hpp
   - data_structure/UnionFind.hpp
-  - io/out.hpp
-  - io/in.hpp
-  - io/io.hpp
-  - verify/hello_world.cpp
-  - template/constant.hpp
-  - template/len.hpp
-  - template/template.hpp
-  - template/io.hpp
-  - template/alias.hpp
-  - template/macro.hpp
-  - template/named_tuple.hpp
+  - data_structure/data_structure.hpp
+  - data_structure/FenwickTree.hpp
   - algorithm/algorithm.hpp
   - algorithm/bit.hpp
   - test.cpp
-  - all/all.hpp
-  - function/monoid.hpp
   - function/function.hpp
+  - function/monoid.hpp
+  - math/factorize.hpp
+  - math/is_prime.hpp
+  - math/ModInt.hpp
+  - math/math.hpp
+  - math/DynamicModInt.hpp
+  - math/Barrett.hpp
+  - math/Montgomery.hpp
+  - math/divisors.hpp
+  - math/euler_phi.hpp
+  - verify/hello_world.cpp
+  - template/named_tuple.hpp
+  - template/alias.hpp
+  - template/template.hpp
+  - template/constant.hpp
+  - template/len.hpp
+  - template/macro.hpp
+  - template/io.hpp
   - meta/meta.hpp
   - meta/constant.hpp
-  - all.hpp
+  - io/in.hpp
+  - io/out.hpp
+  - io/io.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yosupo/unionfind.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
-  - verify/yosupo/many_aplusb.test.cpp
   - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/unionfind.test.cpp
   - verify/aoj/PrimeNumber.test.cpp
 documentation_of: meta/setting.hpp
 layout: document

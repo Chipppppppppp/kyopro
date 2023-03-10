@@ -60,9 +60,6 @@ data:
     path: template/template.hpp
     title: template/template.hpp
   - icon: ':warning:'
-    path: template/vals.hpp
-    title: template/vals.hpp
-  - icon: ':warning:'
     path: test.cpp
     title: test.cpp
   - icon: ':warning:'
@@ -219,35 +216,34 @@ data:
   isVerificationFile: false
   path: meta/tuple_like.hpp
   requiredBy:
-  - math/math.hpp
-  - math/is_prime.hpp
-  - math/ModInt.hpp
-  - math/DynamicModInt.hpp
-  - math/factorize.hpp
-  - io/out.hpp
-  - io/in.hpp
-  - io/io.hpp
-  - verify/hello_world.cpp
-  - template/vals.hpp
-  - template/lambda.hpp
-  - template/template.hpp
-  - template/io.hpp
-  - template/alias.hpp
-  - template/macro.hpp
-  - template/named_tuple.hpp
+  - all/all.hpp
+  - all.hpp
   - algorithm/algorithm.hpp
   - algorithm/Hash.hpp
   - test.cpp
-  - all/all.hpp
+  - math/factorize.hpp
+  - math/is_prime.hpp
+  - math/ModInt.hpp
+  - math/math.hpp
+  - math/DynamicModInt.hpp
+  - verify/hello_world.cpp
+  - template/named_tuple.hpp
+  - template/alias.hpp
+  - template/template.hpp
+  - template/lambda.hpp
+  - template/macro.hpp
+  - template/io.hpp
   - meta/meta.hpp
-  - all.hpp
+  - io/in.hpp
+  - io/out.hpp
+  - io/io.hpp
   timestamp: '2023-03-07 11:56:47+00:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yosupo/unionfind.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
-  - verify/yosupo/many_aplusb.test.cpp
   - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/unionfind.test.cpp
   - verify/aoj/PrimeNumber.test.cpp
 documentation_of: meta/tuple_like.hpp
 layout: document

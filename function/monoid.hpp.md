@@ -275,14 +275,14 @@ data:
   isVerificationFile: false
   path: function/monoid.hpp
   requiredBy:
-  - data_structure/FenwickTree.hpp
-  - data_structure/data_structure.hpp
-  - data_structure/structure.hpp
-  - verify/hello_world.cpp
-  - test.cpp
   - all/all.hpp
-  - function/function.hpp
   - all.hpp
+  - data_structure/structure.hpp
+  - data_structure/data_structure.hpp
+  - data_structure/FenwickTree.hpp
+  - test.cpp
+  - function/function.hpp
+  - verify/hello_world.cpp
   timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
