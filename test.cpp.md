@@ -1327,8 +1327,9 @@ data:
     \n#include <mutex>\r\n#line 71 \"template/stl.hpp\"\n#include <ratio>\r\n#include\
     \ <regex>\r\n#include <scoped_allocator>\r\n#include <system_error>\r\n#include\
     \ <thread>\r\n#line 77 \"template/stl.hpp\"\n#include <typeindex>\r\n#line 2 \"\
-    test.cpp\"\n\nvoid kpr::main() {\n    \n}\n"
-  code: "#include \"all.hpp\"\n\nvoid kpr::main() {\n    \n}\n"
+    test.cpp\"\n\nnamespace kpr {\n    void main() {\n        \n    }\n}\n"
+  code: "#include \"all.hpp\"\n\nnamespace kpr {\n    void main() {\n        \n  \
+    \  }\n}\n"
   dependsOn:
   - all.hpp
   - all/all.hpp
@@ -1382,7 +1383,7 @@ data:
   isVerificationFile: false
   path: test.cpp
   requiredBy: []
-  timestamp: '2023-03-10 22:42:57+09:00'
+  timestamp: '2023-03-10 23:23:08+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: test.cpp
