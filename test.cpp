@@ -1,5 +1,7 @@
 #include "all.hpp"
 
-void kpr::main() {
-    
+namespace kpr {
+    void main() {
+        
+    }
 }
