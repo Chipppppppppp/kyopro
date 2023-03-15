@@ -70,25 +70,28 @@ namespace kpr {
 
     #define DEFINE_ALIAS(name, short_name, value) \
         using short_name ## value = name<value>; \
-        using short_name ## short_name ## value = name<value>; \
-        using short_name ## short_name ## short_name ## value = name<value>; \
-        using short_name ## short_name ## short_name ## short_name ## value = name<value>; \
+        using short_name ## short_name ## value = name<name<value>>; \
+        using short_name ## short_name ## short_name ## value = name<name<name<value>>>; \
+        using short_name ## short_name ## short_name ## short_name ## value = name<name<name<name<value>>>>; \
+        using short_name ## short_name ## short_name ## short_name ## short_name ## value = name<name<name<name<name<value>>>>>;
+
+    #define DEFINE_VEC_ALIAS(name, short_name, value) \
         using V ## short_name ## value = Vec<name<value>>; \
         using VV ## short_name ## value = VVec<name<value>>;
 
-    #define DEFINE_CONTAINER_ALIAS(name, short_name) \
-        DEFINE_ALIAS(name, short_name, int); \
-        DEFINE_ALIAS(name, short_name, li); \
-        DEFINE_ALIAS(name, short_name, float); \
-        DEFINE_ALIAS(name, short_name, lf); \
-        DEFINE_ALIAS(name, short_name, llf); \
-        DEFINE_ALIAS(name, short_name, mint); \
-        DEFINE_ALIAS(name, short_name, dmint); \
-        DEFINE_ALIAS(name, short_name, li1); \
-        DEFINE_ALIAS(name, short_name, li2); \
-        DEFINE_ALIAS(name, short_name, li3); \
-        DEFINE_ALIAS(name, short_name, li4); \
-        DEFINE_ALIAS(name, short_name, li5);
+    #define DEFINE_CONTAINER_ALIAS(define_alias, name, short_name) \
+        define_alias(name, short_name, int); \
+        define_alias(name, short_name, li); \
+        define_alias(name, short_name, float); \
+        define_alias(name, short_name, lf); \
+        define_alias(name, short_name, llf); \
+        define_alias(name, short_name, mint); \
+        define_alias(name, short_name, dmint); \
+        define_alias(name, short_name, li1); \
+        define_alias(name, short_name, li2); \
+        define_alias(name, short_name, li3); \
+        define_alias(name, short_name, li4); \
+        define_alias(name, short_name, li5);
 
 
     template<class T>
@@ -102,29 +105,33 @@ namespace kpr {
     template<class T>
     using VVVVVec = Vec<VVVVec<T>>;
 
-    DEFINE_CONTAINER_ALIAS(Vec, V);
+    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Vec, V);
 
     template<class T>
     using Deque = std::deque<T>;
 
-    DEFINE_CONTAINER_ALIAS(Deque, D);
+    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Deque, D);
+    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, Deque, D);
 
     template<class T>
     using List = std::list<T>;
 
-    DEFINE_CONTAINER_ALIAS(List, L);
+    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, List, L);
+    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, List, L);
 
     template<class T>
     using ForwardList = std::forward_list<T>;
 
-    DEFINE_CONTAINER_ALIAS(ForwardList, FL);
+    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, ForwardList, FL);
+    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, ForwardList, FL);
 
     template<class Key, class Compare = Less>
     using Set = std::set<Key, Compare>;
     template<class Key, class Compare = Less>
     using Map = std::map<Key, Compare>;
 
-    DEFINE_CONTAINER_ALIAS(Set, S);
+    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Set, S);
+    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, Set, S);
     using Mlili = Map<li, li>;
     using VMlili = Vec<Mlili>;
 
@@ -133,7 +140,8 @@ namespace kpr {
     template<class Key, class T, class Compare = Less>
     using HashMap = std::unordered_map<Key, T, Compare>;
 
-    DEFINE_CONTAINER_ALIAS(HashSet, HS);
+    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HashSet, HS);
+    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashSet, HS);
     using HMlili = HashMap<li, li>;
     using VHMlili = Vec<HMlili>;
 
@@ -142,7 +150,8 @@ namespace kpr {
     template<class Key, class T>
     using MultiMap = std::multimap<Key, T, Hash<Key>>;
 
-    DEFINE_CONTAINER_ALIAS(MultiSet, MS);
+    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, MultiSet, MS);
+    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, MultiSet, MS);
     using MMlili = MultiMap<li, li>;
     using VMMlili = Vec<MMlili>;
 
@@ -151,28 +160,32 @@ namespace kpr {
     template<class Key, class T>
     using HashMultiMap = std::unordered_multimap<Key, T, Hash<Key>>;
 
-    DEFINE_CONTAINER_ALIAS(HashMultiSet, HMS);
-    using VHMSli = Vec<HMSli>;
+    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HashMultiSet, HMS);
+    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashMultiSet, HMS);
     using HMMli = HashMultiMap<li, li>;
     using VHMMli = Vec<HMMli>;
 
     template<class T, class Container = std::deque<T>>
     using Queue = std::queue<T, Container>;
 
-    DEFINE_CONTAINER_ALIAS(Queue, Que);
+    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Queue, Que);
+    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, Queue, Que);
 
     template<class T, class Container = std::deque<T>>
     using Stack = std::stack<T, Container>;
 
-    DEFINE_CONTAINER_ALIAS(Stack, Stk);
+    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Stack, Stk);
+    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, Stack, Stk);
 
     template<class T, class Compare = Less, class Container = Vec<T>>
     using PriQ = std::priority_queue<T, Container, Compare>;
     template<class T, class Compare = Greater, class Container = Vec<T>>
     using HeapQ = PriQ<T, Compare, Container>;
 
-    DEFINE_CONTAINER_ALIAS(PriQ, PQ);
-    DEFINE_CONTAINER_ALIAS(HeapQ, HQ);
+    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, PriQ, PQ);
+    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, PriQ, PQ);
+    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HeapQ, HQ);
+    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HeapQ, HQ);
 
     template<std::size_t size>
     using BitSet = std::bitset<size>;

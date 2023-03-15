@@ -67,7 +67,7 @@ namespace kpr {
         template<bool sorted = true, class Container = std::vector<KYOPRO_BASE_INT>>
         Container operator ()(std::uint_fast64_t n) const {
             Container res;
-            for (int p = 2; p < 100 && p * p <= n; ++p) {
+            for (int p = 2; p < 100 && p * p <= static_cast<int>(n); ++p) {
                 while (n % p == 0) {
                 n /= p;
                 res.emplace_back(p);
