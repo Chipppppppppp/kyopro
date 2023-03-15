@@ -1,31 +1,31 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: io/in.hpp
     title: io/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: io/io_option.hpp
     title: io/io_option.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: io/out.hpp
     title: io/out.hpp
   - icon: ':warning:'
     path: math/Barrett.hpp
     title: math/Barrett.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
   - icon: ':warning:'
@@ -37,28 +37,28 @@ data:
   - icon: ':warning:'
     path: math/euler_phi.hpp
     title: math/euler_phi.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
   _extendedRequiredBy:
@@ -813,15 +813,15 @@ data:
     \    [[maybe_unused]] inline constexpr struct {\r\n        template<bool sorted\
     \ = true, class Container = std::vector<KYOPRO_BASE_INT>>\r\n        Container\
     \ operator ()(std::uint_fast64_t n) const {\r\n            Container res;\r\n\
-    \            for (int p = 2; p < 100 && p * p <= n; ++p) {\r\n               \
-    \ while (n % p == 0) {\r\n                n /= p;\r\n                res.emplace_back(p);\r\
-    \n                }\r\n            }\r\n            while (n > 1) {\r\n      \
-    \          std::uint_fast64_t p = find_factor(n);\r\n                do {\r\n\
-    \                n /= p;\r\n                res.emplace_back(p);\r\n         \
-    \       } while (n % p == 0);\r\n            }\r\n            if constexpr (sorted)\
-    \ std::sort(res.begin(), res.end());\r\n            return res;\r\n        }\r\
-    \n    } factorize;\r\n} // namespace kpr\r\n#line 2 \"math/mod.hpp\"\n#include\
-    \ <cassert>\r\n#line 4 \"math/mod.hpp\"\n\r\nnamespace kpr {\r\n    [[maybe_unused]]\
+    \            for (int p = 2; p < 100 && p * p <= static_cast<int>(n); ++p) {\r\
+    \n                while (n % p == 0) {\r\n                n /= p;\r\n        \
+    \        res.emplace_back(p);\r\n                }\r\n            }\r\n      \
+    \      while (n > 1) {\r\n                std::uint_fast64_t p = find_factor(n);\r\
+    \n                do {\r\n                n /= p;\r\n                res.emplace_back(p);\r\
+    \n                } while (n % p == 0);\r\n            }\r\n            if constexpr\
+    \ (sorted) std::sort(res.begin(), res.end());\r\n            return res;\r\n \
+    \       }\r\n    } factorize;\r\n} // namespace kpr\r\n#line 2 \"math/mod.hpp\"\
+    \n#include <cassert>\r\n#line 4 \"math/mod.hpp\"\n\r\nnamespace kpr {\r\n    [[maybe_unused]]\
     \ inline constexpr struct {\r\n        template<class T, class U>\r\n        constexpr\
     \ std::common_type_t<T, U> operator ()(T x, U m) const noexcept {\r\n        \
     \    static_assert(is_integer_v<T> && is_integer_v<U>, \"Both of the arguments\
@@ -932,7 +932,7 @@ data:
   - all/all.hpp
   - all.hpp
   - verify/hello_world.cpp
-  timestamp: '2023-03-07 11:56:47+00:00'
+  timestamp: '2023-03-16 01:25:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/math.hpp

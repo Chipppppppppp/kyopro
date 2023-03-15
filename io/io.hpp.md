@@ -1,25 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: io/in.hpp
     title: io/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: io/io_option.hpp
     title: io/io_option.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: io/out.hpp
     title: io/out.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
   _extendedRequiredBy:
@@ -45,7 +45,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
   - icon: ':heavy_check_mark:'
@@ -57,9 +57,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"io/in.hpp\"\n#include <unistd.h>\r\n#include <array>\r\n\
@@ -548,7 +548,7 @@ data:
   - template/macro.hpp
   - template/io.hpp
   timestamp: '2023-03-07 11:56:47+00:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/yosupo/factorize.test.cpp
   - verify/yosupo/many_aplusb.test.cpp
