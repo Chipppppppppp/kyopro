@@ -106,33 +106,33 @@ data:
   isVerificationFile: false
   path: math/power.hpp
   requiredBy:
+  - io/in.hpp
+  - io/io.hpp
   - all/all.hpp
-  - all.hpp
-  - data_structure/structure.hpp
-  - data_structure/data_structure.hpp
-  - data_structure/FenwickTree.hpp
-  - function/function.hpp
   - function/monoid.hpp
-  - math/factorize.hpp
+  - function/function.hpp
+  - meta/constant.hpp
+  - meta/meta.hpp
+  - all.hpp
   - math/is_prime.hpp
+  - math/factorize.hpp
   - math/ModInt.hpp
   - math/math.hpp
   - math/DynamicModInt.hpp
   - verify/hello_world.cpp
-  - template/named_tuple.hpp
-  - template/alias.hpp
   - template/template.hpp
+  - template/named_tuple.hpp
   - template/macro.hpp
   - template/io.hpp
-  - meta/meta.hpp
-  - meta/constant.hpp
-  - io/in.hpp
-  - io/io.hpp
+  - template/alias.hpp
+  - data_structure/structure.hpp
+  - data_structure/data_structure.hpp
+  - data_structure/FenwickTree.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/yosupo/factorize.test.cpp
   - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/factorize.test.cpp
   - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/unionfind.test.cpp
   - verify/aoj/PrimeNumber.test.cpp

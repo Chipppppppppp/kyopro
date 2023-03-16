@@ -782,8 +782,8 @@ data:
   - all.hpp
   - math/math.hpp
   - verify/hello_world.cpp
-  - template/alias.hpp
   - template/template.hpp
+  - template/alias.hpp
   timestamp: '2023-03-07 11:56:47+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

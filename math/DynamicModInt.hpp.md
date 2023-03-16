@@ -751,12 +751,12 @@ data:
   requiredBy:
   - all/all.hpp
   - all.hpp
-  - math/factorize.hpp
   - math/is_prime.hpp
+  - math/factorize.hpp
   - math/math.hpp
   - verify/hello_world.cpp
-  - template/alias.hpp
   - template/template.hpp
+  - template/alias.hpp
   timestamp: '2023-03-07 11:56:47+00:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:

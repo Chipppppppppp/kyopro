@@ -73,11 +73,11 @@ data:
   path: function/compare.hpp
   requiredBy:
   - all/all.hpp
-  - all.hpp
   - function/function.hpp
+  - all.hpp
   - verify/hello_world.cpp
-  - template/alias.hpp
   - template/template.hpp
+  - template/alias.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

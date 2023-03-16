@@ -590,25 +590,25 @@ data:
   isVerificationFile: false
   path: io/out.hpp
   requiredBy:
+  - io/io.hpp
   - all/all.hpp
   - all.hpp
-  - math/factorize.hpp
   - math/is_prime.hpp
+  - math/factorize.hpp
   - math/ModInt.hpp
   - math/math.hpp
   - math/DynamicModInt.hpp
   - verify/hello_world.cpp
-  - template/named_tuple.hpp
-  - template/alias.hpp
   - template/template.hpp
+  - template/named_tuple.hpp
   - template/macro.hpp
   - template/io.hpp
-  - io/io.hpp
+  - template/alias.hpp
   timestamp: '2023-03-07 11:56:47+00:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/yosupo/factorize.test.cpp
   - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/factorize.test.cpp
   - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/unionfind.test.cpp
   - verify/aoj/PrimeNumber.test.cpp

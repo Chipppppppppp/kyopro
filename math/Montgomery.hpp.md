@@ -110,13 +110,13 @@ data:
   requiredBy:
   - all/all.hpp
   - all.hpp
-  - math/factorize.hpp
   - math/is_prime.hpp
+  - math/factorize.hpp
   - math/math.hpp
   - math/DynamicModInt.hpp
   - verify/hello_world.cpp
-  - template/alias.hpp
   - template/template.hpp
+  - template/alias.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:

@@ -213,31 +213,31 @@ data:
   isVerificationFile: false
   path: meta/tuple_like.hpp
   requiredBy:
+  - io/in.hpp
+  - io/out.hpp
+  - io/io.hpp
   - all/all.hpp
+  - meta/meta.hpp
   - all.hpp
-  - algorithm/algorithm.hpp
-  - algorithm/Hash.hpp
-  - math/factorize.hpp
   - math/is_prime.hpp
+  - math/factorize.hpp
   - math/ModInt.hpp
   - math/math.hpp
   - math/DynamicModInt.hpp
   - verify/hello_world.cpp
-  - template/named_tuple.hpp
-  - template/alias.hpp
+  - algorithm/algorithm.hpp
+  - algorithm/Hash.hpp
   - template/template.hpp
-  - template/lambda.hpp
+  - template/named_tuple.hpp
   - template/macro.hpp
   - template/io.hpp
-  - meta/meta.hpp
-  - io/in.hpp
-  - io/out.hpp
-  - io/io.hpp
+  - template/lambda.hpp
+  - template/alias.hpp
   timestamp: '2023-03-07 11:56:47+00:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/yosupo/factorize.test.cpp
   - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/factorize.test.cpp
   - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/unionfind.test.cpp
   - verify/aoj/PrimeNumber.test.cpp
