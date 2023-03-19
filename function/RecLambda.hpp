@@ -5,7 +5,7 @@
 namespace kpr {
     // 再帰可能関数クラス
     template<class F>
-    struct RecursiveLambda {
+    struct RecLambda {
         using value_type = F;
 
     private:
@@ -13,7 +13,7 @@ namespace kpr {
 
     public:
         template<class G>
-        constexpr RecursiveLambda(G&& func) noexcept: func(std::forward<G>(func)) {}
+        constexpr RecLambda(G&& func) noexcept: func(std::forward<G>(func)) {}
 
         template<class... Args>
         constexpr decltype(auto) operator ()(Args&&... args) const noexcept(noexcept(func(*this, std::forward<Args>(args)...))) {
@@ -22,5 +22,5 @@ namespace kpr {
     };
 
     template<class F>
-    RecursiveLambda(F&&) -> RecursiveLambda<std::decay_t<F>>;
+    RecLambda(F&&) -> RecLambda<std::decay_t<F>>;
 } // namespace kpr

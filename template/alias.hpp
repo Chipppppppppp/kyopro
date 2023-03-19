@@ -23,7 +23,7 @@
 namespace kpr {
     using ushort = unsigned short;
     using li = long long;
-    using uli = unsigned long long;
+    using ull = unsigned long long;
     using lf = double;
     using llf = long double;
 
@@ -45,6 +45,8 @@ namespace kpr {
 
     using mint = ModInt<mod>;
     using dmint = DynamicModInt<KYOPRO_BASE_UINT>;
+
+    using str = std::string;
 
     template<class T, std::size_t idx, class... Args>
     struct agg_type {
@@ -68,30 +70,33 @@ namespace kpr {
     using li5 = agg<li, 5>;
 
 
-    #define DEFINE_ALIAS(name, short_name, value) \
-        using short_name ## value = name<value>; \
-        using short_name ## short_name ## value = name<name<value>>; \
-        using short_name ## short_name ## short_name ## value = name<name<name<value>>>; \
-        using short_name ## short_name ## short_name ## short_name ## value = name<name<name<name<value>>>>; \
-        using short_name ## short_name ## short_name ## short_name ## short_name ## value = name<name<name<name<name<value>>>>>;
+    #define DEFINE_ALIAS(name, short_name, value_name, short_value_name) \
+        using short_name ## short_value_name = name<value_name>; \
+        using short_name ## short_name ## short_value_name = name<name<value_name>>; \
+        using short_name ## short_name ## short_name ## short_value_name = name<name<name<value_name>>>; \
+        using short_name ## short_name ## short_name ## short_name ## short_value_name = name<name<name<name<value_name>>>>; \
+        using short_name ## short_name ## short_name ## short_name ## short_name ## short_value_name = name<name<name<name<name<value_name>>>>>;
 
-    #define DEFINE_VEC_ALIAS(name, short_name, value) \
-        using V ## short_name ## value = Vec<name<value>>; \
-        using VV ## short_name ## value = VVec<name<value>>;
+    #define DEFINE_VEC_ALIAS(name, short_name, value_name, short_value_name) \
+        using V ## short_name ## short_value_name = Vec<name<value_name>>; \
+        using VV ## short_name ## short_value_name = VVec<name<value_name>>;
 
     #define DEFINE_CONTAINER_ALIAS(define_alias, name, short_name) \
-        define_alias(name, short_name, int); \
-        define_alias(name, short_name, li); \
-        define_alias(name, short_name, float); \
-        define_alias(name, short_name, lf); \
-        define_alias(name, short_name, llf); \
-        define_alias(name, short_name, mint); \
-        define_alias(name, short_name, dmint); \
-        define_alias(name, short_name, li1); \
-        define_alias(name, short_name, li2); \
-        define_alias(name, short_name, li3); \
-        define_alias(name, short_name, li4); \
-        define_alias(name, short_name, li5);
+        define_alias(name, short_name, bool, b); \
+        define_alias(name, short_name, int, i); \
+        define_alias(name, short_name, li, l); \
+        define_alias(name, short_name, float, f); \
+        define_alias(name, short_name, lf, lf); \
+        define_alias(name, short_name, llf, llf); \
+        define_alias(name, short_name, mint, m); \
+        define_alias(name, short_name, dmint, dm); \
+        define_alias(name, short_name, char, c); \
+        define_alias(name, short_name, str, s); \
+        define_alias(name, short_name, li1, li1); \
+        define_alias(name, short_name, li2, li2); \
+        define_alias(name, short_name, li3, li3); \
+        define_alias(name, short_name, li4, li4); \
+        define_alias(name, short_name, li5, li5);
 
 
     template<class T>
@@ -132,8 +137,8 @@ namespace kpr {
 
     DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Set, S);
     DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, Set, S);
-    using Mlili = Map<li, li>;
-    using VMlili = Vec<Mlili>;
+    using Mll = Map<li, li>;
+    using VMll = Vec<Mll>;
 
     template<class Key, class Compare = Less>
     using HashSet = std::unordered_set<Key, Compare>;
@@ -142,8 +147,8 @@ namespace kpr {
 
     DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HashSet, HS);
     DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashSet, HS);
-    using HMlili = HashMap<li, li>;
-    using VHMlili = Vec<HMlili>;
+    using HMll = HashMap<li, li>;
+    using VHMll = Vec<HMll>;
 
     template<class Key>
     using MultiSet = std::multiset<Key, Hash<Key>>;
@@ -152,8 +157,8 @@ namespace kpr {
 
     DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, MultiSet, MS);
     DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, MultiSet, MS);
-    using MMlili = MultiMap<li, li>;
-    using VMMlili = Vec<MMlili>;
+    using MMll = MultiMap<li, li>;
+    using VMMll = Vec<MMll>;
 
     template<class Key>
     using HashMultiSet = std::unordered_multiset<Key, Hash<Key>>;
