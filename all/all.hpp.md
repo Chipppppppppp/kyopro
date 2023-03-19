@@ -11,8 +11,8 @@ data:
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
-    path: function/RecursiveLambda.hpp
-    title: function/RecursiveLambda.hpp
+    path: function/RecLambda.hpp
+    title: function/RecLambda.hpp
   - icon: ':warning:'
     path: function/compare.hpp
     title: function/compare.hpp
@@ -434,15 +434,15 @@ data:
     \ std::void_t<decltype(&T::inverse)>> {\r\n        static constexpr bool value\
     \ = true;\r\n    };\r\n\r\n    // inverse\u3092\u6301\u3064\u304B\u8ABF\u3079\u308B\
     \r\n    template<class T>\r\n    inline constexpr bool has_inverse_v = has_inverse<T>::value;\r\
-    \n} // namespace kpr\r\n#line 4 \"function/RecursiveLambda.hpp\"\n\r\nnamespace\
-    \ kpr {\r\n    // \u518D\u5E30\u53EF\u80FD\u95A2\u6570\u30AF\u30E9\u30B9\r\n \
-    \   template<class F>\r\n    struct RecursiveLambda {\r\n        using value_type\
-    \ = F;\r\n\r\n    private:\r\n        F func;\r\n\r\n    public:\r\n        template<class\
-    \ G>\r\n        constexpr RecursiveLambda(G&& func) noexcept: func(std::forward<G>(func))\
-    \ {}\r\n\r\n        template<class... Args>\r\n        constexpr decltype(auto)\
-    \ operator ()(Args&&... args) const noexcept(noexcept(func(*this, std::forward<Args>(args)...)))\
-    \ {\r\n            return func(*this, std::forward<Args>(args)...);\r\n      \
-    \  }\r\n    };\r\n\r\n    template<class F>\r\n    RecursiveLambda(F&&) -> RecursiveLambda<std::decay_t<F>>;\r\
+    \n} // namespace kpr\r\n#line 4 \"function/RecLambda.hpp\"\n\r\nnamespace kpr\
+    \ {\r\n    // \u518D\u5E30\u53EF\u80FD\u95A2\u6570\u30AF\u30E9\u30B9\r\n    template<class\
+    \ F>\r\n    struct RecLambda {\r\n        using value_type = F;\r\n\r\n    private:\r\
+    \n        F func;\r\n\r\n    public:\r\n        template<class G>\r\n        constexpr\
+    \ RecLambda(G&& func) noexcept: func(std::forward<G>(func)) {}\r\n\r\n       \
+    \ template<class... Args>\r\n        constexpr decltype(auto) operator ()(Args&&...\
+    \ args) const noexcept(noexcept(func(*this, std::forward<Args>(args)...))) {\r\
+    \n            return func(*this, std::forward<Args>(args)...);\r\n        }\r\n\
+    \    };\r\n\r\n    template<class F>\r\n    RecLambda(F&&) -> RecLambda<std::decay_t<F>>;\r\
     \n} // namespace kpr\r\n#line 2 \"io/in.hpp\"\n#include <unistd.h>\r\n#include\
     \ <array>\r\n#include <bitset>\r\n#line 7 \"io/in.hpp\"\n#include <cstdio>\r\n\
     #include <string>\r\n#line 5 \"io/io_option.hpp\"\n\r\nnamespace kpr {\r\n   \
@@ -1001,7 +1001,7 @@ data:
   - function/monoid.hpp
   - meta/constant.hpp
   - math/power.hpp
-  - function/RecursiveLambda.hpp
+  - function/RecLambda.hpp
   - io/io.hpp
   - io/in.hpp
   - io/io_option.hpp
@@ -1023,7 +1023,7 @@ data:
   requiredBy:
   - all.hpp
   - verify/hello_world.cpp
-  timestamp: '2023-03-16 01:25:36+09:00'
+  timestamp: '2023-03-20 02:49:55+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp

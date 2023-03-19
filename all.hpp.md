@@ -23,8 +23,8 @@ data:
     path: data_structure/data_structure.hpp
     title: data_structure/data_structure.hpp
   - icon: ':warning:'
-    path: function/RecursiveLambda.hpp
-    title: function/RecursiveLambda.hpp
+    path: function/RecLambda.hpp
+    title: function/RecLambda.hpp
   - icon: ':warning:'
     path: function/compare.hpp
     title: function/compare.hpp
@@ -491,15 +491,15 @@ data:
     \ std::void_t<decltype(&T::inverse)>> {\r\n        static constexpr bool value\
     \ = true;\r\n    };\r\n\r\n    // inverse\u3092\u6301\u3064\u304B\u8ABF\u3079\u308B\
     \r\n    template<class T>\r\n    inline constexpr bool has_inverse_v = has_inverse<T>::value;\r\
-    \n} // namespace kpr\r\n#line 4 \"function/RecursiveLambda.hpp\"\n\r\nnamespace\
-    \ kpr {\r\n    // \u518D\u5E30\u53EF\u80FD\u95A2\u6570\u30AF\u30E9\u30B9\r\n \
-    \   template<class F>\r\n    struct RecursiveLambda {\r\n        using value_type\
-    \ = F;\r\n\r\n    private:\r\n        F func;\r\n\r\n    public:\r\n        template<class\
-    \ G>\r\n        constexpr RecursiveLambda(G&& func) noexcept: func(std::forward<G>(func))\
-    \ {}\r\n\r\n        template<class... Args>\r\n        constexpr decltype(auto)\
-    \ operator ()(Args&&... args) const noexcept(noexcept(func(*this, std::forward<Args>(args)...)))\
-    \ {\r\n            return func(*this, std::forward<Args>(args)...);\r\n      \
-    \  }\r\n    };\r\n\r\n    template<class F>\r\n    RecursiveLambda(F&&) -> RecursiveLambda<std::decay_t<F>>;\r\
+    \n} // namespace kpr\r\n#line 4 \"function/RecLambda.hpp\"\n\r\nnamespace kpr\
+    \ {\r\n    // \u518D\u5E30\u53EF\u80FD\u95A2\u6570\u30AF\u30E9\u30B9\r\n    template<class\
+    \ F>\r\n    struct RecLambda {\r\n        using value_type = F;\r\n\r\n    private:\r\
+    \n        F func;\r\n\r\n    public:\r\n        template<class G>\r\n        constexpr\
+    \ RecLambda(G&& func) noexcept: func(std::forward<G>(func)) {}\r\n\r\n       \
+    \ template<class... Args>\r\n        constexpr decltype(auto) operator ()(Args&&...\
+    \ args) const noexcept(noexcept(func(*this, std::forward<Args>(args)...))) {\r\
+    \n            return func(*this, std::forward<Args>(args)...);\r\n        }\r\n\
+    \    };\r\n\r\n    template<class F>\r\n    RecLambda(F&&) -> RecLambda<std::decay_t<F>>;\r\
     \n} // namespace kpr\r\n#line 2 \"io/in.hpp\"\n#include <unistd.h>\r\n#include\
     \ <array>\r\n#include <bitset>\r\n#line 7 \"io/in.hpp\"\n#include <cstdio>\r\n\
     #include <string>\r\n#line 5 \"io/io_option.hpp\"\n\r\nnamespace kpr {\r\n   \
@@ -1106,7 +1106,7 @@ data:
     \n#include <list>\n#include <map>\n#include <queue>\n#include <set>\n#include\
     \ <stack>\n#line 14 \"template/alias.hpp\"\n#include <unordered_set>\n#line 22\
     \ \"template/alias.hpp\"\n\nnamespace kpr {\n    using ushort = unsigned short;\n\
-    \    using li = long long;\n    using uli = unsigned long long;\n    using lf\
+    \    using li = long long;\n    using ull = unsigned long long;\n    using lf\
     \ = double;\n    using llf = long double;\n\n    using i8 = std::int8_t;\n   \
     \ using u8 = std::uint8_t;\n    using i16 = std::int16_t;\n    using u16 = std::uint16_t;\n\
     \    using i32 = std::int32_t;\n    using u32 = std::uint32_t;\n    using i64\
@@ -1114,36 +1114,41 @@ data:
     \    using i128 = __int128_t;\n    using u128 = __uint128_t;\n    #endif\n   \
     \ #ifdef __SIZEOF_FLOAT128__\n    using f128 = __float128;\n    #endif\n\n   \
     \ using mint = ModInt<mod>;\n    using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\
-    \n    template<class T, std::size_t idx, class... Args>\n    struct agg_type {\n\
-    \        using type = typename agg_type<T, idx - 1, T, Args...>::type;\n    };\n\
-    \    template<class T, class... Args>\n    struct agg_type<T, 0, Args...> {\n\
-    \        using type = std::tuple<Args...>;\n    };\n    template<class T>\n  \
-    \  struct agg_type<T, 0, T, T> {\n        using type = std::pair<T, T>;\n    };\n\
-    \n    template<class T, std::size_t idx>\n    using agg = typename agg_type<T,\
-    \ idx>::type;\n    using li1 = agg<li, 1>;\n    using li2 = agg<li, 2>;\n    using\
-    \ li3 = agg<li, 3>;\n    using li4 = agg<li, 4>;\n    using li5 = agg<li, 5>;\n\
-    \n\n    #define DEFINE_ALIAS(name, short_name, value) \\\n        using short_name\
-    \ ## value = name<value>; \\\n        using short_name ## short_name ## value\
-    \ = name<name<value>>; \\\n        using short_name ## short_name ## short_name\
-    \ ## value = name<name<name<value>>>; \\\n        using short_name ## short_name\
-    \ ## short_name ## short_name ## value = name<name<name<name<value>>>>; \\\n \
-    \       using short_name ## short_name ## short_name ## short_name ## short_name\
-    \ ## value = name<name<name<name<name<value>>>>>;\n\n    #define DEFINE_VEC_ALIAS(name,\
-    \ short_name, value) \\\n        using V ## short_name ## value = Vec<name<value>>;\
-    \ \\\n        using VV ## short_name ## value = VVec<name<value>>;\n\n    #define\
-    \ DEFINE_CONTAINER_ALIAS(define_alias, name, short_name) \\\n        define_alias(name,\
-    \ short_name, int); \\\n        define_alias(name, short_name, li); \\\n     \
-    \   define_alias(name, short_name, float); \\\n        define_alias(name, short_name,\
-    \ lf); \\\n        define_alias(name, short_name, llf); \\\n        define_alias(name,\
-    \ short_name, mint); \\\n        define_alias(name, short_name, dmint); \\\n \
-    \       define_alias(name, short_name, li1); \\\n        define_alias(name, short_name,\
-    \ li2); \\\n        define_alias(name, short_name, li3); \\\n        define_alias(name,\
-    \ short_name, li4); \\\n        define_alias(name, short_name, li5);\n\n\n   \
-    \ template<class T>\n    using Vec = std::vector<T>;\n    template<class T>\n\
-    \    using VVec = Vec<Vec<T>>;\n    template<class T>\n    using VVVec = Vec<VVec<T>>;\n\
-    \    template<class T>\n    using VVVVec = Vec<VVVec<T>>;\n    template<class\
-    \ T>\n    using VVVVVec = Vec<VVVVec<T>>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
-    \ Vec, V);\n\n    template<class T>\n    using Deque = std::deque<T>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
+    \n    using str = std::string;\n\n    template<class T, std::size_t idx, class...\
+    \ Args>\n    struct agg_type {\n        using type = typename agg_type<T, idx\
+    \ - 1, T, Args...>::type;\n    };\n    template<class T, class... Args>\n    struct\
+    \ agg_type<T, 0, Args...> {\n        using type = std::tuple<Args...>;\n    };\n\
+    \    template<class T>\n    struct agg_type<T, 0, T, T> {\n        using type\
+    \ = std::pair<T, T>;\n    };\n\n    template<class T, std::size_t idx>\n    using\
+    \ agg = typename agg_type<T, idx>::type;\n    using li1 = agg<li, 1>;\n    using\
+    \ li2 = agg<li, 2>;\n    using li3 = agg<li, 3>;\n    using li4 = agg<li, 4>;\n\
+    \    using li5 = agg<li, 5>;\n\n\n    #define DEFINE_ALIAS(name, short_name, value_name,\
+    \ short_value_name) \\\n        using short_name ## short_value_name = name<value_name>;\
+    \ \\\n        using short_name ## short_name ## short_value_name = name<name<value_name>>;\
+    \ \\\n        using short_name ## short_name ## short_name ## short_value_name\
+    \ = name<name<name<value_name>>>; \\\n        using short_name ## short_name ##\
+    \ short_name ## short_name ## short_value_name = name<name<name<name<value_name>>>>;\
+    \ \\\n        using short_name ## short_name ## short_name ## short_name ## short_name\
+    \ ## short_value_name = name<name<name<name<name<value_name>>>>>;\n\n    #define\
+    \ DEFINE_VEC_ALIAS(name, short_name, value_name, short_value_name) \\\n      \
+    \  using V ## short_name ## short_value_name = Vec<name<value_name>>; \\\n   \
+    \     using VV ## short_name ## short_value_name = VVec<name<value_name>>;\n\n\
+    \    #define DEFINE_CONTAINER_ALIAS(define_alias, name, short_name) \\\n     \
+    \   define_alias(name, short_name, bool, b); \\\n        define_alias(name, short_name,\
+    \ int, i); \\\n        define_alias(name, short_name, li, l); \\\n        define_alias(name,\
+    \ short_name, float, f); \\\n        define_alias(name, short_name, lf, lf); \\\
+    \n        define_alias(name, short_name, llf, llf); \\\n        define_alias(name,\
+    \ short_name, mint, m); \\\n        define_alias(name, short_name, dmint, dm);\
+    \ \\\n        define_alias(name, short_name, char, c); \\\n        define_alias(name,\
+    \ short_name, str, s); \\\n        define_alias(name, short_name, li1, li1); \\\
+    \n        define_alias(name, short_name, li2, li2); \\\n        define_alias(name,\
+    \ short_name, li3, li3); \\\n        define_alias(name, short_name, li4, li4);\
+    \ \\\n        define_alias(name, short_name, li5, li5);\n\n\n    template<class\
+    \ T>\n    using Vec = std::vector<T>;\n    template<class T>\n    using VVec =\
+    \ Vec<Vec<T>>;\n    template<class T>\n    using VVVec = Vec<VVec<T>>;\n    template<class\
+    \ T>\n    using VVVVec = Vec<VVVec<T>>;\n    template<class T>\n    using VVVVVec\
+    \ = Vec<VVVVec<T>>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Vec, V);\n\n \
+    \   template<class T>\n    using Deque = std::deque<T>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
     \ Deque, D);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, Deque, D);\n\n    template<class\
     \ T>\n    using List = std::list<T>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
     \ List, L);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, List, L);\n\n    template<class\
@@ -1152,18 +1157,18 @@ data:
     \ FL);\n\n    template<class Key, class Compare = Less>\n    using Set = std::set<Key,\
     \ Compare>;\n    template<class Key, class Compare = Less>\n    using Map = std::map<Key,\
     \ Compare>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Set, S);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
-    \ Set, S);\n    using Mlili = Map<li, li>;\n    using VMlili = Vec<Mlili>;\n\n\
-    \    template<class Key, class Compare = Less>\n    using HashSet = std::unordered_set<Key,\
-    \ Compare>;\n    template<class Key, class T, class Compare = Less>\n    using\
-    \ HashMap = std::unordered_map<Key, T, Compare>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
-    \ HashSet, HS);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashSet, HS);\n\
-    \    using HMlili = HashMap<li, li>;\n    using VHMlili = Vec<HMlili>;\n\n   \
-    \ template<class Key>\n    using MultiSet = std::multiset<Key, Hash<Key>>;\n \
-    \   template<class Key, class T>\n    using MultiMap = std::multimap<Key, T, Hash<Key>>;\n\
-    \n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, MultiSet, MS);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
-    \ MultiSet, MS);\n    using MMlili = MultiMap<li, li>;\n    using VMMlili = Vec<MMlili>;\n\
-    \n    template<class Key>\n    using HashMultiSet = std::unordered_multiset<Key,\
-    \ Hash<Key>>;\n    template<class Key, class T>\n    using HashMultiMap = std::unordered_multimap<Key,\
+    \ Set, S);\n    using Mll = Map<li, li>;\n    using VMll = Vec<Mll>;\n\n    template<class\
+    \ Key, class Compare = Less>\n    using HashSet = std::unordered_set<Key, Compare>;\n\
+    \    template<class Key, class T, class Compare = Less>\n    using HashMap = std::unordered_map<Key,\
+    \ T, Compare>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HashSet, HS);\n   \
+    \ DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashSet, HS);\n    using HMll = HashMap<li,\
+    \ li>;\n    using VHMll = Vec<HMll>;\n\n    template<class Key>\n    using MultiSet\
+    \ = std::multiset<Key, Hash<Key>>;\n    template<class Key, class T>\n    using\
+    \ MultiMap = std::multimap<Key, T, Hash<Key>>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
+    \ MultiSet, MS);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, MultiSet, MS);\n\
+    \    using MMll = MultiMap<li, li>;\n    using VMMll = Vec<MMll>;\n\n    template<class\
+    \ Key>\n    using HashMultiSet = std::unordered_multiset<Key, Hash<Key>>;\n  \
+    \  template<class Key, class T>\n    using HashMultiMap = std::unordered_multimap<Key,\
     \ T, Hash<Key>>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HashMultiSet, HMS);\n\
     \    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashMultiSet, HMS);\n    using HMMli\
     \ = HashMultiMap<li, li>;\n    using VHMMli = Vec<HMMli>;\n\n    template<class\
@@ -1207,13 +1212,31 @@ data:
     \ f())...};\n    }\n\n    Printer<Writer<>::iterator, true, true, true, true>\
     \ debug_impl(output.begin());\n\n    template<bool flag>\n    void print_if(std::string_view\
     \ sv) {\n        if constexpr (flag) print(' ', sv);\n    }\n} // namespace kpr::helper\n\
-    \n#define read(type_or_init, ...) \\\n    auto [__VA_ARGS__] = (kpr::helper::read_impl(([]()\
-    \ { \\\n        using T = std::decay_t<decltype(*new type_or_init)>; \\\n    \
-    \    alignas(T) std::byte storage[sizeof(T)]; \\\n        T* p = new (storage)\
-    \ type_or_init; \\\n        kpr::scan(*p); \\\n        T res = std::move(*p);\
-    \ \\\n        p->~T(); \\\n        return res; \\\n    }), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\n\
-    \n#ifdef NDEBUG\n#define debug(...) (void())\n#else\n#define debug(...) (kpr::print('#',\
-    \ ' ', 'l', 'i', 'n', 'e', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
+    \n/* C++20\u4EE5\u964D\n#define read(type_or_init, ...) \\\n    auto [__VA_ARGS__]\
+    \ = (kpr::helper::read_impl(([]() { \\\n        using T = std::decay_t<decltype(*new\
+    \ type_or_init)>; \\\n        alignas(T) std::byte storage[sizeof(T)]; \\\n  \
+    \      T* p = new (storage) type_or_init; \\\n        kpr::scan(*p); \\\n    \
+    \    T res = std::move(*p); \\\n        p->~T(); \\\n        return res; \\\n\
+    \    }), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\n\
+    */\n\n#define BOOL(...) bool __VA_ARGS__; scan(__VA_ARGS__)\n#define INT(...)\
+    \ int __VA_ARGS__; scan(__VA_ARGS__)\n#define LI(...) li __VA_ARGS__; scan(__VA_ARGS__)\n\
+    #define FLOAT(...) float __VA_ARGS__; scan(__VA_ARGS__)\n#define LF(...) lf __VA_ARGS__;\
+    \ scan(__VA_ARGS__)\n#define LLF(...) llf __VA_ARGS__; scan(__VA_ARGS__)\n#define\
+    \ MINT(...) mint __VA_ARGS__; scan(__VA_ARGS__)\n#define DMINT(...) dmint __VA_ARGS__;\
+    \ scan(__VA_ARGS__)\n#define CHAR(...) char __VA_ARGS__; scan(__VA_ARGS__)\n#define\
+    \ STR(...) str __VA_ARGS__; scan(__VA_ARGS__)\n#define LI1(...) li1 __VA_ARGS__;\
+    \ scan(__VA_ARGS__)\n#define LI2(...) li2 __VA_ARGS__; scan(__VA_ARGS__)\n#define\
+    \ LI3(...) li3 __VA_ARGS__; scan(__VA_ARGS__)\n#define LI4(...) li4 __VA_ARGS__;\
+    \ scan(__VA_ARGS__)\n#define LI5(...) li5 __VA_ARGS__; scan(__VA_ARGS__)\n\n#define\
+    \ KYOPRO_READ1(init, _1) auto _1 = init; scan(_1)\n#define KYOPRO_READ2(init,\
+    \ _1, _2) auto _1 = init, _2 = init; scan(_1, _2)\n#define KYOPRO_READ3(init,\
+    \ _1, _2, _3) auto _1 = init, _2 = init, _3 = init; scan(_1, _2, _3)\n#define\
+    \ KYOPRO_READ4(init, _1, _2, _3, _4) auto _1 = init, _2 = init, _3 = init, _4\
+    \ = init; scan(_1, _2, _3, _4)\n\n#define KYOPRO_OVERLOAD_READ(_1, _2, _3, _4,\
+    \ _5, name, ...) name\n#define read(...) KYOPRO_OVERLOAD_READ(__VA_ARGS__, KYOPRO_READ4,\
+    \ KYOPRO_READ3, KYOPRO_READ2, KYOPRO_READ1)(__VA_ARGS__)\n\n#ifdef NDEBUG\n#define\
+    \ debug(...) (void())\n#else\n#define debug(...) (kpr::print('#', ' ', 'l', 'i',\
+    \ 'n', 'e', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
     \ != 0>(#__VA_ARGS__), kpr::print('\\n'), kpr::helper::debug_impl(__VA_ARGS__))\n\
     #endif\n#line 5 \"template/lambda.hpp\"\n\r\n#define $(...) \\\r\n([&](auto&&...\
     \ _args) { \\\r\n    auto _args_tuple = std::forward_as_tuple(_args...); \\\r\n\
@@ -1354,7 +1377,7 @@ data:
   - function/monoid.hpp
   - meta/constant.hpp
   - math/power.hpp
-  - function/RecursiveLambda.hpp
+  - function/RecLambda.hpp
   - io/io.hpp
   - io/in.hpp
   - io/io_option.hpp
@@ -1394,7 +1417,7 @@ data:
   path: all.hpp
   requiredBy:
   - verify/hello_world.cpp
-  timestamp: '2023-03-16 01:25:36+09:00'
+  timestamp: '2023-03-20 02:49:55+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp

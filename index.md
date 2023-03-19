@@ -39,8 +39,8 @@ data:
   - name: function
     pages:
     - icon: ':warning:'
-      path: function/RecursiveLambda.hpp
-      title: function/RecursiveLambda.hpp
+      path: function/RecLambda.hpp
+      title: function/RecLambda.hpp
     - icon: ':warning:'
       path: function/compare.hpp
       title: function/compare.hpp
