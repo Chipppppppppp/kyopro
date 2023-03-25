@@ -980,7 +980,7 @@ data:
     \n            a.value = floor_mod(value, a.mod);\r\n        }\r\n    };\r\n\r\n\
     \    template<KYOPRO_BASE_UINT mod>\r\n    struct PrintFunction<ModInt<mod>> {\r\
     \n        template<class Printer>\r\n        static void print(Printer& printer,\
-    \ ModInt<mod>& a) {\r\n            PrintFunction<typename ModInt<mod>::value_type>::print(printer,\
+    \ ModInt<mod> a) {\r\n            PrintFunction<typename ModInt<mod>::value_type>::print(printer,\
     \ a.value);\r\n        }\r\n    };\r\n\r\n    template<KYOPRO_BASE_UINT mod>\r\
     \n    struct Hash<ModInt<mod>> {\r\n        using value_type = ModInt<mod>;\r\n\
     \        constexpr std::size_t operator ()(ModInt<mod> a) const noexcept {\r\n\
@@ -1023,7 +1023,7 @@ data:
   requiredBy:
   - all.hpp
   - verify/hello_world.cpp
-  timestamp: '2023-03-20 02:49:55+09:00'
+  timestamp: '2023-03-25 22:11:58+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp
