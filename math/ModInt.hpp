@@ -166,7 +166,7 @@ namespace kpr {
     template<KYOPRO_BASE_UINT mod>
     struct PrintFunction<ModInt<mod>> {
         template<class Printer>
-        static void print(Printer& printer, ModInt<mod>& a) {
+        static void print(Printer& printer, ModInt<mod> a) {
             PrintFunction<typename ModInt<mod>::value_type>::print(printer, a.value);
         }
     };
