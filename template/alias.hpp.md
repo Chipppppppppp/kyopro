@@ -806,7 +806,7 @@ data:
     \        constexpr std::size_t operator ()(ModInt<mod> a) const noexcept {\r\n\
     \            return static_cast<std::size_t>(a);\r\n        }\r\n    };\r\n} //\
     \ namespace kpr\r\n#line 22 \"template/alias.hpp\"\n\nnamespace kpr {\n    using\
-    \ ushort = unsigned short;\n    using li = long long;\n    using ull = unsigned\
+    \ ushort = unsigned short;\n    using ll = long long;\n    using ull = unsigned\
     \ long long;\n    using lf = double;\n    using llf = long double;\n\n    using\
     \ i8 = std::int8_t;\n    using u8 = std::uint8_t;\n    using i16 = std::int16_t;\n\
     \    using u16 = std::uint16_t;\n    using i32 = std::int32_t;\n    using u32\
@@ -820,9 +820,9 @@ data:
     \ agg_type<T, 0, Args...> {\n        using type = std::tuple<Args...>;\n    };\n\
     \    template<class T>\n    struct agg_type<T, 0, T, T> {\n        using type\
     \ = std::pair<T, T>;\n    };\n\n    template<class T, std::size_t idx>\n    using\
-    \ agg = typename agg_type<T, idx>::type;\n    using li1 = agg<li, 1>;\n    using\
-    \ li2 = agg<li, 2>;\n    using li3 = agg<li, 3>;\n    using li4 = agg<li, 4>;\n\
-    \    using li5 = agg<li, 5>;\n\n\n    #define DEFINE_ALIAS(name, short_name, value_name,\
+    \ agg = typename agg_type<T, idx>::type;\n    using ll1 = agg<ll, 1>;\n    using\
+    \ ll2 = agg<ll, 2>;\n    using ll3 = agg<ll, 3>;\n    using ll4 = agg<ll, 4>;\n\
+    \    using ll5 = agg<ll, 5>;\n\n\n    #define DEFINE_ALIAS(name, short_name, value_name,\
     \ short_value_name) \\\n        using short_name ## short_value_name = name<value_name>;\
     \ \\\n        using short_name ## short_name ## short_value_name = name<name<value_name>>;\
     \ \\\n        using short_name ## short_name ## short_name ## short_value_name\
@@ -835,15 +835,15 @@ data:
     \     using VV ## short_name ## short_value_name = VVec<name<value_name>>;\n\n\
     \    #define DEFINE_CONTAINER_ALIAS(define_alias, name, short_name) \\\n     \
     \   define_alias(name, short_name, bool, b); \\\n        define_alias(name, short_name,\
-    \ int, i); \\\n        define_alias(name, short_name, li, l); \\\n        define_alias(name,\
+    \ int, i); \\\n        define_alias(name, short_name, ll, l); \\\n        define_alias(name,\
     \ short_name, float, f); \\\n        define_alias(name, short_name, lf, lf); \\\
     \n        define_alias(name, short_name, llf, llf); \\\n        define_alias(name,\
     \ short_name, mint, m); \\\n        define_alias(name, short_name, dmint, dm);\
     \ \\\n        define_alias(name, short_name, char, c); \\\n        define_alias(name,\
-    \ short_name, str, s); \\\n        define_alias(name, short_name, li1, li1); \\\
-    \n        define_alias(name, short_name, li2, li2); \\\n        define_alias(name,\
-    \ short_name, li3, li3); \\\n        define_alias(name, short_name, li4, li4);\
-    \ \\\n        define_alias(name, short_name, li5, li5);\n\n\n    template<class\
+    \ short_name, str, s); \\\n        define_alias(name, short_name, ll1, ll1); \\\
+    \n        define_alias(name, short_name, ll2, ll2); \\\n        define_alias(name,\
+    \ short_name, ll3, ll3); \\\n        define_alias(name, short_name, ll4, ll4);\
+    \ \\\n        define_alias(name, short_name, ll5, ll5);\n\n\n    template<class\
     \ T>\n    using Vec = std::vector<T>;\n    template<class T>\n    using VVec =\
     \ Vec<Vec<T>>;\n    template<class T>\n    using VVVec = Vec<VVec<T>>;\n    template<class\
     \ T>\n    using VVVVec = Vec<VVVec<T>>;\n    template<class T>\n    using VVVVVec\
@@ -857,21 +857,21 @@ data:
     \ FL);\n\n    template<class Key, class Compare = Less>\n    using Set = std::set<Key,\
     \ Compare>;\n    template<class Key, class Compare = Less>\n    using Map = std::map<Key,\
     \ Compare>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Set, S);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
-    \ Set, S);\n    using Mll = Map<li, li>;\n    using VMll = Vec<Mll>;\n\n    template<class\
+    \ Set, S);\n    using Mll = Map<ll, ll>;\n    using VMll = Vec<Mll>;\n\n    template<class\
     \ Key, class Compare = Less>\n    using HashSet = std::unordered_set<Key, Compare>;\n\
     \    template<class Key, class T, class Compare = Less>\n    using HashMap = std::unordered_map<Key,\
     \ T, Compare>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HashSet, HS);\n   \
-    \ DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashSet, HS);\n    using HMll = HashMap<li,\
-    \ li>;\n    using VHMll = Vec<HMll>;\n\n    template<class Key>\n    using MultiSet\
+    \ DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashSet, HS);\n    using HMll = HashMap<ll,\
+    \ ll>;\n    using VHMll = Vec<HMll>;\n\n    template<class Key>\n    using MultiSet\
     \ = std::multiset<Key, Hash<Key>>;\n    template<class Key, class T>\n    using\
     \ MultiMap = std::multimap<Key, T, Hash<Key>>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
     \ MultiSet, MS);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, MultiSet, MS);\n\
-    \    using MMll = MultiMap<li, li>;\n    using VMMll = Vec<MMll>;\n\n    template<class\
+    \    using MMll = MultiMap<ll, ll>;\n    using VMMll = Vec<MMll>;\n\n    template<class\
     \ Key>\n    using HashMultiSet = std::unordered_multiset<Key, Hash<Key>>;\n  \
     \  template<class Key, class T>\n    using HashMultiMap = std::unordered_multimap<Key,\
     \ T, Hash<Key>>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HashMultiSet, HMS);\n\
     \    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashMultiSet, HMS);\n    using HMMli\
-    \ = HashMultiMap<li, li>;\n    using VHMMli = Vec<HMMli>;\n\n    template<class\
+    \ = HashMultiMap<ll, ll>;\n    using VHMMli = Vec<HMMli>;\n\n    template<class\
     \ T, class Container = std::deque<T>>\n    using Queue = std::queue<T, Container>;\n\
     \n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Queue, Que);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
     \ Queue, Que);\n\n    template<class T, class Container = std::deque<T>>\n   \
@@ -890,7 +890,7 @@ data:
     #include <unordered_set>\n#include <utility>\n#include <vector>\n#include \"../algorithm/Hash.hpp\"\
     \n#include \"../function/compare.hpp\"\n#include \"../math/DynamicModInt.hpp\"\
     \n#include \"../math/ModInt.hpp\"\n#include \"../meta/setting.hpp\"\n\nnamespace\
-    \ kpr {\n    using ushort = unsigned short;\n    using li = long long;\n    using\
+    \ kpr {\n    using ushort = unsigned short;\n    using ll = long long;\n    using\
     \ ull = unsigned long long;\n    using lf = double;\n    using llf = long double;\n\
     \n    using i8 = std::int8_t;\n    using u8 = std::uint8_t;\n    using i16 = std::int16_t;\n\
     \    using u16 = std::uint16_t;\n    using i32 = std::int32_t;\n    using u32\
@@ -904,9 +904,9 @@ data:
     \ agg_type<T, 0, Args...> {\n        using type = std::tuple<Args...>;\n    };\n\
     \    template<class T>\n    struct agg_type<T, 0, T, T> {\n        using type\
     \ = std::pair<T, T>;\n    };\n\n    template<class T, std::size_t idx>\n    using\
-    \ agg = typename agg_type<T, idx>::type;\n    using li1 = agg<li, 1>;\n    using\
-    \ li2 = agg<li, 2>;\n    using li3 = agg<li, 3>;\n    using li4 = agg<li, 4>;\n\
-    \    using li5 = agg<li, 5>;\n\n\n    #define DEFINE_ALIAS(name, short_name, value_name,\
+    \ agg = typename agg_type<T, idx>::type;\n    using ll1 = agg<ll, 1>;\n    using\
+    \ ll2 = agg<ll, 2>;\n    using ll3 = agg<ll, 3>;\n    using ll4 = agg<ll, 4>;\n\
+    \    using ll5 = agg<ll, 5>;\n\n\n    #define DEFINE_ALIAS(name, short_name, value_name,\
     \ short_value_name) \\\n        using short_name ## short_value_name = name<value_name>;\
     \ \\\n        using short_name ## short_name ## short_value_name = name<name<value_name>>;\
     \ \\\n        using short_name ## short_name ## short_name ## short_value_name\
@@ -919,15 +919,15 @@ data:
     \     using VV ## short_name ## short_value_name = VVec<name<value_name>>;\n\n\
     \    #define DEFINE_CONTAINER_ALIAS(define_alias, name, short_name) \\\n     \
     \   define_alias(name, short_name, bool, b); \\\n        define_alias(name, short_name,\
-    \ int, i); \\\n        define_alias(name, short_name, li, l); \\\n        define_alias(name,\
+    \ int, i); \\\n        define_alias(name, short_name, ll, l); \\\n        define_alias(name,\
     \ short_name, float, f); \\\n        define_alias(name, short_name, lf, lf); \\\
     \n        define_alias(name, short_name, llf, llf); \\\n        define_alias(name,\
     \ short_name, mint, m); \\\n        define_alias(name, short_name, dmint, dm);\
     \ \\\n        define_alias(name, short_name, char, c); \\\n        define_alias(name,\
-    \ short_name, str, s); \\\n        define_alias(name, short_name, li1, li1); \\\
-    \n        define_alias(name, short_name, li2, li2); \\\n        define_alias(name,\
-    \ short_name, li3, li3); \\\n        define_alias(name, short_name, li4, li4);\
-    \ \\\n        define_alias(name, short_name, li5, li5);\n\n\n    template<class\
+    \ short_name, str, s); \\\n        define_alias(name, short_name, ll1, ll1); \\\
+    \n        define_alias(name, short_name, ll2, ll2); \\\n        define_alias(name,\
+    \ short_name, ll3, ll3); \\\n        define_alias(name, short_name, ll4, ll4);\
+    \ \\\n        define_alias(name, short_name, ll5, ll5);\n\n\n    template<class\
     \ T>\n    using Vec = std::vector<T>;\n    template<class T>\n    using VVec =\
     \ Vec<Vec<T>>;\n    template<class T>\n    using VVVec = Vec<VVec<T>>;\n    template<class\
     \ T>\n    using VVVVec = Vec<VVVec<T>>;\n    template<class T>\n    using VVVVVec\
@@ -941,21 +941,21 @@ data:
     \ FL);\n\n    template<class Key, class Compare = Less>\n    using Set = std::set<Key,\
     \ Compare>;\n    template<class Key, class Compare = Less>\n    using Map = std::map<Key,\
     \ Compare>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Set, S);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
-    \ Set, S);\n    using Mll = Map<li, li>;\n    using VMll = Vec<Mll>;\n\n    template<class\
+    \ Set, S);\n    using Mll = Map<ll, ll>;\n    using VMll = Vec<Mll>;\n\n    template<class\
     \ Key, class Compare = Less>\n    using HashSet = std::unordered_set<Key, Compare>;\n\
     \    template<class Key, class T, class Compare = Less>\n    using HashMap = std::unordered_map<Key,\
     \ T, Compare>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HashSet, HS);\n   \
-    \ DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashSet, HS);\n    using HMll = HashMap<li,\
-    \ li>;\n    using VHMll = Vec<HMll>;\n\n    template<class Key>\n    using MultiSet\
+    \ DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashSet, HS);\n    using HMll = HashMap<ll,\
+    \ ll>;\n    using VHMll = Vec<HMll>;\n\n    template<class Key>\n    using MultiSet\
     \ = std::multiset<Key, Hash<Key>>;\n    template<class Key, class T>\n    using\
     \ MultiMap = std::multimap<Key, T, Hash<Key>>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
     \ MultiSet, MS);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, MultiSet, MS);\n\
-    \    using MMll = MultiMap<li, li>;\n    using VMMll = Vec<MMll>;\n\n    template<class\
+    \    using MMll = MultiMap<ll, ll>;\n    using VMMll = Vec<MMll>;\n\n    template<class\
     \ Key>\n    using HashMultiSet = std::unordered_multiset<Key, Hash<Key>>;\n  \
     \  template<class Key, class T>\n    using HashMultiMap = std::unordered_multimap<Key,\
     \ T, Hash<Key>>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HashMultiSet, HMS);\n\
     \    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashMultiSet, HMS);\n    using HMMli\
-    \ = HashMultiMap<li, li>;\n    using VHMMli = Vec<HMMli>;\n\n    template<class\
+    \ = HashMultiMap<ll, ll>;\n    using VHMMli = Vec<HMMli>;\n\n    template<class\
     \ T, class Container = std::deque<T>>\n    using Queue = std::queue<T, Container>;\n\
     \n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Queue, Que);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
     \ Queue, Que);\n\n    template<class T, class Container = std::deque<T>>\n   \
@@ -990,7 +990,7 @@ data:
   - all.hpp
   - verify/hello_world.cpp
   - template/template.hpp
-  timestamp: '2023-03-25 22:11:58+09:00'
+  timestamp: '2023-03-27 03:13:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/alias.hpp
