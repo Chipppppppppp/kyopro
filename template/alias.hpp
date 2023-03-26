@@ -22,7 +22,7 @@
 
 namespace kpr {
     using ushort = unsigned short;
-    using li = long long;
+    using ll = long long;
     using ull = unsigned long long;
     using lf = double;
     using llf = long double;
@@ -63,11 +63,11 @@ namespace kpr {
 
     template<class T, std::size_t idx>
     using agg = typename agg_type<T, idx>::type;
-    using li1 = agg<li, 1>;
-    using li2 = agg<li, 2>;
-    using li3 = agg<li, 3>;
-    using li4 = agg<li, 4>;
-    using li5 = agg<li, 5>;
+    using ll1 = agg<ll, 1>;
+    using ll2 = agg<ll, 2>;
+    using ll3 = agg<ll, 3>;
+    using ll4 = agg<ll, 4>;
+    using ll5 = agg<ll, 5>;
 
 
     #define DEFINE_ALIAS(name, short_name, value_name, short_value_name) \
@@ -84,7 +84,7 @@ namespace kpr {
     #define DEFINE_CONTAINER_ALIAS(define_alias, name, short_name) \
         define_alias(name, short_name, bool, b); \
         define_alias(name, short_name, int, i); \
-        define_alias(name, short_name, li, l); \
+        define_alias(name, short_name, ll, l); \
         define_alias(name, short_name, float, f); \
         define_alias(name, short_name, lf, lf); \
         define_alias(name, short_name, llf, llf); \
@@ -92,11 +92,11 @@ namespace kpr {
         define_alias(name, short_name, dmint, dm); \
         define_alias(name, short_name, char, c); \
         define_alias(name, short_name, str, s); \
-        define_alias(name, short_name, li1, li1); \
-        define_alias(name, short_name, li2, li2); \
-        define_alias(name, short_name, li3, li3); \
-        define_alias(name, short_name, li4, li4); \
-        define_alias(name, short_name, li5, li5);
+        define_alias(name, short_name, ll1, ll1); \
+        define_alias(name, short_name, ll2, ll2); \
+        define_alias(name, short_name, ll3, ll3); \
+        define_alias(name, short_name, ll4, ll4); \
+        define_alias(name, short_name, ll5, ll5);
 
 
     template<class T>
@@ -137,7 +137,7 @@ namespace kpr {
 
     DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Set, S);
     DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, Set, S);
-    using Mll = Map<li, li>;
+    using Mll = Map<ll, ll>;
     using VMll = Vec<Mll>;
 
     template<class Key, class Compare = Less>
@@ -147,7 +147,7 @@ namespace kpr {
 
     DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HashSet, HS);
     DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashSet, HS);
-    using HMll = HashMap<li, li>;
+    using HMll = HashMap<ll, ll>;
     using VHMll = Vec<HMll>;
 
     template<class Key>
@@ -157,7 +157,7 @@ namespace kpr {
 
     DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, MultiSet, MS);
     DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, MultiSet, MS);
-    using MMll = MultiMap<li, li>;
+    using MMll = MultiMap<ll, ll>;
     using VMMll = Vec<MMll>;
 
     template<class Key>
@@ -167,7 +167,7 @@ namespace kpr {
 
     DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HashMultiSet, HMS);
     DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashMultiSet, HMS);
-    using HMMli = HashMultiMap<li, li>;
+    using HMMli = HashMultiMap<ll, ll>;
     using VHMMli = Vec<HMMli>;
 
     template<class T, class Container = std::deque<T>>
