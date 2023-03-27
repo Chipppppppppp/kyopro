@@ -70,128 +70,53 @@ namespace kpr {
     })()
 #define KYOPRO_NAMED_TUPLE1(name0, value0) \
     ([] { \
-        using Type0 = std::decay_t<decltype(*new value0)>; \
         struct NamedTuple: kpr::NamedTupleBase<NamedTuple, 1> { \
             using kpr::NamedTupleBase<NamedTuple, 1>::NamedTupleBase; \
-            Type0 name0; \
+            std::decay_t<decltype(value0)> name0; \
         }; \
-        alignas(Type0) std::byte storage0[sizeof(Type0)]; \
-        Type0* ptr0 = new (storage0) value0; \
-        Type0 res0 = std::move(*ptr0); \
-        ptr0->~Type0(); \
-        return NamedTuple{std::move(res0)}; \
+        return NamedTuple{value0}; \
     })()
 #define KYOPRO_NAMED_TUPLE2(name0, value0, name1, value1) \
     ([] { \
-        using Type0 = std::decay_t<decltype(*new value0)>; \
-        using Type1 = std::decay_t<decltype(*new value1)>; \
         struct NamedTuple: kpr::NamedTupleBase<NamedTuple, 2> { \
             using kpr::NamedTupleBase<NamedTuple, 2>::NamedTupleBase; \
-            Type0 name0; \
-            Type1 name1; \
+            std::decay_t<decltype(value0)> name0; \
+            std::decay_t<decltype(value1)> name1; \
         }; \
-        alignas(Type0) std::byte storage0[sizeof(Type0)]; \
-        Type0* ptr0 = new (storage0) value0; \
-        Type0 res0 = std::move(*ptr0); \
-        ptr0->~Type0(); \
-        alignas(Type1) std::byte storage1[sizeof(Type1)]; \
-        Type1* ptr1 = new (storage1) value1; \
-        Type1 res1 = std::move(*ptr1); \
-        ptr1->~Type1(); \
-        return NamedTuple{std::move(res0), std::move(res1)}; \
+        return NamedTuple{value0, value1}; \
     })()
 #define KYOPRO_NAMED_TUPLE3(name0, value0, name1, value1, name2, value2) \
     ([] { \
-        using Type0 = std::decay_t<decltype(*new value0)>; \
-        using Type1 = std::decay_t<decltype(*new value1)>; \
-        using Type2 = std::decay_t<decltype(*new value2)>; \
         struct NamedTuple: kpr::NamedTupleBase<NamedTuple, 3> { \
             using kpr::NamedTupleBase<NamedTuple, 3>::NamedTupleBase; \
-            Type0 name0; \
-            Type1 name1; \
-            Type2 name2; \
+            std::decay_t<decltype(value0)> name0; \
+            std::decay_t<decltype(value1)> name1; \
+            std::decay_t<decltype(value2)> name2; \
         }; \
-        alignas(Type0) std::byte storage0[sizeof(Type0)]; \
-        Type0* ptr0 = new (storage0) value0; \
-        Type0 res0 = std::move(*ptr0); \
-        ptr0->~Type0(); \
-        alignas(Type1) std::byte storage1[sizeof(Type1)]; \
-        Type1* ptr1 = new (storage1) value1; \
-        Type1 res1 = std::move(*ptr1); \
-        ptr1->~Type1(); \
-        alignas(Type2) std::byte storage2[sizeof(Type2)]; \
-        Type2* ptr2 = new (storage2) value2; \
-        Type2 res2 = std::move(*ptr2); \
-        ptr2->~Type2(); \
-        return NamedTuple{std:move(res0), std::move(res1), std::move(res2)}; \
+        return NamedTuple{value0, value1, value2}; \
     })()
 #define KYOPRO_NAMED_TUPLE4(name0, value0, name1, value1, name2, value2, name3, value3) \
     ([] { \
-        using Type0 = std::decay_t<decltype(*new value0)>; \
-        using Type1 = std::decay_t<decltype(*new value1)>; \
-        using Type2 = std::decay_t<decltype(*new value2)>; \
-        using Type3 = std::decay_t<decltype(*new value3)>; \
         struct NamedTuple: kpr::NamedTupleBase<NamedTuple, 4> { \
             using kpr::NamedTupleBase<NamedTuple, 4>::NamedTupleBase; \
-            Type0 name0; \
-            Type1 name1; \
-            Type2 name2; \
-            Type3 name3; \
+            std::decay_t<decltype(value0)> name0; \
+            std::decay_t<decltype(value1)> name1; \
+            std::decay_t<decltype(value2)> name2; \
+            std::decay_t<decltype(value3)> name3; \
         }; \
-        alignas(Type0) std::byte storage0[sizeof(Type0)]; \
-        Type0* ptr0 = new (storage0) value0; \
-        Type0 res0 = std::move(*ptr0); \
-        ptr0->~Type0(); \
-        alignas(Type1) std::byte storage1[sizeof(Type1)]; \
-        Type1* ptr1 = new (storage1) value1; \
-        Type1 res1 = std::move(*ptr1); \
-        ptr1->~Type1(); \
-        alignas(Type2) std::byte storage2[sizeof(Type2)]; \
-        Type2* ptr2 = new (storage2) value2; \
-        Type2 res2 = std::move(*ptr2); \
-        ptr2->~Type2(); \
-        alignas(Type3) std::byte storage3[sizeof(Type3)]; \
-        Type3* ptr3 = new (storage3) value3; \
-        Type3 res3 = std::move(*ptr3); \
-        ptr3->~Type3(); \
-        return NamedTuple{std:move(res0), std::move(res1), std::move(res2), std::move(res3)}; \
+        return NamedTuple{value0, value1, value2, value3}; \
     })()
 #define KYOPRO_NAMED_TUPLE5(name0, value0, name1, value1, name2, value2, name3, value3, name4, value4) \
     ([] { \
-        using Type0 = std::decay_t<decltype(*new value0)>; \
-        using Type1 = std::decay_t<decltype(*new value1)>; \
-        using Type2 = std::decay_t<decltype(*new value2)>; \
-        using Type3 = std::decay_t<decltype(*new value3)>; \
-        using Type4 = std::decay_t<decltype(*new value4)>; \
         struct NamedTuple: kpr::NamedTupleBase<NamedTuple, 5> { \
             using kpr::NamedTupleBase<NamedTuple, 5>::NamedTupleBase; \
-            Type0 name0; \
-            Type1 name1; \
-            Type2 name2; \
-            Type3 name3; \
-            Type4 name4; \
+            std::decay_t<decltype(value0)> name0; \
+            std::decay_t<decltype(value1)> name1; \
+            std::decay_t<decltype(value2)> name2; \
+            std::decay_t<decltype(value3)> name3; \
+            std::decay_t<decltype(value4)> name4; \
         }; \
-        alignas(Type0) std::byte storage0[sizeof(Type0)]; \
-        Type0* ptr0 = new (storage0) value0; \
-        Type0 res0 = std::move(*ptr0); \
-        ptr0->~Type0(); \
-        alignas(Type1) std::byte storage1[sizeof(Type1)]; \
-        Type1* ptr1 = new (storage1) value1; \
-        Type1 res1 = std::move(*ptr1); \
-        ptr1->~Type1(); \
-        alignas(Type2) std::byte storage2[sizeof(Type2)]; \
-        Type2* ptr2 = new (storage2) value2; \
-        Type2 res2 = std::move(*ptr2); \
-        ptr2->~Type2(); \
-        alignas(Type3) std::byte storage3[sizeof(Type3)]; \
-        Type3* ptr3 = new (storage3) value3; \
-        Type3 res3 = std::move(*ptr3); \
-        ptr3->~Type3(); \
-        alignas(Type4) std::byte storage4[sizeof(Type4)]; \
-        Type4* ptr4 = new (storage4) value4; \
-        Type4 res4 = std::move(*ptr4); \
-        ptr4->~Type4(); \
-        return NamedTuple{std:move(res0), std::move(res1), std::move(res2), std::move(res3), std::move(res4)}; \
+        return NamedTuple{value0, value1, value2, value3, value4}; \
     })()
 
 #define KYOPRO_OVERLOAD_NAMED_TUPLE(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, name, ...) name
