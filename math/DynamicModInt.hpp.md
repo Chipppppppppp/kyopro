@@ -53,9 +53,6 @@ data:
   - icon: ':warning:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':warning:'
-    path: verify/hello_world.cpp
-    title: verify/hello_world.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/aoj/PrimeNumber.test.cpp
@@ -754,7 +751,6 @@ data:
   - math/is_prime.hpp
   - math/factorize.hpp
   - math/math.hpp
-  - verify/hello_world.cpp
   - template/template.hpp
   - template/alias.hpp
   timestamp: '2023-03-07 11:56:47+00:00'

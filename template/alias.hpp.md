@@ -53,9 +53,6 @@ data:
   - icon: ':warning:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':warning:'
-    path: verify/hello_world.cpp
-    title: verify/hello_world.cpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -988,7 +985,6 @@ data:
   path: template/alias.hpp
   requiredBy:
   - all.hpp
-  - verify/hello_world.cpp
   - template/template.hpp
   timestamp: '2023-03-27 03:13:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS

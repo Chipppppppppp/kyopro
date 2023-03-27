@@ -26,9 +26,6 @@ data:
   - icon: ':warning:'
     path: data_structure/structure.hpp
     title: data_structure/structure.hpp
-  - icon: ':warning:'
-    path: verify/hello_world.cpp
-    title: verify/hello_world.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/point_add_range_sum.test.cpp
@@ -284,7 +281,6 @@ data:
   path: data_structure/FenwickTree.hpp
   requiredBy:
   - all.hpp
-  - verify/hello_world.cpp
   - data_structure/structure.hpp
   - data_structure/data_structure.hpp
   timestamp: '2023-02-14 01:39:39+09:00'

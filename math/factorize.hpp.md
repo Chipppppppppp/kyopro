@@ -50,9 +50,6 @@ data:
   - icon: ':warning:'
     path: math/math.hpp
     title: math/math.hpp
-  - icon: ':warning:'
-    path: verify/hello_world.cpp
-    title: verify/hello_world.cpp
   _extendedVerifiedWith:
   - icon: ':x:'
     path: verify/yosupo/factorize.test.cpp
@@ -822,7 +819,6 @@ data:
   - all/all.hpp
   - all.hpp
   - math/math.hpp
-  - verify/hello_world.cpp
   timestamp: '2023-03-16 01:25:36+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:

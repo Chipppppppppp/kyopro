@@ -757,14 +757,15 @@ data:
     \n                } while (n % p == 0);\r\n            }\r\n            if constexpr\
     \ (sorted) std::sort(res.begin(), res.end());\r\n            return res;\r\n \
     \       }\r\n    } factorize;\r\n} // namespace kpr\r\n#line 4 \"verify/yosupo/factorize.test.cpp\"\
-    \n\r\nint main() {\r\n  long long q;\r\n  kpr::scan(q);\r\n  for (int i = 0; i\
-    \ < q; ++i) {\r\n    long long a;\r\n    kpr::scan(a);\r\n    auto res = kpr::factorize(a);\r\
-    \n    kpr::println(res.size(), res);\r\n  }\r\n}\r\n"
+    \n\r\nint main() {\r\n    long long q;\r\n    kpr::scan(q);\r\n    for (int i\
+    \ = 0; i < q; ++i) {\r\n        long long a;\r\n        kpr::scan(a);\r\n    \
+    \    auto res = kpr::factorize(a);\r\n        kpr::println(res.size(), res);\r\
+    \n    }\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\r\n#include\
     \ \"../../math/factorize.hpp\"\r\n#include \"../../io/io.hpp\"\r\n\r\nint main()\
-    \ {\r\n  long long q;\r\n  kpr::scan(q);\r\n  for (int i = 0; i < q; ++i) {\r\n\
-    \    long long a;\r\n    kpr::scan(a);\r\n    auto res = kpr::factorize(a);\r\n\
-    \    kpr::println(res.size(), res);\r\n  }\r\n}\r\n"
+    \ {\r\n    long long q;\r\n    kpr::scan(q);\r\n    for (int i = 0; i < q; ++i)\
+    \ {\r\n        long long a;\r\n        kpr::scan(a);\r\n        auto res = kpr::factorize(a);\r\
+    \n        kpr::println(res.size(), res);\r\n    }\r\n}\r\n"
   dependsOn:
   - math/factorize.hpp
   - algorithm/bit.hpp
@@ -784,7 +785,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2023-03-16 01:25:36+09:00'
+  timestamp: '2023-03-27 22:50:32+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/yosupo/factorize.test.cpp

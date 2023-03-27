@@ -718,14 +718,16 @@ data:
     \ {\r\n                    if (n <= i) return true;\r\n                    if\
     \ (ng(i)) return false;\r\n                }\r\n            }\r\n            return\
     \ true;\r\n        }\r\n    } is_prime;\r\n} // namespace kpr\r\n#line 4 \"verify/aoj/PrimeNumber.test.cpp\"\
-    \n\r\nint main() {\r\n  int t;\r\n  kpr::scan(t);\r\n  int cnt = 0;\r\n  for (int\
-    \ i = 0; i < t; ++i) {\r\n    long long x;\r\n    kpr::scan(x);\r\n    if (kpr::is_prime(x))\
-    \ ++cnt;\r\n  }\r\n  kpr::println(cnt);\r\n}\r\n"
+    \n\r\nint main() {\r\n    int t;\r\n    kpr::scan(t);\r\n    int cnt = 0;\r\n\
+    \    for (int i = 0; i < t; ++i) {\r\n        long long x;\r\n        kpr::scan(x);\r\
+    \n        if (kpr::is_prime(x)) ++cnt;\r\n    }\r\n    kpr::println(cnt);\r\n\
+    }\r\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_1_C&lang=ja\"\
     \r\n#include \"../../math/is_prime.hpp\"\r\n#include \"../../io/io.hpp\"\r\n\r\
-    \nint main() {\r\n  int t;\r\n  kpr::scan(t);\r\n  int cnt = 0;\r\n  for (int\
-    \ i = 0; i < t; ++i) {\r\n    long long x;\r\n    kpr::scan(x);\r\n    if (kpr::is_prime(x))\
-    \ ++cnt;\r\n  }\r\n  kpr::println(cnt);\r\n}\r\n"
+    \nint main() {\r\n    int t;\r\n    kpr::scan(t);\r\n    int cnt = 0;\r\n    for\
+    \ (int i = 0; i < t; ++i) {\r\n        long long x;\r\n        kpr::scan(x);\r\
+    \n        if (kpr::is_prime(x)) ++cnt;\r\n    }\r\n    kpr::println(cnt);\r\n\
+    }\r\n"
   dependsOn:
   - math/is_prime.hpp
   - algorithm/bit.hpp
@@ -744,7 +746,7 @@ data:
   isVerificationFile: true
   path: verify/aoj/PrimeNumber.test.cpp
   requiredBy: []
-  timestamp: '2023-03-07 11:56:47+00:00'
+  timestamp: '2023-03-27 22:50:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/aoj/PrimeNumber.test.cpp

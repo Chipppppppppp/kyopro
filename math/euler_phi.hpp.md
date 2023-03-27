@@ -14,9 +14,6 @@ data:
   - icon: ':warning:'
     path: math/math.hpp
     title: math/math.hpp
-  - icon: ':warning:'
-    path: verify/hello_world.cpp
-    title: verify/hello_world.cpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -69,7 +66,6 @@ data:
   - all/all.hpp
   - all.hpp
   - math/math.hpp
-  - verify/hello_world.cpp
   timestamp: '2023-02-11 02:36:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

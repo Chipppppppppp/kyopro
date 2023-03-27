@@ -50,9 +50,6 @@ data:
   - icon: ':warning:'
     path: math/math.hpp
     title: math/math.hpp
-  - icon: ':warning:'
-    path: verify/hello_world.cpp
-    title: verify/hello_world.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/aoj/PrimeNumber.test.cpp
@@ -774,7 +771,6 @@ data:
   - all.hpp
   - math/factorize.hpp
   - math/math.hpp
-  - verify/hello_world.cpp
   timestamp: '2023-03-07 11:56:47+00:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:

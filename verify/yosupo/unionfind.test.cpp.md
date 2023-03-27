@@ -542,16 +542,16 @@ data:
     \u3092\u51FA\u529B\u3059\u308B(\u6539\u884C\u3001\u533A\u5207\u308A\u6587\u5B57\
     \u3042\u308A)\r\n    Printer<Writer<>::iterator> println{output.begin()}, eprintln{error.begin()};\r\
     \n} // namespace kpr\r\n#line 4 \"verify/yosupo/unionfind.test.cpp\"\n\r\nint\
-    \ main() {\r\n  int n, q;\r\n  kpr::scan(n, q);\r\n  kpr::UnionFind uf(n);\r\n\
-    \  for (int i = 0; i < q; ++i) {\r\n    int t, u, v;\r\n    kpr::scan(t, u, v);\r\
-    \n    if (t == 0) uf.merge(u, v);\r\n    else kpr::println(uf.same(u, v));\r\n\
-    \  }\r\n}\r\n"
+    \ main() {\r\n    int n, q;\r\n    kpr::scan(n, q);\r\n    kpr::UnionFind uf(n);\r\
+    \n    for (int i = 0; i < q; ++i) {\r\n        int t, u, v;\r\n        kpr::scan(t,\
+    \ u, v);\r\n        if (t == 0) uf.merge(u, v);\r\n        else kpr::println(uf.same(u,\
+    \ v));\r\n    }\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\r\n#include\
     \ \"../../data_structure/UnionFind.hpp\"\r\n#include \"../../io/io.hpp\"\r\n\r\
-    \nint main() {\r\n  int n, q;\r\n  kpr::scan(n, q);\r\n  kpr::UnionFind uf(n);\r\
-    \n  for (int i = 0; i < q; ++i) {\r\n    int t, u, v;\r\n    kpr::scan(t, u, v);\r\
-    \n    if (t == 0) uf.merge(u, v);\r\n    else kpr::println(uf.same(u, v));\r\n\
-    \  }\r\n}\r\n"
+    \nint main() {\r\n    int n, q;\r\n    kpr::scan(n, q);\r\n    kpr::UnionFind\
+    \ uf(n);\r\n    for (int i = 0; i < q; ++i) {\r\n        int t, u, v;\r\n    \
+    \    kpr::scan(t, u, v);\r\n        if (t == 0) uf.merge(u, v);\r\n        else\
+    \ kpr::println(uf.same(u, v));\r\n    }\r\n}\r\n"
   dependsOn:
   - data_structure/UnionFind.hpp
   - meta/setting.hpp
@@ -565,7 +565,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo/unionfind.test.cpp
   requiredBy: []
-  timestamp: '2023-03-07 11:56:47+00:00'
+  timestamp: '2023-03-27 22:50:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yosupo/unionfind.test.cpp

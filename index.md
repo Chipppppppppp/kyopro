@@ -169,8 +169,8 @@ data:
       path: template/make_array.hpp
       title: template/make_array.hpp
     - icon: ':warning:'
-      path: template/make_vector.hpp
-      title: template/make_vector.hpp
+      path: template/make_vec.hpp
+      title: template/make_vec.hpp
     - icon: ':warning:'
       path: template/match.hpp
       title: template/match.hpp
@@ -186,11 +186,6 @@ data:
     - icon: ':warning:'
       path: template/template.hpp
       title: template/template.hpp
-  - name: verify
-    pages:
-    - icon: ':warning:'
-      path: verify/hello_world.cpp
-      title: verify/hello_world.cpp
   verificationCategories:
   - name: verify/aoj
     pages:

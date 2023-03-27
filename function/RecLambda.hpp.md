@@ -11,9 +11,6 @@ data:
   - icon: ':warning:'
     path: function/function.hpp
     title: function/function.hpp
-  - icon: ':warning:'
-    path: verify/hello_world.cpp
-    title: verify/hello_world.cpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -47,7 +44,6 @@ data:
   - all/all.hpp
   - function/function.hpp
   - all.hpp
-  - verify/hello_world.cpp
   timestamp: '2023-03-20 02:49:55+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

@@ -53,9 +53,6 @@ data:
   - icon: ':warning:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':warning:'
-    path: verify/hello_world.cpp
-    title: verify/hello_world.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/aoj/PrimeNumber.test.cpp
@@ -141,7 +138,6 @@ data:
   - math/ModInt.hpp
   - math/math.hpp
   - math/DynamicModInt.hpp
-  - verify/hello_world.cpp
   - template/template.hpp
   - template/alias.hpp
   - data_structure/structure.hpp

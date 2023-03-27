@@ -587,18 +587,20 @@ data:
     \u3092\u51FA\u529B\u3059\u308B(\u6539\u884C\u3001\u533A\u5207\u308A\u6587\u5B57\
     \u3042\u308A)\r\n    Printer<Writer<>::iterator> println{output.begin()}, eprintln{error.begin()};\r\
     \n} // namespace kpr\r\n#line 4 \"verify/yosupo/point_add_range_sum.test.cpp\"\
-    \n\r\nint main() {\r\n  int n, q;\r\n  kpr::scan(n, q);\r\n  kpr::FenwickTree<long\
-    \ long> ft(n);\r\n  for (int i = 0; i < n; ++i) {\r\n    int a;\r\n    kpr::scan(a);\r\
-    \n    ft.apply(i, a);\r\n  }\r\n  for (int i = 0; i < q; ++i) {\r\n    int t,\
-    \ x, y;\r\n    kpr::scan(t, x, y);\r\n    if (t == 0) ft.apply(x, y);\r\n    else\
-    \ kpr::println(ft.prod(x, y));\r\n  }\r\n}\r\n"
+    \n\r\nint main() {\r\n    int n, q;\r\n    kpr::scan(n, q);\r\n    kpr::FenwickTree<long\
+    \ long> ft(n);\r\n    for (int i = 0; i < n; ++i) {\r\n        int a;\r\n    \
+    \    kpr::scan(a);\r\n        ft.apply(i, a);\r\n    }\r\n    for (int i = 0;\
+    \ i < q; ++i) {\r\n        int t, x, y;\r\n        kpr::scan(t, x, y);\r\n   \
+    \     if (t == 0) ft.apply(x, y);\r\n        else kpr::println(ft.prod(x, y));\r\
+    \n    }\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_range_sum\"\r\
     \n#include \"../../data_structure/FenwickTree.hpp\"\r\n#include \"../../io/io.hpp\"\
-    \r\n\r\nint main() {\r\n  int n, q;\r\n  kpr::scan(n, q);\r\n  kpr::FenwickTree<long\
-    \ long> ft(n);\r\n  for (int i = 0; i < n; ++i) {\r\n    int a;\r\n    kpr::scan(a);\r\
-    \n    ft.apply(i, a);\r\n  }\r\n  for (int i = 0; i < q; ++i) {\r\n    int t,\
-    \ x, y;\r\n    kpr::scan(t, x, y);\r\n    if (t == 0) ft.apply(x, y);\r\n    else\
-    \ kpr::println(ft.prod(x, y));\r\n  }\r\n}\r\n"
+    \r\n\r\nint main() {\r\n    int n, q;\r\n    kpr::scan(n, q);\r\n    kpr::FenwickTree<long\
+    \ long> ft(n);\r\n    for (int i = 0; i < n; ++i) {\r\n        int a;\r\n    \
+    \    kpr::scan(a);\r\n        ft.apply(i, a);\r\n    }\r\n    for (int i = 0;\
+    \ i < q; ++i) {\r\n        int t, x, y;\r\n        kpr::scan(t, x, y);\r\n   \
+    \     if (t == 0) ft.apply(x, y);\r\n        else kpr::println(ft.prod(x, y));\r\
+    \n    }\r\n}\r\n"
   dependsOn:
   - data_structure/FenwickTree.hpp
   - function/monoid.hpp
@@ -614,7 +616,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo/point_add_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-03-07 11:56:47+00:00'
+  timestamp: '2023-03-27 22:50:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yosupo/point_add_range_sum.test.cpp

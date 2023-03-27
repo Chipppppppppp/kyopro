@@ -503,13 +503,13 @@ data:
     \u3092\u51FA\u529B\u3059\u308B(\u6539\u884C\u3001\u533A\u5207\u308A\u6587\u5B57\
     \u3042\u308A)\r\n    Printer<Writer<>::iterator> println{output.begin()}, eprintln{error.begin()};\r\
     \n} // namespace kpr\r\n#line 3 \"verify/yosupo/many_aplusb.test.cpp\"\n\r\nint\
-    \ main() {\r\n  int t;\r\n  kpr::scan(t);\r\n  for (int i = 0; i < t; ++i) {\r\
-    \n    long long a, b;\r\n    kpr::scan(a, b);\r\n    kpr::println(a + b);\r\n\
-    \  }\r\n}\r\n"
+    \ main() {\r\n    int t;\r\n    kpr::scan(t);\r\n    for (int i = 0; i < t; ++i)\
+    \ {\r\n        long long a, b;\r\n        kpr::scan(a, b);\r\n        kpr::println(a\
+    \ + b);\r\n    }\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/many_aplusb\"\r\n#include\
-    \ \"../../io/io.hpp\"\r\n\r\nint main() {\r\n  int t;\r\n  kpr::scan(t);\r\n \
-    \ for (int i = 0; i < t; ++i) {\r\n    long long a, b;\r\n    kpr::scan(a, b);\r\
-    \n    kpr::println(a + b);\r\n  }\r\n}\r\n"
+    \ \"../../io/io.hpp\"\r\n\r\nint main() {\r\n    int t;\r\n    kpr::scan(t);\r\
+    \n    for (int i = 0; i < t; ++i) {\r\n        long long a, b;\r\n        kpr::scan(a,\
+    \ b);\r\n        kpr::println(a + b);\r\n    }\r\n}\r\n"
   dependsOn:
   - io/io.hpp
   - io/in.hpp
@@ -522,7 +522,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo/many_aplusb.test.cpp
   requiredBy: []
-  timestamp: '2023-03-07 11:56:47+00:00'
+  timestamp: '2023-03-27 22:50:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yosupo/many_aplusb.test.cpp

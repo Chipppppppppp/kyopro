@@ -29,9 +29,6 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':warning:'
-    path: verify/hello_world.cpp
-    title: verify/hello_world.cpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -269,7 +266,6 @@ data:
   requiredBy:
   - all/all.hpp
   - all.hpp
-  - verify/hello_world.cpp
   timestamp: '2023-03-20 02:49:55+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

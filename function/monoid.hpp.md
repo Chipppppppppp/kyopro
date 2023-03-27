@@ -32,9 +32,6 @@ data:
   - icon: ':warning:'
     path: function/function.hpp
     title: function/function.hpp
-  - icon: ':warning:'
-    path: verify/hello_world.cpp
-    title: verify/hello_world.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/point_add_range_sum.test.cpp
@@ -275,7 +272,6 @@ data:
   - all/all.hpp
   - function/function.hpp
   - all.hpp
-  - verify/hello_world.cpp
   - data_structure/structure.hpp
   - data_structure/data_structure.hpp
   - data_structure/FenwickTree.hpp
