@@ -360,9 +360,9 @@ data:
     \ T& y) const noexcept(noexcept(x >= y)) {\r\n            return x >= y;\r\n \
     \       }\r\n    };\r\n} // namespace kpr\r\n#line 7 \"algorithm/compress.hpp\"\
     \n\nnamespace kpr {\n    // \u5EA7\u6A19\u5727\u7E2E\n    [[maybe_unused]] inline\
-    \ constexpr struct {\n        template<class T, class Compare>\n        auto operator\
-    \ ()(T first, T last, Compare comp = Less{}) {\n            using ValueType =\
-    \ typename std::iterator_traits<T>::value_type;\n            std::vector<ValueType>\
+    \ constexpr struct {\n        template<class T, class Compare = Less>\n      \
+    \  auto operator ()(T first, T last, Compare comp = {}) const {\n            using\
+    \ ValueType = typename std::iterator_traits<T>::value_type;\n            std::vector<ValueType>\
     \ a(first, last);\n            std::sort(a.begin(), a.end(), comp);\n        \
     \    auto itr = unique(a.begin(), a.end());\n            std::unordered_map<ValueType,\
     \ KYOPRO_BASE_INT> mem;\n            int cnt = -1;\n            for (auto i =\
@@ -1227,7 +1227,7 @@ data:
     \    T res = std::move(*p); \\\n        p->~T(); \\\n        return res; \\\n\
     \    }), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\n\
     */\n\n#define BOOL(...) bool __VA_ARGS__; scan(__VA_ARGS__)\n#define INT(...)\
-    \ int __VA_ARGS__; scan(__VA_ARGS__)\n#define LI(...) li __VA_ARGS__; scan(__VA_ARGS__)\n\
+    \ int __VA_ARGS__; scan(__VA_ARGS__)\n#define LL(...) ll __VA_ARGS__; scan(__VA_ARGS__)\n\
     #define FLOAT(...) float __VA_ARGS__; scan(__VA_ARGS__)\n#define LF(...) lf __VA_ARGS__;\
     \ scan(__VA_ARGS__)\n#define LLF(...) llf __VA_ARGS__; scan(__VA_ARGS__)\n#define\
     \ MINT(...) mint __VA_ARGS__; scan(__VA_ARGS__)\n#define DMINT(...) dmint __VA_ARGS__;\
@@ -1425,7 +1425,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2023-03-28 00:43:57+09:00'
+  timestamp: '2023-03-28 01:11:02+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp

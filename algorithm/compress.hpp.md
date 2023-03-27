@@ -44,8 +44,8 @@ data:
     \n            return x >= y;\r\n        }\r\n    };\r\n} // namespace kpr\r\n\
     #line 7 \"algorithm/compress.hpp\"\n\nnamespace kpr {\n    // \u5EA7\u6A19\u5727\
     \u7E2E\n    [[maybe_unused]] inline constexpr struct {\n        template<class\
-    \ T, class Compare>\n        auto operator ()(T first, T last, Compare comp =\
-    \ Less{}) {\n            using ValueType = typename std::iterator_traits<T>::value_type;\n\
+    \ T, class Compare = Less>\n        auto operator ()(T first, T last, Compare\
+    \ comp = {}) const {\n            using ValueType = typename std::iterator_traits<T>::value_type;\n\
     \            std::vector<ValueType> a(first, last);\n            std::sort(a.begin(),\
     \ a.end(), comp);\n            auto itr = unique(a.begin(), a.end());\n      \
     \      std::unordered_map<ValueType, KYOPRO_BASE_INT> mem;\n            int cnt\
@@ -54,13 +54,14 @@ data:
   code: "#pragma once\n#include <algorithm>\n#include <iterator>\n#include <unordered_map>\n\
     #include <vector>\n#include \"../function/compare.hpp\"\n\nnamespace kpr {\n \
     \   // \u5EA7\u6A19\u5727\u7E2E\n    [[maybe_unused]] inline constexpr struct\
-    \ {\n        template<class T, class Compare>\n        auto operator ()(T first,\
-    \ T last, Compare comp = Less{}) {\n            using ValueType = typename std::iterator_traits<T>::value_type;\n\
-    \            std::vector<ValueType> a(first, last);\n            std::sort(a.begin(),\
-    \ a.end(), comp);\n            auto itr = unique(a.begin(), a.end());\n      \
-    \      std::unordered_map<ValueType, KYOPRO_BASE_INT> mem;\n            int cnt\
-    \ = -1;\n            for (auto i = std::begin(a); i != itr; ++i) mem[*i] = ++cnt;\n\
-    \            return mem;\n        }\n    } compress;\n} // namespace kpr\n"
+    \ {\n        template<class T, class Compare = Less>\n        auto operator ()(T\
+    \ first, T last, Compare comp = {}) const {\n            using ValueType = typename\
+    \ std::iterator_traits<T>::value_type;\n            std::vector<ValueType> a(first,\
+    \ last);\n            std::sort(a.begin(), a.end(), comp);\n            auto itr\
+    \ = unique(a.begin(), a.end());\n            std::unordered_map<ValueType, KYOPRO_BASE_INT>\
+    \ mem;\n            int cnt = -1;\n            for (auto i = std::begin(a); i\
+    \ != itr; ++i) mem[*i] = ++cnt;\n            return mem;\n        }\n    } compress;\n\
+    } // namespace kpr\n"
   dependsOn:
   - function/compare.hpp
   isVerificationFile: false
@@ -69,7 +70,7 @@ data:
   - all/all.hpp
   - all.hpp
   - algorithm/algorithm.hpp
-  timestamp: '2023-03-28 00:43:57+09:00'
+  timestamp: '2023-03-28 01:11:02+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm/compress.hpp

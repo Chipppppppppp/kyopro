@@ -542,7 +542,7 @@ data:
     \ type_or_init; \\\n        kpr::scan(*p); \\\n        T res = std::move(*p);\
     \ \\\n        p->~T(); \\\n        return res; \\\n    }), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\n\
     */\n\n#define BOOL(...) bool __VA_ARGS__; scan(__VA_ARGS__)\n#define INT(...)\
-    \ int __VA_ARGS__; scan(__VA_ARGS__)\n#define LI(...) li __VA_ARGS__; scan(__VA_ARGS__)\n\
+    \ int __VA_ARGS__; scan(__VA_ARGS__)\n#define LL(...) ll __VA_ARGS__; scan(__VA_ARGS__)\n\
     #define FLOAT(...) float __VA_ARGS__; scan(__VA_ARGS__)\n#define LF(...) lf __VA_ARGS__;\
     \ scan(__VA_ARGS__)\n#define LLF(...) llf __VA_ARGS__; scan(__VA_ARGS__)\n#define\
     \ MINT(...) mint __VA_ARGS__; scan(__VA_ARGS__)\n#define DMINT(...) dmint __VA_ARGS__;\
@@ -682,7 +682,7 @@ data:
   requiredBy:
   - all.hpp
   - template/template.hpp
-  timestamp: '2023-03-27 23:32:56+09:00'
+  timestamp: '2023-03-28 01:11:02+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/macro.hpp
