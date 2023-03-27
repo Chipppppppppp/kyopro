@@ -16,5 +16,5 @@ namespace kpr {
         auto operator ()(const std::size_t (&d)[n]) noexcept {
             return operator ()(d, T{});
         }
-    } make_vector;
+    } make_vec;
 } // namespace kpr
