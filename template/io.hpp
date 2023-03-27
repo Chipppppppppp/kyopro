@@ -50,7 +50,7 @@ namespace kpr::helper {
 
 #define BOOL(...) bool __VA_ARGS__; scan(__VA_ARGS__)
 #define INT(...) int __VA_ARGS__; scan(__VA_ARGS__)
-#define LI(...) li __VA_ARGS__; scan(__VA_ARGS__)
+#define LL(...) ll __VA_ARGS__; scan(__VA_ARGS__)
 #define FLOAT(...) float __VA_ARGS__; scan(__VA_ARGS__)
 #define LF(...) lf __VA_ARGS__; scan(__VA_ARGS__)
 #define LLF(...) llf __VA_ARGS__; scan(__VA_ARGS__)

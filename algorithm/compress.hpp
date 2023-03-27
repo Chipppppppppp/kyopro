@@ -8,8 +8,8 @@
 namespace kpr {
     // 座標圧縮
     [[maybe_unused]] inline constexpr struct {
-        template<class T, class Compare>
-        auto operator ()(T first, T last, Compare comp = Less{}) {
+        template<class T, class Compare = Less>
+        auto operator ()(T first, T last, Compare comp = {}) const {
             using ValueType = typename std::iterator_traits<T>::value_type;
             std::vector<ValueType> a(first, last);
             std::sort(a.begin(), a.end(), comp);
