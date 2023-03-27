@@ -7,6 +7,12 @@ data:
   - icon: ':question:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
+  - icon: ':warning:'
+    path: algorithm/compress.hpp
+    title: algorithm/compress.hpp
+  - icon: ':warning:'
+    path: function/compare.hpp
+    title: function/compare.hpp
   - icon: ':question:'
     path: meta/setting.hpp
     title: meta/setting.hpp
@@ -210,11 +216,42 @@ data:
     \ {\r\n        template<class T>\r\n        constexpr KYOPRO_BASE_INT operator\
     \ ()(T x) const noexcept {\r\n            if (x == 0) return 0;\r\n          \
     \  return bit_len(x - static_cast<T>(1));\r\n        }\r\n    } ceil_bit;\r\n\
-    } // namespace kpr\r\n#line 3 \"algorithm/Hash.hpp\"\n#include <functional>\r\n\
-    #line 6 \"meta/tuple_like.hpp\"\n\r\nnamespace kpr {\r\n    namespace helper {\r\
-    \n        struct CastableToAny {\r\n            template<class T>\r\n        \
-    \    operator T() const noexcept;\r\n        };\r\n\r\n        template<class\
-    \ T, std::size_t... idx, std::void_t<decltype(T{((void)idx, CastableToAny{})...})>*\
+    } // namespace kpr\r\n#line 2 \"algorithm/compress.hpp\"\n#include <algorithm>\n\
+    #line 4 \"algorithm/compress.hpp\"\n#include <unordered_map>\n#include <vector>\n\
+    #line 2 \"function/compare.hpp\"\n\r\nnamespace kpr {\r\n    // operator =\u3067\
+    \u6BD4\u8F03\r\n    struct Equal {\r\n        template<class T>\r\n        constexpr\
+    \ bool operator()(const T& x, const T& y) const noexcept(noexcept(x == y)) {\r\
+    \n            return x == y;\r\n        }\r\n    };\r\n\r\n    // operator !=\u3067\
+    \u6BD4\u8F03\r\n    struct NotEqual {\r\n        template<class T>\r\n       \
+    \ constexpr bool operator()(const T& x, const T& y) const noexcept(noexcept(x\
+    \ != y)) {\r\n            return x != y;\r\n        }\r\n    };\r\n\r\n    //\
+    \ operator <\u306E\u95A2\u6570\u30AF\u30E9\u30B9\r\n    struct Less {\r\n    \
+    \    template<class T>\r\n        constexpr bool operator()(const T& x, const\
+    \ T& y) const noexcept(noexcept(x < y)) {\r\n            return x < y;\r\n   \
+    \     }\r\n    };\r\n\r\n    // operator <=\u306E\u95A2\u6570\u30AF\u30E9\u30B9\
+    \r\n    struct LessEqual {\r\n        template<class T>\r\n        constexpr bool\
+    \ operator()(const T& x, const T& y) const noexcept(noexcept(x <= y)) {\r\n  \
+    \          return x <= y;\r\n        }\r\n    };\r\n\r\n    // operator >\u306E\
+    \u95A2\u6570\u30AF\u30E9\u30B9\r\n    struct Greater {\r\n        template<class\
+    \ T>\r\n        constexpr bool operator()(const T& x, const T& y) const noexcept(noexcept(x\
+    \ > y)) {\r\n            return x > y;\r\n        }\r\n    };\r\n\r\n    // operator\
+    \ >=\u306E\u95A2\u6570\u30AF\u30E9\u30B9\r\n    struct GreaterEqual {\r\n    \
+    \    template<class T>\r\n        constexpr bool operator()(const T& x, const\
+    \ T& y) const noexcept(noexcept(x >= y)) {\r\n            return x >= y;\r\n \
+    \       }\r\n    };\r\n} // namespace kpr\r\n#line 7 \"algorithm/compress.hpp\"\
+    \n\nnamespace kpr {\n    // \u5EA7\u6A19\u5727\u7E2E\n    [[maybe_unused]] inline\
+    \ constexpr struct {\n        template<class T, class Compare>\n        auto operator\
+    \ ()(T first, T last, Compare comp = Less{}) {\n            using ValueType =\
+    \ typename std::iterator_traits<T>::value_type;\n            std::vector<ValueType>\
+    \ a(first, last);\n            std::sort(a.begin(), a.end(), comp);\n        \
+    \    auto itr = unique(a.begin(), a.end());\n            std::unordered_map<ValueType,\
+    \ KYOPRO_BASE_INT> mem;\n            int cnt = -1;\n            for (auto i =\
+    \ std::begin(a); i != itr; ++i) mem[*i] = ++cnt;\n            return mem;\n  \
+    \      }\n    } compress;\n} // namespace kpr\n#line 3 \"algorithm/Hash.hpp\"\n\
+    #include <functional>\r\n#line 6 \"meta/tuple_like.hpp\"\n\r\nnamespace kpr {\r\
+    \n    namespace helper {\r\n        struct CastableToAny {\r\n            template<class\
+    \ T>\r\n            operator T() const noexcept;\r\n        };\r\n\r\n       \
+    \ template<class T, std::size_t... idx, std::void_t<decltype(T{((void)idx, CastableToAny{})...})>*\
     \ = nullptr>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
     \ bool) noexcept {\r\n            return true;\r\n        }\r\n        template<class\
     \ T, std::size_t... idx>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
@@ -290,13 +327,16 @@ data:
     \ std::size_t operator ()(const T& a) const {\r\n            std::size_t seed\
     \ = std::size(a);\r\n            for (auto&& i: a) seed ^= Hash<range_value_t<T>>{}(i)\
     \ + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4);\r\n            return seed;\r\
-    \n        }\r\n    };\r\n} // namespace kpr\r\n#line 4 \"algorithm/algorithm.hpp\"\
+    \n        }\r\n    };\r\n} // namespace kpr\r\n#line 5 \"algorithm/algorithm.hpp\"\
     \n"
-  code: "#pragma once\r\n#include \"bit.hpp\"\r\n#include \"Hash.hpp\"\r\n"
+  code: "#pragma once\r\n#include \"bit.hpp\"\r\n#include \"compress.hpp\"\r\n#include\
+    \ \"Hash.hpp\"\r\n"
   dependsOn:
   - algorithm/bit.hpp
   - meta/setting.hpp
   - meta/trait.hpp
+  - algorithm/compress.hpp
+  - function/compare.hpp
   - algorithm/Hash.hpp
   - meta/tuple_like.hpp
   isVerificationFile: false
@@ -304,7 +344,7 @@ data:
   requiredBy:
   - all/all.hpp
   - all.hpp
-  timestamp: '2023-03-07 11:56:47+00:00'
+  timestamp: '2023-03-28 00:43:57+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm/algorithm.hpp

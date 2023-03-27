@@ -12,6 +12,9 @@ data:
     - icon: ':question:'
       path: algorithm/bit.hpp
       title: algorithm/bit.hpp
+    - icon: ':warning:'
+      path: algorithm/compress.hpp
+      title: algorithm/compress.hpp
   - name: all
     pages:
     - icon: ':warning:'

@@ -3,6 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: algorithm/algorithm.hpp
+    title: algorithm/algorithm.hpp
+  - icon: ':warning:'
+    path: algorithm/compress.hpp
+    title: algorithm/compress.hpp
+  - icon: ':warning:'
     path: all.hpp
     title: all.hpp
   - icon: ':warning:'
@@ -72,6 +78,8 @@ data:
   - all/all.hpp
   - function/function.hpp
   - all.hpp
+  - algorithm/compress.hpp
+  - algorithm/algorithm.hpp
   - template/template.hpp
   - template/alias.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
