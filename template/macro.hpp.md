@@ -41,6 +41,9 @@ data:
     path: template/named_tuple.hpp
     title: template/named_tuple.hpp
   - icon: ':warning:'
+    path: template/push_pop.hpp
+    title: template/push_pop.hpp
+  - icon: ':warning:'
     path: template/rep.hpp
     title: template/rep.hpp
   _extendedRequiredBy:
@@ -573,11 +576,14 @@ data:
     \ get<1>(_args_tuple), get<2>(_args_tuple)); \\\r\n    } else if constexpr (sizeof...(_args)\
     \ == 4) { \\\r\n        return ([&](auto&& $0, auto&& $1, auto&& $2, auto&& $3)\
     \ { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple), get<2>(_args_tuple),\
-    \ get<3>(_args_tuple)); \\\r\n    } \\\r\n})\r\n#line 2 \"template/match.hpp\"\
-    \n\n#define KYOPRO_MATCH1(_1) break; case _1:\n#define KYOPRO_MATCH2(_1, _2) break;\
-    \ case _1: case _2:\n#define KYOPRO_MATCH3(_1, _2, _3) break; case _1: case _2:\
-    \ case _3:\n#define KYOPRO_MATCH4(_1, _2, _3, _4) break; case _1: case _2: case\
-    \ _3: case _4:\n\n#define KYOPRO_OVERLOAD_MATCH(_1, _2, _3, _4, name, ...) name\n\
+    \ get<3>(_args_tuple)); \\\r\n    } \\\r\n})\r\n#line 2 \"template/push_pop.hpp\"\
+    \n\n#define pushf(...) emplace_front(__VA_ARGS__)\n#define popf(...) pop_front(__VA_ARGS__)\n\
+    #define pushb(...) emplace_back(__VA_ARGS__)\n#define popb(...) pop_back(__VA_ARGS__)\n\
+    #define push(...) emplace(__VA_ARGS__)\n#line 2 \"template/match.hpp\"\n\n#define\
+    \ KYOPRO_MATCH1(_1) break; case _1:\n#define KYOPRO_MATCH2(_1, _2) break; case\
+    \ _1: case _2:\n#define KYOPRO_MATCH3(_1, _2, _3) break; case _1: case _2: case\
+    \ _3:\n#define KYOPRO_MATCH4(_1, _2, _3, _4) break; case _1: case _2: case _3:\
+    \ case _4:\n\n#define KYOPRO_OVERLOAD_MATCH(_1, _2, _3, _4, name, ...) name\n\
     #define match(...) KYOPRO_OVERLOAD_MATCH(__VA_ARGS__, KYOPRO_MATCH4, KYOPRO_MATCH3,\
     \ KYOPRO_MATCH2, KYOPRO_MATCH1)(__VA_ARGS__)\n#define otherwise break; default:\n\
     #line 7 \"template/named_tuple.hpp\"\n\nnamespace kpr {\n    template<class Derived,\
@@ -645,7 +651,7 @@ data:
     \ ++(i))\n#define KYOPRO_REP3(i, first, last) for (auto i = (first), KYOPRO_LAST\
     \ = last; (i) < (KYOPRO_LAST); ++(i))\n\n#define KYOPRO_OVERLOAD_REP(_1, _2, _3,\
     \ name, ...) name\n#define rep(...) KYOPRO_OVERLOAD_REP(__VA_ARGS__ __VA_OPT__(,)\
-    \ KYOPRO_REP3, KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\n#line 8 \"\
+    \ KYOPRO_REP3, KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\n#line 9 \"\
     template/macro.hpp\"\n"
   code: '#pragma once
 
@@ -654,6 +660,8 @@ data:
     #include "io.hpp"
 
     #include "lambda.hpp"
+
+    #include "push_pop.hpp"
 
     #include "match.hpp"
 
@@ -674,6 +682,7 @@ data:
   - meta/tuple_like.hpp
   - io/out.hpp
   - template/lambda.hpp
+  - template/push_pop.hpp
   - template/match.hpp
   - template/named_tuple.hpp
   - template/rep.hpp
@@ -682,7 +691,7 @@ data:
   requiredBy:
   - all.hpp
   - template/template.hpp
-  timestamp: '2023-03-28 01:11:02+09:00'
+  timestamp: '2023-03-28 19:27:23+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/macro.hpp

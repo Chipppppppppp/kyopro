@@ -14,6 +14,9 @@ data:
     path: algorithm/compress.hpp
     title: algorithm/compress.hpp
   - icon: ':warning:'
+    path: algorithm/count_all.hpp
+    title: algorithm/count_all.hpp
+  - icon: ':warning:'
     path: function/RecLambda.hpp
     title: function/RecLambda.hpp
   - icon: ':warning:'
@@ -310,7 +313,12 @@ data:
     \    auto itr = unique(a.begin(), a.end());\n            std::unordered_map<ValueType,\
     \ KYOPRO_BASE_INT> mem;\n            int cnt = -1;\n            for (auto i =\
     \ std::begin(a); i != itr; ++i) mem[*i] = ++cnt;\n            return mem;\n  \
-    \      }\n    } compress;\n} // namespace kpr\n#line 3 \"algorithm/Hash.hpp\"\n\
+    \      }\n    } compress;\n} // namespace kpr\n#line 5 \"algorithm/count_all.hpp\"\
+    \n\nnamespace kpr {\n    inline constexpr struct {\n        template<class T>\n\
+    \        auto operator ()(T first, T last) const {\n            std::unordered_map<typename\
+    \ std::iterator_traits<T>::value_type, KYOPRO_BASE_INT> mem;\n            for\
+    \ (auto i = first; i != last; ++i) ++mem[*i];\n            return mem;\n     \
+    \   }\n    } count_all;\n} // namespace kpr\n#line 3 \"algorithm/Hash.hpp\"\n\
     #include <functional>\r\n#line 6 \"meta/tuple_like.hpp\"\n\r\nnamespace kpr {\r\
     \n    namespace helper {\r\n        struct CastableToAny {\r\n            template<class\
     \ T>\r\n            operator T() const noexcept;\r\n        };\r\n\r\n       \
@@ -1005,6 +1013,7 @@ data:
   - meta/trait.hpp
   - algorithm/compress.hpp
   - function/compare.hpp
+  - algorithm/count_all.hpp
   - algorithm/Hash.hpp
   - meta/tuple_like.hpp
   - function/function.hpp
@@ -1032,7 +1041,7 @@ data:
   path: all/all.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2023-03-28 01:11:02+09:00'
+  timestamp: '2023-03-28 19:27:23+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all/all.hpp

@@ -81,6 +81,9 @@ data:
     path: template/alias.hpp
     title: template/alias.hpp
   - icon: ':warning:'
+    path: template/contains.hpp
+    title: template/contains.hpp
+  - icon: ':warning:'
     path: template/io.hpp
     title: template/io.hpp
   - icon: ':warning:'
@@ -373,6 +376,7 @@ data:
   - template/template.hpp
   - template/named_tuple.hpp
   - template/macro.hpp
+  - template/contains.hpp
   - template/io.hpp
   - template/alias.hpp
   - data_structure/structure.hpp

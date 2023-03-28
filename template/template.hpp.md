@@ -62,6 +62,9 @@ data:
     path: template/constant.hpp
     title: template/constant.hpp
   - icon: ':warning:'
+    path: template/contains.hpp
+    title: template/contains.hpp
+  - icon: ':warning:'
     path: template/io.hpp
     title: template/io.hpp
   - icon: ':warning:'
@@ -88,6 +91,12 @@ data:
   - icon: ':warning:'
     path: template/named_tuple.hpp
     title: template/named_tuple.hpp
+  - icon: ':warning:'
+    path: template/push_pop.hpp
+    title: template/push_pop.hpp
+  - icon: ':warning:'
+    path: template/range_cast.hpp
+    title: template/range_cast.hpp
   - icon: ':warning:'
     path: template/rep.hpp
     title: template/rep.hpp
@@ -900,22 +909,22 @@ data:
     \ Compare>;\n    template<class Key, class Compare = Less>\n    using Map = std::map<Key,\
     \ Compare>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Set, S);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
     \ Set, S);\n    using Mll = Map<ll, ll>;\n    using VMll = Vec<Mll>;\n\n    template<class\
-    \ Key, class Compare = Less>\n    using HashSet = std::unordered_set<Key, Compare>;\n\
-    \    template<class Key, class T, class Compare = Less>\n    using HashMap = std::unordered_map<Key,\
-    \ T, Compare>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HashSet, HS);\n   \
-    \ DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashSet, HS);\n    using HMll = HashMap<ll,\
-    \ ll>;\n    using VHMll = Vec<HMll>;\n\n    template<class Key>\n    using MultiSet\
-    \ = std::multiset<Key, Hash<Key>>;\n    template<class Key, class T>\n    using\
-    \ MultiMap = std::multimap<Key, T, Hash<Key>>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
+    \ Key, class H = Hash<Key>>\n    using HashSet = std::unordered_set<Key, H>;\n\
+    \    template<class Key, class T, class H = Hash<Key>>\n    using HashMap = std::unordered_map<Key,\
+    \ T, H>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HashSet, HS);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
+    \ HashSet, HS);\n    using HMll = HashMap<ll, ll>;\n    using VHMll = Vec<HMll>;\n\
+    \n    template<class Key, class Compare = Less>\n    using MultiSet = std::multiset<Key,\
+    \ Compare>;\n    template<class Key, class T, class Compare = Less>\n    using\
+    \ MultiMap = std::multimap<Key, T, Compare>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
     \ MultiSet, MS);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, MultiSet, MS);\n\
     \    using MMll = MultiMap<ll, ll>;\n    using VMMll = Vec<MMll>;\n\n    template<class\
-    \ Key>\n    using HashMultiSet = std::unordered_multiset<Key, Hash<Key>>;\n  \
-    \  template<class Key, class T>\n    using HashMultiMap = std::unordered_multimap<Key,\
-    \ T, Hash<Key>>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HashMultiSet, HMS);\n\
-    \    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashMultiSet, HMS);\n    using HMMli\
-    \ = HashMultiMap<ll, ll>;\n    using VHMMli = Vec<HMMli>;\n\n    template<class\
-    \ T, class Container = std::deque<T>>\n    using Queue = std::queue<T, Container>;\n\
-    \n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Queue, Que);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
+    \ Key, class H = Hash<Key>>\n    using HashMultiSet = std::unordered_multiset<Key,\
+    \ H>;\n    template<class Key, class T, class H = Hash<Key>>\n    using HashMultiMap\
+    \ = std::unordered_multimap<Key, T, H>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
+    \ HashMultiSet, HMS);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashMultiSet,\
+    \ HMS);\n    using HMMli = HashMultiMap<ll, ll>;\n    using VHMMli = Vec<HMMli>;\n\
+    \n    template<class T, class Container = std::deque<T>>\n    using Queue = std::queue<T,\
+    \ Container>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Queue, Que);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
     \ Queue, Que);\n\n    template<class T, class Container = std::deque<T>>\n   \
     \ using Stack = std::stack<T, Container>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
     \ Stack, Stk);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, Stack, Stk);\n\n\
@@ -936,11 +945,25 @@ data:
     \    inline constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>,\
     \ 4> beside{{{-1, 0}, {0, -1}, {1, 0}, {0, 1}}};\r\n    inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
     \ KYOPRO_BASE_INT>, 8> around{{{-1, 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1,\
-    \ 1}, {0, 1}, {-1, 1}}};\r\n} // namespace kpr\r\n#line 4 \"template/len.hpp\"\
-    \n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr struct {\r\n  \
-    \      template<class T>\r\n        constexpr KYOPRO_BASE_INT operator ()(T&&\
-    \ a) const noexcept {\r\n            return std::size(a);\r\n        }\r\n   \
-    \ } len;\r\n} // namespace kpr\r\n#line 3 \"template/all_rall.hpp\"\n\n#define\
+    \ 1}, {0, 1}, {-1, 1}}};\r\n} // namespace kpr\r\n#line 6 \"template/contains.hpp\"\
+    \n\nnamespace kpr {\n    [[maybe_unused]] inline constexpr struct {\n    private:\n\
+    \        template<class T>\n        constexpr bool impl(const T& container, const\
+    \ typename T::key_type& value, char) const {\n            return container.find(value)\
+    \ != container.end();\n        }\n        template<class T, std::enable_if_t<!is_tuple_like_v<T>>*\
+    \ = nullptr>\n        constexpr bool impl(const T& container, const range_value_t<T>&\
+    \ value, bool) const {\n            return std::find(std::begin(container), std::end(container),\
+    \ value) != std::end(container);\n        }\n        template<std::size_t i =\
+    \ 0, class T, class U, std::enable_if_t<is_tuple_like_v<T>>* = nullptr>\n    \
+    \    constexpr bool impl(const T& tuple_like, const U& value, bool) const {\n\
+    \            if constexpr (i < tuple_like_size_v<T>) return get<i>(tuple_like)\
+    \ == value || impl<i + 1>(tuple_like, value, false);\n            else return\
+    \ false;\n        }\n\n    public:\n        template<class T, class U>\n     \
+    \   constexpr bool operator ()(const T& a, const U& x) const {\n            return\
+    \ impl(a, x, false);\n        }\n    } contains;\n} // namespace kpr\n#line 4\
+    \ \"template/len.hpp\"\n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr\
+    \ struct {\r\n        template<class T>\r\n        constexpr KYOPRO_BASE_INT operator\
+    \ ()(T&& a) const noexcept {\r\n            return std::size(a);\r\n        }\r\
+    \n    } len;\r\n} // namespace kpr\r\n#line 3 \"template/all_rall.hpp\"\n\n#define\
     \ all(...) std::begin(__VA_ARGS__), std::end(__VA_ARGS__)\n#define rall(...) std::rbegin(__VA_ARGS__),\
     \ std::rend(__VA_ARGS__)\n#line 4 \"template/io.hpp\"\n#include <istream>\n#line\
     \ 10 \"template/io.hpp\"\n\nnamespace kpr::helper {\n    template<std::size_t\
@@ -992,11 +1015,14 @@ data:
     \ get<1>(_args_tuple), get<2>(_args_tuple)); \\\r\n    } else if constexpr (sizeof...(_args)\
     \ == 4) { \\\r\n        return ([&](auto&& $0, auto&& $1, auto&& $2, auto&& $3)\
     \ { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple), get<2>(_args_tuple),\
-    \ get<3>(_args_tuple)); \\\r\n    } \\\r\n})\r\n#line 2 \"template/match.hpp\"\
-    \n\n#define KYOPRO_MATCH1(_1) break; case _1:\n#define KYOPRO_MATCH2(_1, _2) break;\
-    \ case _1: case _2:\n#define KYOPRO_MATCH3(_1, _2, _3) break; case _1: case _2:\
-    \ case _3:\n#define KYOPRO_MATCH4(_1, _2, _3, _4) break; case _1: case _2: case\
-    \ _3: case _4:\n\n#define KYOPRO_OVERLOAD_MATCH(_1, _2, _3, _4, name, ...) name\n\
+    \ get<3>(_args_tuple)); \\\r\n    } \\\r\n})\r\n#line 2 \"template/push_pop.hpp\"\
+    \n\n#define pushf(...) emplace_front(__VA_ARGS__)\n#define popf(...) pop_front(__VA_ARGS__)\n\
+    #define pushb(...) emplace_back(__VA_ARGS__)\n#define popb(...) pop_back(__VA_ARGS__)\n\
+    #define push(...) emplace(__VA_ARGS__)\n#line 2 \"template/match.hpp\"\n\n#define\
+    \ KYOPRO_MATCH1(_1) break; case _1:\n#define KYOPRO_MATCH2(_1, _2) break; case\
+    \ _1: case _2:\n#define KYOPRO_MATCH3(_1, _2, _3) break; case _1: case _2: case\
+    \ _3:\n#define KYOPRO_MATCH4(_1, _2, _3, _4) break; case _1: case _2: case _3:\
+    \ case _4:\n\n#define KYOPRO_OVERLOAD_MATCH(_1, _2, _3, _4, name, ...) name\n\
     #define match(...) KYOPRO_OVERLOAD_MATCH(__VA_ARGS__, KYOPRO_MATCH4, KYOPRO_MATCH3,\
     \ KYOPRO_MATCH2, KYOPRO_MATCH1)(__VA_ARGS__)\n#define otherwise break; default:\n\
     #line 7 \"template/named_tuple.hpp\"\n\nnamespace kpr {\n    template<class Derived,\
@@ -1082,31 +1108,37 @@ data:
     \ else return init;\r\n        }\r\n\r\n        template<class T, std::size_t\
     \ n>\r\n        auto operator ()(const std::size_t (&d)[n]) noexcept {\r\n   \
     \         return operator ()(d, T{});\r\n        }\r\n    } make_vec;\r\n} //\
-    \ namespace kpr\r\n#line 3 \"template/stl.hpp\"\n#include <cctype>\r\n#include\
-    \ <cerrno>\r\n#include <cfloat>\r\n#include <ciso646>\r\n#include <climits>\r\n\
-    #include <clocale>\r\n#line 10 \"template/stl.hpp\"\n#include <csetjmp>\r\n#include\
-    \ <csignal>\r\n#include <cstdarg>\r\n#line 15 \"template/stl.hpp\"\n#include <cstdlib>\r\
-    \n#include <cstring>\r\n#include <ctime>\r\n\r\n#include <ccomplex>\r\n#include\
-    \ <cfenv>\r\n#include <cinttypes>\r\n#include <cstdalign>\r\n#include <cstdbool>\r\
-    \n#line 25 \"template/stl.hpp\"\n#include <ctgmath>\r\n#include <cwchar>\r\n#include\
-    \ <cwctype>\r\n\r\n#line 31 \"template/stl.hpp\"\n#include <complex>\r\n#include\
-    \ <deque>\r\n#include <exception>\r\n#include <fstream>\r\n#line 36 \"template/stl.hpp\"\
-    \n#include <iomanip>\r\n#include <ios>\r\n#include <iosfwd>\r\n#include <iostream>\r\
-    \n#line 44 \"template/stl.hpp\"\n#include <locale>\r\n#line 46 \"template/stl.hpp\"\
-    \n#include <memory>\r\n#include <new>\r\n#include <numeric>\r\n#include <ostream>\r\
-    \n#line 52 \"template/stl.hpp\"\n#include <sstream>\r\n#line 54 \"template/stl.hpp\"\
-    \n#include <stdexcept>\r\n#include <streambuf>\r\n#line 57 \"template/stl.hpp\"\
-    \n#include <typeinfo>\r\n#line 59 \"template/stl.hpp\"\n#include <valarray>\r\n\
-    #line 61 \"template/stl.hpp\"\n\r\n#line 63 \"template/stl.hpp\"\n#include <atomic>\r\
-    \n#include <chrono>\r\n#include <condition_variable>\r\n#line 67 \"template/stl.hpp\"\
-    \n#include <future>\r\n#include <initializer_list>\r\n#include <mutex>\r\n#include\
-    \ <random>\r\n#include <ratio>\r\n#include <regex>\r\n#include <scoped_allocator>\r\
-    \n#include <system_error>\r\n#include <thread>\r\n#line 77 \"template/stl.hpp\"\
-    \n#include <typeindex>\r\n#line 11 \"template/template.hpp\"\n"
+    \ namespace kpr\r\n#line 3 \"template/range_cast.hpp\"\n\nnamespace kpr {\n  \
+    \  // Range\u306E\u578B\u5909\u63DB\n    [[maybe_unused]] inline constexpr struct\
+    \ {\n        template<class To, class From>\n        constexpr To operator ()(From&&\
+    \ container) const noexcept {\n            return To(std::begin(container), std::end(container));\n\
+    \        }\n    } range_cast;\n} // namespace kpr\n#line 3 \"template/stl.hpp\"\
+    \n#include <cctype>\r\n#include <cerrno>\r\n#include <cfloat>\r\n#include <ciso646>\r\
+    \n#include <climits>\r\n#include <clocale>\r\n#line 10 \"template/stl.hpp\"\n\
+    #include <csetjmp>\r\n#include <csignal>\r\n#include <cstdarg>\r\n#line 15 \"\
+    template/stl.hpp\"\n#include <cstdlib>\r\n#include <cstring>\r\n#include <ctime>\r\
+    \n\r\n#include <ccomplex>\r\n#include <cfenv>\r\n#include <cinttypes>\r\n#include\
+    \ <cstdalign>\r\n#include <cstdbool>\r\n#line 25 \"template/stl.hpp\"\n#include\
+    \ <ctgmath>\r\n#include <cwchar>\r\n#include <cwctype>\r\n\r\n#line 31 \"template/stl.hpp\"\
+    \n#include <complex>\r\n#include <deque>\r\n#include <exception>\r\n#include <fstream>\r\
+    \n#line 36 \"template/stl.hpp\"\n#include <iomanip>\r\n#include <ios>\r\n#include\
+    \ <iosfwd>\r\n#include <iostream>\r\n#line 44 \"template/stl.hpp\"\n#include <locale>\r\
+    \n#line 46 \"template/stl.hpp\"\n#include <memory>\r\n#include <new>\r\n#include\
+    \ <numeric>\r\n#include <ostream>\r\n#line 52 \"template/stl.hpp\"\n#include <sstream>\r\
+    \n#line 54 \"template/stl.hpp\"\n#include <stdexcept>\r\n#include <streambuf>\r\
+    \n#line 57 \"template/stl.hpp\"\n#include <typeinfo>\r\n#line 59 \"template/stl.hpp\"\
+    \n#include <valarray>\r\n#line 61 \"template/stl.hpp\"\n\r\n#line 63 \"template/stl.hpp\"\
+    \n#include <atomic>\r\n#include <chrono>\r\n#include <condition_variable>\r\n\
+    #line 67 \"template/stl.hpp\"\n#include <future>\r\n#include <initializer_list>\r\
+    \n#include <mutex>\r\n#include <random>\r\n#include <ratio>\r\n#include <regex>\r\
+    \n#include <scoped_allocator>\r\n#include <system_error>\r\n#include <thread>\r\
+    \n#line 77 \"template/stl.hpp\"\n#include <typeindex>\r\n#line 13 \"template/template.hpp\"\
+    \n"
   code: "#pragma once\r\n#include \"alias.hpp\"\r\n#include \"amin_amax.hpp\"\r\n\
-    #include \"constant.hpp\"\r\n#include \"len.hpp\"\r\n#include \"macro.hpp\"\r\n\
-    #include \"main.hpp\"\r\n#include \"make_array.hpp\"\r\n#include \"make_vec.hpp\"\
-    \r\n#include \"stl.hpp\"\r\n"
+    #include \"constant.hpp\"\r\n#include \"contains.hpp\"\r\n#include \"len.hpp\"\
+    \r\n#include \"macro.hpp\"\r\n#include \"main.hpp\"\r\n#include \"make_array.hpp\"\
+    \r\n#include \"make_vec.hpp\"\r\n#include \"range_cast.hpp\"\r\n#include \"stl.hpp\"\
+    \r\n"
   dependsOn:
   - template/alias.hpp
   - algorithm/Hash.hpp
@@ -1126,24 +1158,27 @@ data:
   - math/mod.hpp
   - template/amin_amax.hpp
   - template/constant.hpp
+  - template/contains.hpp
   - template/len.hpp
   - template/macro.hpp
   - template/all_rall.hpp
   - template/io.hpp
   - io/io.hpp
   - template/lambda.hpp
+  - template/push_pop.hpp
   - template/match.hpp
   - template/named_tuple.hpp
   - template/rep.hpp
   - template/main.hpp
   - template/make_array.hpp
   - template/make_vec.hpp
+  - template/range_cast.hpp
   - template/stl.hpp
   isVerificationFile: false
   path: template/template.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2023-03-28 01:11:02+09:00'
+  timestamp: '2023-03-28 19:27:23+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/template.hpp

@@ -11,6 +11,9 @@ data:
     path: algorithm/compress.hpp
     title: algorithm/compress.hpp
   - icon: ':warning:'
+    path: algorithm/count_all.hpp
+    title: algorithm/count_all.hpp
+  - icon: ':warning:'
     path: function/compare.hpp
     title: function/compare.hpp
   - icon: ':question:'
@@ -247,7 +250,12 @@ data:
     \    auto itr = unique(a.begin(), a.end());\n            std::unordered_map<ValueType,\
     \ KYOPRO_BASE_INT> mem;\n            int cnt = -1;\n            for (auto i =\
     \ std::begin(a); i != itr; ++i) mem[*i] = ++cnt;\n            return mem;\n  \
-    \      }\n    } compress;\n} // namespace kpr\n#line 3 \"algorithm/Hash.hpp\"\n\
+    \      }\n    } compress;\n} // namespace kpr\n#line 5 \"algorithm/count_all.hpp\"\
+    \n\nnamespace kpr {\n    inline constexpr struct {\n        template<class T>\n\
+    \        auto operator ()(T first, T last) const {\n            std::unordered_map<typename\
+    \ std::iterator_traits<T>::value_type, KYOPRO_BASE_INT> mem;\n            for\
+    \ (auto i = first; i != last; ++i) ++mem[*i];\n            return mem;\n     \
+    \   }\n    } count_all;\n} // namespace kpr\n#line 3 \"algorithm/Hash.hpp\"\n\
     #include <functional>\r\n#line 6 \"meta/tuple_like.hpp\"\n\r\nnamespace kpr {\r\
     \n    namespace helper {\r\n        struct CastableToAny {\r\n            template<class\
     \ T>\r\n            operator T() const noexcept;\r\n        };\r\n\r\n       \
@@ -327,16 +335,17 @@ data:
     \ std::size_t operator ()(const T& a) const {\r\n            std::size_t seed\
     \ = std::size(a);\r\n            for (auto&& i: a) seed ^= Hash<range_value_t<T>>{}(i)\
     \ + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4);\r\n            return seed;\r\
-    \n        }\r\n    };\r\n} // namespace kpr\r\n#line 5 \"algorithm/algorithm.hpp\"\
+    \n        }\r\n    };\r\n} // namespace kpr\r\n#line 6 \"algorithm/algorithm.hpp\"\
     \n"
   code: "#pragma once\r\n#include \"bit.hpp\"\r\n#include \"compress.hpp\"\r\n#include\
-    \ \"Hash.hpp\"\r\n"
+    \ \"count_all.hpp\"\r\n#include \"Hash.hpp\"\r\n"
   dependsOn:
   - algorithm/bit.hpp
   - meta/setting.hpp
   - meta/trait.hpp
   - algorithm/compress.hpp
   - function/compare.hpp
+  - algorithm/count_all.hpp
   - algorithm/Hash.hpp
   - meta/tuple_like.hpp
   isVerificationFile: false
@@ -344,7 +353,7 @@ data:
   requiredBy:
   - all/all.hpp
   - all.hpp
-  timestamp: '2023-03-28 01:11:02+09:00'
+  timestamp: '2023-03-28 19:27:23+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm/algorithm.hpp

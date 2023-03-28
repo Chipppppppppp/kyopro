@@ -15,6 +15,9 @@ data:
     - icon: ':warning:'
       path: algorithm/compress.hpp
       title: algorithm/compress.hpp
+    - icon: ':warning:'
+      path: algorithm/count_all.hpp
+      title: algorithm/count_all.hpp
   - name: all
     pages:
     - icon: ':warning:'
@@ -154,6 +157,9 @@ data:
       path: template/constant.hpp
       title: template/constant.hpp
     - icon: ':warning:'
+      path: template/contains.hpp
+      title: template/contains.hpp
+    - icon: ':warning:'
       path: template/io.hpp
       title: template/io.hpp
     - icon: ':warning:'
@@ -180,6 +186,12 @@ data:
     - icon: ':warning:'
       path: template/named_tuple.hpp
       title: template/named_tuple.hpp
+    - icon: ':warning:'
+      path: template/push_pop.hpp
+      title: template/push_pop.hpp
+    - icon: ':warning:'
+      path: template/range_cast.hpp
+      title: template/range_cast.hpp
     - icon: ':warning:'
       path: template/rep.hpp
       title: template/rep.hpp

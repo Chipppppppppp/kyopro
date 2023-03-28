@@ -9,6 +9,9 @@ data:
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
+    path: algorithm/count_all.hpp
+    title: algorithm/count_all.hpp
+  - icon: ':warning:'
     path: all.hpp
     title: all.hpp
   - icon: ':warning:'
@@ -171,6 +174,7 @@ data:
   - math/Montgomery.hpp
   - algorithm/algorithm.hpp
   - algorithm/bit.hpp
+  - algorithm/count_all.hpp
   - template/template.hpp
   - template/len.hpp
   - template/constant.hpp
