@@ -11,8 +11,14 @@ data:
     path: algorithm/compress.hpp
     title: algorithm/compress.hpp
   - icon: ':warning:'
+    path: algorithm/contains.hpp
+    title: algorithm/contains.hpp
+  - icon: ':warning:'
     path: algorithm/count_all.hpp
     title: algorithm/count_all.hpp
+  - icon: ':warning:'
+    path: algorithm/next_combination.hpp
+    title: algorithm/next_combination.hpp
   - icon: ':warning:'
     path: function/compare.hpp
     title: function/compare.hpp
@@ -250,17 +256,11 @@ data:
     \    auto itr = unique(a.begin(), a.end());\n            std::unordered_map<ValueType,\
     \ KYOPRO_BASE_INT> mem;\n            int cnt = -1;\n            for (auto i =\
     \ std::begin(a); i != itr; ++i) mem[*i] = ++cnt;\n            return mem;\n  \
-    \      }\n    } compress;\n} // namespace kpr\n#line 5 \"algorithm/count_all.hpp\"\
-    \n\nnamespace kpr {\n    inline constexpr struct {\n        template<class T>\n\
-    \        auto operator ()(T first, T last) const {\n            std::unordered_map<typename\
-    \ std::iterator_traits<T>::value_type, KYOPRO_BASE_INT> mem;\n            for\
-    \ (auto i = first; i != last; ++i) ++mem[*i];\n            return mem;\n     \
-    \   }\n    } count_all;\n} // namespace kpr\n#line 3 \"algorithm/Hash.hpp\"\n\
-    #include <functional>\r\n#line 6 \"meta/tuple_like.hpp\"\n\r\nnamespace kpr {\r\
-    \n    namespace helper {\r\n        struct CastableToAny {\r\n            template<class\
-    \ T>\r\n            operator T() const noexcept;\r\n        };\r\n\r\n       \
-    \ template<class T, std::size_t... idx, std::void_t<decltype(T{((void)idx, CastableToAny{})...})>*\
-    \ = nullptr>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
+    \      }\n    } compress;\n} // namespace kpr\n#line 6 \"meta/tuple_like.hpp\"\
+    \n\r\nnamespace kpr {\r\n    namespace helper {\r\n        struct CastableToAny\
+    \ {\r\n            template<class T>\r\n            operator T() const noexcept;\r\
+    \n        };\r\n\r\n        template<class T, std::size_t... idx, std::void_t<decltype(T{((void)idx,\
+    \ CastableToAny{})...})>* = nullptr>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
     \ bool) noexcept {\r\n            return true;\r\n        }\r\n        template<class\
     \ T, std::size_t... idx>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
     \ char) noexcept {\r\n            return false;\r\n        }\n\n        template<class\
@@ -318,12 +318,35 @@ data:
     \ {\n        static constexpr bool value = true;\n    };\n\n    // \u578BT\u304C\
     tuple_like\u304B\u8ABF\u3079\u308B\n    template<class T>\n    inline constexpr\
     \ bool is_tuple_like_v = is_tuple_like<T>::value;\r\n} // namespace kpr\r\n#line\
-    \ 9 \"algorithm/Hash.hpp\"\n\r\nnamespace kpr {\r\n    // \u30CF\u30C3\u30B7\u30E5\
-    (tuple_like, range\u5BFE\u5FDC)\r\n    template<class, class = void>\r\n    struct\
-    \ Hash;\r\n\r\n    template<class T>\r\n    struct Hash<T, std::enable_if_t<std::is_scalar_v<T>>>\
-    \ {\r\n        using value_type = T;\r\n\r\n        constexpr std::size_t operator\
-    \ ()(T a) const noexcept {\r\n            return std::hash<T>{}(a);\r\n      \
-    \  }\r\n    };\r\n\r\n    template<class T>\r\n    struct Hash<T, std::enable_if_t<is_tuple_like_v<T>\
+    \ 6 \"algorithm/contains.hpp\"\n\nnamespace kpr {\n    // \u8981\u7D20\u3092\u542B\
+    \u3093\u3067\u3044\u308B\u304B\u8ABF\u3079\u308B\n    [[maybe_unused]] inline\
+    \ constexpr struct {\n    private:\n        template<class T>\n        constexpr\
+    \ bool impl(const T& container, const typename T::key_type& value, char) const\
+    \ {\n            return container.find(value) != container.end();\n        }\n\
+    \        template<class T, std::enable_if_t<!is_tuple_like_v<T>>* = nullptr>\n\
+    \        constexpr bool impl(const T& container, const range_value_t<T>& value,\
+    \ bool) const {\n            return std::find(std::begin(container), std::end(container),\
+    \ value) != std::end(container);\n        }\n        template<std::size_t i =\
+    \ 0, class T, class U, std::enable_if_t<is_tuple_like_v<T>>* = nullptr>\n    \
+    \    constexpr bool impl(const T& tuple_like, const U& value, bool) const {\n\
+    \            if constexpr (i < tuple_like_size_v<T>) return get<i>(tuple_like)\
+    \ == value || impl<i + 1>(tuple_like, value, false);\n            else return\
+    \ false;\n        }\n\n    public:\n        template<class T, class U>\n     \
+    \   constexpr bool operator ()(const T& a, const U& x) const {\n            return\
+    \ impl(a, x, false);\n        }\n    } contains;\n} // namespace kpr\n#line 5\
+    \ \"algorithm/count_all.hpp\"\n\nnamespace kpr {\n    // \u8981\u7D20: \u500B\u6570\
+    \u306E\u8F9E\u66F8\u3092\u8FD4\u3059\n    [[maybe_unused]] inline constexpr struct\
+    \ {\n        template<class T>\n        auto operator ()(T first, T last) const\
+    \ {\n            std::unordered_map<typename std::iterator_traits<T>::value_type,\
+    \ KYOPRO_BASE_INT> mem;\n            for (auto i = first; i != last; ++i) ++mem[*i];\n\
+    \            return mem;\n        }\n    } count_all;\n} // namespace kpr\n#line\
+    \ 3 \"algorithm/Hash.hpp\"\n#include <functional>\r\n#line 9 \"algorithm/Hash.hpp\"\
+    \n\r\nnamespace kpr {\r\n    // \u30CF\u30C3\u30B7\u30E5(tuple_like, range\u5BFE\
+    \u5FDC)\r\n    template<class, class = void>\r\n    struct Hash;\r\n\r\n    template<class\
+    \ T>\r\n    struct Hash<T, std::enable_if_t<std::is_scalar_v<T>>> {\r\n      \
+    \  using value_type = T;\r\n\r\n        constexpr std::size_t operator ()(T a)\
+    \ const noexcept {\r\n            return std::hash<T>{}(a);\r\n        }\r\n \
+    \   };\r\n\r\n    template<class T>\r\n    struct Hash<T, std::enable_if_t<is_tuple_like_v<T>\
     \ && !is_range_v<T>>> {\r\n        using value_type = T;\r\n\r\n        template<std::size_t\
     \ i = 0>\r\n        constexpr std::size_t operator ()(const T& a) const noexcept\
     \ {\r\n            if constexpr (i == tuple_like_size_v<T>) return tuple_like_size_v<T>;\r\
@@ -335,25 +358,39 @@ data:
     \ std::size_t operator ()(const T& a) const {\r\n            std::size_t seed\
     \ = std::size(a);\r\n            for (auto&& i: a) seed ^= Hash<range_value_t<T>>{}(i)\
     \ + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4);\r\n            return seed;\r\
-    \n        }\r\n    };\r\n} // namespace kpr\r\n#line 6 \"algorithm/algorithm.hpp\"\
+    \n        }\r\n    };\r\n} // namespace kpr\r\n#line 3 \"algorithm/next_combination.hpp\"\
+    \n\nnamespace kpr {\n    [[maybe_unused]] inline constexpr struct {\n        template<class\
+    \ T>\n        bool operator ()(T first, T last, int k) {\n            T subset\
+    \ = first + k;\n            if (first == last || first == subset || last == subset)\
+    \ return false;\n            T src = subset;\n            while (first != src)\
+    \ {\n                --src;\n                if (*src < *(last - 1)) {\n     \
+    \               T dest = subset;\n                    while (*src >= *dest) ++dest;\n\
+    \                    std::iter_swap(src, dest);\n                    std::rotate(src\
+    \ + 1, dest + 1, last);\n                    std::rotate(subset, subset + (last\
+    \ - dest) - 1, last);\n                    return true;\n                }\n \
+    \           }\n            std::rotate(first, subset, last);\n            return\
+    \ false;\n        }\n    } next_combination;\n} // namespace kpr\n#line 8 \"algorithm/algorithm.hpp\"\
     \n"
   code: "#pragma once\r\n#include \"bit.hpp\"\r\n#include \"compress.hpp\"\r\n#include\
-    \ \"count_all.hpp\"\r\n#include \"Hash.hpp\"\r\n"
+    \ \"contains.hpp\"\r\n#include \"count_all.hpp\"\r\n#include \"Hash.hpp\"\r\n\
+    #include \"next_combination.hpp\"\r\n"
   dependsOn:
   - algorithm/bit.hpp
   - meta/setting.hpp
   - meta/trait.hpp
   - algorithm/compress.hpp
   - function/compare.hpp
+  - algorithm/contains.hpp
+  - meta/tuple_like.hpp
   - algorithm/count_all.hpp
   - algorithm/Hash.hpp
-  - meta/tuple_like.hpp
+  - algorithm/next_combination.hpp
   isVerificationFile: false
   path: algorithm/algorithm.hpp
   requiredBy:
   - all/all.hpp
   - all.hpp
-  timestamp: '2023-03-28 19:27:23+09:00'
+  timestamp: '2023-03-29 00:32:58+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm/algorithm.hpp

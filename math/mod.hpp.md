@@ -9,6 +9,9 @@ data:
     path: all/all.hpp
     title: all/all.hpp
   - icon: ':warning:'
+    path: math/BinomMod.hpp
+    title: math/BinomMod.hpp
+  - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
   - icon: ':warning:'
@@ -57,6 +60,7 @@ data:
   - all.hpp
   - math/ModInt.hpp
   - math/math.hpp
+  - math/BinomMod.hpp
   - template/template.hpp
   - template/alias.hpp
   timestamp: '2023-02-11 02:36:17+09:00'

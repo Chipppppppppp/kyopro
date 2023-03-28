@@ -36,17 +36,19 @@ data:
     \u8868\u3059\r\n#define KYOPRO_INF_DIV (static_cast<KYOPRO_BASE_UINT>(3))\r\n\
     #endif\r\n\r\n#ifndef KYOPRO_BUFFER_SIZE\r\n// \u30C7\u30D5\u30A9\u30EB\u30C8\u306E\
     \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\r\n#define KYOPRO_BUFFER_SIZE (static_cast<KYOPRO_BASE_UINT>(2048))\r\
-    \n#endif\r\n#line 5 \"algorithm/count_all.hpp\"\n\nnamespace kpr {\n    inline\
-    \ constexpr struct {\n        template<class T>\n        auto operator ()(T first,\
-    \ T last) const {\n            std::unordered_map<typename std::iterator_traits<T>::value_type,\
+    \n#endif\r\n#line 5 \"algorithm/count_all.hpp\"\n\nnamespace kpr {\n    // \u8981\
+    \u7D20: \u500B\u6570\u306E\u8F9E\u66F8\u3092\u8FD4\u3059\n    [[maybe_unused]]\
+    \ inline constexpr struct {\n        template<class T>\n        auto operator\
+    \ ()(T first, T last) const {\n            std::unordered_map<typename std::iterator_traits<T>::value_type,\
     \ KYOPRO_BASE_INT> mem;\n            for (auto i = first; i != last; ++i) ++mem[*i];\n\
     \            return mem;\n        }\n    } count_all;\n} // namespace kpr\n"
   code: "#pragma once\n#include <iterator>\n#include <unordered_map>\n#include \"\
-    ../meta/setting.hpp\"\n\nnamespace kpr {\n    inline constexpr struct {\n    \
-    \    template<class T>\n        auto operator ()(T first, T last) const {\n  \
-    \          std::unordered_map<typename std::iterator_traits<T>::value_type, KYOPRO_BASE_INT>\
-    \ mem;\n            for (auto i = first; i != last; ++i) ++mem[*i];\n        \
-    \    return mem;\n        }\n    } count_all;\n} // namespace kpr\n"
+    ../meta/setting.hpp\"\n\nnamespace kpr {\n    // \u8981\u7D20: \u500B\u6570\u306E\
+    \u8F9E\u66F8\u3092\u8FD4\u3059\n    [[maybe_unused]] inline constexpr struct {\n\
+    \        template<class T>\n        auto operator ()(T first, T last) const {\n\
+    \            std::unordered_map<typename std::iterator_traits<T>::value_type,\
+    \ KYOPRO_BASE_INT> mem;\n            for (auto i = first; i != last; ++i) ++mem[*i];\n\
+    \            return mem;\n        }\n    } count_all;\n} // namespace kpr\n"
   dependsOn:
   - meta/setting.hpp
   isVerificationFile: false
@@ -55,7 +57,7 @@ data:
   - all/all.hpp
   - all.hpp
   - algorithm/algorithm.hpp
-  timestamp: '2023-03-28 19:27:23+09:00'
+  timestamp: '2023-03-29 00:32:58+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm/count_all.hpp

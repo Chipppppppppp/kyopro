@@ -9,6 +9,9 @@ data:
     path: algorithm/algorithm.hpp
     title: algorithm/algorithm.hpp
   - icon: ':warning:'
+    path: algorithm/contains.hpp
+    title: algorithm/contains.hpp
+  - icon: ':warning:'
     path: all.hpp
     title: all.hpp
   - icon: ':warning:'
@@ -23,6 +26,9 @@ data:
   - icon: ':question:'
     path: io/out.hpp
     title: io/out.hpp
+  - icon: ':warning:'
+    path: math/BinomMod.hpp
+    title: math/BinomMod.hpp
   - icon: ':question:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
@@ -44,9 +50,6 @@ data:
   - icon: ':warning:'
     path: template/alias.hpp
     title: template/alias.hpp
-  - icon: ':warning:'
-    path: template/contains.hpp
-    title: template/contains.hpp
   - icon: ':warning:'
     path: template/io.hpp
     title: template/io.hpp
@@ -223,13 +226,14 @@ data:
   - math/factorize.hpp
   - math/ModInt.hpp
   - math/math.hpp
+  - math/BinomMod.hpp
   - math/DynamicModInt.hpp
   - algorithm/algorithm.hpp
+  - algorithm/contains.hpp
   - algorithm/Hash.hpp
   - template/template.hpp
   - template/named_tuple.hpp
   - template/macro.hpp
-  - template/contains.hpp
   - template/io.hpp
   - template/lambda.hpp
   - template/alias.hpp

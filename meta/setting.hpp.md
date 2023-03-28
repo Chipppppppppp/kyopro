@@ -47,6 +47,9 @@ data:
   - icon: ':warning:'
     path: math/Barrett.hpp
     title: math/Barrett.hpp
+  - icon: ':warning:'
+    path: math/BinomMod.hpp
+    title: math/BinomMod.hpp
   - icon: ':question:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
@@ -168,6 +171,7 @@ data:
   - math/factorize.hpp
   - math/ModInt.hpp
   - math/math.hpp
+  - math/BinomMod.hpp
   - math/divisors.hpp
   - math/DynamicModInt.hpp
   - math/Barrett.hpp

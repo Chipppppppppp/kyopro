@@ -9,18 +9,21 @@ data:
     title: meta/tuple_like.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: algorithm/algorithm.hpp
+    title: algorithm/algorithm.hpp
+  - icon: ':warning:'
     path: all.hpp
     title: all.hpp
   - icon: ':warning:'
-    path: template/template.hpp
-    title: template/template.hpp
+    path: all/all.hpp
+    title: all/all.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"template/contains.hpp\"\n#include <algorithm>\n#include\
+  bundledCode: "#line 2 \"algorithm/contains.hpp\"\n#include <algorithm>\n#include\
     \ <iterator>\n#line 2 \"meta/tuple_like.hpp\"\n#include <cstddef>\r\n#include\
     \ <type_traits>\r\n#include <tuple>\r\n#include <utility>\r\n\r\nnamespace kpr\
     \ {\r\n    namespace helper {\r\n        struct CastableToAny {\r\n          \
@@ -198,8 +201,9 @@ data:
     \ = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\r\n    };\r\n    //\
     \ Range\u578BT\u304B\u3089\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n\
     \    template<class T>\r\n    using range_value_t = typename range_value<T>::type;\r\
-    \n} // namespace kpr\r\n#line 6 \"template/contains.hpp\"\n\nnamespace kpr {\n\
-    \    [[maybe_unused]] inline constexpr struct {\n    private:\n        template<class\
+    \n} // namespace kpr\r\n#line 6 \"algorithm/contains.hpp\"\n\nnamespace kpr {\n\
+    \    // \u8981\u7D20\u3092\u542B\u3093\u3067\u3044\u308B\u304B\u8ABF\u3079\u308B\
+    \n    [[maybe_unused]] inline constexpr struct {\n    private:\n        template<class\
     \ T>\n        constexpr bool impl(const T& container, const typename T::key_type&\
     \ value, char) const {\n            return container.find(value) != container.end();\n\
     \        }\n        template<class T, std::enable_if_t<!is_tuple_like_v<T>>* =\
@@ -214,7 +218,8 @@ data:
     \   constexpr bool operator ()(const T& a, const U& x) const {\n            return\
     \ impl(a, x, false);\n        }\n    } contains;\n} // namespace kpr\n"
   code: "#pragma once\n#include <algorithm>\n#include <iterator>\n#include \"../meta/tuple_like.hpp\"\
-    \n#include \"../meta/trait.hpp\"\n\nnamespace kpr {\n    [[maybe_unused]] inline\
+    \n#include \"../meta/trait.hpp\"\n\nnamespace kpr {\n    // \u8981\u7D20\u3092\
+    \u542B\u3093\u3067\u3044\u308B\u304B\u8ABF\u3079\u308B\n    [[maybe_unused]] inline\
     \ constexpr struct {\n    private:\n        template<class T>\n        constexpr\
     \ bool impl(const T& container, const typename T::key_type& value, char) const\
     \ {\n            return container.find(value) != container.end();\n        }\n\
@@ -233,17 +238,18 @@ data:
   - meta/tuple_like.hpp
   - meta/trait.hpp
   isVerificationFile: false
-  path: template/contains.hpp
+  path: algorithm/contains.hpp
   requiredBy:
+  - all/all.hpp
   - all.hpp
-  - template/template.hpp
-  timestamp: '2023-03-28 19:27:23+09:00'
+  - algorithm/algorithm.hpp
+  timestamp: '2023-03-29 00:32:58+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: template/contains.hpp
+documentation_of: algorithm/contains.hpp
 layout: document
 redirect_from:
-- /library/template/contains.hpp
-- /library/template/contains.hpp.html
-title: template/contains.hpp
+- /library/algorithm/contains.hpp
+- /library/algorithm/contains.hpp.html
+title: algorithm/contains.hpp
 ---

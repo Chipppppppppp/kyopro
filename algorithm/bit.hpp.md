@@ -18,6 +18,9 @@ data:
     path: all/all.hpp
     title: all/all.hpp
   - icon: ':warning:'
+    path: math/BinomMod.hpp
+    title: math/BinomMod.hpp
+  - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
   - icon: ':x:'
@@ -293,6 +296,7 @@ data:
   - math/factorize.hpp
   - math/ModInt.hpp
   - math/math.hpp
+  - math/BinomMod.hpp
   - algorithm/algorithm.hpp
   - template/template.hpp
   - template/alias.hpp

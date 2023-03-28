@@ -62,9 +62,6 @@ data:
     path: template/constant.hpp
     title: template/constant.hpp
   - icon: ':warning:'
-    path: template/contains.hpp
-    title: template/contains.hpp
-  - icon: ':warning:'
     path: template/io.hpp
     title: template/io.hpp
   - icon: ':warning:'
@@ -945,25 +942,11 @@ data:
     \    inline constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>,\
     \ 4> beside{{{-1, 0}, {0, -1}, {1, 0}, {0, 1}}};\r\n    inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
     \ KYOPRO_BASE_INT>, 8> around{{{-1, 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1,\
-    \ 1}, {0, 1}, {-1, 1}}};\r\n} // namespace kpr\r\n#line 6 \"template/contains.hpp\"\
-    \n\nnamespace kpr {\n    [[maybe_unused]] inline constexpr struct {\n    private:\n\
-    \        template<class T>\n        constexpr bool impl(const T& container, const\
-    \ typename T::key_type& value, char) const {\n            return container.find(value)\
-    \ != container.end();\n        }\n        template<class T, std::enable_if_t<!is_tuple_like_v<T>>*\
-    \ = nullptr>\n        constexpr bool impl(const T& container, const range_value_t<T>&\
-    \ value, bool) const {\n            return std::find(std::begin(container), std::end(container),\
-    \ value) != std::end(container);\n        }\n        template<std::size_t i =\
-    \ 0, class T, class U, std::enable_if_t<is_tuple_like_v<T>>* = nullptr>\n    \
-    \    constexpr bool impl(const T& tuple_like, const U& value, bool) const {\n\
-    \            if constexpr (i < tuple_like_size_v<T>) return get<i>(tuple_like)\
-    \ == value || impl<i + 1>(tuple_like, value, false);\n            else return\
-    \ false;\n        }\n\n    public:\n        template<class T, class U>\n     \
-    \   constexpr bool operator ()(const T& a, const U& x) const {\n            return\
-    \ impl(a, x, false);\n        }\n    } contains;\n} // namespace kpr\n#line 4\
-    \ \"template/len.hpp\"\n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr\
-    \ struct {\r\n        template<class T>\r\n        constexpr KYOPRO_BASE_INT operator\
-    \ ()(T&& a) const noexcept {\r\n            return std::size(a);\r\n        }\r\
-    \n    } len;\r\n} // namespace kpr\r\n#line 3 \"template/all_rall.hpp\"\n\n#define\
+    \ 1}, {0, 1}, {-1, 1}}};\r\n} // namespace kpr\r\n#line 4 \"template/len.hpp\"\
+    \n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr struct {\r\n  \
+    \      template<class T>\r\n        constexpr KYOPRO_BASE_INT operator ()(T&&\
+    \ a) const noexcept {\r\n            return std::size(a);\r\n        }\r\n   \
+    \ } len;\r\n} // namespace kpr\r\n#line 3 \"template/all_rall.hpp\"\n\n#define\
     \ all(...) std::begin(__VA_ARGS__), std::end(__VA_ARGS__)\n#define rall(...) std::rbegin(__VA_ARGS__),\
     \ std::rend(__VA_ARGS__)\n#line 4 \"template/io.hpp\"\n#include <istream>\n#line\
     \ 10 \"template/io.hpp\"\n\nnamespace kpr::helper {\n    template<std::size_t\
@@ -1118,27 +1101,26 @@ data:
     #include <csetjmp>\r\n#include <csignal>\r\n#include <cstdarg>\r\n#line 15 \"\
     template/stl.hpp\"\n#include <cstdlib>\r\n#include <cstring>\r\n#include <ctime>\r\
     \n\r\n#include <ccomplex>\r\n#include <cfenv>\r\n#include <cinttypes>\r\n#include\
-    \ <cstdalign>\r\n#include <cstdbool>\r\n#line 25 \"template/stl.hpp\"\n#include\
-    \ <ctgmath>\r\n#include <cwchar>\r\n#include <cwctype>\r\n\r\n#line 31 \"template/stl.hpp\"\
-    \n#include <complex>\r\n#include <deque>\r\n#include <exception>\r\n#include <fstream>\r\
-    \n#line 36 \"template/stl.hpp\"\n#include <iomanip>\r\n#include <ios>\r\n#include\
-    \ <iosfwd>\r\n#include <iostream>\r\n#line 44 \"template/stl.hpp\"\n#include <locale>\r\
-    \n#line 46 \"template/stl.hpp\"\n#include <memory>\r\n#include <new>\r\n#include\
-    \ <numeric>\r\n#include <ostream>\r\n#line 52 \"template/stl.hpp\"\n#include <sstream>\r\
-    \n#line 54 \"template/stl.hpp\"\n#include <stdexcept>\r\n#include <streambuf>\r\
-    \n#line 57 \"template/stl.hpp\"\n#include <typeinfo>\r\n#line 59 \"template/stl.hpp\"\
-    \n#include <valarray>\r\n#line 61 \"template/stl.hpp\"\n\r\n#line 63 \"template/stl.hpp\"\
+    \ <cstdbool>\r\n#line 24 \"template/stl.hpp\"\n#include <ctgmath>\r\n#include\
+    \ <cwchar>\r\n#include <cwctype>\r\n\r\n#line 30 \"template/stl.hpp\"\n#include\
+    \ <complex>\r\n#include <deque>\r\n#include <exception>\r\n#include <fstream>\r\
+    \n#line 35 \"template/stl.hpp\"\n#include <iomanip>\r\n#include <ios>\r\n#include\
+    \ <iosfwd>\r\n#include <iostream>\r\n#line 43 \"template/stl.hpp\"\n#include <locale>\r\
+    \n#line 45 \"template/stl.hpp\"\n#include <memory>\r\n#include <new>\r\n#include\
+    \ <numeric>\r\n#include <ostream>\r\n#line 51 \"template/stl.hpp\"\n#include <sstream>\r\
+    \n#line 53 \"template/stl.hpp\"\n#include <stdexcept>\r\n#include <streambuf>\r\
+    \n#line 56 \"template/stl.hpp\"\n#include <typeinfo>\r\n#line 58 \"template/stl.hpp\"\
+    \n#include <valarray>\r\n#line 60 \"template/stl.hpp\"\n\r\n#line 62 \"template/stl.hpp\"\
     \n#include <atomic>\r\n#include <chrono>\r\n#include <condition_variable>\r\n\
-    #line 67 \"template/stl.hpp\"\n#include <future>\r\n#include <initializer_list>\r\
+    #line 66 \"template/stl.hpp\"\n#include <future>\r\n#include <initializer_list>\r\
     \n#include <mutex>\r\n#include <random>\r\n#include <ratio>\r\n#include <regex>\r\
     \n#include <scoped_allocator>\r\n#include <system_error>\r\n#include <thread>\r\
-    \n#line 77 \"template/stl.hpp\"\n#include <typeindex>\r\n#line 13 \"template/template.hpp\"\
+    \n#line 76 \"template/stl.hpp\"\n#include <typeindex>\r\n#line 12 \"template/template.hpp\"\
     \n"
   code: "#pragma once\r\n#include \"alias.hpp\"\r\n#include \"amin_amax.hpp\"\r\n\
-    #include \"constant.hpp\"\r\n#include \"contains.hpp\"\r\n#include \"len.hpp\"\
-    \r\n#include \"macro.hpp\"\r\n#include \"main.hpp\"\r\n#include \"make_array.hpp\"\
-    \r\n#include \"make_vec.hpp\"\r\n#include \"range_cast.hpp\"\r\n#include \"stl.hpp\"\
-    \r\n"
+    #include \"constant.hpp\"\r\n#include \"len.hpp\"\r\n#include \"macro.hpp\"\r\n\
+    #include \"main.hpp\"\r\n#include \"make_array.hpp\"\r\n#include \"make_vec.hpp\"\
+    \r\n#include \"range_cast.hpp\"\r\n#include \"stl.hpp\"\r\n"
   dependsOn:
   - template/alias.hpp
   - algorithm/Hash.hpp
@@ -1158,7 +1140,6 @@ data:
   - math/mod.hpp
   - template/amin_amax.hpp
   - template/constant.hpp
-  - template/contains.hpp
   - template/len.hpp
   - template/macro.hpp
   - template/all_rall.hpp
@@ -1178,7 +1159,7 @@ data:
   path: template/template.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2023-03-28 19:27:23+09:00'
+  timestamp: '2023-03-29 00:32:58+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/template.hpp

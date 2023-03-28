@@ -16,8 +16,14 @@ data:
       path: algorithm/compress.hpp
       title: algorithm/compress.hpp
     - icon: ':warning:'
+      path: algorithm/contains.hpp
+      title: algorithm/contains.hpp
+    - icon: ':warning:'
       path: algorithm/count_all.hpp
       title: algorithm/count_all.hpp
+    - icon: ':warning:'
+      path: algorithm/next_combination.hpp
+      title: algorithm/next_combination.hpp
   - name: all
     pages:
     - icon: ':warning:'
@@ -75,6 +81,9 @@ data:
     - icon: ':warning:'
       path: math/Barrett.hpp
       title: math/Barrett.hpp
+    - icon: ':warning:'
+      path: math/BinomMod.hpp
+      title: math/BinomMod.hpp
     - icon: ':question:'
       path: math/DynamicModInt.hpp
       title: math/DynamicModInt.hpp
@@ -156,9 +165,6 @@ data:
     - icon: ':warning:'
       path: template/constant.hpp
       title: template/constant.hpp
-    - icon: ':warning:'
-      path: template/contains.hpp
-      title: template/contains.hpp
     - icon: ':warning:'
       path: template/io.hpp
       title: template/io.hpp

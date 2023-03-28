@@ -29,6 +29,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
+  - icon: ':warning:'
+    path: math/BinomMod.hpp
+    title: math/BinomMod.hpp
   - icon: ':question:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
@@ -137,6 +140,7 @@ data:
   - math/factorize.hpp
   - math/ModInt.hpp
   - math/math.hpp
+  - math/BinomMod.hpp
   - math/DynamicModInt.hpp
   - template/template.hpp
   - template/alias.hpp

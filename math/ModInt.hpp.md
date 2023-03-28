@@ -42,6 +42,9 @@ data:
     path: all/all.hpp
     title: all/all.hpp
   - icon: ':warning:'
+    path: math/BinomMod.hpp
+    title: math/BinomMod.hpp
+  - icon: ':warning:'
     path: math/math.hpp
     title: math/math.hpp
   - icon: ':warning:'
@@ -778,6 +781,7 @@ data:
   - all/all.hpp
   - all.hpp
   - math/math.hpp
+  - math/BinomMod.hpp
   - template/template.hpp
   - template/alias.hpp
   timestamp: '2023-03-25 22:11:58+09:00'
