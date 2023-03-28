@@ -1,5 +1,6 @@
 #pragma once
 #include "Barrett.hpp"
+#include "BinomMod.hpp"
 #include "div.hpp"
 #include "divisors.hpp"
 #include "DynamicModInt.hpp"

@@ -5,6 +5,7 @@
 #include "../meta/trait.hpp"
 
 namespace kpr {
+    // 要素を含んでいるか調べる
     [[maybe_unused]] inline constexpr struct {
     private:
         template<class T>

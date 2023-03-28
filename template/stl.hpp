@@ -19,7 +19,6 @@
 #include <ccomplex>
 #include <cfenv>
 #include <cinttypes>
-#include <cstdalign>
 #include <cstdbool>
 #include <cstdint>
 #include <ctgmath>
