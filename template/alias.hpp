@@ -140,30 +140,30 @@ namespace kpr {
     using Mll = Map<ll, ll>;
     using VMll = Vec<Mll>;
 
-    template<class Key, class Compare = Less>
-    using HashSet = std::unordered_set<Key, Compare>;
-    template<class Key, class T, class Compare = Less>
-    using HashMap = std::unordered_map<Key, T, Compare>;
+    template<class Key, class H = Hash<Key>>
+    using HashSet = std::unordered_set<Key, H>;
+    template<class Key, class T, class H = Hash<Key>>
+    using HashMap = std::unordered_map<Key, T, H>;
 
     DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HashSet, HS);
     DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashSet, HS);
     using HMll = HashMap<ll, ll>;
     using VHMll = Vec<HMll>;
 
-    template<class Key>
-    using MultiSet = std::multiset<Key, Hash<Key>>;
-    template<class Key, class T>
-    using MultiMap = std::multimap<Key, T, Hash<Key>>;
+    template<class Key, class Compare = Less>
+    using MultiSet = std::multiset<Key, Compare>;
+    template<class Key, class T, class Compare = Less>
+    using MultiMap = std::multimap<Key, T, Compare>;
 
     DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, MultiSet, MS);
     DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, MultiSet, MS);
     using MMll = MultiMap<ll, ll>;
     using VMMll = Vec<MMll>;
 
-    template<class Key>
-    using HashMultiSet = std::unordered_multiset<Key, Hash<Key>>;
-    template<class Key, class T>
-    using HashMultiMap = std::unordered_multimap<Key, T, Hash<Key>>;
+    template<class Key, class H = Hash<Key>>
+    using HashMultiSet = std::unordered_multiset<Key, H>;
+    template<class Key, class T, class H = Hash<Key>>
+    using HashMultiMap = std::unordered_multimap<Key, T, H>;
 
     DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HashMultiSet, HMS);
     DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashMultiSet, HMS);
