@@ -1,6 +1,6 @@
 #pragma once
 #include "alias.hpp"
-#include "amin_amax.hpp"
+#include "chmin_chmax.hpp"
 #include "constant.hpp"
 #include "len.hpp"
 #include "macro.hpp"
