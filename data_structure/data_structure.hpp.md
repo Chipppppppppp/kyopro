@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/FenwickTree.hpp
     title: data_structure/FenwickTree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/UnionFind.hpp
     title: data_structure/UnionFind.hpp
   - icon: ':heavy_check_mark:'

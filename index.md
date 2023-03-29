@@ -39,7 +39,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/FenwickTree.hpp
       title: data_structure/FenwickTree.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data_structure/UnionFind.hpp
       title: data_structure/UnionFind.hpp
     - icon: ':warning:'
@@ -224,7 +224,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yosupo/point_add_range_sum.test.cpp
       title: verify/yosupo/point_add_range_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/yosupo/unionfind.test.cpp
       title: verify/yosupo/unionfind.test.cpp
 layout: toppage

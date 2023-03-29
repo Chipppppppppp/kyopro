@@ -18,12 +18,12 @@ data:
     path: data_structure/structure.hpp
     title: data_structure/structure.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"data_structure/UnionFind.hpp\"\n#include <algorithm>\r\n\
@@ -242,7 +242,7 @@ data:
   - data_structure/structure.hpp
   - data_structure/data_structure.hpp
   timestamp: '2023-02-14 01:39:39+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo/unionfind.test.cpp
 documentation_of: data_structure/UnionFind.hpp

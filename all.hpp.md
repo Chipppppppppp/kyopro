@@ -28,7 +28,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/FenwickTree.hpp
     title: data_structure/FenwickTree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: data_structure/UnionFind.hpp
     title: data_structure/UnionFind.hpp
   - icon: ':warning:'
@@ -921,25 +921,25 @@ data:
     \n    struct Hash<ModInt<mod>> {\r\n        using value_type = ModInt<mod>;\r\n\
     \        constexpr std::size_t operator ()(ModInt<mod> a) const noexcept {\r\n\
     \            return static_cast<std::size_t>(a);\r\n        }\r\n    };\r\n} //\
-    \ namespace kpr\r\n#line 6 \"math/BinomMod.hpp\"\n\nnamespace kpr {\n    // \u4E8C\
+    \ namespace kpr\r\n#line 6 \"math/BinomMod.hpp\"\n\nnamespace kpr {\n    // mod\u4E8C\
     \u9805\u4FC2\u6570\n    template<std::size_t max = 1000000, KYOPRO_BASE_UINT m\
-    \ = mod>\n    struct Binom {\n        std::array<std::uint_fast64_t, max> fact,\
-    \ factinv, inv;\n        constexpr Binom() noexcept {\n            fact[0] = fact[1]\
-    \ = 1;\n            factinv[0] = factinv[1] = 1;\n            inv[1] = 1;\n  \
-    \          for (int i = 2; i < (int)max; ++i) {\n                fact[i] = fact[i\
-    \ - 1] * i % m;\n                inv[i] = m - inv[m % i] * (m / i) % m;\n    \
-    \            factinv[i] = factinv[i - 1] * inv[i] % m;\n            }\n      \
-    \  }\n\n        constexpr ModInt<m> c(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r)\
-    \ noexcept {\n            if (n < r) return 0;\n            return ModInt<m>(fact[n]\
-    \ * factinv[n - r] % m * factinv[r]);\n        }\n        constexpr ModInt<m>\
-    \ p(KYOPRO_BASE_UINT n) noexcept {\n            return ModInt<m>::raw(fact[n]);\n\
-    \        }\n        constexpr ModInt<m> p(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT\
-    \ r) noexcept {\n            if (n < r) return 0;\n            return ModInt<m>(fact[n]\
-    \ * factinv[n - r]);\n        }\n        constexpr ModInt<m> h(KYOPRO_BASE_UINT\
-    \ n, KYOPRO_BASE_UINT r) noexcept {\n            return c(n + r - 1, r);\n   \
-    \     }\n    };\n} // namespace kpr\n#line 3 \"math/div.hpp\"\n\r\nnamespace kpr\
-    \ {\r\n    // floor(a \xF7 b)\u3092\u8FD4\u3059\r\n    [[maybe_unused]] inline\
-    \ constexpr struct {\r\n        template<class T, class U>\r\n        constexpr\
+    \ = mod>\n    struct BinomMod {\n        std::array<std::uint_fast64_t, max> fact,\
+    \ factinv, inv;\n        constexpr BinomMod() noexcept {\n            fact[0]\
+    \ = fact[1] = 1;\n            factinv[0] = factinv[1] = 1;\n            inv[0]\
+    \ = 0;\n            inv[1] = 1;\n            for (int i = 2; i < (int)max; ++i)\
+    \ {\n                fact[i] = fact[i - 1] * i % m;\n                inv[i] =\
+    \ m - inv[m % i] * (m / i) % m;\n                factinv[i] = factinv[i - 1] *\
+    \ inv[i] % m;\n            }\n        }\n\n        constexpr ModInt<m> c(KYOPRO_BASE_UINT\
+    \ n, KYOPRO_BASE_UINT r) noexcept {\n            if (n < r) return 0;\n      \
+    \      return ModInt<m>(fact[n] * factinv[n - r] % m * factinv[r]);\n        }\n\
+    \        constexpr ModInt<m> p(KYOPRO_BASE_UINT n) noexcept {\n            return\
+    \ ModInt<m>::raw(fact[n]);\n        }\n        constexpr ModInt<m> p(KYOPRO_BASE_UINT\
+    \ n, KYOPRO_BASE_UINT r) noexcept {\n            if (n < r) return 0;\n      \
+    \      return ModInt<m>(fact[n] * factinv[n - r]);\n        }\n        constexpr\
+    \ ModInt<m> h(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept {\n           \
+    \ return c(n + r - 1, r);\n        }\n    };\n} // namespace kpr\n#line 3 \"math/div.hpp\"\
+    \n\r\nnamespace kpr {\r\n    // floor(a \xF7 b)\u3092\u8FD4\u3059\r\n    [[maybe_unused]]\
+    \ inline constexpr struct {\r\n        template<class T, class U>\r\n        constexpr\
     \ std::common_type_t<T, U> operator ()(T x, U m) const noexcept {\r\n        \
     \    static_assert(is_integer_v<T> && is_integer_v<U>, \"Both of the arguments\
     \ must be integers\");\r\n            if constexpr (is_unsigned_integer_v<T> ||\
@@ -1505,7 +1505,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2023-03-29 16:54:59+09:00'
+  timestamp: '2023-03-30 02:20:20+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp
