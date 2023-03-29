@@ -1,23 +1,27 @@
 #pragma once
 
 namespace kpr {
-    // min assign
-    template<class T, class U = T>
-    constexpr bool chmin(T& a, const U& b) noexcept {
-        if (b < a) {
-            a = b;
-            return true;
+    // assign min
+    [[maybe_unused]] inline constexpr struct {
+        template<class T, class U = T>
+        constexpr bool operator ()(T& a, const U& b) noexcept {
+            if (a > b) {
+                a = b;
+                return true;
+            }
+            return false;
         }
-        return false;
-    }
+    } chmin;
 
-    // max assign
-    template<class T, class U = T>
-    constexpr bool chmax(T& a, const U& b) noexcept {
-        if (a < b) {
-            a = b;
-            return true;
+    // assign max
+    [[maybe_unused]] inline constexpr struct {
+        template<class T, class U = T>
+        constexpr bool operator ()(T& a, const U& b) noexcept {
+            if (a < b) {
+                a = b;
+                return true;
+            }
+            return false;
         }
-        return false;
-    }
+    } chmax;
 } // namespace kpr
