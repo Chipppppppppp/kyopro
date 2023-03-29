@@ -51,17 +51,17 @@ data:
     path: template/alias.hpp
     title: template/alias.hpp
   - icon: ':warning:'
-    path: template/io.hpp
-    title: template/io.hpp
+    path: template/io_macro.hpp
+    title: template/io_macro.hpp
   - icon: ':warning:'
-    path: template/lambda.hpp
-    title: template/lambda.hpp
+    path: template/lambda_macro.hpp
+    title: template/lambda_macro.hpp
   - icon: ':warning:'
     path: template/macro.hpp
     title: template/macro.hpp
   - icon: ':warning:'
-    path: template/named_tuple.hpp
-    title: template/named_tuple.hpp
+    path: template/named_tuple_macro.hpp
+    title: template/named_tuple_macro.hpp
   - icon: ':warning:'
     path: template/template.hpp
     title: template/template.hpp
@@ -78,7 +78,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/point_add_range_sum.test.cpp
     title: verify/yosupo/point_add_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
   _isVerificationFailed: true
@@ -232,10 +232,10 @@ data:
   - algorithm/contains.hpp
   - algorithm/Hash.hpp
   - template/template.hpp
-  - template/named_tuple.hpp
   - template/macro.hpp
-  - template/io.hpp
-  - template/lambda.hpp
+  - template/io_macro.hpp
+  - template/lambda_macro.hpp
+  - template/named_tuple_macro.hpp
   - template/alias.hpp
   timestamp: '2023-03-07 11:56:47+00:00'
   verificationStatus: LIBRARY_SOME_WA

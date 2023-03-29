@@ -53,20 +53,20 @@ data:
     path: template/alias.hpp
     title: template/alias.hpp
   - icon: ':warning:'
-    path: template/all_rall.hpp
-    title: template/all_rall.hpp
+    path: template/all_rall_macro.hpp
+    title: template/all_rall_macro.hpp
   - icon: ':warning:'
-    path: template/amin_amax.hpp
-    title: template/amin_amax.hpp
+    path: template/chmin_chmax.hpp
+    title: template/chmin_chmax.hpp
   - icon: ':warning:'
     path: template/constant.hpp
     title: template/constant.hpp
   - icon: ':warning:'
-    path: template/io.hpp
-    title: template/io.hpp
+    path: template/io_macro.hpp
+    title: template/io_macro.hpp
   - icon: ':warning:'
-    path: template/lambda.hpp
-    title: template/lambda.hpp
+    path: template/lambda_macro.hpp
+    title: template/lambda_macro.hpp
   - icon: ':warning:'
     path: template/len.hpp
     title: template/len.hpp
@@ -83,20 +83,20 @@ data:
     path: template/make_vec.hpp
     title: template/make_vec.hpp
   - icon: ':warning:'
-    path: template/match.hpp
-    title: template/match.hpp
+    path: template/match_macro.hpp
+    title: template/match_macro.hpp
   - icon: ':warning:'
-    path: template/named_tuple.hpp
-    title: template/named_tuple.hpp
+    path: template/named_tuple_macro.hpp
+    title: template/named_tuple_macro.hpp
   - icon: ':warning:'
-    path: template/push_pop.hpp
-    title: template/push_pop.hpp
+    path: template/push_pop_macro.hpp
+    title: template/push_pop_macro.hpp
   - icon: ':warning:'
     path: template/range_cast.hpp
     title: template/range_cast.hpp
   - icon: ':warning:'
-    path: template/rep.hpp
-    title: template/rep.hpp
+    path: template/rep_macro.hpp
+    title: template/rep_macro.hpp
   - icon: ':warning:'
     path: template/stl.hpp
     title: template/stl.hpp
@@ -931,41 +931,41 @@ data:
     \ Container>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, PriQ, PQ);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
     \ PriQ, PQ);\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HeapQ, HQ);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
     \ HeapQ, HQ);\n\n    template<std::size_t size>\n    using BitSet = std::bitset<size>;\n\
-    } // namespace kpr\n\nusing namespace std;\nusing namespace kpr;\n#line 2 \"template/amin_amax.hpp\"\
-    \n\r\nnamespace kpr {\r\n    template<class T, class U = T>\r\n    constexpr bool\
-    \ amin(T& a, const U& b) noexcept {\r\n        if (b < a) {\r\n            a =\
-    \ b;\r\n            return true;\r\n        }\r\n        return false;\r\n   \
-    \ }\r\n\r\n    template<class T, class U = T>\r\n    constexpr bool amax(T& a,\
-    \ const U& b) noexcept {\r\n        if (a < b) {\r\n            a = b;\r\n   \
-    \         return true;\r\n        }\r\n        return false;\r\n    }\r\n} //\
-    \ namespace kpr\r\n#line 4 \"template/constant.hpp\"\n\r\nnamespace kpr {\r\n\
-    \    inline constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>,\
-    \ 4> beside{{{-1, 0}, {0, -1}, {1, 0}, {0, 1}}};\r\n    inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 8> around{{{-1, 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1,\
-    \ 1}, {0, 1}, {-1, 1}}};\r\n} // namespace kpr\r\n#line 4 \"template/len.hpp\"\
-    \n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr struct {\r\n  \
-    \      template<class T>\r\n        constexpr KYOPRO_BASE_INT operator ()(T&&\
-    \ a) const noexcept {\r\n            return std::size(a);\r\n        }\r\n   \
-    \ } len;\r\n} // namespace kpr\r\n#line 3 \"template/all_rall.hpp\"\n\n#define\
-    \ all(...) std::begin(__VA_ARGS__), std::end(__VA_ARGS__)\n#define rall(...) std::rbegin(__VA_ARGS__),\
-    \ std::rend(__VA_ARGS__)\n#line 4 \"template/io.hpp\"\n#include <istream>\n#line\
-    \ 10 \"template/io.hpp\"\n\nnamespace kpr::helper {\n    template<std::size_t\
-    \ len>\n    constexpr std::size_t va_args_size(const char (&s)[len]) noexcept\
-    \ {\n        if constexpr (len == 1) return 0;\n        std::size_t cnt = 1;\n\
-    \        std::uint_fast64_t bracket = 0;\n        for (auto i: s) {\n        \
-    \    if (i == '(') ++bracket;\n            else if (i == ')') --bracket;\n   \
-    \         else if (i == ',' && bracket == 0) ++cnt;\n        }\n        return\
-    \ cnt;\n    }\n\n    template<class F, std::size_t... idx>\n    auto read_impl(F&&\
-    \ f, std::index_sequence<idx...>) {\n        return std::tuple{(static_cast<void>(idx),\
-    \ f())...};\n    }\n\n    Printer<Writer<>::iterator, true, true, true, true>\
-    \ debug_impl(output.begin());\n\n    template<bool flag>\n    void print_if(std::string_view\
-    \ sv) {\n        if constexpr (flag) print(' ', sv);\n    }\n} // namespace kpr::helper\n\
-    \n/* C++20\u4EE5\u964D\n#define read(type_or_init, ...) \\\n    auto [__VA_ARGS__]\
-    \ = (kpr::helper::read_impl(([]() { \\\n        using T = std::decay_t<decltype(*new\
-    \ type_or_init)>; \\\n        alignas(T) std::byte storage[sizeof(T)]; \\\n  \
-    \      T* p = new (storage) type_or_init; \\\n        kpr::scan(*p); \\\n    \
-    \    T res = std::move(*p); \\\n        p->~T(); \\\n        return res; \\\n\
-    \    }), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\n\
+    } // namespace kpr\n\nusing namespace std;\nusing namespace kpr;\n#line 2 \"template/chmin_chmax.hpp\"\
+    \n\r\nnamespace kpr {\r\n    // min assign\r\n    template<class T, class U =\
+    \ T>\r\n    constexpr bool chmin(T& a, const U& b) noexcept {\r\n        if (b\
+    \ < a) {\r\n            a = b;\r\n            return true;\r\n        }\r\n  \
+    \      return false;\r\n    }\r\n\r\n    // max assign\r\n    template<class T,\
+    \ class U = T>\r\n    constexpr bool chmax(T& a, const U& b) noexcept {\r\n  \
+    \      if (a < b) {\r\n            a = b;\r\n            return true;\r\n    \
+    \    }\r\n        return false;\r\n    }\r\n} // namespace kpr\r\n#line 4 \"template/constant.hpp\"\
+    \n\r\nnamespace kpr {\r\n    inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
+    \ KYOPRO_BASE_INT>, 4> beside{{{-1, 0}, {0, -1}, {1, 0}, {0, 1}}};\r\n    inline\
+    \ constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{-1,\
+    \ 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1, 1}, {0, 1}, {-1, 1}}};\r\n} // namespace\
+    \ kpr\r\n#line 4 \"template/len.hpp\"\n\r\nnamespace kpr {\r\n    [[maybe_unused]]\
+    \ inline constexpr struct {\r\n        template<class T>\r\n        constexpr\
+    \ KYOPRO_BASE_INT operator ()(T&& a) const noexcept {\r\n            return std::size(a);\r\
+    \n        }\r\n    } len;\r\n} // namespace kpr\r\n#line 3 \"template/all_rall_macro.hpp\"\
+    \n\n#define all(...) std::begin(__VA_ARGS__), std::end(__VA_ARGS__)\n#define rall(...)\
+    \ std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\n#line 4 \"template/io_macro.hpp\"\
+    \n#include <istream>\n#line 10 \"template/io_macro.hpp\"\n\nnamespace kpr::helper\
+    \ {\n    template<std::size_t len>\n    constexpr std::size_t va_args_size(const\
+    \ char (&s)[len]) noexcept {\n        if constexpr (len == 1) return 0;\n    \
+    \    std::size_t cnt = 1;\n        std::uint_fast64_t bracket = 0;\n        for\
+    \ (auto i: s) {\n            if (i == '(') ++bracket;\n            else if (i\
+    \ == ')') --bracket;\n            else if (i == ',' && bracket == 0) ++cnt;\n\
+    \        }\n        return cnt;\n    }\n\n    template<class F, std::size_t...\
+    \ idx>\n    auto read_impl(F&& f, std::index_sequence<idx...>) {\n        return\
+    \ std::tuple{(static_cast<void>(idx), f())...};\n    }\n\n    Printer<Writer<>::iterator,\
+    \ true, true, true, true> debug_impl(output.begin());\n\n    template<bool flag>\n\
+    \    void print_if(std::string_view sv) {\n        if constexpr (flag) print('\
+    \ ', sv);\n    }\n} // namespace kpr::helper\n\n/* C++20\u4EE5\u964D\n#define\
+    \ read(type_or_init, ...) \\\n    auto [__VA_ARGS__] = (kpr::helper::read_impl(([]()\
+    \ { \\\n        using T = std::decay_t<decltype(*new type_or_init)>; \\\n    \
+    \    alignas(T) std::byte storage[sizeof(T)]; \\\n        T* p = new (storage)\
+    \ type_or_init; \\\n        kpr::scan(*p); \\\n        T res = std::move(*p);\
+    \ \\\n        p->~T(); \\\n        return res; \\\n    }), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\n\
     */\n\n#define BOOL(...) bool __VA_ARGS__; scan(__VA_ARGS__)\n#define INT(...)\
     \ int __VA_ARGS__; scan(__VA_ARGS__)\n#define LL(...) ll __VA_ARGS__; scan(__VA_ARGS__)\n\
     #define FLOAT(...) float __VA_ARGS__; scan(__VA_ARGS__)\n#define LF(...) lf __VA_ARGS__;\
@@ -986,7 +986,7 @@ data:
     \ debug(...) (void())\n#else\n#define debug(...) (kpr::print('#', ' ', 'l', 'i',\
     \ 'n', 'e', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
     \ != 0>(#__VA_ARGS__), kpr::print('\\n'), kpr::helper::debug_impl(__VA_ARGS__))\n\
-    #endif\n#line 5 \"template/lambda.hpp\"\n\r\n#define $(...) \\\r\n([&](auto&&...\
+    #endif\n#line 5 \"template/lambda_macro.hpp\"\n\r\n#define $(...) \\\r\n([&](auto&&...\
     \ _args) { \\\r\n    auto _args_tuple = std::forward_as_tuple(_args...); \\\r\n\
     \    if constexpr (sizeof...(_args) == 0) { \\\r\n        return ([&]() { return\
     \ (__VA_ARGS__); })(); \\\r\n    } else if constexpr (sizeof...(_args) == 1) {\
@@ -998,18 +998,18 @@ data:
     \ get<1>(_args_tuple), get<2>(_args_tuple)); \\\r\n    } else if constexpr (sizeof...(_args)\
     \ == 4) { \\\r\n        return ([&](auto&& $0, auto&& $1, auto&& $2, auto&& $3)\
     \ { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple), get<2>(_args_tuple),\
-    \ get<3>(_args_tuple)); \\\r\n    } \\\r\n})\r\n#line 2 \"template/push_pop.hpp\"\
+    \ get<3>(_args_tuple)); \\\r\n    } \\\r\n})\r\n#line 2 \"template/push_pop_macro.hpp\"\
     \n\n#define pushf(...) emplace_front(__VA_ARGS__)\n#define popf(...) pop_front(__VA_ARGS__)\n\
     #define pushb(...) emplace_back(__VA_ARGS__)\n#define popb(...) pop_back(__VA_ARGS__)\n\
-    #define push(...) emplace(__VA_ARGS__)\n#line 2 \"template/match.hpp\"\n\n#define\
-    \ KYOPRO_MATCH1(_1) break; case _1:\n#define KYOPRO_MATCH2(_1, _2) break; case\
-    \ _1: case _2:\n#define KYOPRO_MATCH3(_1, _2, _3) break; case _1: case _2: case\
-    \ _3:\n#define KYOPRO_MATCH4(_1, _2, _3, _4) break; case _1: case _2: case _3:\
-    \ case _4:\n\n#define KYOPRO_OVERLOAD_MATCH(_1, _2, _3, _4, name, ...) name\n\
+    #define push(...) emplace(__VA_ARGS__)\n#line 2 \"template/match_macro.hpp\"\n\
+    \n#define KYOPRO_MATCH1(_1) break; case _1:\n#define KYOPRO_MATCH2(_1, _2) break;\
+    \ case _1: case _2:\n#define KYOPRO_MATCH3(_1, _2, _3) break; case _1: case _2:\
+    \ case _3:\n#define KYOPRO_MATCH4(_1, _2, _3, _4) break; case _1: case _2: case\
+    \ _3: case _4:\n\n#define KYOPRO_OVERLOAD_MATCH(_1, _2, _3, _4, name, ...) name\n\
     #define match(...) KYOPRO_OVERLOAD_MATCH(__VA_ARGS__, KYOPRO_MATCH4, KYOPRO_MATCH3,\
     \ KYOPRO_MATCH2, KYOPRO_MATCH1)(__VA_ARGS__)\n#define otherwise break; default:\n\
-    #line 7 \"template/named_tuple.hpp\"\n\nnamespace kpr {\n    template<class Derived,\
-    \ std::size_t _size>\n    struct NamedTupleBase {\n        using named_tuple_tag\
+    #line 7 \"template/named_tuple_macro.hpp\"\n\nnamespace kpr {\n    template<class\
+    \ Derived, std::size_t _size>\n    struct NamedTupleBase {\n        using named_tuple_tag\
     \ = void;\n        static constexpr std::size_t size = _size;\n\n    private:\n\
     \        template<std::size_t i = 0, class T>\n        void assign(T&& named_tuple)\
     \ noexcept {\n            if constexpr (i < tuple_like_size_v<Derived>) {\n  \
@@ -1067,12 +1067,12 @@ data:
     \ _3, _4, _5, _6, _7, _8, _9, _10, name, ...) name\n\n#define $$(...) KYOPRO_OVERLOAD_NAMED_TUPLE(__VA_ARGS__\
     \ __VA_OPT__(,) KYOPRO_NAMED_TUPLE5, nullptr, KYOPRO_NAMED_TUPLE4, nullptr, KYOPRO_NAMED_TUPLE3,\
     \ nullptr, KYOPRO_NAMED_TUPLE2, nullptr, KYOPRO_NAMED_TUPLE1, nullptr, KYOPRO_NAMED_TUPLE0)(__VA_ARGS__)\n\
-    #line 3 \"template/rep.hpp\"\n\n#define KYOPRO_REP0() for (; ; )\n#define KYOPRO_REP1(last)\
-    \ KYOPRO_REP2(KYOPRO_COUNTER, last)\n#define KYOPRO_REP2(i, last) for (auto i\
-    \ = std::decay_t<decltype(last)>(), KYOPRO_LAST = (last); (i) < (KYOPRO_LAST);\
-    \ ++(i))\n#define KYOPRO_REP3(i, first, last) for (auto i = (first), KYOPRO_LAST\
-    \ = last; (i) < (KYOPRO_LAST); ++(i))\n\n#define KYOPRO_OVERLOAD_REP(_1, _2, _3,\
-    \ name, ...) name\n#define rep(...) KYOPRO_OVERLOAD_REP(__VA_ARGS__ __VA_OPT__(,)\
+    #line 3 \"template/rep_macro.hpp\"\n\n#define KYOPRO_REP0() for (; ; )\n#define\
+    \ KYOPRO_REP1(last) KYOPRO_REP2(KYOPRO_COUNTER, last)\n#define KYOPRO_REP2(i,\
+    \ last) for (auto i = std::decay_t<decltype(last)>(), KYOPRO_LAST = (last); (i)\
+    \ < (KYOPRO_LAST); ++(i))\n#define KYOPRO_REP3(i, first, last) for (auto i = (first),\
+    \ KYOPRO_LAST = last; (i) < (KYOPRO_LAST); ++(i))\n\n#define KYOPRO_OVERLOAD_REP(_1,\
+    \ _2, _3, name, ...) name\n#define rep(...) KYOPRO_OVERLOAD_REP(__VA_ARGS__ __VA_OPT__(,)\
     \ KYOPRO_REP3, KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\n#line 2 \"\
     template/main.hpp\"\n\nnamespace kpr {\n    void main();\n} // namespace kpr\n\
     \nint main() {\n    kpr::main();\n}\n#line 4 \"template/make_array.hpp\"\n\r\n\
@@ -1117,7 +1117,7 @@ data:
     \n#include <scoped_allocator>\r\n#include <system_error>\r\n#include <thread>\r\
     \n#line 76 \"template/stl.hpp\"\n#include <typeindex>\r\n#line 12 \"template/template.hpp\"\
     \n"
-  code: "#pragma once\r\n#include \"alias.hpp\"\r\n#include \"amin_amax.hpp\"\r\n\
+  code: "#pragma once\r\n#include \"alias.hpp\"\r\n#include \"chmin_chmax.hpp\"\r\n\
     #include \"constant.hpp\"\r\n#include \"len.hpp\"\r\n#include \"macro.hpp\"\r\n\
     #include \"main.hpp\"\r\n#include \"make_array.hpp\"\r\n#include \"make_vec.hpp\"\
     \r\n#include \"range_cast.hpp\"\r\n#include \"stl.hpp\"\r\n"
@@ -1138,18 +1138,18 @@ data:
   - math/ModInt.hpp
   - algorithm/bit.hpp
   - math/mod.hpp
-  - template/amin_amax.hpp
+  - template/chmin_chmax.hpp
   - template/constant.hpp
   - template/len.hpp
   - template/macro.hpp
-  - template/all_rall.hpp
-  - template/io.hpp
+  - template/all_rall_macro.hpp
+  - template/io_macro.hpp
   - io/io.hpp
-  - template/lambda.hpp
-  - template/push_pop.hpp
-  - template/match.hpp
-  - template/named_tuple.hpp
-  - template/rep.hpp
+  - template/lambda_macro.hpp
+  - template/push_pop_macro.hpp
+  - template/match_macro.hpp
+  - template/named_tuple_macro.hpp
+  - template/rep_macro.hpp
   - template/main.hpp
   - template/make_array.hpp
   - template/make_vec.hpp
@@ -1159,7 +1159,7 @@ data:
   path: template/template.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2023-03-29 00:32:58+09:00'
+  timestamp: '2023-03-29 16:54:59+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/template.hpp

@@ -17,7 +17,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: '#line 2 "template/rep.hpp"
+  bundledCode: '#line 2 "template/rep_macro.hpp"
 
     #include <type_traits>
 
@@ -63,18 +63,18 @@ data:
     '
   dependsOn: []
   isVerificationFile: false
-  path: template/rep.hpp
+  path: template/rep_macro.hpp
   requiredBy:
   - all.hpp
   - template/template.hpp
   - template/macro.hpp
-  timestamp: '2023-02-20 00:38:21+09:00'
+  timestamp: '2023-03-29 16:52:33+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: template/rep.hpp
+documentation_of: template/rep_macro.hpp
 layout: document
 redirect_from:
-- /library/template/rep.hpp
-- /library/template/rep.hpp.html
-title: template/rep.hpp
+- /library/template/rep_macro.hpp
+- /library/template/rep_macro.hpp.html
+title: template/rep_macro.hpp
 ---

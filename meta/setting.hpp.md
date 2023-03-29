@@ -20,7 +20,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data_structure/FenwickTree.hpp
     title: data_structure/FenwickTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: data_structure/UnionFind.hpp
     title: data_structure/UnionFind.hpp
   - icon: ':warning:'
@@ -87,8 +87,8 @@ data:
     path: template/constant.hpp
     title: template/constant.hpp
   - icon: ':warning:'
-    path: template/io.hpp
-    title: template/io.hpp
+    path: template/io_macro.hpp
+    title: template/io_macro.hpp
   - icon: ':warning:'
     path: template/len.hpp
     title: template/len.hpp
@@ -96,8 +96,8 @@ data:
     path: template/macro.hpp
     title: template/macro.hpp
   - icon: ':warning:'
-    path: template/named_tuple.hpp
-    title: template/named_tuple.hpp
+    path: template/named_tuple_macro.hpp
+    title: template/named_tuple_macro.hpp
   - icon: ':warning:'
     path: template/template.hpp
     title: template/template.hpp
@@ -114,7 +114,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/point_add_range_sum.test.cpp
     title: verify/yosupo/point_add_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
   _isVerificationFailed: true
@@ -182,9 +182,9 @@ data:
   - template/template.hpp
   - template/len.hpp
   - template/constant.hpp
-  - template/named_tuple.hpp
   - template/macro.hpp
-  - template/io.hpp
+  - template/io_macro.hpp
+  - template/named_tuple_macro.hpp
   - template/alias.hpp
   - data_structure/structure.hpp
   - data_structure/UnionFind.hpp

@@ -41,7 +41,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"template/io.hpp\"\n#include <unistd.h>\n#include <cstddef>\n\
+  bundledCode: "#line 2 \"template/io_macro.hpp\"\n#include <unistd.h>\n#include <cstddef>\n\
     #include <istream>\n#include <string_view>\n#include <tuple>\n#include <type_traits>\n\
     #include <utility>\n#line 3 \"io/in.hpp\"\n#include <array>\r\n#include <bitset>\r\
     \n#line 6 \"io/in.hpp\"\n#include <cstdint>\r\n#include <cstdio>\r\n#include <string>\r\
@@ -507,7 +507,7 @@ data:
     \u6E96\u51FA\u529B\u3001\u6A19\u6E96\u30A8\u30E9\u30FC\u51FA\u529B\u306B\u5024\
     \u3092\u51FA\u529B\u3059\u308B(\u6539\u884C\u3001\u533A\u5207\u308A\u6587\u5B57\
     \u3042\u308A)\r\n    Printer<Writer<>::iterator> println{output.begin()}, eprintln{error.begin()};\r\
-    \n} // namespace kpr\r\n#line 10 \"template/io.hpp\"\n\nnamespace kpr::helper\
+    \n} // namespace kpr\r\n#line 10 \"template/io_macro.hpp\"\n\nnamespace kpr::helper\
     \ {\n    template<std::size_t len>\n    constexpr std::size_t va_args_size(const\
     \ char (&s)[len]) noexcept {\n        if constexpr (len == 1) return 0;\n    \
     \    std::size_t cnt = 1;\n        std::uint_fast64_t bracket = 0;\n        for\
@@ -595,18 +595,18 @@ data:
   - meta/tuple_like.hpp
   - io/out.hpp
   isVerificationFile: false
-  path: template/io.hpp
+  path: template/io_macro.hpp
   requiredBy:
   - all.hpp
   - template/template.hpp
   - template/macro.hpp
-  timestamp: '2023-03-28 01:11:02+09:00'
+  timestamp: '2023-03-29 16:52:33+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: template/io.hpp
+documentation_of: template/io_macro.hpp
 layout: document
 redirect_from:
-- /library/template/io.hpp
-- /library/template/io.hpp.html
-title: template/io.hpp
+- /library/template/io_macro.hpp
+- /library/template/io_macro.hpp.html
+title: template/io_macro.hpp
 ---

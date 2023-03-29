@@ -17,7 +17,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: '#line 2 "template/all_rall.hpp"
+  bundledCode: '#line 2 "template/all_rall_macro.hpp"
 
     #include <iterator>
 
@@ -39,18 +39,18 @@ data:
     '
   dependsOn: []
   isVerificationFile: false
-  path: template/all_rall.hpp
+  path: template/all_rall_macro.hpp
   requiredBy:
   - all.hpp
   - template/template.hpp
   - template/macro.hpp
-  timestamp: '2023-02-19 20:41:56+09:00'
+  timestamp: '2023-03-29 16:54:59+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: template/all_rall.hpp
+documentation_of: template/all_rall_macro.hpp
 layout: document
 redirect_from:
-- /library/template/all_rall.hpp
-- /library/template/all_rall.hpp.html
-title: template/all_rall.hpp
+- /library/template/all_rall_macro.hpp
+- /library/template/all_rall_macro.hpp.html
+title: template/all_rall_macro.hpp
 ---

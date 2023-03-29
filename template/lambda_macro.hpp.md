@@ -20,8 +20,8 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"template/lambda.hpp\"\n#include <iterator>\r\n#include <tuple>\r\
-    \n#line 2 \"meta/tuple_like.hpp\"\n#include <cstddef>\r\n#include <type_traits>\r\
+  bundledCode: "#line 2 \"template/lambda_macro.hpp\"\n#include <iterator>\r\n#include\
+    \ <tuple>\r\n#line 2 \"meta/tuple_like.hpp\"\n#include <cstddef>\r\n#include <type_traits>\r\
     \n#line 5 \"meta/tuple_like.hpp\"\n#include <utility>\r\n\r\nnamespace kpr {\r\
     \n    namespace helper {\r\n        struct CastableToAny {\r\n            template<class\
     \ T>\r\n            operator T() const noexcept;\r\n        };\r\n\r\n       \
@@ -84,9 +84,9 @@ data:
     \ {\n        static constexpr bool value = true;\n    };\n\n    // \u578BT\u304C\
     tuple_like\u304B\u8ABF\u3079\u308B\n    template<class T>\n    inline constexpr\
     \ bool is_tuple_like_v = is_tuple_like<T>::value;\r\n} // namespace kpr\r\n#line\
-    \ 5 \"template/lambda.hpp\"\n\r\n#define $(...) \\\r\n([&](auto&&... _args) {\
-    \ \\\r\n    auto _args_tuple = std::forward_as_tuple(_args...); \\\r\n    if constexpr\
-    \ (sizeof...(_args) == 0) { \\\r\n        return ([&]() { return (__VA_ARGS__);\
+    \ 5 \"template/lambda_macro.hpp\"\n\r\n#define $(...) \\\r\n([&](auto&&... _args)\
+    \ { \\\r\n    auto _args_tuple = std::forward_as_tuple(_args...); \\\r\n    if\
+    \ constexpr (sizeof...(_args) == 0) { \\\r\n        return ([&]() { return (__VA_ARGS__);\
     \ })(); \\\r\n    } else if constexpr (sizeof...(_args) == 1) { \\\r\n       \
     \ return ([&](auto&& $0) { return (__VA_ARGS__); })(get<0>(_args_tuple)); \\\r\
     \n    } else if constexpr (sizeof...(_args) == 2) { \\\r\n        return ([&](auto&&\
@@ -114,18 +114,18 @@ data:
   dependsOn:
   - meta/tuple_like.hpp
   isVerificationFile: false
-  path: template/lambda.hpp
+  path: template/lambda_macro.hpp
   requiredBy:
   - all.hpp
   - template/template.hpp
   - template/macro.hpp
-  timestamp: '2023-03-07 11:56:47+00:00'
+  timestamp: '2023-03-29 16:52:33+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: template/lambda.hpp
+documentation_of: template/lambda_macro.hpp
 layout: document
 redirect_from:
-- /library/template/lambda.hpp
-- /library/template/lambda.hpp.html
-title: template/lambda.hpp
+- /library/template/lambda_macro.hpp
+- /library/template/lambda_macro.hpp.html
+title: template/lambda_macro.hpp
 ---

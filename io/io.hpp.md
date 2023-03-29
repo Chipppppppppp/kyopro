@@ -30,8 +30,8 @@ data:
     path: all/all.hpp
     title: all/all.hpp
   - icon: ':warning:'
-    path: template/io.hpp
-    title: template/io.hpp
+    path: template/io_macro.hpp
+    title: template/io_macro.hpp
   - icon: ':warning:'
     path: template/macro.hpp
     title: template/macro.hpp
@@ -51,7 +51,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/point_add_range_sum.test.cpp
     title: verify/yosupo/point_add_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
   _isVerificationFailed: true
@@ -542,7 +542,7 @@ data:
   - all.hpp
   - template/template.hpp
   - template/macro.hpp
-  - template/io.hpp
+  - template/io_macro.hpp
   timestamp: '2023-03-07 11:56:47+00:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:

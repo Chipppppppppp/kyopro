@@ -39,7 +39,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data_structure/FenwickTree.hpp
       title: data_structure/FenwickTree.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: data_structure/UnionFind.hpp
       title: data_structure/UnionFind.hpp
     - icon: ':warning:'
@@ -157,20 +157,20 @@ data:
       path: template/alias.hpp
       title: template/alias.hpp
     - icon: ':warning:'
-      path: template/all_rall.hpp
-      title: template/all_rall.hpp
+      path: template/all_rall_macro.hpp
+      title: template/all_rall_macro.hpp
     - icon: ':warning:'
-      path: template/amin_amax.hpp
-      title: template/amin_amax.hpp
+      path: template/chmin_chmax.hpp
+      title: template/chmin_chmax.hpp
     - icon: ':warning:'
       path: template/constant.hpp
       title: template/constant.hpp
     - icon: ':warning:'
-      path: template/io.hpp
-      title: template/io.hpp
+      path: template/io_macro.hpp
+      title: template/io_macro.hpp
     - icon: ':warning:'
-      path: template/lambda.hpp
-      title: template/lambda.hpp
+      path: template/lambda_macro.hpp
+      title: template/lambda_macro.hpp
     - icon: ':warning:'
       path: template/len.hpp
       title: template/len.hpp
@@ -187,20 +187,20 @@ data:
       path: template/make_vec.hpp
       title: template/make_vec.hpp
     - icon: ':warning:'
-      path: template/match.hpp
-      title: template/match.hpp
+      path: template/match_macro.hpp
+      title: template/match_macro.hpp
     - icon: ':warning:'
-      path: template/named_tuple.hpp
-      title: template/named_tuple.hpp
+      path: template/named_tuple_macro.hpp
+      title: template/named_tuple_macro.hpp
     - icon: ':warning:'
-      path: template/push_pop.hpp
-      title: template/push_pop.hpp
+      path: template/push_pop_macro.hpp
+      title: template/push_pop_macro.hpp
     - icon: ':warning:'
       path: template/range_cast.hpp
       title: template/range_cast.hpp
     - icon: ':warning:'
-      path: template/rep.hpp
-      title: template/rep.hpp
+      path: template/rep_macro.hpp
+      title: template/rep_macro.hpp
     - icon: ':warning:'
       path: template/stl.hpp
       title: template/stl.hpp
@@ -224,7 +224,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yosupo/point_add_range_sum.test.cpp
       title: verify/yosupo/point_add_range_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/yosupo/unionfind.test.cpp
       title: verify/yosupo/unionfind.test.cpp
 layout: toppage

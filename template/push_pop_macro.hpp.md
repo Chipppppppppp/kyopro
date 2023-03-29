@@ -17,7 +17,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: '#line 2 "template/push_pop.hpp"
+  bundledCode: '#line 2 "template/push_pop_macro.hpp"
 
 
     #define pushf(...) emplace_front(__VA_ARGS__)
@@ -47,18 +47,18 @@ data:
     '
   dependsOn: []
   isVerificationFile: false
-  path: template/push_pop.hpp
+  path: template/push_pop_macro.hpp
   requiredBy:
   - all.hpp
   - template/template.hpp
   - template/macro.hpp
-  timestamp: '2023-03-28 19:27:23+09:00'
+  timestamp: '2023-03-29 16:52:33+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: template/push_pop.hpp
+documentation_of: template/push_pop_macro.hpp
 layout: document
 redirect_from:
-- /library/template/push_pop.hpp
-- /library/template/push_pop.hpp.html
-title: template/push_pop.hpp
+- /library/template/push_pop_macro.hpp
+- /library/template/push_pop_macro.hpp.html
+title: template/push_pop_macro.hpp
 ---

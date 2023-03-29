@@ -38,9 +38,9 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"template/named_tuple.hpp\"\n#include <type_traits>\n#include\
-    \ <utility>\n#line 2 \"io/in.hpp\"\n#include <unistd.h>\r\n#include <array>\r\n\
-    #include <bitset>\r\n#include <cstddef>\r\n#include <cstdint>\r\n#include <cstdio>\r\
+  bundledCode: "#line 2 \"template/named_tuple_macro.hpp\"\n#include <type_traits>\n\
+    #include <utility>\n#line 2 \"io/in.hpp\"\n#include <unistd.h>\r\n#include <array>\r\
+    \n#include <bitset>\r\n#include <cstddef>\r\n#include <cstdint>\r\n#include <cstdio>\r\
     \n#include <string>\r\n#line 3 \"io/io_option.hpp\"\n#include <tuple>\r\n#line\
     \ 5 \"io/io_option.hpp\"\n\r\nnamespace kpr {\r\n    template<class Tuple, std::size_t\
     \ idx>\r\n    struct Indexed {\r\n        Tuple args_tuple;\r\n        template<class...\
@@ -504,8 +504,8 @@ data:
     \u6E96\u51FA\u529B\u3001\u6A19\u6E96\u30A8\u30E9\u30FC\u51FA\u529B\u306B\u5024\
     \u3092\u51FA\u529B\u3059\u308B(\u6539\u884C\u3001\u533A\u5207\u308A\u6587\u5B57\
     \u3042\u308A)\r\n    Printer<Writer<>::iterator> println{output.begin()}, eprintln{error.begin()};\r\
-    \n} // namespace kpr\r\n#line 7 \"template/named_tuple.hpp\"\n\nnamespace kpr\
-    \ {\n    template<class Derived, std::size_t _size>\n    struct NamedTupleBase\
+    \n} // namespace kpr\r\n#line 7 \"template/named_tuple_macro.hpp\"\n\nnamespace\
+    \ kpr {\n    template<class Derived, std::size_t _size>\n    struct NamedTupleBase\
     \ {\n        using named_tuple_tag = void;\n        static constexpr std::size_t\
     \ size = _size;\n\n    private:\n        template<std::size_t i = 0, class T>\n\
     \        void assign(T&& named_tuple) noexcept {\n            if constexpr (i\
@@ -632,18 +632,18 @@ data:
   - meta/tuple_like.hpp
   - io/out.hpp
   isVerificationFile: false
-  path: template/named_tuple.hpp
+  path: template/named_tuple_macro.hpp
   requiredBy:
   - all.hpp
   - template/template.hpp
   - template/macro.hpp
-  timestamp: '2023-03-27 23:32:56+09:00'
+  timestamp: '2023-03-29 16:52:33+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: template/named_tuple.hpp
+documentation_of: template/named_tuple_macro.hpp
 layout: document
 redirect_from:
-- /library/template/named_tuple.hpp
-- /library/template/named_tuple.hpp.html
-title: template/named_tuple.hpp
+- /library/template/named_tuple_macro.hpp
+- /library/template/named_tuple_macro.hpp.html
+title: template/named_tuple_macro.hpp
 ---

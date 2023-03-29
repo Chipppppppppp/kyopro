@@ -26,26 +26,26 @@ data:
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
   - icon: ':warning:'
-    path: template/all_rall.hpp
-    title: template/all_rall.hpp
+    path: template/all_rall_macro.hpp
+    title: template/all_rall_macro.hpp
   - icon: ':warning:'
-    path: template/io.hpp
-    title: template/io.hpp
+    path: template/io_macro.hpp
+    title: template/io_macro.hpp
   - icon: ':warning:'
-    path: template/lambda.hpp
-    title: template/lambda.hpp
+    path: template/lambda_macro.hpp
+    title: template/lambda_macro.hpp
   - icon: ':warning:'
-    path: template/match.hpp
-    title: template/match.hpp
+    path: template/match_macro.hpp
+    title: template/match_macro.hpp
   - icon: ':warning:'
-    path: template/named_tuple.hpp
-    title: template/named_tuple.hpp
+    path: template/named_tuple_macro.hpp
+    title: template/named_tuple_macro.hpp
   - icon: ':warning:'
-    path: template/push_pop.hpp
-    title: template/push_pop.hpp
+    path: template/push_pop_macro.hpp
+    title: template/push_pop_macro.hpp
   - icon: ':warning:'
-    path: template/rep.hpp
-    title: template/rep.hpp
+    path: template/rep_macro.hpp
+    title: template/rep_macro.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
     path: all.hpp
@@ -59,11 +59,11 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"template/all_rall.hpp\"\n#include <iterator>\n\n#define\
+  bundledCode: "#line 2 \"template/all_rall_macro.hpp\"\n#include <iterator>\n\n#define\
     \ all(...) std::begin(__VA_ARGS__), std::end(__VA_ARGS__)\n#define rall(...) std::rbegin(__VA_ARGS__),\
-    \ std::rend(__VA_ARGS__)\n#line 2 \"template/io.hpp\"\n#include <unistd.h>\n#include\
-    \ <cstddef>\n#include <istream>\n#include <string_view>\n#include <tuple>\n#include\
-    \ <type_traits>\n#include <utility>\n#line 3 \"io/in.hpp\"\n#include <array>\r\
+    \ std::rend(__VA_ARGS__)\n#line 2 \"template/io_macro.hpp\"\n#include <unistd.h>\n\
+    #include <cstddef>\n#include <istream>\n#include <string_view>\n#include <tuple>\n\
+    #include <type_traits>\n#include <utility>\n#line 3 \"io/in.hpp\"\n#include <array>\r\
     \n#include <bitset>\r\n#line 6 \"io/in.hpp\"\n#include <cstdint>\r\n#include <cstdio>\r\
     \n#include <string>\r\n#line 5 \"io/io_option.hpp\"\n\r\nnamespace kpr {\r\n \
     \   template<class Tuple, std::size_t idx>\r\n    struct Indexed {\r\n       \
@@ -527,7 +527,7 @@ data:
     \u6E96\u51FA\u529B\u3001\u6A19\u6E96\u30A8\u30E9\u30FC\u51FA\u529B\u306B\u5024\
     \u3092\u51FA\u529B\u3059\u308B(\u6539\u884C\u3001\u533A\u5207\u308A\u6587\u5B57\
     \u3042\u308A)\r\n    Printer<Writer<>::iterator> println{output.begin()}, eprintln{error.begin()};\r\
-    \n} // namespace kpr\r\n#line 10 \"template/io.hpp\"\n\nnamespace kpr::helper\
+    \n} // namespace kpr\r\n#line 10 \"template/io_macro.hpp\"\n\nnamespace kpr::helper\
     \ {\n    template<std::size_t len>\n    constexpr std::size_t va_args_size(const\
     \ char (&s)[len]) noexcept {\n        if constexpr (len == 1) return 0;\n    \
     \    std::size_t cnt = 1;\n        std::uint_fast64_t bracket = 0;\n        for\
@@ -564,7 +564,7 @@ data:
     \ debug(...) (void())\n#else\n#define debug(...) (kpr::print('#', ' ', 'l', 'i',\
     \ 'n', 'e', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
     \ != 0>(#__VA_ARGS__), kpr::print('\\n'), kpr::helper::debug_impl(__VA_ARGS__))\n\
-    #endif\n#line 5 \"template/lambda.hpp\"\n\r\n#define $(...) \\\r\n([&](auto&&...\
+    #endif\n#line 5 \"template/lambda_macro.hpp\"\n\r\n#define $(...) \\\r\n([&](auto&&...\
     \ _args) { \\\r\n    auto _args_tuple = std::forward_as_tuple(_args...); \\\r\n\
     \    if constexpr (sizeof...(_args) == 0) { \\\r\n        return ([&]() { return\
     \ (__VA_ARGS__); })(); \\\r\n    } else if constexpr (sizeof...(_args) == 1) {\
@@ -576,18 +576,18 @@ data:
     \ get<1>(_args_tuple), get<2>(_args_tuple)); \\\r\n    } else if constexpr (sizeof...(_args)\
     \ == 4) { \\\r\n        return ([&](auto&& $0, auto&& $1, auto&& $2, auto&& $3)\
     \ { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple), get<2>(_args_tuple),\
-    \ get<3>(_args_tuple)); \\\r\n    } \\\r\n})\r\n#line 2 \"template/push_pop.hpp\"\
+    \ get<3>(_args_tuple)); \\\r\n    } \\\r\n})\r\n#line 2 \"template/push_pop_macro.hpp\"\
     \n\n#define pushf(...) emplace_front(__VA_ARGS__)\n#define popf(...) pop_front(__VA_ARGS__)\n\
     #define pushb(...) emplace_back(__VA_ARGS__)\n#define popb(...) pop_back(__VA_ARGS__)\n\
-    #define push(...) emplace(__VA_ARGS__)\n#line 2 \"template/match.hpp\"\n\n#define\
-    \ KYOPRO_MATCH1(_1) break; case _1:\n#define KYOPRO_MATCH2(_1, _2) break; case\
-    \ _1: case _2:\n#define KYOPRO_MATCH3(_1, _2, _3) break; case _1: case _2: case\
-    \ _3:\n#define KYOPRO_MATCH4(_1, _2, _3, _4) break; case _1: case _2: case _3:\
-    \ case _4:\n\n#define KYOPRO_OVERLOAD_MATCH(_1, _2, _3, _4, name, ...) name\n\
+    #define push(...) emplace(__VA_ARGS__)\n#line 2 \"template/match_macro.hpp\"\n\
+    \n#define KYOPRO_MATCH1(_1) break; case _1:\n#define KYOPRO_MATCH2(_1, _2) break;\
+    \ case _1: case _2:\n#define KYOPRO_MATCH3(_1, _2, _3) break; case _1: case _2:\
+    \ case _3:\n#define KYOPRO_MATCH4(_1, _2, _3, _4) break; case _1: case _2: case\
+    \ _3: case _4:\n\n#define KYOPRO_OVERLOAD_MATCH(_1, _2, _3, _4, name, ...) name\n\
     #define match(...) KYOPRO_OVERLOAD_MATCH(__VA_ARGS__, KYOPRO_MATCH4, KYOPRO_MATCH3,\
     \ KYOPRO_MATCH2, KYOPRO_MATCH1)(__VA_ARGS__)\n#define otherwise break; default:\n\
-    #line 7 \"template/named_tuple.hpp\"\n\nnamespace kpr {\n    template<class Derived,\
-    \ std::size_t _size>\n    struct NamedTupleBase {\n        using named_tuple_tag\
+    #line 7 \"template/named_tuple_macro.hpp\"\n\nnamespace kpr {\n    template<class\
+    \ Derived, std::size_t _size>\n    struct NamedTupleBase {\n        using named_tuple_tag\
     \ = void;\n        static constexpr std::size_t size = _size;\n\n    private:\n\
     \        template<std::size_t i = 0, class T>\n        void assign(T&& named_tuple)\
     \ noexcept {\n            if constexpr (i < tuple_like_size_v<Derived>) {\n  \
@@ -645,34 +645,34 @@ data:
     \ _3, _4, _5, _6, _7, _8, _9, _10, name, ...) name\n\n#define $$(...) KYOPRO_OVERLOAD_NAMED_TUPLE(__VA_ARGS__\
     \ __VA_OPT__(,) KYOPRO_NAMED_TUPLE5, nullptr, KYOPRO_NAMED_TUPLE4, nullptr, KYOPRO_NAMED_TUPLE3,\
     \ nullptr, KYOPRO_NAMED_TUPLE2, nullptr, KYOPRO_NAMED_TUPLE1, nullptr, KYOPRO_NAMED_TUPLE0)(__VA_ARGS__)\n\
-    #line 3 \"template/rep.hpp\"\n\n#define KYOPRO_REP0() for (; ; )\n#define KYOPRO_REP1(last)\
-    \ KYOPRO_REP2(KYOPRO_COUNTER, last)\n#define KYOPRO_REP2(i, last) for (auto i\
-    \ = std::decay_t<decltype(last)>(), KYOPRO_LAST = (last); (i) < (KYOPRO_LAST);\
-    \ ++(i))\n#define KYOPRO_REP3(i, first, last) for (auto i = (first), KYOPRO_LAST\
-    \ = last; (i) < (KYOPRO_LAST); ++(i))\n\n#define KYOPRO_OVERLOAD_REP(_1, _2, _3,\
-    \ name, ...) name\n#define rep(...) KYOPRO_OVERLOAD_REP(__VA_ARGS__ __VA_OPT__(,)\
+    #line 3 \"template/rep_macro.hpp\"\n\n#define KYOPRO_REP0() for (; ; )\n#define\
+    \ KYOPRO_REP1(last) KYOPRO_REP2(KYOPRO_COUNTER, last)\n#define KYOPRO_REP2(i,\
+    \ last) for (auto i = std::decay_t<decltype(last)>(), KYOPRO_LAST = (last); (i)\
+    \ < (KYOPRO_LAST); ++(i))\n#define KYOPRO_REP3(i, first, last) for (auto i = (first),\
+    \ KYOPRO_LAST = last; (i) < (KYOPRO_LAST); ++(i))\n\n#define KYOPRO_OVERLOAD_REP(_1,\
+    \ _2, _3, name, ...) name\n#define rep(...) KYOPRO_OVERLOAD_REP(__VA_ARGS__ __VA_OPT__(,)\
     \ KYOPRO_REP3, KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\n#line 9 \"\
     template/macro.hpp\"\n"
   code: '#pragma once
 
-    #include "all_rall.hpp"
+    #include "all_rall_macro.hpp"
 
-    #include "io.hpp"
+    #include "io_macro.hpp"
 
-    #include "lambda.hpp"
+    #include "lambda_macro.hpp"
 
-    #include "push_pop.hpp"
+    #include "push_pop_macro.hpp"
 
-    #include "match.hpp"
+    #include "match_macro.hpp"
 
-    #include "named_tuple.hpp"
+    #include "named_tuple_macro.hpp"
 
-    #include "rep.hpp"
+    #include "rep_macro.hpp"
 
     '
   dependsOn:
-  - template/all_rall.hpp
-  - template/io.hpp
+  - template/all_rall_macro.hpp
+  - template/io_macro.hpp
   - io/io.hpp
   - io/in.hpp
   - io/io_option.hpp
@@ -681,17 +681,17 @@ data:
   - meta/trait.hpp
   - meta/tuple_like.hpp
   - io/out.hpp
-  - template/lambda.hpp
-  - template/push_pop.hpp
-  - template/match.hpp
-  - template/named_tuple.hpp
-  - template/rep.hpp
+  - template/lambda_macro.hpp
+  - template/push_pop_macro.hpp
+  - template/match_macro.hpp
+  - template/named_tuple_macro.hpp
+  - template/rep_macro.hpp
   isVerificationFile: false
   path: template/macro.hpp
   requiredBy:
   - all.hpp
   - template/template.hpp
-  timestamp: '2023-03-28 19:27:23+09:00'
+  timestamp: '2023-03-29 16:54:59+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/macro.hpp

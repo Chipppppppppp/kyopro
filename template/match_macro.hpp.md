@@ -17,7 +17,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: '#line 2 "template/match.hpp"
+  bundledCode: '#line 2 "template/match_macro.hpp"
 
 
     #define KYOPRO_MATCH1(_1) break; case _1:
@@ -59,18 +59,18 @@ data:
     '
   dependsOn: []
   isVerificationFile: false
-  path: template/match.hpp
+  path: template/match_macro.hpp
   requiredBy:
   - all.hpp
   - template/template.hpp
   - template/macro.hpp
-  timestamp: '2023-02-19 20:41:56+09:00'
+  timestamp: '2023-03-29 16:52:33+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: template/match.hpp
+documentation_of: template/match_macro.hpp
 layout: document
 redirect_from:
-- /library/template/match.hpp
-- /library/template/match.hpp.html
-title: template/match.hpp
+- /library/template/match_macro.hpp
+- /library/template/match_macro.hpp.html
+title: template/match_macro.hpp
 ---
