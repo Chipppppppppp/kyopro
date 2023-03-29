@@ -1,56 +1,56 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: io/in.hpp
     title: io/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: io/io.hpp
     title: io/io.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: io/io_option.hpp
     title: io/io_option.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: io/out.hpp
     title: io/out.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/factorize
@@ -749,14 +749,14 @@ data:
     \    [[maybe_unused]] inline constexpr struct {\r\n        template<bool sorted\
     \ = true, class Container = std::vector<KYOPRO_BASE_INT>>\r\n        Container\
     \ operator ()(std::uint_fast64_t n) const {\r\n            Container res;\r\n\
-    \            for (int p = 2; p < 100 && p * p <= static_cast<int>(n); ++p) {\r\
-    \n                while (n % p == 0) {\r\n                n /= p;\r\n        \
-    \        res.emplace_back(p);\r\n                }\r\n            }\r\n      \
-    \      while (n > 1) {\r\n                std::uint_fast64_t p = find_factor(n);\r\
-    \n                do {\r\n                n /= p;\r\n                res.emplace_back(p);\r\
-    \n                } while (n % p == 0);\r\n            }\r\n            if constexpr\
-    \ (sorted) std::sort(res.begin(), res.end());\r\n            return res;\r\n \
-    \       }\r\n    } factorize;\r\n} // namespace kpr\r\n#line 4 \"verify/yosupo/factorize.test.cpp\"\
+    \            for (int p = 2; p < 100 && p * p <= n; ++p) {\r\n               \
+    \ while (n % p == 0) {\r\n                n /= p;\r\n                res.emplace_back(p);\r\
+    \n                }\r\n            }\r\n            while (n > 1) {\r\n      \
+    \          std::uint_fast64_t p = find_factor(n);\r\n                do {\r\n\
+    \                n /= p;\r\n                res.emplace_back(p);\r\n         \
+    \       } while (n % p == 0);\r\n            }\r\n            if constexpr (sorted)\
+    \ std::sort(res.begin(), res.end());\r\n            return res;\r\n        }\r\
+    \n    } factorize;\r\n} // namespace kpr\r\n#line 4 \"verify/yosupo/factorize.test.cpp\"\
     \n\r\nint main() {\r\n    long long q;\r\n    kpr::scan(q);\r\n    for (int i\
     \ = 0; i < q; ++i) {\r\n        long long a;\r\n        kpr::scan(a);\r\n    \
     \    auto res = kpr::factorize(a);\r\n        kpr::println(res.size(), res);\r\
@@ -785,8 +785,8 @@ data:
   isVerificationFile: true
   path: verify/yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2023-03-27 22:50:32+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-03-30 03:19:13+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yosupo/factorize.test.cpp
 layout: document

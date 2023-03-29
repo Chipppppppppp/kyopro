@@ -1,52 +1,52 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
     path: function/compare.hpp
     title: function/compare.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: io/in.hpp
     title: io/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: io/io.hpp
     title: io/io.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: io/io_option.hpp
     title: io/io_option.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: io/out.hpp
     title: io/out.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
   - icon: ':warning:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
   - icon: ':warning:'
@@ -932,22 +932,25 @@ data:
     \ PriQ, PQ);\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HeapQ, HQ);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
     \ HeapQ, HQ);\n\n    template<std::size_t size>\n    using BitSet = std::bitset<size>;\n\
     } // namespace kpr\n\nusing namespace std;\nusing namespace kpr;\n#line 2 \"template/chmin_chmax.hpp\"\
-    \n\r\nnamespace kpr {\r\n    // min assign\r\n    template<class T, class U =\
-    \ T>\r\n    constexpr bool chmin(T& a, const U& b) noexcept {\r\n        if (b\
-    \ < a) {\r\n            a = b;\r\n            return true;\r\n        }\r\n  \
-    \      return false;\r\n    }\r\n\r\n    // max assign\r\n    template<class T,\
-    \ class U = T>\r\n    constexpr bool chmax(T& a, const U& b) noexcept {\r\n  \
-    \      if (a < b) {\r\n            a = b;\r\n            return true;\r\n    \
-    \    }\r\n        return false;\r\n    }\r\n} // namespace kpr\r\n#line 4 \"template/constant.hpp\"\
-    \n\r\nnamespace kpr {\r\n    inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 4> beside{{{-1, 0}, {0, -1}, {1, 0}, {0, 1}}};\r\n    inline\
-    \ constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{-1,\
-    \ 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1, 1}, {0, 1}, {-1, 1}}};\r\n} // namespace\
-    \ kpr\r\n#line 4 \"template/len.hpp\"\n\r\nnamespace kpr {\r\n    [[maybe_unused]]\
-    \ inline constexpr struct {\r\n        template<class T>\r\n        constexpr\
-    \ KYOPRO_BASE_INT operator ()(T&& a) const noexcept {\r\n            return std::size(a);\r\
-    \n        }\r\n    } len;\r\n} // namespace kpr\r\n#line 3 \"template/all_rall_macro.hpp\"\
-    \n\n#define all(...) std::begin(__VA_ARGS__), std::end(__VA_ARGS__)\n#define rall(...)\
+    \n\r\nnamespace kpr {\r\n    // assign min\r\n    [[maybe_unused]] inline constexpr\
+    \ struct {\r\n        template<class T, class U = T>\r\n        constexpr bool\
+    \ operator ()(T& a, const U& b) noexcept {\r\n            if (a > b) {\r\n   \
+    \             a = b;\r\n                return true;\r\n            }\r\n    \
+    \        return false;\r\n        }\r\n    } chmin;\r\n\r\n    // assign max\r\
+    \n    [[maybe_unused]] inline constexpr struct {\r\n        template<class T,\
+    \ class U = T>\r\n        constexpr bool operator ()(T& a, const U& b) noexcept\
+    \ {\r\n            if (a < b) {\r\n                a = b;\r\n                return\
+    \ true;\r\n            }\r\n            return false;\r\n        }\r\n    } chmax;\r\
+    \n} // namespace kpr\r\n#line 4 \"template/constant.hpp\"\n\r\nnamespace kpr {\r\
+    \n    inline constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>,\
+    \ 4> beside{{{-1, 0}, {0, -1}, {1, 0}, {0, 1}}};\r\n    inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
+    \ KYOPRO_BASE_INT>, 8> around{{{-1, 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1,\
+    \ 1}, {0, 1}, {-1, 1}}};\r\n} // namespace kpr\r\n#line 4 \"template/len.hpp\"\
+    \n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr struct {\r\n  \
+    \      template<class T>\r\n        constexpr KYOPRO_BASE_INT operator ()(T&&\
+    \ a) const noexcept {\r\n            return std::size(a);\r\n        }\r\n   \
+    \ } len;\r\n} // namespace kpr\r\n#line 3 \"template/all_rall_macro.hpp\"\n\n\
+    #define all(...) std::begin(__VA_ARGS__), std::end(__VA_ARGS__)\n#define rall(...)\
     \ std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\n#line 4 \"template/io_macro.hpp\"\
     \n#include <istream>\n#line 10 \"template/io_macro.hpp\"\n\nnamespace kpr::helper\
     \ {\n    template<std::size_t len>\n    constexpr std::size_t va_args_size(const\
@@ -1159,7 +1162,7 @@ data:
   path: template/template.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2023-03-29 16:54:59+09:00'
+  timestamp: '2023-03-30 03:19:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/template.hpp

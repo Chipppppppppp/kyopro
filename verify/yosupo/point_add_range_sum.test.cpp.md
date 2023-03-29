@@ -7,31 +7,31 @@ data:
   - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: io/in.hpp
     title: io/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: io/io.hpp
     title: io/io.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: io/io_option.hpp
     title: io/io_option.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: io/out.hpp
     title: io/out.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
   _extendedRequiredBy: []

@@ -15,27 +15,32 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"template/chmin_chmax.hpp\"\n\r\nnamespace kpr {\r\n    //\
-    \ min assign\r\n    template<class T, class U = T>\r\n    constexpr bool chmin(T&\
-    \ a, const U& b) noexcept {\r\n        if (b < a) {\r\n            a = b;\r\n\
-    \            return true;\r\n        }\r\n        return false;\r\n    }\r\n\r\
-    \n    // max assign\r\n    template<class T, class U = T>\r\n    constexpr bool\
-    \ chmax(T& a, const U& b) noexcept {\r\n        if (a < b) {\r\n            a\
-    \ = b;\r\n            return true;\r\n        }\r\n        return false;\r\n \
-    \   }\r\n} // namespace kpr\r\n"
-  code: "#pragma once\r\n\r\nnamespace kpr {\r\n    // min assign\r\n    template<class\
-    \ T, class U = T>\r\n    constexpr bool chmin(T& a, const U& b) noexcept {\r\n\
-    \        if (b < a) {\r\n            a = b;\r\n            return true;\r\n  \
-    \      }\r\n        return false;\r\n    }\r\n\r\n    // max assign\r\n    template<class\
-    \ T, class U = T>\r\n    constexpr bool chmax(T& a, const U& b) noexcept {\r\n\
-    \        if (a < b) {\r\n            a = b;\r\n            return true;\r\n  \
-    \      }\r\n        return false;\r\n    }\r\n} // namespace kpr\r\n"
+    \ assign min\r\n    [[maybe_unused]] inline constexpr struct {\r\n        template<class\
+    \ T, class U = T>\r\n        constexpr bool operator ()(T& a, const U& b) noexcept\
+    \ {\r\n            if (a > b) {\r\n                a = b;\r\n                return\
+    \ true;\r\n            }\r\n            return false;\r\n        }\r\n    } chmin;\r\
+    \n\r\n    // assign max\r\n    [[maybe_unused]] inline constexpr struct {\r\n\
+    \        template<class T, class U = T>\r\n        constexpr bool operator ()(T&\
+    \ a, const U& b) noexcept {\r\n            if (a < b) {\r\n                a =\
+    \ b;\r\n                return true;\r\n            }\r\n            return false;\r\
+    \n        }\r\n    } chmax;\r\n} // namespace kpr\r\n"
+  code: "#pragma once\r\n\r\nnamespace kpr {\r\n    // assign min\r\n    [[maybe_unused]]\
+    \ inline constexpr struct {\r\n        template<class T, class U = T>\r\n    \
+    \    constexpr bool operator ()(T& a, const U& b) noexcept {\r\n            if\
+    \ (a > b) {\r\n                a = b;\r\n                return true;\r\n    \
+    \        }\r\n            return false;\r\n        }\r\n    } chmin;\r\n\r\n \
+    \   // assign max\r\n    [[maybe_unused]] inline constexpr struct {\r\n      \
+    \  template<class T, class U = T>\r\n        constexpr bool operator ()(T& a,\
+    \ const U& b) noexcept {\r\n            if (a < b) {\r\n                a = b;\r\
+    \n                return true;\r\n            }\r\n            return false;\r\
+    \n        }\r\n    } chmax;\r\n} // namespace kpr\r\n"
   dependsOn: []
   isVerificationFile: false
   path: template/chmin_chmax.hpp
   requiredBy:
   - all.hpp
   - template/template.hpp
-  timestamp: '2023-03-29 16:52:33+09:00'
+  timestamp: '2023-03-30 03:19:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/chmin_chmax.hpp
