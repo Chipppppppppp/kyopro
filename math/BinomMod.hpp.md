@@ -686,30 +686,12 @@ data:
     \            return static_cast<std::size_t>(a);\r\n        }\r\n    };\r\n} //\
     \ namespace kpr\r\n#line 6 \"math/BinomMod.hpp\"\n\nnamespace kpr {\n    // mod\u4E8C\
     \u9805\u4FC2\u6570\n    template<std::size_t max = 1000000, KYOPRO_BASE_UINT m\
-    \ = mod>\n    struct BinomMod {\n        std::array<std::uint_fast64_t, max> fact,\
-    \ factinv, inv;\n        constexpr BinomMod() noexcept {\n            fact[0]\
-    \ = fact[1] = 1;\n            factinv[0] = factinv[1] = 1;\n            inv[0]\
-    \ = 0;\n            inv[1] = 1;\n            for (int i = 2; i < (int)max; ++i)\
-    \ {\n                fact[i] = fact[i - 1] * i % m;\n                inv[i] =\
-    \ m - inv[m % i] * (m / i) % m;\n                factinv[i] = factinv[i - 1] *\
-    \ inv[i] % m;\n            }\n        }\n\n        constexpr ModInt<m> c(KYOPRO_BASE_UINT\
-    \ n, KYOPRO_BASE_UINT r) noexcept {\n            if (n < r) return 0;\n      \
-    \      return ModInt<m>(fact[n] * factinv[n - r] % m * factinv[r]);\n        }\n\
-    \        constexpr ModInt<m> p(KYOPRO_BASE_UINT n) noexcept {\n            return\
-    \ ModInt<m>::raw(fact[n]);\n        }\n        constexpr ModInt<m> p(KYOPRO_BASE_UINT\
-    \ n, KYOPRO_BASE_UINT r) noexcept {\n            if (n < r) return 0;\n      \
-    \      return ModInt<m>(fact[n] * factinv[n - r]);\n        }\n        constexpr\
-    \ ModInt<m> h(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept {\n           \
-    \ return c(n + r - 1, r);\n        }\n    };\n} // namespace kpr\n"
-  code: "#pragma once\n#include <array>\n#include <cstdint>\n#include \"../meta/constant.hpp\"\
-    \n#include \"ModInt.hpp\"\n\nnamespace kpr {\n    // mod\u4E8C\u9805\u4FC2\u6570\
-    \n    template<std::size_t max = 1000000, KYOPRO_BASE_UINT m = mod>\n    struct\
-    \ BinomMod {\n        std::array<std::uint_fast64_t, max> fact, factinv, inv;\n\
-    \        constexpr BinomMod() noexcept {\n            fact[0] = fact[1] = 1;\n\
-    \            factinv[0] = factinv[1] = 1;\n            inv[0] = 0;\n         \
-    \   inv[1] = 1;\n            for (int i = 2; i < (int)max; ++i) {\n          \
-    \      fact[i] = fact[i - 1] * i % m;\n                inv[i] = m - inv[m % i]\
-    \ * (m / i) % m;\n                factinv[i] = factinv[i - 1] * inv[i] % m;\n\
+    \ = mod>\n    struct BinomMod {\n        static std::array<std::uint_fast64_t,\
+    \ max> fact, factinv, inv;\n        constexpr BinomMod() noexcept {\n        \
+    \    fact[0] = fact[1] = 1;\n            factinv[0] = factinv[1] = 1;\n      \
+    \      inv[1] = 1;\n            for (int i = 2; i < (int)max; ++i) {\n       \
+    \         fact[i] = fact[i - 1] * i % m;\n                inv[i] = m - inv[m %\
+    \ i] * (m / i) % m;\n                factinv[i] = factinv[i - 1] * inv[i] % m;\n\
     \            }\n        }\n\n        constexpr ModInt<m> c(KYOPRO_BASE_UINT n,\
     \ KYOPRO_BASE_UINT r) noexcept {\n            if (n < r) return 0;\n         \
     \   return ModInt<m>(fact[n] * factinv[n - r] % m * factinv[r]);\n        }\n\
@@ -719,6 +701,24 @@ data:
     \      return ModInt<m>(fact[n] * factinv[n - r]);\n        }\n        constexpr\
     \ ModInt<m> h(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept {\n           \
     \ return c(n + r - 1, r);\n        }\n    };\n} // namespace kpr\n"
+  code: "#pragma once\n#include <array>\n#include <cstdint>\n#include \"../meta/constant.hpp\"\
+    \n#include \"ModInt.hpp\"\n\nnamespace kpr {\n    // mod\u4E8C\u9805\u4FC2\u6570\
+    \n    template<std::size_t max = 1000000, KYOPRO_BASE_UINT m = mod>\n    struct\
+    \ BinomMod {\n        static std::array<std::uint_fast64_t, max> fact, factinv,\
+    \ inv;\n        constexpr BinomMod() noexcept {\n            fact[0] = fact[1]\
+    \ = 1;\n            factinv[0] = factinv[1] = 1;\n            inv[1] = 1;\n  \
+    \          for (int i = 2; i < (int)max; ++i) {\n                fact[i] = fact[i\
+    \ - 1] * i % m;\n                inv[i] = m - inv[m % i] * (m / i) % m;\n    \
+    \            factinv[i] = factinv[i - 1] * inv[i] % m;\n            }\n      \
+    \  }\n\n        constexpr ModInt<m> c(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r)\
+    \ noexcept {\n            if (n < r) return 0;\n            return ModInt<m>(fact[n]\
+    \ * factinv[n - r] % m * factinv[r]);\n        }\n        constexpr ModInt<m>\
+    \ p(KYOPRO_BASE_UINT n) noexcept {\n            return ModInt<m>::raw(fact[n]);\n\
+    \        }\n        constexpr ModInt<m> p(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT\
+    \ r) noexcept {\n            if (n < r) return 0;\n            return ModInt<m>(fact[n]\
+    \ * factinv[n - r]);\n        }\n        constexpr ModInt<m> h(KYOPRO_BASE_UINT\
+    \ n, KYOPRO_BASE_UINT r) noexcept {\n            return c(n + r - 1, r);\n   \
+    \     }\n    };\n} // namespace kpr\n"
   dependsOn:
   - meta/constant.hpp
   - math/power.hpp
@@ -738,7 +738,7 @@ data:
   - all/all.hpp
   - all.hpp
   - math/math.hpp
-  timestamp: '2023-03-30 02:20:20+09:00'
+  timestamp: '2023-03-30 17:08:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/BinomMod.hpp
