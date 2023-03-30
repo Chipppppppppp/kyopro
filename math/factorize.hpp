@@ -65,19 +65,19 @@ namespace kpr {
 
     [[maybe_unused]] inline constexpr struct {
         template<bool sorted = true, class Container = std::vector<KYOPRO_BASE_INT>>
-        Container operator ()(std::uint_fast64_t n) const {
+        Container operator ()(KYOPRO_BASE_UINT n) const {
             Container res;
-            for (int p = 2; p < 100 && p * p <= n; ++p) {
+            for (int p = 2; p < 100 && p * p <= static_cast<int>(n); ++p) {
                 while (n % p == 0) {
-                n /= p;
-                res.emplace_back(p);
+                    n /= p;
+                    res.emplace_back(p);
                 }
             }
             while (n > 1) {
                 std::uint_fast64_t p = find_factor(n);
                 do {
-                n /= p;
-                res.emplace_back(p);
+                    n /= p;
+                    res.emplace_back(p);
                 } while (n % p == 0);
             }
             if constexpr (sorted) std::sort(res.begin(), res.end());
