@@ -30,7 +30,8 @@ namespace kpr {
 ```
 
 # 要件
-[Language Test 202001](https://atcoder.jp/contests/language-test-202001)で更新されたバージョンであるgcc9.2.1以上であることと、posix準拠であることが前提です。
+- posix準拠、C++17以上
+- `__int128 / unsigned __int128(g++, clang++), __builtin_(ctz/ctzll/clz/clzll/popcount)(g++, clang++)` が必要です。
 
 # Verify Status
 [![Actions Status](https://github.com/Chipppppppppp/kyopro/workflows/verify/badge.svg)](https://github.com/Chipppppppppp/kyopro/actions)
