@@ -8,11 +8,10 @@ namespace kpr {
     // mod二項係数
     template<std::size_t max = 1000000, KYOPRO_BASE_UINT m = mod>
     struct BinomMod {
-        std::array<std::uint_fast64_t, max> fact, factinv, inv;
+        static std::array<std::uint_fast64_t, max> fact, factinv, inv;
         constexpr BinomMod() noexcept {
             fact[0] = fact[1] = 1;
             factinv[0] = factinv[1] = 1;
-            inv[0] = 0;
             inv[1] = 1;
             for (int i = 2; i < (int)max; ++i) {
                 fact[i] = fact[i - 1] * i % m;
