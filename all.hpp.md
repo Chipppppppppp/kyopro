@@ -1177,29 +1177,48 @@ data:
     \        Map all_group_members() {\r\n            Map group_members;\r\n     \
     \       for (int member = 0; member < (int)(size()); ++member) group_members[find(member)].emplace_back(member);\r\
     \n            return group_members;\r\n        }\r\n    };\r\n} // namespace kpr\r\
-    \n#line 3 \"template/alias.hpp\"\n#include <forward_list>\n#line 6 \"template/alias.hpp\"\
-    \n#include <list>\n#include <map>\n#include <queue>\n#include <set>\n#include\
-    \ <stack>\n#line 14 \"template/alias.hpp\"\n#include <unordered_set>\n#line 22\
-    \ \"template/alias.hpp\"\n\nnamespace kpr {\n    using ushort = unsigned short;\n\
-    \    using ll = long long;\n    using ull = unsigned long long;\n    using lf\
-    \ = double;\n    using llf = long double;\n\n    using i8 = std::int8_t;\n   \
-    \ using u8 = std::uint8_t;\n    using i16 = std::int16_t;\n    using u16 = std::uint16_t;\n\
-    \    using i32 = std::int32_t;\n    using u32 = std::uint32_t;\n    using i64\
-    \ = std::int64_t;\n    using u64 = std::uint64_t;\n    #ifdef __SIZEOF_INT128__\n\
-    \    using i128 = __int128_t;\n    using u128 = __uint128_t;\n    #endif\n   \
-    \ #ifdef __SIZEOF_FLOAT128__\n    using f128 = __float128;\n    #endif\n\n   \
-    \ using mint = ModInt<mod>;\n    using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\
-    \n    using str = std::string;\n\n    template<class T, std::size_t idx, class...\
-    \ Args>\n    struct agg_type {\n        using type = typename agg_type<T, idx\
-    \ - 1, T, Args...>::type;\n    };\n    template<class T, class... Args>\n    struct\
-    \ agg_type<T, 0, Args...> {\n        using type = std::tuple<Args...>;\n    };\n\
-    \    template<class T>\n    struct agg_type<T, 0, T, T> {\n        using type\
-    \ = std::pair<T, T>;\n    };\n\n    template<class T, std::size_t idx>\n    using\
-    \ agg = typename agg_type<T, idx>::type;\n    using ll1 = agg<ll, 1>;\n    using\
-    \ ll2 = agg<ll, 2>;\n    using ll3 = agg<ll, 3>;\n    using ll4 = agg<ll, 4>;\n\
-    \    using ll5 = agg<ll, 5>;\n\n\n    #define DEFINE_ALIAS(name, short_name, value_name,\
-    \ short_value_name) \\\n        using short_name ## short_value_name = name<value_name>;\
-    \ \\\n        using short_name ## short_name ## short_value_name = name<name<value_name>>;\
+    \n#line 3 \"template/stl.hpp\"\n#include <cctype>\r\n#include <cerrno>\r\n#include\
+    \ <cfloat>\r\n#include <ciso646>\r\n#include <climits>\r\n#include <clocale>\r\
+    \n#line 10 \"template/stl.hpp\"\n#include <csetjmp>\r\n#include <csignal>\r\n\
+    #include <cstdarg>\r\n#line 15 \"template/stl.hpp\"\n#include <cstdlib>\r\n#include\
+    \ <cstring>\r\n#include <ctime>\r\n\r\n#include <ccomplex>\r\n#include <cfenv>\r\
+    \n#include <cinttypes>\r\n#include <cstdbool>\r\n#line 24 \"template/stl.hpp\"\
+    \n#include <ctgmath>\r\n#include <cwchar>\r\n#include <cwctype>\r\n\r\n#line 30\
+    \ \"template/stl.hpp\"\n#include <complex>\r\n#include <deque>\r\n#include <exception>\r\
+    \n#include <fstream>\r\n#line 35 \"template/stl.hpp\"\n#include <iomanip>\r\n\
+    #include <ios>\r\n#include <iosfwd>\r\n#include <iostream>\r\n#include <istream>\r\
+    \n#line 42 \"template/stl.hpp\"\n#include <list>\r\n#include <locale>\r\n#include\
+    \ <map>\r\n#include <memory>\r\n#include <new>\r\n#line 48 \"template/stl.hpp\"\
+    \n#include <ostream>\r\n#include <queue>\r\n#include <set>\r\n#include <sstream>\r\
+    \n#include <stack>\r\n#include <stdexcept>\r\n#include <streambuf>\r\n#line 56\
+    \ \"template/stl.hpp\"\n#include <typeinfo>\r\n#line 58 \"template/stl.hpp\"\n\
+    #include <valarray>\r\n#line 60 \"template/stl.hpp\"\n\r\n#line 62 \"template/stl.hpp\"\
+    \n#include <atomic>\r\n#include <chrono>\r\n#include <condition_variable>\r\n\
+    #include <forward_list>\r\n#include <future>\r\n#include <initializer_list>\r\n\
+    #include <mutex>\r\n#line 70 \"template/stl.hpp\"\n#include <ratio>\r\n#include\
+    \ <regex>\r\n#include <scoped_allocator>\r\n#include <system_error>\r\n#include\
+    \ <thread>\r\n#line 76 \"template/stl.hpp\"\n#include <typeindex>\r\n#line 79\
+    \ \"template/stl.hpp\"\n#include <unordered_set>\r\n#line 22 \"template/alias.hpp\"\
+    \n\nnamespace kpr {\n    using ushort = unsigned short;\n    using ll = long long;\n\
+    \    using ull = unsigned long long;\n    using lf = double;\n    using llf =\
+    \ long double;\n\n    using i8 = std::int8_t;\n    using u8 = std::uint8_t;\n\
+    \    using i16 = std::int16_t;\n    using u16 = std::uint16_t;\n    using i32\
+    \ = std::int32_t;\n    using u32 = std::uint32_t;\n    using i64 = std::int64_t;\n\
+    \    using u64 = std::uint64_t;\n    #ifdef __SIZEOF_INT128__\n    using i128\
+    \ = __int128_t;\n    using u128 = __uint128_t;\n    #endif\n    #ifdef __SIZEOF_FLOAT128__\n\
+    \    using f128 = __float128;\n    #endif\n\n    using mint = ModInt<mod>;\n \
+    \   using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\n    using str = std::string;\n\
+    \n    template<class T, std::size_t idx, class... Args>\n    struct agg_type {\n\
+    \        using type = typename agg_type<T, idx - 1, T, Args...>::type;\n    };\n\
+    \    template<class T, class... Args>\n    struct agg_type<T, 0, Args...> {\n\
+    \        using type = std::tuple<Args...>;\n    };\n    template<class T>\n  \
+    \  struct agg_type<T, 0, T, T> {\n        using type = std::pair<T, T>;\n    };\n\
+    \n    template<class T, std::size_t idx>\n    using agg = typename agg_type<T,\
+    \ idx>::type;\n    using ll1 = agg<ll, 1>;\n    using ll2 = agg<ll, 2>;\n    using\
+    \ ll3 = agg<ll, 3>;\n    using ll4 = agg<ll, 4>;\n    using ll5 = agg<ll, 5>;\n\
+    \n\n    #define DEFINE_ALIAS(name, short_name, value_name, short_value_name) \\\
+    \n        using short_name ## short_value_name = name<value_name>; \\\n      \
+    \  using short_name ## short_name ## short_value_name = name<name<value_name>>;\
     \ \\\n        using short_name ## short_name ## short_name ## short_value_name\
     \ = name<name<name<value_name>>>; \\\n        using short_name ## short_name ##\
     \ short_name ## short_name ## short_value_name = name<name<name<name<value_name>>>>;\
@@ -1278,20 +1297,19 @@ data:
     \ a) const noexcept {\r\n            return std::size(a);\r\n        }\r\n   \
     \ } len;\r\n} // namespace kpr\r\n#line 3 \"template/all_rall_macro.hpp\"\n\n\
     #define all(...) std::begin(__VA_ARGS__), std::end(__VA_ARGS__)\n#define rall(...)\
-    \ std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\n#line 4 \"template/io_macro.hpp\"\
-    \n#include <istream>\n#line 10 \"template/io_macro.hpp\"\n\nnamespace kpr::helper\
-    \ {\n    template<std::size_t len>\n    constexpr std::size_t va_args_size(const\
-    \ char (&s)[len]) noexcept {\n        if constexpr (len == 1) return 0;\n    \
-    \    std::size_t cnt = 1;\n        std::uint_fast64_t bracket = 0;\n        for\
-    \ (auto i: s) {\n            if (i == '(') ++bracket;\n            else if (i\
-    \ == ')') --bracket;\n            else if (i == ',' && bracket == 0) ++cnt;\n\
-    \        }\n        return cnt;\n    }\n\n    template<class F, std::size_t...\
-    \ idx>\n    auto read_impl(F&& f, std::index_sequence<idx...>) {\n        return\
-    \ std::tuple{(static_cast<void>(idx), f())...};\n    }\n\n    Printer<Writer<>::iterator,\
-    \ true, true, true, true> debug_impl(output.begin());\n\n    template<bool flag>\n\
-    \    void print_if(std::string_view sv) {\n        if constexpr (flag) print('\
-    \ ', sv);\n    }\n} // namespace kpr::helper\n\n/* C++20\u4EE5\u964D\n#define\
-    \ read(type_or_init, ...) \\\n    auto [__VA_ARGS__] = (kpr::helper::read_impl(([]()\
+    \ std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\n#line 10 \"template/io_macro.hpp\"\
+    \n\nnamespace kpr::helper {\n    template<std::size_t len>\n    constexpr std::size_t\
+    \ va_args_size(const char (&s)[len]) noexcept {\n        if constexpr (len ==\
+    \ 1) return 0;\n        std::size_t cnt = 1;\n        std::uint_fast64_t bracket\
+    \ = 0;\n        for (auto i: s) {\n            if (i == '(') ++bracket;\n    \
+    \        else if (i == ')') --bracket;\n            else if (i == ',' && bracket\
+    \ == 0) ++cnt;\n        }\n        return cnt;\n    }\n\n    template<class F,\
+    \ std::size_t... idx>\n    auto read_impl(F&& f, std::index_sequence<idx...>)\
+    \ {\n        return std::tuple{(static_cast<void>(idx), f())...};\n    }\n\n \
+    \   Printer<Writer<>::iterator, true, true, true, true> debug_impl(output.begin());\n\
+    \n    template<bool flag>\n    void print_if(std::string_view sv) {\n        if\
+    \ constexpr (flag) print(' ', sv);\n    }\n} // namespace kpr::helper\n\n/* C++20\u4EE5\
+    \u964D\n#define read(type_or_init, ...) \\\n    auto [__VA_ARGS__] = (kpr::helper::read_impl(([]()\
     \ { \\\n        using T = std::decay_t<decltype(*new type_or_init)>; \\\n    \
     \    alignas(T) std::byte storage[sizeof(T)]; \\\n        T* p = new (storage)\
     \ type_or_init; \\\n        kpr::scan(*p); \\\n        T res = std::move(*p);\
@@ -1425,28 +1443,7 @@ data:
     \  // Range\u306E\u578B\u5909\u63DB\n    [[maybe_unused]] inline constexpr struct\
     \ {\n        template<class To, class From>\n        constexpr To operator ()(From&&\
     \ container) const noexcept {\n            return To(std::begin(container), std::end(container));\n\
-    \        }\n    } range_cast;\n} // namespace kpr\n#line 3 \"template/stl.hpp\"\
-    \n#include <cctype>\r\n#include <cerrno>\r\n#include <cfloat>\r\n#include <ciso646>\r\
-    \n#include <climits>\r\n#include <clocale>\r\n#line 10 \"template/stl.hpp\"\n\
-    #include <csetjmp>\r\n#include <csignal>\r\n#include <cstdarg>\r\n#line 15 \"\
-    template/stl.hpp\"\n#include <cstdlib>\r\n#include <cstring>\r\n#include <ctime>\r\
-    \n\r\n#include <ccomplex>\r\n#include <cfenv>\r\n#include <cinttypes>\r\n#include\
-    \ <cstdbool>\r\n#line 24 \"template/stl.hpp\"\n#include <ctgmath>\r\n#include\
-    \ <cwchar>\r\n#include <cwctype>\r\n\r\n#line 30 \"template/stl.hpp\"\n#include\
-    \ <complex>\r\n#include <deque>\r\n#include <exception>\r\n#include <fstream>\r\
-    \n#line 35 \"template/stl.hpp\"\n#include <iomanip>\r\n#include <ios>\r\n#include\
-    \ <iosfwd>\r\n#include <iostream>\r\n#line 43 \"template/stl.hpp\"\n#include <locale>\r\
-    \n#line 45 \"template/stl.hpp\"\n#include <memory>\r\n#include <new>\r\n#line\
-    \ 48 \"template/stl.hpp\"\n#include <ostream>\r\n#line 51 \"template/stl.hpp\"\
-    \n#include <sstream>\r\n#line 53 \"template/stl.hpp\"\n#include <stdexcept>\r\n\
-    #include <streambuf>\r\n#line 56 \"template/stl.hpp\"\n#include <typeinfo>\r\n\
-    #line 58 \"template/stl.hpp\"\n#include <valarray>\r\n#line 60 \"template/stl.hpp\"\
-    \n\r\n#line 62 \"template/stl.hpp\"\n#include <atomic>\r\n#include <chrono>\r\n\
-    #include <condition_variable>\r\n#line 66 \"template/stl.hpp\"\n#include <future>\r\
-    \n#include <initializer_list>\r\n#include <mutex>\r\n#line 70 \"template/stl.hpp\"\
-    \n#include <ratio>\r\n#include <regex>\r\n#include <scoped_allocator>\r\n#include\
-    \ <system_error>\r\n#include <thread>\r\n#line 76 \"template/stl.hpp\"\n#include\
-    \ <typeindex>\r\n#line 5 \"all.hpp\"\n"
+    \        }\n    } range_cast;\n} // namespace kpr\n#line 5 \"all.hpp\"\n"
   code: "#pragma once\r\n#include \"all/all.hpp\"\r\n#include \"data_structure/data_structure.hpp\"\
     \r\n#include \"template/template.hpp\"\r\n"
   dependsOn:
@@ -1488,6 +1485,7 @@ data:
   - data_structure/FenwickTree.hpp
   - data_structure/UnionFind.hpp
   - template/template.hpp
+  - template/stl.hpp
   - template/alias.hpp
   - template/chmin_chmax.hpp
   - template/constant.hpp
@@ -1504,11 +1502,10 @@ data:
   - template/make_array.hpp
   - template/make_vec.hpp
   - template/range_cast.hpp
-  - template/stl.hpp
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2023-03-30 10:02:03+09:00'
+  timestamp: '2023-03-30 11:52:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp

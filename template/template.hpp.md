@@ -110,12 +110,27 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"template/alias.hpp\"\n#include <cstdint>\n#include <forward_list>\n\
-    #include <functional>\n#include <limits>\n#include <list>\n#include <map>\n#include\
-    \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
-    #include <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include\
-    \ <vector>\n#line 2 \"algorithm/Hash.hpp\"\n#include <cstddef>\r\n#line 4 \"algorithm/Hash.hpp\"\
-    \n#include <iterator>\r\n#include <type_traits>\r\n#line 6 \"meta/tuple_like.hpp\"\
+  bundledCode: "#line 2 \"template/stl.hpp\"\n#include <cassert>\r\n#include <cctype>\r\
+    \n#include <cerrno>\r\n#include <cfloat>\r\n#include <ciso646>\r\n#include <climits>\r\
+    \n#include <clocale>\r\n#include <cmath>\r\n#include <csetjmp>\r\n#include <csignal>\r\
+    \n#include <cstdarg>\r\n#include <cstddef>\r\n#include <cstdio>\r\n#include <cstdlib>\r\
+    \n#include <cstring>\r\n#include <ctime>\r\n\r\n#include <ccomplex>\r\n#include\
+    \ <cfenv>\r\n#include <cinttypes>\r\n#include <cstdbool>\r\n#include <cstdint>\r\
+    \n#include <ctgmath>\r\n#include <cwchar>\r\n#include <cwctype>\r\n\r\n#include\
+    \ <algorithm>\r\n#include <bitset>\r\n#include <complex>\r\n#include <deque>\r\
+    \n#include <exception>\r\n#include <fstream>\r\n#include <functional>\r\n#include\
+    \ <iomanip>\r\n#include <ios>\r\n#include <iosfwd>\r\n#include <iostream>\r\n\
+    #include <istream>\r\n#include <iterator>\r\n#include <limits>\r\n#include <list>\r\
+    \n#include <locale>\r\n#include <map>\r\n#include <memory>\r\n#include <new>\r\
+    \n#include <numeric>\r\n#include <ostream>\r\n#include <queue>\r\n#include <set>\r\
+    \n#include <sstream>\r\n#include <stack>\r\n#include <stdexcept>\r\n#include <streambuf>\r\
+    \n#include <string>\r\n#include <typeinfo>\r\n#include <utility>\r\n#include <valarray>\r\
+    \n#include <vector>\r\n\r\n#include <array>\r\n#include <atomic>\r\n#include <chrono>\r\
+    \n#include <condition_variable>\r\n#include <forward_list>\r\n#include <future>\r\
+    \n#include <initializer_list>\r\n#include <mutex>\r\n#include <random>\r\n#include\
+    \ <ratio>\r\n#include <regex>\r\n#include <scoped_allocator>\r\n#include <system_error>\r\
+    \n#include <thread>\r\n#include <tuple>\r\n#include <typeindex>\r\n#include <type_traits>\r\
+    \n#include <unordered_map>\r\n#include <unordered_set>\r\n#line 6 \"meta/tuple_like.hpp\"\
     \n\r\nnamespace kpr {\r\n    namespace helper {\r\n        struct CastableToAny\
     \ {\r\n            template<class T>\r\n            operator T() const noexcept;\r\
     \n        };\r\n\r\n        template<class T, std::size_t... idx, std::void_t<decltype(T{((void)idx,\
@@ -365,19 +380,17 @@ data:
     \ eps = EPS<KYOPRO_BASE_FLOAT>;\r\n\r\n    // \u5186\u5468\u7387\r\n    template<class\
     \ T>\r\n    inline constexpr T PI = 3.14159265358979323846;\r\n    // \u5186\u5468\
     \u7387\r\n    inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\r\
-    \n} // namespace kpr\r\n#line 2 \"io/in.hpp\"\n#include <unistd.h>\r\n#include\
-    \ <array>\r\n#include <bitset>\r\n#line 7 \"io/in.hpp\"\n#include <cstdio>\r\n\
-    #line 5 \"io/io_option.hpp\"\n\r\nnamespace kpr {\r\n    template<class Tuple,\
-    \ std::size_t idx>\r\n    struct Indexed {\r\n        Tuple args_tuple;\r\n  \
-    \      template<class... Args>\r\n        constexpr Indexed(Args&&... args) noexcept:\
-    \ args_tuple{std::forward<Args>(args)...} {}\r\n    };\r\n\r\n    template<std::size_t\
-    \ i, class... Args>\r\n    constexpr auto indexed(Args&&... args) noexcept {\r\
-    \n        return Indexed<std::tuple<Args...>, i>{std::forward<Args>(args)...};\r\
-    \n    }\r\n\r\n    template<class Tuple, bool... seps>\r\n    struct SepWith {\r\
-    \n        Tuple args_tuple;\r\n        template<class... Args>\r\n        constexpr\
-    \ SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...} {}\r\
-    \n    };\r\n\r\n    template<bool... seps, class... Args>\r\n    constexpr auto\
-    \ sep_with(Args&&... args) noexcept {\r\n        return SepWith<std::tuple<Args...>,\
+    \n} // namespace kpr\r\n#line 2 \"io/in.hpp\"\n#include <unistd.h>\r\n#line 5\
+    \ \"io/io_option.hpp\"\n\r\nnamespace kpr {\r\n    template<class Tuple, std::size_t\
+    \ idx>\r\n    struct Indexed {\r\n        Tuple args_tuple;\r\n        template<class...\
+    \ Args>\r\n        constexpr Indexed(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
+    \ {}\r\n    };\r\n\r\n    template<std::size_t i, class... Args>\r\n    constexpr\
+    \ auto indexed(Args&&... args) noexcept {\r\n        return Indexed<std::tuple<Args...>,\
+    \ i>{std::forward<Args>(args)...};\r\n    }\r\n\r\n    template<class Tuple, bool...\
+    \ seps>\r\n    struct SepWith {\r\n        Tuple args_tuple;\r\n        template<class...\
+    \ Args>\r\n        constexpr SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
+    \ {}\r\n    };\r\n\r\n    template<bool... seps, class... Args>\r\n    constexpr\
+    \ auto sep_with(Args&&... args) noexcept {\r\n        return SepWith<std::tuple<Args...>,\
     \ seps...>{std::forward<Args>(args)...};\r\n    }\r\n} // namespace kpr\r\n#line\
     \ 16 \"io/in.hpp\"\n\r\nnamespace kpr {\r\n    // \u30D0\u30C3\u30D5\u30A1\u3092\
     \u7528\u3044\u3066\u30D5\u30A1\u30A4\u30EB\u3092\u8AAD\u307F\u8FBC\u3080\u30AF\
@@ -486,46 +499,45 @@ data:
     \ = static_cast<ScannerWrapper<Scanner>&>(scanner);\r\n            scan_impl(scanner_wrapper,\
     \ a.args_tuple);\r\n        }\r\n    };\r\n\r\n    // \u6A19\u6E96\u5165\u529B\
     \u304B\u3089\u5024\u3092\u5165\u529B\u3059\u308B\u95A2\u6570\r\n    Scanner<Reader<>::iterator>\
-    \ scan{input.begin()};\r\n} // namespace kpr\r\n#line 3 \"io/out.hpp\"\n#include\
-    \ <algorithm>\r\n#line 6 \"io/out.hpp\"\n#include <cmath>\r\n#line 11 \"io/out.hpp\"\
-    \n#include <string_view>\r\n#line 19 \"io/out.hpp\"\n\r\nnamespace kpr {\r\n \
-    \   // \u30D0\u30C3\u30D5\u30A1\u3092\u7528\u3044\u3066\u30D5\u30A1\u30A4\u30EB\
-    \u306B\u66F8\u304D\u8FBC\u3080\u30AF\u30E9\u30B9\r\n    template<std::size_t buf_size\
-    \ = KYOPRO_BUFFER_SIZE>\r\n    struct Writer {\r\n    private:\r\n        int\
-    \ fd, idx;\r\n        std::array<char, buf_size> buffer;\r\n\r\n    public:\r\n\
-    \        // \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\u3092\u53D6\u5F97\r\n \
-    \       static constexpr KYOPRO_BASE_INT get_buf_size() noexcept {\r\n       \
-    \     return buf_size;\r\n        }\r\n\r\n        Writer() noexcept = default;\r\
-    \n        Writer(int fd) noexcept: fd(fd), idx(0), buffer() {}\r\n        Writer(FILE*\
-    \ fp) noexcept: fd(fileno(fp)), idx(0), buffer() {}\r\n\r\n        ~Writer() {\r\
-    \n            [[maybe_unused]]ssize_t res = write(fd, buffer.begin(), idx);\r\n\
-    \        }\r\n\r\n        // \u51FA\u529B\u30A4\u30C6\u30EC\u30FC\u30BF\r\n  \
-    \      struct iterator {\r\n        private:\r\n            Writer& writer;\r\n\
-    \r\n        public:\r\n            using difference_type = void;\r\n         \
-    \   using value_type = void;\r\n            using pointer = void;\r\n        \
-    \    using reference = void;\r\n            using iterator_category = std::output_iterator_tag;\r\
-    \n\r\n            iterator() noexcept = default;\r\n            iterator(Writer&\
-    \ writer) noexcept: writer(writer) {}\r\n\r\n            iterator& operator ++()\
-    \ {\r\n                ++writer.idx;\r\n                if (writer.idx == buf_size)\
-    \ {\r\n                [[maybe_unused]]ssize_t res = write(writer.fd, writer.buffer.begin(),\
-    \ buf_size);\r\n                writer.idx = 0;\r\n                }\r\n     \
-    \           return *this;\r\n            }\r\n\r\n            iterator operator\
-    \ ++(int) {\r\n                iterator before = *this;\r\n                operator\
-    \ ++();\r\n                return before;\r\n            }\r\n\r\n           \
-    \ char& operator *() const {\r\n                return writer.buffer[writer.idx];\r\
-    \n            }\r\n\r\n            // \u30D0\u30C3\u30D5\u30A1\u3092\u5168\u3066\
-    \u51FA\u529B\u3059\u308B\r\n            void flush() const {\r\n             \
-    \   [[maybe_unused]] ssize_t res = write(writer.fd, writer.buffer.begin(), writer.idx);\r\
-    \n            }\r\n        };\r\n\r\n        // \u30D5\u30A1\u30A4\u30EB\u306E\
-    \u6700\u521D\u3092\u793A\u3059\u30A4\u30C6\u30EC\u30FC\u30BF\u3092\u53D6\u5F97\
-    \r\n        iterator begin() noexcept {\r\n            return iterator(*this);\r\
-    \n        }\r\n    };\r\n\r\n    // \u6A19\u6E96\u51FA\u529B\u3001\u6A19\u6E96\
-    \u30A8\u30E9\u30FC\u51FA\u529B\r\n    Writer output{1}, error{2};\r\n\r\n    //\
-    \ \u5024\u306E\u51FA\u529B\u306E\u95A2\u6570\u30AF\u30E9\u30B9\r\n    template<class,\
-    \ class = void>\r\n    struct PrintFunction;\r\n\r\n    // \u51FA\u529B\u30A4\u30C6\
-    \u30EC\u30FC\u30BF\u3092\u7528\u3044\u3066\u5024\u3092\u51FA\u529B\u3059\u308B\
-    \u30AF\u30E9\u30B9\r\n    template<class Iterator, bool _space = true, bool _line\
-    \ = true, bool _debug = false, bool _comment = false, bool _flush = false, std::size_t\
+    \ scan{input.begin()};\r\n} // namespace kpr\r\n#line 11 \"io/out.hpp\"\n#include\
+    \ <string_view>\r\n#line 19 \"io/out.hpp\"\n\r\nnamespace kpr {\r\n    // \u30D0\
+    \u30C3\u30D5\u30A1\u3092\u7528\u3044\u3066\u30D5\u30A1\u30A4\u30EB\u306B\u66F8\
+    \u304D\u8FBC\u3080\u30AF\u30E9\u30B9\r\n    template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>\r\
+    \n    struct Writer {\r\n    private:\r\n        int fd, idx;\r\n        std::array<char,\
+    \ buf_size> buffer;\r\n\r\n    public:\r\n        // \u30D0\u30C3\u30D5\u30A1\u30B5\
+    \u30A4\u30BA\u3092\u53D6\u5F97\r\n        static constexpr KYOPRO_BASE_INT get_buf_size()\
+    \ noexcept {\r\n            return buf_size;\r\n        }\r\n\r\n        Writer()\
+    \ noexcept = default;\r\n        Writer(int fd) noexcept: fd(fd), idx(0), buffer()\
+    \ {}\r\n        Writer(FILE* fp) noexcept: fd(fileno(fp)), idx(0), buffer() {}\r\
+    \n\r\n        ~Writer() {\r\n            [[maybe_unused]]ssize_t res = write(fd,\
+    \ buffer.begin(), idx);\r\n        }\r\n\r\n        // \u51FA\u529B\u30A4\u30C6\
+    \u30EC\u30FC\u30BF\r\n        struct iterator {\r\n        private:\r\n      \
+    \      Writer& writer;\r\n\r\n        public:\r\n            using difference_type\
+    \ = void;\r\n            using value_type = void;\r\n            using pointer\
+    \ = void;\r\n            using reference = void;\r\n            using iterator_category\
+    \ = std::output_iterator_tag;\r\n\r\n            iterator() noexcept = default;\r\
+    \n            iterator(Writer& writer) noexcept: writer(writer) {}\r\n\r\n   \
+    \         iterator& operator ++() {\r\n                ++writer.idx;\r\n     \
+    \           if (writer.idx == buf_size) {\r\n                [[maybe_unused]]ssize_t\
+    \ res = write(writer.fd, writer.buffer.begin(), buf_size);\r\n               \
+    \ writer.idx = 0;\r\n                }\r\n                return *this;\r\n  \
+    \          }\r\n\r\n            iterator operator ++(int) {\r\n              \
+    \  iterator before = *this;\r\n                operator ++();\r\n            \
+    \    return before;\r\n            }\r\n\r\n            char& operator *() const\
+    \ {\r\n                return writer.buffer[writer.idx];\r\n            }\r\n\r\
+    \n            // \u30D0\u30C3\u30D5\u30A1\u3092\u5168\u3066\u51FA\u529B\u3059\u308B\
+    \r\n            void flush() const {\r\n                [[maybe_unused]] ssize_t\
+    \ res = write(writer.fd, writer.buffer.begin(), writer.idx);\r\n            }\r\
+    \n        };\r\n\r\n        // \u30D5\u30A1\u30A4\u30EB\u306E\u6700\u521D\u3092\
+    \u793A\u3059\u30A4\u30C6\u30EC\u30FC\u30BF\u3092\u53D6\u5F97\r\n        iterator\
+    \ begin() noexcept {\r\n            return iterator(*this);\r\n        }\r\n \
+    \   };\r\n\r\n    // \u6A19\u6E96\u51FA\u529B\u3001\u6A19\u6E96\u30A8\u30E9\u30FC\
+    \u51FA\u529B\r\n    Writer output{1}, error{2};\r\n\r\n    // \u5024\u306E\u51FA\
+    \u529B\u306E\u95A2\u6570\u30AF\u30E9\u30B9\r\n    template<class, class = void>\r\
+    \n    struct PrintFunction;\r\n\r\n    // \u51FA\u529B\u30A4\u30C6\u30EC\u30FC\
+    \u30BF\u3092\u7528\u3044\u3066\u5024\u3092\u51FA\u529B\u3059\u308B\u30AF\u30E9\
+    \u30B9\r\n    template<class Iterator, bool _space = true, bool _line = true,\
+    \ bool _debug = false, bool _comment = false, bool _flush = false, std::size_t\
     \ decimal_precision = KYOPRO_DECIMAL_PRECISION>\r\n    struct Printer {\r\n  \
     \      using iterator_type = Iterator;\r\n\r\n        // \u6307\u5B9A\u3055\u308C\
     \u305F\u30AA\u30D7\u30B7\u30E7\u30F3\r\n        static constexpr bool space =\
@@ -724,22 +736,21 @@ data:
     \ Hash<DynamicModInt<T, kind>> {\r\n        using value_type = DynamicModInt<T,\
     \ kind>;\r\n\r\n        std::size_t operator ()(DynamicModInt<T, kind> a) const\
     \ noexcept {\r\n            return static_cast<std::size_t>(a);\r\n        }\r\
-    \n    };\r\n} // namespace kpr\r\n#line 2 \"math/ModInt.hpp\"\n#include <cassert>\r\
-    \n#line 6 \"algorithm/bit.hpp\"\n\r\nnamespace kpr {\r\n    // \u7ACB\u3063\u3066\
-    \u3044\u308Bbit\u306E\u500B\u6570\u3092\u8FD4\u3059\r\n    [[maybe_unused]] inline\
-    \ constexpr struct {\r\n        template<class T>\r\n        constexpr KYOPRO_BASE_INT\
-    \ operator ()(T x) const noexcept {\r\n            static_assert(is_integer_v<T>,\
-    \ \"The argument must be an integer\");\r\n            constexpr auto digits =\
-    \ std::numeric_limits<std::make_unsigned_t<T>>::digits;\r\n            static_assert(digits\
-    \ <= std::numeric_limits<unsigned long long>::digits, \"The integer type of the\
-    \ argument is too large\");\r\n            if constexpr (digits <= std::numeric_limits<unsigned\
-    \ int>::digits) return __builtin_popcount(x);\r\n            else if constexpr\
-    \ (digits <= std::numeric_limits<unsigned long>::digits) return __builtin_popcountl(x);\r\
-    \n            else return __builtin_popcountll(x);\r\n        }\r\n    } pop_count;\r\
-    \n\r\n    [[maybe_unused]] inline constexpr struct {\r\n        template<class\
+    \n    };\r\n} // namespace kpr\r\n#line 6 \"algorithm/bit.hpp\"\n\r\nnamespace\
+    \ kpr {\r\n    // \u7ACB\u3063\u3066\u3044\u308Bbit\u306E\u500B\u6570\u3092\u8FD4\
+    \u3059\r\n    [[maybe_unused]] inline constexpr struct {\r\n        template<class\
     \ T>\r\n        constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {\r\n\
     \            static_assert(is_integer_v<T>, \"The argument must be an integer\"\
     );\r\n            constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\r\
+    \n            static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
+    \ \"The integer type of the argument is too large\");\r\n            if constexpr\
+    \ (digits <= std::numeric_limits<unsigned int>::digits) return __builtin_popcount(x);\r\
+    \n            else if constexpr (digits <= std::numeric_limits<unsigned long>::digits)\
+    \ return __builtin_popcountl(x);\r\n            else return __builtin_popcountll(x);\r\
+    \n        }\r\n    } pop_count;\r\n\r\n    [[maybe_unused]] inline constexpr struct\
+    \ {\r\n        template<class T>\r\n        constexpr KYOPRO_BASE_INT operator\
+    \ ()(T x) const noexcept {\r\n            static_assert(is_integer_v<T>, \"The\
+    \ argument must be an integer\");\r\n            constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\r\
     \n            static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
     \ \"The integer type of the argument is too large\");\r\n            if (x ==\
     \ 0) return 0;\r\n            if constexpr (digits <= std::numeric_limits<unsigned\
@@ -951,20 +962,19 @@ data:
     \ a) const noexcept {\r\n            return std::size(a);\r\n        }\r\n   \
     \ } len;\r\n} // namespace kpr\r\n#line 3 \"template/all_rall_macro.hpp\"\n\n\
     #define all(...) std::begin(__VA_ARGS__), std::end(__VA_ARGS__)\n#define rall(...)\
-    \ std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\n#line 4 \"template/io_macro.hpp\"\
-    \n#include <istream>\n#line 10 \"template/io_macro.hpp\"\n\nnamespace kpr::helper\
-    \ {\n    template<std::size_t len>\n    constexpr std::size_t va_args_size(const\
-    \ char (&s)[len]) noexcept {\n        if constexpr (len == 1) return 0;\n    \
-    \    std::size_t cnt = 1;\n        std::uint_fast64_t bracket = 0;\n        for\
-    \ (auto i: s) {\n            if (i == '(') ++bracket;\n            else if (i\
-    \ == ')') --bracket;\n            else if (i == ',' && bracket == 0) ++cnt;\n\
-    \        }\n        return cnt;\n    }\n\n    template<class F, std::size_t...\
-    \ idx>\n    auto read_impl(F&& f, std::index_sequence<idx...>) {\n        return\
-    \ std::tuple{(static_cast<void>(idx), f())...};\n    }\n\n    Printer<Writer<>::iterator,\
-    \ true, true, true, true> debug_impl(output.begin());\n\n    template<bool flag>\n\
-    \    void print_if(std::string_view sv) {\n        if constexpr (flag) print('\
-    \ ', sv);\n    }\n} // namespace kpr::helper\n\n/* C++20\u4EE5\u964D\n#define\
-    \ read(type_or_init, ...) \\\n    auto [__VA_ARGS__] = (kpr::helper::read_impl(([]()\
+    \ std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\n#line 10 \"template/io_macro.hpp\"\
+    \n\nnamespace kpr::helper {\n    template<std::size_t len>\n    constexpr std::size_t\
+    \ va_args_size(const char (&s)[len]) noexcept {\n        if constexpr (len ==\
+    \ 1) return 0;\n        std::size_t cnt = 1;\n        std::uint_fast64_t bracket\
+    \ = 0;\n        for (auto i: s) {\n            if (i == '(') ++bracket;\n    \
+    \        else if (i == ')') --bracket;\n            else if (i == ',' && bracket\
+    \ == 0) ++cnt;\n        }\n        return cnt;\n    }\n\n    template<class F,\
+    \ std::size_t... idx>\n    auto read_impl(F&& f, std::index_sequence<idx...>)\
+    \ {\n        return std::tuple{(static_cast<void>(idx), f())...};\n    }\n\n \
+    \   Printer<Writer<>::iterator, true, true, true, true> debug_impl(output.begin());\n\
+    \n    template<bool flag>\n    void print_if(std::string_view sv) {\n        if\
+    \ constexpr (flag) print(' ', sv);\n    }\n} // namespace kpr::helper\n\n/* C++20\u4EE5\
+    \u964D\n#define read(type_or_init, ...) \\\n    auto [__VA_ARGS__] = (kpr::helper::read_impl(([]()\
     \ { \\\n        using T = std::decay_t<decltype(*new type_or_init)>; \\\n    \
     \    alignas(T) std::byte storage[sizeof(T)]; \\\n        T* p = new (storage)\
     \ type_or_init; \\\n        kpr::scan(*p); \\\n        T res = std::move(*p);\
@@ -1098,33 +1108,14 @@ data:
     \  // Range\u306E\u578B\u5909\u63DB\n    [[maybe_unused]] inline constexpr struct\
     \ {\n        template<class To, class From>\n        constexpr To operator ()(From&&\
     \ container) const noexcept {\n            return To(std::begin(container), std::end(container));\n\
-    \        }\n    } range_cast;\n} // namespace kpr\n#line 3 \"template/stl.hpp\"\
-    \n#include <cctype>\r\n#include <cerrno>\r\n#include <cfloat>\r\n#include <ciso646>\r\
-    \n#include <climits>\r\n#include <clocale>\r\n#line 10 \"template/stl.hpp\"\n\
-    #include <csetjmp>\r\n#include <csignal>\r\n#include <cstdarg>\r\n#line 15 \"\
-    template/stl.hpp\"\n#include <cstdlib>\r\n#include <cstring>\r\n#include <ctime>\r\
-    \n\r\n#include <ccomplex>\r\n#include <cfenv>\r\n#include <cinttypes>\r\n#include\
-    \ <cstdbool>\r\n#line 24 \"template/stl.hpp\"\n#include <ctgmath>\r\n#include\
-    \ <cwchar>\r\n#include <cwctype>\r\n\r\n#line 30 \"template/stl.hpp\"\n#include\
-    \ <complex>\r\n#include <deque>\r\n#include <exception>\r\n#include <fstream>\r\
-    \n#line 35 \"template/stl.hpp\"\n#include <iomanip>\r\n#include <ios>\r\n#include\
-    \ <iosfwd>\r\n#include <iostream>\r\n#line 43 \"template/stl.hpp\"\n#include <locale>\r\
-    \n#line 45 \"template/stl.hpp\"\n#include <memory>\r\n#include <new>\r\n#include\
-    \ <numeric>\r\n#include <ostream>\r\n#line 51 \"template/stl.hpp\"\n#include <sstream>\r\
-    \n#line 53 \"template/stl.hpp\"\n#include <stdexcept>\r\n#include <streambuf>\r\
-    \n#line 56 \"template/stl.hpp\"\n#include <typeinfo>\r\n#line 58 \"template/stl.hpp\"\
-    \n#include <valarray>\r\n#line 60 \"template/stl.hpp\"\n\r\n#line 62 \"template/stl.hpp\"\
-    \n#include <atomic>\r\n#include <chrono>\r\n#include <condition_variable>\r\n\
-    #line 66 \"template/stl.hpp\"\n#include <future>\r\n#include <initializer_list>\r\
-    \n#include <mutex>\r\n#include <random>\r\n#include <ratio>\r\n#include <regex>\r\
-    \n#include <scoped_allocator>\r\n#include <system_error>\r\n#include <thread>\r\
-    \n#line 76 \"template/stl.hpp\"\n#include <typeindex>\r\n#line 12 \"template/template.hpp\"\
+    \        }\n    } range_cast;\n} // namespace kpr\n#line 12 \"template/template.hpp\"\
     \n"
-  code: "#pragma once\r\n#include \"alias.hpp\"\r\n#include \"chmin_chmax.hpp\"\r\n\
-    #include \"constant.hpp\"\r\n#include \"len.hpp\"\r\n#include \"macro.hpp\"\r\n\
-    #include \"main.hpp\"\r\n#include \"make_array.hpp\"\r\n#include \"make_vec.hpp\"\
-    \r\n#include \"range_cast.hpp\"\r\n#include \"stl.hpp\"\r\n"
+  code: "#pragma once\r\n#include \"stl.hpp\"\r\n#include \"alias.hpp\"\r\n#include\
+    \ \"chmin_chmax.hpp\"\r\n#include \"constant.hpp\"\r\n#include \"len.hpp\"\r\n\
+    #include \"macro.hpp\"\r\n#include \"main.hpp\"\r\n#include \"make_array.hpp\"\
+    \r\n#include \"make_vec.hpp\"\r\n#include \"range_cast.hpp\"\r\n"
   dependsOn:
+  - template/stl.hpp
   - template/alias.hpp
   - algorithm/Hash.hpp
   - meta/tuple_like.hpp
@@ -1157,12 +1148,11 @@ data:
   - template/make_array.hpp
   - template/make_vec.hpp
   - template/range_cast.hpp
-  - template/stl.hpp
   isVerificationFile: false
   path: template/template.hpp
   requiredBy:
   - all.hpp
-  timestamp: '2023-03-30 03:19:13+09:00'
+  timestamp: '2023-03-30 11:52:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/template.hpp
