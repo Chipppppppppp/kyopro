@@ -1,56 +1,56 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: io/in.hpp
     title: io/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: io/io.hpp
     title: io/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: io/io_option.hpp
     title: io/io_option.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: io/out.hpp
     title: io/out.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/factorize
@@ -748,15 +748,15 @@ data:
     \        }\r\n            return 1;\r\n        }\r\n    } find_factor;\r\n\r\n\
     \    [[maybe_unused]] inline constexpr struct {\r\n        template<bool sorted\
     \ = true, class Container = std::vector<KYOPRO_BASE_INT>>\r\n        Container\
-    \ operator ()(std::uint_fast64_t n) const {\r\n            Container res;\r\n\
-    \            for (int p = 2; p < 100 && p * p <= n; ++p) {\r\n               \
-    \ while (n % p == 0) {\r\n                n /= p;\r\n                res.emplace_back(p);\r\
-    \n                }\r\n            }\r\n            while (n > 1) {\r\n      \
-    \          std::uint_fast64_t p = find_factor(n);\r\n                do {\r\n\
-    \                n /= p;\r\n                res.emplace_back(p);\r\n         \
-    \       } while (n % p == 0);\r\n            }\r\n            if constexpr (sorted)\
-    \ std::sort(res.begin(), res.end());\r\n            return res;\r\n        }\r\
-    \n    } factorize;\r\n} // namespace kpr\r\n#line 4 \"verify/yosupo/factorize.test.cpp\"\
+    \ operator ()(KYOPRO_BASE_UINT n) const {\r\n            Container res;\r\n  \
+    \          for (int p = 2; p < 100 && p * p <= static_cast<int>(n); ++p) {\r\n\
+    \                while (n % p == 0) {\r\n                    n /= p;\r\n     \
+    \               res.emplace_back(p);\r\n                }\r\n            }\r\n\
+    \            while (n > 1) {\r\n                std::uint_fast64_t p = find_factor(n);\r\
+    \n                do {\r\n                    n /= p;\r\n                    res.emplace_back(p);\r\
+    \n                } while (n % p == 0);\r\n            }\r\n            if constexpr\
+    \ (sorted) std::sort(res.begin(), res.end());\r\n            return res;\r\n \
+    \       }\r\n    } factorize;\r\n} // namespace kpr\r\n#line 4 \"verify/yosupo/factorize.test.cpp\"\
     \n\r\nint main() {\r\n    long long q;\r\n    kpr::scan(q);\r\n    for (int i\
     \ = 0; i < q; ++i) {\r\n        long long a;\r\n        kpr::scan(a);\r\n    \
     \    auto res = kpr::factorize(a);\r\n        kpr::println(res.size(), res);\r\
@@ -785,8 +785,8 @@ data:
   isVerificationFile: true
   path: verify/yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2023-03-30 03:19:13+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-03-30 09:27:13+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/yosupo/factorize.test.cpp
 layout: document

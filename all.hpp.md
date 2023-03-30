@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
   - icon: ':warning:'
     path: algorithm/algorithm.hpp
     title: algorithm/algorithm.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
@@ -46,16 +46,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: io/in.hpp
     title: io/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: io/io.hpp
     title: io/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: io/io_option.hpp
     title: io/io_option.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: io/out.hpp
     title: io/out.hpp
   - icon: ':warning:'
@@ -64,13 +64,13 @@ data:
   - icon: ':warning:'
     path: math/BinomMod.hpp
     title: math/BinomMod.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
   - icon: ':warning:'
@@ -82,10 +82,10 @@ data:
   - icon: ':warning:'
     path: math/euler_phi.hpp
     title: math/euler_phi.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
@@ -94,22 +94,22 @@ data:
   - icon: ':warning:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/constant.hpp
     title: meta/constant.hpp
   - icon: ':warning:'
     path: meta/meta.hpp
     title: meta/meta.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
   - icon: ':warning:'
@@ -1110,15 +1110,15 @@ data:
     \        }\r\n            return 1;\r\n        }\r\n    } find_factor;\r\n\r\n\
     \    [[maybe_unused]] inline constexpr struct {\r\n        template<bool sorted\
     \ = true, class Container = std::vector<KYOPRO_BASE_INT>>\r\n        Container\
-    \ operator ()(std::uint_fast64_t n) const {\r\n            Container res;\r\n\
-    \            for (int p = 2; p < 100 && p * p <= n; ++p) {\r\n               \
-    \ while (n % p == 0) {\r\n                n /= p;\r\n                res.emplace_back(p);\r\
-    \n                }\r\n            }\r\n            while (n > 1) {\r\n      \
-    \          std::uint_fast64_t p = find_factor(n);\r\n                do {\r\n\
-    \                n /= p;\r\n                res.emplace_back(p);\r\n         \
-    \       } while (n % p == 0);\r\n            }\r\n            if constexpr (sorted)\
-    \ std::sort(res.begin(), res.end());\r\n            return res;\r\n        }\r\
-    \n    } factorize;\r\n} // namespace kpr\r\n#line 6 \"data_structure/FenwickTree.hpp\"\
+    \ operator ()(KYOPRO_BASE_UINT n) const {\r\n            Container res;\r\n  \
+    \          for (int p = 2; p < 100 && p * p <= static_cast<int>(n); ++p) {\r\n\
+    \                while (n % p == 0) {\r\n                    n /= p;\r\n     \
+    \               res.emplace_back(p);\r\n                }\r\n            }\r\n\
+    \            while (n > 1) {\r\n                std::uint_fast64_t p = find_factor(n);\r\
+    \n                do {\r\n                    n /= p;\r\n                    res.emplace_back(p);\r\
+    \n                } while (n % p == 0);\r\n            }\r\n            if constexpr\
+    \ (sorted) std::sort(res.begin(), res.end());\r\n            return res;\r\n \
+    \       }\r\n    } factorize;\r\n} // namespace kpr\r\n#line 6 \"data_structure/FenwickTree.hpp\"\
     \n\r\nnamespace kpr {\r\n    template<class T, class Op = Add<T>, class Container\
     \ = std::vector<T>>\r\n    struct FenwickTree: private Op {\r\n        using value_type\
     \ = T;\r\n        using size_type = std::size_t;\r\n        using reference =\
@@ -1508,7 +1508,7 @@ data:
   isVerificationFile: false
   path: all.hpp
   requiredBy: []
-  timestamp: '2023-03-30 03:19:13+09:00'
+  timestamp: '2023-03-30 09:27:13+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: all.hpp
