@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: io/in.hpp
     title: io/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: io/io_option.hpp
     title: io/io_option.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: io/out.hpp
     title: io/out.hpp
   - icon: ':warning:'
@@ -22,13 +22,13 @@ data:
   - icon: ':warning:'
     path: math/BinomMod.hpp
     title: math/BinomMod.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
     path: math/ModInt.hpp
     title: math/ModInt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/Montgomery.hpp
     title: math/Montgomery.hpp
   - icon: ':warning:'
@@ -40,28 +40,28 @@ data:
   - icon: ':warning:'
     path: math/euler_phi.hpp
     title: math/euler_phi.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
   _extendedRequiredBy:
@@ -883,7 +883,7 @@ data:
     \     }\r\n            return true;\r\n        }\r\n    } is_prime;\r\n} // namespace\
     \ kpr\r\n#line 12 \"math/factorize.hpp\"\n\r\nnamespace kpr {\r\n    // \u7D20\
     \u56E0\u6570\u5206\u89E3\r\n    [[maybe_unused]] inline constexpr struct {\r\n\
-    \        template<class T>\r\n        constexpr T operator ()(T p, std::uint_fast64_t\
+    \        template<class T>\r\n        constexpr T operator ()(T p, KYOPRO_BASE_UINT\
     \ c) const {\r\n            using U = std::make_unsigned_t<T>;\r\n           \
     \ using dmint = DynamicModInt<U, 0, true>;\r\n            U n = p;\r\n       \
     \     dmint::set_mod(n);\r\n            dmint cc = c;\r\n            auto f =\
@@ -900,7 +900,7 @@ data:
     \               do {\r\n                z = f(z);\r\n                g = std::gcd(static_cast<U>(x\
     \ - z), n);\r\n                } while (g == 1);\r\n            }\r\n        \
     \    return g;\r\n        }\r\n    } pollard_rho;\r\n\r\n    [[maybe_unused]]\
-    \ inline constexpr struct {\r\n        KYOPRO_BASE_UINT operator ()(std::uint_fast64_t\
+    \ inline constexpr struct {\r\n        KYOPRO_BASE_UINT operator ()(KYOPRO_BASE_UINT\
     \ n) const noexcept {\r\n            static std::mt19937_64 mt(std::random_device{}());\r\
     \n            std::uniform_int_distribution<std::uint_fast64_t> rnd(0, n - 1);\r\
     \n            if (is_prime(n)) return n;\r\n            for (int i = 0; i < 100;\
@@ -910,12 +910,12 @@ data:
     \    [[maybe_unused]] inline constexpr struct {\r\n        template<bool sorted\
     \ = true, class Container = std::vector<KYOPRO_BASE_INT>>\r\n        Container\
     \ operator ()(KYOPRO_BASE_UINT n) const {\r\n            Container res;\r\n  \
-    \          for (int p = 2; p < 100 && p * p <= static_cast<int>(n); ++p) {\r\n\
-    \                while (n % p == 0) {\r\n                    n /= p;\r\n     \
-    \               res.emplace_back(p);\r\n                }\r\n            }\r\n\
-    \            while (n > 1) {\r\n                std::uint_fast64_t p = find_factor(n);\r\
-    \n                do {\r\n                    n /= p;\r\n                    res.emplace_back(p);\r\
-    \n                } while (n % p == 0);\r\n            }\r\n            if constexpr\
+    \          for (int p = 2; p < 100 && p * p <= n; ++p) {\r\n                while\
+    \ (n % p == 0) {\r\n                    n /= p;\r\n                    res.emplace_back(p);\r\
+    \n                }\r\n            }\r\n            while (n > 1) {\r\n      \
+    \          std::uint_fast64_t p = find_factor(n);\r\n                do {\r\n\
+    \                    n /= p;\r\n                    res.emplace_back(p);\r\n \
+    \               } while (n % p == 0);\r\n            }\r\n            if constexpr\
     \ (sorted) std::sort(res.begin(), res.end());\r\n            return res;\r\n \
     \       }\r\n    } factorize;\r\n} // namespace kpr\r\n#line 14 \"math/math.hpp\"\
     \n"
@@ -951,7 +951,7 @@ data:
   requiredBy:
   - all/all.hpp
   - all.hpp
-  timestamp: '2023-03-30 09:27:13+09:00'
+  timestamp: '2023-03-30 10:02:03+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/math.hpp
