@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/setting.hpp
     title: meta/setting.hpp
   _extendedRequiredBy:
@@ -11,13 +11,13 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
@@ -30,15 +30,15 @@ data:
     path: template/template.hpp
     title: template/template.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"math/Montgomery.hpp\"\n#include <cstdint>\r\n#include <limits>\r\
@@ -72,12 +72,12 @@ data:
     \ mod;\r\n        }\r\n\r\n        Montgomery() noexcept = default;\r\n      \
     \  Montgomery(T mod) noexcept {\r\n            set_mod(mod);\r\n        }\r\n\r\
     \n        constexpr T transform(T x) const noexcept {\r\n            return reduce(static_cast<larger_type>(x)\
-    \ * n2);\r\n        }\r\n\r\n        constexpr T inverse_transform(T x) const\
-    \ noexcept {\r\n            T y = reduce(x);\r\n            return y >= mod ?\
-    \ y - mod : y;\r\n        }\r\n\r\n        constexpr T reduce(larger_type x) const\
-    \ noexcept {\r\n            return (x + static_cast<larger_type>(static_cast<T>(x)\
-    \ * r) * mod) >> std::numeric_limits<T>::digits;\r\n        }\r\n    };\r\n} //\
-    \ namespace kpr\r\n"
+    \ * n2);\r\n        }\r\n\r\n        constexpr T inv_transform(T x) const noexcept\
+    \ {\r\n            T y = reduce(x);\r\n            return y >= mod ? y - mod :\
+    \ y;\r\n        }\r\n\r\n        constexpr T reduce(larger_type x) const noexcept\
+    \ {\r\n            return (x + static_cast<larger_type>(static_cast<T>(x) * r)\
+    \ * mod) >> std::numeric_limits<T>::digits;\r\n        }\r\n    };\r\n} // namespace\
+    \ kpr\r\n"
   code: "#pragma once\r\n#include <cstdint>\r\n#include <limits>\r\n#include <type_traits>\r\
     \n#include \"../meta/setting.hpp\"\r\n\r\nnamespace kpr {\r\n    template<class\
     \ T>\r\n    struct Montgomery {\r\n        static_assert(is_unsigned_integer_v<T>,\
@@ -94,12 +94,12 @@ data:
     \ mod;\r\n        }\r\n\r\n        Montgomery() noexcept = default;\r\n      \
     \  Montgomery(T mod) noexcept {\r\n            set_mod(mod);\r\n        }\r\n\r\
     \n        constexpr T transform(T x) const noexcept {\r\n            return reduce(static_cast<larger_type>(x)\
-    \ * n2);\r\n        }\r\n\r\n        constexpr T inverse_transform(T x) const\
-    \ noexcept {\r\n            T y = reduce(x);\r\n            return y >= mod ?\
-    \ y - mod : y;\r\n        }\r\n\r\n        constexpr T reduce(larger_type x) const\
-    \ noexcept {\r\n            return (x + static_cast<larger_type>(static_cast<T>(x)\
-    \ * r) * mod) >> std::numeric_limits<T>::digits;\r\n        }\r\n    };\r\n} //\
-    \ namespace kpr\r\n"
+    \ * n2);\r\n        }\r\n\r\n        constexpr T inv_transform(T x) const noexcept\
+    \ {\r\n            T y = reduce(x);\r\n            return y >= mod ? y - mod :\
+    \ y;\r\n        }\r\n\r\n        constexpr T reduce(larger_type x) const noexcept\
+    \ {\r\n            return (x + static_cast<larger_type>(static_cast<T>(x) * r)\
+    \ * mod) >> std::numeric_limits<T>::digits;\r\n        }\r\n    };\r\n} // namespace\
+    \ kpr\r\n"
   dependsOn:
   - meta/setting.hpp
   isVerificationFile: false
@@ -113,8 +113,8 @@ data:
   - math/DynamicModInt.hpp
   - template/template.hpp
   - template/alias.hpp
-  timestamp: '2023-02-11 02:36:17+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-04-01 14:10:21+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/yosupo/factorize.test.cpp
   - verify/aoj/PrimeNumber.test.cpp

@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -27,41 +27,41 @@ data:
     path: data_structure/structure.hpp
     title: data_structure/structure.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/point_add_range_sum.test.cpp
     title: verify/yosupo/point_add_range_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"data_structure/FenwickTree.hpp\"\n#include <cstddef>\r\n\
     #include <utility>\r\n#include <vector>\r\n#line 2 \"function/monoid.hpp\"\n#include\
     \ <limits>\r\n#include <type_traits>\r\n#line 2 \"math/power.hpp\"\n#include <cstdint>\r\
-    \n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr struct {\r\n  \
-    \      template<class T>\r\n        constexpr T operator ()(T a, std::uint_fast64_t\
-    \ n, T init = 1) const noexcept {\r\n            while (n > 0) {\r\n         \
-    \       if (n & 1) init *= a;\r\n                a *= a;\r\n                n\
-    \ >>= 1;\r\n            }\r\n            return init;\r\n        }\r\n    } power;\r\
-    \n} // namespace kpr\r\n#line 3 \"meta/setting.hpp\"\n\r\n#ifndef KYOPRO_BASE_INT\r\
-    \n// \u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u578B\r\n#define KYOPRO_BASE_INT\
-    \ std::int64_t\r\n#endif\r\n\r\n#ifndef KYOPRO_BASE_UINT\r\n// \u57FA\u672C\u7B26\
-    \u53F7\u306A\u3057\u6574\u6570\u578B\r\n#define KYOPRO_BASE_UINT std::uint64_t\r\
-    \n#endif\r\n\r\n#ifndef KYOPRO_BASE_FLOAT\r\n// \u57FA\u672C\u6D6E\u52D5\u5C0F\
-    \u6570\u70B9\u6570\u578B\r\n#define KYOPRO_BASE_FLOAT double\r\n#endif\r\n\r\n\
-    #ifndef KYOPRO_DEFAULT_MOD\r\n// \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305F\
-    mod\r\n#define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))\r\
-    \n#endif\r\n\r\n#ifndef KYOPRO_DECIMAL_PRECISION\r\n// \u5C0F\u6570\u7CBE\u5EA6\
-    (\u6841)\r\n#define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))\r\
+    \n#line 3 \"meta/setting.hpp\"\n\r\n#ifndef KYOPRO_BASE_INT\r\n// \u57FA\u672C\
+    \u7B26\u53F7\u4ED8\u304D\u6574\u6570\u578B\r\n#define KYOPRO_BASE_INT std::int64_t\r\
+    \n#endif\r\n\r\n#ifndef KYOPRO_BASE_UINT\r\n// \u57FA\u672C\u7B26\u53F7\u306A\u3057\
+    \u6574\u6570\u578B\r\n#define KYOPRO_BASE_UINT std::uint64_t\r\n#endif\r\n\r\n\
+    #ifndef KYOPRO_BASE_FLOAT\r\n// \u57FA\u672C\u6D6E\u52D5\u5C0F\u6570\u70B9\u6570\
+    \u578B\r\n#define KYOPRO_BASE_FLOAT double\r\n#endif\r\n\r\n#ifndef KYOPRO_DEFAULT_MOD\r\
+    \n// \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305Fmod\r\n#define KYOPRO_DEFAULT_MOD\
+    \ (static_cast<KYOPRO_BASE_UINT>(998244353))\r\n#endif\r\n\r\n#ifndef KYOPRO_DECIMAL_PRECISION\r\
+    \n// \u5C0F\u6570\u7CBE\u5EA6(\u6841)\r\n#define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))\r\
     \n#endif\r\n\r\n#ifndef KYOPRO_INF_DIV\r\n// \u7121\u9650\u5927\u3092\u8868\u3059\
     \u6574\u6570\u304C\u6700\u5927\u5024\u306E\u4F55\u5206\u306E\u4E00\u304B\u3092\
     \u8868\u3059\r\n#define KYOPRO_INF_DIV (static_cast<KYOPRO_BASE_UINT>(3))\r\n\
     #endif\r\n\r\n#ifndef KYOPRO_BUFFER_SIZE\r\n// \u30C7\u30D5\u30A9\u30EB\u30C8\u306E\
     \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\r\n#define KYOPRO_BUFFER_SIZE (static_cast<KYOPRO_BASE_UINT>(2048))\r\
-    \n#endif\r\n#line 5 \"meta/constant.hpp\"\n\r\nnamespace kpr {\r\n    // \u554F\
-    \u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305Fmod\r\n    template<class T>\r\n   \
-    \ inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\r\n    // \u554F\u984C\u3067\u8A2D\
-    \u5B9A\u3055\u308C\u305Fmod\r\n    inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\r\
+    \n#endif\r\n#line 5 \"math/power.hpp\"\n\r\nnamespace kpr {\r\n    [[maybe_unused]]\
+    \ inline constexpr struct {\r\n        template<class T>\r\n        constexpr\
+    \ T operator ()(T a, KYOPRO_BASE_UINT n, T init = Mul<T>::id()) const noexcept\
+    \ {\r\n            while (n > 0) {\r\n                if (n & 1) init *= a;\r\n\
+    \                a *= a;\r\n                n >>= 1;\r\n            }\r\n    \
+    \        return init;\r\n        }\r\n    } power;\r\n} // namespace kpr\r\n#line\
+    \ 5 \"meta/constant.hpp\"\n\r\nnamespace kpr {\r\n    // \u554F\u984C\u3067\u8A2D\
+    \u5B9A\u3055\u308C\u305Fmod\r\n    template<class T>\r\n    inline constexpr T\
+    \ MOD = KYOPRO_DEFAULT_MOD;\r\n    // \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\
+    \u305Fmod\r\n    inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\r\
     \n\r\n    // \u7121\u9650\u5927\u3092\u8868\u3059\u6574\u6570\r\n    template<class\
     \ T>\r\n    inline constexpr T INF = std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\r\
     \n    // \u7121\u9650\u5927\u3092\u8868\u3059\u6574\u6570\r\n    inline constexpr\
@@ -191,85 +191,82 @@ data:
     \n} // namespace kpr\r\n#line 6 \"function/monoid.hpp\"\n\r\nnamespace kpr {\r\
     \n    // \u8DB3\u3057\u7B97\u306Emonoid\r\n    template<class T>\r\n    struct\
     \ Add {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic\
-    \ type\");\r\n\r\n        using value_type = T;\r\n\r\n        constexpr T id()\
-    \ const noexcept {\r\n            return T{};\r\n        }\r\n\r\n        constexpr\
+    \ type\");\r\n\r\n        using value_type = T;\r\n\r\n        static constexpr\
+    \ T id() noexcept {\r\n            return T{};\r\n        }\r\n\r\n        constexpr\
     \ T operator ()(const T& a, const T& b) const noexcept {\r\n            return\
-    \ a + b;\r\n        }\r\n\r\n        constexpr T inverse(const T& a) const noexcept\
+    \ a + b;\r\n        }\r\n\r\n        static constexpr T inv(const T& a) noexcept\
     \ {\r\n            static_assert(std::is_signed_v<T>, \"T must be a signed type\"\
     );\r\n            return -a;\r\n        }\r\n    };\r\n\r\n    // \u639B\u3051\
     \u7B97\u306Emonoid\r\n    template<class T>\r\n    struct Mul {\r\n        static_assert(is_arithmetic_v<T>,\
     \ \"T must be an arithmetic type\");\r\n\r\n        using value_type = T;\r\n\r\
-    \n        constexpr T id() const noexcept {\r\n            return 1;\r\n     \
-    \   }\r\n\r\n        constexpr T operator ()(const T& a, const T& b) const noexcept\
-    \ {\r\n            return a * b;\r\n        }\r\n\r\n        constexpr T inverse(const\
-    \ T& a) const noexcept {\r\n            return 1 / a;\r\n        }\r\n    };\r\
-    \n\r\n    // min\u306Emonoid\r\n    template<class T>\r\n    struct Min {\r\n\
-    \        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic type\");\r\
-    \n\r\n        using value_type = T;\r\n\r\n        constexpr T id() const noexcept\
-    \ {\r\n            return std::numeric_limits<T>::has_infinity ? -std::numeric_limits<T>::infinity()\
+    \n        static constexpr T id() noexcept {\r\n            return 1;\r\n    \
+    \    }\r\n\r\n        constexpr T operator ()(const T& a, const T& b) const noexcept\
+    \ {\r\n            return a * b;\r\n        }\r\n\r\n        static constexpr\
+    \ T inv(const T& a) noexcept {\r\n            return 1 / a;\r\n        }\r\n \
+    \   };\r\n\r\n    // min\u306Emonoid\r\n    template<class T>\r\n    struct Min\
+    \ {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic type\"\
+    );\r\n\r\n        using value_type = T;\r\n\r\n        static constexpr T id()\
+    \ noexcept {\r\n            return std::numeric_limits<T>::has_infinity ? -std::numeric_limits<T>::infinity()\
     \ : INF<T>;\r\n        }\r\n\r\n        constexpr T operator ()(const T& a, const\
     \ T& b) const noexcept {\r\n            return a < b ? a : b;\r\n        }\r\n\
     \    };\r\n\r\n    // max\u306Emonoid\r\n    template<class T>\r\n    struct Max\
     \ {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic type\"\
-    );\r\n\r\n        using value_type = T;\r\n\r\n        constexpr T id() const\
+    );\r\n\r\n        using value_type = T;\r\n\r\n        static constexpr T id()\
     \ noexcept {\r\n            return std::numeric_limits<T>::has_infinity ? -std::numeric_limits<T>::infinity()\
     \ : (std::is_signed_v<T> ? -INF<T> : 0);\r\n        }\r\n\r\n        constexpr\
-    \ T operator ()(const T& a, const T& b) const noexcept {\r\n            return\
-    \ a > b ? a : b;\r\n        }\r\n    };\r\n\r\n\r\n    // inverse\u3092\u6301\u3064\
-    \u304B\u8ABF\u3079\u308B\r\n    template<class, class = void>\r\n    struct has_inverse\
+    \  T operator ()(const T& a, const T& b) const noexcept {\r\n            return\
+    \ a > b ? a : b;\r\n        }\r\n    };\r\n\r\n\r\n    // inv\u3092\u6301\u3064\
+    \u304B\u8ABF\u3079\u308B\r\n    template<class, class = void>\r\n    struct has_inv\
     \ {\r\n        static constexpr bool value = false;\r\n    };\r\n\r\n    template<class\
-    \ T>\r\n    struct has_inverse<T, std::void_t<decltype(&T::inverse)>> {\r\n  \
-    \      static constexpr bool value = true;\r\n    };\r\n\r\n    // inverse\u3092\
-    \u6301\u3064\u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    inline constexpr\
-    \ bool has_inverse_v = has_inverse<T>::value;\r\n} // namespace kpr\r\n#line 6\
-    \ \"data_structure/FenwickTree.hpp\"\n\r\nnamespace kpr {\r\n    template<class\
-    \ T, class Op = Add<T>, class Container = std::vector<T>>\r\n    struct FenwickTree:\
-    \ private Op {\r\n        using value_type = T;\r\n        using size_type = std::size_t;\r\
-    \n        using reference = T&;\r\n        using const_reference = const T&;\r\
-    \n        using operator_type = Op;\r\n        using container_type = Container;\r\
-    \n\r\n    private:\r\n        Container tree;\r\n\r\n    public:\r\n        FenwickTree()\
-    \ noexcept = default;\r\n        FenwickTree(std::size_t n) noexcept: tree(n,\
-    \ Op::id()) {}\r\n\r\n        std::size_t size() noexcept {\r\n            return\
-    \ tree.size();\r\n        }\r\n\r\n        void apply(int p, const T& x) {\r\n\
-    \            ++p;\r\n            while (p <= (int)size()) {\r\n              \
-    \  tree[p - 1] = Op::operator ()(tree[p - 1], x);\r\n                p += p &\
-    \ -p;\r\n            }\r\n        }\r\n\r\n        T prod(int r) const {\r\n \
-    \           T s = Op::id();\r\n            while (r > 0) {\r\n               \
-    \ s = Op::operator ()(s, tree[r - 1]);\r\n                r -= r & -r;\r\n   \
-    \         }\r\n            return s;\r\n        }\r\n        T prod(int l, int\
-    \ r) const {\r\n            static_assert(has_inverse_v<Op>, \"Operator doesn't\
-    \ have an inverse\");\r\n            return Op::operator ()(prod(r), Op::inverse(prod(l)));\r\
+    \ T>\r\n    struct has_inv<T, std::void_t<decltype(&T::inv)>> {\r\n        static\
+    \ constexpr bool value = true;\r\n    };\r\n\r\n    // inv\u3092\u6301\u3064\u304B\
+    \u8ABF\u3079\u308B\r\n    template<class T>\r\n    inline constexpr bool has_inv_v\
+    \ = has_inv<T>::value;\r\n} // namespace kpr\r\n#line 6 \"data_structure/FenwickTree.hpp\"\
+    \n\r\nnamespace kpr {\r\n    template<class T, class Op = Add<T>, class Container\
+    \ = std::vector<T>>\r\n    struct FenwickTree {\r\n        using value_type =\
+    \ T;\r\n        using size_type = std::size_t;\r\n        using reference = T&;\r\
+    \n        using const_reference = const T&;\r\n        using operator_type = Op;\r\
+    \n        using container_type = Container;\r\n\r\n    private:\r\n        Op\
+    \ op;\r\n        Container tree;\r\n\r\n    public:\r\n        FenwickTree() noexcept\
+    \ = default;\r\n        FenwickTree(std::size_t n) noexcept: tree(n, op.id())\
+    \ {}\r\n\r\n        std::size_t size() noexcept {\r\n            return tree.size();\r\
+    \n        }\r\n\r\n        void apply(int p, const T& x) {\r\n            ++p;\r\
+    \n            while (p <= (int)size()) {\r\n                tree[p - 1] = op(tree[p\
+    \ - 1], x);\r\n                p += p & -p;\r\n            }\r\n        }\r\n\r\
+    \n        T prod(int r) const {\r\n            T s = op.id();\r\n            while\
+    \ (r > 0) {\r\n                s = op(s, tree[r - 1]);\r\n                r -=\
+    \ r & -r;\r\n            }\r\n            return s;\r\n        }\r\n        T\
+    \ prod(int l, int r) const {\r\n            static_assert(has_inv_v<Op>, \"Operator\
+    \ doesn't have an inv\");\r\n            return op(prod(r), op.inv(prod(l)));\r\
     \n        }\r\n\r\n        T all_prod() {\r\n            return prod(tree.size());\r\
-    \n        }\r\n\r\n        T get(int p) {\r\n            static_assert(has_inverse_v<Op>,\
-    \ \"Operator doesn't have an inverse\");\r\n            return Op::operator ()(prod(p\
-    \ + 1), Op::inverse(prod(p)));\r\n        }\r\n\r\n        void set(int p, const\
-    \ T& x) {\r\n            static_assert(has_inverse_v<Op>, \"Operator doesn't have\
-    \ an inverse\");\r\n            apply(p, Op::operator ()(x, Op::inverse(get(p))));\r\
+    \n        }\r\n\r\n        T get(int p) {\r\n            static_assert(has_inv_v<Op>,\
+    \ \"Operator doesn't have an inv\");\r\n            return op(prod(p + 1), op.inv(prod(p)));\r\
+    \n        }\r\n\r\n        void set(int p, const T& x) {\r\n            static_assert(has_inv_v<Op>,\
+    \ \"Operator doesn't have an inv\");\r\n            apply(p, op(x, op.inv(get(p))));\r\
     \n        }\r\n    };\r\n} // namespace kpr\r\n"
   code: "#pragma once\r\n#include <cstddef>\r\n#include <utility>\r\n#include <vector>\r\
     \n#include \"../function/monoid.hpp\"\r\n\r\nnamespace kpr {\r\n    template<class\
-    \ T, class Op = Add<T>, class Container = std::vector<T>>\r\n    struct FenwickTree:\
-    \ private Op {\r\n        using value_type = T;\r\n        using size_type = std::size_t;\r\
+    \ T, class Op = Add<T>, class Container = std::vector<T>>\r\n    struct FenwickTree\
+    \ {\r\n        using value_type = T;\r\n        using size_type = std::size_t;\r\
     \n        using reference = T&;\r\n        using const_reference = const T&;\r\
     \n        using operator_type = Op;\r\n        using container_type = Container;\r\
-    \n\r\n    private:\r\n        Container tree;\r\n\r\n    public:\r\n        FenwickTree()\
-    \ noexcept = default;\r\n        FenwickTree(std::size_t n) noexcept: tree(n,\
-    \ Op::id()) {}\r\n\r\n        std::size_t size() noexcept {\r\n            return\
-    \ tree.size();\r\n        }\r\n\r\n        void apply(int p, const T& x) {\r\n\
-    \            ++p;\r\n            while (p <= (int)size()) {\r\n              \
-    \  tree[p - 1] = Op::operator ()(tree[p - 1], x);\r\n                p += p &\
-    \ -p;\r\n            }\r\n        }\r\n\r\n        T prod(int r) const {\r\n \
-    \           T s = Op::id();\r\n            while (r > 0) {\r\n               \
-    \ s = Op::operator ()(s, tree[r - 1]);\r\n                r -= r & -r;\r\n   \
-    \         }\r\n            return s;\r\n        }\r\n        T prod(int l, int\
-    \ r) const {\r\n            static_assert(has_inverse_v<Op>, \"Operator doesn't\
-    \ have an inverse\");\r\n            return Op::operator ()(prod(r), Op::inverse(prod(l)));\r\
-    \n        }\r\n\r\n        T all_prod() {\r\n            return prod(tree.size());\r\
-    \n        }\r\n\r\n        T get(int p) {\r\n            static_assert(has_inverse_v<Op>,\
-    \ \"Operator doesn't have an inverse\");\r\n            return Op::operator ()(prod(p\
-    \ + 1), Op::inverse(prod(p)));\r\n        }\r\n\r\n        void set(int p, const\
-    \ T& x) {\r\n            static_assert(has_inverse_v<Op>, \"Operator doesn't have\
-    \ an inverse\");\r\n            apply(p, Op::operator ()(x, Op::inverse(get(p))));\r\
+    \n\r\n    private:\r\n        Op op;\r\n        Container tree;\r\n\r\n    public:\r\
+    \n        FenwickTree() noexcept = default;\r\n        FenwickTree(std::size_t\
+    \ n) noexcept: tree(n, op.id()) {}\r\n\r\n        std::size_t size() noexcept\
+    \ {\r\n            return tree.size();\r\n        }\r\n\r\n        void apply(int\
+    \ p, const T& x) {\r\n            ++p;\r\n            while (p <= (int)size())\
+    \ {\r\n                tree[p - 1] = op(tree[p - 1], x);\r\n                p\
+    \ += p & -p;\r\n            }\r\n        }\r\n\r\n        T prod(int r) const\
+    \ {\r\n            T s = op.id();\r\n            while (r > 0) {\r\n         \
+    \       s = op(s, tree[r - 1]);\r\n                r -= r & -r;\r\n          \
+    \  }\r\n            return s;\r\n        }\r\n        T prod(int l, int r) const\
+    \ {\r\n            static_assert(has_inv_v<Op>, \"Operator doesn't have an inv\"\
+    );\r\n            return op(prod(r), op.inv(prod(l)));\r\n        }\r\n\r\n  \
+    \      T all_prod() {\r\n            return prod(tree.size());\r\n        }\r\n\
+    \r\n        T get(int p) {\r\n            static_assert(has_inv_v<Op>, \"Operator\
+    \ doesn't have an inv\");\r\n            return op(prod(p + 1), op.inv(prod(p)));\r\
+    \n        }\r\n\r\n        void set(int p, const T& x) {\r\n            static_assert(has_inv_v<Op>,\
+    \ \"Operator doesn't have an inv\");\r\n            apply(p, op(x, op.inv(get(p))));\r\
     \n        }\r\n    };\r\n} // namespace kpr\r\n"
   dependsOn:
   - function/monoid.hpp
@@ -283,8 +280,8 @@ data:
   - all.hpp
   - data_structure/structure.hpp
   - data_structure/data_structure.hpp
-  timestamp: '2023-02-14 01:39:39+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-04-01 14:10:21+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/yosupo/point_add_range_sum.test.cpp
 documentation_of: data_structure/FenwickTree.hpp

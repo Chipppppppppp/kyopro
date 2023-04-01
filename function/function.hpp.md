@@ -7,19 +7,19 @@ data:
   - icon: ':warning:'
     path: function/compare.hpp
     title: function/compare.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
   _extendedRequiredBy:
@@ -57,13 +57,8 @@ data:
     \ T& y) const noexcept(noexcept(x >= y)) {\r\n            return x >= y;\r\n \
     \       }\r\n    };\r\n} // namespace kpr\r\n#line 2 \"function/monoid.hpp\"\n\
     #include <limits>\r\n#include <type_traits>\r\n#line 2 \"math/power.hpp\"\n#include\
-    \ <cstdint>\r\n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr struct\
-    \ {\r\n        template<class T>\r\n        constexpr T operator ()(T a, std::uint_fast64_t\
-    \ n, T init = 1) const noexcept {\r\n            while (n > 0) {\r\n         \
-    \       if (n & 1) init *= a;\r\n                a *= a;\r\n                n\
-    \ >>= 1;\r\n            }\r\n            return init;\r\n        }\r\n    } power;\r\
-    \n} // namespace kpr\r\n#line 3 \"meta/setting.hpp\"\n\r\n#ifndef KYOPRO_BASE_INT\r\
-    \n// \u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u578B\r\n#define KYOPRO_BASE_INT\
+    \ <cstdint>\r\n#line 3 \"meta/setting.hpp\"\n\r\n#ifndef KYOPRO_BASE_INT\r\n//\
+    \ \u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u578B\r\n#define KYOPRO_BASE_INT\
     \ std::int64_t\r\n#endif\r\n\r\n#ifndef KYOPRO_BASE_UINT\r\n// \u57FA\u672C\u7B26\
     \u53F7\u306A\u3057\u6574\u6570\u578B\r\n#define KYOPRO_BASE_UINT std::uint64_t\r\
     \n#endif\r\n\r\n#ifndef KYOPRO_BASE_FLOAT\r\n// \u57FA\u672C\u6D6E\u52D5\u5C0F\
@@ -77,10 +72,16 @@ data:
     \u8868\u3059\r\n#define KYOPRO_INF_DIV (static_cast<KYOPRO_BASE_UINT>(3))\r\n\
     #endif\r\n\r\n#ifndef KYOPRO_BUFFER_SIZE\r\n// \u30C7\u30D5\u30A9\u30EB\u30C8\u306E\
     \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\r\n#define KYOPRO_BUFFER_SIZE (static_cast<KYOPRO_BASE_UINT>(2048))\r\
-    \n#endif\r\n#line 5 \"meta/constant.hpp\"\n\r\nnamespace kpr {\r\n    // \u554F\
-    \u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305Fmod\r\n    template<class T>\r\n   \
-    \ inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\r\n    // \u554F\u984C\u3067\u8A2D\
-    \u5B9A\u3055\u308C\u305Fmod\r\n    inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\r\
+    \n#endif\r\n#line 5 \"math/power.hpp\"\n\r\nnamespace kpr {\r\n    [[maybe_unused]]\
+    \ inline constexpr struct {\r\n        template<class T>\r\n        constexpr\
+    \ T operator ()(T a, KYOPRO_BASE_UINT n, T init = Mul<T>::id()) const noexcept\
+    \ {\r\n            while (n > 0) {\r\n                if (n & 1) init *= a;\r\n\
+    \                a *= a;\r\n                n >>= 1;\r\n            }\r\n    \
+    \        return init;\r\n        }\r\n    } power;\r\n} // namespace kpr\r\n#line\
+    \ 5 \"meta/constant.hpp\"\n\r\nnamespace kpr {\r\n    // \u554F\u984C\u3067\u8A2D\
+    \u5B9A\u3055\u308C\u305Fmod\r\n    template<class T>\r\n    inline constexpr T\
+    \ MOD = KYOPRO_DEFAULT_MOD;\r\n    // \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\
+    \u305Fmod\r\n    inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\r\
     \n\r\n    // \u7121\u9650\u5927\u3092\u8868\u3059\u6574\u6570\r\n    template<class\
     \ T>\r\n    inline constexpr T INF = std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\r\
     \n    // \u7121\u9650\u5927\u3092\u8868\u3059\u6574\u6570\r\n    inline constexpr\
@@ -210,46 +211,45 @@ data:
     \n} // namespace kpr\r\n#line 6 \"function/monoid.hpp\"\n\r\nnamespace kpr {\r\
     \n    // \u8DB3\u3057\u7B97\u306Emonoid\r\n    template<class T>\r\n    struct\
     \ Add {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic\
-    \ type\");\r\n\r\n        using value_type = T;\r\n\r\n        constexpr T id()\
-    \ const noexcept {\r\n            return T{};\r\n        }\r\n\r\n        constexpr\
+    \ type\");\r\n\r\n        using value_type = T;\r\n\r\n        static constexpr\
+    \ T id() noexcept {\r\n            return T{};\r\n        }\r\n\r\n        constexpr\
     \ T operator ()(const T& a, const T& b) const noexcept {\r\n            return\
-    \ a + b;\r\n        }\r\n\r\n        constexpr T inverse(const T& a) const noexcept\
+    \ a + b;\r\n        }\r\n\r\n        static constexpr T inv(const T& a) noexcept\
     \ {\r\n            static_assert(std::is_signed_v<T>, \"T must be a signed type\"\
     );\r\n            return -a;\r\n        }\r\n    };\r\n\r\n    // \u639B\u3051\
     \u7B97\u306Emonoid\r\n    template<class T>\r\n    struct Mul {\r\n        static_assert(is_arithmetic_v<T>,\
     \ \"T must be an arithmetic type\");\r\n\r\n        using value_type = T;\r\n\r\
-    \n        constexpr T id() const noexcept {\r\n            return 1;\r\n     \
-    \   }\r\n\r\n        constexpr T operator ()(const T& a, const T& b) const noexcept\
-    \ {\r\n            return a * b;\r\n        }\r\n\r\n        constexpr T inverse(const\
-    \ T& a) const noexcept {\r\n            return 1 / a;\r\n        }\r\n    };\r\
-    \n\r\n    // min\u306Emonoid\r\n    template<class T>\r\n    struct Min {\r\n\
-    \        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic type\");\r\
-    \n\r\n        using value_type = T;\r\n\r\n        constexpr T id() const noexcept\
-    \ {\r\n            return std::numeric_limits<T>::has_infinity ? -std::numeric_limits<T>::infinity()\
+    \n        static constexpr T id() noexcept {\r\n            return 1;\r\n    \
+    \    }\r\n\r\n        constexpr T operator ()(const T& a, const T& b) const noexcept\
+    \ {\r\n            return a * b;\r\n        }\r\n\r\n        static constexpr\
+    \ T inv(const T& a) noexcept {\r\n            return 1 / a;\r\n        }\r\n \
+    \   };\r\n\r\n    // min\u306Emonoid\r\n    template<class T>\r\n    struct Min\
+    \ {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic type\"\
+    );\r\n\r\n        using value_type = T;\r\n\r\n        static constexpr T id()\
+    \ noexcept {\r\n            return std::numeric_limits<T>::has_infinity ? -std::numeric_limits<T>::infinity()\
     \ : INF<T>;\r\n        }\r\n\r\n        constexpr T operator ()(const T& a, const\
     \ T& b) const noexcept {\r\n            return a < b ? a : b;\r\n        }\r\n\
     \    };\r\n\r\n    // max\u306Emonoid\r\n    template<class T>\r\n    struct Max\
     \ {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic type\"\
-    );\r\n\r\n        using value_type = T;\r\n\r\n        constexpr T id() const\
+    );\r\n\r\n        using value_type = T;\r\n\r\n        static constexpr T id()\
     \ noexcept {\r\n            return std::numeric_limits<T>::has_infinity ? -std::numeric_limits<T>::infinity()\
     \ : (std::is_signed_v<T> ? -INF<T> : 0);\r\n        }\r\n\r\n        constexpr\
-    \ T operator ()(const T& a, const T& b) const noexcept {\r\n            return\
-    \ a > b ? a : b;\r\n        }\r\n    };\r\n\r\n\r\n    // inverse\u3092\u6301\u3064\
-    \u304B\u8ABF\u3079\u308B\r\n    template<class, class = void>\r\n    struct has_inverse\
+    \  T operator ()(const T& a, const T& b) const noexcept {\r\n            return\
+    \ a > b ? a : b;\r\n        }\r\n    };\r\n\r\n\r\n    // inv\u3092\u6301\u3064\
+    \u304B\u8ABF\u3079\u308B\r\n    template<class, class = void>\r\n    struct has_inv\
     \ {\r\n        static constexpr bool value = false;\r\n    };\r\n\r\n    template<class\
-    \ T>\r\n    struct has_inverse<T, std::void_t<decltype(&T::inverse)>> {\r\n  \
-    \      static constexpr bool value = true;\r\n    };\r\n\r\n    // inverse\u3092\
-    \u6301\u3064\u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    inline constexpr\
-    \ bool has_inverse_v = has_inverse<T>::value;\r\n} // namespace kpr\r\n#line 4\
-    \ \"function/RecLambda.hpp\"\n\r\nnamespace kpr {\r\n    // \u518D\u5E30\u53EF\
-    \u80FD\u95A2\u6570\u30AF\u30E9\u30B9\r\n    template<class F>\r\n    struct RecLambda\
-    \ {\r\n        using value_type = F;\r\n\r\n    private:\r\n        F func;\r\n\
-    \r\n    public:\r\n        template<class G>\r\n        constexpr RecLambda(G&&\
-    \ func) noexcept: func(std::forward<G>(func)) {}\r\n\r\n        template<class...\
-    \ Args>\r\n        constexpr decltype(auto) operator ()(Args&&... args) const\
-    \ noexcept(noexcept(func(*this, std::forward<Args>(args)...))) {\r\n         \
-    \   return func(*this, std::forward<Args>(args)...);\r\n        }\r\n    };\r\n\
-    \r\n    template<class F>\r\n    RecLambda(F&&) -> RecLambda<std::decay_t<F>>;\r\
+    \ T>\r\n    struct has_inv<T, std::void_t<decltype(&T::inv)>> {\r\n        static\
+    \ constexpr bool value = true;\r\n    };\r\n\r\n    // inv\u3092\u6301\u3064\u304B\
+    \u8ABF\u3079\u308B\r\n    template<class T>\r\n    inline constexpr bool has_inv_v\
+    \ = has_inv<T>::value;\r\n} // namespace kpr\r\n#line 4 \"function/RecLambda.hpp\"\
+    \n\r\nnamespace kpr {\r\n    // \u518D\u5E30\u53EF\u80FD\u95A2\u6570\u30AF\u30E9\
+    \u30B9\r\n    template<class F>\r\n    struct RecLambda {\r\n        using value_type\
+    \ = F;\r\n\r\n    private:\r\n        F func;\r\n\r\n    public:\r\n        template<class\
+    \ G>\r\n        constexpr RecLambda(G&& func) noexcept: func(std::forward<G>(func))\
+    \ {}\r\n\r\n        template<class... Args>\r\n        constexpr decltype(auto)\
+    \ operator ()(Args&&... args) const noexcept(noexcept(func(*this, std::forward<Args>(args)...)))\
+    \ {\r\n            return func(*this, std::forward<Args>(args)...);\r\n      \
+    \  }\r\n    };\r\n\r\n    template<class F>\r\n    RecLambda(F&&) -> RecLambda<std::decay_t<F>>;\r\
     \n} // namespace kpr\r\n#line 5 \"function/function.hpp\"\n"
   code: "#pragma once\r\n#include \"compare.hpp\"\r\n#include \"monoid.hpp\"\r\n#include\
     \ \"RecLambda.hpp\"\r\n"
@@ -266,7 +266,7 @@ data:
   requiredBy:
   - all/all.hpp
   - all.hpp
-  timestamp: '2023-03-20 02:49:55+09:00'
+  timestamp: '2023-04-01 14:10:21+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: function/function.hpp

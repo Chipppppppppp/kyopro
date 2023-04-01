@@ -1,38 +1,44 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: data_structure/UnionFind.hpp
     title: data_structure/UnionFind.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: function/monoid.hpp
+    title: function/monoid.hpp
+  - icon: ':x:'
     path: io/in.hpp
     title: io/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: io/io.hpp
     title: io/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: io/io_option.hpp
     title: io/io_option.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: io/out.hpp
     title: io/out.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: meta/constant.hpp
+    title: meta/constant.hpp
+  - icon: ':x:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/unionfind
@@ -172,32 +178,28 @@ data:
     \ Range\u578BT\u304B\u3089\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n\
     \    template<class T>\r\n    using range_value_t = typename range_value<T>::type;\r\
     \n} // namespace kpr\r\n#line 9 \"data_structure/UnionFind.hpp\"\n\r\nnamespace\
-    \ kpr {\r\n    template<class Container = std::vector<int>>\r\n    struct UnionFind\
-    \ {\r\n        using value_type = range_value_t<Container>;\r\n        using container_type\
-    \ = Container;\r\n\r\n    private:\r\n        Container par;\r\n\r\n    public:\r\
-    \n        UnionFind() noexcept = default;\r\n        UnionFind(std::size_t n)\
-    \ noexcept: par(n, -1) {}\r\n        template<class C, std::enable_if_t<std::is_same_v<Container,\
-    \ std::decay_t<C>>>>\r\n        UnionFind(C&& par): par(std::forward<C>(par))\
-    \ {}\r\n\r\n        void resize(std::size_t x) { par.resize(x, -1); }\r\n    \
-    \    void assign(std::size_t x) { par.assign(x, -1); }\r\n        void reset()\
-    \ { std::fill(std::begin(par), std::end(par), -1); }\r\n\r\n        std::size_t\
-    \ size() const noexcept {\r\n            return par.size();\r\n        }\r\n\r\
-    \n        KYOPRO_BASE_INT find(int x) {\r\n            int p = x;\r\n        \
-    \    while (par[p] >= 0) p = par[p];\r\n            while (x != p) {\r\n     \
-    \           int tmp = x;\r\n                x = par[x];\r\n                par[tmp]\
-    \ = p;\r\n            }\r\n            return p;\r\n        }\r\n\r\n        bool\
-    \ merge(int x, int y) {\r\n            x = find(x), y = find(y);\r\n         \
-    \   if (x == y) return false;\r\n            if (par[x] > par[y]) {\r\n      \
-    \          int tmp = x;\r\n                x = y;\r\n                y = tmp;\r\
-    \n            }\r\n            par[x] += par[y];\r\n            par[y] = x;\r\n\
-    \            return true;\r\n        }\r\n\r\n        bool same(int x, int y)\
-    \ {\r\n            return find(x) == find(y);\r\n        }\r\n\r\n        KYOPRO_BASE_INT\
-    \ group_size(int x) {\r\n            return -par[find(x)];\r\n        }\r\n\r\n\
-    \        std::vector<int> group_members(int x) {\r\n            x = find(x);\r\
-    \n            std::vector<int> a;\r\n            for (int i = 0; i < (int)(size());\
-    \ ++i) if (find(i) == x) a.emplace_back(i);\r\n            return a;\r\n     \
-    \   }\r\n\r\n        template<class Vector = std::vector<KYOPRO_BASE_INT>>\r\n\
-    \        Vector roots() const {\r\n            Vector a;\r\n            for (int\
+    \ kpr {\r\n    struct UnionFind {\r\n    private:\r\n        std::vector<int>\
+    \ par;\r\n\r\n    public:\r\n        UnionFind() noexcept = default;\r\n     \
+    \   UnionFind(std::size_t n) noexcept: par(n, -1) {}\r\n\r\n        void resize(std::size_t\
+    \ x) { par.resize(x, -1); }\r\n        void assign(std::size_t x) { par.assign(x,\
+    \ -1); }\r\n        void clear() { std::fill(par.begin(), par.end(), -1); }\r\n\
+    \r\n        std::size_t size() const noexcept {\r\n            return par.size();\r\
+    \n        }\r\n\r\n        KYOPRO_BASE_INT find(int x) {\r\n            int p\
+    \ = x;\r\n            while (par[p] >= 0) p = par[p];\r\n            while (x\
+    \ != p) {\r\n                int tmp = x;\r\n                x = par[x];\r\n \
+    \               par[tmp] = p;\r\n            }\r\n            return p;\r\n  \
+    \      }\r\n\r\n        bool merge(int x, int y) {\r\n            x = find(x),\
+    \ y = find(y);\r\n            if (x == y) return false;\r\n            if (par[x]\
+    \ > par[y]) {\r\n                int tmp = x;\r\n                x = y;\r\n  \
+    \              y = tmp;\r\n            }\r\n            par[x] += par[y];\r\n\
+    \            par[y] = x;\r\n            return true;\r\n        }\r\n\r\n    \
+    \    bool same(int x, int y) {\r\n            return find(x) == find(y);\r\n \
+    \       }\r\n\r\n        KYOPRO_BASE_INT group_size(int x) {\r\n            return\
+    \ -par[find(x)];\r\n        }\r\n\r\n        std::vector<int> group_members(int\
+    \ x) {\r\n            x = find(x);\r\n            std::vector<int> a;\r\n    \
+    \        for (int i = 0; i < (int)(size()); ++i) if (find(i) == x) a.emplace_back(i);\r\
+    \n            return a;\r\n        }\r\n\r\n        template<class Vector = std::vector<KYOPRO_BASE_INT>>\r\
+    \n        Vector roots() const {\r\n            Vector a;\r\n            for (int\
     \ i = 0; i < (int)(size()); ++i) if (par[i] < 0) a.emplace_back(i);\r\n      \
     \      return a;\r\n        }\r\n\r\n        KYOPRO_BASE_INT group_count() const\
     \ {\r\n            KYOPRO_BASE_INT cnt = 0;\r\n            for (int i = 0; i <\
@@ -220,15 +222,65 @@ data:
     \ {}\r\n    };\r\n\r\n    template<bool... seps, class... Args>\r\n    constexpr\
     \ auto sep_with(Args&&... args) noexcept {\r\n        return SepWith<std::tuple<Args...>,\
     \ seps...>{std::forward<Args>(args)...};\r\n    }\r\n} // namespace kpr\r\n#line\
-    \ 3 \"math/power.hpp\"\n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr\
-    \ struct {\r\n        template<class T>\r\n        constexpr T operator ()(T a,\
-    \ std::uint_fast64_t n, T init = 1) const noexcept {\r\n            while (n >\
-    \ 0) {\r\n                if (n & 1) init *= a;\r\n                a *= a;\r\n\
-    \                n >>= 1;\r\n            }\r\n            return init;\r\n   \
-    \     }\r\n    } power;\r\n} // namespace kpr\r\n#line 6 \"meta/tuple_like.hpp\"\
-    \n\r\nnamespace kpr {\r\n    namespace helper {\r\n        struct CastableToAny\
-    \ {\r\n            template<class T>\r\n            operator T() const noexcept;\r\
-    \n        };\r\n\r\n        template<class T, std::size_t... idx, std::void_t<decltype(T{((void)idx,\
+    \ 2 \"function/monoid.hpp\"\n#include <limits>\r\n#line 5 \"meta/constant.hpp\"\
+    \n\r\nnamespace kpr {\r\n    // \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305F\
+    mod\r\n    template<class T>\r\n    inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\r\
+    \n    // \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305Fmod\r\n    inline constexpr\
+    \ KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\r\n\r\n    // \u7121\u9650\u5927\
+    \u3092\u8868\u3059\u6574\u6570\r\n    template<class T>\r\n    inline constexpr\
+    \ T INF = std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\r\n    // \u7121\u9650\
+    \u5927\u3092\u8868\u3059\u6574\u6570\r\n    inline constexpr KYOPRO_BASE_INT inf\
+    \ = INF<KYOPRO_BASE_INT>;\r\n\r\n    // \u8A31\u5BB9\u3055\u308C\u308B\u5C0F\u6570\
+    \u8AA4\u5DEE\r\n    template<class T, KYOPRO_BASE_UINT decimal_precision = KYOPRO_DECIMAL_PRECISION>\r\
+    \n    inline constexpr KYOPRO_BASE_FLOAT EPS = static_cast<T>(1) / power(10ULL,\
+    \ decimal_precision);\r\n    // \u8A31\u5BB9\u3055\u308C\u308B\u5C0F\u6570\u8AA4\
+    \u5DEE\r\n    inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\r\
+    \n\r\n    // \u5186\u5468\u7387\r\n    template<class T>\r\n    inline constexpr\
+    \ T PI = 3.14159265358979323846;\r\n    // \u5186\u5468\u7387\r\n    inline constexpr\
+    \ KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\r\n} // namespace kpr\r\n#line\
+    \ 6 \"function/monoid.hpp\"\n\r\nnamespace kpr {\r\n    // \u8DB3\u3057\u7B97\u306E\
+    monoid\r\n    template<class T>\r\n    struct Add {\r\n        static_assert(is_arithmetic_v<T>,\
+    \ \"T must be an arithmetic type\");\r\n\r\n        using value_type = T;\r\n\r\
+    \n        static constexpr T id() noexcept {\r\n            return T{};\r\n  \
+    \      }\r\n\r\n        constexpr T operator ()(const T& a, const T& b) const\
+    \ noexcept {\r\n            return a + b;\r\n        }\r\n\r\n        static constexpr\
+    \ T inv(const T& a) noexcept {\r\n            static_assert(std::is_signed_v<T>,\
+    \ \"T must be a signed type\");\r\n            return -a;\r\n        }\r\n   \
+    \ };\r\n\r\n    // \u639B\u3051\u7B97\u306Emonoid\r\n    template<class T>\r\n\
+    \    struct Mul {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an\
+    \ arithmetic type\");\r\n\r\n        using value_type = T;\r\n\r\n        static\
+    \ constexpr T id() noexcept {\r\n            return 1;\r\n        }\r\n\r\n  \
+    \      constexpr T operator ()(const T& a, const T& b) const noexcept {\r\n  \
+    \          return a * b;\r\n        }\r\n\r\n        static constexpr T inv(const\
+    \ T& a) noexcept {\r\n            return 1 / a;\r\n        }\r\n    };\r\n\r\n\
+    \    // min\u306Emonoid\r\n    template<class T>\r\n    struct Min {\r\n     \
+    \   static_assert(is_arithmetic_v<T>, \"T must be an arithmetic type\");\r\n\r\
+    \n        using value_type = T;\r\n\r\n        static constexpr T id() noexcept\
+    \ {\r\n            return std::numeric_limits<T>::has_infinity ? -std::numeric_limits<T>::infinity()\
+    \ : INF<T>;\r\n        }\r\n\r\n        constexpr T operator ()(const T& a, const\
+    \ T& b) const noexcept {\r\n            return a < b ? a : b;\r\n        }\r\n\
+    \    };\r\n\r\n    // max\u306Emonoid\r\n    template<class T>\r\n    struct Max\
+    \ {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic type\"\
+    );\r\n\r\n        using value_type = T;\r\n\r\n        static constexpr T id()\
+    \ noexcept {\r\n            return std::numeric_limits<T>::has_infinity ? -std::numeric_limits<T>::infinity()\
+    \ : (std::is_signed_v<T> ? -INF<T> : 0);\r\n        }\r\n\r\n        constexpr\
+    \  T operator ()(const T& a, const T& b) const noexcept {\r\n            return\
+    \ a > b ? a : b;\r\n        }\r\n    };\r\n\r\n\r\n    // inv\u3092\u6301\u3064\
+    \u304B\u8ABF\u3079\u308B\r\n    template<class, class = void>\r\n    struct has_inv\
+    \ {\r\n        static constexpr bool value = false;\r\n    };\r\n\r\n    template<class\
+    \ T>\r\n    struct has_inv<T, std::void_t<decltype(&T::inv)>> {\r\n        static\
+    \ constexpr bool value = true;\r\n    };\r\n\r\n    // inv\u3092\u6301\u3064\u304B\
+    \u8ABF\u3079\u308B\r\n    template<class T>\r\n    inline constexpr bool has_inv_v\
+    \ = has_inv<T>::value;\r\n} // namespace kpr\r\n#line 5 \"math/power.hpp\"\n\r\
+    \nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr struct {\r\n      \
+    \  template<class T>\r\n        constexpr T operator ()(T a, KYOPRO_BASE_UINT\
+    \ n, T init = Mul<T>::id()) const noexcept {\r\n            while (n > 0) {\r\n\
+    \                if (n & 1) init *= a;\r\n                a *= a;\r\n        \
+    \        n >>= 1;\r\n            }\r\n            return init;\r\n        }\r\n\
+    \    } power;\r\n} // namespace kpr\r\n#line 6 \"meta/tuple_like.hpp\"\n\r\nnamespace\
+    \ kpr {\r\n    namespace helper {\r\n        struct CastableToAny {\r\n      \
+    \      template<class T>\r\n            operator T() const noexcept;\r\n     \
+    \   };\r\n\r\n        template<class T, std::size_t... idx, std::void_t<decltype(T{((void)idx,\
     \ CastableToAny{})...})>* = nullptr>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
     \ bool) noexcept {\r\n            return true;\r\n        }\r\n        template<class\
     \ T, std::size_t... idx>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
@@ -560,13 +612,15 @@ data:
   - io/in.hpp
   - io/io_option.hpp
   - math/power.hpp
+  - function/monoid.hpp
+  - meta/constant.hpp
   - meta/tuple_like.hpp
   - io/out.hpp
   isVerificationFile: true
   path: verify/yosupo/unionfind.test.cpp
   requiredBy: []
-  timestamp: '2023-03-27 22:50:32+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-04-01 14:10:21+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/yosupo/unionfind.test.cpp
 layout: document

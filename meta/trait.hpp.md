@@ -2,13 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
   - icon: ':warning:'
     path: algorithm/algorithm.hpp
     title: algorithm/algorithm.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
@@ -20,10 +20,10 @@ data:
   - icon: ':warning:'
     path: all/all.hpp
     title: all/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: data_structure/FenwickTree.hpp
     title: data_structure/FenwickTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: data_structure/UnionFind.hpp
     title: data_structure/UnionFind.hpp
   - icon: ':warning:'
@@ -35,16 +35,16 @@ data:
   - icon: ':warning:'
     path: function/function.hpp
     title: function/function.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: function/monoid.hpp
     title: function/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: io/in.hpp
     title: io/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: io/io.hpp
     title: io/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: io/out.hpp
     title: io/out.hpp
   - icon: ':warning:'
@@ -53,7 +53,7 @@ data:
   - icon: ':warning:'
     path: math/BinomMod.hpp
     title: math/BinomMod.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/DynamicModInt.hpp
     title: math/DynamicModInt.hpp
   - icon: ':warning:'
@@ -62,15 +62,21 @@ data:
   - icon: ':warning:'
     path: math/div.hpp
     title: math/div.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/factorize.hpp
     title: math/factorize.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/is_prime.hpp
     title: math/is_prime.hpp
   - icon: ':warning:'
     path: math/math.hpp
     title: math/math.hpp
+  - icon: ':x:'
+    path: math/power.hpp
+    title: math/power.hpp
+  - icon: ':x:'
+    path: meta/constant.hpp
+    title: meta/constant.hpp
   - icon: ':warning:'
     path: meta/meta.hpp
     title: meta/meta.hpp
@@ -99,24 +105,24 @@ data:
     path: template/template.hpp
     title: template/template.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/many_aplusb.test.cpp
     title: verify/yosupo/many_aplusb.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/point_add_range_sum.test.cpp
     title: verify/yosupo/point_add_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"meta/trait.hpp\"\n#include <cstddef>\r\n#include <iterator>\r\
@@ -364,6 +370,7 @@ data:
   - range/irange.hpp
   - function/monoid.hpp
   - function/function.hpp
+  - meta/constant.hpp
   - meta/meta.hpp
   - all.hpp
   - math/is_prime.hpp
@@ -371,6 +378,7 @@ data:
   - math/ModInt.hpp
   - math/math.hpp
   - math/BinomMod.hpp
+  - math/power.hpp
   - math/DynamicModInt.hpp
   - math/Barrett.hpp
   - math/div.hpp
@@ -388,7 +396,7 @@ data:
   - data_structure/data_structure.hpp
   - data_structure/FenwickTree.hpp
   timestamp: '2023-02-11 02:36:17+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/yosupo/many_aplusb.test.cpp
   - verify/yosupo/factorize.test.cpp

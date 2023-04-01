@@ -1,37 +1,40 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: function/monoid.hpp
+    title: function/monoid.hpp
+  - icon: ':x:'
     path: io/in.hpp
     title: io/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: io/io_option.hpp
     title: io/io_option.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: io/out.hpp
     title: io/out.hpp
   - icon: ':warning:'
     path: math/mod.hpp
     title: math/mod.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/power.hpp
     title: math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/constant.hpp
     title: meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
   _extendedRequiredBy:
@@ -321,27 +324,60 @@ data:
     \ std::size_t operator ()(const T& a) const {\r\n            std::size_t seed\
     \ = std::size(a);\r\n            for (auto&& i: a) seed ^= Hash<range_value_t<T>>{}(i)\
     \ + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4);\r\n            return seed;\r\
-    \n        }\r\n    };\r\n} // namespace kpr\r\n#line 3 \"math/power.hpp\"\n\r\n\
-    namespace kpr {\r\n    [[maybe_unused]] inline constexpr struct {\r\n        template<class\
-    \ T>\r\n        constexpr T operator ()(T a, std::uint_fast64_t n, T init = 1)\
-    \ const noexcept {\r\n            while (n > 0) {\r\n                if (n & 1)\
-    \ init *= a;\r\n                a *= a;\r\n                n >>= 1;\r\n      \
-    \      }\r\n            return init;\r\n        }\r\n    } power;\r\n} // namespace\
-    \ kpr\r\n#line 5 \"meta/constant.hpp\"\n\r\nnamespace kpr {\r\n    // \u554F\u984C\
-    \u3067\u8A2D\u5B9A\u3055\u308C\u305Fmod\r\n    template<class T>\r\n    inline\
-    \ constexpr T MOD = KYOPRO_DEFAULT_MOD;\r\n    // \u554F\u984C\u3067\u8A2D\u5B9A\
-    \u3055\u308C\u305Fmod\r\n    inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\r\
-    \n\r\n    // \u7121\u9650\u5927\u3092\u8868\u3059\u6574\u6570\r\n    template<class\
-    \ T>\r\n    inline constexpr T INF = std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\r\
-    \n    // \u7121\u9650\u5927\u3092\u8868\u3059\u6574\u6570\r\n    inline constexpr\
-    \ KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\r\n\r\n    // \u8A31\u5BB9\u3055\
-    \u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\r\n    template<class T, KYOPRO_BASE_UINT\
-    \ decimal_precision = KYOPRO_DECIMAL_PRECISION>\r\n    inline constexpr KYOPRO_BASE_FLOAT\
-    \ EPS = static_cast<T>(1) / power(10ULL, decimal_precision);\r\n    // \u8A31\u5BB9\
-    \u3055\u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\r\n    inline constexpr KYOPRO_BASE_FLOAT\
-    \ eps = EPS<KYOPRO_BASE_FLOAT>;\r\n\r\n    // \u5186\u5468\u7387\r\n    template<class\
-    \ T>\r\n    inline constexpr T PI = 3.14159265358979323846;\r\n    // \u5186\u5468\
-    \u7387\r\n    inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\r\
+    \n        }\r\n    };\r\n} // namespace kpr\r\n#line 6 \"function/monoid.hpp\"\
+    \n\r\nnamespace kpr {\r\n    // \u8DB3\u3057\u7B97\u306Emonoid\r\n    template<class\
+    \ T>\r\n    struct Add {\r\n        static_assert(is_arithmetic_v<T>, \"T must\
+    \ be an arithmetic type\");\r\n\r\n        using value_type = T;\r\n\r\n     \
+    \   static constexpr T id() noexcept {\r\n            return T{};\r\n        }\r\
+    \n\r\n        constexpr T operator ()(const T& a, const T& b) const noexcept {\r\
+    \n            return a + b;\r\n        }\r\n\r\n        static constexpr T inv(const\
+    \ T& a) noexcept {\r\n            static_assert(std::is_signed_v<T>, \"T must\
+    \ be a signed type\");\r\n            return -a;\r\n        }\r\n    };\r\n\r\n\
+    \    // \u639B\u3051\u7B97\u306Emonoid\r\n    template<class T>\r\n    struct\
+    \ Mul {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic\
+    \ type\");\r\n\r\n        using value_type = T;\r\n\r\n        static constexpr\
+    \ T id() noexcept {\r\n            return 1;\r\n        }\r\n\r\n        constexpr\
+    \ T operator ()(const T& a, const T& b) const noexcept {\r\n            return\
+    \ a * b;\r\n        }\r\n\r\n        static constexpr T inv(const T& a) noexcept\
+    \ {\r\n            return 1 / a;\r\n        }\r\n    };\r\n\r\n    // min\u306E\
+    monoid\r\n    template<class T>\r\n    struct Min {\r\n        static_assert(is_arithmetic_v<T>,\
+    \ \"T must be an arithmetic type\");\r\n\r\n        using value_type = T;\r\n\r\
+    \n        static constexpr T id() noexcept {\r\n            return std::numeric_limits<T>::has_infinity\
+    \ ? -std::numeric_limits<T>::infinity() : INF<T>;\r\n        }\r\n\r\n       \
+    \ constexpr T operator ()(const T& a, const T& b) const noexcept {\r\n       \
+    \     return a < b ? a : b;\r\n        }\r\n    };\r\n\r\n    // max\u306Emonoid\r\
+    \n    template<class T>\r\n    struct Max {\r\n        static_assert(is_arithmetic_v<T>,\
+    \ \"T must be an arithmetic type\");\r\n\r\n        using value_type = T;\r\n\r\
+    \n        static constexpr T id() noexcept {\r\n            return std::numeric_limits<T>::has_infinity\
+    \ ? -std::numeric_limits<T>::infinity() : (std::is_signed_v<T> ? -INF<T> : 0);\r\
+    \n        }\r\n\r\n        constexpr  T operator ()(const T& a, const T& b) const\
+    \ noexcept {\r\n            return a > b ? a : b;\r\n        }\r\n    };\r\n\r\
+    \n\r\n    // inv\u3092\u6301\u3064\u304B\u8ABF\u3079\u308B\r\n    template<class,\
+    \ class = void>\r\n    struct has_inv {\r\n        static constexpr bool value\
+    \ = false;\r\n    };\r\n\r\n    template<class T>\r\n    struct has_inv<T, std::void_t<decltype(&T::inv)>>\
+    \ {\r\n        static constexpr bool value = true;\r\n    };\r\n\r\n    // inv\u3092\
+    \u6301\u3064\u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    inline constexpr\
+    \ bool has_inv_v = has_inv<T>::value;\r\n} // namespace kpr\r\n#line 5 \"math/power.hpp\"\
+    \n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr struct {\r\n  \
+    \      template<class T>\r\n        constexpr T operator ()(T a, KYOPRO_BASE_UINT\
+    \ n, T init = Mul<T>::id()) const noexcept {\r\n            while (n > 0) {\r\n\
+    \                if (n & 1) init *= a;\r\n                a *= a;\r\n        \
+    \        n >>= 1;\r\n            }\r\n            return init;\r\n        }\r\n\
+    \    } power;\r\n} // namespace kpr\r\n#line 5 \"meta/constant.hpp\"\n\r\nnamespace\
+    \ kpr {\r\n    // \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305Fmod\r\n    template<class\
+    \ T>\r\n    inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\r\n    // \u554F\u984C\
+    \u3067\u8A2D\u5B9A\u3055\u308C\u305Fmod\r\n    inline constexpr KYOPRO_BASE_INT\
+    \ mod = MOD<KYOPRO_BASE_INT>;\r\n\r\n    // \u7121\u9650\u5927\u3092\u8868\u3059\
+    \u6574\u6570\r\n    template<class T>\r\n    inline constexpr T INF = std::numeric_limits<T>::max()\
+    \ / KYOPRO_INF_DIV;\r\n    // \u7121\u9650\u5927\u3092\u8868\u3059\u6574\u6570\
+    \r\n    inline constexpr KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\r\n\r\n \
+    \   // \u8A31\u5BB9\u3055\u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\r\n    template<class\
+    \ T, KYOPRO_BASE_UINT decimal_precision = KYOPRO_DECIMAL_PRECISION>\r\n    inline\
+    \ constexpr KYOPRO_BASE_FLOAT EPS = static_cast<T>(1) / power(10ULL, decimal_precision);\r\
+    \n    // \u8A31\u5BB9\u3055\u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\r\n    inline\
+    \ constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\r\n\r\n    // \u5186\
+    \u5468\u7387\r\n    template<class T>\r\n    inline constexpr T PI = 3.14159265358979323846;\r\
+    \n    // \u5186\u5468\u7387\r\n    inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\r\
     \n} // namespace kpr\r\n#line 2 \"io/in.hpp\"\n#include <unistd.h>\r\n#include\
     \ <array>\r\n#include <bitset>\r\n#line 7 \"io/in.hpp\"\n#include <cstdio>\r\n\
     #include <string>\r\n#line 5 \"io/io_option.hpp\"\n\r\nnamespace kpr {\r\n   \
@@ -632,12 +668,12 @@ data:
     \ const noexcept {\r\n            return value;\r\n        }\r\n\r\n        static\
     \ constexpr ModInt raw(value_type value) noexcept {\r\n            ModInt res;\r\
     \n            res.value = value;\r\n            return res;\r\n        }\r\n\r\
-    \n        constexpr ModInt power(KYOPRO_BASE_UINT n) const noexcept {\r\n    \
-    \        std::uint_fast64_t res = 1, a = value;\r\n            while (n > 0) {\r\
+    \n        constexpr ModInt pow(KYOPRO_BASE_UINT n) const noexcept {\r\n      \
+    \      std::uint_fast64_t res = 1, a = value;\r\n            while (n > 0) {\r\
     \n                if (n & 1) res = res * a % mod;\r\n                a = a * a\
     \ % mod;\r\n                n >>= 1;\r\n            }\r\n            return res;\r\
-    \n        }\r\n\r\n        constexpr ModInt inverse() const noexcept {\r\n   \
-    \         std::uint_fast64_t a = value, b = mod;\r\n            std::int_fast64_t\
+    \n        }\r\n\r\n        constexpr ModInt inv() const noexcept {\r\n       \
+    \     std::uint_fast64_t a = value, b = mod;\r\n            std::int_fast64_t\
     \ u = 1, v = 0;\r\n            while (b > 0) {\r\n                std::uint_fast64_t\
     \ t = a / b;\r\n                a -= t * b;\r\n                std::swap(a, b);\r\
     \n                u -= t * v;\r\n                std::swap(u, v);\r\n        \
@@ -661,7 +697,7 @@ data:
     \ ModInt& operator *=(ModInt rhs) noexcept {\r\n            value = static_cast<uint_least_t<bit_len(mod)\
     \ * 2>>(value) * rhs.value % mod;\r\n            return *this;\r\n        }\r\n\
     \r\n        constexpr ModInt& operator /=(ModInt rhs) noexcept {\r\n         \
-    \   value = static_cast<uint_least_t<bit_len(mod) * 2>>(value) * rhs.inverse().value\
+    \   value = static_cast<uint_least_t<bit_len(mod) * 2>>(value) * rhs.inv().value\
     \ % mod;\r\n            return *this;\r\n        }\r\n\r\n        friend constexpr\
     \ ModInt operator +(ModInt lhs, ModInt rhs) noexcept {\r\n            return lhs\
     \ += rhs;\r\n        }\r\n\r\n        friend constexpr ModInt operator -(ModInt\
@@ -705,58 +741,58 @@ data:
     \ T() const noexcept {\r\n            return value;\r\n        }\r\n\r\n     \
     \   static constexpr ModInt raw(value_type value) noexcept {\r\n            ModInt\
     \ res;\r\n            res.value = value;\r\n            return res;\r\n      \
-    \  }\r\n\r\n        constexpr ModInt power(KYOPRO_BASE_UINT n) const noexcept\
-    \ {\r\n            std::uint_fast64_t res = 1, a = value;\r\n            while\
-    \ (n > 0) {\r\n                if (n & 1) res = res * a % mod;\r\n           \
-    \     a = a * a % mod;\r\n                n >>= 1;\r\n            }\r\n      \
-    \      return res;\r\n        }\r\n\r\n        constexpr ModInt inverse() const\
-    \ noexcept {\r\n            std::uint_fast64_t a = value, b = mod;\r\n       \
-    \     std::int_fast64_t u = 1, v = 0;\r\n            while (b > 0) {\r\n     \
-    \           std::uint_fast64_t t = a / b;\r\n                a -= t * b;\r\n \
-    \               std::swap(a, b);\r\n                u -= t * v;\r\n          \
-    \      std::swap(u, v);\r\n            }\r\n            return floor_mod(u, mod);\r\
-    \n        }\r\n\r\n        constexpr ModInt operator +() const noexcept {\r\n\
-    \            return *this;\r\n        }\r\n\r\n        constexpr ModInt operator\
-    \ -() const noexcept {\r\n            return value == 0 ? 0 : mod - value;\r\n\
-    \        }\r\n\r\n        constexpr ModInt& operator ++() noexcept {\r\n     \
-    \       if (++value >= mod) value -= mod;\r\n            return *this;\r\n   \
-    \     }\r\n\r\n        constexpr ModInt operator ++(int) noexcept {\r\n      \
-    \      ModInt before = *this;\r\n            ++*this;\r\n            return before;\r\
-    \n        }\r\n\r\n        constexpr ModInt& operator --() noexcept {\r\n    \
-    \        if (value == 0) value = mod;\r\n            --value;\r\n            return\
-    \ *this;\r\n        }\r\n\r\n        constexpr ModInt operator --(int) noexcept\
-    \ {\r\n            ModInt before = *this;\r\n            --*this;\r\n        \
-    \    return before;\r\n        }\r\n\r\n        constexpr ModInt& operator +=(ModInt\
-    \ rhs) noexcept {\r\n            if ((value += rhs.value) >= mod) value -= mod;\r\
-    \n            return *this;\r\n        }\r\n\r\n        constexpr ModInt& operator\
-    \ -=(ModInt rhs) noexcept {\r\n            if (value < rhs.value) value += mod;\r\
-    \n            value -= rhs.value;\r\n            return *this;\r\n        }\r\n\
-    \r\n        constexpr ModInt& operator *=(ModInt rhs) noexcept {\r\n         \
-    \   value = static_cast<uint_least_t<bit_len(mod) * 2>>(value) * rhs.value % mod;\r\
-    \n            return *this;\r\n        }\r\n\r\n        constexpr ModInt& operator\
-    \ /=(ModInt rhs) noexcept {\r\n            value = static_cast<uint_least_t<bit_len(mod)\
-    \ * 2>>(value) * rhs.inverse().value % mod;\r\n            return *this;\r\n \
-    \       }\r\n\r\n        friend constexpr ModInt operator +(ModInt lhs, ModInt\
-    \ rhs) noexcept {\r\n            return lhs += rhs;\r\n        }\r\n\r\n     \
-    \   friend constexpr ModInt operator -(ModInt lhs, ModInt rhs) noexcept {\r\n\
-    \            return lhs -= rhs;\r\n        }\r\n\r\n        friend constexpr ModInt\
-    \ operator *(ModInt lhs, ModInt rhs) noexcept {\r\n            return lhs *= rhs;\r\
-    \n        }\r\n\r\n        friend constexpr ModInt operator /(ModInt lhs, ModInt\
-    \ rhs) noexcept {\r\n            return lhs /= rhs;\r\n        }\r\n\r\n     \
-    \   friend constexpr bool operator ==(ModInt lhs, ModInt rhs) noexcept {\r\n \
-    \           return lhs.value == rhs.value;\r\n        }\r\n\r\n        friend\
-    \ constexpr bool operator !=(ModInt lhs, ModInt rhs) noexcept {\r\n          \
-    \  return lhs.value != rhs.value;\r\n        }\r\n\r\n        template<class Scanner>\r\
-    \n        void scan(Scanner& scanner) {\r\n            std::int_fast64_t value;\r\
-    \n            scanner.scan(value);\r\n            value = floor_mod(value, mod);\r\
-    \n        }\r\n\r\n        template<class Printer>\r\n        void print(Printer&\
-    \ printer) const {\r\n            printer.print(value);\r\n        }\r\n    };\r\
-    \n\r\n    template<KYOPRO_BASE_UINT mod>\r\n    struct ScanFunction<ModInt<mod>>\
-    \ {\r\n        template<class Scanner>\r\n        static void scan(Scanner& scanner,\
-    \ ModInt<mod>& a) {\r\n            std::int_fast64_t value;\r\n            ScanFunction<std::int_fast64_t>::scan(scanner,\
-    \ value);\r\n            a.value = floor_mod(value, a.mod);\r\n        }\r\n \
-    \   };\r\n\r\n    template<KYOPRO_BASE_UINT mod>\r\n    struct PrintFunction<ModInt<mod>>\
-    \ {\r\n        template<class Printer>\r\n        static void print(Printer& printer,\
+    \  }\r\n\r\n        constexpr ModInt pow(KYOPRO_BASE_UINT n) const noexcept {\r\
+    \n            std::uint_fast64_t res = 1, a = value;\r\n            while (n >\
+    \ 0) {\r\n                if (n & 1) res = res * a % mod;\r\n                a\
+    \ = a * a % mod;\r\n                n >>= 1;\r\n            }\r\n            return\
+    \ res;\r\n        }\r\n\r\n        constexpr ModInt inv() const noexcept {\r\n\
+    \            std::uint_fast64_t a = value, b = mod;\r\n            std::int_fast64_t\
+    \ u = 1, v = 0;\r\n            while (b > 0) {\r\n                std::uint_fast64_t\
+    \ t = a / b;\r\n                a -= t * b;\r\n                std::swap(a, b);\r\
+    \n                u -= t * v;\r\n                std::swap(u, v);\r\n        \
+    \    }\r\n            return floor_mod(u, mod);\r\n        }\r\n\r\n        constexpr\
+    \ ModInt operator +() const noexcept {\r\n            return *this;\r\n      \
+    \  }\r\n\r\n        constexpr ModInt operator -() const noexcept {\r\n       \
+    \     return value == 0 ? 0 : mod - value;\r\n        }\r\n\r\n        constexpr\
+    \ ModInt& operator ++() noexcept {\r\n            if (++value >= mod) value -=\
+    \ mod;\r\n            return *this;\r\n        }\r\n\r\n        constexpr ModInt\
+    \ operator ++(int) noexcept {\r\n            ModInt before = *this;\r\n      \
+    \      ++*this;\r\n            return before;\r\n        }\r\n\r\n        constexpr\
+    \ ModInt& operator --() noexcept {\r\n            if (value == 0) value = mod;\r\
+    \n            --value;\r\n            return *this;\r\n        }\r\n\r\n     \
+    \   constexpr ModInt operator --(int) noexcept {\r\n            ModInt before\
+    \ = *this;\r\n            --*this;\r\n            return before;\r\n        }\r\
+    \n\r\n        constexpr ModInt& operator +=(ModInt rhs) noexcept {\r\n       \
+    \     if ((value += rhs.value) >= mod) value -= mod;\r\n            return *this;\r\
+    \n        }\r\n\r\n        constexpr ModInt& operator -=(ModInt rhs) noexcept\
+    \ {\r\n            if (value < rhs.value) value += mod;\r\n            value -=\
+    \ rhs.value;\r\n            return *this;\r\n        }\r\n\r\n        constexpr\
+    \ ModInt& operator *=(ModInt rhs) noexcept {\r\n            value = static_cast<uint_least_t<bit_len(mod)\
+    \ * 2>>(value) * rhs.value % mod;\r\n            return *this;\r\n        }\r\n\
+    \r\n        constexpr ModInt& operator /=(ModInt rhs) noexcept {\r\n         \
+    \   value = static_cast<uint_least_t<bit_len(mod) * 2>>(value) * rhs.inv().value\
+    \ % mod;\r\n            return *this;\r\n        }\r\n\r\n        friend constexpr\
+    \ ModInt operator +(ModInt lhs, ModInt rhs) noexcept {\r\n            return lhs\
+    \ += rhs;\r\n        }\r\n\r\n        friend constexpr ModInt operator -(ModInt\
+    \ lhs, ModInt rhs) noexcept {\r\n            return lhs -= rhs;\r\n        }\r\
+    \n\r\n        friend constexpr ModInt operator *(ModInt lhs, ModInt rhs) noexcept\
+    \ {\r\n            return lhs *= rhs;\r\n        }\r\n\r\n        friend constexpr\
+    \ ModInt operator /(ModInt lhs, ModInt rhs) noexcept {\r\n            return lhs\
+    \ /= rhs;\r\n        }\r\n\r\n        friend constexpr bool operator ==(ModInt\
+    \ lhs, ModInt rhs) noexcept {\r\n            return lhs.value == rhs.value;\r\n\
+    \        }\r\n\r\n        friend constexpr bool operator !=(ModInt lhs, ModInt\
+    \ rhs) noexcept {\r\n            return lhs.value != rhs.value;\r\n        }\r\
+    \n\r\n        template<class Scanner>\r\n        void scan(Scanner& scanner) {\r\
+    \n            std::int_fast64_t value;\r\n            scanner.scan(value);\r\n\
+    \            value = floor_mod(value, mod);\r\n        }\r\n\r\n        template<class\
+    \ Printer>\r\n        void print(Printer& printer) const {\r\n            printer.print(value);\r\
+    \n        }\r\n    };\r\n\r\n    template<KYOPRO_BASE_UINT mod>\r\n    struct\
+    \ ScanFunction<ModInt<mod>> {\r\n        template<class Scanner>\r\n        static\
+    \ void scan(Scanner& scanner, ModInt<mod>& a) {\r\n            std::int_fast64_t\
+    \ value;\r\n            ScanFunction<std::int_fast64_t>::scan(scanner, value);\r\
+    \n            a.value = floor_mod(value, a.mod);\r\n        }\r\n    };\r\n\r\n\
+    \    template<KYOPRO_BASE_UINT mod>\r\n    struct PrintFunction<ModInt<mod>> {\r\
+    \n        template<class Printer>\r\n        static void print(Printer& printer,\
     \ ModInt<mod> a) {\r\n            PrintFunction<typename ModInt<mod>::value_type>::print(printer,\
     \ a.value);\r\n        }\r\n    };\r\n\r\n    template<KYOPRO_BASE_UINT mod>\r\
     \n    struct Hash<ModInt<mod>> {\r\n        using value_type = ModInt<mod>;\r\n\
@@ -771,6 +807,7 @@ data:
   - meta/tuple_like.hpp
   - meta/constant.hpp
   - math/power.hpp
+  - function/monoid.hpp
   - io/in.hpp
   - io/io_option.hpp
   - io/out.hpp
@@ -784,7 +821,7 @@ data:
   - math/BinomMod.hpp
   - template/template.hpp
   - template/alias.hpp
-  timestamp: '2023-03-25 22:11:58+09:00'
+  timestamp: '2023-04-01 14:10:21+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/ModInt.hpp

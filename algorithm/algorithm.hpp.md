@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
@@ -22,13 +22,13 @@ data:
   - icon: ':warning:'
     path: function/compare.hpp
     title: function/compare.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
   _extendedRequiredBy:
@@ -249,18 +249,18 @@ data:
     \ T& y) const noexcept(noexcept(x >= y)) {\r\n            return x >= y;\r\n \
     \       }\r\n    };\r\n} // namespace kpr\r\n#line 7 \"algorithm/compress.hpp\"\
     \n\nnamespace kpr {\n    // \u5EA7\u6A19\u5727\u7E2E\n    [[maybe_unused]] inline\
-    \ constexpr struct {\n        template<class T, class Compare = Less>\n      \
-    \  auto operator ()(T first, T last, Compare comp = {}) const {\n            using\
-    \ ValueType = typename std::iterator_traits<T>::value_type;\n            std::vector<ValueType>\
-    \ a(first, last);\n            std::sort(a.begin(), a.end(), comp);\n        \
-    \    auto itr = unique(a.begin(), a.end());\n            std::unordered_map<ValueType,\
-    \ KYOPRO_BASE_INT> mem;\n            int cnt = -1;\n            for (auto i =\
-    \ std::begin(a); i != itr; ++i) mem[*i] = ++cnt;\n            return mem;\n  \
-    \      }\n    } compress;\n} // namespace kpr\n#line 6 \"meta/tuple_like.hpp\"\
-    \n\r\nnamespace kpr {\r\n    namespace helper {\r\n        struct CastableToAny\
-    \ {\r\n            template<class T>\r\n            operator T() const noexcept;\r\
-    \n        };\r\n\r\n        template<class T, std::size_t... idx, std::void_t<decltype(T{((void)idx,\
-    \ CastableToAny{})...})>* = nullptr>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
+    \ constexpr struct {\n        template<class T, class Compare = Less, class Container\
+    \ = std::unordered_map<typename std::iterator_traits<T>::value_type, KYOPRO_BASE_INT>>\n\
+    \        auto operator ()(T first, T last, Compare comp = {}) const {\n      \
+    \      std::vector<Container::key_type> a(first, last);\n            std::sort(a.begin(),\
+    \ a.end(), comp);\n            auto itr = unique(a.begin(), a.end());\n      \
+    \      Container mem;\n            int cnt = -1;\n            for (auto i = std::begin(a);\
+    \ i != itr; ++i) mem[*i] = ++cnt;\n            return mem;\n        }\n    } compress;\n\
+    } // namespace kpr\n#line 6 \"meta/tuple_like.hpp\"\n\r\nnamespace kpr {\r\n \
+    \   namespace helper {\r\n        struct CastableToAny {\r\n            template<class\
+    \ T>\r\n            operator T() const noexcept;\r\n        };\r\n\r\n       \
+    \ template<class T, std::size_t... idx, std::void_t<decltype(T{((void)idx, CastableToAny{})...})>*\
+    \ = nullptr>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
     \ bool) noexcept {\r\n            return true;\r\n        }\r\n        template<class\
     \ T, std::size_t... idx>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
     \ char) noexcept {\r\n            return false;\r\n        }\n\n        template<class\
@@ -336,9 +336,9 @@ data:
     \ impl(a, x, false);\n        }\n    } contains;\n} // namespace kpr\n#line 5\
     \ \"algorithm/count_all.hpp\"\n\nnamespace kpr {\n    // \u8981\u7D20: \u500B\u6570\
     \u306E\u8F9E\u66F8\u3092\u8FD4\u3059\n    [[maybe_unused]] inline constexpr struct\
-    \ {\n        template<class T>\n        auto operator ()(T first, T last) const\
-    \ {\n            std::unordered_map<typename std::iterator_traits<T>::value_type,\
-    \ KYOPRO_BASE_INT> mem;\n            for (auto i = first; i != last; ++i) ++mem[*i];\n\
+    \ {\n        template<class T, class Container = std::unordered_map<typename std::iterator_traits<T>::value_type,\
+    \ KYOPRO_BASE_INT>>\n        auto operator ()(T first, T last) const {\n     \
+    \       Container mem;\n            for (auto i = first; i != last; ++i) ++mem[*i];\n\
     \            return mem;\n        }\n    } count_all;\n} // namespace kpr\n#line\
     \ 3 \"algorithm/Hash.hpp\"\n#include <functional>\r\n#line 9 \"algorithm/Hash.hpp\"\
     \n\r\nnamespace kpr {\r\n    // \u30CF\u30C3\u30B7\u30E5(tuple_like, range\u5BFE\
@@ -390,7 +390,7 @@ data:
   requiredBy:
   - all/all.hpp
   - all.hpp
-  timestamp: '2023-03-29 00:32:58+09:00'
+  timestamp: '2023-04-01 14:10:21+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm/algorithm.hpp
