@@ -6,7 +6,7 @@
 
 namespace kpr {
     template<class T, class Op = Add<T>, class Container = std::vector<T>>
-    struct FenwickTree: private Op {
+    struct FenwickTree {
         using value_type = T;
         using size_type = std::size_t;
         using reference = T&;
@@ -15,11 +15,12 @@ namespace kpr {
         using container_type = Container;
 
     private:
+        Op op;
         Container tree;
 
     public:
         FenwickTree() noexcept = default;
-        FenwickTree(std::size_t n) noexcept: tree(n, Op::id()) {}
+        FenwickTree(std::size_t n) noexcept: tree(n, op.id()) {}
 
         std::size_t size() noexcept {
             return tree.size();
@@ -28,22 +29,22 @@ namespace kpr {
         void apply(int p, const T& x) {
             ++p;
             while (p <= (int)size()) {
-                tree[p - 1] = Op::operator ()(tree[p - 1], x);
+                tree[p - 1] = op(tree[p - 1], x);
                 p += p & -p;
             }
         }
 
         T prod(int r) const {
-            T s = Op::id();
+            T s = op.id();
             while (r > 0) {
-                s = Op::operator ()(s, tree[r - 1]);
+                s = op(s, tree[r - 1]);
                 r -= r & -r;
             }
             return s;
         }
         T prod(int l, int r) const {
-            static_assert(has_inverse_v<Op>, "Operator doesn't have an inverse");
-            return Op::operator ()(prod(r), Op::inverse(prod(l)));
+            static_assert(has_inv_v<Op>, "Operator doesn't have an inv");
+            return op(prod(r), op.inv(prod(l)));
         }
 
         T all_prod() {
@@ -51,13 +52,13 @@ namespace kpr {
         }
 
         T get(int p) {
-            static_assert(has_inverse_v<Op>, "Operator doesn't have an inverse");
-            return Op::operator ()(prod(p + 1), Op::inverse(prod(p)));
+            static_assert(has_inv_v<Op>, "Operator doesn't have an inv");
+            return op(prod(p + 1), op.inv(prod(p)));
         }
 
         void set(int p, const T& x) {
-            static_assert(has_inverse_v<Op>, "Operator doesn't have an inverse");
-            apply(p, Op::operator ()(x, Op::inverse(get(p))));
+            static_assert(has_inv_v<Op>, "Operator doesn't have an inv");
+            apply(p, op(x, op.inv(get(p))));
         }
     };
 } // namespace kpr

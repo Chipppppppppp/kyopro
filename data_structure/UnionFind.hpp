@@ -8,23 +8,17 @@
 #include "../meta/trait.hpp"
 
 namespace kpr {
-    template<class Container = std::vector<int>>
     struct UnionFind {
-        using value_type = range_value_t<Container>;
-        using container_type = Container;
-
     private:
-        Container par;
+        std::vector<int> par;
 
     public:
         UnionFind() noexcept = default;
         UnionFind(std::size_t n) noexcept: par(n, -1) {}
-        template<class C, std::enable_if_t<std::is_same_v<Container, std::decay_t<C>>>>
-        UnionFind(C&& par): par(std::forward<C>(par)) {}
 
         void resize(std::size_t x) { par.resize(x, -1); }
         void assign(std::size_t x) { par.assign(x, -1); }
-        void reset() { std::fill(std::begin(par), std::end(par), -1); }
+        void clear() { std::fill(par.begin(), par.end(), -1); }
 
         std::size_t size() const noexcept {
             return par.size();

@@ -12,7 +12,7 @@ namespace kpr {
 
         using value_type = T;
 
-        constexpr T id() const noexcept {
+        static constexpr T id() noexcept {
             return T{};
         }
 
@@ -20,7 +20,7 @@ namespace kpr {
             return a + b;
         }
 
-        constexpr T inverse(const T& a) const noexcept {
+        static constexpr T inv(const T& a) noexcept {
             static_assert(std::is_signed_v<T>, "T must be a signed type");
             return -a;
         }
@@ -33,7 +33,7 @@ namespace kpr {
 
         using value_type = T;
 
-        constexpr T id() const noexcept {
+        static constexpr T id() noexcept {
             return 1;
         }
 
@@ -41,7 +41,7 @@ namespace kpr {
             return a * b;
         }
 
-        constexpr T inverse(const T& a) const noexcept {
+        static constexpr T inv(const T& a) noexcept {
             return 1 / a;
         }
     };
@@ -53,7 +53,7 @@ namespace kpr {
 
         using value_type = T;
 
-        constexpr T id() const noexcept {
+        static constexpr T id() noexcept {
             return std::numeric_limits<T>::has_infinity ? -std::numeric_limits<T>::infinity() : INF<T>;
         }
 
@@ -69,28 +69,28 @@ namespace kpr {
 
         using value_type = T;
 
-        constexpr T id() const noexcept {
+        static constexpr T id() noexcept {
             return std::numeric_limits<T>::has_infinity ? -std::numeric_limits<T>::infinity() : (std::is_signed_v<T> ? -INF<T> : 0);
         }
 
-        constexpr T operator ()(const T& a, const T& b) const noexcept {
+        constexpr  T operator ()(const T& a, const T& b) const noexcept {
             return a > b ? a : b;
         }
     };
 
 
-    // inverseを持つか調べる
+    // invを持つか調べる
     template<class, class = void>
-    struct has_inverse {
+    struct has_inv {
         static constexpr bool value = false;
     };
 
     template<class T>
-    struct has_inverse<T, std::void_t<decltype(&T::inverse)>> {
+    struct has_inv<T, std::void_t<decltype(&T::inv)>> {
         static constexpr bool value = true;
     };
 
-    // inverseを持つか調べる
+    // invを持つか調べる
     template<class T>
-    inline constexpr bool has_inverse_v = has_inverse<T>::value;
+    inline constexpr bool has_inv_v = has_inv<T>::value;
 } // namespace kpr

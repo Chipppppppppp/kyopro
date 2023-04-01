@@ -41,7 +41,7 @@ namespace kpr {
             return res;
         }
 
-        constexpr ModInt power(KYOPRO_BASE_UINT n) const noexcept {
+        constexpr ModInt pow(KYOPRO_BASE_UINT n) const noexcept {
             std::uint_fast64_t res = 1, a = value;
             while (n > 0) {
                 if (n & 1) res = res * a % mod;
@@ -51,7 +51,7 @@ namespace kpr {
             return res;
         }
 
-        constexpr ModInt inverse() const noexcept {
+        constexpr ModInt inv() const noexcept {
             std::uint_fast64_t a = value, b = mod;
             std::int_fast64_t u = 1, v = 0;
             while (b > 0) {
@@ -112,7 +112,7 @@ namespace kpr {
         }
 
         constexpr ModInt& operator /=(ModInt rhs) noexcept {
-            value = static_cast<uint_least_t<bit_len(mod) * 2>>(value) * rhs.inverse().value % mod;
+            value = static_cast<uint_least_t<bit_len(mod) * 2>>(value) * rhs.inv().value % mod;
             return *this;
         }
 

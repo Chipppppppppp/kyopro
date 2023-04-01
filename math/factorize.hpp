@@ -30,19 +30,19 @@ namespace kpr {
                 x = y;
                 for (int i = 0; i < r; ++i) y = f(y);
                 for (int k = 0; k < r && g == 1; k += m) {
-                z = y;
-                int min = std::min(m, r - k);
-                for (int i = 0; i < min; ++i) {
-                    y = f(y);
-                    q *= x - y;
-                }
-                g = std::gcd(static_cast<U>(q), n);
+                    z = y;
+                    int min = std::min(m, r - k);
+                    for (int i = 0; i < min; ++i) {
+                        y = f(y);
+                        q *= x - y;
+                    }
+                    g = std::gcd(static_cast<U>(q), n);
                 }
             }
             if (g == n) {
                 do {
-                z = f(z);
-                g = std::gcd(static_cast<U>(x - z), n);
+                    z = f(z);
+                    g = std::gcd(static_cast<U>(x - z), n);
                 } while (g == 1);
             }
             return g;
@@ -67,7 +67,7 @@ namespace kpr {
         template<bool sorted = true, class Container = std::vector<KYOPRO_BASE_INT>>
         Container operator ()(KYOPRO_BASE_UINT n) const {
             Container res;
-            for (int p = 2; p < 100 && p * p <= n; ++p) {
+            for (int p = 2; p < 100 && static_cast<KYOPRO_BASE_UINT>(p * p) <= n; ++p) {
                 while (n % p == 0) {
                     n /= p;
                     res.emplace_back(p);

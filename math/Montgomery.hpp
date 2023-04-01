@@ -46,7 +46,7 @@ namespace kpr {
             return reduce(static_cast<larger_type>(x) * n2);
         }
 
-        constexpr T inverse_transform(T x) const noexcept {
+        constexpr T inv_transform(T x) const noexcept {
             T y = reduce(x);
             return y >= mod ? y - mod : y;
         }

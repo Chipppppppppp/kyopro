@@ -39,7 +39,7 @@ namespace kpr {
         }
 
         KYOPRO_BASE_INT get_val() noexcept {
-            return montgomery.inverse_transform(value);
+            return montgomery.inv_transform(value);
         }
 
         DynamicModInt() noexcept = default;
@@ -47,7 +47,7 @@ namespace kpr {
 
         template<class U>
         explicit operator U() const noexcept {
-            return montgomery.inverse_transform(value);
+            return montgomery.inv_transform(value);
         }
 
         static DynamicModInt raw(T value) noexcept {
@@ -56,7 +56,7 @@ namespace kpr {
             return res;
         }
 
-        DynamicModInt power(std::uint_fast64_t n) const noexcept {
+        DynamicModInt pow(std::uint_fast64_t n) const noexcept {
             DynamicModInt res = 1, a = *this;
             while (n > 0) {
                 if (n & 1) res = res * a;
@@ -66,8 +66,8 @@ namespace kpr {
             return res;
         }
 
-        DynamicModInt inverse() const noexcept {
-            return power(montgomery.mod - 2);
+        DynamicModInt inv() const noexcept {
+            return pow(montgomery.mod - 2);
         }
 
         DynamicModInt operator +() const noexcept {
@@ -116,7 +116,7 @@ namespace kpr {
         }
 
         DynamicModInt& operator /=(DynamicModInt rhs) noexcept {
-            value = montgomery.reduce(static_cast<larger_type>(value) * rhs.inverse().value);
+            value = montgomery.reduce(static_cast<larger_type>(value) * rhs.inv().value);
             return *this;
         }
 
@@ -163,7 +163,7 @@ namespace kpr {
     struct PrintFunction<DynamicModInt<T, kind>> {
         template<class Printer>
         static void print(Printer& printer, const DynamicModInt<T, kind>& a) {
-            PrintFunction<T>::print(printer, a.montgomery.inverse_transform(a.value));
+            PrintFunction<T>::print(printer, a.montgomery.inv_transform(a.value));
         }
     };
 
