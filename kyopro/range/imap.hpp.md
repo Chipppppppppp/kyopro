@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
   - icon: ':warning:'
@@ -203,7 +203,7 @@ data:
     \ -> imap<std::decay_t<F>, std::decay_t<R>>;\r\n} // namespace kpr\r\n"
   code: "#pragma once\r\n#include <cstddef>\r\n#include <functional>\r\n#include <iterator>\r\
     \n#include <type_traits>\r\n#include <utility>\r\n#include \"range_base.hpp\"\r\
-    \n#include \"kyopro/meta/trait.hpp\"\r\n\r\nnamespace kpr {\r\n    template<class\
+    \n#include \"../meta/trait.hpp\"\r\n\r\nnamespace kpr {\r\n    template<class\
     \ Func, class Range>\r\n    struct imap: RangeBase<imap<Func, Range>, std::invoke_result_t<Func,\
     \ range_value_t<Range>>> {\r\n    private:\r\n        using BaseIterator = range_iterator_t<Range>;\r\
     \n        using BaseConstIterator = range_const_iterator_t<Range>;\r\n\r\n   \
@@ -245,7 +245,7 @@ data:
   path: kyopro/range/imap.hpp
   requiredBy:
   - kyopro/range/range.hpp
-  timestamp: '2023-04-02 20:21:18+09:00'
+  timestamp: '2023-04-02 21:40:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kyopro/range/imap.hpp

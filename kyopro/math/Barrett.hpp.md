@@ -1,13 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kyopro/all/all.hpp
+    title: kyopro/all/all.hpp
+  - icon: ':warning:'
+    path: kyopro/math/math.hpp
+    title: kyopro/math/math.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -159,27 +165,28 @@ data:
     \            x -= static_cast<T>((x * m) >> 64) * mod;\r\n            return x\
     \ < mod ? x : x - mod;\r\n        }\r\n    };\r\n} // namespace kpr\r\n"
   code: "#pragma once\r\n#include <cstdint>\r\n#include <limits>\r\n#include <type_traits>\r\
-    \n#include \"kyopro/meta/setting.hpp\"\r\n#include \"kyopro/meta/trait.hpp\"\r\
-    \n\r\nnamespace kpr {\r\n    // Barrett Reduction\r\n    template<class T>\r\n\
-    \    struct Barrett {\r\n        static_assert(is_unsigned_integer_v<T>, \"The\
-    \ given type must be an unsigned integer type\");\r\n\r\n        using value_type\
-    \ = T;\r\n\r\n        T mod;\r\n\r\n    private:\r\n        using larger_type\
-    \ = next_integer_t<T>;\r\n\r\n        larger_type m;\r\n\r\n    public:\r\n  \
-    \      constexpr void set_mod(T mod) noexcept {\r\n            this->mod = mod;\r\
-    \n            m = (static_cast<larger_type>(1) << 64) / mod;\r\n        }\r\n\r\
-    \n        constexpr KYOPRO_BASE_INT get_mod() const noexcept {\r\n           \
-    \ return mod;\r\n        }\r\n\r\n        Barrett() noexcept = default;\r\n  \
-    \      Barrett(T mod) noexcept: mod(mod), m((static_cast<larger_type>(1) << 64)\
-    \ / mod) {}\r\n\r\n        constexpr T reduce(T x) const noexcept {\r\n      \
-    \      x -= static_cast<T>((x * m) >> 64) * mod;\r\n            return x < mod\
-    \ ? x : x - mod;\r\n        }\r\n    };\r\n} // namespace kpr\r\n"
+    \n#include \"../meta/setting.hpp\"\r\n#include \"../meta/trait.hpp\"\r\n\r\nnamespace\
+    \ kpr {\r\n    // Barrett Reduction\r\n    template<class T>\r\n    struct Barrett\
+    \ {\r\n        static_assert(is_unsigned_integer_v<T>, \"The given type must be\
+    \ an unsigned integer type\");\r\n\r\n        using value_type = T;\r\n\r\n  \
+    \      T mod;\r\n\r\n    private:\r\n        using larger_type = next_integer_t<T>;\r\
+    \n\r\n        larger_type m;\r\n\r\n    public:\r\n        constexpr void set_mod(T\
+    \ mod) noexcept {\r\n            this->mod = mod;\r\n            m = (static_cast<larger_type>(1)\
+    \ << 64) / mod;\r\n        }\r\n\r\n        constexpr KYOPRO_BASE_INT get_mod()\
+    \ const noexcept {\r\n            return mod;\r\n        }\r\n\r\n        Barrett()\
+    \ noexcept = default;\r\n        Barrett(T mod) noexcept: mod(mod), m((static_cast<larger_type>(1)\
+    \ << 64) / mod) {}\r\n\r\n        constexpr T reduce(T x) const noexcept {\r\n\
+    \            x -= static_cast<T>((x * m) >> 64) * mod;\r\n            return x\
+    \ < mod ? x : x - mod;\r\n        }\r\n    };\r\n} // namespace kpr\r\n"
   dependsOn:
   - kyopro/meta/setting.hpp
   - kyopro/meta/trait.hpp
   isVerificationFile: false
   path: kyopro/math/Barrett.hpp
-  requiredBy: []
-  timestamp: '2023-04-02 20:21:18+09:00'
+  requiredBy:
+  - kyopro/all/all.hpp
+  - kyopro/math/math.hpp
+  timestamp: '2023-04-02 21:40:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kyopro/math/Barrett.hpp

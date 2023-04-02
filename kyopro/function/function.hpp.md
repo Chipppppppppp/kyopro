@@ -2,29 +2,32 @@
 data:
   _extendedDependsOn:
   - icon: ':warning:'
-    path: kyopro/algorithm/function/RecLambda.hpp
-    title: kyopro/algorithm/function/RecLambda.hpp
+    path: kyopro/function/RecLambda.hpp
+    title: kyopro/function/RecLambda.hpp
   - icon: ':warning:'
-    path: kyopro/algorithm/function/compare.hpp
-    title: kyopro/algorithm/function/compare.hpp
-  - icon: ':warning:'
-    path: kyopro/algorithm/function/monoid.hpp
-    title: kyopro/algorithm/function/monoid.hpp
-  - icon: ':warning:'
+    path: kyopro/function/compare.hpp
+    title: kyopro/function/compare.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/function/monoid.hpp
+    title: kyopro/function/monoid.hpp
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kyopro/all/all.hpp
+    title: kyopro/all/all.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"kyopro/algorithm/function/compare.hpp\"\n\r\nnamespace kpr\
-    \ {\r\n    // operator =\u3067\u6BD4\u8F03\r\n    struct Equal {\r\n        template<class\
+  bundledCode: "#line 2 \"kyopro/function/compare.hpp\"\n\r\nnamespace kpr {\r\n \
+    \   // operator =\u3067\u6BD4\u8F03\r\n    struct Equal {\r\n        template<class\
     \ T>\r\n        constexpr bool operator()(const T& x, const T& y) const noexcept(noexcept(x\
     \ == y)) {\r\n            return x == y;\r\n        }\r\n    };\r\n\r\n    //\
     \ operator !=\u3067\u6BD4\u8F03\r\n    struct NotEqual {\r\n        template<class\
@@ -43,7 +46,7 @@ data:
     \ >=\u306E\u95A2\u6570\u30AF\u30E9\u30B9\r\n    struct GreaterEqual {\r\n    \
     \    template<class T>\r\n        constexpr bool operator()(const T& x, const\
     \ T& y) const noexcept(noexcept(x >= y)) {\r\n            return x >= y;\r\n \
-    \       }\r\n    };\r\n} // namespace kpr\r\n#line 2 \"kyopro/algorithm/function/monoid.hpp\"\
+    \       }\r\n    };\r\n} // namespace kpr\r\n#line 2 \"kyopro/function/monoid.hpp\"\
     \n#include <limits>\r\n#include <type_traits>\r\n#line 2 \"kyopro/meta/setting.hpp\"\
     \n#include <cstdint>\r\n\r\n#ifndef KYOPRO_BASE_INT\r\n// \u57FA\u672C\u7B26\u53F7\
     \u4ED8\u304D\u6574\u6570\u578B\r\n#define KYOPRO_BASE_INT std::int64_t\r\n#endif\r\
@@ -174,13 +177,13 @@ data:
     \ = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\r\n    };\r\n    //\
     \ Range\u578BT\u304B\u3089\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n\
     \    template<class T>\r\n    using range_value_t = typename range_value<T>::type;\r\
-    \n} // namespace kpr\r\n#line 6 \"kyopro/algorithm/function/monoid.hpp\"\n\r\n\
-    namespace kpr {\r\n    // \u8DB3\u3057\u7B97\u306Emonoid\r\n    template<class\
-    \ T>\r\n    struct Add {\r\n        static_assert(is_arithmetic_v<T>, \"T must\
-    \ be an arithmetic type\");\r\n\r\n        using value_type = T;\r\n\r\n     \
-    \   static constexpr T id() noexcept {\r\n            return T{};\r\n        }\r\
-    \n\r\n        constexpr T operator ()(const T& a, const T& b) const noexcept {\r\
-    \n            return a + b;\r\n        }\r\n\r\n        static constexpr T inv(const\
+    \n} // namespace kpr\r\n#line 6 \"kyopro/function/monoid.hpp\"\n\r\nnamespace\
+    \ kpr {\r\n    // \u8DB3\u3057\u7B97\u306Emonoid\r\n    template<class T>\r\n\
+    \    struct Add {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an\
+    \ arithmetic type\");\r\n\r\n        using value_type = T;\r\n\r\n        static\
+    \ constexpr T id() noexcept {\r\n            return T{};\r\n        }\r\n\r\n\
+    \        constexpr T operator ()(const T& a, const T& b) const noexcept {\r\n\
+    \            return a + b;\r\n        }\r\n\r\n        static constexpr T inv(const\
     \ T& a) noexcept {\r\n            static_assert(std::is_signed_v<T>, \"T must\
     \ be a signed type\");\r\n            return -a;\r\n        }\r\n    };\r\n\r\n\
     \    // \u639B\u3051\u7B97\u306Emonoid\r\n    template<class T>\r\n    struct\
@@ -209,7 +212,7 @@ data:
     \ = false;\r\n    };\r\n\r\n    template<class T>\r\n    struct has_inv<T, std::void_t<decltype(&T::inv)>>\
     \ {\r\n        static constexpr bool value = true;\r\n    };\r\n\r\n    // inv\u3092\
     \u6301\u3064\u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    inline constexpr\
-    \ bool has_inv_v = has_inv<T>::value;\r\n} // namespace kpr\r\n#line 4 \"kyopro/algorithm/function/RecLambda.hpp\"\
+    \ bool has_inv_v = has_inv<T>::value;\r\n} // namespace kpr\r\n#line 4 \"kyopro/function/RecLambda.hpp\"\
     \n\r\nnamespace kpr {\r\n    // \u518D\u5E30\u53EF\u80FD\u95A2\u6570\u30AF\u30E9\
     \u30B9\r\n    template<class F>\r\n    struct RecLambda {\r\n        using value_type\
     \ = F;\r\n\r\n    private:\r\n        F func;\r\n\r\n    public:\r\n        template<class\
@@ -218,25 +221,26 @@ data:
     \ operator ()(Args&&... args) const noexcept(noexcept(func(*this, std::forward<Args>(args)...)))\
     \ {\r\n            return func(*this, std::forward<Args>(args)...);\r\n      \
     \  }\r\n    };\r\n\r\n    template<class F>\r\n    RecLambda(F&&) -> RecLambda<std::decay_t<F>>;\r\
-    \n} // namespace kpr\r\n#line 5 \"kyopro/algorithm/function/function.hpp\"\n"
+    \n} // namespace kpr\r\n#line 5 \"kyopro/function/function.hpp\"\n"
   code: "#pragma once\r\n#include \"compare.hpp\"\r\n#include \"monoid.hpp\"\r\n#include\
     \ \"RecLambda.hpp\"\r\n"
   dependsOn:
-  - kyopro/algorithm/function/compare.hpp
-  - kyopro/algorithm/function/monoid.hpp
+  - kyopro/function/compare.hpp
+  - kyopro/function/monoid.hpp
   - kyopro/meta/setting.hpp
   - kyopro/meta/trait.hpp
-  - kyopro/algorithm/function/RecLambda.hpp
+  - kyopro/function/RecLambda.hpp
   isVerificationFile: false
-  path: kyopro/algorithm/function/function.hpp
-  requiredBy: []
-  timestamp: '2023-04-02 20:21:18+09:00'
+  path: kyopro/function/function.hpp
+  requiredBy:
+  - kyopro/all/all.hpp
+  timestamp: '2023-04-02 21:40:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: kyopro/algorithm/function/function.hpp
+documentation_of: kyopro/function/function.hpp
 layout: document
 redirect_from:
-- /library/kyopro/algorithm/function/function.hpp
-- /library/kyopro/algorithm/function/function.hpp.html
-title: kyopro/algorithm/function/function.hpp
+- /library/kyopro/function/function.hpp
+- /library/kyopro/function/function.hpp.html
+title: kyopro/function/function.hpp
 ---

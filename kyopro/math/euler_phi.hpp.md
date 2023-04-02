@@ -1,10 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kyopro/all/all.hpp
+    title: kyopro/all/all.hpp
+  - icon: ':warning:'
+    path: kyopro/math/math.hpp
+    title: kyopro/math/math.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -37,8 +43,8 @@ data:
     \     n /= i;\r\n                while (n % i == 0) n /= i;\r\n              \
     \  }\r\n            }\r\n            if (n != 1) res -= res / n;\r\n         \
     \   return res;\r\n        }\r\n    } euler_phi;\r\n} // namespace kpr\r\n"
-  code: "#pragma once\r\n#include <cstdint>\r\n#include \"kyopro/meta/setting.hpp\"\
-    \r\n\r\nnamespace kpr {\r\n    // \u30AA\u30A4\u30E9\u30FC\u306E\u03C6\u95A2\u6570\
+  code: "#pragma once\r\n#include <cstdint>\r\n#include \"../meta/setting.hpp\"\r\n\
+    \r\nnamespace kpr {\r\n    // \u30AA\u30A4\u30E9\u30FC\u306E\u03C6\u95A2\u6570\
     \r\n    [[maybe_unused]] inline constexpr struct {\r\n        constexpr KYOPRO_BASE_INT\
     \ operator ()(std::uint_fast64_t n) const noexcept {\r\n            std::uint_fast64_t\
     \ res = n;\r\n            if ((n & 1) == 0) {\r\n                res -= res >>\
@@ -53,8 +59,10 @@ data:
   - kyopro/meta/setting.hpp
   isVerificationFile: false
   path: kyopro/math/euler_phi.hpp
-  requiredBy: []
-  timestamp: '2023-04-02 20:21:18+09:00'
+  requiredBy:
+  - kyopro/all/all.hpp
+  - kyopro/math/math.hpp
+  timestamp: '2023-04-02 21:40:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kyopro/math/euler_phi.hpp

@@ -1,10 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/tuple_like.hpp
     title: kyopro/meta/tuple_like.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kyopro/template/macro.hpp
+    title: kyopro/template/macro.hpp
+  - icon: ':warning:'
+    path: kyopro/template/template.hpp
+    title: kyopro/template/template.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -88,7 +94,7 @@ data:
     \ == 4) { \\\r\n        return ([&](auto&& $0, auto&& $1, auto&& $2, auto&& $3)\
     \ { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple), get<2>(_args_tuple),\
     \ get<3>(_args_tuple)); \\\r\n    } \\\r\n})\r\n"
-  code: "#pragma once\r\n#include <iterator>\r\n#include <tuple>\r\n#include \"kyopro/meta/tuple_like.hpp\"\
+  code: "#pragma once\r\n#include <iterator>\r\n#include <tuple>\r\n#include \"../meta/tuple_like.hpp\"\
     \r\n\r\n#define $(...) \\\r\n([&](auto&&... _args) { \\\r\n    auto _args_tuple\
     \ = std::forward_as_tuple(_args...); \\\r\n    if constexpr (sizeof...(_args)\
     \ == 0) { \\\r\n        return ([&]() { return (__VA_ARGS__); })(); \\\r\n   \
@@ -106,8 +112,10 @@ data:
   - kyopro/meta/tuple_like.hpp
   isVerificationFile: false
   path: kyopro/template/lambda_macro.hpp
-  requiredBy: []
-  timestamp: '2023-04-02 20:21:18+09:00'
+  requiredBy:
+  - kyopro/template/template.hpp
+  - kyopro/template/macro.hpp
+  timestamp: '2023-04-02 21:40:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kyopro/template/lambda_macro.hpp

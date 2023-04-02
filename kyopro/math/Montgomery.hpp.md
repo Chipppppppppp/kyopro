@@ -1,14 +1,41 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kyopro/all/all.hpp
+    title: kyopro/all/all.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/DynamicModInt.hpp
+    title: kyopro/math/DynamicModInt.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/factorize.hpp
+    title: kyopro/math/factorize.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/is_prime.hpp
+    title: kyopro/math/is_prime.hpp
+  - icon: ':warning:'
+    path: kyopro/math/math.hpp
+    title: kyopro/math/math.hpp
+  - icon: ':warning:'
+    path: kyopro/template/alias.hpp
+    title: kyopro/template/alias.hpp
+  - icon: ':warning:'
+    path: kyopro/template/template.hpp
+    title: kyopro/template/template.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/aoj/PrimeNumber.test.cpp
+    title: verify/aoj/PrimeNumber.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/factorize.test.cpp
+    title: verify/yosupo/factorize.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kyopro/math/Montgomery.hpp\"\n#include <cstdint>\r\n#include\
@@ -49,7 +76,7 @@ data:
     \ * mod) >> std::numeric_limits<T>::digits;\r\n        }\r\n    };\r\n} // namespace\
     \ kpr\r\n"
   code: "#pragma once\r\n#include <cstdint>\r\n#include <limits>\r\n#include <type_traits>\r\
-    \n#include \"kyopro/meta/setting.hpp\"\r\n\r\nnamespace kpr {\r\n    template<class\
+    \n#include \"../meta/setting.hpp\"\r\n\r\nnamespace kpr {\r\n    template<class\
     \ T>\r\n    struct Montgomery {\r\n        static_assert(is_unsigned_integer_v<T>,\
     \ \"The given type must be an unsigned integer type\");\r\n\r\n        using value_type\
     \ = T;\r\n\r\n        T mod;\r\n\r\n    private:\r\n        using larger_type\
@@ -74,10 +101,19 @@ data:
   - kyopro/meta/setting.hpp
   isVerificationFile: false
   path: kyopro/math/Montgomery.hpp
-  requiredBy: []
-  timestamp: '2023-04-02 20:21:18+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  requiredBy:
+  - kyopro/all/all.hpp
+  - kyopro/math/is_prime.hpp
+  - kyopro/math/factorize.hpp
+  - kyopro/math/math.hpp
+  - kyopro/math/DynamicModInt.hpp
+  - kyopro/template/template.hpp
+  - kyopro/template/alias.hpp
+  timestamp: '2023-04-02 21:40:56+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yosupo/factorize.test.cpp
+  - verify/aoj/PrimeNumber.test.cpp
 documentation_of: kyopro/math/Montgomery.hpp
 layout: document
 redirect_from:

@@ -2,22 +2,85 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/algorithm/Hash.hpp
     title: kyopro/algorithm/Hash.hpp
+  - icon: ':warning:'
+    path: kyopro/algorithm/algorithm.hpp
+    title: kyopro/algorithm/algorithm.hpp
   - icon: ':warning:'
     path: kyopro/algorithm/contains.hpp
     title: kyopro/algorithm/contains.hpp
   - icon: ':warning:'
+    path: kyopro/all/all.hpp
+    title: kyopro/all/all.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/io/in.hpp
+    title: kyopro/io/in.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/io/io.hpp
+    title: kyopro/io/io.hpp
+  - icon: ':heavy_check_mark:'
     path: kyopro/io/out.hpp
     title: kyopro/io/out.hpp
   - icon: ':warning:'
+    path: kyopro/math/BinomMod.hpp
+    title: kyopro/math/BinomMod.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/DynamicModInt.hpp
+    title: kyopro/math/DynamicModInt.hpp
+  - icon: ':warning:'
+    path: kyopro/math/ModInt.hpp
+    title: kyopro/math/ModInt.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/factorize.hpp
+    title: kyopro/math/factorize.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/is_prime.hpp
+    title: kyopro/math/is_prime.hpp
+  - icon: ':warning:'
+    path: kyopro/math/math.hpp
+    title: kyopro/math/math.hpp
+  - icon: ':warning:'
+    path: kyopro/meta/meta.hpp
+    title: kyopro/meta/meta.hpp
+  - icon: ':warning:'
+    path: kyopro/template/alias.hpp
+    title: kyopro/template/alias.hpp
+  - icon: ':warning:'
+    path: kyopro/template/io_macro.hpp
+    title: kyopro/template/io_macro.hpp
+  - icon: ':warning:'
     path: kyopro/template/lambda_macro.hpp
     title: kyopro/template/lambda_macro.hpp
-  _extendedVerifiedWith: []
+  - icon: ':warning:'
+    path: kyopro/template/macro.hpp
+    title: kyopro/template/macro.hpp
+  - icon: ':warning:'
+    path: kyopro/template/named_tuple_macro.hpp
+    title: kyopro/template/named_tuple_macro.hpp
+  - icon: ':warning:'
+    path: kyopro/template/template.hpp
+    title: kyopro/template/template.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/aoj/PrimeNumber.test.cpp
+    title: verify/aoj/PrimeNumber.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/factorize.test.cpp
+    title: verify/yosupo/factorize.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/many_aplusb.test.cpp
+    title: verify/yosupo/many_aplusb.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/point_add_range_sum.test.cpp
+    title: verify/yosupo/point_add_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/unionfind.test.cpp
+    title: verify/yosupo/unionfind.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kyopro/meta/tuple_like.hpp\"\n#include <cstddef>\r\n#include\
@@ -150,13 +213,34 @@ data:
   isVerificationFile: false
   path: kyopro/meta/tuple_like.hpp
   requiredBy:
+  - kyopro/io/in.hpp
   - kyopro/io/out.hpp
+  - kyopro/io/io.hpp
+  - kyopro/all/all.hpp
+  - kyopro/meta/meta.hpp
+  - kyopro/math/is_prime.hpp
+  - kyopro/math/factorize.hpp
+  - kyopro/math/ModInt.hpp
+  - kyopro/math/math.hpp
+  - kyopro/math/BinomMod.hpp
+  - kyopro/math/DynamicModInt.hpp
+  - kyopro/algorithm/algorithm.hpp
   - kyopro/algorithm/contains.hpp
   - kyopro/algorithm/Hash.hpp
+  - kyopro/template/template.hpp
+  - kyopro/template/macro.hpp
+  - kyopro/template/io_macro.hpp
   - kyopro/template/lambda_macro.hpp
-  timestamp: '2023-04-02 20:21:18+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  - kyopro/template/named_tuple_macro.hpp
+  - kyopro/template/alias.hpp
+  timestamp: '2023-04-02 21:40:56+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/unionfind.test.cpp
+  - verify/aoj/PrimeNumber.test.cpp
 documentation_of: kyopro/meta/tuple_like.hpp
 layout: document
 redirect_from:

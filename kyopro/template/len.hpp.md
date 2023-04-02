@@ -1,10 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kyopro/template/template.hpp
+    title: kyopro/template/template.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -31,17 +34,18 @@ data:
     \ inline constexpr struct {\r\n        template<class T>\r\n        constexpr\
     \ KYOPRO_BASE_INT operator ()(T&& a) const noexcept {\r\n            return std::size(a);\r\
     \n        }\r\n    } len;\r\n} // namespace kpr\r\n"
-  code: "#pragma once\r\n#include <iterator>\r\n#include \"kyopro/meta/setting.hpp\"\
-    \r\n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr struct {\r\n\
-    \        template<class T>\r\n        constexpr KYOPRO_BASE_INT operator ()(T&&\
+  code: "#pragma once\r\n#include <iterator>\r\n#include \"../meta/setting.hpp\"\r\
+    \n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr struct {\r\n  \
+    \      template<class T>\r\n        constexpr KYOPRO_BASE_INT operator ()(T&&\
     \ a) const noexcept {\r\n            return std::size(a);\r\n        }\r\n   \
     \ } len;\r\n} // namespace kpr\r\n"
   dependsOn:
   - kyopro/meta/setting.hpp
   isVerificationFile: false
   path: kyopro/template/len.hpp
-  requiredBy: []
-  timestamp: '2023-04-02 20:21:18+09:00'
+  requiredBy:
+  - kyopro/template/template.hpp
+  timestamp: '2023-04-02 21:40:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kyopro/template/len.hpp

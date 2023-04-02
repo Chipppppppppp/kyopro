@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
   - icon: ':warning:'
@@ -274,10 +274,10 @@ data:
     \ kpr\r\n"
   code: "#pragma once\r\n#include <cstddef>\r\n#include <functional>\r\n#include <iterator>\r\
     \n#include <type_traits>\r\n#include <utility>\r\n#include \"iterator_base.hpp\"\
-    \r\n#include \"range_base.hpp\"\r\n#include \"kyopro/meta/trait.hpp\"\r\n\r\n\
-    namespace kpr {\r\n    template<class T>\r\n    struct irange: RangeBase<irange<T>,\
-    \ T> {\r\n    private:\r\n        T first, last;\r\n\r\n        template<class,\
-    \ class = void, class = void, class = void>\r\n        struct get_iterator_category;\r\
+    \r\n#include \"range_base.hpp\"\r\n#include \"../meta/trait.hpp\"\r\n\r\nnamespace\
+    \ kpr {\r\n    template<class T>\r\n    struct irange: RangeBase<irange<T>, T>\
+    \ {\r\n    private:\r\n        T first, last;\r\n\r\n        template<class, class\
+    \ = void, class = void, class = void>\r\n        struct get_iterator_category;\r\
     \n        template<class ValueType, class Void>\r\n        struct get_iterator_category<ValueType,\
     \ std::void_t<decltype(++std::declval<ValueType>())>, Void, Void> {\r\n      \
     \      using type = std::forward_iterator_tag;\r\n        };\r\n        template<class\
@@ -343,7 +343,7 @@ data:
   path: kyopro/range/irange.hpp
   requiredBy:
   - kyopro/range/range.hpp
-  timestamp: '2023-04-02 20:21:18+09:00'
+  timestamp: '2023-04-02 21:40:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kyopro/range/irange.hpp

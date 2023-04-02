@@ -2,33 +2,81 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/algorithm/Hash.hpp
     title: kyopro/algorithm/Hash.hpp
   - icon: ':warning:'
+    path: kyopro/algorithm/algorithm.hpp
+    title: kyopro/algorithm/algorithm.hpp
+  - icon: ':heavy_check_mark:'
     path: kyopro/algorithm/bit.hpp
     title: kyopro/algorithm/bit.hpp
   - icon: ':warning:'
     path: kyopro/algorithm/contains.hpp
     title: kyopro/algorithm/contains.hpp
   - icon: ':warning:'
-    path: kyopro/algorithm/function/function.hpp
-    title: kyopro/algorithm/function/function.hpp
-  - icon: ':warning:'
-    path: kyopro/algorithm/function/monoid.hpp
-    title: kyopro/algorithm/function/monoid.hpp
-  - icon: ':warning:'
+    path: kyopro/all/all.hpp
+    title: kyopro/all/all.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/data_structure/FenwickTree.hpp
+    title: kyopro/data_structure/FenwickTree.hpp
+  - icon: ':heavy_check_mark:'
     path: kyopro/data_structure/UnionFind.hpp
     title: kyopro/data_structure/UnionFind.hpp
   - icon: ':warning:'
+    path: kyopro/data_structure/data_structure.hpp
+    title: kyopro/data_structure/data_structure.hpp
+  - icon: ':warning:'
+    path: kyopro/data_structure/structure.hpp
+    title: kyopro/data_structure/structure.hpp
+  - icon: ':warning:'
+    path: kyopro/function/function.hpp
+    title: kyopro/function/function.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/function/monoid.hpp
+    title: kyopro/function/monoid.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/io/in.hpp
+    title: kyopro/io/in.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/io/io.hpp
+    title: kyopro/io/io.hpp
+  - icon: ':heavy_check_mark:'
     path: kyopro/io/out.hpp
     title: kyopro/io/out.hpp
   - icon: ':warning:'
     path: kyopro/math/Barrett.hpp
     title: kyopro/math/Barrett.hpp
   - icon: ':warning:'
+    path: kyopro/math/BinomMod.hpp
+    title: kyopro/math/BinomMod.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/DynamicModInt.hpp
+    title: kyopro/math/DynamicModInt.hpp
+  - icon: ':warning:'
+    path: kyopro/math/ModInt.hpp
+    title: kyopro/math/ModInt.hpp
+  - icon: ':warning:'
     path: kyopro/math/div.hpp
     title: kyopro/math/div.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/factorize.hpp
+    title: kyopro/math/factorize.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/is_prime.hpp
+    title: kyopro/math/is_prime.hpp
+  - icon: ':warning:'
+    path: kyopro/math/math.hpp
+    title: kyopro/math/math.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/power.hpp
+    title: kyopro/math/power.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/meta/constant.hpp
+    title: kyopro/meta/constant.hpp
+  - icon: ':warning:'
+    path: kyopro/meta/meta.hpp
+    title: kyopro/meta/meta.hpp
   - icon: ':warning:'
     path: kyopro/range/imap.hpp
     title: kyopro/range/imap.hpp
@@ -38,10 +86,40 @@ data:
   - icon: ':warning:'
     path: kyopro/range/range.hpp
     title: kyopro/range/range.hpp
-  _extendedVerifiedWith: []
+  - icon: ':warning:'
+    path: kyopro/template/alias.hpp
+    title: kyopro/template/alias.hpp
+  - icon: ':warning:'
+    path: kyopro/template/io_macro.hpp
+    title: kyopro/template/io_macro.hpp
+  - icon: ':warning:'
+    path: kyopro/template/macro.hpp
+    title: kyopro/template/macro.hpp
+  - icon: ':warning:'
+    path: kyopro/template/named_tuple_macro.hpp
+    title: kyopro/template/named_tuple_macro.hpp
+  - icon: ':warning:'
+    path: kyopro/template/template.hpp
+    title: kyopro/template/template.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/aoj/PrimeNumber.test.cpp
+    title: verify/aoj/PrimeNumber.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/factorize.test.cpp
+    title: verify/yosupo/factorize.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/many_aplusb.test.cpp
+    title: verify/yosupo/many_aplusb.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/point_add_range_sum.test.cpp
+    title: verify/yosupo/point_add_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/unionfind.test.cpp
+    title: verify/yosupo/unionfind.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kyopro/meta/trait.hpp\"\n#include <cstddef>\r\n#include\
@@ -280,21 +358,47 @@ data:
   isVerificationFile: false
   path: kyopro/meta/trait.hpp
   requiredBy:
+  - kyopro/io/in.hpp
   - kyopro/io/out.hpp
+  - kyopro/io/io.hpp
+  - kyopro/all/all.hpp
   - kyopro/range/imap.hpp
   - kyopro/range/range.hpp
   - kyopro/range/irange.hpp
+  - kyopro/function/monoid.hpp
+  - kyopro/function/function.hpp
+  - kyopro/meta/constant.hpp
+  - kyopro/meta/meta.hpp
+  - kyopro/math/is_prime.hpp
+  - kyopro/math/factorize.hpp
+  - kyopro/math/ModInt.hpp
+  - kyopro/math/math.hpp
+  - kyopro/math/BinomMod.hpp
+  - kyopro/math/power.hpp
+  - kyopro/math/DynamicModInt.hpp
   - kyopro/math/Barrett.hpp
   - kyopro/math/div.hpp
+  - kyopro/algorithm/algorithm.hpp
   - kyopro/algorithm/bit.hpp
   - kyopro/algorithm/contains.hpp
-  - kyopro/algorithm/function/monoid.hpp
-  - kyopro/algorithm/function/function.hpp
   - kyopro/algorithm/Hash.hpp
+  - kyopro/template/template.hpp
+  - kyopro/template/macro.hpp
+  - kyopro/template/io_macro.hpp
+  - kyopro/template/named_tuple_macro.hpp
+  - kyopro/template/alias.hpp
+  - kyopro/data_structure/structure.hpp
   - kyopro/data_structure/UnionFind.hpp
-  timestamp: '2023-04-02 20:21:18+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  - kyopro/data_structure/data_structure.hpp
+  - kyopro/data_structure/FenwickTree.hpp
+  timestamp: '2023-04-02 21:40:56+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/unionfind.test.cpp
+  - verify/aoj/PrimeNumber.test.cpp
 documentation_of: kyopro/meta/trait.hpp
 layout: document
 redirect_from:

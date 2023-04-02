@@ -1,7 +1,25 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kyopro/all/all.hpp
+    title: kyopro/all/all.hpp
+  - icon: ':warning:'
+    path: kyopro/math/BinomMod.hpp
+    title: kyopro/math/BinomMod.hpp
+  - icon: ':warning:'
+    path: kyopro/math/ModInt.hpp
+    title: kyopro/math/ModInt.hpp
+  - icon: ':warning:'
+    path: kyopro/math/math.hpp
+    title: kyopro/math/math.hpp
+  - icon: ':warning:'
+    path: kyopro/template/alias.hpp
+    title: kyopro/template/alias.hpp
+  - icon: ':warning:'
+    path: kyopro/template/template.hpp
+    title: kyopro/template/template.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -34,8 +52,14 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: kyopro/math/mod.hpp
-  requiredBy: []
-  timestamp: '2023-04-02 20:21:18+09:00'
+  requiredBy:
+  - kyopro/all/all.hpp
+  - kyopro/math/ModInt.hpp
+  - kyopro/math/math.hpp
+  - kyopro/math/BinomMod.hpp
+  - kyopro/template/template.hpp
+  - kyopro/template/alias.hpp
+  timestamp: '2023-04-02 21:40:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kyopro/math/mod.hpp

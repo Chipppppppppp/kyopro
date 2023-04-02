@@ -107,7 +107,7 @@ data:
   requiredBy:
   - kyopro/range/range.hpp
   - kyopro/range/irange.hpp
-  timestamp: '2023-04-02 20:21:18+09:00'
+  timestamp: '2023-04-02 21:40:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kyopro/range/iterator_base.hpp

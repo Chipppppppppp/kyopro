@@ -1,10 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kyopro/all/all.hpp
+    title: kyopro/all/all.hpp
+  - icon: ':warning:'
+    path: kyopro/math/math.hpp
+    title: kyopro/math/math.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -37,7 +43,7 @@ data:
     \n            lower.insert(end(lower), upper.rbegin(), upper.rend());\r\n    \
     \        return lower;\r\n        }\r\n    } divisors;\r\n} // namespace kpr\r\
     \n"
-  code: "#pragma once\r\n#include <cstdint>\r\n#include <vector>\r\n#include \"kyopro/meta/setting.hpp\"\
+  code: "#pragma once\r\n#include <cstdint>\r\n#include <vector>\r\n#include \"../meta/setting.hpp\"\
     \r\n\r\nnamespace kpr {\r\n    // \u5168\u3066\u306E\u6B63\u306E\u7D04\u6570\u3092\
     \u8FD4\u3059\r\n    [[maybe_unused]] inline constexpr struct {\r\n        std::vector<KYOPRO_BASE_INT>\
     \ operator ()(std::uint_fast64_t n) const {\r\n            std::vector<KYOPRO_BASE_INT>\
@@ -51,8 +57,10 @@ data:
   - kyopro/meta/setting.hpp
   isVerificationFile: false
   path: kyopro/math/divisors.hpp
-  requiredBy: []
-  timestamp: '2023-04-02 20:21:18+09:00'
+  requiredBy:
+  - kyopro/all/all.hpp
+  - kyopro/math/math.hpp
+  timestamp: '2023-04-02 21:40:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kyopro/math/divisors.hpp

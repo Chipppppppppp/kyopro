@@ -1,23 +1,77 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/io/io_option.hpp
     title: kyopro/io/io_option.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/tuple_like.hpp
     title: kyopro/meta/tuple_like.hpp
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kyopro/all/all.hpp
+    title: kyopro/all/all.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/io/io.hpp
+    title: kyopro/io/io.hpp
+  - icon: ':warning:'
+    path: kyopro/math/BinomMod.hpp
+    title: kyopro/math/BinomMod.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/DynamicModInt.hpp
+    title: kyopro/math/DynamicModInt.hpp
+  - icon: ':warning:'
+    path: kyopro/math/ModInt.hpp
+    title: kyopro/math/ModInt.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/factorize.hpp
+    title: kyopro/math/factorize.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/is_prime.hpp
+    title: kyopro/math/is_prime.hpp
+  - icon: ':warning:'
+    path: kyopro/math/math.hpp
+    title: kyopro/math/math.hpp
+  - icon: ':warning:'
+    path: kyopro/template/alias.hpp
+    title: kyopro/template/alias.hpp
+  - icon: ':warning:'
+    path: kyopro/template/io_macro.hpp
+    title: kyopro/template/io_macro.hpp
+  - icon: ':warning:'
+    path: kyopro/template/macro.hpp
+    title: kyopro/template/macro.hpp
+  - icon: ':warning:'
+    path: kyopro/template/named_tuple_macro.hpp
+    title: kyopro/template/named_tuple_macro.hpp
+  - icon: ':warning:'
+    path: kyopro/template/template.hpp
+    title: kyopro/template/template.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/aoj/PrimeNumber.test.cpp
+    title: verify/aoj/PrimeNumber.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/factorize.test.cpp
+    title: verify/yosupo/factorize.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/many_aplusb.test.cpp
+    title: verify/yosupo/many_aplusb.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/point_add_range_sum.test.cpp
+    title: verify/yosupo/point_add_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/unionfind.test.cpp
+    title: verify/yosupo/unionfind.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kyopro/io/out.hpp\"\n#include <unistd.h>\r\n#include <algorithm>\r\
@@ -377,10 +431,10 @@ data:
     \n#include <bitset>\r\n#include <cmath>\r\n#include <cstdint>\r\n#include <cstdio>\r\
     \n#include <iterator>\r\n#include <string>\r\n#include <string_view>\r\n#include\
     \ <tuple>\r\n#include <type_traits>\r\n#include <utility>\r\n#include \"io_option.hpp\"\
-    \r\n#include \"kyopro/meta/setting.hpp\"\r\n#include \"kyopro/meta/trait.hpp\"\
-    \r\n#include \"kyopro/meta/tuple_like.hpp\"\r\n\r\nnamespace kpr {\r\n    // \u30D0\
-    \u30C3\u30D5\u30A1\u3092\u7528\u3044\u3066\u30D5\u30A1\u30A4\u30EB\u306B\u66F8\
-    \u304D\u8FBC\u3080\u30AF\u30E9\u30B9\r\n    template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>\r\
+    \r\n#include \"../meta/setting.hpp\"\r\n#include \"../meta/trait.hpp\"\r\n#include\
+    \ \"../meta/tuple_like.hpp\"\r\n\r\nnamespace kpr {\r\n    // \u30D0\u30C3\u30D5\
+    \u30A1\u3092\u7528\u3044\u3066\u30D5\u30A1\u30A4\u30EB\u306B\u66F8\u304D\u8FBC\
+    \u3080\u30AF\u30E9\u30B9\r\n    template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>\r\
     \n    struct Writer {\r\n    private:\r\n        int fd, idx;\r\n        std::array<char,\
     \ buf_size> buffer;\r\n\r\n    public:\r\n        // \u30D0\u30C3\u30D5\u30A1\u30B5\
     \u30A4\u30BA\u3092\u53D6\u5F97\r\n        static constexpr KYOPRO_BASE_INT get_buf_size()\
@@ -532,10 +586,28 @@ data:
   - kyopro/meta/tuple_like.hpp
   isVerificationFile: false
   path: kyopro/io/out.hpp
-  requiredBy: []
-  timestamp: '2023-04-02 20:21:18+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  requiredBy:
+  - kyopro/io/io.hpp
+  - kyopro/all/all.hpp
+  - kyopro/math/is_prime.hpp
+  - kyopro/math/factorize.hpp
+  - kyopro/math/ModInt.hpp
+  - kyopro/math/math.hpp
+  - kyopro/math/BinomMod.hpp
+  - kyopro/math/DynamicModInt.hpp
+  - kyopro/template/template.hpp
+  - kyopro/template/macro.hpp
+  - kyopro/template/io_macro.hpp
+  - kyopro/template/named_tuple_macro.hpp
+  - kyopro/template/alias.hpp
+  timestamp: '2023-04-02 21:40:56+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/unionfind.test.cpp
+  - verify/aoj/PrimeNumber.test.cpp
 documentation_of: kyopro/io/out.hpp
 layout: document
 redirect_from:

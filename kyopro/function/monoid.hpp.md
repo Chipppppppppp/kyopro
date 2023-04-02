@@ -1,31 +1,106 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: kyopro/algorithm/function/function.hpp
-    title: kyopro/algorithm/function/function.hpp
-  _extendedVerifiedWith: []
+    path: kyopro/all/all.hpp
+    title: kyopro/all/all.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/data_structure/FenwickTree.hpp
+    title: kyopro/data_structure/FenwickTree.hpp
+  - icon: ':warning:'
+    path: kyopro/data_structure/data_structure.hpp
+    title: kyopro/data_structure/data_structure.hpp
+  - icon: ':warning:'
+    path: kyopro/data_structure/structure.hpp
+    title: kyopro/data_structure/structure.hpp
+  - icon: ':warning:'
+    path: kyopro/function/function.hpp
+    title: kyopro/function/function.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/io/in.hpp
+    title: kyopro/io/in.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/io/io.hpp
+    title: kyopro/io/io.hpp
+  - icon: ':warning:'
+    path: kyopro/math/BinomMod.hpp
+    title: kyopro/math/BinomMod.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/DynamicModInt.hpp
+    title: kyopro/math/DynamicModInt.hpp
+  - icon: ':warning:'
+    path: kyopro/math/ModInt.hpp
+    title: kyopro/math/ModInt.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/factorize.hpp
+    title: kyopro/math/factorize.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/is_prime.hpp
+    title: kyopro/math/is_prime.hpp
+  - icon: ':warning:'
+    path: kyopro/math/math.hpp
+    title: kyopro/math/math.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/power.hpp
+    title: kyopro/math/power.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/meta/constant.hpp
+    title: kyopro/meta/constant.hpp
+  - icon: ':warning:'
+    path: kyopro/meta/meta.hpp
+    title: kyopro/meta/meta.hpp
+  - icon: ':warning:'
+    path: kyopro/template/alias.hpp
+    title: kyopro/template/alias.hpp
+  - icon: ':warning:'
+    path: kyopro/template/io_macro.hpp
+    title: kyopro/template/io_macro.hpp
+  - icon: ':warning:'
+    path: kyopro/template/macro.hpp
+    title: kyopro/template/macro.hpp
+  - icon: ':warning:'
+    path: kyopro/template/named_tuple_macro.hpp
+    title: kyopro/template/named_tuple_macro.hpp
+  - icon: ':warning:'
+    path: kyopro/template/template.hpp
+    title: kyopro/template/template.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/aoj/PrimeNumber.test.cpp
+    title: verify/aoj/PrimeNumber.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/factorize.test.cpp
+    title: verify/yosupo/factorize.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/many_aplusb.test.cpp
+    title: verify/yosupo/many_aplusb.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/point_add_range_sum.test.cpp
+    title: verify/yosupo/point_add_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/unionfind.test.cpp
+    title: verify/yosupo/unionfind.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"kyopro/algorithm/function/monoid.hpp\"\n#include <limits>\r\
-    \n#include <type_traits>\r\n#line 2 \"kyopro/meta/setting.hpp\"\n#include <cstdint>\r\
-    \n\r\n#ifndef KYOPRO_BASE_INT\r\n// \u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\
-    \u6570\u578B\r\n#define KYOPRO_BASE_INT std::int64_t\r\n#endif\r\n\r\n#ifndef\
-    \ KYOPRO_BASE_UINT\r\n// \u57FA\u672C\u7B26\u53F7\u306A\u3057\u6574\u6570\u578B\
-    \r\n#define KYOPRO_BASE_UINT std::uint64_t\r\n#endif\r\n\r\n#ifndef KYOPRO_BASE_FLOAT\r\
-    \n// \u57FA\u672C\u6D6E\u52D5\u5C0F\u6570\u70B9\u6570\u578B\r\n#define KYOPRO_BASE_FLOAT\
-    \ double\r\n#endif\r\n\r\n#ifndef KYOPRO_DEFAULT_MOD\r\n// \u554F\u984C\u3067\u8A2D\
-    \u5B9A\u3055\u308C\u305Fmod\r\n#define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))\r\
+  bundledCode: "#line 2 \"kyopro/function/monoid.hpp\"\n#include <limits>\r\n#include\
+    \ <type_traits>\r\n#line 2 \"kyopro/meta/setting.hpp\"\n#include <cstdint>\r\n\
+    \r\n#ifndef KYOPRO_BASE_INT\r\n// \u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\
+    \u578B\r\n#define KYOPRO_BASE_INT std::int64_t\r\n#endif\r\n\r\n#ifndef KYOPRO_BASE_UINT\r\
+    \n// \u57FA\u672C\u7B26\u53F7\u306A\u3057\u6574\u6570\u578B\r\n#define KYOPRO_BASE_UINT\
+    \ std::uint64_t\r\n#endif\r\n\r\n#ifndef KYOPRO_BASE_FLOAT\r\n// \u57FA\u672C\u6D6E\
+    \u52D5\u5C0F\u6570\u70B9\u6570\u578B\r\n#define KYOPRO_BASE_FLOAT double\r\n#endif\r\
+    \n\r\n#ifndef KYOPRO_DEFAULT_MOD\r\n// \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\
+    \u305Fmod\r\n#define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))\r\
     \n#endif\r\n\r\n#ifndef KYOPRO_DECIMAL_PRECISION\r\n// \u5C0F\u6570\u7CBE\u5EA6\
     (\u6841)\r\n#define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))\r\
     \n#endif\r\n\r\n#ifndef KYOPRO_INF_DIV\r\n// \u7121\u9650\u5927\u3092\u8868\u3059\
@@ -148,44 +223,7 @@ data:
     \ = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\r\n    };\r\n    //\
     \ Range\u578BT\u304B\u3089\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n\
     \    template<class T>\r\n    using range_value_t = typename range_value<T>::type;\r\
-    \n} // namespace kpr\r\n#line 6 \"kyopro/algorithm/function/monoid.hpp\"\n\r\n\
-    namespace kpr {\r\n    // \u8DB3\u3057\u7B97\u306Emonoid\r\n    template<class\
-    \ T>\r\n    struct Add {\r\n        static_assert(is_arithmetic_v<T>, \"T must\
-    \ be an arithmetic type\");\r\n\r\n        using value_type = T;\r\n\r\n     \
-    \   static constexpr T id() noexcept {\r\n            return T{};\r\n        }\r\
-    \n\r\n        constexpr T operator ()(const T& a, const T& b) const noexcept {\r\
-    \n            return a + b;\r\n        }\r\n\r\n        static constexpr T inv(const\
-    \ T& a) noexcept {\r\n            static_assert(std::is_signed_v<T>, \"T must\
-    \ be a signed type\");\r\n            return -a;\r\n        }\r\n    };\r\n\r\n\
-    \    // \u639B\u3051\u7B97\u306Emonoid\r\n    template<class T>\r\n    struct\
-    \ Mul {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic\
-    \ type\");\r\n\r\n        using value_type = T;\r\n\r\n        static constexpr\
-    \ T id() noexcept {\r\n            return 1;\r\n        }\r\n\r\n        constexpr\
-    \ T operator ()(const T& a, const T& b) const noexcept {\r\n            return\
-    \ a * b;\r\n        }\r\n\r\n        static constexpr T inv(const T& a) noexcept\
-    \ {\r\n            return 1 / a;\r\n        }\r\n    };\r\n\r\n    // min\u306E\
-    monoid\r\n    template<class T>\r\n    struct Min {\r\n        static_assert(is_arithmetic_v<T>,\
-    \ \"T must be an arithmetic type\");\r\n\r\n        using value_type = T;\r\n\r\
-    \n        static constexpr T id() noexcept {\r\n            if constexpr (std::numeric_limits<T>::has_infinity)\
-    \ return std::numeric_limits<T>::infinity();\r\n            return std::numeric_limits<T>::max()\
-    \ / KYOPRO_INF_DIV;\r\n        }\r\n\r\n        constexpr T operator ()(const\
-    \ T& a, const T& b) const noexcept {\r\n            return a < b ? a : b;\r\n\
-    \        }\r\n    };\r\n\r\n    // max\u306Emonoid\r\n    template<class T>\r\n\
-    \    struct Max {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an\
-    \ arithmetic type\");\r\n\r\n        using value_type = T;\r\n\r\n        static\
-    \ constexpr T id() noexcept {\r\n            if constexpr (std::numeric_limits<T>::has_infinity)\
-    \ return -std::numeric_limits<T>::infinity();\r\n            if constexpr (std::is_signed_v<T>)\
-    \ return -(std::numeric_limits<T>::max() / KYOPRO_INF_DIV);\r\n            return\
-    \ 0;\r\n        }\r\n\r\n        constexpr  T operator ()(const T& a, const T&\
-    \ b) const noexcept {\r\n            return a > b ? a : b;\r\n        }\r\n  \
-    \  };\r\n\r\n\r\n    // inv\u3092\u6301\u3064\u304B\u8ABF\u3079\u308B\r\n    template<class,\
-    \ class = void>\r\n    struct has_inv {\r\n        static constexpr bool value\
-    \ = false;\r\n    };\r\n\r\n    template<class T>\r\n    struct has_inv<T, std::void_t<decltype(&T::inv)>>\
-    \ {\r\n        static constexpr bool value = true;\r\n    };\r\n\r\n    // inv\u3092\
-    \u6301\u3064\u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    inline constexpr\
-    \ bool has_inv_v = has_inv<T>::value;\r\n} // namespace kpr\r\n"
-  code: "#pragma once\r\n#include <limits>\r\n#include <type_traits>\r\n#include \"\
-    kyopro/meta/setting.hpp\"\r\n#include \"kyopro/meta/trait.hpp\"\r\n\r\nnamespace\
+    \n} // namespace kpr\r\n#line 6 \"kyopro/function/monoid.hpp\"\n\r\nnamespace\
     \ kpr {\r\n    // \u8DB3\u3057\u7B97\u306Emonoid\r\n    template<class T>\r\n\
     \    struct Add {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an\
     \ arithmetic type\");\r\n\r\n        using value_type = T;\r\n\r\n        static\
@@ -221,20 +259,82 @@ data:
     \ {\r\n        static constexpr bool value = true;\r\n    };\r\n\r\n    // inv\u3092\
     \u6301\u3064\u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    inline constexpr\
     \ bool has_inv_v = has_inv<T>::value;\r\n} // namespace kpr\r\n"
+  code: "#pragma once\r\n#include <limits>\r\n#include <type_traits>\r\n#include \"\
+    ../meta/setting.hpp\"\r\n#include \"../meta/trait.hpp\"\r\n\r\nnamespace kpr {\r\
+    \n    // \u8DB3\u3057\u7B97\u306Emonoid\r\n    template<class T>\r\n    struct\
+    \ Add {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic\
+    \ type\");\r\n\r\n        using value_type = T;\r\n\r\n        static constexpr\
+    \ T id() noexcept {\r\n            return T{};\r\n        }\r\n\r\n        constexpr\
+    \ T operator ()(const T& a, const T& b) const noexcept {\r\n            return\
+    \ a + b;\r\n        }\r\n\r\n        static constexpr T inv(const T& a) noexcept\
+    \ {\r\n            static_assert(std::is_signed_v<T>, \"T must be a signed type\"\
+    );\r\n            return -a;\r\n        }\r\n    };\r\n\r\n    // \u639B\u3051\
+    \u7B97\u306Emonoid\r\n    template<class T>\r\n    struct Mul {\r\n        static_assert(is_arithmetic_v<T>,\
+    \ \"T must be an arithmetic type\");\r\n\r\n        using value_type = T;\r\n\r\
+    \n        static constexpr T id() noexcept {\r\n            return 1;\r\n    \
+    \    }\r\n\r\n        constexpr T operator ()(const T& a, const T& b) const noexcept\
+    \ {\r\n            return a * b;\r\n        }\r\n\r\n        static constexpr\
+    \ T inv(const T& a) noexcept {\r\n            return 1 / a;\r\n        }\r\n \
+    \   };\r\n\r\n    // min\u306Emonoid\r\n    template<class T>\r\n    struct Min\
+    \ {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic type\"\
+    );\r\n\r\n        using value_type = T;\r\n\r\n        static constexpr T id()\
+    \ noexcept {\r\n            if constexpr (std::numeric_limits<T>::has_infinity)\
+    \ return std::numeric_limits<T>::infinity();\r\n            return std::numeric_limits<T>::max()\
+    \ / KYOPRO_INF_DIV;\r\n        }\r\n\r\n        constexpr T operator ()(const\
+    \ T& a, const T& b) const noexcept {\r\n            return a < b ? a : b;\r\n\
+    \        }\r\n    };\r\n\r\n    // max\u306Emonoid\r\n    template<class T>\r\n\
+    \    struct Max {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an\
+    \ arithmetic type\");\r\n\r\n        using value_type = T;\r\n\r\n        static\
+    \ constexpr T id() noexcept {\r\n            if constexpr (std::numeric_limits<T>::has_infinity)\
+    \ return -std::numeric_limits<T>::infinity();\r\n            if constexpr (std::is_signed_v<T>)\
+    \ return -(std::numeric_limits<T>::max() / KYOPRO_INF_DIV);\r\n            return\
+    \ 0;\r\n        }\r\n\r\n        constexpr  T operator ()(const T& a, const T&\
+    \ b) const noexcept {\r\n            return a > b ? a : b;\r\n        }\r\n  \
+    \  };\r\n\r\n\r\n    // inv\u3092\u6301\u3064\u304B\u8ABF\u3079\u308B\r\n    template<class,\
+    \ class = void>\r\n    struct has_inv {\r\n        static constexpr bool value\
+    \ = false;\r\n    };\r\n\r\n    template<class T>\r\n    struct has_inv<T, std::void_t<decltype(&T::inv)>>\
+    \ {\r\n        static constexpr bool value = true;\r\n    };\r\n\r\n    // inv\u3092\
+    \u6301\u3064\u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    inline constexpr\
+    \ bool has_inv_v = has_inv<T>::value;\r\n} // namespace kpr\r\n"
   dependsOn:
   - kyopro/meta/setting.hpp
   - kyopro/meta/trait.hpp
   isVerificationFile: false
-  path: kyopro/algorithm/function/monoid.hpp
+  path: kyopro/function/monoid.hpp
   requiredBy:
-  - kyopro/algorithm/function/function.hpp
-  timestamp: '2023-04-02 20:21:18+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
-documentation_of: kyopro/algorithm/function/monoid.hpp
+  - kyopro/io/in.hpp
+  - kyopro/io/io.hpp
+  - kyopro/all/all.hpp
+  - kyopro/function/function.hpp
+  - kyopro/meta/constant.hpp
+  - kyopro/meta/meta.hpp
+  - kyopro/math/is_prime.hpp
+  - kyopro/math/factorize.hpp
+  - kyopro/math/ModInt.hpp
+  - kyopro/math/math.hpp
+  - kyopro/math/BinomMod.hpp
+  - kyopro/math/power.hpp
+  - kyopro/math/DynamicModInt.hpp
+  - kyopro/template/template.hpp
+  - kyopro/template/macro.hpp
+  - kyopro/template/io_macro.hpp
+  - kyopro/template/named_tuple_macro.hpp
+  - kyopro/template/alias.hpp
+  - kyopro/data_structure/structure.hpp
+  - kyopro/data_structure/data_structure.hpp
+  - kyopro/data_structure/FenwickTree.hpp
+  timestamp: '2023-04-02 21:40:56+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/unionfind.test.cpp
+  - verify/aoj/PrimeNumber.test.cpp
+documentation_of: kyopro/function/monoid.hpp
 layout: document
 redirect_from:
-- /library/kyopro/algorithm/function/monoid.hpp
-- /library/kyopro/algorithm/function/monoid.hpp.html
-title: kyopro/algorithm/function/monoid.hpp
+- /library/kyopro/function/monoid.hpp
+- /library/kyopro/function/monoid.hpp.html
+title: kyopro/function/monoid.hpp
 ---

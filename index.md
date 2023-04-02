@@ -1,15 +1,20 @@
 ---
 data:
   libraryCategories:
-  - name: kyopro/algorithm
+  - name: .
     pages:
     - icon: ':warning:'
+      path: all.hpp
+      title: all.hpp
+  - name: kyopro/algorithm
+    pages:
+    - icon: ':heavy_check_mark:'
       path: kyopro/algorithm/Hash.hpp
       title: kyopro/algorithm/Hash.hpp
     - icon: ':warning:'
       path: kyopro/algorithm/algorithm.hpp
       title: kyopro/algorithm/algorithm.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/algorithm/bit.hpp
       title: kyopro/algorithm/bit.hpp
     - icon: ':warning:'
@@ -24,36 +29,17 @@ data:
     - icon: ':warning:'
       path: kyopro/algorithm/next_combination.hpp
       title: kyopro/algorithm/next_combination.hpp
-  - name: kyopro/algorithm/function
-    pages:
-    - icon: ':warning:'
-      path: kyopro/algorithm/function/RecLambda.hpp
-      title: kyopro/algorithm/function/RecLambda.hpp
-    - icon: ':warning:'
-      path: kyopro/algorithm/function/compare.hpp
-      title: kyopro/algorithm/function/compare.hpp
-    - icon: ':warning:'
-      path: kyopro/algorithm/function/function.hpp
-      title: kyopro/algorithm/function/function.hpp
-    - icon: ':warning:'
-      path: kyopro/algorithm/function/monoid.hpp
-      title: kyopro/algorithm/function/monoid.hpp
   - name: kyopro/all
     pages:
     - icon: ':warning:'
       path: kyopro/all/all.hpp
       title: kyopro/all/all.hpp
-  - name: kyopro
-    pages:
-    - icon: ':warning:'
-      path: kyopro/all.hpp
-      title: kyopro/all.hpp
   - name: kyopro/data_structure
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/data_structure/FenwickTree.hpp
       title: kyopro/data_structure/FenwickTree.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/data_structure/UnionFind.hpp
       title: kyopro/data_structure/UnionFind.hpp
     - icon: ':warning:'
@@ -62,18 +48,32 @@ data:
     - icon: ':warning:'
       path: kyopro/data_structure/structure.hpp
       title: kyopro/data_structure/structure.hpp
-  - name: kyopro/io
+  - name: kyopro/function
     pages:
     - icon: ':warning:'
+      path: kyopro/function/RecLambda.hpp
+      title: kyopro/function/RecLambda.hpp
+    - icon: ':warning:'
+      path: kyopro/function/compare.hpp
+      title: kyopro/function/compare.hpp
+    - icon: ':warning:'
+      path: kyopro/function/function.hpp
+      title: kyopro/function/function.hpp
+    - icon: ':heavy_check_mark:'
+      path: kyopro/function/monoid.hpp
+      title: kyopro/function/monoid.hpp
+  - name: kyopro/io
+    pages:
+    - icon: ':heavy_check_mark:'
       path: kyopro/io/in.hpp
       title: kyopro/io/in.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/io/io.hpp
       title: kyopro/io/io.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/io/io_option.hpp
       title: kyopro/io/io_option.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/io/out.hpp
       title: kyopro/io/out.hpp
   - name: kyopro/math
@@ -84,13 +84,13 @@ data:
     - icon: ':warning:'
       path: kyopro/math/BinomMod.hpp
       title: kyopro/math/BinomMod.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/math/DynamicModInt.hpp
       title: kyopro/math/DynamicModInt.hpp
     - icon: ':warning:'
       path: kyopro/math/ModInt.hpp
       title: kyopro/math/ModInt.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/math/Montgomery.hpp
       title: kyopro/math/Montgomery.hpp
     - icon: ':warning:'
@@ -102,10 +102,10 @@ data:
     - icon: ':warning:'
       path: kyopro/math/euler_phi.hpp
       title: kyopro/math/euler_phi.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/math/factorize.hpp
       title: kyopro/math/factorize.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/math/is_prime.hpp
       title: kyopro/math/is_prime.hpp
     - icon: ':warning:'
@@ -114,24 +114,24 @@ data:
     - icon: ':warning:'
       path: kyopro/math/mod.hpp
       title: kyopro/math/mod.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/math/power.hpp
       title: kyopro/math/power.hpp
   - name: kyopro/meta
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/meta/constant.hpp
       title: kyopro/meta/constant.hpp
     - icon: ':warning:'
       path: kyopro/meta/meta.hpp
       title: kyopro/meta/meta.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/meta/setting.hpp
       title: kyopro/meta/setting.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/meta/trait.hpp
       title: kyopro/meta/trait.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/meta/tuple_like.hpp
       title: kyopro/meta/tuple_like.hpp
   - name: kyopro/range
@@ -210,21 +210,21 @@ data:
   verificationCategories:
   - name: verify/aoj
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/aoj/PrimeNumber.test.cpp
       title: verify/aoj/PrimeNumber.test.cpp
   - name: verify/yosupo
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/yosupo/factorize.test.cpp
       title: verify/yosupo/factorize.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/yosupo/many_aplusb.test.cpp
       title: verify/yosupo/many_aplusb.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/yosupo/point_add_range_sum.test.cpp
       title: verify/yosupo/point_add_range_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/yosupo/unionfind.test.cpp
       title: verify/yosupo/unionfind.test.cpp
 layout: toppage

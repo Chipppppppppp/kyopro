@@ -1,10 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kyopro/algorithm/algorithm.hpp
+    title: kyopro/algorithm/algorithm.hpp
+  - icon: ':warning:'
+    path: kyopro/all/all.hpp
+    title: kyopro/all/all.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -35,9 +41,9 @@ data:
     \ i = first; i != last; ++i) ++mem[*i];\n            return mem;\n        }\n\
     \    } count_all;\n} // namespace kpr\n"
   code: "#pragma once\n#include <iterator>\n#include <unordered_map>\n#include \"\
-    kyopro/meta/setting.hpp\"\n\nnamespace kpr {\n    // \u8981\u7D20: \u500B\u6570\
-    \u306E\u8F9E\u66F8\u3092\u8FD4\u3059\n    [[maybe_unused]] inline constexpr struct\
-    \ {\n        template<class T, class Container = std::unordered_map<typename std::iterator_traits<T>::value_type,\
+    ../meta/setting.hpp\"\n\nnamespace kpr {\n    // \u8981\u7D20: \u500B\u6570\u306E\
+    \u8F9E\u66F8\u3092\u8FD4\u3059\n    [[maybe_unused]] inline constexpr struct {\n\
+    \        template<class T, class Container = std::unordered_map<typename std::iterator_traits<T>::value_type,\
     \ KYOPRO_BASE_INT>>\n        auto operator ()(T first, T last) const {\n     \
     \       Container mem;\n            for (auto i = first; i != last; ++i) ++mem[*i];\n\
     \            return mem;\n        }\n    } count_all;\n} // namespace kpr\n"
@@ -45,8 +51,10 @@ data:
   - kyopro/meta/setting.hpp
   isVerificationFile: false
   path: kyopro/algorithm/count_all.hpp
-  requiredBy: []
-  timestamp: '2023-04-02 20:21:18+09:00'
+  requiredBy:
+  - kyopro/all/all.hpp
+  - kyopro/algorithm/algorithm.hpp
+  timestamp: '2023-04-02 21:40:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kyopro/algorithm/count_all.hpp

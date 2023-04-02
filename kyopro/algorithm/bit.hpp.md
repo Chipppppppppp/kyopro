@@ -1,17 +1,50 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kyopro/algorithm/algorithm.hpp
+    title: kyopro/algorithm/algorithm.hpp
+  - icon: ':warning:'
+    path: kyopro/all/all.hpp
+    title: kyopro/all/all.hpp
+  - icon: ':warning:'
+    path: kyopro/math/BinomMod.hpp
+    title: kyopro/math/BinomMod.hpp
+  - icon: ':warning:'
+    path: kyopro/math/ModInt.hpp
+    title: kyopro/math/ModInt.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/factorize.hpp
+    title: kyopro/math/factorize.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/is_prime.hpp
+    title: kyopro/math/is_prime.hpp
+  - icon: ':warning:'
+    path: kyopro/math/math.hpp
+    title: kyopro/math/math.hpp
+  - icon: ':warning:'
+    path: kyopro/template/alias.hpp
+    title: kyopro/template/alias.hpp
+  - icon: ':warning:'
+    path: kyopro/template/template.hpp
+    title: kyopro/template/template.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/aoj/PrimeNumber.test.cpp
+    title: verify/aoj/PrimeNumber.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/factorize.test.cpp
+    title: verify/yosupo/factorize.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kyopro/algorithm/bit.hpp\"\n#include <limits>\r\n#include\
@@ -197,12 +230,12 @@ data:
     \  return bit_len(x - static_cast<T>(1));\r\n        }\r\n    } ceil_bit;\r\n\
     } // namespace kpr\r\n"
   code: "#pragma once\r\n#include <limits>\r\n#include <type_traits>\r\n#include \"\
-    kyopro/meta/setting.hpp\"\r\n#include \"kyopro/meta/trait.hpp\"\r\n\r\nnamespace\
-    \ kpr {\r\n    // \u7ACB\u3063\u3066\u3044\u308Bbit\u306E\u500B\u6570\u3092\u8FD4\
-    \u3059\r\n    [[maybe_unused]] inline constexpr struct {\r\n        template<class\
-    \ T>\r\n        constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {\r\n\
-    \            static_assert(is_integer_v<T>, \"The argument must be an integer\"\
-    );\r\n            constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\r\
+    ../meta/setting.hpp\"\r\n#include \"../meta/trait.hpp\"\r\n\r\nnamespace kpr {\r\
+    \n    // \u7ACB\u3063\u3066\u3044\u308Bbit\u306E\u500B\u6570\u3092\u8FD4\u3059\
+    \r\n    [[maybe_unused]] inline constexpr struct {\r\n        template<class T>\r\
+    \n        constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {\r\n    \
+    \        static_assert(is_integer_v<T>, \"The argument must be an integer\");\r\
+    \n            constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\r\
     \n            static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
     \ \"The integer type of the argument is too large\");\r\n            if constexpr\
     \ (digits <= std::numeric_limits<unsigned int>::digits) return __builtin_popcount(x);\r\
@@ -253,10 +286,21 @@ data:
   - kyopro/meta/trait.hpp
   isVerificationFile: false
   path: kyopro/algorithm/bit.hpp
-  requiredBy: []
-  timestamp: '2023-04-02 20:21:18+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  requiredBy:
+  - kyopro/all/all.hpp
+  - kyopro/math/is_prime.hpp
+  - kyopro/math/factorize.hpp
+  - kyopro/math/ModInt.hpp
+  - kyopro/math/math.hpp
+  - kyopro/math/BinomMod.hpp
+  - kyopro/algorithm/algorithm.hpp
+  - kyopro/template/template.hpp
+  - kyopro/template/alias.hpp
+  timestamp: '2023-04-02 21:40:56+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yosupo/factorize.test.cpp
+  - verify/aoj/PrimeNumber.test.cpp
 documentation_of: kyopro/algorithm/bit.hpp
 layout: document
 redirect_from:

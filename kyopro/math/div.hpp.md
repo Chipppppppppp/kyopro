@@ -1,10 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kyopro/all/all.hpp
+    title: kyopro/all/all.hpp
+  - icon: ':warning:'
+    path: kyopro/math/math.hpp
+    title: kyopro/math/math.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -139,8 +145,8 @@ data:
     \ U> operator ()(T x, U m) const noexcept {\r\n            return floor_div(x\
     \ + m - static_cast<T>(1), m);\r\n        }\r\n    } ceil_div;\r\n} // namespace\
     \ kpr\r\n"
-  code: "#pragma once\r\n#include \"kyopro/meta/trait.hpp\"\r\n\r\nnamespace kpr {\r\
-    \n    // floor(a \xF7 b)\u3092\u8FD4\u3059\r\n    [[maybe_unused]] inline constexpr\
+  code: "#pragma once\r\n#include \"../meta/trait.hpp\"\r\n\r\nnamespace kpr {\r\n\
+    \    // floor(a \xF7 b)\u3092\u8FD4\u3059\r\n    [[maybe_unused]] inline constexpr\
     \ struct {\r\n        template<class T, class U>\r\n        constexpr std::common_type_t<T,\
     \ U> operator ()(T x, U m) const noexcept {\r\n            static_assert(is_integer_v<T>\
     \ && is_integer_v<U>, \"Both of the arguments must be integers\");\r\n       \
@@ -156,8 +162,10 @@ data:
   - kyopro/meta/trait.hpp
   isVerificationFile: false
   path: kyopro/math/div.hpp
-  requiredBy: []
-  timestamp: '2023-04-02 20:21:18+09:00'
+  requiredBy:
+  - kyopro/all/all.hpp
+  - kyopro/math/math.hpp
+  timestamp: '2023-04-02 21:40:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kyopro/math/div.hpp

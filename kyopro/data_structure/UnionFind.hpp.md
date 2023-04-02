@@ -1,17 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kyopro/data_structure/data_structure.hpp
+    title: kyopro/data_structure/data_structure.hpp
+  - icon: ':warning:'
+    path: kyopro/data_structure/structure.hpp
+    title: kyopro/data_structure/structure.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/unionfind.test.cpp
+    title: verify/yosupo/unionfind.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kyopro/data_structure/UnionFind.hpp\"\n#include <algorithm>\r\
@@ -179,8 +188,8 @@ data:
     \ ++member) group_members[find(member)].emplace_back(member);\r\n            return\
     \ group_members;\r\n        }\r\n    };\r\n} // namespace kpr\r\n"
   code: "#pragma once\r\n#include <algorithm>\r\n#include <type_traits>\r\n#include\
-    \ <unordered_map>\r\n#include <utility>\r\n#include <vector>\r\n#include \"kyopro/meta/setting.hpp\"\
-    \r\n#include \"kyopro/meta/trait.hpp\"\r\n\r\nnamespace kpr {\r\n    struct UnionFind\
+    \ <unordered_map>\r\n#include <utility>\r\n#include <vector>\r\n#include \"../meta/setting.hpp\"\
+    \r\n#include \"../meta/trait.hpp\"\r\n\r\nnamespace kpr {\r\n    struct UnionFind\
     \ {\r\n    private:\r\n        std::vector<int> par;\r\n\r\n    public:\r\n  \
     \      UnionFind() noexcept = default;\r\n        UnionFind(std::size_t n) noexcept:\
     \ par(n, -1) {}\r\n\r\n        void resize(std::size_t x) { par.resize(x, -1);\
@@ -217,10 +226,13 @@ data:
   - kyopro/meta/trait.hpp
   isVerificationFile: false
   path: kyopro/data_structure/UnionFind.hpp
-  requiredBy: []
-  timestamp: '2023-04-02 20:21:18+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  requiredBy:
+  - kyopro/data_structure/structure.hpp
+  - kyopro/data_structure/data_structure.hpp
+  timestamp: '2023-04-02 21:40:56+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yosupo/unionfind.test.cpp
 documentation_of: kyopro/data_structure/UnionFind.hpp
 layout: document
 redirect_from:

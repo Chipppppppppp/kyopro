@@ -1,13 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/tuple_like.hpp
     title: kyopro/meta/tuple_like.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kyopro/algorithm/algorithm.hpp
+    title: kyopro/algorithm/algorithm.hpp
+  - icon: ':warning:'
+    path: kyopro/all/all.hpp
+    title: kyopro/all/all.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -208,8 +214,8 @@ data:
     \ false;\n        }\n\n    public:\n        template<class T, class U>\n     \
     \   constexpr bool operator ()(const T& a, const U& x) const {\n            return\
     \ impl(a, x, false);\n        }\n    } contains;\n} // namespace kpr\n"
-  code: "#pragma once\n#include <algorithm>\n#include <iterator>\n#include \"kyopro/meta/tuple_like.hpp\"\
-    \n#include \"kyopro/meta/trait.hpp\"\n\nnamespace kpr {\n    // \u8981\u7D20\u3092\
+  code: "#pragma once\n#include <algorithm>\n#include <iterator>\n#include \"../meta/tuple_like.hpp\"\
+    \n#include \"../meta/trait.hpp\"\n\nnamespace kpr {\n    // \u8981\u7D20\u3092\
     \u542B\u3093\u3067\u3044\u308B\u304B\u8ABF\u3079\u308B\n    [[maybe_unused]] inline\
     \ constexpr struct {\n    private:\n        template<class T>\n        constexpr\
     \ bool impl(const T& container, const typename T::key_type& value, char) const\
@@ -230,8 +236,10 @@ data:
   - kyopro/meta/trait.hpp
   isVerificationFile: false
   path: kyopro/algorithm/contains.hpp
-  requiredBy: []
-  timestamp: '2023-04-02 20:21:18+09:00'
+  requiredBy:
+  - kyopro/all/all.hpp
+  - kyopro/algorithm/algorithm.hpp
+  timestamp: '2023-04-02 21:40:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kyopro/algorithm/contains.hpp

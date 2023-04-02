@@ -1,17 +1,53 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/tuple_like.hpp
     title: kyopro/meta/tuple_like.hpp
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kyopro/algorithm/algorithm.hpp
+    title: kyopro/algorithm/algorithm.hpp
+  - icon: ':warning:'
+    path: kyopro/all/all.hpp
+    title: kyopro/all/all.hpp
+  - icon: ':warning:'
+    path: kyopro/math/BinomMod.hpp
+    title: kyopro/math/BinomMod.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/DynamicModInt.hpp
+    title: kyopro/math/DynamicModInt.hpp
+  - icon: ':warning:'
+    path: kyopro/math/ModInt.hpp
+    title: kyopro/math/ModInt.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/factorize.hpp
+    title: kyopro/math/factorize.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/is_prime.hpp
+    title: kyopro/math/is_prime.hpp
+  - icon: ':warning:'
+    path: kyopro/math/math.hpp
+    title: kyopro/math/math.hpp
+  - icon: ':warning:'
+    path: kyopro/template/alias.hpp
+    title: kyopro/template/alias.hpp
+  - icon: ':warning:'
+    path: kyopro/template/template.hpp
+    title: kyopro/template/template.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/aoj/PrimeNumber.test.cpp
+    title: verify/aoj/PrimeNumber.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/factorize.test.cpp
+    title: verify/yosupo/factorize.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kyopro/algorithm/Hash.hpp\"\n#include <cstddef>\r\n#include\
@@ -212,17 +248,16 @@ data:
     \ + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4);\r\n            return seed;\r\
     \n        }\r\n    };\r\n} // namespace kpr\r\n"
   code: "#pragma once\r\n#include <cstddef>\r\n#include <functional>\r\n#include <iterator>\r\
-    \n#include <type_traits>\r\n#include <utility>\r\n#include \"kyopro/meta/tuple_like.hpp\"\
-    \r\n#include \"kyopro/meta/trait.hpp\"\r\n\r\nnamespace kpr {\r\n    // \u30CF\
-    \u30C3\u30B7\u30E5(tuple_like, range\u5BFE\u5FDC)\r\n    template<class, class\
-    \ = void>\r\n    struct Hash;\r\n\r\n    template<class T>\r\n    struct Hash<T,\
-    \ std::enable_if_t<std::is_scalar_v<T>>> {\r\n        using value_type = T;\r\n\
-    \r\n        constexpr std::size_t operator ()(T a) const noexcept {\r\n      \
-    \      return std::hash<T>{}(a);\r\n        }\r\n    };\r\n\r\n    template<class\
-    \ T>\r\n    struct Hash<T, std::enable_if_t<is_tuple_like_v<T> && !is_range_v<T>>>\
-    \ {\r\n        using value_type = T;\r\n\r\n        template<std::size_t i = 0>\r\
-    \n        constexpr std::size_t operator ()(const T& a) const noexcept {\r\n \
-    \           if constexpr (i == tuple_like_size_v<T>) return tuple_like_size_v<T>;\r\
+    \n#include <type_traits>\r\n#include <utility>\r\n#include \"../meta/tuple_like.hpp\"\
+    \r\n#include \"../meta/trait.hpp\"\r\n\r\nnamespace kpr {\r\n    // \u30CF\u30C3\
+    \u30B7\u30E5(tuple_like, range\u5BFE\u5FDC)\r\n    template<class, class = void>\r\
+    \n    struct Hash;\r\n\r\n    template<class T>\r\n    struct Hash<T, std::enable_if_t<std::is_scalar_v<T>>>\
+    \ {\r\n        using value_type = T;\r\n\r\n        constexpr std::size_t operator\
+    \ ()(T a) const noexcept {\r\n            return std::hash<T>{}(a);\r\n      \
+    \  }\r\n    };\r\n\r\n    template<class T>\r\n    struct Hash<T, std::enable_if_t<is_tuple_like_v<T>\
+    \ && !is_range_v<T>>> {\r\n        using value_type = T;\r\n\r\n        template<std::size_t\
+    \ i = 0>\r\n        constexpr std::size_t operator ()(const T& a) const noexcept\
+    \ {\r\n            if constexpr (i == tuple_like_size_v<T>) return tuple_like_size_v<T>;\r\
     \n            else {\r\n                std::size_t seed = operator()<i + 1>(a);\r\
     \n                return seed ^ (Hash<tuple_like_element_t<i, T>>{}(get<i>(a))\
     \ + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4));\r\n            }\r\n \
@@ -237,10 +272,22 @@ data:
   - kyopro/meta/trait.hpp
   isVerificationFile: false
   path: kyopro/algorithm/Hash.hpp
-  requiredBy: []
-  timestamp: '2023-04-02 20:21:18+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  requiredBy:
+  - kyopro/all/all.hpp
+  - kyopro/math/is_prime.hpp
+  - kyopro/math/factorize.hpp
+  - kyopro/math/ModInt.hpp
+  - kyopro/math/math.hpp
+  - kyopro/math/BinomMod.hpp
+  - kyopro/math/DynamicModInt.hpp
+  - kyopro/algorithm/algorithm.hpp
+  - kyopro/template/template.hpp
+  - kyopro/template/alias.hpp
+  timestamp: '2023-04-02 21:40:56+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yosupo/factorize.test.cpp
+  - verify/aoj/PrimeNumber.test.cpp
 documentation_of: kyopro/algorithm/Hash.hpp
 layout: document
 redirect_from:
