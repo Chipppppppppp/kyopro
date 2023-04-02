@@ -1,7 +1,7 @@
 #pragma once
 #include <limits>
 #include <type_traits>
-#include "../meta/constant.hpp"
+#include "../meta/setting.hpp"
 #include "../meta/trait.hpp"
 
 namespace kpr {
@@ -54,7 +54,8 @@ namespace kpr {
         using value_type = T;
 
         static constexpr T id() noexcept {
-            return std::numeric_limits<T>::has_infinity ? -std::numeric_limits<T>::infinity() : INF<T>;
+            if constexpr (std::numeric_limits<T>::has_infinity) return std::numeric_limits<T>::infinity();
+            return std::numeric_limits<T>::max() / KYOPRO_INF_DIV;
         }
 
         constexpr T operator ()(const T& a, const T& b) const noexcept {
@@ -70,7 +71,9 @@ namespace kpr {
         using value_type = T;
 
         static constexpr T id() noexcept {
-            return std::numeric_limits<T>::has_infinity ? -std::numeric_limits<T>::infinity() : (std::is_signed_v<T> ? -INF<T> : 0);
+            if constexpr (std::numeric_limits<T>::has_infinity) return -std::numeric_limits<T>::infinity();
+            if constexpr (std::is_signed_v<T>) return -(std::numeric_limits<T>::max() / KYOPRO_INF_DIV);
+            return 0;
         }
 
         constexpr  T operator ()(const T& a, const T& b) const noexcept {

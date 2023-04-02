@@ -10,7 +10,7 @@ namespace kpr {
     [[maybe_unused]] inline constexpr struct {
         template<class T, class Compare = Less, class Container = std::unordered_map<typename std::iterator_traits<T>::value_type, KYOPRO_BASE_INT>>
         auto operator ()(T first, T last, Compare comp = {}) const {
-            std::vector<Container::key_type> a(first, last);
+            std::vector<typename Container::key_type> a(first, last);
             std::sort(a.begin(), a.end(), comp);
             auto itr = unique(a.begin(), a.end());
             Container mem;
