@@ -1,31 +1,31 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/function/monoid.hpp
     title: kyopro/function/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/io/in.hpp
     title: kyopro/io/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/io/io.hpp
     title: kyopro/io/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/io/io_option.hpp
     title: kyopro/io/io_option.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/io/out.hpp
     title: kyopro/io/out.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/math/power.hpp
     title: kyopro/math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/meta/tuple_like.hpp
     title: kyopro/meta/tuple_like.hpp
   _extendedRequiredBy: []

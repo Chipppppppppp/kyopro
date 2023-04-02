@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/function/monoid.hpp
     title: kyopro/function/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
   _extendedRequiredBy:
@@ -206,13 +206,13 @@ data:
     \ = default;\r\n        FenwickTree(std::size_t n) noexcept: tree(n, op.id())\
     \ {}\r\n\r\n        std::size_t size() noexcept {\r\n            return tree.size();\r\
     \n        }\r\n\r\n        void apply(int p, const T& x) {\r\n            ++p;\r\
-    \n            while (p <= (int)size()) {\r\n                tree[p - 1] = op(tree[p\
-    \ - 1], x);\r\n                p += p & -p;\r\n            }\r\n        }\r\n\r\
-    \n        T prod(int r) const {\r\n            T s = op.id();\r\n            while\
-    \ (r > 0) {\r\n                s = op(s, tree[r - 1]);\r\n                r -=\
-    \ r & -r;\r\n            }\r\n            return s;\r\n        }\r\n        T\
-    \ prod(int l, int r) const {\r\n            static_assert(has_inv_v<Op>, \"Operator\
-    \ doesn't have an inv\");\r\n            return op(prod(r), op.inv(prod(l)));\r\
+    \n            while (p <= (int)size()) {\r\n                tree[p - 1] = op(std::move(tree[p\
+    \ - 1]), x);\r\n                p += p & -p;\r\n            }\r\n        }\r\n\
+    \r\n        T prod(int r) const {\r\n            T s = op.id();\r\n          \
+    \  while (r > 0) {\r\n                s = op(std::move(s), tree[r - 1]);\r\n \
+    \               r -= r & -r;\r\n            }\r\n            return s;\r\n   \
+    \     }\r\n        T prod(int l, int r) const {\r\n            static_assert(has_inv_v<Op>,\
+    \ \"Operator doesn't have an inv\");\r\n            return op(prod(r), op.inv(prod(l)));\r\
     \n        }\r\n\r\n        T all_prod() {\r\n            return prod(tree.size());\r\
     \n        }\r\n\r\n        T get(int p) {\r\n            static_assert(has_inv_v<Op>,\
     \ \"Operator doesn't have an inv\");\r\n            return op(prod(p + 1), op.inv(prod(p)));\r\
@@ -230,16 +230,16 @@ data:
     \ n) noexcept: tree(n, op.id()) {}\r\n\r\n        std::size_t size() noexcept\
     \ {\r\n            return tree.size();\r\n        }\r\n\r\n        void apply(int\
     \ p, const T& x) {\r\n            ++p;\r\n            while (p <= (int)size())\
-    \ {\r\n                tree[p - 1] = op(tree[p - 1], x);\r\n                p\
-    \ += p & -p;\r\n            }\r\n        }\r\n\r\n        T prod(int r) const\
-    \ {\r\n            T s = op.id();\r\n            while (r > 0) {\r\n         \
-    \       s = op(s, tree[r - 1]);\r\n                r -= r & -r;\r\n          \
-    \  }\r\n            return s;\r\n        }\r\n        T prod(int l, int r) const\
-    \ {\r\n            static_assert(has_inv_v<Op>, \"Operator doesn't have an inv\"\
-    );\r\n            return op(prod(r), op.inv(prod(l)));\r\n        }\r\n\r\n  \
-    \      T all_prod() {\r\n            return prod(tree.size());\r\n        }\r\n\
-    \r\n        T get(int p) {\r\n            static_assert(has_inv_v<Op>, \"Operator\
-    \ doesn't have an inv\");\r\n            return op(prod(p + 1), op.inv(prod(p)));\r\
+    \ {\r\n                tree[p - 1] = op(std::move(tree[p - 1]), x);\r\n      \
+    \          p += p & -p;\r\n            }\r\n        }\r\n\r\n        T prod(int\
+    \ r) const {\r\n            T s = op.id();\r\n            while (r > 0) {\r\n\
+    \                s = op(std::move(s), tree[r - 1]);\r\n                r -= r\
+    \ & -r;\r\n            }\r\n            return s;\r\n        }\r\n        T prod(int\
+    \ l, int r) const {\r\n            static_assert(has_inv_v<Op>, \"Operator doesn't\
+    \ have an inv\");\r\n            return op(prod(r), op.inv(prod(l)));\r\n    \
+    \    }\r\n\r\n        T all_prod() {\r\n            return prod(tree.size());\r\
+    \n        }\r\n\r\n        T get(int p) {\r\n            static_assert(has_inv_v<Op>,\
+    \ \"Operator doesn't have an inv\");\r\n            return op(prod(p + 1), op.inv(prod(p)));\r\
     \n        }\r\n\r\n        void set(int p, const T& x) {\r\n            static_assert(has_inv_v<Op>,\
     \ \"Operator doesn't have an inv\");\r\n            apply(p, op(x, op.inv(get(p))));\r\
     \n        }\r\n    };\r\n} // namespace kpr\r\n"
@@ -253,7 +253,7 @@ data:
   - kyopro/all.hpp
   - kyopro/data_structure/structure.hpp
   - kyopro/data_structure/data_structure.hpp
-  timestamp: '2023-04-02 21:40:56+09:00'
+  timestamp: '2023-04-03 01:27:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo/point_add_range_sum.test.cpp

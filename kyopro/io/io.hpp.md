@@ -1,28 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/function/monoid.hpp
     title: kyopro/function/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/io/in.hpp
     title: kyopro/io/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/io/io_option.hpp
     title: kyopro/io/io_option.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/io/out.hpp
     title: kyopro/io/out.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/math/power.hpp
     title: kyopro/math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/meta/tuple_like.hpp
     title: kyopro/meta/tuple_like.hpp
   _extendedRequiredBy:
@@ -45,6 +45,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
+  - icon: ':x:'
+    path: verify/aoj/WeightedUnionFind.test.cpp
+    title: verify/aoj/WeightedUnionFind.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
@@ -57,9 +60,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kyopro/io/in.hpp\"\n#include <unistd.h>\r\n#include <array>\r\
@@ -585,12 +588,13 @@ data:
   - kyopro/template/macro.hpp
   - kyopro/template/io_macro.hpp
   timestamp: '2023-04-02 21:40:56+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/yosupo/many_aplusb.test.cpp
   - verify/yosupo/factorize.test.cpp
   - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/unionfind.test.cpp
+  - verify/aoj/WeightedUnionFind.test.cpp
   - verify/aoj/PrimeNumber.test.cpp
 documentation_of: kyopro/io/io.hpp
 layout: document

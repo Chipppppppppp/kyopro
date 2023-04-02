@@ -4,31 +4,31 @@ data:
   - icon: ':heavy_check_mark:'
     path: kyopro/data_structure/UnionFind.hpp
     title: kyopro/data_structure/UnionFind.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/function/monoid.hpp
     title: kyopro/function/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/io/in.hpp
     title: kyopro/io/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/io/io.hpp
     title: kyopro/io/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/io/io_option.hpp
     title: kyopro/io/io_option.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/io/out.hpp
     title: kyopro/io/out.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/math/power.hpp
     title: kyopro/math/power.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/meta/tuple_like.hpp
     title: kyopro/meta/tuple_like.hpp
   _extendedRequiredBy: []
@@ -178,21 +178,22 @@ data:
     namespace kpr {\r\n    struct UnionFind {\r\n    private:\r\n        std::vector<int>\
     \ par;\r\n\r\n    public:\r\n        UnionFind() noexcept = default;\r\n     \
     \   UnionFind(std::size_t n) noexcept: par(n, -1) {}\r\n\r\n        void resize(std::size_t\
-    \ x) { par.resize(x, -1); }\r\n        void assign(std::size_t x) { par.assign(x,\
-    \ -1); }\r\n        void clear() { std::fill(par.begin(), par.end(), -1); }\r\n\
-    \r\n        std::size_t size() const noexcept {\r\n            return par.size();\r\
+    \ n) {\r\n            par.resize(n, -1);\r\n        }\r\n        void assign(std::size_t\
+    \ n) {\r\n            par.assign(n, -1);\r\n        }\r\n        void clear()\
+    \ {\r\n            std::fill(par.begin(), par.end(), -1);\r\n        }\r\n\r\n\
+    \        std::size_t size() const noexcept {\r\n            return par.size();\r\
     \n        }\r\n\r\n        KYOPRO_BASE_INT find(int x) {\r\n            int p\
     \ = x;\r\n            while (par[p] >= 0) p = par[p];\r\n            while (x\
     \ != p) {\r\n                int tmp = x;\r\n                x = par[x];\r\n \
     \               par[tmp] = p;\r\n            }\r\n            return p;\r\n  \
     \      }\r\n\r\n        bool merge(int x, int y) {\r\n            x = find(x),\
     \ y = find(y);\r\n            if (x == y) return false;\r\n            if (par[x]\
-    \ > par[y]) {\r\n                int tmp = x;\r\n                x = y;\r\n  \
-    \              y = tmp;\r\n            }\r\n            par[x] += par[y];\r\n\
-    \            par[y] = x;\r\n            return true;\r\n        }\r\n\r\n    \
-    \    bool same(int x, int y) {\r\n            return find(x) == find(y);\r\n \
-    \       }\r\n\r\n        KYOPRO_BASE_INT group_size(int x) {\r\n            return\
-    \ -par[find(x)];\r\n        }\r\n\r\n        std::vector<int> group_members(int\
+    \ > par[y]) {\r\n                par[y] += par[x];\r\n                par[x] =\
+    \ y;\r\n            } else {\r\n                par[x] += par[y];\r\n        \
+    \        par[y] = x;\r\n            }\r\n            return true;\r\n        }\r\
+    \n\r\n        bool same(int x, int y) {\r\n            return find(x) == find(y);\r\
+    \n        }\r\n\r\n        KYOPRO_BASE_INT group_size(int x) {\r\n           \
+    \ return -par[find(x)];\r\n        }\r\n\r\n        std::vector<int> group_members(int\
     \ x) {\r\n            x = find(x);\r\n            std::vector<int> a;\r\n    \
     \        for (int i = 0; i < (int)(size()); ++i) if (find(i) == x) a.emplace_back(i);\r\
     \n            return a;\r\n        }\r\n\r\n        template<class Vector = std::vector<KYOPRO_BASE_INT>>\r\
@@ -602,7 +603,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo/unionfind.test.cpp
   requiredBy: []
-  timestamp: '2023-04-02 21:40:56+09:00'
+  timestamp: '2023-04-03 01:27:56+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yosupo/unionfind.test.cpp

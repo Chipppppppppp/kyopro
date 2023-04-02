@@ -17,13 +17,13 @@ data:
   - icon: ':warning:'
     path: kyopro/all/all.hpp
     title: kyopro/all/all.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/io/in.hpp
     title: kyopro/io/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/io/io.hpp
     title: kyopro/io/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/io/out.hpp
     title: kyopro/io/out.hpp
   - icon: ':warning:'
@@ -69,6 +69,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/aoj/PrimeNumber.test.cpp
     title: verify/aoj/PrimeNumber.test.cpp
+  - icon: ':x:'
+    path: verify/aoj/WeightedUnionFind.test.cpp
+    title: verify/aoj/WeightedUnionFind.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
@@ -81,9 +84,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kyopro/meta/tuple_like.hpp\"\n#include <cstddef>\r\n#include\
@@ -238,12 +241,13 @@ data:
   - kyopro/template/named_tuple_macro.hpp
   - kyopro/template/alias.hpp
   timestamp: '2023-04-02 21:40:56+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/yosupo/many_aplusb.test.cpp
   - verify/yosupo/factorize.test.cpp
   - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/unionfind.test.cpp
+  - verify/aoj/WeightedUnionFind.test.cpp
   - verify/aoj/PrimeNumber.test.cpp
 documentation_of: kyopro/meta/tuple_like.hpp
 layout: document

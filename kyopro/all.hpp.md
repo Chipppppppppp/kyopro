@@ -43,19 +43,19 @@ data:
   - icon: ':warning:'
     path: kyopro/function/function.hpp
     title: kyopro/function/function.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/function/monoid.hpp
     title: kyopro/function/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/io/in.hpp
     title: kyopro/io/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/io/io.hpp
     title: kyopro/io/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/io/io_option.hpp
     title: kyopro/io/io_option.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/io/out.hpp
     title: kyopro/io/out.hpp
   - icon: ':warning:'
@@ -94,7 +94,7 @@ data:
   - icon: ':warning:'
     path: kyopro/math/mod.hpp
     title: kyopro/math/mod.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/math/power.hpp
     title: kyopro/math/power.hpp
   - icon: ':heavy_check_mark:'
@@ -103,13 +103,13 @@ data:
   - icon: ':warning:'
     path: kyopro/meta/meta.hpp
     title: kyopro/meta/meta.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/meta/tuple_like.hpp
     title: kyopro/meta/tuple_like.hpp
   - icon: ':warning:'
@@ -1135,13 +1135,13 @@ data:
     \ = default;\r\n        FenwickTree(std::size_t n) noexcept: tree(n, op.id())\
     \ {}\r\n\r\n        std::size_t size() noexcept {\r\n            return tree.size();\r\
     \n        }\r\n\r\n        void apply(int p, const T& x) {\r\n            ++p;\r\
-    \n            while (p <= (int)size()) {\r\n                tree[p - 1] = op(tree[p\
-    \ - 1], x);\r\n                p += p & -p;\r\n            }\r\n        }\r\n\r\
-    \n        T prod(int r) const {\r\n            T s = op.id();\r\n            while\
-    \ (r > 0) {\r\n                s = op(s, tree[r - 1]);\r\n                r -=\
-    \ r & -r;\r\n            }\r\n            return s;\r\n        }\r\n        T\
-    \ prod(int l, int r) const {\r\n            static_assert(has_inv_v<Op>, \"Operator\
-    \ doesn't have an inv\");\r\n            return op(prod(r), op.inv(prod(l)));\r\
+    \n            while (p <= (int)size()) {\r\n                tree[p - 1] = op(std::move(tree[p\
+    \ - 1]), x);\r\n                p += p & -p;\r\n            }\r\n        }\r\n\
+    \r\n        T prod(int r) const {\r\n            T s = op.id();\r\n          \
+    \  while (r > 0) {\r\n                s = op(std::move(s), tree[r - 1]);\r\n \
+    \               r -= r & -r;\r\n            }\r\n            return s;\r\n   \
+    \     }\r\n        T prod(int l, int r) const {\r\n            static_assert(has_inv_v<Op>,\
+    \ \"Operator doesn't have an inv\");\r\n            return op(prod(r), op.inv(prod(l)));\r\
     \n        }\r\n\r\n        T all_prod() {\r\n            return prod(tree.size());\r\
     \n        }\r\n\r\n        T get(int p) {\r\n            static_assert(has_inv_v<Op>,\
     \ \"Operator doesn't have an inv\");\r\n            return op(prod(p + 1), op.inv(prod(p)));\r\
@@ -1151,21 +1151,22 @@ data:
     \n\r\nnamespace kpr {\r\n    struct UnionFind {\r\n    private:\r\n        std::vector<int>\
     \ par;\r\n\r\n    public:\r\n        UnionFind() noexcept = default;\r\n     \
     \   UnionFind(std::size_t n) noexcept: par(n, -1) {}\r\n\r\n        void resize(std::size_t\
-    \ x) { par.resize(x, -1); }\r\n        void assign(std::size_t x) { par.assign(x,\
-    \ -1); }\r\n        void clear() { std::fill(par.begin(), par.end(), -1); }\r\n\
-    \r\n        std::size_t size() const noexcept {\r\n            return par.size();\r\
+    \ n) {\r\n            par.resize(n, -1);\r\n        }\r\n        void assign(std::size_t\
+    \ n) {\r\n            par.assign(n, -1);\r\n        }\r\n        void clear()\
+    \ {\r\n            std::fill(par.begin(), par.end(), -1);\r\n        }\r\n\r\n\
+    \        std::size_t size() const noexcept {\r\n            return par.size();\r\
     \n        }\r\n\r\n        KYOPRO_BASE_INT find(int x) {\r\n            int p\
     \ = x;\r\n            while (par[p] >= 0) p = par[p];\r\n            while (x\
     \ != p) {\r\n                int tmp = x;\r\n                x = par[x];\r\n \
     \               par[tmp] = p;\r\n            }\r\n            return p;\r\n  \
     \      }\r\n\r\n        bool merge(int x, int y) {\r\n            x = find(x),\
     \ y = find(y);\r\n            if (x == y) return false;\r\n            if (par[x]\
-    \ > par[y]) {\r\n                int tmp = x;\r\n                x = y;\r\n  \
-    \              y = tmp;\r\n            }\r\n            par[x] += par[y];\r\n\
-    \            par[y] = x;\r\n            return true;\r\n        }\r\n\r\n    \
-    \    bool same(int x, int y) {\r\n            return find(x) == find(y);\r\n \
-    \       }\r\n\r\n        KYOPRO_BASE_INT group_size(int x) {\r\n            return\
-    \ -par[find(x)];\r\n        }\r\n\r\n        std::vector<int> group_members(int\
+    \ > par[y]) {\r\n                par[y] += par[x];\r\n                par[x] =\
+    \ y;\r\n            } else {\r\n                par[x] += par[y];\r\n        \
+    \        par[y] = x;\r\n            }\r\n            return true;\r\n        }\r\
+    \n\r\n        bool same(int x, int y) {\r\n            return find(x) == find(y);\r\
+    \n        }\r\n\r\n        KYOPRO_BASE_INT group_size(int x) {\r\n           \
+    \ return -par[find(x)];\r\n        }\r\n\r\n        std::vector<int> group_members(int\
     \ x) {\r\n            x = find(x);\r\n            std::vector<int> a;\r\n    \
     \        for (int i = 0; i < (int)(size()); ++i) if (find(i) == x) a.emplace_back(i);\r\
     \n            return a;\r\n        }\r\n\r\n        template<class Vector = std::vector<KYOPRO_BASE_INT>>\r\
@@ -1517,7 +1518,7 @@ data:
   isVerificationFile: false
   path: kyopro/all.hpp
   requiredBy: []
-  timestamp: '2023-04-02 21:50:19+09:00'
+  timestamp: '2023-04-03 01:27:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kyopro/all.hpp

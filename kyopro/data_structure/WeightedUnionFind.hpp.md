@@ -1,12 +1,6 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: kyopro/data_structure/FenwickTree.hpp
-    title: kyopro/data_structure/FenwickTree.hpp
-  - icon: ':heavy_check_mark:'
-    path: kyopro/data_structure/UnionFind.hpp
-    title: kyopro/data_structure/UnionFind.hpp
   - icon: ':question:'
     path: kyopro/function/monoid.hpp
     title: kyopro/function/monoid.hpp
@@ -17,36 +11,40 @@ data:
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: verify/aoj/WeightedUnionFind.test.cpp
+    title: verify/aoj/WeightedUnionFind.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"kyopro/data_structure/FenwickTree.hpp\"\n#include <cstddef>\r\
-    \n#include <utility>\r\n#include <vector>\r\n#line 2 \"kyopro/function/monoid.hpp\"\
-    \n#include <limits>\r\n#include <type_traits>\r\n#line 2 \"kyopro/meta/setting.hpp\"\
-    \n#include <cstdint>\r\n\r\n#ifndef KYOPRO_BASE_INT\r\n// \u57FA\u672C\u7B26\u53F7\
-    \u4ED8\u304D\u6574\u6570\u578B\r\n#define KYOPRO_BASE_INT std::int64_t\r\n#endif\r\
-    \n\r\n#ifndef KYOPRO_BASE_UINT\r\n// \u57FA\u672C\u7B26\u53F7\u306A\u3057\u6574\
-    \u6570\u578B\r\n#define KYOPRO_BASE_UINT std::uint64_t\r\n#endif\r\n\r\n#ifndef\
-    \ KYOPRO_BASE_FLOAT\r\n// \u57FA\u672C\u6D6E\u52D5\u5C0F\u6570\u70B9\u6570\u578B\
-    \r\n#define KYOPRO_BASE_FLOAT double\r\n#endif\r\n\r\n#ifndef KYOPRO_DEFAULT_MOD\r\
-    \n// \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305Fmod\r\n#define KYOPRO_DEFAULT_MOD\
-    \ (static_cast<KYOPRO_BASE_UINT>(998244353))\r\n#endif\r\n\r\n#ifndef KYOPRO_DECIMAL_PRECISION\r\
-    \n// \u5C0F\u6570\u7CBE\u5EA6(\u6841)\r\n#define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))\r\
+  bundledCode: "#line 2 \"kyopro/data_structure/WeightedUnionFind.hpp\"\n#include\
+    \ <algorithm>\n#include <type_traits>\n#include <unordered_map>\n#include <utility>\n\
+    #include <vector>\n#line 2 \"kyopro/function/monoid.hpp\"\n#include <limits>\r\
+    \n#line 2 \"kyopro/meta/setting.hpp\"\n#include <cstdint>\r\n\r\n#ifndef KYOPRO_BASE_INT\r\
+    \n// \u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u578B\r\n#define KYOPRO_BASE_INT\
+    \ std::int64_t\r\n#endif\r\n\r\n#ifndef KYOPRO_BASE_UINT\r\n// \u57FA\u672C\u7B26\
+    \u53F7\u306A\u3057\u6574\u6570\u578B\r\n#define KYOPRO_BASE_UINT std::uint64_t\r\
+    \n#endif\r\n\r\n#ifndef KYOPRO_BASE_FLOAT\r\n// \u57FA\u672C\u6D6E\u52D5\u5C0F\
+    \u6570\u70B9\u6570\u578B\r\n#define KYOPRO_BASE_FLOAT double\r\n#endif\r\n\r\n\
+    #ifndef KYOPRO_DEFAULT_MOD\r\n// \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305F\
+    mod\r\n#define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))\r\
+    \n#endif\r\n\r\n#ifndef KYOPRO_DECIMAL_PRECISION\r\n// \u5C0F\u6570\u7CBE\u5EA6\
+    (\u6841)\r\n#define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))\r\
     \n#endif\r\n\r\n#ifndef KYOPRO_INF_DIV\r\n// \u7121\u9650\u5927\u3092\u8868\u3059\
     \u6574\u6570\u304C\u6700\u5927\u5024\u306E\u4F55\u5206\u306E\u4E00\u304B\u3092\
     \u8868\u3059\r\n#define KYOPRO_INF_DIV (static_cast<KYOPRO_BASE_UINT>(3))\r\n\
     #endif\r\n\r\n#ifndef KYOPRO_BUFFER_SIZE\r\n// \u30C7\u30D5\u30A9\u30EB\u30C8\u306E\
     \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\r\n#define KYOPRO_BUFFER_SIZE (static_cast<KYOPRO_BASE_UINT>(2048))\r\
-    \n#endif\r\n#line 3 \"kyopro/meta/trait.hpp\"\n#include <iterator>\r\n#include\
-    \ <tuple>\r\n#line 7 \"kyopro/meta/trait.hpp\"\n\r\nnamespace kpr {\r\n    namespace\
-    \ helper {\r\n        template<class T>\r\n        struct is_integer_helper {\r\
-    \n            static constexpr bool value = std::is_integral_v<T>;\r\n       \
-    \ };\r\n\r\n        #ifdef __SIZEOF_INT128__\r\n        template<>\r\n       \
-    \ struct is_integer_helper<__int128_t> {\r\n            static constexpr bool\
-    \ value = true;\r\n        };\r\n        template<>\r\n        struct is_integer_helper<__uint128_t>\
+    \n#endif\r\n#line 2 \"kyopro/meta/trait.hpp\"\n#include <cstddef>\r\n#include\
+    \ <iterator>\r\n#include <tuple>\r\n#line 7 \"kyopro/meta/trait.hpp\"\n\r\nnamespace\
+    \ kpr {\r\n    namespace helper {\r\n        template<class T>\r\n        struct\
+    \ is_integer_helper {\r\n            static constexpr bool value = std::is_integral_v<T>;\r\
+    \n        };\r\n\r\n        #ifdef __SIZEOF_INT128__\r\n        template<>\r\n\
+    \        struct is_integer_helper<__int128_t> {\r\n            static constexpr\
+    \ bool value = true;\r\n        };\r\n        template<>\r\n        struct is_integer_helper<__uint128_t>\
     \ {\r\n            static constexpr bool value = true;\r\n        };\r\n     \
     \   #endif\r\n    } // namespace helper\r\n\r\n    // \u578BT\u304C\u6574\u6570\
     \u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    struct is_integer {\r\
@@ -190,81 +188,101 @@ data:
     \ = false;\r\n    };\r\n\r\n    template<class T>\r\n    struct has_inv<T, std::void_t<decltype(&T::inv)>>\
     \ {\r\n        static constexpr bool value = true;\r\n    };\r\n\r\n    // inv\u3092\
     \u6301\u3064\u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    inline constexpr\
-    \ bool has_inv_v = has_inv<T>::value;\r\n} // namespace kpr\r\n#line 6 \"kyopro/data_structure/FenwickTree.hpp\"\
-    \n\r\nnamespace kpr {\r\n    template<class T, class Op = Add<T>, class Container\
-    \ = std::vector<T>>\r\n    struct FenwickTree {\r\n        using value_type =\
-    \ T;\r\n        using size_type = std::size_t;\r\n        using reference = T&;\r\
-    \n        using const_reference = const T&;\r\n        using operator_type = Op;\r\
-    \n        using container_type = Container;\r\n\r\n    private:\r\n        Op\
-    \ op;\r\n        Container tree;\r\n\r\n    public:\r\n        FenwickTree() noexcept\
-    \ = default;\r\n        FenwickTree(std::size_t n) noexcept: tree(n, op.id())\
-    \ {}\r\n\r\n        std::size_t size() noexcept {\r\n            return tree.size();\r\
-    \n        }\r\n\r\n        void apply(int p, const T& x) {\r\n            ++p;\r\
-    \n            while (p <= (int)size()) {\r\n                tree[p - 1] = op(std::move(tree[p\
-    \ - 1]), x);\r\n                p += p & -p;\r\n            }\r\n        }\r\n\
-    \r\n        T prod(int r) const {\r\n            T s = op.id();\r\n          \
-    \  while (r > 0) {\r\n                s = op(std::move(s), tree[r - 1]);\r\n \
-    \               r -= r & -r;\r\n            }\r\n            return s;\r\n   \
-    \     }\r\n        T prod(int l, int r) const {\r\n            static_assert(has_inv_v<Op>,\
-    \ \"Operator doesn't have an inv\");\r\n            return op(prod(r), op.inv(prod(l)));\r\
-    \n        }\r\n\r\n        T all_prod() {\r\n            return prod(tree.size());\r\
-    \n        }\r\n\r\n        T get(int p) {\r\n            static_assert(has_inv_v<Op>,\
-    \ \"Operator doesn't have an inv\");\r\n            return op(prod(p + 1), op.inv(prod(p)));\r\
-    \n        }\r\n\r\n        void set(int p, const T& x) {\r\n            static_assert(has_inv_v<Op>,\
-    \ \"Operator doesn't have an inv\");\r\n            apply(p, op(x, op.inv(get(p))));\r\
-    \n        }\r\n    };\r\n} // namespace kpr\r\n#line 2 \"kyopro/data_structure/UnionFind.hpp\"\
-    \n#include <algorithm>\r\n#line 4 \"kyopro/data_structure/UnionFind.hpp\"\n#include\
-    \ <unordered_map>\r\n#line 9 \"kyopro/data_structure/UnionFind.hpp\"\n\r\nnamespace\
-    \ kpr {\r\n    struct UnionFind {\r\n    private:\r\n        std::vector<int>\
-    \ par;\r\n\r\n    public:\r\n        UnionFind() noexcept = default;\r\n     \
-    \   UnionFind(std::size_t n) noexcept: par(n, -1) {}\r\n\r\n        void resize(std::size_t\
-    \ n) {\r\n            par.resize(n, -1);\r\n        }\r\n        void assign(std::size_t\
-    \ n) {\r\n            par.assign(n, -1);\r\n        }\r\n        void clear()\
-    \ {\r\n            std::fill(par.begin(), par.end(), -1);\r\n        }\r\n\r\n\
-    \        std::size_t size() const noexcept {\r\n            return par.size();\r\
-    \n        }\r\n\r\n        KYOPRO_BASE_INT find(int x) {\r\n            int p\
-    \ = x;\r\n            while (par[p] >= 0) p = par[p];\r\n            while (x\
-    \ != p) {\r\n                int tmp = x;\r\n                x = par[x];\r\n \
-    \               par[tmp] = p;\r\n            }\r\n            return p;\r\n  \
-    \      }\r\n\r\n        bool merge(int x, int y) {\r\n            x = find(x),\
-    \ y = find(y);\r\n            if (x == y) return false;\r\n            if (par[x]\
-    \ > par[y]) {\r\n                par[y] += par[x];\r\n                par[x] =\
-    \ y;\r\n            } else {\r\n                par[x] += par[y];\r\n        \
-    \        par[y] = x;\r\n            }\r\n            return true;\r\n        }\r\
-    \n\r\n        bool same(int x, int y) {\r\n            return find(x) == find(y);\r\
-    \n        }\r\n\r\n        KYOPRO_BASE_INT group_size(int x) {\r\n           \
-    \ return -par[find(x)];\r\n        }\r\n\r\n        std::vector<int> group_members(int\
-    \ x) {\r\n            x = find(x);\r\n            std::vector<int> a;\r\n    \
-    \        for (int i = 0; i < (int)(size()); ++i) if (find(i) == x) a.emplace_back(i);\r\
-    \n            return a;\r\n        }\r\n\r\n        template<class Vector = std::vector<KYOPRO_BASE_INT>>\r\
-    \n        Vector roots() const {\r\n            Vector a;\r\n            for (int\
-    \ i = 0; i < (int)(size()); ++i) if (par[i] < 0) a.emplace_back(i);\r\n      \
-    \      return a;\r\n        }\r\n\r\n        KYOPRO_BASE_INT group_count() const\
-    \ {\r\n            KYOPRO_BASE_INT cnt = 0;\r\n            for (int i = 0; i <\
-    \ (int)(size()); ++i) if (par[i] < 0) ++cnt;\r\n            return cnt;\r\n  \
-    \      }\r\n\r\n        template<class Map = std::unordered_map<KYOPRO_BASE_INT,\
-    \ std::vector<KYOPRO_BASE_INT>>>\r\n        Map all_group_members() {\r\n    \
-    \        Map group_members;\r\n            for (int member = 0; member < (int)(size());\
-    \ ++member) group_members[find(member)].emplace_back(member);\r\n            return\
-    \ group_members;\r\n        }\r\n    };\r\n} // namespace kpr\r\n#line 4 \"kyopro/data_structure/structure.hpp\"\
-    \n"
-  code: "#pragma once\r\n#include \"FenwickTree.hpp\"\r\n#include \"UnionFind.hpp\""
+    \ bool has_inv_v = has_inv<T>::value;\r\n} // namespace kpr\r\n#line 10 \"kyopro/data_structure/WeightedUnionFind.hpp\"\
+    \n\nnamespace kpr {\n    template<class T, class Op = Add<T>>\n    struct WeightedUnionFind\
+    \ {\n    private:\n        std::vector<int> par;\n        std::vector<T> diff_weight;\n\
+    \        Op op;\n\n    public:\n        WeightedUnionFind() noexcept = default;\n\
+    \        WeightedUnionFind(std::size_t n) noexcept: par(n, -1), diff_weight(n,\
+    \ op.id()) {}\n\n        void resize(std::size_t n) {\n            par.resize(n,\
+    \ -1);\n            diff_weight.resize(n, op.id());\n        }\n        void assign(std::size_t\
+    \ n) {\n            par.assign(n, -1);\n            diff_weight.assign(n, op.id());\n\
+    \        }\n        void clear() {\n            std::fill(par.begin(), par.end(),\
+    \ -1);\n            std::fill(diff_weight.begin(), diff_weight.end(), op.id());\n\
+    \        }\n\n        std::size_t size() const noexcept {\n            return\
+    \ par.size();\n        }\n\n        KYOPRO_BASE_INT find(int x) {\n          \
+    \  if (par[x] == x) return x;\n            int r = find(par[x]);\n           \
+    \ diff_weight[x] = op(std::move(diff_weight[x]), diff_weight[par[x]]);\n     \
+    \       return par[x] = r;\n        }\n\n        T weight(int x) {\n         \
+    \   static_cast<void>(find(x));\n            return diff_weight[x];\n        }\n\
+    \n        T diff(int x, int y) {\n            op(weight(y), op.inv(weight(x)));\n\
+    \        }\n\n        bool merge(int x, int y, T w) {\n            x = find(x),\
+    \ y = find(y);\n            w = op(std::move(w), op(diff_weight[x], op.inv(diff_weight[y])));\n\
+    \            if (x == y) return false;\n            if (par[x] > par[y]) {\n \
+    \               par[y] += par[x];\n                par[x] = y;\n             \
+    \   diff_weight[x] = w;\n            } else {\n                par[x] += par[y];\n\
+    \                par[y] = x;\n                diff_weight[y] = w;\n          \
+    \  }\n            return true;\n        }\n\n        bool same(int x, int y) {\n\
+    \            return find(x) == find(y);\n        }\n\n        KYOPRO_BASE_INT\
+    \ group_size(int x) {\n            return -par[find(x)];\n        }\n\n      \
+    \  std::vector<int> group_members(int x) {\n            x = find(x);\n       \
+    \     std::vector<int> a;\n            for (int i = 0; i < (int)(size()); ++i)\
+    \ if (find(i) == x) a.emplace_back(i);\n            return a;\n        }\n\n \
+    \       template<class Vector = std::vector<KYOPRO_BASE_INT>>\n        Vector\
+    \ roots() const {\n            Vector a;\n            for (int i = 0; i < (int)(size());\
+    \ ++i) if (par[i] < 0) a.emplace_back(i);\n            return a;\n        }\n\n\
+    \        KYOPRO_BASE_INT group_count() const {\n            KYOPRO_BASE_INT cnt\
+    \ = 0;\n            for (int i = 0; i < (int)(size()); ++i) if (par[i] < 0) ++cnt;\n\
+    \            return cnt;\n        }\n\n        template<class Map = std::unordered_map<KYOPRO_BASE_INT,\
+    \ std::vector<KYOPRO_BASE_INT>>>\n        Map all_group_members() {\n        \
+    \    Map group_members;\n            for (int member = 0; member < (int)(size());\
+    \ ++member) group_members[find(member)].emplace_back(member);\n            return\
+    \ group_members;\n        }\n    };\n} // namespace kpr\n"
+  code: "#pragma once\n#include <algorithm>\n#include <type_traits>\n#include <unordered_map>\n\
+    #include <utility>\n#include <vector>\n#include \"../function/monoid.hpp\"\n#include\
+    \ \"../meta/setting.hpp\"\n#include \"../meta/trait.hpp\"\n\nnamespace kpr {\n\
+    \    template<class T, class Op = Add<T>>\n    struct WeightedUnionFind {\n  \
+    \  private:\n        std::vector<int> par;\n        std::vector<T> diff_weight;\n\
+    \        Op op;\n\n    public:\n        WeightedUnionFind() noexcept = default;\n\
+    \        WeightedUnionFind(std::size_t n) noexcept: par(n, -1), diff_weight(n,\
+    \ op.id()) {}\n\n        void resize(std::size_t n) {\n            par.resize(n,\
+    \ -1);\n            diff_weight.resize(n, op.id());\n        }\n        void assign(std::size_t\
+    \ n) {\n            par.assign(n, -1);\n            diff_weight.assign(n, op.id());\n\
+    \        }\n        void clear() {\n            std::fill(par.begin(), par.end(),\
+    \ -1);\n            std::fill(diff_weight.begin(), diff_weight.end(), op.id());\n\
+    \        }\n\n        std::size_t size() const noexcept {\n            return\
+    \ par.size();\n        }\n\n        KYOPRO_BASE_INT find(int x) {\n          \
+    \  if (par[x] == x) return x;\n            int r = find(par[x]);\n           \
+    \ diff_weight[x] = op(std::move(diff_weight[x]), diff_weight[par[x]]);\n     \
+    \       return par[x] = r;\n        }\n\n        T weight(int x) {\n         \
+    \   static_cast<void>(find(x));\n            return diff_weight[x];\n        }\n\
+    \n        T diff(int x, int y) {\n            op(weight(y), op.inv(weight(x)));\n\
+    \        }\n\n        bool merge(int x, int y, T w) {\n            x = find(x),\
+    \ y = find(y);\n            w = op(std::move(w), op(diff_weight[x], op.inv(diff_weight[y])));\n\
+    \            if (x == y) return false;\n            if (par[x] > par[y]) {\n \
+    \               par[y] += par[x];\n                par[x] = y;\n             \
+    \   diff_weight[x] = w;\n            } else {\n                par[x] += par[y];\n\
+    \                par[y] = x;\n                diff_weight[y] = w;\n          \
+    \  }\n            return true;\n        }\n\n        bool same(int x, int y) {\n\
+    \            return find(x) == find(y);\n        }\n\n        KYOPRO_BASE_INT\
+    \ group_size(int x) {\n            return -par[find(x)];\n        }\n\n      \
+    \  std::vector<int> group_members(int x) {\n            x = find(x);\n       \
+    \     std::vector<int> a;\n            for (int i = 0; i < (int)(size()); ++i)\
+    \ if (find(i) == x) a.emplace_back(i);\n            return a;\n        }\n\n \
+    \       template<class Vector = std::vector<KYOPRO_BASE_INT>>\n        Vector\
+    \ roots() const {\n            Vector a;\n            for (int i = 0; i < (int)(size());\
+    \ ++i) if (par[i] < 0) a.emplace_back(i);\n            return a;\n        }\n\n\
+    \        KYOPRO_BASE_INT group_count() const {\n            KYOPRO_BASE_INT cnt\
+    \ = 0;\n            for (int i = 0; i < (int)(size()); ++i) if (par[i] < 0) ++cnt;\n\
+    \            return cnt;\n        }\n\n        template<class Map = std::unordered_map<KYOPRO_BASE_INT,\
+    \ std::vector<KYOPRO_BASE_INT>>>\n        Map all_group_members() {\n        \
+    \    Map group_members;\n            for (int member = 0; member < (int)(size());\
+    \ ++member) group_members[find(member)].emplace_back(member);\n            return\
+    \ group_members;\n        }\n    };\n} // namespace kpr\n"
   dependsOn:
-  - kyopro/data_structure/FenwickTree.hpp
   - kyopro/function/monoid.hpp
   - kyopro/meta/setting.hpp
   - kyopro/meta/trait.hpp
-  - kyopro/data_structure/UnionFind.hpp
   isVerificationFile: false
-  path: kyopro/data_structure/structure.hpp
+  path: kyopro/data_structure/WeightedUnionFind.hpp
   requiredBy: []
   timestamp: '2023-04-03 01:27:56+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
-documentation_of: kyopro/data_structure/structure.hpp
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - verify/aoj/WeightedUnionFind.test.cpp
+documentation_of: kyopro/data_structure/WeightedUnionFind.hpp
 layout: document
 redirect_from:
-- /library/kyopro/data_structure/structure.hpp
-- /library/kyopro/data_structure/structure.hpp.html
-title: kyopro/data_structure/structure.hpp
+- /library/kyopro/data_structure/WeightedUnionFind.hpp
+- /library/kyopro/data_structure/WeightedUnionFind.hpp.html
+title: kyopro/data_structure/WeightedUnionFind.hpp
 ---

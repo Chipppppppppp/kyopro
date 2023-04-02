@@ -4,34 +4,34 @@ data:
   - icon: ':heavy_check_mark:'
     path: kyopro/algorithm/Hash.hpp
     title: kyopro/algorithm/Hash.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/function/monoid.hpp
     title: kyopro/function/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/io/in.hpp
     title: kyopro/io/in.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/io/io_option.hpp
     title: kyopro/io/io_option.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/io/out.hpp
     title: kyopro/io/out.hpp
   - icon: ':heavy_check_mark:'
     path: kyopro/math/Montgomery.hpp
     title: kyopro/math/Montgomery.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/math/power.hpp
     title: kyopro/math/power.hpp
   - icon: ':heavy_check_mark:'
     path: kyopro/meta/constant.hpp
     title: kyopro/meta/constant.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: kyopro/meta/tuple_like.hpp
     title: kyopro/meta/tuple_like.hpp
   _extendedRequiredBy:

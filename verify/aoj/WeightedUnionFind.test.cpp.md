@@ -1,9 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: kyopro/data_structure/FenwickTree.hpp
-    title: kyopro/data_structure/FenwickTree.hpp
+  - icon: ':x:'
+    path: kyopro/data_structure/WeightedUnionFind.hpp
+    title: kyopro/data_structure/WeightedUnionFind.hpp
   - icon: ':question:'
     path: kyopro/function/monoid.hpp
     title: kyopro/function/monoid.hpp
@@ -33,26 +33,26 @@ data:
     title: kyopro/meta/tuple_like.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/point_add_range_sum
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/problems/DSL_1_B
     links:
-    - https://judge.yosupo.jp/problem/point_add_range_sum
-  bundledCode: "#line 1 \"verify/yosupo/point_add_range_sum.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/point_add_range_sum\"\r\n#line 2 \"kyopro/data_structure/FenwickTree.hpp\"\
-    \n#include <cstddef>\r\n#include <utility>\r\n#include <vector>\r\n#line 2 \"\
-    kyopro/function/monoid.hpp\"\n#include <limits>\r\n#include <type_traits>\r\n\
-    #line 2 \"kyopro/meta/setting.hpp\"\n#include <cstdint>\r\n\r\n#ifndef KYOPRO_BASE_INT\r\
-    \n// \u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u578B\r\n#define KYOPRO_BASE_INT\
-    \ std::int64_t\r\n#endif\r\n\r\n#ifndef KYOPRO_BASE_UINT\r\n// \u57FA\u672C\u7B26\
-    \u53F7\u306A\u3057\u6574\u6570\u578B\r\n#define KYOPRO_BASE_UINT std::uint64_t\r\
-    \n#endif\r\n\r\n#ifndef KYOPRO_BASE_FLOAT\r\n// \u57FA\u672C\u6D6E\u52D5\u5C0F\
-    \u6570\u70B9\u6570\u578B\r\n#define KYOPRO_BASE_FLOAT double\r\n#endif\r\n\r\n\
-    #ifndef KYOPRO_DEFAULT_MOD\r\n// \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305F\
-    mod\r\n#define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))\r\
+    - https://onlinejudge.u-aizu.ac.jp/problems/DSL_1_B
+  bundledCode: "#line 1 \"verify/aoj/WeightedUnionFind.test.cpp\"\n#define PROBLEM\
+    \ \"https://onlinejudge.u-aizu.ac.jp/problems/DSL_1_B\"\n#line 2 \"kyopro/data_structure/WeightedUnionFind.hpp\"\
+    \n#include <algorithm>\n#include <type_traits>\n#include <unordered_map>\n#include\
+    \ <utility>\n#include <vector>\n#line 2 \"kyopro/function/monoid.hpp\"\n#include\
+    \ <limits>\r\n#line 2 \"kyopro/meta/setting.hpp\"\n#include <cstdint>\r\n\r\n\
+    #ifndef KYOPRO_BASE_INT\r\n// \u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\
+    \u578B\r\n#define KYOPRO_BASE_INT std::int64_t\r\n#endif\r\n\r\n#ifndef KYOPRO_BASE_UINT\r\
+    \n// \u57FA\u672C\u7B26\u53F7\u306A\u3057\u6574\u6570\u578B\r\n#define KYOPRO_BASE_UINT\
+    \ std::uint64_t\r\n#endif\r\n\r\n#ifndef KYOPRO_BASE_FLOAT\r\n// \u57FA\u672C\u6D6E\
+    \u52D5\u5C0F\u6570\u70B9\u6570\u578B\r\n#define KYOPRO_BASE_FLOAT double\r\n#endif\r\
+    \n\r\n#ifndef KYOPRO_DEFAULT_MOD\r\n// \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\
+    \u305Fmod\r\n#define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))\r\
     \n#endif\r\n\r\n#ifndef KYOPRO_DECIMAL_PRECISION\r\n// \u5C0F\u6570\u7CBE\u5EA6\
     (\u6841)\r\n#define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))\r\
     \n#endif\r\n\r\n#ifndef KYOPRO_INF_DIV\r\n// \u7121\u9650\u5927\u3092\u8868\u3059\
@@ -60,13 +60,13 @@ data:
     \u8868\u3059\r\n#define KYOPRO_INF_DIV (static_cast<KYOPRO_BASE_UINT>(3))\r\n\
     #endif\r\n\r\n#ifndef KYOPRO_BUFFER_SIZE\r\n// \u30C7\u30D5\u30A9\u30EB\u30C8\u306E\
     \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\r\n#define KYOPRO_BUFFER_SIZE (static_cast<KYOPRO_BASE_UINT>(2048))\r\
-    \n#endif\r\n#line 3 \"kyopro/meta/trait.hpp\"\n#include <iterator>\r\n#include\
-    \ <tuple>\r\n#line 7 \"kyopro/meta/trait.hpp\"\n\r\nnamespace kpr {\r\n    namespace\
-    \ helper {\r\n        template<class T>\r\n        struct is_integer_helper {\r\
-    \n            static constexpr bool value = std::is_integral_v<T>;\r\n       \
-    \ };\r\n\r\n        #ifdef __SIZEOF_INT128__\r\n        template<>\r\n       \
-    \ struct is_integer_helper<__int128_t> {\r\n            static constexpr bool\
-    \ value = true;\r\n        };\r\n        template<>\r\n        struct is_integer_helper<__uint128_t>\
+    \n#endif\r\n#line 2 \"kyopro/meta/trait.hpp\"\n#include <cstddef>\r\n#include\
+    \ <iterator>\r\n#include <tuple>\r\n#line 7 \"kyopro/meta/trait.hpp\"\n\r\nnamespace\
+    \ kpr {\r\n    namespace helper {\r\n        template<class T>\r\n        struct\
+    \ is_integer_helper {\r\n            static constexpr bool value = std::is_integral_v<T>;\r\
+    \n        };\r\n\r\n        #ifdef __SIZEOF_INT128__\r\n        template<>\r\n\
+    \        struct is_integer_helper<__int128_t> {\r\n            static constexpr\
+    \ bool value = true;\r\n        };\r\n        template<>\r\n        struct is_integer_helper<__uint128_t>\
     \ {\r\n            static constexpr bool value = true;\r\n        };\r\n     \
     \   #endif\r\n    } // namespace helper\r\n\r\n    // \u578BT\u304C\u6574\u6570\
     \u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    struct is_integer {\r\
@@ -210,30 +210,46 @@ data:
     \ = false;\r\n    };\r\n\r\n    template<class T>\r\n    struct has_inv<T, std::void_t<decltype(&T::inv)>>\
     \ {\r\n        static constexpr bool value = true;\r\n    };\r\n\r\n    // inv\u3092\
     \u6301\u3064\u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    inline constexpr\
-    \ bool has_inv_v = has_inv<T>::value;\r\n} // namespace kpr\r\n#line 6 \"kyopro/data_structure/FenwickTree.hpp\"\
-    \n\r\nnamespace kpr {\r\n    template<class T, class Op = Add<T>, class Container\
-    \ = std::vector<T>>\r\n    struct FenwickTree {\r\n        using value_type =\
-    \ T;\r\n        using size_type = std::size_t;\r\n        using reference = T&;\r\
-    \n        using const_reference = const T&;\r\n        using operator_type = Op;\r\
-    \n        using container_type = Container;\r\n\r\n    private:\r\n        Op\
-    \ op;\r\n        Container tree;\r\n\r\n    public:\r\n        FenwickTree() noexcept\
-    \ = default;\r\n        FenwickTree(std::size_t n) noexcept: tree(n, op.id())\
-    \ {}\r\n\r\n        std::size_t size() noexcept {\r\n            return tree.size();\r\
-    \n        }\r\n\r\n        void apply(int p, const T& x) {\r\n            ++p;\r\
-    \n            while (p <= (int)size()) {\r\n                tree[p - 1] = op(std::move(tree[p\
-    \ - 1]), x);\r\n                p += p & -p;\r\n            }\r\n        }\r\n\
-    \r\n        T prod(int r) const {\r\n            T s = op.id();\r\n          \
-    \  while (r > 0) {\r\n                s = op(std::move(s), tree[r - 1]);\r\n \
-    \               r -= r & -r;\r\n            }\r\n            return s;\r\n   \
-    \     }\r\n        T prod(int l, int r) const {\r\n            static_assert(has_inv_v<Op>,\
-    \ \"Operator doesn't have an inv\");\r\n            return op(prod(r), op.inv(prod(l)));\r\
-    \n        }\r\n\r\n        T all_prod() {\r\n            return prod(tree.size());\r\
-    \n        }\r\n\r\n        T get(int p) {\r\n            static_assert(has_inv_v<Op>,\
-    \ \"Operator doesn't have an inv\");\r\n            return op(prod(p + 1), op.inv(prod(p)));\r\
-    \n        }\r\n\r\n        void set(int p, const T& x) {\r\n            static_assert(has_inv_v<Op>,\
-    \ \"Operator doesn't have an inv\");\r\n            apply(p, op(x, op.inv(get(p))));\r\
-    \n        }\r\n    };\r\n} // namespace kpr\r\n#line 2 \"kyopro/io/in.hpp\"\n\
-    #include <unistd.h>\r\n#include <array>\r\n#include <bitset>\r\n#line 7 \"kyopro/io/in.hpp\"\
+    \ bool has_inv_v = has_inv<T>::value;\r\n} // namespace kpr\r\n#line 10 \"kyopro/data_structure/WeightedUnionFind.hpp\"\
+    \n\nnamespace kpr {\n    template<class T, class Op = Add<T>>\n    struct WeightedUnionFind\
+    \ {\n    private:\n        std::vector<int> par;\n        std::vector<T> diff_weight;\n\
+    \        Op op;\n\n    public:\n        WeightedUnionFind() noexcept = default;\n\
+    \        WeightedUnionFind(std::size_t n) noexcept: par(n, -1), diff_weight(n,\
+    \ op.id()) {}\n\n        void resize(std::size_t n) {\n            par.resize(n,\
+    \ -1);\n            diff_weight.resize(n, op.id());\n        }\n        void assign(std::size_t\
+    \ n) {\n            par.assign(n, -1);\n            diff_weight.assign(n, op.id());\n\
+    \        }\n        void clear() {\n            std::fill(par.begin(), par.end(),\
+    \ -1);\n            std::fill(diff_weight.begin(), diff_weight.end(), op.id());\n\
+    \        }\n\n        std::size_t size() const noexcept {\n            return\
+    \ par.size();\n        }\n\n        KYOPRO_BASE_INT find(int x) {\n          \
+    \  if (par[x] == x) return x;\n            int r = find(par[x]);\n           \
+    \ diff_weight[x] = op(std::move(diff_weight[x]), diff_weight[par[x]]);\n     \
+    \       return par[x] = r;\n        }\n\n        T weight(int x) {\n         \
+    \   static_cast<void>(find(x));\n            return diff_weight[x];\n        }\n\
+    \n        T diff(int x, int y) {\n            op(weight(y), op.inv(weight(x)));\n\
+    \        }\n\n        bool merge(int x, int y, T w) {\n            x = find(x),\
+    \ y = find(y);\n            w = op(std::move(w), op(diff_weight[x], op.inv(diff_weight[y])));\n\
+    \            if (x == y) return false;\n            if (par[x] > par[y]) {\n \
+    \               par[y] += par[x];\n                par[x] = y;\n             \
+    \   diff_weight[x] = w;\n            } else {\n                par[x] += par[y];\n\
+    \                par[y] = x;\n                diff_weight[y] = w;\n          \
+    \  }\n            return true;\n        }\n\n        bool same(int x, int y) {\n\
+    \            return find(x) == find(y);\n        }\n\n        KYOPRO_BASE_INT\
+    \ group_size(int x) {\n            return -par[find(x)];\n        }\n\n      \
+    \  std::vector<int> group_members(int x) {\n            x = find(x);\n       \
+    \     std::vector<int> a;\n            for (int i = 0; i < (int)(size()); ++i)\
+    \ if (find(i) == x) a.emplace_back(i);\n            return a;\n        }\n\n \
+    \       template<class Vector = std::vector<KYOPRO_BASE_INT>>\n        Vector\
+    \ roots() const {\n            Vector a;\n            for (int i = 0; i < (int)(size());\
+    \ ++i) if (par[i] < 0) a.emplace_back(i);\n            return a;\n        }\n\n\
+    \        KYOPRO_BASE_INT group_count() const {\n            KYOPRO_BASE_INT cnt\
+    \ = 0;\n            for (int i = 0; i < (int)(size()); ++i) if (par[i] < 0) ++cnt;\n\
+    \            return cnt;\n        }\n\n        template<class Map = std::unordered_map<KYOPRO_BASE_INT,\
+    \ std::vector<KYOPRO_BASE_INT>>>\n        Map all_group_members() {\n        \
+    \    Map group_members;\n            for (int member = 0; member < (int)(size());\
+    \ ++member) group_members[find(member)].emplace_back(member);\n            return\
+    \ group_members;\n        }\n    };\n} // namespace kpr\n#line 2 \"kyopro/io/in.hpp\"\
+    \n#include <unistd.h>\r\n#include <array>\r\n#include <bitset>\r\n#line 7 \"kyopro/io/in.hpp\"\
     \n#include <cstdio>\r\n#include <string>\r\n#line 5 \"kyopro/io/io_option.hpp\"\
     \n\r\nnamespace kpr {\r\n    template<class Tuple, std::size_t idx>\r\n    struct\
     \ Indexed {\r\n        Tuple args_tuple;\r\n        template<class... Args>\r\n\
@@ -420,46 +436,46 @@ data:
     \ = static_cast<ScannerWrapper<Scanner>&>(scanner);\r\n            scan_impl(scanner_wrapper,\
     \ a.args_tuple);\r\n        }\r\n    };\r\n\r\n    // \u6A19\u6E96\u5165\u529B\
     \u304B\u3089\u5024\u3092\u5165\u529B\u3059\u308B\u95A2\u6570\r\n    Scanner<Reader<>::iterator>\
-    \ scan{input.begin()};\r\n} // namespace kpr\r\n#line 3 \"kyopro/io/out.hpp\"\n\
-    #include <algorithm>\r\n#line 6 \"kyopro/io/out.hpp\"\n#include <cmath>\r\n#line\
-    \ 11 \"kyopro/io/out.hpp\"\n#include <string_view>\r\n#line 19 \"kyopro/io/out.hpp\"\
-    \n\r\nnamespace kpr {\r\n    // \u30D0\u30C3\u30D5\u30A1\u3092\u7528\u3044\u3066\
-    \u30D5\u30A1\u30A4\u30EB\u306B\u66F8\u304D\u8FBC\u3080\u30AF\u30E9\u30B9\r\n \
-    \   template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>\r\n    struct Writer {\r\
-    \n    private:\r\n        int fd, idx;\r\n        std::array<char, buf_size> buffer;\r\
-    \n\r\n    public:\r\n        // \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\u3092\
-    \u53D6\u5F97\r\n        static constexpr KYOPRO_BASE_INT get_buf_size() noexcept\
-    \ {\r\n            return buf_size;\r\n        }\r\n\r\n        Writer() noexcept\
-    \ = default;\r\n        Writer(int fd) noexcept: fd(fd), idx(0), buffer() {}\r\
-    \n        Writer(FILE* fp) noexcept: fd(fileno(fp)), idx(0), buffer() {}\r\n\r\
-    \n        ~Writer() {\r\n            [[maybe_unused]]ssize_t res = write(fd, buffer.begin(),\
-    \ idx);\r\n        }\r\n\r\n        // \u51FA\u529B\u30A4\u30C6\u30EC\u30FC\u30BF\
-    \r\n        struct iterator {\r\n        private:\r\n            Writer& writer;\r\
-    \n\r\n        public:\r\n            using difference_type = void;\r\n       \
-    \     using value_type = void;\r\n            using pointer = void;\r\n      \
-    \      using reference = void;\r\n            using iterator_category = std::output_iterator_tag;\r\
-    \n\r\n            iterator() noexcept = default;\r\n            iterator(Writer&\
-    \ writer) noexcept: writer(writer) {}\r\n\r\n            iterator& operator ++()\
-    \ {\r\n                ++writer.idx;\r\n                if (writer.idx == buf_size)\
-    \ {\r\n                [[maybe_unused]]ssize_t res = write(writer.fd, writer.buffer.begin(),\
-    \ buf_size);\r\n                writer.idx = 0;\r\n                }\r\n     \
-    \           return *this;\r\n            }\r\n\r\n            iterator operator\
-    \ ++(int) {\r\n                iterator before = *this;\r\n                operator\
-    \ ++();\r\n                return before;\r\n            }\r\n\r\n           \
-    \ char& operator *() const {\r\n                return writer.buffer[writer.idx];\r\
-    \n            }\r\n\r\n            // \u30D0\u30C3\u30D5\u30A1\u3092\u5168\u3066\
-    \u51FA\u529B\u3059\u308B\r\n            void flush() const {\r\n             \
-    \   [[maybe_unused]] ssize_t res = write(writer.fd, writer.buffer.begin(), writer.idx);\r\
-    \n            }\r\n        };\r\n\r\n        // \u30D5\u30A1\u30A4\u30EB\u306E\
-    \u6700\u521D\u3092\u793A\u3059\u30A4\u30C6\u30EC\u30FC\u30BF\u3092\u53D6\u5F97\
-    \r\n        iterator begin() noexcept {\r\n            return iterator(*this);\r\
-    \n        }\r\n    };\r\n\r\n    // \u6A19\u6E96\u51FA\u529B\u3001\u6A19\u6E96\
-    \u30A8\u30E9\u30FC\u51FA\u529B\r\n    Writer output{1}, error{2};\r\n\r\n    //\
-    \ \u5024\u306E\u51FA\u529B\u306E\u95A2\u6570\u30AF\u30E9\u30B9\r\n    template<class,\
-    \ class = void>\r\n    struct PrintFunction;\r\n\r\n    // \u51FA\u529B\u30A4\u30C6\
-    \u30EC\u30FC\u30BF\u3092\u7528\u3044\u3066\u5024\u3092\u51FA\u529B\u3059\u308B\
-    \u30AF\u30E9\u30B9\r\n    template<class Iterator, bool _space = true, bool _line\
-    \ = true, bool _debug = false, bool _comment = false, bool _flush = false, std::size_t\
+    \ scan{input.begin()};\r\n} // namespace kpr\r\n#line 6 \"kyopro/io/out.hpp\"\n\
+    #include <cmath>\r\n#line 11 \"kyopro/io/out.hpp\"\n#include <string_view>\r\n\
+    #line 19 \"kyopro/io/out.hpp\"\n\r\nnamespace kpr {\r\n    // \u30D0\u30C3\u30D5\
+    \u30A1\u3092\u7528\u3044\u3066\u30D5\u30A1\u30A4\u30EB\u306B\u66F8\u304D\u8FBC\
+    \u3080\u30AF\u30E9\u30B9\r\n    template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>\r\
+    \n    struct Writer {\r\n    private:\r\n        int fd, idx;\r\n        std::array<char,\
+    \ buf_size> buffer;\r\n\r\n    public:\r\n        // \u30D0\u30C3\u30D5\u30A1\u30B5\
+    \u30A4\u30BA\u3092\u53D6\u5F97\r\n        static constexpr KYOPRO_BASE_INT get_buf_size()\
+    \ noexcept {\r\n            return buf_size;\r\n        }\r\n\r\n        Writer()\
+    \ noexcept = default;\r\n        Writer(int fd) noexcept: fd(fd), idx(0), buffer()\
+    \ {}\r\n        Writer(FILE* fp) noexcept: fd(fileno(fp)), idx(0), buffer() {}\r\
+    \n\r\n        ~Writer() {\r\n            [[maybe_unused]]ssize_t res = write(fd,\
+    \ buffer.begin(), idx);\r\n        }\r\n\r\n        // \u51FA\u529B\u30A4\u30C6\
+    \u30EC\u30FC\u30BF\r\n        struct iterator {\r\n        private:\r\n      \
+    \      Writer& writer;\r\n\r\n        public:\r\n            using difference_type\
+    \ = void;\r\n            using value_type = void;\r\n            using pointer\
+    \ = void;\r\n            using reference = void;\r\n            using iterator_category\
+    \ = std::output_iterator_tag;\r\n\r\n            iterator() noexcept = default;\r\
+    \n            iterator(Writer& writer) noexcept: writer(writer) {}\r\n\r\n   \
+    \         iterator& operator ++() {\r\n                ++writer.idx;\r\n     \
+    \           if (writer.idx == buf_size) {\r\n                [[maybe_unused]]ssize_t\
+    \ res = write(writer.fd, writer.buffer.begin(), buf_size);\r\n               \
+    \ writer.idx = 0;\r\n                }\r\n                return *this;\r\n  \
+    \          }\r\n\r\n            iterator operator ++(int) {\r\n              \
+    \  iterator before = *this;\r\n                operator ++();\r\n            \
+    \    return before;\r\n            }\r\n\r\n            char& operator *() const\
+    \ {\r\n                return writer.buffer[writer.idx];\r\n            }\r\n\r\
+    \n            // \u30D0\u30C3\u30D5\u30A1\u3092\u5168\u3066\u51FA\u529B\u3059\u308B\
+    \r\n            void flush() const {\r\n                [[maybe_unused]] ssize_t\
+    \ res = write(writer.fd, writer.buffer.begin(), writer.idx);\r\n            }\r\
+    \n        };\r\n\r\n        // \u30D5\u30A1\u30A4\u30EB\u306E\u6700\u521D\u3092\
+    \u793A\u3059\u30A4\u30C6\u30EC\u30FC\u30BF\u3092\u53D6\u5F97\r\n        iterator\
+    \ begin() noexcept {\r\n            return iterator(*this);\r\n        }\r\n \
+    \   };\r\n\r\n    // \u6A19\u6E96\u51FA\u529B\u3001\u6A19\u6E96\u30A8\u30E9\u30FC\
+    \u51FA\u529B\r\n    Writer output{1}, error{2};\r\n\r\n    // \u5024\u306E\u51FA\
+    \u529B\u306E\u95A2\u6570\u30AF\u30E9\u30B9\r\n    template<class, class = void>\r\
+    \n    struct PrintFunction;\r\n\r\n    // \u51FA\u529B\u30A4\u30C6\u30EC\u30FC\
+    \u30BF\u3092\u7528\u3044\u3066\u5024\u3092\u51FA\u529B\u3059\u308B\u30AF\u30E9\
+    \u30B9\r\n    template<class Iterator, bool _space = true, bool _line = true,\
+    \ bool _debug = false, bool _comment = false, bool _flush = false, std::size_t\
     \ decimal_precision = KYOPRO_DECIMAL_PRECISION>\r\n    struct Printer {\r\n  \
     \      using iterator_type = Iterator;\r\n\r\n        // \u6307\u5B9A\u3055\u308C\
     \u305F\u30AA\u30D7\u30B7\u30E7\u30F3\r\n        static constexpr bool space =\
@@ -568,23 +584,23 @@ data:
     \u6E96\u51FA\u529B\u3001\u6A19\u6E96\u30A8\u30E9\u30FC\u51FA\u529B\u306B\u5024\
     \u3092\u51FA\u529B\u3059\u308B(\u6539\u884C\u3001\u533A\u5207\u308A\u6587\u5B57\
     \u3042\u308A)\r\n    Printer<Writer<>::iterator> println{output.begin()}, eprintln{error.begin()};\r\
-    \n} // namespace kpr\r\n#line 4 \"verify/yosupo/point_add_range_sum.test.cpp\"\
-    \n\r\nint main() {\r\n    int n, q;\r\n    kpr::scan(n, q);\r\n    kpr::FenwickTree<long\
-    \ long> ft(n);\r\n    for (int i = 0; i < n; ++i) {\r\n        int a;\r\n    \
-    \    kpr::scan(a);\r\n        ft.apply(i, a);\r\n    }\r\n    for (int i = 0;\
-    \ i < q; ++i) {\r\n        int t, x, y;\r\n        kpr::scan(t, x, y);\r\n   \
-    \     if (t == 0) ft.apply(x, y);\r\n        else kpr::println(ft.prod(x, y));\r\
-    \n    }\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_range_sum\"\r\
-    \n#include \"../../kyopro/data_structure/FenwickTree.hpp\"\r\n#include \"../../kyopro/io/io.hpp\"\
-    \r\n\r\nint main() {\r\n    int n, q;\r\n    kpr::scan(n, q);\r\n    kpr::FenwickTree<long\
-    \ long> ft(n);\r\n    for (int i = 0; i < n; ++i) {\r\n        int a;\r\n    \
-    \    kpr::scan(a);\r\n        ft.apply(i, a);\r\n    }\r\n    for (int i = 0;\
-    \ i < q; ++i) {\r\n        int t, x, y;\r\n        kpr::scan(t, x, y);\r\n   \
-    \     if (t == 0) ft.apply(x, y);\r\n        else kpr::println(ft.prod(x, y));\r\
-    \n    }\r\n}\r\n"
+    \n} // namespace kpr\r\n#line 4 \"verify/aoj/WeightedUnionFind.test.cpp\"\n\n\
+    int main() {\n    int n, q;\n    kpr::scan(n, q);\n    kpr::WeightedUnionFind<long\
+    \ long> wuf;\n    for (int i = 0; i < q; ++i) {\n        int t;\n        kpr::scan(t);\n\
+    \        if (t == 0) {\n            int x, y, z;\n            kpr::scan(x, y,\
+    \ z);\n            wuf.merge(x, y, z);\n        } else {\n            int x, y;\n\
+    \            kpr::scan(x, y);\n            kpr::println(wuf.diff(x, y));\n   \
+    \     }\n    }\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/problems/DSL_1_B\"\n#include\
+    \ \"../../kyopro/data_structure/WeightedUnionFind.hpp\"\n#include \"../../kyopro/io/io.hpp\"\
+    \n\nint main() {\n    int n, q;\n    kpr::scan(n, q);\n    kpr::WeightedUnionFind<long\
+    \ long> wuf;\n    for (int i = 0; i < q; ++i) {\n        int t;\n        kpr::scan(t);\n\
+    \        if (t == 0) {\n            int x, y, z;\n            kpr::scan(x, y,\
+    \ z);\n            wuf.merge(x, y, z);\n        } else {\n            int x, y;\n\
+    \            kpr::scan(x, y);\n            kpr::println(wuf.diff(x, y));\n   \
+    \     }\n    }\n}\n"
   dependsOn:
-  - kyopro/data_structure/FenwickTree.hpp
+  - kyopro/data_structure/WeightedUnionFind.hpp
   - kyopro/function/monoid.hpp
   - kyopro/meta/setting.hpp
   - kyopro/meta/trait.hpp
@@ -595,15 +611,15 @@ data:
   - kyopro/meta/tuple_like.hpp
   - kyopro/io/out.hpp
   isVerificationFile: true
-  path: verify/yosupo/point_add_range_sum.test.cpp
+  path: verify/aoj/WeightedUnionFind.test.cpp
   requiredBy: []
   timestamp: '2023-04-03 01:27:56+09:00'
-  verificationStatus: TEST_ACCEPTED
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verify/yosupo/point_add_range_sum.test.cpp
+documentation_of: verify/aoj/WeightedUnionFind.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/yosupo/point_add_range_sum.test.cpp
-- /verify/verify/yosupo/point_add_range_sum.test.cpp.html
-title: verify/yosupo/point_add_range_sum.test.cpp
+- /verify/verify/aoj/WeightedUnionFind.test.cpp
+- /verify/verify/aoj/WeightedUnionFind.test.cpp.html
+title: verify/aoj/WeightedUnionFind.test.cpp
 ---
