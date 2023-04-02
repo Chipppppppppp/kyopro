@@ -1,11 +1,6 @@
 ---
 data:
   libraryCategories:
-  - name: .
-    pages:
-    - icon: ':warning:'
-      path: all.hpp
-      title: all.hpp
   - name: kyopro/algorithm
     pages:
     - icon: ':heavy_check_mark:'
@@ -34,6 +29,11 @@ data:
     - icon: ':warning:'
       path: kyopro/all/all.hpp
       title: kyopro/all/all.hpp
+  - name: kyopro
+    pages:
+    - icon: ':warning:'
+      path: kyopro/all.hpp
+      title: kyopro/all.hpp
   - name: kyopro/data_structure
     pages:
     - icon: ':heavy_check_mark:'

@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: kyopro/all.hpp
+    title: kyopro/all.hpp
+  - icon: ':warning:'
     path: kyopro/all/all.hpp
     title: kyopro/all/all.hpp
   - icon: ':warning:'
@@ -54,6 +57,7 @@ data:
   path: kyopro/math/mod.hpp
   requiredBy:
   - kyopro/all/all.hpp
+  - kyopro/all.hpp
   - kyopro/math/ModInt.hpp
   - kyopro/math/math.hpp
   - kyopro/math/BinomMod.hpp

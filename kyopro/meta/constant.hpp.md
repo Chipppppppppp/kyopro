@@ -15,6 +15,9 @@ data:
     title: kyopro/meta/trait.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: kyopro/all.hpp
+    title: kyopro/all.hpp
+  - icon: ':warning:'
     path: kyopro/all/all.hpp
     title: kyopro/all/all.hpp
   - icon: ':warning:'
@@ -272,6 +275,7 @@ data:
   requiredBy:
   - kyopro/all/all.hpp
   - kyopro/meta/meta.hpp
+  - kyopro/all.hpp
   - kyopro/math/is_prime.hpp
   - kyopro/math/factorize.hpp
   - kyopro/math/ModInt.hpp

@@ -27,6 +27,9 @@ data:
     title: kyopro/meta/tuple_like.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: kyopro/all.hpp
+    title: kyopro/all.hpp
+  - icon: ':warning:'
     path: kyopro/all/all.hpp
     title: kyopro/all/all.hpp
   - icon: ':warning:'
@@ -577,6 +580,7 @@ data:
   path: kyopro/io/io.hpp
   requiredBy:
   - kyopro/all/all.hpp
+  - kyopro/all.hpp
   - kyopro/template/template.hpp
   - kyopro/template/macro.hpp
   - kyopro/template/io_macro.hpp

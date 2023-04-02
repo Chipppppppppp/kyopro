@@ -42,6 +42,9 @@ data:
     title: kyopro/meta/tuple_like.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: kyopro/all.hpp
+    title: kyopro/all.hpp
+  - icon: ':warning:'
     path: kyopro/all/all.hpp
     title: kyopro/all/all.hpp
   - icon: ':warning:'
@@ -772,6 +775,7 @@ data:
   path: kyopro/math/BinomMod.hpp
   requiredBy:
   - kyopro/all/all.hpp
+  - kyopro/all.hpp
   - kyopro/math/math.hpp
   timestamp: '2023-04-02 21:40:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS

@@ -4,12 +4,45 @@ data:
   - icon: ':heavy_check_mark:'
     path: kyopro/algorithm/Hash.hpp
     title: kyopro/algorithm/Hash.hpp
+  - icon: ':warning:'
+    path: kyopro/algorithm/algorithm.hpp
+    title: kyopro/algorithm/algorithm.hpp
   - icon: ':heavy_check_mark:'
     path: kyopro/algorithm/bit.hpp
     title: kyopro/algorithm/bit.hpp
   - icon: ':warning:'
+    path: kyopro/algorithm/compress.hpp
+    title: kyopro/algorithm/compress.hpp
+  - icon: ':warning:'
+    path: kyopro/algorithm/contains.hpp
+    title: kyopro/algorithm/contains.hpp
+  - icon: ':warning:'
+    path: kyopro/algorithm/count_all.hpp
+    title: kyopro/algorithm/count_all.hpp
+  - icon: ':warning:'
+    path: kyopro/algorithm/next_combination.hpp
+    title: kyopro/algorithm/next_combination.hpp
+  - icon: ':warning:'
+    path: kyopro/all/all.hpp
+    title: kyopro/all/all.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/data_structure/FenwickTree.hpp
+    title: kyopro/data_structure/FenwickTree.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/data_structure/UnionFind.hpp
+    title: kyopro/data_structure/UnionFind.hpp
+  - icon: ':warning:'
+    path: kyopro/data_structure/data_structure.hpp
+    title: kyopro/data_structure/data_structure.hpp
+  - icon: ':warning:'
+    path: kyopro/function/RecLambda.hpp
+    title: kyopro/function/RecLambda.hpp
+  - icon: ':warning:'
     path: kyopro/function/compare.hpp
     title: kyopro/function/compare.hpp
+  - icon: ':warning:'
+    path: kyopro/function/function.hpp
+    title: kyopro/function/function.hpp
   - icon: ':heavy_check_mark:'
     path: kyopro/function/monoid.hpp
     title: kyopro/function/monoid.hpp
@@ -25,6 +58,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: kyopro/io/out.hpp
     title: kyopro/io/out.hpp
+  - icon: ':warning:'
+    path: kyopro/math/Barrett.hpp
+    title: kyopro/math/Barrett.hpp
+  - icon: ':warning:'
+    path: kyopro/math/BinomMod.hpp
+    title: kyopro/math/BinomMod.hpp
   - icon: ':heavy_check_mark:'
     path: kyopro/math/DynamicModInt.hpp
     title: kyopro/math/DynamicModInt.hpp
@@ -35,6 +74,24 @@ data:
     path: kyopro/math/Montgomery.hpp
     title: kyopro/math/Montgomery.hpp
   - icon: ':warning:'
+    path: kyopro/math/div.hpp
+    title: kyopro/math/div.hpp
+  - icon: ':warning:'
+    path: kyopro/math/divisors.hpp
+    title: kyopro/math/divisors.hpp
+  - icon: ':warning:'
+    path: kyopro/math/euler_phi.hpp
+    title: kyopro/math/euler_phi.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/factorize.hpp
+    title: kyopro/math/factorize.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/math/is_prime.hpp
+    title: kyopro/math/is_prime.hpp
+  - icon: ':warning:'
+    path: kyopro/math/math.hpp
+    title: kyopro/math/math.hpp
+  - icon: ':warning:'
     path: kyopro/math/mod.hpp
     title: kyopro/math/mod.hpp
   - icon: ':heavy_check_mark:'
@@ -43,6 +100,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: kyopro/meta/constant.hpp
     title: kyopro/meta/constant.hpp
+  - icon: ':warning:'
+    path: kyopro/meta/meta.hpp
+    title: kyopro/meta/meta.hpp
   - icon: ':heavy_check_mark:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
@@ -103,109 +163,44 @@ data:
   - icon: ':warning:'
     path: kyopro/template/stl.hpp
     title: kyopro/template/stl.hpp
-  _extendedRequiredBy:
   - icon: ':warning:'
-    path: kyopro/all.hpp
-    title: kyopro/all.hpp
+    path: kyopro/template/template.hpp
+    title: kyopro/template/template.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"kyopro/template/stl.hpp\"\n#include <cassert>\r\n#include\
-    \ <cctype>\r\n#include <cerrno>\r\n#include <cfloat>\r\n#include <ciso646>\r\n\
-    #include <climits>\r\n#include <clocale>\r\n#include <cmath>\r\n#include <csetjmp>\r\
-    \n#include <csignal>\r\n#include <cstdarg>\r\n#include <cstddef>\r\n#include <cstdio>\r\
-    \n#include <cstdlib>\r\n#include <cstring>\r\n#include <ctime>\r\n\r\n#include\
-    \ <ccomplex>\r\n#include <cfenv>\r\n#include <cinttypes>\r\n#include <cstdbool>\r\
-    \n#include <cstdint>\r\n#include <ctgmath>\r\n#include <cwchar>\r\n#include <cwctype>\r\
-    \n\r\n#include <algorithm>\r\n#include <bitset>\r\n#include <complex>\r\n#include\
-    \ <deque>\r\n#include <exception>\r\n#include <fstream>\r\n#include <functional>\r\
-    \n#include <iomanip>\r\n#include <ios>\r\n#include <iosfwd>\r\n#include <iostream>\r\
-    \n#include <istream>\r\n#include <iterator>\r\n#include <limits>\r\n#include <list>\r\
-    \n#include <locale>\r\n#include <map>\r\n#include <memory>\r\n#include <new>\r\
-    \n#include <numeric>\r\n#include <ostream>\r\n#include <queue>\r\n#include <set>\r\
-    \n#include <sstream>\r\n#include <stack>\r\n#include <stdexcept>\r\n#include <streambuf>\r\
-    \n#include <string>\r\n#include <typeinfo>\r\n#include <utility>\r\n#include <valarray>\r\
-    \n#include <vector>\r\n\r\n#include <array>\r\n#include <atomic>\r\n#include <chrono>\r\
-    \n#include <condition_variable>\r\n#include <forward_list>\r\n#include <future>\r\
-    \n#include <initializer_list>\r\n#include <mutex>\r\n#include <random>\r\n#include\
-    \ <ratio>\r\n#include <regex>\r\n#include <scoped_allocator>\r\n#include <system_error>\r\
-    \n#include <thread>\r\n#include <tuple>\r\n#include <typeindex>\r\n#include <type_traits>\r\
-    \n#include <unordered_map>\r\n#include <unordered_set>\r\n#line 6 \"kyopro/meta/tuple_like.hpp\"\
-    \n\r\nnamespace kpr {\r\n    namespace helper {\r\n        struct CastableToAny\
-    \ {\r\n            template<class T>\r\n            operator T() const noexcept;\r\
-    \n        };\r\n\r\n        template<class T, std::size_t... idx, std::void_t<decltype(T{((void)idx,\
-    \ CastableToAny{})...})>* = nullptr>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
-    \ bool) noexcept {\r\n            return true;\r\n        }\r\n        template<class\
-    \ T, std::size_t... idx>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
-    \ char) noexcept {\r\n            return false;\r\n        }\n\n        template<class\
-    \ T, std::size_t n = sizeof(T) * 8, class = void>\n        struct constructible_size\
-    \ {\n            static_assert(n != 0, \"T is not constructible\");\n        \
-    \    static constexpr std::size_t value = constructible_size<T, n - 1>::value;\n\
-    \        };\n\n        template<class T, std::size_t n>\n        struct constructible_size<T,\
-    \ n, std::enable_if_t<is_constructible_with<T>(std::make_index_sequence<n>(),\
-    \ false)>> {\n            static constexpr std::size_t value = n;\n        };\r\
-    \n    } // namespace helper\r\n\n\r\n    // tuple_like\u306A\u578BT\u306E\u5927\
-    \u304D\u3055\u3092\u8ABF\u3079\u308B\r\n    template<class T, class = void>\r\n\
-    \    struct tuple_like_size {\r\n        static constexpr std::size_t value =\
-    \ helper::constructible_size<T>::value;\r\n    };\r\n\r\n    template<class T>\r\
-    \n    struct tuple_like_size<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
-    \ {\r\n        static constexpr std::size_t value = std::tuple_size_v<T>;\r\n\
-    \    };\r\n\r\n    // tuple_like\u306A\u578BT\u306E\u5927\u304D\u3055\u3092\u8ABF\
-    \u3079\u308B\r\n    template<class T>\r\n    inline constexpr std::size_t tuple_like_size_v\
-    \ = tuple_like_size<T>::value;\r\n\r\n\n    // tuple_like\u306A\u30AA\u30D6\u30B8\
-    \u30A7\u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\u95A2\
-    \u6570\u30AF\u30E9\u30B9\n    template<class T, class = void>\n    struct GetFunction\
-    \ {\n        #define GET(...) \\\n            { \\\n                auto&& [__VA_ARGS__]\
-    \ = std::forward<U>(tuple_like); \\\n                return std::get<idx> (std::forward_as_tuple(__VA_ARGS__));\
-    \ \\\n            }\n\n        template<std::size_t idx, class U>\n        static\
-    \ constexpr decltype(auto) get(U&& tuple_like) noexcept {\n            constexpr\
-    \ std::size_t size = tuple_like_size_v<T>;\n            static_assert(size !=\
-    \ 0, \"The size must not be 0\");\n            static_assert(size < 9, \"The size\
-    \ of tuple_like must be less than 9\");\n            if constexpr (size == 1)\
-    \ GET(a)\n            else if constexpr (size == 2) GET(a, b)\n            else\
-    \ if constexpr (size == 3) GET(a, b, c)\n            else if constexpr (size ==\
-    \ 4) GET(a, b, c, d)\n            else if constexpr (size == 5) GET(a, b, c, d,\
-    \ e)\n            else if constexpr (size == 6) GET(a, b, c, d, e, f)\n      \
-    \      else if constexpr (size == 7) GET(a, b, c, d, e, f, g)\n            else\
-    \ GET(a, b, c, d, e, f, g, h)\n        }\n\n        #undef GET\n    };\n\n   \
-    \ template<class T>\n    struct GetFunction<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
-    \ {\n        template<std::size_t idx, class U>\n        static constexpr decltype(auto)\
-    \ get(U&& tuple_like) noexcept {\n            return std::get<idx>(std::forward<U>(tuple_like));\n\
-    \        }\n    };\r\n\r\n    namespace helper {\n        template<std::size_t\
-    \ idx>\r\n        struct GetHelper {\r\n            template<class T>\r\n    \
-    \        constexpr decltype(auto) operator ()(T&& tuple_like) const noexcept {\r\
-    \n                return GetFunction<std::decay_t<T>>::template get<idx>(std::forward<T>(tuple_like));\r\
-    \n            }\r\n        };\r\n    }\r\n\r\n    // tuple-like\u306A\u30AA\u30D6\
-    \u30B8\u30A7\u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\
-    \r\n    template<std::size_t idx>\r\n    inline constexpr helper::GetHelper<idx>\
-    \ get;\r\n\r\n\r\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\
-    \u306E\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n    template<std::size_t\
-    \ idx, class T>\r\n    struct tuple_like_element {\r\n        using type = decltype(get<idx>(std::declval<T>()));\r\
-    \n    };\r\n\r\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\
-    \u306E\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n    template<std::size_t\
-    \ idx, class T>\r\n    using tuple_like_element_t = typename tuple_like_element<idx,\
-    \ T>::type;\n\n\n    // \u578BT\u304Ctuple_like\u304B\u8ABF\u3079\u308B\n    template<class,\
-    \ class = void>\n    struct is_tuple_like {\n        static constexpr bool value\
-    \ = false;\n    };\n\n    template<class T>\n    struct is_tuple_like<T, std::enable_if_t<std::is_aggregate_v<T>>>\
-    \ {\n        static constexpr bool value = true;\n    };\n\n    template<class\
-    \ T>\n    struct is_tuple_like<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
-    \ {\n        static constexpr bool value = true;\n    };\n\n    // \u578BT\u304C\
-    tuple_like\u304B\u8ABF\u3079\u308B\n    template<class T>\n    inline constexpr\
-    \ bool is_tuple_like_v = is_tuple_like<T>::value;\r\n} // namespace kpr\r\n#line\
-    \ 7 \"kyopro/meta/trait.hpp\"\n\r\nnamespace kpr {\r\n    namespace helper {\r\
-    \n        template<class T>\r\n        struct is_integer_helper {\r\n        \
-    \    static constexpr bool value = std::is_integral_v<T>;\r\n        };\r\n\r\n\
-    \        #ifdef __SIZEOF_INT128__\r\n        template<>\r\n        struct is_integer_helper<__int128_t>\
-    \ {\r\n            static constexpr bool value = true;\r\n        };\r\n     \
-    \   template<>\r\n        struct is_integer_helper<__uint128_t> {\r\n        \
-    \    static constexpr bool value = true;\r\n        };\r\n        #endif\r\n \
-    \   } // namespace helper\r\n\r\n    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\
-    \u308B\r\n    template<class T>\r\n    struct is_integer {\r\n        static constexpr\
-    \ bool value = helper::is_integer_helper<std::remove_cv_t<T>>::value;\r\n    };\r\
-    \n    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\u308B\r\n    template<class\
+  bundledCode: "#line 2 \"kyopro/algorithm/bit.hpp\"\n#include <limits>\r\n#include\
+    \ <type_traits>\r\n#line 2 \"kyopro/meta/setting.hpp\"\n#include <cstdint>\r\n\
+    \r\n#ifndef KYOPRO_BASE_INT\r\n// \u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\
+    \u578B\r\n#define KYOPRO_BASE_INT std::int64_t\r\n#endif\r\n\r\n#ifndef KYOPRO_BASE_UINT\r\
+    \n// \u57FA\u672C\u7B26\u53F7\u306A\u3057\u6574\u6570\u578B\r\n#define KYOPRO_BASE_UINT\
+    \ std::uint64_t\r\n#endif\r\n\r\n#ifndef KYOPRO_BASE_FLOAT\r\n// \u57FA\u672C\u6D6E\
+    \u52D5\u5C0F\u6570\u70B9\u6570\u578B\r\n#define KYOPRO_BASE_FLOAT double\r\n#endif\r\
+    \n\r\n#ifndef KYOPRO_DEFAULT_MOD\r\n// \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\
+    \u305Fmod\r\n#define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))\r\
+    \n#endif\r\n\r\n#ifndef KYOPRO_DECIMAL_PRECISION\r\n// \u5C0F\u6570\u7CBE\u5EA6\
+    (\u6841)\r\n#define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))\r\
+    \n#endif\r\n\r\n#ifndef KYOPRO_INF_DIV\r\n// \u7121\u9650\u5927\u3092\u8868\u3059\
+    \u6574\u6570\u304C\u6700\u5927\u5024\u306E\u4F55\u5206\u306E\u4E00\u304B\u3092\
+    \u8868\u3059\r\n#define KYOPRO_INF_DIV (static_cast<KYOPRO_BASE_UINT>(3))\r\n\
+    #endif\r\n\r\n#ifndef KYOPRO_BUFFER_SIZE\r\n// \u30C7\u30D5\u30A9\u30EB\u30C8\u306E\
+    \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\r\n#define KYOPRO_BUFFER_SIZE (static_cast<KYOPRO_BASE_UINT>(2048))\r\
+    \n#endif\r\n#line 2 \"kyopro/meta/trait.hpp\"\n#include <cstddef>\r\n#include\
+    \ <iterator>\r\n#include <tuple>\r\n#line 6 \"kyopro/meta/trait.hpp\"\n#include\
+    \ <utility>\r\n\r\nnamespace kpr {\r\n    namespace helper {\r\n        template<class\
+    \ T>\r\n        struct is_integer_helper {\r\n            static constexpr bool\
+    \ value = std::is_integral_v<T>;\r\n        };\r\n\r\n        #ifdef __SIZEOF_INT128__\r\
+    \n        template<>\r\n        struct is_integer_helper<__int128_t> {\r\n   \
+    \         static constexpr bool value = true;\r\n        };\r\n        template<>\r\
+    \n        struct is_integer_helper<__uint128_t> {\r\n            static constexpr\
+    \ bool value = true;\r\n        };\r\n        #endif\r\n    } // namespace helper\r\
+    \n\r\n    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\u308B\r\n    template<class\
+    \ T>\r\n    struct is_integer {\r\n        static constexpr bool value = helper::is_integer_helper<std::remove_cv_t<T>>::value;\r\
+    \n    };\r\n    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\u308B\r\n    template<class\
     \ T>\r\n    inline constexpr bool is_integer_v = is_integer<T>::value;\r\n\r\n\
     \    // \u578BT\u304C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u304B\u8ABF\u3079\u308B\
     \r\n    template<class T>\r\n    struct is_signed_integer {\r\n        static\
@@ -309,16 +304,182 @@ data:
     \ = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\r\n    };\r\n    //\
     \ Range\u578BT\u304B\u3089\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n\
     \    template<class T>\r\n    using range_value_t = typename range_value<T>::type;\r\
-    \n} // namespace kpr\r\n#line 9 \"kyopro/algorithm/Hash.hpp\"\n\r\nnamespace kpr\
-    \ {\r\n    // \u30CF\u30C3\u30B7\u30E5(tuple_like, range\u5BFE\u5FDC)\r\n    template<class,\
-    \ class = void>\r\n    struct Hash;\r\n\r\n    template<class T>\r\n    struct\
-    \ Hash<T, std::enable_if_t<std::is_scalar_v<T>>> {\r\n        using value_type\
-    \ = T;\r\n\r\n        constexpr std::size_t operator ()(T a) const noexcept {\r\
-    \n            return std::hash<T>{}(a);\r\n        }\r\n    };\r\n\r\n    template<class\
-    \ T>\r\n    struct Hash<T, std::enable_if_t<is_tuple_like_v<T> && !is_range_v<T>>>\
-    \ {\r\n        using value_type = T;\r\n\r\n        template<std::size_t i = 0>\r\
-    \n        constexpr std::size_t operator ()(const T& a) const noexcept {\r\n \
-    \           if constexpr (i == tuple_like_size_v<T>) return tuple_like_size_v<T>;\r\
+    \n} // namespace kpr\r\n#line 6 \"kyopro/algorithm/bit.hpp\"\n\r\nnamespace kpr\
+    \ {\r\n    // \u7ACB\u3063\u3066\u3044\u308Bbit\u306E\u500B\u6570\u3092\u8FD4\u3059\
+    \r\n    [[maybe_unused]] inline constexpr struct {\r\n        template<class T>\r\
+    \n        constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {\r\n    \
+    \        static_assert(is_integer_v<T>, \"The argument must be an integer\");\r\
+    \n            constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\r\
+    \n            static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
+    \ \"The integer type of the argument is too large\");\r\n            if constexpr\
+    \ (digits <= std::numeric_limits<unsigned int>::digits) return __builtin_popcount(x);\r\
+    \n            else if constexpr (digits <= std::numeric_limits<unsigned long>::digits)\
+    \ return __builtin_popcountl(x);\r\n            else return __builtin_popcountll(x);\r\
+    \n        }\r\n    } pop_count;\r\n\r\n    [[maybe_unused]] inline constexpr struct\
+    \ {\r\n        template<class T>\r\n        constexpr KYOPRO_BASE_INT operator\
+    \ ()(T x) const noexcept {\r\n            static_assert(is_integer_v<T>, \"The\
+    \ argument must be an integer\");\r\n            constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\r\
+    \n            static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
+    \ \"The integer type of the argument is too large\");\r\n            if (x ==\
+    \ 0) return 0;\r\n            if constexpr (digits <= std::numeric_limits<unsigned\
+    \ int>::digits) return __builtin_clz(x) + digits - std::numeric_limits<unsigned\
+    \ int>::digits;\r\n            else if constexpr (digits <= std::numeric_limits<unsigned\
+    \ long>::digits) return __builtin_clzl(x) + digits - std::numeric_limits<unsigned\
+    \ long>::digits;\r\n            else return __builtin_clzll(x) + digits - std::numeric_limits<unsigned\
+    \ long long>::digits;\r\n        }\r\n    } lzero_count;\r\n\r\n    [[maybe_unused]]\
+    \ inline constexpr struct {\r\n        template<class T>\r\n        constexpr\
+    \ KYOPRO_BASE_INT operator ()(T x) const noexcept {\r\n            static_assert(is_integer_v<T>,\
+    \ \"The argument must be an integer\");\r\n            constexpr auto digits =\
+    \ std::numeric_limits<std::make_unsigned_t<T>>::digits;\r\n            static_assert(digits\
+    \ <= std::numeric_limits<unsigned long long>::digits, \"The integer type of the\
+    \ argument is too large\");\r\n            if constexpr (digits <= std::numeric_limits<unsigned\
+    \ int>::digits) return __builtin_ctz(x);\r\n            else if constexpr (digits\
+    \ <= std::numeric_limits<unsigned long>::digits) return __builtin_ctzl(x);\r\n\
+    \            else return __builtin_ctzll(x);\r\n        }\r\n    } rzero_count;\r\
+    \n\r\n    [[maybe_unused]] inline constexpr struct {\r\n        template<class\
+    \ T>\r\n        constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {\r\n\
+    \            static_assert(is_integer_v<T>, \"The argument must be an integer\"\
+    );\r\n            constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\r\
+    \n            static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
+    \ \"The integer type of the argument is too large\");\r\n            if (x ==\
+    \ 0) return 0;\r\n            if constexpr (digits <= std::numeric_limits<unsigned\
+    \ int>::digits) return std::numeric_limits<unsigned int>::digits - __builtin_clz(x);\r\
+    \n            else if constexpr (digits <= std::numeric_limits<unsigned long>::digits)\
+    \ return std::numeric_limits<unsigned long>::digits - __builtin_clzl(x);\r\n \
+    \           else return std::numeric_limits<unsigned long long>::digits - __builtin_clzll(x);\r\
+    \n        }\r\n    } bit_len;\r\n\r\n    [[maybe_unused]] inline constexpr struct\
+    \ {\r\n        template<class T>\r\n        constexpr KYOPRO_BASE_INT operator\
+    \ ()(T x) const noexcept {\r\n            return bit_len(x >> static_cast<T>(1));\r\
+    \n        }\r\n    } floor_bit;\r\n\r\n    [[maybe_unused]] inline constexpr struct\
+    \ {\r\n        template<class T>\r\n        constexpr KYOPRO_BASE_INT operator\
+    \ ()(T x) const noexcept {\r\n            if (x == 0) return 0;\r\n          \
+    \  return bit_len(x - static_cast<T>(1));\r\n        }\r\n    } ceil_bit;\r\n\
+    } // namespace kpr\r\n#line 2 \"kyopro/algorithm/compress.hpp\"\n#include <algorithm>\n\
+    #line 4 \"kyopro/algorithm/compress.hpp\"\n#include <unordered_map>\n#include\
+    \ <vector>\n#line 2 \"kyopro/function/compare.hpp\"\n\r\nnamespace kpr {\r\n \
+    \   // operator =\u3067\u6BD4\u8F03\r\n    struct Equal {\r\n        template<class\
+    \ T>\r\n        constexpr bool operator()(const T& x, const T& y) const noexcept(noexcept(x\
+    \ == y)) {\r\n            return x == y;\r\n        }\r\n    };\r\n\r\n    //\
+    \ operator !=\u3067\u6BD4\u8F03\r\n    struct NotEqual {\r\n        template<class\
+    \ T>\r\n        constexpr bool operator()(const T& x, const T& y) const noexcept(noexcept(x\
+    \ != y)) {\r\n            return x != y;\r\n        }\r\n    };\r\n\r\n    //\
+    \ operator <\u306E\u95A2\u6570\u30AF\u30E9\u30B9\r\n    struct Less {\r\n    \
+    \    template<class T>\r\n        constexpr bool operator()(const T& x, const\
+    \ T& y) const noexcept(noexcept(x < y)) {\r\n            return x < y;\r\n   \
+    \     }\r\n    };\r\n\r\n    // operator <=\u306E\u95A2\u6570\u30AF\u30E9\u30B9\
+    \r\n    struct LessEqual {\r\n        template<class T>\r\n        constexpr bool\
+    \ operator()(const T& x, const T& y) const noexcept(noexcept(x <= y)) {\r\n  \
+    \          return x <= y;\r\n        }\r\n    };\r\n\r\n    // operator >\u306E\
+    \u95A2\u6570\u30AF\u30E9\u30B9\r\n    struct Greater {\r\n        template<class\
+    \ T>\r\n        constexpr bool operator()(const T& x, const T& y) const noexcept(noexcept(x\
+    \ > y)) {\r\n            return x > y;\r\n        }\r\n    };\r\n\r\n    // operator\
+    \ >=\u306E\u95A2\u6570\u30AF\u30E9\u30B9\r\n    struct GreaterEqual {\r\n    \
+    \    template<class T>\r\n        constexpr bool operator()(const T& x, const\
+    \ T& y) const noexcept(noexcept(x >= y)) {\r\n            return x >= y;\r\n \
+    \       }\r\n    };\r\n} // namespace kpr\r\n#line 7 \"kyopro/algorithm/compress.hpp\"\
+    \n\nnamespace kpr {\n    // \u5EA7\u6A19\u5727\u7E2E\n    [[maybe_unused]] inline\
+    \ constexpr struct {\n        template<class T, class Compare = Less, class Container\
+    \ = std::unordered_map<typename std::iterator_traits<T>::value_type, KYOPRO_BASE_INT>>\n\
+    \        auto operator ()(T first, T last, Compare comp = {}) const {\n      \
+    \      std::vector<typename Container::key_type> a(first, last);\n           \
+    \ std::sort(a.begin(), a.end(), comp);\n            auto itr = unique(a.begin(),\
+    \ a.end());\n            Container mem;\n            int cnt = -1;\n         \
+    \   for (auto i = std::begin(a); i != itr; ++i) mem[*i] = ++cnt;\n           \
+    \ return mem;\n        }\n    } compress;\n} // namespace kpr\n#line 6 \"kyopro/meta/tuple_like.hpp\"\
+    \n\r\nnamespace kpr {\r\n    namespace helper {\r\n        struct CastableToAny\
+    \ {\r\n            template<class T>\r\n            operator T() const noexcept;\r\
+    \n        };\r\n\r\n        template<class T, std::size_t... idx, std::void_t<decltype(T{((void)idx,\
+    \ CastableToAny{})...})>* = nullptr>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
+    \ bool) noexcept {\r\n            return true;\r\n        }\r\n        template<class\
+    \ T, std::size_t... idx>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
+    \ char) noexcept {\r\n            return false;\r\n        }\n\n        template<class\
+    \ T, std::size_t n = sizeof(T) * 8, class = void>\n        struct constructible_size\
+    \ {\n            static_assert(n != 0, \"T is not constructible\");\n        \
+    \    static constexpr std::size_t value = constructible_size<T, n - 1>::value;\n\
+    \        };\n\n        template<class T, std::size_t n>\n        struct constructible_size<T,\
+    \ n, std::enable_if_t<is_constructible_with<T>(std::make_index_sequence<n>(),\
+    \ false)>> {\n            static constexpr std::size_t value = n;\n        };\r\
+    \n    } // namespace helper\r\n\n\r\n    // tuple_like\u306A\u578BT\u306E\u5927\
+    \u304D\u3055\u3092\u8ABF\u3079\u308B\r\n    template<class T, class = void>\r\n\
+    \    struct tuple_like_size {\r\n        static constexpr std::size_t value =\
+    \ helper::constructible_size<T>::value;\r\n    };\r\n\r\n    template<class T>\r\
+    \n    struct tuple_like_size<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
+    \ {\r\n        static constexpr std::size_t value = std::tuple_size_v<T>;\r\n\
+    \    };\r\n\r\n    // tuple_like\u306A\u578BT\u306E\u5927\u304D\u3055\u3092\u8ABF\
+    \u3079\u308B\r\n    template<class T>\r\n    inline constexpr std::size_t tuple_like_size_v\
+    \ = tuple_like_size<T>::value;\r\n\r\n\n    // tuple_like\u306A\u30AA\u30D6\u30B8\
+    \u30A7\u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\u95A2\
+    \u6570\u30AF\u30E9\u30B9\n    template<class T, class = void>\n    struct GetFunction\
+    \ {\n        #define GET(...) \\\n            { \\\n                auto&& [__VA_ARGS__]\
+    \ = std::forward<U>(tuple_like); \\\n                return std::get<idx> (std::forward_as_tuple(__VA_ARGS__));\
+    \ \\\n            }\n\n        template<std::size_t idx, class U>\n        static\
+    \ constexpr decltype(auto) get(U&& tuple_like) noexcept {\n            constexpr\
+    \ std::size_t size = tuple_like_size_v<T>;\n            static_assert(size !=\
+    \ 0, \"The size must not be 0\");\n            static_assert(size < 9, \"The size\
+    \ of tuple_like must be less than 9\");\n            if constexpr (size == 1)\
+    \ GET(a)\n            else if constexpr (size == 2) GET(a, b)\n            else\
+    \ if constexpr (size == 3) GET(a, b, c)\n            else if constexpr (size ==\
+    \ 4) GET(a, b, c, d)\n            else if constexpr (size == 5) GET(a, b, c, d,\
+    \ e)\n            else if constexpr (size == 6) GET(a, b, c, d, e, f)\n      \
+    \      else if constexpr (size == 7) GET(a, b, c, d, e, f, g)\n            else\
+    \ GET(a, b, c, d, e, f, g, h)\n        }\n\n        #undef GET\n    };\n\n   \
+    \ template<class T>\n    struct GetFunction<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
+    \ {\n        template<std::size_t idx, class U>\n        static constexpr decltype(auto)\
+    \ get(U&& tuple_like) noexcept {\n            return std::get<idx>(std::forward<U>(tuple_like));\n\
+    \        }\n    };\r\n\r\n    namespace helper {\n        template<std::size_t\
+    \ idx>\r\n        struct GetHelper {\r\n            template<class T>\r\n    \
+    \        constexpr decltype(auto) operator ()(T&& tuple_like) const noexcept {\r\
+    \n                return GetFunction<std::decay_t<T>>::template get<idx>(std::forward<T>(tuple_like));\r\
+    \n            }\r\n        };\r\n    }\r\n\r\n    // tuple-like\u306A\u30AA\u30D6\
+    \u30B8\u30A7\u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\
+    \r\n    template<std::size_t idx>\r\n    inline constexpr helper::GetHelper<idx>\
+    \ get;\r\n\r\n\r\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\
+    \u306E\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n    template<std::size_t\
+    \ idx, class T>\r\n    struct tuple_like_element {\r\n        using type = decltype(get<idx>(std::declval<T>()));\r\
+    \n    };\r\n\r\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\
+    \u306E\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n    template<std::size_t\
+    \ idx, class T>\r\n    using tuple_like_element_t = typename tuple_like_element<idx,\
+    \ T>::type;\n\n\n    // \u578BT\u304Ctuple_like\u304B\u8ABF\u3079\u308B\n    template<class,\
+    \ class = void>\n    struct is_tuple_like {\n        static constexpr bool value\
+    \ = false;\n    };\n\n    template<class T>\n    struct is_tuple_like<T, std::enable_if_t<std::is_aggregate_v<T>>>\
+    \ {\n        static constexpr bool value = true;\n    };\n\n    template<class\
+    \ T>\n    struct is_tuple_like<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
+    \ {\n        static constexpr bool value = true;\n    };\n\n    // \u578BT\u304C\
+    tuple_like\u304B\u8ABF\u3079\u308B\n    template<class T>\n    inline constexpr\
+    \ bool is_tuple_like_v = is_tuple_like<T>::value;\r\n} // namespace kpr\r\n#line\
+    \ 6 \"kyopro/algorithm/contains.hpp\"\n\nnamespace kpr {\n    // \u8981\u7D20\u3092\
+    \u542B\u3093\u3067\u3044\u308B\u304B\u8ABF\u3079\u308B\n    [[maybe_unused]] inline\
+    \ constexpr struct {\n    private:\n        template<class T>\n        constexpr\
+    \ bool impl(const T& container, const typename T::key_type& value, char) const\
+    \ {\n            return container.find(value) != container.end();\n        }\n\
+    \        template<class T, std::enable_if_t<!is_tuple_like_v<T>>* = nullptr>\n\
+    \        constexpr bool impl(const T& container, const range_value_t<T>& value,\
+    \ bool) const {\n            return std::find(std::begin(container), std::end(container),\
+    \ value) != std::end(container);\n        }\n        template<std::size_t i =\
+    \ 0, class T, class U, std::enable_if_t<is_tuple_like_v<T>>* = nullptr>\n    \
+    \    constexpr bool impl(const T& tuple_like, const U& value, bool) const {\n\
+    \            if constexpr (i < tuple_like_size_v<T>) return get<i>(tuple_like)\
+    \ == value || impl<i + 1>(tuple_like, value, false);\n            else return\
+    \ false;\n        }\n\n    public:\n        template<class T, class U>\n     \
+    \   constexpr bool operator ()(const T& a, const U& x) const {\n            return\
+    \ impl(a, x, false);\n        }\n    } contains;\n} // namespace kpr\n#line 5\
+    \ \"kyopro/algorithm/count_all.hpp\"\n\nnamespace kpr {\n    // \u8981\u7D20:\
+    \ \u500B\u6570\u306E\u8F9E\u66F8\u3092\u8FD4\u3059\n    [[maybe_unused]] inline\
+    \ constexpr struct {\n        template<class T, class Container = std::unordered_map<typename\
+    \ std::iterator_traits<T>::value_type, KYOPRO_BASE_INT>>\n        auto operator\
+    \ ()(T first, T last) const {\n            Container mem;\n            for (auto\
+    \ i = first; i != last; ++i) ++mem[*i];\n            return mem;\n        }\n\
+    \    } count_all;\n} // namespace kpr\n#line 3 \"kyopro/algorithm/Hash.hpp\"\n\
+    #include <functional>\r\n#line 9 \"kyopro/algorithm/Hash.hpp\"\n\r\nnamespace\
+    \ kpr {\r\n    // \u30CF\u30C3\u30B7\u30E5(tuple_like, range\u5BFE\u5FDC)\r\n\
+    \    template<class, class = void>\r\n    struct Hash;\r\n\r\n    template<class\
+    \ T>\r\n    struct Hash<T, std::enable_if_t<std::is_scalar_v<T>>> {\r\n      \
+    \  using value_type = T;\r\n\r\n        constexpr std::size_t operator ()(T a)\
+    \ const noexcept {\r\n            return std::hash<T>{}(a);\r\n        }\r\n \
+    \   };\r\n\r\n    template<class T>\r\n    struct Hash<T, std::enable_if_t<is_tuple_like_v<T>\
+    \ && !is_range_v<T>>> {\r\n        using value_type = T;\r\n\r\n        template<std::size_t\
+    \ i = 0>\r\n        constexpr std::size_t operator ()(const T& a) const noexcept\
+    \ {\r\n            if constexpr (i == tuple_like_size_v<T>) return tuple_like_size_v<T>;\r\
     \n            else {\r\n                std::size_t seed = operator()<i + 1>(a);\r\
     \n                return seed ^ (Hash<tuple_like_element_t<i, T>>{}(get<i>(a))\
     \ + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4));\r\n            }\r\n \
@@ -327,60 +488,36 @@ data:
     \ std::size_t operator ()(const T& a) const {\r\n            std::size_t seed\
     \ = std::size(a);\r\n            for (auto&& i: a) seed ^= Hash<range_value_t<T>>{}(i)\
     \ + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4);\r\n            return seed;\r\
-    \n        }\r\n    };\r\n} // namespace kpr\r\n#line 2 \"kyopro/function/compare.hpp\"\
-    \n\r\nnamespace kpr {\r\n    // operator =\u3067\u6BD4\u8F03\r\n    struct Equal\
-    \ {\r\n        template<class T>\r\n        constexpr bool operator()(const T&\
-    \ x, const T& y) const noexcept(noexcept(x == y)) {\r\n            return x ==\
-    \ y;\r\n        }\r\n    };\r\n\r\n    // operator !=\u3067\u6BD4\u8F03\r\n  \
-    \  struct NotEqual {\r\n        template<class T>\r\n        constexpr bool operator()(const\
-    \ T& x, const T& y) const noexcept(noexcept(x != y)) {\r\n            return x\
-    \ != y;\r\n        }\r\n    };\r\n\r\n    // operator <\u306E\u95A2\u6570\u30AF\
-    \u30E9\u30B9\r\n    struct Less {\r\n        template<class T>\r\n        constexpr\
-    \ bool operator()(const T& x, const T& y) const noexcept(noexcept(x < y)) {\r\n\
-    \            return x < y;\r\n        }\r\n    };\r\n\r\n    // operator <=\u306E\
-    \u95A2\u6570\u30AF\u30E9\u30B9\r\n    struct LessEqual {\r\n        template<class\
-    \ T>\r\n        constexpr bool operator()(const T& x, const T& y) const noexcept(noexcept(x\
-    \ <= y)) {\r\n            return x <= y;\r\n        }\r\n    };\r\n\r\n    //\
-    \ operator >\u306E\u95A2\u6570\u30AF\u30E9\u30B9\r\n    struct Greater {\r\n \
-    \       template<class T>\r\n        constexpr bool operator()(const T& x, const\
-    \ T& y) const noexcept(noexcept(x > y)) {\r\n            return x > y;\r\n   \
-    \     }\r\n    };\r\n\r\n    // operator >=\u306E\u95A2\u6570\u30AF\u30E9\u30B9\
-    \r\n    struct GreaterEqual {\r\n        template<class T>\r\n        constexpr\
-    \ bool operator()(const T& x, const T& y) const noexcept(noexcept(x >= y)) {\r\
-    \n            return x >= y;\r\n        }\r\n    };\r\n} // namespace kpr\r\n\
-    #line 3 \"kyopro/meta/setting.hpp\"\n\r\n#ifndef KYOPRO_BASE_INT\r\n// \u57FA\u672C\
-    \u7B26\u53F7\u4ED8\u304D\u6574\u6570\u578B\r\n#define KYOPRO_BASE_INT std::int64_t\r\
-    \n#endif\r\n\r\n#ifndef KYOPRO_BASE_UINT\r\n// \u57FA\u672C\u7B26\u53F7\u306A\u3057\
-    \u6574\u6570\u578B\r\n#define KYOPRO_BASE_UINT std::uint64_t\r\n#endif\r\n\r\n\
-    #ifndef KYOPRO_BASE_FLOAT\r\n// \u57FA\u672C\u6D6E\u52D5\u5C0F\u6570\u70B9\u6570\
-    \u578B\r\n#define KYOPRO_BASE_FLOAT double\r\n#endif\r\n\r\n#ifndef KYOPRO_DEFAULT_MOD\r\
-    \n// \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305Fmod\r\n#define KYOPRO_DEFAULT_MOD\
-    \ (static_cast<KYOPRO_BASE_UINT>(998244353))\r\n#endif\r\n\r\n#ifndef KYOPRO_DECIMAL_PRECISION\r\
-    \n// \u5C0F\u6570\u7CBE\u5EA6(\u6841)\r\n#define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))\r\
-    \n#endif\r\n\r\n#ifndef KYOPRO_INF_DIV\r\n// \u7121\u9650\u5927\u3092\u8868\u3059\
-    \u6574\u6570\u304C\u6700\u5927\u5024\u306E\u4F55\u5206\u306E\u4E00\u304B\u3092\
-    \u8868\u3059\r\n#define KYOPRO_INF_DIV (static_cast<KYOPRO_BASE_UINT>(3))\r\n\
-    #endif\r\n\r\n#ifndef KYOPRO_BUFFER_SIZE\r\n// \u30C7\u30D5\u30A9\u30EB\u30C8\u306E\
-    \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\r\n#define KYOPRO_BUFFER_SIZE (static_cast<KYOPRO_BASE_UINT>(2048))\r\
-    \n#endif\r\n#line 6 \"kyopro/function/monoid.hpp\"\n\r\nnamespace kpr {\r\n  \
-    \  // \u8DB3\u3057\u7B97\u306Emonoid\r\n    template<class T>\r\n    struct Add\
-    \ {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic type\"\
-    );\r\n\r\n        using value_type = T;\r\n\r\n        static constexpr T id()\
-    \ noexcept {\r\n            return T{};\r\n        }\r\n\r\n        constexpr\
+    \n        }\r\n    };\r\n} // namespace kpr\r\n#line 3 \"kyopro/algorithm/next_combination.hpp\"\
+    \n\nnamespace kpr {\n    [[maybe_unused]] inline constexpr struct {\n        template<class\
+    \ T>\n        bool operator ()(T first, T last, int k) {\n            T subset\
+    \ = first + k;\n            if (first == last || first == subset || last == subset)\
+    \ return false;\n            T src = subset;\n            while (first != src)\
+    \ {\n                --src;\n                if (*src < *(last - 1)) {\n     \
+    \               T dest = subset;\n                    while (*src >= *dest) ++dest;\n\
+    \                    std::iter_swap(src, dest);\n                    std::rotate(src\
+    \ + 1, dest + 1, last);\n                    std::rotate(subset, subset + (last\
+    \ - dest) - 1, last);\n                    return true;\n                }\n \
+    \           }\n            std::rotate(first, subset, last);\n            return\
+    \ false;\n        }\n    } next_combination;\n} // namespace kpr\n#line 6 \"kyopro/function/monoid.hpp\"\
+    \n\r\nnamespace kpr {\r\n    // \u8DB3\u3057\u7B97\u306Emonoid\r\n    template<class\
+    \ T>\r\n    struct Add {\r\n        static_assert(is_arithmetic_v<T>, \"T must\
+    \ be an arithmetic type\");\r\n\r\n        using value_type = T;\r\n\r\n     \
+    \   static constexpr T id() noexcept {\r\n            return T{};\r\n        }\r\
+    \n\r\n        constexpr T operator ()(const T& a, const T& b) const noexcept {\r\
+    \n            return a + b;\r\n        }\r\n\r\n        static constexpr T inv(const\
+    \ T& a) noexcept {\r\n            static_assert(std::is_signed_v<T>, \"T must\
+    \ be a signed type\");\r\n            return -a;\r\n        }\r\n    };\r\n\r\n\
+    \    // \u639B\u3051\u7B97\u306Emonoid\r\n    template<class T>\r\n    struct\
+    \ Mul {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic\
+    \ type\");\r\n\r\n        using value_type = T;\r\n\r\n        static constexpr\
+    \ T id() noexcept {\r\n            return 1;\r\n        }\r\n\r\n        constexpr\
     \ T operator ()(const T& a, const T& b) const noexcept {\r\n            return\
-    \ a + b;\r\n        }\r\n\r\n        static constexpr T inv(const T& a) noexcept\
-    \ {\r\n            static_assert(std::is_signed_v<T>, \"T must be a signed type\"\
-    );\r\n            return -a;\r\n        }\r\n    };\r\n\r\n    // \u639B\u3051\
-    \u7B97\u306Emonoid\r\n    template<class T>\r\n    struct Mul {\r\n        static_assert(is_arithmetic_v<T>,\
+    \ a * b;\r\n        }\r\n\r\n        static constexpr T inv(const T& a) noexcept\
+    \ {\r\n            return 1 / a;\r\n        }\r\n    };\r\n\r\n    // min\u306E\
+    monoid\r\n    template<class T>\r\n    struct Min {\r\n        static_assert(is_arithmetic_v<T>,\
     \ \"T must be an arithmetic type\");\r\n\r\n        using value_type = T;\r\n\r\
-    \n        static constexpr T id() noexcept {\r\n            return 1;\r\n    \
-    \    }\r\n\r\n        constexpr T operator ()(const T& a, const T& b) const noexcept\
-    \ {\r\n            return a * b;\r\n        }\r\n\r\n        static constexpr\
-    \ T inv(const T& a) noexcept {\r\n            return 1 / a;\r\n        }\r\n \
-    \   };\r\n\r\n    // min\u306Emonoid\r\n    template<class T>\r\n    struct Min\
-    \ {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic type\"\
-    );\r\n\r\n        using value_type = T;\r\n\r\n        static constexpr T id()\
-    \ noexcept {\r\n            if constexpr (std::numeric_limits<T>::has_infinity)\
+    \n        static constexpr T id() noexcept {\r\n            if constexpr (std::numeric_limits<T>::has_infinity)\
     \ return std::numeric_limits<T>::infinity();\r\n            return std::numeric_limits<T>::max()\
     \ / KYOPRO_INF_DIV;\r\n        }\r\n\r\n        constexpr T operator ()(const\
     \ T& a, const T& b) const noexcept {\r\n            return a < b ? a : b;\r\n\
@@ -397,48 +534,43 @@ data:
     \ = false;\r\n    };\r\n\r\n    template<class T>\r\n    struct has_inv<T, std::void_t<decltype(&T::inv)>>\
     \ {\r\n        static constexpr bool value = true;\r\n    };\r\n\r\n    // inv\u3092\
     \u6301\u3064\u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    inline constexpr\
-    \ bool has_inv_v = has_inv<T>::value;\r\n} // namespace kpr\r\n#line 5 \"kyopro/math/power.hpp\"\
-    \n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr struct {\r\n  \
-    \      template<class T>\r\n        constexpr T operator ()(T a, KYOPRO_BASE_UINT\
-    \ n, T init = Mul<T>::id()) const noexcept {\r\n            while (n > 0) {\r\n\
-    \                if (n & 1) init *= a;\r\n                a *= a;\r\n        \
-    \        n >>= 1;\r\n            }\r\n            return init;\r\n        }\r\n\
-    \    } power;\r\n} // namespace kpr\r\n#line 5 \"kyopro/meta/constant.hpp\"\n\r\
-    \nnamespace kpr {\r\n    // \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305Fmod\r\
-    \n    template<class T>\r\n    inline constexpr T MOD = KYOPRO_DEFAULT_MOD;\r\n\
-    \    // \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305Fmod\r\n    inline constexpr\
-    \ KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\r\n\r\n    // \u7121\u9650\u5927\
-    \u3092\u8868\u3059\u6574\u6570\r\n    template<class T>\r\n    inline constexpr\
-    \ T INF = std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\r\n    // \u7121\u9650\
-    \u5927\u3092\u8868\u3059\u6574\u6570\r\n    inline constexpr KYOPRO_BASE_INT inf\
-    \ = INF<KYOPRO_BASE_INT>;\r\n\r\n    // \u8A31\u5BB9\u3055\u308C\u308B\u5C0F\u6570\
-    \u8AA4\u5DEE\r\n    template<class T, KYOPRO_BASE_UINT decimal_precision = KYOPRO_DECIMAL_PRECISION>\r\
-    \n    inline constexpr KYOPRO_BASE_FLOAT EPS = static_cast<T>(1) / power(10ULL,\
-    \ decimal_precision);\r\n    // \u8A31\u5BB9\u3055\u308C\u308B\u5C0F\u6570\u8AA4\
-    \u5DEE\r\n    inline constexpr KYOPRO_BASE_FLOAT eps = EPS<KYOPRO_BASE_FLOAT>;\r\
-    \n\r\n    // \u5186\u5468\u7387\r\n    template<class T>\r\n    inline constexpr\
-    \ T PI = 3.14159265358979323846;\r\n    // \u5186\u5468\u7387\r\n    inline constexpr\
-    \ KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\r\n} // namespace kpr\r\n#line\
-    \ 2 \"kyopro/io/in.hpp\"\n#include <unistd.h>\r\n#line 5 \"kyopro/io/io_option.hpp\"\
-    \n\r\nnamespace kpr {\r\n    template<class Tuple, std::size_t idx>\r\n    struct\
-    \ Indexed {\r\n        Tuple args_tuple;\r\n        template<class... Args>\r\n\
-    \        constexpr Indexed(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
-    \ {}\r\n    };\r\n\r\n    template<std::size_t i, class... Args>\r\n    constexpr\
-    \ auto indexed(Args&&... args) noexcept {\r\n        return Indexed<std::tuple<Args...>,\
+    \ bool has_inv_v = has_inv<T>::value;\r\n} // namespace kpr\r\n#line 4 \"kyopro/function/RecLambda.hpp\"\
+    \n\r\nnamespace kpr {\r\n    // \u518D\u5E30\u53EF\u80FD\u95A2\u6570\u30AF\u30E9\
+    \u30B9\r\n    template<class F>\r\n    struct RecLambda {\r\n        using value_type\
+    \ = F;\r\n\r\n    private:\r\n        F func;\r\n\r\n    public:\r\n        template<class\
+    \ G>\r\n        constexpr RecLambda(G&& func) noexcept: func(std::forward<G>(func))\
+    \ {}\r\n\r\n        template<class... Args>\r\n        constexpr decltype(auto)\
+    \ operator ()(Args&&... args) const noexcept(noexcept(func(*this, std::forward<Args>(args)...)))\
+    \ {\r\n            return func(*this, std::forward<Args>(args)...);\r\n      \
+    \  }\r\n    };\r\n\r\n    template<class F>\r\n    RecLambda(F&&) -> RecLambda<std::decay_t<F>>;\r\
+    \n} // namespace kpr\r\n#line 2 \"kyopro/io/in.hpp\"\n#include <unistd.h>\r\n\
+    #include <array>\r\n#include <bitset>\r\n#line 7 \"kyopro/io/in.hpp\"\n#include\
+    \ <cstdio>\r\n#include <string>\r\n#line 5 \"kyopro/io/io_option.hpp\"\n\r\nnamespace\
+    \ kpr {\r\n    template<class Tuple, std::size_t idx>\r\n    struct Indexed {\r\
+    \n        Tuple args_tuple;\r\n        template<class... Args>\r\n        constexpr\
+    \ Indexed(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...} {}\r\
+    \n    };\r\n\r\n    template<std::size_t i, class... Args>\r\n    constexpr auto\
+    \ indexed(Args&&... args) noexcept {\r\n        return Indexed<std::tuple<Args...>,\
     \ i>{std::forward<Args>(args)...};\r\n    }\r\n\r\n    template<class Tuple, bool...\
     \ seps>\r\n    struct SepWith {\r\n        Tuple args_tuple;\r\n        template<class...\
     \ Args>\r\n        constexpr SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
     \ {}\r\n    };\r\n\r\n    template<bool... seps, class... Args>\r\n    constexpr\
     \ auto sep_with(Args&&... args) noexcept {\r\n        return SepWith<std::tuple<Args...>,\
     \ seps...>{std::forward<Args>(args)...};\r\n    }\r\n} // namespace kpr\r\n#line\
-    \ 16 \"kyopro/io/in.hpp\"\n\r\nnamespace kpr {\r\n    // \u30D0\u30C3\u30D5\u30A1\
-    \u3092\u7528\u3044\u3066\u30D5\u30A1\u30A4\u30EB\u3092\u8AAD\u307F\u8FBC\u3080\
-    \u30AF\u30E9\u30B9\r\n    template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>\r\
-    \n    struct Reader {\r\n    private:\r\n        int fd, idx;\r\n        std::array<char,\
-    \ buf_size> buffer;\r\n\r\n    public:\r\n        // \u30D0\u30C3\u30D5\u30A1\u30B5\
-    \u30A4\u30BA\u3092\u53D6\u5F97\r\n        static constexpr KYOPRO_BASE_INT get_buf_size()\
-    \ noexcept {\r\n            return buf_size;\r\n        }\r\n\r\n        Reader()\
-    \ {\r\n            [[maybe_unused]] ssize_t res = read(fd, buffer.begin(), buf_size);\r\
+    \ 5 \"kyopro/math/power.hpp\"\n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline\
+    \ constexpr struct {\r\n        template<class T>\r\n        constexpr T operator\
+    \ ()(T a, KYOPRO_BASE_UINT n, T init = Mul<T>::id()) const noexcept {\r\n    \
+    \        while (n > 0) {\r\n                if (n & 1) init *= a;\r\n        \
+    \        a *= a;\r\n                n >>= 1;\r\n            }\r\n            return\
+    \ init;\r\n        }\r\n    } power;\r\n} // namespace kpr\r\n#line 16 \"kyopro/io/in.hpp\"\
+    \n\r\nnamespace kpr {\r\n    // \u30D0\u30C3\u30D5\u30A1\u3092\u7528\u3044\u3066\
+    \u30D5\u30A1\u30A4\u30EB\u3092\u8AAD\u307F\u8FBC\u3080\u30AF\u30E9\u30B9\r\n \
+    \   template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>\r\n    struct Reader {\r\
+    \n    private:\r\n        int fd, idx;\r\n        std::array<char, buf_size> buffer;\r\
+    \n\r\n    public:\r\n        // \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\u3092\
+    \u53D6\u5F97\r\n        static constexpr KYOPRO_BASE_INT get_buf_size() noexcept\
+    \ {\r\n            return buf_size;\r\n        }\r\n\r\n        Reader() {\r\n\
+    \            [[maybe_unused]] ssize_t res = read(fd, buffer.begin(), buf_size);\r\
     \n        }\r\n        Reader(int fd): fd(fd), idx(0), buffer() {\r\n        \
     \    [[maybe_unused]] ssize_t res = read(fd, buffer.begin(), buf_size);\r\n  \
     \      }\r\n        Reader(FILE* fp): fd(fileno(fp)), idx(0), buffer() {\r\n \
@@ -538,45 +670,46 @@ data:
     \ = static_cast<ScannerWrapper<Scanner>&>(scanner);\r\n            scan_impl(scanner_wrapper,\
     \ a.args_tuple);\r\n        }\r\n    };\r\n\r\n    // \u6A19\u6E96\u5165\u529B\
     \u304B\u3089\u5024\u3092\u5165\u529B\u3059\u308B\u95A2\u6570\r\n    Scanner<Reader<>::iterator>\
-    \ scan{input.begin()};\r\n} // namespace kpr\r\n#line 11 \"kyopro/io/out.hpp\"\
-    \n#include <string_view>\r\n#line 19 \"kyopro/io/out.hpp\"\n\r\nnamespace kpr\
-    \ {\r\n    // \u30D0\u30C3\u30D5\u30A1\u3092\u7528\u3044\u3066\u30D5\u30A1\u30A4\
-    \u30EB\u306B\u66F8\u304D\u8FBC\u3080\u30AF\u30E9\u30B9\r\n    template<std::size_t\
-    \ buf_size = KYOPRO_BUFFER_SIZE>\r\n    struct Writer {\r\n    private:\r\n  \
-    \      int fd, idx;\r\n        std::array<char, buf_size> buffer;\r\n\r\n    public:\r\
-    \n        // \u30D0\u30C3\u30D5\u30A1\u30B5\u30A4\u30BA\u3092\u53D6\u5F97\r\n\
-    \        static constexpr KYOPRO_BASE_INT get_buf_size() noexcept {\r\n      \
-    \      return buf_size;\r\n        }\r\n\r\n        Writer() noexcept = default;\r\
-    \n        Writer(int fd) noexcept: fd(fd), idx(0), buffer() {}\r\n        Writer(FILE*\
-    \ fp) noexcept: fd(fileno(fp)), idx(0), buffer() {}\r\n\r\n        ~Writer() {\r\
-    \n            [[maybe_unused]]ssize_t res = write(fd, buffer.begin(), idx);\r\n\
-    \        }\r\n\r\n        // \u51FA\u529B\u30A4\u30C6\u30EC\u30FC\u30BF\r\n  \
-    \      struct iterator {\r\n        private:\r\n            Writer& writer;\r\n\
-    \r\n        public:\r\n            using difference_type = void;\r\n         \
-    \   using value_type = void;\r\n            using pointer = void;\r\n        \
-    \    using reference = void;\r\n            using iterator_category = std::output_iterator_tag;\r\
-    \n\r\n            iterator() noexcept = default;\r\n            iterator(Writer&\
-    \ writer) noexcept: writer(writer) {}\r\n\r\n            iterator& operator ++()\
-    \ {\r\n                ++writer.idx;\r\n                if (writer.idx == buf_size)\
-    \ {\r\n                [[maybe_unused]]ssize_t res = write(writer.fd, writer.buffer.begin(),\
-    \ buf_size);\r\n                writer.idx = 0;\r\n                }\r\n     \
-    \           return *this;\r\n            }\r\n\r\n            iterator operator\
-    \ ++(int) {\r\n                iterator before = *this;\r\n                operator\
-    \ ++();\r\n                return before;\r\n            }\r\n\r\n           \
-    \ char& operator *() const {\r\n                return writer.buffer[writer.idx];\r\
-    \n            }\r\n\r\n            // \u30D0\u30C3\u30D5\u30A1\u3092\u5168\u3066\
-    \u51FA\u529B\u3059\u308B\r\n            void flush() const {\r\n             \
-    \   [[maybe_unused]] ssize_t res = write(writer.fd, writer.buffer.begin(), writer.idx);\r\
-    \n            }\r\n        };\r\n\r\n        // \u30D5\u30A1\u30A4\u30EB\u306E\
-    \u6700\u521D\u3092\u793A\u3059\u30A4\u30C6\u30EC\u30FC\u30BF\u3092\u53D6\u5F97\
-    \r\n        iterator begin() noexcept {\r\n            return iterator(*this);\r\
-    \n        }\r\n    };\r\n\r\n    // \u6A19\u6E96\u51FA\u529B\u3001\u6A19\u6E96\
-    \u30A8\u30E9\u30FC\u51FA\u529B\r\n    Writer output{1}, error{2};\r\n\r\n    //\
-    \ \u5024\u306E\u51FA\u529B\u306E\u95A2\u6570\u30AF\u30E9\u30B9\r\n    template<class,\
-    \ class = void>\r\n    struct PrintFunction;\r\n\r\n    // \u51FA\u529B\u30A4\u30C6\
-    \u30EC\u30FC\u30BF\u3092\u7528\u3044\u3066\u5024\u3092\u51FA\u529B\u3059\u308B\
-    \u30AF\u30E9\u30B9\r\n    template<class Iterator, bool _space = true, bool _line\
-    \ = true, bool _debug = false, bool _comment = false, bool _flush = false, std::size_t\
+    \ scan{input.begin()};\r\n} // namespace kpr\r\n#line 6 \"kyopro/io/out.hpp\"\n\
+    #include <cmath>\r\n#line 11 \"kyopro/io/out.hpp\"\n#include <string_view>\r\n\
+    #line 19 \"kyopro/io/out.hpp\"\n\r\nnamespace kpr {\r\n    // \u30D0\u30C3\u30D5\
+    \u30A1\u3092\u7528\u3044\u3066\u30D5\u30A1\u30A4\u30EB\u306B\u66F8\u304D\u8FBC\
+    \u3080\u30AF\u30E9\u30B9\r\n    template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>\r\
+    \n    struct Writer {\r\n    private:\r\n        int fd, idx;\r\n        std::array<char,\
+    \ buf_size> buffer;\r\n\r\n    public:\r\n        // \u30D0\u30C3\u30D5\u30A1\u30B5\
+    \u30A4\u30BA\u3092\u53D6\u5F97\r\n        static constexpr KYOPRO_BASE_INT get_buf_size()\
+    \ noexcept {\r\n            return buf_size;\r\n        }\r\n\r\n        Writer()\
+    \ noexcept = default;\r\n        Writer(int fd) noexcept: fd(fd), idx(0), buffer()\
+    \ {}\r\n        Writer(FILE* fp) noexcept: fd(fileno(fp)), idx(0), buffer() {}\r\
+    \n\r\n        ~Writer() {\r\n            [[maybe_unused]]ssize_t res = write(fd,\
+    \ buffer.begin(), idx);\r\n        }\r\n\r\n        // \u51FA\u529B\u30A4\u30C6\
+    \u30EC\u30FC\u30BF\r\n        struct iterator {\r\n        private:\r\n      \
+    \      Writer& writer;\r\n\r\n        public:\r\n            using difference_type\
+    \ = void;\r\n            using value_type = void;\r\n            using pointer\
+    \ = void;\r\n            using reference = void;\r\n            using iterator_category\
+    \ = std::output_iterator_tag;\r\n\r\n            iterator() noexcept = default;\r\
+    \n            iterator(Writer& writer) noexcept: writer(writer) {}\r\n\r\n   \
+    \         iterator& operator ++() {\r\n                ++writer.idx;\r\n     \
+    \           if (writer.idx == buf_size) {\r\n                [[maybe_unused]]ssize_t\
+    \ res = write(writer.fd, writer.buffer.begin(), buf_size);\r\n               \
+    \ writer.idx = 0;\r\n                }\r\n                return *this;\r\n  \
+    \          }\r\n\r\n            iterator operator ++(int) {\r\n              \
+    \  iterator before = *this;\r\n                operator ++();\r\n            \
+    \    return before;\r\n            }\r\n\r\n            char& operator *() const\
+    \ {\r\n                return writer.buffer[writer.idx];\r\n            }\r\n\r\
+    \n            // \u30D0\u30C3\u30D5\u30A1\u3092\u5168\u3066\u51FA\u529B\u3059\u308B\
+    \r\n            void flush() const {\r\n                [[maybe_unused]] ssize_t\
+    \ res = write(writer.fd, writer.buffer.begin(), writer.idx);\r\n            }\r\
+    \n        };\r\n\r\n        // \u30D5\u30A1\u30A4\u30EB\u306E\u6700\u521D\u3092\
+    \u793A\u3059\u30A4\u30C6\u30EC\u30FC\u30BF\u3092\u53D6\u5F97\r\n        iterator\
+    \ begin() noexcept {\r\n            return iterator(*this);\r\n        }\r\n \
+    \   };\r\n\r\n    // \u6A19\u6E96\u51FA\u529B\u3001\u6A19\u6E96\u30A8\u30E9\u30FC\
+    \u51FA\u529B\r\n    Writer output{1}, error{2};\r\n\r\n    // \u5024\u306E\u51FA\
+    \u529B\u306E\u95A2\u6570\u30AF\u30E9\u30B9\r\n    template<class, class = void>\r\
+    \n    struct PrintFunction;\r\n\r\n    // \u51FA\u529B\u30A4\u30C6\u30EC\u30FC\
+    \u30BF\u3092\u7528\u3044\u3066\u5024\u3092\u51FA\u529B\u3059\u308B\u30AF\u30E9\
+    \u30B9\r\n    template<class Iterator, bool _space = true, bool _line = true,\
+    \ bool _debug = false, bool _comment = false, bool _flush = false, std::size_t\
     \ decimal_precision = KYOPRO_DECIMAL_PRECISION>\r\n    struct Printer {\r\n  \
     \      using iterator_type = Iterator;\r\n\r\n        // \u6307\u5B9A\u3055\u308C\
     \u305F\u30AA\u30D7\u30B7\u30E7\u30F3\r\n        static constexpr bool space =\
@@ -685,154 +818,43 @@ data:
     \u6E96\u51FA\u529B\u3001\u6A19\u6E96\u30A8\u30E9\u30FC\u51FA\u529B\u306B\u5024\
     \u3092\u51FA\u529B\u3059\u308B(\u6539\u884C\u3001\u533A\u5207\u308A\u6587\u5B57\
     \u3042\u308A)\r\n    Printer<Writer<>::iterator> println{output.begin()}, eprintln{error.begin()};\r\
-    \n} // namespace kpr\r\n#line 6 \"kyopro/math/Montgomery.hpp\"\n\r\nnamespace\
-    \ kpr {\r\n    template<class T>\r\n    struct Montgomery {\r\n        static_assert(is_unsigned_integer_v<T>,\
-    \ \"The given type must be an unsigned integer type\");\r\n\r\n        using value_type\
-    \ = T;\r\n\r\n        T mod;\r\n\r\n    private:\r\n        using larger_type\
-    \ = next_integer_t<T>;\r\n\r\n        T r, n2;\r\n\r\n    public:\r\n        constexpr\
-    \ void set_mod(T mod) noexcept {\r\n            this->mod = mod;\r\n         \
-    \   n2 = -static_cast<larger_type>(mod) % mod;\r\n            T t = 0;\r\n   \
-    \         r = 0;\r\n            for (int i = 0; i < std::numeric_limits<T>::digits;\
-    \ ++i) {\r\n                if (!(t & 1)) {\r\n                    t += mod;\r\
-    \n                    r += static_cast<T>(1) << static_cast<T>(i);\r\n       \
-    \         }\r\n                t >>= 1;\r\n            }\r\n        }\r\n\r\n\
-    \        constexpr KYOPRO_BASE_INT get_mod() const noexcept {\r\n            return\
-    \ mod;\r\n        }\r\n\r\n        Montgomery() noexcept = default;\r\n      \
-    \  Montgomery(T mod) noexcept {\r\n            set_mod(mod);\r\n        }\r\n\r\
-    \n        constexpr T transform(T x) const noexcept {\r\n            return reduce(static_cast<larger_type>(x)\
-    \ * n2);\r\n        }\r\n\r\n        constexpr T inv_transform(T x) const noexcept\
-    \ {\r\n            T y = reduce(x);\r\n            return y >= mod ? y - mod :\
-    \ y;\r\n        }\r\n\r\n        constexpr T reduce(larger_type x) const noexcept\
-    \ {\r\n            return (x + static_cast<larger_type>(static_cast<T>(x) * r)\
-    \ * mod) >> std::numeric_limits<T>::digits;\r\n        }\r\n    };\r\n} // namespace\
-    \ kpr\r\n#line 13 \"kyopro/math/DynamicModInt.hpp\"\n\r\nnamespace kpr {\r\n \
-    \   template<class T, std::size_t kind = 0, bool = false>\r\n    struct DynamicModInt\
-    \ {\r\n        static_assert(std::is_unsigned_v<T>, \"The given type must be an\
-    \ unsigned integer type\");\r\n\r\n        using value_type = T;\r\n\r\n    private:\r\
-    \n        using larger_type = next_integer_t<T>;\r\n\r\n        inline static\
-    \ Montgomery<T> montgomery;\r\n\r\n    public:\r\n        T value;\r\n\r\n   \
-    \     static constexpr KYOPRO_BASE_INT get_kind() noexcept {\r\n            return\
-    \ kind;\r\n        }\r\n\r\n        static void set_mod(T mod) noexcept {\r\n\
-    \            montgomery.set_mod(mod);\r\n        }\r\n\r\n        static KYOPRO_BASE_INT\
-    \ get_mod() noexcept {\r\n            return montgomery.mod;\r\n        }\r\n\r\
-    \n        KYOPRO_BASE_INT get_val() noexcept {\r\n            return montgomery.inv_transform(value);\r\
-    \n        }\r\n\r\n        DynamicModInt() noexcept = default;\r\n        DynamicModInt(T\
-    \ value) noexcept: value(montgomery.transform(value % montgomery.mod + montgomery.mod))\
-    \ {}\r\n\r\n        template<class U>\r\n        explicit operator U() const noexcept\
-    \ {\r\n            return montgomery.inv_transform(value);\r\n        }\r\n\r\n\
-    \        static DynamicModInt raw(T value) noexcept {\r\n            DynamicModInt\
-    \ res;\r\n            res.value = montgomery.transform(value);\r\n           \
-    \ return res;\r\n        }\r\n\r\n        DynamicModInt pow(std::uint_fast64_t\
-    \ n) const noexcept {\r\n            DynamicModInt res = 1, a = *this;\r\n   \
-    \         while (n > 0) {\r\n                if (n & 1) res = res * a;\r\n   \
-    \             a = a * a;\r\n                n >>= 1;\r\n            }\r\n    \
-    \        return res;\r\n        }\r\n\r\n        DynamicModInt inv() const noexcept\
-    \ {\r\n            return pow(montgomery.mod - 2);\r\n        }\r\n\r\n      \
-    \  DynamicModInt operator +() const noexcept {\r\n            return *this;\r\n\
-    \        }\r\n\r\n        DynamicModInt operator -() const noexcept {\r\n    \
-    \        return value == 0 ? 0 : montgomery.mod - value;\r\n        }\r\n\r\n\
-    \        DynamicModInt& operator ++() noexcept {\r\n            *this += DynamicModInt::raw(1);\r\
-    \n            return *this;\r\n        }\r\n\r\n        DynamicModInt operator\
-    \ ++(int) noexcept {\r\n            DynamicModInt before = *this;\r\n        \
-    \    ++*this;\r\n            return before;\r\n        }\r\n\r\n        DynamicModInt&\
-    \ operator --() noexcept {\r\n            *this -= DynamicModInt::raw(1);\r\n\
-    \            return *this;\r\n        }\r\n\r\n        DynamicModInt operator\
-    \ --(int) noexcept {\r\n            DynamicModInt before = *this;\r\n        \
-    \    --*this;\r\n            return before;\r\n        }\r\n\r\n        DynamicModInt&\
-    \ operator +=(DynamicModInt rhs) noexcept {\r\n            if ((value += rhs.value\
-    \ - (montgomery.mod << 1)) > std::numeric_limits<std::make_signed_t<T>>::max())\
-    \ value += montgomery.mod << 1;\r\n            return *this;\r\n        }\r\n\r\
-    \n        DynamicModInt& operator -=(DynamicModInt rhs) noexcept {\r\n       \
-    \     if ((value -= rhs.value) > std::numeric_limits<std::make_signed_t<T>>::max())\
-    \ value += montgomery.mod << 1;\r\n            return *this;\r\n        }\r\n\r\
-    \n        DynamicModInt& operator *=(DynamicModInt rhs) noexcept {\r\n       \
-    \     value = montgomery.reduce(static_cast<larger_type>(value) * rhs.value);\r\
-    \n            return *this;\r\n        }\r\n\r\n        DynamicModInt& operator\
-    \ /=(DynamicModInt rhs) noexcept {\r\n            value = montgomery.reduce(static_cast<larger_type>(value)\
-    \ * rhs.inv().value);\r\n            return *this;\r\n        }\r\n\r\n      \
-    \  friend DynamicModInt operator +(DynamicModInt lhs, DynamicModInt rhs) noexcept\
-    \ {\r\n            return lhs += rhs;\r\n        }\r\n\r\n        friend DynamicModInt\
-    \ operator -(DynamicModInt lhs, DynamicModInt rhs) noexcept {\r\n            return\
-    \ lhs -= rhs;\r\n        }\r\n\r\n        friend DynamicModInt operator *(DynamicModInt\
-    \ lhs, DynamicModInt rhs) noexcept {\r\n            return lhs *= rhs;\r\n   \
-    \     }\r\n\r\n        friend DynamicModInt operator /(DynamicModInt lhs, DynamicModInt\
-    \ rhs) noexcept {\r\n            return lhs /= rhs;\r\n        }\r\n\r\n     \
-    \   friend bool operator ==(DynamicModInt lhs, DynamicModInt rhs) noexcept {\r\
-    \n            return lhs.value == rhs.value;\r\n        }\r\n\r\n        friend\
-    \ bool operator !=(DynamicModInt lhs, DynamicModInt rhs) noexcept {\r\n      \
-    \      return lhs.value != rhs.value;\r\n        }\r\n\r\n        friend struct\
-    \ ScanFunction<DynamicModInt>;\r\n\r\n        friend struct PrintFunction<DynamicModInt>;\r\
-    \n    };\r\n\r\n    template<class T, std::size_t kind>\r\n    struct ScanFunction<DynamicModInt<T,\
-    \ kind>> {\r\n        template<class Scanner>\r\n        static void scan(Scanner&\
-    \ scanner, DynamicModInt<T, kind>& a) {\r\n            std::int_fast64_t value;\r\
-    \n            ScanFunction<std::int_fast64_t>::scan(scanner, value);\r\n     \
-    \       a.value = a.montgomery.transform(value % a.montgomery.mod + a.montgomery.mod);\r\
-    \n        }\r\n    };\r\n\r\n    template<class T, std::size_t kind>\r\n    struct\
-    \ PrintFunction<DynamicModInt<T, kind>> {\r\n        template<class Printer>\r\
-    \n        static void print(Printer& printer, const DynamicModInt<T, kind>& a)\
-    \ {\r\n            PrintFunction<T>::print(printer, a.montgomery.inv_transform(a.value));\r\
-    \n        }\r\n    };\r\n\r\n    template<class T, std::size_t kind>\r\n    struct\
-    \ Hash<DynamicModInt<T, kind>> {\r\n        using value_type = DynamicModInt<T,\
-    \ kind>;\r\n\r\n        std::size_t operator ()(DynamicModInt<T, kind> a) const\
-    \ noexcept {\r\n            return static_cast<std::size_t>(a);\r\n        }\r\
-    \n    };\r\n} // namespace kpr\r\n#line 6 \"kyopro/algorithm/bit.hpp\"\n\r\nnamespace\
-    \ kpr {\r\n    // \u7ACB\u3063\u3066\u3044\u308Bbit\u306E\u500B\u6570\u3092\u8FD4\
-    \u3059\r\n    [[maybe_unused]] inline constexpr struct {\r\n        template<class\
-    \ T>\r\n        constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {\r\n\
-    \            static_assert(is_integer_v<T>, \"The argument must be an integer\"\
-    );\r\n            constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\r\
-    \n            static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"The integer type of the argument is too large\");\r\n            if constexpr\
-    \ (digits <= std::numeric_limits<unsigned int>::digits) return __builtin_popcount(x);\r\
-    \n            else if constexpr (digits <= std::numeric_limits<unsigned long>::digits)\
-    \ return __builtin_popcountl(x);\r\n            else return __builtin_popcountll(x);\r\
-    \n        }\r\n    } pop_count;\r\n\r\n    [[maybe_unused]] inline constexpr struct\
-    \ {\r\n        template<class T>\r\n        constexpr KYOPRO_BASE_INT operator\
-    \ ()(T x) const noexcept {\r\n            static_assert(is_integer_v<T>, \"The\
-    \ argument must be an integer\");\r\n            constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\r\
-    \n            static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"The integer type of the argument is too large\");\r\n            if (x ==\
-    \ 0) return 0;\r\n            if constexpr (digits <= std::numeric_limits<unsigned\
-    \ int>::digits) return __builtin_clz(x) + digits - std::numeric_limits<unsigned\
-    \ int>::digits;\r\n            else if constexpr (digits <= std::numeric_limits<unsigned\
-    \ long>::digits) return __builtin_clzl(x) + digits - std::numeric_limits<unsigned\
-    \ long>::digits;\r\n            else return __builtin_clzll(x) + digits - std::numeric_limits<unsigned\
-    \ long long>::digits;\r\n        }\r\n    } lzero_count;\r\n\r\n    [[maybe_unused]]\
-    \ inline constexpr struct {\r\n        template<class T>\r\n        constexpr\
-    \ KYOPRO_BASE_INT operator ()(T x) const noexcept {\r\n            static_assert(is_integer_v<T>,\
-    \ \"The argument must be an integer\");\r\n            constexpr auto digits =\
-    \ std::numeric_limits<std::make_unsigned_t<T>>::digits;\r\n            static_assert(digits\
-    \ <= std::numeric_limits<unsigned long long>::digits, \"The integer type of the\
-    \ argument is too large\");\r\n            if constexpr (digits <= std::numeric_limits<unsigned\
-    \ int>::digits) return __builtin_ctz(x);\r\n            else if constexpr (digits\
-    \ <= std::numeric_limits<unsigned long>::digits) return __builtin_ctzl(x);\r\n\
-    \            else return __builtin_ctzll(x);\r\n        }\r\n    } rzero_count;\r\
-    \n\r\n    [[maybe_unused]] inline constexpr struct {\r\n        template<class\
-    \ T>\r\n        constexpr KYOPRO_BASE_INT operator ()(T x) const noexcept {\r\n\
-    \            static_assert(is_integer_v<T>, \"The argument must be an integer\"\
-    );\r\n            constexpr auto digits = std::numeric_limits<std::make_unsigned_t<T>>::digits;\r\
-    \n            static_assert(digits <= std::numeric_limits<unsigned long long>::digits,\
-    \ \"The integer type of the argument is too large\");\r\n            if (x ==\
-    \ 0) return 0;\r\n            if constexpr (digits <= std::numeric_limits<unsigned\
-    \ int>::digits) return std::numeric_limits<unsigned int>::digits - __builtin_clz(x);\r\
-    \n            else if constexpr (digits <= std::numeric_limits<unsigned long>::digits)\
-    \ return std::numeric_limits<unsigned long>::digits - __builtin_clzl(x);\r\n \
-    \           else return std::numeric_limits<unsigned long long>::digits - __builtin_clzll(x);\r\
-    \n        }\r\n    } bit_len;\r\n\r\n    [[maybe_unused]] inline constexpr struct\
-    \ {\r\n        template<class T>\r\n        constexpr KYOPRO_BASE_INT operator\
-    \ ()(T x) const noexcept {\r\n            return bit_len(x >> static_cast<T>(1));\r\
-    \n        }\r\n    } floor_bit;\r\n\r\n    [[maybe_unused]] inline constexpr struct\
-    \ {\r\n        template<class T>\r\n        constexpr KYOPRO_BASE_INT operator\
-    \ ()(T x) const noexcept {\r\n            if (x == 0) return 0;\r\n          \
-    \  return bit_len(x - static_cast<T>(1));\r\n        }\r\n    } ceil_bit;\r\n\
-    } // namespace kpr\r\n#line 4 \"kyopro/math/mod.hpp\"\n\r\nnamespace kpr {\r\n\
-    \    [[maybe_unused]] inline constexpr struct {\r\n        template<class T, class\
-    \ U>\r\n        constexpr std::common_type_t<T, U> operator ()(T x, U m) const\
-    \ noexcept {\r\n            static_assert(is_integer_v<T> && is_integer_v<U>,\
-    \ \"Both of the arguments must be integers\");\r\n            if constexpr (is_unsigned_integer_v<T>\
-    \ || is_unsigned_integer_v<U>) return x % m;\r\n            return (x %= m) <\
-    \ 0 ? x + m : x;\r\n        }\r\n    } floor_mod;\r\n\r\n    [[maybe_unused]]\
+    \n} // namespace kpr\r\n#line 7 \"kyopro/math/Barrett.hpp\"\n\r\nnamespace kpr\
+    \ {\r\n    // Barrett Reduction\r\n    template<class T>\r\n    struct Barrett\
+    \ {\r\n        static_assert(is_unsigned_integer_v<T>, \"The given type must be\
+    \ an unsigned integer type\");\r\n\r\n        using value_type = T;\r\n\r\n  \
+    \      T mod;\r\n\r\n    private:\r\n        using larger_type = next_integer_t<T>;\r\
+    \n\r\n        larger_type m;\r\n\r\n    public:\r\n        constexpr void set_mod(T\
+    \ mod) noexcept {\r\n            this->mod = mod;\r\n            m = (static_cast<larger_type>(1)\
+    \ << 64) / mod;\r\n        }\r\n\r\n        constexpr KYOPRO_BASE_INT get_mod()\
+    \ const noexcept {\r\n            return mod;\r\n        }\r\n\r\n        Barrett()\
+    \ noexcept = default;\r\n        Barrett(T mod) noexcept: mod(mod), m((static_cast<larger_type>(1)\
+    \ << 64) / mod) {}\r\n\r\n        constexpr T reduce(T x) const noexcept {\r\n\
+    \            x -= static_cast<T>((x * m) >> 64) * mod;\r\n            return x\
+    \ < mod ? x : x - mod;\r\n        }\r\n    };\r\n} // namespace kpr\r\n#line 5\
+    \ \"kyopro/meta/constant.hpp\"\n\r\nnamespace kpr {\r\n    // \u554F\u984C\u3067\
+    \u8A2D\u5B9A\u3055\u308C\u305Fmod\r\n    template<class T>\r\n    inline constexpr\
+    \ T MOD = KYOPRO_DEFAULT_MOD;\r\n    // \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\
+    \u305Fmod\r\n    inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;\r\
+    \n\r\n    // \u7121\u9650\u5927\u3092\u8868\u3059\u6574\u6570\r\n    template<class\
+    \ T>\r\n    inline constexpr T INF = std::numeric_limits<T>::max() / KYOPRO_INF_DIV;\r\
+    \n    // \u7121\u9650\u5927\u3092\u8868\u3059\u6574\u6570\r\n    inline constexpr\
+    \ KYOPRO_BASE_INT inf = INF<KYOPRO_BASE_INT>;\r\n\r\n    // \u8A31\u5BB9\u3055\
+    \u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\r\n    template<class T, KYOPRO_BASE_UINT\
+    \ decimal_precision = KYOPRO_DECIMAL_PRECISION>\r\n    inline constexpr KYOPRO_BASE_FLOAT\
+    \ EPS = static_cast<T>(1) / power(10ULL, decimal_precision);\r\n    // \u8A31\u5BB9\
+    \u3055\u308C\u308B\u5C0F\u6570\u8AA4\u5DEE\r\n    inline constexpr KYOPRO_BASE_FLOAT\
+    \ eps = EPS<KYOPRO_BASE_FLOAT>;\r\n\r\n    // \u5186\u5468\u7387\r\n    template<class\
+    \ T>\r\n    inline constexpr T PI = 3.14159265358979323846;\r\n    // \u5186\u5468\
+    \u7387\r\n    inline constexpr KYOPRO_BASE_FLOAT pi = PI<KYOPRO_BASE_FLOAT>;\r\
+    \n} // namespace kpr\r\n#line 2 \"kyopro/math/ModInt.hpp\"\n#include <cassert>\r\
+    \n#line 4 \"kyopro/math/mod.hpp\"\n\r\nnamespace kpr {\r\n    [[maybe_unused]]\
     \ inline constexpr struct {\r\n        template<class T, class U>\r\n        constexpr\
+    \ std::common_type_t<T, U> operator ()(T x, U m) const noexcept {\r\n        \
+    \    static_assert(is_integer_v<T> && is_integer_v<U>, \"Both of the arguments\
+    \ must be integers\");\r\n            if constexpr (is_unsigned_integer_v<T> ||\
+    \ is_unsigned_integer_v<U>) return x % m;\r\n            return (x %= m) < 0 ?\
+    \ x + m : x;\r\n        }\r\n    } floor_mod;\r\n\r\n    [[maybe_unused]] inline\
+    \ constexpr struct {\r\n        template<class T, class U>\r\n        constexpr\
     \ std::common_type_t<T, U> operator ()(T x, U m) const noexcept {\r\n        \
     \    return m - floor_mod(x - 1, m) - static_cast<T>(1);\r\n        }\r\n    }\
     \ ceil_mod;\r\n} // namespace kpr\r\n#line 16 \"kyopro/math/ModInt.hpp\"\n\r\n\
@@ -903,10 +925,286 @@ data:
     \n    struct Hash<ModInt<mod>> {\r\n        using value_type = ModInt<mod>;\r\n\
     \        constexpr std::size_t operator ()(ModInt<mod> a) const noexcept {\r\n\
     \            return static_cast<std::size_t>(a);\r\n        }\r\n    };\r\n} //\
-    \ namespace kpr\r\n#line 22 \"kyopro/template/alias.hpp\"\n\nnamespace kpr {\n\
-    \    using ushort = unsigned short;\n    using ll = long long;\n    using ull\
-    \ = unsigned long long;\n    using lf = double;\n    using llf = long double;\n\
-    \n    using i8 = std::int8_t;\n    using u8 = std::uint8_t;\n    using i16 = std::int16_t;\n\
+    \ namespace kpr\r\n#line 6 \"kyopro/math/BinomMod.hpp\"\n\nnamespace kpr {\n \
+    \   // mod\u4E8C\u9805\u4FC2\u6570\n    template<std::size_t max = 1000000, KYOPRO_BASE_UINT\
+    \ m = mod>\n    struct BinomMod {\n        static std::array<std::uint_fast64_t,\
+    \ max> fact, factinv, inv;\n        constexpr BinomMod() noexcept {\n        \
+    \    fact[0] = fact[1] = 1;\n            factinv[0] = factinv[1] = 1;\n      \
+    \      inv[1] = 1;\n            for (int i = 2; i < (int)max; ++i) {\n       \
+    \         fact[i] = fact[i - 1] * i % m;\n                inv[i] = m - inv[m %\
+    \ i] * (m / i) % m;\n                factinv[i] = factinv[i - 1] * inv[i] % m;\n\
+    \            }\n        }\n\n        constexpr ModInt<m> c(KYOPRO_BASE_UINT n,\
+    \ KYOPRO_BASE_UINT r) noexcept {\n            if (n < r) return 0;\n         \
+    \   return ModInt<m>(fact[n] * factinv[n - r] % m * factinv[r]);\n        }\n\
+    \        constexpr ModInt<m> p(KYOPRO_BASE_UINT n) noexcept {\n            return\
+    \ ModInt<m>::raw(fact[n]);\n        }\n        constexpr ModInt<m> p(KYOPRO_BASE_UINT\
+    \ n, KYOPRO_BASE_UINT r) noexcept {\n            if (n < r) return 0;\n      \
+    \      return ModInt<m>(fact[n] * factinv[n - r]);\n        }\n        constexpr\
+    \ ModInt<m> h(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept {\n           \
+    \ return c(n + r - 1, r);\n        }\n    };\n} // namespace kpr\n#line 3 \"kyopro/math/div.hpp\"\
+    \n\r\nnamespace kpr {\r\n    // floor(a \xF7 b)\u3092\u8FD4\u3059\r\n    [[maybe_unused]]\
+    \ inline constexpr struct {\r\n        template<class T, class U>\r\n        constexpr\
+    \ std::common_type_t<T, U> operator ()(T x, U m) const noexcept {\r\n        \
+    \    static_assert(is_integer_v<T> && is_integer_v<U>, \"Both of the arguments\
+    \ must be integers\");\r\n            if constexpr (is_unsigned_integer_v<T> ||\
+    \ is_unsigned_integer_v<U>) return x / m;\r\n            auto d = x / m;\r\n \
+    \           return d * m == x ? d : d - ((x < 0) ^ (m < 0));\r\n        }\r\n\
+    \    } floor_div;\r\n\r\n    // ceil(a \xF7 b)\u3092\u8FD4\u3059\r\n    [[maybe_unused]]\
+    \ inline constexpr struct {\r\n        template<class T, class U>\r\n        constexpr\
+    \ std::common_type_t<T, U> operator ()(T x, U m) const noexcept {\r\n        \
+    \    return floor_div(x + m - static_cast<T>(1), m);\r\n        }\r\n    } ceil_div;\r\
+    \n} // namespace kpr\r\n#line 5 \"kyopro/math/divisors.hpp\"\n\r\nnamespace kpr\
+    \ {\r\n    // \u5168\u3066\u306E\u6B63\u306E\u7D04\u6570\u3092\u8FD4\u3059\r\n\
+    \    [[maybe_unused]] inline constexpr struct {\r\n        std::vector<KYOPRO_BASE_INT>\
+    \ operator ()(std::uint_fast64_t n) const {\r\n            std::vector<KYOPRO_BASE_INT>\
+    \ lower, upper;\r\n            std::uint_fast64_t i;\r\n            for (i = 1;\
+    \ i * i < n; ++i) if (n % i == 0) {\r\n                lower.emplace_back(i);\r\
+    \n                upper.emplace_back(n / i);\r\n            }\r\n            if\
+    \ (i * i == n) lower.emplace_back(i);\r\n            lower.insert(end(lower),\
+    \ upper.rbegin(), upper.rend());\r\n            return lower;\r\n        }\r\n\
+    \    } divisors;\r\n} // namespace kpr\r\n#line 6 \"kyopro/math/Montgomery.hpp\"\
+    \n\r\nnamespace kpr {\r\n    template<class T>\r\n    struct Montgomery {\r\n\
+    \        static_assert(is_unsigned_integer_v<T>, \"The given type must be an unsigned\
+    \ integer type\");\r\n\r\n        using value_type = T;\r\n\r\n        T mod;\r\
+    \n\r\n    private:\r\n        using larger_type = next_integer_t<T>;\r\n\r\n \
+    \       T r, n2;\r\n\r\n    public:\r\n        constexpr void set_mod(T mod) noexcept\
+    \ {\r\n            this->mod = mod;\r\n            n2 = -static_cast<larger_type>(mod)\
+    \ % mod;\r\n            T t = 0;\r\n            r = 0;\r\n            for (int\
+    \ i = 0; i < std::numeric_limits<T>::digits; ++i) {\r\n                if (!(t\
+    \ & 1)) {\r\n                    t += mod;\r\n                    r += static_cast<T>(1)\
+    \ << static_cast<T>(i);\r\n                }\r\n                t >>= 1;\r\n \
+    \           }\r\n        }\r\n\r\n        constexpr KYOPRO_BASE_INT get_mod()\
+    \ const noexcept {\r\n            return mod;\r\n        }\r\n\r\n        Montgomery()\
+    \ noexcept = default;\r\n        Montgomery(T mod) noexcept {\r\n            set_mod(mod);\r\
+    \n        }\r\n\r\n        constexpr T transform(T x) const noexcept {\r\n   \
+    \         return reduce(static_cast<larger_type>(x) * n2);\r\n        }\r\n\r\n\
+    \        constexpr T inv_transform(T x) const noexcept {\r\n            T y =\
+    \ reduce(x);\r\n            return y >= mod ? y - mod : y;\r\n        }\r\n\r\n\
+    \        constexpr T reduce(larger_type x) const noexcept {\r\n            return\
+    \ (x + static_cast<larger_type>(static_cast<T>(x) * r) * mod) >> std::numeric_limits<T>::digits;\r\
+    \n        }\r\n    };\r\n} // namespace kpr\r\n#line 13 \"kyopro/math/DynamicModInt.hpp\"\
+    \n\r\nnamespace kpr {\r\n    template<class T, std::size_t kind = 0, bool = false>\r\
+    \n    struct DynamicModInt {\r\n        static_assert(std::is_unsigned_v<T>, \"\
+    The given type must be an unsigned integer type\");\r\n\r\n        using value_type\
+    \ = T;\r\n\r\n    private:\r\n        using larger_type = next_integer_t<T>;\r\
+    \n\r\n        inline static Montgomery<T> montgomery;\r\n\r\n    public:\r\n \
+    \       T value;\r\n\r\n        static constexpr KYOPRO_BASE_INT get_kind() noexcept\
+    \ {\r\n            return kind;\r\n        }\r\n\r\n        static void set_mod(T\
+    \ mod) noexcept {\r\n            montgomery.set_mod(mod);\r\n        }\r\n\r\n\
+    \        static KYOPRO_BASE_INT get_mod() noexcept {\r\n            return montgomery.mod;\r\
+    \n        }\r\n\r\n        KYOPRO_BASE_INT get_val() noexcept {\r\n          \
+    \  return montgomery.inv_transform(value);\r\n        }\r\n\r\n        DynamicModInt()\
+    \ noexcept = default;\r\n        DynamicModInt(T value) noexcept: value(montgomery.transform(value\
+    \ % montgomery.mod + montgomery.mod)) {}\r\n\r\n        template<class U>\r\n\
+    \        explicit operator U() const noexcept {\r\n            return montgomery.inv_transform(value);\r\
+    \n        }\r\n\r\n        static DynamicModInt raw(T value) noexcept {\r\n  \
+    \          DynamicModInt res;\r\n            res.value = montgomery.transform(value);\r\
+    \n            return res;\r\n        }\r\n\r\n        DynamicModInt pow(std::uint_fast64_t\
+    \ n) const noexcept {\r\n            DynamicModInt res = 1, a = *this;\r\n   \
+    \         while (n > 0) {\r\n                if (n & 1) res = res * a;\r\n   \
+    \             a = a * a;\r\n                n >>= 1;\r\n            }\r\n    \
+    \        return res;\r\n        }\r\n\r\n        DynamicModInt inv() const noexcept\
+    \ {\r\n            return pow(montgomery.mod - 2);\r\n        }\r\n\r\n      \
+    \  DynamicModInt operator +() const noexcept {\r\n            return *this;\r\n\
+    \        }\r\n\r\n        DynamicModInt operator -() const noexcept {\r\n    \
+    \        return value == 0 ? 0 : montgomery.mod - value;\r\n        }\r\n\r\n\
+    \        DynamicModInt& operator ++() noexcept {\r\n            *this += DynamicModInt::raw(1);\r\
+    \n            return *this;\r\n        }\r\n\r\n        DynamicModInt operator\
+    \ ++(int) noexcept {\r\n            DynamicModInt before = *this;\r\n        \
+    \    ++*this;\r\n            return before;\r\n        }\r\n\r\n        DynamicModInt&\
+    \ operator --() noexcept {\r\n            *this -= DynamicModInt::raw(1);\r\n\
+    \            return *this;\r\n        }\r\n\r\n        DynamicModInt operator\
+    \ --(int) noexcept {\r\n            DynamicModInt before = *this;\r\n        \
+    \    --*this;\r\n            return before;\r\n        }\r\n\r\n        DynamicModInt&\
+    \ operator +=(DynamicModInt rhs) noexcept {\r\n            if ((value += rhs.value\
+    \ - (montgomery.mod << 1)) > std::numeric_limits<std::make_signed_t<T>>::max())\
+    \ value += montgomery.mod << 1;\r\n            return *this;\r\n        }\r\n\r\
+    \n        DynamicModInt& operator -=(DynamicModInt rhs) noexcept {\r\n       \
+    \     if ((value -= rhs.value) > std::numeric_limits<std::make_signed_t<T>>::max())\
+    \ value += montgomery.mod << 1;\r\n            return *this;\r\n        }\r\n\r\
+    \n        DynamicModInt& operator *=(DynamicModInt rhs) noexcept {\r\n       \
+    \     value = montgomery.reduce(static_cast<larger_type>(value) * rhs.value);\r\
+    \n            return *this;\r\n        }\r\n\r\n        DynamicModInt& operator\
+    \ /=(DynamicModInt rhs) noexcept {\r\n            value = montgomery.reduce(static_cast<larger_type>(value)\
+    \ * rhs.inv().value);\r\n            return *this;\r\n        }\r\n\r\n      \
+    \  friend DynamicModInt operator +(DynamicModInt lhs, DynamicModInt rhs) noexcept\
+    \ {\r\n            return lhs += rhs;\r\n        }\r\n\r\n        friend DynamicModInt\
+    \ operator -(DynamicModInt lhs, DynamicModInt rhs) noexcept {\r\n            return\
+    \ lhs -= rhs;\r\n        }\r\n\r\n        friend DynamicModInt operator *(DynamicModInt\
+    \ lhs, DynamicModInt rhs) noexcept {\r\n            return lhs *= rhs;\r\n   \
+    \     }\r\n\r\n        friend DynamicModInt operator /(DynamicModInt lhs, DynamicModInt\
+    \ rhs) noexcept {\r\n            return lhs /= rhs;\r\n        }\r\n\r\n     \
+    \   friend bool operator ==(DynamicModInt lhs, DynamicModInt rhs) noexcept {\r\
+    \n            return lhs.value == rhs.value;\r\n        }\r\n\r\n        friend\
+    \ bool operator !=(DynamicModInt lhs, DynamicModInt rhs) noexcept {\r\n      \
+    \      return lhs.value != rhs.value;\r\n        }\r\n\r\n        friend struct\
+    \ ScanFunction<DynamicModInt>;\r\n\r\n        friend struct PrintFunction<DynamicModInt>;\r\
+    \n    };\r\n\r\n    template<class T, std::size_t kind>\r\n    struct ScanFunction<DynamicModInt<T,\
+    \ kind>> {\r\n        template<class Scanner>\r\n        static void scan(Scanner&\
+    \ scanner, DynamicModInt<T, kind>& a) {\r\n            std::int_fast64_t value;\r\
+    \n            ScanFunction<std::int_fast64_t>::scan(scanner, value);\r\n     \
+    \       a.value = a.montgomery.transform(value % a.montgomery.mod + a.montgomery.mod);\r\
+    \n        }\r\n    };\r\n\r\n    template<class T, std::size_t kind>\r\n    struct\
+    \ PrintFunction<DynamicModInt<T, kind>> {\r\n        template<class Printer>\r\
+    \n        static void print(Printer& printer, const DynamicModInt<T, kind>& a)\
+    \ {\r\n            PrintFunction<T>::print(printer, a.montgomery.inv_transform(a.value));\r\
+    \n        }\r\n    };\r\n\r\n    template<class T, std::size_t kind>\r\n    struct\
+    \ Hash<DynamicModInt<T, kind>> {\r\n        using value_type = DynamicModInt<T,\
+    \ kind>;\r\n\r\n        std::size_t operator ()(DynamicModInt<T, kind> a) const\
+    \ noexcept {\r\n            return static_cast<std::size_t>(a);\r\n        }\r\
+    \n    };\r\n} // namespace kpr\r\n#line 4 \"kyopro/math/euler_phi.hpp\"\n\r\n\
+    namespace kpr {\r\n    // \u30AA\u30A4\u30E9\u30FC\u306E\u03C6\u95A2\u6570\r\n\
+    \    [[maybe_unused]] inline constexpr struct {\r\n        constexpr KYOPRO_BASE_INT\
+    \ operator ()(std::uint_fast64_t n) const noexcept {\r\n            std::uint_fast64_t\
+    \ res = n;\r\n            if ((n & 1) == 0) {\r\n                res -= res >>\
+    \ 1;\r\n                n >>= 1;\r\n                while ((n & 1) == 0) n >>=\
+    \ 1;\r\n            }\r\n            for (std::uint_fast64_t i = 3; i * i <= n;\
+    \ i += 2) {\r\n                if (n % i == 0) {\r\n                res -= res\
+    \ / i;\r\n                n /= i;\r\n                while (n % i == 0) n /= i;\r\
+    \n                }\r\n            }\r\n            if (n != 1) res -= res / n;\r\
+    \n            return res;\r\n        }\r\n    } euler_phi;\r\n} // namespace kpr\r\
+    \n#line 5 \"kyopro/math/factorize.hpp\"\n#include <numeric>\r\n#include <random>\r\
+    \n#line 9 \"kyopro/math/is_prime.hpp\"\n\r\nnamespace kpr {\r\n    [[maybe_unused]]\
+    \ inline constexpr struct {\r\n        template<class T>\r\n        constexpr\
+    \ bool operator ()(T x) const {\r\n            using U = std::make_unsigned_t<T>;\r\
+    \n            using dmint = DynamicModInt<U, 0, true>;\r\n            constexpr\
+    \ std::array<std::uint_fast64_t, 3> miller_rabin32 = {2, 7, 61};\r\n         \
+    \   constexpr std::array<std::uint_fast64_t, 7> miller_rabin64 = {2, 325, 9375,\
+    \ 28178, 450775, 9780504, 1795265022};\r\n            U n = x;\r\n           \
+    \ if (n <= 1) return false;\r\n            if (!(n & 1)) return n == 2;\r\n  \
+    \          dmint::set_mod(n);\r\n            std::uint_fast64_t d = (n - 1) >>\
+    \ rzero_count(n - 1);\r\n            dmint one = 1, minus_one = n - 1;\r\n   \
+    \         auto ng = [&](std::uint_fast64_t a) noexcept {\r\n                auto\
+    \ y = dmint(a).pow(d);\r\n                std::uint_fast64_t t = d;\r\n      \
+    \          while (y != one and y != minus_one and t != n - 1) y *= y, t <<= 1;\r\
+    \n                if (y != minus_one and !(t & 1)) return true;\r\n          \
+    \      return false;\r\n            };\r\n            if constexpr (std::numeric_limits<U>::digits\
+    \ <= 32) {\r\n                for (auto i: miller_rabin32) {\r\n             \
+    \       if (n <= i) return true;\r\n                    if (ng(i)) return false;\r\
+    \n                }\r\n            } else if (n < (static_cast<U>(1) << 32)) {\r\
+    \n                for (auto i: miller_rabin32) {\r\n                    if (n\
+    \ <= i) return true;\r\n                    if (ng(i)) return false;\r\n     \
+    \           }\r\n            } else {\r\n                for (auto i: miller_rabin64)\
+    \ {\r\n                    if (n <= i) return true;\r\n                    if\
+    \ (ng(i)) return false;\r\n                }\r\n            }\r\n            return\
+    \ true;\r\n        }\r\n    } is_prime;\r\n} // namespace kpr\r\n#line 12 \"kyopro/math/factorize.hpp\"\
+    \n\r\nnamespace kpr {\r\n    // \u7D20\u56E0\u6570\u5206\u89E3\r\n    [[maybe_unused]]\
+    \ inline constexpr struct {\r\n        template<class T>\r\n        constexpr\
+    \ T operator ()(T p, KYOPRO_BASE_UINT c) const {\r\n            using U = std::make_unsigned_t<T>;\r\
+    \n            using dmint = DynamicModInt<U, 0, true>;\r\n            U n = p;\r\
+    \n            dmint::set_mod(n);\r\n            dmint cc = c;\r\n            auto\
+    \ f = [=](dmint x) noexcept {\r\n                return x * x + cc;\r\n      \
+    \      };\r\n            auto x = dmint::raw(1), y = dmint::raw(2), z = dmint::raw(1),\
+    \ q = dmint::raw(1);\r\n            U g = 1;\r\n            const int m = 1 <<\
+    \ (floor_bit(n) / 5);\r\n            for (int r = 1; g == 1; r <<= 1) {\r\n  \
+    \              x = y;\r\n                for (int i = 0; i < r; ++i) y = f(y);\r\
+    \n                for (int k = 0; k < r && g == 1; k += m) {\r\n             \
+    \       z = y;\r\n                    int min = std::min(m, r - k);\r\n      \
+    \              for (int i = 0; i < min; ++i) {\r\n                        y =\
+    \ f(y);\r\n                        q *= x - y;\r\n                    }\r\n  \
+    \                  g = std::gcd(static_cast<U>(q), n);\r\n                }\r\n\
+    \            }\r\n            if (g == n) {\r\n                do {\r\n      \
+    \              z = f(z);\r\n                    g = std::gcd(static_cast<U>(x\
+    \ - z), n);\r\n                } while (g == 1);\r\n            }\r\n        \
+    \    return g;\r\n        }\r\n    } pollard_rho;\r\n\r\n    [[maybe_unused]]\
+    \ inline constexpr struct {\r\n        KYOPRO_BASE_UINT operator ()(KYOPRO_BASE_UINT\
+    \ n) const noexcept {\r\n            static std::mt19937_64 mt(std::random_device{}());\r\
+    \n            std::uniform_int_distribution<std::uint_fast64_t> rnd(0, n - 1);\r\
+    \n            if (is_prime(n)) return n;\r\n            for (int i = 0; i < 100;\
+    \ ++i) {\r\n                std::uint_fast64_t m = pollard_rho(n, rnd(mt));\r\n\
+    \                if (is_prime(m)) return m;\r\n                n = m;\r\n    \
+    \        }\r\n            return 1;\r\n        }\r\n    } find_factor;\r\n\r\n\
+    \    [[maybe_unused]] inline constexpr struct {\r\n        template<bool sorted\
+    \ = true, class Container = std::vector<KYOPRO_BASE_INT>>\r\n        Container\
+    \ operator ()(KYOPRO_BASE_UINT n) const {\r\n            Container res;\r\n  \
+    \          for (int p = 2; p < 100 && static_cast<KYOPRO_BASE_UINT>(p * p) <=\
+    \ n; ++p) {\r\n                while (n % p == 0) {\r\n                    n /=\
+    \ p;\r\n                    res.emplace_back(p);\r\n                }\r\n    \
+    \        }\r\n            while (n > 1) {\r\n                std::uint_fast64_t\
+    \ p = find_factor(n);\r\n                do {\r\n                    n /= p;\r\
+    \n                    res.emplace_back(p);\r\n                } while (n % p ==\
+    \ 0);\r\n            }\r\n            if constexpr (sorted) std::sort(res.begin(),\
+    \ res.end());\r\n            return res;\r\n        }\r\n    } factorize;\r\n\
+    } // namespace kpr\r\n#line 6 \"kyopro/data_structure/FenwickTree.hpp\"\n\r\n\
+    namespace kpr {\r\n    template<class T, class Op = Add<T>, class Container =\
+    \ std::vector<T>>\r\n    struct FenwickTree {\r\n        using value_type = T;\r\
+    \n        using size_type = std::size_t;\r\n        using reference = T&;\r\n\
+    \        using const_reference = const T&;\r\n        using operator_type = Op;\r\
+    \n        using container_type = Container;\r\n\r\n    private:\r\n        Op\
+    \ op;\r\n        Container tree;\r\n\r\n    public:\r\n        FenwickTree() noexcept\
+    \ = default;\r\n        FenwickTree(std::size_t n) noexcept: tree(n, op.id())\
+    \ {}\r\n\r\n        std::size_t size() noexcept {\r\n            return tree.size();\r\
+    \n        }\r\n\r\n        void apply(int p, const T& x) {\r\n            ++p;\r\
+    \n            while (p <= (int)size()) {\r\n                tree[p - 1] = op(tree[p\
+    \ - 1], x);\r\n                p += p & -p;\r\n            }\r\n        }\r\n\r\
+    \n        T prod(int r) const {\r\n            T s = op.id();\r\n            while\
+    \ (r > 0) {\r\n                s = op(s, tree[r - 1]);\r\n                r -=\
+    \ r & -r;\r\n            }\r\n            return s;\r\n        }\r\n        T\
+    \ prod(int l, int r) const {\r\n            static_assert(has_inv_v<Op>, \"Operator\
+    \ doesn't have an inv\");\r\n            return op(prod(r), op.inv(prod(l)));\r\
+    \n        }\r\n\r\n        T all_prod() {\r\n            return prod(tree.size());\r\
+    \n        }\r\n\r\n        T get(int p) {\r\n            static_assert(has_inv_v<Op>,\
+    \ \"Operator doesn't have an inv\");\r\n            return op(prod(p + 1), op.inv(prod(p)));\r\
+    \n        }\r\n\r\n        void set(int p, const T& x) {\r\n            static_assert(has_inv_v<Op>,\
+    \ \"Operator doesn't have an inv\");\r\n            apply(p, op(x, op.inv(get(p))));\r\
+    \n        }\r\n    };\r\n} // namespace kpr\r\n#line 9 \"kyopro/data_structure/UnionFind.hpp\"\
+    \n\r\nnamespace kpr {\r\n    struct UnionFind {\r\n    private:\r\n        std::vector<int>\
+    \ par;\r\n\r\n    public:\r\n        UnionFind() noexcept = default;\r\n     \
+    \   UnionFind(std::size_t n) noexcept: par(n, -1) {}\r\n\r\n        void resize(std::size_t\
+    \ x) { par.resize(x, -1); }\r\n        void assign(std::size_t x) { par.assign(x,\
+    \ -1); }\r\n        void clear() { std::fill(par.begin(), par.end(), -1); }\r\n\
+    \r\n        std::size_t size() const noexcept {\r\n            return par.size();\r\
+    \n        }\r\n\r\n        KYOPRO_BASE_INT find(int x) {\r\n            int p\
+    \ = x;\r\n            while (par[p] >= 0) p = par[p];\r\n            while (x\
+    \ != p) {\r\n                int tmp = x;\r\n                x = par[x];\r\n \
+    \               par[tmp] = p;\r\n            }\r\n            return p;\r\n  \
+    \      }\r\n\r\n        bool merge(int x, int y) {\r\n            x = find(x),\
+    \ y = find(y);\r\n            if (x == y) return false;\r\n            if (par[x]\
+    \ > par[y]) {\r\n                int tmp = x;\r\n                x = y;\r\n  \
+    \              y = tmp;\r\n            }\r\n            par[x] += par[y];\r\n\
+    \            par[y] = x;\r\n            return true;\r\n        }\r\n\r\n    \
+    \    bool same(int x, int y) {\r\n            return find(x) == find(y);\r\n \
+    \       }\r\n\r\n        KYOPRO_BASE_INT group_size(int x) {\r\n            return\
+    \ -par[find(x)];\r\n        }\r\n\r\n        std::vector<int> group_members(int\
+    \ x) {\r\n            x = find(x);\r\n            std::vector<int> a;\r\n    \
+    \        for (int i = 0; i < (int)(size()); ++i) if (find(i) == x) a.emplace_back(i);\r\
+    \n            return a;\r\n        }\r\n\r\n        template<class Vector = std::vector<KYOPRO_BASE_INT>>\r\
+    \n        Vector roots() const {\r\n            Vector a;\r\n            for (int\
+    \ i = 0; i < (int)(size()); ++i) if (par[i] < 0) a.emplace_back(i);\r\n      \
+    \      return a;\r\n        }\r\n\r\n        KYOPRO_BASE_INT group_count() const\
+    \ {\r\n            KYOPRO_BASE_INT cnt = 0;\r\n            for (int i = 0; i <\
+    \ (int)(size()); ++i) if (par[i] < 0) ++cnt;\r\n            return cnt;\r\n  \
+    \      }\r\n\r\n        template<class Map = std::unordered_map<KYOPRO_BASE_INT,\
+    \ std::vector<KYOPRO_BASE_INT>>>\r\n        Map all_group_members() {\r\n    \
+    \        Map group_members;\r\n            for (int member = 0; member < (int)(size());\
+    \ ++member) group_members[find(member)].emplace_back(member);\r\n            return\
+    \ group_members;\r\n        }\r\n    };\r\n} // namespace kpr\r\n#line 3 \"kyopro/template/stl.hpp\"\
+    \n#include <cctype>\r\n#include <cerrno>\r\n#include <cfloat>\r\n#include <ciso646>\r\
+    \n#include <climits>\r\n#include <clocale>\r\n#line 10 \"kyopro/template/stl.hpp\"\
+    \n#include <csetjmp>\r\n#include <csignal>\r\n#include <cstdarg>\r\n#line 15 \"\
+    kyopro/template/stl.hpp\"\n#include <cstdlib>\r\n#include <cstring>\r\n#include\
+    \ <ctime>\r\n\r\n#include <ccomplex>\r\n#include <cfenv>\r\n#include <cinttypes>\r\
+    \n#include <cstdbool>\r\n#line 24 \"kyopro/template/stl.hpp\"\n#include <ctgmath>\r\
+    \n#include <cwchar>\r\n#include <cwctype>\r\n\r\n#line 30 \"kyopro/template/stl.hpp\"\
+    \n#include <complex>\r\n#include <deque>\r\n#include <exception>\r\n#include <fstream>\r\
+    \n#line 35 \"kyopro/template/stl.hpp\"\n#include <iomanip>\r\n#include <ios>\r\
+    \n#include <iosfwd>\r\n#include <iostream>\r\n#include <istream>\r\n#line 42 \"\
+    kyopro/template/stl.hpp\"\n#include <list>\r\n#include <locale>\r\n#include <map>\r\
+    \n#include <memory>\r\n#include <new>\r\n#line 48 \"kyopro/template/stl.hpp\"\n\
+    #include <ostream>\r\n#include <queue>\r\n#include <set>\r\n#include <sstream>\r\
+    \n#include <stack>\r\n#include <stdexcept>\r\n#include <streambuf>\r\n#line 56\
+    \ \"kyopro/template/stl.hpp\"\n#include <typeinfo>\r\n#line 58 \"kyopro/template/stl.hpp\"\
+    \n#include <valarray>\r\n#line 60 \"kyopro/template/stl.hpp\"\n\r\n#line 62 \"\
+    kyopro/template/stl.hpp\"\n#include <atomic>\r\n#include <chrono>\r\n#include\
+    \ <condition_variable>\r\n#include <forward_list>\r\n#include <future>\r\n#include\
+    \ <initializer_list>\r\n#include <mutex>\r\n#line 70 \"kyopro/template/stl.hpp\"\
+    \n#include <ratio>\r\n#include <regex>\r\n#include <scoped_allocator>\r\n#include\
+    \ <system_error>\r\n#include <thread>\r\n#line 76 \"kyopro/template/stl.hpp\"\n\
+    #include <typeindex>\r\n#line 79 \"kyopro/template/stl.hpp\"\n#include <unordered_set>\r\
+    \n#line 22 \"kyopro/template/alias.hpp\"\n\nnamespace kpr {\n    using ushort\
+    \ = unsigned short;\n    using ll = long long;\n    using ull = unsigned long\
+    \ long;\n    using lf = double;\n    using llf = long double;\n\n    using i8\
+    \ = std::int8_t;\n    using u8 = std::uint8_t;\n    using i16 = std::int16_t;\n\
     \    using u16 = std::uint16_t;\n    using i32 = std::int32_t;\n    using u32\
     \ = std::uint32_t;\n    using i64 = std::int64_t;\n    using u64 = std::uint64_t;\n\
     \    #ifdef __SIZEOF_INT128__\n    using i128 = __int128_t;\n    using u128 =\
@@ -1157,37 +1455,56 @@ data:
     \ struct {\n        template<class To, class From>\n        constexpr To operator\
     \ ()(From&& container) const noexcept {\n            return To(std::begin(container),\
     \ std::end(container));\n        }\n    } range_cast;\n} // namespace kpr\n#line\
-    \ 12 \"kyopro/template/template.hpp\"\n"
-  code: "#pragma once\r\n#include \"stl.hpp\"\r\n#include \"alias.hpp\"\r\n#include\
-    \ \"chmin_chmax.hpp\"\r\n#include \"constant.hpp\"\r\n#include \"len.hpp\"\r\n\
-    #include \"macro.hpp\"\r\n#include \"main.hpp\"\r\n#include \"make_array.hpp\"\
-    \r\n#include \"make_vec.hpp\"\r\n#include \"range_cast.hpp\"\r\n"
+    \ 5 \"kyopro/all.hpp\"\n"
+  code: "#pragma once\r\n#include \"all/all.hpp\"\r\n#include \"data_structure/data_structure.hpp\"\
+    \r\n#include \"template/template.hpp\"\r\n"
   dependsOn:
-  - kyopro/template/stl.hpp
-  - kyopro/template/alias.hpp
-  - kyopro/algorithm/Hash.hpp
-  - kyopro/meta/tuple_like.hpp
-  - kyopro/meta/trait.hpp
-  - kyopro/function/compare.hpp
-  - kyopro/math/DynamicModInt.hpp
-  - kyopro/meta/constant.hpp
-  - kyopro/math/power.hpp
-  - kyopro/function/monoid.hpp
+  - kyopro/all/all.hpp
+  - kyopro/algorithm/algorithm.hpp
+  - kyopro/algorithm/bit.hpp
   - kyopro/meta/setting.hpp
+  - kyopro/meta/trait.hpp
+  - kyopro/algorithm/compress.hpp
+  - kyopro/function/compare.hpp
+  - kyopro/algorithm/contains.hpp
+  - kyopro/meta/tuple_like.hpp
+  - kyopro/algorithm/count_all.hpp
+  - kyopro/algorithm/Hash.hpp
+  - kyopro/algorithm/next_combination.hpp
+  - kyopro/function/function.hpp
+  - kyopro/function/monoid.hpp
+  - kyopro/function/RecLambda.hpp
+  - kyopro/io/io.hpp
   - kyopro/io/in.hpp
   - kyopro/io/io_option.hpp
+  - kyopro/math/power.hpp
   - kyopro/io/out.hpp
-  - kyopro/math/Montgomery.hpp
+  - kyopro/math/math.hpp
+  - kyopro/math/Barrett.hpp
+  - kyopro/math/BinomMod.hpp
+  - kyopro/meta/constant.hpp
   - kyopro/math/ModInt.hpp
-  - kyopro/algorithm/bit.hpp
   - kyopro/math/mod.hpp
+  - kyopro/math/div.hpp
+  - kyopro/math/divisors.hpp
+  - kyopro/math/DynamicModInt.hpp
+  - kyopro/math/Montgomery.hpp
+  - kyopro/math/euler_phi.hpp
+  - kyopro/math/factorize.hpp
+  - kyopro/math/is_prime.hpp
+  - kyopro/meta/meta.hpp
+  - kyopro/data_structure/data_structure.hpp
+  - kyopro/data_structure/FenwickTree.hpp
+  - kyopro/data_structure/UnionFind.hpp
+  - kyopro/template/template.hpp
+  - kyopro/template/stl.hpp
+  - kyopro/template/alias.hpp
   - kyopro/template/chmin_chmax.hpp
   - kyopro/template/constant.hpp
   - kyopro/template/len.hpp
   - kyopro/template/macro.hpp
   - kyopro/template/all_rall_macro.hpp
   - kyopro/template/io_macro.hpp
-  - kyopro/io/io.hpp
   - kyopro/template/lambda_macro.hpp
   - kyopro/template/push_pop_macro.hpp
   - kyopro/template/match_macro.hpp
@@ -1198,16 +1515,15 @@ data:
   - kyopro/template/make_vec.hpp
   - kyopro/template/range_cast.hpp
   isVerificationFile: false
-  path: kyopro/template/template.hpp
-  requiredBy:
-  - kyopro/all.hpp
-  timestamp: '2023-04-02 21:40:56+09:00'
+  path: kyopro/all.hpp
+  requiredBy: []
+  timestamp: '2023-04-02 21:50:19+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: kyopro/template/template.hpp
+documentation_of: kyopro/all.hpp
 layout: document
 redirect_from:
-- /library/kyopro/template/template.hpp
-- /library/kyopro/template/template.hpp.html
-title: kyopro/template/template.hpp
+- /library/kyopro/all.hpp
+- /library/kyopro/all.hpp.html
+title: kyopro/all.hpp
 ---

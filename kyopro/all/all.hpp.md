@@ -100,7 +100,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: kyopro/meta/tuple_like.hpp
     title: kyopro/meta/tuple_like.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kyopro/all.hpp
+    title: kyopro/all.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -1099,7 +1102,8 @@ data:
   - kyopro/meta/meta.hpp
   isVerificationFile: false
   path: kyopro/all/all.hpp
-  requiredBy: []
+  requiredBy:
+  - kyopro/all.hpp
   timestamp: '2023-04-02 21:40:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

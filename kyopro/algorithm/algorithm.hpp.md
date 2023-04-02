@@ -33,6 +33,9 @@ data:
     title: kyopro/meta/tuple_like.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: kyopro/all.hpp
+    title: kyopro/all.hpp
+  - icon: ':warning:'
     path: kyopro/all/all.hpp
     title: kyopro/all/all.hpp
   _extendedVerifiedWith: []
@@ -387,6 +390,7 @@ data:
   path: kyopro/algorithm/algorithm.hpp
   requiredBy:
   - kyopro/all/all.hpp
+  - kyopro/all.hpp
   timestamp: '2023-04-02 21:40:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

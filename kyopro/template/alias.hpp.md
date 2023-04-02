@@ -51,6 +51,9 @@ data:
     title: kyopro/meta/tuple_like.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: kyopro/all.hpp
+    title: kyopro/all.hpp
+  - icon: ':warning:'
     path: kyopro/template/template.hpp
     title: kyopro/template/template.hpp
   _extendedVerifiedWith: []
@@ -1021,6 +1024,7 @@ data:
   isVerificationFile: false
   path: kyopro/template/alias.hpp
   requiredBy:
+  - kyopro/all.hpp
   - kyopro/template/template.hpp
   timestamp: '2023-04-02 21:40:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS

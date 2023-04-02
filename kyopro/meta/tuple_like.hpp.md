@@ -12,6 +12,9 @@ data:
     path: kyopro/algorithm/contains.hpp
     title: kyopro/algorithm/contains.hpp
   - icon: ':warning:'
+    path: kyopro/all.hpp
+    title: kyopro/all.hpp
+  - icon: ':warning:'
     path: kyopro/all/all.hpp
     title: kyopro/all/all.hpp
   - icon: ':heavy_check_mark:'
@@ -218,6 +221,7 @@ data:
   - kyopro/io/io.hpp
   - kyopro/all/all.hpp
   - kyopro/meta/meta.hpp
+  - kyopro/all.hpp
   - kyopro/math/is_prime.hpp
   - kyopro/math/factorize.hpp
   - kyopro/math/ModInt.hpp

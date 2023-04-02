@@ -12,6 +12,9 @@ data:
     path: kyopro/algorithm/count_all.hpp
     title: kyopro/algorithm/count_all.hpp
   - icon: ':warning:'
+    path: kyopro/all.hpp
+    title: kyopro/all.hpp
+  - icon: ':warning:'
     path: kyopro/all/all.hpp
     title: kyopro/all/all.hpp
   - icon: ':heavy_check_mark:'
@@ -165,6 +168,7 @@ data:
   - kyopro/function/function.hpp
   - kyopro/meta/constant.hpp
   - kyopro/meta/meta.hpp
+  - kyopro/all.hpp
   - kyopro/math/is_prime.hpp
   - kyopro/math/euler_phi.hpp
   - kyopro/math/factorize.hpp

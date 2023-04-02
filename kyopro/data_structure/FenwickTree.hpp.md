@@ -12,6 +12,9 @@ data:
     title: kyopro/meta/trait.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: kyopro/all.hpp
+    title: kyopro/all.hpp
+  - icon: ':warning:'
     path: kyopro/data_structure/data_structure.hpp
     title: kyopro/data_structure/data_structure.hpp
   - icon: ':warning:'
@@ -247,6 +250,7 @@ data:
   isVerificationFile: false
   path: kyopro/data_structure/FenwickTree.hpp
   requiredBy:
+  - kyopro/all.hpp
   - kyopro/data_structure/structure.hpp
   - kyopro/data_structure/data_structure.hpp
   timestamp: '2023-04-02 21:40:56+09:00'

@@ -12,6 +12,9 @@ data:
     path: kyopro/algorithm/algorithm.hpp
     title: kyopro/algorithm/algorithm.hpp
   - icon: ':warning:'
+    path: kyopro/all.hpp
+    title: kyopro/all.hpp
+  - icon: ':warning:'
     path: kyopro/all/all.hpp
     title: kyopro/all/all.hpp
   - icon: ':warning:'
@@ -288,6 +291,7 @@ data:
   path: kyopro/algorithm/bit.hpp
   requiredBy:
   - kyopro/all/all.hpp
+  - kyopro/all.hpp
   - kyopro/math/is_prime.hpp
   - kyopro/math/factorize.hpp
   - kyopro/math/ModInt.hpp

@@ -12,6 +12,9 @@ data:
     path: kyopro/algorithm/algorithm.hpp
     title: kyopro/algorithm/algorithm.hpp
   - icon: ':warning:'
+    path: kyopro/all.hpp
+    title: kyopro/all.hpp
+  - icon: ':warning:'
     path: kyopro/all/all.hpp
     title: kyopro/all/all.hpp
   _extendedVerifiedWith: []
@@ -238,6 +241,7 @@ data:
   path: kyopro/algorithm/contains.hpp
   requiredBy:
   - kyopro/all/all.hpp
+  - kyopro/all.hpp
   - kyopro/algorithm/algorithm.hpp
   timestamp: '2023-04-02 21:40:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS

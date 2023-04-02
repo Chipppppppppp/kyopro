@@ -16,7 +16,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kyopro/all.hpp
+    title: kyopro/all.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -262,7 +265,8 @@ data:
   - kyopro/data_structure/UnionFind.hpp
   isVerificationFile: false
   path: kyopro/data_structure/data_structure.hpp
-  requiredBy: []
+  requiredBy:
+  - kyopro/all.hpp
   timestamp: '2023-04-02 21:40:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

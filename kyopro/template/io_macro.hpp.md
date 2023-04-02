@@ -30,6 +30,9 @@ data:
     title: kyopro/meta/tuple_like.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: kyopro/all.hpp
+    title: kyopro/all.hpp
+  - icon: ':warning:'
     path: kyopro/template/macro.hpp
     title: kyopro/template/macro.hpp
   - icon: ':warning:'
@@ -636,6 +639,7 @@ data:
   isVerificationFile: false
   path: kyopro/template/io_macro.hpp
   requiredBy:
+  - kyopro/all.hpp
   - kyopro/template/template.hpp
   - kyopro/template/macro.hpp
   timestamp: '2023-04-02 21:40:56+09:00'

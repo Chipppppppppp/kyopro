@@ -9,6 +9,9 @@ data:
     path: kyopro/algorithm/compress.hpp
     title: kyopro/algorithm/compress.hpp
   - icon: ':warning:'
+    path: kyopro/all.hpp
+    title: kyopro/all.hpp
+  - icon: ':warning:'
     path: kyopro/all/all.hpp
     title: kyopro/all/all.hpp
   - icon: ':warning:'
@@ -74,6 +77,7 @@ data:
   requiredBy:
   - kyopro/all/all.hpp
   - kyopro/function/function.hpp
+  - kyopro/all.hpp
   - kyopro/algorithm/compress.hpp
   - kyopro/algorithm/algorithm.hpp
   - kyopro/template/template.hpp
