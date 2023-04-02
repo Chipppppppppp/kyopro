@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/function/monoid.hpp
     title: kyopro/function/monoid.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
   _extendedRequiredBy:
@@ -17,9 +17,6 @@ data:
   - icon: ':warning:'
     path: kyopro/data_structure/data_structure.hpp
     title: kyopro/data_structure/data_structure.hpp
-  - icon: ':warning:'
-    path: kyopro/data_structure/structure.hpp
-    title: kyopro/data_structure/structure.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/point_add_range_sum.test.cpp
@@ -251,7 +248,6 @@ data:
   path: kyopro/data_structure/FenwickTree.hpp
   requiredBy:
   - kyopro/all.hpp
-  - kyopro/data_structure/structure.hpp
   - kyopro/data_structure/data_structure.hpp
   timestamp: '2023-04-03 01:27:56+09:00'
   verificationStatus: LIBRARY_ALL_AC

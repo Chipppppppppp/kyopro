@@ -1,41 +1,41 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/data_structure/WeightedUnionFind.hpp
     title: kyopro/data_structure/WeightedUnionFind.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/function/monoid.hpp
     title: kyopro/function/monoid.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/io/in.hpp
     title: kyopro/io/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/io/io.hpp
     title: kyopro/io/io.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/io/io_option.hpp
     title: kyopro/io/io_option.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/io/out.hpp
     title: kyopro/io/out.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/math/power.hpp
     title: kyopro/math/power.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/tuple_like.hpp
     title: kyopro/meta/tuple_like.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/problems/DSL_1_B
@@ -222,45 +222,45 @@ data:
     \ -1);\n            std::fill(diff_weight.begin(), diff_weight.end(), op.id());\n\
     \        }\n\n        std::size_t size() const noexcept {\n            return\
     \ par.size();\n        }\n\n        KYOPRO_BASE_INT find(int x) {\n          \
-    \  if (par[x] == x) return x;\n            int r = find(par[x]);\n           \
-    \ diff_weight[x] = op(std::move(diff_weight[x]), diff_weight[par[x]]);\n     \
-    \       return par[x] = r;\n        }\n\n        T weight(int x) {\n         \
-    \   static_cast<void>(find(x));\n            return diff_weight[x];\n        }\n\
-    \n        T diff(int x, int y) {\n            op(weight(y), op.inv(weight(x)));\n\
-    \        }\n\n        bool merge(int x, int y, T w) {\n            x = find(x),\
-    \ y = find(y);\n            w = op(std::move(w), op(diff_weight[x], op.inv(diff_weight[y])));\n\
-    \            if (x == y) return false;\n            if (par[x] > par[y]) {\n \
-    \               par[y] += par[x];\n                par[x] = y;\n             \
-    \   diff_weight[x] = w;\n            } else {\n                par[x] += par[y];\n\
-    \                par[y] = x;\n                diff_weight[y] = w;\n          \
-    \  }\n            return true;\n        }\n\n        bool same(int x, int y) {\n\
-    \            return find(x) == find(y);\n        }\n\n        KYOPRO_BASE_INT\
-    \ group_size(int x) {\n            return -par[find(x)];\n        }\n\n      \
-    \  std::vector<int> group_members(int x) {\n            x = find(x);\n       \
-    \     std::vector<int> a;\n            for (int i = 0; i < (int)(size()); ++i)\
-    \ if (find(i) == x) a.emplace_back(i);\n            return a;\n        }\n\n \
-    \       template<class Vector = std::vector<KYOPRO_BASE_INT>>\n        Vector\
-    \ roots() const {\n            Vector a;\n            for (int i = 0; i < (int)(size());\
-    \ ++i) if (par[i] < 0) a.emplace_back(i);\n            return a;\n        }\n\n\
-    \        KYOPRO_BASE_INT group_count() const {\n            KYOPRO_BASE_INT cnt\
-    \ = 0;\n            for (int i = 0; i < (int)(size()); ++i) if (par[i] < 0) ++cnt;\n\
-    \            return cnt;\n        }\n\n        template<class Map = std::unordered_map<KYOPRO_BASE_INT,\
-    \ std::vector<KYOPRO_BASE_INT>>>\n        Map all_group_members() {\n        \
-    \    Map group_members;\n            for (int member = 0; member < (int)(size());\
-    \ ++member) group_members[find(member)].emplace_back(member);\n            return\
-    \ group_members;\n        }\n    };\n} // namespace kpr\n#line 2 \"kyopro/io/in.hpp\"\
-    \n#include <unistd.h>\r\n#include <array>\r\n#include <bitset>\r\n#line 7 \"kyopro/io/in.hpp\"\
-    \n#include <cstdio>\r\n#include <string>\r\n#line 5 \"kyopro/io/io_option.hpp\"\
-    \n\r\nnamespace kpr {\r\n    template<class Tuple, std::size_t idx>\r\n    struct\
-    \ Indexed {\r\n        Tuple args_tuple;\r\n        template<class... Args>\r\n\
-    \        constexpr Indexed(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
-    \ {}\r\n    };\r\n\r\n    template<std::size_t i, class... Args>\r\n    constexpr\
-    \ auto indexed(Args&&... args) noexcept {\r\n        return Indexed<std::tuple<Args...>,\
-    \ i>{std::forward<Args>(args)...};\r\n    }\r\n\r\n    template<class Tuple, bool...\
-    \ seps>\r\n    struct SepWith {\r\n        Tuple args_tuple;\r\n        template<class...\
-    \ Args>\r\n        constexpr SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
-    \ {}\r\n    };\r\n\r\n    template<bool... seps, class... Args>\r\n    constexpr\
-    \ auto sep_with(Args&&... args) noexcept {\r\n        return SepWith<std::tuple<Args...>,\
+    \  if (par[x] < 0) return x;\n            int r = find(par[x]);\n            diff_weight[x]\
+    \ = op(std::move(diff_weight[x]), diff_weight[par[x]]);\n            return par[x]\
+    \ = r;\n        }\n\n        T weight(int x) {\n            return find(x), diff_weight[x];\n\
+    \        }\n\n        T diff(int x, int y) {\n            return op(weight(y),\
+    \ op.inv(weight(x)));\n        }\n\n        bool merge(int x, int y, T w) {\n\
+    \            w = op(std::move(w), op(weight(x), op.inv(weight(y))));\n       \
+    \     x = find(x), y = find(y);\n            if (x == y) return false;\n     \
+    \       if (par[x] > par[y]) {\n                par[y] += par[x];\n          \
+    \      par[x] = y;\n                diff_weight[x] = op.inv(w);\n            }\
+    \ else {\n                par[x] += par[y];\n                par[y] = x;\n   \
+    \             diff_weight[y] = w;\n            }\n            return true;\n \
+    \       }\n\n        bool same(int x, int y) {\n            return find(x) ==\
+    \ find(y);\n        }\n\n        KYOPRO_BASE_INT group_size(int x) {\n       \
+    \     return -par[find(x)];\n        }\n\n        std::vector<int> group_members(int\
+    \ x) {\n            x = find(x);\n            std::vector<int> a;\n          \
+    \  for (int i = 0; i < (int)(size()); ++i) if (find(i) == x) a.emplace_back(i);\n\
+    \            return a;\n        }\n\n        template<class Vector = std::vector<KYOPRO_BASE_INT>>\n\
+    \        Vector roots() const {\n            Vector a;\n            for (int i\
+    \ = 0; i < (int)(size()); ++i) if (par[i] < 0) a.emplace_back(i);\n          \
+    \  return a;\n        }\n\n        KYOPRO_BASE_INT group_count() const {\n   \
+    \         KYOPRO_BASE_INT cnt = 0;\n            for (int i = 0; i < (int)(size());\
+    \ ++i) if (par[i] < 0) ++cnt;\n            return cnt;\n        }\n\n        template<class\
+    \ Map = std::unordered_map<KYOPRO_BASE_INT, std::vector<KYOPRO_BASE_INT>>>\n \
+    \       Map all_group_members() {\n            Map group_members;\n          \
+    \  for (int member = 0; member < (int)(size()); ++member) group_members[find(member)].emplace_back(member);\n\
+    \            return group_members;\n        }\n    };\n} // namespace kpr\n#line\
+    \ 2 \"kyopro/io/in.hpp\"\n#include <unistd.h>\r\n#include <array>\r\n#include\
+    \ <bitset>\r\n#line 7 \"kyopro/io/in.hpp\"\n#include <cstdio>\r\n#include <string>\r\
+    \n#line 5 \"kyopro/io/io_option.hpp\"\n\r\nnamespace kpr {\r\n    template<class\
+    \ Tuple, std::size_t idx>\r\n    struct Indexed {\r\n        Tuple args_tuple;\r\
+    \n        template<class... Args>\r\n        constexpr Indexed(Args&&... args)\
+    \ noexcept: args_tuple{std::forward<Args>(args)...} {}\r\n    };\r\n\r\n    template<std::size_t\
+    \ i, class... Args>\r\n    constexpr auto indexed(Args&&... args) noexcept {\r\
+    \n        return Indexed<std::tuple<Args...>, i>{std::forward<Args>(args)...};\r\
+    \n    }\r\n\r\n    template<class Tuple, bool... seps>\r\n    struct SepWith {\r\
+    \n        Tuple args_tuple;\r\n        template<class... Args>\r\n        constexpr\
+    \ SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...} {}\r\
+    \n    };\r\n\r\n    template<bool... seps, class... Args>\r\n    constexpr auto\
+    \ sep_with(Args&&... args) noexcept {\r\n        return SepWith<std::tuple<Args...>,\
     \ seps...>{std::forward<Args>(args)...};\r\n    }\r\n} // namespace kpr\r\n#line\
     \ 5 \"kyopro/math/power.hpp\"\n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline\
     \ constexpr struct {\r\n        template<class T>\r\n        constexpr T operator\
@@ -586,19 +586,19 @@ data:
     \u3042\u308A)\r\n    Printer<Writer<>::iterator> println{output.begin()}, eprintln{error.begin()};\r\
     \n} // namespace kpr\r\n#line 4 \"verify/aoj/WeightedUnionFind.test.cpp\"\n\n\
     int main() {\n    int n, q;\n    kpr::scan(n, q);\n    kpr::WeightedUnionFind<long\
-    \ long> wuf;\n    for (int i = 0; i < q; ++i) {\n        int t;\n        kpr::scan(t);\n\
+    \ long> wuf(n);\n    for (int i = 0; i < q; ++i) {\n        int t;\n        kpr::scan(t);\n\
     \        if (t == 0) {\n            int x, y, z;\n            kpr::scan(x, y,\
     \ z);\n            wuf.merge(x, y, z);\n        } else {\n            int x, y;\n\
-    \            kpr::scan(x, y);\n            kpr::println(wuf.diff(x, y));\n   \
-    \     }\n    }\n}\n"
+    \            kpr::scan(x, y);\n            if (wuf.same(x, y)) kpr::println(wuf.diff(x,\
+    \ y));\n            else kpr::println('?');\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/problems/DSL_1_B\"\n#include\
-    \ \"../../kyopro/data_structure/WeightedUnionFind.hpp\"\n#include \"../../kyopro/io/io.hpp\"\
+    \ \"kyopro/data_structure/WeightedUnionFind.hpp\"\n#include \"kyopro/io/io.hpp\"\
     \n\nint main() {\n    int n, q;\n    kpr::scan(n, q);\n    kpr::WeightedUnionFind<long\
-    \ long> wuf;\n    for (int i = 0; i < q; ++i) {\n        int t;\n        kpr::scan(t);\n\
+    \ long> wuf(n);\n    for (int i = 0; i < q; ++i) {\n        int t;\n        kpr::scan(t);\n\
     \        if (t == 0) {\n            int x, y, z;\n            kpr::scan(x, y,\
     \ z);\n            wuf.merge(x, y, z);\n        } else {\n            int x, y;\n\
-    \            kpr::scan(x, y);\n            kpr::println(wuf.diff(x, y));\n   \
-    \     }\n    }\n}\n"
+    \            kpr::scan(x, y);\n            if (wuf.same(x, y)) kpr::println(wuf.diff(x,\
+    \ y));\n            else kpr::println('?');\n        }\n    }\n}\n"
   dependsOn:
   - kyopro/data_structure/WeightedUnionFind.hpp
   - kyopro/function/monoid.hpp
@@ -613,8 +613,8 @@ data:
   isVerificationFile: true
   path: verify/aoj/WeightedUnionFind.test.cpp
   requiredBy: []
-  timestamp: '2023-04-03 01:27:56+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-04-03 03:01:58+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/aoj/WeightedUnionFind.test.cpp
 layout: document

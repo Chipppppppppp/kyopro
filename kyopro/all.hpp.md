@@ -31,6 +31,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: kyopro/data_structure/UnionFind.hpp
     title: kyopro/data_structure/UnionFind.hpp
+  - icon: ':heavy_check_mark:'
+    path: kyopro/data_structure/WeightedUnionFind.hpp
+    title: kyopro/data_structure/WeightedUnionFind.hpp
   - icon: ':warning:'
     path: kyopro/data_structure/data_structure.hpp
     title: kyopro/data_structure/data_structure.hpp
@@ -43,19 +46,19 @@ data:
   - icon: ':warning:'
     path: kyopro/function/function.hpp
     title: kyopro/function/function.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/function/monoid.hpp
     title: kyopro/function/monoid.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/io/in.hpp
     title: kyopro/io/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/io/io.hpp
     title: kyopro/io/io.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/io/io_option.hpp
     title: kyopro/io/io_option.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/io/out.hpp
     title: kyopro/io/out.hpp
   - icon: ':warning:'
@@ -94,7 +97,7 @@ data:
   - icon: ':warning:'
     path: kyopro/math/mod.hpp
     title: kyopro/math/mod.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/math/power.hpp
     title: kyopro/math/power.hpp
   - icon: ':heavy_check_mark:'
@@ -103,13 +106,13 @@ data:
   - icon: ':warning:'
     path: kyopro/meta/meta.hpp
     title: kyopro/meta/meta.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/tuple_like.hpp
     title: kyopro/meta/tuple_like.hpp
   - icon: ':warning:'
@@ -1179,26 +1182,63 @@ data:
     \ std::vector<KYOPRO_BASE_INT>>>\r\n        Map all_group_members() {\r\n    \
     \        Map group_members;\r\n            for (int member = 0; member < (int)(size());\
     \ ++member) group_members[find(member)].emplace_back(member);\r\n            return\
-    \ group_members;\r\n        }\r\n    };\r\n} // namespace kpr\r\n#line 3 \"kyopro/template/stl.hpp\"\
-    \n#include <cctype>\r\n#include <cerrno>\r\n#include <cfloat>\r\n#include <ciso646>\r\
-    \n#include <climits>\r\n#include <clocale>\r\n#line 10 \"kyopro/template/stl.hpp\"\
-    \n#include <csetjmp>\r\n#include <csignal>\r\n#include <cstdarg>\r\n#line 15 \"\
-    kyopro/template/stl.hpp\"\n#include <cstdlib>\r\n#include <cstring>\r\n#include\
-    \ <ctime>\r\n\r\n#include <ccomplex>\r\n#include <cfenv>\r\n#include <cinttypes>\r\
-    \n#include <cstdbool>\r\n#line 24 \"kyopro/template/stl.hpp\"\n#include <ctgmath>\r\
-    \n#include <cwchar>\r\n#include <cwctype>\r\n\r\n#line 30 \"kyopro/template/stl.hpp\"\
-    \n#include <complex>\r\n#include <deque>\r\n#include <exception>\r\n#include <fstream>\r\
-    \n#line 35 \"kyopro/template/stl.hpp\"\n#include <iomanip>\r\n#include <ios>\r\
-    \n#include <iosfwd>\r\n#include <iostream>\r\n#include <istream>\r\n#line 42 \"\
-    kyopro/template/stl.hpp\"\n#include <list>\r\n#include <locale>\r\n#include <map>\r\
-    \n#include <memory>\r\n#include <new>\r\n#line 48 \"kyopro/template/stl.hpp\"\n\
-    #include <ostream>\r\n#include <queue>\r\n#include <set>\r\n#include <sstream>\r\
-    \n#include <stack>\r\n#include <stdexcept>\r\n#include <streambuf>\r\n#line 56\
-    \ \"kyopro/template/stl.hpp\"\n#include <typeinfo>\r\n#line 58 \"kyopro/template/stl.hpp\"\
-    \n#include <valarray>\r\n#line 60 \"kyopro/template/stl.hpp\"\n\r\n#line 62 \"\
-    kyopro/template/stl.hpp\"\n#include <atomic>\r\n#include <chrono>\r\n#include\
-    \ <condition_variable>\r\n#include <forward_list>\r\n#include <future>\r\n#include\
-    \ <initializer_list>\r\n#include <mutex>\r\n#line 70 \"kyopro/template/stl.hpp\"\
+    \ group_members;\r\n        }\r\n    };\r\n} // namespace kpr\r\n#line 10 \"kyopro/data_structure/WeightedUnionFind.hpp\"\
+    \n\nnamespace kpr {\n    template<class T, class Op = Add<T>>\n    struct WeightedUnionFind\
+    \ {\n    private:\n        std::vector<int> par;\n        std::vector<T> diff_weight;\n\
+    \        Op op;\n\n    public:\n        WeightedUnionFind() noexcept = default;\n\
+    \        WeightedUnionFind(std::size_t n) noexcept: par(n, -1), diff_weight(n,\
+    \ op.id()) {}\n\n        void resize(std::size_t n) {\n            par.resize(n,\
+    \ -1);\n            diff_weight.resize(n, op.id());\n        }\n        void assign(std::size_t\
+    \ n) {\n            par.assign(n, -1);\n            diff_weight.assign(n, op.id());\n\
+    \        }\n        void clear() {\n            std::fill(par.begin(), par.end(),\
+    \ -1);\n            std::fill(diff_weight.begin(), diff_weight.end(), op.id());\n\
+    \        }\n\n        std::size_t size() const noexcept {\n            return\
+    \ par.size();\n        }\n\n        KYOPRO_BASE_INT find(int x) {\n          \
+    \  if (par[x] < 0) return x;\n            int r = find(par[x]);\n            diff_weight[x]\
+    \ = op(std::move(diff_weight[x]), diff_weight[par[x]]);\n            return par[x]\
+    \ = r;\n        }\n\n        T weight(int x) {\n            return find(x), diff_weight[x];\n\
+    \        }\n\n        T diff(int x, int y) {\n            return op(weight(y),\
+    \ op.inv(weight(x)));\n        }\n\n        bool merge(int x, int y, T w) {\n\
+    \            w = op(std::move(w), op(weight(x), op.inv(weight(y))));\n       \
+    \     x = find(x), y = find(y);\n            if (x == y) return false;\n     \
+    \       if (par[x] > par[y]) {\n                par[y] += par[x];\n          \
+    \      par[x] = y;\n                diff_weight[x] = op.inv(w);\n            }\
+    \ else {\n                par[x] += par[y];\n                par[y] = x;\n   \
+    \             diff_weight[y] = w;\n            }\n            return true;\n \
+    \       }\n\n        bool same(int x, int y) {\n            return find(x) ==\
+    \ find(y);\n        }\n\n        KYOPRO_BASE_INT group_size(int x) {\n       \
+    \     return -par[find(x)];\n        }\n\n        std::vector<int> group_members(int\
+    \ x) {\n            x = find(x);\n            std::vector<int> a;\n          \
+    \  for (int i = 0; i < (int)(size()); ++i) if (find(i) == x) a.emplace_back(i);\n\
+    \            return a;\n        }\n\n        template<class Vector = std::vector<KYOPRO_BASE_INT>>\n\
+    \        Vector roots() const {\n            Vector a;\n            for (int i\
+    \ = 0; i < (int)(size()); ++i) if (par[i] < 0) a.emplace_back(i);\n          \
+    \  return a;\n        }\n\n        KYOPRO_BASE_INT group_count() const {\n   \
+    \         KYOPRO_BASE_INT cnt = 0;\n            for (int i = 0; i < (int)(size());\
+    \ ++i) if (par[i] < 0) ++cnt;\n            return cnt;\n        }\n\n        template<class\
+    \ Map = std::unordered_map<KYOPRO_BASE_INT, std::vector<KYOPRO_BASE_INT>>>\n \
+    \       Map all_group_members() {\n            Map group_members;\n          \
+    \  for (int member = 0; member < (int)(size()); ++member) group_members[find(member)].emplace_back(member);\n\
+    \            return group_members;\n        }\n    };\n} // namespace kpr\n#line\
+    \ 3 \"kyopro/template/stl.hpp\"\n#include <cctype>\r\n#include <cerrno>\r\n#include\
+    \ <cfloat>\r\n#include <ciso646>\r\n#include <climits>\r\n#include <clocale>\r\
+    \n#line 10 \"kyopro/template/stl.hpp\"\n#include <csetjmp>\r\n#include <csignal>\r\
+    \n#include <cstdarg>\r\n#line 15 \"kyopro/template/stl.hpp\"\n#include <cstdlib>\r\
+    \n#include <cstring>\r\n#include <ctime>\r\n\r\n#include <ccomplex>\r\n#include\
+    \ <cfenv>\r\n#include <cinttypes>\r\n#include <cstdbool>\r\n#line 24 \"kyopro/template/stl.hpp\"\
+    \n#include <ctgmath>\r\n#include <cwchar>\r\n#include <cwctype>\r\n\r\n#line 30\
+    \ \"kyopro/template/stl.hpp\"\n#include <complex>\r\n#include <deque>\r\n#include\
+    \ <exception>\r\n#include <fstream>\r\n#line 35 \"kyopro/template/stl.hpp\"\n\
+    #include <iomanip>\r\n#include <ios>\r\n#include <iosfwd>\r\n#include <iostream>\r\
+    \n#include <istream>\r\n#line 42 \"kyopro/template/stl.hpp\"\n#include <list>\r\
+    \n#include <locale>\r\n#include <map>\r\n#include <memory>\r\n#include <new>\r\
+    \n#line 48 \"kyopro/template/stl.hpp\"\n#include <ostream>\r\n#include <queue>\r\
+    \n#include <set>\r\n#include <sstream>\r\n#include <stack>\r\n#include <stdexcept>\r\
+    \n#include <streambuf>\r\n#line 56 \"kyopro/template/stl.hpp\"\n#include <typeinfo>\r\
+    \n#line 58 \"kyopro/template/stl.hpp\"\n#include <valarray>\r\n#line 60 \"kyopro/template/stl.hpp\"\
+    \n\r\n#line 62 \"kyopro/template/stl.hpp\"\n#include <atomic>\r\n#include <chrono>\r\
+    \n#include <condition_variable>\r\n#include <forward_list>\r\n#include <future>\r\
+    \n#include <initializer_list>\r\n#include <mutex>\r\n#line 70 \"kyopro/template/stl.hpp\"\
     \n#include <ratio>\r\n#include <regex>\r\n#include <scoped_allocator>\r\n#include\
     \ <system_error>\r\n#include <thread>\r\n#line 76 \"kyopro/template/stl.hpp\"\n\
     #include <typeindex>\r\n#line 79 \"kyopro/template/stl.hpp\"\n#include <unordered_set>\r\
@@ -1497,6 +1537,7 @@ data:
   - kyopro/data_structure/data_structure.hpp
   - kyopro/data_structure/FenwickTree.hpp
   - kyopro/data_structure/UnionFind.hpp
+  - kyopro/data_structure/WeightedUnionFind.hpp
   - kyopro/template/template.hpp
   - kyopro/template/stl.hpp
   - kyopro/template/alias.hpp
@@ -1518,7 +1559,7 @@ data:
   isVerificationFile: false
   path: kyopro/all.hpp
   requiredBy: []
-  timestamp: '2023-04-03 01:27:56+09:00'
+  timestamp: '2023-04-03 03:01:58+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kyopro/all.hpp

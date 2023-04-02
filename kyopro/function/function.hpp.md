@@ -7,13 +7,13 @@ data:
   - icon: ':warning:'
     path: kyopro/function/compare.hpp
     title: kyopro/function/compare.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/function/monoid.hpp
     title: kyopro/function/monoid.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
   _extendedRequiredBy:

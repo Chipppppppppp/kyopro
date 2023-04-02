@@ -1,23 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/function/monoid.hpp
     title: kyopro/function/monoid.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/setting.hpp
     title: kyopro/meta/setting.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kyopro/meta/trait.hpp
     title: kyopro/meta/trait.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kyopro/all.hpp
+    title: kyopro/all.hpp
+  - icon: ':warning:'
+    path: kyopro/data_structure/data_structure.hpp
+    title: kyopro/data_structure/data_structure.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/aoj/WeightedUnionFind.test.cpp
     title: verify/aoj/WeightedUnionFind.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kyopro/data_structure/WeightedUnionFind.hpp\"\n#include\
@@ -200,33 +206,32 @@ data:
     \ -1);\n            std::fill(diff_weight.begin(), diff_weight.end(), op.id());\n\
     \        }\n\n        std::size_t size() const noexcept {\n            return\
     \ par.size();\n        }\n\n        KYOPRO_BASE_INT find(int x) {\n          \
-    \  if (par[x] == x) return x;\n            int r = find(par[x]);\n           \
-    \ diff_weight[x] = op(std::move(diff_weight[x]), diff_weight[par[x]]);\n     \
-    \       return par[x] = r;\n        }\n\n        T weight(int x) {\n         \
-    \   static_cast<void>(find(x));\n            return diff_weight[x];\n        }\n\
-    \n        T diff(int x, int y) {\n            op(weight(y), op.inv(weight(x)));\n\
-    \        }\n\n        bool merge(int x, int y, T w) {\n            x = find(x),\
-    \ y = find(y);\n            w = op(std::move(w), op(diff_weight[x], op.inv(diff_weight[y])));\n\
-    \            if (x == y) return false;\n            if (par[x] > par[y]) {\n \
-    \               par[y] += par[x];\n                par[x] = y;\n             \
-    \   diff_weight[x] = w;\n            } else {\n                par[x] += par[y];\n\
-    \                par[y] = x;\n                diff_weight[y] = w;\n          \
-    \  }\n            return true;\n        }\n\n        bool same(int x, int y) {\n\
-    \            return find(x) == find(y);\n        }\n\n        KYOPRO_BASE_INT\
-    \ group_size(int x) {\n            return -par[find(x)];\n        }\n\n      \
-    \  std::vector<int> group_members(int x) {\n            x = find(x);\n       \
-    \     std::vector<int> a;\n            for (int i = 0; i < (int)(size()); ++i)\
-    \ if (find(i) == x) a.emplace_back(i);\n            return a;\n        }\n\n \
-    \       template<class Vector = std::vector<KYOPRO_BASE_INT>>\n        Vector\
-    \ roots() const {\n            Vector a;\n            for (int i = 0; i < (int)(size());\
-    \ ++i) if (par[i] < 0) a.emplace_back(i);\n            return a;\n        }\n\n\
-    \        KYOPRO_BASE_INT group_count() const {\n            KYOPRO_BASE_INT cnt\
-    \ = 0;\n            for (int i = 0; i < (int)(size()); ++i) if (par[i] < 0) ++cnt;\n\
-    \            return cnt;\n        }\n\n        template<class Map = std::unordered_map<KYOPRO_BASE_INT,\
-    \ std::vector<KYOPRO_BASE_INT>>>\n        Map all_group_members() {\n        \
-    \    Map group_members;\n            for (int member = 0; member < (int)(size());\
-    \ ++member) group_members[find(member)].emplace_back(member);\n            return\
-    \ group_members;\n        }\n    };\n} // namespace kpr\n"
+    \  if (par[x] < 0) return x;\n            int r = find(par[x]);\n            diff_weight[x]\
+    \ = op(std::move(diff_weight[x]), diff_weight[par[x]]);\n            return par[x]\
+    \ = r;\n        }\n\n        T weight(int x) {\n            return find(x), diff_weight[x];\n\
+    \        }\n\n        T diff(int x, int y) {\n            return op(weight(y),\
+    \ op.inv(weight(x)));\n        }\n\n        bool merge(int x, int y, T w) {\n\
+    \            w = op(std::move(w), op(weight(x), op.inv(weight(y))));\n       \
+    \     x = find(x), y = find(y);\n            if (x == y) return false;\n     \
+    \       if (par[x] > par[y]) {\n                par[y] += par[x];\n          \
+    \      par[x] = y;\n                diff_weight[x] = op.inv(w);\n            }\
+    \ else {\n                par[x] += par[y];\n                par[y] = x;\n   \
+    \             diff_weight[y] = w;\n            }\n            return true;\n \
+    \       }\n\n        bool same(int x, int y) {\n            return find(x) ==\
+    \ find(y);\n        }\n\n        KYOPRO_BASE_INT group_size(int x) {\n       \
+    \     return -par[find(x)];\n        }\n\n        std::vector<int> group_members(int\
+    \ x) {\n            x = find(x);\n            std::vector<int> a;\n          \
+    \  for (int i = 0; i < (int)(size()); ++i) if (find(i) == x) a.emplace_back(i);\n\
+    \            return a;\n        }\n\n        template<class Vector = std::vector<KYOPRO_BASE_INT>>\n\
+    \        Vector roots() const {\n            Vector a;\n            for (int i\
+    \ = 0; i < (int)(size()); ++i) if (par[i] < 0) a.emplace_back(i);\n          \
+    \  return a;\n        }\n\n        KYOPRO_BASE_INT group_count() const {\n   \
+    \         KYOPRO_BASE_INT cnt = 0;\n            for (int i = 0; i < (int)(size());\
+    \ ++i) if (par[i] < 0) ++cnt;\n            return cnt;\n        }\n\n        template<class\
+    \ Map = std::unordered_map<KYOPRO_BASE_INT, std::vector<KYOPRO_BASE_INT>>>\n \
+    \       Map all_group_members() {\n            Map group_members;\n          \
+    \  for (int member = 0; member < (int)(size()); ++member) group_members[find(member)].emplace_back(member);\n\
+    \            return group_members;\n        }\n    };\n} // namespace kpr\n"
   code: "#pragma once\n#include <algorithm>\n#include <type_traits>\n#include <unordered_map>\n\
     #include <utility>\n#include <vector>\n#include \"../function/monoid.hpp\"\n#include\
     \ \"../meta/setting.hpp\"\n#include \"../meta/trait.hpp\"\n\nnamespace kpr {\n\
@@ -241,42 +246,43 @@ data:
     \ -1);\n            std::fill(diff_weight.begin(), diff_weight.end(), op.id());\n\
     \        }\n\n        std::size_t size() const noexcept {\n            return\
     \ par.size();\n        }\n\n        KYOPRO_BASE_INT find(int x) {\n          \
-    \  if (par[x] == x) return x;\n            int r = find(par[x]);\n           \
-    \ diff_weight[x] = op(std::move(diff_weight[x]), diff_weight[par[x]]);\n     \
-    \       return par[x] = r;\n        }\n\n        T weight(int x) {\n         \
-    \   static_cast<void>(find(x));\n            return diff_weight[x];\n        }\n\
-    \n        T diff(int x, int y) {\n            op(weight(y), op.inv(weight(x)));\n\
-    \        }\n\n        bool merge(int x, int y, T w) {\n            x = find(x),\
-    \ y = find(y);\n            w = op(std::move(w), op(diff_weight[x], op.inv(diff_weight[y])));\n\
-    \            if (x == y) return false;\n            if (par[x] > par[y]) {\n \
-    \               par[y] += par[x];\n                par[x] = y;\n             \
-    \   diff_weight[x] = w;\n            } else {\n                par[x] += par[y];\n\
-    \                par[y] = x;\n                diff_weight[y] = w;\n          \
-    \  }\n            return true;\n        }\n\n        bool same(int x, int y) {\n\
-    \            return find(x) == find(y);\n        }\n\n        KYOPRO_BASE_INT\
-    \ group_size(int x) {\n            return -par[find(x)];\n        }\n\n      \
-    \  std::vector<int> group_members(int x) {\n            x = find(x);\n       \
-    \     std::vector<int> a;\n            for (int i = 0; i < (int)(size()); ++i)\
-    \ if (find(i) == x) a.emplace_back(i);\n            return a;\n        }\n\n \
-    \       template<class Vector = std::vector<KYOPRO_BASE_INT>>\n        Vector\
-    \ roots() const {\n            Vector a;\n            for (int i = 0; i < (int)(size());\
-    \ ++i) if (par[i] < 0) a.emplace_back(i);\n            return a;\n        }\n\n\
-    \        KYOPRO_BASE_INT group_count() const {\n            KYOPRO_BASE_INT cnt\
-    \ = 0;\n            for (int i = 0; i < (int)(size()); ++i) if (par[i] < 0) ++cnt;\n\
-    \            return cnt;\n        }\n\n        template<class Map = std::unordered_map<KYOPRO_BASE_INT,\
-    \ std::vector<KYOPRO_BASE_INT>>>\n        Map all_group_members() {\n        \
-    \    Map group_members;\n            for (int member = 0; member < (int)(size());\
-    \ ++member) group_members[find(member)].emplace_back(member);\n            return\
-    \ group_members;\n        }\n    };\n} // namespace kpr\n"
+    \  if (par[x] < 0) return x;\n            int r = find(par[x]);\n            diff_weight[x]\
+    \ = op(std::move(diff_weight[x]), diff_weight[par[x]]);\n            return par[x]\
+    \ = r;\n        }\n\n        T weight(int x) {\n            return find(x), diff_weight[x];\n\
+    \        }\n\n        T diff(int x, int y) {\n            return op(weight(y),\
+    \ op.inv(weight(x)));\n        }\n\n        bool merge(int x, int y, T w) {\n\
+    \            w = op(std::move(w), op(weight(x), op.inv(weight(y))));\n       \
+    \     x = find(x), y = find(y);\n            if (x == y) return false;\n     \
+    \       if (par[x] > par[y]) {\n                par[y] += par[x];\n          \
+    \      par[x] = y;\n                diff_weight[x] = op.inv(w);\n            }\
+    \ else {\n                par[x] += par[y];\n                par[y] = x;\n   \
+    \             diff_weight[y] = w;\n            }\n            return true;\n \
+    \       }\n\n        bool same(int x, int y) {\n            return find(x) ==\
+    \ find(y);\n        }\n\n        KYOPRO_BASE_INT group_size(int x) {\n       \
+    \     return -par[find(x)];\n        }\n\n        std::vector<int> group_members(int\
+    \ x) {\n            x = find(x);\n            std::vector<int> a;\n          \
+    \  for (int i = 0; i < (int)(size()); ++i) if (find(i) == x) a.emplace_back(i);\n\
+    \            return a;\n        }\n\n        template<class Vector = std::vector<KYOPRO_BASE_INT>>\n\
+    \        Vector roots() const {\n            Vector a;\n            for (int i\
+    \ = 0; i < (int)(size()); ++i) if (par[i] < 0) a.emplace_back(i);\n          \
+    \  return a;\n        }\n\n        KYOPRO_BASE_INT group_count() const {\n   \
+    \         KYOPRO_BASE_INT cnt = 0;\n            for (int i = 0; i < (int)(size());\
+    \ ++i) if (par[i] < 0) ++cnt;\n            return cnt;\n        }\n\n        template<class\
+    \ Map = std::unordered_map<KYOPRO_BASE_INT, std::vector<KYOPRO_BASE_INT>>>\n \
+    \       Map all_group_members() {\n            Map group_members;\n          \
+    \  for (int member = 0; member < (int)(size()); ++member) group_members[find(member)].emplace_back(member);\n\
+    \            return group_members;\n        }\n    };\n} // namespace kpr\n"
   dependsOn:
   - kyopro/function/monoid.hpp
   - kyopro/meta/setting.hpp
   - kyopro/meta/trait.hpp
   isVerificationFile: false
   path: kyopro/data_structure/WeightedUnionFind.hpp
-  requiredBy: []
-  timestamp: '2023-04-03 01:27:56+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  requiredBy:
+  - kyopro/all.hpp
+  - kyopro/data_structure/data_structure.hpp
+  timestamp: '2023-04-03 03:01:58+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/aoj/WeightedUnionFind.test.cpp
 documentation_of: kyopro/data_structure/WeightedUnionFind.hpp

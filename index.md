@@ -42,15 +42,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: kyopro/data_structure/UnionFind.hpp
       title: kyopro/data_structure/UnionFind.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/data_structure/WeightedUnionFind.hpp
       title: kyopro/data_structure/WeightedUnionFind.hpp
     - icon: ':warning:'
       path: kyopro/data_structure/data_structure.hpp
       title: kyopro/data_structure/data_structure.hpp
-    - icon: ':warning:'
-      path: kyopro/data_structure/structure.hpp
-      title: kyopro/data_structure/structure.hpp
   - name: kyopro/function
     pages:
     - icon: ':warning:'
@@ -62,21 +59,21 @@ data:
     - icon: ':warning:'
       path: kyopro/function/function.hpp
       title: kyopro/function/function.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/function/monoid.hpp
       title: kyopro/function/monoid.hpp
   - name: kyopro/io
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/io/in.hpp
       title: kyopro/io/in.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/io/io.hpp
       title: kyopro/io/io.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/io/io_option.hpp
       title: kyopro/io/io_option.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/io/out.hpp
       title: kyopro/io/out.hpp
   - name: kyopro/math
@@ -117,7 +114,7 @@ data:
     - icon: ':warning:'
       path: kyopro/math/mod.hpp
       title: kyopro/math/mod.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/math/power.hpp
       title: kyopro/math/power.hpp
   - name: kyopro/meta
@@ -128,13 +125,13 @@ data:
     - icon: ':warning:'
       path: kyopro/meta/meta.hpp
       title: kyopro/meta/meta.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/meta/setting.hpp
       title: kyopro/meta/setting.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/meta/trait.hpp
       title: kyopro/meta/trait.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: kyopro/meta/tuple_like.hpp
       title: kyopro/meta/tuple_like.hpp
   - name: kyopro/range
@@ -216,7 +213,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/aoj/PrimeNumber.test.cpp
       title: verify/aoj/PrimeNumber.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/aoj/WeightedUnionFind.test.cpp
       title: verify/aoj/WeightedUnionFind.test.cpp
   - name: verify/yosupo
