@@ -1,230 +1,230 @@
 ---
 data:
   libraryCategories:
-  - name: algorithm
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: algorithm/Hash.hpp
-      title: algorithm/Hash.hpp
-    - icon: ':warning:'
-      path: algorithm/algorithm.hpp
-      title: algorithm/algorithm.hpp
-    - icon: ':heavy_check_mark:'
-      path: algorithm/bit.hpp
-      title: algorithm/bit.hpp
-    - icon: ':warning:'
-      path: algorithm/compress.hpp
-      title: algorithm/compress.hpp
-    - icon: ':warning:'
-      path: algorithm/contains.hpp
-      title: algorithm/contains.hpp
-    - icon: ':warning:'
-      path: algorithm/count_all.hpp
-      title: algorithm/count_all.hpp
-    - icon: ':warning:'
-      path: algorithm/next_combination.hpp
-      title: algorithm/next_combination.hpp
-  - name: all
+  - name: kyopro/algorithm
     pages:
     - icon: ':warning:'
-      path: all/all.hpp
-      title: all/all.hpp
-  - name: .
+      path: kyopro/algorithm/Hash.hpp
+      title: kyopro/algorithm/Hash.hpp
+    - icon: ':warning:'
+      path: kyopro/algorithm/algorithm.hpp
+      title: kyopro/algorithm/algorithm.hpp
+    - icon: ':warning:'
+      path: kyopro/algorithm/bit.hpp
+      title: kyopro/algorithm/bit.hpp
+    - icon: ':warning:'
+      path: kyopro/algorithm/compress.hpp
+      title: kyopro/algorithm/compress.hpp
+    - icon: ':warning:'
+      path: kyopro/algorithm/contains.hpp
+      title: kyopro/algorithm/contains.hpp
+    - icon: ':warning:'
+      path: kyopro/algorithm/count_all.hpp
+      title: kyopro/algorithm/count_all.hpp
+    - icon: ':warning:'
+      path: kyopro/algorithm/next_combination.hpp
+      title: kyopro/algorithm/next_combination.hpp
+  - name: kyopro/algorithm/function
     pages:
     - icon: ':warning:'
-      path: all.hpp
-      title: all.hpp
-  - name: data_structure
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: data_structure/FenwickTree.hpp
-      title: data_structure/FenwickTree.hpp
-    - icon: ':heavy_check_mark:'
-      path: data_structure/UnionFind.hpp
-      title: data_structure/UnionFind.hpp
+      path: kyopro/algorithm/function/RecLambda.hpp
+      title: kyopro/algorithm/function/RecLambda.hpp
     - icon: ':warning:'
-      path: data_structure/data_structure.hpp
-      title: data_structure/data_structure.hpp
+      path: kyopro/algorithm/function/compare.hpp
+      title: kyopro/algorithm/function/compare.hpp
     - icon: ':warning:'
-      path: data_structure/structure.hpp
-      title: data_structure/structure.hpp
-  - name: function
+      path: kyopro/algorithm/function/function.hpp
+      title: kyopro/algorithm/function/function.hpp
+    - icon: ':warning:'
+      path: kyopro/algorithm/function/monoid.hpp
+      title: kyopro/algorithm/function/monoid.hpp
+  - name: kyopro/all
     pages:
     - icon: ':warning:'
-      path: function/RecLambda.hpp
-      title: function/RecLambda.hpp
-    - icon: ':warning:'
-      path: function/compare.hpp
-      title: function/compare.hpp
-    - icon: ':warning:'
-      path: function/function.hpp
-      title: function/function.hpp
-    - icon: ':heavy_check_mark:'
-      path: function/monoid.hpp
-      title: function/monoid.hpp
-  - name: io
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: io/in.hpp
-      title: io/in.hpp
-    - icon: ':heavy_check_mark:'
-      path: io/io.hpp
-      title: io/io.hpp
-    - icon: ':heavy_check_mark:'
-      path: io/io_option.hpp
-      title: io/io_option.hpp
-    - icon: ':heavy_check_mark:'
-      path: io/out.hpp
-      title: io/out.hpp
-  - name: math
+      path: kyopro/all/all.hpp
+      title: kyopro/all/all.hpp
+  - name: kyopro
     pages:
     - icon: ':warning:'
-      path: math/Barrett.hpp
-      title: math/Barrett.hpp
-    - icon: ':warning:'
-      path: math/BinomMod.hpp
-      title: math/BinomMod.hpp
-    - icon: ':heavy_check_mark:'
-      path: math/DynamicModInt.hpp
-      title: math/DynamicModInt.hpp
-    - icon: ':warning:'
-      path: math/ModInt.hpp
-      title: math/ModInt.hpp
-    - icon: ':heavy_check_mark:'
-      path: math/Montgomery.hpp
-      title: math/Montgomery.hpp
-    - icon: ':warning:'
-      path: math/div.hpp
-      title: math/div.hpp
-    - icon: ':warning:'
-      path: math/divisors.hpp
-      title: math/divisors.hpp
-    - icon: ':warning:'
-      path: math/euler_phi.hpp
-      title: math/euler_phi.hpp
-    - icon: ':heavy_check_mark:'
-      path: math/factorize.hpp
-      title: math/factorize.hpp
-    - icon: ':heavy_check_mark:'
-      path: math/is_prime.hpp
-      title: math/is_prime.hpp
-    - icon: ':warning:'
-      path: math/math.hpp
-      title: math/math.hpp
-    - icon: ':warning:'
-      path: math/mod.hpp
-      title: math/mod.hpp
-    - icon: ':heavy_check_mark:'
-      path: math/power.hpp
-      title: math/power.hpp
-  - name: meta
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: meta/constant.hpp
-      title: meta/constant.hpp
-    - icon: ':warning:'
-      path: meta/meta.hpp
-      title: meta/meta.hpp
-    - icon: ':heavy_check_mark:'
-      path: meta/setting.hpp
-      title: meta/setting.hpp
-    - icon: ':heavy_check_mark:'
-      path: meta/trait.hpp
-      title: meta/trait.hpp
-    - icon: ':heavy_check_mark:'
-      path: meta/tuple_like.hpp
-      title: meta/tuple_like.hpp
-  - name: range
+      path: kyopro/all.hpp
+      title: kyopro/all.hpp
+  - name: kyopro/data_structure
     pages:
     - icon: ':warning:'
-      path: range/imap.hpp
-      title: range/imap.hpp
+      path: kyopro/data_structure/FenwickTree.hpp
+      title: kyopro/data_structure/FenwickTree.hpp
     - icon: ':warning:'
-      path: range/irange.hpp
-      title: range/irange.hpp
+      path: kyopro/data_structure/UnionFind.hpp
+      title: kyopro/data_structure/UnionFind.hpp
     - icon: ':warning:'
-      path: range/iterator_base.hpp
-      title: range/iterator_base.hpp
+      path: kyopro/data_structure/data_structure.hpp
+      title: kyopro/data_structure/data_structure.hpp
     - icon: ':warning:'
-      path: range/range.hpp
-      title: range/range.hpp
-    - icon: ':warning:'
-      path: range/range_base.hpp
-      title: range/range_base.hpp
-  - name: template
+      path: kyopro/data_structure/structure.hpp
+      title: kyopro/data_structure/structure.hpp
+  - name: kyopro/io
     pages:
     - icon: ':warning:'
-      path: template/alias.hpp
-      title: template/alias.hpp
+      path: kyopro/io/in.hpp
+      title: kyopro/io/in.hpp
     - icon: ':warning:'
-      path: template/all_rall_macro.hpp
-      title: template/all_rall_macro.hpp
+      path: kyopro/io/io.hpp
+      title: kyopro/io/io.hpp
     - icon: ':warning:'
-      path: template/chmin_chmax.hpp
-      title: template/chmin_chmax.hpp
+      path: kyopro/io/io_option.hpp
+      title: kyopro/io/io_option.hpp
     - icon: ':warning:'
-      path: template/constant.hpp
-      title: template/constant.hpp
+      path: kyopro/io/out.hpp
+      title: kyopro/io/out.hpp
+  - name: kyopro/math
+    pages:
     - icon: ':warning:'
-      path: template/io_macro.hpp
-      title: template/io_macro.hpp
+      path: kyopro/math/Barrett.hpp
+      title: kyopro/math/Barrett.hpp
     - icon: ':warning:'
-      path: template/lambda_macro.hpp
-      title: template/lambda_macro.hpp
+      path: kyopro/math/BinomMod.hpp
+      title: kyopro/math/BinomMod.hpp
     - icon: ':warning:'
-      path: template/len.hpp
-      title: template/len.hpp
+      path: kyopro/math/DynamicModInt.hpp
+      title: kyopro/math/DynamicModInt.hpp
     - icon: ':warning:'
-      path: template/macro.hpp
-      title: template/macro.hpp
+      path: kyopro/math/ModInt.hpp
+      title: kyopro/math/ModInt.hpp
     - icon: ':warning:'
-      path: template/main.hpp
-      title: template/main.hpp
+      path: kyopro/math/Montgomery.hpp
+      title: kyopro/math/Montgomery.hpp
     - icon: ':warning:'
-      path: template/make_array.hpp
-      title: template/make_array.hpp
+      path: kyopro/math/div.hpp
+      title: kyopro/math/div.hpp
     - icon: ':warning:'
-      path: template/make_vec.hpp
-      title: template/make_vec.hpp
+      path: kyopro/math/divisors.hpp
+      title: kyopro/math/divisors.hpp
     - icon: ':warning:'
-      path: template/match_macro.hpp
-      title: template/match_macro.hpp
+      path: kyopro/math/euler_phi.hpp
+      title: kyopro/math/euler_phi.hpp
     - icon: ':warning:'
-      path: template/named_tuple_macro.hpp
-      title: template/named_tuple_macro.hpp
+      path: kyopro/math/factorize.hpp
+      title: kyopro/math/factorize.hpp
     - icon: ':warning:'
-      path: template/push_pop_macro.hpp
-      title: template/push_pop_macro.hpp
+      path: kyopro/math/is_prime.hpp
+      title: kyopro/math/is_prime.hpp
     - icon: ':warning:'
-      path: template/range_cast.hpp
-      title: template/range_cast.hpp
+      path: kyopro/math/math.hpp
+      title: kyopro/math/math.hpp
     - icon: ':warning:'
-      path: template/rep_macro.hpp
-      title: template/rep_macro.hpp
+      path: kyopro/math/mod.hpp
+      title: kyopro/math/mod.hpp
     - icon: ':warning:'
-      path: template/stl.hpp
-      title: template/stl.hpp
+      path: kyopro/math/power.hpp
+      title: kyopro/math/power.hpp
+  - name: kyopro/meta
+    pages:
     - icon: ':warning:'
-      path: template/template.hpp
-      title: template/template.hpp
+      path: kyopro/meta/constant.hpp
+      title: kyopro/meta/constant.hpp
+    - icon: ':warning:'
+      path: kyopro/meta/meta.hpp
+      title: kyopro/meta/meta.hpp
+    - icon: ':warning:'
+      path: kyopro/meta/setting.hpp
+      title: kyopro/meta/setting.hpp
+    - icon: ':warning:'
+      path: kyopro/meta/trait.hpp
+      title: kyopro/meta/trait.hpp
+    - icon: ':warning:'
+      path: kyopro/meta/tuple_like.hpp
+      title: kyopro/meta/tuple_like.hpp
+  - name: kyopro/range
+    pages:
+    - icon: ':warning:'
+      path: kyopro/range/imap.hpp
+      title: kyopro/range/imap.hpp
+    - icon: ':warning:'
+      path: kyopro/range/irange.hpp
+      title: kyopro/range/irange.hpp
+    - icon: ':warning:'
+      path: kyopro/range/iterator_base.hpp
+      title: kyopro/range/iterator_base.hpp
+    - icon: ':warning:'
+      path: kyopro/range/range.hpp
+      title: kyopro/range/range.hpp
+    - icon: ':warning:'
+      path: kyopro/range/range_base.hpp
+      title: kyopro/range/range_base.hpp
+  - name: kyopro/template
+    pages:
+    - icon: ':warning:'
+      path: kyopro/template/alias.hpp
+      title: kyopro/template/alias.hpp
+    - icon: ':warning:'
+      path: kyopro/template/all_rall_macro.hpp
+      title: kyopro/template/all_rall_macro.hpp
+    - icon: ':warning:'
+      path: kyopro/template/chmin_chmax.hpp
+      title: kyopro/template/chmin_chmax.hpp
+    - icon: ':warning:'
+      path: kyopro/template/constant.hpp
+      title: kyopro/template/constant.hpp
+    - icon: ':warning:'
+      path: kyopro/template/io_macro.hpp
+      title: kyopro/template/io_macro.hpp
+    - icon: ':warning:'
+      path: kyopro/template/lambda_macro.hpp
+      title: kyopro/template/lambda_macro.hpp
+    - icon: ':warning:'
+      path: kyopro/template/len.hpp
+      title: kyopro/template/len.hpp
+    - icon: ':warning:'
+      path: kyopro/template/macro.hpp
+      title: kyopro/template/macro.hpp
+    - icon: ':warning:'
+      path: kyopro/template/main.hpp
+      title: kyopro/template/main.hpp
+    - icon: ':warning:'
+      path: kyopro/template/make_array.hpp
+      title: kyopro/template/make_array.hpp
+    - icon: ':warning:'
+      path: kyopro/template/make_vec.hpp
+      title: kyopro/template/make_vec.hpp
+    - icon: ':warning:'
+      path: kyopro/template/match_macro.hpp
+      title: kyopro/template/match_macro.hpp
+    - icon: ':warning:'
+      path: kyopro/template/named_tuple_macro.hpp
+      title: kyopro/template/named_tuple_macro.hpp
+    - icon: ':warning:'
+      path: kyopro/template/push_pop_macro.hpp
+      title: kyopro/template/push_pop_macro.hpp
+    - icon: ':warning:'
+      path: kyopro/template/range_cast.hpp
+      title: kyopro/template/range_cast.hpp
+    - icon: ':warning:'
+      path: kyopro/template/rep_macro.hpp
+      title: kyopro/template/rep_macro.hpp
+    - icon: ':warning:'
+      path: kyopro/template/stl.hpp
+      title: kyopro/template/stl.hpp
+    - icon: ':warning:'
+      path: kyopro/template/template.hpp
+      title: kyopro/template/template.hpp
   verificationCategories:
   - name: verify/aoj
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/aoj/PrimeNumber.test.cpp
       title: verify/aoj/PrimeNumber.test.cpp
   - name: verify/yosupo
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/yosupo/factorize.test.cpp
       title: verify/yosupo/factorize.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/yosupo/many_aplusb.test.cpp
       title: verify/yosupo/many_aplusb.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/yosupo/point_add_range_sum.test.cpp
       title: verify/yosupo/point_add_range_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/yosupo/unionfind.test.cpp
       title: verify/yosupo/unionfind.test.cpp
 layout: toppage

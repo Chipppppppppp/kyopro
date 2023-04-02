@@ -3,10 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
-  _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
-  attributes: {}
+  _isVerificationFailed: false
+  _pathExtension: hpp
+  _verificationStatusIcon: ':warning:'
+  attributes:
+    links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.2/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
@@ -18,27 +19,23 @@ data:
     , line 401, in update\n    self.update(self._resolve(pathlib.Path(included), included_from=path))\n\
     \  File \"/opt/hostedtoolcache/Python/3.11.2/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 401, in update\n    self.update(self._resolve(pathlib.Path(included), included_from=path))\n\
-    \  [Previous line repeated 2 more times]\n  File \"/opt/hostedtoolcache/Python/3.11.2/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
+    \                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n \
+    \ File \"/opt/hostedtoolcache/Python/3.11.2/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 260, in _resolve\n    raise BundleErrorAt(path, -1, \"no such header\"\
     )\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: kyopro/function/monoid.hpp:\
     \ line -1: no such header\n"
-  code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_1_C&lang=ja\"\
-    \r\n#include \"kyopro/math/is_prime.hpp\"\r\n#include \"kyopro/io/io.hpp\"\r\n\
-    \r\nint main() {\r\n    int t;\r\n    kpr::scan(t);\r\n    int cnt = 0;\r\n  \
-    \  for (int i = 0; i < t; ++i) {\r\n        long long x;\r\n        kpr::scan(x);\r\
-    \n        if (kpr::is_prime(x)) ++cnt;\r\n    }\r\n    kpr::println(cnt);\r\n\
-    }\r\n"
+  code: "#pragma once\r\n#include \"in.hpp\"\r\n#include \"out.hpp\""
   dependsOn: []
-  isVerificationFile: true
-  path: verify/aoj/PrimeNumber.test.cpp
+  isVerificationFile: false
+  path: kyopro/io/io.hpp
   requiredBy: []
   timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: verify/aoj/PrimeNumber.test.cpp
+documentation_of: kyopro/io/io.hpp
 layout: document
 redirect_from:
-- /verify/verify/aoj/PrimeNumber.test.cpp
-- /verify/verify/aoj/PrimeNumber.test.cpp.html
-title: verify/aoj/PrimeNumber.test.cpp
+- /library/kyopro/io/io.hpp
+- /library/kyopro/io/io.hpp.html
+title: kyopro/io/io.hpp
 ---

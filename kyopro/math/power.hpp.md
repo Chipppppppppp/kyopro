@@ -3,10 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
-  _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
-  attributes: {}
+  _isVerificationFailed: false
+  _pathExtension: hpp
+  _verificationStatusIcon: ':warning:'
+  attributes:
+    links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.2/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
@@ -14,32 +15,29 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.11.2/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/cplusplus.py\"\
     , line 187, in bundle\n    bundler.update(path)\n  File \"/opt/hostedtoolcache/Python/3.11.2/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 401, in update\n    self.update(self._resolve(pathlib.Path(included), included_from=path))\n\
-    \  File \"/opt/hostedtoolcache/Python/3.11.2/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
-    , line 401, in update\n    self.update(self._resolve(pathlib.Path(included), included_from=path))\n\
     \                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n \
     \ File \"/opt/hostedtoolcache/Python/3.11.2/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 260, in _resolve\n    raise BundleErrorAt(path, -1, \"no such header\"\
     )\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: kyopro/function/monoid.hpp:\
     \ line -1: no such header\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_range_sum\"\r\
-    \n#include \"kyopro/data_structure/FenwickTree.hpp\"\r\n#include \"kyopro/io/io.hpp\"\
-    \r\n\r\nint main() {\r\n    int n, q;\r\n    kpr::scan(n, q);\r\n    kpr::FenwickTree<long\
-    \ long> ft(n);\r\n    for (int i = 0; i < n; ++i) {\r\n        int a;\r\n    \
-    \    kpr::scan(a);\r\n        ft.apply(i, a);\r\n    }\r\n    for (int i = 0;\
-    \ i < q; ++i) {\r\n        int t, x, y;\r\n        kpr::scan(t, x, y);\r\n   \
-    \     if (t == 0) ft.apply(x, y);\r\n        else kpr::println(ft.prod(x, y));\r\
-    \n    }\r\n}\r\n"
+  code: "#pragma once\r\n#include <cstdint>\r\n#include \"kyopro/function/monoid.hpp\"\
+    \r\n#include \"kyopro/meta/setting.hpp\"\r\n\r\nnamespace kpr {\r\n    [[maybe_unused]]\
+    \ inline constexpr struct {\r\n        template<class T>\r\n        constexpr\
+    \ T operator ()(T a, KYOPRO_BASE_UINT n, T init = Mul<T>::id()) const noexcept\
+    \ {\r\n            while (n > 0) {\r\n                if (n & 1) init *= a;\r\n\
+    \                a *= a;\r\n                n >>= 1;\r\n            }\r\n    \
+    \        return init;\r\n        }\r\n    } power;\r\n} // namespace kpr\r\n"
   dependsOn: []
-  isVerificationFile: true
-  path: verify/yosupo/point_add_range_sum.test.cpp
+  isVerificationFile: false
+  path: kyopro/math/power.hpp
   requiredBy: []
   timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: verify/yosupo/point_add_range_sum.test.cpp
+documentation_of: kyopro/math/power.hpp
 layout: document
 redirect_from:
-- /verify/verify/yosupo/point_add_range_sum.test.cpp
-- /verify/verify/yosupo/point_add_range_sum.test.cpp.html
-title: verify/yosupo/point_add_range_sum.test.cpp
+- /library/kyopro/math/power.hpp
+- /library/kyopro/math/power.hpp.html
+title: kyopro/math/power.hpp
 ---
