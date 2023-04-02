@@ -38,29 +38,28 @@ namespace kpr {
         }
 
         KYOPRO_BASE_INT find(int x) {
-            if (par[x] == x) return x;
+            if (par[x] < 0) return x;
             int r = find(par[x]);
             diff_weight[x] = op(std::move(diff_weight[x]), diff_weight[par[x]]);
             return par[x] = r;
         }
 
         T weight(int x) {
-            static_cast<void>(find(x));
-            return diff_weight[x];
+            return find(x), diff_weight[x];
         }
 
         T diff(int x, int y) {
-            op(weight(y), op.inv(weight(x)));
+            return op(weight(y), op.inv(weight(x)));
         }
 
         bool merge(int x, int y, T w) {
+            w = op(std::move(w), op(weight(x), op.inv(weight(y))));
             x = find(x), y = find(y);
-            w = op(std::move(w), op(diff_weight[x], op.inv(diff_weight[y])));
             if (x == y) return false;
             if (par[x] > par[y]) {
                 par[y] += par[x];
                 par[x] = y;
-                diff_weight[x] = w;
+                diff_weight[x] = op.inv(w);
             } else {
                 par[x] += par[y];
                 par[y] = x;
