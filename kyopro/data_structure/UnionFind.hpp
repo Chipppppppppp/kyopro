@@ -16,9 +16,15 @@ namespace kpr {
         UnionFind() noexcept = default;
         UnionFind(std::size_t n) noexcept: par(n, -1) {}
 
-        void resize(std::size_t x) { par.resize(x, -1); }
-        void assign(std::size_t x) { par.assign(x, -1); }
-        void clear() { std::fill(par.begin(), par.end(), -1); }
+        void resize(std::size_t n) {
+            par.resize(n, -1);
+        }
+        void assign(std::size_t n) {
+            par.assign(n, -1);
+        }
+        void clear() {
+            std::fill(par.begin(), par.end(), -1);
+        }
 
         std::size_t size() const noexcept {
             return par.size();
@@ -39,12 +45,12 @@ namespace kpr {
             x = find(x), y = find(y);
             if (x == y) return false;
             if (par[x] > par[y]) {
-                int tmp = x;
-                x = y;
-                y = tmp;
+                par[y] += par[x];
+                par[x] = y;
+            } else {
+                par[x] += par[y];
+                par[y] = x;
             }
-            par[x] += par[y];
-            par[y] = x;
             return true;
         }
 

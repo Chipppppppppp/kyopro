@@ -29,7 +29,7 @@ namespace kpr {
         void apply(int p, const T& x) {
             ++p;
             while (p <= (int)size()) {
-                tree[p - 1] = op(tree[p - 1], x);
+                tree[p - 1] = op(std::move(tree[p - 1]), x);
                 p += p & -p;
             }
         }
@@ -37,7 +37,7 @@ namespace kpr {
         T prod(int r) const {
             T s = op.id();
             while (r > 0) {
-                s = op(s, tree[r - 1]);
+                s = op(std::move(s), tree[r - 1]);
                 r -= r & -r;
             }
             return s;
