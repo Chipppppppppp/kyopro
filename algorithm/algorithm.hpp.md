@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/Hash.hpp
     title: algorithm/Hash.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algorithm/bit.hpp
     title: algorithm/bit.hpp
   - icon: ':warning:'
@@ -22,13 +22,13 @@ data:
   - icon: ':warning:'
     path: function/compare.hpp
     title: function/compare.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/setting.hpp
     title: meta/setting.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/trait.hpp
     title: meta/trait.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: meta/tuple_like.hpp
     title: meta/tuple_like.hpp
   _extendedRequiredBy:
@@ -252,15 +252,15 @@ data:
     \ constexpr struct {\n        template<class T, class Compare = Less, class Container\
     \ = std::unordered_map<typename std::iterator_traits<T>::value_type, KYOPRO_BASE_INT>>\n\
     \        auto operator ()(T first, T last, Compare comp = {}) const {\n      \
-    \      std::vector<Container::key_type> a(first, last);\n            std::sort(a.begin(),\
-    \ a.end(), comp);\n            auto itr = unique(a.begin(), a.end());\n      \
-    \      Container mem;\n            int cnt = -1;\n            for (auto i = std::begin(a);\
-    \ i != itr; ++i) mem[*i] = ++cnt;\n            return mem;\n        }\n    } compress;\n\
-    } // namespace kpr\n#line 6 \"meta/tuple_like.hpp\"\n\r\nnamespace kpr {\r\n \
-    \   namespace helper {\r\n        struct CastableToAny {\r\n            template<class\
-    \ T>\r\n            operator T() const noexcept;\r\n        };\r\n\r\n       \
-    \ template<class T, std::size_t... idx, std::void_t<decltype(T{((void)idx, CastableToAny{})...})>*\
-    \ = nullptr>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
+    \      std::vector<typename Container::key_type> a(first, last);\n           \
+    \ std::sort(a.begin(), a.end(), comp);\n            auto itr = unique(a.begin(),\
+    \ a.end());\n            Container mem;\n            int cnt = -1;\n         \
+    \   for (auto i = std::begin(a); i != itr; ++i) mem[*i] = ++cnt;\n           \
+    \ return mem;\n        }\n    } compress;\n} // namespace kpr\n#line 6 \"meta/tuple_like.hpp\"\
+    \n\r\nnamespace kpr {\r\n    namespace helper {\r\n        struct CastableToAny\
+    \ {\r\n            template<class T>\r\n            operator T() const noexcept;\r\
+    \n        };\r\n\r\n        template<class T, std::size_t... idx, std::void_t<decltype(T{((void)idx,\
+    \ CastableToAny{})...})>* = nullptr>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
     \ bool) noexcept {\r\n            return true;\r\n        }\r\n        template<class\
     \ T, std::size_t... idx>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
     \ char) noexcept {\r\n            return false;\r\n        }\n\n        template<class\
@@ -390,7 +390,7 @@ data:
   requiredBy:
   - all/all.hpp
   - all.hpp
-  timestamp: '2023-04-01 14:10:21+09:00'
+  timestamp: '2023-04-02 19:15:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm/algorithm.hpp

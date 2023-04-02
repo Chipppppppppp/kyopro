@@ -46,22 +46,22 @@ data:
     \u7E2E\n    [[maybe_unused]] inline constexpr struct {\n        template<class\
     \ T, class Compare = Less, class Container = std::unordered_map<typename std::iterator_traits<T>::value_type,\
     \ KYOPRO_BASE_INT>>\n        auto operator ()(T first, T last, Compare comp =\
-    \ {}) const {\n            std::vector<Container::key_type> a(first, last);\n\
-    \            std::sort(a.begin(), a.end(), comp);\n            auto itr = unique(a.begin(),\
-    \ a.end());\n            Container mem;\n            int cnt = -1;\n         \
-    \   for (auto i = std::begin(a); i != itr; ++i) mem[*i] = ++cnt;\n           \
-    \ return mem;\n        }\n    } compress;\n} // namespace kpr\n"
+    \ {}) const {\n            std::vector<typename Container::key_type> a(first,\
+    \ last);\n            std::sort(a.begin(), a.end(), comp);\n            auto itr\
+    \ = unique(a.begin(), a.end());\n            Container mem;\n            int cnt\
+    \ = -1;\n            for (auto i = std::begin(a); i != itr; ++i) mem[*i] = ++cnt;\n\
+    \            return mem;\n        }\n    } compress;\n} // namespace kpr\n"
   code: "#pragma once\n#include <algorithm>\n#include <iterator>\n#include <unordered_map>\n\
     #include <vector>\n#include \"../function/compare.hpp\"\n\nnamespace kpr {\n \
     \   // \u5EA7\u6A19\u5727\u7E2E\n    [[maybe_unused]] inline constexpr struct\
     \ {\n        template<class T, class Compare = Less, class Container = std::unordered_map<typename\
     \ std::iterator_traits<T>::value_type, KYOPRO_BASE_INT>>\n        auto operator\
-    \ ()(T first, T last, Compare comp = {}) const {\n            std::vector<Container::key_type>\
-    \ a(first, last);\n            std::sort(a.begin(), a.end(), comp);\n        \
-    \    auto itr = unique(a.begin(), a.end());\n            Container mem;\n    \
-    \        int cnt = -1;\n            for (auto i = std::begin(a); i != itr; ++i)\
-    \ mem[*i] = ++cnt;\n            return mem;\n        }\n    } compress;\n} //\
-    \ namespace kpr\n"
+    \ ()(T first, T last, Compare comp = {}) const {\n            std::vector<typename\
+    \ Container::key_type> a(first, last);\n            std::sort(a.begin(), a.end(),\
+    \ comp);\n            auto itr = unique(a.begin(), a.end());\n            Container\
+    \ mem;\n            int cnt = -1;\n            for (auto i = std::begin(a); i\
+    \ != itr; ++i) mem[*i] = ++cnt;\n            return mem;\n        }\n    } compress;\n\
+    } // namespace kpr\n"
   dependsOn:
   - function/compare.hpp
   isVerificationFile: false
@@ -70,7 +70,7 @@ data:
   - all/all.hpp
   - all.hpp
   - algorithm/algorithm.hpp
-  timestamp: '2023-04-01 14:10:21+09:00'
+  timestamp: '2023-04-02 19:15:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: algorithm/compress.hpp
