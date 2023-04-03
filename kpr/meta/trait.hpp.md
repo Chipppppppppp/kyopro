@@ -1,0 +1,396 @@
+---
+data:
+  _extendedDependsOn: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kpr/algorithm/Hash.hpp
+    title: kpr/algorithm/Hash.hpp
+  - icon: ':warning:'
+    path: kpr/algorithm/algorithm.hpp
+    title: kpr/algorithm/algorithm.hpp
+  - icon: ':warning:'
+    path: kpr/algorithm/bit.hpp
+    title: kpr/algorithm/bit.hpp
+  - icon: ':warning:'
+    path: kpr/algorithm/contains.hpp
+    title: kpr/algorithm/contains.hpp
+  - icon: ':warning:'
+    path: kpr/all.hpp
+    title: kpr/all.hpp
+  - icon: ':warning:'
+    path: kpr/all/all.hpp
+    title: kpr/all/all.hpp
+  - icon: ':warning:'
+    path: kpr/data_structure/FenwickTree.hpp
+    title: kpr/data_structure/FenwickTree.hpp
+  - icon: ':warning:'
+    path: kpr/data_structure/SegmentTree.hpp
+    title: kpr/data_structure/SegmentTree.hpp
+  - icon: ':warning:'
+    path: kpr/data_structure/UnionFind.hpp
+    title: kpr/data_structure/UnionFind.hpp
+  - icon: ':warning:'
+    path: kpr/data_structure/WeightedUnionFind.hpp
+    title: kpr/data_structure/WeightedUnionFind.hpp
+  - icon: ':warning:'
+    path: kpr/data_structure/data_structure.hpp
+    title: kpr/data_structure/data_structure.hpp
+  - icon: ':warning:'
+    path: kpr/function/function.hpp
+    title: kpr/function/function.hpp
+  - icon: ':warning:'
+    path: kpr/function/monoid.hpp
+    title: kpr/function/monoid.hpp
+  - icon: ':warning:'
+    path: kpr/io/in.hpp
+    title: kpr/io/in.hpp
+  - icon: ':warning:'
+    path: kpr/io/io.hpp
+    title: kpr/io/io.hpp
+  - icon: ':warning:'
+    path: kpr/io/out.hpp
+    title: kpr/io/out.hpp
+  - icon: ':warning:'
+    path: kpr/math/Barrett.hpp
+    title: kpr/math/Barrett.hpp
+  - icon: ':warning:'
+    path: kpr/math/BinomMod.hpp
+    title: kpr/math/BinomMod.hpp
+  - icon: ':warning:'
+    path: kpr/math/DynamicModInt.hpp
+    title: kpr/math/DynamicModInt.hpp
+  - icon: ':warning:'
+    path: kpr/math/ModInt.hpp
+    title: kpr/math/ModInt.hpp
+  - icon: ':warning:'
+    path: kpr/math/div.hpp
+    title: kpr/math/div.hpp
+  - icon: ':warning:'
+    path: kpr/math/factorize.hpp
+    title: kpr/math/factorize.hpp
+  - icon: ':warning:'
+    path: kpr/math/is_prime.hpp
+    title: kpr/math/is_prime.hpp
+  - icon: ':warning:'
+    path: kpr/math/math.hpp
+    title: kpr/math/math.hpp
+  - icon: ':warning:'
+    path: kpr/math/power.hpp
+    title: kpr/math/power.hpp
+  - icon: ':warning:'
+    path: kpr/meta/constant.hpp
+    title: kpr/meta/constant.hpp
+  - icon: ':warning:'
+    path: kpr/meta/meta.hpp
+    title: kpr/meta/meta.hpp
+  - icon: ':warning:'
+    path: kpr/range/imap.hpp
+    title: kpr/range/imap.hpp
+  - icon: ':warning:'
+    path: kpr/range/irange.hpp
+    title: kpr/range/irange.hpp
+  - icon: ':warning:'
+    path: kpr/range/range.hpp
+    title: kpr/range/range.hpp
+  - icon: ':warning:'
+    path: kpr/template/alias.hpp
+    title: kpr/template/alias.hpp
+  - icon: ':warning:'
+    path: kpr/template/io_macro.hpp
+    title: kpr/template/io_macro.hpp
+  - icon: ':warning:'
+    path: kpr/template/macro.hpp
+    title: kpr/template/macro.hpp
+  - icon: ':warning:'
+    path: kpr/template/named_tuple_macro.hpp
+    title: kpr/template/named_tuple_macro.hpp
+  - icon: ':warning:'
+    path: kpr/template/template.hpp
+    title: kpr/template/template.hpp
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
+  _pathExtension: hpp
+  _verificationStatusIcon: ':warning:'
+  attributes:
+    links: []
+  bundledCode: "#line 2 \"kpr/meta/trait.hpp\"\n#include <cstddef>\r\n#include <iterator>\r\
+    \n#include <tuple>\r\n#include <type_traits>\r\n#include <utility>\r\n\r\nnamespace\
+    \ kpr {\r\n    namespace helper {\r\n        template<class T>\r\n        struct\
+    \ is_integer_helper {\r\n            static constexpr bool value = std::is_integral_v<T>;\r\
+    \n        };\r\n\r\n        #ifdef __SIZEOF_INT128__\r\n        template<>\r\n\
+    \        struct is_integer_helper<__int128_t> {\r\n            static constexpr\
+    \ bool value = true;\r\n        };\r\n        template<>\r\n        struct is_integer_helper<__uint128_t>\
+    \ {\r\n            static constexpr bool value = true;\r\n        };\r\n     \
+    \   #endif\r\n    } // namespace helper\r\n\r\n    // \u578BT\u304C\u6574\u6570\
+    \u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    struct is_integer {\r\
+    \n        static constexpr bool value = helper::is_integer_helper<std::remove_cv_t<T>>::value;\r\
+    \n    };\r\n    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\u308B\r\n    template<class\
+    \ T>\r\n    inline constexpr bool is_integer_v = is_integer<T>::value;\r\n\r\n\
+    \    // \u578BT\u304C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u304B\u8ABF\u3079\u308B\
+    \r\n    template<class T>\r\n    struct is_signed_integer {\r\n        static\
+    \ constexpr bool value = is_integer_v<T> && std::is_signed_v<T>;\r\n    };\r\n\
+    \    // \u578BT\u304C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u304B\u8ABF\u3079\u308B\
+    \r\n    template<class T>\r\n    inline constexpr bool is_signed_integer_v = is_signed_integer<T>::value;\r\
+    \n\r\n    // \u578BT\u304C\u7B26\u53F7\u7121\u3057\u6574\u6570\u304B\u8ABF\u3079\
+    \u308B\r\n    template<class T>\r\n    struct is_unsigned_integer {\r\n      \
+    \  static constexpr bool value = is_integer_v<T> && !std::is_signed_v<T>;\r\n\
+    \    };\r\n    // \u578BT\u304C\u7B26\u53F7\u7121\u3057\u6574\u6570\u304B\u8ABF\
+    \u3079\u308B\r\n    template<class T>\r\n    inline constexpr bool is_unsigned_integer_v\
+    \ = is_unsigned_integer<T>::value;\r\n\r\n    namespace helper {\r\n        template<class\
+    \ T>\r\n        struct is_floating_point_helper {\r\n            static constexpr\
+    \ bool value = std::is_floating_point_v<T>;\r\n        };\r\n\r\n        #ifdef\
+    \ __SIZEOF_FLOAT128__\r\n        template<>\r\n        struct is_floating_point_helper<__float128>\
+    \ {\r\n            static constexpr bool value = true;\r\n        };\r\n     \
+    \   #endif\r\n    } // namespace helper\r\n\r\n    // \u578BT\u304C\u6D6E\u52D5\
+    \u5C0F\u6570\u70B9\u6570\u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n\
+    \    struct is_floating_point {\r\n        static constexpr bool value = helper::is_floating_point_helper<std::remove_cv_t<T>>::value;\r\
+    \n    };\r\n    // \u578BT\u304C\u6D6E\u52D5\u5C0F\u6570\u70B9\u6570\u304B\u8ABF\
+    \u3079\u308B\r\n    template<class T>\r\n    inline constexpr bool is_floating_point_v\
+    \ = is_floating_point<T>::value;\r\n\r\n    // \u578BT\u304C\u7B97\u8853\u578B\
+    \u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    struct is_arithmetic\
+    \ {\r\n        static constexpr bool value = is_integer_v<T> || is_floating_point_v<T>;\r\
+    \n    };\r\n    // \u578BT\u304C\u7B97\u8853\u578B\u304B\u8ABF\u3079\u308B\r\n\
+    \    template<class T>\r\n    inline constexpr bool is_arithmetic_v = is_arithmetic<T>::value;\r\
+    \n\r\n    // \u578BT\u304C\u30B9\u30AB\u30E9\u30FC\u304B\u8ABF\u3079\u308B\r\n\
+    \    template<class T>\r\n    struct is_scalar {\r\n        static constexpr bool\
+    \ value = is_arithmetic_v<T> || std::is_enum_v<T> || std::is_pointer_v<T> || std::is_member_pointer_v<T>\
+    \ || std::is_null_pointer_v<T>;\r\n    };\r\n    // \u578BT\u304C\u30B9\u30AB\u30E9\
+    \u30FC\u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    inline constexpr\
+    \ bool is_scalar_v = is_scalar<T>::value;\r\n\r\n    // size\u4EE5\u4E0A\u306E\
+    \u5927\u304D\u3055\u3092\u6301\u3064\u6700\u5C0F\u306E\u7B26\u53F7\u4ED8\u304D\
+    \u6574\u6570\u3092\u8ABF\u3079\u308B\r\n    template<std::size_t size>\r\n   \
+    \ struct int_least {\r\n    private:\r\n        static constexpr auto get_type()\
+    \ noexcept {\r\n            static_assert(size <= 128, \"The given integer type\
+    \ is too large\");\r\n            if constexpr (size <= 8) return std::int_least8_t{};\r\
+    \n            else if constexpr (size <= 16) return std::int_least16_t{};\r\n\
+    \            else if constexpr (size <= 32) return std::int_least32_t{};\r\n \
+    \           else if constexpr (size <= 64) return std::int_least64_t{};\r\n  \
+    \          else return __int128_t{};\r\n        }\r\n\r\n    public:\r\n     \
+    \   using type = decltype(get_type());\r\n    };\r\n    // size\u4EE5\u4E0A\u306E\
+    \u5927\u304D\u3055\u3092\u6301\u3064\u6700\u5C0F\u306E\u7B26\u53F7\u4ED8\u304D\
+    \u6574\u6570\u3092\u8ABF\u3079\u308B\r\n    template<std::size_t size>\r\n   \
+    \ using int_least_t = typename int_least<size>::type;\r\n\r\n    // size\u4EE5\
+    \u4E0A\u306E\u5927\u304D\u3055\u3092\u6301\u3064\u6700\u5C0F\u306E\u7B26\u53F7\
+    \u7121\u3057\u6574\u6570\u3092\u8ABF\u3079\u308B\r\n    template<std::size_t size>\r\
+    \n    struct uint_least {\r\n    private:\r\n        static constexpr auto get_type()\
+    \ noexcept {\r\n            static_assert(size <= 128, \"The give integer type\
+    \ is too large\");\r\n            if constexpr (size <= 8) return std::uint_least8_t{};\r\
+    \n            else if constexpr (size <= 16) return std::uint_least16_t{};\r\n\
+    \            else if constexpr (size <= 32) return std::uint_least32_t{};\r\n\
+    \            else if constexpr (size <= 64) return std::uint_least64_t{};\r\n\
+    \            else return __uint128_t{};\r\n        }\r\n\r\n    public:\r\n  \
+    \      using type = decltype(get_type());\r\n    };\r\n    // size\u4EE5\u4E0A\
+    \u306E\u5927\u304D\u3055\u3092\u6301\u3064\u6700\u5C0F\u306E\u7B26\u53F7\u7121\
+    \u3057\u6574\u6570\u3092\u8ABF\u3079\u308B\r\n    template<std::size_t size>\r\
+    \n    using uint_least_t = typename uint_least<size>::type;\r\n\r\n    // T\u306E\
+    \u6B21\u306B\u5927\u304D\u3044\u6574\u6570\u578B\u3092\u8ABF\u3079\u308B\r\n \
+    \   template<class T>\r\n    struct next_integer {\r\n        static_assert(is_integer_v<T>,\
+    \ \"The given type must be an integer type\");\r\n        static_assert(sizeof(T)\
+    \ <= 8, \"The given integer type is too large\");\r\n        using type = std::conditional_t<std::is_signed_v<T>,\
+    \ int_least_t<sizeof(T) * 16>, uint_least_t<sizeof(T) * 16>>;\r\n    };\r\n  \
+    \  // T\u306E\u6B21\u306B\u5927\u304D\u3044\u6574\u6570\u578B\u3092\u8ABF\u3079\
+    \u308B\r\n    template<class T>\r\n    using next_integer_t = typename next_integer<T>::type;\r\
+    \n\r\n    // T\u306E\u6B21\u306B\u5C0F\u3055\u3044\u6574\u6570\u578B\u3092\u8ABF\
+    \u3079\u308B\r\n    template<class T>\r\n    struct prev_integer {\r\n       \
+    \ static_assert(is_integer_v<T>, \"The given type must be an integer type\");\r\
+    \n        static_assert(sizeof(T) >= 2, \"The given integer type is too large\"\
+    );\r\n        using type = std::conditional_t<std::is_signed_v<T>, int_least_t<sizeof(T)\
+    \ * 4>, uint_least_t<sizeof(T) * 4>>;\r\n    };\r\n    // T\u306E\u6B21\u306B\u5C0F\
+    \u3055\u3044\u6574\u6570\u578B\u3092\u8ABF\u3079\u308B\r\n    template<class T>\r\
+    \n    using prev_integer_t = typename prev_integer<T>::type;\r\n\r\n    // \u578B\
+    T\u304C\u30A4\u30C6\u30EC\u30FC\u30BF\u304B\u8ABF\u3079\u308B\r\n    template<class\
+    \ T, class = void>\r\n    struct is_iterator {\r\n        static constexpr bool\
+    \ value = false;\r\n    };\r\n    template<class T>\r\n    struct is_iterator<T,\
+    \ std::void_t<typename std::iterator_traits<T>::iterator_category>> {\r\n    \
+    \    static constexpr bool value = true;\r\n    };\r\n    // \u578BT\u304C\u30A4\
+    \u30C6\u30EC\u30FC\u30BF\u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n\
+    \    inline constexpr bool is_iterator_v = is_iterator<T>::value;\r\n\r\n    //\
+    \ \u578BT\u304CRange\u304B\u8ABF\u3079\u308B\r\n    template<class T, class =\
+    \ void>\r\n    struct is_range {\r\n        static constexpr bool value = false;\r\
+    \n    };\r\n    template<class T>\r\n    struct is_range<T, std::void_t<decltype(std::begin(std::declval<std::add_lvalue_reference_t<T>>()),\
+    \ std::end(std::declval<std::add_lvalue_reference_t<T>>()))>> {\r\n        static\
+    \ constexpr bool value = true;\r\n    };\r\n     // \u578BT\u304CRange\u304B\u8ABF\
+    \u3079\u308B\r\n    template<class T>\r\n    inline constexpr bool is_range_v\
+    \ = is_range<T>::value;\r\n\r\n    // Range\u578BT\u304B\u3089\u30A4\u30C6\u30EC\
+    \u30FC\u30BF\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n    template<class T>\r\n\
+    \    struct range_iterator {\r\n        using type = std::decay_t<decltype(std::begin(std::declval<T>()))>;\r\
+    \n    };\r\n    // Range\u578BT\u304B\u3089\u30A4\u30C6\u30EC\u30FC\u30BF\u306E\
+    \u578B\u3092\u8ABF\u3079\u308B\r\n    template<class T>\r\n    using range_iterator_t\
+    \ = typename range_iterator<T>::type;\r\n\r\n    // Range\u578BT\u304B\u3089\u8AAD\
+    \u307F\u53D6\u308A\u5C02\u7528\u30A4\u30C6\u30EC\u30FC\u30BF\u306E\u578B\u3092\
+    \u8ABF\u3079\u308B\r\n    template<class T>\r\n    struct range_const_iterator\
+    \ {\r\n        using type = std::decay_t<decltype(std::cbegin(std::declval<T>()))>;\r\
+    \n    };\r\n    // Range\u578BT\u304B\u3089\u8AAD\u307F\u53D6\u308A\u5C02\u7528\
+    \u30A4\u30C6\u30EC\u30FC\u30BF\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n    template<class\
+    \ T>\r\n    using range_const_iterator_t = typename range_iterator<T>::type;\r\
+    \n\r\n    // Range\u578BT\u304B\u3089\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\
+    \u308B\r\n    template<class T>\r\n    struct range_value {\r\n        using type\
+    \ = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\r\n    };\r\n    //\
+    \ Range\u578BT\u304B\u3089\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n\
+    \    template<class T>\r\n    using range_value_t = typename range_value<T>::type;\r\
+    \n} // namespace kpr\r\n"
+  code: "#pragma once\r\n#include <cstddef>\r\n#include <iterator>\r\n#include <tuple>\r\
+    \n#include <type_traits>\r\n#include <utility>\r\n\r\nnamespace kpr {\r\n    namespace\
+    \ helper {\r\n        template<class T>\r\n        struct is_integer_helper {\r\
+    \n            static constexpr bool value = std::is_integral_v<T>;\r\n       \
+    \ };\r\n\r\n        #ifdef __SIZEOF_INT128__\r\n        template<>\r\n       \
+    \ struct is_integer_helper<__int128_t> {\r\n            static constexpr bool\
+    \ value = true;\r\n        };\r\n        template<>\r\n        struct is_integer_helper<__uint128_t>\
+    \ {\r\n            static constexpr bool value = true;\r\n        };\r\n     \
+    \   #endif\r\n    } // namespace helper\r\n\r\n    // \u578BT\u304C\u6574\u6570\
+    \u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    struct is_integer {\r\
+    \n        static constexpr bool value = helper::is_integer_helper<std::remove_cv_t<T>>::value;\r\
+    \n    };\r\n    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\u308B\r\n    template<class\
+    \ T>\r\n    inline constexpr bool is_integer_v = is_integer<T>::value;\r\n\r\n\
+    \    // \u578BT\u304C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u304B\u8ABF\u3079\u308B\
+    \r\n    template<class T>\r\n    struct is_signed_integer {\r\n        static\
+    \ constexpr bool value = is_integer_v<T> && std::is_signed_v<T>;\r\n    };\r\n\
+    \    // \u578BT\u304C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u304B\u8ABF\u3079\u308B\
+    \r\n    template<class T>\r\n    inline constexpr bool is_signed_integer_v = is_signed_integer<T>::value;\r\
+    \n\r\n    // \u578BT\u304C\u7B26\u53F7\u7121\u3057\u6574\u6570\u304B\u8ABF\u3079\
+    \u308B\r\n    template<class T>\r\n    struct is_unsigned_integer {\r\n      \
+    \  static constexpr bool value = is_integer_v<T> && !std::is_signed_v<T>;\r\n\
+    \    };\r\n    // \u578BT\u304C\u7B26\u53F7\u7121\u3057\u6574\u6570\u304B\u8ABF\
+    \u3079\u308B\r\n    template<class T>\r\n    inline constexpr bool is_unsigned_integer_v\
+    \ = is_unsigned_integer<T>::value;\r\n\r\n    namespace helper {\r\n        template<class\
+    \ T>\r\n        struct is_floating_point_helper {\r\n            static constexpr\
+    \ bool value = std::is_floating_point_v<T>;\r\n        };\r\n\r\n        #ifdef\
+    \ __SIZEOF_FLOAT128__\r\n        template<>\r\n        struct is_floating_point_helper<__float128>\
+    \ {\r\n            static constexpr bool value = true;\r\n        };\r\n     \
+    \   #endif\r\n    } // namespace helper\r\n\r\n    // \u578BT\u304C\u6D6E\u52D5\
+    \u5C0F\u6570\u70B9\u6570\u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n\
+    \    struct is_floating_point {\r\n        static constexpr bool value = helper::is_floating_point_helper<std::remove_cv_t<T>>::value;\r\
+    \n    };\r\n    // \u578BT\u304C\u6D6E\u52D5\u5C0F\u6570\u70B9\u6570\u304B\u8ABF\
+    \u3079\u308B\r\n    template<class T>\r\n    inline constexpr bool is_floating_point_v\
+    \ = is_floating_point<T>::value;\r\n\r\n    // \u578BT\u304C\u7B97\u8853\u578B\
+    \u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    struct is_arithmetic\
+    \ {\r\n        static constexpr bool value = is_integer_v<T> || is_floating_point_v<T>;\r\
+    \n    };\r\n    // \u578BT\u304C\u7B97\u8853\u578B\u304B\u8ABF\u3079\u308B\r\n\
+    \    template<class T>\r\n    inline constexpr bool is_arithmetic_v = is_arithmetic<T>::value;\r\
+    \n\r\n    // \u578BT\u304C\u30B9\u30AB\u30E9\u30FC\u304B\u8ABF\u3079\u308B\r\n\
+    \    template<class T>\r\n    struct is_scalar {\r\n        static constexpr bool\
+    \ value = is_arithmetic_v<T> || std::is_enum_v<T> || std::is_pointer_v<T> || std::is_member_pointer_v<T>\
+    \ || std::is_null_pointer_v<T>;\r\n    };\r\n    // \u578BT\u304C\u30B9\u30AB\u30E9\
+    \u30FC\u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n    inline constexpr\
+    \ bool is_scalar_v = is_scalar<T>::value;\r\n\r\n    // size\u4EE5\u4E0A\u306E\
+    \u5927\u304D\u3055\u3092\u6301\u3064\u6700\u5C0F\u306E\u7B26\u53F7\u4ED8\u304D\
+    \u6574\u6570\u3092\u8ABF\u3079\u308B\r\n    template<std::size_t size>\r\n   \
+    \ struct int_least {\r\n    private:\r\n        static constexpr auto get_type()\
+    \ noexcept {\r\n            static_assert(size <= 128, \"The given integer type\
+    \ is too large\");\r\n            if constexpr (size <= 8) return std::int_least8_t{};\r\
+    \n            else if constexpr (size <= 16) return std::int_least16_t{};\r\n\
+    \            else if constexpr (size <= 32) return std::int_least32_t{};\r\n \
+    \           else if constexpr (size <= 64) return std::int_least64_t{};\r\n  \
+    \          else return __int128_t{};\r\n        }\r\n\r\n    public:\r\n     \
+    \   using type = decltype(get_type());\r\n    };\r\n    // size\u4EE5\u4E0A\u306E\
+    \u5927\u304D\u3055\u3092\u6301\u3064\u6700\u5C0F\u306E\u7B26\u53F7\u4ED8\u304D\
+    \u6574\u6570\u3092\u8ABF\u3079\u308B\r\n    template<std::size_t size>\r\n   \
+    \ using int_least_t = typename int_least<size>::type;\r\n\r\n    // size\u4EE5\
+    \u4E0A\u306E\u5927\u304D\u3055\u3092\u6301\u3064\u6700\u5C0F\u306E\u7B26\u53F7\
+    \u7121\u3057\u6574\u6570\u3092\u8ABF\u3079\u308B\r\n    template<std::size_t size>\r\
+    \n    struct uint_least {\r\n    private:\r\n        static constexpr auto get_type()\
+    \ noexcept {\r\n            static_assert(size <= 128, \"The give integer type\
+    \ is too large\");\r\n            if constexpr (size <= 8) return std::uint_least8_t{};\r\
+    \n            else if constexpr (size <= 16) return std::uint_least16_t{};\r\n\
+    \            else if constexpr (size <= 32) return std::uint_least32_t{};\r\n\
+    \            else if constexpr (size <= 64) return std::uint_least64_t{};\r\n\
+    \            else return __uint128_t{};\r\n        }\r\n\r\n    public:\r\n  \
+    \      using type = decltype(get_type());\r\n    };\r\n    // size\u4EE5\u4E0A\
+    \u306E\u5927\u304D\u3055\u3092\u6301\u3064\u6700\u5C0F\u306E\u7B26\u53F7\u7121\
+    \u3057\u6574\u6570\u3092\u8ABF\u3079\u308B\r\n    template<std::size_t size>\r\
+    \n    using uint_least_t = typename uint_least<size>::type;\r\n\r\n    // T\u306E\
+    \u6B21\u306B\u5927\u304D\u3044\u6574\u6570\u578B\u3092\u8ABF\u3079\u308B\r\n \
+    \   template<class T>\r\n    struct next_integer {\r\n        static_assert(is_integer_v<T>,\
+    \ \"The given type must be an integer type\");\r\n        static_assert(sizeof(T)\
+    \ <= 8, \"The given integer type is too large\");\r\n        using type = std::conditional_t<std::is_signed_v<T>,\
+    \ int_least_t<sizeof(T) * 16>, uint_least_t<sizeof(T) * 16>>;\r\n    };\r\n  \
+    \  // T\u306E\u6B21\u306B\u5927\u304D\u3044\u6574\u6570\u578B\u3092\u8ABF\u3079\
+    \u308B\r\n    template<class T>\r\n    using next_integer_t = typename next_integer<T>::type;\r\
+    \n\r\n    // T\u306E\u6B21\u306B\u5C0F\u3055\u3044\u6574\u6570\u578B\u3092\u8ABF\
+    \u3079\u308B\r\n    template<class T>\r\n    struct prev_integer {\r\n       \
+    \ static_assert(is_integer_v<T>, \"The given type must be an integer type\");\r\
+    \n        static_assert(sizeof(T) >= 2, \"The given integer type is too large\"\
+    );\r\n        using type = std::conditional_t<std::is_signed_v<T>, int_least_t<sizeof(T)\
+    \ * 4>, uint_least_t<sizeof(T) * 4>>;\r\n    };\r\n    // T\u306E\u6B21\u306B\u5C0F\
+    \u3055\u3044\u6574\u6570\u578B\u3092\u8ABF\u3079\u308B\r\n    template<class T>\r\
+    \n    using prev_integer_t = typename prev_integer<T>::type;\r\n\r\n    // \u578B\
+    T\u304C\u30A4\u30C6\u30EC\u30FC\u30BF\u304B\u8ABF\u3079\u308B\r\n    template<class\
+    \ T, class = void>\r\n    struct is_iterator {\r\n        static constexpr bool\
+    \ value = false;\r\n    };\r\n    template<class T>\r\n    struct is_iterator<T,\
+    \ std::void_t<typename std::iterator_traits<T>::iterator_category>> {\r\n    \
+    \    static constexpr bool value = true;\r\n    };\r\n    // \u578BT\u304C\u30A4\
+    \u30C6\u30EC\u30FC\u30BF\u304B\u8ABF\u3079\u308B\r\n    template<class T>\r\n\
+    \    inline constexpr bool is_iterator_v = is_iterator<T>::value;\r\n\r\n    //\
+    \ \u578BT\u304CRange\u304B\u8ABF\u3079\u308B\r\n    template<class T, class =\
+    \ void>\r\n    struct is_range {\r\n        static constexpr bool value = false;\r\
+    \n    };\r\n    template<class T>\r\n    struct is_range<T, std::void_t<decltype(std::begin(std::declval<std::add_lvalue_reference_t<T>>()),\
+    \ std::end(std::declval<std::add_lvalue_reference_t<T>>()))>> {\r\n        static\
+    \ constexpr bool value = true;\r\n    };\r\n     // \u578BT\u304CRange\u304B\u8ABF\
+    \u3079\u308B\r\n    template<class T>\r\n    inline constexpr bool is_range_v\
+    \ = is_range<T>::value;\r\n\r\n    // Range\u578BT\u304B\u3089\u30A4\u30C6\u30EC\
+    \u30FC\u30BF\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n    template<class T>\r\n\
+    \    struct range_iterator {\r\n        using type = std::decay_t<decltype(std::begin(std::declval<T>()))>;\r\
+    \n    };\r\n    // Range\u578BT\u304B\u3089\u30A4\u30C6\u30EC\u30FC\u30BF\u306E\
+    \u578B\u3092\u8ABF\u3079\u308B\r\n    template<class T>\r\n    using range_iterator_t\
+    \ = typename range_iterator<T>::type;\r\n\r\n    // Range\u578BT\u304B\u3089\u8AAD\
+    \u307F\u53D6\u308A\u5C02\u7528\u30A4\u30C6\u30EC\u30FC\u30BF\u306E\u578B\u3092\
+    \u8ABF\u3079\u308B\r\n    template<class T>\r\n    struct range_const_iterator\
+    \ {\r\n        using type = std::decay_t<decltype(std::cbegin(std::declval<T>()))>;\r\
+    \n    };\r\n    // Range\u578BT\u304B\u3089\u8AAD\u307F\u53D6\u308A\u5C02\u7528\
+    \u30A4\u30C6\u30EC\u30FC\u30BF\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n    template<class\
+    \ T>\r\n    using range_const_iterator_t = typename range_iterator<T>::type;\r\
+    \n\r\n    // Range\u578BT\u304B\u3089\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\
+    \u308B\r\n    template<class T>\r\n    struct range_value {\r\n        using type\
+    \ = std::decay_t<decltype(*std::begin(std::declval<T>()))>;\r\n    };\r\n    //\
+    \ Range\u578BT\u304B\u3089\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n\
+    \    template<class T>\r\n    using range_value_t = typename range_value<T>::type;\r\
+    \n} // namespace kpr\r\n"
+  dependsOn: []
+  isVerificationFile: false
+  path: kpr/meta/trait.hpp
+  requiredBy:
+  - kpr/io/in.hpp
+  - kpr/io/out.hpp
+  - kpr/io/io.hpp
+  - kpr/all/all.hpp
+  - kpr/range/imap.hpp
+  - kpr/range/range.hpp
+  - kpr/range/irange.hpp
+  - kpr/function/monoid.hpp
+  - kpr/function/function.hpp
+  - kpr/meta/constant.hpp
+  - kpr/meta/meta.hpp
+  - kpr/all.hpp
+  - kpr/math/is_prime.hpp
+  - kpr/math/factorize.hpp
+  - kpr/math/ModInt.hpp
+  - kpr/math/math.hpp
+  - kpr/math/BinomMod.hpp
+  - kpr/math/power.hpp
+  - kpr/math/DynamicModInt.hpp
+  - kpr/math/Barrett.hpp
+  - kpr/math/div.hpp
+  - kpr/algorithm/algorithm.hpp
+  - kpr/algorithm/bit.hpp
+  - kpr/algorithm/contains.hpp
+  - kpr/algorithm/Hash.hpp
+  - kpr/template/template.hpp
+  - kpr/template/macro.hpp
+  - kpr/template/io_macro.hpp
+  - kpr/template/named_tuple_macro.hpp
+  - kpr/template/alias.hpp
+  - kpr/data_structure/SegmentTree.hpp
+  - kpr/data_structure/WeightedUnionFind.hpp
+  - kpr/data_structure/UnionFind.hpp
+  - kpr/data_structure/data_structure.hpp
+  - kpr/data_structure/FenwickTree.hpp
+  timestamp: '2023-04-04 01:42:52+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: kpr/meta/trait.hpp
+layout: document
+redirect_from:
+- /library/kpr/meta/trait.hpp
+- /library/kpr/meta/trait.hpp.html
+title: kpr/meta/trait.hpp
+---
