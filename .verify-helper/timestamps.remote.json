@@ -1,8 +1,9 @@
 {
-"verify/aoj/PrimeNumber.test.cpp": "2023-04-02 21:40:56 +0900",
-"verify/aoj/WeightedUnionFind.test.cpp": "2023-04-03 03:01:58 +0900",
-"verify/yosupo/factorize.test.cpp": "2023-04-02 21:40:56 +0900",
-"verify/yosupo/many_aplusb.test.cpp": "2023-04-02 21:40:56 +0900",
-"verify/yosupo/point_add_range_sum.test.cpp": "2023-04-03 01:27:56 +0900",
-"verify/yosupo/unionfind.test.cpp": "2023-04-03 01:27:56 +0900"
+"verify/aoj/WeightedUnionFind.test.cpp": "2023-04-04 01:44:29 +0900",
+"verify/aoj/is_prime.test.cpp": "2023-04-04 01:44:29 +0900",
+"verify/yosupo/factorize.test.cpp": "2023-04-04 01:44:29 +0900",
+"verify/yosupo/many_aplusb.test.cpp": "2023-04-04 01:44:29 +0900",
+"verify/yosupo/point_add_range_sum.test.cpp": "2023-04-04 01:44:29 +0900",
+"verify/yosupo/point_set_range_composite.test.cpp": "2023-04-04 01:44:29 +0900",
+"verify/yosupo/unionfind.test.cpp": "2023-04-04 01:44:29 +0900"
 }
