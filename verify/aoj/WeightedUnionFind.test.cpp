@@ -1,6 +1,6 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/problems/DSL_1_B"
-#include "kyopro/data_structure/WeightedUnionFind.hpp"
-#include "kyopro/io/io.hpp"
+#include "kpr/data_structure/WeightedUnionFind.hpp"
+#include "kpr/io/io.hpp"
 
 int main() {
     int n, q;

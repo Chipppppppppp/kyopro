@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
-#include "../../kyopro/data_structure/FenwickTree.hpp"
-#include "../../kyopro/io/io.hpp"
+#include "../../kpr/data_structure/FenwickTree.hpp"
+#include "../../kpr/io/io.hpp"
 
 int main() {
     int n, q;
