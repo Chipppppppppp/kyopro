@@ -1,46 +1,46 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/algorithm/Hash.hpp
     title: kpr/algorithm/Hash.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/algorithm/bit.hpp
     title: kpr/algorithm/bit.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/function/monoid.hpp
     title: kpr/function/monoid.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/io/in.hpp
     title: kpr/io/in.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/io/io_option.hpp
     title: kpr/io/io_option.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/io/out.hpp
     title: kpr/io/out.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/DynamicModInt.hpp
     title: kpr/math/DynamicModInt.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/Montgomery.hpp
     title: kpr/math/Montgomery.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/is_prime.hpp
     title: kpr/math/is_prime.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/power.hpp
     title: kpr/math/power.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/constant.hpp
     title: kpr/meta/constant.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/setting.hpp
     title: kpr/meta/setting.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/trait.hpp
     title: kpr/meta/trait.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/tuple_like.hpp
     title: kpr/meta/tuple_like.hpp
   _extendedRequiredBy:
@@ -53,10 +53,13 @@ data:
   - icon: ':warning:'
     path: kpr/math/math.hpp
     title: kpr/math/math.hpp
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/factorize.test.cpp
+    title: verify/yosupo/factorize.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kpr/math/factorize.hpp\"\n#include <algorithm>\r\n#include\
@@ -870,8 +873,9 @@ data:
   - kpr/all.hpp
   - kpr/math/math.hpp
   timestamp: '2023-04-04 01:42:52+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yosupo/factorize.test.cpp
 documentation_of: kpr/math/factorize.hpp
 layout: document
 redirect_from:

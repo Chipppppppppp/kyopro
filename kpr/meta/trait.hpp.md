@@ -2,13 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/algorithm/Hash.hpp
     title: kpr/algorithm/Hash.hpp
   - icon: ':warning:'
     path: kpr/algorithm/algorithm.hpp
     title: kpr/algorithm/algorithm.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/algorithm/bit.hpp
     title: kpr/algorithm/bit.hpp
   - icon: ':warning:'
@@ -20,16 +20,16 @@ data:
   - icon: ':warning:'
     path: kpr/all/all.hpp
     title: kpr/all/all.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/data_structure/FenwickTree.hpp
     title: kpr/data_structure/FenwickTree.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/data_structure/SegmentTree.hpp
     title: kpr/data_structure/SegmentTree.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/data_structure/UnionFind.hpp
     title: kpr/data_structure/UnionFind.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/data_structure/WeightedUnionFind.hpp
     title: kpr/data_structure/WeightedUnionFind.hpp
   - icon: ':warning:'
@@ -38,16 +38,16 @@ data:
   - icon: ':warning:'
     path: kpr/function/function.hpp
     title: kpr/function/function.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/function/monoid.hpp
     title: kpr/function/monoid.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/io/in.hpp
     title: kpr/io/in.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/io/io.hpp
     title: kpr/io/io.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/io/out.hpp
     title: kpr/io/out.hpp
   - icon: ':warning:'
@@ -56,28 +56,28 @@ data:
   - icon: ':warning:'
     path: kpr/math/BinomMod.hpp
     title: kpr/math/BinomMod.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/DynamicModInt.hpp
     title: kpr/math/DynamicModInt.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/ModInt.hpp
     title: kpr/math/ModInt.hpp
   - icon: ':warning:'
     path: kpr/math/div.hpp
     title: kpr/math/div.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/factorize.hpp
     title: kpr/math/factorize.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/is_prime.hpp
     title: kpr/math/is_prime.hpp
   - icon: ':warning:'
     path: kpr/math/math.hpp
     title: kpr/math/math.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/power.hpp
     title: kpr/math/power.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/constant.hpp
     title: kpr/meta/constant.hpp
   - icon: ':warning:'
@@ -107,10 +107,31 @@ data:
   - icon: ':warning:'
     path: kpr/template/template.hpp
     title: kpr/template/template.hpp
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/aoj/WeightedUnionFind.test.cpp
+    title: verify/aoj/WeightedUnionFind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/aoj/is_prime.test.cpp
+    title: verify/aoj/is_prime.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/factorize.test.cpp
+    title: verify/yosupo/factorize.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/many_aplusb.test.cpp
+    title: verify/yosupo/many_aplusb.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/point_add_range_sum.test.cpp
+    title: verify/yosupo/point_add_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/point_set_range_composite.test.cpp
+    title: verify/yosupo/point_set_range_composite.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/unionfind.test.cpp
+    title: verify/yosupo/unionfind.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kpr/meta/trait.hpp\"\n#include <cstddef>\r\n#include <iterator>\r\
@@ -385,8 +406,15 @@ data:
   - kpr/data_structure/data_structure.hpp
   - kpr/data_structure/FenwickTree.hpp
   timestamp: '2023-04-04 01:42:52+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/unionfind.test.cpp
+  - verify/yosupo/point_set_range_composite.test.cpp
+  - verify/aoj/is_prime.test.cpp
+  - verify/aoj/WeightedUnionFind.test.cpp
 documentation_of: kpr/meta/trait.hpp
 layout: document
 redirect_from:

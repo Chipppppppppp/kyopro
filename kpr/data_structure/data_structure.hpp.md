@@ -1,28 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/algorithm/bit.hpp
     title: kpr/algorithm/bit.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/data_structure/FenwickTree.hpp
     title: kpr/data_structure/FenwickTree.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/data_structure/SegmentTree.hpp
     title: kpr/data_structure/SegmentTree.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/data_structure/UnionFind.hpp
     title: kpr/data_structure/UnionFind.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/data_structure/WeightedUnionFind.hpp
     title: kpr/data_structure/WeightedUnionFind.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/function/monoid.hpp
     title: kpr/function/monoid.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/setting.hpp
     title: kpr/meta/setting.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/trait.hpp
     title: kpr/meta/trait.hpp
   _extendedRequiredBy:

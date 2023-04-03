@@ -11,7 +11,7 @@ data:
   - icon: ':warning:'
     path: kpr/math/BinomMod.hpp
     title: kpr/math/BinomMod.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/ModInt.hpp
     title: kpr/math/ModInt.hpp
   - icon: ':warning:'
@@ -23,10 +23,13 @@ data:
   - icon: ':warning:'
     path: kpr/template/template.hpp
     title: kpr/template/template.hpp
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/point_set_range_composite.test.cpp
+    title: verify/yosupo/point_set_range_composite.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kpr/math/mod.hpp\"\n#include <cassert>\r\n#include <type_traits>\r\
@@ -64,8 +67,9 @@ data:
   - kpr/template/template.hpp
   - kpr/template/alias.hpp
   timestamp: '2023-04-04 01:42:52+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yosupo/point_set_range_composite.test.cpp
 documentation_of: kpr/math/mod.hpp
 layout: document
 redirect_from:

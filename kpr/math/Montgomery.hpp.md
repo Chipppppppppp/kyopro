@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/setting.hpp
     title: kpr/meta/setting.hpp
   _extendedRequiredBy:
@@ -11,13 +11,13 @@ data:
   - icon: ':warning:'
     path: kpr/all/all.hpp
     title: kpr/all/all.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/DynamicModInt.hpp
     title: kpr/math/DynamicModInt.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/factorize.hpp
     title: kpr/math/factorize.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/is_prime.hpp
     title: kpr/math/is_prime.hpp
   - icon: ':warning:'
@@ -29,10 +29,16 @@ data:
   - icon: ':warning:'
     path: kpr/template/template.hpp
     title: kpr/template/template.hpp
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/aoj/is_prime.test.cpp
+    title: verify/aoj/is_prime.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/factorize.test.cpp
+    title: verify/yosupo/factorize.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kpr/math/Montgomery.hpp\"\n#include <cstdint>\r\n#include\
@@ -108,8 +114,10 @@ data:
   - kpr/template/template.hpp
   - kpr/template/alias.hpp
   timestamp: '2023-04-04 01:42:52+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yosupo/factorize.test.cpp
+  - verify/aoj/is_prime.test.cpp
 documentation_of: kpr/math/Montgomery.hpp
 layout: document
 redirect_from:
