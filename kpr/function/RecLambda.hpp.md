@@ -42,8 +42,8 @@ data:
   path: kpr/function/RecLambda.hpp
   requiredBy:
   - kpr/all/all.hpp
-  - kpr/function/function.hpp
   - kpr/all.hpp
+  - kpr/function/function.hpp
   timestamp: '2023-04-04 01:42:52+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
