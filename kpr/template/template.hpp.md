@@ -1032,10 +1032,10 @@ data:
     \ scan(__VA_ARGS__)\n#define LLF(...) llf __VA_ARGS__; scan(__VA_ARGS__)\n#define\
     \ MINT(...) mint __VA_ARGS__; scan(__VA_ARGS__)\n#define DMINT(...) dmint __VA_ARGS__;\
     \ scan(__VA_ARGS__)\n#define CHAR(...) char __VA_ARGS__; scan(__VA_ARGS__)\n#define\
-    \ STR(...) str __VA_ARGS__; scan(__VA_ARGS__)\n#define LI1(...) li1 __VA_ARGS__;\
-    \ scan(__VA_ARGS__)\n#define LI2(...) li2 __VA_ARGS__; scan(__VA_ARGS__)\n#define\
-    \ LI3(...) li3 __VA_ARGS__; scan(__VA_ARGS__)\n#define LI4(...) li4 __VA_ARGS__;\
-    \ scan(__VA_ARGS__)\n#define LI5(...) li5 __VA_ARGS__; scan(__VA_ARGS__)\n\n#define\
+    \ STR(...) str __VA_ARGS__; scan(__VA_ARGS__)\n#define LL1(...) ll1 __VA_ARGS__;\
+    \ scan(__VA_ARGS__)\n#define LL2(...) ll2 __VA_ARGS__; scan(__VA_ARGS__)\n#define\
+    \ LL3(...) ll3 __VA_ARGS__; scan(__VA_ARGS__)\n#define LL4(...) ll4 __VA_ARGS__;\
+    \ scan(__VA_ARGS__)\n#define LL5(...) ll5 __VA_ARGS__; scan(__VA_ARGS__)\n\n#define\
     \ KYOPRO_READ1(init, _1) auto _1 = init; scan(_1)\n#define KYOPRO_READ2(init,\
     \ _1, _2) auto _1 = init, _2 = init; scan(_1, _2)\n#define KYOPRO_READ3(init,\
     \ _1, _2, _3) auto _1 = init, _2 = init, _3 = init; scan(_1, _2, _3)\n#define\
@@ -1209,7 +1209,7 @@ data:
   path: kpr/template/template.hpp
   requiredBy:
   - kpr/all.hpp
-  timestamp: '2023-04-04 01:42:52+09:00'
+  timestamp: '2023-04-08 19:46:06+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/template/template.hpp
