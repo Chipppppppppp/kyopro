@@ -945,34 +945,36 @@ data:
     \ namespace kpr\r\n#line 6 \"kpr/math/BinomMod.hpp\"\n\nnamespace kpr {\n    //\
     \ mod\u4E8C\u9805\u4FC2\u6570\n    template<std::size_t max = KYOPRO_BINOM_MOD_MAX,\
     \ class T = ModInt<mod>>\n    struct BinomMod {\n    private:\n        static\
-    \ constexpr std::uint_fast64_t m = T::mod;\n\n    public:\n        using value_type\
-    \ = T;\n        inline static std::array<std::uint_fast64_t, max> fact, factinv,\
-    \ inv;\n\n        constexpr BinomMod() noexcept {\n            fact[0] = fact[1]\
-    \ = 1;\n            factinv[0] = factinv[1] = 1;\n            inv[1] = 1;\n  \
-    \          for (int i = 2; i < (int)max; ++i) {\n                fact[i] = fact[i\
-    \ - 1] * i % m;\n                inv[i] = m - inv[m % i] * (m / i) % m;\n    \
-    \            factinv[i] = factinv[i - 1] * inv[i] % m;\n            }\n      \
-    \  }\n\n        constexpr T c(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept\
+    \ constexpr auto m = T::m;\n\n    public:\n        using value_type = T;\n   \
+    \     inline static std::array<typename T::value_type, max> fact, factinv, inv;\n\
+    \n        constexpr BinomMod() noexcept {\n            fact[0] = fact[1] = 1;\n\
+    \            factinv[0] = factinv[1] = 1;\n            inv[1] = 1;\n         \
+    \   for (int i = 2; i < (int)max; ++i) {\n                fact[i] = static_cast<typename\
+    \ T::multiplies_type>(fact[i - 1]) * i % m;\n                inv[i] = m - static_cast<typename\
+    \ T::value_type>(static_cast<typename T::multiplies_type>(inv[m % i]) * (m / i)\
+    \ % m);\n                factinv[i] = static_cast<typename T::multiplies_type>(factinv[i\
+    \ - 1]) * inv[i] % m;\n            }\n        }\n\n        constexpr T c(KYOPRO_BASE_UINT\
+    \ n, KYOPRO_BASE_UINT r) noexcept {\n            if (n < r) return 0;\n      \
+    \      return T(fact[n] * factinv[n - r] % m * factinv[r]);\n        }\n     \
+    \   constexpr T p(KYOPRO_BASE_UINT n) noexcept {\n            return T::raw(fact[n]);\n\
+    \        }\n        constexpr T p(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept\
     \ {\n            if (n < r) return 0;\n            return T(fact[n] * factinv[n\
-    \ - r] % m * factinv[r]);\n        }\n        constexpr T p(KYOPRO_BASE_UINT n)\
-    \ noexcept {\n            return T::raw(fact[n]);\n        }\n        constexpr\
-    \ T p(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept {\n            if (n <\
-    \ r) return 0;\n            return T(fact[n] * factinv[n - r]);\n        }\n \
-    \       constexpr T h(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept {\n   \
-    \         return c(n + r - 1, r);\n        }\n    };\n} // namespace kpr\n#line\
-    \ 3 \"kpr/math/div.hpp\"\n\r\nnamespace kpr {\r\n    // floor(a \xF7 b)\u3092\u8FD4\
-    \u3059\r\n    [[maybe_unused]] inline constexpr struct {\r\n        template<class\
-    \ T, class U>\r\n        constexpr std::common_type_t<T, U> operator ()(T x, U\
-    \ m) const noexcept {\r\n            static_assert(is_integer_v<T> && is_integer_v<U>,\
-    \ \"Both of the arguments must be integers\");\r\n            if constexpr (is_unsigned_integer_v<T>\
-    \ || is_unsigned_integer_v<U>) return x / m;\r\n            auto d = x / m;\r\n\
-    \            return d * m == x ? d : d - ((x < 0) ^ (m < 0));\r\n        }\r\n\
-    \    } floor_div;\r\n\r\n    // ceil(a \xF7 b)\u3092\u8FD4\u3059\r\n    [[maybe_unused]]\
-    \ inline constexpr struct {\r\n        template<class T, class U>\r\n        constexpr\
-    \ std::common_type_t<T, U> operator ()(T x, U m) const noexcept {\r\n        \
-    \    return floor_div(x + m - static_cast<T>(1), m);\r\n        }\r\n    } ceil_div;\r\
-    \n} // namespace kpr\r\n#line 5 \"kpr/math/divisors.hpp\"\n\r\nnamespace kpr {\r\
-    \n    // \u5168\u3066\u306E\u6B63\u306E\u7D04\u6570\u3092\u8FD4\u3059\r\n    [[maybe_unused]]\
+    \ - r]);\n        }\n        constexpr T h(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT\
+    \ r) noexcept {\n            return c(n + r - 1, r);\n        }\n    };\n} //\
+    \ namespace kpr\n#line 3 \"kpr/math/div.hpp\"\n\r\nnamespace kpr {\r\n    // floor(a\
+    \ \xF7 b)\u3092\u8FD4\u3059\r\n    [[maybe_unused]] inline constexpr struct {\r\
+    \n        template<class T, class U>\r\n        constexpr std::common_type_t<T,\
+    \ U> operator ()(T x, U m) const noexcept {\r\n            static_assert(is_integer_v<T>\
+    \ && is_integer_v<U>, \"Both of the arguments must be integers\");\r\n       \
+    \     if constexpr (is_unsigned_integer_v<T> || is_unsigned_integer_v<U>) return\
+    \ x / m;\r\n            auto d = x / m;\r\n            return d * m == x ? d :\
+    \ d - ((x < 0) ^ (m < 0));\r\n        }\r\n    } floor_div;\r\n\r\n    // ceil(a\
+    \ \xF7 b)\u3092\u8FD4\u3059\r\n    [[maybe_unused]] inline constexpr struct {\r\
+    \n        template<class T, class U>\r\n        constexpr std::common_type_t<T,\
+    \ U> operator ()(T x, U m) const noexcept {\r\n            return floor_div(x\
+    \ + m - static_cast<T>(1), m);\r\n        }\r\n    } ceil_div;\r\n} // namespace\
+    \ kpr\r\n#line 5 \"kpr/math/divisors.hpp\"\n\r\nnamespace kpr {\r\n    // \u5168\
+    \u3066\u306E\u6B63\u306E\u7D04\u6570\u3092\u8FD4\u3059\r\n    [[maybe_unused]]\
     \ inline constexpr struct {\r\n        std::vector<KYOPRO_BASE_INT> operator ()(std::uint_fast64_t\
     \ n) const {\r\n            std::vector<KYOPRO_BASE_INT> lower, upper;\r\n   \
     \         std::uint_fast64_t i;\r\n            for (i = 1; i * i < n; ++i) if\
@@ -1623,7 +1625,7 @@ data:
   isVerificationFile: false
   path: kpr/all.hpp
   requiredBy: []
-  timestamp: '2023-04-16 05:00:59+09:00'
+  timestamp: '2023-04-16 07:23:53+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/all.hpp

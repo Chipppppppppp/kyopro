@@ -749,32 +749,15 @@ data:
     \ namespace kpr\r\n#line 6 \"kpr/math/BinomMod.hpp\"\n\nnamespace kpr {\n    //\
     \ mod\u4E8C\u9805\u4FC2\u6570\n    template<std::size_t max = KYOPRO_BINOM_MOD_MAX,\
     \ class T = ModInt<mod>>\n    struct BinomMod {\n    private:\n        static\
-    \ constexpr std::uint_fast64_t m = T::mod;\n\n    public:\n        using value_type\
-    \ = T;\n        inline static std::array<std::uint_fast64_t, max> fact, factinv,\
-    \ inv;\n\n        constexpr BinomMod() noexcept {\n            fact[0] = fact[1]\
-    \ = 1;\n            factinv[0] = factinv[1] = 1;\n            inv[1] = 1;\n  \
-    \          for (int i = 2; i < (int)max; ++i) {\n                fact[i] = fact[i\
-    \ - 1] * i % m;\n                inv[i] = m - inv[m % i] * (m / i) % m;\n    \
-    \            factinv[i] = factinv[i - 1] * inv[i] % m;\n            }\n      \
-    \  }\n\n        constexpr T c(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept\
-    \ {\n            if (n < r) return 0;\n            return T(fact[n] * factinv[n\
-    \ - r] % m * factinv[r]);\n        }\n        constexpr T p(KYOPRO_BASE_UINT n)\
-    \ noexcept {\n            return T::raw(fact[n]);\n        }\n        constexpr\
-    \ T p(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept {\n            if (n <\
-    \ r) return 0;\n            return T(fact[n] * factinv[n - r]);\n        }\n \
-    \       constexpr T h(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept {\n   \
-    \         return c(n + r - 1, r);\n        }\n    };\n} // namespace kpr\n"
-  code: "#pragma once\n#include <array>\n#include <cstdint>\n#include \"../meta/constant.hpp\"\
-    \n#include \"ModInt.hpp\"\n\nnamespace kpr {\n    // mod\u4E8C\u9805\u4FC2\u6570\
-    \n    template<std::size_t max = KYOPRO_BINOM_MOD_MAX, class T = ModInt<mod>>\n\
-    \    struct BinomMod {\n    private:\n        static constexpr std::uint_fast64_t\
-    \ m = T::mod;\n\n    public:\n        using value_type = T;\n        inline static\
-    \ std::array<std::uint_fast64_t, max> fact, factinv, inv;\n\n        constexpr\
-    \ BinomMod() noexcept {\n            fact[0] = fact[1] = 1;\n            factinv[0]\
-    \ = factinv[1] = 1;\n            inv[1] = 1;\n            for (int i = 2; i <\
-    \ (int)max; ++i) {\n                fact[i] = fact[i - 1] * i % m;\n         \
-    \       inv[i] = m - inv[m % i] * (m / i) % m;\n                factinv[i] = factinv[i\
-    \ - 1] * inv[i] % m;\n            }\n        }\n\n        constexpr T c(KYOPRO_BASE_UINT\
+    \ constexpr auto m = T::m;\n\n    public:\n        using value_type = T;\n   \
+    \     inline static std::array<typename T::value_type, max> fact, factinv, inv;\n\
+    \n        constexpr BinomMod() noexcept {\n            fact[0] = fact[1] = 1;\n\
+    \            factinv[0] = factinv[1] = 1;\n            inv[1] = 1;\n         \
+    \   for (int i = 2; i < (int)max; ++i) {\n                fact[i] = static_cast<typename\
+    \ T::multiplies_type>(fact[i - 1]) * i % m;\n                inv[i] = m - static_cast<typename\
+    \ T::value_type>(static_cast<typename T::multiplies_type>(inv[m % i]) * (m / i)\
+    \ % m);\n                factinv[i] = static_cast<typename T::multiplies_type>(factinv[i\
+    \ - 1]) * inv[i] % m;\n            }\n        }\n\n        constexpr T c(KYOPRO_BASE_UINT\
     \ n, KYOPRO_BASE_UINT r) noexcept {\n            if (n < r) return 0;\n      \
     \      return T(fact[n] * factinv[n - r] % m * factinv[r]);\n        }\n     \
     \   constexpr T p(KYOPRO_BASE_UINT n) noexcept {\n            return T::raw(fact[n]);\n\
@@ -783,6 +766,26 @@ data:
     \ - r]);\n        }\n        constexpr T h(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT\
     \ r) noexcept {\n            return c(n + r - 1, r);\n        }\n    };\n} //\
     \ namespace kpr\n"
+  code: "#pragma once\n#include <array>\n#include <cstdint>\n#include \"../meta/constant.hpp\"\
+    \n#include \"ModInt.hpp\"\n\nnamespace kpr {\n    // mod\u4E8C\u9805\u4FC2\u6570\
+    \n    template<std::size_t max = KYOPRO_BINOM_MOD_MAX, class T = ModInt<mod>>\n\
+    \    struct BinomMod {\n    private:\n        static constexpr auto m = T::m;\n\
+    \n    public:\n        using value_type = T;\n        inline static std::array<typename\
+    \ T::value_type, max> fact, factinv, inv;\n\n        constexpr BinomMod() noexcept\
+    \ {\n            fact[0] = fact[1] = 1;\n            factinv[0] = factinv[1] =\
+    \ 1;\n            inv[1] = 1;\n            for (int i = 2; i < (int)max; ++i)\
+    \ {\n                fact[i] = static_cast<typename T::multiplies_type>(fact[i\
+    \ - 1]) * i % m;\n                inv[i] = m - static_cast<typename T::value_type>(static_cast<typename\
+    \ T::multiplies_type>(inv[m % i]) * (m / i) % m);\n                factinv[i]\
+    \ = static_cast<typename T::multiplies_type>(factinv[i - 1]) * inv[i] % m;\n \
+    \           }\n        }\n\n        constexpr T c(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT\
+    \ r) noexcept {\n            if (n < r) return 0;\n            return T(fact[n]\
+    \ * factinv[n - r] % m * factinv[r]);\n        }\n        constexpr T p(KYOPRO_BASE_UINT\
+    \ n) noexcept {\n            return T::raw(fact[n]);\n        }\n        constexpr\
+    \ T p(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept {\n            if (n <\
+    \ r) return 0;\n            return T(fact[n] * factinv[n - r]);\n        }\n \
+    \       constexpr T h(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept {\n   \
+    \         return c(n + r - 1, r);\n        }\n    };\n} // namespace kpr\n"
   dependsOn:
   - kpr/meta/constant.hpp
   - kpr/math/power.hpp
@@ -803,7 +806,7 @@ data:
   - kpr/all/all.hpp
   - kpr/math/math.hpp
   - kpr/all.hpp
-  timestamp: '2023-04-16 05:00:59+09:00'
+  timestamp: '2023-04-16 07:23:53+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/aoj/mod/DPL_5_B.test.cpp
