@@ -2,19 +2,112 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':question:'
     path: kpr/algorithm/Hash.hpp
     title: kpr/algorithm/Hash.hpp
+  - icon: ':warning:'
+    path: kpr/algorithm/algorithm.hpp
+    title: kpr/algorithm/algorithm.hpp
   - icon: ':warning:'
     path: kpr/algorithm/contains.hpp
     title: kpr/algorithm/contains.hpp
   - icon: ':warning:'
+    path: kpr/all.hpp
+    title: kpr/all.hpp
+  - icon: ':warning:'
+    path: kpr/all/all.hpp
+    title: kpr/all/all.hpp
+  - icon: ':question:'
+    path: kpr/io/in.hpp
+    title: kpr/io/in.hpp
+  - icon: ':question:'
+    path: kpr/io/io.hpp
+    title: kpr/io/io.hpp
+  - icon: ':question:'
+    path: kpr/io/out.hpp
+    title: kpr/io/out.hpp
+  - icon: ':x:'
+    path: kpr/math/BinomMod.hpp
+    title: kpr/math/BinomMod.hpp
+  - icon: ':question:'
+    path: kpr/math/DynamicModInt.hpp
+    title: kpr/math/DynamicModInt.hpp
+  - icon: ':question:'
+    path: kpr/math/ModInt.hpp
+    title: kpr/math/ModInt.hpp
+  - icon: ':heavy_check_mark:'
+    path: kpr/math/factorize.hpp
+    title: kpr/math/factorize.hpp
+  - icon: ':question:'
+    path: kpr/math/is_prime.hpp
+    title: kpr/math/is_prime.hpp
+  - icon: ':warning:'
+    path: kpr/math/math.hpp
+    title: kpr/math/math.hpp
+  - icon: ':warning:'
+    path: kpr/meta/meta.hpp
+    title: kpr/meta/meta.hpp
+  - icon: ':warning:'
+    path: kpr/template/alias.hpp
+    title: kpr/template/alias.hpp
+  - icon: ':warning:'
+    path: kpr/template/io_macro.hpp
+    title: kpr/template/io_macro.hpp
+  - icon: ':warning:'
     path: kpr/template/lambda_macro.hpp
     title: kpr/template/lambda_macro.hpp
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  - icon: ':warning:'
+    path: kpr/template/macro.hpp
+    title: kpr/template/macro.hpp
+  - icon: ':warning:'
+    path: kpr/template/named_tuple_macro.hpp
+    title: kpr/template/named_tuple_macro.hpp
+  - icon: ':warning:'
+    path: kpr/template/template.hpp
+    title: kpr/template/template.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/aoj/WeightedUnionFind.test.cpp
+    title: verify/aoj/WeightedUnionFind.test.cpp
+  - icon: ':x:'
+    path: verify/aoj/is_prime.test.cpp
+    title: verify/aoj/is_prime.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/aoj/mod/DPL_5_A.test.cpp
+    title: verify/aoj/mod/DPL_5_A.test.cpp
+  - icon: ':x:'
+    path: verify/aoj/mod/DPL_5_B.test.cpp
+    title: verify/aoj/mod/DPL_5_B.test.cpp
+  - icon: ':x:'
+    path: verify/aoj/mod/DPL_5_C.test.cpp
+    title: verify/aoj/mod/DPL_5_C.test.cpp
+  - icon: ':x:'
+    path: verify/aoj/mod/DPL_5_D.test.cpp
+    title: verify/aoj/mod/DPL_5_D.test.cpp
+  - icon: ':x:'
+    path: verify/aoj/mod/DPL_5_E.test.cpp
+    title: verify/aoj/mod/DPL_5_E.test.cpp
+  - icon: ':x:'
+    path: verify/aoj/mod/DPL_5_F.test.cpp
+    title: verify/aoj/mod/DPL_5_F.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/factorize.test.cpp
+    title: verify/yosupo/factorize.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/many_aplusb.test.cpp
+    title: verify/yosupo/many_aplusb.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/point_add_range_sum.test.cpp
+    title: verify/yosupo/point_add_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/point_set_range_composite.test.cpp
+    title: verify/yosupo/point_set_range_composite.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yosupo/unionfind.test.cpp
+    title: verify/yosupo/unionfind.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kpr/meta/tuple_like.hpp\"\n#include <cstddef>\n#include\
@@ -142,12 +235,43 @@ data:
   isVerificationFile: false
   path: kpr/meta/tuple_like.hpp
   requiredBy:
+  - kpr/all/all.hpp
+  - kpr/math/ModInt.hpp
+  - kpr/math/DynamicModInt.hpp
+  - kpr/math/math.hpp
+  - kpr/math/factorize.hpp
+  - kpr/math/is_prime.hpp
+  - kpr/math/BinomMod.hpp
+  - kpr/template/macro.hpp
+  - kpr/template/named_tuple_macro.hpp
   - kpr/template/lambda_macro.hpp
+  - kpr/template/alias.hpp
+  - kpr/template/template.hpp
+  - kpr/template/io_macro.hpp
+  - kpr/io/out.hpp
+  - kpr/io/in.hpp
+  - kpr/io/io.hpp
+  - kpr/all.hpp
+  - kpr/meta/meta.hpp
   - kpr/algorithm/contains.hpp
   - kpr/algorithm/Hash.hpp
+  - kpr/algorithm/algorithm.hpp
   timestamp: '2023-04-16 03:08:34+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_SOME_WA
+  verifiedWith:
+  - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/unionfind.test.cpp
+  - verify/yosupo/point_set_range_composite.test.cpp
+  - verify/aoj/WeightedUnionFind.test.cpp
+  - verify/aoj/mod/DPL_5_B.test.cpp
+  - verify/aoj/mod/DPL_5_F.test.cpp
+  - verify/aoj/mod/DPL_5_C.test.cpp
+  - verify/aoj/mod/DPL_5_A.test.cpp
+  - verify/aoj/mod/DPL_5_D.test.cpp
+  - verify/aoj/mod/DPL_5_E.test.cpp
+  - verify/aoj/is_prime.test.cpp
 documentation_of: kpr/meta/tuple_like.hpp
 layout: document
 redirect_from:

@@ -1,7 +1,13 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kpr/all.hpp
+    title: kpr/all.hpp
+  - icon: ':warning:'
+    path: kpr/template/template.hpp
+    title: kpr/template/template.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -25,7 +31,9 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: kpr/template/make_vec.hpp
-  requiredBy: []
+  requiredBy:
+  - kpr/template/template.hpp
+  - kpr/all.hpp
   timestamp: '2023-04-16 03:08:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

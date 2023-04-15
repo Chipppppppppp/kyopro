@@ -1,13 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':question:'
     path: kpr/meta/trait.hpp
     title: kpr/meta/trait.hpp
-  - icon: ':warning:'
+  - icon: ':question:'
     path: kpr/meta/tuple_like.hpp
     title: kpr/meta/tuple_like.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kpr/algorithm/algorithm.hpp
+    title: kpr/algorithm/algorithm.hpp
+  - icon: ':warning:'
+    path: kpr/all.hpp
+    title: kpr/all.hpp
+  - icon: ':warning:'
+    path: kpr/all/all.hpp
+    title: kpr/all/all.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -227,7 +236,10 @@ data:
   - kpr/meta/trait.hpp
   isVerificationFile: false
   path: kpr/algorithm/contains.hpp
-  requiredBy: []
+  requiredBy:
+  - kpr/all/all.hpp
+  - kpr/all.hpp
+  - kpr/algorithm/algorithm.hpp
   timestamp: '2023-04-16 03:08:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

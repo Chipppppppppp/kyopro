@@ -1,7 +1,16 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: kpr/all.hpp
+    title: kpr/all.hpp
+  - icon: ':warning:'
+    path: kpr/template/macro.hpp
+    title: kpr/template/macro.hpp
+  - icon: ':warning:'
+    path: kpr/template/template.hpp
+    title: kpr/template/template.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -31,7 +40,10 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: kpr/template/all_rall_macro.hpp
-  requiredBy: []
+  requiredBy:
+  - kpr/template/macro.hpp
+  - kpr/template/template.hpp
+  - kpr/all.hpp
   timestamp: '2023-04-04 01:42:52+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

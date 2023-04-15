@@ -3,13 +3,13 @@ data:
   libraryCategories:
   - name: kpr/algorithm
     pages:
-    - icon: ':warning:'
+    - icon: ':question:'
       path: kpr/algorithm/Hash.hpp
       title: kpr/algorithm/Hash.hpp
     - icon: ':warning:'
       path: kpr/algorithm/algorithm.hpp
       title: kpr/algorithm/algorithm.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: kpr/algorithm/bit.hpp
       title: kpr/algorithm/bit.hpp
     - icon: ':warning:'
@@ -36,16 +36,16 @@ data:
       title: kpr/all.hpp
   - name: kpr/data_structure
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: kpr/data_structure/FenwickTree.hpp
       title: kpr/data_structure/FenwickTree.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: kpr/data_structure/SegmentTree.hpp
       title: kpr/data_structure/SegmentTree.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: kpr/data_structure/UnionFind.hpp
       title: kpr/data_structure/UnionFind.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: kpr/data_structure/WeightedUnionFind.hpp
       title: kpr/data_structure/WeightedUnionFind.hpp
     - icon: ':warning:'
@@ -62,21 +62,21 @@ data:
     - icon: ':warning:'
       path: kpr/function/function.hpp
       title: kpr/function/function.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: kpr/function/monoid.hpp
       title: kpr/function/monoid.hpp
   - name: kpr/io
     pages:
-    - icon: ':warning:'
+    - icon: ':question:'
       path: kpr/io/in.hpp
       title: kpr/io/in.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: kpr/io/io.hpp
       title: kpr/io/io.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: kpr/io/io_option.hpp
       title: kpr/io/io_option.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: kpr/io/out.hpp
       title: kpr/io/out.hpp
   - name: kpr/math
@@ -84,16 +84,16 @@ data:
     - icon: ':warning:'
       path: kpr/math/Barrett.hpp
       title: kpr/math/Barrett.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: kpr/math/BinomMod.hpp
       title: kpr/math/BinomMod.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: kpr/math/DynamicModInt.hpp
       title: kpr/math/DynamicModInt.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: kpr/math/ModInt.hpp
       title: kpr/math/ModInt.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: kpr/math/Montgomery.hpp
       title: kpr/math/Montgomery.hpp
     - icon: ':warning:'
@@ -105,36 +105,36 @@ data:
     - icon: ':warning:'
       path: kpr/math/euler_phi.hpp
       title: kpr/math/euler_phi.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: kpr/math/factorize.hpp
       title: kpr/math/factorize.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: kpr/math/is_prime.hpp
       title: kpr/math/is_prime.hpp
     - icon: ':warning:'
       path: kpr/math/math.hpp
       title: kpr/math/math.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: kpr/math/mod.hpp
       title: kpr/math/mod.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: kpr/math/power.hpp
       title: kpr/math/power.hpp
   - name: kpr/meta
     pages:
-    - icon: ':warning:'
+    - icon: ':question:'
       path: kpr/meta/constant.hpp
       title: kpr/meta/constant.hpp
     - icon: ':warning:'
       path: kpr/meta/meta.hpp
       title: kpr/meta/meta.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: kpr/meta/setting.hpp
       title: kpr/meta/setting.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: kpr/meta/trait.hpp
       title: kpr/meta/trait.hpp
-    - icon: ':warning:'
+    - icon: ':question:'
       path: kpr/meta/tuple_like.hpp
       title: kpr/meta/tuple_like.hpp
   - name: kpr/range
@@ -213,7 +213,7 @@ data:
   verificationCategories:
   - name: verify/aoj
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/aoj/WeightedUnionFind.test.cpp
       title: verify/aoj/WeightedUnionFind.test.cpp
     - icon: ':x:'
@@ -221,7 +221,7 @@ data:
       title: verify/aoj/is_prime.test.cpp
   - name: verify/aoj/mod
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/aoj/mod/DPL_5_A.test.cpp
       title: verify/aoj/mod/DPL_5_A.test.cpp
     - icon: ':x:'
@@ -241,19 +241,19 @@ data:
       title: verify/aoj/mod/DPL_5_F.test.cpp
   - name: verify/yosupo
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/yosupo/factorize.test.cpp
       title: verify/yosupo/factorize.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/yosupo/many_aplusb.test.cpp
       title: verify/yosupo/many_aplusb.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/yosupo/point_add_range_sum.test.cpp
       title: verify/yosupo/point_add_range_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/yosupo/point_set_range_composite.test.cpp
       title: verify/yosupo/point_set_range_composite.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/yosupo/unionfind.test.cpp
       title: verify/yosupo/unionfind.test.cpp
 layout: toppage
