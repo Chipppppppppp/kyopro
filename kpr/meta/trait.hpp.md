@@ -2,87 +2,15 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: kpr/algorithm/Hash.hpp
     title: kpr/algorithm/Hash.hpp
-  - icon: ':warning:'
-    path: kpr/algorithm/algorithm.hpp
-    title: kpr/algorithm/algorithm.hpp
-  - icon: ':heavy_check_mark:'
-    path: kpr/algorithm/bit.hpp
-    title: kpr/algorithm/bit.hpp
   - icon: ':warning:'
     path: kpr/algorithm/contains.hpp
     title: kpr/algorithm/contains.hpp
   - icon: ':warning:'
-    path: kpr/all.hpp
-    title: kpr/all.hpp
-  - icon: ':warning:'
-    path: kpr/all/all.hpp
-    title: kpr/all/all.hpp
-  - icon: ':heavy_check_mark:'
-    path: kpr/data_structure/FenwickTree.hpp
-    title: kpr/data_structure/FenwickTree.hpp
-  - icon: ':heavy_check_mark:'
-    path: kpr/data_structure/SegmentTree.hpp
-    title: kpr/data_structure/SegmentTree.hpp
-  - icon: ':heavy_check_mark:'
-    path: kpr/data_structure/UnionFind.hpp
-    title: kpr/data_structure/UnionFind.hpp
-  - icon: ':heavy_check_mark:'
-    path: kpr/data_structure/WeightedUnionFind.hpp
-    title: kpr/data_structure/WeightedUnionFind.hpp
-  - icon: ':warning:'
-    path: kpr/data_structure/data_structure.hpp
-    title: kpr/data_structure/data_structure.hpp
-  - icon: ':warning:'
-    path: kpr/function/function.hpp
-    title: kpr/function/function.hpp
-  - icon: ':heavy_check_mark:'
-    path: kpr/function/monoid.hpp
-    title: kpr/function/monoid.hpp
-  - icon: ':heavy_check_mark:'
-    path: kpr/io/in.hpp
-    title: kpr/io/in.hpp
-  - icon: ':heavy_check_mark:'
-    path: kpr/io/io.hpp
-    title: kpr/io/io.hpp
-  - icon: ':heavy_check_mark:'
-    path: kpr/io/out.hpp
-    title: kpr/io/out.hpp
-  - icon: ':warning:'
-    path: kpr/math/Barrett.hpp
-    title: kpr/math/Barrett.hpp
-  - icon: ':warning:'
-    path: kpr/math/BinomMod.hpp
-    title: kpr/math/BinomMod.hpp
-  - icon: ':heavy_check_mark:'
-    path: kpr/math/DynamicModInt.hpp
-    title: kpr/math/DynamicModInt.hpp
-  - icon: ':heavy_check_mark:'
-    path: kpr/math/ModInt.hpp
-    title: kpr/math/ModInt.hpp
-  - icon: ':warning:'
     path: kpr/math/div.hpp
     title: kpr/math/div.hpp
-  - icon: ':heavy_check_mark:'
-    path: kpr/math/factorize.hpp
-    title: kpr/math/factorize.hpp
-  - icon: ':heavy_check_mark:'
-    path: kpr/math/is_prime.hpp
-    title: kpr/math/is_prime.hpp
-  - icon: ':warning:'
-    path: kpr/math/math.hpp
-    title: kpr/math/math.hpp
-  - icon: ':heavy_check_mark:'
-    path: kpr/math/power.hpp
-    title: kpr/math/power.hpp
-  - icon: ':heavy_check_mark:'
-    path: kpr/meta/constant.hpp
-    title: kpr/meta/constant.hpp
-  - icon: ':warning:'
-    path: kpr/meta/meta.hpp
-    title: kpr/meta/meta.hpp
   - icon: ':warning:'
     path: kpr/range/imap.hpp
     title: kpr/range/imap.hpp
@@ -92,46 +20,10 @@ data:
   - icon: ':warning:'
     path: kpr/range/range.hpp
     title: kpr/range/range.hpp
-  - icon: ':warning:'
-    path: kpr/template/alias.hpp
-    title: kpr/template/alias.hpp
-  - icon: ':warning:'
-    path: kpr/template/io_macro.hpp
-    title: kpr/template/io_macro.hpp
-  - icon: ':warning:'
-    path: kpr/template/macro.hpp
-    title: kpr/template/macro.hpp
-  - icon: ':warning:'
-    path: kpr/template/named_tuple_macro.hpp
-    title: kpr/template/named_tuple_macro.hpp
-  - icon: ':warning:'
-    path: kpr/template/template.hpp
-    title: kpr/template/template.hpp
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/aoj/WeightedUnionFind.test.cpp
-    title: verify/aoj/WeightedUnionFind.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/aoj/is_prime.test.cpp
-    title: verify/aoj/is_prime.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/yosupo/factorize.test.cpp
-    title: verify/yosupo/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/yosupo/many_aplusb.test.cpp
-    title: verify/yosupo/many_aplusb.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/yosupo/point_add_range_sum.test.cpp
-    title: verify/yosupo/point_add_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/yosupo/point_set_range_composite.test.cpp
-    title: verify/yosupo/point_set_range_composite.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/yosupo/unionfind.test.cpp
-    title: verify/yosupo/unionfind.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kpr/meta/trait.hpp\"\n#include <cstddef>\r\n#include <iterator>\r\
@@ -373,48 +265,12 @@ data:
   - kpr/range/irange.hpp
   - kpr/range/range.hpp
   - kpr/range/imap.hpp
-  - kpr/all/all.hpp
-  - kpr/math/ModInt.hpp
-  - kpr/math/power.hpp
-  - kpr/math/DynamicModInt.hpp
-  - kpr/math/math.hpp
-  - kpr/math/factorize.hpp
-  - kpr/math/is_prime.hpp
-  - kpr/math/BinomMod.hpp
   - kpr/math/div.hpp
-  - kpr/math/Barrett.hpp
-  - kpr/template/macro.hpp
-  - kpr/template/named_tuple_macro.hpp
-  - kpr/template/alias.hpp
-  - kpr/template/template.hpp
-  - kpr/template/io_macro.hpp
-  - kpr/io/out.hpp
-  - kpr/io/in.hpp
-  - kpr/io/io.hpp
-  - kpr/data_structure/WeightedUnionFind.hpp
-  - kpr/data_structure/SegmentTree.hpp
-  - kpr/data_structure/data_structure.hpp
-  - kpr/data_structure/UnionFind.hpp
-  - kpr/data_structure/FenwickTree.hpp
-  - kpr/all.hpp
-  - kpr/meta/constant.hpp
-  - kpr/meta/meta.hpp
-  - kpr/function/monoid.hpp
-  - kpr/function/function.hpp
   - kpr/algorithm/contains.hpp
   - kpr/algorithm/Hash.hpp
-  - kpr/algorithm/bit.hpp
-  - kpr/algorithm/algorithm.hpp
   timestamp: '2023-04-04 01:42:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/yosupo/factorize.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
-  - verify/yosupo/many_aplusb.test.cpp
-  - verify/yosupo/unionfind.test.cpp
-  - verify/yosupo/point_set_range_composite.test.cpp
-  - verify/aoj/WeightedUnionFind.test.cpp
-  - verify/aoj/is_prime.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: kpr/meta/trait.hpp
 layout: document
 redirect_from:

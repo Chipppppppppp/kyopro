@@ -1,19 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: kpr/meta/trait.hpp
     title: kpr/meta/trait.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: kpr/all.hpp
-    title: kpr/all.hpp
-  - icon: ':warning:'
-    path: kpr/all/all.hpp
-    title: kpr/all/all.hpp
-  - icon: ':warning:'
-    path: kpr/math/math.hpp
-    title: kpr/math/math.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -165,10 +156,7 @@ data:
   - kpr/meta/trait.hpp
   isVerificationFile: false
   path: kpr/math/div.hpp
-  requiredBy:
-  - kpr/all/all.hpp
-  - kpr/math/math.hpp
-  - kpr/all.hpp
+  requiredBy: []
   timestamp: '2023-04-04 01:42:52+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

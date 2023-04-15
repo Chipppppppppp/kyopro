@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: kpr/meta/trait.hpp
     title: kpr/meta/trait.hpp
   - icon: ':warning:'

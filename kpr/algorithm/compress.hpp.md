@@ -4,16 +4,7 @@ data:
   - icon: ':warning:'
     path: kpr/function/compare.hpp
     title: kpr/function/compare.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: kpr/algorithm/algorithm.hpp
-    title: kpr/algorithm/algorithm.hpp
-  - icon: ':warning:'
-    path: kpr/all.hpp
-    title: kpr/all.hpp
-  - icon: ':warning:'
-    path: kpr/all/all.hpp
-    title: kpr/all/all.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -66,10 +57,7 @@ data:
   - kpr/function/compare.hpp
   isVerificationFile: false
   path: kpr/algorithm/compress.hpp
-  requiredBy:
-  - kpr/all/all.hpp
-  - kpr/all.hpp
-  - kpr/algorithm/algorithm.hpp
+  requiredBy: []
   timestamp: '2023-04-04 01:42:52+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

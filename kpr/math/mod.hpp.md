@@ -1,35 +1,11 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: kpr/all.hpp
-    title: kpr/all.hpp
-  - icon: ':warning:'
-    path: kpr/all/all.hpp
-    title: kpr/all/all.hpp
-  - icon: ':warning:'
-    path: kpr/math/BinomMod.hpp
-    title: kpr/math/BinomMod.hpp
-  - icon: ':heavy_check_mark:'
-    path: kpr/math/ModInt.hpp
-    title: kpr/math/ModInt.hpp
-  - icon: ':warning:'
-    path: kpr/math/math.hpp
-    title: kpr/math/math.hpp
-  - icon: ':warning:'
-    path: kpr/template/alias.hpp
-    title: kpr/template/alias.hpp
-  - icon: ':warning:'
-    path: kpr/template/template.hpp
-    title: kpr/template/template.hpp
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/yosupo/point_set_range_composite.test.cpp
-    title: verify/yosupo/point_set_range_composite.test.cpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kpr/math/mod.hpp\"\n#include <cassert>\r\n#include <type_traits>\r\
@@ -58,18 +34,10 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: kpr/math/mod.hpp
-  requiredBy:
-  - kpr/all/all.hpp
-  - kpr/math/ModInt.hpp
-  - kpr/math/math.hpp
-  - kpr/math/BinomMod.hpp
-  - kpr/template/alias.hpp
-  - kpr/template/template.hpp
-  - kpr/all.hpp
+  requiredBy: []
   timestamp: '2023-04-04 01:42:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/yosupo/point_set_range_composite.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: kpr/math/mod.hpp
 layout: document
 redirect_from:
