@@ -1130,39 +1130,40 @@ data:
     \ nullptr, KYOPRO_NAMED_TUPLE2, nullptr, KYOPRO_NAMED_TUPLE1, nullptr, KYOPRO_NAMED_TUPLE0)(__VA_ARGS__)\n\
     #line 3 \"kpr/template/rep_macro.hpp\"\n\n#define KYOPRO_OVERLOAD_REP(_1, _2,\
     \ _3, name, ...) name\n\n#define KYOPRO_REP0() for (; ; )\n#define KYOPRO_REP1(last)\
-    \ KYOPRO_REP2(KYOPRO_COUNTER, last)\n#define KYOPRO_REP2(i, last) for (auto i\
-    \ = std::decay_t<decltype(last)>(), KYOPRO_LAST = (last); (i) != (KYOPRO_LAST);\
-    \ ++(i))\n#define KYOPRO_REP3(i, first, last) for (auto i = (first), KYOPRO_LAST\
-    \ = last; (i) != (KYOPRO_LAST); ++(i))\n\n#define rep(...) KYOPRO_OVERLOAD_REP(__VA_ARGS__\
-    \ __VA_OPT__(,) KYOPRO_REP3, KYOPRO_REP2, KYOPRO_REP1, KYOPRO_REP0)(__VA_ARGS__)\n\
-    \nnamespace kpr::helper {\n    template<class T>\n    constexpr auto prev(T x)\
-    \ noexcept {\n        return --x;\n    }\n} // namespace kpr::helper\n\n#define\
-    \ KYOPRO_RREP0() for (; ; )\n#define KYOPRO_RREP1(last) KYOPRO_RREP2(KYOPRO_COUNTER,\
-    \ last)\n#define KYOPRO_RREP2(i, last) for (auto i = kpr::helper::prev(last),\
-    \ KYOPRO_FIRST = kpr::helper::prev(std::decay_t<decltype(last)>()); (i) != (KYOPRO_FIRST);\
-    \ --(i))\n#define KYOPRO_RREP3(i, first, last) for (auto i = kpr::helper::prev(last),\
-    \ KYOPRO_FIRST = kpr::helper::prev(first); (i) != (KYOPRO_FIRST); --(i))\n\n#define\
-    \ rrep(...) KYOPRO_OVERLOAD_REP(__VA_ARGS__ __VA_OPT__(,) KYOPRO_RREP3, KYOPRO_RREP2,\
-    \ KYOPRO_RREP1, KYOPRO_RREP0)(__VA_ARGS__)\n#line 2 \"kpr/template/main.hpp\"\n\
-    \nnamespace kpr {\n    void main();\n} // namespace kpr\n\nint main() {\n    kpr::main();\n\
-    }\n#line 4 \"kpr/template/make_array.hpp\"\n\r\nnamespace kpr {\r\n    // 0\u6B21\
-    \u5143array\u3092\u751F\u6210\u3059\u308B\r\n    template<class T>\r\n    constexpr\
-    \ auto make_array(const T& init = {}) noexcept {\r\n        return init;\r\n \
-    \   }\r\n\r\n    // \u591A\u6B21\u5143array\u3092\u751F\u6210\u3059\u308B\r\n\
-    \    template<class T, std::size_t l, std::size_t... d>\r\n    constexpr auto\
-    \ make_array(const T& init = {}) noexcept {\r\n        std::array<decltype(make_array<T,\
-    \ d...>(init)), l> res{};\r\n        res.fill(make_array<T, d...>(init));\r\n\
-    \        return res;\r\n    }\r\n} // namespace kpr\r\n#line 6 \"kpr/template/make_vec.hpp\"\
-    \n\r\nnamespace kpr {\r\n    // \u591A\u6B21\u5143vector\u3092\u751F\u6210\u3059\
-    \u308B\r\n    template<class T, std::size_t n, std::size_t i = 0>\r\n    auto\
-    \ make_vec(const std::size_t (&d)[n], const T& init = {}) noexcept {\r\n     \
-    \   if constexpr (i < n) return std::vector(d[i], make_vec<T, n, i + 1>(d, init));\r\
-    \n        else return init;\r\n    }\r\n} // namespace kpr\r\n#line 3 \"kpr/template/range_cast.hpp\"\
-    \n\nnamespace kpr {\n    // Range\u306E\u578B\u5909\u63DB\n    [[maybe_unused]]\
-    \ inline constexpr struct {\n        template<class To, class From>\n        constexpr\
-    \ To operator ()(From&& container) const noexcept {\n            return To(std::begin(container),\
-    \ std::end(container));\n        }\n    } range_cast;\n} // namespace kpr\n#line\
-    \ 12 \"kpr/template/template.hpp\"\n"
+    \ KYOPRO_REP2(KYOPRO_COUNTER, last)\n#define KYOPRO_REP2(i, last) for (std::decay_t<decltype(last)>\
+    \ i{}, KYOPRO_LAST{last}; (i) != (KYOPRO_LAST); ++(i))\n#define KYOPRO_REP3(i,\
+    \ first, last) for (std::common_type_t<std::decay_t<decltype(first)>, std::decay_t<decltype(last)>>\
+    \ i{first}, KYOPRO_LAST{last}; (i) != (KYOPRO_LAST); ++(i))\n\n#define rep(...)\
+    \ KYOPRO_OVERLOAD_REP(__VA_ARGS__ __VA_OPT__(,) KYOPRO_REP3, KYOPRO_REP2, KYOPRO_REP1,\
+    \ KYOPRO_REP0)(__VA_ARGS__)\n\nnamespace kpr::helper {\n    template<class T>\n\
+    \    constexpr auto prev(T x) noexcept {\n        return --x;\n    }\n} // namespace\
+    \ kpr::helper\n\n#define KYOPRO_RREP0() for (; ; )\n#define KYOPRO_RREP1(last)\
+    \ KYOPRO_RREP2(KYOPRO_COUNTER, last)\n#define KYOPRO_RREP2(i, last) for (std::decay_t<decltype(last)>\
+    \ i{kpr::helper::prev(last)}, KYOPRO_FIRST{}; (i) != (KYOPRO_FIRST); --(i))\n\
+    #define KYOPRO_RREP3(i, first, last) for (std::common_type_t<std::decay_t<decltype(first)>,\
+    \ std::decay_t<decltype(last)>> i{kpr::helper::prev(last)}, KYOPRO_FIRST{kpr::helper::prev(first)};\
+    \ (i) != (KYOPRO_FIRST); --(i))\n\n#define rrep(...) KYOPRO_OVERLOAD_REP(__VA_ARGS__\
+    \ __VA_OPT__(,) KYOPRO_RREP3, KYOPRO_RREP2, KYOPRO_RREP1, KYOPRO_RREP0)(__VA_ARGS__)\n\
+    #line 2 \"kpr/template/main.hpp\"\n\nnamespace kpr {\n    void main();\n} // namespace\
+    \ kpr\n\nint main() {\n    kpr::main();\n}\n#line 4 \"kpr/template/make_array.hpp\"\
+    \n\r\nnamespace kpr {\r\n    // 0\u6B21\u5143array\u3092\u751F\u6210\u3059\u308B\
+    \r\n    template<class T>\r\n    constexpr auto make_array(const T& init = {})\
+    \ noexcept {\r\n        return init;\r\n    }\r\n\r\n    // \u591A\u6B21\u5143\
+    array\u3092\u751F\u6210\u3059\u308B\r\n    template<class T, std::size_t l, std::size_t...\
+    \ d>\r\n    constexpr auto make_array(const T& init = {}) noexcept {\r\n     \
+    \   std::array<decltype(make_array<T, d...>(init)), l> res{};\r\n        res.fill(make_array<T,\
+    \ d...>(init));\r\n        return res;\r\n    }\r\n} // namespace kpr\r\n#line\
+    \ 6 \"kpr/template/make_vec.hpp\"\n\r\nnamespace kpr {\r\n    // \u591A\u6B21\u5143\
+    vector\u3092\u751F\u6210\u3059\u308B\r\n    template<class T, std::size_t n, std::size_t\
+    \ i = 0>\r\n    auto make_vec(const std::size_t (&d)[n], const T& init = {}) noexcept\
+    \ {\r\n        if constexpr (i < n) return std::vector(d[i], make_vec<T, n, i\
+    \ + 1>(d, init));\r\n        else return init;\r\n    }\r\n} // namespace kpr\r\
+    \n#line 3 \"kpr/template/range_cast.hpp\"\n\nnamespace kpr {\n    // Range\u306E\
+    \u578B\u5909\u63DB\n    [[maybe_unused]] inline constexpr struct {\n        template<class\
+    \ To, class From>\n        constexpr To operator ()(From&& container) const noexcept\
+    \ {\n            return To(std::begin(container), std::end(container));\n    \
+    \    }\n    } range_cast;\n} // namespace kpr\n#line 12 \"kpr/template/template.hpp\"\
+    \n"
   code: "#pragma once\r\n#include \"stl.hpp\"\r\n#include \"alias.hpp\"\r\n#include\
     \ \"chmin_chmax.hpp\"\r\n#include \"constant.hpp\"\r\n#include \"len.hpp\"\r\n\
     #include \"macro.hpp\"\r\n#include \"main.hpp\"\r\n#include \"make_array.hpp\"\
@@ -1206,7 +1207,7 @@ data:
   path: kpr/template/template.hpp
   requiredBy:
   - kpr/all.hpp
-  timestamp: '2023-04-16 03:46:24+09:00'
+  timestamp: '2023-04-16 04:28:29+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/template/template.hpp
