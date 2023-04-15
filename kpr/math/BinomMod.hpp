@@ -13,8 +13,8 @@ namespace kpr {
 
     public:
         using value_type = T;
+        inline static std::array<std::uint_fast64_t, max> fact, factinv, inv;
 
-        static std::array<std::uint_fast64_t, max> fact, factinv, inv;
         constexpr BinomMod() noexcept {
             fact[0] = fact[1] = 1;
             factinv[0] = factinv[1] = 1;
