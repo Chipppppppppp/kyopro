@@ -22,7 +22,7 @@ data:
   - icon: ':question:'
     path: kpr/io/out.hpp
     title: kpr/io/out.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: kpr/math/BinomMod.hpp
     title: kpr/math/BinomMod.hpp
   - icon: ':question:'
@@ -48,9 +48,9 @@ data:
     title: kpr/meta/tuple_like.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/problems/DPL_5_E
@@ -736,22 +736,23 @@ data:
     \ mod\u4E8C\u9805\u4FC2\u6570\n    template<std::size_t max = KYOPRO_BINOM_MOD_MAX,\
     \ class T = ModInt<mod>>\n    struct BinomMod {\n    private:\n        static\
     \ constexpr std::uint_fast64_t m = T::mod;\n\n    public:\n        using value_type\
-    \ = T;\n\n        static std::array<std::uint_fast64_t, max> fact, factinv, inv;\n\
-    \        constexpr BinomMod() noexcept {\n            fact[0] = fact[1] = 1;\n\
-    \            factinv[0] = factinv[1] = 1;\n            inv[1] = 1;\n         \
-    \   for (int i = 2; i < (int)max; ++i) {\n                fact[i] = fact[i - 1]\
-    \ * i % m;\n                inv[i] = m - inv[m % i] * (m / i) % m;\n         \
-    \       factinv[i] = factinv[i - 1] * inv[i] % m;\n            }\n        }\n\n\
-    \        constexpr T c(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept {\n  \
-    \          if (n < r) return 0;\n            return T(fact[n] * factinv[n - r]\
-    \ % m * factinv[r]);\n        }\n        constexpr T p(KYOPRO_BASE_UINT n) noexcept\
-    \ {\n            return T::raw(fact[n]);\n        }\n        constexpr T p(KYOPRO_BASE_UINT\
-    \ n, KYOPRO_BASE_UINT r) noexcept {\n            if (n < r) return 0;\n      \
-    \      return T(fact[n] * factinv[n - r]);\n        }\n        constexpr T h(KYOPRO_BASE_UINT\
-    \ n, KYOPRO_BASE_UINT r) noexcept {\n            return c(n + r - 1, r);\n   \
-    \     }\n    };\n} // namespace kpr\n#line 4 \"verify/aoj/mod/DPL_5_E.test.cpp\"\
-    \n\nint main() {\n    kpr::BinomMod<1000000, kpr::ModInt<1000000007>> bnm;\n \
-    \   int n, k;\n    kpr::scan(n, k);\n    kpr::println(bnm.c(k, n));\n}\n"
+    \ = T;\n        inline static std::array<std::uint_fast64_t, max> fact, factinv,\
+    \ inv;\n\n        constexpr BinomMod() noexcept {\n            fact[0] = fact[1]\
+    \ = 1;\n            factinv[0] = factinv[1] = 1;\n            inv[1] = 1;\n  \
+    \          for (int i = 2; i < (int)max; ++i) {\n                fact[i] = fact[i\
+    \ - 1] * i % m;\n                inv[i] = m - inv[m % i] * (m / i) % m;\n    \
+    \            factinv[i] = factinv[i - 1] * inv[i] % m;\n            }\n      \
+    \  }\n\n        constexpr T c(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept\
+    \ {\n            if (n < r) return 0;\n            return T(fact[n] * factinv[n\
+    \ - r] % m * factinv[r]);\n        }\n        constexpr T p(KYOPRO_BASE_UINT n)\
+    \ noexcept {\n            return T::raw(fact[n]);\n        }\n        constexpr\
+    \ T p(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept {\n            if (n <\
+    \ r) return 0;\n            return T(fact[n] * factinv[n - r]);\n        }\n \
+    \       constexpr T h(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept {\n   \
+    \         return c(n + r - 1, r);\n        }\n    };\n} // namespace kpr\n#line\
+    \ 4 \"verify/aoj/mod/DPL_5_E.test.cpp\"\n\nint main() {\n    kpr::BinomMod<1000000,\
+    \ kpr::ModInt<1000000007>> bnm;\n    int n, k;\n    kpr::scan(n, k);\n    kpr::println(bnm.c(k,\
+    \ n));\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/problems/DPL_5_E\"\n#include\
     \ \"kpr/io/io.hpp\"\n#include \"kpr/math/BinomMod.hpp\"\n\nint main() {\n    kpr::BinomMod<1000000,\
     \ kpr::ModInt<1000000007>> bnm;\n    int n, k;\n    kpr::scan(n, k);\n    kpr::println(bnm.c(k,\
@@ -775,8 +776,8 @@ data:
   isVerificationFile: true
   path: verify/aoj/mod/DPL_5_E.test.cpp
   requiredBy: []
-  timestamp: '2023-04-16 03:59:33+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-04-16 04:15:34+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/aoj/mod/DPL_5_E.test.cpp
 layout: document
