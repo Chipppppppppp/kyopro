@@ -9,7 +9,7 @@ namespace kpr {
     template<std::size_t max = KYOPRO_BINOM_MOD_MAX, class T = ModInt<mod>>
     struct BinomMod {
     private:
-        static constexpr std::uint_fast64_t m = T::mod;
+        static constexpr std::uint_fast64_t m = T::m;
 
     public:
         using value_type = T;
