@@ -53,7 +53,7 @@ data:
   - icon: ':warning:'
     path: kpr/math/Barrett.hpp
     title: kpr/math/Barrett.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: kpr/math/BinomMod.hpp
     title: kpr/math/BinomMod.hpp
   - icon: ':question:'
@@ -117,19 +117,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/aoj/mod/DPL_5_A.test.cpp
     title: verify/aoj/mod/DPL_5_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/aoj/mod/DPL_5_B.test.cpp
     title: verify/aoj/mod/DPL_5_B.test.cpp
   - icon: ':x:'
     path: verify/aoj/mod/DPL_5_C.test.cpp
     title: verify/aoj/mod/DPL_5_C.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/aoj/mod/DPL_5_D.test.cpp
     title: verify/aoj/mod/DPL_5_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/aoj/mod/DPL_5_E.test.cpp
     title: verify/aoj/mod/DPL_5_E.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/aoj/mod/DPL_5_F.test.cpp
     title: verify/aoj/mod/DPL_5_F.test.cpp
   - icon: ':heavy_check_mark:'

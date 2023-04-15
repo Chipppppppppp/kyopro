@@ -22,7 +22,7 @@ data:
   - icon: ':question:'
     path: kpr/io/out.hpp
     title: kpr/io/out.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: kpr/math/BinomMod.hpp
     title: kpr/math/BinomMod.hpp
   - icon: ':question:'
@@ -48,9 +48,9 @@ data:
     title: kpr/meta/tuple_like.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/problems/DPL_5_F
@@ -666,67 +666,68 @@ data:
     \ ()(T x, U m) const noexcept {\r\n            return m - floor_mod(x - 1, m)\
     \ - static_cast<T>(1);\r\n        }\r\n    } ceil_mod;\r\n} // namespace kpr\r\
     \n#line 16 \"kpr/math/ModInt.hpp\"\n\r\nnamespace kpr {\r\n    template<KYOPRO_BASE_UINT\
-    \ m>\r\n    struct ModInt {\r\n        using value_type = uint_least_t<bit_len(m\
-    \ * 2 - 2)>;\r\n\r\n        static constexpr value_type mod = m;\r\n        value_type\
-    \ value;\r\n\r\n        static constexpr KYOPRO_BASE_INT get_mod() noexcept {\r\
-    \n            return mod;\r\n        }\r\n\r\n        constexpr ModInt() noexcept\
-    \ = default;\r\n        template<class T>\r\n        constexpr ModInt(T value)\
-    \ noexcept: value(floor_mod(value, mod)) {}\r\n\r\n        template<class T>\r\
-    \n        explicit constexpr operator T() const noexcept {\r\n            return\
-    \ value;\r\n        }\r\n\r\n        static constexpr ModInt raw(value_type value)\
-    \ noexcept {\r\n            ModInt res;\r\n            res.value = value;\r\n\
-    \            return res;\r\n        }\r\n\r\n        constexpr ModInt pow(KYOPRO_BASE_UINT\
-    \ n) const noexcept {\r\n            std::uint_fast64_t res = 1, a = value;\r\n\
-    \            while (n > 0) {\r\n                if (n & 1) res = res * a % mod;\r\
-    \n                a = a * a % mod;\r\n                n >>= 1;\r\n           \
-    \ }\r\n            return res;\r\n        }\r\n\r\n        constexpr ModInt inv()\
-    \ const noexcept {\r\n            std::uint_fast64_t a = value, b = mod;\r\n \
-    \           std::int_fast64_t u = 1, v = 0;\r\n            while (b > 0) {\r\n\
-    \                std::uint_fast64_t t = a / b;\r\n                a -= t * b;\r\
-    \n                std::swap(a, b);\r\n                u -= t * v;\r\n        \
-    \        std::swap(u, v);\r\n            }\r\n            return floor_mod(u,\
-    \ mod);\r\n        }\r\n\r\n        constexpr ModInt operator +() const noexcept\
-    \ {\r\n            return *this;\r\n        }\r\n\r\n        constexpr ModInt\
-    \ operator -() const noexcept {\r\n            return value == 0 ? 0 : mod - value;\r\
-    \n        }\r\n\r\n        constexpr ModInt& operator ++() noexcept {\r\n    \
-    \        if (++value >= mod) value -= mod;\r\n            return *this;\r\n  \
-    \      }\r\n\r\n        constexpr ModInt operator ++(int) noexcept {\r\n     \
-    \       ModInt before = *this;\r\n            ++*this;\r\n            return before;\r\
-    \n        }\r\n\r\n        constexpr ModInt& operator --() noexcept {\r\n    \
-    \        if (value == 0) value = mod;\r\n            --value;\r\n            return\
-    \ *this;\r\n        }\r\n\r\n        constexpr ModInt operator --(int) noexcept\
-    \ {\r\n            ModInt before = *this;\r\n            --*this;\r\n        \
-    \    return before;\r\n        }\r\n\r\n        constexpr ModInt& operator +=(ModInt\
-    \ rhs) noexcept {\r\n            if ((value += rhs.value) >= mod) value -= mod;\r\
-    \n            return *this;\r\n        }\r\n\r\n        constexpr ModInt& operator\
-    \ -=(ModInt rhs) noexcept {\r\n            if (value < rhs.value) value += mod;\r\
-    \n            value -= rhs.value;\r\n            return *this;\r\n        }\r\n\
-    \r\n        constexpr ModInt& operator *=(ModInt rhs) noexcept {\r\n         \
-    \   value = static_cast<uint_least_t<bit_len(mod) * 2>>(value) * rhs.value % mod;\r\
-    \n            return *this;\r\n        }\r\n\r\n        constexpr ModInt& operator\
-    \ /=(ModInt rhs) noexcept {\r\n            value = static_cast<uint_least_t<bit_len(mod)\
-    \ * 2>>(value) * rhs.inv().value % mod;\r\n            return *this;\r\n     \
-    \   }\r\n\r\n        friend constexpr ModInt operator +(ModInt lhs, ModInt rhs)\
-    \ noexcept {\r\n            return lhs += rhs;\r\n        }\r\n\r\n        friend\
-    \ constexpr ModInt operator -(ModInt lhs, ModInt rhs) noexcept {\r\n         \
-    \   return lhs -= rhs;\r\n        }\r\n\r\n        friend constexpr ModInt operator\
-    \ *(ModInt lhs, ModInt rhs) noexcept {\r\n            return lhs *= rhs;\r\n \
-    \       }\r\n\r\n        friend constexpr ModInt operator /(ModInt lhs, ModInt\
-    \ rhs) noexcept {\r\n            return lhs /= rhs;\r\n        }\r\n\r\n     \
-    \   friend constexpr bool operator ==(ModInt lhs, ModInt rhs) noexcept {\r\n \
-    \           return lhs.value == rhs.value;\r\n        }\r\n\r\n        friend\
-    \ constexpr bool operator !=(ModInt lhs, ModInt rhs) noexcept {\r\n          \
-    \  return lhs.value != rhs.value;\r\n        }\r\n\r\n        template<class Scanner>\r\
-    \n        void scan(Scanner& scanner) {\r\n            std::int_fast64_t value;\r\
-    \n            scanner.scan(value);\r\n            value = floor_mod(value, mod);\r\
-    \n        }\r\n\r\n        template<class Printer>\r\n        void print(Printer&\
-    \ printer) const {\r\n            printer.print(value);\r\n        }\r\n    };\r\
-    \n\r\n    template<KYOPRO_BASE_UINT mod>\r\n    struct ScanFunction<ModInt<mod>>\
-    \ {\r\n        template<class Scanner>\r\n        static void scan(Scanner& scanner,\
-    \ ModInt<mod>& a) {\r\n            std::int_fast64_t value;\r\n            ScanFunction<std::int_fast64_t>::scan(scanner,\
-    \ value);\r\n            a.value = floor_mod(value, a.mod);\r\n        }\r\n \
-    \   };\r\n\r\n    template<KYOPRO_BASE_UINT mod>\r\n    struct PrintFunction<ModInt<mod>>\
-    \ {\r\n        template<class Printer>\r\n        static void print(Printer& printer,\
+    \ mod>\r\n    struct ModInt {\r\n        using value_type = uint_least_t<bit_len(mod\
+    \ * 2 - 2)>;\r\n        using multiplies_type = uint_least_t<bit_len(mod) * 2>;\r\
+    \n\r\n        static constexpr value_type m = mod;\r\n        value_type value;\r\
+    \n\r\n        static constexpr KYOPRO_BASE_INT get_mod() noexcept {\r\n      \
+    \      return m;\r\n        }\r\n\r\n        constexpr ModInt() noexcept = default;\r\
+    \n        template<class T>\r\n        constexpr ModInt(T value) noexcept: value(floor_mod(value,\
+    \ m)) {}\r\n\r\n        template<class T>\r\n        explicit constexpr operator\
+    \ T() const noexcept {\r\n            return value;\r\n        }\r\n\r\n     \
+    \   static constexpr ModInt raw(value_type value) noexcept {\r\n            ModInt\
+    \ res;\r\n            res.value = value;\r\n            return res;\r\n      \
+    \  }\r\n\r\n        constexpr ModInt pow(KYOPRO_BASE_UINT n) const noexcept {\r\
+    \n            value_type res = 1, a = value;\r\n            while (n > 0) {\r\n\
+    \                if (n & 1) res = static_cast<multiplies_type>(res) * a % m;\r\
+    \n                a = static_cast<multiplies_type>(a) * a % m;\r\n           \
+    \     n >>= 1;\r\n            }\r\n            return res;\r\n        }\r\n\r\n\
+    \        constexpr ModInt inv() const noexcept {\r\n            value_type a =\
+    \ value, b = m;\r\n            std::make_signed_t<value_type> u = 1, v = 0;\r\n\
+    \            while (b > 0) {\r\n                value_type t = a / b;\r\n    \
+    \            a -= t * b;\r\n                std::swap(a, b);\r\n             \
+    \   u -= t * v;\r\n                std::swap(u, v);\r\n            }\r\n     \
+    \       return floor_mod(u, get_mod());\r\n        }\r\n\r\n        constexpr\
+    \ ModInt operator +() const noexcept {\r\n            return *this;\r\n      \
+    \  }\r\n\r\n        constexpr ModInt operator -() const noexcept {\r\n       \
+    \     return value == 0 ? 0 : m - value;\r\n        }\r\n\r\n        constexpr\
+    \ ModInt& operator ++() noexcept {\r\n            if (++value >= m) value -= m;\r\
+    \n            return *this;\r\n        }\r\n\r\n        constexpr ModInt operator\
+    \ ++(int) noexcept {\r\n            ModInt before = *this;\r\n            ++*this;\r\
+    \n            return before;\r\n        }\r\n\r\n        constexpr ModInt& operator\
+    \ --() noexcept {\r\n            if (value == 0) value = m;\r\n            --value;\r\
+    \n            return *this;\r\n        }\r\n\r\n        constexpr ModInt operator\
+    \ --(int) noexcept {\r\n            ModInt before = *this;\r\n            --*this;\r\
+    \n            return before;\r\n        }\r\n\r\n        constexpr ModInt& operator\
+    \ +=(ModInt rhs) noexcept {\r\n            if ((value += rhs.value) >= m) value\
+    \ -= m;\r\n            return *this;\r\n        }\r\n\r\n        constexpr ModInt&\
+    \ operator -=(ModInt rhs) noexcept {\r\n            if (value < rhs.value) value\
+    \ += m;\r\n            value -= rhs.value;\r\n            return *this;\r\n  \
+    \      }\r\n\r\n        constexpr ModInt& operator *=(ModInt rhs) noexcept {\r\
+    \n            value = static_cast<multiplies_type>(value) * rhs.value % m;\r\n\
+    \            return *this;\r\n        }\r\n\r\n        constexpr ModInt& operator\
+    \ /=(ModInt rhs) noexcept {\r\n            value = static_cast<multiplies_type>(value)\
+    \ * rhs.inv().value % m;\r\n            return *this;\r\n        }\r\n\r\n   \
+    \     friend constexpr ModInt operator +(ModInt lhs, ModInt rhs) noexcept {\r\n\
+    \            return lhs += rhs;\r\n        }\r\n\r\n        friend constexpr ModInt\
+    \ operator -(ModInt lhs, ModInt rhs) noexcept {\r\n            return lhs -= rhs;\r\
+    \n        }\r\n\r\n        friend constexpr ModInt operator *(ModInt lhs, ModInt\
+    \ rhs) noexcept {\r\n            return lhs *= rhs;\r\n        }\r\n\r\n     \
+    \   friend constexpr ModInt operator /(ModInt lhs, ModInt rhs) noexcept {\r\n\
+    \            return lhs /= rhs;\r\n        }\r\n\r\n        friend constexpr bool\
+    \ operator ==(ModInt lhs, ModInt rhs) noexcept {\r\n            return lhs.value\
+    \ == rhs.value;\r\n        }\r\n\r\n        friend constexpr bool operator !=(ModInt\
+    \ lhs, ModInt rhs) noexcept {\r\n            return lhs.value != rhs.value;\r\n\
+    \        }\r\n\r\n        template<class Scanner>\r\n        void scan(Scanner&\
+    \ scanner) {\r\n            std::int_fast64_t value;\r\n            scanner.scan(value);\r\
+    \n            value = floor_mod(value, m);\r\n        }\r\n\r\n        template<class\
+    \ Printer>\r\n        void print(Printer& printer) const {\r\n            printer.print(value);\r\
+    \n        }\r\n    };\r\n\r\n    template<KYOPRO_BASE_UINT mod>\r\n    struct\
+    \ ScanFunction<ModInt<mod>> {\r\n        template<class Scanner>\r\n        static\
+    \ void scan(Scanner& scanner, ModInt<mod>& a) {\r\n            std::int_fast64_t\
+    \ value;\r\n            ScanFunction<std::int_fast64_t>::scan(scanner, value);\r\
+    \n            a.value = floor_mod(value, a.m);\r\n        }\r\n    };\r\n\r\n\
+    \    template<KYOPRO_BASE_UINT mod>\r\n    struct PrintFunction<ModInt<mod>> {\r\
+    \n        template<class Printer>\r\n        static void print(Printer& printer,\
     \ ModInt<mod> a) {\r\n            PrintFunction<typename ModInt<mod>::value_type>::print(printer,\
     \ a.value);\r\n        }\r\n    };\r\n\r\n    template<KYOPRO_BASE_UINT mod>\r\
     \n    struct Hash<ModInt<mod>> {\r\n        using value_type = ModInt<mod>;\r\n\
@@ -776,8 +777,8 @@ data:
   isVerificationFile: true
   path: verify/aoj/mod/DPL_5_F.test.cpp
   requiredBy: []
-  timestamp: '2023-04-16 04:15:34+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-04-16 05:00:59+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/aoj/mod/DPL_5_F.test.cpp
 layout: document
