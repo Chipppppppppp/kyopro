@@ -43,7 +43,7 @@ namespace kpr {
     using f128 = __float128;
     #endif
 
-    using mint = ModInt<mod>;
+    using mint = KYOPRO_BASE_MINT;
     using dmint = DynamicModInt<KYOPRO_BASE_UINT>;
 
     using str = std::string;

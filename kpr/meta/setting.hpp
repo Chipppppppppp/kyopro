@@ -16,6 +16,11 @@
 #define KYOPRO_BASE_FLOAT double
 #endif
 
+#ifndef KYOPRO_BASE_MINT
+// 基本modint
+#define KYOPRO_BASE_MINT kpr::ModInt<mod>
+#endif
+
 #ifndef KYOPRO_DEFAULT_MOD
 // 問題で設定されたmod
 #define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))
@@ -34,6 +39,7 @@
 #ifndef KYOPRO_BUFFER_SIZE
 // デフォルトのバッファサイズ
 #define KYOPRO_BUFFER_SIZE (static_cast<KYOPRO_BASE_UINT>(2048))
+#endif
 
 #ifndef KYOPRO_BINOM_MOD_MAX
 // デフォルトのBinomModの計算上限
