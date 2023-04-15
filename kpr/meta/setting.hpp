@@ -34,4 +34,8 @@
 #ifndef KYOPRO_BUFFER_SIZE
 // デフォルトのバッファサイズ
 #define KYOPRO_BUFFER_SIZE (static_cast<KYOPRO_BASE_UINT>(2048))
+
+#ifndef KYOPRO_BINOM_MOD_MAX
+// デフォルトのBinomModの計算上限
+#define KYOPRO_BINOM_MOD_MAX (static_cast<KYOPRO_BASE_UINT>(1000000))
 #endif

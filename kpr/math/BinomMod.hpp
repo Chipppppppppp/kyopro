@@ -6,8 +6,14 @@
 
 namespace kpr {
     // mod二項係数
-    template<std::size_t max = 1000000, KYOPRO_BASE_UINT m = mod>
+    template<std::size_t max = KYOPRO_BINOM_MOD_MAX, class T = ModInt<mod>>
     struct BinomMod {
+    private:
+        constexpr std::uint_fast64_t m = T::mod;
+
+    public:
+        using value_type = T;
+
         static std::array<std::uint_fast64_t, max> fact, factinv, inv;
         constexpr BinomMod() noexcept {
             fact[0] = fact[1] = 1;
@@ -20,18 +26,18 @@ namespace kpr {
             }
         }
 
-        constexpr ModInt<m> c(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept {
+        constexpr T c(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept {
             if (n < r) return 0;
-            return ModInt<m>(fact[n] * factinv[n - r] % m * factinv[r]);
+            return T(fact[n] * factinv[n - r] % m * factinv[r]);
         }
-        constexpr ModInt<m> p(KYOPRO_BASE_UINT n) noexcept {
-            return ModInt<m>::raw(fact[n]);
+        constexpr T p(KYOPRO_BASE_UINT n) noexcept {
+            return T::raw(fact[n]);
         }
-        constexpr ModInt<m> p(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept {
+        constexpr T p(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept {
             if (n < r) return 0;
-            return ModInt<m>(fact[n] * factinv[n - r]);
+            return T(fact[n] * factinv[n - r]);
         }
-        constexpr ModInt<m> h(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept {
+        constexpr T h(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept {
             return c(n + r - 1, r);
         }
     };
