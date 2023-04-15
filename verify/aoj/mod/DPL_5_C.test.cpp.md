@@ -734,12 +734,12 @@ data:
     \            return static_cast<std::size_t>(a);\r\n        }\r\n    };\r\n} //\
     \ namespace kpr\r\n#line 6 \"kpr/math/BinomMod.hpp\"\n\nnamespace kpr {\n    //\
     \ mod\u4E8C\u9805\u4FC2\u6570\n    template<std::size_t max = KYOPRO_BINOM_MOD_MAX,\
-    \ class T = ModInt<mod>>\n    struct BinomMod {\n    private:\n        constexpr\
-    \ std::uint_fast64_t m = T::mod;\n\n    public:\n        using value_type = T;\n\
-    \n        static std::array<std::uint_fast64_t, max> fact, factinv, inv;\n   \
-    \     constexpr BinomMod() noexcept {\n            fact[0] = fact[1] = 1;\n  \
-    \          factinv[0] = factinv[1] = 1;\n            inv[1] = 1;\n           \
-    \ for (int i = 2; i < (int)max; ++i) {\n                fact[i] = fact[i - 1]\
+    \ class T = ModInt<mod>>\n    struct BinomMod {\n    private:\n        static\
+    \ constexpr std::uint_fast64_t m = T::mod;\n\n    public:\n        using value_type\
+    \ = T;\n\n        static std::array<std::uint_fast64_t, max> fact, factinv, inv;\n\
+    \        constexpr BinomMod() noexcept {\n            fact[0] = fact[1] = 1;\n\
+    \            factinv[0] = factinv[1] = 1;\n            inv[1] = 1;\n         \
+    \   for (int i = 2; i < (int)max; ++i) {\n                fact[i] = fact[i - 1]\
     \ * i % m;\n                inv[i] = m - inv[m % i] * (m / i) % m;\n         \
     \       factinv[i] = factinv[i - 1] * inv[i] % m;\n            }\n        }\n\n\
     \        constexpr T c(KYOPRO_BASE_UINT n, KYOPRO_BASE_UINT r) noexcept {\n  \
@@ -779,7 +779,7 @@ data:
   isVerificationFile: true
   path: verify/aoj/mod/DPL_5_C.test.cpp
   requiredBy: []
-  timestamp: '2023-04-16 03:46:24+09:00'
+  timestamp: '2023-04-16 03:59:33+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/aoj/mod/DPL_5_C.test.cpp
