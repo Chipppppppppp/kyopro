@@ -3,18 +3,17 @@
 #include <array>
 
 namespace kpr {
-    [[maybe_unused]] inline constexpr struct {
-        template<class T>
-        constexpr auto operator ()(const T& init = {}) noexcept {
-            return init;
-        }
+    // 0次元arrayを生成する
+    template<class T>
+    constexpr auto make_array(const T& init = {}) noexcept {
+        return init;
+    }
 
-        template<class T, std::size_t length, std::size_t... lengths>
-        constexpr auto operator ()(const T& init = {}) noexcept {
-            auto elm = operator ()<T, lengths...>(init);
-            std::array<decltype(elm), length> res;
-            for (auto& i: res) i = elm;
-            return res;
-        }
-    } make_array;
+    // 多次元arrayを生成する
+    template<class T, std::size_t l, std::size_t... d>
+    constexpr auto make_array(const T& init = {}) noexcept {
+        std::array<decltype(make_array<T, d...>(init)), l> res{};
+        res.fill(make_array<T, d...>(init));
+        return res;
+    }
 } // namespace kpr

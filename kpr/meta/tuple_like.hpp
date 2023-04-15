@@ -111,14 +111,9 @@ namespace kpr {
 
 
     // 型Tがtuple_likeか調べる
-    template<class, class = void>
+    template<class T, class = void>
     struct is_tuple_like {
-        static constexpr bool value = false;
-    };
-
-    template<class T>
-    struct is_tuple_like<T, std::enable_if_t<std::is_aggregate_v<T>>> {
-        static constexpr bool value = true;
+        static constexpr bool value = std::is_aggregate_v<T>;
     };
 
     template<class T>
