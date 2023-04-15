@@ -134,30 +134,29 @@ data:
     \ <ratio>\r\n#include <regex>\r\n#include <scoped_allocator>\r\n#include <system_error>\r\
     \n#include <thread>\r\n#include <tuple>\r\n#include <typeindex>\r\n#include <type_traits>\r\
     \n#include <unordered_map>\r\n#include <unordered_set>\r\n#line 6 \"kpr/meta/tuple_like.hpp\"\
-    \n\r\nnamespace kpr {\r\n    namespace helper {\r\n        struct CastableToAny\
-    \ {\r\n            template<class T>\r\n            operator T() const noexcept;\r\
-    \n        };\r\n\r\n        template<class T, std::size_t... idx, std::void_t<decltype(T{((void)idx,\
-    \ CastableToAny{})...})>* = nullptr>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
-    \ bool) noexcept {\r\n            return true;\r\n        }\r\n        template<class\
-    \ T, std::size_t... idx>\r\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
-    \ char) noexcept {\r\n            return false;\r\n        }\n\n        template<class\
+    \n\nnamespace kpr {\n    namespace helper {\n        struct CastableToAny {\n\
+    \            template<class T>\n            operator T() const noexcept;\n   \
+    \     };\n\n        template<class T, std::size_t... idx, std::void_t<decltype(T{((void)idx,\
+    \ CastableToAny{})...})>* = nullptr>\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
+    \ bool) noexcept {\n            return true;\n        }\n        template<class\
+    \ T, std::size_t... idx>\n        constexpr bool is_constructible_with(std::index_sequence<idx...>,\
+    \ char) noexcept {\n            return false;\n        }\n\n        template<class\
     \ T, std::size_t n = sizeof(T) * 8, class = void>\n        struct constructible_size\
     \ {\n            static_assert(n != 0, \"T is not constructible\");\n        \
     \    static constexpr std::size_t value = constructible_size<T, n - 1>::value;\n\
     \        };\n\n        template<class T, std::size_t n>\n        struct constructible_size<T,\
     \ n, std::enable_if_t<is_constructible_with<T>(std::make_index_sequence<n>(),\
-    \ false)>> {\n            static constexpr std::size_t value = n;\n        };\r\
-    \n    } // namespace helper\r\n\n\r\n    // tuple_like\u306A\u578BT\u306E\u5927\
-    \u304D\u3055\u3092\u8ABF\u3079\u308B\r\n    template<class T, class = void>\r\n\
-    \    struct tuple_like_size {\r\n        static constexpr std::size_t value =\
-    \ helper::constructible_size<T>::value;\r\n    };\r\n\r\n    template<class T>\r\
-    \n    struct tuple_like_size<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
-    \ {\r\n        static constexpr std::size_t value = std::tuple_size_v<T>;\r\n\
-    \    };\r\n\r\n    // tuple_like\u306A\u578BT\u306E\u5927\u304D\u3055\u3092\u8ABF\
-    \u3079\u308B\r\n    template<class T>\r\n    inline constexpr std::size_t tuple_like_size_v\
-    \ = tuple_like_size<T>::value;\r\n\r\n\n    // tuple_like\u306A\u30AA\u30D6\u30B8\
-    \u30A7\u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\u95A2\
-    \u6570\u30AF\u30E9\u30B9\n    template<class T, class = void>\n    struct GetFunction\
+    \ false)>> {\n            static constexpr std::size_t value = n;\n        };\n\
+    \    } // namespace helper\n\n\n    // tuple_like\u306A\u578BT\u306E\u5927\u304D\
+    \u3055\u3092\u8ABF\u3079\u308B\n    template<class T, class = void>\n    struct\
+    \ tuple_like_size {\n        static constexpr std::size_t value = helper::constructible_size<T>::value;\n\
+    \    };\n\n    template<class T>\n    struct tuple_like_size<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
+    \ {\n        static constexpr std::size_t value = std::tuple_size_v<T>;\n    };\n\
+    \n    // tuple_like\u306A\u578BT\u306E\u5927\u304D\u3055\u3092\u8ABF\u3079\u308B\
+    \n    template<class T>\n    inline constexpr std::size_t tuple_like_size_v =\
+    \ tuple_like_size<T>::value;\n\n\n    // tuple_like\u306A\u30AA\u30D6\u30B8\u30A7\
+    \u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\u95A2\u6570\
+    \u30AF\u30E9\u30B9\n    template<class T, class = void>\n    struct GetFunction\
     \ {\n        #define GET(...) \\\n            { \\\n                auto&& [__VA_ARGS__]\
     \ = std::forward<U>(tuple_like); \\\n                return std::get<idx> (std::forward_as_tuple(__VA_ARGS__));\
     \ \\\n            }\n\n        template<std::size_t idx, class U>\n        static\
@@ -174,38 +173,36 @@ data:
     \ template<class T>\n    struct GetFunction<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
     \ {\n        template<std::size_t idx, class U>\n        static constexpr decltype(auto)\
     \ get(U&& tuple_like) noexcept {\n            return std::get<idx>(std::forward<U>(tuple_like));\n\
-    \        }\n    };\r\n\r\n    namespace helper {\n        template<std::size_t\
-    \ idx>\r\n        struct GetHelper {\r\n            template<class T>\r\n    \
-    \        constexpr decltype(auto) operator ()(T&& tuple_like) const noexcept {\r\
-    \n                return GetFunction<std::decay_t<T>>::template get<idx>(std::forward<T>(tuple_like));\r\
-    \n            }\r\n        };\r\n    }\r\n\r\n    // tuple-like\u306A\u30AA\u30D6\
-    \u30B8\u30A7\u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\
-    \r\n    template<std::size_t idx>\r\n    inline constexpr helper::GetHelper<idx>\
-    \ get;\r\n\r\n\r\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\
-    \u306E\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n    template<std::size_t\
-    \ idx, class T>\r\n    struct tuple_like_element {\r\n        using type = decltype(get<idx>(std::declval<T>()));\r\
-    \n    };\r\n\r\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\
-    \u306E\u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\r\n    template<std::size_t\
-    \ idx, class T>\r\n    using tuple_like_element_t = typename tuple_like_element<idx,\
-    \ T>::type;\n\n\n    // \u578BT\u304Ctuple_like\u304B\u8ABF\u3079\u308B\n    template<class,\
-    \ class = void>\n    struct is_tuple_like {\n        static constexpr bool value\
-    \ = false;\n    };\n\n    template<class T>\n    struct is_tuple_like<T, std::enable_if_t<std::is_aggregate_v<T>>>\
-    \ {\n        static constexpr bool value = true;\n    };\n\n    template<class\
-    \ T>\n    struct is_tuple_like<T, std::void_t<decltype(std::tuple_size<T>::value)>>\
-    \ {\n        static constexpr bool value = true;\n    };\n\n    // \u578BT\u304C\
-    tuple_like\u304B\u8ABF\u3079\u308B\n    template<class T>\n    inline constexpr\
-    \ bool is_tuple_like_v = is_tuple_like<T>::value;\r\n} // namespace kpr\r\n#line\
-    \ 7 \"kpr/meta/trait.hpp\"\n\r\nnamespace kpr {\r\n    namespace helper {\r\n\
-    \        template<class T>\r\n        struct is_integer_helper {\r\n         \
-    \   static constexpr bool value = std::is_integral_v<T>;\r\n        };\r\n\r\n\
-    \        #ifdef __SIZEOF_INT128__\r\n        template<>\r\n        struct is_integer_helper<__int128_t>\
-    \ {\r\n            static constexpr bool value = true;\r\n        };\r\n     \
-    \   template<>\r\n        struct is_integer_helper<__uint128_t> {\r\n        \
-    \    static constexpr bool value = true;\r\n        };\r\n        #endif\r\n \
-    \   } // namespace helper\r\n\r\n    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\
-    \u308B\r\n    template<class T>\r\n    struct is_integer {\r\n        static constexpr\
-    \ bool value = helper::is_integer_helper<std::remove_cv_t<T>>::value;\r\n    };\r\
-    \n    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\u308B\r\n    template<class\
+    \        }\n    };\n\n    namespace helper {\n        template<std::size_t idx>\n\
+    \        struct GetHelper {\n            template<class T>\n            constexpr\
+    \ decltype(auto) operator ()(T&& tuple_like) const noexcept {\n              \
+    \  return GetFunction<std::decay_t<T>>::template get<idx>(std::forward<T>(tuple_like));\n\
+    \            }\n        };\n    }\n\n    // tuple-like\u306A\u30AA\u30D6\u30B8\
+    \u30A7\u30AF\u30C8\u306Eidx(0 <= idx < 8)\u756A\u76EE\u3092\u6C42\u3081\u308B\n\
+    \    template<std::size_t idx>\n    inline constexpr helper::GetHelper<idx> get;\n\
+    \n\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\u8981\
+    \u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t idx, class\
+    \ T>\n    struct tuple_like_element {\n        using type = decltype(get<idx>(std::declval<T>()));\n\
+    \    };\n\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\
+    \u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t idx,\
+    \ class T>\n    using tuple_like_element_t = typename tuple_like_element<idx,\
+    \ T>::type;\n\n\n    // \u578BT\u304Ctuple_like\u304B\u8ABF\u3079\u308B\n    template<class\
+    \ T, class = void>\n    struct is_tuple_like {\n        static constexpr bool\
+    \ value = std::is_aggregate_v<T>;\n    };\n\n    template<class T>\n    struct\
+    \ is_tuple_like<T, std::void_t<decltype(std::tuple_size<T>::value)>> {\n     \
+    \   static constexpr bool value = true;\n    };\n\n    // \u578BT\u304Ctuple_like\u304B\
+    \u8ABF\u3079\u308B\n    template<class T>\n    inline constexpr bool is_tuple_like_v\
+    \ = is_tuple_like<T>::value;\n} // namespace kpr\n#line 7 \"kpr/meta/trait.hpp\"\
+    \n\r\nnamespace kpr {\r\n    namespace helper {\r\n        template<class T>\r\
+    \n        struct is_integer_helper {\r\n            static constexpr bool value\
+    \ = std::is_integral_v<T>;\r\n        };\r\n\r\n        #ifdef __SIZEOF_INT128__\r\
+    \n        template<>\r\n        struct is_integer_helper<__int128_t> {\r\n   \
+    \         static constexpr bool value = true;\r\n        };\r\n        template<>\r\
+    \n        struct is_integer_helper<__uint128_t> {\r\n            static constexpr\
+    \ bool value = true;\r\n        };\r\n        #endif\r\n    } // namespace helper\r\
+    \n\r\n    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\u308B\r\n    template<class\
+    \ T>\r\n    struct is_integer {\r\n        static constexpr bool value = helper::is_integer_helper<std::remove_cv_t<T>>::value;\r\
+    \n    };\r\n    // \u578BT\u304C\u6574\u6570\u304B\u8ABF\u3079\u308B\r\n    template<class\
     \ T>\r\n    inline constexpr bool is_integer_v = is_integer<T>::value;\r\n\r\n\
     \    // \u578BT\u304C\u7B26\u53F7\u4ED8\u304D\u6574\u6570\u304B\u8ABF\u3079\u308B\
     \r\n    template<class T>\r\n    struct is_signed_integer {\r\n        static\
@@ -1144,28 +1141,24 @@ data:
     \ rrep(...) KYOPRO_OVERLOAD_REP(__VA_ARGS__ __VA_OPT__(,) KYOPRO_RREP3, KYOPRO_RREP2,\
     \ KYOPRO_RREP1, KYOPRO_RREP0)(__VA_ARGS__)\n#line 2 \"kpr/template/main.hpp\"\n\
     \nnamespace kpr {\n    void main();\n} // namespace kpr\n\nint main() {\n    kpr::main();\n\
-    }\n#line 4 \"kpr/template/make_array.hpp\"\n\r\nnamespace kpr {\r\n    [[maybe_unused]]\
-    \ inline constexpr struct {\r\n        template<class T>\r\n        constexpr\
-    \ auto operator ()(const T& init = {}) noexcept {\r\n            return init;\r\
-    \n        }\r\n\r\n        template<class T, std::size_t length, std::size_t...\
-    \ lengths>\r\n        constexpr auto operator ()(const T& init = {}) noexcept\
-    \ {\r\n            auto elm = operator ()<T, lengths...>(init);\r\n          \
-    \  std::array<decltype(elm), length> res;\r\n            for (auto& i: res) i\
-    \ = elm;\r\n            return res;\r\n        }\r\n    } make_array;\r\n} //\
-    \ namespace kpr\r\n#line 6 \"kpr/template/make_vec.hpp\"\n\r\nnamespace kpr {\r\
-    \n    [[maybe_unused]] inline constexpr struct {\r\n        template<class T,\
-    \ std::size_t n, std::size_t i = 0>\r\n        auto operator ()(const std::size_t\
-    \ (&d)[n], const T& init = {}) noexcept {\r\n            if constexpr (i < n)\
-    \ return std::vector(d[i], operator ()<T, n, i + 1>(d, init));\r\n           \
-    \ else return init;\r\n        }\r\n\r\n        template<class T, std::size_t\
-    \ n>\r\n        auto operator ()(const std::size_t (&d)[n]) noexcept {\r\n   \
-    \         return operator ()(d, T{});\r\n        }\r\n    } make_vec;\r\n} //\
-    \ namespace kpr\r\n#line 3 \"kpr/template/range_cast.hpp\"\n\nnamespace kpr {\n\
-    \    // Range\u306E\u578B\u5909\u63DB\n    [[maybe_unused]] inline constexpr struct\
-    \ {\n        template<class To, class From>\n        constexpr To operator ()(From&&\
-    \ container) const noexcept {\n            return To(std::begin(container), std::end(container));\n\
-    \        }\n    } range_cast;\n} // namespace kpr\n#line 12 \"kpr/template/template.hpp\"\
-    \n"
+    }\n#line 4 \"kpr/template/make_array.hpp\"\n\r\nnamespace kpr {\r\n    // 0\u6B21\
+    \u5143array\u3092\u751F\u6210\u3059\u308B\r\n    template<class T>\r\n    constexpr\
+    \ auto make_array(const T& init = {}) noexcept {\r\n        return init;\r\n \
+    \   }\r\n\r\n    // \u591A\u6B21\u5143array\u3092\u751F\u6210\u3059\u308B\r\n\
+    \    template<class T, std::size_t l, std::size_t... d>\r\n    constexpr auto\
+    \ make_array(const T& init = {}) noexcept {\r\n        std::array<decltype(make_array<T,\
+    \ d...>(init)), l> res{};\r\n        res.fill(make_array<T, d...>(init));\r\n\
+    \        return res;\r\n    }\r\n} // namespace kpr\r\n#line 6 \"kpr/template/make_vec.hpp\"\
+    \n\r\nnamespace kpr {\r\n    // \u591A\u6B21\u5143vector\u3092\u751F\u6210\u3059\
+    \u308B\r\n    template<class T, std::size_t n, std::size_t i = 0>\r\n    auto\
+    \ make_vec(const std::size_t (&d)[n], const T& init = {}) noexcept {\r\n     \
+    \   if constexpr (i < n) return std::vector(d[i], make_vec<T, n, i + 1>(d, init));\r\
+    \n        else return init;\r\n    }\r\n} // namespace kpr\r\n#line 3 \"kpr/template/range_cast.hpp\"\
+    \n\nnamespace kpr {\n    // Range\u306E\u578B\u5909\u63DB\n    [[maybe_unused]]\
+    \ inline constexpr struct {\n        template<class To, class From>\n        constexpr\
+    \ To operator ()(From&& container) const noexcept {\n            return To(std::begin(container),\
+    \ std::end(container));\n        }\n    } range_cast;\n} // namespace kpr\n#line\
+    \ 12 \"kpr/template/template.hpp\"\n"
   code: "#pragma once\r\n#include \"stl.hpp\"\r\n#include \"alias.hpp\"\r\n#include\
     \ \"chmin_chmax.hpp\"\r\n#include \"constant.hpp\"\r\n#include \"len.hpp\"\r\n\
     #include \"macro.hpp\"\r\n#include \"main.hpp\"\r\n#include \"make_array.hpp\"\
@@ -1209,7 +1202,7 @@ data:
   path: kpr/template/template.hpp
   requiredBy:
   - kpr/all.hpp
-  timestamp: '2023-04-08 19:46:06+09:00'
+  timestamp: '2023-04-16 03:08:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/template/template.hpp

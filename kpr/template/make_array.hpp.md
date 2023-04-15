@@ -15,30 +15,29 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"kpr/template/make_array.hpp\"\n#include <cstddef>\r\n#include\
-    \ <array>\r\n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr struct\
-    \ {\r\n        template<class T>\r\n        constexpr auto operator ()(const T&\
-    \ init = {}) noexcept {\r\n            return init;\r\n        }\r\n\r\n     \
-    \   template<class T, std::size_t length, std::size_t... lengths>\r\n        constexpr\
-    \ auto operator ()(const T& init = {}) noexcept {\r\n            auto elm = operator\
-    \ ()<T, lengths...>(init);\r\n            std::array<decltype(elm), length> res;\r\
-    \n            for (auto& i: res) i = elm;\r\n            return res;\r\n     \
-    \   }\r\n    } make_array;\r\n} // namespace kpr\r\n"
-  code: "#pragma once\r\n#include <cstddef>\r\n#include <array>\r\n\r\nnamespace kpr\
-    \ {\r\n    [[maybe_unused]] inline constexpr struct {\r\n        template<class\
-    \ T>\r\n        constexpr auto operator ()(const T& init = {}) noexcept {\r\n\
-    \            return init;\r\n        }\r\n\r\n        template<class T, std::size_t\
-    \ length, std::size_t... lengths>\r\n        constexpr auto operator ()(const\
-    \ T& init = {}) noexcept {\r\n            auto elm = operator ()<T, lengths...>(init);\r\
-    \n            std::array<decltype(elm), length> res;\r\n            for (auto&\
-    \ i: res) i = elm;\r\n            return res;\r\n        }\r\n    } make_array;\r\
+    \ <array>\r\n\r\nnamespace kpr {\r\n    // 0\u6B21\u5143array\u3092\u751F\u6210\
+    \u3059\u308B\r\n    template<class T>\r\n    constexpr auto make_array(const T&\
+    \ init = {}) noexcept {\r\n        return init;\r\n    }\r\n\r\n    // \u591A\u6B21\
+    \u5143array\u3092\u751F\u6210\u3059\u308B\r\n    template<class T, std::size_t\
+    \ l, std::size_t... d>\r\n    constexpr auto make_array(const T& init = {}) noexcept\
+    \ {\r\n        std::array<decltype(make_array<T, d...>(init)), l> res{};\r\n \
+    \       res.fill(make_array<T, d...>(init));\r\n        return res;\r\n    }\r\
     \n} // namespace kpr\r\n"
+  code: "#pragma once\r\n#include <cstddef>\r\n#include <array>\r\n\r\nnamespace kpr\
+    \ {\r\n    // 0\u6B21\u5143array\u3092\u751F\u6210\u3059\u308B\r\n    template<class\
+    \ T>\r\n    constexpr auto make_array(const T& init = {}) noexcept {\r\n     \
+    \   return init;\r\n    }\r\n\r\n    // \u591A\u6B21\u5143array\u3092\u751F\u6210\
+    \u3059\u308B\r\n    template<class T, std::size_t l, std::size_t... d>\r\n   \
+    \ constexpr auto make_array(const T& init = {}) noexcept {\r\n        std::array<decltype(make_array<T,\
+    \ d...>(init)), l> res{};\r\n        res.fill(make_array<T, d...>(init));\r\n\
+    \        return res;\r\n    }\r\n} // namespace kpr\r\n"
   dependsOn: []
   isVerificationFile: false
   path: kpr/template/make_array.hpp
   requiredBy:
   - kpr/template/template.hpp
   - kpr/all.hpp
-  timestamp: '2023-04-04 01:42:52+09:00'
+  timestamp: '2023-04-16 03:08:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/template/make_array.hpp
