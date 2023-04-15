@@ -15,20 +15,21 @@
 #include "mod.hpp"
 
 namespace kpr {
-    template<KYOPRO_BASE_UINT m>
+    template<KYOPRO_BASE_UINT mod>
     struct ModInt {
-        using value_type = uint_least_t<bit_len(m * 2 - 2)>;
+        using value_type = uint_least_t<bit_len(mod * 2 - 2)>;
+        using multiplies_type = uint_least_t<bit_len(mod) * 2>;
 
-        static constexpr value_type mod = m;
+        static constexpr value_type m = mod;
         value_type value;
 
         static constexpr KYOPRO_BASE_INT get_mod() noexcept {
-            return mod;
+            return m;
         }
 
         constexpr ModInt() noexcept = default;
         template<class T>
-        constexpr ModInt(T value) noexcept: value(floor_mod(value, mod)) {}
+        constexpr ModInt(T value) noexcept: value(floor_mod(value, m)) {}
 
         template<class T>
         explicit constexpr operator T() const noexcept {
@@ -42,26 +43,26 @@ namespace kpr {
         }
 
         constexpr ModInt pow(KYOPRO_BASE_UINT n) const noexcept {
-            std::uint_fast64_t res = 1, a = value;
+            value_type res = 1, a = value;
             while (n > 0) {
-                if (n & 1) res = res * a % mod;
-                a = a * a % mod;
+                if (n & 1) res = static_cast<multiplies_type>(res) * a % m;
+                a = static_cast<multiplies_type>(a) * a % m;
                 n >>= 1;
             }
             return res;
         }
 
         constexpr ModInt inv() const noexcept {
-            std::uint_fast64_t a = value, b = mod;
-            std::int_fast64_t u = 1, v = 0;
+            value_type a = value, b = m;
+            std::make_signed_t<value_type> u = 1, v = 0;
             while (b > 0) {
-                std::uint_fast64_t t = a / b;
+                value_type t = a / b;
                 a -= t * b;
                 std::swap(a, b);
                 u -= t * v;
                 std::swap(u, v);
             }
-            return floor_mod(u, mod);
+            return floor_mod(u, get_mod());
         }
 
         constexpr ModInt operator +() const noexcept {
@@ -69,11 +70,11 @@ namespace kpr {
         }
 
         constexpr ModInt operator -() const noexcept {
-            return value == 0 ? 0 : mod - value;
+            return value == 0 ? 0 : m - value;
         }
 
         constexpr ModInt& operator ++() noexcept {
-            if (++value >= mod) value -= mod;
+            if (++value >= m) value -= m;
             return *this;
         }
 
@@ -84,7 +85,7 @@ namespace kpr {
         }
 
         constexpr ModInt& operator --() noexcept {
-            if (value == 0) value = mod;
+            if (value == 0) value = m;
             --value;
             return *this;
         }
@@ -96,23 +97,23 @@ namespace kpr {
         }
 
         constexpr ModInt& operator +=(ModInt rhs) noexcept {
-            if ((value += rhs.value) >= mod) value -= mod;
+            if ((value += rhs.value) >= m) value -= m;
             return *this;
         }
 
         constexpr ModInt& operator -=(ModInt rhs) noexcept {
-            if (value < rhs.value) value += mod;
+            if (value < rhs.value) value += m;
             value -= rhs.value;
             return *this;
         }
 
         constexpr ModInt& operator *=(ModInt rhs) noexcept {
-            value = static_cast<uint_least_t<bit_len(mod) * 2>>(value) * rhs.value % mod;
+            value = static_cast<multiplies_type>(value) * rhs.value % m;
             return *this;
         }
 
         constexpr ModInt& operator /=(ModInt rhs) noexcept {
-            value = static_cast<uint_least_t<bit_len(mod) * 2>>(value) * rhs.inv().value % mod;
+            value = static_cast<multiplies_type>(value) * rhs.inv().value % m;
             return *this;
         }
 
@@ -144,7 +145,7 @@ namespace kpr {
         void scan(Scanner& scanner) {
             std::int_fast64_t value;
             scanner.scan(value);
-            value = floor_mod(value, mod);
+            value = floor_mod(value, m);
         }
 
         template<class Printer>
@@ -159,7 +160,7 @@ namespace kpr {
         static void scan(Scanner& scanner, ModInt<mod>& a) {
             std::int_fast64_t value;
             ScanFunction<std::int_fast64_t>::scan(scanner, value);
-            a.value = floor_mod(value, a.mod);
+            a.value = floor_mod(value, a.m);
         }
     };
 
