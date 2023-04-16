@@ -84,13 +84,13 @@ data:
     - icon: ':warning:'
       path: kpr/math/Barrett.hpp
       title: kpr/math/Barrett.hpp
-    - icon: ':x:'
+    - icon: ':warning:'
       path: kpr/math/BinomMod.hpp
       title: kpr/math/BinomMod.hpp
     - icon: ':question:'
       path: kpr/math/DynamicModInt.hpp
       title: kpr/math/DynamicModInt.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: kpr/math/ModInt.hpp
       title: kpr/math/ModInt.hpp
     - icon: ':question:'
@@ -114,7 +114,7 @@ data:
     - icon: ':warning:'
       path: kpr/math/math.hpp
       title: kpr/math/math.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: kpr/math/mod.hpp
       title: kpr/math/mod.hpp
     - icon: ':question:'
@@ -219,26 +219,6 @@ data:
     - icon: ':x:'
       path: verify/aoj/is_prime.test.cpp
       title: verify/aoj/is_prime.test.cpp
-  - name: verify/aoj/mod
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: verify/aoj/mod/DPL_5_A.test.cpp
-      title: verify/aoj/mod/DPL_5_A.test.cpp
-    - icon: ':x:'
-      path: verify/aoj/mod/DPL_5_B.test.cpp
-      title: verify/aoj/mod/DPL_5_B.test.cpp
-    - icon: ':x:'
-      path: verify/aoj/mod/DPL_5_C.test.cpp
-      title: verify/aoj/mod/DPL_5_C.test.cpp
-    - icon: ':x:'
-      path: verify/aoj/mod/DPL_5_D.test.cpp
-      title: verify/aoj/mod/DPL_5_D.test.cpp
-    - icon: ':x:'
-      path: verify/aoj/mod/DPL_5_E.test.cpp
-      title: verify/aoj/mod/DPL_5_E.test.cpp
-    - icon: ':x:'
-      path: verify/aoj/mod/DPL_5_F.test.cpp
-      title: verify/aoj/mod/DPL_5_F.test.cpp
   - name: verify/yosupo
     pages:
     - icon: ':heavy_check_mark:'

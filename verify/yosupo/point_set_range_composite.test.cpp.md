@@ -25,10 +25,10 @@ data:
   - icon: ':question:'
     path: kpr/io/out.hpp
     title: kpr/io/out.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/ModInt.hpp
     title: kpr/math/ModInt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/mod.hpp
     title: kpr/math/mod.hpp
   - icon: ':question:'

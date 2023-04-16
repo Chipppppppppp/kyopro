@@ -25,13 +25,13 @@ data:
   - icon: ':question:'
     path: kpr/math/DynamicModInt.hpp
     title: kpr/math/DynamicModInt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/ModInt.hpp
     title: kpr/math/ModInt.hpp
   - icon: ':question:'
     path: kpr/math/Montgomery.hpp
     title: kpr/math/Montgomery.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/mod.hpp
     title: kpr/math/mod.hpp
   - icon: ':question:'

@@ -19,7 +19,7 @@ data:
   - icon: ':question:'
     path: kpr/io/out.hpp
     title: kpr/io/out.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/mod.hpp
     title: kpr/math/mod.hpp
   - icon: ':question:'
@@ -44,7 +44,7 @@ data:
   - icon: ':warning:'
     path: kpr/all/all.hpp
     title: kpr/all/all.hpp
-  - icon: ':x:'
+  - icon: ':warning:'
     path: kpr/math/BinomMod.hpp
     title: kpr/math/BinomMod.hpp
   - icon: ':warning:'
@@ -58,29 +58,11 @@ data:
     title: kpr/template/template.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/aoj/mod/DPL_5_A.test.cpp
-    title: verify/aoj/mod/DPL_5_A.test.cpp
-  - icon: ':x:'
-    path: verify/aoj/mod/DPL_5_B.test.cpp
-    title: verify/aoj/mod/DPL_5_B.test.cpp
-  - icon: ':x:'
-    path: verify/aoj/mod/DPL_5_C.test.cpp
-    title: verify/aoj/mod/DPL_5_C.test.cpp
-  - icon: ':x:'
-    path: verify/aoj/mod/DPL_5_D.test.cpp
-    title: verify/aoj/mod/DPL_5_D.test.cpp
-  - icon: ':x:'
-    path: verify/aoj/mod/DPL_5_E.test.cpp
-    title: verify/aoj/mod/DPL_5_E.test.cpp
-  - icon: ':x:'
-    path: verify/aoj/mod/DPL_5_F.test.cpp
-    title: verify/aoj/mod/DPL_5_F.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/yosupo/point_set_range_composite.test.cpp
     title: verify/yosupo/point_set_range_composite.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kpr/math/ModInt.hpp\"\n#include <cassert>\r\n#include <cstddef>\r\
@@ -855,15 +837,9 @@ data:
   - kpr/template/template.hpp
   - kpr/all.hpp
   timestamp: '2023-04-16 05:00:59+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo/point_set_range_composite.test.cpp
-  - verify/aoj/mod/DPL_5_B.test.cpp
-  - verify/aoj/mod/DPL_5_F.test.cpp
-  - verify/aoj/mod/DPL_5_C.test.cpp
-  - verify/aoj/mod/DPL_5_A.test.cpp
-  - verify/aoj/mod/DPL_5_D.test.cpp
-  - verify/aoj/mod/DPL_5_E.test.cpp
 documentation_of: kpr/math/ModInt.hpp
 layout: document
 redirect_from:

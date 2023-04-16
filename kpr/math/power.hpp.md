@@ -23,13 +23,13 @@ data:
   - icon: ':question:'
     path: kpr/io/io.hpp
     title: kpr/io/io.hpp
-  - icon: ':x:'
+  - icon: ':warning:'
     path: kpr/math/BinomMod.hpp
     title: kpr/math/BinomMod.hpp
   - icon: ':question:'
     path: kpr/math/DynamicModInt.hpp
     title: kpr/math/DynamicModInt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/ModInt.hpp
     title: kpr/math/ModInt.hpp
   - icon: ':heavy_check_mark:'
@@ -69,24 +69,6 @@ data:
   - icon: ':x:'
     path: verify/aoj/is_prime.test.cpp
     title: verify/aoj/is_prime.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/aoj/mod/DPL_5_A.test.cpp
-    title: verify/aoj/mod/DPL_5_A.test.cpp
-  - icon: ':x:'
-    path: verify/aoj/mod/DPL_5_B.test.cpp
-    title: verify/aoj/mod/DPL_5_B.test.cpp
-  - icon: ':x:'
-    path: verify/aoj/mod/DPL_5_C.test.cpp
-    title: verify/aoj/mod/DPL_5_C.test.cpp
-  - icon: ':x:'
-    path: verify/aoj/mod/DPL_5_D.test.cpp
-    title: verify/aoj/mod/DPL_5_D.test.cpp
-  - icon: ':x:'
-    path: verify/aoj/mod/DPL_5_E.test.cpp
-    title: verify/aoj/mod/DPL_5_E.test.cpp
-  - icon: ':x:'
-    path: verify/aoj/mod/DPL_5_F.test.cpp
-    title: verify/aoj/mod/DPL_5_F.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
@@ -323,12 +305,6 @@ data:
   - verify/yosupo/unionfind.test.cpp
   - verify/yosupo/point_set_range_composite.test.cpp
   - verify/aoj/WeightedUnionFind.test.cpp
-  - verify/aoj/mod/DPL_5_B.test.cpp
-  - verify/aoj/mod/DPL_5_F.test.cpp
-  - verify/aoj/mod/DPL_5_C.test.cpp
-  - verify/aoj/mod/DPL_5_A.test.cpp
-  - verify/aoj/mod/DPL_5_D.test.cpp
-  - verify/aoj/mod/DPL_5_E.test.cpp
   - verify/aoj/is_prime.test.cpp
 documentation_of: kpr/math/power.hpp
 layout: document

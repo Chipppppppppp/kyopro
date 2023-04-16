@@ -19,10 +19,10 @@ data:
   - icon: ':question:'
     path: kpr/io/out.hpp
     title: kpr/io/out.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/ModInt.hpp
     title: kpr/math/ModInt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/mod.hpp
     title: kpr/math/mod.hpp
   - icon: ':question:'
@@ -50,25 +50,10 @@ data:
   - icon: ':warning:'
     path: kpr/math/math.hpp
     title: kpr/math/math.hpp
-  _extendedVerifiedWith:
-  - icon: ':x:'
-    path: verify/aoj/mod/DPL_5_B.test.cpp
-    title: verify/aoj/mod/DPL_5_B.test.cpp
-  - icon: ':x:'
-    path: verify/aoj/mod/DPL_5_C.test.cpp
-    title: verify/aoj/mod/DPL_5_C.test.cpp
-  - icon: ':x:'
-    path: verify/aoj/mod/DPL_5_D.test.cpp
-    title: verify/aoj/mod/DPL_5_D.test.cpp
-  - icon: ':x:'
-    path: verify/aoj/mod/DPL_5_E.test.cpp
-    title: verify/aoj/mod/DPL_5_E.test.cpp
-  - icon: ':x:'
-    path: verify/aoj/mod/DPL_5_F.test.cpp
-    title: verify/aoj/mod/DPL_5_F.test.cpp
-  _isVerificationFailed: true
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kpr/math/BinomMod.hpp\"\n#include <array>\n#include <cstdint>\n\
@@ -807,13 +792,8 @@ data:
   - kpr/math/math.hpp
   - kpr/all.hpp
   timestamp: '2023-04-16 07:23:53+09:00'
-  verificationStatus: LIBRARY_ALL_WA
-  verifiedWith:
-  - verify/aoj/mod/DPL_5_B.test.cpp
-  - verify/aoj/mod/DPL_5_F.test.cpp
-  - verify/aoj/mod/DPL_5_C.test.cpp
-  - verify/aoj/mod/DPL_5_D.test.cpp
-  - verify/aoj/mod/DPL_5_E.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: kpr/math/BinomMod.hpp
 layout: document
 redirect_from:

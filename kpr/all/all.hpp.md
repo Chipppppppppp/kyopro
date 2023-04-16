@@ -49,13 +49,13 @@ data:
   - icon: ':warning:'
     path: kpr/math/Barrett.hpp
     title: kpr/math/Barrett.hpp
-  - icon: ':x:'
+  - icon: ':warning:'
     path: kpr/math/BinomMod.hpp
     title: kpr/math/BinomMod.hpp
   - icon: ':question:'
     path: kpr/math/DynamicModInt.hpp
     title: kpr/math/DynamicModInt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/ModInt.hpp
     title: kpr/math/ModInt.hpp
   - icon: ':question:'
@@ -79,7 +79,7 @@ data:
   - icon: ':warning:'
     path: kpr/math/math.hpp
     title: kpr/math/math.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/mod.hpp
     title: kpr/math/mod.hpp
   - icon: ':question:'
