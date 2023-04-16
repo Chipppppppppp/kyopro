@@ -31,6 +31,8 @@ namespace kpr {
 
     public:
         irange() noexcept = default;
+        template<class L>
+        irange(L&& last) noexcept: last(std::forward<L>(last)) {}
         template<class F, class L>
         irange(F&& first, L&& last) noexcept: first(std::forward<F>(first)), last(std::forward<L>(last)) {}
 
@@ -132,6 +134,8 @@ namespace kpr {
         }
     };
 
+    template<class L>
+    irange(L&&) -> irange<std::decay_t<L>>;
     template<class F, class L>
-    irange(F&&, L&&) -> irange<std::decay_t<F>>;
+    irange(F&&, L&&) -> irange<std::common_type_t<std::decay_t<F>, std::decay_t<L>>>;
 } // namespace kpr
