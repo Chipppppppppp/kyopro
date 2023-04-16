@@ -265,9 +265,10 @@ data:
     \ std::declval<ValueType>() + std::declval<std::ptrdiff_t>(), std::declval<ValueType>()\
     \ - std::declval<ValueType>())>> {\r\n            using type = std::random_access_iterator_tag;\r\
     \n        };\r\n\r\n    public:\r\n        irange() noexcept = default;\r\n  \
-    \      template<class F, class L>\r\n        irange(F&& first, L&& last) noexcept:\
-    \ first(std::forward<F>(first)), last(std::forward<L>(last)) {}\r\n\r\n      \
-    \  struct iterator: IteratorBase<iterator, const T&, typename get_iterator_category<T&>::type>\
+    \      template<class L>\r\n        irange(L&& last) noexcept: last(std::forward<L>(last))\
+    \ {}\r\n        template<class F, class L>\r\n        irange(F&& first, L&& last)\
+    \ noexcept: first(std::forward<F>(first)), last(std::forward<L>(last)) {}\r\n\r\
+    \n        struct iterator: IteratorBase<iterator, const T&, typename get_iterator_category<T&>::type>\
     \ {\r\n        private:\r\n            T itr;\r\n\r\n            constexpr int\
     \ compare(const iterator& rhs) const noexcept {\r\n                if (itr < rhs.itr)\
     \ return -1;\r\n                else if (itr > rhs.itr) return 1;\r\n        \
@@ -308,8 +309,9 @@ data:
     \  constexpr const_iterator cbegin() const noexcept {\r\n            return const_iterator{first};\r\
     \n        }\r\n\r\n        constexpr const_iterator cend() const noexcept {\r\n\
     \            return const_iterator{last};\r\n        }\r\n    };\r\n\r\n    template<class\
-    \ F, class L>\r\n    irange(F&&, L&&) -> irange<std::decay_t<F>>;\r\n} // namespace\
-    \ kpr\r\n#line 6 \"kpr/range/range.hpp\"\n"
+    \ L>\r\n    irange(L&&) -> irange<std::decay_t<L>>;\r\n    template<class F, class\
+    \ L>\r\n    irange(F&&, L&&) -> irange<std::common_type_t<std::decay_t<F>, std::decay_t<L>>>;\r\
+    \n} // namespace kpr\r\n#line 6 \"kpr/range/range.hpp\"\n"
   code: "#pragma once\r\n#include \"imap.hpp\"\r\n#include \"irange.hpp\"\r\n#include\
     \ \"iterator_base.hpp\"\r\n#include \"range_base.hpp\""
   dependsOn:
@@ -321,7 +323,7 @@ data:
   isVerificationFile: false
   path: kpr/range/range.hpp
   requiredBy: []
-  timestamp: '2023-04-04 01:42:52+09:00'
+  timestamp: '2023-04-17 07:24:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/range/range.hpp
