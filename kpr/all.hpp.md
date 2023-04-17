@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/algorithm/Hash.hpp
     title: kpr/algorithm/Hash.hpp
   - icon: ':warning:'
     path: kpr/algorithm/algorithm.hpp
     title: kpr/algorithm/algorithm.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/algorithm/bit.hpp
     title: kpr/algorithm/bit.hpp
   - icon: ':warning:'
@@ -49,19 +49,19 @@ data:
   - icon: ':warning:'
     path: kpr/function/function.hpp
     title: kpr/function/function.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/function/monoid.hpp
     title: kpr/function/monoid.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/io/in.hpp
     title: kpr/io/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/io/io.hpp
     title: kpr/io/io.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/io/io_option.hpp
     title: kpr/io/io_option.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/io/out.hpp
     title: kpr/io/out.hpp
   - icon: ':warning:'
@@ -70,13 +70,13 @@ data:
   - icon: ':warning:'
     path: kpr/math/BinomMod.hpp
     title: kpr/math/BinomMod.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/DynamicModInt.hpp
     title: kpr/math/DynamicModInt.hpp
   - icon: ':heavy_check_mark:'
     path: kpr/math/ModInt.hpp
     title: kpr/math/ModInt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/Montgomery.hpp
     title: kpr/math/Montgomery.hpp
   - icon: ':warning:'
@@ -91,7 +91,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: kpr/math/factorize.hpp
     title: kpr/math/factorize.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/is_prime.hpp
     title: kpr/math/is_prime.hpp
   - icon: ':warning:'
@@ -100,22 +100,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: kpr/math/mod.hpp
     title: kpr/math/mod.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/power.hpp
     title: kpr/math/power.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/constant.hpp
     title: kpr/meta/constant.hpp
   - icon: ':warning:'
     path: kpr/meta/meta.hpp
     title: kpr/meta/meta.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/setting.hpp
     title: kpr/meta/setting.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/trait.hpp
     title: kpr/meta/trait.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/tuple_like.hpp
     title: kpr/meta/tuple_like.hpp
   - icon: ':warning:'

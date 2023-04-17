@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/trait.hpp
     title: kpr/meta/trait.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/tuple_like.hpp
     title: kpr/meta/tuple_like.hpp
   _extendedRequiredBy:
@@ -20,7 +20,7 @@ data:
   - icon: ':warning:'
     path: kpr/math/BinomMod.hpp
     title: kpr/math/BinomMod.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/DynamicModInt.hpp
     title: kpr/math/DynamicModInt.hpp
   - icon: ':heavy_check_mark:'
@@ -29,7 +29,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: kpr/math/factorize.hpp
     title: kpr/math/factorize.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/is_prime.hpp
     title: kpr/math/is_prime.hpp
   - icon: ':warning:'
@@ -42,18 +42,15 @@ data:
     path: kpr/template/template.hpp
     title: kpr/template/template.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: verify/aoj/is_prime.test.cpp
-    title: verify/aoj/is_prime.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/point_set_range_composite.test.cpp
     title: verify/yosupo/point_set_range_composite.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kpr/algorithm/Hash.hpp\"\n#include <cstddef>\r\n#include\
@@ -288,11 +285,10 @@ data:
   - kpr/all.hpp
   - kpr/algorithm/algorithm.hpp
   timestamp: '2023-04-16 03:08:34+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo/factorize.test.cpp
   - verify/yosupo/point_set_range_composite.test.cpp
-  - verify/aoj/is_prime.test.cpp
 documentation_of: kpr/algorithm/Hash.hpp
 layout: document
 redirect_from:

@@ -4,31 +4,31 @@ data:
   - icon: ':heavy_check_mark:'
     path: kpr/data_structure/UnionFind.hpp
     title: kpr/data_structure/UnionFind.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/function/monoid.hpp
     title: kpr/function/monoid.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/io/in.hpp
     title: kpr/io/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/io/io.hpp
     title: kpr/io/io.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/io/io_option.hpp
     title: kpr/io/io_option.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/io/out.hpp
     title: kpr/io/out.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/power.hpp
     title: kpr/math/power.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/setting.hpp
     title: kpr/meta/setting.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/trait.hpp
     title: kpr/meta/trait.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/tuple_like.hpp
     title: kpr/meta/tuple_like.hpp
   _extendedRequiredBy: []

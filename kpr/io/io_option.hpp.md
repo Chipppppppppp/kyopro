@@ -8,19 +8,19 @@ data:
   - icon: ':warning:'
     path: kpr/all/all.hpp
     title: kpr/all/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/io/in.hpp
     title: kpr/io/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/io/io.hpp
     title: kpr/io/io.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/io/out.hpp
     title: kpr/io/out.hpp
   - icon: ':warning:'
     path: kpr/math/BinomMod.hpp
     title: kpr/math/BinomMod.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/DynamicModInt.hpp
     title: kpr/math/DynamicModInt.hpp
   - icon: ':heavy_check_mark:'
@@ -29,7 +29,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: kpr/math/factorize.hpp
     title: kpr/math/factorize.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/is_prime.hpp
     title: kpr/math/is_prime.hpp
   - icon: ':warning:'
@@ -54,9 +54,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/aoj/WeightedUnionFind.test.cpp
     title: verify/aoj/WeightedUnionFind.test.cpp
-  - icon: ':x:'
-    path: verify/aoj/is_prime.test.cpp
-    title: verify/aoj/is_prime.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
@@ -72,9 +69,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/unionfind.test.cpp
     title: verify/yosupo/unionfind.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kpr/io/io_option.hpp\"\n#include <cstddef>\r\n#include <tuple>\r\
@@ -122,7 +119,7 @@ data:
   - kpr/io/io.hpp
   - kpr/all.hpp
   timestamp: '2023-04-04 01:42:52+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo/factorize.test.cpp
   - verify/yosupo/point_add_range_sum.test.cpp
@@ -130,7 +127,6 @@ data:
   - verify/yosupo/unionfind.test.cpp
   - verify/yosupo/point_set_range_composite.test.cpp
   - verify/aoj/WeightedUnionFind.test.cpp
-  - verify/aoj/is_prime.test.cpp
 documentation_of: kpr/io/io_option.hpp
 layout: document
 redirect_from:

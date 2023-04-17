@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/setting.hpp
     title: kpr/meta/setting.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/trait.hpp
     title: kpr/meta/trait.hpp
   _extendedRequiredBy:

@@ -1,37 +1,37 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/algorithm/Hash.hpp
     title: kpr/algorithm/Hash.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/function/monoid.hpp
     title: kpr/function/monoid.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/io/in.hpp
     title: kpr/io/in.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/io/io_option.hpp
     title: kpr/io/io_option.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/io/out.hpp
     title: kpr/io/out.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/Montgomery.hpp
     title: kpr/math/Montgomery.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/power.hpp
     title: kpr/math/power.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/constant.hpp
     title: kpr/meta/constant.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/setting.hpp
     title: kpr/meta/setting.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/trait.hpp
     title: kpr/meta/trait.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/meta/tuple_like.hpp
     title: kpr/meta/tuple_like.hpp
   _extendedRequiredBy:
@@ -44,7 +44,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: kpr/math/factorize.hpp
     title: kpr/math/factorize.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: kpr/math/is_prime.hpp
     title: kpr/math/is_prime.hpp
   - icon: ':warning:'
@@ -57,15 +57,12 @@ data:
     path: kpr/template/template.hpp
     title: kpr/template/template.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: verify/aoj/is_prime.test.cpp
-    title: verify/aoj/is_prime.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/yosupo/factorize.test.cpp
     title: verify/yosupo/factorize.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"kpr/math/DynamicModInt.hpp\"\n#include <cstddef>\r\n#include\
@@ -794,10 +791,9 @@ data:
   - kpr/template/template.hpp
   - kpr/all.hpp
   timestamp: '2023-04-16 03:46:24+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo/factorize.test.cpp
-  - verify/aoj/is_prime.test.cpp
 documentation_of: kpr/math/DynamicModInt.hpp
 layout: document
 redirect_from:
