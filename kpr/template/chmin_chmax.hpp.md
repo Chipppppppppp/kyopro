@@ -17,31 +17,31 @@ data:
   bundledCode: "#line 2 \"kpr/template/chmin_chmax.hpp\"\n\r\nnamespace kpr {\r\n\
     \    // assign min\r\n    [[maybe_unused]] inline constexpr struct {\r\n     \
     \   template<class T, class U = T>\r\n        constexpr bool operator ()(T& a,\
-    \ const U& b) noexcept {\r\n            if (a > b) {\r\n                a = b;\r\
-    \n                return true;\r\n            }\r\n            return false;\r\
-    \n        }\r\n    } chmin;\r\n\r\n    // assign max\r\n    [[maybe_unused]] inline\
-    \ constexpr struct {\r\n        template<class T, class U = T>\r\n        constexpr\
-    \ bool operator ()(T& a, const U& b) noexcept {\r\n            if (a < b) {\r\n\
-    \                a = b;\r\n                return true;\r\n            }\r\n \
-    \           return false;\r\n        }\r\n    } chmax;\r\n} // namespace kpr\r\
-    \n"
+    \ const U& b) const noexcept {\r\n            if (a > b) {\r\n               \
+    \ a = b;\r\n                return true;\r\n            }\r\n            return\
+    \ false;\r\n        }\r\n    } chmin;\r\n\r\n    // assign max\r\n    [[maybe_unused]]\
+    \ inline constexpr struct {\r\n        template<class T, class U = T>\r\n    \
+    \    constexpr bool operator ()(T& a, const U& b) const noexcept {\r\n       \
+    \     if (a < b) {\r\n                a = b;\r\n                return true;\r\
+    \n            }\r\n            return false;\r\n        }\r\n    } chmax;\r\n\
+    } // namespace kpr\r\n"
   code: "#pragma once\r\n\r\nnamespace kpr {\r\n    // assign min\r\n    [[maybe_unused]]\
     \ inline constexpr struct {\r\n        template<class T, class U = T>\r\n    \
-    \    constexpr bool operator ()(T& a, const U& b) noexcept {\r\n            if\
-    \ (a > b) {\r\n                a = b;\r\n                return true;\r\n    \
-    \        }\r\n            return false;\r\n        }\r\n    } chmin;\r\n\r\n \
-    \   // assign max\r\n    [[maybe_unused]] inline constexpr struct {\r\n      \
-    \  template<class T, class U = T>\r\n        constexpr bool operator ()(T& a,\
-    \ const U& b) noexcept {\r\n            if (a < b) {\r\n                a = b;\r\
-    \n                return true;\r\n            }\r\n            return false;\r\
-    \n        }\r\n    } chmax;\r\n} // namespace kpr\r\n"
+    \    constexpr bool operator ()(T& a, const U& b) const noexcept {\r\n       \
+    \     if (a > b) {\r\n                a = b;\r\n                return true;\r\
+    \n            }\r\n            return false;\r\n        }\r\n    } chmin;\r\n\r\
+    \n    // assign max\r\n    [[maybe_unused]] inline constexpr struct {\r\n    \
+    \    template<class T, class U = T>\r\n        constexpr bool operator ()(T& a,\
+    \ const U& b) const noexcept {\r\n            if (a < b) {\r\n               \
+    \ a = b;\r\n                return true;\r\n            }\r\n            return\
+    \ false;\r\n        }\r\n    } chmax;\r\n} // namespace kpr\r\n"
   dependsOn: []
   isVerificationFile: false
   path: kpr/template/chmin_chmax.hpp
   requiredBy:
   - kpr/template/template.hpp
   - kpr/all.hpp
-  timestamp: '2023-04-04 01:42:52+09:00'
+  timestamp: '2023-04-22 22:26:52+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/template/chmin_chmax.hpp

@@ -994,11 +994,11 @@ data:
     } // namespace kpr\n\nusing namespace std;\nusing namespace kpr;\n#line 2 \"kpr/template/chmin_chmax.hpp\"\
     \n\r\nnamespace kpr {\r\n    // assign min\r\n    [[maybe_unused]] inline constexpr\
     \ struct {\r\n        template<class T, class U = T>\r\n        constexpr bool\
-    \ operator ()(T& a, const U& b) noexcept {\r\n            if (a > b) {\r\n   \
-    \             a = b;\r\n                return true;\r\n            }\r\n    \
-    \        return false;\r\n        }\r\n    } chmin;\r\n\r\n    // assign max\r\
+    \ operator ()(T& a, const U& b) const noexcept {\r\n            if (a > b) {\r\
+    \n                a = b;\r\n                return true;\r\n            }\r\n\
+    \            return false;\r\n        }\r\n    } chmin;\r\n\r\n    // assign max\r\
     \n    [[maybe_unused]] inline constexpr struct {\r\n        template<class T,\
-    \ class U = T>\r\n        constexpr bool operator ()(T& a, const U& b) noexcept\
+    \ class U = T>\r\n        constexpr bool operator ()(T& a, const U& b) const noexcept\
     \ {\r\n            if (a < b) {\r\n                a = b;\r\n                return\
     \ true;\r\n            }\r\n            return false;\r\n        }\r\n    } chmax;\r\
     \n} // namespace kpr\r\n#line 4 \"kpr/template/constant.hpp\"\n\r\nnamespace kpr\
@@ -1208,7 +1208,7 @@ data:
   path: kpr/template/template.hpp
   requiredBy:
   - kpr/all.hpp
-  timestamp: '2023-04-16 05:00:59+09:00'
+  timestamp: '2023-04-22 22:26:52+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/template/template.hpp
