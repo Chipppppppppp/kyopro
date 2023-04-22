@@ -5,7 +5,7 @@ namespace kpr {
     // 先頭k個を次の組み合わせにして、次の組み合わせが存在するかを返す
     [[maybe_unused]] inline constexpr struct {
         template<class T>
-        bool operator ()(T first, T last, int k) {
+        bool operator ()(T first, T last, int k) const {
             T subset = first + k;
             if (first == last || first == subset || last == subset) return false;
             T src = subset;
