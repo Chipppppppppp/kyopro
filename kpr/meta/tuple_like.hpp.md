@@ -54,9 +54,6 @@ data:
     path: kpr/template/io_macro.hpp
     title: kpr/template/io_macro.hpp
   - icon: ':warning:'
-    path: kpr/template/lambda_macro.hpp
-    title: kpr/template/lambda_macro.hpp
-  - icon: ':warning:'
     path: kpr/template/macro.hpp
     title: kpr/template/macro.hpp
   - icon: ':warning:'
@@ -223,7 +220,6 @@ data:
   - kpr/math/BinomMod.hpp
   - kpr/template/macro.hpp
   - kpr/template/named_tuple_macro.hpp
-  - kpr/template/lambda_macro.hpp
   - kpr/template/alias.hpp
   - kpr/template/template.hpp
   - kpr/template/io_macro.hpp

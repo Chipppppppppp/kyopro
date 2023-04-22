@@ -1446,19 +1446,13 @@ data:
     \ debug(...) (void())\n#else\n#define debug(...) (kpr::print('#', ' ', 'l', 'i',\
     \ 'n', 'e', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
     \ != 0>(#__VA_ARGS__), kpr::print('\\n'), kpr::helper::debug_impl(__VA_ARGS__))\n\
-    #endif\n#line 5 \"kpr/template/lambda_macro.hpp\"\n\r\n#define $(...) \\\r\n([&](auto&&...\
-    \ _args) { \\\r\n    auto _args_tuple = std::forward_as_tuple(_args...); \\\r\n\
-    \    if constexpr (sizeof...(_args) == 0) { \\\r\n        return ([&]() { return\
-    \ (__VA_ARGS__); })(); \\\r\n    } else if constexpr (sizeof...(_args) == 1) {\
-    \ \\\r\n        return ([&](auto&& $0) { return (__VA_ARGS__); })(get<0>(_args_tuple));\
-    \ \\\r\n    } else if constexpr (sizeof...(_args) == 2) { \\\r\n        return\
-    \ ([&](auto&& $0, auto&& $1) { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple));\
-    \ \\\r\n    } else if constexpr (sizeof...(_args) == 3) { \\\r\n        return\
-    \ ([&](auto&& $0, auto&& $1, auto&& $2) { return (__VA_ARGS__); })(get<0>(_args_tuple),\
-    \ get<1>(_args_tuple), get<2>(_args_tuple)); \\\r\n    } else if constexpr (sizeof...(_args)\
-    \ == 4) { \\\r\n        return ([&](auto&& $0, auto&& $1, auto&& $2, auto&& $3)\
-    \ { return (__VA_ARGS__); })(get<0>(_args_tuple), get<1>(_args_tuple), get<2>(_args_tuple),\
-    \ get<3>(_args_tuple)); \\\r\n    } \\\r\n})\r\n#line 2 \"kpr/template/push_pop_macro.hpp\"\
+    #endif\n#line 4 \"kpr/template/lambda_macro.hpp\"\n\r\n#define $(...) \\\r\n([&](auto&&...\
+    \ _args) { \\\r\n    return ([&]([[maybe_unused]] auto&& $0, [[maybe_unused]]\
+    \ auto&& $1, [[maybe_unused]] auto&& $2, [[maybe_unused]] auto&& $3, [[maybe_unused]]\
+    \ auto&& $4, std::nullptr_t = nullptr, std::nullptr_t = nullptr, std::nullptr_t\
+    \ = nullptr, std::nullptr_t = nullptr, std::nullptr_t = nullptr) noexcept { return\
+    \ (__VA_ARGS__); })(std::forward<decltype(_args)>(_args)..., nullptr, nullptr,\
+    \ nullptr, nullptr, nullptr); \\\r\n})\r\n#line 2 \"kpr/template/push_pop_macro.hpp\"\
     \n\n#define pushf(...) emplace_front(__VA_ARGS__)\n#define popf(...) pop_front(__VA_ARGS__)\n\
     #define pushb(...) emplace_back(__VA_ARGS__)\n#define popb(...) pop_back(__VA_ARGS__)\n\
     #define push(...) emplace(__VA_ARGS__)\n#line 2 \"kpr/template/match_macro.hpp\"\
@@ -1625,7 +1619,7 @@ data:
   isVerificationFile: false
   path: kpr/all.hpp
   requiredBy: []
-  timestamp: '2023-04-22 22:30:26+09:00'
+  timestamp: '2023-04-23 01:38:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/all.hpp
