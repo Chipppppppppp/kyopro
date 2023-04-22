@@ -507,8 +507,8 @@ data:
     \u308F\u305B\u306B\u3057\u3066\u3001\u6B21\u306E\u7D44\u307F\u5408\u308F\u305B\
     \u304C\u5B58\u5728\u3059\u308B\u304B\u3092\u8FD4\u3059\n    [[maybe_unused]] inline\
     \ constexpr struct {\n        template<class T>\n        bool operator ()(T first,\
-    \ T last, int k) {\n            T subset = first + k;\n            if (first ==\
-    \ last || first == subset || last == subset) return false;\n            T src\
+    \ T last, int k) const {\n            T subset = first + k;\n            if (first\
+    \ == last || first == subset || last == subset) return false;\n            T src\
     \ = subset;\n            while (first != src) {\n                --src;\n    \
     \            if (*src < *(last - 1)) {\n                    T dest = subset;\n\
     \                    while (*src >= *dest) ++dest;\n                    std::iter_swap(src,\
@@ -1625,7 +1625,7 @@ data:
   isVerificationFile: false
   path: kpr/all.hpp
   requiredBy: []
-  timestamp: '2023-04-22 22:26:52+09:00'
+  timestamp: '2023-04-22 22:30:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/all.hpp
