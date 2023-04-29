@@ -816,10 +816,10 @@ data:
   isVerificationFile: false
   path: kpr/math/is_prime.hpp
   requiredBy:
-  - kpr/all/all.hpp
-  - kpr/math/math.hpp
-  - kpr/math/factorize.hpp
   - kpr/all.hpp
+  - kpr/math/factorize.hpp
+  - kpr/math/math.hpp
+  - kpr/all/all.hpp
   timestamp: '2023-04-16 03:46:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

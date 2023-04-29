@@ -1002,8 +1002,8 @@ data:
   isVerificationFile: false
   path: kpr/math/math.hpp
   requiredBy:
-  - kpr/all/all.hpp
   - kpr/all.hpp
+  - kpr/all/all.hpp
   timestamp: '2023-04-16 07:23:53+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
