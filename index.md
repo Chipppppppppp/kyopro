@@ -137,23 +137,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: kpr/meta/tuple_like.hpp
       title: kpr/meta/tuple_like.hpp
-  - name: kpr/range
-    pages:
-    - icon: ':warning:'
-      path: kpr/range/imap.hpp
-      title: kpr/range/imap.hpp
-    - icon: ':warning:'
-      path: kpr/range/irange.hpp
-      title: kpr/range/irange.hpp
-    - icon: ':warning:'
-      path: kpr/range/iterator_base.hpp
-      title: kpr/range/iterator_base.hpp
-    - icon: ':warning:'
-      path: kpr/range/range.hpp
-      title: kpr/range/range.hpp
-    - icon: ':warning:'
-      path: kpr/range/range_base.hpp
-      title: kpr/range/range_base.hpp
   - name: kpr/template
     pages:
     - icon: ':warning:'

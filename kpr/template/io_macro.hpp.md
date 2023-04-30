@@ -559,31 +559,22 @@ data:
     \ std::tuple{(static_cast<void>(idx), f())...};\n    }\n\n    Printer<Writer<>::iterator,\
     \ true, true, true, true> debug_impl(output.begin());\n\n    template<bool flag>\n\
     \    void print_if(std::string_view sv) {\n        if constexpr (flag) print('\
-    \ ', sv);\n    }\n} // namespace kpr::helper\n\n/* C++20\u4EE5\u964D\n#define\
-    \ read(type_or_init, ...) \\\n    auto [__VA_ARGS__] = (kpr::helper::read_impl(([]()\
-    \ { \\\n        using T = std::decay_t<decltype(*new type_or_init)>; \\\n    \
-    \    alignas(T) std::byte storage[sizeof(T)]; \\\n        T* p = new (storage)\
-    \ type_or_init; \\\n        kpr::scan(*p); \\\n        T res = std::move(*p);\
-    \ \\\n        p->~T(); \\\n        return res; \\\n    }), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\n\
-    */\n\n#define BOOL(...) bool __VA_ARGS__; scan(__VA_ARGS__)\n#define INT(...)\
-    \ int __VA_ARGS__; scan(__VA_ARGS__)\n#define LL(...) ll __VA_ARGS__; scan(__VA_ARGS__)\n\
-    #define FLOAT(...) float __VA_ARGS__; scan(__VA_ARGS__)\n#define LF(...) lf __VA_ARGS__;\
-    \ scan(__VA_ARGS__)\n#define LLF(...) llf __VA_ARGS__; scan(__VA_ARGS__)\n#define\
-    \ MINT(...) mint __VA_ARGS__; scan(__VA_ARGS__)\n#define DMINT(...) dmint __VA_ARGS__;\
-    \ scan(__VA_ARGS__)\n#define CHAR(...) char __VA_ARGS__; scan(__VA_ARGS__)\n#define\
-    \ STR(...) str __VA_ARGS__; scan(__VA_ARGS__)\n#define LL1(...) ll1 __VA_ARGS__;\
-    \ scan(__VA_ARGS__)\n#define LL2(...) ll2 __VA_ARGS__; scan(__VA_ARGS__)\n#define\
-    \ LL3(...) ll3 __VA_ARGS__; scan(__VA_ARGS__)\n#define LL4(...) ll4 __VA_ARGS__;\
-    \ scan(__VA_ARGS__)\n#define LL5(...) ll5 __VA_ARGS__; scan(__VA_ARGS__)\n\n#define\
-    \ KYOPRO_READ1(init, _1) auto _1 = init; scan(_1)\n#define KYOPRO_READ2(init,\
-    \ _1, _2) auto _1 = init, _2 = init; scan(_1, _2)\n#define KYOPRO_READ3(init,\
-    \ _1, _2, _3) auto _1 = init, _2 = init, _3 = init; scan(_1, _2, _3)\n#define\
-    \ KYOPRO_READ4(init, _1, _2, _3, _4) auto _1 = init, _2 = init, _3 = init, _4\
-    \ = init; scan(_1, _2, _3, _4)\n\n#define KYOPRO_OVERLOAD_READ(_1, _2, _3, _4,\
-    \ _5, name, ...) name\n#define read(...) KYOPRO_OVERLOAD_READ(__VA_ARGS__, KYOPRO_READ4,\
-    \ KYOPRO_READ3, KYOPRO_READ2, KYOPRO_READ1)(__VA_ARGS__)\n\n#ifdef NDEBUG\n#define\
-    \ debug(...) (void())\n#else\n#define debug(...) (kpr::print('#', ' ', 'l', 'i',\
-    \ 'n', 'e', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
+    \ ', sv);\n    }\n} // namespace kpr::helper\n\n#define read(type_or_init, ...)\
+    \ \\\n    auto [__VA_ARGS__] = (kpr::helper::read_impl(([&]() { \\\n        using\
+    \ T = std::decay_t<decltype(*new type_or_init)>; \\\n        alignas(T) std::byte\
+    \ storage[sizeof(T)]; \\\n        T* p = new (storage) type_or_init; \\\n    \
+    \    kpr::scan(*p); \\\n        T res = std::move(*p); \\\n        p->~T(); \\\
+    \n        return res; \\\n    }), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\n\
+    \n#define BOOL(...) read(bool, __VA_ARGS__);\n#define INT(...) read(int, __VA_ARGS__);\n\
+    #define LL(...) read(ll, __VA_ARGS__);\n#define FLOAT(...) read(float, __VA_ARGS__);\n\
+    #define LF(...) read(lf, __VA_ARGS__);\n#define LLF(...) read(llf, __VA_ARGS__);\n\
+    #define MINT(...) read(mint, __VA_ARGS__);\n#define DMINT(...) read(dmint, __VA_ARGS__);\n\
+    #define CHAR(...) read(char, __VA_ARGS__);\n#define STR(...) read(str, __VA_ARGS__);\n\
+    #define LL1(...) read(ll1, __VA_ARGS__);\n#define LL2(...) read(ll2, __VA_ARGS__);\n\
+    #define LL3(...) read(ll3, __VA_ARGS__);\n#define LL4(...) read(ll4, __VA_ARGS__);\n\
+    #define LL5(...) read(ll5, __VA_ARGS__);\n\n#ifdef NDEBUG\n#define debug(...)\
+    \ (void())\n#else\n#define debug(...) (kpr::print('#', ' ', 'l', 'i', 'n', 'e',\
+    \ ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
     \ != 0>(#__VA_ARGS__), kpr::print('\\n'), kpr::helper::debug_impl(__VA_ARGS__))\n\
     #endif\n"
   code: "#pragma once\n#include <unistd.h>\n#include <cstddef>\n#include <istream>\n\
@@ -599,31 +590,21 @@ data:
     \ f())...};\n    }\n\n    Printer<Writer<>::iterator, true, true, true, true>\
     \ debug_impl(output.begin());\n\n    template<bool flag>\n    void print_if(std::string_view\
     \ sv) {\n        if constexpr (flag) print(' ', sv);\n    }\n} // namespace kpr::helper\n\
-    \n/* C++20\u4EE5\u964D\n#define read(type_or_init, ...) \\\n    auto [__VA_ARGS__]\
-    \ = (kpr::helper::read_impl(([]() { \\\n        using T = std::decay_t<decltype(*new\
-    \ type_or_init)>; \\\n        alignas(T) std::byte storage[sizeof(T)]; \\\n  \
-    \      T* p = new (storage) type_or_init; \\\n        kpr::scan(*p); \\\n    \
-    \    T res = std::move(*p); \\\n        p->~T(); \\\n        return res; \\\n\
-    \    }), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\n\
-    */\n\n#define BOOL(...) bool __VA_ARGS__; scan(__VA_ARGS__)\n#define INT(...)\
-    \ int __VA_ARGS__; scan(__VA_ARGS__)\n#define LL(...) ll __VA_ARGS__; scan(__VA_ARGS__)\n\
-    #define FLOAT(...) float __VA_ARGS__; scan(__VA_ARGS__)\n#define LF(...) lf __VA_ARGS__;\
-    \ scan(__VA_ARGS__)\n#define LLF(...) llf __VA_ARGS__; scan(__VA_ARGS__)\n#define\
-    \ MINT(...) mint __VA_ARGS__; scan(__VA_ARGS__)\n#define DMINT(...) dmint __VA_ARGS__;\
-    \ scan(__VA_ARGS__)\n#define CHAR(...) char __VA_ARGS__; scan(__VA_ARGS__)\n#define\
-    \ STR(...) str __VA_ARGS__; scan(__VA_ARGS__)\n#define LL1(...) ll1 __VA_ARGS__;\
-    \ scan(__VA_ARGS__)\n#define LL2(...) ll2 __VA_ARGS__; scan(__VA_ARGS__)\n#define\
-    \ LL3(...) ll3 __VA_ARGS__; scan(__VA_ARGS__)\n#define LL4(...) ll4 __VA_ARGS__;\
-    \ scan(__VA_ARGS__)\n#define LL5(...) ll5 __VA_ARGS__; scan(__VA_ARGS__)\n\n#define\
-    \ KYOPRO_READ1(init, _1) auto _1 = init; scan(_1)\n#define KYOPRO_READ2(init,\
-    \ _1, _2) auto _1 = init, _2 = init; scan(_1, _2)\n#define KYOPRO_READ3(init,\
-    \ _1, _2, _3) auto _1 = init, _2 = init, _3 = init; scan(_1, _2, _3)\n#define\
-    \ KYOPRO_READ4(init, _1, _2, _3, _4) auto _1 = init, _2 = init, _3 = init, _4\
-    \ = init; scan(_1, _2, _3, _4)\n\n#define KYOPRO_OVERLOAD_READ(_1, _2, _3, _4,\
-    \ _5, name, ...) name\n#define read(...) KYOPRO_OVERLOAD_READ(__VA_ARGS__, KYOPRO_READ4,\
-    \ KYOPRO_READ3, KYOPRO_READ2, KYOPRO_READ1)(__VA_ARGS__)\n\n#ifdef NDEBUG\n#define\
-    \ debug(...) (void())\n#else\n#define debug(...) (kpr::print('#', ' ', 'l', 'i',\
-    \ 'n', 'e', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
+    \n#define read(type_or_init, ...) \\\n    auto [__VA_ARGS__] = (kpr::helper::read_impl(([&]()\
+    \ { \\\n        using T = std::decay_t<decltype(*new type_or_init)>; \\\n    \
+    \    alignas(T) std::byte storage[sizeof(T)]; \\\n        T* p = new (storage)\
+    \ type_or_init; \\\n        kpr::scan(*p); \\\n        T res = std::move(*p);\
+    \ \\\n        p->~T(); \\\n        return res; \\\n    }), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\n\
+    \n#define BOOL(...) read(bool, __VA_ARGS__);\n#define INT(...) read(int, __VA_ARGS__);\n\
+    #define LL(...) read(ll, __VA_ARGS__);\n#define FLOAT(...) read(float, __VA_ARGS__);\n\
+    #define LF(...) read(lf, __VA_ARGS__);\n#define LLF(...) read(llf, __VA_ARGS__);\n\
+    #define MINT(...) read(mint, __VA_ARGS__);\n#define DMINT(...) read(dmint, __VA_ARGS__);\n\
+    #define CHAR(...) read(char, __VA_ARGS__);\n#define STR(...) read(str, __VA_ARGS__);\n\
+    #define LL1(...) read(ll1, __VA_ARGS__);\n#define LL2(...) read(ll2, __VA_ARGS__);\n\
+    #define LL3(...) read(ll3, __VA_ARGS__);\n#define LL4(...) read(ll4, __VA_ARGS__);\n\
+    #define LL5(...) read(ll5, __VA_ARGS__);\n\n#ifdef NDEBUG\n#define debug(...)\
+    \ (void())\n#else\n#define debug(...) (kpr::print('#', ' ', 'l', 'i', 'n', 'e',\
+    \ ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
     \ != 0>(#__VA_ARGS__), kpr::print('\\n'), kpr::helper::debug_impl(__VA_ARGS__))\n\
     #endif\n"
   dependsOn:
@@ -642,7 +623,7 @@ data:
   - kpr/template/template.hpp
   - kpr/template/macro.hpp
   - kpr/all.hpp
-  timestamp: '2023-04-16 03:46:24+09:00'
+  timestamp: '2023-04-30 17:50:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/template/io_macro.hpp

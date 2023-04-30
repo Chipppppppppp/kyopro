@@ -84,15 +84,6 @@ data:
     path: kpr/meta/meta.hpp
     title: kpr/meta/meta.hpp
   - icon: ':warning:'
-    path: kpr/range/imap.hpp
-    title: kpr/range/imap.hpp
-  - icon: ':warning:'
-    path: kpr/range/irange.hpp
-    title: kpr/range/irange.hpp
-  - icon: ':warning:'
-    path: kpr/range/range.hpp
-    title: kpr/range/range.hpp
-  - icon: ':warning:'
     path: kpr/template/alias.hpp
     title: kpr/template/alias.hpp
   - icon: ':warning:'
@@ -367,9 +358,6 @@ data:
   isVerificationFile: false
   path: kpr/meta/trait.hpp
   requiredBy:
-  - kpr/range/irange.hpp
-  - kpr/range/range.hpp
-  - kpr/range/imap.hpp
   - kpr/io/io.hpp
   - kpr/io/in.hpp
   - kpr/io/out.hpp
