@@ -35,9 +35,8 @@ namespace kpr::helper {
     }
 } // namespace kpr::helper
 
-/* C++20以降
 #define read(type_or_init, ...) \
-    auto [__VA_ARGS__] = (kpr::helper::read_impl(([]() { \
+    auto [__VA_ARGS__] = (kpr::helper::read_impl(([&]() { \
         using T = std::decay_t<decltype(*new type_or_init)>; \
         alignas(T) std::byte storage[sizeof(T)]; \
         T* p = new (storage) type_or_init; \
@@ -46,31 +45,22 @@ namespace kpr::helper {
         p->~T(); \
         return res; \
     }), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))
-*/
 
-#define BOOL(...) bool __VA_ARGS__; scan(__VA_ARGS__)
-#define INT(...) int __VA_ARGS__; scan(__VA_ARGS__)
-#define LL(...) ll __VA_ARGS__; scan(__VA_ARGS__)
-#define FLOAT(...) float __VA_ARGS__; scan(__VA_ARGS__)
-#define LF(...) lf __VA_ARGS__; scan(__VA_ARGS__)
-#define LLF(...) llf __VA_ARGS__; scan(__VA_ARGS__)
-#define MINT(...) mint __VA_ARGS__; scan(__VA_ARGS__)
-#define DMINT(...) dmint __VA_ARGS__; scan(__VA_ARGS__)
-#define CHAR(...) char __VA_ARGS__; scan(__VA_ARGS__)
-#define STR(...) str __VA_ARGS__; scan(__VA_ARGS__)
-#define LL1(...) ll1 __VA_ARGS__; scan(__VA_ARGS__)
-#define LL2(...) ll2 __VA_ARGS__; scan(__VA_ARGS__)
-#define LL3(...) ll3 __VA_ARGS__; scan(__VA_ARGS__)
-#define LL4(...) ll4 __VA_ARGS__; scan(__VA_ARGS__)
-#define LL5(...) ll5 __VA_ARGS__; scan(__VA_ARGS__)
-
-#define KYOPRO_READ1(init, _1) auto _1 = init; scan(_1)
-#define KYOPRO_READ2(init, _1, _2) auto _1 = init, _2 = init; scan(_1, _2)
-#define KYOPRO_READ3(init, _1, _2, _3) auto _1 = init, _2 = init, _3 = init; scan(_1, _2, _3)
-#define KYOPRO_READ4(init, _1, _2, _3, _4) auto _1 = init, _2 = init, _3 = init, _4 = init; scan(_1, _2, _3, _4)
-
-#define KYOPRO_OVERLOAD_READ(_1, _2, _3, _4, _5, name, ...) name
-#define read(...) KYOPRO_OVERLOAD_READ(__VA_ARGS__, KYOPRO_READ4, KYOPRO_READ3, KYOPRO_READ2, KYOPRO_READ1)(__VA_ARGS__)
+#define BOOL(...) read(bool, __VA_ARGS__);
+#define INT(...) read(int, __VA_ARGS__);
+#define LL(...) read(ll, __VA_ARGS__);
+#define FLOAT(...) read(float, __VA_ARGS__);
+#define LF(...) read(lf, __VA_ARGS__);
+#define LLF(...) read(llf, __VA_ARGS__);
+#define MINT(...) read(mint, __VA_ARGS__);
+#define DMINT(...) read(dmint, __VA_ARGS__);
+#define CHAR(...) read(char, __VA_ARGS__);
+#define STR(...) read(str, __VA_ARGS__);
+#define LL1(...) read(ll1, __VA_ARGS__);
+#define LL2(...) read(ll2, __VA_ARGS__);
+#define LL3(...) read(ll3, __VA_ARGS__);
+#define LL4(...) read(ll4, __VA_ARGS__);
+#define LL5(...) read(ll5, __VA_ARGS__);
 
 #ifdef NDEBUG
 #define debug(...) (void())

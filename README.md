@@ -32,7 +32,7 @@ namespace kpr {
 
 # 要件
 - posix準拠、C++17以上
-- `__int128 / unsigned __int128(g++, clang++), __builtin_(ctz/ctzll/clz/clzll/popcount)(g++, clang++)` が必要
+- gcc 8以降またはClang 8.0以降
 
 ac-libraryを実行できるUnix環境なら大丈夫だと思います。MSVC++はしりません
 
