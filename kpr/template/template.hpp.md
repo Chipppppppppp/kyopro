@@ -350,12 +350,13 @@ data:
     \n#endif\r\n\r\n#ifndef KYOPRO_BASE_UINT\r\n// \u57FA\u672C\u7B26\u53F7\u306A\u3057\
     \u6574\u6570\u578B\r\n#define KYOPRO_BASE_UINT std::uint64_t\r\n#endif\r\n\r\n\
     #ifndef KYOPRO_BASE_FLOAT\r\n// \u57FA\u672C\u6D6E\u52D5\u5C0F\u6570\u70B9\u6570\
-    \u578B\r\n#define KYOPRO_BASE_FLOAT double\r\n#endif\r\n\r\n#ifndef KYOPRO_BASE_MINT\r\
-    \n// \u57FA\u672Cmodint\r\n#define KYOPRO_BASE_MINT kpr::ModInt<mod>\r\n#endif\r\
-    \n\r\n#ifndef KYOPRO_DEFAULT_MOD\r\n// \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\
-    \u305Fmod\r\n#define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))\r\
-    \n#endif\r\n\r\n#ifndef KYOPRO_DECIMAL_PRECISION\r\n// \u5C0F\u6570\u7CBE\u5EA6\
-    (\u6841)\r\n#define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))\r\
+    \u578B\r\n#define KYOPRO_BASE_FLOAT double\r\n#endif\r\n\r\n#ifndef KYOPRO_LL\r\
+    \n// ll\r\n#define KYOPRO_LL long long\r\n#endif\r\n\r\n#ifndef KYOPRO_LF\r\n\
+    // lf\r\n#define KYOPRO_LF double\r\n#endif\r\n\r\n#ifndef KYOPRO_MINT\r\n// mint\r\
+    \n#define KYOPRO_MINT kpr::ModInt<mod>\r\n#endif\r\n\r\n#ifndef KYOPRO_DEFAULT_MOD\r\
+    \n// \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\u305Fmod\r\n#define KYOPRO_DEFAULT_MOD\
+    \ (static_cast<KYOPRO_BASE_UINT>(998244353))\r\n#endif\r\n\r\n#ifndef KYOPRO_DECIMAL_PRECISION\r\
+    \n// \u5C0F\u6570\u7CBE\u5EA6(\u6841)\r\n#define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))\r\
     \n#endif\r\n\r\n#ifndef KYOPRO_INF_DIV\r\n// \u7121\u9650\u5927\u3092\u8868\u3059\
     \u6574\u6570\u304C\u6700\u5927\u5024\u306E\u4F55\u5206\u306E\u4E00\u304B\u3092\
     \u8868\u3059\r\n#define KYOPRO_INF_DIV (static_cast<KYOPRO_BASE_UINT>(3))\r\n\
@@ -914,14 +915,14 @@ data:
     \        constexpr std::size_t operator ()(ModInt<mod> a) const noexcept {\r\n\
     \            return static_cast<std::size_t>(a);\r\n        }\r\n    };\r\n} //\
     \ namespace kpr\r\n#line 22 \"kpr/template/alias.hpp\"\n\nnamespace kpr {\n  \
-    \  using ushort = unsigned short;\n    using ll = long long;\n    using ull =\
-    \ unsigned long long;\n    using lf = double;\n    using llf = long double;\n\n\
-    \    using i8 = std::int8_t;\n    using u8 = std::uint8_t;\n    using i16 = std::int16_t;\n\
+    \  using ushort = unsigned short;\n    using ll = KYOPRO_LL;\n    using ull =\
+    \ unsigned long long;\n    using lf = KYOPRO_LF;\n    using llf = long double;\n\
+    \n    using i8 = std::int8_t;\n    using u8 = std::uint8_t;\n    using i16 = std::int16_t;\n\
     \    using u16 = std::uint16_t;\n    using i32 = std::int32_t;\n    using u32\
     \ = std::uint32_t;\n    using i64 = std::int64_t;\n    using u64 = std::uint64_t;\n\
     \    #ifdef __SIZEOF_INT128__\n    using i128 = __int128_t;\n    using u128 =\
     \ __uint128_t;\n    #endif\n    #ifdef __SIZEOF_FLOAT128__\n    using f128 = __float128;\n\
-    \    #endif\n\n    using mint = KYOPRO_BASE_MINT;\n    using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\
+    \    #endif\n\n    using mint = KYOPRO_MINT;\n    using dmint = DynamicModInt<KYOPRO_BASE_UINT>;\n\
     \n    using str = std::string;\n\n    template<class T, std::size_t idx, class...\
     \ Args>\n    struct agg_type {\n        using type = typename agg_type<T, idx\
     \ - 1, T, Args...>::type;\n    };\n    template<class T, class... Args>\n    struct\
@@ -1193,7 +1194,7 @@ data:
   path: kpr/template/template.hpp
   requiredBy:
   - kpr/all.hpp
-  timestamp: '2023-04-30 17:50:47+09:00'
+  timestamp: '2023-05-30 09:27:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/template/template.hpp

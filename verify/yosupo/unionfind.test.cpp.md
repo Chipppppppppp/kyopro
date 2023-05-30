@@ -50,9 +50,11 @@ data:
     \n// \u57FA\u672C\u7B26\u53F7\u306A\u3057\u6574\u6570\u578B\r\n#define KYOPRO_BASE_UINT\
     \ std::uint64_t\r\n#endif\r\n\r\n#ifndef KYOPRO_BASE_FLOAT\r\n// \u57FA\u672C\u6D6E\
     \u52D5\u5C0F\u6570\u70B9\u6570\u578B\r\n#define KYOPRO_BASE_FLOAT double\r\n#endif\r\
-    \n\r\n#ifndef KYOPRO_BASE_MINT\r\n// \u57FA\u672Cmodint\r\n#define KYOPRO_BASE_MINT\
-    \ kpr::ModInt<mod>\r\n#endif\r\n\r\n#ifndef KYOPRO_DEFAULT_MOD\r\n// \u554F\u984C\
-    \u3067\u8A2D\u5B9A\u3055\u308C\u305Fmod\r\n#define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))\r\
+    \n\r\n#ifndef KYOPRO_LL\r\n// ll\r\n#define KYOPRO_LL long long\r\n#endif\r\n\r\
+    \n#ifndef KYOPRO_LF\r\n// lf\r\n#define KYOPRO_LF double\r\n#endif\r\n\r\n#ifndef\
+    \ KYOPRO_MINT\r\n// mint\r\n#define KYOPRO_MINT kpr::ModInt<mod>\r\n#endif\r\n\
+    \r\n#ifndef KYOPRO_DEFAULT_MOD\r\n// \u554F\u984C\u3067\u8A2D\u5B9A\u3055\u308C\
+    \u305Fmod\r\n#define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))\r\
     \n#endif\r\n\r\n#ifndef KYOPRO_DECIMAL_PRECISION\r\n// \u5C0F\u6570\u7CBE\u5EA6\
     (\u6841)\r\n#define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))\r\
     \n#endif\r\n\r\n#ifndef KYOPRO_INF_DIV\r\n// \u7121\u9650\u5927\u3092\u8868\u3059\
@@ -604,7 +606,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo/unionfind.test.cpp
   requiredBy: []
-  timestamp: '2023-04-16 03:46:24+09:00'
+  timestamp: '2023-05-30 09:27:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yosupo/unionfind.test.cpp

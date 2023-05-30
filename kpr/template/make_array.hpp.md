@@ -35,8 +35,8 @@ data:
   isVerificationFile: false
   path: kpr/template/make_array.hpp
   requiredBy:
-  - kpr/template/template.hpp
   - kpr/all.hpp
+  - kpr/template/template.hpp
   timestamp: '2023-04-16 03:08:34+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
