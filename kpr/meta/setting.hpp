@@ -16,9 +16,19 @@
 #define KYOPRO_BASE_FLOAT double
 #endif
 
-#ifndef KYOPRO_BASE_MINT
-// 基本modint
-#define KYOPRO_BASE_MINT kpr::ModInt<mod>
+#ifndef KYOPRO_LL
+// ll
+#define KYOPRO_LL long long
+#endif
+
+#ifndef KYOPRO_LF
+// lf
+#define KYOPRO_LF double
+#endif
+
+#ifndef KYOPRO_MINT
+// mint
+#define KYOPRO_MINT kpr::ModInt<mod>
 #endif
 
 #ifndef KYOPRO_DEFAULT_MOD

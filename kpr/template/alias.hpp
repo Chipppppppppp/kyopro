@@ -22,9 +22,9 @@
 
 namespace kpr {
     using ushort = unsigned short;
-    using ll = long long;
+    using ll = KYOPRO_LL;
     using ull = unsigned long long;
-    using lf = double;
+    using lf = KYOPRO_LF;
     using llf = long double;
 
     using i8 = std::int8_t;
@@ -43,7 +43,7 @@ namespace kpr {
     using f128 = __float128;
     #endif
 
-    using mint = KYOPRO_BASE_MINT;
+    using mint = KYOPRO_MINT;
     using dmint = DynamicModInt<KYOPRO_BASE_UINT>;
 
     using str = std::string;
