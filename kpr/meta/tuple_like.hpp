@@ -102,7 +102,7 @@ namespace kpr {
     // tuple-likeな型Tのidx(0 <= idx < 8)番目の要素の型を調べる
     template<std::size_t idx, class T>
     struct tuple_like_element {
-        using type = decltype(get<idx>(std::declval<T>()));
+        using type = std::decay_t<decltype(get<idx>(std::declval<T>()))>;
     };
 
     // tuple-likeな型Tのidx(0 <= idx < 8)番目の要素の型を調べる
