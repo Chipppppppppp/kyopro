@@ -280,7 +280,7 @@ data:
     \    template<std::size_t idx>\n    inline constexpr helper::GetHelper<idx> get;\n\
     \n\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\u8981\
     \u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t idx, class\
-    \ T>\n    struct tuple_like_element {\n        using type = decltype(get<idx>(std::declval<T>()));\n\
+    \ T>\n    struct tuple_like_element {\n        using type = std::decay_t<decltype(get<idx>(std::declval<T>()))>;\n\
     \    };\n\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\
     \u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t idx,\
     \ class T>\n    using tuple_like_element_t = typename tuple_like_element<idx,\
@@ -567,7 +567,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo/many_aplusb.test.cpp
   requiredBy: []
-  timestamp: '2023-05-30 09:27:18+09:00'
+  timestamp: '2023-06-09 13:17:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yosupo/many_aplusb.test.cpp

@@ -306,7 +306,7 @@ data:
     \    template<std::size_t idx>\n    inline constexpr helper::GetHelper<idx> get;\n\
     \n\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\u8981\
     \u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t idx, class\
-    \ T>\n    struct tuple_like_element {\n        using type = decltype(get<idx>(std::declval<T>()));\n\
+    \ T>\n    struct tuple_like_element {\n        using type = std::decay_t<decltype(get<idx>(std::declval<T>()))>;\n\
     \    };\n\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\
     \u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t idx,\
     \ class T>\n    using tuple_like_element_t = typename tuple_like_element<idx,\
@@ -817,11 +817,11 @@ data:
   isVerificationFile: false
   path: kpr/math/is_prime.hpp
   requiredBy:
+  - kpr/math/factorize.hpp
+  - kpr/math/math.hpp
   - kpr/all/all.hpp
   - kpr/all.hpp
-  - kpr/math/math.hpp
-  - kpr/math/factorize.hpp
-  timestamp: '2023-05-30 09:27:18+09:00'
+  timestamp: '2023-06-09 13:17:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo/factorize.test.cpp

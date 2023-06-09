@@ -75,13 +75,13 @@ data:
   isVerificationFile: false
   path: kpr/function/compare.hpp
   requiredBy:
-  - kpr/all/all.hpp
-  - kpr/all.hpp
-  - kpr/template/template.hpp
-  - kpr/template/alias.hpp
   - kpr/algorithm/compress.hpp
   - kpr/algorithm/algorithm.hpp
   - kpr/function/function.hpp
+  - kpr/template/alias.hpp
+  - kpr/template/template.hpp
+  - kpr/all/all.hpp
+  - kpr/all.hpp
   timestamp: '2023-04-04 01:42:52+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

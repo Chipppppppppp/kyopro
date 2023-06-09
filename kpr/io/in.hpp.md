@@ -326,7 +326,7 @@ data:
     \    template<std::size_t idx>\n    inline constexpr helper::GetHelper<idx> get;\n\
     \n\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\u8981\
     \u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t idx, class\
-    \ T>\n    struct tuple_like_element {\n        using type = decltype(get<idx>(std::declval<T>()));\n\
+    \ T>\n    struct tuple_like_element {\n        using type = std::decay_t<decltype(get<idx>(std::declval<T>()))>;\n\
     \    };\n\n    // tuple-like\u306A\u578BT\u306Eidx(0 <= idx < 8)\u756A\u76EE\u306E\
     \u8981\u7D20\u306E\u578B\u3092\u8ABF\u3079\u308B\n    template<std::size_t idx,\
     \ class T>\n    using tuple_like_element_t = typename tuple_like_element<idx,\
@@ -568,29 +568,29 @@ data:
   isVerificationFile: false
   path: kpr/io/in.hpp
   requiredBy:
-  - kpr/all/all.hpp
-  - kpr/all.hpp
-  - kpr/math/math.hpp
+  - kpr/io/io.hpp
   - kpr/math/factorize.hpp
   - kpr/math/BinomMod.hpp
-  - kpr/math/DynamicModInt.hpp
   - kpr/math/ModInt.hpp
+  - kpr/math/DynamicModInt.hpp
+  - kpr/math/math.hpp
   - kpr/math/is_prime.hpp
-  - kpr/template/macro.hpp
-  - kpr/template/io_macro.hpp
-  - kpr/template/template.hpp
-  - kpr/template/named_tuple_macro.hpp
   - kpr/template/alias.hpp
-  - kpr/io/io.hpp
-  timestamp: '2023-05-30 09:27:18+09:00'
+  - kpr/template/template.hpp
+  - kpr/template/io_macro.hpp
+  - kpr/template/macro.hpp
+  - kpr/template/named_tuple_macro.hpp
+  - kpr/all/all.hpp
+  - kpr/all.hpp
+  timestamp: '2023-06-09 13:17:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yosupo/factorize.test.cpp
-  - verify/yosupo/point_add_range_sum.test.cpp
-  - verify/yosupo/point_set_range_composite.test.cpp
-  - verify/yosupo/unionfind.test.cpp
-  - verify/yosupo/many_aplusb.test.cpp
   - verify/aoj/WeightedUnionFind.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/factorize.test.cpp
+  - verify/yosupo/unionfind.test.cpp
+  - verify/yosupo/point_set_range_composite.test.cpp
 documentation_of: kpr/io/in.hpp
 layout: document
 redirect_from:
