@@ -878,8 +878,8 @@ data:
     \ \\\n        using short_name ## short_name ## short_name ## short_name ## short_name\
     \ ## short_value_name = name<name<name<name<name<value_name>>>>>;\n\n    #define\
     \ DEFINE_VEC_ALIAS(name, short_name, value_name, short_value_name) \\\n      \
-    \  using V ## short_name ## short_value_name = Vec<name<value_name>>; \\\n   \
-    \     using VV ## short_name ## short_value_name = VVec<name<value_name>>;\n\n\
+    \  using v ## short_name ## short_value_name = Vec<name<value_name>>; \\\n   \
+    \     using vv ## short_name ## short_value_name = VVec<name<value_name>>;\n\n\
     \    #define DEFINE_CONTAINER_ALIAS(define_alias, name, short_name) \\\n     \
     \   define_alias(name, short_name, bool, b); \\\n        define_alias(name, short_name,\
     \ int, i); \\\n        define_alias(name, short_name, ll, l); \\\n        define_alias(name,\
@@ -894,42 +894,42 @@ data:
     \ T>\n    using Vec = std::vector<T>;\n    template<class T>\n    using VVec =\
     \ Vec<Vec<T>>;\n    template<class T>\n    using VVVec = Vec<VVec<T>>;\n    template<class\
     \ T>\n    using VVVVec = Vec<VVVec<T>>;\n    template<class T>\n    using VVVVVec\
-    \ = Vec<VVVVec<T>>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Vec, V);\n\n \
+    \ = Vec<VVVVec<T>>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Vec, v);\n\n \
     \   template<class T>\n    using Deque = std::deque<T>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
-    \ Deque, D);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, Deque, D);\n\n    template<class\
+    \ Deque, d);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, Deque, d);\n\n    template<class\
     \ T>\n    using List = std::list<T>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
-    \ List, L);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, List, L);\n\n    template<class\
+    \ List, l);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, List, l);\n\n    template<class\
     \ T>\n    using ForwardList = std::forward_list<T>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
-    \ ForwardList, FL);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, ForwardList,\
-    \ FL);\n\n    template<class Key, class Compare = Less>\n    using Set = std::set<Key,\
+    \ ForwardList, fl);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, ForwardList,\
+    \ fl);\n\n    template<class Key, class Compare = Less>\n    using Set = std::set<Key,\
     \ Compare>;\n    template<class Key, class Compare = Less>\n    using Map = std::map<Key,\
-    \ Compare>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Set, S);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
-    \ Set, S);\n    using Mll = Map<ll, ll>;\n    using VMll = Vec<Mll>;\n\n    template<class\
+    \ Compare>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Set, s);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
+    \ Set, s);\n    using mll = Map<ll, ll>;\n    using vmll = Vec<mll>;\n\n    template<class\
     \ Key, class H = Hash<Key>>\n    using HashSet = std::unordered_set<Key, H>;\n\
     \    template<class Key, class T, class H = Hash<Key>>\n    using HashMap = std::unordered_map<Key,\
-    \ T, H>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HashSet, HS);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
-    \ HashSet, HS);\n    using HMll = HashMap<ll, ll>;\n    using VHMll = Vec<HMll>;\n\
+    \ T, H>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HashSet, hs);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
+    \ HashSet, hs);\n    using hmll = HashMap<ll, ll>;\n    using vhmll = Vec<hmll>;\n\
     \n    template<class Key, class Compare = Less>\n    using MultiSet = std::multiset<Key,\
     \ Compare>;\n    template<class Key, class T, class Compare = Less>\n    using\
     \ MultiMap = std::multimap<Key, T, Compare>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
-    \ MultiSet, MS);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, MultiSet, MS);\n\
-    \    using MMll = MultiMap<ll, ll>;\n    using VMMll = Vec<MMll>;\n\n    template<class\
+    \ MultiSet, ms);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, MultiSet, ms);\n\
+    \    using mmll = MultiMap<ll, ll>;\n    using vmmll = Vec<mmll>;\n\n    template<class\
     \ Key, class H = Hash<Key>>\n    using HashMultiSet = std::unordered_multiset<Key,\
     \ H>;\n    template<class Key, class T, class H = Hash<Key>>\n    using HashMultiMap\
     \ = std::unordered_multimap<Key, T, H>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
-    \ HashMultiSet, HMS);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashMultiSet,\
-    \ HMS);\n    using HMMli = HashMultiMap<ll, ll>;\n    using VHMMli = Vec<HMMli>;\n\
+    \ HashMultiSet, hms);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashMultiSet,\
+    \ hms);\n    using hmmli = HashMultiMap<ll, ll>;\n    using vhmmli = Vec<hmmli>;\n\
     \n    template<class T, class Container = std::deque<T>>\n    using Queue = std::queue<T,\
-    \ Container>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Queue, Que);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
-    \ Queue, Que);\n\n    template<class T, class Container = std::deque<T>>\n   \
+    \ Container>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Queue, que);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
+    \ Queue, que);\n\n    template<class T, class Container = std::deque<T>>\n   \
     \ using Stack = std::stack<T, Container>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
-    \ Stack, Stk);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, Stack, Stk);\n\n\
+    \ Stack, stk);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, Stack, stk);\n\n\
     \    template<class T, class Compare = Less, class Container = Vec<T>>\n    using\
     \ PriQ = std::priority_queue<T, Container, Compare>;\n    template<class T, class\
     \ Compare = Greater, class Container = Vec<T>>\n    using HeapQ = PriQ<T, Compare,\
-    \ Container>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, PriQ, PQ);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
-    \ PriQ, PQ);\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HeapQ, HQ);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
-    \ HeapQ, HQ);\n\n    template<std::size_t size>\n    using BitSet = std::bitset<size>;\n\
+    \ Container>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, PriQ, pq);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
+    \ PriQ, pq);\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HeapQ, hq);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
+    \ HeapQ, hq);\n\n    template<std::size_t size>\n    using BitSet = std::bitset<size>;\n\
     } // namespace kpr\n\nusing namespace std;\nusing namespace kpr;\n"
   code: "#pragma once\n#include <cstdint>\n#include <forward_list>\n#include <functional>\n\
     #include <limits>\n#include <list>\n#include <map>\n#include <queue>\n#include\
@@ -962,8 +962,8 @@ data:
     \ \\\n        using short_name ## short_name ## short_name ## short_name ## short_name\
     \ ## short_value_name = name<name<name<name<name<value_name>>>>>;\n\n    #define\
     \ DEFINE_VEC_ALIAS(name, short_name, value_name, short_value_name) \\\n      \
-    \  using V ## short_name ## short_value_name = Vec<name<value_name>>; \\\n   \
-    \     using VV ## short_name ## short_value_name = VVec<name<value_name>>;\n\n\
+    \  using v ## short_name ## short_value_name = Vec<name<value_name>>; \\\n   \
+    \     using vv ## short_name ## short_value_name = VVec<name<value_name>>;\n\n\
     \    #define DEFINE_CONTAINER_ALIAS(define_alias, name, short_name) \\\n     \
     \   define_alias(name, short_name, bool, b); \\\n        define_alias(name, short_name,\
     \ int, i); \\\n        define_alias(name, short_name, ll, l); \\\n        define_alias(name,\
@@ -978,42 +978,42 @@ data:
     \ T>\n    using Vec = std::vector<T>;\n    template<class T>\n    using VVec =\
     \ Vec<Vec<T>>;\n    template<class T>\n    using VVVec = Vec<VVec<T>>;\n    template<class\
     \ T>\n    using VVVVec = Vec<VVVec<T>>;\n    template<class T>\n    using VVVVVec\
-    \ = Vec<VVVVec<T>>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Vec, V);\n\n \
+    \ = Vec<VVVVec<T>>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Vec, v);\n\n \
     \   template<class T>\n    using Deque = std::deque<T>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
-    \ Deque, D);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, Deque, D);\n\n    template<class\
+    \ Deque, d);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, Deque, d);\n\n    template<class\
     \ T>\n    using List = std::list<T>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
-    \ List, L);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, List, L);\n\n    template<class\
+    \ List, l);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, List, l);\n\n    template<class\
     \ T>\n    using ForwardList = std::forward_list<T>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
-    \ ForwardList, FL);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, ForwardList,\
-    \ FL);\n\n    template<class Key, class Compare = Less>\n    using Set = std::set<Key,\
+    \ ForwardList, fl);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, ForwardList,\
+    \ fl);\n\n    template<class Key, class Compare = Less>\n    using Set = std::set<Key,\
     \ Compare>;\n    template<class Key, class Compare = Less>\n    using Map = std::map<Key,\
-    \ Compare>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Set, S);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
-    \ Set, S);\n    using Mll = Map<ll, ll>;\n    using VMll = Vec<Mll>;\n\n    template<class\
+    \ Compare>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Set, s);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
+    \ Set, s);\n    using mll = Map<ll, ll>;\n    using vmll = Vec<mll>;\n\n    template<class\
     \ Key, class H = Hash<Key>>\n    using HashSet = std::unordered_set<Key, H>;\n\
     \    template<class Key, class T, class H = Hash<Key>>\n    using HashMap = std::unordered_map<Key,\
-    \ T, H>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HashSet, HS);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
-    \ HashSet, HS);\n    using HMll = HashMap<ll, ll>;\n    using VHMll = Vec<HMll>;\n\
+    \ T, H>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HashSet, hs);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
+    \ HashSet, hs);\n    using hmll = HashMap<ll, ll>;\n    using vhmll = Vec<hmll>;\n\
     \n    template<class Key, class Compare = Less>\n    using MultiSet = std::multiset<Key,\
     \ Compare>;\n    template<class Key, class T, class Compare = Less>\n    using\
     \ MultiMap = std::multimap<Key, T, Compare>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
-    \ MultiSet, MS);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, MultiSet, MS);\n\
-    \    using MMll = MultiMap<ll, ll>;\n    using VMMll = Vec<MMll>;\n\n    template<class\
+    \ MultiSet, ms);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, MultiSet, ms);\n\
+    \    using mmll = MultiMap<ll, ll>;\n    using vmmll = Vec<mmll>;\n\n    template<class\
     \ Key, class H = Hash<Key>>\n    using HashMultiSet = std::unordered_multiset<Key,\
     \ H>;\n    template<class Key, class T, class H = Hash<Key>>\n    using HashMultiMap\
     \ = std::unordered_multimap<Key, T, H>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
-    \ HashMultiSet, HMS);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashMultiSet,\
-    \ HMS);\n    using HMMli = HashMultiMap<ll, ll>;\n    using VHMMli = Vec<HMMli>;\n\
+    \ HashMultiSet, hms);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, HashMultiSet,\
+    \ hms);\n    using hmmli = HashMultiMap<ll, ll>;\n    using vhmmli = Vec<hmmli>;\n\
     \n    template<class T, class Container = std::deque<T>>\n    using Queue = std::queue<T,\
-    \ Container>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Queue, Que);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
-    \ Queue, Que);\n\n    template<class T, class Container = std::deque<T>>\n   \
+    \ Container>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Queue, que);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
+    \ Queue, que);\n\n    template<class T, class Container = std::deque<T>>\n   \
     \ using Stack = std::stack<T, Container>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
-    \ Stack, Stk);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, Stack, Stk);\n\n\
+    \ Stack, stk);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, Stack, stk);\n\n\
     \    template<class T, class Compare = Less, class Container = Vec<T>>\n    using\
     \ PriQ = std::priority_queue<T, Container, Compare>;\n    template<class T, class\
     \ Compare = Greater, class Container = Vec<T>>\n    using HeapQ = PriQ<T, Compare,\
-    \ Container>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, PriQ, PQ);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
-    \ PriQ, PQ);\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HeapQ, HQ);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
-    \ HeapQ, HQ);\n\n    template<std::size_t size>\n    using BitSet = std::bitset<size>;\n\
+    \ Container>;\n\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, PriQ, pq);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
+    \ PriQ, pq);\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HeapQ, hq);\n    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS,\
+    \ HeapQ, hq);\n\n    template<std::size_t size>\n    using BitSet = std::bitset<size>;\n\
     } // namespace kpr\n\nusing namespace std;\nusing namespace kpr;\n"
   dependsOn:
   - kpr/algorithm/Hash.hpp
@@ -1037,7 +1037,7 @@ data:
   requiredBy:
   - kpr/template/template.hpp
   - kpr/all.hpp
-  timestamp: '2023-06-09 13:17:06+09:00'
+  timestamp: '2023-06-10 19:13:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/template/alias.hpp
