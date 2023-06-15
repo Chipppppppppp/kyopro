@@ -119,6 +119,9 @@ data:
     path: kpr/meta/tuple_like.hpp
     title: kpr/meta/tuple_like.hpp
   - icon: ':warning:'
+    path: kpr/template/ShowType.hpp
+    title: kpr/template/ShowType.hpp
+  - icon: ':warning:'
     path: kpr/template/alias.hpp
     title: kpr/template/alias.hpp
   - icon: ':warning:'
@@ -130,6 +133,9 @@ data:
   - icon: ':warning:'
     path: kpr/template/constant.hpp
     title: kpr/template/constant.hpp
+  - icon: ':warning:'
+    path: kpr/template/fix_vector_bool.hpp
+    title: kpr/template/fix_vector_bool.hpp
   - icon: ':warning:'
     path: kpr/template/io_macro.hpp
     title: kpr/template/io_macro.hpp
@@ -1404,7 +1410,10 @@ data:
     \ {\r\n    inline constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>,\
     \ 4> beside{{{-1, 0}, {0, -1}, {1, 0}, {0, 1}}};\r\n    inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
     \ KYOPRO_BASE_INT>, 8> around{{{-1, 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1,\
-    \ 1}, {0, 1}, {-1, 1}}};\r\n} // namespace kpr\r\n#line 4 \"kpr/template/len.hpp\"\
+    \ 1}, {0, 1}, {-1, 1}}};\r\n} // namespace kpr\r\n#line 4 \"kpr/template/fix_vector_bool.hpp\"\
+    \n\ntemplate<>\nstruct std::vector<bool>: std::basic_string<bool> {\n    using\
+    \ std::basic_string<bool>::basic_string, std::basic_string<bool>::operator =;\n\
+    \    explicit vector(size_t n): vector(n, false) {}\n};\n#line 4 \"kpr/template/len.hpp\"\
     \n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr struct {\r\n  \
     \      template<class T>\r\n        constexpr KYOPRO_BASE_INT operator ()(T&&\
     \ a) const noexcept {\r\n            return std::size(a);\r\n        }\r\n   \
@@ -1547,7 +1556,10 @@ data:
     \u578B\u5909\u63DB\n    [[maybe_unused]] inline constexpr struct {\n        template<class\
     \ To, class From>\n        constexpr To operator ()(From&& container) const noexcept\
     \ {\n            return To(std::begin(container), std::end(container));\n    \
-    \    }\n    } range_cast;\n} // namespace kpr\n#line 5 \"kpr/all.hpp\"\n"
+    \    }\n    } range_cast;\n} // namespace kpr\n#line 2 \"kpr/template/ShowType.hpp\"\
+    \n\nnamespace kpr {\n    // \u30B3\u30F3\u30D1\u30A4\u30EB\u30A8\u30E9\u30FC\u304B\
+    \u3089\u578B\u540D\u3092\u78BA\u8A8D\u3059\u308B\n    template<class>\n    struct\
+    \ ShowType;\n} // namespace kpr\n#line 5 \"kpr/all.hpp\"\n"
   code: "#pragma once\r\n#include \"all/all.hpp\"\r\n#include \"data_structure/data_structure.hpp\"\
     \r\n#include \"template/template.hpp\"\r\n"
   dependsOn:
@@ -1595,6 +1607,7 @@ data:
   - kpr/template/alias.hpp
   - kpr/template/chmin_chmax.hpp
   - kpr/template/constant.hpp
+  - kpr/template/fix_vector_bool.hpp
   - kpr/template/len.hpp
   - kpr/template/macro.hpp
   - kpr/template/all_rall_macro.hpp
@@ -1608,10 +1621,11 @@ data:
   - kpr/template/make_array.hpp
   - kpr/template/make_vec.hpp
   - kpr/template/range_cast.hpp
+  - kpr/template/ShowType.hpp
   isVerificationFile: false
   path: kpr/all.hpp
   requiredBy: []
-  timestamp: '2023-06-10 21:22:08+09:00'
+  timestamp: '2023-06-15 19:03:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/all.hpp

@@ -140,6 +140,9 @@ data:
   - name: kpr/template
     pages:
     - icon: ':warning:'
+      path: kpr/template/ShowType.hpp
+      title: kpr/template/ShowType.hpp
+    - icon: ':warning:'
       path: kpr/template/alias.hpp
       title: kpr/template/alias.hpp
     - icon: ':warning:'
@@ -151,6 +154,9 @@ data:
     - icon: ':warning:'
       path: kpr/template/constant.hpp
       title: kpr/template/constant.hpp
+    - icon: ':warning:'
+      path: kpr/template/fix_vector_bool.hpp
+      title: kpr/template/fix_vector_bool.hpp
     - icon: ':warning:'
       path: kpr/template/io_macro.hpp
       title: kpr/template/io_macro.hpp
