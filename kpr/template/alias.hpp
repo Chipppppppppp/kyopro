@@ -115,20 +115,13 @@ namespace kpr {
     template<class T>
     using Deque = std::deque<T>;
 
-    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Deque, d);
-    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, Deque, d);
+    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Deque, dq);
+    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, Deque, dq);
 
     template<class T>
     using List = std::list<T>;
-
-    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, List, l);
-    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, List, l);
-
     template<class T>
     using ForwardList = std::forward_list<T>;
-
-    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, ForwardList, fl);
-    DEFINE_CONTAINER_ALIAS(DEFINE_VEC_ALIAS, ForwardList, fl);
 
     template<class Key, class Compare = Less>
     using Set = std::set<Key, Compare>;
