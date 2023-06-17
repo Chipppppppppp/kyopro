@@ -59,11 +59,11 @@ data:
   isVerificationFile: false
   path: kpr/math/mod.hpp
   requiredBy:
-  - kpr/math/BinomMod.hpp
-  - kpr/math/ModInt.hpp
-  - kpr/math/math.hpp
   - kpr/template/alias.hpp
   - kpr/template/template.hpp
+  - kpr/math/ModInt.hpp
+  - kpr/math/BinomMod.hpp
+  - kpr/math/math.hpp
   - kpr/all/all.hpp
   - kpr/all.hpp
   timestamp: '2023-04-04 01:42:52+09:00'

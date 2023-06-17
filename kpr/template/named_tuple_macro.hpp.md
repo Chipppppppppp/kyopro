@@ -679,8 +679,8 @@ data:
   isVerificationFile: false
   path: kpr/template/named_tuple_macro.hpp
   requiredBy:
-  - kpr/template/template.hpp
   - kpr/template/macro.hpp
+  - kpr/template/template.hpp
   - kpr/all.hpp
   timestamp: '2023-06-09 13:17:06+09:00'
   verificationStatus: LIBRARY_NO_TESTS

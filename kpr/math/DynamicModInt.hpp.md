@@ -785,11 +785,11 @@ data:
   isVerificationFile: false
   path: kpr/math/DynamicModInt.hpp
   requiredBy:
-  - kpr/math/factorize.hpp
-  - kpr/math/math.hpp
-  - kpr/math/is_prime.hpp
   - kpr/template/alias.hpp
   - kpr/template/template.hpp
+  - kpr/math/is_prime.hpp
+  - kpr/math/factorize.hpp
+  - kpr/math/math.hpp
   - kpr/all/all.hpp
   - kpr/all.hpp
   timestamp: '2023-06-09 13:17:06+09:00'

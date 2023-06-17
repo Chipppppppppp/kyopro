@@ -831,10 +831,10 @@ data:
   isVerificationFile: false
   path: kpr/math/ModInt.hpp
   requiredBy:
-  - kpr/math/BinomMod.hpp
-  - kpr/math/math.hpp
   - kpr/template/alias.hpp
   - kpr/template/template.hpp
+  - kpr/math/BinomMod.hpp
+  - kpr/math/math.hpp
   - kpr/all/all.hpp
   - kpr/all.hpp
   timestamp: '2023-06-09 13:17:06+09:00'

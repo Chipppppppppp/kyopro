@@ -75,8 +75,8 @@ data:
   isVerificationFile: false
   path: kpr/function/compare.hpp
   requiredBy:
-  - kpr/algorithm/compress.hpp
   - kpr/algorithm/algorithm.hpp
+  - kpr/algorithm/compress.hpp
   - kpr/function/function.hpp
   - kpr/template/alias.hpp
   - kpr/template/template.hpp
