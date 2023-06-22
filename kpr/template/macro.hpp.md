@@ -594,8 +594,7 @@ data:
     #define LL1(...) read(ll1, __VA_ARGS__);\n#define LL2(...) read(ll2, __VA_ARGS__);\n\
     #define LL3(...) read(ll3, __VA_ARGS__);\n#define LL4(...) read(ll4, __VA_ARGS__);\n\
     #define LL5(...) read(ll5, __VA_ARGS__);\n\n#ifdef NDEBUG\n#define debug(...)\
-    \ (void())\n#else\n#define debug(...) (kpr::print('#', ' ', 'l', 'i', 'n', 'e',\
-    \ ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
+    \ (void())\n#else\n#define debug(...) (kpr::print('#', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
     \ != 0>(#__VA_ARGS__), kpr::print('\\n'), kpr::helper::debug_impl(__VA_ARGS__))\n\
     #endif\n#line 3 \"kpr/template/lambda_macro.hpp\"\n\r\n#define $(...) \\\r\n([&](auto&&...\
     \ _lambda_macro_args) { \\\r\n    return ([&]([[maybe_unused]] auto&& $0, [[maybe_unused]]\
@@ -728,7 +727,7 @@ data:
   requiredBy:
   - kpr/template/template.hpp
   - kpr/all.hpp
-  timestamp: '2023-06-09 13:17:06+09:00'
+  timestamp: '2023-06-22 12:50:39+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/template/macro.hpp
