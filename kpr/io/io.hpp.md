@@ -217,30 +217,25 @@ data:
     \    template<class T>\r\n    using range_value_t = typename range_value<T>::type;\r\
     \n} // namespace kpr\r\n#line 6 \"kpr/function/monoid.hpp\"\n\r\nnamespace kpr\
     \ {\r\n    // \u8DB3\u3057\u7B97\u306Emonoid\r\n    template<class T>\r\n    struct\
-    \ Add {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic\
-    \ type\");\r\n\r\n        using value_type = T;\r\n\r\n        static constexpr\
-    \ T id() noexcept {\r\n            return T{};\r\n        }\r\n\r\n        constexpr\
+    \ Add {\r\n        using value_type = T;\r\n\r\n        static constexpr T id()\
+    \ noexcept {\r\n            return T{};\r\n        }\r\n\r\n        constexpr\
     \ T operator ()(const T& a, const T& b) const noexcept {\r\n            return\
     \ a + b;\r\n        }\r\n\r\n        static constexpr T inv(const T& a) noexcept\
-    \ {\r\n            static_assert(std::is_signed_v<T>, \"T must be a signed type\"\
-    );\r\n            return -a;\r\n        }\r\n    };\r\n\r\n    // \u639B\u3051\
-    \u7B97\u306Emonoid\r\n    template<class T>\r\n    struct Mul {\r\n        static_assert(is_arithmetic_v<T>,\
-    \ \"T must be an arithmetic type\");\r\n\r\n        using value_type = T;\r\n\r\
-    \n        static constexpr T id() noexcept {\r\n            return 1;\r\n    \
-    \    }\r\n\r\n        constexpr T operator ()(const T& a, const T& b) const noexcept\
-    \ {\r\n            return a * b;\r\n        }\r\n\r\n        static constexpr\
-    \ T inv(const T& a) noexcept {\r\n            return 1 / a;\r\n        }\r\n \
-    \   };\r\n\r\n    // min\u306Emonoid\r\n    template<class T>\r\n    struct Min\
-    \ {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an arithmetic type\"\
-    );\r\n\r\n        using value_type = T;\r\n\r\n        static constexpr T id()\
-    \ noexcept {\r\n            if constexpr (std::numeric_limits<T>::has_infinity)\
+    \ {\r\n            return -a;\r\n        }\r\n    };\r\n\r\n    // \u639B\u3051\
+    \u7B97\u306Emonoid\r\n    template<class T>\r\n    struct Mul {\r\n        using\
+    \ value_type = T;\r\n\r\n        static constexpr T id() noexcept {\r\n      \
+    \      return 1;\r\n        }\r\n\r\n        constexpr T operator ()(const T&\
+    \ a, const T& b) const noexcept {\r\n            return a * b;\r\n        }\r\n\
+    \r\n        static constexpr T inv(const T& a) noexcept {\r\n            return\
+    \ 1 / a;\r\n        }\r\n    };\r\n\r\n    // min\u306Emonoid\r\n    template<class\
+    \ T>\r\n    struct Min {\r\n        using value_type = T;\r\n\r\n        static\
+    \ constexpr T id() noexcept {\r\n            if constexpr (std::numeric_limits<T>::has_infinity)\
     \ return std::numeric_limits<T>::infinity();\r\n            return std::numeric_limits<T>::max()\
     \ / KYOPRO_INF_DIV;\r\n        }\r\n\r\n        constexpr T operator ()(const\
     \ T& a, const T& b) const noexcept {\r\n            return a < b ? a : b;\r\n\
     \        }\r\n    };\r\n\r\n    // max\u306Emonoid\r\n    template<class T>\r\n\
-    \    struct Max {\r\n        static_assert(is_arithmetic_v<T>, \"T must be an\
-    \ arithmetic type\");\r\n\r\n        using value_type = T;\r\n\r\n        static\
-    \ constexpr T id() noexcept {\r\n            if constexpr (std::numeric_limits<T>::has_infinity)\
+    \    struct Max {\r\n        using value_type = T;\r\n\r\n        static constexpr\
+    \ T id() noexcept {\r\n            if constexpr (std::numeric_limits<T>::has_infinity)\
     \ return -std::numeric_limits<T>::infinity();\r\n            if constexpr (std::is_signed_v<T>)\
     \ return -(std::numeric_limits<T>::max() / KYOPRO_INF_DIV);\r\n            return\
     \ 0;\r\n        }\r\n\r\n        constexpr  T operator ()(const T& a, const T&\
@@ -590,7 +585,7 @@ data:
   - kpr/template/io_macro.hpp
   - kpr/all/all.hpp
   - kpr/all.hpp
-  timestamp: '2023-06-09 13:17:06+09:00'
+  timestamp: '2023-06-22 14:29:46+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo/point_add_range_sum.test.cpp
