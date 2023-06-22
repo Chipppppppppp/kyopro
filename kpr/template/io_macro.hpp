@@ -65,5 +65,5 @@ namespace kpr::helper {
 #ifdef NDEBUG
 #define debug(...) (void())
 #else
-#define debug(...) (kpr::print('#', ' ', 'l', 'i', 'n', 'e', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__) != 0>(#__VA_ARGS__), kpr::print('\n'), kpr::helper::debug_impl(__VA_ARGS__))
+#define debug(...) (kpr::print('#', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__) != 0>(#__VA_ARGS__), kpr::print('\n'), kpr::helper::debug_impl(__VA_ARGS__))
 #endif
