@@ -8,8 +8,6 @@ namespace kpr {
     // 足し算のmonoid
     template<class T>
     struct Add {
-        static_assert(is_arithmetic_v<T>, "T must be an arithmetic type");
-
         using value_type = T;
 
         static constexpr T id() noexcept {
@@ -21,7 +19,6 @@ namespace kpr {
         }
 
         static constexpr T inv(const T& a) noexcept {
-            static_assert(std::is_signed_v<T>, "T must be a signed type");
             return -a;
         }
     };
@@ -29,8 +26,6 @@ namespace kpr {
     // 掛け算のmonoid
     template<class T>
     struct Mul {
-        static_assert(is_arithmetic_v<T>, "T must be an arithmetic type");
-
         using value_type = T;
 
         static constexpr T id() noexcept {
@@ -49,8 +44,6 @@ namespace kpr {
     // minのmonoid
     template<class T>
     struct Min {
-        static_assert(is_arithmetic_v<T>, "T must be an arithmetic type");
-
         using value_type = T;
 
         static constexpr T id() noexcept {
@@ -66,8 +59,6 @@ namespace kpr {
     // maxのmonoid
     template<class T>
     struct Max {
-        static_assert(is_arithmetic_v<T>, "T must be an arithmetic type");
-
         using value_type = T;
 
         static constexpr T id() noexcept {

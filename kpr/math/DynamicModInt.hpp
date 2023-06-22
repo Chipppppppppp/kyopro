@@ -56,7 +56,7 @@ namespace kpr {
             return res;
         }
 
-        DynamicModInt pow(std::uint_fast64_t n) const noexcept {
+        DynamicModInt pow(KYOPRO_BASE_UINT n) const noexcept {
             DynamicModInt res = 1, a = *this;
             while (n > 0) {
                 if (n & 1) res = res * a;
