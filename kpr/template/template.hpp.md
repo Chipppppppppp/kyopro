@@ -1044,7 +1044,8 @@ data:
     #define LL1(...) read(ll1, __VA_ARGS__);\n#define LL2(...) read(ll2, __VA_ARGS__);\n\
     #define LL3(...) read(ll3, __VA_ARGS__);\n#define LL4(...) read(ll4, __VA_ARGS__);\n\
     #define LL5(...) read(ll5, __VA_ARGS__);\n\n#ifdef NDEBUG\n#define debug(...)\
-    \ (void())\n#else\n#define debug(...) (kpr::print('#', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
+    \ (void())\n#else\n#define debug(...) (kpr::print('#', ' ', 'l', 'i', 'n', 'e',\
+    \ ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
     \ != 0>(#__VA_ARGS__), kpr::print('\\n'), kpr::helper::debug_impl(__VA_ARGS__))\n\
     #endif\n#line 3 \"kpr/template/lambda_macro.hpp\"\n\r\n#define $(...) \\\r\n([&](auto&&...\
     \ _lambda_macro_args) { \\\r\n    return ([&]([[maybe_unused]] auto&& $0, [[maybe_unused]]\
@@ -1132,8 +1133,8 @@ data:
     \    constexpr auto prev(T x) noexcept {\n        return --x;\n    }\n} // namespace\
     \ kpr::helper\n\n#define KYOPRO_RREP0() for (; ; )\n#define KYOPRO_RREP1(last)\
     \ KYOPRO_RREP2(KYOPRO_COUNTER, last)\n#define KYOPRO_RREP2(i, last) for (std::decay_t<decltype(last)>\
-    \ i{kpr::helper::prev(last)}, KYOPRO_FIRST{kpr::helper::prev(std::decay_t<decltype(last)>{})};\
-    \ (i) != (KYOPRO_FIRST); --(i))\n#define KYOPRO_RREP3(i, first, last) for (std::common_type_t<std::decay_t<decltype(first)>,\
+    \ i{kpr::helper::prev(last)}, KYOPRO_FIRST{}; (i) != (KYOPRO_FIRST); --(i))\n\
+    #define KYOPRO_RREP3(i, first, last) for (std::common_type_t<std::decay_t<decltype(first)>,\
     \ std::decay_t<decltype(last)>> i{kpr::helper::prev(last)}, KYOPRO_FIRST{kpr::helper::prev(first)};\
     \ (i) != (KYOPRO_FIRST); --(i))\n\n#define rrep(...) KYOPRO_OVERLOAD_REP(__VA_ARGS__\
     \ __VA_OPT__(,) KYOPRO_RREP3, KYOPRO_RREP2, KYOPRO_RREP1, KYOPRO_RREP0)(__VA_ARGS__)\n\
@@ -1205,7 +1206,7 @@ data:
   path: kpr/template/template.hpp
   requiredBy:
   - kpr/all.hpp
-  timestamp: '2023-06-17 22:52:03+09:00'
+  timestamp: '2023-06-15 19:12:12+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/template/template.hpp

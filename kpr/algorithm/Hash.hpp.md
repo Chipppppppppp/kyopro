@@ -12,6 +12,9 @@ data:
     path: kpr/algorithm/algorithm.hpp
     title: kpr/algorithm/algorithm.hpp
   - icon: ':warning:'
+    path: kpr/algorithm/count_all.hpp
+    title: kpr/algorithm/count_all.hpp
+  - icon: ':warning:'
     path: kpr/all.hpp
     title: kpr/all.hpp
   - icon: ':warning:'
@@ -273,6 +276,7 @@ data:
   isVerificationFile: false
   path: kpr/algorithm/Hash.hpp
   requiredBy:
+  - kpr/algorithm/count_all.hpp
   - kpr/algorithm/algorithm.hpp
   - kpr/template/alias.hpp
   - kpr/template/template.hpp

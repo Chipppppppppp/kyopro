@@ -342,24 +342,17 @@ data:
     \ == value || impl<i + 1>(tuple_like, value, false);\n            else return\
     \ false;\n        }\n\n    public:\n        template<class T, class U>\n     \
     \   constexpr bool operator ()(const T& a, const U& x) const {\n            return\
-    \ impl(a, x, false);\n        }\n    } contains;\n} // namespace kpr\n#line 5\
-    \ \"kpr/algorithm/count_all.hpp\"\n\nnamespace kpr {\n    // \u8981\u7D20: \u500B\
-    \u6570\u306E\u8F9E\u66F8\u3092\u8FD4\u3059\n    [[maybe_unused]] inline constexpr\
-    \ struct {\n        template<class T, class Container = std::unordered_map<typename\
-    \ std::iterator_traits<T>::value_type, KYOPRO_BASE_INT>>\n        auto operator\
-    \ ()(T first, T last) const {\n            Container mem;\n            for (auto\
-    \ i = first; i != last; ++i) ++mem[*i];\n            return mem;\n        }\n\
-    \    } count_all;\n} // namespace kpr\n#line 3 \"kpr/algorithm/Hash.hpp\"\n#include\
-    \ <functional>\r\n#line 9 \"kpr/algorithm/Hash.hpp\"\n\r\nnamespace kpr {\r\n\
-    \    // \u30CF\u30C3\u30B7\u30E5(tuple_like, range\u5BFE\u5FDC)\r\n    template<class,\
-    \ class = void>\r\n    struct Hash;\r\n\r\n    template<class T>\r\n    struct\
-    \ Hash<T, std::enable_if_t<std::is_scalar_v<T>>> {\r\n        using value_type\
-    \ = T;\r\n\r\n        constexpr std::size_t operator ()(T a) const noexcept {\r\
-    \n            return std::hash<T>{}(a);\r\n        }\r\n    };\r\n\r\n    template<class\
-    \ T>\r\n    struct Hash<T, std::enable_if_t<is_tuple_like_v<T> && !is_range_v<T>>>\
-    \ {\r\n        using value_type = T;\r\n\r\n        template<std::size_t i = 0>\r\
-    \n        constexpr std::size_t operator ()(const T& a) const noexcept {\r\n \
-    \           if constexpr (i == tuple_like_size_v<T>) return tuple_like_size_v<T>;\r\
+    \ impl(a, x, false);\n        }\n    } contains;\n} // namespace kpr\n#line 3\
+    \ \"kpr/algorithm/Hash.hpp\"\n#include <functional>\r\n#line 9 \"kpr/algorithm/Hash.hpp\"\
+    \n\r\nnamespace kpr {\r\n    // \u30CF\u30C3\u30B7\u30E5(tuple_like, range\u5BFE\
+    \u5FDC)\r\n    template<class, class = void>\r\n    struct Hash;\r\n\r\n    template<class\
+    \ T>\r\n    struct Hash<T, std::enable_if_t<std::is_scalar_v<T>>> {\r\n      \
+    \  using value_type = T;\r\n\r\n        constexpr std::size_t operator ()(T a)\
+    \ const noexcept {\r\n            return std::hash<T>{}(a);\r\n        }\r\n \
+    \   };\r\n\r\n    template<class T>\r\n    struct Hash<T, std::enable_if_t<is_tuple_like_v<T>\
+    \ && !is_range_v<T>>> {\r\n        using value_type = T;\r\n\r\n        template<std::size_t\
+    \ i = 0>\r\n        constexpr std::size_t operator ()(const T& a) const noexcept\
+    \ {\r\n            if constexpr (i == tuple_like_size_v<T>) return tuple_like_size_v<T>;\r\
     \n            else {\r\n                std::size_t seed = operator()<i + 1>(a);\r\
     \n                return seed ^ (Hash<tuple_like_element_t<i, T>>{}(get<i>(a))\
     \ + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4));\r\n            }\r\n \
@@ -368,7 +361,14 @@ data:
     \ std::size_t operator ()(const T& a) const {\r\n            std::size_t seed\
     \ = std::size(a);\r\n            for (auto&& i: a) seed ^= Hash<range_value_t<T>>{}(i)\
     \ + 0x9e3779b97f4a7c15LU + (seed << 12) + (seed >> 4);\r\n            return seed;\r\
-    \n        }\r\n    };\r\n} // namespace kpr\r\n#line 3 \"kpr/algorithm/next_combination.hpp\"\
+    \n        }\r\n    };\r\n} // namespace kpr\r\n#line 6 \"kpr/algorithm/count_all.hpp\"\
+    \n\nnamespace kpr {\n    // \u8981\u7D20: \u500B\u6570\u306E\u8F9E\u66F8\u3092\
+    \u8FD4\u3059\n    [[maybe_unused]] inline constexpr struct {\n        template<class\
+    \ T, class Container = std::unordered_map<typename std::iterator_traits<T>::value_type,\
+    \ KYOPRO_BASE_INT, Hash<typename std::iterator_traits<T>::value_type>>>\n    \
+    \    auto operator ()(T first, T last) const {\n            Container mem;\n \
+    \           for (auto i = first; i != last; ++i) ++mem[*i];\n            return\
+    \ mem;\n        }\n    } count_all;\n} // namespace kpr\n#line 3 \"kpr/algorithm/next_combination.hpp\"\
     \n\nnamespace kpr {\n    // \u5148\u982Dk\u500B\u3092\u6B21\u306E\u7D44\u307F\u5408\
     \u308F\u305B\u306B\u3057\u3066\u3001\u6B21\u306E\u7D44\u307F\u5408\u308F\u305B\
     \u304C\u5B58\u5728\u3059\u308B\u304B\u3092\u8FD4\u3059\n    [[maybe_unused]] inline\
@@ -402,7 +402,7 @@ data:
   requiredBy:
   - kpr/all/all.hpp
   - kpr/all.hpp
-  timestamp: '2023-06-09 13:17:06+09:00'
+  timestamp: '2023-06-22 12:22:29+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/algorithm/algorithm.hpp

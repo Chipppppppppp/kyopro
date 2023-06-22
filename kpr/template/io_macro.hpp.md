@@ -575,7 +575,8 @@ data:
     #define LL1(...) read(ll1, __VA_ARGS__);\n#define LL2(...) read(ll2, __VA_ARGS__);\n\
     #define LL3(...) read(ll3, __VA_ARGS__);\n#define LL4(...) read(ll4, __VA_ARGS__);\n\
     #define LL5(...) read(ll5, __VA_ARGS__);\n\n#ifdef NDEBUG\n#define debug(...)\
-    \ (void())\n#else\n#define debug(...) (kpr::print('#', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
+    \ (void())\n#else\n#define debug(...) (kpr::print('#', ' ', 'l', 'i', 'n', 'e',\
+    \ ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
     \ != 0>(#__VA_ARGS__), kpr::print('\\n'), kpr::helper::debug_impl(__VA_ARGS__))\n\
     #endif\n"
   code: "#pragma once\n#include <unistd.h>\n#include <cstddef>\n#include <istream>\n\
@@ -604,7 +605,8 @@ data:
     #define LL1(...) read(ll1, __VA_ARGS__);\n#define LL2(...) read(ll2, __VA_ARGS__);\n\
     #define LL3(...) read(ll3, __VA_ARGS__);\n#define LL4(...) read(ll4, __VA_ARGS__);\n\
     #define LL5(...) read(ll5, __VA_ARGS__);\n\n#ifdef NDEBUG\n#define debug(...)\
-    \ (void())\n#else\n#define debug(...) (kpr::print('#', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
+    \ (void())\n#else\n#define debug(...) (kpr::print('#', ' ', 'l', 'i', 'n', 'e',\
+    \ ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
     \ != 0>(#__VA_ARGS__), kpr::print('\\n'), kpr::helper::debug_impl(__VA_ARGS__))\n\
     #endif\n"
   dependsOn:
@@ -623,7 +625,7 @@ data:
   - kpr/template/macro.hpp
   - kpr/template/template.hpp
   - kpr/all.hpp
-  timestamp: '2023-06-17 22:52:03+09:00'
+  timestamp: '2023-06-09 13:17:06+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/template/io_macro.hpp

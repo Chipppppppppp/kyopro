@@ -15,6 +15,9 @@ data:
     path: kpr/algorithm/contains.hpp
     title: kpr/algorithm/contains.hpp
   - icon: ':warning:'
+    path: kpr/algorithm/count_all.hpp
+    title: kpr/algorithm/count_all.hpp
+  - icon: ':warning:'
     path: kpr/all.hpp
     title: kpr/all.hpp
   - icon: ':warning:'
@@ -360,6 +363,7 @@ data:
   requiredBy:
   - kpr/meta/constant.hpp
   - kpr/meta/meta.hpp
+  - kpr/algorithm/count_all.hpp
   - kpr/algorithm/contains.hpp
   - kpr/algorithm/algorithm.hpp
   - kpr/algorithm/Hash.hpp
