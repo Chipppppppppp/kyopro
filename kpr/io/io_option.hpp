@@ -16,6 +16,11 @@ namespace kpr {
         return Indexed<std::tuple<Args...>, i>{std::forward<Args>(args)...};
     }
 
+    template<class... Args>
+    constexpr auto idx1(Args&&... args) noexcept {
+        return indexed<1>(std::forward<Args>(args)...);
+    }
+
     template<class Tuple, bool... seps>
     struct SepWith {
         Tuple args_tuple;
