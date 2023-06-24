@@ -564,14 +564,25 @@ data:
     \ storage[sizeof(T)]; \\\n        T* p = new (storage) type_or_init; \\\n    \
     \    kpr::scan(*p); \\\n        T res = std::move(*p); \\\n        p->~T(); \\\
     \n        return res; \\\n    }), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\n\
+    \n#define read1(type_or_init, ...) \\\n    auto [__VA_ARGS__] = (kpr::helper::read_impl(([&]()\
+    \ { \\\n        using T = std::decay_t<decltype(*new type_or_init)>; \\\n    \
+    \    alignas(T) std::byte storage[sizeof(T)]; \\\n        T* p = new (storage)\
+    \ type_or_init; \\\n        kpr::scan(idx1(*p)); \\\n        T res = std::move(*p);\
+    \ \\\n        p->~T(); \\\n        return res; \\\n    }), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\n\
     \n#define BOOL(...) read(bool, __VA_ARGS__);\n#define INT(...) read(int, __VA_ARGS__);\n\
-    #define LL(...) read(ll, __VA_ARGS__);\n#define FLOAT(...) read(float, __VA_ARGS__);\n\
-    #define LF(...) read(lf, __VA_ARGS__);\n#define LLF(...) read(llf, __VA_ARGS__);\n\
-    #define MINT(...) read(mint, __VA_ARGS__);\n#define DMINT(...) read(dmint, __VA_ARGS__);\n\
-    #define CHAR(...) read(char, __VA_ARGS__);\n#define STR(...) read(str, __VA_ARGS__);\n\
-    #define LL1(...) read(ll1, __VA_ARGS__);\n#define LL2(...) read(ll2, __VA_ARGS__);\n\
-    #define LL3(...) read(ll3, __VA_ARGS__);\n#define LL4(...) read(ll4, __VA_ARGS__);\n\
-    #define LL5(...) read(ll5, __VA_ARGS__);\n\n#ifdef NDEBUG\n#define debug(...)\
+    #define INT1(...) read1(int, __VA_ARGS__);\n#define LL(...) read(ll, __VA_ARGS__);\n\
+    #define LL1(...) read1(ll, __VA_ARGS__);\n#define FLOAT(...) read(float, __VA_ARGS__);\n\
+    #define FLOAT1(...) read1(float, __VA_ARGS__);\n#define LF(...) read(lf, __VA_ARGS__);\n\
+    #define LF1(...) read1(lf, __VA_ARGS__);\n#define LLF(...) read(llf, __VA_ARGS__);\n\
+    #define LLF1(...) read1(llf, __VA_ARGS__);\n#define MINT(...) read(mint, __VA_ARGS__);\n\
+    #define MINT1(...) read1(mint, __VA_ARGS__);\n#define DMINT(...) read(dmint, __VA_ARGS__);\n\
+    #define DMINT1(...) read1(dmint, __VA_ARGS__);\n#define CHAR(...) read(char, __VA_ARGS__);\n\
+    #define STR(...) read(str, __VA_ARGS__);\n#define LL1(...) read(ll1, __VA_ARGS__);\n\
+    #define LL11(...) read1(ll1, __VA_ARGS__);\n#define LL2(...) read(ll2, __VA_ARGS__);\n\
+    #define LL21(...) read1(ll2, __VA_ARGS__);\n#define LL3(...) read(ll3, __VA_ARGS__);\n\
+    #define LL31(...) read1(ll3, __VA_ARGS__);\n#define LL4(...) read(ll4, __VA_ARGS__);\n\
+    #define LL41(...) read1(ll4, __VA_ARGS__);\n#define LL5(...) read(ll5, __VA_ARGS__);\n\
+    #define LL51(...) read1(ll5, __VA_ARGS__);\n\n#ifdef NDEBUG\n#define debug(...)\
     \ (void())\n#else\n#define debug(...) (kpr::print('#', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
     \ != 0>(#__VA_ARGS__), kpr::print('\\n'), kpr::helper::debug_impl(__VA_ARGS__))\n\
     #endif\n"
@@ -593,14 +604,25 @@ data:
     \    alignas(T) std::byte storage[sizeof(T)]; \\\n        T* p = new (storage)\
     \ type_or_init; \\\n        kpr::scan(*p); \\\n        T res = std::move(*p);\
     \ \\\n        p->~T(); \\\n        return res; \\\n    }), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\n\
+    \n#define read1(type_or_init, ...) \\\n    auto [__VA_ARGS__] = (kpr::helper::read_impl(([&]()\
+    \ { \\\n        using T = std::decay_t<decltype(*new type_or_init)>; \\\n    \
+    \    alignas(T) std::byte storage[sizeof(T)]; \\\n        T* p = new (storage)\
+    \ type_or_init; \\\n        kpr::scan(idx1(*p)); \\\n        T res = std::move(*p);\
+    \ \\\n        p->~T(); \\\n        return res; \\\n    }), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\n\
     \n#define BOOL(...) read(bool, __VA_ARGS__);\n#define INT(...) read(int, __VA_ARGS__);\n\
-    #define LL(...) read(ll, __VA_ARGS__);\n#define FLOAT(...) read(float, __VA_ARGS__);\n\
-    #define LF(...) read(lf, __VA_ARGS__);\n#define LLF(...) read(llf, __VA_ARGS__);\n\
-    #define MINT(...) read(mint, __VA_ARGS__);\n#define DMINT(...) read(dmint, __VA_ARGS__);\n\
-    #define CHAR(...) read(char, __VA_ARGS__);\n#define STR(...) read(str, __VA_ARGS__);\n\
-    #define LL1(...) read(ll1, __VA_ARGS__);\n#define LL2(...) read(ll2, __VA_ARGS__);\n\
-    #define LL3(...) read(ll3, __VA_ARGS__);\n#define LL4(...) read(ll4, __VA_ARGS__);\n\
-    #define LL5(...) read(ll5, __VA_ARGS__);\n\n#ifdef NDEBUG\n#define debug(...)\
+    #define INT1(...) read1(int, __VA_ARGS__);\n#define LL(...) read(ll, __VA_ARGS__);\n\
+    #define LL1(...) read1(ll, __VA_ARGS__);\n#define FLOAT(...) read(float, __VA_ARGS__);\n\
+    #define FLOAT1(...) read1(float, __VA_ARGS__);\n#define LF(...) read(lf, __VA_ARGS__);\n\
+    #define LF1(...) read1(lf, __VA_ARGS__);\n#define LLF(...) read(llf, __VA_ARGS__);\n\
+    #define LLF1(...) read1(llf, __VA_ARGS__);\n#define MINT(...) read(mint, __VA_ARGS__);\n\
+    #define MINT1(...) read1(mint, __VA_ARGS__);\n#define DMINT(...) read(dmint, __VA_ARGS__);\n\
+    #define DMINT1(...) read1(dmint, __VA_ARGS__);\n#define CHAR(...) read(char, __VA_ARGS__);\n\
+    #define STR(...) read(str, __VA_ARGS__);\n#define LL1(...) read(ll1, __VA_ARGS__);\n\
+    #define LL11(...) read1(ll1, __VA_ARGS__);\n#define LL2(...) read(ll2, __VA_ARGS__);\n\
+    #define LL21(...) read1(ll2, __VA_ARGS__);\n#define LL3(...) read(ll3, __VA_ARGS__);\n\
+    #define LL31(...) read1(ll3, __VA_ARGS__);\n#define LL4(...) read(ll4, __VA_ARGS__);\n\
+    #define LL41(...) read1(ll4, __VA_ARGS__);\n#define LL5(...) read(ll5, __VA_ARGS__);\n\
+    #define LL51(...) read1(ll5, __VA_ARGS__);\n\n#ifdef NDEBUG\n#define debug(...)\
     \ (void())\n#else\n#define debug(...) (kpr::print('#', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
     \ != 0>(#__VA_ARGS__), kpr::print('\\n'), kpr::helper::debug_impl(__VA_ARGS__))\n\
     #endif\n"
@@ -620,7 +642,7 @@ data:
   - kpr/template/template.hpp
   - kpr/template/macro.hpp
   - kpr/all.hpp
-  timestamp: '2023-06-23 11:13:58+09:00'
+  timestamp: '2023-06-25 00:30:25+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/template/io_macro.hpp

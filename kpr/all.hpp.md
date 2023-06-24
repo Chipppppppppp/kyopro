@@ -1416,54 +1416,68 @@ data:
     \ std::decay_t<decltype(std::declval<std::priority_queue<T, Container, Compare>>())>,\
     \ class T, class Compare = Greater, class Container = Vec<T>)\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
     \ HQ, HeapQ)\n\n    DEFINE_TEMPLATE_ALIAS(BitSet, std::bitset<size>, std::size_t\
-    \ size)\n} // namespace kpr\n\nusing namespace std;\nusing namespace kpr;\n#line\
-    \ 2 \"kpr/template/chmin_chmax.hpp\"\n\r\nnamespace kpr {\r\n    // assign min\r\
-    \n    [[maybe_unused]] inline constexpr struct {\r\n        template<class T,\
-    \ class U = T>\r\n        constexpr bool operator ()(T& a, const U& b) const noexcept\
-    \ {\r\n            if (a > b) {\r\n                a = b;\r\n                return\
-    \ true;\r\n            }\r\n            return false;\r\n        }\r\n    } chmin;\r\
-    \n\r\n    // assign max\r\n    [[maybe_unused]] inline constexpr struct {\r\n\
-    \        template<class T, class U = T>\r\n        constexpr bool operator ()(T&\
-    \ a, const U& b) const noexcept {\r\n            if (a < b) {\r\n            \
+    \ size)\n\n    #undef DEFINE_TEMPLATE_ALIAS\n    #undef DEFINE_ALIAS\n    #undef\
+    \ DEFINE_ALIAS_FOR_VEC\n    #undef DEFINE_MAP_ALIAS_IMPL\n    #undef DEFINE_MAP_ALIAS\n\
+    \    #undef DEFINE_CONTAINER_ALIAS\n} // namespace kpr\n\nusing namespace std;\n\
+    using namespace kpr;\n#line 2 \"kpr/template/chmin_chmax.hpp\"\n\r\nnamespace\
+    \ kpr {\r\n    // assign min\r\n    [[maybe_unused]] inline constexpr struct {\r\
+    \n        template<class T, class U = T>\r\n        constexpr bool operator ()(T&\
+    \ a, const U& b) const noexcept {\r\n            if (a > b) {\r\n            \
     \    a = b;\r\n                return true;\r\n            }\r\n            return\
-    \ false;\r\n        }\r\n    } chmax;\r\n} // namespace kpr\r\n#line 4 \"kpr/template/constant.hpp\"\
-    \n\r\nnamespace kpr {\r\n    inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
-    \ KYOPRO_BASE_INT>, 4> beside{{{-1, 0}, {0, -1}, {1, 0}, {0, 1}}};\r\n    inline\
-    \ constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>, 8> around{{{-1,\
-    \ 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1, 1}, {0, 1}, {-1, 1}}};\r\n} // namespace\
-    \ kpr\r\n#line 4 \"kpr/template/fix_vector_bool.hpp\"\n\ntemplate<>\nstruct std::vector<bool>:\
-    \ std::basic_string<bool> {\n    using std::basic_string<bool>::basic_string,\
-    \ std::basic_string<bool>::operator =;\n    explicit vector(size_t n): vector(n,\
-    \ false) {}\n};\n#line 4 \"kpr/template/len.hpp\"\n\r\nnamespace kpr {\r\n   \
-    \ [[maybe_unused]] inline constexpr struct {\r\n        template<class T>\r\n\
-    \        constexpr KYOPRO_BASE_INT operator ()(T&& a) const noexcept {\r\n   \
-    \         return std::size(a);\r\n        }\r\n    } len;\r\n} // namespace kpr\r\
-    \n#line 3 \"kpr/template/all_rall_macro.hpp\"\n\n#define all(...) std::begin(__VA_ARGS__),\
-    \ std::end(__VA_ARGS__)\n#define rall(...) std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\n\
-    #line 10 \"kpr/template/io_macro.hpp\"\n\nnamespace kpr::helper {\n    template<std::size_t\
-    \ len>\n    constexpr std::size_t va_args_size(const char (&s)[len]) noexcept\
-    \ {\n        if constexpr (len == 1) return 0;\n        std::size_t cnt = 1;\n\
-    \        std::uint_fast64_t bracket = 0;\n        for (auto i: s) {\n        \
-    \    if (i == '(') ++bracket;\n            else if (i == ')') --bracket;\n   \
-    \         else if (i == ',' && bracket == 0) ++cnt;\n        }\n        return\
-    \ cnt;\n    }\n\n    template<class F, std::size_t... idx>\n    auto read_impl(F&&\
-    \ f, std::index_sequence<idx...>) {\n        return std::tuple{(static_cast<void>(idx),\
-    \ f())...};\n    }\n\n    Printer<Writer<>::iterator, true, true, true, true>\
-    \ debug_impl(output.begin());\n\n    template<bool flag>\n    void print_if(std::string_view\
-    \ sv) {\n        if constexpr (flag) print(' ', sv);\n    }\n} // namespace kpr::helper\n\
-    \n#define read(type_or_init, ...) \\\n    auto [__VA_ARGS__] = (kpr::helper::read_impl(([&]()\
+    \ false;\r\n        }\r\n    } chmin;\r\n\r\n    // assign max\r\n    [[maybe_unused]]\
+    \ inline constexpr struct {\r\n        template<class T, class U = T>\r\n    \
+    \    constexpr bool operator ()(T& a, const U& b) const noexcept {\r\n       \
+    \     if (a < b) {\r\n                a = b;\r\n                return true;\r\
+    \n            }\r\n            return false;\r\n        }\r\n    } chmax;\r\n\
+    } // namespace kpr\r\n#line 4 \"kpr/template/constant.hpp\"\n\r\nnamespace kpr\
+    \ {\r\n    inline constexpr std::array<std::pair<KYOPRO_BASE_INT, KYOPRO_BASE_INT>,\
+    \ 4> beside{{{-1, 0}, {0, -1}, {1, 0}, {0, 1}}};\r\n    inline constexpr std::array<std::pair<KYOPRO_BASE_INT,\
+    \ KYOPRO_BASE_INT>, 8> around{{{-1, 0}, {-1, -1}, {0, -1}, {1, -1}, {1, 0}, {1,\
+    \ 1}, {0, 1}, {-1, 1}}};\r\n} // namespace kpr\r\n#line 4 \"kpr/template/fix_vector_bool.hpp\"\
+    \n\ntemplate<>\nstruct std::vector<bool>: std::basic_string<bool> {\n    using\
+    \ std::basic_string<bool>::basic_string, std::basic_string<bool>::operator =;\n\
+    \    explicit vector(size_t n): vector(n, false) {}\n};\n#line 4 \"kpr/template/len.hpp\"\
+    \n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline constexpr struct {\r\n  \
+    \      template<class T>\r\n        constexpr KYOPRO_BASE_INT operator ()(T&&\
+    \ a) const noexcept {\r\n            return std::size(a);\r\n        }\r\n   \
+    \ } len;\r\n} // namespace kpr\r\n#line 3 \"kpr/template/all_rall_macro.hpp\"\n\
+    \n#define all(...) std::begin(__VA_ARGS__), std::end(__VA_ARGS__)\n#define rall(...)\
+    \ std::rbegin(__VA_ARGS__), std::rend(__VA_ARGS__)\n#line 10 \"kpr/template/io_macro.hpp\"\
+    \n\nnamespace kpr::helper {\n    template<std::size_t len>\n    constexpr std::size_t\
+    \ va_args_size(const char (&s)[len]) noexcept {\n        if constexpr (len ==\
+    \ 1) return 0;\n        std::size_t cnt = 1;\n        std::uint_fast64_t bracket\
+    \ = 0;\n        for (auto i: s) {\n            if (i == '(') ++bracket;\n    \
+    \        else if (i == ')') --bracket;\n            else if (i == ',' && bracket\
+    \ == 0) ++cnt;\n        }\n        return cnt;\n    }\n\n    template<class F,\
+    \ std::size_t... idx>\n    auto read_impl(F&& f, std::index_sequence<idx...>)\
+    \ {\n        return std::tuple{(static_cast<void>(idx), f())...};\n    }\n\n \
+    \   Printer<Writer<>::iterator, true, true, true, true> debug_impl(output.begin());\n\
+    \n    template<bool flag>\n    void print_if(std::string_view sv) {\n        if\
+    \ constexpr (flag) print(' ', sv);\n    }\n} // namespace kpr::helper\n\n#define\
+    \ read(type_or_init, ...) \\\n    auto [__VA_ARGS__] = (kpr::helper::read_impl(([&]()\
     \ { \\\n        using T = std::decay_t<decltype(*new type_or_init)>; \\\n    \
     \    alignas(T) std::byte storage[sizeof(T)]; \\\n        T* p = new (storage)\
     \ type_or_init; \\\n        kpr::scan(*p); \\\n        T res = std::move(*p);\
     \ \\\n        p->~T(); \\\n        return res; \\\n    }), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\n\
+    \n#define read1(type_or_init, ...) \\\n    auto [__VA_ARGS__] = (kpr::helper::read_impl(([&]()\
+    \ { \\\n        using T = std::decay_t<decltype(*new type_or_init)>; \\\n    \
+    \    alignas(T) std::byte storage[sizeof(T)]; \\\n        T* p = new (storage)\
+    \ type_or_init; \\\n        kpr::scan(idx1(*p)); \\\n        T res = std::move(*p);\
+    \ \\\n        p->~T(); \\\n        return res; \\\n    }), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))\n\
     \n#define BOOL(...) read(bool, __VA_ARGS__);\n#define INT(...) read(int, __VA_ARGS__);\n\
-    #define LL(...) read(ll, __VA_ARGS__);\n#define FLOAT(...) read(float, __VA_ARGS__);\n\
-    #define LF(...) read(lf, __VA_ARGS__);\n#define LLF(...) read(llf, __VA_ARGS__);\n\
-    #define MINT(...) read(mint, __VA_ARGS__);\n#define DMINT(...) read(dmint, __VA_ARGS__);\n\
-    #define CHAR(...) read(char, __VA_ARGS__);\n#define STR(...) read(str, __VA_ARGS__);\n\
-    #define LL1(...) read(ll1, __VA_ARGS__);\n#define LL2(...) read(ll2, __VA_ARGS__);\n\
-    #define LL3(...) read(ll3, __VA_ARGS__);\n#define LL4(...) read(ll4, __VA_ARGS__);\n\
-    #define LL5(...) read(ll5, __VA_ARGS__);\n\n#ifdef NDEBUG\n#define debug(...)\
+    #define INT1(...) read1(int, __VA_ARGS__);\n#define LL(...) read(ll, __VA_ARGS__);\n\
+    #define LL1(...) read1(ll, __VA_ARGS__);\n#define FLOAT(...) read(float, __VA_ARGS__);\n\
+    #define FLOAT1(...) read1(float, __VA_ARGS__);\n#define LF(...) read(lf, __VA_ARGS__);\n\
+    #define LF1(...) read1(lf, __VA_ARGS__);\n#define LLF(...) read(llf, __VA_ARGS__);\n\
+    #define LLF1(...) read1(llf, __VA_ARGS__);\n#define MINT(...) read(mint, __VA_ARGS__);\n\
+    #define MINT1(...) read1(mint, __VA_ARGS__);\n#define DMINT(...) read(dmint, __VA_ARGS__);\n\
+    #define DMINT1(...) read1(dmint, __VA_ARGS__);\n#define CHAR(...) read(char, __VA_ARGS__);\n\
+    #define STR(...) read(str, __VA_ARGS__);\n#define LL1(...) read(ll1, __VA_ARGS__);\n\
+    #define LL11(...) read1(ll1, __VA_ARGS__);\n#define LL2(...) read(ll2, __VA_ARGS__);\n\
+    #define LL21(...) read1(ll2, __VA_ARGS__);\n#define LL3(...) read(ll3, __VA_ARGS__);\n\
+    #define LL31(...) read1(ll3, __VA_ARGS__);\n#define LL4(...) read(ll4, __VA_ARGS__);\n\
+    #define LL41(...) read1(ll4, __VA_ARGS__);\n#define LL5(...) read(ll5, __VA_ARGS__);\n\
+    #define LL51(...) read1(ll5, __VA_ARGS__);\n\n#ifdef NDEBUG\n#define debug(...)\
     \ (void())\n#else\n#define debug(...) (kpr::print('#', ' ', __LINE__, ':'), kpr::helper::print_if<kpr::helper::va_args_size(#__VA_ARGS__)\
     \ != 0>(#__VA_ARGS__), kpr::print('\\n'), kpr::helper::debug_impl(__VA_ARGS__))\n\
     #endif\n#line 3 \"kpr/template/lambda_macro.hpp\"\n\r\n#define $(...) \\\r\n([&](auto&&...\
@@ -1644,7 +1658,7 @@ data:
   isVerificationFile: false
   path: kpr/all.hpp
   requiredBy: []
-  timestamp: '2023-06-24 14:23:30+09:00'
+  timestamp: '2023-06-25 00:30:25+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/all.hpp

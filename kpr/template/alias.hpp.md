@@ -950,7 +950,10 @@ data:
     \ std::decay_t<decltype(std::declval<std::priority_queue<T, Container, Compare>>())>,\
     \ class T, class Compare = Greater, class Container = Vec<T>)\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
     \ HQ, HeapQ)\n\n    DEFINE_TEMPLATE_ALIAS(BitSet, std::bitset<size>, std::size_t\
-    \ size)\n} // namespace kpr\n\nusing namespace std;\nusing namespace kpr;\n"
+    \ size)\n\n    #undef DEFINE_TEMPLATE_ALIAS\n    #undef DEFINE_ALIAS\n    #undef\
+    \ DEFINE_ALIAS_FOR_VEC\n    #undef DEFINE_MAP_ALIAS_IMPL\n    #undef DEFINE_MAP_ALIAS\n\
+    \    #undef DEFINE_CONTAINER_ALIAS\n} // namespace kpr\n\nusing namespace std;\n\
+    using namespace kpr;\n"
   code: "#pragma once\n#include <cstdint>\n#include <forward_list>\n#include <functional>\n\
     #include <limits>\n#include <list>\n#include <map>\n#include <queue>\n#include\
     \ <set>\n#include <stack>\n#include <string>\n#include <tuple>\n#include <unordered_map>\n\
@@ -1057,7 +1060,10 @@ data:
     \ std::decay_t<decltype(std::declval<std::priority_queue<T, Container, Compare>>())>,\
     \ class T, class Compare = Greater, class Container = Vec<T>)\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
     \ HQ, HeapQ)\n\n    DEFINE_TEMPLATE_ALIAS(BitSet, std::bitset<size>, std::size_t\
-    \ size)\n} // namespace kpr\n\nusing namespace std;\nusing namespace kpr;\n"
+    \ size)\n\n    #undef DEFINE_TEMPLATE_ALIAS\n    #undef DEFINE_ALIAS\n    #undef\
+    \ DEFINE_ALIAS_FOR_VEC\n    #undef DEFINE_MAP_ALIAS_IMPL\n    #undef DEFINE_MAP_ALIAS\n\
+    \    #undef DEFINE_CONTAINER_ALIAS\n} // namespace kpr\n\nusing namespace std;\n\
+    using namespace kpr;\n"
   dependsOn:
   - kpr/algorithm/Hash.hpp
   - kpr/meta/tuple_like.hpp
@@ -1080,7 +1086,7 @@ data:
   requiredBy:
   - kpr/template/template.hpp
   - kpr/all.hpp
-  timestamp: '2023-06-24 14:23:30+09:00'
+  timestamp: '2023-06-25 00:30:25+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/template/alias.hpp
