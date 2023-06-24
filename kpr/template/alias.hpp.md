@@ -864,29 +864,29 @@ data:
     \ agg_type<T, 0, Args...> {\n        using type = std::tuple<Args...>;\n    };\n\
     \    template<class T>\n    struct agg_type<T, 0, T, T> {\n        using type\
     \ = std::pair<T, T>;\n    };\n\n    template<class T, std::size_t idx>\n    using\
-    \ agg = typename agg_type<T, idx>::type;\n    using ll1 = agg<ll, 1>;\n    using\
-    \ ll2 = agg<ll, 2>;\n    using ll3 = agg<ll, 3>;\n    using ll4 = agg<ll, 4>;\n\
-    \    using ll5 = agg<ll, 5>;\n\n\n    #define DEFINE_TEMPLATE_ALIAS(short_name,\
-    \ type, ...) \\\n        template<__VA_ARGS__> \\\n        using short_name =\
-    \ type; \\\n        template<__VA_ARGS__> \\\n        using V ## short_name =\
-    \ Vec<type>; \\\n        template<__VA_ARGS__> \\\n        using VV ## short_name\
-    \ = VVec<type>;\n\n    #define DEFINE_ALIAS(short_name, name, short_value_type,\
-    \ value_type) \\\n        using short_name ## short_value_type = name<value_type>;\
-    \ \\\n        using V ## short_name ## short_value_type = V ## name<value_type>;\
-    \ \\\n        using VV ## short_name ## short_value_type = VV ## name<value_type>;\
-    \ \\\n        using short_name ## V ## short_value_type = name<Vec<value_type>>;\
-    \ \\\n        using V ## short_name ## V ## short_value_type = V ## name<Vec<value_type>>;\n\
-    \n    #define DEFINE_ALIAS_FOR_VEC(short_name, name, short_value_type, value_type)\
-    \ \\\n        using V ## short_value_type = Vec<value_type>; \\\n        using\
-    \ VV ## short_value_type = VVec<value_type>; \\\n        using VVV ## short_value_type\
-    \ = VVVec<value_type>; \\\n        using VVVV ## short_value_type = VVVVec<value_type>;\
-    \ \\\n        using VVVVV ## short_value_type = VVVVVec<value_type>;\n\n    #define\
-    \ DEFINE_MAP_ALIAS_IMPL(short_name, name, short_value_type1, value_type1, short_value_type2,\
-    \ value_type2) \\\n        using short_name ## short_value_type1 ## short_value_type2\
-    \ = name<value_type1, value_type2>; \\\n        using V ## short_name ## short_value_type1\
-    \ ## short_value_type2 = V ## name<value_type1, value_type2>; \\\n        using\
-    \ VV ## short_name ## short_value_type1 ## short_value_type2 = VV ## name<value_type1,\
-    \ value_type2>; \\\n        using short_name ## V ## short_value_type1 ## short_value_type2\
+    \ agg = typename agg_type<T, idx>::type;\n    using ll2 = agg<ll, 2>;\n    using\
+    \ ll3 = agg<ll, 3>;\n    using ll4 = agg<ll, 4>;\n    using ll5 = agg<ll, 5>;\n\
+    \n\n    #define DEFINE_TEMPLATE_ALIAS(short_name, type, ...) \\\n        template<__VA_ARGS__>\
+    \ \\\n        using short_name = type; \\\n        template<__VA_ARGS__> \\\n\
+    \        using V ## short_name = Vec<type>; \\\n        template<__VA_ARGS__>\
+    \ \\\n        using VV ## short_name = VVec<type>;\n\n    #define DEFINE_ALIAS(short_name,\
+    \ name, short_value_type, value_type) \\\n        using short_name ## short_value_type\
+    \ = name<value_type>; \\\n        using V ## short_name ## short_value_type =\
+    \ V ## name<value_type>; \\\n        using VV ## short_name ## short_value_type\
+    \ = VV ## name<value_type>; \\\n        using short_name ## V ## short_value_type\
+    \ = name<Vec<value_type>>; \\\n        using V ## short_name ## V ## short_value_type\
+    \ = V ## name<Vec<value_type>>;\n\n    #define DEFINE_ALIAS_FOR_VEC(short_name,\
+    \ name, short_value_type, value_type) \\\n        using V ## short_value_type\
+    \ = Vec<value_type>; \\\n        using VV ## short_value_type = VVec<value_type>;\
+    \ \\\n        using VVV ## short_value_type = VVVec<value_type>; \\\n        using\
+    \ VVVV ## short_value_type = VVVVec<value_type>; \\\n        using VVVVV ## short_value_type\
+    \ = VVVVVec<value_type>;\n\n    #define DEFINE_MAP_ALIAS_IMPL(short_name, name,\
+    \ short_value_type1, value_type1, short_value_type2, value_type2) \\\n       \
+    \ using short_name ## short_value_type1 ## short_value_type2 = name<value_type1,\
+    \ value_type2>; \\\n        using V ## short_name ## short_value_type1 ## short_value_type2\
+    \ = V ## name<value_type1, value_type2>; \\\n        using VV ## short_name ##\
+    \ short_value_type1 ## short_value_type2 = VV ## name<value_type1, value_type2>;\
+    \ \\\n        using short_name ## V ## short_value_type1 ## short_value_type2\
     \ = name<Vec<value_type1>, value_type2>; \\\n        using short_name ## short_value_type1\
     \ ## V ## short_value_type2 = name<value_type1, Vec<value_type2>>; \\\n      \
     \  using short_name ## V ## short_value_type1 ## V ## short_value_type2 = name<Vec<value_type1>,\
@@ -902,24 +902,23 @@ data:
     \    DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, llf, llf); \\\n        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__,\
     \ m, mint); \\\n        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, dm, dmint); \\\n  \
     \      DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, c, char); \\\n        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__,\
-    \ s, str); \\\n        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll1, ll1); \\\n    \
-    \    DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll2, ll2); \\\n        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__,\
-    \ ll3, ll3); \\\n        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll4, ll4); \\\n  \
-    \      DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll5, ll5);\n\n    #define DEFINE_CONTAINER_ALIAS(define_alias,\
-    \ short_name, name) \\\n        define_alias(short_name, name, b, bool); \\\n\
-    \        define_alias(short_name, name, i, int); \\\n        define_alias(short_name,\
-    \ name, l, ll); \\\n        define_alias(short_name, name, f, float); \\\n   \
-    \     define_alias(short_name, name, lf, lf); \\\n        define_alias(short_name,\
-    \ name, llf, llf); \\\n        define_alias(short_name, name, m, mint); \\\n \
-    \       define_alias(short_name, name, dm, dmint); \\\n        define_alias(short_name,\
-    \ name, c, char); \\\n        define_alias(short_name, name, s, str); \\\n   \
-    \     define_alias(short_name, name, ll1, ll1); \\\n        define_alias(short_name,\
-    \ name, ll2, ll2); \\\n        define_alias(short_name, name, ll3, ll3); \\\n\
-    \        define_alias(short_name, name, ll4, ll4); \\\n        define_alias(short_name,\
-    \ name, ll5, ll5);\n\n    template<class T>\n    using Vec = std::vector<T>;\n\
-    \    template<class T>\n    using VVec = Vec<Vec<T>>;\n    template<class T>\n\
-    \    using VVVec = Vec<VVec<T>>;\n    template<class T>\n    using VVVVec = Vec<VVVec<T>>;\n\
-    \    template<class T>\n    using VVVVVec = Vec<VVVVec<T>>;\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS_FOR_VEC,\
+    \ s, str); \\\n        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll2, ll2); \\\n    \
+    \    DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll3, ll3); \\\n        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__,\
+    \ ll4, ll4); \\\n        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll5, ll5);\n\n   \
+    \ #define DEFINE_CONTAINER_ALIAS(define_alias, short_name, name) \\\n        define_alias(short_name,\
+    \ name, b, bool); \\\n        define_alias(short_name, name, i, int); \\\n   \
+    \     define_alias(short_name, name, l, ll); \\\n        define_alias(short_name,\
+    \ name, f, float); \\\n        define_alias(short_name, name, lf, lf); \\\n  \
+    \      define_alias(short_name, name, llf, llf); \\\n        define_alias(short_name,\
+    \ name, m, mint); \\\n        define_alias(short_name, name, dm, dmint); \\\n\
+    \        define_alias(short_name, name, c, char); \\\n        define_alias(short_name,\
+    \ name, s, str); \\\n        define_alias(short_name, name, ll2, ll2); \\\n  \
+    \      define_alias(short_name, name, ll3, ll3); \\\n        define_alias(short_name,\
+    \ name, ll4, ll4); \\\n        define_alias(short_name, name, ll5, ll5);\n\n \
+    \   template<class T>\n    using Vec = std::vector<T>;\n    template<class T>\n\
+    \    using VVec = Vec<Vec<T>>;\n    template<class T>\n    using VVVec = Vec<VVec<T>>;\n\
+    \    template<class T>\n    using VVVVec = Vec<VVVec<T>>;\n    template<class\
+    \ T>\n    using VVVVVec = Vec<VVVVec<T>>;\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS_FOR_VEC,\
     \ V, Vec)\n\n    DEFINE_TEMPLATE_ALIAS(Deque, std::deque<T>, class T)\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
     \ DQ, Deque)\n\n    DEFINE_TEMPLATE_ALIAS(List, std::list<T>, class T)\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
     \ L, List)\n    DEFINE_TEMPLATE_ALIAS(ForwardList, std::forward_list<T>, class\
@@ -974,29 +973,29 @@ data:
     \ agg_type<T, 0, Args...> {\n        using type = std::tuple<Args...>;\n    };\n\
     \    template<class T>\n    struct agg_type<T, 0, T, T> {\n        using type\
     \ = std::pair<T, T>;\n    };\n\n    template<class T, std::size_t idx>\n    using\
-    \ agg = typename agg_type<T, idx>::type;\n    using ll1 = agg<ll, 1>;\n    using\
-    \ ll2 = agg<ll, 2>;\n    using ll3 = agg<ll, 3>;\n    using ll4 = agg<ll, 4>;\n\
-    \    using ll5 = agg<ll, 5>;\n\n\n    #define DEFINE_TEMPLATE_ALIAS(short_name,\
-    \ type, ...) \\\n        template<__VA_ARGS__> \\\n        using short_name =\
-    \ type; \\\n        template<__VA_ARGS__> \\\n        using V ## short_name =\
-    \ Vec<type>; \\\n        template<__VA_ARGS__> \\\n        using VV ## short_name\
-    \ = VVec<type>;\n\n    #define DEFINE_ALIAS(short_name, name, short_value_type,\
-    \ value_type) \\\n        using short_name ## short_value_type = name<value_type>;\
-    \ \\\n        using V ## short_name ## short_value_type = V ## name<value_type>;\
-    \ \\\n        using VV ## short_name ## short_value_type = VV ## name<value_type>;\
-    \ \\\n        using short_name ## V ## short_value_type = name<Vec<value_type>>;\
-    \ \\\n        using V ## short_name ## V ## short_value_type = V ## name<Vec<value_type>>;\n\
-    \n    #define DEFINE_ALIAS_FOR_VEC(short_name, name, short_value_type, value_type)\
-    \ \\\n        using V ## short_value_type = Vec<value_type>; \\\n        using\
-    \ VV ## short_value_type = VVec<value_type>; \\\n        using VVV ## short_value_type\
-    \ = VVVec<value_type>; \\\n        using VVVV ## short_value_type = VVVVec<value_type>;\
-    \ \\\n        using VVVVV ## short_value_type = VVVVVec<value_type>;\n\n    #define\
-    \ DEFINE_MAP_ALIAS_IMPL(short_name, name, short_value_type1, value_type1, short_value_type2,\
-    \ value_type2) \\\n        using short_name ## short_value_type1 ## short_value_type2\
-    \ = name<value_type1, value_type2>; \\\n        using V ## short_name ## short_value_type1\
-    \ ## short_value_type2 = V ## name<value_type1, value_type2>; \\\n        using\
-    \ VV ## short_name ## short_value_type1 ## short_value_type2 = VV ## name<value_type1,\
-    \ value_type2>; \\\n        using short_name ## V ## short_value_type1 ## short_value_type2\
+    \ agg = typename agg_type<T, idx>::type;\n    using ll2 = agg<ll, 2>;\n    using\
+    \ ll3 = agg<ll, 3>;\n    using ll4 = agg<ll, 4>;\n    using ll5 = agg<ll, 5>;\n\
+    \n\n    #define DEFINE_TEMPLATE_ALIAS(short_name, type, ...) \\\n        template<__VA_ARGS__>\
+    \ \\\n        using short_name = type; \\\n        template<__VA_ARGS__> \\\n\
+    \        using V ## short_name = Vec<type>; \\\n        template<__VA_ARGS__>\
+    \ \\\n        using VV ## short_name = VVec<type>;\n\n    #define DEFINE_ALIAS(short_name,\
+    \ name, short_value_type, value_type) \\\n        using short_name ## short_value_type\
+    \ = name<value_type>; \\\n        using V ## short_name ## short_value_type =\
+    \ V ## name<value_type>; \\\n        using VV ## short_name ## short_value_type\
+    \ = VV ## name<value_type>; \\\n        using short_name ## V ## short_value_type\
+    \ = name<Vec<value_type>>; \\\n        using V ## short_name ## V ## short_value_type\
+    \ = V ## name<Vec<value_type>>;\n\n    #define DEFINE_ALIAS_FOR_VEC(short_name,\
+    \ name, short_value_type, value_type) \\\n        using V ## short_value_type\
+    \ = Vec<value_type>; \\\n        using VV ## short_value_type = VVec<value_type>;\
+    \ \\\n        using VVV ## short_value_type = VVVec<value_type>; \\\n        using\
+    \ VVVV ## short_value_type = VVVVec<value_type>; \\\n        using VVVVV ## short_value_type\
+    \ = VVVVVec<value_type>;\n\n    #define DEFINE_MAP_ALIAS_IMPL(short_name, name,\
+    \ short_value_type1, value_type1, short_value_type2, value_type2) \\\n       \
+    \ using short_name ## short_value_type1 ## short_value_type2 = name<value_type1,\
+    \ value_type2>; \\\n        using V ## short_name ## short_value_type1 ## short_value_type2\
+    \ = V ## name<value_type1, value_type2>; \\\n        using VV ## short_name ##\
+    \ short_value_type1 ## short_value_type2 = VV ## name<value_type1, value_type2>;\
+    \ \\\n        using short_name ## V ## short_value_type1 ## short_value_type2\
     \ = name<Vec<value_type1>, value_type2>; \\\n        using short_name ## short_value_type1\
     \ ## V ## short_value_type2 = name<value_type1, Vec<value_type2>>; \\\n      \
     \  using short_name ## V ## short_value_type1 ## V ## short_value_type2 = name<Vec<value_type1>,\
@@ -1012,24 +1011,23 @@ data:
     \    DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, llf, llf); \\\n        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__,\
     \ m, mint); \\\n        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, dm, dmint); \\\n  \
     \      DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, c, char); \\\n        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__,\
-    \ s, str); \\\n        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll1, ll1); \\\n    \
-    \    DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll2, ll2); \\\n        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__,\
-    \ ll3, ll3); \\\n        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll4, ll4); \\\n  \
-    \      DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll5, ll5);\n\n    #define DEFINE_CONTAINER_ALIAS(define_alias,\
-    \ short_name, name) \\\n        define_alias(short_name, name, b, bool); \\\n\
-    \        define_alias(short_name, name, i, int); \\\n        define_alias(short_name,\
-    \ name, l, ll); \\\n        define_alias(short_name, name, f, float); \\\n   \
-    \     define_alias(short_name, name, lf, lf); \\\n        define_alias(short_name,\
-    \ name, llf, llf); \\\n        define_alias(short_name, name, m, mint); \\\n \
-    \       define_alias(short_name, name, dm, dmint); \\\n        define_alias(short_name,\
-    \ name, c, char); \\\n        define_alias(short_name, name, s, str); \\\n   \
-    \     define_alias(short_name, name, ll1, ll1); \\\n        define_alias(short_name,\
-    \ name, ll2, ll2); \\\n        define_alias(short_name, name, ll3, ll3); \\\n\
-    \        define_alias(short_name, name, ll4, ll4); \\\n        define_alias(short_name,\
-    \ name, ll5, ll5);\n\n    template<class T>\n    using Vec = std::vector<T>;\n\
-    \    template<class T>\n    using VVec = Vec<Vec<T>>;\n    template<class T>\n\
-    \    using VVVec = Vec<VVec<T>>;\n    template<class T>\n    using VVVVec = Vec<VVVec<T>>;\n\
-    \    template<class T>\n    using VVVVVec = Vec<VVVVec<T>>;\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS_FOR_VEC,\
+    \ s, str); \\\n        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll2, ll2); \\\n    \
+    \    DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll3, ll3); \\\n        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__,\
+    \ ll4, ll4); \\\n        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll5, ll5);\n\n   \
+    \ #define DEFINE_CONTAINER_ALIAS(define_alias, short_name, name) \\\n        define_alias(short_name,\
+    \ name, b, bool); \\\n        define_alias(short_name, name, i, int); \\\n   \
+    \     define_alias(short_name, name, l, ll); \\\n        define_alias(short_name,\
+    \ name, f, float); \\\n        define_alias(short_name, name, lf, lf); \\\n  \
+    \      define_alias(short_name, name, llf, llf); \\\n        define_alias(short_name,\
+    \ name, m, mint); \\\n        define_alias(short_name, name, dm, dmint); \\\n\
+    \        define_alias(short_name, name, c, char); \\\n        define_alias(short_name,\
+    \ name, s, str); \\\n        define_alias(short_name, name, ll2, ll2); \\\n  \
+    \      define_alias(short_name, name, ll3, ll3); \\\n        define_alias(short_name,\
+    \ name, ll4, ll4); \\\n        define_alias(short_name, name, ll5, ll5);\n\n \
+    \   template<class T>\n    using Vec = std::vector<T>;\n    template<class T>\n\
+    \    using VVec = Vec<Vec<T>>;\n    template<class T>\n    using VVVec = Vec<VVec<T>>;\n\
+    \    template<class T>\n    using VVVVec = Vec<VVVec<T>>;\n    template<class\
+    \ T>\n    using VVVVVec = Vec<VVVVec<T>>;\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS_FOR_VEC,\
     \ V, Vec)\n\n    DEFINE_TEMPLATE_ALIAS(Deque, std::deque<T>, class T)\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
     \ DQ, Deque)\n\n    DEFINE_TEMPLATE_ALIAS(List, std::list<T>, class T)\n    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS,\
     \ L, List)\n    DEFINE_TEMPLATE_ALIAS(ForwardList, std::forward_list<T>, class\
@@ -1086,7 +1084,7 @@ data:
   requiredBy:
   - kpr/template/template.hpp
   - kpr/all.hpp
-  timestamp: '2023-06-25 00:30:25+09:00'
+  timestamp: '2023-06-25 00:32:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/template/alias.hpp

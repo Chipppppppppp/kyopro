@@ -555,7 +555,7 @@ data:
     \ == ')') --bracket;\n            else if (i == ',' && bracket == 0) ++cnt;\n\
     \        }\n        return cnt;\n    }\n\n    template<class F, std::size_t...\
     \ idx>\n    auto read_impl(F&& f, std::index_sequence<idx...>) {\n        return\
-    \ std::tuple{(static_cast<void>(idx), f())...};\n    }\n\n    Printer<Writer<>::iterator,\
+    \ std::make_tuple((static_cast<void>(idx), f())...);\n    }\n\n    Printer<Writer<>::iterator,\
     \ true, true, true, true> debug_impl(output.begin());\n\n    template<bool flag>\n\
     \    void print_if(std::string_view sv) {\n        if constexpr (flag) print('\
     \ ', sv);\n    }\n} // namespace kpr::helper\n\n#define read(type_or_init, ...)\
@@ -577,8 +577,7 @@ data:
     #define LLF1(...) read1(llf, __VA_ARGS__);\n#define MINT(...) read(mint, __VA_ARGS__);\n\
     #define MINT1(...) read1(mint, __VA_ARGS__);\n#define DMINT(...) read(dmint, __VA_ARGS__);\n\
     #define DMINT1(...) read1(dmint, __VA_ARGS__);\n#define CHAR(...) read(char, __VA_ARGS__);\n\
-    #define STR(...) read(str, __VA_ARGS__);\n#define LL1(...) read(ll1, __VA_ARGS__);\n\
-    #define LL11(...) read1(ll1, __VA_ARGS__);\n#define LL2(...) read(ll2, __VA_ARGS__);\n\
+    #define STR(...) read(str, __VA_ARGS__);\n#define LL2(...) read(ll2, __VA_ARGS__);\n\
     #define LL21(...) read1(ll2, __VA_ARGS__);\n#define LL3(...) read(ll3, __VA_ARGS__);\n\
     #define LL31(...) read1(ll3, __VA_ARGS__);\n#define LL4(...) read(ll4, __VA_ARGS__);\n\
     #define LL41(...) read1(ll4, __VA_ARGS__);\n#define LL5(...) read(ll5, __VA_ARGS__);\n\
@@ -595,8 +594,8 @@ data:
     \    if (i == '(') ++bracket;\n            else if (i == ')') --bracket;\n   \
     \         else if (i == ',' && bracket == 0) ++cnt;\n        }\n        return\
     \ cnt;\n    }\n\n    template<class F, std::size_t... idx>\n    auto read_impl(F&&\
-    \ f, std::index_sequence<idx...>) {\n        return std::tuple{(static_cast<void>(idx),\
-    \ f())...};\n    }\n\n    Printer<Writer<>::iterator, true, true, true, true>\
+    \ f, std::index_sequence<idx...>) {\n        return std::make_tuple((static_cast<void>(idx),\
+    \ f())...);\n    }\n\n    Printer<Writer<>::iterator, true, true, true, true>\
     \ debug_impl(output.begin());\n\n    template<bool flag>\n    void print_if(std::string_view\
     \ sv) {\n        if constexpr (flag) print(' ', sv);\n    }\n} // namespace kpr::helper\n\
     \n#define read(type_or_init, ...) \\\n    auto [__VA_ARGS__] = (kpr::helper::read_impl(([&]()\
@@ -617,8 +616,7 @@ data:
     #define LLF1(...) read1(llf, __VA_ARGS__);\n#define MINT(...) read(mint, __VA_ARGS__);\n\
     #define MINT1(...) read1(mint, __VA_ARGS__);\n#define DMINT(...) read(dmint, __VA_ARGS__);\n\
     #define DMINT1(...) read1(dmint, __VA_ARGS__);\n#define CHAR(...) read(char, __VA_ARGS__);\n\
-    #define STR(...) read(str, __VA_ARGS__);\n#define LL1(...) read(ll1, __VA_ARGS__);\n\
-    #define LL11(...) read1(ll1, __VA_ARGS__);\n#define LL2(...) read(ll2, __VA_ARGS__);\n\
+    #define STR(...) read(str, __VA_ARGS__);\n#define LL2(...) read(ll2, __VA_ARGS__);\n\
     #define LL21(...) read1(ll2, __VA_ARGS__);\n#define LL3(...) read(ll3, __VA_ARGS__);\n\
     #define LL31(...) read1(ll3, __VA_ARGS__);\n#define LL4(...) read(ll4, __VA_ARGS__);\n\
     #define LL41(...) read1(ll4, __VA_ARGS__);\n#define LL5(...) read(ll5, __VA_ARGS__);\n\
@@ -642,7 +640,7 @@ data:
   - kpr/template/template.hpp
   - kpr/template/macro.hpp
   - kpr/all.hpp
-  timestamp: '2023-06-25 00:30:25+09:00'
+  timestamp: '2023-06-25 00:47:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/template/io_macro.hpp
