@@ -189,6 +189,13 @@ namespace kpr {
     DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HQ, HeapQ)
 
     DEFINE_TEMPLATE_ALIAS(BitSet, std::bitset<size>, std::size_t size)
+
+    #undef DEFINE_TEMPLATE_ALIAS
+    #undef DEFINE_ALIAS
+    #undef DEFINE_ALIAS_FOR_VEC
+    #undef DEFINE_MAP_ALIAS_IMPL
+    #undef DEFINE_MAP_ALIAS
+    #undef DEFINE_CONTAINER_ALIAS
 } // namespace kpr
 
 using namespace std;

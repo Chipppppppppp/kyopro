@@ -46,21 +46,44 @@ namespace kpr::helper {
         return res; \
     }), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))
 
+#define read1(type_or_init, ...) \
+    auto [__VA_ARGS__] = (kpr::helper::read_impl(([&]() { \
+        using T = std::decay_t<decltype(*new type_or_init)>; \
+        alignas(T) std::byte storage[sizeof(T)]; \
+        T* p = new (storage) type_or_init; \
+        kpr::scan(idx1(*p)); \
+        T res = std::move(*p); \
+        p->~T(); \
+        return res; \
+    }), std::make_index_sequence<kpr::helper::va_args_size(#__VA_ARGS__)>()))
+
 #define BOOL(...) read(bool, __VA_ARGS__);
 #define INT(...) read(int, __VA_ARGS__);
+#define INT1(...) read1(int, __VA_ARGS__);
 #define LL(...) read(ll, __VA_ARGS__);
+#define LL1(...) read1(ll, __VA_ARGS__);
 #define FLOAT(...) read(float, __VA_ARGS__);
+#define FLOAT1(...) read1(float, __VA_ARGS__);
 #define LF(...) read(lf, __VA_ARGS__);
+#define LF1(...) read1(lf, __VA_ARGS__);
 #define LLF(...) read(llf, __VA_ARGS__);
+#define LLF1(...) read1(llf, __VA_ARGS__);
 #define MINT(...) read(mint, __VA_ARGS__);
+#define MINT1(...) read1(mint, __VA_ARGS__);
 #define DMINT(...) read(dmint, __VA_ARGS__);
+#define DMINT1(...) read1(dmint, __VA_ARGS__);
 #define CHAR(...) read(char, __VA_ARGS__);
 #define STR(...) read(str, __VA_ARGS__);
 #define LL1(...) read(ll1, __VA_ARGS__);
+#define LL11(...) read1(ll1, __VA_ARGS__);
 #define LL2(...) read(ll2, __VA_ARGS__);
+#define LL21(...) read1(ll2, __VA_ARGS__);
 #define LL3(...) read(ll3, __VA_ARGS__);
+#define LL31(...) read1(ll3, __VA_ARGS__);
 #define LL4(...) read(ll4, __VA_ARGS__);
+#define LL41(...) read1(ll4, __VA_ARGS__);
 #define LL5(...) read(ll5, __VA_ARGS__);
+#define LL51(...) read1(ll5, __VA_ARGS__);
 
 #ifdef NDEBUG
 #define debug(...) (void())
