@@ -342,6 +342,8 @@ data:
     \ noexcept: args_tuple{std::forward<Args>(args)...} {}\r\n    };\r\n\r\n    template<std::size_t\
     \ i, class... Args>\r\n    constexpr auto indexed(Args&&... args) noexcept {\r\
     \n        return Indexed<std::tuple<Args...>, i>{std::forward<Args>(args)...};\r\
+    \n    }\r\n\r\n    template<class... Args>\r\n    constexpr auto idx1(Args&&...\
+    \ args) noexcept {\r\n        return indexed<1>(std::forward<Args>(args)...);\r\
     \n    }\r\n\r\n    template<class Tuple, bool... seps>\r\n    struct SepWith {\r\
     \n        Tuple args_tuple;\r\n        template<class... Args>\r\n        constexpr\
     \ SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...} {}\r\
@@ -824,7 +826,7 @@ data:
   isVerificationFile: true
   path: verify/yosupo/point_set_range_composite.test.cpp
   requiredBy: []
-  timestamp: '2023-06-22 14:29:46+09:00'
+  timestamp: '2023-06-23 11:13:58+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/yosupo/point_set_range_composite.test.cpp

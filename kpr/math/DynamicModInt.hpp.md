@@ -339,11 +339,13 @@ data:
     \ Args>\r\n        constexpr Indexed(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
     \ {}\r\n    };\r\n\r\n    template<std::size_t i, class... Args>\r\n    constexpr\
     \ auto indexed(Args&&... args) noexcept {\r\n        return Indexed<std::tuple<Args...>,\
-    \ i>{std::forward<Args>(args)...};\r\n    }\r\n\r\n    template<class Tuple, bool...\
-    \ seps>\r\n    struct SepWith {\r\n        Tuple args_tuple;\r\n        template<class...\
-    \ Args>\r\n        constexpr SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
-    \ {}\r\n    };\r\n\r\n    template<bool... seps, class... Args>\r\n    constexpr\
-    \ auto sep_with(Args&&... args) noexcept {\r\n        return SepWith<std::tuple<Args...>,\
+    \ i>{std::forward<Args>(args)...};\r\n    }\r\n\r\n    template<class... Args>\r\
+    \n    constexpr auto idx1(Args&&... args) noexcept {\r\n        return indexed<1>(std::forward<Args>(args)...);\r\
+    \n    }\r\n\r\n    template<class Tuple, bool... seps>\r\n    struct SepWith {\r\
+    \n        Tuple args_tuple;\r\n        template<class... Args>\r\n        constexpr\
+    \ SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...} {}\r\
+    \n    };\r\n\r\n    template<bool... seps, class... Args>\r\n    constexpr auto\
+    \ sep_with(Args&&... args) noexcept {\r\n        return SepWith<std::tuple<Args...>,\
     \ seps...>{std::forward<Args>(args)...};\r\n    }\r\n} // namespace kpr\r\n#line\
     \ 16 \"kpr/io/in.hpp\"\n\r\nnamespace kpr {\r\n    // \u30D0\u30C3\u30D5\u30A1\
     \u3092\u7528\u3044\u3066\u30D5\u30A1\u30A4\u30EB\u3092\u8AAD\u307F\u8FBC\u3080\
@@ -782,12 +784,12 @@ data:
   requiredBy:
   - kpr/template/alias.hpp
   - kpr/template/template.hpp
+  - kpr/math/math.hpp
   - kpr/math/is_prime.hpp
   - kpr/math/factorize.hpp
-  - kpr/math/math.hpp
   - kpr/all/all.hpp
   - kpr/all.hpp
-  timestamp: '2023-06-22 14:29:46+09:00'
+  timestamp: '2023-06-23 11:13:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yosupo/factorize.test.cpp

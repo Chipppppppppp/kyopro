@@ -267,8 +267,8 @@ data:
   isVerificationFile: false
   path: kpr/algorithm/count_all.hpp
   requiredBy:
-  - kpr/algorithm/algorithm.hpp
   - kpr/all/all.hpp
+  - kpr/algorithm/algorithm.hpp
   - kpr/all.hpp
   timestamp: '2023-06-22 12:22:29+09:00'
   verificationStatus: LIBRARY_NO_TESTS

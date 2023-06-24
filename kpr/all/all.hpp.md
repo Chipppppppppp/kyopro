@@ -495,11 +495,13 @@ data:
     \ Indexed(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...} {}\r\
     \n    };\r\n\r\n    template<std::size_t i, class... Args>\r\n    constexpr auto\
     \ indexed(Args&&... args) noexcept {\r\n        return Indexed<std::tuple<Args...>,\
-    \ i>{std::forward<Args>(args)...};\r\n    }\r\n\r\n    template<class Tuple, bool...\
-    \ seps>\r\n    struct SepWith {\r\n        Tuple args_tuple;\r\n        template<class...\
-    \ Args>\r\n        constexpr SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
-    \ {}\r\n    };\r\n\r\n    template<bool... seps, class... Args>\r\n    constexpr\
-    \ auto sep_with(Args&&... args) noexcept {\r\n        return SepWith<std::tuple<Args...>,\
+    \ i>{std::forward<Args>(args)...};\r\n    }\r\n\r\n    template<class... Args>\r\
+    \n    constexpr auto idx1(Args&&... args) noexcept {\r\n        return indexed<1>(std::forward<Args>(args)...);\r\
+    \n    }\r\n\r\n    template<class Tuple, bool... seps>\r\n    struct SepWith {\r\
+    \n        Tuple args_tuple;\r\n        template<class... Args>\r\n        constexpr\
+    \ SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...} {}\r\
+    \n    };\r\n\r\n    template<bool... seps, class... Args>\r\n    constexpr auto\
+    \ sep_with(Args&&... args) noexcept {\r\n        return SepWith<std::tuple<Args...>,\
     \ seps...>{std::forward<Args>(args)...};\r\n    }\r\n} // namespace kpr\r\n#line\
     \ 5 \"kpr/math/power.hpp\"\n\r\nnamespace kpr {\r\n    [[maybe_unused]] inline\
     \ constexpr struct {\r\n        template<class T>\r\n        constexpr T operator\
@@ -1114,7 +1116,7 @@ data:
   path: kpr/all/all.hpp
   requiredBy:
   - kpr/all.hpp
-  timestamp: '2023-06-22 14:29:46+09:00'
+  timestamp: '2023-06-23 11:13:58+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/all/all.hpp

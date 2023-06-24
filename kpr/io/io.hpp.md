@@ -74,11 +74,13 @@ data:
     \        constexpr Indexed(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
     \ {}\r\n    };\r\n\r\n    template<std::size_t i, class... Args>\r\n    constexpr\
     \ auto indexed(Args&&... args) noexcept {\r\n        return Indexed<std::tuple<Args...>,\
-    \ i>{std::forward<Args>(args)...};\r\n    }\r\n\r\n    template<class Tuple, bool...\
-    \ seps>\r\n    struct SepWith {\r\n        Tuple args_tuple;\r\n        template<class...\
-    \ Args>\r\n        constexpr SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...}\
-    \ {}\r\n    };\r\n\r\n    template<bool... seps, class... Args>\r\n    constexpr\
-    \ auto sep_with(Args&&... args) noexcept {\r\n        return SepWith<std::tuple<Args...>,\
+    \ i>{std::forward<Args>(args)...};\r\n    }\r\n\r\n    template<class... Args>\r\
+    \n    constexpr auto idx1(Args&&... args) noexcept {\r\n        return indexed<1>(std::forward<Args>(args)...);\r\
+    \n    }\r\n\r\n    template<class Tuple, bool... seps>\r\n    struct SepWith {\r\
+    \n        Tuple args_tuple;\r\n        template<class... Args>\r\n        constexpr\
+    \ SepWith(Args&&... args) noexcept: args_tuple{std::forward<Args>(args)...} {}\r\
+    \n    };\r\n\r\n    template<bool... seps, class... Args>\r\n    constexpr auto\
+    \ sep_with(Args&&... args) noexcept {\r\n        return SepWith<std::tuple<Args...>,\
     \ seps...>{std::forward<Args>(args)...};\r\n    }\r\n} // namespace kpr\r\n#line\
     \ 2 \"kpr/function/monoid.hpp\"\n#include <limits>\r\n#line 3 \"kpr/meta/setting.hpp\"\
     \n\r\n#ifndef KYOPRO_BASE_INT\r\n// \u57FA\u672C\u7B26\u53F7\u4ED8\u304D\u6574\
@@ -580,19 +582,19 @@ data:
   isVerificationFile: false
   path: kpr/io/io.hpp
   requiredBy:
-  - kpr/template/macro.hpp
   - kpr/template/template.hpp
+  - kpr/template/macro.hpp
   - kpr/template/io_macro.hpp
   - kpr/all/all.hpp
   - kpr/all.hpp
-  timestamp: '2023-06-22 14:29:46+09:00'
+  timestamp: '2023-06-23 11:13:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/factorize.test.cpp
-  - verify/yosupo/unionfind.test.cpp
-  - verify/yosupo/many_aplusb.test.cpp
   - verify/yosupo/point_set_range_composite.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/point_add_range_sum.test.cpp
+  - verify/yosupo/unionfind.test.cpp
   - verify/aoj/WeightedUnionFind.test.cpp
 documentation_of: kpr/io/io.hpp
 layout: document

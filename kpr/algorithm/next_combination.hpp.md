@@ -51,8 +51,8 @@ data:
   isVerificationFile: false
   path: kpr/algorithm/next_combination.hpp
   requiredBy:
-  - kpr/algorithm/algorithm.hpp
   - kpr/all/all.hpp
+  - kpr/algorithm/algorithm.hpp
   - kpr/all.hpp
   timestamp: '2023-04-22 22:30:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
