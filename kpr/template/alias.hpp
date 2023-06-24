@@ -63,7 +63,6 @@ namespace kpr {
 
     template<class T, std::size_t idx>
     using agg = typename agg_type<T, idx>::type;
-    using ll1 = agg<ll, 1>;
     using ll2 = agg<ll, 2>;
     using ll3 = agg<ll, 3>;
     using ll4 = agg<ll, 4>;
@@ -114,7 +113,6 @@ namespace kpr {
         DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, dm, dmint); \
         DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, c, char); \
         DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, s, str); \
-        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll1, ll1); \
         DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll2, ll2); \
         DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll3, ll3); \
         DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll4, ll4); \
@@ -131,7 +129,6 @@ namespace kpr {
         define_alias(short_name, name, dm, dmint); \
         define_alias(short_name, name, c, char); \
         define_alias(short_name, name, s, str); \
-        define_alias(short_name, name, ll1, ll1); \
         define_alias(short_name, name, ll2, ll2); \
         define_alias(short_name, name, ll3, ll3); \
         define_alias(short_name, name, ll4, ll4); \

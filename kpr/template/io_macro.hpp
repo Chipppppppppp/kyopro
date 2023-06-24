@@ -74,8 +74,6 @@ namespace kpr::helper {
 #define DMINT1(...) read1(dmint, __VA_ARGS__);
 #define CHAR(...) read(char, __VA_ARGS__);
 #define STR(...) read(str, __VA_ARGS__);
-#define LL1(...) read(ll1, __VA_ARGS__);
-#define LL11(...) read1(ll1, __VA_ARGS__);
 #define LL2(...) read(ll2, __VA_ARGS__);
 #define LL21(...) read1(ll2, __VA_ARGS__);
 #define LL3(...) read(ll3, __VA_ARGS__);
