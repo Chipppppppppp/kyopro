@@ -21,12 +21,14 @@ MIT License ですが、競技プログラミングのためにこのライブ�
 #include "kyopro/all.hpp"
 
 namespace kpr {
-    void main() {
-        // named tuple macro
-        auto named_tuple = $$(a, 42, b, "Hello");
-        println(named_tuple); // 42 Hello
-    }
+
+void main() {
+    // named tuple macro
+    auto named_tuple = $$(a, 42, b, "Hello");
+    println(named_tuple); // 42 Hello
 }
+
+} // namespace kpr
 ```
 
 
