@@ -24,7 +24,7 @@ namespace kpr::helper {
 
     template<class F, std::size_t... idx>
     auto read_impl(F&& f, std::index_sequence<idx...>) {
-        return std::tuple{(static_cast<void>(idx), f())...};
+        return std::make_tuple((static_cast<void>(idx), f())...);
     }
 
     Printer<Writer<>::iterator, true, true, true, true> debug_impl(output.begin());
