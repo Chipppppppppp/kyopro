@@ -26,8 +26,8 @@ data:
   isVerificationFile: false
   path: kpr/template/fix_vector_bool.hpp
   requiredBy:
-  - kpr/template/template.hpp
   - kpr/all.hpp
+  - kpr/template/template.hpp
   timestamp: '2023-06-15 19:03:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

@@ -278,8 +278,8 @@ data:
   isVerificationFile: false
   path: kpr/data_structure/WeightedUnionFind.hpp
   requiredBy:
-  - kpr/data_structure/data_structure.hpp
   - kpr/all.hpp
+  - kpr/data_structure/data_structure.hpp
   timestamp: '2023-06-22 14:29:46+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

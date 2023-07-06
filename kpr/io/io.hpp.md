@@ -582,20 +582,20 @@ data:
   isVerificationFile: false
   path: kpr/io/io.hpp
   requiredBy:
-  - kpr/template/template.hpp
+  - kpr/all.hpp
   - kpr/template/macro.hpp
   - kpr/template/io_macro.hpp
+  - kpr/template/template.hpp
   - kpr/all/all.hpp
-  - kpr/all.hpp
   timestamp: '2023-06-23 11:13:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/aoj/WeightedUnionFind.test.cpp
   - verify/yosupo/factorize.test.cpp
-  - verify/yosupo/point_set_range_composite.test.cpp
-  - verify/yosupo/many_aplusb.test.cpp
   - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/unionfind.test.cpp
-  - verify/aoj/WeightedUnionFind.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/point_set_range_composite.test.cpp
 documentation_of: kpr/io/io.hpp
 layout: document
 redirect_from:

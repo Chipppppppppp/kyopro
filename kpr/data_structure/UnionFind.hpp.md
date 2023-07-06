@@ -234,8 +234,8 @@ data:
   isVerificationFile: false
   path: kpr/data_structure/UnionFind.hpp
   requiredBy:
-  - kpr/data_structure/data_structure.hpp
   - kpr/all.hpp
+  - kpr/data_structure/data_structure.hpp
   timestamp: '2023-05-30 09:27:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

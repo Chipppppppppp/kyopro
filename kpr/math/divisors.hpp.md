@@ -65,9 +65,9 @@ data:
   isVerificationFile: false
   path: kpr/math/divisors.hpp
   requiredBy:
+  - kpr/all.hpp
   - kpr/math/math.hpp
   - kpr/all/all.hpp
-  - kpr/all.hpp
   timestamp: '2023-05-30 09:27:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

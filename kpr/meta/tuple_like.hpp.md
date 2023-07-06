@@ -214,36 +214,36 @@ data:
   isVerificationFile: false
   path: kpr/meta/tuple_like.hpp
   requiredBy:
-  - kpr/template/alias.hpp
-  - kpr/template/template.hpp
-  - kpr/template/macro.hpp
-  - kpr/template/named_tuple_macro.hpp
-  - kpr/template/io_macro.hpp
-  - kpr/math/math.hpp
-  - kpr/math/BinomMod.hpp
-  - kpr/math/DynamicModInt.hpp
+  - kpr/all.hpp
   - kpr/math/is_prime.hpp
   - kpr/math/ModInt.hpp
   - kpr/math/factorize.hpp
-  - kpr/io/in.hpp
-  - kpr/io/io.hpp
-  - kpr/io/out.hpp
-  - kpr/all/all.hpp
-  - kpr/algorithm/Hash.hpp
-  - kpr/algorithm/contains.hpp
+  - kpr/math/math.hpp
+  - kpr/math/BinomMod.hpp
+  - kpr/math/DynamicModInt.hpp
   - kpr/algorithm/algorithm.hpp
   - kpr/algorithm/count_all.hpp
-  - kpr/all.hpp
+  - kpr/algorithm/Hash.hpp
+  - kpr/algorithm/contains.hpp
+  - kpr/io/io.hpp
+  - kpr/io/out.hpp
+  - kpr/io/in.hpp
+  - kpr/template/macro.hpp
+  - kpr/template/io_macro.hpp
+  - kpr/template/named_tuple_macro.hpp
+  - kpr/template/alias.hpp
+  - kpr/template/template.hpp
+  - kpr/all/all.hpp
   - kpr/meta/meta.hpp
   timestamp: '2023-06-09 13:17:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/aoj/WeightedUnionFind.test.cpp
   - verify/yosupo/factorize.test.cpp
-  - verify/yosupo/point_set_range_composite.test.cpp
-  - verify/yosupo/many_aplusb.test.cpp
   - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/unionfind.test.cpp
-  - verify/aoj/WeightedUnionFind.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/point_set_range_composite.test.cpp
 documentation_of: kpr/meta/tuple_like.hpp
 layout: document
 redirect_from:

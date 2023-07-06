@@ -61,9 +61,9 @@ data:
   isVerificationFile: false
   path: kpr/template/match_macro.hpp
   requiredBy:
-  - kpr/template/template.hpp
-  - kpr/template/macro.hpp
   - kpr/all.hpp
+  - kpr/template/macro.hpp
+  - kpr/template/template.hpp
   timestamp: '2023-04-04 01:42:52+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

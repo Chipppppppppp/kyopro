@@ -1082,8 +1082,8 @@ data:
   isVerificationFile: false
   path: kpr/template/alias.hpp
   requiredBy:
-  - kpr/template/template.hpp
   - kpr/all.hpp
+  - kpr/template/template.hpp
   timestamp: '2023-06-25 00:32:47+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

@@ -39,8 +39,8 @@ data:
   isVerificationFile: false
   path: kpr/template/chmin_chmax.hpp
   requiredBy:
-  - kpr/template/template.hpp
   - kpr/all.hpp
+  - kpr/template/template.hpp
   timestamp: '2023-04-22 22:26:52+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

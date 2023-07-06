@@ -361,48 +361,48 @@ data:
   isVerificationFile: false
   path: kpr/meta/trait.hpp
   requiredBy:
-  - kpr/template/alias.hpp
-  - kpr/template/template.hpp
-  - kpr/template/macro.hpp
-  - kpr/template/named_tuple_macro.hpp
-  - kpr/template/io_macro.hpp
+  - kpr/all.hpp
+  - kpr/math/is_prime.hpp
+  - kpr/math/ModInt.hpp
+  - kpr/math/Barrett.hpp
+  - kpr/math/div.hpp
+  - kpr/math/factorize.hpp
+  - kpr/math/power.hpp
   - kpr/math/math.hpp
   - kpr/math/BinomMod.hpp
   - kpr/math/DynamicModInt.hpp
-  - kpr/math/is_prime.hpp
-  - kpr/math/ModInt.hpp
-  - kpr/math/div.hpp
-  - kpr/math/factorize.hpp
-  - kpr/math/Barrett.hpp
-  - kpr/math/power.hpp
-  - kpr/io/in.hpp
-  - kpr/io/io.hpp
-  - kpr/io/out.hpp
-  - kpr/all/all.hpp
-  - kpr/algorithm/Hash.hpp
-  - kpr/algorithm/contains.hpp
   - kpr/algorithm/algorithm.hpp
   - kpr/algorithm/count_all.hpp
+  - kpr/algorithm/Hash.hpp
+  - kpr/algorithm/contains.hpp
   - kpr/algorithm/bit.hpp
-  - kpr/data_structure/FenwickTree.hpp
-  - kpr/data_structure/UnionFind.hpp
-  - kpr/data_structure/WeightedUnionFind.hpp
-  - kpr/data_structure/SegmentTree.hpp
-  - kpr/data_structure/data_structure.hpp
+  - kpr/io/io.hpp
+  - kpr/io/out.hpp
+  - kpr/io/in.hpp
+  - kpr/template/macro.hpp
+  - kpr/template/io_macro.hpp
+  - kpr/template/named_tuple_macro.hpp
+  - kpr/template/alias.hpp
+  - kpr/template/template.hpp
+  - kpr/all/all.hpp
   - kpr/function/function.hpp
   - kpr/function/monoid.hpp
-  - kpr/all.hpp
-  - kpr/meta/constant.hpp
   - kpr/meta/meta.hpp
+  - kpr/meta/constant.hpp
+  - kpr/data_structure/UnionFind.hpp
+  - kpr/data_structure/FenwickTree.hpp
+  - kpr/data_structure/SegmentTree.hpp
+  - kpr/data_structure/data_structure.hpp
+  - kpr/data_structure/WeightedUnionFind.hpp
   timestamp: '2023-04-04 01:42:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/aoj/WeightedUnionFind.test.cpp
   - verify/yosupo/factorize.test.cpp
-  - verify/yosupo/point_set_range_composite.test.cpp
-  - verify/yosupo/many_aplusb.test.cpp
   - verify/yosupo/point_add_range_sum.test.cpp
   - verify/yosupo/unionfind.test.cpp
-  - verify/aoj/WeightedUnionFind.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/point_set_range_composite.test.cpp
 documentation_of: kpr/meta/trait.hpp
 layout: document
 redirect_from:

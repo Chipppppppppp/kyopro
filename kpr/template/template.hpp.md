@@ -1051,11 +1051,11 @@ data:
     \        else if (i == ')') --bracket;\n            else if (i == ',' && bracket\
     \ == 0) ++cnt;\n        }\n        return cnt;\n    }\n\n    template<class F,\
     \ std::size_t... idx>\n    auto read_impl(F&& f, std::index_sequence<idx...>)\
-    \ {\n        return std::make_tuple((static_cast<void>(idx), f())...);\n    }\n\
-    \n    Printer<Writer<>::iterator, true, true, true, true> debug_impl(output.begin());\n\
-    \n    template<bool flag>\n    void print_if(std::string_view sv) {\n        if\
-    \ constexpr (flag) print(' ', sv);\n    }\n} // namespace kpr::helper\n\n#define\
-    \ read(type_or_init, ...) \\\n    auto [__VA_ARGS__] = (kpr::helper::read_impl(([&]()\
+    \ {\n        return std::tuple<std::decay_t<decltype(static_cast<void>(idx), std::declval<std::invoke_result_t<F>>())>...>{(static_cast<void>(idx),\
+    \ f())...};\n    }\n\n    Printer<Writer<>::iterator, true, true, true, true>\
+    \ debug_impl(output.begin());\n\n    template<bool flag>\n    void print_if(std::string_view\
+    \ sv) {\n        if constexpr (flag) print(' ', sv);\n    }\n} // namespace kpr::helper\n\
+    \n#define read(type_or_init, ...) \\\n    auto [__VA_ARGS__] = (kpr::helper::read_impl(([&]()\
     \ { \\\n        using T = std::decay_t<decltype(*new type_or_init)>; \\\n    \
     \    alignas(T) std::byte storage[sizeof(T)]; \\\n        T* p = new (storage)\
     \ type_or_init; \\\n        kpr::scan(*p); \\\n        T res = std::move(*p);\
@@ -1239,7 +1239,7 @@ data:
   path: kpr/template/template.hpp
   requiredBy:
   - kpr/all.hpp
-  timestamp: '2023-06-25 00:47:27+09:00'
+  timestamp: '2023-07-07 04:30:55+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/template/template.hpp

@@ -400,8 +400,8 @@ data:
   isVerificationFile: false
   path: kpr/algorithm/algorithm.hpp
   requiredBy:
-  - kpr/all/all.hpp
   - kpr/all.hpp
+  - kpr/all/all.hpp
   timestamp: '2023-06-22 12:22:29+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
