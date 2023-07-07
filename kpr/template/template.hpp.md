@@ -1186,13 +1186,14 @@ data:
     \ {\r\n        if constexpr (i < n) return std::vector(d[i], make_vec<T, n, i\
     \ + 1>(d, init));\r\n        else return init;\r\n    }\r\n} // namespace kpr\r\
     \n#line 3 \"kpr/template/range_cast.hpp\"\n\nnamespace kpr {\n    // Range\u306E\
-    \u578B\u5909\u63DB\n    [[maybe_unused]] inline constexpr struct {\n        template<class\
-    \ To, class From>\n        constexpr To operator ()(From&& container) const noexcept\
-    \ {\n            return To(std::begin(container), std::end(container));\n    \
-    \    }\n    } range_cast;\n} // namespace kpr\n#line 2 \"kpr/template/ShowType.hpp\"\
-    \n\nnamespace kpr {\n    // \u30B3\u30F3\u30D1\u30A4\u30EB\u30A8\u30E9\u30FC\u304B\
-    \u3089\u578B\u540D\u3092\u78BA\u8A8D\u3059\u308B\n    template<class>\n    struct\
-    \ ShowType;\n} // namespace kpr\n#line 14 \"kpr/template/template.hpp\"\n"
+    \u578B\u5909\u63DB\n    template<class To>\n    struct RangeCast {\n        template<class\
+    \ From>\n        constexpr To operator ()(From&& container) const noexcept {\n\
+    \            return To(std::begin(container), std::end(container));\n        }\n\
+    \    };\n\n    template<class To>\n    inline constexpr RangeCast<To> range_cast;\n\
+    } // namespace kpr\n#line 2 \"kpr/template/ShowType.hpp\"\n\nnamespace kpr {\n\
+    \    // \u30B3\u30F3\u30D1\u30A4\u30EB\u30A8\u30E9\u30FC\u304B\u3089\u578B\u540D\
+    \u3092\u78BA\u8A8D\u3059\u308B\n    template<class>\n    struct ShowType;\n} //\
+    \ namespace kpr\n#line 14 \"kpr/template/template.hpp\"\n"
   code: "#pragma once\r\n#include \"stl.hpp\"\r\n#include \"alias.hpp\"\r\n#include\
     \ \"chmin_chmax.hpp\"\r\n#include \"constant.hpp\"\r\n#include \"fix_vector_bool.hpp\"\
     \r\n#include \"len.hpp\"\r\n#include \"macro.hpp\"\r\n#include \"main.hpp\"\r\n\
@@ -1239,7 +1240,7 @@ data:
   path: kpr/template/template.hpp
   requiredBy:
   - kpr/all.hpp
-  timestamp: '2023-07-07 04:30:55+09:00'
+  timestamp: '2023-07-07 08:38:53+01:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/template/template.hpp

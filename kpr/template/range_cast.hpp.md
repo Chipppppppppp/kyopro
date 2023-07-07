@@ -15,22 +15,24 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"kpr/template/range_cast.hpp\"\n#include <iterator>\n\nnamespace\
-    \ kpr {\n    // Range\u306E\u578B\u5909\u63DB\n    [[maybe_unused]] inline constexpr\
-    \ struct {\n        template<class To, class From>\n        constexpr To operator\
-    \ ()(From&& container) const noexcept {\n            return To(std::begin(container),\
-    \ std::end(container));\n        }\n    } range_cast;\n} // namespace kpr\n"
+    \ kpr {\n    // Range\u306E\u578B\u5909\u63DB\n    template<class To>\n    struct\
+    \ RangeCast {\n        template<class From>\n        constexpr To operator ()(From&&\
+    \ container) const noexcept {\n            return To(std::begin(container), std::end(container));\n\
+    \        }\n    };\n\n    template<class To>\n    inline constexpr RangeCast<To>\
+    \ range_cast;\n} // namespace kpr\n"
   code: "#pragma once\n#include <iterator>\n\nnamespace kpr {\n    // Range\u306E\u578B\
-    \u5909\u63DB\n    [[maybe_unused]] inline constexpr struct {\n        template<class\
-    \ To, class From>\n        constexpr To operator ()(From&& container) const noexcept\
-    \ {\n            return To(std::begin(container), std::end(container));\n    \
-    \    }\n    } range_cast;\n} // namespace kpr\n"
+    \u5909\u63DB\n    template<class To>\n    struct RangeCast {\n        template<class\
+    \ From>\n        constexpr To operator ()(From&& container) const noexcept {\n\
+    \            return To(std::begin(container), std::end(container));\n        }\n\
+    \    };\n\n    template<class To>\n    inline constexpr RangeCast<To> range_cast;\n\
+    } // namespace kpr\n"
   dependsOn: []
   isVerificationFile: false
   path: kpr/template/range_cast.hpp
   requiredBy:
   - kpr/all.hpp
   - kpr/template/template.hpp
-  timestamp: '2023-04-04 01:42:52+09:00'
+  timestamp: '2023-07-07 08:38:53+01:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/template/range_cast.hpp
