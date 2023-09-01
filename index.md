@@ -143,6 +143,9 @@ data:
       path: kpr/template/ShowType.hpp
       title: kpr/template/ShowType.hpp
     - icon: ':warning:'
+      path: kpr/template/YesNo.hpp
+      title: kpr/template/YesNo.hpp
+    - icon: ':warning:'
       path: kpr/template/alias.hpp
       title: kpr/template/alias.hpp
     - icon: ':warning:'

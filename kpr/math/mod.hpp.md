@@ -60,12 +60,12 @@ data:
   path: kpr/math/mod.hpp
   requiredBy:
   - kpr/all.hpp
+  - kpr/all/all.hpp
+  - kpr/template/alias.hpp
+  - kpr/template/template.hpp
   - kpr/math/ModInt.hpp
   - kpr/math/math.hpp
   - kpr/math/BinomMod.hpp
-  - kpr/template/alias.hpp
-  - kpr/template/template.hpp
-  - kpr/all/all.hpp
   timestamp: '2023-04-04 01:42:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

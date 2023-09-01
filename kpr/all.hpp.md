@@ -122,6 +122,9 @@ data:
     path: kpr/template/ShowType.hpp
     title: kpr/template/ShowType.hpp
   - icon: ':warning:'
+    path: kpr/template/YesNo.hpp
+    title: kpr/template/YesNo.hpp
+  - icon: ':warning:'
     path: kpr/template/alias.hpp
     title: kpr/template/alias.hpp
   - icon: ':warning:'
@@ -1591,7 +1594,10 @@ data:
     } // namespace kpr\n#line 2 \"kpr/template/ShowType.hpp\"\n\nnamespace kpr {\n\
     \    // \u30B3\u30F3\u30D1\u30A4\u30EB\u30A8\u30E9\u30FC\u304B\u3089\u578B\u540D\
     \u3092\u78BA\u8A8D\u3059\u308B\n    template<class>\n    struct ShowType;\n} //\
-    \ namespace kpr\n#line 5 \"kpr/all.hpp\"\n"
+    \ namespace kpr\n#line 3 \"kpr/template/YesNo.hpp\"\n\nnamespace kpr {\n    [[maybe_unused]]\
+    \ inline constexpr struct {\n        void operator ()(bool f) const noexcept {\n\
+    \            if (f) println('Y', 'e', 's');\n            else println('N', 'o');\n\
+    \        }\n    } YesNo;\n} // namespace kpr\n#line 5 \"kpr/all.hpp\"\n"
   code: "#pragma once\r\n#include \"all/all.hpp\"\r\n#include \"data_structure/data_structure.hpp\"\
     \r\n#include \"template/template.hpp\"\r\n"
   dependsOn:
@@ -1654,10 +1660,11 @@ data:
   - kpr/template/make_vec.hpp
   - kpr/template/range_cast.hpp
   - kpr/template/ShowType.hpp
+  - kpr/template/YesNo.hpp
   isVerificationFile: false
   path: kpr/all.hpp
   requiredBy: []
-  timestamp: '2023-07-07 08:38:53+01:00'
+  timestamp: '2023-09-02 08:45:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/all.hpp

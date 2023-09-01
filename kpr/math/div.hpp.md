@@ -167,8 +167,8 @@ data:
   path: kpr/math/div.hpp
   requiredBy:
   - kpr/all.hpp
-  - kpr/math/math.hpp
   - kpr/all/all.hpp
+  - kpr/math/math.hpp
   timestamp: '2023-04-04 01:42:52+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

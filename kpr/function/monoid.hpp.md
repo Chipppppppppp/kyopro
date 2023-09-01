@@ -306,38 +306,38 @@ data:
   isVerificationFile: false
   path: kpr/function/monoid.hpp
   requiredBy:
-  - kpr/all.hpp
-  - kpr/math/is_prime.hpp
-  - kpr/math/ModInt.hpp
-  - kpr/math/factorize.hpp
-  - kpr/math/power.hpp
-  - kpr/math/math.hpp
-  - kpr/math/BinomMod.hpp
-  - kpr/math/DynamicModInt.hpp
-  - kpr/io/io.hpp
-  - kpr/io/in.hpp
-  - kpr/template/macro.hpp
-  - kpr/template/io_macro.hpp
-  - kpr/template/named_tuple_macro.hpp
-  - kpr/template/alias.hpp
-  - kpr/template/template.hpp
-  - kpr/all/all.hpp
-  - kpr/function/function.hpp
-  - kpr/meta/meta.hpp
-  - kpr/meta/constant.hpp
-  - kpr/data_structure/FenwickTree.hpp
+  - kpr/data_structure/WeightedUnionFind.hpp
   - kpr/data_structure/SegmentTree.hpp
   - kpr/data_structure/data_structure.hpp
-  - kpr/data_structure/WeightedUnionFind.hpp
+  - kpr/data_structure/FenwickTree.hpp
+  - kpr/all.hpp
+  - kpr/all/all.hpp
+  - kpr/function/function.hpp
+  - kpr/template/io_macro.hpp
+  - kpr/template/macro.hpp
+  - kpr/template/alias.hpp
+  - kpr/template/template.hpp
+  - kpr/template/named_tuple_macro.hpp
+  - kpr/meta/constant.hpp
+  - kpr/meta/meta.hpp
+  - kpr/io/io.hpp
+  - kpr/io/in.hpp
+  - kpr/math/is_prime.hpp
+  - kpr/math/factorize.hpp
+  - kpr/math/ModInt.hpp
+  - kpr/math/power.hpp
+  - kpr/math/DynamicModInt.hpp
+  - kpr/math/math.hpp
+  - kpr/math/BinomMod.hpp
   timestamp: '2023-06-22 14:29:46+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/aoj/WeightedUnionFind.test.cpp
-  - verify/yosupo/factorize.test.cpp
   - verify/yosupo/point_add_range_sum.test.cpp
-  - verify/yosupo/unionfind.test.cpp
-  - verify/yosupo/many_aplusb.test.cpp
   - verify/yosupo/point_set_range_composite.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/unionfind.test.cpp
+  - verify/yosupo/factorize.test.cpp
+  - verify/aoj/WeightedUnionFind.test.cpp
 documentation_of: kpr/function/monoid.hpp
 layout: document
 redirect_from:

@@ -36,6 +36,9 @@ data:
     path: kpr/math/math.hpp
     title: kpr/math/math.hpp
   - icon: ':warning:'
+    path: kpr/template/YesNo.hpp
+    title: kpr/template/YesNo.hpp
+  - icon: ':warning:'
     path: kpr/template/alias.hpp
     title: kpr/template/alias.hpp
   - icon: ':warning:'
@@ -107,30 +110,31 @@ data:
   path: kpr/io/io_option.hpp
   requiredBy:
   - kpr/all.hpp
-  - kpr/math/is_prime.hpp
-  - kpr/math/ModInt.hpp
-  - kpr/math/factorize.hpp
-  - kpr/math/math.hpp
-  - kpr/math/BinomMod.hpp
-  - kpr/math/DynamicModInt.hpp
-  - kpr/io/io.hpp
-  - kpr/io/out.hpp
-  - kpr/io/in.hpp
-  - kpr/template/macro.hpp
+  - kpr/all/all.hpp
   - kpr/template/io_macro.hpp
-  - kpr/template/named_tuple_macro.hpp
+  - kpr/template/macro.hpp
   - kpr/template/alias.hpp
   - kpr/template/template.hpp
-  - kpr/all/all.hpp
+  - kpr/template/YesNo.hpp
+  - kpr/template/named_tuple_macro.hpp
+  - kpr/io/io.hpp
+  - kpr/io/in.hpp
+  - kpr/io/out.hpp
+  - kpr/math/is_prime.hpp
+  - kpr/math/factorize.hpp
+  - kpr/math/ModInt.hpp
+  - kpr/math/DynamicModInt.hpp
+  - kpr/math/math.hpp
+  - kpr/math/BinomMod.hpp
   timestamp: '2023-06-23 11:13:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/aoj/WeightedUnionFind.test.cpp
-  - verify/yosupo/factorize.test.cpp
   - verify/yosupo/point_add_range_sum.test.cpp
-  - verify/yosupo/unionfind.test.cpp
-  - verify/yosupo/many_aplusb.test.cpp
   - verify/yosupo/point_set_range_composite.test.cpp
+  - verify/yosupo/many_aplusb.test.cpp
+  - verify/yosupo/unionfind.test.cpp
+  - verify/yosupo/factorize.test.cpp
+  - verify/aoj/WeightedUnionFind.test.cpp
 documentation_of: kpr/io/io_option.hpp
 layout: document
 redirect_from:

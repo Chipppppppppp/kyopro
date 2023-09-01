@@ -56,6 +56,9 @@ data:
     path: kpr/template/ShowType.hpp
     title: kpr/template/ShowType.hpp
   - icon: ':warning:'
+    path: kpr/template/YesNo.hpp
+    title: kpr/template/YesNo.hpp
+  - icon: ':warning:'
     path: kpr/template/alias.hpp
     title: kpr/template/alias.hpp
   - icon: ':warning:'
@@ -1193,12 +1196,16 @@ data:
     } // namespace kpr\n#line 2 \"kpr/template/ShowType.hpp\"\n\nnamespace kpr {\n\
     \    // \u30B3\u30F3\u30D1\u30A4\u30EB\u30A8\u30E9\u30FC\u304B\u3089\u578B\u540D\
     \u3092\u78BA\u8A8D\u3059\u308B\n    template<class>\n    struct ShowType;\n} //\
-    \ namespace kpr\n#line 14 \"kpr/template/template.hpp\"\n"
+    \ namespace kpr\n#line 3 \"kpr/template/YesNo.hpp\"\n\nnamespace kpr {\n    [[maybe_unused]]\
+    \ inline constexpr struct {\n        void operator ()(bool f) const noexcept {\n\
+    \            if (f) println('Y', 'e', 's');\n            else println('N', 'o');\n\
+    \        }\n    } YesNo;\n} // namespace kpr\n#line 15 \"kpr/template/template.hpp\"\
+    \n"
   code: "#pragma once\r\n#include \"stl.hpp\"\r\n#include \"alias.hpp\"\r\n#include\
     \ \"chmin_chmax.hpp\"\r\n#include \"constant.hpp\"\r\n#include \"fix_vector_bool.hpp\"\
     \r\n#include \"len.hpp\"\r\n#include \"macro.hpp\"\r\n#include \"main.hpp\"\r\n\
     #include \"make_array.hpp\"\r\n#include \"make_vec.hpp\"\r\n#include \"range_cast.hpp\"\
-    \r\n#include \"ShowType.hpp\"\r\n"
+    \r\n#include \"ShowType.hpp\"\r\n#include \"YesNo.hpp\"\r\n"
   dependsOn:
   - kpr/template/stl.hpp
   - kpr/template/alias.hpp
@@ -1236,11 +1243,12 @@ data:
   - kpr/template/make_vec.hpp
   - kpr/template/range_cast.hpp
   - kpr/template/ShowType.hpp
+  - kpr/template/YesNo.hpp
   isVerificationFile: false
   path: kpr/template/template.hpp
   requiredBy:
   - kpr/all.hpp
-  timestamp: '2023-07-07 08:38:53+01:00'
+  timestamp: '2023-09-02 08:45:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: kpr/template/template.hpp
