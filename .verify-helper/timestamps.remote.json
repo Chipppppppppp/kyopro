@@ -1,8 +1,17 @@
 {
+<<<<<<< HEAD
 "verify/aoj/WeightedUnionFind.test.cpp": "2023-06-09 13:17:06 +0900",
 "verify/yosupo/factorize.test.cpp": "2023-06-09 13:17:06 +0900",
 "verify/yosupo/many_aplusb.test.cpp": "2023-06-09 13:17:06 +0900",
 "verify/yosupo/point_add_range_sum.test.cpp": "2023-06-09 13:17:06 +0900",
 "verify/yosupo/point_set_range_composite.test.cpp": "2023-06-09 13:17:06 +0900",
 "verify/yosupo/unionfind.test.cpp": "2023-06-09 13:17:06 +0900"
+=======
+"verify/aoj/WeightedUnionFind.test.cpp": "2023-06-23 11:13:58 +0900",
+"verify/yosupo/factorize.test.cpp": "2023-06-23 11:13:58 +0900",
+"verify/yosupo/many_aplusb.test.cpp": "2023-06-23 11:13:58 +0900",
+"verify/yosupo/point_add_range_sum.test.cpp": "2023-06-23 11:13:58 +0900",
+"verify/yosupo/point_set_range_composite.test.cpp": "2023-06-23 11:13:58 +0900",
+"verify/yosupo/unionfind.test.cpp": "2023-06-23 11:13:58 +0900"
+>>>>>>> 0cebbe0d28847614f079c19ccd80d36c817e7fa2
 }
