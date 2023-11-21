@@ -68,71 +68,51 @@ namespace kpr {
     using ll4 = agg<ll, 4>;
     using ll5 = agg<ll, 5>;
 
+    #define DEFINE_CONTAINER_ALIAS(short_name, name) \
+        using short_name ## b = name<bool>; \
+        using short_name ## i = name<int>; \
+        using short_name ## l = name<ll>; \
+        using short_name ## f = name<float>; \
+        using short_name ## lf = name<lf>; \
+        using short_name ## llf = name<llf>; \
+        using short_name ## m = name<mint>; \
+        using short_name ## dm = name<dmint>; \
+        using short_name ## c = name<char>; \
+        using short_name ## s = name<str>; \
+        using short_name ## ll2 = name<ll2>; \
+        using short_name ## ll3 = name<ll3>; \
+        using short_name ## ll4 = name<ll4>; \
+        using short_name ## ll5 = name<ll5>;
 
-    #define DEFINE_TEMPLATE_ALIAS(short_name, type, ...) \
-        template<__VA_ARGS__> \
-        using short_name = type; \
-        template<__VA_ARGS__> \
-        using V ## short_name = Vec<type>; \
-        template<__VA_ARGS__> \
-        using VV ## short_name = VVec<type>;
-
-    #define DEFINE_ALIAS(short_name, name, short_value_type, value_type) \
-        using short_name ## short_value_type = name<value_type>; \
-        using V ## short_name ## short_value_type = V ## name<value_type>; \
-        using VV ## short_name ## short_value_type = VV ## name<value_type>; \
-        using short_name ## V ## short_value_type = name<Vec<value_type>>; \
-        using V ## short_name ## V ## short_value_type = V ## name<Vec<value_type>>;
-
-    #define DEFINE_ALIAS_FOR_VEC(short_name, name, short_value_type, value_type) \
-        using V ## short_value_type = Vec<value_type>; \
-        using VV ## short_value_type = VVec<value_type>; \
-        using VVV ## short_value_type = VVVec<value_type>; \
-        using VVVV ## short_value_type = VVVVec<value_type>; \
-        using VVVVV ## short_value_type = VVVVVec<value_type>;
-
-    #define DEFINE_MAP_ALIAS_IMPL(short_name, name, short_value_type1, value_type1, short_value_type2, value_type2) \
-        using short_name ## short_value_type1 ## short_value_type2 = name<value_type1, value_type2>; \
-        using V ## short_name ## short_value_type1 ## short_value_type2 = V ## name<value_type1, value_type2>; \
-        using VV ## short_name ## short_value_type1 ## short_value_type2 = VV ## name<value_type1, value_type2>; \
-        using short_name ## V ## short_value_type1 ## short_value_type2 = name<Vec<value_type1>, value_type2>; \
-        using short_name ## short_value_type1 ## V ## short_value_type2 = name<value_type1, Vec<value_type2>>; \
-        using short_name ## V ## short_value_type1 ## V ## short_value_type2 = name<Vec<value_type1>, Vec<value_type2>>; \
-        using V ## short_name ## V ## short_value_type1 ## short_value_type2 = V ## name<Vec<value_type1>, value_type2>; \
-        using V ## short_name ## short_value_type1 ## V ## short_value_type2 = V ## name<value_type1, Vec<value_type2>>; \
-        using V ## short_name ## V ## short_value_type1 ## V ## short_value_type2 = V ## name<Vec<value_type1>, Vec<value_type2>>;
-
-    #define DEFINE_MAP_ALIAS(...) \
-        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, b, bool); \
-        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, i, int); \
-        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, l, ll); \
-        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, f, float); \
-        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, lf, lf); \
-        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, llf, llf); \
-        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, m, mint); \
-        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, dm, dmint); \
-        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, c, char); \
-        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, s, str); \
-        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll2, ll2); \
-        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll3, ll3); \
-        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll4, ll4); \
-        DEFINE_MAP_ALIAS_IMPL(__VA_ARGS__, ll5, ll5);
-
-    #define DEFINE_CONTAINER_ALIAS(define_alias, short_name, name) \
-        define_alias(short_name, name, b, bool); \
-        define_alias(short_name, name, i, int); \
-        define_alias(short_name, name, l, ll); \
-        define_alias(short_name, name, f, float); \
-        define_alias(short_name, name, lf, lf); \
-        define_alias(short_name, name, llf, llf); \
-        define_alias(short_name, name, m, mint); \
-        define_alias(short_name, name, dm, dmint); \
-        define_alias(short_name, name, c, char); \
-        define_alias(short_name, name, s, str); \
-        define_alias(short_name, name, ll2, ll2); \
-        define_alias(short_name, name, ll3, ll3); \
-        define_alias(short_name, name, ll4, ll4); \
-        define_alias(short_name, name, ll5, ll5);
+    #define DEFINE_MAP_ALIAS(short_name, name) \
+        using short_name ## lb = name<ll, bool>; \
+        using short_name ## li = name<ll, int>; \
+        using short_name ## ll = name<ll, ll>; \
+        using short_name ## lf = name<ll, float>; \
+        using short_name ## llf = name<ll, lf>; \
+        using short_name ## lllf = name<ll, llf>; \
+        using short_name ## lm = name<ll, mint>; \
+        using short_name ## ldm = name<ll, dmint>; \
+        using short_name ## lc = name<ll, char>; \
+        using short_name ## ls = name<ll, str>; \
+        using short_name ## lll2 = name<ll, ll2>; \
+        using short_name ## lll3 = name<ll, ll3>; \
+        using short_name ## lll4 = name<ll, ll4>; \
+        using short_name ## lll5 = name<ll, ll5>; \
+        using short_name ## sb = name<str, bool>; \
+        using short_name ## si = name<str, int>; \
+        using short_name ## sl = name<str, ll>; \
+        using short_name ## sf = name<str, float>; \
+        using short_name ## slf = name<str, lf>; \
+        using short_name ## sllf = name<str, llf>; \
+        using short_name ## sm = name<str, mint>; \
+        using short_name ## sdm = name<str, dmint>; \
+        using short_name ## sc = name<str, char>; \
+        using short_name ## ss = name<str, str>; \
+        using short_name ## sll2 = name<str, ll2>; \
+        using short_name ## sll3 = name<str, ll3>; \
+        using short_name ## sll4 = name<str, ll4>; \
+        using short_name ## sll5 = name<str, ll5>;
 
     template<class T>
     using Vec = std::vector<T>;
@@ -144,48 +124,68 @@ namespace kpr {
     using VVVVec = Vec<VVVec<T>>;
     template<class T>
     using VVVVVec = Vec<VVVVec<T>>;
-    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS_FOR_VEC, V, Vec)
+    DEFINE_CONTAINER_ALIAS(V, Vec)
+    DEFINE_CONTAINER_ALIAS(VV, VVec)
+    DEFINE_CONTAINER_ALIAS(VVV, VVVec)
+    DEFINE_CONTAINER_ALIAS(VVVV, VVVVec)
+    DEFINE_CONTAINER_ALIAS(VVVVV, VVVVVec)
 
-    DEFINE_TEMPLATE_ALIAS(Deque, std::deque<T>, class T)
-    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, DQ, Deque)
+    template<class T>
+    using Deque = std::deque<T>;
+    DEFINE_CONTAINER_ALIAS(DQ, Deque)
 
-    DEFINE_TEMPLATE_ALIAS(List, std::list<T>, class T)
-    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, L, List)
-    DEFINE_TEMPLATE_ALIAS(ForwardList, std::forward_list<T>, class T)
-    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, FL, ForwardList)
+    template<class T>
+    using List = std::list<T>;
+    DEFINE_CONTAINER_ALIAS(L, List)
+    template<class T>
+    using ForwardList = std::forward_list<T>;
+    DEFINE_CONTAINER_ALIAS(FL, ForwardList)
 
-    DEFINE_TEMPLATE_ALIAS(Set, std::decay_t<decltype(std::declval<std::set<Key, Compare>>())>, class Key, class Compare = Less)
-    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, S, Set)
-    DEFINE_TEMPLATE_ALIAS(Map, std::decay_t<decltype(std::declval<std::map<Key, T, Compare>>())>, class Key, class T, class Compare = Less)
-    DEFINE_CONTAINER_ALIAS(DEFINE_MAP_ALIAS, M, Map)
+    template<class Key, class Compare = Less>
+    using Set = std::set<Key, Compare>;
+    DEFINE_CONTAINER_ALIAS(S, Set)
+    template<class Key, class T, class Compare = Less>
+    using Map = std::map<Key, T, Compare>;
+    DEFINE_MAP_ALIAS(M, Map)
 
-    DEFINE_TEMPLATE_ALIAS(HashSet, std::decay_t<decltype(std::declval<std::unordered_set<Key, H>>())>, class Key, class H = Hash<Key>)
-    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HS, HashSet)
-    DEFINE_TEMPLATE_ALIAS(HashMap, std::decay_t<decltype(std::declval<std::unordered_map<Key, T, H>>())>, class Key, class T, class H = Hash<Key>)
-    DEFINE_CONTAINER_ALIAS(DEFINE_MAP_ALIAS, HM, HashMap)
+    template<class Key, class H = Hash<Key>>
+    using HashSet = std::unordered_set<Key, H>;
+    DEFINE_CONTAINER_ALIAS(HS, HashSet)
+    template<class Key, class T, class H = Hash<Key>>
+    using HashMap = std::unordered_map<Key, T, H>;
+    DEFINE_MAP_ALIAS(HM, HashMap)
 
-    DEFINE_TEMPLATE_ALIAS(MultiSet, std::decay_t<decltype(std::declval<std::multiset<Key, Compare>>())>, class Key, class Compare = Less)
-    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, MS, MultiSet)
-    DEFINE_TEMPLATE_ALIAS(MultiMap, std::decay_t<decltype(std::declval<std::multimap<Key, T, Compare>>())>, class Key, class T, class Compare = Less)
-    DEFINE_CONTAINER_ALIAS(DEFINE_MAP_ALIAS, MM, MultiMap)
+    template<class Key, class Compare = Less>
+    using MultiSet = std::multiset<Key, Compare>;
+    DEFINE_CONTAINER_ALIAS(MS, MultiSet)
+    template<class Key, class T, class Compare = Less>
+    using MultiMap = std::multimap<Key, T, Compare>;
+    DEFINE_MAP_ALIAS(MM, MultiMap)
 
-    DEFINE_TEMPLATE_ALIAS(HashMultiSet, std::decay_t<decltype(std::declval<std::unordered_multiset<Key, H>>())>, class Key, class H = Hash<Key>)
-    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HMS, HashMultiSet)
-    DEFINE_TEMPLATE_ALIAS(HashMultiMap, std::decay_t<decltype(std::declval<std::unordered_multimap<Key, T, H>>())>, class Key, class T, class H = Hash<Key>)
-    DEFINE_CONTAINER_ALIAS(DEFINE_MAP_ALIAS, HMM, HashMultiMap)
+    template<class Key, class H = Hash<Key>>
+    using HashMultiSet = std::unordered_multiset<Key, H>;
+    DEFINE_CONTAINER_ALIAS(HMS, HashMultiSet)
+    template<class Key, class T, class H = Hash<Key>>
+    using HashMultiMap = std::unordered_multimap<Key, T, H>;
+    DEFINE_MAP_ALIAS(HMM, HashMultiMap)
 
-    DEFINE_TEMPLATE_ALIAS(Queue, std::decay_t<decltype(std::declval<std::queue<T, Container>>())>, class T, class Container = std::deque<T>)
-    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Que, Queue)
+    template<class T, class Container = std::deque<T>>
+    using Queue = std::queue<T, Container>;
+    DEFINE_CONTAINER_ALIAS(Que, Queue)
 
-    DEFINE_TEMPLATE_ALIAS(Stack, std::decay_t<decltype(std::declval<std::stack<T, Container>>())>, class T, class Container = std::deque<T>)
-    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, Stk, Stack)
+    template<class T, class Container = std::deque<T>>
+    using Stack = std::stack<T, Container>;
+    DEFINE_CONTAINER_ALIAS(Stk, Stack)
 
-    DEFINE_TEMPLATE_ALIAS(PriQ, std::decay_t<decltype(std::declval<std::priority_queue<T, Container, Compare>>())>, class T, class Compare = Less, class Container = Vec<T>)
-    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, PQ, PriQ)
-    DEFINE_TEMPLATE_ALIAS(HeapQ, std::decay_t<decltype(std::declval<std::priority_queue<T, Container, Compare>>())>, class T, class Compare = Greater, class Container = Vec<T>)
-    DEFINE_CONTAINER_ALIAS(DEFINE_ALIAS, HQ, HeapQ)
+    template<class T, class Compare = Less, class Container = Vec<T>>
+    using PriQue = std::priority_queue<T, Container, Compare>;
+    DEFINE_CONTAINER_ALIAS(PQ, PriQue)
+    template<class T, class Compare = Greater, class Container = Vec<T>>
+    using HeapQue = std::priority_queue<T, Container, Compare>;
+    DEFINE_CONTAINER_ALIAS(HQ, HeapQue)
 
-    DEFINE_TEMPLATE_ALIAS(BitSet, std::bitset<size>, std::size_t size)
+    template<std::size_t size>
+    using BitSet = std::bitset<size>;
 
     #undef DEFINE_TEMPLATE_ALIAS
     #undef DEFINE_ALIAS
