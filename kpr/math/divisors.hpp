@@ -14,7 +14,7 @@ namespace kpr {
                 upper.emplace_back(n / i);
             }
             if (i * i == n) lower.emplace_back(i);
-            lower.insert(end(lower), upper.rbegin(), upper.rend());
+            lower.insert(lower.end(), upper.rbegin(), upper.rend());
             return lower;
         }
     } divisors;
