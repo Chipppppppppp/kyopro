@@ -17,32 +17,37 @@
 #include "../meta/trait.hpp"
 #include "../meta/tuple_like.hpp"
 
-namespace kpr {
+namespace kpr
+{
     // バッファを用いてファイルに書き込むクラス
-    template<std::size_t buf_size = KYOPRO_BUFFER_SIZE>
-    struct Writer {
+    template <std::size_t buf_size = KYOPRO_BUFFER_SIZE>
+    struct Writer
+    {
     private:
         int fd, idx;
         std::array<char, buf_size> buffer;
 
     public:
         // バッファサイズを取得
-        static constexpr KYOPRO_BASE_INT get_buf_size() noexcept {
+        static constexpr KYOPRO_BASE_INT get_buf_size() noexcept
+        {
             return buf_size;
         }
 
         Writer() noexcept = default;
-        Writer(int fd) noexcept: fd(fd), idx(0), buffer() {}
-        Writer(FILE* fp) noexcept: fd(fileno(fp)), idx(0), buffer() {}
+        Writer(int fd) noexcept : fd(fd), idx(0), buffer() {}
+        Writer(FILE *fp) noexcept : fd(fileno(fp)), idx(0), buffer() {}
 
-        ~Writer() {
-            [[maybe_unused]]ssize_t res = write(fd, buffer.begin(), idx);
+        ~Writer()
+        {
+            [[maybe_unused]] ssize_t res = write(fd, buffer.begin(), idx);
         }
 
         // 出力イテレータ
-        struct iterator {
+        struct iterator
+        {
         private:
-            Writer& writer;
+            Writer &writer;
 
         public:
             using difference_type = void;
@@ -52,35 +57,41 @@ namespace kpr {
             using iterator_category = std::output_iterator_tag;
 
             iterator() noexcept = default;
-            iterator(Writer& writer) noexcept: writer(writer) {}
+            iterator(Writer &writer) noexcept : writer(writer) {}
 
-            iterator& operator ++() {
+            iterator &operator++()
+            {
                 ++writer.idx;
-                if (writer.idx == buf_size) {
-                [[maybe_unused]]ssize_t res = write(writer.fd, writer.buffer.begin(), buf_size);
-                writer.idx = 0;
+                if (writer.idx == buf_size)
+                {
+                    [[maybe_unused]] ssize_t res = write(writer.fd, writer.buffer.begin(), buf_size);
+                    writer.idx = 0;
                 }
                 return *this;
             }
 
-            iterator operator ++(int) {
+            iterator operator++(int)
+            {
                 iterator before = *this;
-                operator ++();
+                operator++();
                 return before;
             }
 
-            char& operator *() const {
+            char &operator*() const
+            {
                 return writer.buffer[writer.idx];
             }
 
             // バッファを全て出力する
-            void flush() const {
+            void flush() const
+            {
                 [[maybe_unused]] ssize_t res = write(writer.fd, writer.buffer.begin(), writer.idx);
             }
         };
 
         // ファイルの最初を示すイテレータを取得
-        iterator begin() noexcept {
+        iterator begin() noexcept
+        {
             return iterator(*this);
         }
     };
@@ -89,19 +100,21 @@ namespace kpr {
     Writer output{1}, error{2};
 
     // 値の出力の関数クラス
-    template<class, class = void>
+    template <class, class = void>
     struct PrintFunction;
 
     // 出力イテレータを用いて値を出力するクラス
-    template<class Iterator, bool _space = true, bool _line = true, bool _debug = false, bool _comment = false, bool _flush = false, std::size_t decimal_precision = KYOPRO_DECIMAL_PRECISION>
-    struct Printer {
+    template <class Iterator, bool _space = true, bool _line = true, bool _debug = false, bool _comment = false, bool _flush = false, std::size_t decimal_precision = KYOPRO_DECIMAL_PRECISION>
+    struct Printer
+    {
         using iterator_type = Iterator;
 
         // 指定されたオプション
         static constexpr bool space = _space, line = _line, debug = _debug, comment = _comment, flush = _flush;
 
         // 指定された小数誤差を取得
-        static constexpr KYOPRO_BASE_INT get_decimal_precision() noexcept {
+        static constexpr KYOPRO_BASE_INT get_decimal_precision() noexcept
+        {
             return decimal_precision;
         }
 
@@ -109,190 +122,256 @@ namespace kpr {
         Iterator itr;
 
         Printer() noexcept = default;
-        Printer(Iterator itr) noexcept: itr(itr) {}
+        Printer(Iterator itr) noexcept : itr(itr) {}
 
         // 一文字出力する
-        void print_char(char c) {
+        void print_char(char c)
+        {
             *itr = c;
             ++itr;
         }
 
         // 整数、小数を出力
-        template<class T>
-        void print_arithmetic(T a) {
-            if constexpr (is_floating_point_v<T>) {
-                if (a == std::numeric_limits<T>::infinity()) {
+        template <class T>
+        void print_arithmetic(T a)
+        {
+            if constexpr (is_floating_point_v<T>)
+            {
+                if (a == std::numeric_limits<T>::infinity())
+                {
                     print_char('i');
                     print_char('n');
                     print_char('f');
                     return;
                 }
-                if (a == -std::numeric_limits<T>::infinity()) {
+                if (a == -std::numeric_limits<T>::infinity())
+                {
                     print_char('-');
                     print_char('i');
                     print_char('n');
                     print_char('f');
                     return;
                 }
-                if (std::isnan(a)) {
+                if (std::isnan(a))
+                {
                     print_char('n');
                     print_char('a');
                     print_char('n');
                     return;
                 }
             }
-            if constexpr (std::is_signed_v<T>) if (a < 0) {
-                print_char('-');
-                a = -a;
-            }
+            if constexpr (std::is_signed_v<T>)
+                if (a < 0)
+                {
+                    print_char('-');
+                    a = -a;
+                }
             std::uint_fast64_t p = a;
             std::string s;
-            do {
+            do
+            {
                 s += '0' + p % 10;
                 p /= 10;
             } while (p > 0);
-            for (auto i = s.rbegin(); i != s.rend(); ++i) print_char(*i);
-            if constexpr (is_integer_v<T>) return;
+            for (auto i = s.rbegin(); i != s.rend(); ++i)
+                print_char(*i);
+            if constexpr (is_integer_v<T>)
+                return;
             print_char('.');
             a -= p;
-            for (int i = 0; i < static_cast<int>(decimal_precision); ++i) {
+            for (int i = 0; i < static_cast<int>(decimal_precision); ++i)
+            {
                 a *= 10;
                 print_char('0' + static_cast<std::uint_fast64_t>(a) % 10);
             }
         }
 
         // 区切り文字を出力する
-        void print_sep() {
-            if constexpr (debug) print_char(',');
-            if constexpr (space) print_char(' ');
+        void print_sep()
+        {
+            if constexpr (debug)
+                print_char(',');
+            if constexpr (space)
+                print_char(' ');
         }
 
         // 区切り文字を出力する(型によって変更)
-        template<class type>
-        void print_sep_by_type() {
-            if constexpr (is_tuple_like_v<type> || is_range_v<type>) {
+        template <class type>
+        void print_sep_by_type()
+        {
+            if constexpr (is_tuple_like_v<type> || is_range_v<type>)
+            {
                 print_end();
-                if constexpr (comment) print_comment();
-            } else print_sep();
+                if constexpr (comment)
+                    print_comment();
+            }
+            else
+                print_sep();
         }
 
         // 最後の文字を出力する
-        void print_end() {
-            if constexpr (debug) print_char(',');
-            if constexpr (line) print_char('\n');
+        void print_end()
+        {
+            if constexpr (debug)
+                print_char(',');
+            if constexpr (line)
+                print_char('\n');
         }
 
         // コメント記号を出力する
-        void print_comment() {
-            if constexpr (comment) {
+        void print_comment()
+        {
+            if constexpr (comment)
+            {
                 print_char('#');
                 print_char(' ');
             }
         }
 
         // 複数の値を出力
-        template<bool first = true>
-        void operator ()() {
-            if constexpr (first) print_comment();
+        template <bool first = true>
+        void operator()()
+        {
+            if constexpr (first)
+                print_comment();
             print_end();
-            if constexpr (flush) itr.flush();
+            if constexpr (flush)
+                itr.flush();
         }
-        template<bool first = true, class Head, class... Args>
-        void operator ()(Head&& head, Args&&... args) {
-            if constexpr (first) print_comment();
-            else print_sep();
+        template <bool first = true, class Head, class... Args>
+        void operator()(Head &&head, Args &&...args)
+        {
+            if constexpr (first)
+                print_comment();
+            else
+                print_sep();
             PrintFunction<std::decay_t<Head>>::print(*this, std::forward<Head>(head));
-            operator ()<false>(std::forward<Args>(args)...);
+            operator()<false>(std::forward<Args>(args)...);
         }
     };
 
-    template<>
-    struct PrintFunction<char> {
-        template<class Printer>
-        static void print(Printer& printer, char a) {
-            if constexpr (Printer::debug) printer.print_char('\'');
+    template <>
+    struct PrintFunction<char>
+    {
+        template <class Printer>
+        static void print(Printer &printer, char a)
+        {
+            if constexpr (Printer::debug)
+                printer.print_char('\'');
             printer.print_char(a);
-            if constexpr (Printer::debug) printer.print_char('\'');
+            if constexpr (Printer::debug)
+                printer.print_char('\'');
         }
     };
 
-    template<>
-    struct PrintFunction<bool> {
-        template<class Printer>
-        static void print(Printer& printer, bool a) {
+    template <>
+    struct PrintFunction<bool>
+    {
+        template <class Printer>
+        static void print(Printer &printer, bool a)
+        {
             printer.print_char(static_cast<char>('0' + a));
         }
     };
 
-    template<class T>
-    struct PrintFunction<T, std::enable_if_t<std::is_convertible_v<T, std::string_view>>> {
-        template<class Printer>
-        static void print(Printer& printer, std::string_view a) {
-            if constexpr (Printer::debug) printer.print_char('"');
-            for (char i: a) printer.print_char(i);
-            if constexpr (Printer::debug) printer.print_char('"');
+    template <class T>
+    struct PrintFunction<T, std::enable_if_t<std::is_convertible_v<T, std::string_view>>>
+    {
+        template <class Printer>
+        static void print(Printer &printer, std::string_view a)
+        {
+            if constexpr (Printer::debug)
+                printer.print_char('"');
+            for (char i : a)
+                printer.print_char(i);
+            if constexpr (Printer::debug)
+                printer.print_char('"');
         }
     };
 
-    template<std::size_t len>
-    struct PrintFunction<std::bitset<len>> {
-        template<class Printer>
-        static void print(Printer& printer, const std::bitset<len>& a) {
-            for (int i = len - 1; i >= 0; --i) PrintFunction<bool>::print(printer, a[i]);
+    template <std::size_t len>
+    struct PrintFunction<std::bitset<len>>
+    {
+        template <class Printer>
+        static void print(Printer &printer, const std::bitset<len> &a)
+        {
+            for (int i = len - 1; i >= 0; --i)
+                PrintFunction<bool>::print(printer, a[i]);
         }
     };
 
-    template<class T>
-    struct PrintFunction<T, std::enable_if_t<std::is_arithmetic_v<T>>> {
-        template<class Printer>
-        static void print(Printer& printer, T a) {
+    template <class T>
+    struct PrintFunction<T, std::enable_if_t<std::is_arithmetic_v<T>>>
+    {
+        template <class Printer>
+        static void print(Printer &printer, T a)
+        {
             printer.print_arithmetic(a);
         }
     };
 
-    template<class T>
-    struct PrintFunction<T, std::enable_if_t<is_tuple_like_v<T> && !is_range_v<T>>> {
-        template<std::size_t i = 0, class Printer>
-        static void print(Printer& printer, const T& a) {
+    template <class T>
+    struct PrintFunction<T, std::enable_if_t<is_tuple_like_v<T> && !is_range_v<T>>>
+    {
+        template <std::size_t i = 0, class Printer>
+        static void print(Printer &printer, const T &a)
+        {
             using element_type = std::decay_t<tuple_like_element_t<i, T>>;
-            if constexpr (Printer::debug && i == 0) printer.print_char('{');
-            if constexpr (tuple_like_size_v<T> != 0) PrintFunction<element_type>::print(printer, get<i>(a));
-            if constexpr (i + 1 < tuple_like_size_v<T>) {
+            if constexpr (Printer::debug && i == 0)
+                printer.print_char('{');
+            if constexpr (tuple_like_size_v<T> != 0)
+                PrintFunction<element_type>::print(printer, get<i>(a));
+            if constexpr (i + 1 < tuple_like_size_v<T>)
+            {
                 printer.template print_sep_by_type<element_type>();
                 print<i + 1>(printer, a);
-            } else if constexpr (Printer::debug) printer.print_char('}');
+            }
+            else if constexpr (Printer::debug)
+                printer.print_char('}');
         }
     };
 
-    template<class T>
-    struct PrintFunction<T, std::enable_if_t<is_range_v<T> && !std::is_convertible_v<T, std::string_view>>> {
-        template<class Printer>
-        static void print(Printer& printer, const T& a) {
+    template <class T>
+    struct PrintFunction<T, std::enable_if_t<is_range_v<T> && !std::is_convertible_v<T, std::string_view>>>
+    {
+        template <class Printer>
+        static void print(Printer &printer, const T &a)
+        {
             using value_type = range_value_t<T>;
-            if constexpr (Printer::debug) printer.print_char('{');
-            if (!std::empty(a)) {
-                for (auto i = std::begin(a); ; ) {
+            if constexpr (Printer::debug)
+                printer.print_char('{');
+            if (!std::empty(a))
+            {
+                for (auto i = std::begin(a);;)
+                {
                     PrintFunction<value_type>::print(printer, *i);
-                    if (++i != std::end(a)) printer.template print_sep_by_type<value_type>();
-                    else break;
+                    if (++i != std::end(a))
+                        printer.template print_sep_by_type<value_type>();
+                    else
+                        break;
                 }
             }
-            if constexpr (Printer::debug) printer.print_char('}');
+            if constexpr (Printer::debug)
+                printer.print_char('}');
         }
     };
 
-    template<class Tuple, std::size_t idx>
-    struct PrintFunction<Indexed<Tuple, idx>> {
-        template<class Printer>
-        struct PrinterWrapper: Printer {
-            template<class T>
-            void print_arithmetic(T a) {
+    template <class Tuple, std::size_t idx>
+    struct PrintFunction<Indexed<Tuple, idx>>
+    {
+        template <class Printer>
+        struct PrinterWrapper : Printer
+        {
+            template <class T>
+            void print_arithmetic(T a)
+            {
                 Printer::print_arithmetic(a + 1);
             }
         };
-        template<class Printer>
-        static void print(Printer& printer, const Indexed<Tuple, idx>& a) {
-            PrinterWrapper<Printer>& printer_wrapper = static_cast<PrinterWrapper<Printer>&>(printer);
+        template <class Printer>
+        static void print(Printer &printer, const Indexed<Tuple, idx> &a)
+        {
+            PrinterWrapper<Printer> &printer_wrapper = static_cast<PrinterWrapper<Printer> &>(printer);
             PrintFunction<Tuple>::print(printer_wrapper, a.args_tuple);
         }
     };

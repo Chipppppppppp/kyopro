@@ -1,7 +1,8 @@
 #pragma once
 
-namespace kpr {
+namespace kpr
+{
     // コンパイルエラーから型名を確認する
-    template<class>
+    template <class>
     struct ShowType;
 } // namespace kpr
