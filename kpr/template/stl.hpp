@@ -3,7 +3,6 @@
 #include <cctype>
 #include <cerrno>
 #include <cfloat>
-#include <ciso646>
 #include <climits>
 #include <clocale>
 #include <cmath>
@@ -16,12 +15,9 @@
 #include <cstring>
 #include <ctime>
 
-#include <ccomplex>
 #include <cfenv>
 #include <cinttypes>
-#include <cstdbool>
 #include <cstdint>
-#include <ctgmath>
 #include <cwchar>
 #include <cwctype>
 
@@ -57,6 +53,7 @@
 #include <utility>
 #include <valarray>
 #include <vector>
+#include <version>
 
 #include <array>
 #include <atomic>

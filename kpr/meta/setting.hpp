@@ -3,12 +3,12 @@
 
 #ifndef KYOPRO_BASE_INT
 // 基本符号付き整数型
-#define KYOPRO_BASE_INT std::int64_t
+#define KYOPRO_BASE_INT long long
 #endif
 
 #ifndef KYOPRO_BASE_UINT
 // 基本符号なし整数型
-#define KYOPRO_BASE_UINT std::uint64_t
+#define KYOPRO_BASE_UINT unsigned long long
 #endif
 
 #ifndef KYOPRO_BASE_FLOAT
