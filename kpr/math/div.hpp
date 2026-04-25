@@ -3,7 +3,7 @@
 
 namespace kpr
 {
-    // floor(a ÷ b)を返す
+    // floor(a ÷ b) を返す
     [[maybe_unused]] inline constexpr struct
     {
         template <class T, class U>
@@ -17,7 +17,7 @@ namespace kpr
         }
     } floor_div;
 
-    // ceil(a ÷ b)を返す
+    // ceil(a ÷ b) を返す
     [[maybe_unused]] inline constexpr struct
     {
         template <class T, class U>

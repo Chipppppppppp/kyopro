@@ -9,7 +9,7 @@
 
 namespace kpr
 {
-    // ハッシュ(tuple_like, range対応)
+    // ハッシュ (tuple_like, range 対応)
     template <class, class = void>
     struct Hash;
 

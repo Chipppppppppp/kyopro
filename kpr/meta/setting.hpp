@@ -32,12 +32,12 @@
 #endif
 
 #ifndef KYOPRO_DEFAULT_MOD
-// 問題で設定されたmod
+// 問題で設定された mod
 #define KYOPRO_DEFAULT_MOD (static_cast<KYOPRO_BASE_UINT>(998244353))
 #endif
 
 #ifndef KYOPRO_DECIMAL_PRECISION
-// 小数精度(桁)
+// 小数精度 (桁)
 #define KYOPRO_DECIMAL_PRECISION (static_cast<KYOPRO_BASE_UINT>(12))
 #endif
 
@@ -52,6 +52,6 @@
 #endif
 
 #ifndef KYOPRO_BINOM_MOD_MAX
-// デフォルトのBinomModの計算上限
+// デフォルトの BinomMod の計算上限
 #define KYOPRO_BINOM_MOD_MAX (static_cast<KYOPRO_BASE_UINT>(1000000))
 #endif

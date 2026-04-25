@@ -5,10 +5,10 @@
 
 namespace kpr
 {
-    // 問題で設定されたmod
+    // 問題で設定された mod
     template <class T>
     inline constexpr T MOD = KYOPRO_DEFAULT_MOD;
-    // 問題で設定されたmod
+    // 問題で設定された mod
     inline constexpr KYOPRO_BASE_INT mod = MOD<KYOPRO_BASE_INT>;
 
     // 無限大を表す整数

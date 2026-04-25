@@ -2,7 +2,7 @@
 
 namespace kpr
 {
-    // operator =で比較
+    // operator = で比較
     struct Equal
     {
         template <class T>
@@ -12,7 +12,7 @@ namespace kpr
         }
     };
 
-    // operator !=で比較
+    // operator != で比較
     struct NotEqual
     {
         template <class T>
@@ -22,7 +22,7 @@ namespace kpr
         }
     };
 
-    // operator <の関数クラス
+    // operator < の関数クラス
     struct Less
     {
         template <class T>
@@ -32,7 +32,7 @@ namespace kpr
         }
     };
 
-    // operator <=の関数クラス
+    // operator <= の関数クラス
     struct LessEqual
     {
         template <class T>
@@ -42,7 +42,7 @@ namespace kpr
         }
     };
 
-    // operator >の関数クラス
+    // operator > の関数クラス
     struct Greater
     {
         template <class T>
@@ -52,7 +52,7 @@ namespace kpr
         }
     };
 
-    // operator >=の関数クラス
+    // operator >= の関数クラス
     struct GreaterEqual
     {
         template <class T>

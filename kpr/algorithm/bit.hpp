@@ -6,7 +6,7 @@
 
 namespace kpr
 {
-    // 立っているbitの個数を返す
+    // 立っている bit の個数を返す
     [[maybe_unused]] inline constexpr struct
     {
         template <class T>
@@ -24,7 +24,7 @@ namespace kpr
         }
     } pop_count;
 
-    // 最上位bitより左の連続した0ビットの数を返す
+    // 最上位 bit より左の連続した 0 ビットの数を返す
     [[maybe_unused]] inline constexpr struct
     {
         template <class T>
@@ -44,7 +44,7 @@ namespace kpr
         }
     } lzero_count;
 
-    // 1の位から連続した0ビットの数を返す
+    // 1 の位から連続した 0 ビットの数を返す
     [[maybe_unused]] inline constexpr struct
     {
         template <class T>

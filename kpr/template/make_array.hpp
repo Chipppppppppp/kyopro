@@ -4,14 +4,14 @@
 
 namespace kpr
 {
-    // 0次元arrayを生成する
+    // 0 次元の std::array を生成する
     template <class T>
     constexpr auto make_array(const T &init = {}) noexcept
     {
         return init;
     }
 
-    // 多次元arrayを生成する
+    // 多次元の std::array を生成する
     template <class T, std::size_t l, std::size_t... d>
     constexpr auto make_array(const T &init = {}) noexcept
     {

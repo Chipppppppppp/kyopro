@@ -376,8 +376,8 @@ namespace kpr
         }
     };
 
-    // 標準出力、標準エラー出力に値を出力する(改行、区切り文字なし)
+    // 標準出力、標準エラー出力に値を出力する (改行、区切り文字なし)
     Printer<Writer<>::iterator, false, false> print{output.begin()}, eprint{error.begin()};
-    // 標準出力、標準エラー出力に値を出力する(改行、区切り文字あり)
+    // 標準出力、標準エラー出力に値を出力する (改行、区切り文字あり)
     Printer<Writer<>::iterator> println{output.begin()}, eprintln{error.begin()};
 } // namespace kpr

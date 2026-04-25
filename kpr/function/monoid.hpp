@@ -6,7 +6,7 @@
 
 namespace kpr
 {
-    // 足し算のmonoid
+    // 足し算の monoid
     template <class T>
     struct Add
     {
@@ -28,7 +28,7 @@ namespace kpr
         }
     };
 
-    // 掛け算のmonoid
+    // 掛け算の monoid
     template <class T>
     struct Mul
     {
@@ -50,7 +50,7 @@ namespace kpr
         }
     };
 
-    // minのmonoid
+    // min の monoid
     template <class T>
     struct Min
     {
@@ -69,7 +69,7 @@ namespace kpr
         }
     };
 
-    // maxのmonoid
+    // max の monoid
     template <class T>
     struct Max
     {
@@ -90,7 +90,7 @@ namespace kpr
         }
     };
 
-    // invを持つか調べる
+    // inv を持つか調べる
     template <class, class = void>
     struct has_inv
     {
@@ -103,7 +103,6 @@ namespace kpr
         static constexpr bool value = true;
     };
 
-    // invを持つか調べる
     template <class T>
     inline constexpr bool has_inv_v = has_inv<T>::value;
 } // namespace kpr

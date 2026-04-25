@@ -6,7 +6,7 @@
 
 namespace kpr
 {
-    // mod二項係数
+    // mod 二項係数
     template <std::size_t max = KYOPRO_BINOM_MOD_MAX, class T = ModInt<mod>>
     struct BinomMod
     {

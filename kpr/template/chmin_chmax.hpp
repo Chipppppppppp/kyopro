@@ -2,7 +2,6 @@
 
 namespace kpr
 {
-    // assign min
     [[maybe_unused]] inline constexpr struct
     {
         template <class T, class U = T>
@@ -17,7 +16,6 @@ namespace kpr
         }
     } chmin;
 
-    // assign max
     [[maybe_unused]] inline constexpr struct
     {
         template <class T, class U = T>

@@ -4,7 +4,7 @@
 
 namespace kpr
 {
-    // オイラーのφ関数
+    // オイラーの φ 関数
     [[maybe_unused]] inline constexpr struct
     {
         constexpr KYOPRO_BASE_INT operator()(std::uint_fast64_t n) const noexcept

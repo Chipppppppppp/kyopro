@@ -39,7 +39,7 @@ namespace kpr
         };
     } // namespace helper
 
-    // tuple_likeな型Tの大きさを調べる
+    // tuple_like な型 T の大きさを調べる
     template <class T, class = void>
     struct tuple_like_size
     {
@@ -52,11 +52,11 @@ namespace kpr
         static constexpr std::size_t value = std::tuple_size_v<T>;
     };
 
-    // tuple_likeな型Tの大きさを調べる
+
     template <class T>
     inline constexpr std::size_t tuple_like_size_v = tuple_like_size<T>::value;
 
-    // tuple_likeなオブジェクトのidx(0 <= idx < 8)番目を求める関数クラス
+    // tuple_like なオブジェクトの idx (0 <= idx < 8) 番目を求める関数クラス
     template <class T, class = void>
     struct GetFunction
     {
@@ -116,22 +116,21 @@ namespace kpr
         };
     }
 
-    // tuple-likeなオブジェクトのidx(0 <= idx < 8)番目を求める
+    // tuple-like なオブジェクトの idx (0 <= idx < 8) 番目を求める
     template <std::size_t idx>
     inline constexpr helper::GetHelper<idx> get;
 
-    // tuple-likeな型Tのidx(0 <= idx < 8)番目の要素の型を調べる
+    // tuple-like な型 T の idx (0 <= idx < 8) 番目の要素の型を調べる
     template <std::size_t idx, class T>
     struct tuple_like_element
     {
         using type = std::decay_t<decltype(get<idx>(std::declval<T>()))>;
     };
 
-    // tuple-likeな型Tのidx(0 <= idx < 8)番目の要素の型を調べる
     template <std::size_t idx, class T>
     using tuple_like_element_t = typename tuple_like_element<idx, T>::type;
 
-    // 型Tがtuple_likeか調べる
+    // 型 T が tuple_like か調べる
     template <class T, class = void>
     struct is_tuple_like
     {
@@ -144,7 +143,7 @@ namespace kpr
         static constexpr bool value = true;
     };
 
-    // 型Tがtuple_likeか調べる
+    // 型 T が tuple_like か調べる
     template <class T>
     inline constexpr bool is_tuple_like_v = is_tuple_like<T>::value;
 } // namespace kpr

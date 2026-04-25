@@ -3,7 +3,7 @@
 
 namespace kpr
 {
-    // Rangeの型変換
+    // Range の型変換
     template <class To>
     struct RangeCast
     {
