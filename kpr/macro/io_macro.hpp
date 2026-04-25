@@ -6,7 +6,7 @@
 #include <tuple>
 #include <type_traits>
 #include <utility>
-#include "../io/io.hpp"
+#include "../io.hpp"
 
 namespace kpr::helper
 {
